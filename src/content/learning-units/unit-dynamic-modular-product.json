@@ -48,6 +48,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 1,
-  "globalIndex": 34,
+  "globalIndex": 38,
   "orderReason": "通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。"
 }

@@ -43,9 +43,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 91,
-  "globalIndex": 150,
+  "globalIndex": 160,
   "orderReason": "最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

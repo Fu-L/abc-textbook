@@ -3,7 +3,7 @@ title: "平方根・閾値による軽重分類"
 description: "平方根・閾値による軽重分類の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 88
+  order: 103
 ---
 
 # 平方根・閾値による軽重分類
@@ -54,4 +54,4 @@ sidebar:
 - [ABC242 G 公式解説](https://atcoder.jp/contests/abc242/editorial/3517)
 - [ABC242 G 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-threshold-heavy-light`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-threshold-heavy-light`

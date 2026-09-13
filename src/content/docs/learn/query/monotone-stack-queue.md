@@ -3,7 +3,7 @@ title: "支配関係から不要な候補を単調stack・queueで削る"
 description: "支配関係から不要な候補を単調stack・queueで削るの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 47
+  order: 18
 ---
 
 # 支配関係から不要な候補を単調stack・queueで削る
@@ -31,9 +31,6 @@ sidebar:
 1. [ABC359 E「Water Tank」](https://atcoder.jp/contests/abc359/tasks/abc359_e)
 2. [ABC379 F「Buildings 2」](https://atcoder.jp/contests/abc379/tasks/abc379_f)
 3. [ABC228 F「Stamp Game」](https://atcoder.jp/contests/abc228/tasks/abc228_f)
-4. [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
-5. [ABC280 Ex「Substring Sort」](https://atcoder.jp/contests/abc280/tasks/abc280_h)
-6. [ABC303 G「Bags Game」](https://atcoder.jp/contests/abc303/tasks/abc303_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -41,8 +38,11 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
 - [ABC234 G「Divide a Sequence」](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 - [ABC248 Ex「Beautiful Subsequences」](https://atcoder.jp/contests/abc248/tasks/abc248_h)
+- [ABC280 Ex「Substring Sort」](https://atcoder.jp/contests/abc280/tasks/abc280_h)
+- [ABC303 G「Bags Game」](https://atcoder.jp/contests/abc303/tasks/abc303_g)
 - [ABC334 F「Christmas Present 2」](https://atcoder.jp/contests/abc334/tasks/abc334_f)
 - [ABC420 F「kirinuki」](https://atcoder.jp/contests/abc420/tasks/abc420_f)
 - [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
@@ -56,4 +56,4 @@ sidebar:
 - [ABC234 G 公式解説](https://atcoder.jp/contests/abc234/editorial/3227)
 - [ABC234 G 公式問題文](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-monotone-stack-queue`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-monotone-stack-queue`

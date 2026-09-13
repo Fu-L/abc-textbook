@@ -3,7 +3,7 @@ title: "冪等演算のoverlap range query・Sparse Table"
 description: "冪等演算のoverlap range query・Sparse Tableの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 81
+  order: 68
 ---
 
 # 冪等演算のoverlap range query・Sparse Table
@@ -28,13 +28,19 @@ sidebar:
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f)
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+
+## 関連問題
+
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+
+- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
 ## 根拠
 
 - [ABC282 F 公式解説](https://atcoder.jp/contests/abc282/editorial/5403)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-idempotent-overlap-range-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-idempotent-overlap-range-query`

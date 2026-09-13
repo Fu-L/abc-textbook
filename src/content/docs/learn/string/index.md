@@ -3,7 +3,7 @@ title: "文字列アルゴリズム"
 description: "文字列アルゴリズムの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 16
+  order: 6
 ---
 
 # 文字列アルゴリズム
@@ -27,14 +27,14 @@ sidebar:
 ## 下位単元
 
 - [Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/)
-- [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/)
-- [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)
-- [run-length状態の動的遷移](/learn/string/run-length-dynamics/)
 - [接頭辞の一致状態とオートマトン](/learn/string/string-prefix-automata/)
+- [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)
 - [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
-- [文字列周期・primitive word](/learn/string/string-periodicity/)
-- [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/)
 - [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/)
+- [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/)
+- [文字列周期・primitive word](/learn/string/string-periodicity/)
+- [run-length状態の動的遷移](/learn/string/run-length-dynamics/)
+- [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/)
 
 ## 問題一覧
 
@@ -48,14 +48,12 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
 - [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 - [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
 - [ABC268 G「Random Student ID」](https://atcoder.jp/contests/abc268/tasks/abc268_g)
-- [ABC280 Ex「Substring Sort」](https://atcoder.jp/contests/abc280/tasks/abc280_h)
 - [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 - [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
-- [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
+- [ABC343 G「Compress Strings」](https://atcoder.jp/contests/abc343/tasks/abc343_g)
 - [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
 - [ABC403 E「Forbidden Prefix」](https://atcoder.jp/contests/abc403/tasks/abc403_e)
 - [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
@@ -69,4 +67,4 @@ sidebar:
 - [ABC240 H 公式解説](https://atcoder.jp/contests/abc240/editorial/3428)
 - [ABC240 H 公式問題文](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-chapter-string`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-chapter-string`

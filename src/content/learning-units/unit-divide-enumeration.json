@@ -30,7 +30,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/divide-enumeration.md",
   "problemIds": [
-    "abc252-ex",
     "abc271-f",
     "abc282-ex",
     "abc300-g",
@@ -39,9 +38,6 @@
     "abc336-f",
     "abc402-f",
     "abc413-e",
-    "abc423-g",
-    "abc425-g",
-    "abc426-g",
     "abc427-f",
     "abc464-f"
   ],
@@ -51,6 +47,7 @@
     "abc220-h",
     "abc230-h",
     "abc247-ex",
+    "abc252-ex",
     "abc260-ex",
     "abc267-ex",
     "abc269-ex",
@@ -67,13 +64,16 @@
     "abc381-g",
     "abc383-g",
     "abc385-g",
+    "abc423-g",
+    "abc425-g",
+    "abc426-g",
     "abc439-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 4,
-  "globalIndex": 72,
+  "globalIndex": 28,
   "orderReason": "探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。"
 }

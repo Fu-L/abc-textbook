@@ -3,7 +3,7 @@ title: "基準witnessから変更影響を局所化する"
 description: "基準witnessから変更影響を局所化するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 44
+  order: 88
 ---
 
 # 基準witnessから変更影響を局所化する
@@ -29,6 +29,8 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC279 E「Cheating Amidakuji」](https://atcoder.jp/contests/abc279/tasks/abc279_e)
+2. [ABC243 E「Edge Deletion」](https://atcoder.jp/contests/abc243/tasks/abc243_e)
+3. [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -36,8 +38,6 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
-- [ABC243 E「Edge Deletion」](https://atcoder.jp/contests/abc243/tasks/abc243_e)
 - [ABC448 G「Conquest」](https://atcoder.jp/contests/abc448/tasks/abc448_g)
 
 ## 根拠
@@ -49,4 +49,4 @@ sidebar:
 - [ABC279 E 公式問題文](https://atcoder.jp/contests/abc279/tasks/abc279_e)
 - [ABC279 E 公式解説](https://atcoder.jp/contests/abc279/editorial/5289)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-change-impact-localization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-change-impact-localization`

@@ -3,7 +3,7 @@ title: "素因数分解と約数構造"
 description: "素因数分解と約数構造の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 36
+  order: 16
 ---
 
 # 素因数分解と約数構造
@@ -35,9 +35,7 @@ sidebar:
 5. [ABC400 E「Ringo's Favorite Numbers 3」](https://atcoder.jp/contests/abc400/tasks/abc400_e)
 6. [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e)
 7. [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g)
-8. [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
-9. [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
-10. [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
+8. [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -47,6 +45,7 @@ sidebar:
 
 - [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 - [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
+- [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 - [ABC230 G「GCD Permutation」](https://atcoder.jp/contests/abc230/tasks/abc230_g)
 - [ABC238 G「Cubic?」](https://atcoder.jp/contests/abc238/tasks/abc238_g)
 - [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
@@ -59,6 +58,7 @@ sidebar:
 - [ABC368 F「Dividing Game」](https://atcoder.jp/contests/abc368/tasks/abc368_f)
 - [ABC403 F「Shortest One Formula」](https://atcoder.jp/contests/abc403/tasks/abc403_f)
 - [ABC428 G「Necklace」](https://atcoder.jp/contests/abc428/tasks/abc428_g)
+- [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
 
 ## 根拠
 
@@ -69,4 +69,4 @@ sidebar:
 - [ABC227 G 公式解説](https://atcoder.jp/contests/abc227/editorial/2909)
 - [ABC227 G 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-prime-divisor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-prime-divisor`

@@ -37,6 +37,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 151,
+  "globalIndex": 139,
   "orderReason": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
 }

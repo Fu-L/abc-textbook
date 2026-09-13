@@ -61,19 +61,18 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     const placementByProblemId = new Map(
       build.placements.map((placement) => [placement.problemId, placement]),
     );
-    expect(placementByProblemId.get('abc218-f')?.primaryOutcomeId).toBe(
-      'outcome-build-shortest-path-certificate',
+    expect(placementByProblemId.get('abc218-f')).toMatchObject({
+      primaryOutcomeId: 'outcome-localize-change-impact-by-witness',
+      additionalPrimaryOutcomeIds: ['outcome-build-shortest-path-certificate'],
+      presentationUnitId: 'unit-change-impact-localization',
+    });
+    expect(placementByProblemId.get('abc335-g')).toMatchObject({
+      primaryOutcomeId: 'outcome-count-through-cyclic-exponents',
+      additionalPrimaryOutcomeIds: ['outcome-find-period-by-multiplicative-order'],
+    });
+    expect(placementByProblemId.get('abc335-g')?.supportingOutcomeIds).toContain(
+      'outcome-invert-divisor-lattice-by-mobius',
     );
-    expect(placementByProblemId.get('abc218-f')?.additionalPrimaryOutcomeIds).toEqual([
-      'outcome-localize-change-impact-by-witness',
-    ]);
-    expect(placementByProblemId.get('abc218-f')?.supportingOutcomeIds).not.toContain(
-      'outcome-build-shortest-path-certificate',
-    );
-    expect(placementByProblemId.get('abc335-g')?.additionalPrimaryOutcomeIds).toEqual([
-      'outcome-count-through-cyclic-exponents',
-      'outcome-find-period-by-multiplicative-order',
-    ]);
     expect(placementByProblemId.get('abc419-g')).toMatchObject({
       primaryTagIds: ['tag-cycle-space-basis', 'tag-near-tree-kernelization'],
       primaryOutcomeId: 'outcome-kernelize-near-tree-graph',
@@ -194,7 +193,6 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       ['abc216-f', 'abc321-f'],
       ['abc314-f', 'abc235-ex'],
       ['abc294-g', 'abc298-ex'],
-      ['abc354-e', 'abc255-g'],
       ['abc275-e', 'abc226-h'],
       ['abc298-e', 'abc226-h'],
       ['abc273-f', 'abc219-h'],
@@ -215,10 +213,10 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       'abc260-f': 'unit-bounded-enumeration',
       'abc236-e': 'unit-fractional-parametric-search',
       'abc294-f': 'unit-fractional-parametric-search',
-      'abc339-e': 'unit-dp-lis',
+      'abc339-e': 'unit-dp-value-range',
       'abc369-f': 'unit-dp-lis',
       'abc393-f': 'unit-dp-lis',
-      'abc354-f': 'unit-dp-lis',
+      'abc354-f': 'unit-dp-value-range',
     }))
       expect(byProblem.get(id)?.presentationUnitId, id).toBe(home);
     for (const placement of build.placements) {
@@ -228,6 +226,14 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       );
     }
     for (const basic of [
+      'unit-weighted-shortest-path',
+      'unit-dag-topological-processing',
+      'unit-scc-condensation',
+      'unit-tree-ancestor-lca',
+      'unit-rooted-tree-aggregation',
+      'unit-rerooting',
+      'unit-bipartite-matching',
+      'unit-max-flow-min-cut',
       'unit-state-graph-search',
       'unit-dsu-components',
       'unit-priority-queue-best-first',
@@ -237,6 +243,10 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       'unit-range-monoid-aggregation',
     ]) {
       for (const advanced of [
+        'unit-rational-approximation',
+        'unit-stern-brocot-ancestry',
+        'unit-basic-convex-optimization',
+        'unit-lagrangian-relaxation',
         'unit-min25-sieve',
         'unit-rsk-young-tableaux',
         'unit-linear-matroid-intersection',
@@ -358,9 +368,8 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         ...placement.additionalPrimaryOutcomeIds,
       ];
       const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
-      const primaryOwnerUnitIds = normalizeIds(primaryOutcomeIds.flatMap(ownerUnitIdsForOutcome));
       const assignedOwnerUnitIds = normalizeIds(assignedOutcomeIds.flatMap(ownerUnitIdsForOutcome));
-      const expectedPresentationUnitId = [...primaryOwnerUnitIds]
+      const expectedPresentationUnitId = [...assignedOwnerUnitIds]
         .sort(
           (left, right) =>
             (orderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
@@ -371,6 +380,14 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         assignedOwnerUnitIds,
       );
       expect(placement.presentationUnitId, placement.problemId).toBe(expectedPresentationUnitId);
+      if (placement.primaryOverride === undefined) {
+        expect(ownerUnitIdsForOutcome(placement.primaryOutcomeId), placement.problemId).toContain(
+          placement.presentationUnitId,
+        );
+      } else {
+        expect(placement.primaryOverride.primaryOutcomeId).toBe(placement.primaryOutcomeId);
+        expect(placement.primaryOverride.rationale).toBeTruthy();
+      }
     }
   }, 30_000);
 

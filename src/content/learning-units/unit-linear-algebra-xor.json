@@ -37,7 +37,6 @@
     "abc223-h",
     "abc249-g",
     "abc276-ex",
-    "abc278-ex",
     "abc283-g",
     "abc288-g",
     "abc366-g",
@@ -48,15 +47,16 @@
   "relatedProblemIds": [
     "abc236-f",
     "abc265-ex",
+    "abc278-ex",
     "abc323-g",
     "abc399-g",
     "abc412-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 0,
   "difficultyRank": 4,
   "representativeRank": 9,
-  "globalIndex": 84,
+  "globalIndex": 62,
   "orderReason": "制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。"
 }

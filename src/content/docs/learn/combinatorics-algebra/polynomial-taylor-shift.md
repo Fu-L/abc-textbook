@@ -3,7 +3,7 @@ title: "factorial convolutionによる多項式Taylor shift"
 description: "factorial convolutionによる多項式Taylor shiftの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 171
+  order: 173
 ---
 
 # factorial convolutionによる多項式Taylor shift
@@ -37,4 +37,4 @@ P(x+a) の全係数を二項展開し、階乗倍した係数列と a^i/i! の�
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-polynomial-taylor-shift`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-polynomial-taylor-shift`

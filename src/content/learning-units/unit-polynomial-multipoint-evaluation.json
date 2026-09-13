@@ -43,9 +43,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 94,
-  "globalIndex": 186,
+  "globalIndex": 187,
   "orderReason": "形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。"
 }

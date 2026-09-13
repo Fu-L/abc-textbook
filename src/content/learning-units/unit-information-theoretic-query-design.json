@@ -39,6 +39,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 84,
-  "globalIndex": 117,
+  "globalIndex": 118,
   "orderReason": "応答alphabetとquery回数から識別可能状態数の下界を出し、その下界に一致するcodeword割当と復号を構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

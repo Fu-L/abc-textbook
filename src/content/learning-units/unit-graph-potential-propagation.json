@@ -35,20 +35,20 @@
   "docPath": "src/content/docs/learn/graph/graph-potential-propagation.md",
   "problemIds": [
     "abc280-f",
-    "abc352-f",
     "abc396-e"
   ],
   "directProblemIds": [
     "abc280-f",
-    "abc396-e",
+    "abc396-e"
+  ],
+  "relatedProblemIds": [
     "abc352-f"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 1,
   "difficultyRank": 4,
   "representativeRank": 86,
-  "globalIndex": 122,
+  "globalIndex": 33,
   "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
 }

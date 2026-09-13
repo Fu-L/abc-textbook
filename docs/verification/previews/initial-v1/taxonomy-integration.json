@@ -1361,30 +1361,8 @@
               ]
             },
             {
-              "problemId": "abc212-g",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
               "problemId": "abc335-g",
               "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -1440,17 +1418,6 @@
             {
               "problemId": "abc335-g",
               "claimPath": "/typicalTechniques/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/typicalTechniques/1",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -1561,17 +1528,6 @@
             },
             {
               "problemId": "abc335-g",
-              "claimPath": "/prerequisiteCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
               "claimPath": "/reasoningPath/algorithmConnection",
               "evidenceIds": [
                 "evidence-official-analysis"
@@ -1617,17 +1573,6 @@
             {
               "problemId": "abc335-g",
               "claimPath": "/typicalTechniques/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/typicalTechniques/1",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -1755,17 +1700,6 @@
         {
           "problemId": "abc256-f",
           "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
-            "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
-          ]
-        },
-        {
-          "problemId": "abc256-f",
-          "claimPath": "/prerequisiteCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -3108,17 +3042,6 @@
               ]
             },
             {
-              "problemId": "abc212-g",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
               "problemId": "abc335-g",
               "claimPath": "/outcomeCandidates/0",
               "evidenceIds": [
@@ -3194,17 +3117,6 @@
                 "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
                 "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
               ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
             }
           ],
           "representativeProblemIds": [
@@ -3218,83 +3130,6 @@
             "abc212-g"
           ],
           "evidenceRefs": [
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/reasoningPath/algorithmConnection",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/reasoningPath/candidateApproaches/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/reasoningPath/keyInsights/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/reasoningPath/observations/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/reasoningPath/observations/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
-              "problemId": "abc212-g",
-              "claimPath": "/typicalTechniques/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
             {
               "problemId": "abc212-g",
               "claimPath": "/typicalTechniques/1",
@@ -3581,17 +3416,6 @@
                 "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
                 "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
               ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
             }
           ],
           "representativeProblemIds": [
@@ -3793,17 +3617,6 @@
         {
           "problemId": "abc256-f",
           "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
-            "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
-          ]
-        },
-        {
-          "problemId": "abc256-f",
-          "claimPath": "/prerequisiteCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -5267,30 +5080,8 @@
               ]
             },
             {
-              "problemId": "abc212-g",
-              "claimPath": "/typicalTechniques/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-                "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
-              ]
-            },
-            {
               "problemId": "abc335-g",
               "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -5346,17 +5137,6 @@
             {
               "problemId": "abc335-g",
               "claimPath": "/typicalTechniques/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/typicalTechniques/1",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -5467,17 +5247,6 @@
             },
             {
               "problemId": "abc335-g",
-              "claimPath": "/prerequisiteCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
               "claimPath": "/reasoningPath/algorithmConnection",
               "evidenceIds": [
                 "evidence-official-analysis"
@@ -5523,17 +5292,6 @@
             {
               "problemId": "abc335-g",
               "claimPath": "/typicalTechniques/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
-                "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
-              ]
-            },
-            {
-              "problemId": "abc335-g",
-              "claimPath": "/typicalTechniques/1",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -5928,17 +5686,6 @@
             {
               "problemId": "abc256-f",
               "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
-                "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
-              ]
-            },
-            {
-              "problemId": "abc256-f",
-              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -6761,6 +6508,6 @@
   ],
   "status": "accepted",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "e9a2928eef36e9cddc16fed392fedbb0d6200f4abdc37b29d0cf97323ac149e4",
-  "integrationDigest": "44f6fd6b86f4595948b03265c9e2de1a5836777cd32b5fa91545d7ac880f7f47"
+  "integrationSubjectDigest": "5cde32fa97ef83b484b48646cc1b85de16f579b1953fc2805b1717d0eef6fbf3",
+  "integrationDigest": "2e561e00ae3dcf1e8232cdb68533b04e330623c81180fa1f77ff9d5e74ae8345"
 }

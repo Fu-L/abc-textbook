@@ -3,7 +3,7 @@ title: "最短路を証明する木・経路の復元"
 description: "最短路を証明する木・経路の復元の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 157
+  order: 81
 ---
 
 # 最短路を証明する木・経路の復元
@@ -30,10 +30,15 @@ sidebar:
 
 1. [ABC252 E「Road Reduction」](https://atcoder.jp/contests/abc252/tasks/abc252_e)
 2. [ABC308 Ex「Make Q」](https://atcoder.jp/contests/abc308/tasks/abc308_h)
-3. [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
-4. [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+
+## 関連問題
+
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+
+- [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
+- [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
 
 ## 根拠
 
@@ -44,4 +49,4 @@ sidebar:
 - [ABC308 H 公式解説](https://atcoder.jp/contests/abc308/editorial/6709)
 - [ABC308 H 公式問題文](https://atcoder.jp/contests/abc308/tasks/abc308_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-shortest-path-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-shortest-path-reconstruction`

@@ -34,25 +34,24 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
   "problemIds": [
-    "abc212-g",
     "abc230-g",
     "abc304-f",
-    "abc335-g",
     "abc361-f"
   ],
   "directProblemIds": [
     "abc230-g",
     "abc361-f",
-    "abc304-f",
-    "abc335-g",
-    "abc212-g"
+    "abc304-f"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
   "examples": [],
   "exercises": [],
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 83,
-  "globalIndex": 114,
+  "globalIndex": 115,
   "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
 }

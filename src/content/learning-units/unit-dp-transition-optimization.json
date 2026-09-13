@@ -47,6 +47,7 @@
     "abc282-g",
     "abc288-f",
     "abc311-f",
+    "abc319-g",
     "abc333-f",
     "abc334-f",
     "abc338-g",
@@ -55,6 +56,7 @@
     "abc358-g",
     "abc370-e",
     "abc372-f",
+    "abc387-f",
     "abc408-f",
     "abc412-f",
     "abc435-g",
@@ -87,13 +89,13 @@
     "abc408-f",
     "abc333-f",
     "abc224-e",
+    "abc387-f",
     "abc235-g",
+    "abc319-g",
     "abc412-f",
     "abc342-f"
   ],
   "relatedProblemIds": [
-    "abc319-g",
-    "abc387-f",
     "abc436-g"
   ],
   "examples": [],
@@ -101,6 +103,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 60,
+  "globalIndex": 90,
   "orderReason": "正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。"
 }

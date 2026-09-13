@@ -3,7 +3,7 @@ title: "時間を逆向きにして未来依存を消す"
 description: "時間を逆向きにして未来依存を消すの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 20
+  order: 36
 ---
 
 # 時間を逆向きにして未来依存を消す
@@ -33,8 +33,7 @@ sidebar:
 3. [ABC249 F「Ignore Operations」](https://atcoder.jp/contests/abc249/tasks/abc249_f)
 4. [ABC264 E「Blackout 2」](https://atcoder.jp/contests/abc264/tasks/abc264_e)
 5. [ABC329 E「Stamp」](https://atcoder.jp/contests/abc329/tasks/abc329_e)
-6. [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
-7. [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
+6. [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -43,8 +42,9 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC253 F「Operations on a Matrix」](https://atcoder.jp/contests/abc253/tasks/abc253_f)
 - [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
-- [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
+- [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
 
 ## 根拠
 
@@ -55,4 +55,4 @@ sidebar:
 - [ABC249 F 公式解説](https://atcoder.jp/contests/abc249/editorial/3789)
 - [ABC249 F 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-reverse-offline`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-reverse-offline`

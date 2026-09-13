@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861",
-    "acceptedAt": "2026-09-12T10:48:30.232Z"
+    "digest": "5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a",
+    "acceptedAt": "2026-09-13T03:14:22.258Z"
   },
   "tagPrerequisites": [
     {
@@ -300,10 +300,6 @@
     },
     {
       "nodeId": "tag-lis-state",
-      "prerequisiteId": "tag-range-monoid-aggregation"
-    },
-    {
-      "nodeId": "tag-lis-state",
       "prerequisiteId": "tag-sequence-subsequence-dp"
     },
     {
@@ -563,6 +559,14 @@
       "prerequisiteId": "tag-scc-condensation"
     },
     {
+      "nodeId": "tag-value-range-dp",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-value-range-dp",
+      "prerequisiteId": "tag-sequence-subsequence-dp"
+    },
+    {
       "nodeId": "tag-virtual-tree",
       "prerequisiteId": "tag-tree-ancestor-lca"
     },
@@ -581,6 +585,10 @@
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
     },
     {
+      "nodeId": "outcome-accelerate-iteration-by-characteristic-p-frobenius",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
       "nodeId": "outcome-accelerate-tree-dp-by-heavy-path",
       "prerequisiteId": "outcome-aggregate-rooted-tree"
     },
@@ -595,6 +603,14 @@
     {
       "nodeId": "outcome-aggregate-rooted-tree",
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-aggregate-subsequence-transitions-by-value",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-aggregate-subsequence-transitions-by-value",
+      "prerequisiteId": "outcome-design-order-preserving-dp"
     },
     {
       "nodeId": "outcome-allocate-by-convex-marginal-costs",
@@ -685,10 +701,6 @@
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
     },
     {
-      "nodeId": "outcome-classify-game-states",
-      "prerequisiteId": "outcome-enumerate-subset-state-space"
-    },
-    {
       "nodeId": "outcome-compare-algebraic-objects-by-random-fingerprint",
       "prerequisiteId": "outcome-design-and-bound-randomized-algorithm"
     },
@@ -769,10 +781,6 @@
       "prerequisiteId": "outcome-find-period-by-multiplicative-order"
     },
     {
-      "nodeId": "outcome-decompose-finite-field-frobenius-orbits",
-      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
-    },
-    {
       "nodeId": "outcome-decompose-functional-graph",
       "prerequisiteId": "outcome-select-state-graph-search"
     },
@@ -803,10 +811,6 @@
     {
       "nodeId": "outcome-design-interval-split-dp",
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
-    },
-    {
-      "nodeId": "outcome-design-lis-frontier",
-      "prerequisiteId": "outcome-design-associative-range-summary"
     },
     {
       "nodeId": "outcome-design-lis-frontier",
@@ -1335,10 +1339,6 @@
       "prerequisiteId": "unit-dp-state-design"
     },
     {
-      "nodeId": "unit-dp-game",
-      "prerequisiteId": "unit-dp-subset-state"
-    },
-    {
       "nodeId": "unit-dp-game-value",
       "prerequisiteId": "unit-dp-state-design"
     },
@@ -1357,10 +1357,6 @@
     {
       "nodeId": "unit-dp-lis",
       "prerequisiteId": "unit-dp-sequence"
-    },
-    {
-      "nodeId": "unit-dp-lis",
-      "prerequisiteId": "unit-range-monoid-aggregation"
     },
     {
       "nodeId": "unit-dp-prefix-partition",
@@ -1389,6 +1385,14 @@
     {
       "nodeId": "unit-dp-transition-optimization",
       "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-value-range",
+      "prerequisiteId": "unit-dp-sequence"
+    },
+    {
+      "nodeId": "unit-dp-value-range",
+      "prerequisiteId": "unit-range-monoid-aggregation"
     },
     {
       "nodeId": "unit-dsu-merge-tree",
@@ -1817,115 +1821,116 @@
     "unit-prefix-aggregate",
     "unit-two-pointers-window",
     "unit-coordinate-compression",
-    "unit-weighted-prefix-fenwick",
-    "unit-state-graph-search",
-    "unit-priority-queue-best-first",
-    "unit-dsu-components",
-    "unit-ordered-set-multiset",
-    "unit-dp-subset-state",
-    "unit-binary-lifting",
-    "unit-dp-sequence",
-    "unit-range-monoid-aggregation",
-    "unit-dp-prefix-partition",
     "unit-modular-arithmetic",
     "unit-trie-prefix",
-    "unit-event-sweep",
+    "unit-dp-grid-table",
     "unit-gcd-diophantine",
     "unit-normalization",
-    "unit-reverse-offline",
+    "unit-bipartite-structure",
     "unit-contribution-reordering",
     "unit-greedy-exchange",
     "unit-bounded-enumeration",
     "unit-linked-list-index",
-    "unit-interactive-protocol",
     "unit-geometry-primitives",
+    "unit-prime-divisor",
     "unit-combinatorial-coefficients",
-    "unit-modular-periodicity",
-    "unit-dp-grid-table",
+    "unit-monotone-stack-queue",
+    "unit-state-graph-search",
+    "unit-gcd-structure",
+    "unit-dag-topological-processing",
+    "unit-priority-queue-best-first",
+    "unit-dsu-components",
+    "unit-constructive-witness",
+    "unit-ordered-set-multiset",
+    "unit-amortized-monotone-progress",
+    "unit-dp-sequence",
+    "unit-meet-in-the-middle",
+    "unit-recursive-divide-and-conquer",
+    "unit-z-algorithm",
+    "unit-backtracking-search",
+    "unit-dp-prefix-partition",
+    "unit-graph-potential-propagation",
     "unit-dp-subset-resource",
-    "unit-bipartite-structure",
+    "unit-event-sweep",
+    "unit-reverse-offline",
     "unit-tree-metric",
-    "unit-implicit-binary-tree",
     "unit-dynamic-modular-product",
     "unit-modular-congruence",
-    "unit-prime-divisor",
-    "unit-rational-approximation",
-    "unit-suffix-lcp-index",
+    "unit-weighted-prefix-fenwick",
     "unit-dp-carry-mixed-radix",
     "unit-integer-boundary-blocks",
     "unit-palindrome-radius",
     "unit-dp-stochastic",
     "unit-dp-game",
-    "unit-change-impact-localization",
     "unit-dp-game-value",
     "unit-inclusion-exclusion",
-    "unit-monotone-stack-queue",
     "unit-bitset-word-parallel",
     "unit-binary-trie",
-    "unit-numerical-semigroup-reachability",
-    "unit-polynomial-convolution",
-    "unit-gcd-structure",
     "unit-transitive-closure",
-    "unit-dag-topological-processing",
-    "unit-multiplicative-order-periods",
-    "unit-range-actions",
     "unit-spanning-tree-optimization",
-    "unit-constructive-witness",
-    "unit-cyclic-group-exponent-counting",
+    "unit-functional-graph-decomposition",
+    "unit-directed-core-peeling",
+    "unit-dp-subset-state",
+    "unit-rooted-tree-aggregation",
+    "unit-binary-lifting",
+    "unit-finite-function-composition",
+    "unit-tree-euler-flattening",
+    "unit-tree-ancestor-lca",
+    "unit-graph-core",
+    "unit-scc-condensation",
+    "unit-linear-system-rank",
+    "unit-potential-dsu",
+    "unit-sequence-fingerprint",
+    "unit-finite-pattern-automaton",
+    "unit-range-monoid-aggregation",
+    "unit-range-actions",
+    "unit-idempotent-overlap-range-query",
+    "unit-rerooting",
+    "unit-weighted-shortest-path",
+    "unit-dp-interval-composition",
+    "unit-euler-trail-circuit",
+    "unit-xor-linear-basis",
+    "unit-dp-interval-expansion",
+    "unit-dp-lis",
+    "unit-dp-value-range",
+    "unit-bipartite-matching",
+    "unit-digit-dp",
+    "unit-max-flow-min-cut",
+    "unit-monoid-exponentiation",
+    "unit-shortest-path-reconstruction",
+    "unit-modular-periodicity",
+    "unit-implicit-binary-tree",
+    "unit-interactive-protocol",
+    "unit-rational-approximation",
+    "unit-recursive-compressed-string",
+    "unit-suffix-lcp-index",
+    "unit-change-impact-localization",
+    "unit-multiplicative-order-periods",
     "unit-dp-transition-optimization",
     "unit-randomized-algorithms",
     "unit-linear-recurrence",
     "unit-mo-offline-range",
+    "unit-polynomial-convolution",
     "unit-tree-balanced-separators",
     "unit-cartesian-tree",
-    "unit-functional-graph-decomposition",
     "unit-basic-convex-optimization",
-    "unit-directed-core-peeling",
-    "unit-rooted-tree-aggregation",
-    "unit-finite-function-composition",
-    "unit-amortized-monotone-progress",
-    "unit-meet-in-the-middle",
-    "unit-tree-euler-flattening",
-    "unit-tree-ancestor-lca",
-    "unit-graph-core",
-    "unit-recursive-divide-and-conquer",
-    "unit-run-length-dynamics",
-    "unit-scc-condensation",
-    "unit-z-algorithm",
     "unit-directional-grid-effect-scan",
-    "unit-idempotent-overlap-range-query",
     "unit-monotone-path-contraction",
     "unit-small-to-large",
-    "unit-linear-system-rank",
-    "unit-sequence-fingerprint",
-    "unit-bitwise-greedy-feasibility",
-    "unit-finite-pattern-automaton",
-    "unit-threshold-heavy-light",
-    "unit-rerooting",
-    "unit-string-periodicity",
-    "unit-weighted-shortest-path",
-    "unit-dp-interval-composition",
-    "unit-euler-trail-circuit",
     "unit-degree-parity-subgraph",
+    "unit-bitwise-greedy-feasibility",
+    "unit-threshold-heavy-light",
+    "unit-string-periodicity",
     "unit-separable-convex-marginals",
-    "unit-backtracking-search",
     "unit-segment-tree-canonical-decomposition",
     "unit-ordered-interval-partition",
-    "unit-xor-linear-basis",
-    "unit-suffix-automaton",
     "unit-generating-functions",
     "unit-lowlink-critical-structure",
     "unit-automaton-dp",
     "unit-convex-boundary-hull",
-    "unit-dp-interval-expansion",
-    "unit-dp-lis",
     "unit-heavy-light-decomposition",
     "unit-parallel-binary-search",
-    "unit-bipartite-matching",
-    "unit-automaton-subset-construction",
     "unit-cyclic-order-crossing",
-    "unit-digit-dp",
-    "unit-orbit-counting",
     "unit-divisor-mobius-inversion",
     "unit-dynamic-segment-tree",
     "unit-rollback",
@@ -1934,12 +1939,8 @@
     "unit-persistence",
     "unit-two-sat",
     "unit-dsu-merge-tree",
-    "unit-graph-potential-propagation",
-    "unit-potential-dsu",
-    "unit-max-flow-min-cut",
     "unit-static-sorted-range-index",
     "unit-subset-transforms",
-    "unit-monoid-exponentiation",
     "unit-randomized-algebraic-fingerprint",
     "unit-separable-linear-transform",
     "unit-virtual-tree",
@@ -1947,39 +1948,44 @@
     "unit-swag",
     "unit-fractional-parametric-search",
     "unit-half-plane-constraints",
-    "unit-slope-trick",
     "unit-baby-step-giant-step",
     "unit-binary-tree-ancestor-matching",
     "unit-bitwise-minimax-partition",
-    "unit-conway-number-games",
     "unit-cyclic-minimax-game",
+    "unit-stern-brocot-ancestry",
+    "unit-flow-lower-bounds",
+    "unit-semiring-matrix-exponentiation",
+    "unit-cycle-space-basis",
+    "unit-directed-walk-periodicity",
+    "unit-min-cost-flow",
+    "unit-difference-constraints",
+    "unit-kruskal-threshold-sweep",
+    "unit-line-envelope",
+    "unit-near-tree-kernelization",
+    "unit-numerical-semigroup-reachability",
+    "unit-cyclic-group-exponent-counting",
+    "unit-run-length-dynamics",
+    "unit-suffix-automaton",
+    "unit-automaton-subset-construction",
+    "unit-orbit-counting",
+    "unit-slope-trick",
+    "unit-conway-number-games",
     "unit-frontier-profile-dp",
     "unit-heavy-light-recursive-dp",
     "unit-segment-tree-beats",
-    "unit-stern-brocot-ancestry",
     "unit-deletion-contraction",
-    "unit-flow-lower-bounds",
     "unit-heavy-path-tree-dp",
     "unit-reflection-principle",
-    "unit-semiring-matrix-exponentiation",
     "unit-steiner-tree-dp",
-    "unit-cycle-space-basis",
     "unit-determinant-counting",
-    "unit-directed-walk-periodicity",
     "unit-matroid-greedy",
-    "unit-min-cost-flow",
     "unit-planar-duality",
-    "unit-shortest-path-reconstruction",
-    "unit-difference-constraints",
-    "unit-kruskal-threshold-sweep",
     "unit-labeled-component-decomposition",
     "unit-lagrangian-relaxation",
-    "unit-line-envelope",
     "unit-poset-dilworth-antichain",
     "unit-isotonic-regression",
     "unit-kinetic-order-maintenance",
     "unit-monge-optimization",
-    "unit-near-tree-kernelization",
     "unit-prufer-code",
     "unit-subset-convolution",
     "unit-additive-tree-metric-reconstruction",
@@ -1994,7 +2000,6 @@
     "unit-gaussian-integers-two-squares",
     "unit-min-weight-general-perfect-matching",
     "unit-path-matching-contraction",
-    "unit-recursive-compressed-string",
     "unit-static-top-tree",
     "unit-finite-field-extension",
     "unit-formal-power-series",
@@ -2032,219 +2037,219 @@
       "reason": "保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。"
     },
     {
-      "unitId": "unit-weighted-prefix-fenwick",
-      "globalIndex": 5,
-      "reason": "静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。"
-    },
-    {
-      "unitId": "unit-state-graph-search",
-      "globalIndex": 6,
-      "reason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-priority-queue-best-first",
-      "globalIndex": 7,
-      "reason": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-dsu-components",
-      "globalIndex": 8,
-      "reason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-ordered-set-multiset",
-      "globalIndex": 9,
-      "reason": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-dp-subset-state",
-      "globalIndex": 10,
-      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-binary-lifting",
-      "globalIndex": 11,
-      "reason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-dp-sequence",
-      "globalIndex": 12,
-      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-range-monoid-aggregation",
-      "globalIndex": 13,
-      "reason": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-dp-prefix-partition",
-      "globalIndex": 14,
-      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-modular-arithmetic",
-      "globalIndex": 15,
+      "globalIndex": 5,
       "reason": "剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。"
     },
     {
       "unitId": "unit-trie-prefix",
-      "globalIndex": 16,
+      "globalIndex": 6,
       "reason": "文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。"
     },
     {
-      "unitId": "unit-event-sweep",
-      "globalIndex": 17,
-      "reason": "値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。"
+      "unitId": "unit-dp-grid-table",
+      "globalIndex": 7,
+      "reason": "状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。"
     },
     {
       "unitId": "unit-gcd-diophantine",
-      "globalIndex": 18,
+      "globalIndex": 8,
       "reason": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
     },
     {
       "unitId": "unit-normalization",
-      "globalIndex": 19,
+      "globalIndex": 9,
       "reason": "対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。"
     },
     {
-      "unitId": "unit-reverse-offline",
-      "globalIndex": 20,
-      "reason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
+      "unitId": "unit-bipartite-structure",
+      "globalIndex": 10,
+      "reason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
     },
     {
       "unitId": "unit-contribution-reordering",
-      "globalIndex": 21,
+      "globalIndex": 11,
       "reason": "答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。"
     },
     {
       "unitId": "unit-greedy-exchange",
-      "globalIndex": 22,
+      "globalIndex": 12,
       "reason": "局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。"
     },
     {
       "unitId": "unit-bounded-enumeration",
-      "globalIndex": 23,
+      "globalIndex": 13,
       "reason": "候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。"
     },
     {
       "unitId": "unit-linked-list-index",
-      "globalIndex": 24,
+      "globalIndex": 14,
       "reason": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
     },
     {
-      "unitId": "unit-interactive-protocol",
-      "globalIndex": 25,
-      "reason": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
-    },
-    {
       "unitId": "unit-geometry-primitives",
-      "globalIndex": 26,
+      "globalIndex": 15,
       "reason": "座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。"
     },
     {
+      "unitId": "unit-prime-divisor",
+      "globalIndex": 16,
+      "reason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
+    },
+    {
       "unitId": "unit-combinatorial-coefficients",
-      "globalIndex": 27,
+      "globalIndex": 17,
       "reason": "選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。"
     },
     {
-      "unitId": "unit-modular-periodicity",
-      "globalIndex": 28,
-      "reason": "剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。"
+      "unitId": "unit-monotone-stack-queue",
+      "globalIndex": 18,
+      "reason": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
     },
     {
-      "unitId": "unit-dp-grid-table",
+      "unitId": "unit-state-graph-search",
+      "globalIndex": 19,
+      "reason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-gcd-structure",
+      "globalIndex": 20,
+      "reason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-dag-topological-processing",
+      "globalIndex": 21,
+      "reason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-priority-queue-best-first",
+      "globalIndex": 22,
+      "reason": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-dsu-components",
+      "globalIndex": 23,
+      "reason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-constructive-witness",
+      "globalIndex": 24,
+      "reason": "存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。"
+    },
+    {
+      "unitId": "unit-ordered-set-multiset",
+      "globalIndex": 25,
+      "reason": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-amortized-monotone-progress",
+      "globalIndex": 26,
+      "reason": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-dp-sequence",
+      "globalIndex": 27,
+      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-meet-in-the-middle",
+      "globalIndex": 28,
+      "reason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-recursive-divide-and-conquer",
       "globalIndex": 29,
-      "reason": "状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。"
+      "reason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-z-algorithm",
+      "globalIndex": 30,
+      "reason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-backtracking-search",
+      "globalIndex": 31,
+      "reason": "再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-dp-prefix-partition",
+      "globalIndex": 32,
+      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-graph-potential-propagation",
+      "globalIndex": 33,
+      "reason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
     },
     {
       "unitId": "unit-dp-subset-resource",
-      "globalIndex": 30,
+      "globalIndex": 34,
       "reason": "最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。"
     },
     {
-      "unitId": "unit-bipartite-structure",
-      "globalIndex": 31,
-      "reason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
+      "unitId": "unit-event-sweep",
+      "globalIndex": 35,
+      "reason": "値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。"
+    },
+    {
+      "unitId": "unit-reverse-offline",
+      "globalIndex": 36,
+      "reason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
     },
     {
       "unitId": "unit-tree-metric",
-      "globalIndex": 32,
+      "globalIndex": 37,
       "reason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
     },
     {
-      "unitId": "unit-implicit-binary-tree",
-      "globalIndex": 33,
-      "reason": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
-    },
-    {
       "unitId": "unit-dynamic-modular-product",
-      "globalIndex": 34,
+      "globalIndex": 38,
       "reason": "通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。"
     },
     {
       "unitId": "unit-modular-congruence",
-      "globalIndex": 35,
+      "globalIndex": 39,
       "reason": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
     },
     {
-      "unitId": "unit-prime-divisor",
-      "globalIndex": 36,
-      "reason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
-    },
-    {
-      "unitId": "unit-rational-approximation",
-      "globalIndex": 37,
-      "reason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
-    },
-    {
-      "unitId": "unit-suffix-lcp-index",
-      "globalIndex": 38,
-      "reason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
+      "unitId": "unit-weighted-prefix-fenwick",
+      "globalIndex": 40,
+      "reason": "静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。"
     },
     {
       "unitId": "unit-dp-carry-mixed-radix",
-      "globalIndex": 39,
+      "globalIndex": 41,
       "reason": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"
     },
     {
       "unitId": "unit-integer-boundary-blocks",
-      "globalIndex": 40,
+      "globalIndex": 42,
       "reason": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
     },
     {
       "unitId": "unit-palindrome-radius",
-      "globalIndex": 41,
+      "globalIndex": 43,
       "reason": "各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。"
     },
     {
       "unitId": "unit-dp-stochastic",
-      "globalIndex": 42,
+      "globalIndex": 44,
       "reason": "状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。"
     },
     {
       "unitId": "unit-dp-game",
-      "globalIndex": 43,
+      "globalIndex": 45,
       "reason": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
     },
     {
-      "unitId": "unit-change-impact-localization",
-      "globalIndex": 44,
-      "reason": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
-    },
-    {
       "unitId": "unit-dp-game-value",
-      "globalIndex": 45,
+      "globalIndex": 46,
       "reason": "状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。"
     },
     {
       "unitId": "unit-inclusion-exclusion",
-      "globalIndex": 46,
-      "reason": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
-    },
-    {
-      "unitId": "unit-monotone-stack-queue",
       "globalIndex": 47,
-      "reason": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
+      "reason": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
     },
     {
       "unitId": "unit-bitset-word-parallel",
@@ -2257,718 +2262,723 @@
       "reason": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
     },
     {
-      "unitId": "unit-numerical-semigroup-reachability",
-      "globalIndex": 50,
-      "reason": "生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。"
-    },
-    {
-      "unitId": "unit-polynomial-convolution",
-      "globalIndex": 51,
-      "reason": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
-    },
-    {
-      "unitId": "unit-gcd-structure",
-      "globalIndex": 52,
-      "reason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-transitive-closure",
-      "globalIndex": 53,
+      "globalIndex": 50,
       "reason": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-dag-topological-processing",
-      "globalIndex": 54,
-      "reason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-multiplicative-order-periods",
-      "globalIndex": 55,
-      "reason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
-    },
-    {
-      "unitId": "unit-range-actions",
-      "globalIndex": 56,
-      "reason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
-    },
-    {
       "unitId": "unit-spanning-tree-optimization",
-      "globalIndex": 57,
+      "globalIndex": 51,
       "reason": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
     },
     {
-      "unitId": "unit-constructive-witness",
-      "globalIndex": 58,
-      "reason": "存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。"
-    },
-    {
-      "unitId": "unit-cyclic-group-exponent-counting",
-      "globalIndex": 59,
-      "reason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
-    },
-    {
-      "unitId": "unit-dp-transition-optimization",
-      "globalIndex": 60,
-      "reason": "正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。"
-    },
-    {
-      "unitId": "unit-randomized-algorithms",
-      "globalIndex": 61,
-      "reason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
-    },
-    {
-      "unitId": "unit-linear-recurrence",
-      "globalIndex": 62,
-      "reason": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
-    },
-    {
-      "unitId": "unit-mo-offline-range",
-      "globalIndex": 63,
-      "reason": "区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。"
-    },
-    {
-      "unitId": "unit-tree-balanced-separators",
-      "globalIndex": 64,
-      "reason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
-    },
-    {
-      "unitId": "unit-cartesian-tree",
-      "globalIndex": 65,
-      "reason": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
-    },
-    {
       "unitId": "unit-functional-graph-decomposition",
-      "globalIndex": 66,
+      "globalIndex": 52,
       "reason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-basic-convex-optimization",
-      "globalIndex": 67,
-      "reason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-directed-core-peeling",
-      "globalIndex": 68,
+      "globalIndex": 53,
       "reason": "三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
+      "unitId": "unit-dp-subset-state",
+      "globalIndex": 54,
+      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
       "unitId": "unit-rooted-tree-aggregation",
-      "globalIndex": 69,
+      "globalIndex": 55,
       "reason": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
+      "unitId": "unit-binary-lifting",
+      "globalIndex": 56,
+      "reason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
       "unitId": "unit-finite-function-composition",
-      "globalIndex": 70,
+      "globalIndex": 57,
       "reason": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-amortized-monotone-progress",
-      "globalIndex": 71,
-      "reason": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-meet-in-the-middle",
-      "globalIndex": 72,
-      "reason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-tree-euler-flattening",
-      "globalIndex": 73,
+      "globalIndex": 58,
       "reason": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
       "unitId": "unit-tree-ancestor-lca",
-      "globalIndex": 74,
+      "globalIndex": 59,
       "reason": "doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-graph-core",
-      "globalIndex": 75,
+      "globalIndex": 60,
       "reason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-recursive-divide-and-conquer",
-      "globalIndex": 76,
-      "reason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-run-length-dynamics",
-      "globalIndex": 77,
-      "reason": "同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-scc-condensation",
-      "globalIndex": 78,
+      "globalIndex": 61,
       "reason": "DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-z-algorithm",
-      "globalIndex": 79,
-      "reason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-directional-grid-effect-scan",
-      "globalIndex": 80,
-      "reason": "各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
-    },
-    {
-      "unitId": "unit-idempotent-overlap-range-query",
-      "globalIndex": 81,
-      "reason": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-monotone-path-contraction",
-      "globalIndex": 82,
-      "reason": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-small-to-large",
-      "globalIndex": 83,
-      "reason": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-linear-system-rank",
-      "globalIndex": 84,
+      "globalIndex": 62,
       "reason": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
+      "unitId": "unit-potential-dsu",
+      "globalIndex": 63,
+      "reason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
       "unitId": "unit-sequence-fingerprint",
-      "globalIndex": 85,
+      "globalIndex": 64,
       "reason": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-bitwise-greedy-feasibility",
-      "globalIndex": 86,
-      "reason": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-finite-pattern-automaton",
-      "globalIndex": 87,
+      "globalIndex": 65,
       "reason": "文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-threshold-heavy-light",
-      "globalIndex": 88,
-      "reason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+      "unitId": "unit-range-monoid-aggregation",
+      "globalIndex": 66,
+      "reason": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-range-actions",
+      "globalIndex": 67,
+      "reason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
+    },
+    {
+      "unitId": "unit-idempotent-overlap-range-query",
+      "globalIndex": 68,
+      "reason": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-rerooting",
-      "globalIndex": 89,
+      "globalIndex": 69,
       "reason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-string-periodicity",
-      "globalIndex": 90,
-      "reason": "Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-weighted-shortest-path",
-      "globalIndex": 91,
+      "globalIndex": 70,
       "reason": "基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。"
     },
     {
       "unitId": "unit-dp-interval-composition",
-      "globalIndex": 92,
+      "globalIndex": 71,
       "reason": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-euler-trail-circuit",
-      "globalIndex": 93,
+      "globalIndex": 72,
       "reason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-degree-parity-subgraph",
-      "globalIndex": 94,
-      "reason": "Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-separable-convex-marginals",
-      "globalIndex": 95,
-      "reason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
-    },
-    {
-      "unitId": "unit-backtracking-search",
-      "globalIndex": 96,
-      "reason": "再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
-      "unitId": "unit-segment-tree-canonical-decomposition",
-      "globalIndex": 97,
-      "reason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-ordered-interval-partition",
-      "globalIndex": 98,
-      "reason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-xor-linear-basis",
-      "globalIndex": 99,
+      "globalIndex": 73,
       "reason": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-suffix-automaton",
-      "globalIndex": 100,
-      "reason": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
-    },
-    {
-      "unitId": "unit-generating-functions",
-      "globalIndex": 101,
-      "reason": "高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。"
-    },
-    {
-      "unitId": "unit-lowlink-critical-structure",
-      "globalIndex": 102,
-      "reason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
-    },
-    {
-      "unitId": "unit-automaton-dp",
-      "globalIndex": 103,
-      "reason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
-    },
-    {
-      "unitId": "unit-convex-boundary-hull",
-      "globalIndex": 104,
-      "reason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-dp-interval-expansion",
-      "globalIndex": 105,
+      "globalIndex": 74,
       "reason": "DPの最小十分状態で得た考え方と実装を再利用し、区間拡張DPの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-dp-lis",
+      "globalIndex": 75,
+      "reason": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-dp-value-range",
+      "globalIndex": 76,
+      "reason": "区間monoid要約・列・subsequence DPで得た考え方と実装を再利用し、値域集約による部分列DPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-bipartite-matching",
+      "globalIndex": 77,
+      "reason": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-digit-dp",
+      "globalIndex": 78,
+      "reason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
+    },
+    {
+      "unitId": "unit-max-flow-min-cut",
+      "globalIndex": 79,
+      "reason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-monoid-exponentiation",
+      "globalIndex": 80,
+      "reason": "長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-shortest-path-reconstruction",
+      "globalIndex": 81,
+      "reason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
+    },
+    {
+      "unitId": "unit-modular-periodicity",
+      "globalIndex": 82,
+      "reason": "剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。"
+    },
+    {
+      "unitId": "unit-implicit-binary-tree",
+      "globalIndex": 83,
+      "reason": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
+    },
+    {
+      "unitId": "unit-interactive-protocol",
+      "globalIndex": 84,
+      "reason": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
+    },
+    {
+      "unitId": "unit-rational-approximation",
+      "globalIndex": 85,
+      "reason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
+    },
+    {
+      "unitId": "unit-recursive-compressed-string",
+      "globalIndex": 86,
+      "reason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
+    },
+    {
+      "unitId": "unit-suffix-lcp-index",
+      "globalIndex": 87,
+      "reason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
+    },
+    {
+      "unitId": "unit-change-impact-localization",
+      "globalIndex": 88,
+      "reason": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
+    },
+    {
+      "unitId": "unit-multiplicative-order-periods",
+      "globalIndex": 89,
+      "reason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
+    },
+    {
+      "unitId": "unit-dp-transition-optimization",
+      "globalIndex": 90,
+      "reason": "正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。"
+    },
+    {
+      "unitId": "unit-randomized-algorithms",
+      "globalIndex": 91,
+      "reason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
+    },
+    {
+      "unitId": "unit-linear-recurrence",
+      "globalIndex": 92,
+      "reason": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
+    },
+    {
+      "unitId": "unit-mo-offline-range",
+      "globalIndex": 93,
+      "reason": "区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。"
+    },
+    {
+      "unitId": "unit-polynomial-convolution",
+      "globalIndex": 94,
+      "reason": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
+    },
+    {
+      "unitId": "unit-tree-balanced-separators",
+      "globalIndex": 95,
+      "reason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
+    },
+    {
+      "unitId": "unit-cartesian-tree",
+      "globalIndex": 96,
+      "reason": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
+    },
+    {
+      "unitId": "unit-basic-convex-optimization",
+      "globalIndex": 97,
+      "reason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-directional-grid-effect-scan",
+      "globalIndex": 98,
+      "reason": "各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
+    },
+    {
+      "unitId": "unit-monotone-path-contraction",
+      "globalIndex": 99,
+      "reason": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-small-to-large",
+      "globalIndex": 100,
+      "reason": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-degree-parity-subgraph",
+      "globalIndex": 101,
+      "reason": "Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-bitwise-greedy-feasibility",
+      "globalIndex": 102,
+      "reason": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-threshold-heavy-light",
+      "globalIndex": 103,
+      "reason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-string-periodicity",
+      "globalIndex": 104,
+      "reason": "Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-separable-convex-marginals",
+      "globalIndex": 105,
+      "reason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
+    },
+    {
+      "unitId": "unit-segment-tree-canonical-decomposition",
       "globalIndex": 106,
-      "reason": "区間monoid要約・列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
+      "reason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-ordered-interval-partition",
+      "globalIndex": 107,
+      "reason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-generating-functions",
+      "globalIndex": 108,
+      "reason": "高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。"
+    },
+    {
+      "unitId": "unit-lowlink-critical-structure",
+      "globalIndex": 109,
+      "reason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
+    },
+    {
+      "unitId": "unit-automaton-dp",
+      "globalIndex": 110,
+      "reason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
+    },
+    {
+      "unitId": "unit-convex-boundary-hull",
+      "globalIndex": 111,
+      "reason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-heavy-light-decomposition",
-      "globalIndex": 107,
+      "globalIndex": 112,
       "reason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-parallel-binary-search",
-      "globalIndex": 108,
+      "globalIndex": 113,
       "reason": "単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。"
     },
     {
-      "unitId": "unit-bipartite-matching",
-      "globalIndex": 109,
-      "reason": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-automaton-subset-construction",
-      "globalIndex": 110,
-      "reason": "有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-cyclic-order-crossing",
-      "globalIndex": 111,
+      "globalIndex": 114,
       "reason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-digit-dp",
-      "globalIndex": 112,
-      "reason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
-    },
-    {
-      "unitId": "unit-orbit-counting",
-      "globalIndex": 113,
-      "reason": "状態・配置の正規化で得た考え方と実装を再利用し、群作用・軌道数え上げの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-divisor-mobius-inversion",
-      "globalIndex": 114,
+      "globalIndex": 115,
       "reason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-dynamic-segment-tree",
-      "globalIndex": 115,
+      "globalIndex": 116,
       "reason": "区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-rollback",
-      "globalIndex": 116,
+      "globalIndex": 117,
       "reason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
       "unitId": "unit-information-theoretic-query-design",
-      "globalIndex": 117,
+      "globalIndex": 118,
       "reason": "応答alphabetとquery回数から識別可能状態数の下界を出し、その下界に一致するcodeword割当と復号を構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
       "unitId": "unit-laminar-interval-containment-tree",
-      "globalIndex": 118,
+      "globalIndex": 119,
       "reason": "非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。"
     },
     {
       "unitId": "unit-persistence",
-      "globalIndex": 119,
+      "globalIndex": 120,
       "reason": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
       "unitId": "unit-two-sat",
-      "globalIndex": 120,
+      "globalIndex": 121,
       "reason": "SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-dsu-merge-tree",
-      "globalIndex": 121,
+      "globalIndex": 122,
       "reason": "DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-graph-potential-propagation",
-      "globalIndex": 122,
-      "reason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
-    },
-    {
-      "unitId": "unit-potential-dsu",
-      "globalIndex": 123,
-      "reason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-max-flow-min-cut",
-      "globalIndex": 124,
-      "reason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-static-sorted-range-index",
-      "globalIndex": 125,
+      "globalIndex": 123,
       "reason": "Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-subset-transforms",
-      "globalIndex": 126,
+      "globalIndex": 124,
       "reason": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-monoid-exponentiation",
-      "globalIndex": 127,
-      "reason": "長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-randomized-algebraic-fingerprint",
-      "globalIndex": 128,
+      "globalIndex": 125,
       "reason": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-separable-linear-transform",
-      "globalIndex": 129,
+      "globalIndex": 126,
       "reason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
       "unitId": "unit-virtual-tree",
-      "globalIndex": 130,
+      "globalIndex": 127,
       "reason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-aho-corasick",
-      "globalIndex": 131,
+      "globalIndex": 128,
       "reason": "有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-swag",
-      "globalIndex": 132,
+      "globalIndex": 129,
       "reason": "区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-fractional-parametric-search",
-      "globalIndex": 133,
+      "globalIndex": 130,
       "reason": "単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-half-plane-constraints",
-      "globalIndex": 134,
+      "globalIndex": 131,
       "reason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-slope-trick",
-      "globalIndex": 135,
-      "reason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-baby-step-giant-step",
-      "globalIndex": 136,
+      "globalIndex": 132,
       "reason": "有限集合上の可逆な作用と逆作用を定義し、離散対数やaffine反復を含む反復到達時刻をbaby/giantの衝突へ変換して平方根時間で求める。合同算術が必要な問題では個別のreadinessとして接続する。"
     },
     {
       "unitId": "unit-binary-tree-ancestor-matching",
-      "globalIndex": 137,
+      "globalIndex": 133,
       "reason": "貪欲法と交換論で得た考え方と実装を再利用し、二進操作の木へのモデル化と祖先マッチングの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-bitwise-minimax-partition",
-      "globalIndex": 138,
+      "globalIndex": 134,
       "reason": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
-      "unitId": "unit-conway-number-games",
-      "globalIndex": 139,
-      "reason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-cyclic-minimax-game",
-      "globalIndex": 140,
+      "globalIndex": 135,
       "reason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、循環局面の後退解析とminimax距離の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-frontier-profile-dp",
-      "globalIndex": 141,
-      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-heavy-light-recursive-dp",
-      "globalIndex": 142,
-      "reason": "資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-segment-tree-beats",
-      "globalIndex": 143,
-      "reason": "区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-stern-brocot-ancestry",
-      "globalIndex": 144,
+      "globalIndex": 136,
       "reason": "gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–Brocot木の経路と祖先の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-deletion-contraction",
-      "globalIndex": 145,
-      "reason": "辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-flow-lower-bounds",
-      "globalIndex": 146,
+      "globalIndex": 137,
       "reason": "最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-heavy-path-tree-dp",
-      "globalIndex": 147,
-      "reason": "畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-reflection-principle",
-      "globalIndex": 148,
-      "reason": "組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-semiring-matrix-exponentiation",
-      "globalIndex": 149,
+      "globalIndex": 138,
       "reason": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-steiner-tree-dp",
-      "globalIndex": 150,
-      "reason": "最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-cycle-space-basis",
-      "globalIndex": 151,
+      "globalIndex": 139,
       "reason": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
     },
     {
-      "unitId": "unit-determinant-counting",
-      "globalIndex": 152,
-      "reason": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-directed-walk-periodicity",
-      "globalIndex": 153,
+      "globalIndex": 140,
       "reason": "gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-matroid-greedy",
-      "globalIndex": 154,
-      "reason": "Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。"
-    },
-    {
       "unitId": "unit-min-cost-flow",
-      "globalIndex": 155,
+      "globalIndex": 141,
       "reason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-planar-duality",
-      "globalIndex": 156,
-      "reason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
-      "unitId": "unit-shortest-path-reconstruction",
-      "globalIndex": 157,
-      "reason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
-    },
-    {
       "unitId": "unit-difference-constraints",
-      "globalIndex": 158,
+      "globalIndex": 142,
       "reason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
     },
     {
       "unitId": "unit-kruskal-threshold-sweep",
-      "globalIndex": 159,
+      "globalIndex": 143,
       "reason": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
     },
     {
-      "unitId": "unit-labeled-component-decomposition",
+      "unitId": "unit-line-envelope",
+      "globalIndex": 144,
+      "reason": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-near-tree-kernelization",
+      "globalIndex": 145,
+      "reason": "cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-numerical-semigroup-reachability",
+      "globalIndex": 146,
+      "reason": "生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。"
+    },
+    {
+      "unitId": "unit-cyclic-group-exponent-counting",
+      "globalIndex": 147,
+      "reason": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
+    },
+    {
+      "unitId": "unit-run-length-dynamics",
+      "globalIndex": 148,
+      "reason": "同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-suffix-automaton",
+      "globalIndex": 149,
+      "reason": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
+    },
+    {
+      "unitId": "unit-automaton-subset-construction",
+      "globalIndex": 150,
+      "reason": "有限状態automatonの構成で得た考え方と実装を再利用し、非決定性automatonのsubset constructionの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-orbit-counting",
+      "globalIndex": 151,
+      "reason": "状態・配置の正規化で得た考え方と実装を再利用し、群作用・軌道数え上げの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-slope-trick",
+      "globalIndex": 152,
+      "reason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-conway-number-games",
+      "globalIndex": 153,
+      "reason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-frontier-profile-dp",
+      "globalIndex": 154,
+      "reason": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-heavy-light-recursive-dp",
+      "globalIndex": 155,
+      "reason": "資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-segment-tree-beats",
+      "globalIndex": 156,
+      "reason": "区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-deletion-contraction",
+      "globalIndex": 157,
+      "reason": "辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+    },
+    {
+      "unitId": "unit-heavy-path-tree-dp",
+      "globalIndex": 158,
+      "reason": "畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-reflection-principle",
+      "globalIndex": 159,
+      "reason": "組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-steiner-tree-dp",
       "globalIndex": 160,
+      "reason": "最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-determinant-counting",
+      "globalIndex": 161,
+      "reason": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-matroid-greedy",
+      "globalIndex": 162,
+      "reason": "Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。"
+    },
+    {
+      "unitId": "unit-planar-duality",
+      "globalIndex": 163,
+      "reason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、平面graph双対・cut/path対応の発動条件・正当化・境界を重複なく学ぶ。"
+    },
+    {
+      "unitId": "unit-labeled-component-decomposition",
+      "globalIndex": 164,
       "reason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-lagrangian-relaxation",
-      "globalIndex": 161,
+      "globalIndex": 165,
       "reason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-line-envelope",
-      "globalIndex": 162,
-      "reason": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
-    },
-    {
       "unitId": "unit-poset-dilworth-antichain",
-      "globalIndex": 163,
+      "globalIndex": 166,
       "reason": "二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-isotonic-regression",
-      "globalIndex": 164,
+      "globalIndex": 167,
       "reason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、isotonic regression・PAVの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-kinetic-order-maintenance",
-      "globalIndex": 165,
+      "globalIndex": 168,
       "reason": "event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-monge-optimization",
-      "globalIndex": 166,
+      "globalIndex": 169,
       "reason": "DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
-      "unitId": "unit-near-tree-kernelization",
-      "globalIndex": 167,
-      "reason": "cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。"
-    },
-    {
       "unitId": "unit-prufer-code",
-      "globalIndex": 168,
+      "globalIndex": 170,
       "reason": "組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-subset-convolution",
-      "globalIndex": 169,
+      "globalIndex": 171,
       "reason": "畳み込み・相互相関・subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-additive-tree-metric-reconstruction",
-      "globalIndex": 170,
+      "globalIndex": 172,
       "reason": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-polynomial-taylor-shift",
-      "globalIndex": 171,
+      "globalIndex": 173,
       "reason": "畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。"
     },
     {
       "unitId": "unit-weighted-bipartite-matching",
-      "globalIndex": 172,
+      "globalIndex": 174,
       "reason": "二部matching・Hall・Kőnigで得た考え方と実装を再利用し、重み付き二部完全matchingの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-bostan-mori",
-      "globalIndex": 173,
+      "globalIndex": 175,
       "reason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-relaxed-convolution",
-      "globalIndex": 174,
+      "globalIndex": 176,
       "reason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-tree-precedence-contraction",
-      "globalIndex": 175,
+      "globalIndex": 177,
       "reason": "DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-euler-circuit-counting",
-      "globalIndex": 176,
+      "globalIndex": 178,
       "reason": "行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-eventual-unbounded-knapsack",
-      "globalIndex": 177,
+      "globalIndex": 179,
       "reason": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
     },
     {
       "unitId": "unit-finite-field-frobenius",
-      "globalIndex": 178,
+      "globalIndex": 180,
       "reason": "法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-gaussian-integers-two-squares",
-      "globalIndex": 179,
+      "globalIndex": 181,
       "reason": "素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-min-weight-general-perfect-matching",
-      "globalIndex": 180,
+      "globalIndex": 182,
       "reason": "二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。"
     },
     {
       "unitId": "unit-path-matching-contraction",
-      "globalIndex": 181,
+      "globalIndex": 183,
       "reason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
     },
     {
-      "unitId": "unit-recursive-compressed-string",
-      "globalIndex": 182,
-      "reason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
-    },
-    {
       "unitId": "unit-static-top-tree",
-      "globalIndex": 183,
+      "globalIndex": 184,
       "reason": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
     },
     {
       "unitId": "unit-finite-field-extension",
-      "globalIndex": 184,
+      "globalIndex": 185,
       "reason": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
     },
     {
       "unitId": "unit-formal-power-series",
-      "globalIndex": 185,
+      "globalIndex": 186,
       "reason": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
     },
     {
       "unitId": "unit-polynomial-multipoint-evaluation",
-      "globalIndex": 186,
+      "globalIndex": 187,
       "reason": "形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-generating-function-coefficients",
-      "globalIndex": 187,
+      "globalIndex": 188,
       "reason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、母関数方程式・高度な係数抽出の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-min25-sieve",
-      "globalIndex": 188,
+      "globalIndex": 189,
       "reason": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-fps-composition-power-projection",
-      "globalIndex": 189,
+      "globalIndex": 190,
       "reason": "形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。"
     },
     {
       "unitId": "unit-rsk-young-tableaux",
-      "globalIndex": 190,
+      "globalIndex": 191,
       "reason": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
     },
     {
       "unitId": "unit-linear-matroid-intersection",
-      "globalIndex": 191,
+      "globalIndex": 192,
       "reason": "matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。"
     }
   ],
-  "tagDagDigest": "51d08c8b584c79d03d89af1293f74534b22e08c2ceed6184af78cfb5d1372db6",
-  "learningOutcomeDagDigest": "2640dfe45a57d4169b30358c245892731c294a5527991e0238f8c078d1cadbce",
-  "learningUnitDagDigest": "edde9522e5a6ca4e3a32b025b0065d95365e312c0bd152893157ec60194e990c",
-  "orderDigest": "20d2c2020ab0dd2920fc179363d9e59506c20a3af8612ad7d049b9330dc2b2ca"
+  "tagDagDigest": "a9c5368b0d01099e2f3e2f2c65b6b83fa4ed16259abde882a77b29846fc11c6f",
+  "learningOutcomeDagDigest": "680be21fc21b3f6d940c0cf40b919e2dc1a29b2ea4ef9a0cbff28e9db796cd10",
+  "learningUnitDagDigest": "cb445c2ebdb856b29743fd5995875f13528ffc3e49eca9a73cde5063e055b8f3",
+  "orderDigest": "640cc5b45151582c5e3886a30d6aef7ba2647e9c72fa03a1b7c15d2443db15a3"
 }

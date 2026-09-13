@@ -1,5 +1,5 @@
 {
-  "id": "outcome-decompose-finite-field-frobenius-orbits",
+  "id": "outcome-accelerate-iteration-by-characteristic-p-frobenius",
   "statement": "標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
   "prerequisiteOutcomeIds": [
     "outcome-compute-in-modular-arithmetic"

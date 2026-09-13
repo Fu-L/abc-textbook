@@ -34,11 +34,10 @@
   "problemIds": [
     "abc229-e",
     "abc249-f",
-    "abc253-f",
     "abc264-e",
     "abc329-e",
     "abc346-e",
-    "abc392-f"
+    "abc464-e"
   ],
   "directProblemIds": [
     "abc346-e",
@@ -46,19 +45,19 @@
     "abc249-f",
     "abc264-e",
     "abc329-e",
-    "abc392-f",
-    "abc253-f"
+    "abc464-e"
   ],
   "relatedProblemIds": [
     "abc238-ex",
+    "abc253-f",
     "abc375-f",
-    "abc464-e"
+    "abc392-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
+  "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 2,
-  "globalIndex": 20,
+  "globalIndex": 36,
   "orderReason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
 }

@@ -35,7 +35,7 @@
     }
   ],
   "learningOutcomeIds": [
-    "outcome-decompose-finite-field-frobenius-orbits"
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius"
   ],
   "representativeProblemIds": [
     "abc251-ex"

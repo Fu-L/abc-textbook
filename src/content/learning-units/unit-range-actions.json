@@ -52,6 +52,7 @@
     "abc389-f",
     "abc397-f",
     "abc417-f",
+    "abc426-f",
     "abc430-g",
     "abc441-g",
     "abc450-f",
@@ -68,6 +69,7 @@
     "abc265-g",
     "abc322-f",
     "abc357-f",
+    "abc426-f",
     "abc455-f",
     "abc327-f",
     "abc346-g",
@@ -80,14 +82,13 @@
   ],
   "relatedProblemIds": [
     "abc256-ex",
-    "abc363-g",
-    "abc426-f"
+    "abc363-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 3,
-  "globalIndex": 56,
+  "globalIndex": 67,
   "orderReason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
 }

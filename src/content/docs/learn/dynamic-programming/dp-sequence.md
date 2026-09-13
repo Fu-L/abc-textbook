@@ -3,7 +3,7 @@ title: "列・subsequence DP"
 description: "列・subsequence DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 12
+  order: 27
 ---
 
 # 列・subsequence DP
@@ -39,6 +39,8 @@ DPの最小十分状態で得た考え方と実装を再利用し、列・subseq
 5. [ABC386 F「Operate K」](https://atcoder.jp/contests/abc386/tasks/abc386_f)
 6. [ABC237 F「|LIS| = 3」](https://atcoder.jp/contests/abc237/tasks/abc237_f)
 7. [ABC345 E「Colorful Subsequence」](https://atcoder.jp/contests/abc345/tasks/abc345_e)
+8. [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f)
+9. [ABC225 F「String Cards」](https://atcoder.jp/contests/abc225/tasks/abc225_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -47,10 +49,8 @@ DPの最小十分状態で得た考え方と実装を再利用し、列・subseq
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
-- [ABC225 F「String Cards」](https://atcoder.jp/contests/abc225/tasks/abc225_f)
 - [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
 - [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
-- [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f)
 - [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
 ## 根拠
@@ -62,4 +62,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、列・subseq
 - [ABC237 F 公式解説](https://atcoder.jp/contests/abc237/editorial/3320)
 - [ABC237 F 公式問題文](https://atcoder.jp/contests/abc237/tasks/abc237_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-sequence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-sequence`

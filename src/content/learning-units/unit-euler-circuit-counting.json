@@ -39,9 +39,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 97,
-  "globalIndex": 176,
+  "globalIndex": 178,
   "orderReason": "行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。"
 }

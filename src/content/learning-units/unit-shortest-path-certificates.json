@@ -34,10 +34,8 @@
   "problemIds": [
     "abc213-e",
     "abc216-g",
-    "abc218-f",
     "abc232-g",
     "abc237-e",
-    "abc243-e",
     "abc243-ex",
     "abc245-g",
     "abc246-e",
@@ -56,7 +54,6 @@
     "abc325-e",
     "abc338-f",
     "abc342-e",
-    "abc355-e",
     "abc363-e",
     "abc369-e",
     "abc375-f",
@@ -68,8 +65,11 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc218-f",
+    "abc243-e",
     "abc250-ex",
     "abc261-g",
+    "abc355-e",
     "abc364-g",
     "abc375-g",
     "abc393-g",
@@ -79,9 +79,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 1,
-  "globalIndex": 91,
+  "globalIndex": 70,
   "orderReason": "辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。"
 }

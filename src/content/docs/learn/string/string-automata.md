@@ -3,7 +3,7 @@ title: "禁止・要求patternを有限状態へ圧縮する"
 description: "禁止・要求patternを有限状態へ圧縮するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 87
+  order: 65
 ---
 
 # 禁止・要求patternを有限状態へ圧縮する
@@ -25,8 +25,8 @@ sidebar:
 ## 下位単元
 
 - [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)
-- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/)
 - [Aho–Corasick](/learn/string/aho-corasick/)
+- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/)
 
 ## 問題一覧
 
@@ -54,4 +54,4 @@ sidebar:
 - [ABC301 F 公式解説](https://atcoder.jp/contests/abc301/editorial/6331)
 - [ABC301 F 公式問題文](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-string-automata`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-string-automata`

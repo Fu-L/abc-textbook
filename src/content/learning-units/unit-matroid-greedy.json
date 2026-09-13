@@ -38,9 +38,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 154,
+  "globalIndex": 162,
   "orderReason": "Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。"
 }

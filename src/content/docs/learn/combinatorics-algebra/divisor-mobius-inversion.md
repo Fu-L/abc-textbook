@@ -3,7 +3,7 @@ title: "約数格子のzeta・Möbius反転"
 description: "約数格子のzeta・Möbius反転の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 114
+  order: 115
 ---
 
 # 約数格子のzeta・Möbius反転
@@ -31,10 +31,15 @@ sidebar:
 1. [ABC230 G「GCD Permutation」](https://atcoder.jp/contests/abc230/tasks/abc230_g)
 2. [ABC361 F「x = a^b」](https://atcoder.jp/contests/abc361/tasks/abc361_f)
 3. [ABC304 F「Shift Table」](https://atcoder.jp/contests/abc304/tasks/abc304_f)
-4. [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
-5. [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+
+## 関連問題
+
+以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
 ## 根拠
 
@@ -45,4 +50,4 @@ sidebar:
 - [ABC304 F 公式解説](https://atcoder.jp/contests/abc304/editorial/6511)
 - [ABC304 F 公式問題文](https://atcoder.jp/contests/abc304/tasks/abc304_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-divisor-mobius-inversion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-divisor-mobius-inversion`

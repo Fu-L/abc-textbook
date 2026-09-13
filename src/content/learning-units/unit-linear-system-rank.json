@@ -33,24 +33,23 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-system-rank.md",
   "problemIds": [
     "abc276-ex",
-    "abc278-ex",
     "abc366-g"
   ],
   "directProblemIds": [
     "abc366-g",
-    "abc278-ex",
     "abc276-ex"
   ],
   "relatedProblemIds": [
+    "abc278-ex",
     "abc323-g",
     "abc399-g",
     "abc412-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 73,
-  "globalIndex": 84,
+  "globalIndex": 62,
   "orderReason": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

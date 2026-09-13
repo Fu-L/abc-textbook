@@ -63,6 +63,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 62,
+  "globalIndex": 92,
   "orderReason": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
 }

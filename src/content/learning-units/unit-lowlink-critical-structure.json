@@ -49,6 +49,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 11,
-  "globalIndex": 102,
+  "globalIndex": 109,
   "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
 }

@@ -3,7 +3,7 @@ title: "大小関係をCartesian treeへ変換する"
 description: "大小関係をCartesian treeへ変換するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 65
+  order: 96
 ---
 
 # 大小関係をCartesian treeへ変換する
@@ -29,6 +29,7 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC420 F「kirinuki」](https://atcoder.jp/contests/abc420/tasks/abc420_f)
+2. [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -37,7 +38,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
-- [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 
 ## 根拠
 
@@ -48,4 +48,4 @@ sidebar:
 - [ABC435 F 公式解説](https://atcoder.jp/contests/abc435/editorial/14734)
 - [ABC435 F 公式問題文](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-cartesian-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-cartesian-tree`

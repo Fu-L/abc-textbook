@@ -31,14 +31,8 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-arithmetic.md",
-  "problemIds": [
-    "abc276-f",
-    "abc310-g"
-  ],
-  "directProblemIds": [
-    "abc310-g",
-    "abc276-f"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
     "abc215-g",
     "abc220-e",
@@ -63,6 +57,7 @@
     "abc270-g",
     "abc271-g",
     "abc275-e",
+    "abc276-f",
     "abc277-g",
     "abc280-e",
     "abc282-e",
@@ -78,6 +73,7 @@
     "abc303-ex",
     "abc304-f",
     "abc310-f",
+    "abc310-g",
     "abc314-f",
     "abc321-g",
     "abc323-e",
@@ -105,6 +101,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 0,
-  "globalIndex": 15,
+  "globalIndex": 5,
   "orderReason": "剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。"
 }

@@ -52,16 +52,18 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/string/index.md",
   "problemIds": [
+    "abc213-f",
     "abc228-g",
     "abc257-g",
     "abc268-ex",
     "abc272-f",
+    "abc280-ex",
     "abc284-f",
     "abc287-e",
     "abc312-ex",
     "abc313-e",
-    "abc343-g",
     "abc346-f",
+    "abc349-g",
     "abc350-f",
     "abc362-g",
     "abc377-g",
@@ -78,14 +80,12 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc213-f",
     "abc240-ex",
     "abc264-g",
     "abc268-g",
-    "abc280-ex",
     "abc301-f",
     "abc305-g",
-    "abc349-g",
+    "abc343-g",
     "abc353-e",
     "abc403-e",
     "abc418-g"
@@ -95,6 +95,6 @@
   "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 5,
-  "globalIndex": 16,
+  "globalIndex": 6,
   "orderReason": "接頭辞・接尾辞・一致長などの文字列状態を共通言語にし、各種の照合・索引法へ進む土台を作る。"
 }

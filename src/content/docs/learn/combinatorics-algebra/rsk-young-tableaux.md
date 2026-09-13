@@ -3,7 +3,7 @@ title: "Robinson–Schensted対応・Young tableau"
 description: "Robinson–Schensted対応・Young tableauの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 190
+  order: 191
 ---
 
 # Robinson–Schensted対応・Young tableau
@@ -37,4 +37,4 @@ sidebar:
 - [ABC378 G 公式解説](https://atcoder.jp/contests/abc378/editorial/11283)
 - [ABC378 G 公式問題文](https://atcoder.jp/contests/abc378/tasks/abc378_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-rsk-young-tableaux`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-rsk-young-tableaux`

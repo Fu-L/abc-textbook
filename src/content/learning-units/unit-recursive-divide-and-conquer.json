@@ -34,16 +34,12 @@
   "problemIds": [
     "abc282-ex",
     "abc304-g",
-    "abc413-e",
-    "abc425-g",
-    "abc426-g"
+    "abc413-e"
   ],
   "directProblemIds": [
     "abc282-ex",
     "abc413-e",
-    "abc304-g",
-    "abc425-g",
-    "abc426-g"
+    "abc304-g"
   ],
   "relatedProblemIds": [
     "abc213-h",
@@ -65,13 +61,15 @@
     "abc381-g",
     "abc383-g",
     "abc385-g",
+    "abc425-g",
+    "abc426-g",
     "abc439-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 1,
   "difficultyRank": 3,
   "representativeRank": 69,
-  "globalIndex": 76,
+  "globalIndex": 29,
   "orderReason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

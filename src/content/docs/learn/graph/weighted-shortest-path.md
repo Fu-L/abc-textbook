@@ -3,7 +3,7 @@ title: "最短路モデル"
 description: "最短路モデルの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 91
+  order: 70
 ---
 
 # 最短路モデル
@@ -43,18 +43,17 @@ sidebar:
 13. [ABC431 E「Reflection on Grid」](https://atcoder.jp/contests/abc431/tasks/abc431_e)
 14. [ABC463 E「Roads and Gates」](https://atcoder.jp/contests/abc463/tasks/abc463_e)
 15. [ABC232 G「Modulo Shortest Path」](https://atcoder.jp/contests/abc232/tasks/abc232_g)
-16. [ABC243 E「Edge Deletion」](https://atcoder.jp/contests/abc243/tasks/abc243_e)
-17. [ABC243 Ex「Builder Takahashi (Enhanced version)」](https://atcoder.jp/contests/abc243/tasks/abc243_h)
-18. [ABC257 F「Teleporter Setting」](https://atcoder.jp/contests/abc257/tasks/abc257_f)
-19. [ABC369 E「Sightseeing Tour」](https://atcoder.jp/contests/abc369/tasks/abc369_e)
-20. [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
-21. [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
-22. [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
-23. [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
-24. [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
-25. [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
-26. [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
-27. [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
+16. [ABC243 Ex「Builder Takahashi (Enhanced version)」](https://atcoder.jp/contests/abc243/tasks/abc243_h)
+17. [ABC257 F「Teleporter Setting」](https://atcoder.jp/contests/abc257/tasks/abc257_f)
+18. [ABC369 E「Sightseeing Tour」](https://atcoder.jp/contests/abc369/tasks/abc369_e)
+19. [ABC264 G「String Fair」](https://atcoder.jp/contests/abc264/tasks/abc264_g)
+20. [ABC297 E「Kth Takoyaki Set」](https://atcoder.jp/contests/abc297/tasks/abc297_e)
+21. [ABC305 E「Art Gallery on Graph」](https://atcoder.jp/contests/abc305/tasks/abc305_e)
+22. [ABC375 F「Road Blocked」](https://atcoder.jp/contests/abc375/tasks/abc375_f)
+23. [ABC307 F「Virus 2」](https://atcoder.jp/contests/abc307/tasks/abc307_f)
+24. [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
+25. [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
+26. [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -63,6 +62,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
+- [ABC243 E「Edge Deletion」](https://atcoder.jp/contests/abc243/tasks/abc243_e)
 - [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
 - [ABC252 E「Road Reduction」](https://atcoder.jp/contests/abc252/tasks/abc252_e)
 - [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
@@ -83,4 +83,4 @@ sidebar:
 - [ABC232 G 公式解説](https://atcoder.jp/contests/abc232/editorial/3141)
 - [ABC232 G 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-weighted-shortest-path`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-weighted-shortest-path`

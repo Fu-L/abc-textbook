@@ -36,23 +36,24 @@
   "problemIds": [
     "abc230-f",
     "abc285-e",
-    "abc374-f"
+    "abc374-f",
+    "abc466-e"
   ],
   "directProblemIds": [
     "abc285-e",
     "abc230-f",
+    "abc466-e",
     "abc374-f"
   ],
   "relatedProblemIds": [
     "abc262-ex",
-    "abc288-f",
-    "abc466-e"
+    "abc288-f"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 1,
-  "difficultyRank": 0,
+  "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 14,
+  "globalIndex": 32,
   "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

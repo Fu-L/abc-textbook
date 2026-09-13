@@ -3,7 +3,7 @@ title: "二部matching・Hall・Kőnig"
 description: "二部matching・Hall・Kőnigの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 109
+  order: 77
 ---
 
 # 二部matching・Hall・Kőnig
@@ -42,8 +42,7 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 8. [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
 9. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
 10. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
-11. [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
-12. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
+11. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -53,6 +52,7 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 
 - [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 - [ABC237 Ex「Hakata」](https://atcoder.jp/contests/abc237/tasks/abc237_h)
+- [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
 - [ABC363 G「Dynamic Scheduling」](https://atcoder.jp/contests/abc363/tasks/abc363_g)
 
 ## 根拠
@@ -64,4 +64,4 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 - [ABC241 G 公式解説](https://atcoder.jp/contests/abc241/editorial/3452)
 - [ABC241 G 公式問題文](https://atcoder.jp/contests/abc241/tasks/abc241_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-bipartite-matching`

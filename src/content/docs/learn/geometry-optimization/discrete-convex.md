@@ -3,7 +3,7 @@ title: "凸性・傾き・限界費用・slope trick"
 description: "凸性・傾き・限界費用・slope trickの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 67
+  order: 97
 ---
 
 # 凸性・傾き・限界費用・slope trick
@@ -39,12 +39,6 @@ sidebar:
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
-
 ## 根拠
 
 - [ABC216 E 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_e)
@@ -54,4 +48,4 @@ sidebar:
 - [ABC224 G 公式解説](https://atcoder.jp/contests/abc224/editorial/2816)
 - [ABC224 G 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-discrete-convex`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-discrete-convex`

@@ -44,9 +44,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 3,
-  "globalIndex": 31,
+  "globalIndex": 10,
   "orderReason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
 }

@@ -30,6 +30,7 @@ sidebar:
 
 1. [ABC348 F「Oddly Similar」](https://atcoder.jp/contests/abc348/tasks/abc348_f)
 2. [ABC258 G「Triangle」](https://atcoder.jp/contests/abc258/tasks/abc258_g)
+3. [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -37,7 +38,6 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
 - [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
 - [ABC287 Ex「Directed Graph and Query」](https://atcoder.jp/contests/abc287/tasks/abc287_h)
 - [ABC366 G「XOR Neighbors」](https://atcoder.jp/contests/abc366/tasks/abc366_g)
@@ -52,4 +52,4 @@ sidebar:
 - [ABC276 H 公式解説](https://atcoder.jp/contests/abc276/editorial/5169)
 - [ABC276 H 公式問題文](https://atcoder.jp/contests/abc276/tasks/abc276_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-bitset-word-parallel`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-bitset-word-parallel`

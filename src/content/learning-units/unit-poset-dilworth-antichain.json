@@ -47,9 +47,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 93,
-  "globalIndex": 163,
+  "globalIndex": 166,
   "orderReason": "二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。"
 }

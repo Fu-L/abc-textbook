@@ -45,6 +45,6 @@
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 10,
-  "globalIndex": 184,
+  "globalIndex": 185,
   "orderReason": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
 }

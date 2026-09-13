@@ -3,7 +3,7 @@ title: "結合的要約と列・区間の合成"
 description: "結合的要約と列・区間の合成の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 13
+  order: 57
 ---
 
 # 結合的要約と列・区間の合成
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [区間monoid要約](/learn/query/range-monoid-aggregation/)
 - [有限関数・作用の合成](/learn/query/finite-function-composition/)
+- [区間monoid要約](/learn/query/range-monoid-aggregation/)
 - [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/)
 - [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/)
 - [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/)
@@ -47,16 +47,10 @@ sidebar:
 - [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 - [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
 - [ABC248 Ex「Beautiful Subsequences」](https://atcoder.jp/contests/abc248/tasks/abc248_h)
-- [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
-- [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
 - [ABC265 G「012 Inversion」](https://atcoder.jp/contests/abc265/tasks/abc265_g)
-- [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
 - [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
-- [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
-- [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
-- [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
+- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 - [ABC322 F「Vacation Query」](https://atcoder.jp/contests/abc322/tasks/abc322_f)
-- [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 - [ABC339 E「Smooth Subsequence」](https://atcoder.jp/contests/abc339/tasks/abc339_e)
 - [ABC353 G「Merchant Takahashi」](https://atcoder.jp/contests/abc353/tasks/abc353_g)
 - [ABC354 F「Useless for LIS」](https://atcoder.jp/contests/abc354/tasks/abc354_f)
@@ -67,11 +61,7 @@ sidebar:
 - [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
 - [ABC424 F「Adding Chords」](https://atcoder.jp/contests/abc424/tasks/abc424_f)
 - [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
-- [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
-- [ABC440 F「Egoism」](https://atcoder.jp/contests/abc440/tasks/abc440_f)
-- [ABC447 G「Div. 1 & Div. 2」](https://atcoder.jp/contests/abc447/tasks/abc447_g)
 - [ABC453 G「Copy Query」](https://atcoder.jp/contests/abc453/tasks/abc453_g)
-- [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
 
 ## 根拠
 
@@ -82,4 +72,4 @@ sidebar:
 - [ABC244 H 公式解説](https://atcoder.jp/contests/abc244/editorial/3602)
 - [ABC244 H 公式問題文](https://atcoder.jp/contests/abc244/tasks/abc244_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-monoid-segment-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-monoid-segment-tree`

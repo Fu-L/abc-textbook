@@ -39,6 +39,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 138,
+  "globalIndex": 134,
   "orderReason": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

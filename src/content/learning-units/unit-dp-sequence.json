@@ -34,9 +34,11 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-sequence.md",
   "problemIds": [
+    "abc225-f",
     "abc237-f",
     "abc238-f",
     "abc299-f",
+    "abc315-f",
     "abc327-e",
     "abc345-e",
     "abc362-e",
@@ -49,21 +51,21 @@
     "abc362-e",
     "abc386-f",
     "abc237-f",
-    "abc345-e"
+    "abc345-e",
+    "abc315-f",
+    "abc225-f"
   ],
   "relatedProblemIds": [
     "abc214-f",
-    "abc225-f",
     "abc246-ex",
     "abc271-e",
-    "abc315-f",
     "abc457-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 1,
-  "difficultyRank": 0,
+  "difficultyRank": 3,
   "representativeRank": 66,
-  "globalIndex": 12,
+  "globalIndex": 27,
   "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -52,6 +52,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 0,
-  "globalIndex": 16,
+  "globalIndex": 6,
   "orderReason": "文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。"
 }

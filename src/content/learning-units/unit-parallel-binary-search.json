@@ -45,6 +45,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 108,
+  "globalIndex": 113,
   "orderReason": "単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。"
 }

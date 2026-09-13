@@ -1,3 +1,4 @@
+import { curriculumStageForUnit } from './final-taxonomy-curriculum.js';
 import { deterministicTopologicalOrder } from '../validation/validate.js';
 import {
   FINAL_TAG_DIRECTED_RELATION_SEEDS,
@@ -31,9 +32,9 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   supporting:
     '主解法とは別の観察可能な技能を実際に発動するときだけsupportingとし、用語が説明に現れるだけではUnitを付与しない。',
   homeAndReadiness:
-    'presentationUnitIdは想定解法の再構成・実装に必須な全Outcome（supportingを含む）を履修済みにする最遅Unitとする。そのUnitの技能をprimaryへ昇格し、用語だけ・別解だけの技能は後ろ倒し要因にしない。',
+    'presentationUnitIdは想定解法の再構成・実装に必須な全Outcome（supportingを含む）を履修済みにする最遅Unitとする。原則としてそのUnitの技能をprimaryへ昇格するが、理由を明記したsemantic primaryの例外を許す。例外でも掲載位置と必須技能集合は変えない。用語だけ・別解だけの技能は後ろ倒し要因にしない。',
   prerequisite:
-    'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。単なる併用・類似・対比は前提にせずtyped relationへ分離する。',
+    'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。その技能自体の習得に必要な前提だけを課し、特定Problemのreadinessを修正するためにTag・Outcome全体の前提を強めない。問題固有の複合前提はrequired Outcome集合で表し、単なる併用・類似・対比はtyped relationへ分離する。',
   relatedTags:
     'Tag間のcontrast・analogy・specialization・extension・reduction・often_combined・implementation_substrateはcurriculum prerequisiteと独立に保持し、未知問で再利用すべき思考が区別できる具体的理由を付ける。specializationは変形なしに成り立つ狭い一種、extensionは新しい目的・制約・操作・interfaceを加える拡張、reductionはsourceからtargetへの意味保存変換に限る。該当関係がないTagは空配列のままとする。',
   naming:
@@ -208,6 +209,22 @@ export interface SupportingTagDecision {
   readonly decisionBasis: readonly OwnerQualifiedClaimReference[];
 }
 
+export interface ReadinessPrimaryOverride {
+  readonly primaryOutcomeId: string;
+  readonly rationale: string;
+  readonly decisionAuthorId: string;
+}
+
+/** Reviewed exceptions preserve semantic roles, never move the presentation home earlier. */
+export const READINESS_PRIMARY_OVERRIDES: Readonly<Record<string, ReadinessPrimaryOverride>> = {
+  'abc354-e': {
+    primaryOutcomeId: 'outcome-classify-game-states',
+    rationale:
+      '合法手の先に必敗局面があるか、という勝敗再帰が主題である。残存集合は状態表現として必須だが、ゲームの主技法を置き換えない。掲載はゲームと部分集合状態の両方を履修済みにする最遅Unitとする。',
+    decisionAuthorId: 'person-maintainer',
+  },
+};
+
 export interface FinalPrimaryDecision {
   readonly problemId: string;
   readonly primaryOutcomeId: string;
@@ -218,6 +235,7 @@ export interface FinalPrimaryDecision {
   readonly supportingTagDecisions: readonly SupportingTagDecision[];
   readonly learningUnitCandidateIds: readonly string[];
   readonly presentationUnitId: string;
+  readonly primaryOverride?: ReadinessPrimaryOverride;
   readonly decisionKind: 'explicit_inventory_assignment' | 'curated_semantic_override';
   readonly ambiguityStatus: 'proposed_assignment' | 'curated_override';
   readonly selectionRationale: string;
@@ -4835,7 +4853,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
       '標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。',
     parentId: 'tag-number-theory-structure',
     prerequisiteTagIds: ['tag-modular-arithmetic'],
-    outcomeIds: ['outcome-decompose-finite-field-frobenius-orbits'],
+    outcomeIds: ['outcome-accelerate-iteration-by-characteristic-p-frobenius'],
     unitIds: ['unit-finite-field-frobenius'],
     recall: ['Frobenius identity', 'Freshman dream', '標数p'],
     object: ['多項式', 'シフト演算', 'ラン長圧縮'],
@@ -5838,16 +5856,32 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-lis-state',
     name: 'LIS・末尾の支配関係',
     definition:
-      '部分列の長さ別最小末尾と値別最良長を比較し、延長可能性を失わない状態圧縮と値域集約を選ぶ。',
+      '同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。',
     parentId: 'tag-dp-state-transition',
-    prerequisiteTagIds: ['tag-sequence-subsequence-dp', 'tag-range-monoid-aggregation'],
+    prerequisiteTagIds: ['tag-sequence-subsequence-dp'],
     outcomeIds: ['outcome-design-lis-frontier'],
     unitIds: ['unit-dp-lis'],
-    recall: ['LIS', 'tails', '最小末尾', '値域最大DP'],
+    recall: ['LIS', 'tails', '最小末尾', 'patience sorting'],
     object: ['部分列', '末尾', '二次元順序'],
-    trigger: ['順序を保って延長', '末尾の大小で支配', '直前値を範囲制約'],
-    invariant: ['長さ別最小末尾', '値別最良長'],
+    trigger: ['順序を保って延長', '末尾の大小で支配'],
+    invariant: ['長さ別最小末尾', '末尾の支配関係'],
     goal: ['最長部分列', '最適解への所属', '復元'],
+    priority: 80,
+  },
+  {
+    id: 'tag-value-range-dp',
+    name: '値域集約による部分列DP',
+    definition:
+      '末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。',
+    parentId: 'tag-dp-state-transition',
+    prerequisiteTagIds: ['tag-sequence-subsequence-dp', 'tag-range-monoid-aggregation'],
+    outcomeIds: ['outcome-aggregate-subsequence-transitions-by-value'],
+    unitIds: ['unit-dp-value-range'],
+    recall: ['値域DP', '値別最良長', 'Segment Tree上のDP'],
+    object: ['部分列', '直前値', '値域'],
+    trigger: ['直前値を範囲制約', '値ごとの最適値'],
+    invariant: ['処理済みprefixの値別最良状態', '許容区間の集約'],
+    goal: ['最長部分列', '範囲遷移の高速化'],
     priority: 80,
   },
   {
@@ -5865,7 +5899,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     unitIds: ['unit-generating-function-coefficients'],
     recall: ['Lagrange反転', '対数微分', 'Euler積', '五角数定理'],
     object: ['暗黙母関数', '係数列', '形式的無限積'],
-    trigger: ['F=xΦ(F)', '微分恒等式', 'partitionの積'],
+    trigger: [escapeRegexLiteral('F=xΦ(F)'), '微分恒等式', 'partitionの積'],
     invariant: ['形式的係数一致', '必要次数より先の項の不寄与'],
     goal: ['係数漸化式', '疎な係数抽出'],
     priority: 80,
@@ -6345,7 +6379,6 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
 const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
-  'outcome-classify-game-states': ['outcome-enumerate-subset-state-space'],
   'outcome-optimize-stochastic-actions': ['outcome-solve-stochastic-recurrence'],
   'outcome-maintain-modular-product-under-factor-updates': [
     'outcome-compute-in-modular-arithmetic',
@@ -6466,7 +6499,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-construct-degree-parity-subgraph',
   'outcome-contract-monotone-paths-with-jump-pointers',
   'outcome-count-euler-circuits-by-best',
-  'outcome-decompose-finite-field-frobenius-orbits',
+  'outcome-accelerate-iteration-by-characteristic-p-frobenius',
   'outcome-determinize-automaton-by-subsets',
   'outcome-dualize-planar-cut-to-path',
   'outcome-encode-labeled-trees-by-prufer-code',
@@ -6695,6 +6728,7 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-dp-interval-composition': 'unit-dp-sequence-interval',
   'unit-dp-interval-expansion': 'unit-dp-sequence-interval',
   'unit-dp-lis': 'unit-dp-sequence-interval',
+  'unit-dp-value-range': 'unit-dp-sequence-interval',
   'unit-meet-in-the-middle': 'unit-divide-enumeration',
   'unit-recursive-divide-and-conquer': 'unit-divide-enumeration',
   'unit-amortized-monotone-progress': 'unit-decomposition-amortization',
@@ -6872,27 +6906,6 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
   }
 }
 
-// Stages describe reusable content, independent of navigation depth.
-const FOUNDATIONAL_UNIT_IDS = new Set([
-  'unit-state-graph-search',
-  'unit-dsu-components',
-  'unit-priority-queue-best-first',
-  'unit-ordered-set-multiset',
-  'unit-binary-lifting',
-  'unit-weighted-prefix-fenwick',
-  'unit-range-monoid-aggregation',
-  'unit-dp-subset-state',
-  'unit-dp-sequence',
-  'unit-dp-prefix-partition',
-]);
-const SPECIALIZED_UNIT_IDS = new Set([
-  'unit-min25-sieve',
-  'unit-rsk-young-tableaux',
-  'unit-linear-matroid-intersection',
-  'unit-fps-composition-power-projection',
-  'unit-generating-function-coefficients',
-]);
-
 const BASE_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ...refinedLegacyUnitSeeds,
   ...REFINED_CHAPTER_SEEDS,
@@ -6930,16 +6943,7 @@ for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
 
 const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = BASE_LEARNING_UNIT_SEEDS.map((unit) => ({
   ...unit,
-  stageRank: FOUNDATIONAL_UNIT_IDS.has(unit.id)
-    ? 1
-    : SPECIALIZED_UNIT_IDS.has(unit.id)
-      ? 5
-      : unit.stageRank,
-  difficultyRank: FOUNDATIONAL_UNIT_IDS.has(unit.id)
-    ? 0
-    : SPECIALIZED_UNIT_IDS.has(unit.id)
-      ? 4
-      : unit.difficultyRank,
+  stageRank: curriculumStageForUnit(unit.id).rank,
   prerequisiteIds: [
     ...new Set([
       ...unit.prerequisiteIds,
@@ -7891,16 +7895,12 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-design-order-preserving-dp',
     to: 'outcome-design-lis-frontier',
-    problemIds: [
-      'abc240-ex',
-      'abc339-e',
-      'abc354-f',
-      'abc360-g',
-      'abc369-f',
-      'abc393-f',
-      'abc410-g',
-      'abc439-e',
-    ],
+    problemIds: ['abc369-f', 'abc393-f', 'abc439-e'],
+  },
+  {
+    from: 'outcome-design-order-preserving-dp',
+    to: 'outcome-aggregate-subsequence-transitions-by-value',
+    problemIds: ['abc240-ex', 'abc339-e', 'abc354-f', 'abc360-g', 'abc410-g'],
   },
   {
     from: 'outcome-encode-counting-by-generating-function',
@@ -8369,7 +8369,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   },
   {
     from: 'outcome-accelerate-fixed-linear-transition',
-    to: 'outcome-decompose-finite-field-frobenius-orbits',
+    to: 'outcome-accelerate-iteration-by-characteristic-p-frobenius',
     problemIds: ['abc251-ex'],
   },
   {
@@ -9333,9 +9333,20 @@ if (
 /** Primary describes the new technique at the first point the adopted solution is readable.
  * Keep earlier main techniques as co-primary, preserving their claim-level evidence.
  */
-const alignPrimaryWithReadiness = (
+export const alignPrimaryWithReadiness = (
   decision: CuratedProblemClaimDecision,
+  primaryOverride?: ReadinessPrimaryOverride,
 ): CuratedProblemClaimDecision => {
+  if (primaryOverride !== undefined) {
+    if (
+      primaryOverride.primaryOutcomeId !== decision.primaryOutcomeId ||
+      primaryOverride.rationale.trim().length === 0 ||
+      primaryOverride.decisionAuthorId.trim().length === 0
+    ) {
+      throw new Error('INVALID_READINESS_PRIMARY_OVERRIDE');
+    }
+    return decision;
+  }
   const formerPrimary = [decision.primaryOutcomeId, ...decision.additionalPrimaryOutcomeIds];
   const allOutcomes = sortedUnique([
     ...formerPrimary,
@@ -9387,7 +9398,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProb
     Object.fromEntries(
       Object.entries(RAW_FINAL_TAXONOMY_CLAIM_DECISIONS).map(([problemId, decision]) => [
         problemId,
-        alignPrimaryWithReadiness(normalizeClaimDecision(problemId, decision)),
+        alignPrimaryWithReadiness(
+          normalizeClaimDecision(problemId, decision),
+          READINESS_PRIMARY_OVERRIDES[problemId],
+        ),
       ]),
     ),
   );
@@ -9753,6 +9767,7 @@ export const buildFullCorpusPrimaryDecisionTable = (
         throw new Error(`FINAL_TAXONOMY_CURATED_CLAIM_DECISION_MISSING: ${record.problemId}`);
       }
       const override = overrideByProblemId.get(record.problemId);
+      const readinessOverride = READINESS_PRIMARY_OVERRIDES[record.problemId];
       const explicitPrimaryTagId = explicitTagByProblemId.get(record.problemId);
       const primaryTag = override
         ? tagById.get(override.primaryTagId)
@@ -9877,12 +9892,23 @@ export const buildFullCorpusPrimaryDecisionTable = (
         supportingTagDecisions,
         learningUnitCandidateIds,
         presentationUnitId: latestLearningUnitId(learningUnitCandidateIds),
-        decisionKind: override ? 'curated_semantic_override' : 'explicit_inventory_assignment',
-        ambiguityStatus: override ? 'curated_override' : 'proposed_assignment',
-        selectionRationale: override
-          ? override.rationale
-          : `Inventoryの採用方針「${record.reasoningPath.candidateApproaches.find((candidate) => candidate.decision === 'adopted')?.approach ?? ''}」、解法への接続「${record.reasoningPath.algorithmConnection.text}」、学習成果「${record.outcomeCandidates[0]?.text ?? ''}」を照合し、${primaryTag.id} / ${primaryOutcomeId} をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。`,
-        decisionAuthorId: override?.decisionAuthorId ?? record.authorId,
+        ...(readinessOverride === undefined
+          ? {}
+          : {
+              primaryOverride: readinessOverride,
+            }),
+        decisionKind:
+          override || readinessOverride
+            ? 'curated_semantic_override'
+            : 'explicit_inventory_assignment',
+        ambiguityStatus: override || readinessOverride ? 'curated_override' : 'proposed_assignment',
+        selectionRationale: readinessOverride
+          ? readinessOverride.rationale
+          : override
+            ? override.rationale
+            : `Inventoryの採用方針「${record.reasoningPath.candidateApproaches.find((candidate) => candidate.decision === 'adopted')?.approach ?? ''}」、解法への接続「${record.reasoningPath.algorithmConnection.text}」、学習成果「${record.outcomeCandidates[0]?.text ?? ''}」を照合し、${primaryTag.id} / ${primaryOutcomeId} をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。`,
+        decisionAuthorId:
+          readinessOverride?.decisionAuthorId ?? override?.decisionAuthorId ?? record.authorId,
         acceptanceStatus: 'proposed',
         decisionBasis,
         claimDispositions,

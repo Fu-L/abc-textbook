@@ -47,14 +47,12 @@
     "abc280-e",
     "abc298-e",
     "abc300-e",
-    "abc310-f",
     "abc314-e",
     "abc323-e",
     "abc326-e",
     "abc350-e",
     "abc360-e",
     "abc382-e",
-    "abc402-e",
     "abc404-f",
     "abc421-e",
     "abc450-g"
@@ -73,10 +71,8 @@
     "abc326-e",
     "abc360-e",
     "abc239-ex",
-    "abc310-f",
     "abc314-e",
     "abc350-e",
-    "abc402-e",
     "abc404-f",
     "abc421-e",
     "abc226-h"
@@ -87,9 +83,11 @@
     "abc270-ex",
     "abc271-g",
     "abc299-ex",
+    "abc310-f",
     "abc332-f",
     "abc333-f",
     "abc342-f",
+    "abc402-e",
     "abc409-g",
     "abc412-f"
   ],
@@ -98,6 +96,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 4,
-  "globalIndex": 42,
+  "globalIndex": 44,
   "orderReason": "状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。"
 }

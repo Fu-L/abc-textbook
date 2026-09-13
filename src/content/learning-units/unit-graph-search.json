@@ -42,6 +42,7 @@
     "abc317-e",
     "abc394-e",
     "abc414-f",
+    "abc417-e",
     "abc427-e",
     "abc429-e",
     "abc446-e",
@@ -58,14 +59,13 @@
     "abc361-g",
     "abc374-g",
     "abc413-f",
-    "abc417-e",
     "abc443-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
+  "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 0,
-  "globalIndex": 6,
+  "globalIndex": 19,
   "orderReason": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
 }

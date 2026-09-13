@@ -44,9 +44,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 37,
+  "globalIndex": 85,
   "orderReason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
 }

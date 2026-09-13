@@ -3,7 +3,7 @@ title: "Kruskal順の閾値DSU sweep"
 description: "Kruskal順の閾値DSU sweepの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 159
+  order: 143
 ---
 
 # Kruskal順の閾値DSU sweep
@@ -44,4 +44,4 @@ DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順
 - [ABC301 H 公式解説](https://atcoder.jp/contests/abc301/editorial/6344)
 - [ABC301 H 公式問題文](https://atcoder.jp/contests/abc301/tasks/abc301_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-kruskal-threshold-sweep`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-kruskal-threshold-sweep`

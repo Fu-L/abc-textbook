@@ -3,7 +3,7 @@ title: "探索空間を分けて照合・再帰分割する"
 description: "探索空間を分けて照合・再帰分割するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 72
+  order: 28
 ---
 
 # 探索空間を分けて照合・再帰分割する
@@ -43,6 +43,7 @@ sidebar:
 - [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
 - [ABC230 H「Bullion」](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 - [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
+- [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h)
 - [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
 - [ABC267 Ex「Odd Sum」](https://atcoder.jp/contests/abc267/tasks/abc267_h)
 - [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
@@ -59,6 +60,9 @@ sidebar:
 - [ABC381 G「Fibonacci Product」](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 - [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g)
 - [ABC385 G「Counting Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_g)
+- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
+- [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
+- [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
 - [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
 ## 根拠
@@ -70,4 +74,4 @@ sidebar:
 - [ABC230 H 公式解説](https://atcoder.jp/contests/abc230/editorial/3003)
 - [ABC230 H 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-divide-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-divide-enumeration`

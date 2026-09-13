@@ -3,7 +3,7 @@ title: "独立な数ゲームの和"
 description: "独立な数ゲームの和の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 139
+  order: 153
 ---
 
 # 独立な数ゲームの和
@@ -44,4 +44,4 @@ ABC229 Hでは列間で手が干渉しない独立和と、全ての列局面が
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-conway-number-games`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-conway-number-games`

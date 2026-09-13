@@ -3,7 +3,7 @@ title: "SCC・縮約DAG・トポロジカル順序"
 description: "SCC・縮約DAG・トポロジカル順序の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 78
+  order: 61
 ---
 
 # SCC・縮約DAG・トポロジカル順序
@@ -49,4 +49,4 @@ DAGのtopological processingで得た考え方と実装を再利用し、SCC・�
 - [ABC374 G 公式解説](https://atcoder.jp/contests/abc374/editorial/11099)
 - [ABC374 G 公式問題文](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-scc-condensation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-scc-condensation`

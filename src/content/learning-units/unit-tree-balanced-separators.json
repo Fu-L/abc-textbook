@@ -47,6 +47,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 64,
+  "globalIndex": 95,
   "orderReason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
 }

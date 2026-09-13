@@ -83,4 +83,4 @@ ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から�
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-prefix-aggregate`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-prefix-aggregate`

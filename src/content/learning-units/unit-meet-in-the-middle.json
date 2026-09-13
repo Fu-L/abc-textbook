@@ -32,13 +32,11 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/meet-in-the-middle.md",
   "problemIds": [
-    "abc252-ex",
     "abc271-f",
     "abc300-g",
     "abc326-f",
     "abc336-f",
     "abc402-f",
-    "abc423-g",
     "abc427-f",
     "abc464-f"
   ],
@@ -46,21 +44,21 @@
     "abc271-f",
     "abc427-f",
     "abc300-g",
-    "abc252-ex",
     "abc326-f",
     "abc336-f",
     "abc402-f",
-    "abc464-f",
-    "abc423-g"
+    "abc464-f"
   ],
   "relatedProblemIds": [
-    "abc220-h"
+    "abc220-h",
+    "abc252-ex",
+    "abc423-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 1,
   "difficultyRank": 3,
   "representativeRank": 67,
-  "globalIndex": 72,
+  "globalIndex": 28,
   "orderReason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

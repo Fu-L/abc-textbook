@@ -33,6 +33,7 @@
   "docPath": "src/content/docs/learn/modeling/bounded-enumeration.md",
   "problemIds": [
     "abc219-e",
+    "abc227-f",
     "abc234-e",
     "abc254-e",
     "abc260-f",
@@ -41,11 +42,8 @@
     "abc290-g",
     "abc302-g",
     "abc312-e",
-    "abc313-f",
-    "abc328-e",
-    "abc331-e",
+    "abc347-f",
     "abc386-e",
-    "abc409-f",
     "abc410-f",
     "abc442-g"
   ],
@@ -58,20 +56,17 @@
     "abc260-f",
     "abc272-e",
     "abc312-e",
-    "abc328-e",
     "abc290-g",
     "abc302-g",
-    "abc331-e",
     "abc410-f",
     "abc271-ex",
-    "abc409-f",
-    "abc313-f"
+    "abc227-f",
+    "abc347-f"
   ],
   "relatedProblemIds": [
     "abc220-g",
     "abc223-e",
     "abc226-f",
-    "abc227-f",
     "abc227-h",
     "abc234-ex",
     "abc240-ex",
@@ -84,12 +79,15 @@
     "abc293-f",
     "abc298-g",
     "abc301-g",
+    "abc313-f",
     "abc323-f",
+    "abc328-e",
+    "abc331-e",
     "abc343-e",
-    "abc347-f",
     "abc353-f",
     "abc369-e",
     "abc387-e",
+    "abc409-f",
     "abc418-e",
     "abc419-g",
     "abc459-g"
@@ -99,6 +97,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 4,
-  "globalIndex": 23,
+  "globalIndex": 13,
   "orderReason": "候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。"
 }

@@ -6,19 +6,18 @@
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [
-    "unit-dp-sequence",
-    "unit-range-monoid-aggregation"
+    "unit-dp-sequence"
   ],
   "excludedTopics": [
     "LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
-    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
-    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
-    "source-abc339-e-problem-d1ae6b185f28e930dd11f3599a4571ed64b9e1fe38266405278a0a9df6a93bdd",
-    "source-abc339-editorial-9210-e395e1e0a4a0093fb7af80b3b3dad26c960b2f5bccedf1f8c83363bc38e6e94b",
-    "source-abc354-editorial-10027-bc6483f17b3841b339158e56f8e6ae34a489dc4d0513073e8a17fd6d47c28e84",
-    "source-abc354-f-problem-df7964159518037ba49d8e31fa074b4c70361fe81899dcc751daf106f2cef501"
+    "source-abc369-editorial-10835-f7d009793c7de08f42cda826cd15d1d190b2503e80d06887d02386e9732cdddb",
+    "source-abc369-f-problem-fe90546a65130e5d35f17df00887c4686167db073e1ed767b6b9d2a080a6828c",
+    "source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d",
+    "source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06",
+    "source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e",
+    "source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"
   ],
   "tagIds": [
     "tag-lis-state"
@@ -35,31 +34,21 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-lis.md",
   "problemIds": [
-    "abc240-ex",
-    "abc339-e",
-    "abc354-f",
-    "abc360-g",
     "abc369-f",
     "abc393-f",
-    "abc410-g",
     "abc439-e"
   ],
   "directProblemIds": [
     "abc439-e",
-    "abc339-e",
     "abc393-f",
-    "abc369-f",
-    "abc354-f",
-    "abc360-g",
-    "abc410-g",
-    "abc240-ex"
+    "abc369-f"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 106,
-  "orderReason": "区間monoid要約・列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
+  "globalIndex": 75,
+  "orderReason": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
 }

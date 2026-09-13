@@ -3,7 +3,7 @@ title: "関数グラフのcycle・tree分解"
 description: "関数グラフのcycle・tree分解の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 66
+  order: 52
 ---
 
 # 関数グラフのcycle・tree分解
@@ -38,7 +38,6 @@ sidebar:
 8. [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
 9. [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
 10. [ABC371 G「Lexicographically Smallest Permutation」](https://atcoder.jp/contests/abc371/tasks/abc371_g)
-11. [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -47,6 +46,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
+- [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
 - [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
 - [ABC444 G「Kyoen」](https://atcoder.jp/contests/abc444/tasks/abc444_g)
 
@@ -59,4 +59,4 @@ sidebar:
 - [ABC256 E 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_e)
 - [ABC256 E 公式解説](https://atcoder.jp/contests/abc256/editorial/4135)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-functional-graph-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-functional-graph-decomposition`

@@ -3,7 +3,7 @@ title: "フロー・マッチング・カットへ帰着する"
 description: "フロー・マッチング・カットへ帰着するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 109
+  order: 77
 ---
 
 # フロー・マッチング・カットへ帰着する
@@ -46,6 +46,8 @@ sidebar:
 
 - [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 - [ABC237 Ex「Hakata」](https://atcoder.jp/contests/abc237/tasks/abc237_h)
+- [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
+- [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
 - [ABC354 G「Select Strings」](https://atcoder.jp/contests/abc354/tasks/abc354_g)
 - [ABC363 G「Dynamic Scheduling」](https://atcoder.jp/contests/abc363/tasks/abc363_g)
 - [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
@@ -60,4 +62,4 @@ sidebar:
 - [ABC218 H 公式解説](https://atcoder.jp/contests/abc218/editorial/2602)
 - [ABC218 H 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-flow-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-flow-matching`

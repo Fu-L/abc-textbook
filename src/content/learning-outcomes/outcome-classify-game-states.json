@@ -2,8 +2,7 @@
   "id": "outcome-classify-game-states",
   "statement": "後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。",
   "prerequisiteOutcomeIds": [
-    "outcome-design-minimal-sufficient-state",
-    "outcome-enumerate-subset-state-space"
+    "outcome-design-minimal-sufficient-state"
   ],
   "scopeIds": [
     "abc212-h",

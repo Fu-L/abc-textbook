@@ -34,20 +34,21 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
   "problemIds": [
+    "abc303-g",
     "abc349-e"
   ],
   "directProblemIds": [
-    "abc349-e"
+    "abc349-e",
+    "abc303-g"
   ],
   "relatedProblemIds": [
-    "abc218-g",
-    "abc303-g"
+    "abc218-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 45,
+  "globalIndex": 46,
   "orderReason": "状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。"
 }

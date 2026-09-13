@@ -32,11 +32,12 @@
   "problemIds": [
     "abc212-f",
     "abc241-e",
+    "abc254-g",
     "abc256-e",
     "abc258-e",
     "abc284-g",
-    "abc286-f",
     "abc296-e",
+    "abc310-g",
     "abc357-e",
     "abc367-e",
     "abc370-f",
@@ -49,17 +50,16 @@
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc247-ex",
-    "abc254-g",
-    "abc310-g",
+    "abc286-f",
     "abc387-f",
     "abc417-g",
     "abc444-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 4,
-  "globalIndex": 11,
+  "globalIndex": 52,
   "orderReason": "状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。"
 }

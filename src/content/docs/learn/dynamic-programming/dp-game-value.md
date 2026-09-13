@@ -3,7 +3,7 @@ title: "minimax・得点差・局面値を評価するゲームDP"
 description: "minimax・得点差・局面値を評価するゲームDPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 45
+  order: 46
 ---
 
 # minimax・得点差・局面値を評価するゲームDP
@@ -29,6 +29,7 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC349 E「Weighted Tic-Tac-Toe」](https://atcoder.jp/contests/abc349/tasks/abc349_e)
+2. [ABC303 G「Bags Game」](https://atcoder.jp/contests/abc303/tasks/abc303_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -37,7 +38,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC218 G「Game on Tree 2」](https://atcoder.jp/contests/abc218/tasks/abc218_g)
-- [ABC303 G「Bags Game」](https://atcoder.jp/contests/abc303/tasks/abc303_g)
 
 ## 根拠
 
@@ -48,4 +48,4 @@ sidebar:
 - [ABC349 E 公式問題文](https://atcoder.jp/contests/abc349/tasks/abc349_e)
 - [ABC349 E 公式解説](https://atcoder.jp/contests/abc349/editorial/9780)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-game-value`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-game-value`

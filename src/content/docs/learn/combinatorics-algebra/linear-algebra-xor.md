@@ -3,7 +3,7 @@ title: "線形方程式・分離可能変換・行列式計数へ変換する"
 description: "線形方程式・分離可能変換・行列式計数へ変換するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 84
+  order: 62
 ---
 
 # 線形方程式・分離可能変換・行列式計数へ変換する
@@ -42,6 +42,7 @@ sidebar:
 
 - [ABC236 F「Spices」](https://atcoder.jp/contests/abc236/tasks/abc236_f)
 - [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
+- [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
 - [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 - [ABC399 G「Colorful Spanning Tree」](https://atcoder.jp/contests/abc399/tasks/abc399_g)
 - [ABC412 G「Degree Harmony」](https://atcoder.jp/contests/abc412/tasks/abc412_g)
@@ -55,4 +56,4 @@ sidebar:
 - [ABC223 H 公式解説](https://atcoder.jp/contests/abc223/editorial/2784)
 - [ABC223 H 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-linear-algebra-xor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-linear-algebra-xor`

@@ -36,30 +36,26 @@
   "problemIds": [
     "abc277-f",
     "abc291-e",
-    "abc304-ex",
-    "abc306-ex",
-    "abc315-e",
-    "abc335-e",
-    "abc341-f"
+    "abc315-e"
   ],
   "directProblemIds": [
     "abc315-e",
     "abc277-f",
-    "abc291-e",
-    "abc335-e",
-    "abc304-ex",
-    "abc341-f",
-    "abc306-ex"
+    "abc291-e"
   ],
   "relatedProblemIds": [
     "abc224-e",
-    "abc324-f"
+    "abc304-ex",
+    "abc306-ex",
+    "abc324-f",
+    "abc335-e",
+    "abc341-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 56,
-  "globalIndex": 54,
+  "globalIndex": 21,
   "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
 }

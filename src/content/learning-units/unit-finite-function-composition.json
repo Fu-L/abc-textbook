@@ -36,9 +36,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 64,
-  "globalIndex": 70,
+  "globalIndex": 57,
   "orderReason": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -56,6 +56,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 103,
+  "globalIndex": 110,
   "orderReason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
 }

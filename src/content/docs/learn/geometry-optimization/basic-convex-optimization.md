@@ -3,7 +3,7 @@ title: "一次元凸・単峰最適化"
 description: "一次元凸・単峰最適化の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 67
+  order: 97
 ---
 
 # 一次元凸・単峰最適化
@@ -35,14 +35,9 @@ sidebar:
 5. [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 6. [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
 7. [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
+8. [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
 
 ## 根拠
 
@@ -53,4 +48,4 @@ sidebar:
 - [ABC240 F 公式解説](https://atcoder.jp/contests/abc240/editorial/3422)
 - [ABC240 F 公式問題文](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-basic-convex-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-basic-convex-optimization`

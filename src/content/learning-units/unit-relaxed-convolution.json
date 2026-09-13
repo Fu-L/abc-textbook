@@ -50,9 +50,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 96,
-  "globalIndex": 174,
+  "globalIndex": 176,
   "orderReason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
 }

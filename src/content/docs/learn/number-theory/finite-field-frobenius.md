@@ -3,7 +3,7 @@ title: "標数pのFrobenius恒等式による反復高速化"
 description: "標数pのFrobenius恒等式による反復高速化の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 178
+  order: 180
 ---
 
 # 標数pのFrobenius恒等式による反復高速化
@@ -41,4 +41,4 @@ ABC251 Exでは大きい7冪から各幅を高々6回適用する。同じ幅q�
 - [ABC251 H 公式解説](https://atcoder.jp/contests/abc251/editorial/3954)
 - [ABC251 H 公式問題文](https://atcoder.jp/contests/abc251/tasks/abc251_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-finite-field-frobenius`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-finite-field-frobenius`

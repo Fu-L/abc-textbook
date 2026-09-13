@@ -3,7 +3,7 @@ title: "SCCで閉路・DAG順・2-SATを処理する"
 description: "SCCで閉路・DAG順・2-SATを処理するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 54
+  order: 21
 ---
 
 # SCCで閉路・DAG順・2-SATを処理する
@@ -44,7 +44,11 @@ sidebar:
 
 - [ABC214 H「Collecting」](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 - [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
+- [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
+- [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
 - [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
+- [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
+- [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
 - [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
 ## 根拠
@@ -56,4 +60,4 @@ sidebar:
 - [ABC245 F 公式解説](https://atcoder.jp/contests/abc245/editorial/3652)
 - [ABC245 F 公式問題文](https://atcoder.jp/contests/abc245/tasks/abc245_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-directed-condensation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-directed-condensation`

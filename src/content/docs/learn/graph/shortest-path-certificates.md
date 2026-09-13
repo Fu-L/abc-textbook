@@ -3,7 +3,7 @@ title: "重み付き最短路・経路復元・差分制約"
 description: "重み付き最短路・経路復元・差分制約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 91
+  order: 70
 ---
 
 # 重み付き最短路・経路復元・差分制約
@@ -40,8 +40,11 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC218 F「Blocked Roads」](https://atcoder.jp/contests/abc218/tasks/abc218_f)
+- [ABC243 E「Edge Deletion」](https://atcoder.jp/contests/abc243/tasks/abc243_e)
 - [ABC250 Ex「Trespassing Takahashi」](https://atcoder.jp/contests/abc250/tasks/abc250_h)
 - [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
+- [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
 - [ABC364 G「Last Major City」](https://atcoder.jp/contests/abc364/tasks/abc364_g)
 - [ABC375 G「Road Blocked 2」](https://atcoder.jp/contests/abc375/tasks/abc375_g)
 - [ABC393 G「Unevenness」](https://atcoder.jp/contests/abc393/tasks/abc393_g)
@@ -58,4 +61,4 @@ sidebar:
 - [ABC218 F 公式解説](https://atcoder.jp/contests/abc218/editorial/2606)
 - [ABC218 F 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-shortest-path-certificates`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-shortest-path-certificates`

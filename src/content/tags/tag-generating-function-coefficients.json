@@ -13,7 +13,7 @@
       "暗黙母関数"
     ],
     "triggerPatterns": [
-      "F=xΦ(F)",
+      "F=xΦ\\(F\\)",
       "partitionの積",
       "微分恒等式"
     ],

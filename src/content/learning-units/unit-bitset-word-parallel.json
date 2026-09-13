@@ -32,15 +32,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/bitset-word-parallel.md",
   "problemIds": [
+    "abc221-g",
     "abc258-g",
     "abc348-f"
   ],
   "directProblemIds": [
     "abc348-f",
-    "abc258-g"
+    "abc258-g",
+    "abc221-g"
   ],
   "relatedProblemIds": [
-    "abc221-g",
     "abc276-ex",
     "abc287-ex",
     "abc366-g",

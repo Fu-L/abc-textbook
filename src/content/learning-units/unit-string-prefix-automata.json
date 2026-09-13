@@ -30,19 +30,19 @@
   "problemIds": [
     "abc257-g",
     "abc284-f",
-    "abc343-g",
     "abc430-e",
     "abc434-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc312-ex"
+    "abc312-ex",
+    "abc343-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
+  "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 1,
-  "globalIndex": 79,
+  "globalIndex": 30,
   "orderReason": "接頭辞と接尾辞の一致長を状態化し、失敗時の遷移を再利用して照合を線形化する。"
 }

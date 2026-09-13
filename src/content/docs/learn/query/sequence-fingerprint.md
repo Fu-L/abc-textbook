@@ -3,7 +3,7 @@ title: "列・文字列のrolling fingerprint"
 description: "列・文字列のrolling fingerprintの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 85
+  order: 64
 ---
 
 # 列・文字列のrolling fingerprint
@@ -38,7 +38,7 @@ ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と
 
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
-1. [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
+この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -47,6 +47,7 @@ ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC274 Ex「XOR Sum of Arrays」](https://atcoder.jp/contests/abc274/tasks/abc274_h)
+- [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 
 ## 根拠
 
@@ -55,4 +56,4 @@ ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と
 - [ABC331 F 公式解説](https://atcoder.jp/contests/abc331/editorial/7820)
 - [ABC331 F 公式問題文](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-sequence-fingerprint`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-sequence-fingerprint`

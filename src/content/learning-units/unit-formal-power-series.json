@@ -67,6 +67,6 @@
   "stageRank": 4,
   "difficultyRank": 5,
   "representativeRank": 10,
-  "globalIndex": 185,
+  "globalIndex": 186,
   "orderReason": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
 }

@@ -3,7 +3,7 @@ title: "DP遷移を因数分解・集約して加速する"
 description: "DP遷移を因数分解・集約して加速するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 60
+  order: 90
 ---
 
 # DP遷移を因数分解・集約して加速する
@@ -56,9 +56,11 @@ ABC435 Gでは隣接する色集合の対称差だけを明示更新し、共通
 22. [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f)
 23. [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
 24. [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
-25. [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
-26. [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
-27. [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
+25. [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
+26. [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
+27. [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
+28. [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+29. [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -66,8 +68,6 @@ ABC435 Gでは隣接する色集合の対称差だけを明示更新し、共通
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
-- [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
 - [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
 
 ## 根拠
@@ -79,4 +79,4 @@ ABC435 Gでは隣接する色集合の対称差だけを明示更新し、共通
 - [ABC221 H 公式解説](https://atcoder.jp/contests/abc221/editorial/2719)
 - [ABC221 H 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-transition-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-transition-optimization`

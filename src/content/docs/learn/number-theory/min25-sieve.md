@@ -3,7 +3,7 @@ title: "Min_25・Lucy DP型の総和篩"
 description: "Min_25・Lucy DP型の総和篩の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 188
+  order: 189
 ---
 
 # Min_25・Lucy DP型の総和篩
@@ -37,4 +37,4 @@ floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗�
 - [ABC370 G 公式解説](https://atcoder.jp/contests/abc370/editorial/10869)
 - [ABC370 G 公式問題文](https://atcoder.jp/contests/abc370/tasks/abc370_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-min25-sieve`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-min25-sieve`

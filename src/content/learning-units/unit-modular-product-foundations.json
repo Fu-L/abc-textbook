@@ -30,8 +30,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-product-foundations.md",
   "problemIds": [
-    "abc276-f",
-    "abc310-g",
     "abc411-e"
   ],
   "directProblemIds": [],
@@ -59,6 +57,7 @@
     "abc270-g",
     "abc271-g",
     "abc275-e",
+    "abc276-f",
     "abc277-g",
     "abc280-e",
     "abc282-e",
@@ -74,6 +73,7 @@
     "abc303-ex",
     "abc304-f",
     "abc310-f",
+    "abc310-g",
     "abc314-f",
     "abc321-g",
     "abc323-e",
@@ -99,9 +99,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
+  "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 0,
-  "globalIndex": 15,
+  "globalIndex": 5,
   "orderReason": "法上の基本演算を先に確立し、そのうえで「積から旧因子を逆元で外す」操作に必要な可逆性と、法 m で剰余 0 となる因子では逆元が存在しない境界を独立した動的保守技能として学ぶ。"
 }

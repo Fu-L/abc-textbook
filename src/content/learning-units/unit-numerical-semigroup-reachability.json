@@ -38,9 +38,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 4,
   "difficultyRank": 3,
   "representativeRank": 3,
-  "globalIndex": 50,
+  "globalIndex": 146,
   "orderReason": "生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。"
 }

@@ -45,18 +45,18 @@
     "abc340-g",
     "abc405-f",
     "abc406-f",
-    "abc438-f",
-    "abc460-f"
+    "abc438-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc351-g"
+    "abc351-g",
+    "abc460-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 0,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 73,
+  "globalIndex": 58,
   "orderReason": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
 }

@@ -49,13 +49,11 @@
     "abc312-g",
     "abc348-e",
     "abc378-f",
-    "abc387-f",
     "abc391-e",
     "abc394-f",
     "abc397-e",
     "abc409-e",
     "abc416-f",
-    "abc435-f",
     "abc447-f",
     "abc459-e"
   ],
@@ -68,14 +66,16 @@
     "abc329-g",
     "abc340-g",
     "abc369-g",
+    "abc387-f",
+    "abc435-f",
     "abc438-f",
     "abc460-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 69,
+  "globalIndex": 55,
   "orderReason": "探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。"
 }

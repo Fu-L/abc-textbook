@@ -45,6 +45,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 90,
-  "globalIndex": 140,
+  "globalIndex": 135,
   "orderReason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、循環局面の後退解析とminimax距離の発動条件・正当化・境界を重複なく学ぶ。"
 }

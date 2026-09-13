@@ -44,9 +44,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 55,
-  "globalIndex": 53,
+  "globalIndex": 50,
   "orderReason": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

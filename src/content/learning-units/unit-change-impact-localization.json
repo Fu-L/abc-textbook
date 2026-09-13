@@ -32,21 +32,23 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/change-impact-localization.md",
   "problemIds": [
+    "abc218-f",
+    "abc243-e",
     "abc279-e"
   ],
   "directProblemIds": [
-    "abc279-e"
+    "abc279-e",
+    "abc243-e",
+    "abc218-f"
   ],
   "relatedProblemIds": [
-    "abc218-f",
-    "abc243-e",
     "abc448-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 44,
+  "globalIndex": 88,
   "orderReason": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
 }

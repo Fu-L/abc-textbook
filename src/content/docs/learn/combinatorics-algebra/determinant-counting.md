@@ -3,7 +3,7 @@ title: "行列式による数え上げ"
 description: "行列式による数え上げの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 152
+  order: 161
 ---
 
 # 行列式による数え上げ
@@ -65,4 +65,4 @@ sidebar:
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-determinant-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-determinant-counting`

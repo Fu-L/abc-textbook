@@ -3,7 +3,7 @@ title: "回文半径と左右対称区間を特定する"
 description: "回文半径と左右対称区間を特定するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 41
+  order: 43
 ---
 
 # 回文半径と左右対称区間を特定する
@@ -29,14 +29,9 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC398 F「ABCBA」](https://atcoder.jp/contests/abc398/tasks/abc398_f)
+2. [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
-
-## 関連問題
-
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
-
-- [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
 
 ## 根拠
 
@@ -45,4 +40,4 @@ sidebar:
 - [ABC398 F 公式解説](https://atcoder.jp/contests/abc398/editorial/12501)
 - [ABC398 F 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-palindrome-radius`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-palindrome-radius`

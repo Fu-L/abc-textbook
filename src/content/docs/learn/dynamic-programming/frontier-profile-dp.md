@@ -3,7 +3,7 @@ title: "frontier/profile DP・境界状態圧縮"
 description: "frontier/profile DP・境界状態圧縮の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 141
+  order: 154
 ---
 
 # frontier/profile DP・境界状態圧縮
@@ -43,4 +43,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、frontier/pro
 - [ABC379 G 公式解説](https://atcoder.jp/contests/abc379/editorial/11331)
 - [ABC379 G 公式問題文](https://atcoder.jp/contests/abc379/tasks/abc379_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-frontier-profile-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-frontier-profile-dp`

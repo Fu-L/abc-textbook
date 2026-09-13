@@ -56,6 +56,6 @@
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 5,
-  "globalIndex": 32,
+  "globalIndex": 37,
   "orderReason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
 }

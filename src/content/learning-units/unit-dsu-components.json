@@ -34,14 +34,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/dsu-components.md",
   "problemIds": [
+    "abc226-e",
     "abc238-e",
     "abc276-e",
     "abc279-f",
     "abc304-e",
+    "abc328-e",
+    "abc335-e",
     "abc372-e",
+    "abc409-f",
     "abc420-e",
     "abc434-e",
-    "abc440-g"
+    "abc440-g",
+    "abc447-e"
   ],
   "directProblemIds": [
     "abc276-e",
@@ -51,11 +56,15 @@
     "abc420-e",
     "abc238-e",
     "abc434-e",
-    "abc440-g"
+    "abc328-e",
+    "abc440-g",
+    "abc447-e",
+    "abc226-e",
+    "abc409-f",
+    "abc335-e"
   ],
   "relatedProblemIds": [
     "abc218-e",
-    "abc226-e",
     "abc229-e",
     "abc233-f",
     "abc235-e",
@@ -69,8 +78,6 @@
     "abc302-ex",
     "abc311-g",
     "abc314-f",
-    "abc328-e",
-    "abc335-e",
     "abc349-g",
     "abc352-e",
     "abc355-f",
@@ -81,16 +88,14 @@
     "abc394-g",
     "abc401-e",
     "abc408-e",
-    "abc409-f",
     "abc413-g",
-    "abc447-e",
     "abc451-f"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 1,
-  "difficultyRank": 0,
+  "difficultyRank": 2,
   "representativeRank": 58,
-  "globalIndex": 8,
+  "globalIndex": 23,
   "orderReason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

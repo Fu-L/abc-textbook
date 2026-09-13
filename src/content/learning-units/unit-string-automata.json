@@ -45,9 +45,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 3,
   "representativeRank": 2,
-  "globalIndex": 87,
+  "globalIndex": 65,
   "orderReason": "未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。"
 }

@@ -3,7 +3,7 @@ title: "ordered set・multisetの動的順序管理"
 description: "ordered set・multisetの動的順序管理の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 9
+  order: 25
 ---
 
 # ordered set・multisetの動的順序管理
@@ -33,6 +33,7 @@ sidebar:
 3. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
 4. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
 5. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+6. [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -45,7 +46,6 @@ sidebar:
 - [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 - [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
-- [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
 - [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
 - [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
 - [ABC324 G「Generate Arrays」](https://atcoder.jp/contests/abc324/tasks/abc324_g)
@@ -66,4 +66,4 @@ sidebar:
 - [ABC268 H 公式解説](https://atcoder.jp/contests/abc268/editorial/4786)
 - [ABC268 H 公式問題文](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-ordered-set-multiset`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-ordered-set-multiset`

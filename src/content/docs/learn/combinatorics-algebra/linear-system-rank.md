@@ -3,7 +3,7 @@ title: "線形方程式・rank"
 description: "線形方程式・rankの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 84
+  order: 62
 ---
 
 # 線形方程式・rank
@@ -29,8 +29,7 @@ sidebar:
 必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
 
 1. [ABC366 G「XOR Neighbors」](https://atcoder.jp/contests/abc366/tasks/abc366_g)
-2. [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
-3. [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
+2. [ABC276 Ex「Construct a Matrix」](https://atcoder.jp/contests/abc276/tasks/abc276_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -38,6 +37,7 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
 - [ABC323 G「Inversion of Tree」](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 - [ABC399 G「Colorful Spanning Tree」](https://atcoder.jp/contests/abc399/tasks/abc399_g)
 - [ABC412 G「Degree Harmony」](https://atcoder.jp/contests/abc412/tasks/abc412_g)
@@ -51,4 +51,4 @@ sidebar:
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-linear-system-rank`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-linear-system-rank`

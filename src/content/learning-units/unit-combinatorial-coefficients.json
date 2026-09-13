@@ -36,10 +36,10 @@
   "problemIds": [
     "abc215-g",
     "abc226-f",
+    "abc227-g",
     "abc234-f",
     "abc240-g",
     "abc243-f",
-    "abc256-f",
     "abc262-e",
     "abc265-e",
     "abc266-g",
@@ -55,7 +55,6 @@
     "abc425-e",
     "abc431-f",
     "abc433-f",
-    "abc453-e",
     "abc458-e",
     "abc463-f"
   ],
@@ -75,27 +74,26 @@
     "abc405-e",
     "abc431-f",
     "abc433-f",
+    "abc227-g",
     "abc265-e",
     "abc273-g",
     "abc281-g",
-    "abc453-e",
     "abc463-f",
     "abc226-f",
     "abc215-g",
-    "abc295-e",
-    "abc256-f"
+    "abc295-e"
   ],
   "relatedProblemIds": [
     "abc214-g",
     "abc216-h",
     "abc217-f",
     "abc225-h",
-    "abc227-g",
     "abc235-g",
     "abc238-ex",
     "abc242-f",
     "abc249-ex",
     "abc251-ex",
+    "abc256-f",
     "abc256-g",
     "abc259-ex",
     "abc260-ex",
@@ -124,6 +122,7 @@
     "abc409-g",
     "abc422-g",
     "abc432-g",
+    "abc453-e",
     "abc456-g",
     "abc459-e",
     "abc463-g"
@@ -133,6 +132,6 @@
   "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 27,
+  "globalIndex": 17,
   "orderReason": "選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。"
 }

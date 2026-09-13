@@ -50,6 +50,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 63,
+  "globalIndex": 93,
   "orderReason": "区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。"
 }

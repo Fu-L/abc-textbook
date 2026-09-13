@@ -3,7 +3,7 @@ title: "数論"
 description: "数論の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 15
+  order: 5
 ---
 
 # 数論
@@ -28,16 +28,16 @@ sidebar:
 
 - [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)
 - [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/)
-- [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)
-- [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/)
 - [素因数分解と約数構造](/learn/number-theory/prime-divisor/)
-- [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)
+- [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/)
 - [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)
-- [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/)
+- [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)
+- [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)
 - [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)
-- [巡回群を指数化して数える](/learn/number-theory/cyclic-group-exponent-counting/)
 - [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/)
 - [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/)
+- [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/)
+- [巡回群を指数化して数える](/learn/number-theory/cyclic-group-exponent-counting/)
 - [標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/)
 - [Gaussian整数・二平方和](/learn/number-theory/gaussian-integers-two-squares/)
 - [拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/)
@@ -55,7 +55,6 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 - [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
 - [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
 - [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
@@ -63,6 +62,7 @@ sidebar:
 - [ABC222 H「Beautiful Binary Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_h)
 - [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
 - [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
+- [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 - [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
 - [ABC230 G「GCD Permutation」](https://atcoder.jp/contests/abc230/tasks/abc230_g)
 - [ABC234 F「Reordering」](https://atcoder.jp/contests/abc234/tasks/abc234_f)
@@ -78,6 +78,7 @@ sidebar:
 - [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
 - [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
 - [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+- [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
 - [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
 - [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
 - [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
@@ -86,6 +87,7 @@ sidebar:
 - [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
 - [ABC272 G「Yet Another mod M」](https://atcoder.jp/contests/abc272/tasks/abc272_g)
 - [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+- [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
 - [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
 - [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
 - [ABC282 E「Choose Two and Eat One」](https://atcoder.jp/contests/abc282/tasks/abc282_e)
@@ -104,9 +106,9 @@ sidebar:
 - [ABC304 F「Shift Table」](https://atcoder.jp/contests/abc304/tasks/abc304_f)
 - [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
 - [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
+- [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
 - [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 - [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
-- [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
 - [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
 - [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
 - [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
@@ -114,7 +116,6 @@ sidebar:
 - [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
 - [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
 - [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
-- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 - [ABC336 G「16 Integers」](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 - [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
 - [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
@@ -132,15 +133,16 @@ sidebar:
 - [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
 - [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
 - [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
-- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
 - [ABC428 G「Necklace」](https://atcoder.jp/contests/abc428/tasks/abc428_g)
 - [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
 - [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+- [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
 - [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
 - [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
 - [ABC448 E「Simple Division」](https://atcoder.jp/contests/abc448/tasks/abc448_e)
 - [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
 - [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
+- [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
 
 ## 根拠
 
@@ -151,4 +153,4 @@ sidebar:
 - [ABC216 E 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_e)
 - [ABC216 E 公式解説](https://atcoder.jp/contests/abc216/editorial/2469)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-chapter-number-theory`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-chapter-number-theory`

@@ -3,7 +3,7 @@ title: "doubling・binary lifting"
 description: "doubling・binary liftingの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 11
+  order: 56
 ---
 
 # doubling・binary lifting
@@ -31,7 +31,9 @@ sidebar:
 1. [ABC367 E「Permute K times」](https://atcoder.jp/contests/abc367/tasks/abc367_e)
 2. [ABC438 E「Heavy Buckets」](https://atcoder.jp/contests/abc438/tasks/abc438_e)
 3. [ABC212 F「Greedy Takahashi」](https://atcoder.jp/contests/abc212/tasks/abc212_f)
-4. [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
+4. [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+5. [ABC254 G「Elevators」](https://atcoder.jp/contests/abc254/tasks/abc254_g)
+6. [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -39,8 +41,6 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC254 G「Elevators」](https://atcoder.jp/contests/abc254/tasks/abc254_g)
-- [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
 - [ABC417 G「Binary Cat」](https://atcoder.jp/contests/abc417/tasks/abc417_g)
 
 ## 根拠
@@ -52,4 +52,4 @@ sidebar:
 - [ABC310 G 公式解説](https://atcoder.jp/contests/abc310/editorial/6785)
 - [ABC310 G 公式問題文](https://atcoder.jp/contests/abc310/tasks/abc310_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-binary-lifting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-binary-lifting`

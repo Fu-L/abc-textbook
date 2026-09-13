@@ -1,10 +1,9 @@
 {
   "id": "tag-lis-state",
   "name": "LIS・末尾の支配関係",
-  "definition": "部分列の長さ別最小末尾と値別最良長を比較し、延長可能性を失わない状態圧縮と値域集約を選ぶ。",
+  "definition": "同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。",
   "parentId": "tag-dp-state-transition",
   "prerequisiteTagIds": [
-    "tag-range-monoid-aggregation",
     "tag-sequence-subsequence-dp"
   ],
   "semanticSignature": {
@@ -15,11 +14,10 @@
     ],
     "triggerPatterns": [
       "末尾の大小で支配",
-      "直前値を範囲制約",
       "順序を保って延長"
     ],
     "invariantPatterns": [
-      "値別最良長",
+      "末尾の支配関係",
       "長さ別最小末尾"
     ],
     "goalPatterns": [
@@ -36,8 +34,9 @@
     "outcome-design-lis-frontier"
   ],
   "representativeProblemIds": [
+    "abc439-e",
     "abc393-f",
-    "abc339-e"
+    "abc369-f"
   ],
   "aliases": [
     "LIS",

@@ -3,7 +3,7 @@ title: "組合せ係数と対称性で数える"
 description: "組合せ係数と対称性で数えるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 27
+  order: 17
 ---
 
 # 組合せ係数と対称性で数える
@@ -53,15 +53,14 @@ ABC234 Fのように文字の在庫から異なる文字列を数える場合を
 13. [ABC405 E「Fruit Lineup」](https://atcoder.jp/contests/abc405/tasks/abc405_e)
 14. [ABC431 F「Almost Sorted 2」](https://atcoder.jp/contests/abc431/tasks/abc431_f)
 15. [ABC433 F「1122 Subsequence 2」](https://atcoder.jp/contests/abc433/tasks/abc433_f)
-16. [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e)
-17. [ABC273 G「Row Column Sums 2」](https://atcoder.jp/contests/abc273/tasks/abc273_g)
-18. [ABC281 G「Farthest City」](https://atcoder.jp/contests/abc281/tasks/abc281_g)
-19. [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
+16. [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
+17. [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e)
+18. [ABC273 G「Row Column Sums 2」](https://atcoder.jp/contests/abc273/tasks/abc273_g)
+19. [ABC281 G「Farthest City」](https://atcoder.jp/contests/abc281/tasks/abc281_g)
 20. [ABC463 F「Senshuraku」](https://atcoder.jp/contests/abc463/tasks/abc463_f)
 21. [ABC226 F「Score of Permutations」](https://atcoder.jp/contests/abc226/tasks/abc226_f)
 22. [ABC215 G「Colorful Candies 2」](https://atcoder.jp/contests/abc215/tasks/abc215_g)
 23. [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
-24. [ABC256 F「Cumulative Cumulative Cumulative Sum」](https://atcoder.jp/contests/abc256/tasks/abc256_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -73,12 +72,12 @@ ABC234 Fのように文字の在庫から異なる文字列を数える場合を
 - [ABC216 H「Random Robots」](https://atcoder.jp/contests/abc216/tasks/abc216_h)
 - [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
 - [ABC225 H「Social Distance 2」](https://atcoder.jp/contests/abc225/tasks/abc225_h)
-- [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 - [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
 - [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
 - [ABC242 F「Black and White Rooks」](https://atcoder.jp/contests/abc242/tasks/abc242_f)
 - [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 - [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
+- [ABC256 F「Cumulative Cumulative Cumulative Sum」](https://atcoder.jp/contests/abc256/tasks/abc256_f)
 - [ABC256 G「Black and White Stones」](https://atcoder.jp/contests/abc256/tasks/abc256_g)
 - [ABC259 Ex「Yet Another Path Counting」](https://atcoder.jp/contests/abc259/tasks/abc259_h)
 - [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
@@ -107,6 +106,7 @@ ABC234 Fのように文字の在庫から異なる文字列を数える場合を
 - [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
 - [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
 - [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
+- [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
 - [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
 - [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
 - [ABC463 G「Random Walk Distance」](https://atcoder.jp/contests/abc463/tasks/abc463_g)
@@ -120,4 +120,4 @@ ABC234 Fのように文字の在庫から異なる文字列を数える場合を
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-combinatorial-coefficients`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-combinatorial-coefficients`

@@ -78,6 +78,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 40,
+  "globalIndex": 42,
   "orderReason": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
 }

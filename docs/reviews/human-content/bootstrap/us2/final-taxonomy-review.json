@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "14033aef474c6aefac8a6f7047f73b44d658a435141053e26f91a772060a700d",
+  "subjectDigest": "e566a930fa313b246f68e230cab061f372151c9017b6372b8eb76423a7c35935",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "1b51346dba06e96b63831e69304cf81f0da97a382039cd7022dd60cadbfd2d04",
+  "inventoryDigest": "e9bc54a00e673ccad029584b98348bcc02d78e4d2487764054eee03d2bf021df",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "14033aef474c6aefac8a6f7047f73b44d658a435141053e26f91a772060a700d",
+      "subjectDigest": "e566a930fa313b246f68e230cab061f372151c9017b6372b8eb76423a7c35935",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "e4419f09fad40849297dfe58cc4f698aa1283b80d4d27bac653bf303d1107887",
+      "resultDigest": "dee174447b3c053b07c365a00213a152af08d7d2c25e76095896e4a948bff9e4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-12T10:48:09.817Z",
+      "completedAt": "2026-09-13T03:14:01.642Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "14033aef474c6aefac8a6f7047f73b44d658a435141053e26f91a772060a700d",
+      "subjectDigest": "e566a930fa313b246f68e230cab061f372151c9017b6372b8eb76423a7c35935",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "e4419f09fad40849297dfe58cc4f698aa1283b80d4d27bac653bf303d1107887",
+      "resultDigest": "dee174447b3c053b07c365a00213a152af08d7d2c25e76095896e4a948bff9e4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-12T10:48:16.988Z",
+      "completedAt": "2026-09-13T03:14:08.819Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "14033aef474c6aefac8a6f7047f73b44d658a435141053e26f91a772060a700d",
+      "subjectDigest": "e566a930fa313b246f68e230cab061f372151c9017b6372b8eb76423a7c35935",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "e4419f09fad40849297dfe58cc4f698aa1283b80d4d27bac653bf303d1107887",
+      "resultDigest": "dee174447b3c053b07c365a00213a152af08d7d2c25e76095896e4a948bff9e4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-12T10:48:17.436Z",
+      "completedAt": "2026-09-13T03:14:09.351Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "14033aef474c6aefac8a6f7047f73b44d658a435141053e26f91a772060a700d",
+      "subjectDigest": "e566a930fa313b246f68e230cab061f372151c9017b6372b8eb76423a7c35935",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "e4419f09fad40849297dfe58cc4f698aa1283b80d4d27bac653bf303d1107887",
+      "resultDigest": "dee174447b3c053b07c365a00213a152af08d7d2c25e76095896e4a948bff9e4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-12T10:48:17.663Z",
+      "completedAt": "2026-09-13T03:14:09.571Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "14033aef474c6aefac8a6f7047f73b44d658a435141053e26f91a772060a700d",
+      "subjectDigest": "e566a930fa313b246f68e230cab061f372151c9017b6372b8eb76423a7c35935",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "e4419f09fad40849297dfe58cc4f698aa1283b80d4d27bac653bf303d1107887",
+      "resultDigest": "dee174447b3c053b07c365a00213a152af08d7d2c25e76095896e4a948bff9e4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-12T10:48:24.888Z",
+      "completedAt": "2026-09-13T03:14:16.738Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "c6d7a6e25266a9f0b4951f7a31825494f01240411e9e9373d52e69ddabdf0956",
+  "reviewerExecutedCheckSetDigest": "c09e9067ab83e8a4f5a952914b879aa95d9235a25e76e6dbc436907f93dd9dc6",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -100,10 +100,12 @@
       ],
       "learningOutcomeIds": [
         "outcome-accelerate-fixed-linear-transition",
+        "outcome-accelerate-iteration-by-characteristic-p-frobenius",
         "outcome-accelerate-set-operations-with-bitsets",
         "outcome-accelerate-tree-dp-by-heavy-path",
         "outcome-add-conway-number-games",
         "outcome-aggregate-rooted-tree",
+        "outcome-aggregate-subsequence-transitions-by-value",
         "outcome-allocate-by-convex-marginal-costs",
         "outcome-answer-idempotent-range-query",
         "outcome-answer-tree-ancestor-queries",
@@ -161,7 +163,6 @@
         "outcome-count-prefix-constrained-objects",
         "outcome-count-through-cyclic-exponents",
         "outcome-decompose-by-prime-or-divisor",
-        "outcome-decompose-finite-field-frobenius-orbits",
         "outcome-decompose-functional-graph",
         "outcome-decompose-ranges-into-segment-tree-nodes",
         "outcome-derive-coefficient-recurrence-by-differentiation",
@@ -312,10 +313,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# PR #63 学習順・分類の修正\n\n対象レビュー:\n\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5613333410\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5613536039\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正とし、採用解法の記述から教材への配置を再検討した。人間による独立再査読や、全問題の解説本文執筆を表すものではない。既存のsolo-maintainer運用に沿って生成物を更新する。round2の学習順規則は本記録で置き換える。\n\n## 学習順の規則\n\n- `parentId`は目次の包含関係だけを表す。Unitの前提は明示的なcurriculum\n  prerequisiteとOutcome前提から導く。\n- 章・構造節を`standardOrder`から除外する。教えるUnitの`globalIndex`は標準順の位置、構造節の表示位置は最初の学習子孫から導く。目次のDFSと教科書全体の学習順は区別する。\n- 見出しの深さによるstageRankを廃止。状態探索、DSU、heap、ordered set、doubling、Fenwick\n  Tree、区間monoidを基礎、Min_25・RSK・線形matroid intersection・FPS compositionを発展とする。\n- 問題は、想定解法の再構成・実装に必須な全Outcomeの最遅Unitへ置く。最後に学ぶ技能をprimaryとし、従来の主技能はco-primaryとしてclaim単位の根拠を保持する。Inventoryの補助技能欄に記載されていることだけで掲載を早めない。\n- 技能集合の真部分集合関係を問題間の強制的な前提にしない。基本的な定式化から複合・発展的な定式化へ進む編集順位を優先する。\n\n## 指摘ごとの対応\n\n1. ABC450 F・327 Fを区間作用、ABC370 Fをdoublingへ移動。ABC265\n   Exも畳み込み・XOR変換・数ゲームのすべてを学んだ位置へ移動。全868問の必須Unitが主配置より後にならないことを検証する。\n2. 367 Eをdoublingの先頭にし、216 F→321 F、314 F→235 Ex、294 G→298 Ex、354 E→255 G、275 E・298 E→226\n   Hを固定。ゲームの集合状態は部分集合状態の後に学ぶ。\n3. 基礎技能と専門的な発展技能の順序を、前提DAGを満たしたうえで内容に基づくrankで決める。\n4. 列・区間DPを案内節にし、列DP、LIS、prefix分割、区間合成・領域分割、区間拡張へ分割。339 E・369\n   F・393 F・354 FをLIS、262 Gを区間合成、273 F→219\n   Hを区間拡張へ配置する。LIS節はtailsと値域最大の比較を扱うため、区間monoidも先行させる。\n5. ABC244\n   Fを状態グラフ探索へ変更。maskの反転による閉路、単位重みの多始点BFS、空walkの扱いを記述し、部分集合DPとの違いを示す。\n6. ABC435 GをDP遷移高速化へ移動。全体affine変換と対称差への疎な更新を、372 Fの添字移動・457\n   Fの全体倍率と比較する。不要な区間作用の技能を外す。\n7. ABC374 FはInventoryにある順序保存のbatch\n   DPに従いprefix分割DPへ移動。最適時刻をT_i+kXへ絞る証明を先に行い、その後で添字化する。座標圧縮の基礎節では元座標・間隔の保持を明記する。\n8. 母関数の符号化と高度な係数抽出を分離。同じ発展節の中にLagrange反転、微分による係数漸化式、Euler積の疎展開という別Outcomeを設ける。222\n   Hの反転・係数漸化式、230 Hの対数微分、279 Exの五角数定理を接続し、Lucasは組合せ係数の節で扱う。\n9. ABC236 E・294 Fに比率parametric\n   searchを接続。平均値のA_i−x、経路の利得−x·費用、濃度の砂糖量−x·総重量を比較し、236\n   Eの中央値側の±1変換を区別する。\n10. ABC260\n    Fを有界探索へ移動。候補総数を界す探索と成功前の失敗回数を界す探索を区別し、端点対の衝突による早期終了の計算量を説明する。\n\n201 Tag・211 Outcome・226 Unit、うち標準学習順は192\nUnit。問題数は868のまま。生成元から配置表、Unit本文、canonical\nmetadata、目次順、schema、検証記録を同期する。\n\n## 検証\n\nレビューで指定された配置・先行関係、全868問のreadiness、基礎技能→発展技能、構造節の標準順からの除外を回帰検証に追加した。技能集合の小さい連続確率問題が基本的な離散確率DPに先行する旧挙動も検出する。既存の分類検証では、主・共主の交代後も採用技能とclaim単位の根拠を失わないことを確認する。\n\n受理処理の各check結果は`final-taxonomy-check-results.json`に記録する。全体検証の結果は作業完了時に報告する。",
+      "reviewBasis": "# PR #63 技能の前提・学習段階・主技法の修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5647419452\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正として採用解法を照合した。人間による独立再査読を表すものではなく、既存のsolo-maintainer運用で生成物を同期する。round3のゲーム・LISの前提、少数Unitだけのstage補正、例外なしのprimary昇格規則を本記録で置き換える。\n\n## 技能自体の前提と問題の必要技能\n\nゲームの勝敗・Grundy Outcomeから部分集合状態の前提を外した。前提はDP状態設計に限定する。ABC297\nG・255 G・368 Fへ集合状態を要求せず、ABC354\nEにはゲームと集合状態の両Outcomeを残す。問題を後ろへ配置するために技能全体の前提を強めないことをpolicyに明記した。\n\n基本LISは長さ別最小末尾の支配関係と二分探索に限定し、区間monoidの前提を外した。ABC439 E・393 F・369\nFをこの技能へ配置する。値別最良状態の区間集約は別のTag・Outcome・Unitへ分離し、ABC240 Ex・339 E・354\nF・360 G・410 GをInventoryの採用実装に従って配置する。特にABC339\nEでは小さい末尾の支配関係が成り立たないこと、ABC354\nFでは最長解への所属条件とLISの計算法が別の観察であることを本文に記した。\n\n## 全Unitの学習段階\n\n`final-taxonomy-curriculum.ts`に全227\nUnitを明示した。目次専用Unitは段階0、教えるUnitは次の5段階とし、旧rankや目次の深さへのfallbackを廃止した。\n\n1. 状態・順序・集約の基礎、探索・貪欲・基本DP・DAGのtopological sort・基本演算。\n2. 標準データ構造とDP、weighted shortest path・topological\n   sort・SCC・LCA・木DP・rerooting・基本matching/flow。\n3. 複合データ構造、各種変換、連分数・Stern–Brocot、基本凸最適化などの応用。\n4. 発展的な木DP・flow/matching・凸最適化・数え上げ・多項式算法。\n5. Min_25・RSK・線形matroid交差・FPS合成・高度な係数抽出。\n\nprerequisite\nDAGを最優先し、実際の標準順でも段階2の主要グラフ・木・flow技能が連分数・凸最適化へ先行することを検証する。Unit内の基本例→発展例の順は保つが、集合状態を使うABC354\nEを通常のゲーム全体より先行させる制約は外す。\n\n## 掲載位置とsemantic primary\n\n全問題の掲載位置は必須Outcome全体の最遅Unitとする。primaryは原則としてそのUnitの技能に合わせる。理由付きの`READINESS_PRIMARY_OVERRIDES`を別の入力とし、例外では元のsemantic\nprimaryとclaimの主・補助の役割を保存する。例外のOutcome・理由・担当者を`primaryOverride`として配置表とcanonical\nmetadataにも残す。\n\nABC354 Eは勝敗再帰をsemantic\nprimary、集合状態をsupportingとして保持し、掲載先を部分集合状態Unitとする。例外なしの場合には同じ必要技能から集合状態がprimaryへ昇格することも確認する。新しいstage順でABC218\nFは経路証明を踏まえた変更影響の局所化、ABC335 Gは位数を踏まえた巡回群の指数化がprimaryになる。\n\n## IDと正規表現\n\nFrobeniusのcanonical\nOutcomeを`outcome-accelerate-iteration-by-characteristic-p-frobenius`へ改名し、旧orbit\ndecompositionのIDを生成元・scope・前提辺・配置・manifestから除く。\n\n母関数のtriggerは`escapeRegexLiteral('F=xΦ(F)')`で生成し、実際の数学記法に`iu`正規表現で一致するfixtureへ追加した。\n\n202 Tag・212 Outcome・227 Unit（標準学習順193 Unit）、868問。生成元からcanonical\nmetadata・Unit本文・配置・学習順・schema・検証記録を同期する。\n\n## 検証\n\n既存のtaxonomy検査に、全Unitのstage網羅、基本技能の先行、ゲームとLISの前提の独立性、主技法例外と掲載readinessの分離、数学記法のliteral\nmatchを追加した。受理処理の実行結果は`final-taxonomy-check-results.json`へ記録する。型検査・lintとcanonical\nmaterializationの一致も確認する。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-12T10:48:30.232Z"
+      "reviewedAt": "2026-09-13T03:14:22.258Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -331,10 +332,12 @@
     "decision": "confirmed",
     "learningOutcomeIds": [
       "outcome-accelerate-fixed-linear-transition",
+      "outcome-accelerate-iteration-by-characteristic-p-frobenius",
       "outcome-accelerate-set-operations-with-bitsets",
       "outcome-accelerate-tree-dp-by-heavy-path",
       "outcome-add-conway-number-games",
       "outcome-aggregate-rooted-tree",
+      "outcome-aggregate-subsequence-transitions-by-value",
       "outcome-allocate-by-convex-marginal-costs",
       "outcome-answer-idempotent-range-query",
       "outcome-answer-tree-ancestor-queries",
@@ -392,7 +395,6 @@
       "outcome-count-prefix-constrained-objects",
       "outcome-count-through-cyclic-exponents",
       "outcome-decompose-by-prime-or-divisor",
-      "outcome-decompose-finite-field-frobenius-orbits",
       "outcome-decompose-functional-graph",
       "outcome-decompose-ranges-into-segment-tree-nodes",
       "outcome-derive-coefficient-recurrence-by-differentiation",
@@ -546,12 +548,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# PR #63 学習順・分類の修正\n\n対象レビュー:\n\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5613333410\n- https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5613536039\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正とし、採用解法の記述から教材への配置を再検討した。人間による独立再査読や、全問題の解説本文執筆を表すものではない。既存のsolo-maintainer運用に沿って生成物を更新する。round2の学習順規則は本記録で置き換える。\n\n## 学習順の規則\n\n- `parentId`は目次の包含関係だけを表す。Unitの前提は明示的なcurriculum\n  prerequisiteとOutcome前提から導く。\n- 章・構造節を`standardOrder`から除外する。教えるUnitの`globalIndex`は標準順の位置、構造節の表示位置は最初の学習子孫から導く。目次のDFSと教科書全体の学習順は区別する。\n- 見出しの深さによるstageRankを廃止。状態探索、DSU、heap、ordered set、doubling、Fenwick\n  Tree、区間monoidを基礎、Min_25・RSK・線形matroid intersection・FPS compositionを発展とする。\n- 問題は、想定解法の再構成・実装に必須な全Outcomeの最遅Unitへ置く。最後に学ぶ技能をprimaryとし、従来の主技能はco-primaryとしてclaim単位の根拠を保持する。Inventoryの補助技能欄に記載されていることだけで掲載を早めない。\n- 技能集合の真部分集合関係を問題間の強制的な前提にしない。基本的な定式化から複合・発展的な定式化へ進む編集順位を優先する。\n\n## 指摘ごとの対応\n\n1. ABC450 F・327 Fを区間作用、ABC370 Fをdoublingへ移動。ABC265\n   Exも畳み込み・XOR変換・数ゲームのすべてを学んだ位置へ移動。全868問の必須Unitが主配置より後にならないことを検証する。\n2. 367 Eをdoublingの先頭にし、216 F→321 F、314 F→235 Ex、294 G→298 Ex、354 E→255 G、275 E・298 E→226\n   Hを固定。ゲームの集合状態は部分集合状態の後に学ぶ。\n3. 基礎技能と専門的な発展技能の順序を、前提DAGを満たしたうえで内容に基づくrankで決める。\n4. 列・区間DPを案内節にし、列DP、LIS、prefix分割、区間合成・領域分割、区間拡張へ分割。339 E・369\n   F・393 F・354 FをLIS、262 Gを区間合成、273 F→219\n   Hを区間拡張へ配置する。LIS節はtailsと値域最大の比較を扱うため、区間monoidも先行させる。\n5. ABC244\n   Fを状態グラフ探索へ変更。maskの反転による閉路、単位重みの多始点BFS、空walkの扱いを記述し、部分集合DPとの違いを示す。\n6. ABC435 GをDP遷移高速化へ移動。全体affine変換と対称差への疎な更新を、372 Fの添字移動・457\n   Fの全体倍率と比較する。不要な区間作用の技能を外す。\n7. ABC374 FはInventoryにある順序保存のbatch\n   DPに従いprefix分割DPへ移動。最適時刻をT_i+kXへ絞る証明を先に行い、その後で添字化する。座標圧縮の基礎節では元座標・間隔の保持を明記する。\n8. 母関数の符号化と高度な係数抽出を分離。同じ発展節の中にLagrange反転、微分による係数漸化式、Euler積の疎展開という別Outcomeを設ける。222\n   Hの反転・係数漸化式、230 Hの対数微分、279 Exの五角数定理を接続し、Lucasは組合せ係数の節で扱う。\n9. ABC236 E・294 Fに比率parametric\n   searchを接続。平均値のA_i−x、経路の利得−x·費用、濃度の砂糖量−x·総重量を比較し、236\n   Eの中央値側の±1変換を区別する。\n10. ABC260\n    Fを有界探索へ移動。候補総数を界す探索と成功前の失敗回数を界す探索を区別し、端点対の衝突による早期終了の計算量を説明する。\n\n201 Tag・211 Outcome・226 Unit、うち標準学習順は192\nUnit。問題数は868のまま。生成元から配置表、Unit本文、canonical\nmetadata、目次順、schema、検証記録を同期する。\n\n## 検証\n\nレビューで指定された配置・先行関係、全868問のreadiness、基礎技能→発展技能、構造節の標準順からの除外を回帰検証に追加した。技能集合の小さい連続確率問題が基本的な離散確率DPに先行する旧挙動も検出する。既存の分類検証では、主・共主の交代後も採用技能とclaim単位の根拠を失わないことを確認する。\n\n受理処理の各check結果は`final-taxonomy-check-results.json`に記録する。全体検証の結果は作業完了時に報告する。",
+    "rationale": "# PR #63 技能の前提・学習段階・主技法の修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5647419452\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正として採用解法を照合した。人間による独立再査読を表すものではなく、既存のsolo-maintainer運用で生成物を同期する。round3のゲーム・LISの前提、少数Unitだけのstage補正、例外なしのprimary昇格規則を本記録で置き換える。\n\n## 技能自体の前提と問題の必要技能\n\nゲームの勝敗・Grundy Outcomeから部分集合状態の前提を外した。前提はDP状態設計に限定する。ABC297\nG・255 G・368 Fへ集合状態を要求せず、ABC354\nEにはゲームと集合状態の両Outcomeを残す。問題を後ろへ配置するために技能全体の前提を強めないことをpolicyに明記した。\n\n基本LISは長さ別最小末尾の支配関係と二分探索に限定し、区間monoidの前提を外した。ABC439 E・393 F・369\nFをこの技能へ配置する。値別最良状態の区間集約は別のTag・Outcome・Unitへ分離し、ABC240 Ex・339 E・354\nF・360 G・410 GをInventoryの採用実装に従って配置する。特にABC339\nEでは小さい末尾の支配関係が成り立たないこと、ABC354\nFでは最長解への所属条件とLISの計算法が別の観察であることを本文に記した。\n\n## 全Unitの学習段階\n\n`final-taxonomy-curriculum.ts`に全227\nUnitを明示した。目次専用Unitは段階0、教えるUnitは次の5段階とし、旧rankや目次の深さへのfallbackを廃止した。\n\n1. 状態・順序・集約の基礎、探索・貪欲・基本DP・DAGのtopological sort・基本演算。\n2. 標準データ構造とDP、weighted shortest path・topological\n   sort・SCC・LCA・木DP・rerooting・基本matching/flow。\n3. 複合データ構造、各種変換、連分数・Stern–Brocot、基本凸最適化などの応用。\n4. 発展的な木DP・flow/matching・凸最適化・数え上げ・多項式算法。\n5. Min_25・RSK・線形matroid交差・FPS合成・高度な係数抽出。\n\nprerequisite\nDAGを最優先し、実際の標準順でも段階2の主要グラフ・木・flow技能が連分数・凸最適化へ先行することを検証する。Unit内の基本例→発展例の順は保つが、集合状態を使うABC354\nEを通常のゲーム全体より先行させる制約は外す。\n\n## 掲載位置とsemantic primary\n\n全問題の掲載位置は必須Outcome全体の最遅Unitとする。primaryは原則としてそのUnitの技能に合わせる。理由付きの`READINESS_PRIMARY_OVERRIDES`を別の入力とし、例外では元のsemantic\nprimaryとclaimの主・補助の役割を保存する。例外のOutcome・理由・担当者を`primaryOverride`として配置表とcanonical\nmetadataにも残す。\n\nABC354 Eは勝敗再帰をsemantic\nprimary、集合状態をsupportingとして保持し、掲載先を部分集合状態Unitとする。例外なしの場合には同じ必要技能から集合状態がprimaryへ昇格することも確認する。新しいstage順でABC218\nFは経路証明を踏まえた変更影響の局所化、ABC335 Gは位数を踏まえた巡回群の指数化がprimaryになる。\n\n## IDと正規表現\n\nFrobeniusのcanonical\nOutcomeを`outcome-accelerate-iteration-by-characteristic-p-frobenius`へ改名し、旧orbit\ndecompositionのIDを生成元・scope・前提辺・配置・manifestから除く。\n\n母関数のtriggerは`escapeRegexLiteral('F=xΦ(F)')`で生成し、実際の数学記法に`iu`正規表現で一致するfixtureへ追加した。\n\n202 Tag・212 Outcome・227 Unit（標準学習順193 Unit）、868問。生成元からcanonical\nmetadata・Unit本文・配置・学習順・schema・検証記録を同期する。\n\n## 検証\n\n既存のtaxonomy検査に、全Unitのstage網羅、基本技能の先行、ゲームとLISの前提の独立性、主技法例外と掲載readinessの分離、数学記法のliteral\nmatchを追加した。受理処理の実行結果は`final-taxonomy-check-results.json`へ記録する。型検査・lintとcanonical\nmaterializationの一致も確認する。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-12T10:48:30.232Z"
+    "confirmedAt": "2026-09-13T03:14:22.258Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-12T10:48:30.232Z",
-  "evidenceDigest": "fbf3f2f05f4627d1b209e71166cbc525aa45caa44d63d6b481cd95c5aaa9845f"
+  "generatedAt": "2026-09-13T03:14:22.258Z",
+  "evidenceDigest": "b98527e5d5cfc5292fea5e0872d163b59174921f7721d50e34a41c18e9eb6296"
 }

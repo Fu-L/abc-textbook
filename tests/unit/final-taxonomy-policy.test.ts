@@ -1,3 +1,4 @@
+import { CURRICULUM_STAGES } from '../../src/lib/taxonomy/final-taxonomy-curriculum.js';
 import { isCurriculumUnit } from '../../src/lib/taxonomy/learning-unit-order.js';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
@@ -6,6 +7,8 @@ import { describe, expect, it } from 'vitest';
 
 import {
   EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
+  alignPrimaryWithReadiness,
+  FINAL_TAXONOMY_CLAIM_DECISIONS,
   FINAL_LEARNING_UNIT_CANDIDATES,
   FINAL_LEARNING_UNIT_ORDER_POLICY,
   FINAL_TAXONOMY_OUTCOMES,
@@ -100,9 +103,9 @@ describe('final taxonomy policy', () => {
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(201);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(211);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(226);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(202);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(212);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(227);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -466,7 +469,7 @@ describe('final taxonomy policy', () => {
       expect(unitById.get(unitId)).toMatchObject({
         kind: 'section',
         parentId: 'unit-chapter-modeling',
-        stageRank: 1,
+        stageRank: unitId === 'unit-contribution-reordering' ? 1 : 2,
       });
     }
     expect(unitById.get('unit-kinetic-order-maintenance')?.parentId).toBe('unit-event-sweep');
@@ -616,6 +619,7 @@ describe('final taxonomy policy', () => {
       ),
       string,
     ][] = [
+      ['tag-generating-function-coefficients', 'triggerPatterns', 'F=xΦ(F)'],
       ['tag-implicit-binary-tree-arithmetic', 'triggerPatterns', '2v+1'],
       ['tag-implicit-binary-tree-arithmetic', 'invariantPatterns', '親はfloor(v/2)'],
       ['tag-baby-step-giant-step', 'triggerPatterns', 'f^t(s)=g'],
@@ -745,9 +749,6 @@ describe('final taxonomy policy', () => {
         ...decision.additionalPrimaryOutcomeIds,
       ];
       const assignedOutcomeIds = [...primaryOutcomeIds, ...decision.supportingOutcomeIds];
-      const primaryUnitIds = FINAL_LEARNING_UNIT_CANDIDATES.filter((unit) =>
-        primaryOutcomeIds.some((outcomeId) => unit.ownedLearningOutcomeIds.includes(outcomeId)),
-      ).map((unit) => unit.id);
       const assignedUnitIds = FINAL_LEARNING_UNIT_CANDIDATES.filter((unit) =>
         assignedOutcomeIds.some((outcomeId) => unit.ownedLearningOutcomeIds.includes(outcomeId)),
       ).map((unit) => unit.id);
@@ -755,7 +756,7 @@ describe('final taxonomy policy', () => {
         [...assignedUnitIds].sort(),
       );
       expect(decision.presentationUnitId, decision.problemId).toBe(
-        [...primaryUnitIds]
+        [...assignedUnitIds]
           .sort(
             (left, right) =>
               (orderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
@@ -1007,7 +1008,7 @@ describe('final taxonomy policy', () => {
         'unit-poset-dilworth-antichain',
       ],
       'abc251-ex': [
-        'outcome-decompose-finite-field-frobenius-orbits',
+        'outcome-accelerate-iteration-by-characteristic-p-frobenius',
         'unit-finite-field-frobenius',
       ],
       'abc250-ex': ['outcome-model-and-compute-shortest-path', 'unit-kruskal-threshold-sweep'],
@@ -1357,6 +1358,45 @@ describe('final taxonomy policy', () => {
     expect(tagIdsAt('abc378-g', '/typicalTechniques/1', 'supporting')).toEqual([
       'tag-dp-state-equivalence',
     ]);
+  });
+
+  it('reviews every Unit stage and separates intrinsic prerequisites from problem readiness', async () => {
+    expect(CURRICULUM_STAGES.flatMap((stage) => [...stage.unitIds]).sort()).toEqual(
+      FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.id).sort(),
+    );
+    const outcomes = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
+    expect(outcomes.get('outcome-classify-game-states')?.prerequisiteOutcomeIds).toEqual([
+      'outcome-design-minimal-sufficient-state',
+    ]);
+    expect(outcomes.get('outcome-design-lis-frontier')?.prerequisiteOutcomeIds).toEqual([
+      'outcome-design-order-preserving-dp',
+    ]);
+    const table = await loadedDecisionTable;
+    const game = table.decisions.find((decision) => decision.problemId === 'abc354-e');
+    expect(game?.primaryOutcomeId).toBe('outcome-classify-game-states');
+    expect(game?.supportingOutcomeIds).toContain('outcome-enumerate-subset-state-space');
+    expect(game?.presentationUnitId).toBe('unit-dp-subset-state');
+    expect(game?.primaryOverride?.rationale).toBeTruthy();
+    // Without the explicit semantic exception, the same required skills use the default rule.
+    const semanticDecision = FINAL_TAXONOMY_CLAIM_DECISIONS['abc354-e'];
+    if (semanticDecision === undefined) throw new Error('Missing ABC354 E decision');
+    const defaultDecision = alignPrimaryWithReadiness(semanticDecision);
+    expect(defaultDecision.primaryOutcomeId).toBe('outcome-enumerate-subset-state-space');
+    expect(defaultDecision.additionalPrimaryOutcomeIds).toContain('outcome-classify-game-states');
+    for (const id of ['abc297-g', 'abc255-g', 'abc368-f']) {
+      const decision = table.decisions.find((decision) => decision.problemId === id);
+      expect(decision?.learningUnitCandidateIds, id).not.toContain('unit-dp-subset-state');
+    }
+    for (const id of ['abc369-f', 'abc393-f', 'abc439-e']) {
+      const decision = table.decisions.find((decision) => decision.problemId === id);
+      expect(decision?.learningUnitCandidateIds, id).toContain('unit-dp-lis');
+      expect(decision?.learningUnitCandidateIds, id).not.toContain('unit-range-monoid-aggregation');
+    }
+    for (const id of ['abc339-e', 'abc354-f', 'abc360-g']) {
+      const decision = table.decisions.find((decision) => decision.problemId === id);
+      expect(decision?.learningUnitCandidateIds, id).toContain('unit-dp-value-range');
+      expect(decision?.learningUnitCandidateIds, id).toContain('unit-range-monoid-aggregation');
+    }
   });
 
   it('binds the review manifest to every final Outcome exactly', async () => {

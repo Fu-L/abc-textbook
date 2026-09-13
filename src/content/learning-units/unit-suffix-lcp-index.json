@@ -32,8 +32,10 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/string/suffix-lcp-index.md",
   "problemIds": [
+    "abc213-f",
     "abc268-ex",
     "abc272-f",
+    "abc280-ex",
     "abc362-g",
     "abc452-g"
   ],
@@ -41,17 +43,16 @@
     "abc272-f",
     "abc362-g",
     "abc452-g",
+    "abc213-f",
+    "abc280-ex",
     "abc268-ex"
   ],
-  "relatedProblemIds": [
-    "abc213-f",
-    "abc280-ex"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 38,
+  "globalIndex": 87,
   "orderReason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
 }

@@ -3,7 +3,7 @@ title: "区間monoid要約"
 description: "区間monoid要約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 13
+  order: 66
 ---
 
 # 区間monoid要約
@@ -36,10 +36,21 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 6. [ABC415 F「Max Combo」](https://atcoder.jp/contests/abc415/tasks/abc415_f)
 7. [ABC432 E「Clamp」](https://atcoder.jp/contests/abc432/tasks/abc432_e)
 8. [ABC434 G「Keyboard」](https://atcoder.jp/contests/abc434/tasks/abc434_g)
-9. [ABC418 F「We're teapots」](https://atcoder.jp/contests/abc418/tasks/abc418_f)
-10. [ABC356 F「Distance Component Size Query」](https://atcoder.jp/contests/abc356/tasks/abc356_f)
-11. [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
-12. [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
+9. [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
+10. [ABC418 F「We're teapots」](https://atcoder.jp/contests/abc418/tasks/abc418_f)
+11. [ABC440 F「Egoism」](https://atcoder.jp/contests/abc440/tasks/abc440_f)
+12. [ABC447 G「Div. 1 & Div. 2」](https://atcoder.jp/contests/abc447/tasks/abc447_g)
+13. [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
+14. [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
+15. [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
+16. [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
+17. [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
+18. [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
+19. [ABC356 F「Distance Component Size Query」](https://atcoder.jp/contests/abc356/tasks/abc356_f)
+20. [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
+21. [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
+22. [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
+23. [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -49,16 +60,9 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 
 - [ABC240 Ex「Sequence of Substrings」](https://atcoder.jp/contests/abc240/tasks/abc240_h)
 - [ABC248 Ex「Beautiful Subsequences」](https://atcoder.jp/contests/abc248/tasks/abc248_h)
-- [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
-- [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
 - [ABC265 G「012 Inversion」](https://atcoder.jp/contests/abc265/tasks/abc265_g)
-- [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
 - [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
-- [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
-- [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
-- [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
 - [ABC322 F「Vacation Query」](https://atcoder.jp/contests/abc322/tasks/abc322_f)
-- [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 - [ABC339 E「Smooth Subsequence」](https://atcoder.jp/contests/abc339/tasks/abc339_e)
 - [ABC353 G「Merchant Takahashi」](https://atcoder.jp/contests/abc353/tasks/abc353_g)
 - [ABC354 F「Useless for LIS」](https://atcoder.jp/contests/abc354/tasks/abc354_f)
@@ -68,11 +72,7 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 - [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
 - [ABC424 F「Adding Chords」](https://atcoder.jp/contests/abc424/tasks/abc424_f)
 - [ABC429 F「Shortest Path Query」](https://atcoder.jp/contests/abc429/tasks/abc429_f)
-- [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
-- [ABC440 F「Egoism」](https://atcoder.jp/contests/abc440/tasks/abc440_f)
-- [ABC447 G「Div. 1 & Div. 2」](https://atcoder.jp/contests/abc447/tasks/abc447_g)
 - [ABC453 G「Copy Query」](https://atcoder.jp/contests/abc453/tasks/abc453_g)
-- [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
 
 ## 根拠
 
@@ -83,4 +83,4 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 - [ABC246 H 公式解説](https://atcoder.jp/contests/abc246/editorial/3705)
 - [ABC246 H 公式問題文](https://atcoder.jp/contests/abc246/tasks/abc246_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-range-monoid-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-range-monoid-aggregation`

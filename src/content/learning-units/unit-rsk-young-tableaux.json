@@ -39,6 +39,6 @@
   "stageRank": 5,
   "difficultyRank": 4,
   "representativeRank": 99,
-  "globalIndex": 190,
+  "globalIndex": 191,
   "orderReason": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

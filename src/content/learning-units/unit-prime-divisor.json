@@ -32,7 +32,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/prime-divisor.md",
   "problemIds": [
-    "abc227-g",
     "abc259-e",
     "abc322-g",
     "abc384-f",
@@ -40,8 +39,7 @@
     "abc400-e",
     "abc412-e",
     "abc420-g",
-    "abc445-e",
-    "abc461-f"
+    "abc445-e"
   ],
   "directProblemIds": [
     "abc445-e",
@@ -51,13 +49,12 @@
     "abc400-e",
     "abc412-e",
     "abc420-g",
-    "abc227-g",
-    "abc322-g",
-    "abc461-f"
+    "abc322-g"
   ],
   "relatedProblemIds": [
     "abc212-g",
     "abc222-g",
+    "abc227-g",
     "abc230-g",
     "abc238-g",
     "abc245-ex",
@@ -69,13 +66,14 @@
     "abc363-f",
     "abc368-f",
     "abc403-f",
-    "abc428-g"
+    "abc428-g",
+    "abc461-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 36,
+  "globalIndex": 16,
   "orderReason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
 }

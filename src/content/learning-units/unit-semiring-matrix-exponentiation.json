@@ -49,6 +49,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 91,
-  "globalIndex": 149,
+  "globalIndex": 138,
   "orderReason": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
 }

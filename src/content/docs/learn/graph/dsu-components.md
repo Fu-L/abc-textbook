@@ -3,7 +3,7 @@ title: "DSUによる連結成分管理・縮約"
 description: "DSUによる連結成分管理・縮約の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 8
+  order: 23
 ---
 
 # DSUによる連結成分管理・縮約
@@ -35,7 +35,12 @@ sidebar:
 5. [ABC420 E「Reachability Query」](https://atcoder.jp/contests/abc420/tasks/abc420_e)
 6. [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
 7. [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
-8. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+8. [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
+9. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+10. [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
+11. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+12. [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+13. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -44,7 +49,6 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC218 E「Destruction」](https://atcoder.jp/contests/abc218/tasks/abc218_e)
-- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
 - [ABC229 E「Graph Destruction」](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 - [ABC233 F「Swap and Sort」](https://atcoder.jp/contests/abc233/tasks/abc233_f)
 - [ABC235 E「MST + 1」](https://atcoder.jp/contests/abc235/tasks/abc235_e)
@@ -58,8 +62,6 @@ sidebar:
 - [ABC302 Ex「Ball Collector」](https://atcoder.jp/contests/abc302/tasks/abc302_h)
 - [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
 - [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
-- [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
-- [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
 - [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
 - [ABC352 E「Clique Connect」](https://atcoder.jp/contests/abc352/tasks/abc352_e)
 - [ABC355 F「MST Query」](https://atcoder.jp/contests/abc355/tasks/abc355_f)
@@ -70,9 +72,7 @@ sidebar:
 - [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
 - [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
 - [ABC408 E「Minimum OR Path」](https://atcoder.jp/contests/abc408/tasks/abc408_e)
-- [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
 - [ABC413 G「Big Banned Grid」](https://atcoder.jp/contests/abc413/tasks/abc413_g)
-- [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
 - [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
 
 ## 根拠
@@ -84,4 +84,4 @@ sidebar:
 - [ABC229 E 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 - [ABC229 E 公式解説](https://atcoder.jp/contests/abc229/editorial/2958)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dsu-components`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dsu-components`

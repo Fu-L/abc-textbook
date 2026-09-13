@@ -3,7 +3,7 @@ title: "状態グラフのモデリングと探索"
 description: "状態グラフのモデリングと探索の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 6
+  order: 19
 ---
 
 # 状態グラフのモデリングと探索
@@ -41,7 +41,8 @@ sidebar:
 7. [ABC429 E「Hit and Away」](https://atcoder.jp/contests/abc429/tasks/abc429_e)
 8. [ABC446 E「Multiple-Free Sequences」](https://atcoder.jp/contests/abc446/tasks/abc446_e)
 9. [ABC446 F「Reachable Set 2」](https://atcoder.jp/contests/abc446/tasks/abc446_f)
-10. [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+10. [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
+11. [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -58,7 +59,6 @@ sidebar:
 - [ABC355 E「Guess the Sum」](https://atcoder.jp/contests/abc355/tasks/abc355_e)
 - [ABC361 G「Go Territory」](https://atcoder.jp/contests/abc361/tasks/abc361_g)
 - [ABC413 F「No Passage」](https://atcoder.jp/contests/abc413/tasks/abc413_f)
-- [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
 - [ABC443 F「Non-Increasing Number」](https://atcoder.jp/contests/abc443/tasks/abc443_f)
 
 ## 根拠
@@ -70,4 +70,4 @@ sidebar:
 - [ABC257 G 公式解説](https://atcoder.jp/contests/abc257/editorial/4185)
 - [ABC257 G 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-state-graph-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-state-graph-search`

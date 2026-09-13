@@ -3,7 +3,7 @@ title: "再帰分割・分割統治"
 description: "再帰分割・分割統治の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 76
+  order: 29
 ---
 
 # 再帰分割・分割統治
@@ -31,8 +31,6 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 1. [ABC282 Ex「Min + Sum」](https://atcoder.jp/contests/abc282/tasks/abc282_h)
 2. [ABC413 E「Reverse 2^i」](https://atcoder.jp/contests/abc413/tasks/abc413_e)
 3. [ABC304 G「Max of Medians」](https://atcoder.jp/contests/abc304/tasks/abc304_g)
-4. [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
-5. [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -59,6 +57,8 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 - [ABC381 G「Fibonacci Product」](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 - [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g)
 - [ABC385 G「Counting Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_g)
+- [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
+- [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
 - [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
 ## 根拠
@@ -70,4 +70,4 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 - [ABC247 H 公式解説](https://atcoder.jp/contests/abc247/editorial/3737)
 - [ABC247 H 公式問題文](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-recursive-divide-and-conquer`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-recursive-divide-and-conquer`

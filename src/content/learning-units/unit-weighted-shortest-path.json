@@ -37,7 +37,6 @@
     "abc213-e",
     "abc232-g",
     "abc237-e",
-    "abc243-e",
     "abc243-ex",
     "abc245-g",
     "abc246-e",
@@ -78,7 +77,6 @@
     "abc431-e",
     "abc463-e",
     "abc232-g",
-    "abc243-e",
     "abc243-ex",
     "abc257-f",
     "abc369-e",
@@ -93,6 +91,7 @@
   ],
   "relatedProblemIds": [
     "abc218-f",
+    "abc243-e",
     "abc250-ex",
     "abc252-e",
     "abc261-g",
@@ -106,9 +105,9 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 75,
-  "globalIndex": 91,
+  "globalIndex": 70,
   "orderReason": "基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。"
 }

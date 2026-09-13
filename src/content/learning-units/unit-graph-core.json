@@ -40,9 +40,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 69,
-  "globalIndex": 75,
+  "globalIndex": 60,
   "orderReason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

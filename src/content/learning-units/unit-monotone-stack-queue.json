@@ -32,33 +32,30 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/monotone-stack-queue.md",
   "problemIds": [
-    "abc213-f",
     "abc228-f",
-    "abc280-ex",
-    "abc303-g",
     "abc359-e",
     "abc379-f"
   ],
   "directProblemIds": [
     "abc359-e",
     "abc379-f",
-    "abc228-f",
-    "abc213-f",
-    "abc280-ex",
-    "abc303-g"
+    "abc228-f"
   ],
   "relatedProblemIds": [
+    "abc213-f",
     "abc234-g",
     "abc248-ex",
+    "abc280-ex",
+    "abc303-g",
     "abc334-f",
     "abc420-f",
     "abc435-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 7,
-  "globalIndex": 47,
+  "globalIndex": 18,
   "orderReason": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
 }

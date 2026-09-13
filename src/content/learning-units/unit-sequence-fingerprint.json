@@ -29,20 +29,17 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/sequence-fingerprint.md",
-  "problemIds": [
-    "abc331-f"
-  ],
-  "directProblemIds": [
-    "abc331-f"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
-    "abc274-ex"
+    "abc274-ex",
+    "abc331-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 73,
-  "globalIndex": 85,
+  "globalIndex": 64,
   "orderReason": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

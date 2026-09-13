@@ -1,0 +1,48 @@
+{
+  "id": "tag-value-range-dp",
+  "name": "値域集約による部分列DP",
+  "definition": "末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation",
+    "tag-sequence-subsequence-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "値域",
+      "直前値",
+      "部分列"
+    ],
+    "triggerPatterns": [
+      "値ごとの最適値",
+      "直前値を範囲制約"
+    ],
+    "invariantPatterns": [
+      "処理済みprefixの値別最良状態",
+      "許容区間の集約"
+    ],
+    "goalPatterns": [
+      "最長部分列",
+      "範囲遷移の高速化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-aggregate-subsequence-transitions-by-value"
+  ],
+  "representativeProblemIds": [
+    "abc339-e",
+    "abc354-f"
+  ],
+  "aliases": [
+    "Segment Tree上のDP",
+    "値別最良長",
+    "値域DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -3,7 +3,7 @@ title: "圧縮・反復・再帰文字列へ問い合わせる"
 description: "圧縮・反復・再帰文字列へ問い合わせるの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 182
+  order: 86
 ---
 
 # 圧縮・反復・再帰文字列へ問い合わせる
@@ -44,4 +44,4 @@ sidebar:
 - [ABC417 G 公式解説](https://atcoder.jp/contests/abc417/editorial/13580)
 - [ABC417 G 公式問題文](https://atcoder.jp/contests/abc417/tasks/abc417_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-recursive-compressed-string`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-recursive-compressed-string`

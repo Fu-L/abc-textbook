@@ -3,7 +3,7 @@ title: "分離可能線形変換・Walsh–Hadamard変換"
 description: "分離可能線形変換・Walsh–Hadamard変換の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 129
+  order: 126
 ---
 
 # 分離可能線形変換・Walsh–Hadamard変換
@@ -30,8 +30,8 @@ Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolu
 
 1. [ABC288 G「3^N Minesweeper」](https://atcoder.jp/contests/abc288/tasks/abc288_g)
 2. [ABC220 H「Security Camera」](https://atcoder.jp/contests/abc220/tasks/abc220_h)
-3. [ABC367 G「Sum of (XOR^K or 0)」](https://atcoder.jp/contests/abc367/tasks/abc367_g)
-4. [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+3. [ABC212 H「Nim Counting」](https://atcoder.jp/contests/abc212/tasks/abc212_h)
+4. [ABC367 G「Sum of (XOR^K or 0)」](https://atcoder.jp/contests/abc367/tasks/abc367_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -50,4 +50,4 @@ Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolu
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-separable-linear-transform`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-separable-linear-transform`

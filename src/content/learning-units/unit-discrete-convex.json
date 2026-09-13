@@ -44,6 +44,7 @@
     "abc229-g",
     "abc240-f",
     "abc250-g",
+    "abc263-g",
     "abc275-ex",
     "abc305-ex",
     "abc314-ex",
@@ -64,14 +65,12 @@
     "abc462-e"
   ],
   "directProblemIds": [],
-  "relatedProblemIds": [
-    "abc263-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 0,
   "difficultyRank": 4,
   "representativeRank": 12,
-  "globalIndex": 67,
+  "globalIndex": 97,
   "orderReason": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
 }

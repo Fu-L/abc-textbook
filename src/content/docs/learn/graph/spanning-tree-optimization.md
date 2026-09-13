@@ -3,7 +3,7 @@ title: "cut・cycle性質から最適全域木を構成する"
 description: "cut・cycle性質から最適全域木を構成するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 57
+  order: 51
 ---
 
 # cut・cycle性質から最適全域木を構成する
@@ -56,4 +56,4 @@ sidebar:
 - [ABC250 H 公式解説](https://atcoder.jp/contests/abc250/editorial/3908)
 - [ABC250 H 公式問題文](https://atcoder.jp/contests/abc250/tasks/abc250_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-spanning-tree-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-spanning-tree-optimization`

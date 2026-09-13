@@ -3,7 +3,7 @@ title: "gcdと整数解の成立条件"
 description: "gcdと整数解の成立条件の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 18
+  order: 8
 ---
 
 # gcdと整数解の成立条件
@@ -51,9 +51,11 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 - [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 - [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
 - [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+- [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
 - [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 - [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
 - [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+- [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
 - [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
 - [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 - [ABC460 E「x + y ≡ x + y」](https://atcoder.jp/contests/abc460/tasks/abc460_e)
@@ -67,4 +69,4 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-gcd-diophantine`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-gcd-diophantine`

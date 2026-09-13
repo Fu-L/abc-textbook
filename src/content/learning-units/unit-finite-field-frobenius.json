@@ -22,10 +22,10 @@
     "tag-finite-field-frobenius"
   ],
   "learningOutcomeIds": [
-    "outcome-decompose-finite-field-frobenius-orbits"
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-decompose-finite-field-frobenius-orbits"
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/finite-field-frobenius.md",
@@ -38,9 +38,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 4,
   "difficultyRank": 4,
   "representativeRank": 97,
-  "globalIndex": 178,
+  "globalIndex": 180,
   "orderReason": "法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ。"
 }

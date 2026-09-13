@@ -35,22 +35,23 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-congruence.md",
   "problemIds": [
+    "abc423-g",
     "abc460-e"
   ],
   "directProblemIds": [
-    "abc460-e"
+    "abc460-e",
+    "abc423-g"
   ],
   "relatedProblemIds": [
     "abc245-ex",
     "abc286-f",
-    "abc371-g",
-    "abc423-g"
+    "abc371-g"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 1,
-  "globalIndex": 35,
+  "globalIndex": 39,
   "orderReason": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
 }

@@ -3,7 +3,7 @@ title: "包除・Möbius反転で重複を補正する"
 description: "包除・Möbius反転で重複を補正するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 46
+  order: 47
 ---
 
 # 包除・Möbius反転で重複を補正する
@@ -40,9 +40,7 @@ sidebar:
 5. [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
 6. [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
 7. [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
-8. [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
-9. [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
-10. [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
+8. [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -50,9 +48,11 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 - [ABC214 G「Three Permutations」](https://atcoder.jp/contests/abc214/tasks/abc214_g)
 - [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
 - [ABC236 Ex「Distinct Multiples」](https://atcoder.jp/contests/abc236/tasks/abc236_h)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
 - [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
 - [ABC272 Ex「Flipping Coins 2」](https://atcoder.jp/contests/abc272/tasks/abc272_h)
 - [ABC284 Ex「Count Unlabeled Graphs」](https://atcoder.jp/contests/abc284/tasks/abc284_h)
@@ -60,9 +60,11 @@ sidebar:
 - [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)
 - [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
 - [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
 - [ABC317 F「Nim」](https://atcoder.jp/contests/abc317/tasks/abc317_f)
 - [ABC327 G「Many Good Tuple Problems」](https://atcoder.jp/contests/abc327/tasks/abc327_g)
 - [ABC331 G「Collect Them All」](https://atcoder.jp/contests/abc331/tasks/abc331_g)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 - [ABC357 G「Stair-like Grid」](https://atcoder.jp/contests/abc357/tasks/abc357_g)
 - [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
 - [ABC462 G「Completely Wrong」](https://atcoder.jp/contests/abc462/tasks/abc462_g)
@@ -76,4 +78,4 @@ sidebar:
 - [ABC215 H 公式解説](https://atcoder.jp/contests/abc215/editorial/2505)
 - [ABC215 H 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-inclusion-exclusion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-inclusion-exclusion`

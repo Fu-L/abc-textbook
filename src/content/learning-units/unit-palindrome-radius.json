@@ -30,19 +30,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/string/palindrome-radius.md",
   "problemIds": [
+    "abc349-g",
     "abc398-f"
   ],
   "directProblemIds": [
-    "abc398-f"
-  ],
-  "relatedProblemIds": [
+    "abc398-f",
     "abc349-g"
   ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 41,
+  "globalIndex": 43,
   "orderReason": "各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。"
 }

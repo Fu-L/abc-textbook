@@ -2019,6 +2019,9 @@ const placementsFromPolicy = (
       supportingOutcomeIds,
       learningUnitIds,
       presentationUnitId: decision.presentationUnitId,
+      ...(decision.primaryOverride === undefined
+        ? {}
+        : { primaryOverride: decision.primaryOverride }),
       adHocElements: decision.adHocElements.map(adHocProjectionText),
       claimDispositions: decision.claimDispositions.map(
         ({ claimRef, kind, tagIds, rationale }) => ({

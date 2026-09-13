@@ -3,7 +3,7 @@ title: "列・区間・分割のDP"
 description: "列・区間・分割のDPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 12
+  order: 27
 ---
 
 # 列・区間・分割のDP
@@ -33,6 +33,7 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/)
 - [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)
 - [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/)
+- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/)
 
 ## 問題一覧
 
@@ -47,17 +48,14 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
-- [ABC225 F「String Cards」](https://atcoder.jp/contests/abc225/tasks/abc225_f)
 - [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
 - [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
 - [ABC262 Ex「Max Limited Sequence」](https://atcoder.jp/contests/abc262/tasks/abc262_h)
 - [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
 - [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f)
 - [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
-- [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f)
 - [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
 - [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
-- [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
 
 ## 根拠
 
@@ -68,4 +66,4 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [ABC219 H 公式解説](https://atcoder.jp/contests/abc219/editorial/2601)
 - [ABC219 H 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-sequence-interval`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-sequence-interval`

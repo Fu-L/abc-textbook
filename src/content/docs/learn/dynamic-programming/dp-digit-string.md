@@ -3,7 +3,7 @@ title: "接頭辞から更新する有限状態DP"
 description: "接頭辞から更新する有限状態DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 103
+  order: 78
 ---
 
 # 接頭辞から更新する有限状態DP
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/)
 - [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/)
+- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/)
 
 ## 問題一覧
 
@@ -52,4 +52,4 @@ sidebar:
 - [ABC288 H 公式解説](https://atcoder.jp/contests/abc288/editorial/5663)
 - [ABC288 H 公式問題文](https://atcoder.jp/contests/abc288/tasks/abc288_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-digit-string`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-digit-string`

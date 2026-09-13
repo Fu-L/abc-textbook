@@ -32,25 +32,31 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/interactive-protocol.md",
   "problemIds": [
-    "abc269-e"
-  ],
-  "directProblemIds": [
-    "abc269-e"
-  ],
-  "relatedProblemIds": [
+    "abc269-e",
     "abc278-g",
     "abc282-f",
     "abc286-f",
     "abc305-f",
-    "abc337-e",
     "abc355-e",
     "abc398-e"
   ],
+  "directProblemIds": [
+    "abc305-f",
+    "abc269-e",
+    "abc282-f",
+    "abc278-g",
+    "abc398-e",
+    "abc286-f",
+    "abc355-e"
+  ],
+  "relatedProblemIds": [
+    "abc337-e"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
+  "stageRank": 3,
   "difficultyRank": 1,
   "representativeRank": 8,
-  "globalIndex": 25,
+  "globalIndex": 84,
   "orderReason": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
 }

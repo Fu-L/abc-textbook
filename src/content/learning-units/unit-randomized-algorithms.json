@@ -54,6 +54,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 61,
+  "globalIndex": 91,
   "orderReason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
 }

@@ -3,7 +3,7 @@ title: "一意な後続・サイクル・ダブリング"
 description: "一意な後続・サイクル・ダブリングの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 11
+  order: 52
 ---
 
 # 一意な後続・サイクル・ダブリング
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [doubling・binary lifting](/learn/graph/binary-lifting/)
 - [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/)
+- [doubling・binary lifting](/learn/graph/binary-lifting/)
 
 ## 問題一覧
 
@@ -40,8 +40,7 @@ sidebar:
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
 - [ABC247 Ex「Rearranging Problem」](https://atcoder.jp/contests/abc247/tasks/abc247_h)
-- [ABC254 G「Elevators」](https://atcoder.jp/contests/abc254/tasks/abc254_g)
-- [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+- [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
 - [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
 - [ABC417 G「Binary Cat」](https://atcoder.jp/contests/abc417/tasks/abc417_g)
 - [ABC444 G「Kyoen」](https://atcoder.jp/contests/abc444/tasks/abc444_g)
@@ -55,4 +54,4 @@ sidebar:
 - [ABC247 H 公式解説](https://atcoder.jp/contests/abc247/editorial/3737)
 - [ABC247 H 公式問題文](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-functional-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-functional-graph`

@@ -38,7 +38,6 @@
     "abc256-e",
     "abc258-e",
     "abc284-g",
-    "abc286-f",
     "abc296-e",
     "abc357-e",
     "abc371-g",
@@ -56,19 +55,19 @@
     "abc436-e",
     "abc258-e",
     "abc284-g",
-    "abc371-g",
-    "abc286-f"
+    "abc371-g"
   ],
   "relatedProblemIds": [
     "abc247-ex",
+    "abc286-f",
     "abc387-f",
     "abc444-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 60,
-  "globalIndex": 66,
+  "globalIndex": 52,
   "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
 }

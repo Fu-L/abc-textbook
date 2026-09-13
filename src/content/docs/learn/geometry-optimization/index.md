@@ -3,7 +3,7 @@ title: "幾何・凸最適化"
 description: "幾何・凸最適化の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 26
+  order: 15
 ---
 
 # 幾何・凸最適化
@@ -49,13 +49,18 @@ orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進
 - [ABC240 G「Teleporting Takahashi」](https://atcoder.jp/contests/abc240/tasks/abc240_g)
 - [ABC243 Ex「Builder Takahashi (Enhanced version)」](https://atcoder.jp/contests/abc243/tasks/abc243_h)
 - [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
-- [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
+- [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
+- [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
 - [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
+- [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
+- [ABC296 G「Polygon and Points」](https://atcoder.jp/contests/abc296/tasks/abc296_g)
+- [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f)
 - [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
 - [ABC377 F「Avoid Queen Attack」](https://atcoder.jp/contests/abc377/tasks/abc377_f)
 - [ABC405 F「Chord Crossing」](https://atcoder.jp/contests/abc405/tasks/abc405_f)
 - [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
 - [ABC422 E「Colinear」](https://atcoder.jp/contests/abc422/tasks/abc422_e)
+- [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
 - [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
 ## 根拠
@@ -67,4 +72,4 @@ orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進
 - [ABC220 G 公式解説](https://atcoder.jp/contests/abc220/editorial/2684)
 - [ABC220 G 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-chapter-geometry-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-chapter-geometry-optimization`

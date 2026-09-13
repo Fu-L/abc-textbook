@@ -97,6 +97,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 9,
-  "globalIndex": 101,
+  "globalIndex": 108,
   "orderReason": "高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。"
 }

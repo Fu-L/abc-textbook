@@ -3,7 +3,7 @@ title: "prefix分割DP"
 description: "prefix分割DPの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 14
+  order: 32
 ---
 
 # prefix分割DP
@@ -36,7 +36,8 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 
 1. [ABC285 E「Work or Rest」](https://atcoder.jp/contests/abc285/tasks/abc285_e)
 2. [ABC230 F「Predilection」](https://atcoder.jp/contests/abc230/tasks/abc230_f)
-3. [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+3. [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
+4. [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -46,7 +47,6 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 
 - [ABC262 Ex「Max Limited Sequence」](https://atcoder.jp/contests/abc262/tasks/abc262_h)
 - [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f)
-- [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
 
 ## 根拠
 
@@ -57,4 +57,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 - [ABC285 E 公式問題文](https://atcoder.jp/contests/abc285/tasks/abc285_e)
 - [ABC285 E 公式解説](https://atcoder.jp/contests/abc285/editorial/5530)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-dp-prefix-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-dp-prefix-partition`

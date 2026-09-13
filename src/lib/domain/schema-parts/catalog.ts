@@ -1412,10 +1412,25 @@ export const FinalProblemPlacementProjectionSchema = strictObject({
   supportingOutcomeIds: uniqueArray(FinalOutcomeIdSchema),
   learningUnitIds: uniqueArray(FinalLearningUnitIdSchema).min(1),
   presentationUnitId: FinalLearningUnitIdSchema,
+  primaryOverride: strictObject({
+    primaryOutcomeId: FinalOutcomeIdSchema,
+    rationale: nonEmptyText,
+    decisionAuthorId: nonEmptyText,
+  }).optional(),
   adHocElements: uniqueArray(nonEmptyText),
   claimDispositions: uniqueArray(InventoryClaimDispositionSchema).min(1),
   analysisEvidenceRefs: uniqueArray(ProblemAnalysisClaimRefSchema).min(1),
 }).superRefine((placement, context) => {
+  if (
+    placement.primaryOverride !== undefined &&
+    placement.primaryOverride.primaryOutcomeId !== placement.primaryOutcomeId
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['primaryOverride'],
+      message: 'Primary override must match semantic primary.',
+    });
+  }
   const isFull = placement.kind === 'full';
   const isSimilar = placement.kind === 'similar';
   if (isFull !== (placement.primaryProblemId === null)) {

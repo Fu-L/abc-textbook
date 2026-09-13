@@ -40,9 +40,9 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 4,
-  "globalIndex": 116,
+  "globalIndex": 117,
   "orderReason": "更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。"
 }

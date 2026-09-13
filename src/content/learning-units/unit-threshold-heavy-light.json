@@ -59,6 +59,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 74,
-  "globalIndex": 88,
+  "globalIndex": 103,
   "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -38,6 +38,7 @@
     "abc302-f",
     "abc394-e",
     "abc414-f",
+    "abc417-e",
     "abc427-e",
     "abc429-e",
     "abc446-e",
@@ -53,6 +54,7 @@
     "abc429-e",
     "abc446-e",
     "abc446-f",
+    "abc417-e",
     "abc427-e"
   ],
   "relatedProblemIds": [
@@ -65,14 +67,13 @@
     "abc355-e",
     "abc361-g",
     "abc413-f",
-    "abc417-e",
     "abc443-f"
   ],
   "examples": [],
   "exercises": [],
   "stageRank": 1,
-  "difficultyRank": 0,
+  "difficultyRank": 2,
   "representativeRank": 43,
-  "globalIndex": 6,
+  "globalIndex": 19,
   "orderReason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

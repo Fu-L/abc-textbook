@@ -3,7 +3,7 @@ title: "Bostan–Mori・有理生成関数の係数抽出"
 description: "Bostan–Mori・有理生成関数の係数抽出の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 173
+  order: 175
 ---
 
 # Bostan–Mori・有理生成関数の係数抽出
@@ -37,4 +37,4 @@ P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段�
 - [ABC300 H 公式解説](https://atcoder.jp/contests/abc300/editorial/6269)
 - [ABC300 H 公式問題文](https://atcoder.jp/contests/abc300/tasks/abc300_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-bostan-mori`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-bostan-mori`

@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "49ba5bdc30e33e6d272c9dc8e92a1f32baa11fca4ee631be0fe920d0e1755c11",
-  "digest": "1b51346dba06e96b63831e69304cf81f0da97a382039cd7022dd60cadbfd2d04",
+  "scopeDigest": "04ee67c6f8ba29ca621093b45eb7eff8907ebf077aa6db971fc87b28f1a13155",
+  "digest": "e9bc54a00e673ccad029584b98348bcc02d78e4d2487764054eee03d2bf021df",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -18,10 +18,12 @@
   ],
   "learningOutcomeIds": [
     "outcome-accelerate-fixed-linear-transition",
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius",
     "outcome-accelerate-set-operations-with-bitsets",
     "outcome-accelerate-tree-dp-by-heavy-path",
     "outcome-add-conway-number-games",
     "outcome-aggregate-rooted-tree",
+    "outcome-aggregate-subsequence-transitions-by-value",
     "outcome-allocate-by-convex-marginal-costs",
     "outcome-answer-idempotent-range-query",
     "outcome-answer-tree-ancestor-queries",
@@ -79,7 +81,6 @@
     "outcome-count-prefix-constrained-objects",
     "outcome-count-through-cyclic-exponents",
     "outcome-decompose-by-prime-or-divisor",
-    "outcome-decompose-finite-field-frobenius-orbits",
     "outcome-decompose-functional-graph",
     "outcome-decompose-ranges-into-segment-tree-nodes",
     "outcome-derive-coefficient-recurrence-by-differentiation",
@@ -235,7 +236,9 @@
   },
   "reviewPolicy": {
     "requiredMode": "self",
-    "riskReasons": ["major_classification_change"],
+    "riskReasons": [
+      "major_classification_change"
+    ],
     "highRiskSelfReviewReason": "solo_maintainer"
   },
   "reviewUnits": [
@@ -265,10 +268,12 @@
       ],
       "learningOutcomeIds": [
         "outcome-accelerate-fixed-linear-transition",
+        "outcome-accelerate-iteration-by-characteristic-p-frobenius",
         "outcome-accelerate-set-operations-with-bitsets",
         "outcome-accelerate-tree-dp-by-heavy-path",
         "outcome-add-conway-number-games",
         "outcome-aggregate-rooted-tree",
+        "outcome-aggregate-subsequence-transitions-by-value",
         "outcome-allocate-by-convex-marginal-costs",
         "outcome-answer-idempotent-range-query",
         "outcome-answer-tree-ancestor-queries",
@@ -326,7 +331,6 @@
         "outcome-count-prefix-constrained-objects",
         "outcome-count-through-cyclic-exponents",
         "outcome-decompose-by-prime-or-divisor",
-        "outcome-decompose-finite-field-frobenius-orbits",
         "outcome-decompose-functional-graph",
         "outcome-decompose-ranges-into-segment-tree-nodes",
         "outcome-derive-coefficient-recurrence-by-differentiation",
@@ -488,7 +492,9 @@
         "check-schema-parity",
         "check-taxonomy-integration"
       ],
-      "evidenceRoles": ["final_taxonomy_review"],
+      "evidenceRoles": [
+        "final_taxonomy_review"
+      ],
       "maintenanceBenefit": "A single digest-bound taxonomy acceptance unit keeps every full-corpus placement, preview decision, correction impact, and downstream T047-T050 materialization synchronized.",
       "owner": "person-maintainer",
       "status": "planned"

@@ -1,6 +1,7 @@
 export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[]>> = {
   'tag-dp-prefix-partition': ['prefix分割DP', '最後のブロックを固定'],
   'tag-dp-interval-expansion': ['区間拡張DP', '訪問済み区間DP'],
+  'tag-value-range-dp': ['値域DP', '値別最良長', 'Segment Tree上のDP'],
   'tag-lis-state': ['LIS', '最長増加部分列', '長さ別最小末尾'],
   'tag-generating-function-coefficients': ['Lagrange反転', '係数漸化式', 'Eulerの五角数定理'],
   'tag-conway-number-games': ['Conway number', 'simplicity rule', '二進有理数'],
@@ -694,7 +695,8 @@ export const FINAL_TAG_FORMER_NAMES: Readonly<Record<string, readonly string[]>>
 export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly string[]>> = {
   'tag-dp-prefix-partition': ['abc285-e', 'abc288-f'],
   'tag-dp-interval-expansion': ['abc273-f', 'abc219-h'],
-  'tag-lis-state': ['abc393-f', 'abc339-e'],
+  'tag-lis-state': ['abc439-e', 'abc393-f', 'abc369-f'],
+  'tag-value-range-dp': ['abc339-e', 'abc354-f'],
   'tag-generating-function-coefficients': ['abc222-h', 'abc279-ex'],
   'tag-amortized-heavy-light': ['abc217-e', 'abc329-f', 'abc219-g'],
   'tag-bounded-enumeration': ['abc234-e', 'abc328-e', 'abc353-f', 'abc386-e', 'abc442-g'],

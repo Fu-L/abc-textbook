@@ -3,7 +3,7 @@ title: "局所寄与へ分解して集計順を交換する"
 description: "局所寄与へ分解して集計順を交換するの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 21
+  order: 11
 ---
 
 # 局所寄与へ分解して集計順を交換する
@@ -50,16 +50,6 @@ sidebar:
 20. [ABC423 E「Sum of Subarrays」](https://atcoder.jp/contests/abc423/tasks/abc423_e)
 21. [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
 22. [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
-23. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
-24. [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
-25. [ABC261 F「Sorting Color Balls」](https://atcoder.jp/contests/abc261/tasks/abc261_f)
-26. [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
-27. [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
-28. [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
-29. [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
-30. [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
-31. [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
-32. [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -72,10 +62,13 @@ sidebar:
 - [ABC218 E「Destruction」](https://atcoder.jp/contests/abc218/tasks/abc218_e)
 - [ABC219 H「Candles」](https://atcoder.jp/contests/abc219/tasks/abc219_h)
 - [ABC220 E「Distance on Large Perfect Binary Tree」](https://atcoder.jp/contests/abc220/tasks/abc220_e)
+- [ABC221 E「LEQ」](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 - [ABC221 F「Diameter set」](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 - [ABC222 E「Red and Blue Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_e)
+- [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
 - [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
 - [ABC258 G「Triangle」](https://atcoder.jp/contests/abc258/tasks/abc258_g)
+- [ABC261 F「Sorting Color Balls」](https://atcoder.jp/contests/abc261/tasks/abc261_f)
 - [ABC262 Ex「Max Limited Sequence」](https://atcoder.jp/contests/abc262/tasks/abc262_h)
 - [ABC269 E「Last Rook」](https://atcoder.jp/contests/abc269/tasks/abc269_e)
 - [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
@@ -84,6 +77,7 @@ sidebar:
 - [ABC295 E「Kth Number」](https://atcoder.jp/contests/abc295/tasks/abc295_e)
 - [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
 - [ABC298 F「Rook Score」](https://atcoder.jp/contests/abc298/tasks/abc298_f)
+- [ABC306 F「Merge Sets」](https://atcoder.jp/contests/abc306/tasks/abc306_f)
 - [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
 - [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 - [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
@@ -93,14 +87,20 @@ sidebar:
 - [ABC359 G「Sum of Tree Distance」](https://atcoder.jp/contests/abc359/tasks/abc359_g)
 - [ABC361 E「Tree and Hamilton Path 2」](https://atcoder.jp/contests/abc361/tasks/abc361_e)
 - [ABC362 F「Perfect Matching on a Tree」](https://atcoder.jp/contests/abc362/tasks/abc362_f)
+- [ABC378 E「Mod Sigma Problem」](https://atcoder.jp/contests/abc378/tasks/abc378_e)
+- [ABC380 G「Another Shuffle Window」](https://atcoder.jp/contests/abc380/tasks/abc380_g)
 - [ABC386 G「Many MST」](https://atcoder.jp/contests/abc386/tasks/abc386_g)
 - [ABC390 G「Permutation Concatenation」](https://atcoder.jp/contests/abc390/tasks/abc390_g)
+- [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
 - [ABC401 F「Add One Edge 3」](https://atcoder.jp/contests/abc401/tasks/abc401_f)
+- [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
 - [ABC411 E「E [max]」](https://atcoder.jp/contests/abc411/tasks/abc411_e)
 - [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
 - [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
 - [ABC433 F「1122 Subsequence 2」](https://atcoder.jp/contests/abc433/tasks/abc433_f)
+- [ABC436 F「Starry Landscape Photo」](https://atcoder.jp/contests/abc436/tasks/abc436_f)
 - [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f)
+- [ABC439 F「Beautiful Kadomatsu」](https://atcoder.jp/contests/abc439/tasks/abc439_f)
 - [ABC455 F「Merge Slimes 2」](https://atcoder.jp/contests/abc455/tasks/abc455_f)
 - [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
 - [ABC464 F「Random Vault Heist」](https://atcoder.jp/contests/abc464/tasks/abc464_f)
@@ -114,4 +114,4 @@ sidebar:
 - [ABC218 E 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_e)
 - [ABC218 E 公式解説](https://atcoder.jp/contests/abc218/editorial/2580)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-contribution-reordering`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-contribution-reordering`

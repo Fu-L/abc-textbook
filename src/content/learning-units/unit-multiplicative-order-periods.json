@@ -46,6 +46,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 3,
-  "globalIndex": 55,
+  "globalIndex": 89,
   "orderReason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
 }

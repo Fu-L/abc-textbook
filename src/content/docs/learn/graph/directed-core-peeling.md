@@ -3,7 +3,7 @@ title: "有向cycle検出・sink/source peeling"
 description: "有向cycle検出・sink/source peelingの概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 68
+  order: 53
 ---
 
 # 有向cycle検出・sink/source peeling
@@ -40,4 +40,4 @@ sidebar:
 - [ABC456 E 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_e)
 - [ABC456 E 公式解説](https://atcoder.jp/contests/abc456/editorial/19849)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-directed-core-peeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-directed-core-peeling`

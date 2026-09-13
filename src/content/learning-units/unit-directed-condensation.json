@@ -40,26 +40,26 @@
     "abc277-ex",
     "abc277-f",
     "abc291-e",
-    "abc304-ex",
-    "abc306-ex",
     "abc306-g",
     "abc315-e",
-    "abc335-e",
-    "abc341-f",
     "abc456-e"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc214-h",
     "abc224-e",
+    "abc304-ex",
+    "abc306-ex",
     "abc324-f",
+    "abc335-e",
+    "abc341-f",
     "abc374-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
+  "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 54,
+  "globalIndex": 21,
   "orderReason": "到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。"
 }

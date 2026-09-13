@@ -3,7 +3,7 @@ title: "組合せ・多項式・線形代数"
 description: "組合せ・多項式・線形代数の概念と、基礎から応用へ読む問題一覧。"
 draft: true
 sidebar:
-  order: 27
+  order: 17
 ---
 
 # 組合せ・多項式・線形代数
@@ -28,14 +28,14 @@ sidebar:
 
 - [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)
 - [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
-- [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)
 - [線形方程式・分離可能変換・行列式計数へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
-- [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)
-- [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/)
 - [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/)
+- [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)
+- [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)
+- [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/)
+- [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/)
 - [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/)
 - [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/)
-- [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/)
 - [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/)
 - [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/)
 - [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/)
@@ -58,12 +58,14 @@ sidebar:
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
+- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
 - [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
-- [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 - [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 - [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
 - [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
+- [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
 - [ABC251 Ex「Fill Triangle」](https://atcoder.jp/contests/abc251/tasks/abc251_h)
+- [ABC256 F「Cumulative Cumulative Cumulative Sum」](https://atcoder.jp/contests/abc256/tasks/abc256_f)
 - [ABC256 G「Black and White Stones」](https://atcoder.jp/contests/abc256/tasks/abc256_g)
 - [ABC259 Ex「Yet Another Path Counting」](https://atcoder.jp/contests/abc259/tasks/abc259_h)
 - [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
@@ -71,10 +73,13 @@ sidebar:
 - [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
 - [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)
 - [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
 - [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
 - [ABC317 F「Nim」](https://atcoder.jp/contests/abc317/tasks/abc317_f)
+- [ABC335 G「Discrete Logarithm Problems」](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 - [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 - [ABC412 G「Degree Harmony」](https://atcoder.jp/contests/abc412/tasks/abc412_g)
+- [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
 - [ABC459 E「Select from Subtrees」](https://atcoder.jp/contests/abc459/tasks/abc459_e)
 - [ABC463 G「Random Walk Distance」](https://atcoder.jp/contests/abc463/tasks/abc463_g)
 
@@ -87,4 +92,4 @@ sidebar:
 - [ABC213 G 公式解説](https://atcoder.jp/contests/abc213/editorial/2392)
 - [ABC213 G 公式問題文](https://atcoder.jp/contests/abc213/tasks/abc213_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1c747d7235424cdb69761dd4e23c049268d95ccb300fc9d49802f379e3df1861` / LearningUnit `unit-chapter-combinatorics-algebra`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5f45276dcadc4174611f653bed4434f2b20e1a8cf497394e82a64b26e6323c9a` / LearningUnit `unit-chapter-combinatorics-algebra`
