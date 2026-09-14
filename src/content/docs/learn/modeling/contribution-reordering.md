@@ -1,9 +1,9 @@
 ---
 title: "局所寄与へ分解して集計順を交換する"
-description: "局所寄与へ分解して集計順を交換するの概念と、基礎から応用へ読む問題一覧。"
+description: "「局所寄与へ分解して集計順を交換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 11
+  order: 10
 ---
 
 # 局所寄与へ分解して集計順を交換する
@@ -22,34 +22,36 @@ sidebar:
 
 答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。
 
+### このUnitでは扱わないもの
+
 - active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および独立な局所寄与へ分解できない集計。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC233 E「Σ[k=0..10^100]floor(X／10^k)」](https://atcoder.jp/contests/abc233/tasks/abc233_e)
-2. [ABC224 F「Problem where +s Separate Digits」](https://atcoder.jp/contests/abc224/tasks/abc224_f)
-3. [ABC231 G「Balls in Boxes」](https://atcoder.jp/contests/abc231/tasks/abc231_g)
-4. [ABC247 E「Max Min」](https://atcoder.jp/contests/abc247/tasks/abc247_e)
-5. [ABC255 E「Lucky Numbers」](https://atcoder.jp/contests/abc255/tasks/abc255_e)
-6. [ABC308 E「MEX」](https://atcoder.jp/contests/abc308/tasks/abc308_e)
-7. [ABC318 E「Sandwiches」](https://atcoder.jp/contests/abc318/tasks/abc318_e)
-8. [ABC324 E「Joint Two Strings」](https://atcoder.jp/contests/abc324/tasks/abc324_e)
+2. [ABC247 E「Max Min」](https://atcoder.jp/contests/abc247/tasks/abc247_e)
+3. [ABC255 E「Lucky Numbers」](https://atcoder.jp/contests/abc255/tasks/abc255_e)
+4. [ABC290 E「Make it Palindrome」](https://atcoder.jp/contests/abc290/tasks/abc290_e)
+5. [ABC308 E「MEX」](https://atcoder.jp/contests/abc308/tasks/abc308_e)
+6. [ABC318 E「Sandwiches」](https://atcoder.jp/contests/abc318/tasks/abc318_e)
+7. [ABC324 E「Joint Two Strings」](https://atcoder.jp/contests/abc324/tasks/abc324_e)
+8. [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
 9. [ABC347 E「Set Add Query」](https://atcoder.jp/contests/abc347/tasks/abc347_e)
-10. [ABC365 E「Xor Sigma Problem」](https://atcoder.jp/contests/abc365/tasks/abc365_e)
-11. [ABC371 E「I Hate Sigma Problems」](https://atcoder.jp/contests/abc371/tasks/abc371_e)
-12. [ABC379 E「Sum of All Substrings」](https://atcoder.jp/contests/abc379/tasks/abc379_e)
-13. [ABC390 F「Double Sum 3」](https://atcoder.jp/contests/abc390/tasks/abc390_f)
-14. [ABC268 G「Random Student ID」](https://atcoder.jp/contests/abc268/tasks/abc268_g)
-15. [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
-16. [ABC290 E「Make it Palindrome」](https://atcoder.jp/contests/abc290/tasks/abc290_e)
+10. [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
+11. [ABC365 E「Xor Sigma Problem」](https://atcoder.jp/contests/abc365/tasks/abc365_e)
+12. [ABC371 E「I Hate Sigma Problems」](https://atcoder.jp/contests/abc371/tasks/abc371_e)
+13. [ABC379 E「Sum of All Substrings」](https://atcoder.jp/contests/abc379/tasks/abc379_e)
+14. [ABC423 E「Sum of Subarrays」](https://atcoder.jp/contests/abc423/tasks/abc423_e)
+15. [ABC224 F「Problem where +s Separate Digits」](https://atcoder.jp/contests/abc224/tasks/abc224_f)
+16. [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
 17. [ABC295 F「substr = S」](https://atcoder.jp/contests/abc295/tasks/abc295_f)
-18. [ABC330 G「Inversion Squared」](https://atcoder.jp/contests/abc330/tasks/abc330_g)
-19. [ABC334 E「Christmas Color Grid 1」](https://atcoder.jp/contests/abc334/tasks/abc334_e)
-20. [ABC423 E「Sum of Subarrays」](https://atcoder.jp/contests/abc423/tasks/abc423_e)
-21. [ABC353 E「Yet Another Sigma Problem」](https://atcoder.jp/contests/abc353/tasks/abc353_e)
-22. [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
+18. [ABC390 F「Double Sum 3」](https://atcoder.jp/contests/abc390/tasks/abc390_f)
+19. [ABC422 F「Eat and Ride」](https://atcoder.jp/contests/abc422/tasks/abc422_f)
+20. [ABC231 G「Balls in Boxes」](https://atcoder.jp/contests/abc231/tasks/abc231_g)
+21. [ABC268 G「Random Student ID」](https://atcoder.jp/contests/abc268/tasks/abc268_g)
+22. [ABC330 G「Inversion Squared」](https://atcoder.jp/contests/abc330/tasks/abc330_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -114,4 +116,4 @@ sidebar:
 - [ABC218 E 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_e)
 - [ABC218 E 公式解説](https://atcoder.jp/contests/abc218/editorial/2580)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-contribution-reordering`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-contribution-reordering`

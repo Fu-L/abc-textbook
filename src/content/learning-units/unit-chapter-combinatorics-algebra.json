@@ -240,6 +240,6 @@
   "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 7,
-  "globalIndex": 17,
+  "globalIndex": 16,
   "orderReason": "数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。"
 }

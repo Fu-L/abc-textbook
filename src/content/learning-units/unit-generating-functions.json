@@ -54,24 +54,24 @@
     "abc462-g"
   ],
   "directProblemIds": [
-    "abc225-h",
-    "abc241-ex",
-    "abc267-ex",
     "abc214-g",
-    "abc389-g",
-    "abc392-g",
+    "abc331-g",
+    "abc345-g",
+    "abc352-g",
     "abc385-g",
-    "abc285-ex",
+    "abc389-g",
     "abc390-g",
+    "abc392-g",
+    "abc409-g",
     "abc422-g",
     "abc432-g",
-    "abc247-ex",
     "abc436-g",
-    "abc331-g",
-    "abc352-g",
-    "abc409-g",
     "abc462-g",
-    "abc345-g"
+    "abc225-h",
+    "abc241-ex",
+    "abc247-ex",
+    "abc267-ex",
+    "abc285-ex"
   ],
   "relatedProblemIds": [
     "abc235-ex",
@@ -95,6 +95,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 9,
-  "globalIndex": 109,
+  "globalIndex": 112,
   "orderReason": "高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。"
 }

@@ -50,6 +50,6 @@
   "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 92,
-  "globalIndex": 82,
+  "globalIndex": 74,
   "orderReason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
 }

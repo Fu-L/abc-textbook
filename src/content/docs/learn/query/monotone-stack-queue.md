@@ -1,9 +1,9 @@
 ---
 title: "支配関係から不要な候補を単調stack・queueで削る"
-description: "支配関係から不要な候補を単調stack・queueで削るの概念と、基礎から応用へ読む問題一覧。"
+description: "「支配関係から不要な候補を単調stack・queueで削る」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 18
+  order: 17
 ---
 
 # 支配関係から不要な候補を単調stack・queueで削る
@@ -22,15 +22,17 @@ sidebar:
 
 候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。
 
+### このUnitでは扱わないもの
+
 - 全候補から極値を反復取得するheap・ordered set。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC359 E「Water Tank」](https://atcoder.jp/contests/abc359/tasks/abc359_e)
-2. [ABC379 F「Buildings 2」](https://atcoder.jp/contests/abc379/tasks/abc379_f)
-3. [ABC228 F「Stamp Game」](https://atcoder.jp/contests/abc228/tasks/abc228_f)
+2. [ABC228 F「Stamp Game」](https://atcoder.jp/contests/abc228/tasks/abc228_f)
+3. [ABC379 F「Buildings 2」](https://atcoder.jp/contests/abc379/tasks/abc379_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -56,4 +58,4 @@ sidebar:
 - [ABC234 G 公式解説](https://atcoder.jp/contests/abc234/editorial/3227)
 - [ABC234 G 公式問題文](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-monotone-stack-queue`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-monotone-stack-queue`

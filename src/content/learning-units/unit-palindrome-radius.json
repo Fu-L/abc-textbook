@@ -43,6 +43,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 43,
+  "globalIndex": 46,
   "orderReason": "各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。"
 }

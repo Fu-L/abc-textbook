@@ -41,6 +41,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 12,
-  "globalIndex": 60,
+  "globalIndex": 63,
   "orderReason": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
 }

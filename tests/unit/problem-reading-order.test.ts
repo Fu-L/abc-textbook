@@ -3,57 +3,55 @@ import { orderProblemsByPrerequisites } from '../../src/lib/taxonomy/problem-rea
 
 const skills = [
   { id: 'tag-base', prerequisiteIds: [] },
-  { id: 'outcome-base', prerequisiteIds: [] },
   { id: 'tag-advanced', prerequisiteIds: ['tag-base'] },
-  { id: 'outcome-advanced', prerequisiteIds: ['outcome-base'] },
 ];
-const problem = (id: string, advanced = false) => ({
-  problemId: id,
+const problem = (problemId: string, advanced = false) => ({
+  problemId,
   primaryTagIds: [advanced ? 'tag-advanced' : 'tag-base'],
   supportingTagIds: [],
-  primaryOutcomeId: advanced ? 'outcome-advanced' : 'outcome-base',
+  primaryOutcomeId: 'tag-base',
   additionalPrimaryOutcomeIds: [],
   supportingOutcomeIds: [],
 });
 
 describe('problem reading order', () => {
-  it('prioritizes the reviewed local progression over skill counts and representative rank', () => {
-    const intro = problem('abc270-e', true);
-    const extension = problem('abc373-e');
+  it('uses ABC slots before skill counts, representatives, and contest IDs', () => {
+    const input = [
+      problem('abc212-ex'),
+      problem('abc226-h'),
+      problem('abc213-g'),
+      problem('abc466-e', true),
+      problem('abc300-f'),
+    ];
+    const expected = ['abc466-e', 'abc300-f', 'abc213-g', 'abc212-ex', 'abc226-h'];
+    expect(orderProblemsByPrerequisites(input, skills)).toEqual(expected);
+    expect(orderProblemsByPrerequisites([...input].reverse(), [...skills].reverse())).toEqual(
+      expected,
+    );
+  });
+  it('starts event sweep and probability with E problems before complex later slots', () => {
     expect(
       orderProblemsByPrerequisites(
-        [extension, intro],
+        ['abc226-h', 'abc320-e', 'abc214-e', 'abc275-e', 'abc298-e', 'abc300-f'].map((id) =>
+          problem(id),
+        ),
         skills,
-        [extension.problemId],
-        'unit-monotone-search',
       ),
-    ).toEqual([intro.problemId, extension.problemId]);
-    expect(orderProblemsByPrerequisites([extension, intro], skills, [], 'unit-unrelated')).toEqual([
-      extension.problemId,
-      intro.problemId,
+    ).toEqual(['abc214-e', 'abc275-e', 'abc298-e', 'abc320-e', 'abc300-f', 'abc226-h']);
+  });
+  it('keeps a local floor-sum exception inside its original slots', () => {
+    const input = ['abc402-g', 'abc283-ex', 'abc443-g', 'abc300-f'].map((id) => problem(id));
+    expect(orderProblemsByPrerequisites(input, skills, 'unit-euclidean-floor-sum')).toEqual([
+      'abc300-f',
+      'abc443-g',
+      'abc402-g',
+      'abc283-ex',
     ]);
-  });
-  it('puts prerequisite skills before advanced composition regardless of contest ID or representative rank', () => {
-    const basic = problem('abc466-g');
-    const advanced = problem('abc212-e', true);
-    expect(orderProblemsByPrerequisites([advanced, basic], skills, [advanced.problemId])).toEqual([
-      basic.problemId,
-      advanced.problemId,
+    expect(orderProblemsByPrerequisites(input, skills, 'unit-unrelated')).toEqual([
+      'abc300-f',
+      'abc402-g',
+      'abc443-g',
+      'abc283-ex',
     ]);
-    expect(
-      orderProblemsByPrerequisites([basic, advanced], [...skills].reverse(), [advanced.problemId]),
-    ).toEqual([basic.problemId, advanced.problemId]);
-  });
-  it('does not force a smaller skill set ahead of a basic discrete probability DP', () => {
-    expect(
-      orderProblemsByPrerequisites([problem('abc226-h'), problem('abc275-e', true)], skills),
-    ).toEqual(['abc275-e', 'abc226-h']);
-  });
-  it('uses representative rank and then stable ID only when mechanism and requirements tie', () => {
-    expect(
-      orderProblemsByPrerequisites([problem('abc400-e'), problem('abc300-f')], skills, [
-        'abc400-e',
-      ]),
-    ).toEqual(['abc400-e', 'abc300-f']);
   });
 });

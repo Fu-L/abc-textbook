@@ -1,9 +1,9 @@
 ---
 title: "幾何の基本判定と座標変換"
-description: "幾何の基本判定と座標変換の概念と、基礎から応用へ読む問題一覧。"
+description: "「幾何の基本判定と座標変換」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 15
+  order: 14
 ---
 
 # 幾何の基本判定と座標変換
@@ -22,6 +22,8 @@ sidebar:
 
 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
+### このUnitでは扱わないもの
+
 - 凸包の境界候補列挙・半平面交差。
 
 ## 下位単元
@@ -30,23 +32,23 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC385 F「Visible Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_f)
-2. [ABC426 E「Closest Moment」](https://atcoder.jp/contests/abc426/tasks/abc426_e)
-3. [ABC442 E「Laser Takahashi」](https://atcoder.jp/contests/abc442/tasks/abc442_e)
-4. [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
-5. [ABC351 E「Jump Distance Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_e)
-6. [ABC220 G「Isosceles Trapezium」](https://atcoder.jp/contests/abc220/tasks/abc220_g)
-7. [ABC234 Ex「Enumerate Pairs」](https://atcoder.jp/contests/abc234/tasks/abc234_h)
-8. [ABC248 E「K-colinear Line」](https://atcoder.jp/contests/abc248/tasks/abc248_e)
+1. [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
+2. [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
+3. [ABC248 E「K-colinear Line」](https://atcoder.jp/contests/abc248/tasks/abc248_e)
+4. [ABC351 E「Jump Distance Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_e)
+5. [ABC366 E「Manhattan Multifocal Ellipse」](https://atcoder.jp/contests/abc366/tasks/abc366_e)
+6. [ABC426 E「Closest Moment」](https://atcoder.jp/contests/abc426/tasks/abc426_e)
+7. [ABC442 E「Laser Takahashi」](https://atcoder.jp/contests/abc442/tasks/abc442_e)
+8. [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
 9. [ABC258 F「Main Street」](https://atcoder.jp/contests/abc258/tasks/abc258_f)
-10. [ABC301 G「Worst Picture」](https://atcoder.jp/contests/abc301/tasks/abc301_g)
+10. [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
 11. [ABC353 F「Tile Distance」](https://atcoder.jp/contests/abc353/tasks/abc353_f)
-12. [ABC366 E「Manhattan Multifocal Ellipse」](https://atcoder.jp/contests/abc366/tasks/abc366_e)
-13. [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
-14. [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
-15. [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
+12. [ABC385 F「Visible Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_f)
+13. [ABC220 G「Isosceles Trapezium」](https://atcoder.jp/contests/abc220/tasks/abc220_g)
+14. [ABC301 G「Worst Picture」](https://atcoder.jp/contests/abc301/tasks/abc301_g)
+15. [ABC234 Ex「Enumerate Pairs」](https://atcoder.jp/contests/abc234/tasks/abc234_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -82,4 +84,4 @@ sidebar:
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-geometry-primitives`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-geometry-primitives`

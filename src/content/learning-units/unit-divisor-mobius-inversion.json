@@ -39,9 +39,9 @@
     "abc361-f"
   ],
   "directProblemIds": [
-    "abc230-g",
+    "abc304-f",
     "abc361-f",
-    "abc304-f"
+    "abc230-g"
   ],
   "relatedProblemIds": [
     "abc212-g",
@@ -52,6 +52,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 83,
-  "globalIndex": 117,
+  "globalIndex": 119,
   "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
 }

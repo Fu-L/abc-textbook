@@ -1,16 +1,16 @@
 ---
 title: "軽重分類と償却解析で総仕事量を抑える"
-description: "軽重分類と償却解析で総仕事量を抑えるの概念と、基礎から応用へ読む問題一覧。"
+description: "「軽重分類と償却解析で総仕事量を抑える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 26
+  order: 29
 ---
 
 # 軽重分類と償却解析で総仕事量を抑える
 
 ## 概要
 
-下位の単元を、前提を満たす順にまとめます。
+各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。
 
 ## 前提と範囲
 
@@ -18,7 +18,7 @@ sidebar:
 
 追加前提: なし。
 
-各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。
+### このUnitでは扱わないもの
 
 - 探索空間を分けて候補を列挙・照合するmeet-in-the-middleや分割統治。
 
@@ -30,7 +30,7 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -42,7 +42,6 @@ sidebar:
 
 - [ABC255 Ex「Range Harvest Query」](https://atcoder.jp/contests/abc255/tasks/abc255_h)
 - [ABC256 Ex「I like Query Problem」](https://atcoder.jp/contests/abc256/tasks/abc256_h)
-- [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 - [ABC295 G「Minimum Reachable City」](https://atcoder.jp/contests/abc295/tasks/abc295_g)
 - [ABC305 F「Dungeon Explore」](https://atcoder.jp/contests/abc305/tasks/abc305_f)
@@ -67,4 +66,4 @@ sidebar:
 - [ABC255 H 公式解説](https://atcoder.jp/contests/abc255/editorial/4103)
 - [ABC255 H 公式問題文](https://atcoder.jp/contests/abc255/tasks/abc255_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-decomposition-amortization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-decomposition-amortization`

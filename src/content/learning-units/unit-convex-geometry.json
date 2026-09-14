@@ -1,7 +1,7 @@
 {
   "id": "unit-convex-geometry",
   "kind": "section",
-  "title": "凸境界・半平面制約・直線包絡を扱う",
+  "title": "凸境界・半平面制約を扱う",
   "parentId": "unit-chapter-geometry-optimization",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -9,7 +9,7 @@
     "unit-geometry-primitives"
   ],
   "excludedTopics": [
-    "凸性を使わない一般のevent sweepや座標圧縮。"
+    "直線群の最小値・最大値queryはConvex Hull Trick・直線包絡で扱う。凸性を使わない一般のevent sweepや座標圧縮も対象外とする。"
   ],
   "sourceRevisionIds": [
     "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
@@ -48,6 +48,6 @@
   "stageRank": 0,
   "difficultyRank": 3,
   "representativeRank": 11,
-  "globalIndex": 112,
-  "orderReason": "向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。"
+  "globalIndex": 114,
+  "orderReason": "向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。"
 }

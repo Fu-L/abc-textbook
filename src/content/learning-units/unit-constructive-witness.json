@@ -52,24 +52,24 @@
     "abc454-e"
   ],
   "directProblemIds": [
-    "abc244-g",
+    "abc299-e",
+    "abc333-e",
+    "abc387-e",
+    "abc392-e",
+    "abc454-e",
+    "abc233-f",
+    "abc239-f",
     "abc251-f",
     "abc255-f",
     "abc289-f",
-    "abc299-e",
     "abc358-f",
-    "abc448-f",
-    "abc239-f",
-    "abc232-h",
-    "abc233-f",
-    "abc363-f",
-    "abc387-e",
-    "abc454-e",
     "abc362-f",
-    "abc392-e",
+    "abc363-f",
+    "abc403-f",
     "abc443-f",
-    "abc333-e",
-    "abc403-f"
+    "abc448-f",
+    "abc244-g",
+    "abc232-h"
   ],
   "relatedProblemIds": [
     "abc221-g",
@@ -93,6 +93,6 @@
   "stageRank": 1,
   "difficultyRank": 3,
   "representativeRank": 4,
-  "globalIndex": 24,
+  "globalIndex": 27,
   "orderReason": "存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。"
 }

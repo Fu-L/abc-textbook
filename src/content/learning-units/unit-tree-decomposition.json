@@ -57,6 +57,6 @@
   "stageRank": 0,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 58,
+  "globalIndex": 61,
   "orderReason": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
 }

@@ -49,6 +49,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 10,
-  "globalIndex": 97,
+  "globalIndex": 100,
   "orderReason": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
 }

@@ -40,10 +40,10 @@
   ],
   "directProblemIds": [
     "abc242-e",
-    "abc219-f",
     "abc250-e",
-    "abc382-g",
-    "abc307-e"
+    "abc307-e",
+    "abc219-f",
+    "abc382-g"
   ],
   "relatedProblemIds": [
     "abc218-h",
@@ -72,6 +72,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 2,
-  "globalIndex": 9,
+  "globalIndex": 8,
   "orderReason": "対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。"
 }

@@ -1,6 +1,6 @@
 ---
 title: "単調境界を証明して探索する"
-description: "単調境界を証明して探索するの概念と、基礎から応用へ読む問題一覧。"
+description: "「単調境界を証明して探索する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 1
@@ -22,18 +22,20 @@ sidebar:
 
 判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。
 
+### このUnitでは扱わないもの
+
 - 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC270 E「Apple Baskets on Circle」](https://atcoder.jp/contests/abc270/tasks/abc270_e)
-2. [ABC395 F「Smooth Occlusion」](https://atcoder.jp/contests/abc395/tasks/abc395_f)
+2. [ABC373 E「How to Win the Election」](https://atcoder.jp/contests/abc373/tasks/abc373_e)
 3. [ABC381 E「11/22 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_e)
 4. [ABC292 F「Regular Triangle Inside a Rectangle」](https://atcoder.jp/contests/abc292/tasks/abc292_f)
-5. [ABC373 E「How to Win the Election」](https://atcoder.jp/contests/abc373/tasks/abc373_e)
-6. [ABC303 F「Damage over Time」](https://atcoder.jp/contests/abc303/tasks/abc303_f)
+5. [ABC303 F「Damage over Time」](https://atcoder.jp/contests/abc303/tasks/abc303_f)
+6. [ABC395 F「Smooth Occlusion」](https://atcoder.jp/contests/abc395/tasks/abc395_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -80,4 +82,4 @@ sidebar:
 - [ABC229 G 公式解説](https://atcoder.jp/contests/abc229/editorial/2963)
 - [ABC229 G 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-monotone-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-monotone-search`

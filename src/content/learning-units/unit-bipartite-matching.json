@@ -48,16 +48,16 @@
     "abc461-g"
   ],
   "directProblemIds": [
-    "abc401-g",
+    "abc318-f",
     "abc274-g",
-    "abc461-g",
     "abc317-g",
+    "abc374-g",
+    "abc401-g",
+    "abc424-g",
     "abc437-g",
     "abc445-g",
-    "abc424-g",
-    "abc313-ex",
-    "abc318-f",
-    "abc374-g"
+    "abc461-g",
+    "abc313-ex"
   ],
   "relatedProblemIds": [
     "abc215-h",
@@ -70,6 +70,6 @@
   "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 81,
-  "globalIndex": 78,
+  "globalIndex": 81,
   "orderReason": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
 }

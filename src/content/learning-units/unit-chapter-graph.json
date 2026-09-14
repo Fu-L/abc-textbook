@@ -297,6 +297,6 @@
   "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 2,
-  "globalIndex": 10,
+  "globalIndex": 9,
   "orderReason": "対象を頂点と辺へ写して到達可能性を扱えるようにし、連結性・最短路・木・フローへ進む土台を作る。"
 }

@@ -1,9 +1,9 @@
 ---
 title: "ゲーム状態の勝敗とGrundy数"
-description: "ゲーム状態の勝敗とGrundy数の概念と、基礎から応用へ読む問題一覧。"
+description: "「ゲーム状態の勝敗とGrundy数」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 45
+  order: 48
 ---
 
 # ゲーム状態の勝敗とGrundy数
@@ -26,17 +26,19 @@ ABC354 Eはこの勝敗再帰を残存カード集合へ適用する複合例で
 
 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
 
+### このUnitでは扱わないもの
+
 - 有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC380 F「Exchange Game」](https://atcoder.jp/contests/abc380/tasks/abc380_f)
-2. [ABC297 G「Constrained Nim 2」](https://atcoder.jp/contests/abc297/tasks/abc297_g)
-3. [ABC368 F「Dividing Game」](https://atcoder.jp/contests/abc368/tasks/abc368_f)
-4. [ABC398 G「Not Only Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_g)
-5. [ABC255 G「Constrained Nim」](https://atcoder.jp/contests/abc255/tasks/abc255_g)
+1. [ABC368 F「Dividing Game」](https://atcoder.jp/contests/abc368/tasks/abc368_f)
+2. [ABC380 F「Exchange Game」](https://atcoder.jp/contests/abc380/tasks/abc380_f)
+3. [ABC255 G「Constrained Nim」](https://atcoder.jp/contests/abc255/tasks/abc255_g)
+4. [ABC297 G「Constrained Nim 2」](https://atcoder.jp/contests/abc297/tasks/abc297_g)
+5. [ABC398 G「Not Only Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -61,4 +63,4 @@ ABC354 Eはこの勝敗再帰を残存カード集合へ適用する複合例で
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-game`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-game`

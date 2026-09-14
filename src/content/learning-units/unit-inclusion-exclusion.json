@@ -56,12 +56,12 @@
     "abc465-f"
   ],
   "directProblemIds": [
-    "abc242-f",
+    "abc343-e",
     "abc455-e",
+    "abc242-f",
+    "abc297-f",
     "abc377-f",
     "abc465-f",
-    "abc343-e",
-    "abc297-f",
     "abc280-g",
     "abc456-g"
   ],
@@ -92,6 +92,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 7,
-  "globalIndex": 47,
+  "globalIndex": 50,
   "orderReason": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
 }

@@ -45,13 +45,13 @@
   ],
   "directProblemIds": [
     "abc230-e",
-    "abc253-g",
     "abc356-e",
     "abc414-e",
-    "abc293-f",
     "abc452-e",
-    "abc315-g",
-    "abc444-f"
+    "abc293-f",
+    "abc444-f",
+    "abc253-g",
+    "abc315-g"
   ],
   "relatedProblemIds": [
     "abc216-e",
@@ -68,6 +68,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 42,
+  "globalIndex": 45,
   "orderReason": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
 }

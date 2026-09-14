@@ -48,11 +48,11 @@
     "abc383-e"
   ],
   "directProblemIds": [
+    "abc218-e",
     "abc282-e",
     "abc352-e",
-    "abc355-f",
-    "abc218-e",
     "abc270-f",
+    "abc355-f",
     "abc364-f"
   ],
   "relatedProblemIds": [
@@ -63,6 +63,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 3,
-  "globalIndex": 51,
+  "globalIndex": 54,
   "orderReason": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
 }

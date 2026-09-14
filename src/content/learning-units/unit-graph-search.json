@@ -66,6 +66,6 @@
   "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 0,
-  "globalIndex": 19,
+  "globalIndex": 18,
   "orderReason": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
 }

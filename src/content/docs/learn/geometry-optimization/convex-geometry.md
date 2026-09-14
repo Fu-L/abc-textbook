@@ -1,16 +1,16 @@
 ---
-title: "凸境界・半平面制約・直線包絡を扱う"
-description: "凸境界・半平面制約・直線包絡を扱うの概念と、基礎から応用へ読む問題一覧。"
+title: "凸境界・半平面制約を扱う"
+description: "「凸境界・半平面制約を扱う」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 112
+  order: 114
 ---
 
-# 凸境界・半平面制約・直線包絡を扱う
+# 凸境界・半平面制約を扱う
 
 ## 概要
 
-下位の単元を、前提を満たす順にまとめます。
+向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。
 
 ## 前提と範囲
 
@@ -18,9 +18,9 @@ sidebar:
 
 追加前提: 幾何の基本判定と座標変換。
 
-向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。
+### このUnitでは扱わないもの
 
-- 凸性を使わない一般のevent sweepや座標圧縮。
+- 直線群の最小値・最大値queryはConvex Hull Trick・直線包絡で扱う。凸性を使わない一般のevent sweepや座標圧縮も対象外とする。
 
 ## 下位単元
 
@@ -29,7 +29,7 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -51,4 +51,4 @@ sidebar:
 - [ABC257 H 公式解説](https://atcoder.jp/contests/abc257/editorial/4168)
 - [ABC257 H 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-convex-geometry`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-convex-geometry`

@@ -54,21 +54,21 @@
     "abc442-e"
   ],
   "directProblemIds": [
-    "abc385-f",
+    "abc223-e",
+    "abc225-e",
+    "abc248-e",
+    "abc351-e",
+    "abc366-e",
     "abc426-e",
     "abc442-e",
-    "abc223-e",
-    "abc351-e",
-    "abc220-g",
-    "abc234-ex",
-    "abc248-e",
-    "abc258-f",
-    "abc301-g",
-    "abc353-f",
-    "abc366-e",
-    "abc225-e",
     "abc250-f",
-    "abc323-f"
+    "abc258-f",
+    "abc323-f",
+    "abc353-f",
+    "abc385-f",
+    "abc220-g",
+    "abc301-g",
+    "abc234-ex"
   ],
   "relatedProblemIds": [
     "abc221-g",
@@ -95,6 +95,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 10,
-  "globalIndex": 15,
+  "globalIndex": 14,
   "orderReason": "座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。"
 }

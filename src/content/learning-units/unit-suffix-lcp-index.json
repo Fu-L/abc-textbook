@@ -40,12 +40,12 @@
     "abc452-g"
   ],
   "directProblemIds": [
+    "abc213-f",
     "abc272-f",
     "abc362-g",
     "abc452-g",
-    "abc213-f",
-    "abc280-ex",
-    "abc268-ex"
+    "abc268-ex",
+    "abc280-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -53,6 +53,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 88,
+  "globalIndex": 91,
   "orderReason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
 }

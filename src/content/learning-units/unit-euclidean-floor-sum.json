@@ -39,9 +39,9 @@
   ],
   "directProblemIds": [
     "abc443-g",
-    "abc283-ex",
     "abc313-g",
-    "abc402-g"
+    "abc402-g",
+    "abc283-ex"
   ],
   "relatedProblemIds": [
     "abc372-g"
@@ -51,6 +51,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 81,
-  "globalIndex": 115,
+  "globalIndex": 117,
   "orderReason": "一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

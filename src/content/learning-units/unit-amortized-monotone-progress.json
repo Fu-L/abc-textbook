@@ -41,12 +41,12 @@
     "abc466-f"
   ],
   "directProblemIds": [
-    "abc302-e",
-    "abc466-f",
     "abc217-e",
+    "abc302-e",
     "abc403-e",
-    "abc428-f",
     "abc421-f",
+    "abc428-f",
+    "abc466-f",
     "abc427-g"
   ],
   "relatedProblemIds": [
@@ -68,6 +68,6 @@
   "stageRank": 1,
   "difficultyRank": 3,
   "representativeRank": 66,
-  "globalIndex": 26,
+  "globalIndex": 29,
   "orderReason": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -1,13 +1,13 @@
 {
   "id": "unit-linear-algebra-xor",
   "kind": "section",
-  "title": "線形方程式・分離可能変換・行列式計数へ変換する",
+  "title": "線形方程式・基底・分離可能変換へ変換する",
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
-    "通常の多項式畳み込み・生成関数と、幾何の面積行列式。"
+    "行列式による全域木・非交差pathの計数は行列式計数の単元で扱う。通常の多項式畳み込み・生成関数と、幾何の面積行列式も対象外とする。"
   ],
   "sourceRevisionIds": [
     "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
@@ -57,6 +57,6 @@
   "stageRank": 0,
   "difficultyRank": 4,
   "representativeRank": 9,
-  "globalIndex": 62,
-  "orderReason": "制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。"
+  "globalIndex": 64,
+  "orderReason": "制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。"
 }

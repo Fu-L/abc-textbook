@@ -1,9 +1,9 @@
 ---
 title: "乗法的位数から最小周期を求める"
-description: "乗法的位数から最小周期を求めるの概念と、基礎から応用へ読む問題一覧。"
+description: "「乗法的位数から最小周期を求める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 90
+  order: 93
 ---
 
 # 乗法的位数から最小周期を求める
@@ -22,11 +22,13 @@ sidebar:
 
 合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。
 
+### このUnitでは扱わないもの
+
 - 約数格子上の指数計数・包除。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
 
@@ -45,4 +47,4 @@ sidebar:
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-multiplicative-order-periods`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-multiplicative-order-periods`

@@ -39,8 +39,8 @@
     "abc320-g"
   ],
   "directProblemIds": [
-    "abc319-e",
     "abc228-e",
+    "abc319-e",
     "abc320-g"
   ],
   "relatedProblemIds": [
@@ -51,6 +51,6 @@
   "stageRank": 3,
   "difficultyRank": 1,
   "representativeRank": 0,
-  "globalIndex": 83,
+  "globalIndex": 85,
   "orderReason": "剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。"
 }

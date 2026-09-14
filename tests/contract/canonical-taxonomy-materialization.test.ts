@@ -47,6 +47,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(unit.examples).toEqual([]);
       expect(unit.exercises).toEqual([]);
       expect(document).toContain('## 概要');
+      expect(document).toContain('### このUnitでは扱わないもの');
       expect(document).toContain('## 問題一覧');
       expect(document).not.toMatch(/ガイド例|到達確認|自己評価|curriculum/u);
       for (const id of unit.directProblemIds ?? [])

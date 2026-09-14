@@ -1,9 +1,9 @@
 ---
 title: "整数境界と同値区間を正確に分ける"
-description: "整数境界と同値区間を正確に分けるの概念と、基礎から応用へ読む問題一覧。"
+description: "「整数境界と同値区間を正確に分ける」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 42
+  order: 45
 ---
 
 # 整数境界と同値区間を正確に分ける
@@ -26,20 +26,22 @@ floor値・整数根・表記桁数・圧縮block内の式が変わる整数境�
 
 floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。
 
+### このUnitでは扱わないもの
+
 - 素因数指数による整数条件の分解。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-2. [ABC253 G「Swap Many Times」](https://atcoder.jp/contests/abc253/tasks/abc253_g)
-3. [ABC356 E「Max/Min」](https://atcoder.jp/contests/abc356/tasks/abc356_e)
-4. [ABC414 E「Count A%B=C」](https://atcoder.jp/contests/abc414/tasks/abc414_e)
+2. [ABC356 E「Max/Min」](https://atcoder.jp/contests/abc356/tasks/abc356_e)
+3. [ABC414 E「Count A%B=C」](https://atcoder.jp/contests/abc414/tasks/abc414_e)
+4. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
 5. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
-6. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
-7. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
-8. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
+6. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
+7. [ABC253 G「Swap Many Times」](https://atcoder.jp/contests/abc253/tasks/abc253_g)
+8. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -65,4 +67,4 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 - [ABC239 H 公式解説](https://atcoder.jp/contests/abc239/editorial/3357)
 - [ABC239 H 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-integer-boundary-blocks`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-integer-boundary-blocks`

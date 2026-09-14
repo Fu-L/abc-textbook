@@ -1,9 +1,9 @@
 ---
 title: "ordered set・multisetの動的順序管理"
-description: "ordered set・multisetの動的順序管理の概念と、基礎から応用へ読む問題一覧。"
+description: "「ordered set・multisetの動的順序管理」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 25
+  order: 28
 ---
 
 # ordered set・multisetの動的順序管理
@@ -22,17 +22,19 @@ sidebar:
 
 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
+### このUnitでは扱わないもの
+
 - ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
+1. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
 2. [ABC306 E「Best Performances」](https://atcoder.jp/contests/abc306/tasks/abc306_e)
-3. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
-4. [ABC308 G「Minimum Xor Pair Query」](https://atcoder.jp/contests/abc308/tasks/abc308_g)
-5. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+3. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
+4. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+5. [ABC308 G「Minimum Xor Pair Query」](https://atcoder.jp/contests/abc308/tasks/abc308_g)
 6. [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
@@ -66,4 +68,4 @@ sidebar:
 - [ABC268 H 公式解説](https://atcoder.jp/contests/abc268/editorial/4786)
 - [ABC268 H 公式問題文](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-ordered-set-multiset`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-ordered-set-multiset`

@@ -41,11 +41,11 @@
     "abc398-g"
   ],
   "directProblemIds": [
-    "abc380-f",
-    "abc297-g",
     "abc368-f",
-    "abc398-g",
-    "abc255-g"
+    "abc380-f",
+    "abc255-g",
+    "abc297-g",
+    "abc398-g"
   ],
   "relatedProblemIds": [
     "abc212-h",
@@ -61,6 +61,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 5,
-  "globalIndex": 45,
+  "globalIndex": 48,
   "orderReason": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
 }

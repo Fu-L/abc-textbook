@@ -60,6 +60,6 @@
   "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 4,
-  "globalIndex": 52,
+  "globalIndex": 55,
   "orderReason": "状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。"
 }

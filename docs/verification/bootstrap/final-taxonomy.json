@@ -2,20 +2,20 @@
   "schemaVersion": "1.0.0",
   "evidenceId": "bootstrap-final-taxonomy",
   "taskId": "T159",
-  "generatedAt": "2026-09-13T09:09:50.944Z",
+  "generatedAt": "2026-09-14T08:43:04.226Z",
   "status": "passed",
   "buildPath": "staging/taxonomy/initial/final-taxonomy-build.json",
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
-  "buildDigest": "6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8",
+  "taxonomySubjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
+  "buildDigest": "adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9",
   "integrationMapDigest": "2e561e00ae3dcf1e8232cdb68533b04e330623c81180fa1f77ff9d5e74ae8345",
-  "taxonomyDigest": "12d804075b6a580ab5a5d628644855eae16b1196d85c57dafd9cdd2237b420c6",
+  "taxonomyDigest": "dc3eb739366abc60d6d84a9c1150a1ade35aa9d294c5ae4922b48764d28fe38e",
   "tagDagDigest": "dfe87d8e728cbc39f5c2f8c48d48b640354617a5acccb40a4b1831e11c87a21e",
   "learningUnitDagDigest": "f6a96773c045380632e784e5906e32616587c620734bc314a0dc5a3d0470ddca",
-  "orderDigest": "adc847b0ba5c6d0f638950b1e73cc07a94c247cbca1d53cc7169ff51793ab3a3",
-  "placementDigest": "bdb8509c7c6abe1517fd1a0b81a6bdcffa53f35533151d3156e87bc115c1c407",
+  "orderDigest": "dad14139c7ab38102d76d636f6739f166805ac34829282ebbcd95078284763ed",
+  "placementDigest": "b33ff3d53e65144db4add972d4786155630655369a21803e4feaad2847c4c7de",
   "correctionImpactDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467",
   "problemCount": 868,
   "sourceRevisionCount": 1738,
@@ -30,8 +30,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "88a020b750b5a3a6f33715d84af5c8e376c57ac399f4b66f5c7773ddf9613066",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "digest": "77180ea3d1034bcdc8a475f9db9a7ddf642d3b6f29dbfd2b02383fd2e68f3f9c",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "authorIds": [
         "person-maintainer"
       ],
@@ -45,5 +45,5 @@
   "canonicalMaterializationAllowed": true,
   "holdReasons": [],
   "diagnosticCodes": [],
-  "evidenceDigest": "7d212dc5099ae8f844b702246d14fe47f26ff83aba5f2907deb9328ab928b383"
+  "evidenceDigest": "b514853454fd3840a7e4192fdf3e13eb646c2763c933dccc2223a1cfab4a34ef"
 }

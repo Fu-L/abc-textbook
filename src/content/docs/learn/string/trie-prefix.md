@@ -1,6 +1,6 @@
 ---
 title: "Trieで共有接頭辞を索引化する"
-description: "Trieで共有接頭辞を索引化するの概念と、基礎から応用へ読む問題一覧。"
+description: "「Trieで共有接頭辞を索引化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 6
@@ -22,11 +22,13 @@ sidebar:
 
 文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。
 
+### このUnitでは扱わないもの
+
 - failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC287 E「Karuta」](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 2. [ABC437 E「Sort Arrays」](https://atcoder.jp/contests/abc437/tasks/abc437_e)
@@ -52,4 +54,4 @@ sidebar:
 - [ABC287 E 公式問題文](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 - [ABC287 E 公式解説](https://atcoder.jp/contests/abc287/editorial/5609)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-trie-prefix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-trie-prefix`

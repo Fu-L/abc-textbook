@@ -1,6 +1,6 @@
 ---
 title: "大容量unbounded knapsackのeventual linearity"
-description: "大容量unbounded knapsackのeventual linearityの概念と、基礎から応用へ読む問題一覧。"
+description: "「大容量unbounded knapsackのeventual linearity」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 182
@@ -26,14 +26,16 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 
 通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。
 
+### このUnitでは扱わないもの
+
 - 大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC310 Ex「Negative Cost」](https://atcoder.jp/contests/abc310/tasks/abc310_h)
-2. [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g)
+1. [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g)
+2. [ABC310 Ex「Negative Cost」](https://atcoder.jp/contests/abc310/tasks/abc310_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -44,4 +46,4 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 - [ABC415 G 公式解説](https://atcoder.jp/contests/abc415/editorial/13491)
 - [ABC415 G 公式問題文](https://atcoder.jp/contests/abc415/tasks/abc415_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-eventual-unbounded-knapsack`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-eventual-unbounded-knapsack`

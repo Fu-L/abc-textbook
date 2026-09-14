@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+  "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
   "inventoryDigest": "0ce30f3107d0631ce6f4ead8eda8fe38d12364387bbafa6bd3bccfcd23e361c5",
   "reviewPolicy": {
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a38a086086a6c96c5b16c223a3aa0a43afeb3614a9dffbfbf3a763238da53723",
+      "resultDigest": "53472ad449004510ae4267d37f541ca6aec3176e65c8ad6d173aec10e1c86b8a",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-13T09:09:30.223Z",
+      "completedAt": "2026-09-14T08:42:43.272Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a38a086086a6c96c5b16c223a3aa0a43afeb3614a9dffbfbf3a763238da53723",
+      "resultDigest": "53472ad449004510ae4267d37f541ca6aec3176e65c8ad6d173aec10e1c86b8a",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-13T09:09:37.550Z",
+      "completedAt": "2026-09-14T08:42:50.660Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a38a086086a6c96c5b16c223a3aa0a43afeb3614a9dffbfbf3a763238da53723",
+      "resultDigest": "53472ad449004510ae4267d37f541ca6aec3176e65c8ad6d173aec10e1c86b8a",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-13T09:09:38.095Z",
+      "completedAt": "2026-09-14T08:42:51.200Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a38a086086a6c96c5b16c223a3aa0a43afeb3614a9dffbfbf3a763238da53723",
+      "resultDigest": "53472ad449004510ae4267d37f541ca6aec3176e65c8ad6d173aec10e1c86b8a",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-13T09:09:38.317Z",
+      "completedAt": "2026-09-14T08:42:51.421Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a38a086086a6c96c5b16c223a3aa0a43afeb3614a9dffbfbf3a763238da53723",
+      "resultDigest": "53472ad449004510ae4267d37f541ca6aec3176e65c8ad6d173aec10e1c86b8a",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-13T09:09:45.609Z",
+      "completedAt": "2026-09-14T08:42:58.802Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "786442c702c7f8af8f9cf260302bd5351935400b57c5b355274da95ba8d0e341",
+  "reviewerExecutedCheckSetDigest": "a5abc4682fb154475f76fdbac2a7586dfd690e93317ee036bcbaa8332e36113f",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -315,10 +315,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# PR #63 レビュー指摘への教材修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#pullrequestreview-5189471593\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正として採用解法と分類を照合した。人間による独立再査読を表すものではなく、既存のsolo-maintainer運用で生成物を同期する。\n\nABC237 FへLISの長さ別最小末尾、ABC282 Exへ静的RMQ、ABC296\nFへFenwickによる反転数計算の必須Outcomeを追加した。特定問題の前提を列DP・分割統治・不変量のUnit全体へ要求せず、掲載位置を必要技能の最遅Unitへ再計算した。\n\nABC241\nGを容量付き割当の最大流へ移した。試合は一勝を配り、選手は勝数上限の容量を持つ。一対一matchingはABC401\nGの人とボタンの対応から始める。\n\nABC234 Gを最後の区間から遷移するprefix分割DPと単調stackへ、ABC242\nExを段階別期待値と被覆prefixの右端・選択数を持つ走査DPへ整理した。独立な左右区間の合成を意味するOutcomeを外した。\n\nABC249\nExは期待値の頻度圧縮・加法的ポテンシャルを主技能とする期待値DPの発展節へ配置した。一種類の周辺遷移、一段方程式、自己ループ、終端の較正を本文で説明し、二項係数と畳み込みは補助技能として保持する。発展節は通常の期待値DPを先行させ、畳み込みも履修済みになる学習段階に置く。\n\nABC242 Gからheavy/lightを除き、ABC405\nGの値軸bucket分割を独立した基本データ構造として定義した。両問をMoへ戻し、query順・値軸block・頻度別対象分割の違いを本文とTag間の対比へ記した。同じ混同があったABC230\nEも商一定区間列挙へ戻した。\n\nABC309 Gへfrontier/profile\nDPを追加し、未来へ影響する幅2X−1の値の使用済みフラグだけを残す根拠を明記した。色状態、帯状matching、接続partitionを同じ境界原理で比較する。\n\n問題順はUnitごとに採用解法を比較した順序を最優先にし、機構rank・技能数・代表順位は補助規則とした。単調探索、累積和、ordered\nset、Z、区間合成、根付き木、境界DPの指摘された基本形→発展形を反映し、関係するUnitの他の問題も同じ観点で並べた。新たな難易度数値や問題間prerequisiteは導入していない。\n\nEuclid型floor_sumを整数境界列挙から分離した。標準の格子点転置式、ABC443 G、ABC283\nExを先行させ、重み付き一般化のABC402 Gを最後に置く。\n\n最終構成は205 Tag、214 Outcome、230\nUnit、868問。既存の分類・必須技能・掲載位置・学習順検査を実行し、生成物へ同期する。新規の自動順位規則にはUnit内の編集順が技能数・代表順位より優先され、他Unitへ波及しないことの小さな検査だけを加えた。Inventory自体は変更していない。",
+      "reviewBasis": "# PR #63 学習順と単元境界の修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#pullrequestreview-5195484531\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正とし、既存のsolo-maintainer運用で生成物を同期する。人間による独立再査読を行ったという記録ではない。\n\n問題順は全Unit共通でABCの出題枠（E→F→G→H/Ex）を強いpriorとする。現在のProblemデータにはDifficultyが揃わず、配点も正規化されていないため、推測した数値は導入しない。同じ枠のProblem\nID順は決定的な並びを得るためで、開催時期から難易度を推測するものではない。機構rank・技能数・代表問題順位による難易度の代用と、Unitごとの大量の手指定を廃した。floor_sumのみ、同じG枠で標準の格子点集計ABC443\nGから重み付き・複合の一般化へ進む局所補正を残す。例外指定は指定問題同士の位置を交換するだけで、未指定問題をすべて後ろへ送らない。\n\n前提DAGを維持しながら、列DP→LIS→prefix分割、重み付き最短路→経路復元→差分制約、連結成分→SCC→lowlink、gcd不変量→整数解→合同式、有理近似→Stern–Brocot木の経路・祖先を近接配置する。これらは読む順の推奨であり、別技能を履修必須にする新しい辺ではない。lowlinkのstageも標準的なDFS応用へ修正した。生成・検証で同じ順序規則を使い、掲載位置は既存の必須技能から再計算する。\n\ngcd不変量とBézout・一次不定方程式のUnitは数論章直下の兄弟とした。差や周期からgcdを抽出する段階と、可解条件の十分性を示して具体解・全解を構成する段階を本文で区別する。有理近似と祖先問題も独立Unitを維持し、mediant・隣接分数の行列式・Euclidの商による一括移動を再利用する導線を記した。\n\n親Unitのタイトル・説明と子Unitを全件照合した。接頭辞一致はZ\nalgorithmの一致区間再利用へ限定し、線形代数から行列式計数、凸幾何から直線包絡を収録内容として約束する表現を除いた。同様に、文字列hashの親に残っていた集合・代数式への言及をrolling\nfingerprintの範囲へ修正した。範囲外項目は全Unitの本文で「このUnitでは扱わないもの」と明示し、修正対象には別Unitで扱う理由を記した。\n\n新しい典型・空のcontainer・難易度スコア・問題間の前提DAGは追加していない。既存のtaxonomy・materialization検査と、順序規則の小さな回帰検査で整合性を確認する。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-13T09:09:50.944Z"
+      "reviewedAt": "2026-09-14T08:43:04.226Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -552,12 +552,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# PR #63 レビュー指摘への教材修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#pullrequestreview-5189471593\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正として採用解法と分類を照合した。人間による独立再査読を表すものではなく、既存のsolo-maintainer運用で生成物を同期する。\n\nABC237 FへLISの長さ別最小末尾、ABC282 Exへ静的RMQ、ABC296\nFへFenwickによる反転数計算の必須Outcomeを追加した。特定問題の前提を列DP・分割統治・不変量のUnit全体へ要求せず、掲載位置を必要技能の最遅Unitへ再計算した。\n\nABC241\nGを容量付き割当の最大流へ移した。試合は一勝を配り、選手は勝数上限の容量を持つ。一対一matchingはABC401\nGの人とボタンの対応から始める。\n\nABC234 Gを最後の区間から遷移するprefix分割DPと単調stackへ、ABC242\nExを段階別期待値と被覆prefixの右端・選択数を持つ走査DPへ整理した。独立な左右区間の合成を意味するOutcomeを外した。\n\nABC249\nExは期待値の頻度圧縮・加法的ポテンシャルを主技能とする期待値DPの発展節へ配置した。一種類の周辺遷移、一段方程式、自己ループ、終端の較正を本文で説明し、二項係数と畳み込みは補助技能として保持する。発展節は通常の期待値DPを先行させ、畳み込みも履修済みになる学習段階に置く。\n\nABC242 Gからheavy/lightを除き、ABC405\nGの値軸bucket分割を独立した基本データ構造として定義した。両問をMoへ戻し、query順・値軸block・頻度別対象分割の違いを本文とTag間の対比へ記した。同じ混同があったABC230\nEも商一定区間列挙へ戻した。\n\nABC309 Gへfrontier/profile\nDPを追加し、未来へ影響する幅2X−1の値の使用済みフラグだけを残す根拠を明記した。色状態、帯状matching、接続partitionを同じ境界原理で比較する。\n\n問題順はUnitごとに採用解法を比較した順序を最優先にし、機構rank・技能数・代表順位は補助規則とした。単調探索、累積和、ordered\nset、Z、区間合成、根付き木、境界DPの指摘された基本形→発展形を反映し、関係するUnitの他の問題も同じ観点で並べた。新たな難易度数値や問題間prerequisiteは導入していない。\n\nEuclid型floor_sumを整数境界列挙から分離した。標準の格子点転置式、ABC443 G、ABC283\nExを先行させ、重み付き一般化のABC402 Gを最後に置く。\n\n最終構成は205 Tag、214 Outcome、230\nUnit、868問。既存の分類・必須技能・掲載位置・学習順検査を実行し、生成物へ同期する。新規の自動順位規則にはUnit内の編集順が技能数・代表順位より優先され、他Unitへ波及しないことの小さな検査だけを加えた。Inventory自体は変更していない。",
+    "rationale": "# PR #63 学習順と単元境界の修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#pullrequestreview-5195484531\n\nFu-Lの修正・push指示に基づきCodexが修正・検証した記録。Inventoryを正とし、既存のsolo-maintainer運用で生成物を同期する。人間による独立再査読を行ったという記録ではない。\n\n問題順は全Unit共通でABCの出題枠（E→F→G→H/Ex）を強いpriorとする。現在のProblemデータにはDifficultyが揃わず、配点も正規化されていないため、推測した数値は導入しない。同じ枠のProblem\nID順は決定的な並びを得るためで、開催時期から難易度を推測するものではない。機構rank・技能数・代表問題順位による難易度の代用と、Unitごとの大量の手指定を廃した。floor_sumのみ、同じG枠で標準の格子点集計ABC443\nGから重み付き・複合の一般化へ進む局所補正を残す。例外指定は指定問題同士の位置を交換するだけで、未指定問題をすべて後ろへ送らない。\n\n前提DAGを維持しながら、列DP→LIS→prefix分割、重み付き最短路→経路復元→差分制約、連結成分→SCC→lowlink、gcd不変量→整数解→合同式、有理近似→Stern–Brocot木の経路・祖先を近接配置する。これらは読む順の推奨であり、別技能を履修必須にする新しい辺ではない。lowlinkのstageも標準的なDFS応用へ修正した。生成・検証で同じ順序規則を使い、掲載位置は既存の必須技能から再計算する。\n\ngcd不変量とBézout・一次不定方程式のUnitは数論章直下の兄弟とした。差や周期からgcdを抽出する段階と、可解条件の十分性を示して具体解・全解を構成する段階を本文で区別する。有理近似と祖先問題も独立Unitを維持し、mediant・隣接分数の行列式・Euclidの商による一括移動を再利用する導線を記した。\n\n親Unitのタイトル・説明と子Unitを全件照合した。接頭辞一致はZ\nalgorithmの一致区間再利用へ限定し、線形代数から行列式計数、凸幾何から直線包絡を収録内容として約束する表現を除いた。同様に、文字列hashの親に残っていた集合・代数式への言及をrolling\nfingerprintの範囲へ修正した。範囲外項目は全Unitの本文で「このUnitでは扱わないもの」と明示し、修正対象には別Unitで扱う理由を記した。\n\n新しい典型・空のcontainer・難易度スコア・問題間の前提DAGは追加していない。既存のtaxonomy・materialization検査と、順序規則の小さな回帰検査で整合性を確認する。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-13T09:09:50.944Z"
+    "confirmedAt": "2026-09-14T08:43:04.226Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-13T09:09:50.944Z",
-  "evidenceDigest": "88a020b750b5a3a6f33715d84af5c8e376c57ac399f4b66f5c7773ddf9613066"
+  "generatedAt": "2026-09-14T08:43:04.226Z",
+  "evidenceDigest": "77180ea3d1034bcdc8a475f9db9a7ddf642d3b6f29dbfd2b02383fd2e68f3f9c"
 }

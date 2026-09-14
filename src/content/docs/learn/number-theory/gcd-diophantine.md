@@ -1,9 +1,9 @@
 ---
 title: "gcdと整数解の成立条件"
-description: "gcdと整数解の成立条件の概念と、基礎から応用へ読む問題一覧。"
+description: "「gcdと整数解の成立条件」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 8
+  order: 20
 ---
 
 # gcdと整数解の成立条件
@@ -13,6 +13,8 @@ sidebar:
 ### Bézout等式・一次不定方程式
 
 整数線形結合がgcdの倍数全体になることを使い、一次不定方程式の可解性と解のparameter表示を得る。
+
+差や周期をgcdでまとめると整数解の必要条件が見える。ここでは一歩進め、Bézoutの等式からその条件が十分であることを示し、具体解と全解を構成する。gcd不変量の抽出とは数論章内の別の技能として学ぶ。
 
 ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着する。観察: 原点、(X,Y)、(A,B)の三角形の面積は|XB−YA|/2。面積1にはXB−YA=2または−2が必要で、符号反転で対応するから2を解けばよい。
 
@@ -30,17 +32,16 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 
 最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。
 
-- 連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。
+### このUnitでは扱わないもの
 
-## 下位単元
-
-- [gcd不変量・差分構造](/learn/number-theory/gcd-structure/)
+- 差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC340 F「S = 1」](https://atcoder.jp/contests/abc340/tasks/abc340_f)
+2. [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -48,25 +49,17 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC212 G「Power Pair」](https://atcoder.jp/contests/abc212/tasks/abc212_g)
-- [ABC222 G「222」](https://atcoder.jp/contests/abc222/tasks/abc222_g)
-- [ABC248 G「GCD cost on the tree」](https://atcoder.jp/contests/abc248/tasks/abc248_g)
-- [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
-- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
-- [ABC306 G「Return to 1」](https://atcoder.jp/contests/abc306/tasks/abc306_g)
 - [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
-- [ABC438 G「Sum of Min」](https://atcoder.jp/contests/abc438/tasks/abc438_g)
-- [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
 - [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 - [ABC460 E「x + y ≡ x + y」](https://atcoder.jp/contests/abc460/tasks/abc460_e)
 
 ## 根拠
 
-- [ABC212 G 公式解説](https://atcoder.jp/contests/abc212/editorial/2289)
-- [ABC212 G 公式問題文](https://atcoder.jp/contests/abc212/tasks/abc212_g)
-- [ABC222 G 公式解説](https://atcoder.jp/contests/abc222/editorial/2750)
-- [ABC222 G 公式問題文](https://atcoder.jp/contests/abc222/tasks/abc222_g)
-- [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
-- [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
+- [ABC271 H 公式解説](https://atcoder.jp/contests/abc271/editorial/4932)
+- [ABC271 H 公式問題文](https://atcoder.jp/contests/abc271/tasks/abc271_h)
+- [ABC315 G 公式解説](https://atcoder.jp/contests/abc315/editorial/6994)
+- [ABC315 G 公式問題文](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+- [ABC340 F 公式解説](https://atcoder.jp/contests/abc340/editorial/9250)
+- [ABC340 F 公式問題文](https://atcoder.jp/contests/abc340/tasks/abc340_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-gcd-diophantine`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-gcd-diophantine`

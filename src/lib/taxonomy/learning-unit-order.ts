@@ -1,3 +1,43 @@
+import { deterministicTopologicalOrder } from '../validation/validate.js';
+
+/** Reading preferences, not additional knowledge prerequisites. */
+export const CONCEPT_READING_CHAINS: readonly (readonly string[])[] = [
+  ['unit-dp-sequence', 'unit-dp-lis', 'unit-dp-prefix-partition'],
+  [
+    'unit-weighted-shortest-path',
+    'unit-shortest-path-reconstruction',
+    'unit-difference-constraints',
+  ],
+  ['unit-dsu-components', 'unit-scc-condensation', 'unit-lowlink-critical-structure'],
+  ['unit-gcd-structure', 'unit-gcd-diophantine', 'unit-modular-congruence'],
+  ['unit-rational-approximation', 'unit-stern-brocot-ancestry'],
+];
+
+interface OrderedUnit {
+  readonly id: string;
+  readonly prerequisiteIds: readonly string[];
+  readonly stageRank: number;
+  readonly difficultyRank: number;
+  readonly representativeRank: number;
+}
+
+/** Continue a concept at its anchor's priority, subject to all actual prerequisites. */
+export const orderCurriculumUnits = <T extends OrderedUnit>(units: readonly T[]): T[] => {
+  const byId = new Map(units.map((unit) => [unit.id, unit]));
+  const idRank = new Map([...byId.keys()].sort().map((id, index) => [id, index]));
+  return deterministicTopologicalOrder(units, (unit) => {
+    const chain = CONCEPT_READING_CHAINS.find((ids) => ids.includes(unit.id));
+    const anchor = byId.get(chain?.[0] ?? '') ?? unit;
+    return [
+      anchor.stageRank,
+      anchor.difficultyRank,
+      anchor.representativeRank,
+      idRank.get(anchor.id) ?? 0,
+      chain?.indexOf(unit.id) ?? 0,
+    ];
+  });
+};
+
 /** Navigation containers introduce a topic; only teaching Units occupy curriculum positions. */
 export interface CurriculumUnit {
   readonly id: string;

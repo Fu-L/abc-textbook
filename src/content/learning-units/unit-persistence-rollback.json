@@ -43,6 +43,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 4,
-  "globalIndex": 119,
+  "globalIndex": 121,
   "orderReason": "更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。"
 }

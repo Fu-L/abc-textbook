@@ -7,7 +7,7 @@
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
-    "整除性や一次不定方程式の可解判定だけを行う問題、および合同類をCRTで統合する構成。"
+    "Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"
   ],
   "sourceRevisionIds": [
     "source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41",
@@ -47,6 +47,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 86,
+  "globalIndex": 88,
   "orderReason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
 }

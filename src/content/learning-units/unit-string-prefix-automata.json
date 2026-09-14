@@ -1,13 +1,13 @@
 {
   "id": "unit-string-prefix-automata",
   "kind": "section",
-  "title": "接頭辞の一致状態とオートマトン",
+  "title": "接頭辞との一致長を再利用する",
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
-    "接尾辞・LCPの索引、文字列hash、回文半径。"
+    "接尾辞・LCPの索引、文字列hash、回文半径。KMPのfailure linkによる逐次照合も本Unitの対象に含めない。"
   ],
   "sourceRevisionIds": [
     "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
@@ -43,6 +43,6 @@
   "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 1,
-  "globalIndex": 30,
-  "orderReason": "接頭辞と接尾辞の一致長を状態化し、失敗時の遷移を再利用して照合を線形化する。"
+  "globalIndex": 35,
+  "orderReason": "各位置から接頭辞との一致長を求める。既に得られた一致区間の情報を再利用し、Z algorithmで全位置を線形時間に処理する。"
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-13T09:09:50.944Z",
+  "generatedAt": "2026-09-14T08:43:04.226Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "930972a4b20fa7c902be6bbec5a8f2c3d2c10562f0517cfb784cd41cd07b342f",
+    "rulesDigest": "2fed7c65b257ba3ce1c6ecbbac8348a694de718819676da204360e90662f5f65",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -34185,14 +34185,25 @@
         ]
       },
       "sourceRevisionIds": [
+        "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+        "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba",
         "source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a",
         "source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7",
         "source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b",
-        "source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4",
-        "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd",
-        "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"
+        "source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"
       ],
       "evidenceRefs": [
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
         {
           "problemId": "abc324-g",
           "claimPath": "/outcomeCandidates/0",
@@ -34213,17 +34224,6 @@
           "sourceRevisionIds": [
             "source-abc329-editorial-7729-ea6187e9d38477f2f22c6ba9fbced4b85f50530bded67a053ee6c5af570b7d6b",
             "source-abc329-f-problem-3681f3e42c982f349fc3afb43aeb531e6783de03991288d25354a68c5d0ac2c4"
-          ]
-        },
-        {
-          "problemId": "abc411-f",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc411-editorial-13352-24414b95e191333600ef218f42e431b030f1889e668266e9d9aa1cd5427fadfd",
-            "source-abc411-f-problem-38a6798404784b29dd54b04580ef69603ae80d15fd424efd9b3051dce89dfecf"
           ]
         }
       ],
@@ -41496,7 +41496,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 88,
-        "globalIndex": 130,
+        "globalIndex": 132,
         "orderReason": "有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -41728,12 +41728,12 @@
           "abc466-f"
         ],
         "directProblemIds": [
-          "abc302-e",
-          "abc466-f",
           "abc217-e",
+          "abc302-e",
           "abc403-e",
-          "abc428-f",
           "abc421-f",
+          "abc428-f",
+          "abc466-f",
           "abc427-g"
         ],
         "relatedProblemIds": [
@@ -41753,7 +41753,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 66,
-        "globalIndex": 26,
+        "globalIndex": 29,
         "orderReason": "要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -42009,10 +42009,10 @@
           "abc418-g"
         ],
         "directProblemIds": [
-          "abc391-g",
+          "abc301-f",
           "abc305-g",
-          "abc418-g",
-          "abc301-f"
+          "abc391-g",
+          "abc418-g"
         ],
         "relatedProblemIds": [
           "abc228-g",
@@ -42022,7 +42022,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 111,
+        "globalIndex": 113,
         "orderReason": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
       },
       "sourceRevisionIds": [
@@ -42493,7 +42493,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 134,
+        "globalIndex": 136,
         "orderReason": "有限集合上の可逆な作用と逆作用を定義し、離散対数やaffine反復を含む反復到達時刻をbaby/giantの衝突へ変換して平方根時間で求める。合同算術が必要な問題では個別のreadinessとして接続する。"
       },
       "sourceRevisionIds": [
@@ -42635,7 +42635,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 78,
-        "globalIndex": 31,
+        "globalIndex": 36,
         "orderReason": "再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -42802,20 +42802,20 @@
           "abc462-e"
         ],
         "directProblemIds": [
-          "abc224-g",
-          "abc314-ex",
-          "abc229-g",
           "abc462-e",
           "abc240-f",
           "abc330-f",
+          "abc224-g",
+          "abc229-g",
+          "abc263-g",
           "abc459-g",
-          "abc263-g"
+          "abc314-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 61,
-        "globalIndex": 98,
+        "globalIndex": 101,
         "orderReason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43150,9 +43150,9 @@
           "abc367-e",
           "abc438-e",
           "abc212-f",
-          "abc310-g",
+          "abc370-f",
           "abc254-g",
-          "abc370-f"
+          "abc310-g"
         ],
         "relatedProblemIds": [
           "abc417-g"
@@ -43160,7 +43160,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 64,
-        "globalIndex": 56,
+        "globalIndex": 59,
         "orderReason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43469,7 +43469,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 135,
+        "globalIndex": 137,
         "orderReason": "貪欲法と交換論で得た考え方と実装を再利用し、二進操作の木へのモデル化と祖先マッチングの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -43604,7 +43604,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 11,
-        "globalIndex": 49,
+        "globalIndex": 52,
         "orderReason": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
       },
       "sourceRevisionIds": [
@@ -43944,16 +43944,16 @@
           "abc461-g"
         ],
         "directProblemIds": [
-          "abc401-g",
+          "abc318-f",
           "abc274-g",
-          "abc461-g",
           "abc317-g",
+          "abc374-g",
+          "abc401-g",
+          "abc424-g",
           "abc437-g",
           "abc445-g",
-          "abc424-g",
-          "abc313-ex",
-          "abc318-f",
-          "abc374-g"
+          "abc461-g",
+          "abc313-ex"
         ],
         "relatedProblemIds": [
           "abc215-h",
@@ -43964,7 +43964,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 81,
-        "globalIndex": 78,
+        "globalIndex": 81,
         "orderReason": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44246,7 +44246,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 3,
-        "globalIndex": 10,
+        "globalIndex": 9,
         "orderReason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
       },
       "sourceRevisionIds": [
@@ -44532,8 +44532,8 @@
         ],
         "directProblemIds": [
           "abc348-f",
-          "abc258-g",
-          "abc221-g"
+          "abc221-g",
+          "abc258-g"
         ],
         "relatedProblemIds": [
           "abc276-ex",
@@ -44544,7 +44544,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 9,
-        "globalIndex": 48,
+        "globalIndex": 51,
         "orderReason": "集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。"
       },
       "sourceRevisionIds": [
@@ -44785,7 +44785,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 74,
-        "globalIndex": 103,
+        "globalIndex": 106,
         "orderReason": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -44923,7 +44923,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 136,
+        "globalIndex": 138,
         "orderReason": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -45179,7 +45179,6 @@
           "abc234-e",
           "abc254-e",
           "abc260-f",
-          "abc271-ex",
           "abc272-e",
           "abc290-g",
           "abc302-g",
@@ -45190,20 +45189,19 @@
           "abc442-g"
         ],
         "directProblemIds": [
-          "abc234-e",
-          "abc386-e",
-          "abc442-g",
           "abc219-e",
+          "abc234-e",
           "abc254-e",
-          "abc260-f",
           "abc272-e",
           "abc312-e",
+          "abc386-e",
+          "abc227-f",
+          "abc260-f",
+          "abc347-f",
+          "abc410-f",
           "abc290-g",
           "abc302-g",
-          "abc410-f",
-          "abc271-ex",
-          "abc227-f",
-          "abc347-f"
+          "abc442-g"
         ],
         "relatedProblemIds": [
           "abc220-g",
@@ -45217,6 +45215,7 @@
           "abc257-f",
           "abc258-f",
           "abc270-f",
+          "abc271-ex",
           "abc284-e",
           "abc293-f",
           "abc298-g",
@@ -45237,7 +45236,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 4,
-        "globalIndex": 13,
+        "globalIndex": 12,
         "orderReason": "候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。"
       },
       "sourceRevisionIds": [
@@ -45400,7 +45399,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 10,
-        "globalIndex": 97,
+        "globalIndex": 100,
         "orderReason": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
       },
       "sourceRevisionIds": [
@@ -45751,8 +45750,8 @@
           "abc279-e"
         ],
         "directProblemIds": [
-          "abc279-e",
           "abc243-e",
+          "abc279-e",
           "abc218-f"
         ],
         "relatedProblemIds": [
@@ -45761,7 +45760,7 @@
         "stageRank": 3,
         "difficultyRank": 2,
         "representativeRank": 6,
-        "globalIndex": 89,
+        "globalIndex": 92,
         "orderReason": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
       },
       "sourceRevisionIds": [
@@ -46280,7 +46279,7 @@
         "stageRank": 0,
         "difficultyRank": 0,
         "representativeRank": 7,
-        "globalIndex": 17,
+        "globalIndex": 16,
         "orderReason": "数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。"
       },
       "sourceRevisionIds": [
@@ -46707,7 +46706,6 @@
           "abc387-f",
           "abc390-e",
           "abc391-g",
-          "abc393-f",
           "abc395-g",
           "abc396-g",
           "abc398-g",
@@ -46779,6 +46777,7 @@
           "abc378-g",
           "abc388-f",
           "abc389-g",
+          "abc393-f",
           "abc398-e",
           "abc400-g",
           "abc403-f",
@@ -47087,7 +47086,7 @@
         "stageRank": 0,
         "difficultyRank": 0,
         "representativeRank": 8,
-        "globalIndex": 15,
+        "globalIndex": 14,
         "orderReason": "orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進み、候補を構造的に削減する。"
       },
       "sourceRevisionIds": [
@@ -47663,7 +47662,7 @@
         "stageRank": 0,
         "difficultyRank": 0,
         "representativeRank": 2,
-        "globalIndex": 10,
+        "globalIndex": 9,
         "orderReason": "対象を頂点と辺へ写して到達可能性を扱えるようにし、連結性・最短路・木・フローへ進む土台を作る。"
       },
       "sourceRevisionIds": [
@@ -48078,10 +48077,10 @@
           "abc269-e",
           "abc269-f",
           "abc270-e",
-          "abc271-ex",
           "abc271-f",
           "abc272-e",
           "abc272-g",
+          "abc273-ex",
           "abc274-f",
           "abc278-g",
           "abc279-e",
@@ -48151,6 +48150,7 @@
           "abc388-e",
           "abc390-f",
           "abc392-e",
+          "abc393-f",
           "abc394-g",
           "abc395-f",
           "abc398-e",
@@ -48169,6 +48169,7 @@
           "abc422-e",
           "abc422-f",
           "abc423-e",
+          "abc423-g",
           "abc427-f",
           "abc427-g",
           "abc428-f",
@@ -48251,8 +48252,8 @@
           "abc268-ex",
           "abc269-ex",
           "abc270-f",
+          "abc271-ex",
           "abc272-ex",
-          "abc273-ex",
           "abc273-f",
           "abc274-g",
           "abc275-ex",
@@ -48357,7 +48358,6 @@
           "abc390-e",
           "abc390-g",
           "abc392-f",
-          "abc393-f",
           "abc396-e",
           "abc396-f",
           "abc397-g",
@@ -48381,7 +48381,6 @@
           "abc418-e",
           "abc419-g",
           "abc421-e",
-          "abc423-g",
           "abc424-e",
           "abc425-f",
           "abc425-g",
@@ -48764,7 +48763,7 @@
           "abc253-g",
           "abc259-e",
           "abc270-g",
-          "abc273-ex",
+          "abc271-ex",
           "abc274-ex",
           "abc283-ex",
           "abc293-f",
@@ -48789,7 +48788,6 @@
           "abc414-e",
           "abc418-e",
           "abc420-g",
-          "abc423-g",
           "abc443-g",
           "abc444-f",
           "abc444-g",
@@ -48826,9 +48824,9 @@
           "abc263-e",
           "abc269-f",
           "abc270-ex",
-          "abc271-ex",
           "abc271-g",
           "abc272-g",
+          "abc273-ex",
           "abc275-e",
           "abc276-f",
           "abc277-g",
@@ -48876,6 +48874,7 @@
           "abc412-f",
           "abc417-f",
           "abc422-g",
+          "abc423-g",
           "abc428-g",
           "abc429-g",
           "abc432-g",
@@ -49827,7 +49826,7 @@
         "stageRank": 0,
         "difficultyRank": 0,
         "representativeRank": 3,
-        "globalIndex": 37,
+        "globalIndex": 41,
         "orderReason": "一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。"
       },
       "sourceRevisionIds": [
@@ -50178,29 +50177,29 @@
           "abc463-f"
         ],
         "directProblemIds": [
-          "abc358-e",
-          "abc234-f",
           "abc262-e",
-          "abc266-g",
-          "abc267-g",
-          "abc276-g",
-          "abc290-f",
-          "abc399-f",
+          "abc265-e",
+          "abc295-e",
+          "abc358-e",
+          "abc405-e",
           "abc425-e",
           "abc458-e",
-          "abc240-g",
+          "abc226-f",
+          "abc234-f",
           "abc243-f",
-          "abc405-e",
+          "abc290-f",
+          "abc399-f",
           "abc431-f",
           "abc433-f",
-          "abc227-g",
-          "abc265-e",
-          "abc273-g",
-          "abc281-g",
           "abc463-f",
-          "abc226-f",
           "abc215-g",
-          "abc295-e"
+          "abc227-g",
+          "abc240-g",
+          "abc266-g",
+          "abc267-g",
+          "abc273-g",
+          "abc276-g",
+          "abc281-g"
         ],
         "relatedProblemIds": [
           "abc214-g",
@@ -50250,7 +50249,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 6,
-        "globalIndex": 17,
+        "globalIndex": 16,
         "orderReason": "選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。"
       },
       "sourceRevisionIds": [
@@ -50483,7 +50482,7 @@
         "stageRank": 0,
         "difficultyRank": 1,
         "representativeRank": 2,
-        "globalIndex": 23,
+        "globalIndex": 24,
         "orderReason": "連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。"
       },
       "sourceRevisionIds": [
@@ -50684,24 +50683,24 @@
           "abc454-e"
         ],
         "directProblemIds": [
-          "abc244-g",
+          "abc299-e",
+          "abc333-e",
+          "abc387-e",
+          "abc392-e",
+          "abc454-e",
+          "abc233-f",
+          "abc239-f",
           "abc251-f",
           "abc255-f",
           "abc289-f",
-          "abc299-e",
           "abc358-f",
-          "abc448-f",
-          "abc239-f",
-          "abc232-h",
-          "abc233-f",
-          "abc363-f",
-          "abc387-e",
-          "abc454-e",
           "abc362-f",
-          "abc392-e",
+          "abc363-f",
+          "abc403-f",
           "abc443-f",
-          "abc333-e",
-          "abc403-f"
+          "abc448-f",
+          "abc244-g",
+          "abc232-h"
         ],
         "relatedProblemIds": [
           "abc221-g",
@@ -50723,7 +50722,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 4,
-        "globalIndex": 24,
+        "globalIndex": 27,
         "orderReason": "存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。"
       },
       "sourceRevisionIds": [
@@ -50918,27 +50917,27 @@
         ],
         "directProblemIds": [
           "abc233-e",
-          "abc224-f",
-          "abc231-g",
           "abc247-e",
           "abc255-e",
+          "abc290-e",
           "abc308-e",
           "abc318-e",
           "abc324-e",
+          "abc334-e",
           "abc347-e",
+          "abc353-e",
           "abc365-e",
           "abc371-e",
           "abc379-e",
-          "abc390-f",
-          "abc268-g",
-          "abc269-f",
-          "abc290-e",
-          "abc295-f",
-          "abc330-g",
-          "abc334-e",
           "abc423-e",
-          "abc353-e",
-          "abc422-f"
+          "abc224-f",
+          "abc269-f",
+          "abc295-f",
+          "abc390-f",
+          "abc422-f",
+          "abc231-g",
+          "abc268-g",
+          "abc330-g"
         ],
         "relatedProblemIds": [
           "abc215-g",
@@ -50992,7 +50991,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 3,
-        "globalIndex": 11,
+        "globalIndex": 10,
         "orderReason": "答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。"
       },
       "sourceRevisionIds": [
@@ -51181,10 +51180,10 @@
           "abc356-g"
         ],
         "directProblemIds": [
-          "abc341-g",
           "abc275-g",
-          "abc286-ex",
-          "abc356-g"
+          "abc341-g",
+          "abc356-g",
+          "abc286-ex"
         ],
         "relatedProblemIds": [
           "abc244-ex",
@@ -51193,7 +51192,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 112,
+        "globalIndex": 114,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -51422,7 +51421,7 @@
       "entity": {
         "id": "unit-convex-geometry",
         "kind": "section",
-        "title": "凸境界・半平面制約・直線包絡を扱う",
+        "title": "凸境界・半平面制約を扱う",
         "parentId": "unit-chapter-geometry-optimization",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -51430,7 +51429,7 @@
           "unit-geometry-primitives"
         ],
         "excludedTopics": [
-          "凸性を使わない一般のevent sweepや座標圧縮。"
+          "直線群の最小値・最大値queryはConvex Hull Trick・直線包絡で扱う。凸性を使わない一般のevent sweepや座標圧縮も対象外とする。"
         ],
         "sourceRevisionIds": [
           "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
@@ -51465,8 +51464,8 @@
         "stageRank": 0,
         "difficultyRank": 3,
         "representativeRank": 11,
-        "globalIndex": 112,
-        "orderReason": "向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。"
+        "globalIndex": 114,
+        "orderReason": "向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。"
       },
       "sourceRevisionIds": [
         "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
@@ -52115,7 +52114,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 141,
+        "globalIndex": 142,
         "orderReason": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
       },
       "sourceRevisionIds": [
@@ -52285,8 +52284,8 @@
           "abc335-g"
         ],
         "directProblemIds": [
-          "abc335-g",
-          "abc212-g"
+          "abc212-g",
+          "abc335-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -52486,14 +52485,14 @@
           "abc413-f"
         ],
         "directProblemIds": [
-          "abc261-ex",
-          "abc413-f"
+          "abc413-f",
+          "abc261-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 137,
+        "globalIndex": 139,
         "orderReason": "有限局面DAGのminimaxで得た考え方と実装を再利用し、循環局面の後退解析とminimax距離の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -52733,7 +52732,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 116,
+        "globalIndex": 118,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -52976,9 +52975,9 @@
           "abc315-e"
         ],
         "directProblemIds": [
+          "abc291-e",
           "abc315-e",
-          "abc277-f",
-          "abc291-e"
+          "abc277-f"
         ],
         "relatedProblemIds": [
           "abc224-e",
@@ -52991,7 +52990,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 56,
-        "globalIndex": 21,
+        "globalIndex": 22,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -53208,6 +53207,7 @@
           "abc217-e",
           "abc219-g",
           "abc259-ex",
+          "abc273-ex",
           "abc302-e",
           "abc324-g",
           "abc329-f",
@@ -53227,7 +53227,6 @@
         "relatedProblemIds": [
           "abc255-ex",
           "abc256-ex",
-          "abc273-ex",
           "abc275-ex",
           "abc295-g",
           "abc305-f",
@@ -53246,7 +53245,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 5,
-        "globalIndex": 26,
+        "globalIndex": 29,
         "orderReason": "各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。"
       },
       "sourceRevisionIds": [
@@ -53478,7 +53477,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 102,
+        "globalIndex": 105,
         "orderReason": "Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -54044,7 +54043,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 93,
-        "globalIndex": 144,
+        "globalIndex": 75,
         "orderReason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
       },
       "sourceRevisionIds": [
@@ -54277,10 +54276,10 @@
           "abc465-e"
         ],
         "directProblemIds": [
-          "abc235-f",
           "abc336-e",
           "abc406-e",
           "abc465-e",
+          "abc235-f",
           "abc317-f",
           "abc288-ex"
         ],
@@ -54288,7 +54287,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 82,
-        "globalIndex": 79,
+        "globalIndex": 82,
         "orderReason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
       },
       "sourceRevisionIds": [
@@ -54649,7 +54648,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 3,
-        "globalIndex": 21,
+        "globalIndex": 22,
         "orderReason": "到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。"
       },
       "sourceRevisionIds": [
@@ -54898,14 +54897,14 @@
           "abc456-e"
         ],
         "directProblemIds": [
-          "abc245-f",
-          "abc456-e"
+          "abc456-e",
+          "abc245-f"
         ],
         "relatedProblemIds": [],
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 62,
-        "globalIndex": 53,
+        "globalIndex": 56,
         "orderReason": "三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -55125,7 +55124,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 142,
+        "globalIndex": 143,
         "orderReason": "gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -55263,7 +55262,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 99,
+        "globalIndex": 102,
         "orderReason": "各行・各列を固定方向に一度ずつscanし、定数方向へ伸びる効果をblockerまで一括伝播する。効果を止める属性と、その後の処理で禁止する属性を分離する。"
       },
       "sourceRevisionIds": [
@@ -55433,7 +55432,7 @@
         "stageRank": 0,
         "difficultyRank": 4,
         "representativeRank": 12,
-        "globalIndex": 98,
+        "globalIndex": 101,
         "orderReason": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
       },
       "sourceRevisionIds": [
@@ -55740,6 +55739,7 @@
           "abc336-f",
           "abc402-f",
           "abc413-e",
+          "abc423-g",
           "abc427-f",
           "abc464-f"
         ],
@@ -55767,7 +55767,6 @@
           "abc381-g",
           "abc383-g",
           "abc385-g",
-          "abc423-g",
           "abc425-g",
           "abc426-g",
           "abc439-g"
@@ -55775,7 +55774,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 4,
-        "globalIndex": 28,
+        "globalIndex": 33,
         "orderReason": "探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。"
       },
       "sourceRevisionIds": [
@@ -55985,9 +55984,9 @@
           "abc361-f"
         ],
         "directProblemIds": [
-          "abc230-g",
+          "abc304-f",
           "abc361-f",
-          "abc304-f"
+          "abc230-g"
         ],
         "relatedProblemIds": [
           "abc212-g",
@@ -55996,7 +55995,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 117,
+        "globalIndex": 119,
         "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -56221,7 +56220,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 3,
-        "globalIndex": 41,
+        "globalIndex": 44,
         "orderReason": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"
       },
       "sourceRevisionIds": [
@@ -56453,7 +56452,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 3,
-        "globalIndex": 79,
+        "globalIndex": 82,
         "orderReason": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
       },
       "sourceRevisionIds": [
@@ -56808,11 +56807,11 @@
           "abc398-g"
         ],
         "directProblemIds": [
-          "abc380-f",
-          "abc297-g",
           "abc368-f",
-          "abc398-g",
-          "abc255-g"
+          "abc380-f",
+          "abc255-g",
+          "abc297-g",
+          "abc398-g"
         ],
         "relatedProblemIds": [
           "abc212-h",
@@ -56826,7 +56825,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 5,
-        "globalIndex": 45,
+        "globalIndex": 48,
         "orderReason": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
       },
       "sourceRevisionIds": [
@@ -57000,7 +56999,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 6,
-        "globalIndex": 46,
+        "globalIndex": 49,
         "orderReason": "状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。"
       },
       "sourceRevisionIds": [
@@ -57210,9 +57209,9 @@
           "abc443-e"
         ],
         "directProblemIds": [
+          "abc311-e",
           "abc415-e",
-          "abc443-e",
-          "abc311-e"
+          "abc443-e"
         ],
         "relatedProblemIds": [
           "abc221-h",
@@ -57419,15 +57418,15 @@
           "abc400-f"
         ],
         "directProblemIds": [
-          "abc252-g",
           "abc217-f",
-          "abc325-g",
-          "abc233-g",
-          "abc292-g",
-          "abc262-g",
           "abc400-f",
-          "abc298-g",
+          "abc233-g",
+          "abc252-g",
           "abc261-g",
+          "abc262-g",
+          "abc292-g",
+          "abc298-g",
+          "abc325-g",
           "abc238-ex"
         ],
         "relatedProblemIds": [
@@ -57438,7 +57437,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 76,
-        "globalIndex": 72,
+        "globalIndex": 76,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57674,7 +57673,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 75,
+        "globalIndex": 79,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、区間拡張DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -57912,20 +57911,20 @@
         "problemIds": [
           "abc237-f",
           "abc369-f",
-          "abc393-f",
           "abc439-e"
         ],
         "directProblemIds": [
           "abc439-e",
           "abc237-f",
-          "abc393-f",
           "abc369-f"
         ],
-        "relatedProblemIds": [],
+        "relatedProblemIds": [
+          "abc393-f"
+        ],
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 76,
+        "globalIndex": 31,
         "orderReason": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -58203,6 +58202,17 @@
         },
         {
           "problemId": "abc393-f",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d",
+            "source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"
+          ]
+        },
+        {
+          "problemId": "abc393-f",
           "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -58259,8 +58269,8 @@
         ],
         "directProblemIds": [
           "abc285-e",
-          "abc230-f",
           "abc466-e",
+          "abc230-f",
           "abc374-f",
           "abc234-g"
         ],
@@ -58619,13 +58629,13 @@
         ],
         "directProblemIds": [
           "abc327-e",
+          "abc345-e",
+          "abc362-e",
+          "abc225-f",
           "abc238-f",
           "abc299-f",
-          "abc362-e",
-          "abc386-f",
-          "abc345-e",
           "abc315-f",
-          "abc225-f"
+          "abc386-f"
         ],
         "relatedProblemIds": [
           "abc214-f",
@@ -58637,7 +58647,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 66,
-        "globalIndex": 27,
+        "globalIndex": 30,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -59009,7 +59019,6 @@
           "abc369-f",
           "abc374-f",
           "abc386-f",
-          "abc393-f",
           "abc400-f",
           "abc410-g",
           "abc439-e",
@@ -59025,13 +59034,14 @@
           "abc271-e",
           "abc288-f",
           "abc305-ex",
+          "abc393-f",
           "abc418-g",
           "abc457-g"
         ],
         "stageRank": 0,
         "difficultyRank": 1,
         "representativeRank": 2,
-        "globalIndex": 27,
+        "globalIndex": 30,
         "orderReason": "状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。"
       },
       "sourceRevisionIds": [
@@ -59376,17 +59386,17 @@
         ],
         "directProblemIds": [
           "abc232-e",
-          "abc217-g",
-          "abc229-f",
           "abc244-e",
-          "abc247-f",
           "abc251-e",
-          "abc264-f",
           "abc283-e",
           "abc310-e",
+          "abc229-f",
+          "abc247-f",
+          "abc264-f",
           "abc344-f",
           "abc376-f",
-          "abc462-f"
+          "abc462-f",
+          "abc217-g"
         ],
         "relatedProblemIds": [
           "abc215-e",
@@ -59781,25 +59791,25 @@
           "abc450-g"
         ],
         "directProblemIds": [
-          "abc298-e",
-          "abc275-e",
-          "abc300-e",
           "abc263-e",
           "abc266-e",
+          "abc275-e",
           "abc280-e",
-          "abc323-e",
-          "abc382-e",
-          "abc450-g",
-          "abc277-g",
-          "abc326-e",
-          "abc360-e",
-          "abc239-ex",
-          "abc242-ex",
+          "abc298-e",
+          "abc300-e",
           "abc314-e",
+          "abc323-e",
+          "abc326-e",
           "abc350-e",
-          "abc404-f",
+          "abc360-e",
+          "abc382-e",
           "abc421-e",
-          "abc226-h"
+          "abc404-f",
+          "abc277-g",
+          "abc450-g",
+          "abc226-h",
+          "abc239-ex",
+          "abc242-ex"
         ],
         "relatedProblemIds": [
           "abc270-ex",
@@ -59816,7 +59826,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 4,
-        "globalIndex": 44,
+        "globalIndex": 47,
         "orderReason": "状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。"
       },
       "sourceRevisionIds": [
@@ -60192,28 +60202,28 @@
           "abc461-f"
         ],
         "directProblemIds": [
-          "abc216-f",
-          "abc383-f",
-          "abc269-g",
-          "abc275-f",
-          "abc288-e",
-          "abc320-f",
-          "abc325-f",
-          "abc364-e",
-          "abc410-e",
-          "abc441-f",
-          "abc322-e",
-          "abc375-e",
           "abc222-e",
-          "abc307-g",
+          "abc288-e",
+          "abc322-e",
+          "abc364-e",
+          "abc375-e",
           "abc390-e",
+          "abc410-e",
           "abc419-e",
-          "abc461-f",
-          "abc290-ex",
-          "abc366-f",
-          "abc426-g",
+          "abc216-f",
+          "abc275-f",
+          "abc320-f",
+          "abc321-f",
+          "abc325-f",
           "abc341-f",
-          "abc321-f"
+          "abc366-f",
+          "abc383-f",
+          "abc441-f",
+          "abc461-f",
+          "abc269-g",
+          "abc307-g",
+          "abc426-g",
+          "abc290-ex"
         ],
         "relatedProblemIds": [
           "abc213-g",
@@ -60239,7 +60249,7 @@
         "stageRank": 2,
         "difficultyRank": 1,
         "representativeRank": 1,
-        "globalIndex": 34,
+        "globalIndex": 38,
         "orderReason": "最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。"
       },
       "sourceRevisionIds": [
@@ -60510,26 +60520,26 @@
           "abc432-f"
         ],
         "directProblemIds": [
-          "abc354-e",
-          "abc232-f",
+          "abc215-e",
           "abc274-e",
           "abc332-e",
-          "abc396-g",
+          "abc354-e",
+          "abc402-e",
+          "abc232-f",
+          "abc246-f",
+          "abc278-f",
+          "abc310-f",
+          "abc313-f",
+          "abc319-f",
+          "abc352-f",
           "abc381-f",
-          "abc215-e",
+          "abc425-f",
+          "abc432-f",
           "abc328-g",
           "abc343-g",
+          "abc396-g",
           "abc411-g",
-          "abc425-f",
-          "abc278-f",
-          "abc352-f",
-          "abc310-f",
-          "abc319-f",
-          "abc432-f",
-          "abc246-f",
-          "abc313-f",
-          "abc306-ex",
-          "abc402-e"
+          "abc306-ex"
         ],
         "relatedProblemIds": [
           "abc213-g",
@@ -60547,7 +60557,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 62,
-        "globalIndex": 54,
+        "globalIndex": 57,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -60751,34 +60761,34 @@
         ],
         "directProblemIds": [
           "abc212-e",
+          "abc224-e",
           "abc249-e",
           "abc253-e",
-          "abc265-f",
-          "abc338-g",
           "abc370-e",
+          "abc214-f",
+          "abc265-f",
+          "abc288-f",
+          "abc311-f",
+          "abc333-f",
+          "abc334-f",
+          "abc342-f",
           "abc372-f",
-          "abc435-g",
+          "abc387-f",
+          "abc408-f",
+          "abc412-f",
           "abc442-f",
           "abc457-f",
-          "abc279-g",
-          "abc311-f",
-          "abc353-g",
-          "abc221-h",
-          "abc243-g",
-          "abc334-f",
-          "abc358-g",
-          "abc282-g",
-          "abc214-f",
-          "abc288-f",
-          "abc446-g",
-          "abc408-f",
-          "abc333-f",
-          "abc224-e",
-          "abc387-f",
           "abc235-g",
+          "abc243-g",
+          "abc279-g",
+          "abc282-g",
           "abc319-g",
-          "abc412-f",
-          "abc342-f"
+          "abc338-g",
+          "abc353-g",
+          "abc358-g",
+          "abc435-g",
+          "abc446-g",
+          "abc221-h"
         ],
         "relatedProblemIds": [
           "abc436-g"
@@ -60786,7 +60796,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 7,
-        "globalIndex": 91,
+        "globalIndex": 94,
         "orderReason": "正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。"
       },
       "sourceRevisionIds": [
@@ -61130,7 +61140,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 77,
+        "globalIndex": 80,
         "orderReason": "区間monoid要約・列・subsequence DPで得た考え方と実装を再利用し、値域集約による部分列DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61438,19 +61448,19 @@
           "abc447-e"
         ],
         "directProblemIds": [
+          "abc226-e",
+          "abc238-e",
           "abc276-e",
-          "abc279-f",
           "abc304-e",
+          "abc328-e",
+          "abc335-e",
           "abc372-e",
           "abc420-e",
-          "abc238-e",
           "abc434-e",
-          "abc328-e",
-          "abc440-g",
           "abc447-e",
-          "abc226-e",
+          "abc279-f",
           "abc409-f",
-          "abc335-e"
+          "abc440-g"
         ],
         "relatedProblemIds": [
           "abc218-e",
@@ -61483,7 +61493,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 58,
-        "globalIndex": 23,
+        "globalIndex": 24,
         "orderReason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61675,7 +61685,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 85,
-        "globalIndex": 124,
+        "globalIndex": 126,
         "orderReason": "DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -61923,7 +61933,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 1,
-        "globalIndex": 38,
+        "globalIndex": 42,
         "orderReason": "通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。"
       },
       "sourceRevisionIds": [
@@ -62100,7 +62110,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 118,
+        "globalIndex": 120,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、動的・implicit Segment Treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -62240,9 +62250,9 @@
         ],
         "directProblemIds": [
           "abc443-g",
-          "abc283-ex",
           "abc313-g",
-          "abc402-g"
+          "abc402-g",
+          "abc283-ex"
         ],
         "relatedProblemIds": [
           "abc372-g"
@@ -62250,7 +62260,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 81,
-        "globalIndex": 115,
+        "globalIndex": 117,
         "orderReason": "一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -62658,7 +62668,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 10,
-        "globalIndex": 73,
+        "globalIndex": 77,
         "orderReason": "グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。"
       },
       "sourceRevisionIds": [
@@ -62950,7 +62960,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 76,
-        "globalIndex": 73,
+        "globalIndex": 77,
         "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63243,6 +63253,7 @@
           "abc344-g",
           "abc361-g",
           "abc368-e",
+          "abc393-f",
           "abc401-e",
           "abc407-f",
           "abc433-e",
@@ -63250,20 +63261,21 @@
           "abc453-e"
         ],
         "directProblemIds": [
-          "abc368-e",
-          "abc449-f",
-          "abc274-f",
-          "abc453-e",
-          "abc296-g",
-          "abc361-g",
-          "abc401-e",
-          "abc320-e",
-          "abc311-g",
           "abc214-e",
           "abc245-e",
-          "abc308-f",
+          "abc320-e",
+          "abc368-e",
+          "abc401-e",
           "abc433-e",
-          "abc407-f"
+          "abc453-e",
+          "abc274-f",
+          "abc308-f",
+          "abc393-f",
+          "abc407-f",
+          "abc449-f",
+          "abc296-g",
+          "abc311-g",
+          "abc361-g"
         ],
         "relatedProblemIds": [
           "abc223-h",
@@ -63289,7 +63301,6 @@
           "abc346-g",
           "abc351-f",
           "abc360-f",
-          "abc393-f",
           "abc394-g",
           "abc408-f",
           "abc410-g",
@@ -63303,7 +63314,7 @@
         "stageRank": 2,
         "difficultyRank": 1,
         "representativeRank": 1,
-        "globalIndex": 35,
+        "globalIndex": 39,
         "orderReason": "値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。"
       },
       "sourceRevisionIds": [
@@ -63499,8 +63510,8 @@
           "abc415-g"
         ],
         "directProblemIds": [
-          "abc310-ex",
-          "abc415-g"
+          "abc415-g",
+          "abc310-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -64119,7 +64130,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 64,
-        "globalIndex": 57,
+        "globalIndex": 60,
         "orderReason": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64251,7 +64262,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 74,
-        "globalIndex": 65,
+        "globalIndex": 67,
         "orderReason": "文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64582,7 +64593,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 139,
+        "globalIndex": 140,
         "orderReason": "最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -64781,7 +64792,7 @@
         "stageRank": 0,
         "difficultyRank": 3,
         "representativeRank": 9,
-        "globalIndex": 78,
+        "globalIndex": 81,
         "orderReason": "頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。"
       },
       "sourceRevisionIds": [
@@ -65139,11 +65150,11 @@
         ],
         "directProblemIds": [
           "abc449-g",
-          "abc318-ex",
-          "abc317-ex",
+          "abc260-ex",
           "abc289-ex",
           "abc297-ex",
-          "abc260-ex"
+          "abc317-ex",
+          "abc318-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -65843,7 +65854,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 89,
-        "globalIndex": 132,
+        "globalIndex": 134,
         "orderReason": "単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -66143,8 +66154,8 @@
         ],
         "directProblemIds": [
           "abc248-f",
-          "abc379-g",
           "abc309-g",
+          "abc379-g",
           "abc296-ex"
         ],
         "relatedProblemIds": [],
@@ -66479,7 +66490,7 @@
         "stageRank": 0,
         "difficultyRank": 1,
         "representativeRank": 4,
-        "globalIndex": 52,
+        "globalIndex": 55,
         "orderReason": "状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。"
       },
       "sourceRevisionIds": [
@@ -66729,14 +66740,14 @@
           "abc436-e"
         ],
         "directProblemIds": [
-          "abc357-e",
           "abc241-e",
           "abc256-e",
+          "abc258-e",
           "abc296-e",
+          "abc357-e",
           "abc377-e",
           "abc399-e",
           "abc436-e",
-          "abc258-e",
           "abc284-g",
           "abc371-g"
         ],
@@ -66749,7 +66760,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 60,
-        "globalIndex": 52,
+        "globalIndex": 55,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67080,118 +67091,307 @@
         "baselineVersion": "1.0.0",
         "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
-          "連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。"
+          "差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"
         ],
         "sourceRevisionIds": [
-          "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-          "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
-          "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-          "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
-          "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
-          "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+          "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+          "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b",
+          "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+          "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77",
+          "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+          "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
         ],
         "tagIds": [
-          "tag-bezout-diophantine",
-          "tag-gcd-structure"
+          "tag-bezout-diophantine"
         ],
         "ownedTagIds": [
           "tag-bezout-diophantine"
         ],
         "learningOutcomeIds": [
-          "outcome-characterize-integer-solvability",
-          "outcome-reduce-integer-structure-by-gcd"
+          "outcome-characterize-integer-solvability"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-characterize-integer-solvability"
         ],
         "problemIds": [
-          "abc340-f",
-          "abc418-e"
-        ],
-        "directProblemIds": [
+          "abc271-ex",
           "abc340-f"
         ],
+        "directProblemIds": [
+          "abc340-f",
+          "abc271-ex"
+        ],
         "relatedProblemIds": [
-          "abc212-g",
-          "abc222-g",
-          "abc248-g",
-          "abc254-f",
-          "abc271-ex",
-          "abc306-g",
           "abc315-g",
-          "abc438-g",
-          "abc445-g",
           "abc459-g",
           "abc460-e"
         ],
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 1,
-        "globalIndex": 8,
+        "globalIndex": 20,
         "orderReason": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
       },
       "sourceRevisionIds": [
-        "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-        "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
-        "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-        "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
-        "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
-        "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+        "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+        "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b",
+        "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+        "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77",
+        "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+        "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
       ],
       "evidenceRefs": [
         {
-          "problemId": "abc212-g",
-          "claimPath": "/prerequisiteCandidates/0",
+          "problemId": "abc271-ex",
+          "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-            "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5"
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
           ]
         },
         {
-          "problemId": "abc222-g",
-          "claimPath": "/prerequisiteCandidates/0",
+          "problemId": "abc271-ex",
+          "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-            "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
           ]
         },
         {
-          "problemId": "abc222-g",
-          "claimPath": "/typicalTechniques/2",
+          "problemId": "abc271-ex",
+          "claimPath": "/reasoningPath/candidateApproaches/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-            "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378"
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
           ]
         },
         {
-          "problemId": "abc248-g",
+          "problemId": "abc271-ex",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
+          ]
+        },
+        {
+          "problemId": "abc271-ex",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
+          ]
+        },
+        {
+          "problemId": "abc271-ex",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
+          ]
+        },
+        {
+          "problemId": "abc271-ex",
+          "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
+          ]
+        },
+        {
+          "problemId": "abc271-ex",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
           "claimPath": "/prerequisiteCandidates/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
-            "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
           ]
         },
         {
-          "problemId": "abc248-g",
+          "problemId": "abc315-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
+          "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc315-g",
           "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
-            "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        },
+        {
+          "problemId": "abc340-f",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
+          ]
+        },
+        {
+          "problemId": "abc340-f",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
+          ]
+        },
+        {
+          "problemId": "abc340-f",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
+          ]
+        },
+        {
+          "problemId": "abc340-f",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
+          ]
+        },
+        {
+          "problemId": "abc340-f",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
+          ]
+        },
+        {
+          "problemId": "abc340-f",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
           ]
         }
       ],
@@ -67201,14 +67401,14 @@
       "kind": "unit",
       "entity": {
         "id": "unit-gcd-structure",
-        "kind": "subsection",
+        "kind": "section",
         "title": "gcd不変量・差分構造",
-        "parentId": "unit-gcd-diophantine",
+        "parentId": "unit-chapter-number-theory",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
-          "gcd不変量・差分構造の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+          "Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"
         ],
         "sourceRevisionIds": [
           "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
@@ -67248,7 +67448,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 54,
-        "globalIndex": 20,
+        "globalIndex": 19,
         "orderReason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -67363,9 +67563,9 @@
           "abc279-ex"
         ],
         "directProblemIds": [
-          "abc279-ex",
           "abc222-h",
-          "abc230-h"
+          "abc230-h",
+          "abc279-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 5,
@@ -67728,24 +67928,24 @@
           "abc462-g"
         ],
         "directProblemIds": [
-          "abc225-h",
-          "abc241-ex",
-          "abc267-ex",
           "abc214-g",
-          "abc389-g",
-          "abc392-g",
+          "abc331-g",
+          "abc345-g",
+          "abc352-g",
           "abc385-g",
-          "abc285-ex",
+          "abc389-g",
           "abc390-g",
+          "abc392-g",
+          "abc409-g",
           "abc422-g",
           "abc432-g",
-          "abc247-ex",
           "abc436-g",
-          "abc331-g",
-          "abc352-g",
-          "abc409-g",
           "abc462-g",
-          "abc345-g"
+          "abc225-h",
+          "abc241-ex",
+          "abc247-ex",
+          "abc267-ex",
+          "abc285-ex"
         ],
         "relatedProblemIds": [
           "abc235-ex",
@@ -67767,7 +67967,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 9,
-        "globalIndex": 109,
+        "globalIndex": 112,
         "orderReason": "高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。"
       },
       "sourceRevisionIds": [
@@ -68113,21 +68313,21 @@
           "abc442-e"
         ],
         "directProblemIds": [
-          "abc385-f",
+          "abc223-e",
+          "abc225-e",
+          "abc248-e",
+          "abc351-e",
+          "abc366-e",
           "abc426-e",
           "abc442-e",
-          "abc223-e",
-          "abc351-e",
-          "abc220-g",
-          "abc234-ex",
-          "abc248-e",
-          "abc258-f",
-          "abc301-g",
-          "abc353-f",
-          "abc366-e",
-          "abc225-e",
           "abc250-f",
-          "abc323-f"
+          "abc258-f",
+          "abc323-f",
+          "abc353-f",
+          "abc385-f",
+          "abc220-g",
+          "abc301-g",
+          "abc234-ex"
         ],
         "relatedProblemIds": [
           "abc221-g",
@@ -68152,7 +68352,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 10,
-        "globalIndex": 15,
+        "globalIndex": 14,
         "orderReason": "座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。"
       },
       "sourceRevisionIds": [
@@ -68390,14 +68590,14 @@
           "abc267-e"
         ],
         "directProblemIds": [
-          "abc266-f",
-          "abc267-e"
+          "abc267-e",
+          "abc266-f"
         ],
         "relatedProblemIds": [],
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 69,
-        "globalIndex": 60,
+        "globalIndex": 63,
         "orderReason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -68616,7 +68816,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 12,
-        "globalIndex": 60,
+        "globalIndex": 63,
         "orderReason": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
       },
       "sourceRevisionIds": [
@@ -68957,8 +69157,8 @@
           "abc396-e"
         ],
         "directProblemIds": [
-          "abc280-f",
-          "abc396-e"
+          "abc396-e",
+          "abc280-f"
         ],
         "relatedProblemIds": [
           "abc352-f"
@@ -68966,7 +69166,7 @@
         "stageRank": 1,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 33,
+        "globalIndex": 37,
         "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
       },
       "sourceRevisionIds": [
@@ -69245,7 +69445,7 @@
         "stageRank": 0,
         "difficultyRank": 0,
         "representativeRank": 0,
-        "globalIndex": 19,
+        "globalIndex": 18,
         "orderReason": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
       },
       "sourceRevisionIds": [
@@ -69496,19 +69696,19 @@
           "abc457-e"
         ],
         "directProblemIds": [
-          "abc268-f",
-          "abc226-g",
+          "abc227-e",
           "abc257-e",
-          "abc312-f",
+          "abc374-e",
           "abc385-e",
+          "abc388-e",
           "abc404-e",
           "abc457-e",
+          "abc268-f",
           "abc298-f",
-          "abc388-e",
-          "abc227-e",
-          "abc374-e",
-          "abc416-g",
-          "abc454-f"
+          "abc312-f",
+          "abc454-f",
+          "abc226-g",
+          "abc416-g"
         ],
         "relatedProblemIds": [
           "abc214-e",
@@ -69564,7 +69764,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 3,
-        "globalIndex": 12,
+        "globalIndex": 11,
         "orderReason": "局所選択を交換論で正当化し、候補を安全に確定できる順序を導く。"
       },
       "sourceRevisionIds": [
@@ -69928,7 +70128,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 89,
-        "globalIndex": 133,
+        "globalIndex": 135,
         "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -70067,7 +70267,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 113,
+        "globalIndex": 115,
         "orderReason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -70416,7 +70616,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 68,
+        "globalIndex": 70,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -70677,15 +70877,15 @@
           "abc424-e"
         ],
         "directProblemIds": [
+          "abc220-e",
           "abc321-e",
-          "abc424-e",
-          "abc220-e"
+          "abc424-e"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 1,
         "representativeRank": 6,
-        "globalIndex": 84,
+        "globalIndex": 86,
         "orderReason": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
       },
       "sourceRevisionIds": [
@@ -71066,12 +71266,12 @@
           "abc465-f"
         ],
         "directProblemIds": [
-          "abc242-f",
+          "abc343-e",
           "abc455-e",
+          "abc242-f",
+          "abc297-f",
           "abc377-f",
           "abc465-f",
-          "abc343-e",
-          "abc297-f",
           "abc280-g",
           "abc456-g"
         ],
@@ -71100,7 +71300,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 7,
-        "globalIndex": 47,
+        "globalIndex": 50,
         "orderReason": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
       },
       "sourceRevisionIds": [
@@ -71374,7 +71574,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 120,
+        "globalIndex": 122,
         "orderReason": "応答alphabetとquery回数から識別可能状態数の下界を出し、その下界に一致するcodeword割当と復号を構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -71509,13 +71709,13 @@
         ],
         "directProblemIds": [
           "abc230-e",
-          "abc253-g",
           "abc356-e",
           "abc414-e",
-          "abc293-f",
           "abc452-e",
-          "abc315-g",
-          "abc444-f"
+          "abc293-f",
+          "abc444-f",
+          "abc253-g",
+          "abc315-g"
         ],
         "relatedProblemIds": [
           "abc216-e",
@@ -71530,7 +71730,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 3,
-        "globalIndex": 42,
+        "globalIndex": 45,
         "orderReason": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
       },
       "sourceRevisionIds": [
@@ -71797,13 +71997,13 @@
           "abc398-e"
         ],
         "directProblemIds": [
-          "abc305-f",
           "abc269-e",
-          "abc282-f",
-          "abc278-g",
+          "abc355-e",
           "abc398-e",
+          "abc282-f",
           "abc286-f",
-          "abc355-e"
+          "abc305-f",
+          "abc278-g"
         ],
         "relatedProblemIds": [
           "abc337-e"
@@ -71811,7 +72011,7 @@
         "stageRank": 3,
         "difficultyRank": 1,
         "representativeRank": 8,
-        "globalIndex": 85,
+        "globalIndex": 87,
         "orderReason": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
       },
       "sourceRevisionIds": [
@@ -72529,8 +72729,8 @@
           "abc383-e"
         ],
         "directProblemIds": [
-          "abc383-e",
           "abc235-e",
+          "abc383-e",
           "abc250-ex",
           "abc301-ex"
         ],
@@ -72839,12 +73039,12 @@
           "abc386-g"
         ],
         "directProblemIds": [
-          "abc236-ex",
           "abc213-g",
-          "abc253-ex",
-          "abc327-g",
           "abc321-g",
-          "abc386-g"
+          "abc327-g",
+          "abc386-g",
+          "abc236-ex",
+          "abc253-ex"
         ],
         "relatedProblemIds": [
           "abc318-ex"
@@ -73205,9 +73405,9 @@
           "abc400-g"
         ],
         "directProblemIds": [
+          "abc393-g",
           "abc400-g",
-          "abc305-ex",
-          "abc393-g"
+          "abc305-ex"
         ],
         "relatedProblemIds": [
           "abc355-g"
@@ -73544,7 +73744,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 121,
+        "globalIndex": 123,
         "orderReason": "非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。"
       },
       "sourceRevisionIds": [
@@ -73989,13 +74189,13 @@
       "entity": {
         "id": "unit-linear-algebra-xor",
         "kind": "section",
-        "title": "線形方程式・分離可能変換・行列式計数へ変換する",
+        "title": "線形方程式・基底・分離可能変換へ変換する",
         "parentId": "unit-chapter-combinatorics-algebra",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
-          "通常の多項式畳み込み・生成関数と、幾何の面積行列式。"
+          "行列式による全域木・非交差pathの計数は行列式計数の単元で扱う。通常の多項式畳み込み・生成関数と、幾何の面積行列式も対象外とする。"
         ],
         "sourceRevisionIds": [
           "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
@@ -74041,8 +74241,8 @@
         "stageRank": 0,
         "difficultyRank": 4,
         "representativeRank": 9,
-        "globalIndex": 62,
-        "orderReason": "制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。"
+        "globalIndex": 64,
+        "orderReason": "制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。"
       },
       "sourceRevisionIds": [
         "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
@@ -74520,13 +74720,13 @@
         ],
         "directProblemIds": [
           "abc293-e",
-          "abc258-ex",
           "abc256-g",
-          "abc429-g",
           "abc271-g",
+          "abc429-g",
+          "abc245-ex",
+          "abc258-ex",
           "abc270-ex",
-          "abc299-ex",
-          "abc245-ex"
+          "abc299-ex"
         ],
         "relatedProblemIds": [
           "abc300-ex",
@@ -74536,7 +74736,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 8,
-        "globalIndex": 93,
+        "globalIndex": 96,
         "orderReason": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
       },
       "sourceRevisionIds": [
@@ -74887,7 +75087,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 62,
+        "globalIndex": 64,
         "orderReason": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -75179,7 +75379,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 5,
-        "globalIndex": 14,
+        "globalIndex": 13,
         "orderReason": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
       },
       "sourceRevisionIds": [
@@ -75417,20 +75617,19 @@
           "outcome-identify-bridges-and-articulations"
         ],
         "problemIds": [
-          "abc334-g",
-          "abc375-g"
+          "abc334-g"
         ],
         "directProblemIds": [
-          "abc334-g",
-          "abc375-g"
+          "abc334-g"
         ],
         "relatedProblemIds": [
-          "abc301-ex"
+          "abc301-ex",
+          "abc375-g"
         ],
-        "stageRank": 3,
+        "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 11,
-        "globalIndex": 110,
+        "globalIndex": 26,
         "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
       },
       "sourceRevisionIds": [
@@ -75598,6 +75797,17 @@
         },
         {
           "problemId": "abc375-g",
+          "claimPath": "/prerequisiteCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90",
+            "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
+          ]
+        },
+        {
+          "problemId": "abc375-g",
           "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -75643,6 +75853,17 @@
         {
           "problemId": "abc375-g",
           "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90",
+            "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
+          ]
+        },
+        {
+          "problemId": "abc375-g",
+          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -76058,15 +76279,15 @@
           "abc397-g"
         ],
         "directProblemIds": [
-          "abc241-g",
           "abc225-g",
           "abc239-g",
+          "abc241-g",
           "abc259-g",
           "abc318-g",
           "abc326-g",
+          "abc332-g",
           "abc347-g",
           "abc397-g",
-          "abc332-g",
           "abc227-h"
         ],
         "relatedProblemIds": [
@@ -76078,7 +76299,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 80,
+        "globalIndex": 83,
         "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -76407,27 +76628,28 @@
           "abc326-f",
           "abc336-f",
           "abc402-f",
+          "abc423-g",
           "abc427-f",
           "abc464-f"
         ],
         "directProblemIds": [
           "abc271-f",
-          "abc427-f",
-          "abc300-g",
           "abc326-f",
           "abc336-f",
           "abc402-f",
-          "abc464-f"
+          "abc427-f",
+          "abc464-f",
+          "abc300-g",
+          "abc423-g"
         ],
         "relatedProblemIds": [
           "abc220-h",
-          "abc252-ex",
-          "abc423-g"
+          "abc252-ex"
         ],
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 67,
-        "globalIndex": 28,
+        "globalIndex": 33,
         "orderReason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -76784,12 +77006,12 @@
           "abc421-g"
         ],
         "directProblemIds": [
-          "abc407-g",
-          "abc224-h",
-          "abc231-h",
           "abc247-g",
+          "abc407-g",
           "abc421-g",
-          "abc214-h"
+          "abc214-h",
+          "abc224-h",
+          "abc231-h"
         ],
         "relatedProblemIds": [
           "abc393-g"
@@ -76797,7 +77019,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 143,
+        "globalIndex": 144,
         "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -77399,15 +77621,15 @@
         "directProblemIds": [
           "abc242-g",
           "abc293-g",
-          "abc463-g",
           "abc384-g",
-          "abc405-g"
+          "abc405-g",
+          "abc463-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 8,
-        "globalIndex": 94,
+        "globalIndex": 97,
         "orderReason": "区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。"
       },
       "sourceRevisionIds": [
@@ -77839,22 +78061,21 @@
           "outcome-solve-modular-constraints"
         ],
         "problemIds": [
-          "abc423-g",
           "abc460-e"
         ],
         "directProblemIds": [
-          "abc460-e",
-          "abc423-g"
+          "abc460-e"
         ],
         "relatedProblemIds": [
           "abc245-ex",
           "abc286-f",
-          "abc371-g"
+          "abc371-g",
+          "abc423-g"
         ],
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 1,
-        "globalIndex": 39,
+        "globalIndex": 21,
         "orderReason": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
       },
       "sourceRevisionIds": [
@@ -78163,8 +78384,8 @@
           "abc320-g"
         ],
         "directProblemIds": [
-          "abc319-e",
           "abc228-e",
+          "abc319-e",
           "abc320-g"
         ],
         "relatedProblemIds": [
@@ -78173,7 +78394,7 @@
         "stageRank": 3,
         "difficultyRank": 1,
         "representativeRank": 0,
-        "globalIndex": 83,
+        "globalIndex": 85,
         "orderReason": "剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。"
       },
       "sourceRevisionIds": [
@@ -78699,8 +78920,8 @@
         ],
         "directProblemIds": [
           "abc348-g",
-          "abc383-g",
-          "abc355-g"
+          "abc355-g",
+          "abc383-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -79013,7 +79234,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 81,
+        "globalIndex": 84,
         "orderReason": "長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -79198,7 +79419,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 1,
-        "globalIndex": 57,
+        "globalIndex": 60,
         "orderReason": "結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。"
       },
       "sourceRevisionIds": [
@@ -79373,7 +79594,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 100,
+        "globalIndex": 103,
         "orderReason": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -79493,11 +79714,11 @@
         ],
         "directProblemIds": [
           "abc270-e",
-          "abc395-f",
+          "abc373-e",
           "abc381-e",
           "abc292-f",
-          "abc373-e",
-          "abc303-f"
+          "abc303-f",
+          "abc395-f"
         ],
         "relatedProblemIds": [
           "abc215-f",
@@ -79819,8 +80040,8 @@
         ],
         "directProblemIds": [
           "abc359-e",
-          "abc379-f",
-          "abc228-f"
+          "abc228-f",
+          "abc379-f"
         ],
         "relatedProblemIds": [
           "abc213-f",
@@ -79835,7 +80056,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 7,
-        "globalIndex": 18,
+        "globalIndex": 17,
         "orderReason": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
       },
       "sourceRevisionIds": [
@@ -80094,7 +80315,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 90,
+        "globalIndex": 93,
         "orderReason": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
       },
       "sourceRevisionIds": [
@@ -80466,10 +80687,10 @@
         ],
         "directProblemIds": [
           "abc242-e",
-          "abc219-f",
           "abc250-e",
-          "abc382-g",
-          "abc307-e"
+          "abc307-e",
+          "abc219-f",
+          "abc382-g"
         ],
         "relatedProblemIds": [
           "abc218-h",
@@ -80496,7 +80717,7 @@
         "stageRank": 1,
         "difficultyRank": 1,
         "representativeRank": 2,
-        "globalIndex": 9,
+        "globalIndex": 8,
         "orderReason": "対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。"
       },
       "sourceRevisionIds": [
@@ -81061,9 +81282,9 @@
         ],
         "directProblemIds": [
           "abc380-e",
-          "abc255-ex",
           "abc435-e",
           "abc465-g",
+          "abc255-ex",
           "abc256-ex"
         ],
         "relatedProblemIds": [
@@ -81072,7 +81293,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 79,
-        "globalIndex": 108,
+        "globalIndex": 111,
         "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -81377,7 +81598,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 6,
-        "globalIndex": 22,
+        "globalIndex": 23,
         "orderReason": "比較可能な候補全体から極値・順位・隣接を繰り返し取り出すため、動的な順序を保つ。"
       },
       "sourceRevisionIds": [
@@ -81489,11 +81710,11 @@
           "abc444-e"
         ],
         "directProblemIds": [
-          "abc330-e",
-          "abc306-e",
           "abc281-e",
-          "abc308-g",
+          "abc306-e",
+          "abc330-e",
           "abc444-e",
+          "abc308-g",
           "abc314-g"
         ],
         "relatedProblemIds": [
@@ -81516,7 +81737,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 60,
-        "globalIndex": 25,
+        "globalIndex": 28,
         "orderReason": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -81629,7 +81850,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 3,
-        "globalIndex": 43,
+        "globalIndex": 46,
         "orderReason": "各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。"
       },
       "sourceRevisionIds": [
@@ -81841,7 +82062,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 80,
-        "globalIndex": 114,
+        "globalIndex": 116,
         "orderReason": "単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。"
       },
       "sourceRevisionIds": [
@@ -82275,7 +82496,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 122,
+        "globalIndex": 124,
         "orderReason": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -82496,7 +82717,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 4,
-        "globalIndex": 119,
+        "globalIndex": 121,
         "orderReason": "更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。"
       },
       "sourceRevisionIds": [
@@ -82971,7 +83192,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 8,
-        "globalIndex": 95,
+        "globalIndex": 98,
         "orderReason": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
       },
       "sourceRevisionIds": [
@@ -83223,8 +83444,8 @@
           "abc381-g"
         ],
         "directProblemIds": [
-          "abc272-ex",
-          "abc381-g"
+          "abc381-g",
+          "abc272-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -83668,9 +83889,9 @@
           "abc457-g"
         ],
         "directProblemIds": [
-          "abc237-ex",
+          "abc354-g",
           "abc457-g",
-          "abc354-g"
+          "abc237-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -83990,7 +84211,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 63,
+        "globalIndex": 65,
         "orderReason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -84231,10 +84452,10 @@
           "abc430-f"
         ],
         "directProblemIds": [
+          "abc268-e",
           "abc278-e",
           "abc300-f",
           "abc430-f",
-          "abc268-e",
           "abc260-g"
         ],
         "relatedProblemIds": [
@@ -84387,14 +84608,14 @@
           "abc445-e"
         ],
         "directProblemIds": [
-          "abc445-e",
           "abc259-e",
-          "abc384-f",
           "abc393-e",
           "abc400-e",
           "abc412-e",
-          "abc420-g",
-          "abc322-g"
+          "abc445-e",
+          "abc384-f",
+          "abc322-g",
+          "abc420-g"
         ],
         "relatedProblemIds": [
           "abc212-g",
@@ -84417,7 +84638,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 16,
+        "globalIndex": 15,
         "orderReason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
       },
       "sourceRevisionIds": [
@@ -84597,13 +84818,13 @@
           "abc440-e"
         ],
         "directProblemIds": [
-          "abc391-f",
-          "abc440-e",
           "abc331-e",
-          "abc384-e",
-          "abc252-f",
           "abc376-e",
+          "abc384-e",
           "abc407-e",
+          "abc440-e",
+          "abc252-f",
+          "abc391-f",
           "abc304-ex"
         ],
         "relatedProblemIds": [
@@ -84628,7 +84849,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 57,
-        "globalIndex": 22,
+        "globalIndex": 23,
         "orderReason": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -84878,7 +85099,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 127,
+        "globalIndex": 129,
         "orderReason": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -85179,8 +85400,8 @@
           "abc455-g"
         ],
         "directProblemIds": [
-          "abc272-g",
-          "abc422-e"
+          "abc422-e",
+          "abc272-g"
         ],
         "relatedProblemIds": [
           "abc399-g",
@@ -85189,7 +85410,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 7,
-        "globalIndex": 92,
+        "globalIndex": 95,
         "orderReason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
       },
       "sourceRevisionIds": [
@@ -85519,24 +85740,24 @@
         ],
         "directProblemIds": [
           "abc340-e",
-          "abc382-f",
-          "abc237-g",
+          "abc322-f",
+          "abc327-f",
+          "abc332-f",
+          "abc357-f",
+          "abc360-f",
           "abc371-f",
+          "abc382-f",
           "abc389-f",
           "abc397-f",
-          "abc441-g",
-          "abc265-g",
-          "abc322-f",
-          "abc357-f",
-          "abc426-f",
-          "abc455-f",
-          "abc327-f",
-          "abc346-g",
-          "abc450-f",
-          "abc248-ex",
           "abc417-f",
-          "abc360-f",
-          "abc332-f",
+          "abc426-f",
+          "abc450-f",
+          "abc455-f",
+          "abc237-g",
+          "abc265-g",
+          "abc346-g",
+          "abc441-g",
+          "abc248-ex",
           "abc262-ex"
         ],
         "relatedProblemIds": [
@@ -85546,7 +85767,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 67,
+        "globalIndex": 69,
         "orderReason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
       },
       "sourceRevisionIds": [
@@ -85851,29 +86072,29 @@
           "abc460-f"
         ],
         "directProblemIds": [
-          "abc223-f",
-          "abc343-f",
-          "abc285-f",
-          "abc292-ex",
-          "abc365-f",
-          "abc415-f",
           "abc432-e",
-          "abc434-g",
-          "abc331-f",
-          "abc418-f",
-          "abc440-f",
-          "abc447-g",
+          "abc223-f",
           "abc254-f",
           "abc262-f",
-          "abc299-g",
-          "abc437-f",
           "abc283-f",
+          "abc285-f",
           "abc309-f",
+          "abc331-f",
+          "abc343-f",
           "abc356-f",
+          "abc365-f",
+          "abc415-f",
+          "abc418-f",
+          "abc437-f",
+          "abc440-f",
+          "abc460-f",
+          "abc299-g",
           "abc388-g",
-          "abc266-ex",
+          "abc434-g",
+          "abc447-g",
           "abc246-ex",
-          "abc460-f"
+          "abc266-ex",
+          "abc292-ex"
         ],
         "relatedProblemIds": [
           "abc240-ex",
@@ -85895,7 +86116,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 66,
+        "globalIndex": 68,
         "orderReason": "queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -86108,7 +86329,7 @@
         "baselineVersion": "1.0.0",
         "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
-          "整除性や一次不定方程式の可解判定だけを行う問題、および合同類をCRTで統合する構成。"
+          "Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"
         ],
         "sourceRevisionIds": [
           "source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41",
@@ -86144,7 +86365,7 @@
         "stageRank": 3,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 86,
+        "globalIndex": 88,
         "orderReason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
       },
       "sourceRevisionIds": [
@@ -86376,15 +86597,15 @@
         ],
         "directProblemIds": [
           "abc450-e",
-          "abc350-f",
           "abc346-f",
+          "abc350-f",
           "abc417-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 87,
+        "globalIndex": 90,
         "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
       },
       "sourceRevisionIds": [
@@ -86688,7 +86909,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 69,
-        "globalIndex": 29,
+        "globalIndex": 34,
         "orderReason": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -86940,10 +87161,10 @@
           "abc357-g"
         ],
         "directProblemIds": [
-          "abc213-h",
-          "abc315-ex",
           "abc357-g",
-          "abc281-ex"
+          "abc213-h",
+          "abc281-ex",
+          "abc315-ex"
         ],
         "relatedProblemIds": [
           "abc230-h"
@@ -87304,9 +87525,9 @@
           "abc348-e"
         ],
         "directProblemIds": [
+          "abc348-e",
           "abc220-f",
-          "abc223-g",
-          "abc348-e"
+          "abc223-g"
         ],
         "relatedProblemIds": [
           "abc311-ex",
@@ -87315,7 +87536,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 69,
+        "globalIndex": 71,
         "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -87537,12 +87758,12 @@
           "abc464-e"
         ],
         "directProblemIds": [
-          "abc346-e",
           "abc229-e",
-          "abc249-f",
           "abc264-e",
           "abc329-e",
-          "abc464-e"
+          "abc346-e",
+          "abc464-e",
+          "abc249-f"
         ],
         "relatedProblemIds": [
           "abc238-ex",
@@ -87553,7 +87774,7 @@
         "stageRank": 2,
         "difficultyRank": 1,
         "representativeRank": 2,
-        "globalIndex": 36,
+        "globalIndex": 40,
         "orderReason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
       },
       "sourceRevisionIds": [
@@ -87871,15 +88092,15 @@
           "abc363-g"
         ],
         "directProblemIds": [
-          "abc302-ex",
           "abc218-g",
-          "abc363-g"
+          "abc363-g",
+          "abc302-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 83,
-        "globalIndex": 119,
+        "globalIndex": 121,
         "orderReason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -88194,22 +88415,22 @@
         "directProblemIds": [
           "abc239-e",
           "abc309-e",
-          "abc409-e",
           "abc391-e",
-          "abc263-f",
-          "abc394-f",
-          "abc312-g",
-          "abc378-f",
-          "abc447-f",
           "abc397-e",
-          "abc259-f",
+          "abc409-e",
           "abc459-e",
+          "abc259-f",
+          "abc263-f",
           "abc287-f",
+          "abc378-f",
+          "abc394-f",
           "abc416-f",
-          "abc248-g",
+          "abc447-f",
           "abc246-g",
-          "abc293-ex",
-          "abc264-ex"
+          "abc248-g",
+          "abc312-g",
+          "abc264-ex",
+          "abc293-ex"
         ],
         "relatedProblemIds": [
           "abc269-ex",
@@ -88226,7 +88447,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 63,
-        "globalIndex": 55,
+        "globalIndex": 58,
         "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -88837,7 +89058,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 71,
-        "globalIndex": 61,
+        "globalIndex": 25,
         "orderReason": "DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -89185,7 +89406,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 78,
-        "globalIndex": 107,
+        "globalIndex": 110,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -89373,15 +89594,15 @@
           "abc445-f"
         ],
         "directProblemIds": [
-          "abc236-g",
+          "abc429-f",
           "abc445-f",
-          "abc429-f"
+          "abc236-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 91,
-        "globalIndex": 140,
+        "globalIndex": 141,
         "orderReason": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -89681,17 +89902,17 @@
           "abc389-e"
         ],
         "directProblemIds": [
-          "abc389-e",
           "abc216-e",
+          "abc389-e",
           "abc359-f",
-          "abc369-g",
-          "abc373-f"
+          "abc373-f",
+          "abc369-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 77,
-        "globalIndex": 106,
+        "globalIndex": 109,
         "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
       },
       "sourceRevisionIds": [
@@ -90011,9 +90232,9 @@
         ],
         "directProblemIds": [
           "abc288-g",
-          "abc220-h",
+          "abc367-g",
           "abc212-h",
-          "abc367-g"
+          "abc220-h"
         ],
         "relatedProblemIds": [
           "abc265-ex"
@@ -90021,7 +90242,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 128,
+        "globalIndex": 130,
         "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -90296,7 +90517,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 73,
-        "globalIndex": 64,
+        "globalIndex": 66,
         "orderReason": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -90489,6 +90710,7 @@
           "abc363-e",
           "abc369-e",
           "abc375-f",
+          "abc375-g",
           "abc395-e",
           "abc404-g",
           "abc416-e",
@@ -90503,7 +90725,6 @@
           "abc261-g",
           "abc355-e",
           "abc364-g",
-          "abc375-g",
           "abc393-g",
           "abc395-g",
           "abc414-g",
@@ -90512,7 +90733,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 1,
-        "globalIndex": 71,
+        "globalIndex": 73,
         "orderReason": "辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。"
       },
       "sourceRevisionIds": [
@@ -90852,7 +91073,7 @@
         "stageRank": 2,
         "difficultyRank": 4,
         "representativeRank": 92,
-        "globalIndex": 82,
+        "globalIndex": 74,
         "orderReason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
       },
       "sourceRevisionIds": [
@@ -91152,10 +91373,10 @@
           "abc458-g"
         ],
         "directProblemIds": [
-          "abc217-h",
           "abc250-g",
-          "abc458-g",
           "abc406-g",
+          "abc458-g",
+          "abc217-h",
           "abc275-ex"
         ],
         "relatedProblemIds": [],
@@ -91497,6 +91718,7 @@
           "outcome-merge-small-into-large"
         ],
         "problemIds": [
+          "abc273-ex",
           "abc324-g",
           "abc329-f",
           "abc411-f",
@@ -91506,12 +91728,12 @@
         "directProblemIds": [
           "abc329-f",
           "abc411-f",
-          "abc454-g",
+          "abc451-f",
           "abc324-g",
-          "abc451-f"
+          "abc454-g",
+          "abc273-ex"
         ],
         "relatedProblemIds": [
-          "abc273-ex",
           "abc275-ex",
           "abc369-g",
           "abc462-g"
@@ -91519,7 +91741,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 72,
-        "globalIndex": 101,
+        "globalIndex": 104,
         "orderReason": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -91533,7 +91755,95 @@
       "evidenceRefs": [
         {
           "problemId": "abc273-ex",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
           "claimPath": "/prerequisiteCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/reasoningPath/candidateApproaches/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -91738,11 +92048,11 @@
           "abc383-e"
         ],
         "directProblemIds": [
+          "abc218-e",
           "abc282-e",
           "abc352-e",
-          "abc355-f",
-          "abc218-e",
           "abc270-f",
+          "abc355-f",
           "abc364-f"
         ],
         "relatedProblemIds": [
@@ -91751,7 +92061,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 3,
-        "globalIndex": 51,
+        "globalIndex": 54,
         "orderReason": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
       },
       "sourceRevisionIds": [
@@ -92055,17 +92365,17 @@
           "abc446-f"
         ],
         "directProblemIds": [
-          "abc302-f",
-          "abc241-f",
-          "abc244-f",
           "abc289-e",
           "abc394-e",
-          "abc414-f",
+          "abc417-e",
+          "abc427-e",
           "abc429-e",
           "abc446-e",
-          "abc446-f",
-          "abc417-e",
-          "abc427-e"
+          "abc241-f",
+          "abc244-f",
+          "abc302-f",
+          "abc414-f",
+          "abc446-f"
         ],
         "relatedProblemIds": [
           "abc257-g",
@@ -92082,7 +92392,7 @@
         "stageRank": 1,
         "difficultyRank": 2,
         "representativeRank": 43,
-        "globalIndex": 19,
+        "globalIndex": 18,
         "orderReason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -92325,7 +92635,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 125,
+        "globalIndex": 127,
         "orderReason": "Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -92440,8 +92750,8 @@
           "abc460-g"
         ],
         "directProblemIds": [
-          "abc460-g",
-          "abc351-g"
+          "abc351-g",
+          "abc460-g"
         ],
         "relatedProblemIds": [],
         "stageRank": 4,
@@ -92873,7 +93183,7 @@
           "unit-gcd-structure"
         ],
         "excludedTopics": [
-          "Stern–Brocot木の経路と祖先の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+          "分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。"
         ],
         "sourceRevisionIds": [
           "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
@@ -92891,17 +93201,15 @@
         "ownedLearningOutcomeIds": [
           "outcome-traverse-stern-brocot-ancestors"
         ],
-        "problemIds": [
+        "problemIds": [],
+        "directProblemIds": [],
+        "relatedProblemIds": [
           "abc273-ex"
         ],
-        "directProblemIds": [
-          "abc273-ex"
-        ],
-        "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 90,
-        "globalIndex": 138,
+        "globalIndex": 89,
         "orderReason": "gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–Brocot木の経路と祖先の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -92912,6 +93220,17 @@
         {
           "problemId": "abc273-ex",
           "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/prerequisiteCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -92996,6 +93315,17 @@
             "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
             "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
           ]
+        },
+        {
+          "problemId": "abc273-ex",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+            "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+          ]
         }
       ],
       "materializationTask": "T050"
@@ -93048,7 +93378,7 @@
         "stageRank": 0,
         "difficultyRank": 3,
         "representativeRank": 2,
-        "globalIndex": 65,
+        "globalIndex": 67,
         "orderReason": "未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。"
       },
       "sourceRevisionIds": [
@@ -93343,7 +93673,7 @@
       "entity": {
         "id": "unit-string-hash",
         "kind": "section",
-        "title": "Fingerprintで列・集合・式の同値性を比較する",
+        "title": "Rolling fingerprintで列の同値性を比較する",
         "parentId": "unit-chapter-query",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -93374,8 +93704,8 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 9,
-        "globalIndex": 64,
-        "orderReason": "列・集合・式を合成可能なfingerprintへ写し、衝突条件を意識して同値性を比較する。"
+        "globalIndex": 66,
+        "orderReason": "列の順序と長さを保つrolling fingerprintを作り、連結・部分列の切り出し・回文比較へ使う。集合や代数式の乱択fingerprintは乱択アルゴリズムの単元で扱う。"
       },
       "sourceRevisionIds": [
         "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838",
@@ -93549,7 +93879,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 105,
+        "globalIndex": 108,
         "orderReason": "Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -93653,13 +93983,13 @@
       "entity": {
         "id": "unit-string-prefix-automata",
         "kind": "section",
-        "title": "接頭辞の一致状態とオートマトン",
+        "title": "接頭辞との一致長を再利用する",
         "parentId": "unit-chapter-string",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "additionalPrerequisiteUnitIds": [],
         "excludedTopics": [
-          "接尾辞・LCPの索引、文字列hash、回文半径。"
+          "接尾辞・LCPの索引、文字列hash、回文半径。KMPのfailure linkによる逐次照合も本Unitの対象に含めない。"
         ],
         "sourceRevisionIds": [
           "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
@@ -93691,8 +94021,8 @@
         "stageRank": 0,
         "difficultyRank": 1,
         "representativeRank": 1,
-        "globalIndex": 30,
-        "orderReason": "接頭辞と接尾辞の一致長を状態化し、失敗時の遷移を再利用して照合を線形化する。"
+        "globalIndex": 35,
+        "orderReason": "各位置から接頭辞との一致長を求める。既に得られた一致区間の情報を再利用し、Z algorithmで全位置を線形時間に処理する。"
       },
       "sourceRevisionIds": [
         "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
@@ -94058,16 +94388,16 @@
           "abc423-f"
         ],
         "directProblemIds": [
-          "abc423-f",
-          "abc295-ex",
           "abc349-f",
-          "abc215-h"
+          "abc423-f",
+          "abc215-h",
+          "abc295-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 86,
-        "globalIndex": 126,
+        "globalIndex": 128,
         "orderReason": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -94495,18 +94825,18 @@
           "abc452-g"
         ],
         "directProblemIds": [
+          "abc213-f",
           "abc272-f",
           "abc362-g",
           "abc452-g",
-          "abc213-f",
-          "abc280-ex",
-          "abc268-ex"
+          "abc268-ex",
+          "abc280-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 88,
+        "globalIndex": 91,
         "orderReason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
       },
       "sourceRevisionIds": [
@@ -94826,7 +95156,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 88,
-        "globalIndex": 131,
+        "globalIndex": 133,
         "orderReason": "区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -94955,11 +95285,11 @@
           "abc365-g"
         ],
         "directProblemIds": [
-          "abc219-g",
           "abc335-f",
+          "abc219-g",
           "abc350-g",
-          "abc259-ex",
-          "abc365-g"
+          "abc365-g",
+          "abc259-ex"
         ],
         "relatedProblemIds": [
           "abc345-g"
@@ -94967,7 +95297,7 @@
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 74,
-        "globalIndex": 104,
+        "globalIndex": 107,
         "orderReason": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -95260,7 +95590,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 55,
-        "globalIndex": 50,
+        "globalIndex": 53,
         "orderReason": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -95549,7 +95879,7 @@
         "stageRank": 0,
         "difficultyRank": 2,
         "representativeRank": 6,
-        "globalIndex": 55,
+        "globalIndex": 58,
         "orderReason": "探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。"
       },
       "sourceRevisionIds": [
@@ -95838,10 +96168,10 @@
           "abc438-f"
         ],
         "directProblemIds": [
-          "abc294-g",
           "abc267-f",
-          "abc329-g",
           "abc438-f",
+          "abc294-g",
+          "abc329-g",
           "abc298-ex"
         ],
         "relatedProblemIds": [
@@ -95851,7 +96181,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 68,
-        "globalIndex": 59,
+        "globalIndex": 62,
         "orderReason": "doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -96147,15 +96477,15 @@
           "abc453-f"
         ],
         "directProblemIds": [
-          "abc291-ex",
+          "abc453-f",
           "abc359-g",
-          "abc453-f"
+          "abc291-ex"
         ],
         "relatedProblemIds": [],
         "stageRank": 3,
         "difficultyRank": 3,
         "representativeRank": 8,
-        "globalIndex": 96,
+        "globalIndex": 99,
         "orderReason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
       },
       "sourceRevisionIds": [
@@ -96480,7 +96810,7 @@
         "stageRank": 0,
         "difficultyRank": 3,
         "representativeRank": 7,
-        "globalIndex": 58,
+        "globalIndex": 61,
         "orderReason": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
       },
       "sourceRevisionIds": [
@@ -96797,7 +97127,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 67,
-        "globalIndex": 58,
+        "globalIndex": 61,
         "orderReason": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -97075,11 +97405,11 @@
         ],
         "directProblemIds": [
           "abc303-e",
-          "abc222-f",
+          "abc361-e",
           "abc428-e",
           "abc221-f",
-          "abc401-f",
-          "abc361-e"
+          "abc222-f",
+          "abc401-f"
         ],
         "relatedProblemIds": [
           "abc267-f",
@@ -97088,7 +97418,7 @@
         "stageRank": 2,
         "difficultyRank": 1,
         "representativeRank": 5,
-        "globalIndex": 37,
+        "globalIndex": 41,
         "orderReason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
       },
       "sourceRevisionIds": [
@@ -97727,8 +98057,8 @@
         "directProblemIds": [
           "abc260-e",
           "abc294-e",
-          "abc337-f",
-          "abc215-f"
+          "abc215-f",
+          "abc337-f"
         ],
         "relatedProblemIds": [
           "abc250-f",
@@ -98114,7 +98444,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 84,
-        "globalIndex": 123,
+        "globalIndex": 125,
         "orderReason": "SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -98250,7 +98580,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 70,
+        "globalIndex": 72,
         "orderReason": "値軸を長さBのblockに分け、完全blockの要約と端数の走査を合成する。点更新とqueryの回数を別々に数え、O(1)更新とO(V/B+B)の値prefix取得を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -98325,7 +98655,7 @@
         "stageRank": 3,
         "difficultyRank": 4,
         "representativeRank": 87,
-        "globalIndex": 129,
+        "globalIndex": 131,
         "orderReason": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -98593,30 +98923,30 @@
           "abc461-e"
         ],
         "directProblemIds": [
-          "abc461-e",
+          "abc221-e",
           "abc341-e",
-          "abc441-e",
-          "abc256-f",
-          "abc287-g",
-          "abc276-f",
-          "abc261-f",
-          "abc296-f",
           "abc378-e",
+          "abc441-e",
+          "abc449-e",
+          "abc461-e",
+          "abc231-f",
+          "abc253-f",
+          "abc256-f",
+          "abc261-f",
+          "abc276-f",
+          "abc296-f",
+          "abc306-f",
+          "abc351-f",
           "abc392-f",
           "abc396-f",
-          "abc449-e",
-          "abc452-f",
-          "abc253-f",
-          "abc351-f",
-          "abc231-f",
-          "abc368-g",
           "abc436-f",
-          "abc438-g",
-          "abc221-e",
-          "abc306-f",
+          "abc439-f",
+          "abc452-f",
+          "abc287-g",
+          "abc368-g",
           "abc380-g",
           "abc431-g",
-          "abc439-f"
+          "abc438-g"
         ],
         "relatedProblemIds": [
           "abc233-ex",
@@ -98629,7 +98959,7 @@
         "stageRank": 2,
         "difficultyRank": 2,
         "representativeRank": 2,
-        "globalIndex": 40,
+        "globalIndex": 43,
         "orderReason": "静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。"
       },
       "sourceRevisionIds": [
@@ -98900,6 +99230,7 @@
           "abc363-e",
           "abc369-e",
           "abc375-f",
+          "abc375-g",
           "abc395-e",
           "abc416-e",
           "abc431-e",
@@ -98908,30 +99239,31 @@
         "directProblemIds": [
           "abc213-e",
           "abc237-e",
-          "abc325-e",
-          "abc245-g",
           "abc246-e",
+          "abc271-e",
           "abc277-e",
           "abc286-e",
-          "abc291-f",
+          "abc297-e",
+          "abc301-e",
+          "abc305-e",
+          "abc325-e",
           "abc342-e",
           "abc363-e",
+          "abc369-e",
           "abc395-e",
           "abc416-e",
           "abc431-e",
           "abc463-e",
-          "abc232-g",
-          "abc243-ex",
           "abc257-f",
-          "abc369-e",
-          "abc264-g",
-          "abc297-e",
-          "abc305-e",
-          "abc375-f",
+          "abc291-f",
           "abc307-f",
-          "abc271-e",
-          "abc301-e",
-          "abc338-f"
+          "abc338-f",
+          "abc375-f",
+          "abc232-g",
+          "abc245-g",
+          "abc264-g",
+          "abc375-g",
+          "abc243-ex"
         ],
         "relatedProblemIds": [
           "abc218-f",
@@ -98941,7 +99273,6 @@
           "abc261-g",
           "abc308-ex",
           "abc364-g",
-          "abc375-g",
           "abc393-g",
           "abc395-g",
           "abc414-g",
@@ -98950,7 +99281,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 75,
-        "globalIndex": 71,
+        "globalIndex": 73,
         "orderReason": "基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。"
       },
       "sourceRevisionIds": [
@@ -99194,8 +99525,8 @@
         "directProblemIds": [
           "abc249-g",
           "abc283-g",
-          "abc223-h",
-          "abc451-g"
+          "abc451-g",
+          "abc223-h"
         ],
         "relatedProblemIds": [
           "abc236-f"
@@ -99203,7 +99534,7 @@
         "stageRank": 2,
         "difficultyRank": 3,
         "representativeRank": 79,
-        "globalIndex": 74,
+        "globalIndex": 78,
         "orderReason": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -99436,8 +99767,8 @@
         "directProblemIds": [
           "abc430-e",
           "abc284-f",
-          "abc257-g",
-          "abc434-f"
+          "abc434-f",
+          "abc257-g"
         ],
         "relatedProblemIds": [
           "abc312-ex",
@@ -99446,7 +99777,7 @@
         "stageRank": 1,
         "difficultyRank": 3,
         "representativeRank": 71,
-        "globalIndex": 30,
+        "globalIndex": 35,
         "orderReason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
@@ -100830,7 +101161,6 @@
     "unit-modular-arithmetic",
     "unit-trie-prefix",
     "unit-dp-grid-table",
-    "unit-gcd-diophantine",
     "unit-normalization",
     "unit-bipartite-structure",
     "unit-contribution-reordering",
@@ -100843,25 +101173,29 @@
     "unit-monotone-stack-queue",
     "unit-state-graph-search",
     "unit-gcd-structure",
+    "unit-gcd-diophantine",
+    "unit-modular-congruence",
     "unit-dag-topological-processing",
     "unit-priority-queue-best-first",
     "unit-dsu-components",
+    "unit-scc-condensation",
+    "unit-lowlink-critical-structure",
     "unit-constructive-witness",
     "unit-ordered-set-multiset",
     "unit-amortized-monotone-progress",
     "unit-dp-sequence",
+    "unit-dp-lis",
+    "unit-dp-prefix-partition",
     "unit-meet-in-the-middle",
     "unit-recursive-divide-and-conquer",
     "unit-z-algorithm",
     "unit-backtracking-search",
-    "unit-dp-prefix-partition",
     "unit-graph-potential-propagation",
     "unit-dp-subset-resource",
     "unit-event-sweep",
     "unit-reverse-offline",
     "unit-tree-metric",
     "unit-dynamic-modular-product",
-    "unit-modular-congruence",
     "unit-weighted-prefix-fenwick",
     "unit-dp-carry-mixed-radix",
     "unit-integer-boundary-blocks",
@@ -100883,7 +101217,6 @@
     "unit-tree-euler-flattening",
     "unit-tree-ancestor-lca",
     "unit-graph-core",
-    "unit-scc-condensation",
     "unit-linear-system-rank",
     "unit-potential-dsu",
     "unit-sequence-fingerprint",
@@ -100894,21 +101227,22 @@
     "unit-rerooting",
     "unit-value-bucket-aggregation",
     "unit-weighted-shortest-path",
+    "unit-shortest-path-reconstruction",
+    "unit-difference-constraints",
     "unit-dp-interval-composition",
     "unit-euler-trail-circuit",
     "unit-xor-linear-basis",
     "unit-dp-interval-expansion",
-    "unit-dp-lis",
     "unit-dp-value-range",
     "unit-bipartite-matching",
     "unit-digit-dp",
     "unit-max-flow-min-cut",
     "unit-monoid-exponentiation",
-    "unit-shortest-path-reconstruction",
     "unit-modular-periodicity",
     "unit-implicit-binary-tree",
     "unit-interactive-protocol",
     "unit-rational-approximation",
+    "unit-stern-brocot-ancestry",
     "unit-recursive-compressed-string",
     "unit-suffix-lcp-index",
     "unit-change-impact-localization",
@@ -100932,7 +101266,6 @@
     "unit-segment-tree-canonical-decomposition",
     "unit-ordered-interval-partition",
     "unit-generating-functions",
-    "unit-lowlink-critical-structure",
     "unit-automaton-dp",
     "unit-convex-boundary-hull",
     "unit-heavy-light-decomposition",
@@ -100960,13 +101293,11 @@
     "unit-binary-tree-ancestor-matching",
     "unit-bitwise-minimax-partition",
     "unit-cyclic-minimax-game",
-    "unit-stern-brocot-ancestry",
     "unit-flow-lower-bounds",
     "unit-semiring-matrix-exponentiation",
     "unit-cycle-space-basis",
     "unit-directed-walk-periodicity",
     "unit-min-cost-flow",
-    "unit-difference-constraints",
     "unit-kruskal-threshold-sweep",
     "unit-line-envelope",
     "unit-near-tree-kernelization",
@@ -157861,22 +158192,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「許可された高々2方向の組を全列挙して非負整数係数を解き、さらに各axis moveを1回先に使った残targetでも同じpair列挙を行う。」、解法への接続「integer lattice shortest walkをexchange argumentでconstant-support representationsへ縮約し、小さなDiophantine systemsの全列挙で解く。」、学習成果「巨大座標へのminimum move countを、少数方向表現の定数個判定として求められる。」を照合し、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「許可された高々2方向の組を全列挙して非負整数係数を解き、さらに各axis moveを1回先に使った残targetでも同じpair列挙を行う。」、解法への接続「integer lattice shortest walkをexchange argumentでconstant-support representationsへ縮約し、小さなDiophantine systemsの全列挙で解く。」、学習成果「巨大座標へのminimum move countを、少数方向表現の定数個判定として求められる。」を照合し、tag-bezout-diophantine / outcome-characterize-integer-solvability をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bezout-diophantine",
-        "tag-bounded-enumeration"
+        "tag-bezout-diophantine"
       ],
       "supportingTagIds": [
+        "tag-bounded-enumeration",
         "tag-greedy-exchange-order"
       ],
-      "primaryOutcomeId": "outcome-enumerate-bounded-candidates-or-cases",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-characterize-integer-solvability"
-      ],
+      "primaryOutcomeId": "outcome-characterize-integer-solvability",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases",
         "outcome-prove-greedy-order"
       ],
       "learningUnitIds": [
@@ -157884,7 +158214,7 @@
         "unit-gcd-diophantine",
         "unit-greedy-exchange"
       ],
-      "presentationUnitId": "unit-bounded-enumeration",
+      "presentationUnitId": "unit-gcd-diophantine",
       "adHocElements": [
         "rotation/reflection symmetryで方向pairの形をさらに定数個へ標準化できるが、8方向全pairを直接列挙しても十分小さい。（再利用可能な見方: 操作集合が小さくtargetが巨大な最短walkでは、探索空間よりoptimal representationのsupport boundを探す。）"
       ],
@@ -157919,11 +158249,11 @@
               "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-bounded-enumeration"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -159740,24 +160070,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。」、解法への接続「mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。」、学習成果「全consecutive subarraysのmediant insertion minimum countsをcompressed fraction treeで合計できる。」を照合し、tag-stern-brocot-ancestry / outcome-traverse-stern-brocot-ancestors をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-ordered-set-multiset; 補助Outcome=outcome-maintain-ordered-set-statistics; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-ordered-set-multiset / outcome-maintain-ordered-set-statistics を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。; 補助Tag=tag-small-to-large; 補助Outcome=outcome-merge-small-into-large; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-small-to-large / outcome-merge-small-into-large を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。」、解法への接続「mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。」、学習成果「全consecutive subarraysのmediant insertion minimum countsをcompressed fraction treeで合計できる。」を照合し、tag-small-to-large / outcome-merge-small-into-large をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-ordered-set-multiset; 補助Outcome=outcome-maintain-ordered-set-statistics; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-ordered-set-multiset / outcome-maintain-ordered-set-statistics を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-small-to-large",
         "tag-stern-brocot-ancestry"
       ],
       "supportingTagIds": [
         "tag-ordered-set-multiset",
-        "tag-recursive-divide-and-conquer",
-        "tag-small-to-large"
+        "tag-recursive-divide-and-conquer"
       ],
-      "primaryOutcomeId": "outcome-traverse-stern-brocot-ancestors",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-merge-small-into-large",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-traverse-stern-brocot-ancestors"
+      ],
       "supportingOutcomeIds": [
         "outcome-divide-search-space-recursively",
-        "outcome-maintain-ordered-set-statistics",
-        "outcome-merge-small-into-large"
+        "outcome-maintain-ordered-set-statistics"
       ],
       "learningUnitIds": [
         "unit-ordered-set-multiset",
@@ -159765,7 +160096,7 @@
         "unit-small-to-large",
         "unit-stern-brocot-ancestry"
       ],
-      "presentationUnitId": "unit-stern-brocot-ancestry",
+      "presentationUnitId": "unit-small-to-large",
       "adHocElements": [
         "非primitive pairを含むsubarrayは実現不能でf=0なので、primitive targetsだけからなる連続区間を独立に処理し、invalid positionを境界にする。（再利用可能な見方: 定義がimpossible caseを0にする集計では、invalid elementを含むrangesを単に除外し、valid runsへ分割する。）"
       ],
@@ -159818,10 +160149,27 @@
               "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
             ]
           },
+          "kind": "primary",
+          "tagIds": [
+            "tag-small-to-large"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc273-ex",
+            "claimPath": "/typicalTechniques/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+              "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+            ]
+          },
           "kind": "supporting",
           "tagIds": [
-            "tag-ordered-set-multiset",
-            "tag-small-to-large"
+            "tag-ordered-set-multiset"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -159855,10 +160203,27 @@
               "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
             ]
           },
+          "kind": "primary",
+          "tagIds": [
+            "tag-small-to-large"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc273-ex",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+              "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+            ]
+          },
           "kind": "supporting",
           "tagIds": [
-            "tag-ordered-set-multiset",
-            "tag-small-to-large"
+            "tag-ordered-set-multiset"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -247238,26 +247603,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「1 と N から Dijkstra を行って最短路辺を抽出し、その部分グラフで橋となる辺を Yes と判定する。」、解法への接続「両端からの距離を求め、等式を満たす辺で G' を作る。G' に lowlink を適用して橋を列挙し、元の辺が G' の橋なら Yes、それ以外は No とする。」、学習成果「全ての最短路に共通する道路を、最短路部分グラフの橋として線形対数時間で判定できる。」を照合し、tag-lowlink-critical-structure / outcome-identify-bridges-and-articulations をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-model-and-compute-shortest-path; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-model-and-compute-shortest-path を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「1 と N から Dijkstra を行って最短路辺を抽出し、その部分グラフで橋となる辺を Yes と判定する。」、解法への接続「両端からの距離を求め、等式を満たす辺で G' を作る。G' に lowlink を適用して橋を列挙し、元の辺が G' の橋なら Yes、それ以外は No とする。」、学習成果「全ての最短路に共通する道路を、最短路部分グラフの橋として線形対数時間で判定できる。」を照合し、tag-shortest-path / outcome-model-and-compute-shortest-path をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-lowlink-critical-structure"
-      ],
-      "supportingTagIds": [
+        "tag-lowlink-critical-structure",
         "tag-shortest-path"
       ],
-      "primaryOutcomeId": "outcome-identify-bridges-and-articulations",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-model-and-compute-shortest-path"
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-model-and-compute-shortest-path",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-identify-bridges-and-articulations"
       ],
+      "supportingOutcomeIds": [],
       "learningUnitIds": [
         "unit-lowlink-critical-structure",
         "unit-weighted-shortest-path"
       ],
-      "presentationUnitId": "unit-lowlink-critical-structure",
+      "presentationUnitId": "unit-weighted-shortest-path",
       "adHocElements": [
         "全最短路の交差を直接数えず、最短路だけからなるグラフへ制限して通常の必須辺問題に戻す。（再利用可能な見方: 距離の等式は候補性、橋は普遍性をそれぞれ担当する二段階判定である。）"
       ],
@@ -247274,11 +247638,11 @@
               "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -247328,11 +247692,11 @@
               "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -259350,26 +259714,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする」、解法への接続「queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。」、学習成果「prefix・値上限付きLIS queryを、通常tails DPの途中状態へoffline接続して高速回答できる。」を照合し、tag-lis-state / outcome-design-lis-frontier をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする」、解法への接続「queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。」、学習成果「prefix・値上限付きLIS queryを、通常tails DPの途中状態へoffline接続して高速回答できる。」を照合し、tag-event-sweep / outcome-linearize-events をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-event-sweep",
         "tag-lis-state"
       ],
-      "supportingTagIds": [
-        "tag-event-sweep"
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-linearize-events",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-design-lis-frontier"
       ],
-      "primaryOutcomeId": "outcome-design-lis-frontier",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-linearize-events"
-      ],
+      "supportingOutcomeIds": [],
       "learningUnitIds": [
         "unit-dp-lis",
         "unit-event-sweep"
       ],
-      "presentationUnitId": "unit-dp-lis",
+      "presentationUnitId": "unit-event-sweep",
       "adHocElements": [
         "「各要素≤X」という制約はLIS DPへ新しい次元を足さず、最小末尾dpの値境界を読むだけで表せる。（再利用可能な見方: prefix subsequence queryでは、標準online DPのfrontierにquery条件が直接binary searchできないか確認する。）"
       ],
@@ -259386,11 +259749,11 @@
               "source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-event-sweep"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -282110,26 +282473,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「前後追加桁数を分け、小さい側を列挙して線形合同式を解く」、解法への接続「S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。」、学習成果「Kのmultipleでdecimal表現にSを含む最小正整数を構成できる。」を照合し、tag-modular-congruence-crt / outcome-solve-modular-constraints をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-meet-in-the-middle; 補助Outcome=outcome-split-enumeration-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-meet-in-the-middle / outcome-split-enumeration-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「前後追加桁数を分け、小さい側を列挙して線形合同式を解く」、解法への接続「S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。」、学習成果「Kのmultipleでdecimal表現にSを含む最小正整数を構成できる。」を照合し、tag-meet-in-the-middle / outcome-split-enumeration-space をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-meet-in-the-middle",
         "tag-modular-congruence-crt"
       ],
-      "supportingTagIds": [
-        "tag-meet-in-the-middle"
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-split-enumeration-space",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-solve-modular-constraints"
       ],
-      "primaryOutcomeId": "outcome-solve-modular-constraints",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-split-enumeration-space"
-      ],
+      "supportingOutcomeIds": [],
       "learningUnitIds": [
         "unit-meet-in-the-middle",
         "unit-modular-congruence"
       ],
-      "presentationUnitId": "unit-modular-congruence",
+      "presentationUnitId": "unit-meet-in-the-middle",
       "adHocElements": [
         "解の数値比較は巨大整数化せず、leading zero除去後の桁数とdecimal lexicographic順で比較できる。（再利用可能な見方: 巨大非負整数候補はcanonical decimal stringの(length,lex)で順序付ける。）"
       ],
@@ -282164,11 +282526,11 @@
               "source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-meet-in-the-middle"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -392097,8 +392459,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "88a020b750b5a3a6f33715d84af5c8e376c57ac399f4b66f5c7773ddf9613066",
-      "subjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
+      "digest": "77180ea3d1034bcdc8a475f9db9a7ddf642d3b6f29dbfd2b02383fd2e68f3f9c",
+      "subjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
       "authorIds": [
         "person-maintainer"
       ],
@@ -392109,16 +392471,16 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "3f197818d145a9886d107b316ee79444019cf6cc2b705058cbf0ca1626d86146",
-  "taxonomyDigest": "12d804075b6a580ab5a5d628644855eae16b1196d85c57dafd9cdd2237b420c6",
+  "taxonomySubjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
+  "taxonomyDigest": "dc3eb739366abc60d6d84a9c1150a1ade35aa9d294c5ae4922b48764d28fe38e",
   "tagDagDigest": "dfe87d8e728cbc39f5c2f8c48d48b640354617a5acccb40a4b1831e11c87a21e",
   "learningUnitDagDigest": "f6a96773c045380632e784e5906e32616587c620734bc314a0dc5a3d0470ddca",
-  "orderDigest": "adc847b0ba5c6d0f638950b1e73cc07a94c247cbca1d53cc7169ff51793ab3a3",
-  "placementDigest": "bdb8509c7c6abe1517fd1a0b81a6bdcffa53f35533151d3156e87bc115c1c407",
+  "orderDigest": "dad14139c7ab38102d76d636f6739f166805ac34829282ebbcd95078284763ed",
+  "placementDigest": "b33ff3d53e65144db4add972d4786155630655369a21803e4feaad2847c4c7de",
   "correctionImpactDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467",
   "status": "accepted",
-  "acceptedAt": "2026-09-13T09:09:50.944Z",
+  "acceptedAt": "2026-09-14T08:43:04.226Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8"
+  "buildDigest": "adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9"
 }

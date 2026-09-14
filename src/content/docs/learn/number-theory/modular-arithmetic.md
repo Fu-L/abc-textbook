@@ -1,6 +1,6 @@
 ---
 title: "法上の四則演算・高速累乗・逆元"
-description: "法上の四則演算・高速累乗・逆元の概念と、基礎から応用へ読む問題一覧。"
+description: "「法上の四則演算・高速累乗・逆元」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 5
@@ -22,11 +22,13 @@ sidebar:
 
 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
+### このUnitでは扱わないもの
+
 - 法 m で剰余 0 となる因子数と可逆な非零剰余因子の積を分けて因子差し替えを処理する動的積、複数の合同条件を統合する一次合同・CRT、および剰余列の最小周期を求める問題。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -107,4 +109,4 @@ sidebar:
 - [ABC221 E 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_e)
 - [ABC221 E 公式解説](https://atcoder.jp/contests/abc221/editorial/2718)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-modular-arithmetic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-modular-arithmetic`

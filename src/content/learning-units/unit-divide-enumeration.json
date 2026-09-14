@@ -37,6 +37,7 @@
     "abc336-f",
     "abc402-f",
     "abc413-e",
+    "abc423-g",
     "abc427-f",
     "abc464-f"
   ],
@@ -64,7 +65,6 @@
     "abc381-g",
     "abc383-g",
     "abc385-g",
-    "abc423-g",
     "abc425-g",
     "abc426-g",
     "abc439-g"
@@ -74,6 +74,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 4,
-  "globalIndex": 28,
+  "globalIndex": 33,
   "orderReason": "探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。"
 }

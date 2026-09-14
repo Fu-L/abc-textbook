@@ -92,6 +92,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 22,
+  "globalIndex": 23,
   "orderReason": "比較可能な候補全体から極値・順位・隣接を繰り返し取り出すため、動的な順序を保つ。"
 }

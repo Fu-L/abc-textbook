@@ -1,4 +1,8 @@
-import { isCurriculumUnit, unitNavigationIndices } from '../../taxonomy/learning-unit-order.js';
+import {
+  isCurriculumUnit,
+  orderCurriculumUnits,
+  unitNavigationIndices,
+} from '../../taxonomy/learning-unit-order.js';
 import { z } from 'zod';
 
 import { defineZodContractSchema, strictObject, uniqueArray } from '../contract-schema.js';
@@ -2108,39 +2112,19 @@ const deterministicFinalLearningUnitOrder = (
   units: readonly z.infer<typeof LearningUnitTaxonomyCandidateSchema>[],
   edges: readonly { readonly nodeId: string; readonly prerequisiteId: string }[],
 ): string[] => {
-  const remaining = new Map(
-    units.map((unit) => [
-      unit.id,
-      new Set(
-        edges
+  try {
+    return orderCurriculumUnits(
+      units.map((unit) => ({
+        ...unit,
+        prerequisiteIds: edges
           .filter(({ nodeId }) => nodeId === unit.id)
           .map(({ prerequisiteId }) => prerequisiteId),
-      ),
-    ]),
-  );
-  const unitById = new Map(units.map((unit) => [unit.id, unit]));
-  const result: string[] = [];
-  while (remaining.size > 0) {
-    const ready = [...remaining.entries()]
-      .filter(([, dependencies]) => dependencies.size === 0)
-      .map(([id]) => unitById.get(id))
-      .filter(
-        (unit): unit is z.infer<typeof LearningUnitTaxonomyCandidateSchema> => unit !== undefined,
-      )
-      .sort(
-        (left, right) =>
-          left.stageRank - right.stageRank ||
-          left.difficultyRank - right.difficultyRank ||
-          left.representativeRank - right.representativeRank ||
-          (left.id < right.id ? -1 : left.id > right.id ? 1 : 0),
-      );
-    const selected = ready[0];
-    if (selected === undefined) return [];
-    result.push(selected.id);
-    remaining.delete(selected.id);
-    for (const dependencies of remaining.values()) dependencies.delete(selected.id);
+      })),
+    ).map(({ id }) => id);
+  } catch {
+    // Invalid dependency graphs are reported by the surrounding schema checks.
+    return [];
   }
-  return result;
 };
 
 export const FinalTaxonomyBuildSchema = strictObject({

@@ -1,9 +1,9 @@
 ---
 title: "DSUによる連結成分管理・縮約"
-description: "DSUによる連結成分管理・縮約の概念と、基礎から応用へ読む問題一覧。"
+description: "「DSUによる連結成分管理・縮約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 23
+  order: 24
 ---
 
 # DSUによる連結成分管理・縮約
@@ -22,25 +22,27 @@ sidebar:
 
 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
+### このUnitでは扱わないもの
+
 - DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC276 E「Round Trip」](https://atcoder.jp/contests/abc276/tasks/abc276_e)
-2. [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
-3. [ABC304 E「Good Graph」](https://atcoder.jp/contests/abc304/tasks/abc304_e)
-4. [ABC372 E「K-th Largest Connected Components」](https://atcoder.jp/contests/abc372/tasks/abc372_e)
-5. [ABC420 E「Reachability Query」](https://atcoder.jp/contests/abc420/tasks/abc420_e)
-6. [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
-7. [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
-8. [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
-9. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
+1. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+2. [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
+3. [ABC276 E「Round Trip」](https://atcoder.jp/contests/abc276/tasks/abc276_e)
+4. [ABC304 E「Good Graph」](https://atcoder.jp/contests/abc304/tasks/abc304_e)
+5. [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
+6. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
+7. [ABC372 E「K-th Largest Connected Components」](https://atcoder.jp/contests/abc372/tasks/abc372_e)
+8. [ABC420 E「Reachability Query」](https://atcoder.jp/contests/abc420/tasks/abc420_e)
+9. [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
 10. [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
-11. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+11. [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
 12. [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
-13. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
+13. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -84,4 +86,4 @@ sidebar:
 - [ABC229 E 公式問題文](https://atcoder.jp/contests/abc229/tasks/abc229_e)
 - [ABC229 E 公式解説](https://atcoder.jp/contests/abc229/editorial/2958)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dsu-components`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dsu-components`

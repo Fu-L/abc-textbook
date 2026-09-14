@@ -77,6 +77,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 95,
+  "globalIndex": 98,
   "orderReason": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
 }

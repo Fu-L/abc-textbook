@@ -45,6 +45,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 85,
-  "globalIndex": 124,
+  "globalIndex": 126,
   "orderReason": "DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。"
 }

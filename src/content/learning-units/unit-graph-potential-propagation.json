@@ -38,8 +38,8 @@
     "abc396-e"
   ],
   "directProblemIds": [
-    "abc280-f",
-    "abc396-e"
+    "abc396-e",
+    "abc280-f"
   ],
   "relatedProblemIds": [
     "abc352-f"
@@ -49,6 +49,6 @@
   "stageRank": 1,
   "difficultyRank": 4,
   "representativeRank": 86,
-  "globalIndex": 33,
+  "globalIndex": 37,
   "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
 }

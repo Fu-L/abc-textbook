@@ -1,16 +1,16 @@
 ---
-title: "線形方程式・分離可能変換・行列式計数へ変換する"
-description: "線形方程式・分離可能変換・行列式計数へ変換するの概念と、基礎から応用へ読む問題一覧。"
+title: "線形方程式・基底・分離可能変換へ変換する"
+description: "「線形方程式・基底・分離可能変換へ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 62
+  order: 64
 ---
 
-# 線形方程式・分離可能変換・行列式計数へ変換する
+# 線形方程式・基底・分離可能変換へ変換する
 
 ## 概要
 
-下位の単元を、前提を満たす順にまとめます。
+制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。
 
 ## 前提と範囲
 
@@ -18,9 +18,9 @@ sidebar:
 
 追加前提: なし。
 
-制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。
+### このUnitでは扱わないもの
 
-- 通常の多項式畳み込み・生成関数と、幾何の面積行列式。
+- 行列式による全域木・非交差pathの計数は行列式計数の単元で扱う。通常の多項式畳み込み・生成関数と、幾何の面積行列式も対象外とする。
 
 ## 下位単元
 
@@ -30,7 +30,7 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -56,4 +56,4 @@ sidebar:
 - [ABC223 H 公式解説](https://atcoder.jp/contests/abc223/editorial/2784)
 - [ABC223 H 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-linear-algebra-xor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-linear-algebra-xor`

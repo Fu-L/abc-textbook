@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8",
-    "acceptedAt": "2026-09-13T09:09:50.944Z"
+    "digest": "adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9",
+    "acceptedAt": "2026-09-14T08:43:04.226Z"
   },
   "taskIds": [
     "T047",
@@ -40,7 +40,7 @@
     "T049",
     "T050"
   ],
-  "problemReadingOrderReason": "Unitごとに採用解法を比較した導入・発展順を優先する。未指定の問題はその後に置き、機構rank、前提の深さ、必要技能数、主技能の複合数、補助技能数、代表問題順位、Problem IDを補助規則にする。技能集合の包含は問題間の前提にせず、contest番号や出題枠は難易度の代用にしない。",
+  "problemReadingOrderReason": "基本から応用へ進むため、ABCの問題アルファベット順（E→F→G→H/Ex）を基準とする。現corpusではDifficulty・配点が揃っていないため推測値は作らない。同じ出題枠ではProblem ID順とし、contest番号自体に難易度の意味は持たせない。教育的に不自然な箇所だけUnit内の例外で補正し、技能数や本文中の例示順は難易度の代用にしない。",
   "counts": {
     "tags": 205,
     "learningOutcomes": 214,
@@ -65,10 +65,10 @@
   "digests": {
     "tags": "6bc71578392f208f8800a1e54d9006c53745c545731e0ce6a2dea1d77c9bf586",
     "learningOutcomes": "a76471d2127429aa647df21f7c2b6cc878d5f299500fb1138bd4d8d5df3ddd27",
-    "learningUnits": "522466ae816f3f662f278f8cc1f5747c562ae43dbedf79ddda0a32a633cf12a7",
-    "learningDocuments": "c4975af8c6265b430f57f605e4a3fd30aa75e4fc5869ae3804d0b828864e8ae7",
-    "learningOrderDigest": "66fcbebd78430ac9f5aead4415cbea600d4acaa0384542990e4ad9473e6cf007",
-    "problemPlacementPolicyDigest": "1e877f689610838f35bc0e828ffb3e732974d28771a4d703842070b29b845c10"
+    "learningUnits": "44fbe47ddf3fc0c82fef95600fe490c4e12ae1498ce8a83879569b0a3991721f",
+    "learningDocuments": "49740b69ccfc005b70a1fad345be652504986e37820a43c55349485c606b246e",
+    "learningOrderDigest": "f09bc94807b80879bfc3ea2a75d67d88d8430384583427e2061f79f9ba43d780",
+    "problemPlacementPolicyDigest": "4f273397ef26d8fdd6f405803888bd3e760008f0ab8b7992d27a4d157863c662"
   },
-  "materializationDigest": "55e5e38c77a099417a762ddd500a8b61d96e3bbecfbf68e3f1a80755bfb9a2a3"
+  "materializationDigest": "a40a3c0311903520108c753cf73362203dbc8c0413b516353d6de55637a8db6c"
 }

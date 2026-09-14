@@ -1,6 +1,6 @@
 ---
 title: "数論"
-description: "数論の概念と、基礎から応用へ読む問題一覧。"
+description: "「数論」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 5
@@ -22,21 +22,24 @@ sidebar:
 
 整数条件をgcd・合同・素因数指数・約数格子へ翻訳し、有限状態化と反転の基礎を作る。
 
+### このUnitでは扱わないもの
+
 - なし
 
 ## 下位単元
 
 - [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)
-- [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/)
 - [素因数分解と約数構造](/learn/number-theory/prime-divisor/)
+- [gcd不変量・差分構造](/learn/number-theory/gcd-structure/)
+- [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/)
 - [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/)
 - [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)
 - [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)
 - [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)
+- [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/)
 - [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)
 - [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/)
 - [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/)
-- [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/)
 - [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/)
 - [巡回群を指数化して数える](/learn/number-theory/cyclic-group-exponent-counting/)
 - [標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/)
@@ -46,7 +49,7 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -83,9 +86,9 @@ sidebar:
 - [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
 - [ABC269 F「Numbered Checker」](https://atcoder.jp/contests/abc269/tasks/abc269_f)
 - [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
-- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 - [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
 - [ABC272 G「Yet Another mod M」](https://atcoder.jp/contests/abc272/tasks/abc272_g)
+- [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
 - [ABC276 F「Double Chance」](https://atcoder.jp/contests/abc276/tasks/abc276_f)
 - [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
@@ -133,6 +136,7 @@ sidebar:
 - [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
 - [ABC417 F「Random Gathering」](https://atcoder.jp/contests/abc417/tasks/abc417_f)
 - [ABC422 G「Balls and Boxes」](https://atcoder.jp/contests/abc422/tasks/abc422_g)
+- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
 - [ABC428 G「Necklace」](https://atcoder.jp/contests/abc428/tasks/abc428_g)
 - [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
 - [ABC432 G「Sum of Binom(A, B)」](https://atcoder.jp/contests/abc432/tasks/abc432_g)
@@ -153,4 +157,4 @@ sidebar:
 - [ABC216 E 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_e)
 - [ABC216 E 公式解説](https://atcoder.jp/contests/abc216/editorial/2469)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-chapter-number-theory`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-chapter-number-theory`

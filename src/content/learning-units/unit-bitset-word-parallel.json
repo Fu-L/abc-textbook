@@ -38,8 +38,8 @@
   ],
   "directProblemIds": [
     "abc348-f",
-    "abc258-g",
-    "abc221-g"
+    "abc221-g",
+    "abc258-g"
   ],
   "relatedProblemIds": [
     "abc276-ex",
@@ -52,6 +52,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 9,
-  "globalIndex": 48,
+  "globalIndex": 51,
   "orderReason": "集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。"
 }

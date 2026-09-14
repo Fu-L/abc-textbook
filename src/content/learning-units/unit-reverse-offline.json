@@ -40,12 +40,12 @@
     "abc464-e"
   ],
   "directProblemIds": [
-    "abc346-e",
     "abc229-e",
-    "abc249-f",
     "abc264-e",
     "abc329-e",
-    "abc464-e"
+    "abc346-e",
+    "abc464-e",
+    "abc249-f"
   ],
   "relatedProblemIds": [
     "abc238-ex",
@@ -58,6 +58,6 @@
   "stageRank": 2,
   "difficultyRank": 1,
   "representativeRank": 2,
-  "globalIndex": 36,
+  "globalIndex": 40,
   "orderReason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
 }

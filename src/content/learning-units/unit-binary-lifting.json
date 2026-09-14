@@ -43,9 +43,9 @@
     "abc367-e",
     "abc438-e",
     "abc212-f",
-    "abc310-g",
+    "abc370-f",
     "abc254-g",
-    "abc370-f"
+    "abc310-g"
   ],
   "relatedProblemIds": [
     "abc417-g"
@@ -55,6 +55,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 64,
-  "globalIndex": 56,
+  "globalIndex": 59,
   "orderReason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

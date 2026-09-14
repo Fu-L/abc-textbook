@@ -1,9 +1,9 @@
 ---
 title: "候補数を界して全列挙・有限case分解する"
-description: "候補数を界して全列挙・有限case分解するの概念と、基礎から応用へ読む問題一覧。"
+description: "「候補数を界して全列挙・有限case分解する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 13
+  order: 12
 ---
 
 # 候補数を界して全列挙・有限case分解する
@@ -26,26 +26,27 @@ ABC260 Fでは小さい側の端点対(u,v)に、その二点と隣接する中�
 
 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
 
+### このUnitでは扱わないもの
+
 - 探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC234 E「Arithmetic Number」](https://atcoder.jp/contests/abc234/tasks/abc234_e)
-2. [ABC386 E「Maximize XOR」](https://atcoder.jp/contests/abc386/tasks/abc386_e)
-3. [ABC442 G「Lightweight Knapsack」](https://atcoder.jp/contests/abc442/tasks/abc442_g)
-4. [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
-5. [ABC254 E「Small d and k」](https://atcoder.jp/contests/abc254/tasks/abc254_e)
-6. [ABC260 F「Find 4-cycle」](https://atcoder.jp/contests/abc260/tasks/abc260_f)
-7. [ABC272 E「Add and Mex」](https://atcoder.jp/contests/abc272/tasks/abc272_e)
-8. [ABC312 E「Tangency of Cuboids」](https://atcoder.jp/contests/abc312/tasks/abc312_e)
-9. [ABC290 G「Edge Elimination」](https://atcoder.jp/contests/abc290/tasks/abc290_g)
-10. [ABC302 G「Sort from 1 to 4」](https://atcoder.jp/contests/abc302/tasks/abc302_g)
-11. [ABC410 F「Balanced Rectangles」](https://atcoder.jp/contests/abc410/tasks/abc410_f)
-12. [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
-13. [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
-14. [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
+1. [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
+2. [ABC234 E「Arithmetic Number」](https://atcoder.jp/contests/abc234/tasks/abc234_e)
+3. [ABC254 E「Small d and k」](https://atcoder.jp/contests/abc254/tasks/abc254_e)
+4. [ABC272 E「Add and Mex」](https://atcoder.jp/contests/abc272/tasks/abc272_e)
+5. [ABC312 E「Tangency of Cuboids」](https://atcoder.jp/contests/abc312/tasks/abc312_e)
+6. [ABC386 E「Maximize XOR」](https://atcoder.jp/contests/abc386/tasks/abc386_e)
+7. [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
+8. [ABC260 F「Find 4-cycle」](https://atcoder.jp/contests/abc260/tasks/abc260_f)
+9. [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
+10. [ABC410 F「Balanced Rectangles」](https://atcoder.jp/contests/abc410/tasks/abc410_f)
+11. [ABC290 G「Edge Elimination」](https://atcoder.jp/contests/abc290/tasks/abc290_g)
+12. [ABC302 G「Sort from 1 to 4」](https://atcoder.jp/contests/abc302/tasks/abc302_g)
+13. [ABC442 G「Lightweight Knapsack」](https://atcoder.jp/contests/abc442/tasks/abc442_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -64,6 +65,7 @@ ABC260 Fでは小さい側の端点対(u,v)に、その二点と隣接する中�
 - [ABC257 F「Teleporter Setting」](https://atcoder.jp/contests/abc257/tasks/abc257_f)
 - [ABC258 F「Main Street」](https://atcoder.jp/contests/abc258/tasks/abc258_f)
 - [ABC270 F「Transportation」](https://atcoder.jp/contests/abc270/tasks/abc270_f)
+- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 - [ABC284 E「Count Simple Paths」](https://atcoder.jp/contests/abc284/tasks/abc284_e)
 - [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
 - [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
@@ -90,4 +92,4 @@ ABC260 Fでは小さい側の端点対(u,v)に、その二点と隣接する中�
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-bounded-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-bounded-enumeration`

@@ -1,9 +1,9 @@
 ---
 title: "bit列をTrieで索引化する"
-description: "bit列をTrieで索引化するの概念と、基礎から応用へ読む問題一覧。"
+description: "「bit列をTrieで索引化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 49
+  order: 52
 ---
 
 # bit列をTrieで索引化する
@@ -32,11 +32,13 @@ sidebar:
 
 整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。
 
+### このUnitでは扱わないもの
+
 - 文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
 2. [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h)
@@ -58,4 +60,4 @@ sidebar:
 - [ABC451 G 公式解説](https://atcoder.jp/contests/abc451/editorial/18047)
 - [ABC451 G 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-binary-trie`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-binary-trie`

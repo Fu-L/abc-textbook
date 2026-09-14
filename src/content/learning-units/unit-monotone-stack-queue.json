@@ -38,8 +38,8 @@
   ],
   "directProblemIds": [
     "abc359-e",
-    "abc379-f",
-    "abc228-f"
+    "abc228-f",
+    "abc379-f"
   ],
   "relatedProblemIds": [
     "abc213-f",
@@ -56,6 +56,6 @@
   "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 7,
-  "globalIndex": 18,
+  "globalIndex": 17,
   "orderReason": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
 }

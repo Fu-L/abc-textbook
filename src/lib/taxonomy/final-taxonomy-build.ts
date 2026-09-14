@@ -1,4 +1,8 @@
-import { isCurriculumUnit, unitNavigationIndices } from './learning-unit-order.js';
+import {
+  isCurriculumUnit,
+  orderCurriculumUnits,
+  unitNavigationIndices,
+} from './learning-unit-order.js';
 import { lstat, readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
 import { orderProblemsByPrerequisites } from './problem-reading-order.js';
@@ -42,7 +46,6 @@ import {
   validateHumanContentReview,
   type TrustedReviewCheckInventory,
 } from '../validation/human-content-review.js';
-import { deterministicTopologicalOrder } from '../validation/validate.js';
 import {
   FINAL_TAXONOMY_REVIEW_CHECKS as SHARED_FINAL_TAXONOMY_REVIEW_CHECKS,
   FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH,
@@ -1216,19 +1219,17 @@ export const assembleFinalTaxonomyBuild = (
     (candidate): candidate is Extract<FinalTaxonomyCandidate, { kind: 'unit' }> =>
       candidate.kind === 'unit',
   );
-  const orderedUnits = deterministicTopologicalOrder(
+  const orderedUnits = orderCurriculumUnits(
     unitCandidates
       .filter(({ entity }) => isCurriculumUnit(entity))
       .map((candidate) => ({
         id: candidate.entity.id,
         prerequisiteIds: candidate.entity.additionalPrerequisiteUnitIds,
+        stageRank: candidate.entity.stageRank,
+        difficultyRank: candidate.entity.difficultyRank,
+        representativeRank: candidate.entity.representativeRank,
         candidate,
       })),
-    ({ candidate }) => [
-      candidate.entity.stageRank,
-      candidate.entity.difficultyRank,
-      candidate.entity.representativeRank,
-    ],
   );
   const globalIndexByUnitId = unitNavigationIndices(
     unitCandidates.map(({ entity }) => entity),
@@ -1816,10 +1817,6 @@ const materializePolicyLearningUnits = (
       directProblemIds: orderProblemsByPrerequisites(
         decisions.filter(({ presentationUnitId }) => presentationUnitId === unit.id),
         skills,
-        [...FINAL_TAXONOMY_TAGS]
-          .sort((a, b) => compareCodeUnits(a.id, b.id))
-          .filter(({ id }) => unit.ownedTagIds.includes(id))
-          .flatMap(({ representativeProblemIds }) => representativeProblemIds),
         unit.id,
       ),
     };
@@ -2966,10 +2963,6 @@ export const validateFinalTaxonomyBuildAgainstContext = (
           prerequisiteIds: entity.prerequisiteOutcomeIds,
         })),
       ],
-      [...tagCandidates]
-        .sort((a, b) => compareCodeUnits(a.entity.id, b.entity.id))
-        .filter(({ entity }) => unit.ownedTagIds.includes(entity.id))
-        .flatMap(({ entity }) => entity.representativeProblemIds),
       unit.id,
     );
     if (!sameOrderedValues(unit.directProblemIds, expectedDirectIds)) {

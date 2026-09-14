@@ -40,6 +40,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 73,
-  "globalIndex": 64,
+  "globalIndex": 66,
   "orderReason": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

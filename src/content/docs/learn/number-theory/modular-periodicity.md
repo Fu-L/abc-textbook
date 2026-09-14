@@ -1,9 +1,9 @@
 ---
 title: "剰余周期と指数法則を利用する"
-description: "剰余周期と指数法則を利用するの概念と、基礎から応用へ読む問題一覧。"
+description: "「剰余周期と指数法則を利用する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 83
+  order: 85
 ---
 
 # 剰余周期と指数法則を利用する
@@ -22,14 +22,16 @@ sidebar:
 
 剰余列や冪が有限状態で周期化することを示し、周期前計算や指数法則で巨大な反復を短縮する。
 
+### このUnitでは扱わないもの
+
 - 逆元・一次合同・CRTによる合同条件の統合、および巡回群の位数を使う計数。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC319 E「Bus Stops」](https://atcoder.jp/contests/abc319/tasks/abc319_e)
-2. [ABC228 E「Integer Sequence Fair」](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+1. [ABC228 E「Integer Sequence Fair」](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+2. [ABC319 E「Bus Stops」](https://atcoder.jp/contests/abc319/tasks/abc319_e)
 3. [ABC320 G「Slot Strategy 2 (Hard)」](https://atcoder.jp/contests/abc320/tasks/abc320_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
@@ -49,4 +51,4 @@ sidebar:
 - [ABC319 E 公式問題文](https://atcoder.jp/contests/abc319/tasks/abc319_e)
 - [ABC319 E 公式解説](https://atcoder.jp/contests/abc319/editorial/7100)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-modular-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-modular-periodicity`

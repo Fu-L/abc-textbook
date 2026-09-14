@@ -42,10 +42,10 @@
     "abc465-e"
   ],
   "directProblemIds": [
-    "abc235-f",
     "abc336-e",
     "abc406-e",
     "abc465-e",
+    "abc235-f",
     "abc317-f",
     "abc288-ex"
   ],
@@ -55,6 +55,6 @@
   "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 82,
-  "globalIndex": 79,
+  "globalIndex": 82,
   "orderReason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
 }

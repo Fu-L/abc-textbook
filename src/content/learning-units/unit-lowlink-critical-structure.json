@@ -34,21 +34,20 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/lowlink-critical-structure.md",
   "problemIds": [
-    "abc334-g",
-    "abc375-g"
+    "abc334-g"
   ],
   "directProblemIds": [
-    "abc334-g",
-    "abc375-g"
+    "abc334-g"
   ],
   "relatedProblemIds": [
-    "abc301-ex"
+    "abc301-ex",
+    "abc375-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
+  "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 11,
-  "globalIndex": 110,
+  "globalIndex": 26,
   "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
 }

@@ -35,6 +35,7 @@
     "abc217-e",
     "abc219-g",
     "abc259-ex",
+    "abc273-ex",
     "abc302-e",
     "abc324-g",
     "abc329-f",
@@ -54,7 +55,6 @@
   "relatedProblemIds": [
     "abc255-ex",
     "abc256-ex",
-    "abc273-ex",
     "abc275-ex",
     "abc295-g",
     "abc305-f",
@@ -75,6 +75,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 5,
-  "globalIndex": 26,
+  "globalIndex": 29,
   "orderReason": "各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。"
 }

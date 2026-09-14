@@ -41,10 +41,10 @@
     "abc438-f"
   ],
   "directProblemIds": [
-    "abc294-g",
     "abc267-f",
-    "abc329-g",
     "abc438-f",
+    "abc294-g",
+    "abc329-g",
     "abc298-ex"
   ],
   "relatedProblemIds": [
@@ -56,6 +56,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 68,
-  "globalIndex": 59,
+  "globalIndex": 62,
   "orderReason": "doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。"
 }

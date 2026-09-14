@@ -1,9 +1,9 @@
 ---
 title: "状態グラフのモデリングと探索"
-description: "状態グラフのモデリングと探索の概念と、基礎から応用へ読む問題一覧。"
+description: "「状態グラフのモデリングと探索」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 19
+  order: 18
 ---
 
 # 状態グラフのモデリングと探索
@@ -26,23 +26,25 @@ sidebar:
 
 暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
+### このUnitでは扱わないもの
+
 - 状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC302 F「Merge Set」](https://atcoder.jp/contests/abc302/tasks/abc302_f)
-2. [ABC241 F「Skate」](https://atcoder.jp/contests/abc241/tasks/abc241_f)
-3. [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
-4. [ABC289 E「Swap Places」](https://atcoder.jp/contests/abc289/tasks/abc289_e)
-5. [ABC394 E「Palindromic Shortest Path」](https://atcoder.jp/contests/abc394/tasks/abc394_e)
-6. [ABC414 F「Jump Traveling」](https://atcoder.jp/contests/abc414/tasks/abc414_f)
-7. [ABC429 E「Hit and Away」](https://atcoder.jp/contests/abc429/tasks/abc429_e)
-8. [ABC446 E「Multiple-Free Sequences」](https://atcoder.jp/contests/abc446/tasks/abc446_e)
-9. [ABC446 F「Reachable Set 2」](https://atcoder.jp/contests/abc446/tasks/abc446_f)
-10. [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
-11. [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+1. [ABC289 E「Swap Places」](https://atcoder.jp/contests/abc289/tasks/abc289_e)
+2. [ABC394 E「Palindromic Shortest Path」](https://atcoder.jp/contests/abc394/tasks/abc394_e)
+3. [ABC417 E「A Path in A Dictionary」](https://atcoder.jp/contests/abc417/tasks/abc417_e)
+4. [ABC427 E「Wind Cleaning」](https://atcoder.jp/contests/abc427/tasks/abc427_e)
+5. [ABC429 E「Hit and Away」](https://atcoder.jp/contests/abc429/tasks/abc429_e)
+6. [ABC446 E「Multiple-Free Sequences」](https://atcoder.jp/contests/abc446/tasks/abc446_e)
+7. [ABC241 F「Skate」](https://atcoder.jp/contests/abc241/tasks/abc241_f)
+8. [ABC244 F「Shortest Good Path」](https://atcoder.jp/contests/abc244/tasks/abc244_f)
+9. [ABC302 F「Merge Set」](https://atcoder.jp/contests/abc302/tasks/abc302_f)
+10. [ABC414 F「Jump Traveling」](https://atcoder.jp/contests/abc414/tasks/abc414_f)
+11. [ABC446 F「Reachable Set 2」](https://atcoder.jp/contests/abc446/tasks/abc446_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -70,4 +72,4 @@ sidebar:
 - [ABC257 G 公式解説](https://atcoder.jp/contests/abc257/editorial/4185)
 - [ABC257 G 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-state-graph-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-state-graph-search`

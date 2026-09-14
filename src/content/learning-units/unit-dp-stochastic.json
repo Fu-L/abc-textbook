@@ -62,25 +62,25 @@
     "abc450-g"
   ],
   "directProblemIds": [
-    "abc298-e",
-    "abc275-e",
-    "abc300-e",
     "abc263-e",
     "abc266-e",
+    "abc275-e",
     "abc280-e",
-    "abc323-e",
-    "abc382-e",
-    "abc450-g",
-    "abc277-g",
-    "abc326-e",
-    "abc360-e",
-    "abc239-ex",
-    "abc242-ex",
+    "abc298-e",
+    "abc300-e",
     "abc314-e",
+    "abc323-e",
+    "abc326-e",
     "abc350-e",
-    "abc404-f",
+    "abc360-e",
+    "abc382-e",
     "abc421-e",
-    "abc226-h"
+    "abc404-f",
+    "abc277-g",
+    "abc450-g",
+    "abc226-h",
+    "abc239-ex",
+    "abc242-ex"
   ],
   "relatedProblemIds": [
     "abc270-ex",
@@ -99,6 +99,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 4,
-  "globalIndex": 44,
+  "globalIndex": 47,
   "orderReason": "状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。"
 }

@@ -44,10 +44,10 @@
     "abc423-f"
   ],
   "directProblemIds": [
-    "abc423-f",
-    "abc295-ex",
     "abc349-f",
-    "abc215-h"
+    "abc423-f",
+    "abc215-h",
+    "abc295-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -55,6 +55,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 86,
-  "globalIndex": 126,
+  "globalIndex": 128,
   "orderReason": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
 }

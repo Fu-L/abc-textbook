@@ -37,7 +37,6 @@
     "abc234-e",
     "abc254-e",
     "abc260-f",
-    "abc271-ex",
     "abc272-e",
     "abc290-g",
     "abc302-g",
@@ -48,20 +47,19 @@
     "abc442-g"
   ],
   "directProblemIds": [
-    "abc234-e",
-    "abc386-e",
-    "abc442-g",
     "abc219-e",
+    "abc234-e",
     "abc254-e",
-    "abc260-f",
     "abc272-e",
     "abc312-e",
+    "abc386-e",
+    "abc227-f",
+    "abc260-f",
+    "abc347-f",
+    "abc410-f",
     "abc290-g",
     "abc302-g",
-    "abc410-f",
-    "abc271-ex",
-    "abc227-f",
-    "abc347-f"
+    "abc442-g"
   ],
   "relatedProblemIds": [
     "abc220-g",
@@ -75,6 +73,7 @@
     "abc257-f",
     "abc258-f",
     "abc270-f",
+    "abc271-ex",
     "abc284-e",
     "abc293-f",
     "abc298-g",
@@ -97,6 +96,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 4,
-  "globalIndex": 13,
+  "globalIndex": 12,
   "orderReason": "候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。"
 }

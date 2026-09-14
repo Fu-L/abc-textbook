@@ -42,12 +42,12 @@
     "abc386-g"
   ],
   "directProblemIds": [
-    "abc236-ex",
     "abc213-g",
-    "abc253-ex",
-    "abc327-g",
     "abc321-g",
-    "abc386-g"
+    "abc327-g",
+    "abc386-g",
+    "abc236-ex",
+    "abc253-ex"
   ],
   "relatedProblemIds": [
     "abc318-ex"

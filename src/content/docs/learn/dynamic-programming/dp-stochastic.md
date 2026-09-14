@@ -1,9 +1,9 @@
 ---
 title: "確率過程・期待値DP"
-description: "確率過程・期待値DPの概念と、基礎から応用へ読む問題一覧。"
+description: "「確率過程・期待値DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 44
+  order: 47
 ---
 
 # 確率過程・期待値DP
@@ -54,6 +54,8 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。
 
+### このUnitでは扱わないもの
+
 - 二人零和ゲームの勝敗・Grundy数。
 
 ## 下位単元
@@ -62,27 +64,27 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
-2. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
-3. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
-4. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
-5. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
-6. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
-7. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
-8. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
-9. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
-10. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
-11. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
-12. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
-13. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
-14. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
-15. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
-16. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
-17. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
-18. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
-19. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
+1. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+2. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
+3. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
+4. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+5. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
+6. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
+7. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
+8. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
+9. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+10. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
+11. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+12. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
+13. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
+14. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
+15. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+16. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
+17. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
+18. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+19. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -110,4 +112,4 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-stochastic`

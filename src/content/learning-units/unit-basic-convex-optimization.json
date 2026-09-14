@@ -42,14 +42,14 @@
     "abc462-e"
   ],
   "directProblemIds": [
-    "abc224-g",
-    "abc314-ex",
-    "abc229-g",
     "abc462-e",
     "abc240-f",
     "abc330-f",
+    "abc224-g",
+    "abc229-g",
+    "abc263-g",
     "abc459-g",
-    "abc263-g"
+    "abc314-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -57,6 +57,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 61,
-  "globalIndex": 98,
+  "globalIndex": 101,
   "orderReason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

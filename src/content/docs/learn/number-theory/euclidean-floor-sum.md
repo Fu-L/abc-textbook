@@ -1,9 +1,9 @@
 ---
 title: "格子点転置によるfloor_sum"
-description: "格子点転置によるfloor_sumの概念と、基礎から応用へ読む問題一覧。"
+description: "「格子点転置によるfloor_sum」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 115
+  order: 117
 ---
 
 # 格子点転置によるfloor_sum
@@ -14,7 +14,7 @@ sidebar:
 
 一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。
 
-標準の床和F(n,m,a,b)=Σ_{i=0}^{n−1}floor((ai+b)/m)を、格子点数を保つ引数変換から導く。標準式の利用としてABC443 G、bitごとの指示値への分解としてABC283 Exを読み、最後にABC402 Gの一般化された床和へ進む。
+標準の床和F(n,m,a,b)=Σ_{i=0}^{n−1}floor((ai+b)/m)を、格子点数を保つ引数変換から導く。ABC443 Gは標準式の利用、ABC283 Exはbitごとの指示値への分解、ABC402 Gは床和の一般化を練習する問題である。以下では同じFを再利用する式を比較する。
 
 定義: n≥0,m>0。a=qm+a′,b=rm+b′（0≤a′,b′<m）と分け、F=q·n(n−1)/2+rn+F(n,m,a′,b′)。負の係数でもfloor除算で非負剰余を取れば同じ式。
 
@@ -32,16 +32,18 @@ ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−fl
 
 一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
+### このUnitでは扱わないもの
+
 - 格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC443 G「Another Mod of Linear Problem」](https://atcoder.jp/contests/abc443/tasks/abc443_g)
-2. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
-3. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
-4. [ABC402 G「Sum of Prod of Mod of Linear」](https://atcoder.jp/contests/abc402/tasks/abc402_g)
+2. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
+3. [ABC402 G「Sum of Prod of Mod of Linear」](https://atcoder.jp/contests/abc402/tasks/abc402_g)
+4. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -60,4 +62,4 @@ ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−fl
 - [ABC372 G 公式解説](https://atcoder.jp/contests/abc372/editorial/10973)
 - [ABC372 G 公式問題文](https://atcoder.jp/contests/abc372/tasks/abc372_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-euclidean-floor-sum`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-euclidean-floor-sum`

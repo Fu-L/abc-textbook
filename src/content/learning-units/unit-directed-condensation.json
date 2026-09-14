@@ -60,6 +60,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 3,
-  "globalIndex": 21,
+  "globalIndex": 22,
   "orderReason": "到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。"
 }

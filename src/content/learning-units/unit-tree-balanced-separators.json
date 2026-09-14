@@ -37,9 +37,9 @@
     "abc453-f"
   ],
   "directProblemIds": [
-    "abc291-ex",
+    "abc453-f",
     "abc359-g",
-    "abc453-f"
+    "abc291-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -47,6 +47,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 8,
-  "globalIndex": 96,
+  "globalIndex": 99,
   "orderReason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
 }

@@ -1,9 +1,9 @@
 ---
 title: "一次合同・CRTで解の類を統合する"
-description: "一次合同・CRTで解の類を統合するの概念と、基礎から応用へ読む問題一覧。"
+description: "「一次合同・CRTで解の類を統合する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 39
+  order: 21
 ---
 
 # 一次合同・CRTで解の類を統合する
@@ -22,14 +22,15 @@ sidebar:
 
 法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。
 
+### このUnitでは扱わないもの
+
 - 可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC460 E「x + y ≡ x + y」](https://atcoder.jp/contests/abc460/tasks/abc460_e)
-2. [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -40,6 +41,7 @@ sidebar:
 - [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
 - [ABC286 F「Guess The Number 2」](https://atcoder.jp/contests/abc286/tasks/abc286_f)
 - [ABC371 G「Lexicographically Smallest Permutation」](https://atcoder.jp/contests/abc371/tasks/abc371_g)
+- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
 
 ## 根拠
 
@@ -50,4 +52,4 @@ sidebar:
 - [ABC371 G 公式解説](https://atcoder.jp/contests/abc371/editorial/10927)
 - [ABC371 G 公式問題文](https://atcoder.jp/contests/abc371/tasks/abc371_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-modular-congruence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-modular-congruence`

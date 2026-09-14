@@ -1,9 +1,9 @@
 ---
 title: "大小関係をCartesian treeへ変換する"
-description: "大小関係をCartesian treeへ変換するの概念と、基礎から応用へ読む問題一覧。"
+description: "「大小関係をCartesian treeへ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 97
+  order: 100
 ---
 
 # 大小関係をCartesian treeへ変換する
@@ -22,11 +22,13 @@ sidebar:
 
 単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。
 
+### このUnitでは扱わないもの
+
 - 最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC420 F「kirinuki」](https://atcoder.jp/contests/abc420/tasks/abc420_f)
 2. [ABC435 F「Cat exercise」](https://atcoder.jp/contests/abc435/tasks/abc435_f)
@@ -48,4 +50,4 @@ sidebar:
 - [ABC435 F 公式解説](https://atcoder.jp/contests/abc435/editorial/14734)
 - [ABC435 F 公式問題文](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-cartesian-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-cartesian-tree`

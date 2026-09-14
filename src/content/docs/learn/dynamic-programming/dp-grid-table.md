@@ -1,6 +1,6 @@
 ---
 title: "グリッド・多次元表の局所DPを設計する"
-description: "グリッド・多次元表の局所DPを設計するの概念と、基礎から応用へ読む問題一覧。"
+description: "「グリッド・多次元表の局所DPを設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 7
@@ -22,15 +22,17 @@ sidebar:
 
 状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。
 
+### このUnitでは扱わないもの
+
 - 一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC415 E「Hungry Takahashi」](https://atcoder.jp/contests/abc415/tasks/abc415_e)
-2. [ABC443 E「Climbing Silver」](https://atcoder.jp/contests/abc443/tasks/abc443_e)
-3. [ABC311 E「Defect-free Squares」](https://atcoder.jp/contests/abc311/tasks/abc311_e)
+1. [ABC311 E「Defect-free Squares」](https://atcoder.jp/contests/abc311/tasks/abc311_e)
+2. [ABC415 E「Hungry Takahashi」](https://atcoder.jp/contests/abc415/tasks/abc415_e)
+3. [ABC443 E「Climbing Silver」](https://atcoder.jp/contests/abc443/tasks/abc443_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -53,4 +55,4 @@ sidebar:
 - [ABC311 E 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_e)
 - [ABC311 E 公式解説](https://atcoder.jp/contests/abc311/editorial/6819)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-grid-table`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-grid-table`

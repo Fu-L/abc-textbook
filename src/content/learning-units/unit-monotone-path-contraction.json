@@ -39,6 +39,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 72,
-  "globalIndex": 100,
+  "globalIndex": 103,
   "orderReason": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

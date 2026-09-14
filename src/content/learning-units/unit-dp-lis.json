@@ -36,21 +36,21 @@
   "problemIds": [
     "abc237-f",
     "abc369-f",
-    "abc393-f",
     "abc439-e"
   ],
   "directProblemIds": [
     "abc439-e",
     "abc237-f",
-    "abc393-f",
     "abc369-f"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc393-f"
+  ],
   "examples": [],
   "exercises": [],
   "stageRank": 2,
   "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 76,
+  "globalIndex": 31,
   "orderReason": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
 }

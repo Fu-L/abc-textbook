@@ -1,13 +1,13 @@
 {
   "id": "unit-gcd-structure",
-  "kind": "subsection",
+  "kind": "section",
   "title": "gcd不変量・差分構造",
-  "parentId": "unit-gcd-diophantine",
+  "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
-    "gcd不変量・差分構造の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+    "Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"
   ],
   "sourceRevisionIds": [
     "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
@@ -51,6 +51,6 @@
   "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 54,
-  "globalIndex": 20,
+  "globalIndex": 19,
   "orderReason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -1,9 +1,9 @@
 ---
 title: "乱択代数fingerprint"
-description: "乱択代数fingerprintの概念と、基礎から応用へ読む問題一覧。"
+description: "「乱択代数fingerprint」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 127
+  order: 129
 ---
 
 # 乱択代数fingerprint
@@ -22,11 +22,13 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 
 乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。
 
+### このUnitでは扱わないもの
+
 - 乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC339 F「Product Equality」](https://atcoder.jp/contests/abc339/tasks/abc339_f)
 2. [ABC367 F「Rearrange Query」](https://atcoder.jp/contests/abc367/tasks/abc367_f)
@@ -44,4 +46,4 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 - [ABC367 F 公式解説](https://atcoder.jp/contests/abc367/editorial/10692)
 - [ABC367 F 公式問題文](https://atcoder.jp/contests/abc367/tasks/abc367_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-randomized-algebraic-fingerprint`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-randomized-algebraic-fingerprint`

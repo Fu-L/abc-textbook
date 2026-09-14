@@ -41,11 +41,11 @@
     "abc389-e"
   ],
   "directProblemIds": [
-    "abc389-e",
     "abc216-e",
+    "abc389-e",
     "abc359-f",
-    "abc369-g",
-    "abc373-f"
+    "abc373-f",
+    "abc369-g"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -53,6 +53,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 77,
-  "globalIndex": 106,
+  "globalIndex": 109,
   "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
 }

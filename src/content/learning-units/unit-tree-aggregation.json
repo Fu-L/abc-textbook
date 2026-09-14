@@ -76,6 +76,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 55,
+  "globalIndex": 58,
   "orderReason": "探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。"
 }

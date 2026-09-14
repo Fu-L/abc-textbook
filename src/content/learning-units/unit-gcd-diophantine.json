@@ -7,26 +7,24 @@
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
-    "連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。"
+    "差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"
   ],
   "sourceRevisionIds": [
-    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
-    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
-    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
-    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
-    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
-    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+    "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+    "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b",
+    "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+    "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77",
+    "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+    "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
   ],
   "tagIds": [
-    "tag-bezout-diophantine",
-    "tag-gcd-structure"
+    "tag-bezout-diophantine"
   ],
   "ownedTagIds": [
     "tag-bezout-diophantine"
   ],
   "learningOutcomeIds": [
-    "outcome-characterize-integer-solvability",
-    "outcome-reduce-integer-structure-by-gcd"
+    "outcome-characterize-integer-solvability"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-characterize-integer-solvability"
@@ -34,22 +32,15 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/gcd-diophantine.md",
   "problemIds": [
-    "abc340-f",
-    "abc418-e"
-  ],
-  "directProblemIds": [
+    "abc271-ex",
     "abc340-f"
   ],
+  "directProblemIds": [
+    "abc340-f",
+    "abc271-ex"
+  ],
   "relatedProblemIds": [
-    "abc212-g",
-    "abc222-g",
-    "abc248-g",
-    "abc254-f",
-    "abc271-ex",
-    "abc306-g",
     "abc315-g",
-    "abc438-g",
-    "abc445-g",
     "abc459-g",
     "abc460-e"
   ],
@@ -58,6 +49,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 1,
-  "globalIndex": 8,
+  "globalIndex": 20,
   "orderReason": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
 }

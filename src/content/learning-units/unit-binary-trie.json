@@ -47,6 +47,6 @@
   "stageRank": 2,
   "difficultyRank": 2,
   "representativeRank": 11,
-  "globalIndex": 49,
+  "globalIndex": 52,
   "orderReason": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
 }

@@ -46,6 +46,6 @@
   "stageRank": 1,
   "difficultyRank": 1,
   "representativeRank": 5,
-  "globalIndex": 14,
+  "globalIndex": 13,
   "orderReason": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
 }

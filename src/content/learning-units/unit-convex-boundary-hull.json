@@ -40,10 +40,10 @@
     "abc356-g"
   ],
   "directProblemIds": [
-    "abc341-g",
     "abc275-g",
-    "abc286-ex",
-    "abc356-g"
+    "abc341-g",
+    "abc356-g",
+    "abc286-ex"
   ],
   "relatedProblemIds": [
     "abc244-ex",
@@ -54,6 +54,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 80,
-  "globalIndex": 112,
+  "globalIndex": 114,
   "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
 }

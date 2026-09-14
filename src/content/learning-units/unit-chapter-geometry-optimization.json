@@ -137,6 +137,6 @@
   "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 8,
-  "globalIndex": 15,
+  "globalIndex": 14,
   "orderReason": "orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進み、候補を構造的に削減する。"
 }

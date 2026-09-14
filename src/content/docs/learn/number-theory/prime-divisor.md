@@ -1,9 +1,9 @@
 ---
 title: "素因数分解と約数構造"
-description: "素因数分解と約数構造の概念と、基礎から応用へ読む問題一覧。"
+description: "「素因数分解と約数構造」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 16
+  order: 15
 ---
 
 # 素因数分解と約数構造
@@ -22,20 +22,22 @@ sidebar:
 
 初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。
 
+### このUnitでは扱わないもの
+
 - 床関数や整数根の値が一定となる区間への分割。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC445 E「Many LCMs」](https://atcoder.jp/contests/abc445/tasks/abc445_e)
-2. [ABC259 E「LCM on Whiteboard」](https://atcoder.jp/contests/abc259/tasks/abc259_e)
-3. [ABC384 F「Double Sum 2」](https://atcoder.jp/contests/abc384/tasks/abc384_f)
-4. [ABC393 E「GCD of Subset」](https://atcoder.jp/contests/abc393/tasks/abc393_e)
-5. [ABC400 E「Ringo's Favorite Numbers 3」](https://atcoder.jp/contests/abc400/tasks/abc400_e)
-6. [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e)
-7. [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g)
-8. [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
+1. [ABC259 E「LCM on Whiteboard」](https://atcoder.jp/contests/abc259/tasks/abc259_e)
+2. [ABC393 E「GCD of Subset」](https://atcoder.jp/contests/abc393/tasks/abc393_e)
+3. [ABC400 E「Ringo's Favorite Numbers 3」](https://atcoder.jp/contests/abc400/tasks/abc400_e)
+4. [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e)
+5. [ABC445 E「Many LCMs」](https://atcoder.jp/contests/abc445/tasks/abc445_e)
+6. [ABC384 F「Double Sum 2」](https://atcoder.jp/contests/abc384/tasks/abc384_f)
+7. [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
+8. [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -69,4 +71,4 @@ sidebar:
 - [ABC227 G 公式解説](https://atcoder.jp/contests/abc227/editorial/2909)
 - [ABC227 G 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-prime-divisor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-prime-divisor`

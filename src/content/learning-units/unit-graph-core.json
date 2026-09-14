@@ -34,8 +34,8 @@
     "abc267-e"
   ],
   "directProblemIds": [
-    "abc266-f",
-    "abc267-e"
+    "abc267-e",
+    "abc266-f"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -43,6 +43,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 69,
-  "globalIndex": 60,
+  "globalIndex": 63,
   "orderReason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

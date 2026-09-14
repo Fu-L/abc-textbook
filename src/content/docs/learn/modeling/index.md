@@ -1,6 +1,6 @@
 ---
 title: "モデル変換とアルゴリズム設計"
-description: "モデル変換とアルゴリズム設計の概念と、基礎から応用へ読む問題一覧。"
+description: "「モデル変換とアルゴリズム設計」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 1
@@ -30,6 +30,8 @@ sidebar:
 
 問題文の操作を再利用可能な対象・不変量へ言い換え、探索・貪欲・分割手法を選ぶ共通の視点を最初に作る。
 
+### このUnitでは扱わないもの
+
 - なし
 
 ## 下位単元
@@ -57,7 +59,7 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -128,8 +130,8 @@ sidebar:
 - [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 - [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 - [ABC270 F「Transportation」](https://atcoder.jp/contests/abc270/tasks/abc270_f)
+- [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 - [ABC272 Ex「Flipping Coins 2」](https://atcoder.jp/contests/abc272/tasks/abc272_h)
-- [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 - [ABC273 F「Hammer 2」](https://atcoder.jp/contests/abc273/tasks/abc273_f)
 - [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
 - [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
@@ -234,7 +236,6 @@ sidebar:
 - [ABC390 E「Vitamin Balance」](https://atcoder.jp/contests/abc390/tasks/abc390_e)
 - [ABC390 G「Permutation Concatenation」](https://atcoder.jp/contests/abc390/tasks/abc390_g)
 - [ABC392 F「Insert」](https://atcoder.jp/contests/abc392/tasks/abc392_f)
-- [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
 - [ABC396 E「Min of Restricted Sum」](https://atcoder.jp/contests/abc396/tasks/abc396_e)
 - [ABC396 F「Rotated Inversions」](https://atcoder.jp/contests/abc396/tasks/abc396_f)
 - [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g)
@@ -258,7 +259,6 @@ sidebar:
 - [ABC418 E「Trapezium」](https://atcoder.jp/contests/abc418/tasks/abc418_e)
 - [ABC419 G「Count Simple Paths 2」](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 - [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
-- [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)
 - [ABC424 E「Cut in Half」](https://atcoder.jp/contests/abc424/tasks/abc424_e)
 - [ABC425 F「Inserting Process」](https://atcoder.jp/contests/abc425/tasks/abc425_f)
 - [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
@@ -311,4 +311,4 @@ sidebar:
 - [ABC215 F 公式解説](https://atcoder.jp/contests/abc215/editorial/2492)
 - [ABC215 F 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-chapter-modeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-chapter-modeling`

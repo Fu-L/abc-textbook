@@ -1,9 +1,9 @@
 ---
 title: "区間monoid要約"
-description: "区間monoid要約の概念と、基礎から応用へ読む問題一覧。"
+description: "「区間monoid要約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 66
+  order: 68
 ---
 
 # 区間monoid要約
@@ -22,35 +22,37 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 
 queryに十分な値と結合順・単位元を定義し、Segment Treeまたはprefix foldで動的区間要約を保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
+### このUnitでは扱わないもの
+
 - 区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC223 F「Parenthesis Checking」](https://atcoder.jp/contests/abc223/tasks/abc223_f)
-2. [ABC343 F「Second Largest Query」](https://atcoder.jp/contests/abc343/tasks/abc343_f)
-3. [ABC285 F「Substring of Sorted String」](https://atcoder.jp/contests/abc285/tasks/abc285_f)
-4. [ABC292 Ex「Rating Estimator」](https://atcoder.jp/contests/abc292/tasks/abc292_h)
-5. [ABC365 F「Takahashi on Grid」](https://atcoder.jp/contests/abc365/tasks/abc365_f)
-6. [ABC415 F「Max Combo」](https://atcoder.jp/contests/abc415/tasks/abc415_f)
-7. [ABC432 E「Clamp」](https://atcoder.jp/contests/abc432/tasks/abc432_e)
-8. [ABC434 G「Keyboard」](https://atcoder.jp/contests/abc434/tasks/abc434_g)
-9. [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
-10. [ABC418 F「We're teapots」](https://atcoder.jp/contests/abc418/tasks/abc418_f)
-11. [ABC440 F「Egoism」](https://atcoder.jp/contests/abc440/tasks/abc440_f)
-12. [ABC447 G「Div. 1 & Div. 2」](https://atcoder.jp/contests/abc447/tasks/abc447_g)
-13. [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
-14. [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
-15. [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
-16. [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
-17. [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
-18. [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
-19. [ABC356 F「Distance Component Size Query」](https://atcoder.jp/contests/abc356/tasks/abc356_f)
-20. [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
-21. [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
-22. [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
-23. [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
+1. [ABC432 E「Clamp」](https://atcoder.jp/contests/abc432/tasks/abc432_e)
+2. [ABC223 F「Parenthesis Checking」](https://atcoder.jp/contests/abc223/tasks/abc223_f)
+3. [ABC254 F「Rectangle GCD」](https://atcoder.jp/contests/abc254/tasks/abc254_f)
+4. [ABC262 F「Erase and Rotate」](https://atcoder.jp/contests/abc262/tasks/abc262_f)
+5. [ABC283 F「Permutation Distance」](https://atcoder.jp/contests/abc283/tasks/abc283_f)
+6. [ABC285 F「Substring of Sorted String」](https://atcoder.jp/contests/abc285/tasks/abc285_f)
+7. [ABC309 F「Box in Box」](https://atcoder.jp/contests/abc309/tasks/abc309_f)
+8. [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
+9. [ABC343 F「Second Largest Query」](https://atcoder.jp/contests/abc343/tasks/abc343_f)
+10. [ABC356 F「Distance Component Size Query」](https://atcoder.jp/contests/abc356/tasks/abc356_f)
+11. [ABC365 F「Takahashi on Grid」](https://atcoder.jp/contests/abc365/tasks/abc365_f)
+12. [ABC415 F「Max Combo」](https://atcoder.jp/contests/abc415/tasks/abc415_f)
+13. [ABC418 F「We're teapots」](https://atcoder.jp/contests/abc418/tasks/abc418_f)
+14. [ABC437 F「Manhattan Christmas Tree 2」](https://atcoder.jp/contests/abc437/tasks/abc437_f)
+15. [ABC440 F「Egoism」](https://atcoder.jp/contests/abc440/tasks/abc440_f)
+16. [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
+17. [ABC299 G「Minimum Permutation」](https://atcoder.jp/contests/abc299/tasks/abc299_g)
+18. [ABC388 G「Simultaneous Kagamimochi 2」](https://atcoder.jp/contests/abc388/tasks/abc388_g)
+19. [ABC434 G「Keyboard」](https://atcoder.jp/contests/abc434/tasks/abc434_g)
+20. [ABC447 G「Div. 1 & Div. 2」](https://atcoder.jp/contests/abc447/tasks/abc447_g)
+21. [ABC246 Ex「01? Queries」](https://atcoder.jp/contests/abc246/tasks/abc246_h)
+22. [ABC266 Ex「Snuke Panic (2D)」](https://atcoder.jp/contests/abc266/tasks/abc266_h)
+23. [ABC292 Ex「Rating Estimator」](https://atcoder.jp/contests/abc292/tasks/abc292_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -83,4 +85,4 @@ queryに十分な値と結合順・単位元を定義し、Segment Treeまたは
 - [ABC246 H 公式解説](https://atcoder.jp/contests/abc246/editorial/3705)
 - [ABC246 H 公式問題文](https://atcoder.jp/contests/abc246/tasks/abc246_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-range-monoid-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-range-monoid-aggregation`

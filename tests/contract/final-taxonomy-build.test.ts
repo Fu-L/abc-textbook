@@ -215,7 +215,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       'abc294-f': 'unit-fractional-parametric-search',
       'abc339-e': 'unit-dp-value-range',
       'abc369-f': 'unit-dp-lis',
-      'abc393-f': 'unit-dp-lis',
+      'abc393-f': 'unit-event-sweep',
       'abc354-f': 'unit-dp-value-range',
     }))
       expect(byProblem.get(id)?.presentationUnitId, id).toBe(home);

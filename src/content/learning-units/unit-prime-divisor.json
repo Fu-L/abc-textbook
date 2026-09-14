@@ -42,14 +42,14 @@
     "abc445-e"
   ],
   "directProblemIds": [
-    "abc445-e",
     "abc259-e",
-    "abc384-f",
     "abc393-e",
     "abc400-e",
     "abc412-e",
-    "abc420-g",
-    "abc322-g"
+    "abc445-e",
+    "abc384-f",
+    "abc322-g",
+    "abc420-g"
   ],
   "relatedProblemIds": [
     "abc212-g",
@@ -74,6 +74,6 @@
   "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 16,
+  "globalIndex": 15,
   "orderReason": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
 }

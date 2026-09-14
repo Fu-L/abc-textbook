@@ -1,9 +1,9 @@
 ---
 title: "event順にactive集合を更新する"
-description: "event順にactive集合を更新するの概念と、基礎から応用へ読む問題一覧。"
+description: "「event順にactive集合を更新する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 35
+  order: 39
 ---
 
 # event順にactive集合を更新する
@@ -22,6 +22,8 @@ sidebar:
 
 値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。
 
+### このUnitでは扱わないもの
+
 - 更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。
 
 ## 下位単元
@@ -30,22 +32,23 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC368 E「Train Delay」](https://atcoder.jp/contests/abc368/tasks/abc368_e)
-2. [ABC449 F「Grid Clipping」](https://atcoder.jp/contests/abc449/tasks/abc449_f)
-3. [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
-4. [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
-5. [ABC296 G「Polygon and Points」](https://atcoder.jp/contests/abc296/tasks/abc296_g)
-6. [ABC361 G「Go Territory」](https://atcoder.jp/contests/abc361/tasks/abc361_g)
-7. [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
-8. [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
-9. [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
-10. [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
-11. [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
-12. [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
-13. [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
-14. [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+1. [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+2. [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
+3. [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
+4. [ABC368 E「Train Delay」](https://atcoder.jp/contests/abc368/tasks/abc368_e)
+5. [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
+6. [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
+7. [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
+8. [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
+9. [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
+10. [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
+11. [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+12. [ABC449 F「Grid Clipping」](https://atcoder.jp/contests/abc449/tasks/abc449_f)
+13. [ABC296 G「Polygon and Points」](https://atcoder.jp/contests/abc296/tasks/abc296_g)
+14. [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
+15. [ABC361 G「Go Territory」](https://atcoder.jp/contests/abc361/tasks/abc361_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -76,7 +79,6 @@ sidebar:
 - [ABC346 G「Alone」](https://atcoder.jp/contests/abc346/tasks/abc346_g)
 - [ABC351 F「Double Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_f)
 - [ABC360 F「InterSections」](https://atcoder.jp/contests/abc360/tasks/abc360_f)
-- [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
 - [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
 - [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f)
 - [ABC410 G「Longest Chord Chain」](https://atcoder.jp/contests/abc410/tasks/abc410_g)
@@ -96,4 +98,4 @@ sidebar:
 - [ABC224 E 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_e)
 - [ABC224 E 公式解説](https://atcoder.jp/contests/abc224/editorial/2814)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-event-sweep`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-event-sweep`

@@ -1,9 +1,9 @@
 ---
 title: "列・区間・分割のDP"
-description: "列・区間・分割のDPの概念と、基礎から応用へ読む問題一覧。"
+description: "「列・区間・分割のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 27
+  order: 30
 ---
 
 # 列・区間・分割のDP
@@ -14,7 +14,7 @@ sidebar:
 
 LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとして独立に読む。問題名や配列という入力形式ではなく、「何を固定すると残りが同じ問題になるか」で節を選ぶ。
 
-下位の単元を、前提を満たす順にまとめます。
+状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。
 
 ## 前提と範囲
 
@@ -22,22 +22,22 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 
 追加前提: 最小十分状態からDPを設計する。
 
-状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。
+### このUnitでは扱わないもの
 
 - bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。
 
 ## 下位単元
 
 - [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)
+- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/)
 - [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/)
 - [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/)
 - [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)
-- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/)
 - [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/)
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -55,6 +55,7 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [ABC271 E「Subsequence Path」](https://atcoder.jp/contests/abc271/tasks/abc271_e)
 - [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f)
 - [ABC305 Ex「Shojin」](https://atcoder.jp/contests/abc305/tasks/abc305_h)
+- [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
 - [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
 - [ABC457 G「Catch All Apples」](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
@@ -67,4 +68,4 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [ABC219 H 公式解説](https://atcoder.jp/contests/abc219/editorial/2601)
 - [ABC219 H 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-sequence-interval`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-sequence-interval`

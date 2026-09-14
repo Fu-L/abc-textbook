@@ -1,9 +1,9 @@
 ---
 title: "集合・資源軸のDP"
-description: "集合・資源軸のDPの概念と、基礎から応用へ読む問題一覧。"
+description: "「集合・資源軸のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 34
+  order: 38
 ---
 
 # 集合・資源軸のDP
@@ -22,6 +22,8 @@ sidebar:
 
 最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。
 
+### このUnitでは扱わないもの
+
 - 入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。
 
 ## 下位単元
@@ -31,30 +33,30 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC216 F「Max Sum Counting」](https://atcoder.jp/contests/abc216/tasks/abc216_f)
-2. [ABC383 F「Diversity」](https://atcoder.jp/contests/abc383/tasks/abc383_f)
-3. [ABC269 G「Reversible Cards 2」](https://atcoder.jp/contests/abc269/tasks/abc269_g)
-4. [ABC275 F「Erase Subarrays」](https://atcoder.jp/contests/abc275/tasks/abc275_f)
-5. [ABC288 E「Wish List」](https://atcoder.jp/contests/abc288/tasks/abc288_e)
-6. [ABC320 F「Fuel Round Trip」](https://atcoder.jp/contests/abc320/tasks/abc320_f)
-7. [ABC325 F「Sensor Optimization Dilemma」](https://atcoder.jp/contests/abc325/tasks/abc325_f)
-8. [ABC364 E「Maximum Glutton」](https://atcoder.jp/contests/abc364/tasks/abc364_e)
-9. [ABC410 E「Battles in a Row」](https://atcoder.jp/contests/abc410/tasks/abc410_e)
-10. [ABC441 F「Must Buy」](https://atcoder.jp/contests/abc441/tasks/abc441_f)
-11. [ABC322 E「Product Development」](https://atcoder.jp/contests/abc322/tasks/abc322_e)
-12. [ABC375 E「3 Team Division」](https://atcoder.jp/contests/abc375/tasks/abc375_e)
-13. [ABC222 E「Red and Blue Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_e)
-14. [ABC307 G「Approximate Equalization」](https://atcoder.jp/contests/abc307/tasks/abc307_g)
-15. [ABC390 E「Vitamin Balance」](https://atcoder.jp/contests/abc390/tasks/abc390_e)
-16. [ABC419 E「Subarray Sum Divisibility」](https://atcoder.jp/contests/abc419/tasks/abc419_e)
-17. [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
-18. [ABC290 Ex「Bow Meow Optimization」](https://atcoder.jp/contests/abc290/tasks/abc290_h)
-19. [ABC366 F「Maximum Composition」](https://atcoder.jp/contests/abc366/tasks/abc366_f)
-20. [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
-21. [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
-22. [ABC321 F「#(subset sum = K) with Add and Erase」](https://atcoder.jp/contests/abc321/tasks/abc321_f)
+1. [ABC222 E「Red and Blue Tree」](https://atcoder.jp/contests/abc222/tasks/abc222_e)
+2. [ABC288 E「Wish List」](https://atcoder.jp/contests/abc288/tasks/abc288_e)
+3. [ABC322 E「Product Development」](https://atcoder.jp/contests/abc322/tasks/abc322_e)
+4. [ABC364 E「Maximum Glutton」](https://atcoder.jp/contests/abc364/tasks/abc364_e)
+5. [ABC375 E「3 Team Division」](https://atcoder.jp/contests/abc375/tasks/abc375_e)
+6. [ABC390 E「Vitamin Balance」](https://atcoder.jp/contests/abc390/tasks/abc390_e)
+7. [ABC410 E「Battles in a Row」](https://atcoder.jp/contests/abc410/tasks/abc410_e)
+8. [ABC419 E「Subarray Sum Divisibility」](https://atcoder.jp/contests/abc419/tasks/abc419_e)
+9. [ABC216 F「Max Sum Counting」](https://atcoder.jp/contests/abc216/tasks/abc216_f)
+10. [ABC275 F「Erase Subarrays」](https://atcoder.jp/contests/abc275/tasks/abc275_f)
+11. [ABC320 F「Fuel Round Trip」](https://atcoder.jp/contests/abc320/tasks/abc320_f)
+12. [ABC321 F「#(subset sum = K) with Add and Erase」](https://atcoder.jp/contests/abc321/tasks/abc321_f)
+13. [ABC325 F「Sensor Optimization Dilemma」](https://atcoder.jp/contests/abc325/tasks/abc325_f)
+14. [ABC341 F「Breakdown」](https://atcoder.jp/contests/abc341/tasks/abc341_f)
+15. [ABC366 F「Maximum Composition」](https://atcoder.jp/contests/abc366/tasks/abc366_f)
+16. [ABC383 F「Diversity」](https://atcoder.jp/contests/abc383/tasks/abc383_f)
+17. [ABC441 F「Must Buy」](https://atcoder.jp/contests/abc441/tasks/abc441_f)
+18. [ABC461 F「Total Product is N」](https://atcoder.jp/contests/abc461/tasks/abc461_f)
+19. [ABC269 G「Reversible Cards 2」](https://atcoder.jp/contests/abc269/tasks/abc269_g)
+20. [ABC307 G「Approximate Equalization」](https://atcoder.jp/contests/abc307/tasks/abc307_g)
+21. [ABC426 G「Range Knapsack Query」](https://atcoder.jp/contests/abc426/tasks/abc426_g)
+22. [ABC290 Ex「Bow Meow Optimization」](https://atcoder.jp/contests/abc290/tasks/abc290_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -91,4 +93,4 @@ sidebar:
 - [ABC216 F 公式解説](https://atcoder.jp/contests/abc216/editorial/2560)
 - [ABC216 F 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dp-subset-resource`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-subset-resource`

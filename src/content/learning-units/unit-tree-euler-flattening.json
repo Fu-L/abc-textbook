@@ -49,6 +49,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 67,
-  "globalIndex": 58,
+  "globalIndex": 61,
   "orderReason": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

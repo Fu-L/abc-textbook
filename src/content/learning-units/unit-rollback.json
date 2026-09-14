@@ -37,9 +37,9 @@
     "abc363-g"
   ],
   "directProblemIds": [
-    "abc302-ex",
     "abc218-g",
-    "abc363-g"
+    "abc363-g",
+    "abc302-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
@@ -47,6 +47,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 83,
-  "globalIndex": 119,
+  "globalIndex": 121,
   "orderReason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

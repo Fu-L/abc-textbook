@@ -86,6 +86,6 @@
   "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 2,
-  "globalIndex": 23,
+  "globalIndex": 24,
   "orderReason": "連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。"
 }

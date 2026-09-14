@@ -43,6 +43,6 @@
   "stageRank": 3,
   "difficultyRank": 4,
   "representativeRank": 84,
-  "globalIndex": 122,
+  "globalIndex": 124,
   "orderReason": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

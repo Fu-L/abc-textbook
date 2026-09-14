@@ -127,6 +127,6 @@
   "stageRank": 0,
   "difficultyRank": 0,
   "representativeRank": 3,
-  "globalIndex": 37,
+  "globalIndex": 41,
   "orderReason": "一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。"
 }

@@ -1,9 +1,9 @@
 ---
 title: "包除・Möbius反転で重複を補正する"
-description: "包除・Möbius反転で重複を補正するの概念と、基礎から応用へ読む問題一覧。"
+description: "「包除・Möbius反転で重複を補正する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 47
+  order: 50
 ---
 
 # 包除・Möbius反転で重複を補正する
@@ -22,6 +22,8 @@ sidebar:
 
 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
 
+### このUnitでは扱わないもの
+
 - 選択順を二項係数だけで式化する数え上げ。
 
 ## 下位単元
@@ -31,14 +33,14 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC242 F「Black and White Rooks」](https://atcoder.jp/contests/abc242/tasks/abc242_f)
+1. [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
 2. [ABC455 E「Unbalanced ABC Substrings」](https://atcoder.jp/contests/abc455/tasks/abc455_e)
-3. [ABC377 F「Avoid Queen Attack」](https://atcoder.jp/contests/abc377/tasks/abc377_f)
-4. [ABC465 F「Sjeltzer?」](https://atcoder.jp/contests/abc465/tasks/abc465_f)
-5. [ABC343 E「7x7x7」](https://atcoder.jp/contests/abc343/tasks/abc343_e)
-6. [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+3. [ABC242 F「Black and White Rooks」](https://atcoder.jp/contests/abc242/tasks/abc242_f)
+4. [ABC297 F「Minimum Bounding Box 2」](https://atcoder.jp/contests/abc297/tasks/abc297_f)
+5. [ABC377 F「Avoid Queen Attack」](https://atcoder.jp/contests/abc377/tasks/abc377_f)
+6. [ABC465 F「Sjeltzer?」](https://atcoder.jp/contests/abc465/tasks/abc465_f)
 7. [ABC280 G「Do Use Hexagon Grid 2」](https://atcoder.jp/contests/abc280/tasks/abc280_g)
 8. [ABC456 G「Count Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_g)
 
@@ -78,4 +80,4 @@ sidebar:
 - [ABC215 H 公式解説](https://atcoder.jp/contests/abc215/editorial/2505)
 - [ABC215 H 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-inclusion-exclusion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-inclusion-exclusion`

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8",
-    "acceptedAt": "2026-09-13T09:09:50.944Z"
+    "digest": "adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9",
+    "acceptedAt": "2026-09-14T08:43:04.226Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -56852,22 +56852,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「許可された高々2方向の組を全列挙して非負整数係数を解き、さらに各axis moveを1回先に使った残targetでも同じpair列挙を行う。」、解法への接続「integer lattice shortest walkをexchange argumentでconstant-support representationsへ縮約し、小さなDiophantine systemsの全列挙で解く。」、学習成果「巨大座標へのminimum move countを、少数方向表現の定数個判定として求められる。」を照合し、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「許可された高々2方向の組を全列挙して非負整数係数を解き、さらに各axis moveを1回先に使った残targetでも同じpair列挙を行う。」、解法への接続「integer lattice shortest walkをexchange argumentでconstant-support representationsへ縮約し、小さなDiophantine systemsの全列挙で解く。」、学習成果「巨大座標へのminimum move countを、少数方向表現の定数個判定として求められる。」を照合し、tag-bezout-diophantine / outcome-characterize-integer-solvability をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bezout-diophantine",
-        "tag-bounded-enumeration"
+        "tag-bezout-diophantine"
       ],
       "supportingTagIds": [
+        "tag-bounded-enumeration",
         "tag-greedy-exchange-order"
       ],
-      "primaryOutcomeId": "outcome-enumerate-bounded-candidates-or-cases",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-characterize-integer-solvability"
-      ],
+      "primaryOutcomeId": "outcome-characterize-integer-solvability",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases",
         "outcome-prove-greedy-order"
       ],
       "learningUnitIds": [
@@ -56875,7 +56874,7 @@
         "unit-gcd-diophantine",
         "unit-greedy-exchange"
       ],
-      "presentationUnitId": "unit-bounded-enumeration",
+      "presentationUnitId": "unit-gcd-diophantine",
       "adHocElements": [
         "rotation/reflection symmetryで方向pairの形をさらに定数個へ標準化できるが、8方向全pairを直接列挙しても十分小さい。（再利用可能な見方: 操作集合が小さくtargetが巨大な最短walkでは、探索空間よりoptimal representationのsupport boundを探す。）"
       ],
@@ -56910,11 +56909,11 @@
               "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-bounded-enumeration"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -58731,24 +58730,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。」、解法への接続「mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。」、学習成果「全consecutive subarraysのmediant insertion minimum countsをcompressed fraction treeで合計できる。」を照合し、tag-stern-brocot-ancestry / outcome-traverse-stern-brocot-ancestors をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-ordered-set-multiset; 補助Outcome=outcome-maintain-ordered-set-statistics; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-ordered-set-multiset / outcome-maintain-ordered-set-statistics を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。; 補助Tag=tag-small-to-large; 補助Outcome=outcome-merge-small-into-large; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-small-to-large / outcome-merge-small-into-large を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。」、解法への接続「mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。」、学習成果「全consecutive subarraysのmediant insertion minimum countsをcompressed fraction treeで合計できる。」を照合し、tag-small-to-large / outcome-merge-small-into-large をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-ordered-set-multiset; 補助Outcome=outcome-maintain-ordered-set-statistics; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-ordered-set-multiset / outcome-maintain-ordered-set-statistics を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-small-to-large",
         "tag-stern-brocot-ancestry"
       ],
       "supportingTagIds": [
         "tag-ordered-set-multiset",
-        "tag-recursive-divide-and-conquer",
-        "tag-small-to-large"
+        "tag-recursive-divide-and-conquer"
       ],
-      "primaryOutcomeId": "outcome-traverse-stern-brocot-ancestors",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-merge-small-into-large",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-traverse-stern-brocot-ancestors"
+      ],
       "supportingOutcomeIds": [
         "outcome-divide-search-space-recursively",
-        "outcome-maintain-ordered-set-statistics",
-        "outcome-merge-small-into-large"
+        "outcome-maintain-ordered-set-statistics"
       ],
       "learningUnitIds": [
         "unit-ordered-set-multiset",
@@ -58756,7 +58756,7 @@
         "unit-small-to-large",
         "unit-stern-brocot-ancestry"
       ],
-      "presentationUnitId": "unit-stern-brocot-ancestry",
+      "presentationUnitId": "unit-small-to-large",
       "adHocElements": [
         "非primitive pairを含むsubarrayは実現不能でf=0なので、primitive targetsだけからなる連続区間を独立に処理し、invalid positionを境界にする。（再利用可能な見方: 定義がimpossible caseを0にする集計では、invalid elementを含むrangesを単に除外し、valid runsへ分割する。）"
       ],
@@ -58809,10 +58809,27 @@
               "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
             ]
           },
+          "kind": "primary",
+          "tagIds": [
+            "tag-small-to-large"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc273-ex",
+            "claimPath": "/typicalTechniques/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+              "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+            ]
+          },
           "kind": "supporting",
           "tagIds": [
-            "tag-ordered-set-multiset",
-            "tag-small-to-large"
+            "tag-ordered-set-multiset"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -58846,10 +58863,27 @@
               "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
             ]
           },
+          "kind": "primary",
+          "tagIds": [
+            "tag-small-to-large"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc273-ex",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+              "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+            ]
+          },
           "kind": "supporting",
           "tagIds": [
-            "tag-ordered-set-multiset",
-            "tag-small-to-large"
+            "tag-ordered-set-multiset"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -146229,26 +146263,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「1 と N から Dijkstra を行って最短路辺を抽出し、その部分グラフで橋となる辺を Yes と判定する。」、解法への接続「両端からの距離を求め、等式を満たす辺で G' を作る。G' に lowlink を適用して橋を列挙し、元の辺が G' の橋なら Yes、それ以外は No とする。」、学習成果「全ての最短路に共通する道路を、最短路部分グラフの橋として線形対数時間で判定できる。」を照合し、tag-lowlink-critical-structure / outcome-identify-bridges-and-articulations をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-model-and-compute-shortest-path; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-model-and-compute-shortest-path を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「1 と N から Dijkstra を行って最短路辺を抽出し、その部分グラフで橋となる辺を Yes と判定する。」、解法への接続「両端からの距離を求め、等式を満たす辺で G' を作る。G' に lowlink を適用して橋を列挙し、元の辺が G' の橋なら Yes、それ以外は No とする。」、学習成果「全ての最短路に共通する道路を、最短路部分グラフの橋として線形対数時間で判定できる。」を照合し、tag-shortest-path / outcome-model-and-compute-shortest-path をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-lowlink-critical-structure"
-      ],
-      "supportingTagIds": [
+        "tag-lowlink-critical-structure",
         "tag-shortest-path"
       ],
-      "primaryOutcomeId": "outcome-identify-bridges-and-articulations",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-model-and-compute-shortest-path"
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-model-and-compute-shortest-path",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-identify-bridges-and-articulations"
       ],
+      "supportingOutcomeIds": [],
       "learningUnitIds": [
         "unit-lowlink-critical-structure",
         "unit-weighted-shortest-path"
       ],
-      "presentationUnitId": "unit-lowlink-critical-structure",
+      "presentationUnitId": "unit-weighted-shortest-path",
       "adHocElements": [
         "全最短路の交差を直接数えず、最短路だけからなるグラフへ制限して通常の必須辺問題に戻す。（再利用可能な見方: 距離の等式は候補性、橋は普遍性をそれぞれ担当する二段階判定である。）"
       ],
@@ -146265,11 +146298,11 @@
               "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -146319,11 +146352,11 @@
               "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -158341,26 +158374,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする」、解法への接続「queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。」、学習成果「prefix・値上限付きLIS queryを、通常tails DPの途中状態へoffline接続して高速回答できる。」を照合し、tag-lis-state / outcome-design-lis-frontier をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする」、解法への接続「queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。」、学習成果「prefix・値上限付きLIS queryを、通常tails DPの途中状態へoffline接続して高速回答できる。」を照合し、tag-event-sweep / outcome-linearize-events をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-event-sweep",
         "tag-lis-state"
       ],
-      "supportingTagIds": [
-        "tag-event-sweep"
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-linearize-events",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-design-lis-frontier"
       ],
-      "primaryOutcomeId": "outcome-design-lis-frontier",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-linearize-events"
-      ],
+      "supportingOutcomeIds": [],
       "learningUnitIds": [
         "unit-dp-lis",
         "unit-event-sweep"
       ],
-      "presentationUnitId": "unit-dp-lis",
+      "presentationUnitId": "unit-event-sweep",
       "adHocElements": [
         "「各要素≤X」という制約はLIS DPへ新しい次元を足さず、最小末尾dpの値境界を読むだけで表せる。（再利用可能な見方: prefix subsequence queryでは、標準online DPのfrontierにquery条件が直接binary searchできないか確認する。）"
       ],
@@ -158377,11 +158409,11 @@
               "source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-event-sweep"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -181101,26 +181133,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「前後追加桁数を分け、小さい側を列挙して線形合同式を解く」、解法への接続「S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。」、学習成果「Kのmultipleでdecimal表現にSを含む最小正整数を構成できる。」を照合し、tag-modular-congruence-crt / outcome-solve-modular-constraints をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-meet-in-the-middle; 補助Outcome=outcome-split-enumeration-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-meet-in-the-middle / outcome-split-enumeration-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「前後追加桁数を分け、小さい側を列挙して線形合同式を解く」、解法への接続「S mod Kと10冪を前計算する。各split(u,l)で小さい側を0…10^size-1列挙し合同式を解き、反対側が指定桁数内ならzero-padして候補文字列を作る。leading zeroを除いた(length,string)順で全d+1候補の最小を出す。」、学習成果「Kのmultipleでdecimal表現にSを含む最小正整数を構成できる。」を照合し、tag-meet-in-the-middle / outcome-split-enumeration-space をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-meet-in-the-middle",
         "tag-modular-congruence-crt"
       ],
-      "supportingTagIds": [
-        "tag-meet-in-the-middle"
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-split-enumeration-space",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-solve-modular-constraints"
       ],
-      "primaryOutcomeId": "outcome-solve-modular-constraints",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-split-enumeration-space"
-      ],
+      "supportingOutcomeIds": [],
       "learningUnitIds": [
         "unit-meet-in-the-middle",
         "unit-modular-congruence"
       ],
-      "presentationUnitId": "unit-modular-congruence",
+      "presentationUnitId": "unit-meet-in-the-middle",
       "adHocElements": [
         "解の数値比較は巨大整数化せず、leading zero除去後の桁数とdecimal lexicographic順で比較できる。（再利用可能な見方: 巨大非負整数候補はcanonical decimal stringの(length,lex)で順序付ける。）"
       ],
@@ -181155,11 +181186,11 @@
               "source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-meet-in-the-middle"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -290392,7 +290423,7 @@
       "impactSubjectDigest": "f1e0a7a12c22a4e4a4aed2632356ceaf3f7cfb5fec8704b3556b281c71436f40"
     }
   ],
-  "placementDigest": "bdb8509c7c6abe1517fd1a0b81a6bdcffa53f35533151d3156e87bc115c1c407",
+  "placementDigest": "b33ff3d53e65144db4add972d4786155630655369a21803e4feaad2847c4c7de",
   "correctionImpactDigest": "d5154d05bb81da28d7b15fe937af487ec8770b9d81bf577062605f30d47e046e",
   "previewTaxonomyChangeDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467"
 }

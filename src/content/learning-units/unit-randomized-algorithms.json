@@ -42,8 +42,8 @@
     "abc455-g"
   ],
   "directProblemIds": [
-    "abc272-g",
-    "abc422-e"
+    "abc422-e",
+    "abc272-g"
   ],
   "relatedProblemIds": [
     "abc399-g",
@@ -54,6 +54,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 7,
-  "globalIndex": 92,
+  "globalIndex": 95,
   "orderReason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
 }

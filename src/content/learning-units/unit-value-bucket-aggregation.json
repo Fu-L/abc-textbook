@@ -37,6 +37,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 75,
-  "globalIndex": 70,
+  "globalIndex": 72,
   "orderReason": "値軸を長さBのblockに分け、完全blockの要約と端数の走査を合成する。点更新とqueryの回数を別々に数え、O(1)更新とO(V/B+B)の値prefix取得を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

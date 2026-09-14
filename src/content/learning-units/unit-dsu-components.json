@@ -49,19 +49,19 @@
     "abc447-e"
   ],
   "directProblemIds": [
+    "abc226-e",
+    "abc238-e",
     "abc276-e",
-    "abc279-f",
     "abc304-e",
+    "abc328-e",
+    "abc335-e",
     "abc372-e",
     "abc420-e",
-    "abc238-e",
     "abc434-e",
-    "abc328-e",
-    "abc440-g",
     "abc447-e",
-    "abc226-e",
+    "abc279-f",
     "abc409-f",
-    "abc335-e"
+    "abc440-g"
   ],
   "relatedProblemIds": [
     "abc218-e",
@@ -96,6 +96,6 @@
   "stageRank": 1,
   "difficultyRank": 2,
   "representativeRank": 58,
-  "globalIndex": 23,
+  "globalIndex": 24,
   "orderReason": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

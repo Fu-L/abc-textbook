@@ -489,7 +489,7 @@ describe('final taxonomy policy', () => {
     expect(FINAL_LEARNING_UNIT_ORDER_POLICY.precedenceConstraintField).toBe(
       'additionalPrerequisiteUnitIds',
     );
-    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.semantics).toContain('curriculum prerequisite');
+    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.semantics).toContain('教材上の前提');
 
     expect(tagById.get('tag-event-sweep')?.relatedTags).toEqual(
       expect.arrayContaining([

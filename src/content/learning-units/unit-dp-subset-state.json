@@ -56,26 +56,26 @@
     "abc432-f"
   ],
   "directProblemIds": [
-    "abc354-e",
-    "abc232-f",
+    "abc215-e",
     "abc274-e",
     "abc332-e",
-    "abc396-g",
+    "abc354-e",
+    "abc402-e",
+    "abc232-f",
+    "abc246-f",
+    "abc278-f",
+    "abc310-f",
+    "abc313-f",
+    "abc319-f",
+    "abc352-f",
     "abc381-f",
-    "abc215-e",
+    "abc425-f",
+    "abc432-f",
     "abc328-g",
     "abc343-g",
+    "abc396-g",
     "abc411-g",
-    "abc425-f",
-    "abc278-f",
-    "abc352-f",
-    "abc310-f",
-    "abc319-f",
-    "abc432-f",
-    "abc246-f",
-    "abc313-f",
-    "abc306-ex",
-    "abc402-e"
+    "abc306-ex"
   ],
   "relatedProblemIds": [
     "abc213-g",
@@ -95,6 +95,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 62,
-  "globalIndex": 54,
+  "globalIndex": 57,
   "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

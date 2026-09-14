@@ -1,6 +1,6 @@
 ---
 title: "一次元・二次元累積和と差分で区間情報を線形化する"
-description: "一次元・二次元累積和と差分で区間情報を線形化するの概念と、基礎から応用へ読む問題一覧。"
+description: "「一次元・二次元累積和と差分で区間情報を線形化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 2
@@ -24,16 +24,18 @@ ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から�
 
 一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。
 
+### このUnitでは扱わないもの
+
 - オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
-2. [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
-3. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
-4. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
+1. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
+2. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
+3. [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
+4. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
 5. [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
@@ -83,4 +85,4 @@ ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から�
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-prefix-aggregate`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-prefix-aggregate`

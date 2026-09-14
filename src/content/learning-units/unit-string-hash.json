@@ -1,7 +1,7 @@
 {
   "id": "unit-string-hash",
   "kind": "section",
-  "title": "Fingerprintで列・集合・式の同値性を比較する",
+  "title": "Rolling fingerprintで列の同値性を比較する",
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -36,6 +36,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 9,
-  "globalIndex": 64,
-  "orderReason": "列・集合・式を合成可能なfingerprintへ写し、衝突条件を意識して同値性を比較する。"
+  "globalIndex": 66,
+  "orderReason": "列の順序と長さを保つrolling fingerprintを作り、連結・部分列の切り出し・回文比較へ使う。集合や代数式の乱択fingerprintは乱択アルゴリズムの単元で扱う。"
 }

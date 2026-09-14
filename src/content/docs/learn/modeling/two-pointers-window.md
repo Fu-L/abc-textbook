@@ -1,6 +1,6 @@
 ---
 title: "尺取り法・sliding windowで連続区間を走査する"
-description: "尺取り法・sliding windowで連続区間を走査するの概念と、基礎から応用へ読む問題一覧。"
+description: "「尺取り法・sliding windowで連続区間を走査する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 3
@@ -22,16 +22,18 @@ sidebar:
 
 窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。
 
+### このUnitでは扱わないもの
+
 - 値域上の真偽境界を探す二分探索・パラメトリックサーチ。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC260 E「At Least One」](https://atcoder.jp/contests/abc260/tasks/abc260_e)
 2. [ABC294 E「2xN Grid」](https://atcoder.jp/contests/abc294/tasks/abc294_e)
-3. [ABC337 F「Usual Color Ball Problems」](https://atcoder.jp/contests/abc337/tasks/abc337_f)
-4. [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
+3. [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
+4. [ABC337 F「Usual Color Ball Problems」](https://atcoder.jp/contests/abc337/tasks/abc337_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -64,4 +66,4 @@ sidebar:
 - [ABC258 E 公式問題文](https://atcoder.jp/contests/abc258/tasks/abc258_e)
 - [ABC258 E 公式解説](https://atcoder.jp/contests/abc258/editorial/4215)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-two-pointers-window`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-two-pointers-window`

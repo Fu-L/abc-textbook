@@ -1,5 +1,6 @@
 import { curriculumStageForUnit } from './final-taxonomy-curriculum.js';
 import { deterministicTopologicalOrder } from '../validation/validate.js';
+import { CONCEPT_READING_CHAINS, orderCurriculumUnits } from './learning-unit-order.js';
 import {
   FINAL_TAG_DIRECTED_RELATION_SEEDS,
   FINAL_TAG_FORMER_NAMES,
@@ -404,7 +405,9 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   ],
   'unit-binary-trie': ['文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。'],
   'unit-trie-prefix': ['failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。'],
-  'unit-string-prefix-automata': ['接尾辞・LCPの索引、文字列hash、回文半径。'],
+  'unit-string-prefix-automata': [
+    '接尾辞・LCPの索引、文字列hash、回文半径。KMPのfailure linkによる逐次照合も本Unitの対象に含めない。',
+  ],
   'unit-string-automata': [
     '数値上限・桁・繰り上がりを状態にする桁DP、および接頭辞一致長だけを求めるKMP・Z法。',
   ],
@@ -431,13 +434,19 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     '逆元・一次合同・CRTによる合同条件の統合、および巡回群の位数を使う計数。',
   ],
   'unit-gcd-diophantine': [
-    '連分数・Stern–Brocotによる有理近似、および複数の合同類をCRTで統合する構成。',
+    '差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。',
+  ],
+  'unit-gcd-structure': [
+    'Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。',
   ],
   'unit-numerical-semigroup-reachability': [
     '負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。',
   ],
   'unit-rational-approximation': [
-    '整除性や一次不定方程式の可解判定だけを行う問題、および合同類をCRTで統合する構成。',
+    'Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。',
+  ],
+  'unit-stern-brocot-ancestry': [
+    '分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。',
   ],
   'unit-prime-divisor': ['床関数や整数根の値が一定となる区間への分割。'],
   'unit-integer-boundary-blocks': ['素因数指数による整数条件の分解。'],
@@ -454,7 +463,9 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-formal-power-series': [
     '積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。',
   ],
-  'unit-linear-algebra-xor': ['通常の多項式畳み込み・生成関数と、幾何の面積行列式。'],
+  'unit-linear-algebra-xor': [
+    '行列式による全域木・非交差pathの計数は行列式計数の単元で扱う。通常の多項式畳み込み・生成関数と、幾何の面積行列式も対象外とする。',
+  ],
   'unit-matroid-theory': [
     '線形方程式一般、graph matching一般、および交換公理を用いない単なる貪欲選択。',
   ],
@@ -462,7 +473,9 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     '素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。',
   ],
   'unit-geometry-primitives': ['凸包の境界候補列挙・半平面交差。'],
-  'unit-convex-geometry': ['凸性を使わない一般のevent sweepや座標圧縮。'],
+  'unit-convex-geometry': [
+    '直線群の最小値・最大値queryはConvex Hull Trick・直線包絡で扱う。凸性を使わない一般のevent sweepや座標圧縮も対象外とする。',
+  ],
   'unit-discrete-convex': ['真偽値の単調境界探索と、交換論だけで決まる貪欲順。'],
   'unit-constructive-witness': ['存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。'],
 };
@@ -975,7 +988,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   section('unit-trie-prefix', 'Trieで共有接頭辞を索引化する', 'unit-chapter-string', [], 1, 1, 0),
   section(
     'unit-string-prefix-automata',
-    '接頭辞の一致状態とオートマトン',
+    '接頭辞との一致長を再利用する',
     'unit-chapter-string',
     [],
     1,
@@ -1011,7 +1024,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-string-hash',
-    'Fingerprintで列・集合・式の同値性を比較する',
+    'Rolling fingerprintで列の同値性を比較する',
     'unit-chapter-query',
     [],
     2,
@@ -1165,7 +1178,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-linear-algebra-xor',
-    '線形方程式・分離可能変換・行列式計数へ変換する',
+    '線形方程式・基底・分離可能変換へ変換する',
     'unit-chapter-math-geometry',
     [],
     3,
@@ -1192,7 +1205,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-convex-geometry',
-    '凸境界・半平面制約・直線包絡を扱う',
+    '凸境界・半平面制約を扱う',
     'unit-chapter-math-geometry',
     ['unit-geometry-primitives'],
     2,
@@ -1370,7 +1383,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-trie-prefix':
     '文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。',
   'unit-string-prefix-automata':
-    '接頭辞と接尾辞の一致長を状態化し、失敗時の遷移を再利用して照合を線形化する。',
+    '各位置から接頭辞との一致長を求める。既に得られた一致区間の情報を再利用し、Z algorithmで全位置を線形時間に処理する。',
   'unit-string-automata':
     '未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。',
   'unit-suffix-automaton':
@@ -1378,7 +1391,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-suffix-lcp-index':
     '全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。',
   'unit-string-hash':
-    '列・集合・式を合成可能なfingerprintへ写し、衝突条件を意識して同値性を比較する。',
+    '列の順序と長さを保つrolling fingerprintを作り、連結・部分列の切り出し・回文比較へ使う。集合や代数式の乱択fingerprintは乱択アルゴリズムの単元で扱う。',
   'unit-palindrome-radius': '各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。',
   'unit-recursive-compressed-string':
     '明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。',
@@ -1427,7 +1440,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-formal-power-series':
     '生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。',
   'unit-linear-algebra-xor':
-    '制約や多次元変換を線形方程式・基底・軸別変換・行列式へ写し、消去と分離によって解く。',
+    '制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。',
   'unit-matroid-theory':
     '独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。',
   'unit-finite-field-extension':
@@ -1435,7 +1448,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-geometry-primitives':
     '座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。',
   'unit-convex-geometry':
-    '向きと交差を判定できた後、凸境界への候補限定、半平面制約の共通部分、直線包絡による最適化を区別して扱う。',
+    '向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。',
   'unit-discrete-convex':
     '目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。',
   'unit-separable-convex-marginals':
@@ -6851,7 +6864,7 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-automaton-dp': 'unit-dp-digit-string',
   'unit-sequence-fingerprint': 'unit-string-hash',
   'unit-randomized-algebraic-fingerprint': 'unit-randomized-algorithms',
-  'unit-gcd-structure': 'unit-gcd-diophantine',
+  'unit-gcd-structure': 'unit-chapter-number-theory',
   'unit-divisor-mobius-inversion': 'unit-inclusion-exclusion',
   'unit-subset-transforms': 'unit-inclusion-exclusion',
   'unit-subset-convolution': 'unit-subset-transforms',
@@ -7013,12 +7026,11 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = BASE_LEARNING_UNIT_SEED
 }));
 
 const unitSeedById = new Map(LEARNING_UNIT_SEEDS.map((unit) => [unit.id, unit]));
-const orderedUnitSeeds: readonly LearningUnitSeed[] = deterministicTopologicalOrder(
+const orderedUnitSeeds: readonly LearningUnitSeed[] = orderCurriculumUnits(
   LEARNING_UNIT_SEEDS.map((unit) => ({
     ...unit,
     prerequisiteIds: unit.prerequisiteIds,
   })),
-  (unit) => [unit.stageRank, unit.difficultyRank, unit.representativeRank],
 ).map((orderedUnit) => {
   const originalUnit = unitSeedById.get(orderedUnit.id);
   if (originalUnit === undefined)
@@ -7059,7 +7071,8 @@ export const FINAL_LEARNING_UNIT_ORDER_POLICY = {
   policyVersion: '1.0.0' as const,
   precedenceConstraintField: 'additionalPrerequisiteUnitIds',
   semantics:
-    '教材上のcurriculum prerequisiteを先行させる。単独学習の論理的不可能性ではなく、説明の再利用と自然なprogressionを表す。',
+    '教材上の前提を先行させ、直接つながる概念は導入Unitの優先順位で続けて読む。それ以外はstage・難度・代表順位で選ぶ。概念の近接は学習順の推奨であり、新たな前提条件ではない。',
+  conceptReadingChains: CONCEPT_READING_CHAINS,
   tieBreakRanks: ['stageRank', 'difficultyRank', 'representativeRank', 'id'] as const,
   orderedUnitIds: FINAL_LEARNING_UNIT_CANDIDATES.filter(
     (unit) =>

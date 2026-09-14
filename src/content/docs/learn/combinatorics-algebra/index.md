@@ -1,9 +1,9 @@
 ---
 title: "組合せ・多項式・線形代数"
-description: "組合せ・多項式・線形代数の概念と、基礎から応用へ読む問題一覧。"
+description: "「組合せ・多項式・線形代数」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 17
+  order: 16
 ---
 
 # 組合せ・多項式・線形代数
@@ -22,13 +22,15 @@ sidebar:
 
 数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。
 
+### このUnitでは扱わないもの
+
 - なし
 
 ## 下位単元
 
 - [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)
 - [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
-- [線形方程式・分離可能変換・行列式計数へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
+- [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
 - [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/)
 - [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)
 - [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)
@@ -48,7 +50,7 @@ sidebar:
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -94,4 +96,4 @@ sidebar:
 - [ABC213 G 公式解説](https://atcoder.jp/contests/abc213/editorial/2392)
 - [ABC213 G 公式問題文](https://atcoder.jp/contests/abc213/tasks/abc213_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-chapter-combinatorics-algebra`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-chapter-combinatorics-algebra`

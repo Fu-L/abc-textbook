@@ -39,6 +39,6 @@
   "stageRank": 3,
   "difficultyRank": 3,
   "representativeRank": 74,
-  "globalIndex": 103,
+  "globalIndex": 106,
   "orderReason": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -40,11 +40,11 @@
     "abc444-e"
   ],
   "directProblemIds": [
-    "abc330-e",
-    "abc306-e",
     "abc281-e",
-    "abc308-g",
+    "abc306-e",
+    "abc330-e",
     "abc444-e",
+    "abc308-g",
     "abc314-g"
   ],
   "relatedProblemIds": [
@@ -69,6 +69,6 @@
   "stageRank": 1,
   "difficultyRank": 3,
   "representativeRank": 60,
-  "globalIndex": 25,
+  "globalIndex": 28,
   "orderReason": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

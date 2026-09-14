@@ -1,10 +1,43 @@
 import { describe, expect, it } from 'vitest';
 import {
   isCurriculumUnit,
+  orderCurriculumUnits,
   unitNavigationIndices,
 } from '../../src/lib/taxonomy/learning-unit-order.js';
 
 describe('curriculum and navigation positions', () => {
+  it('keeps concept continuations together but waits for outside prerequisites', () => {
+    const unit = (id: string, stageRank: number, prerequisiteIds: string[] = []) => ({
+      id,
+      stageRank,
+      prerequisiteIds,
+      difficultyRank: 1,
+      representativeRank: 1,
+    });
+    const units = [
+      unit('unit-dp-sequence', 1),
+      unit('unit-dp-lis', 2, ['unit-dp-sequence']),
+      unit('unit-dp-prefix-partition', 1),
+      unit('unit-unrelated', 1),
+    ];
+    expect(orderCurriculumUnits(units).map(({ id }) => id)).toEqual([
+      'unit-dp-sequence',
+      'unit-dp-lis',
+      'unit-dp-prefix-partition',
+      'unit-unrelated',
+    ]);
+    const blocked = units.map((u) =>
+      u.id === 'unit-dp-lis'
+        ? { ...u, prerequisiteIds: ['unit-dp-sequence', 'unit-unrelated'] }
+        : u,
+    );
+    expect(orderCurriculumUnits(blocked).map(({ id }) => id)).toEqual([
+      'unit-dp-sequence',
+      'unit-dp-prefix-partition',
+      'unit-unrelated',
+      'unit-dp-lis',
+    ]);
+  });
   it('places containers at their earliest teaching descendant without adding curriculum steps', () => {
     const units = [
       { id: 'chapter', kind: 'chapter', parentId: null, ownedTagIds: ['orientation'] },

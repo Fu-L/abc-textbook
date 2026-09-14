@@ -1,9 +1,9 @@
 ---
 title: "NTT・FFTで畳み込みと相互相関を求める"
-description: "NTT・FFTで畳み込みと相互相関を求めるの概念と、基礎から応用へ読む問題一覧。"
+description: "「NTT・FFTで畳み込みと相互相関を求める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 95
+  order: 98
 ---
 
 # NTT・FFTで畳み込みと相互相関を求める
@@ -32,6 +32,8 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
 
+### このUnitでは扱わないもの
+
 - 組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。
 
 ## 下位単元
@@ -41,7 +43,7 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC291 G「OR Sum」](https://atcoder.jp/contests/abc291/tasks/abc291_g)
 2. [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
@@ -83,4 +85,4 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 - [ABC235 H 公式解説](https://atcoder.jp/contests/abc235/editorial/3250)
 - [ABC235 H 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-polynomial-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-polynomial-convolution`

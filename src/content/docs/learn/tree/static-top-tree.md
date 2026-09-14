@@ -1,6 +1,6 @@
 ---
 title: "rake・compressで動的木DPを保つ"
-description: "rake・compressで動的木DPを保つの概念と、基礎から応用へ読む問題一覧。"
+description: "「rake・compressで動的木DPを保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 187
@@ -22,14 +22,16 @@ sidebar:
 
 木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。
 
+### このUnitでは扱わないもの
+
 - 更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
-1. [ABC460 G「Vertex Flip Query」](https://atcoder.jp/contests/abc460/tasks/abc460_g)
-2. [ABC351 G「Hash on Tree」](https://atcoder.jp/contests/abc351/tasks/abc351_g)
+1. [ABC351 G「Hash on Tree」](https://atcoder.jp/contests/abc351/tasks/abc351_g)
+2. [ABC460 G「Vertex Flip Query」](https://atcoder.jp/contests/abc460/tasks/abc460_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 
@@ -40,4 +42,4 @@ sidebar:
 - [ABC460 G 公式解説](https://atcoder.jp/contests/abc460/editorial/21012)
 - [ABC460 G 公式問題文](https://atcoder.jp/contests/abc460/tasks/abc460_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-static-top-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-static-top-tree`

@@ -50,6 +50,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 73,
-  "globalIndex": 62,
+  "globalIndex": 64,
   "orderReason": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

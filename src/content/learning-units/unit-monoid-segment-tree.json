@@ -97,6 +97,6 @@
   "stageRank": 0,
   "difficultyRank": 2,
   "representativeRank": 1,
-  "globalIndex": 57,
+  "globalIndex": 60,
   "orderReason": "結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。"
 }

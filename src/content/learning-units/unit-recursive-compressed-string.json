@@ -39,8 +39,8 @@
   ],
   "directProblemIds": [
     "abc450-e",
-    "abc350-f",
     "abc346-f",
+    "abc350-f",
     "abc417-g"
   ],
   "relatedProblemIds": [],
@@ -49,6 +49,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 2,
-  "globalIndex": 87,
+  "globalIndex": 90,
   "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
 }

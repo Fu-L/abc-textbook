@@ -37,8 +37,8 @@
     "abc279-e"
   ],
   "directProblemIds": [
-    "abc279-e",
     "abc243-e",
+    "abc279-e",
     "abc218-f"
   ],
   "relatedProblemIds": [
@@ -49,6 +49,6 @@
   "stageRank": 3,
   "difficultyRank": 2,
   "representativeRank": 6,
-  "globalIndex": 89,
+  "globalIndex": 92,
   "orderReason": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
 }

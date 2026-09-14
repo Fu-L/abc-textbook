@@ -89,6 +89,6 @@
   "stageRank": 0,
   "difficultyRank": 3,
   "representativeRank": 9,
-  "globalIndex": 78,
+  "globalIndex": 81,
   "orderReason": "頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。"
 }

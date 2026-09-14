@@ -69,7 +69,6 @@
     "abc369-f",
     "abc374-f",
     "abc386-f",
-    "abc393-f",
     "abc400-f",
     "abc410-g",
     "abc439-e",
@@ -85,6 +84,7 @@
     "abc271-e",
     "abc288-f",
     "abc305-ex",
+    "abc393-f",
     "abc418-g",
     "abc457-g"
   ],
@@ -93,6 +93,6 @@
   "stageRank": 0,
   "difficultyRank": 1,
   "representativeRank": 2,
-  "globalIndex": 27,
+  "globalIndex": 30,
   "orderReason": "状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。"
 }

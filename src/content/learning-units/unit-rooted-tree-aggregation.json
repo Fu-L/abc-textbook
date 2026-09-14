@@ -56,22 +56,22 @@
   "directProblemIds": [
     "abc239-e",
     "abc309-e",
-    "abc409-e",
     "abc391-e",
-    "abc263-f",
-    "abc394-f",
-    "abc312-g",
-    "abc378-f",
-    "abc447-f",
     "abc397-e",
-    "abc259-f",
+    "abc409-e",
     "abc459-e",
+    "abc259-f",
+    "abc263-f",
     "abc287-f",
+    "abc378-f",
+    "abc394-f",
     "abc416-f",
-    "abc248-g",
+    "abc447-f",
     "abc246-g",
-    "abc293-ex",
-    "abc264-ex"
+    "abc248-g",
+    "abc312-g",
+    "abc264-ex",
+    "abc293-ex"
   ],
   "relatedProblemIds": [
     "abc269-ex",
@@ -90,6 +90,6 @@
   "stageRank": 2,
   "difficultyRank": 3,
   "representativeRank": 63,
-  "globalIndex": 55,
+  "globalIndex": 58,
   "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
 }

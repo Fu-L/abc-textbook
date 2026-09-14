@@ -1,9 +1,9 @@
 ---
 title: "可逆な非零剰余と剰余 0 因子を含む法上の動的積"
-description: "可逆な非零剰余と剰余 0 因子を含む法上の動的積の概念と、基礎から応用へ読む問題一覧。"
+description: "「可逆な非零剰余と剰余 0 因子を含む法上の動的積」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 38
+  order: 42
 ---
 
 # 可逆な非零剰余と剰余 0 因子を含む法上の動的積
@@ -22,11 +22,13 @@ sidebar:
 
 通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。
 
+### このUnitでは扱わないもの
+
 - 因子が変化しない一回限りの積、和やmin/maxの更新、任意区間積を求めるSegment Tree、および合成数法で非零の非可逆因子も差し替える一般の場合。
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 1. [ABC411 E「E [max]」](https://atcoder.jp/contests/abc411/tasks/abc411_e)
 
@@ -48,4 +50,4 @@ sidebar:
 - [ABC456 G 公式解説](https://atcoder.jp/contests/abc456/editorial/19853)
 - [ABC456 G 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-dynamic-modular-product`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dynamic-modular-product`

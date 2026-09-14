@@ -1,16 +1,16 @@
 ---
 title: "SCCで閉路・DAG順・2-SATを処理する"
-description: "SCCで閉路・DAG順・2-SATを処理するの概念と、基礎から応用へ読む問題一覧。"
+description: "「SCCで閉路・DAG順・2-SATを処理する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 21
+  order: 22
 ---
 
 # SCCで閉路・DAG順・2-SATを処理する
 
 ## 概要
 
-下位の単元を、前提を満たす順にまとめます。
+到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。
 
 ## 前提と範囲
 
@@ -18,21 +18,21 @@ sidebar:
 
 追加前提: なし。
 
-到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。
+### このUnitでは扱わないもの
 
 - 無向辺追加だけを扱うDSU連結成分管理。
 
 ## 下位単元
 
 - [DAGのtopological processing](/learn/graph/dag-topological-processing/)
-- [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/)
 - [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/)
+- [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/)
 - [2-SAT・含意グラフ](/learn/graph/two-sat/)
 - [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/)
 
 ## 問題一覧
 
-必要な前提と解法の基本性を優先し、複数の技能を組み合わせる問題へ進む順に並べています。
+基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
@@ -60,4 +60,4 @@ sidebar:
 - [ABC245 F 公式解説](https://atcoder.jp/contests/abc245/editorial/3652)
 - [ABC245 F 公式問題文](https://atcoder.jp/contests/abc245/tasks/abc245_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `6936d6a80b1bc64a837a7d03073a998d83dbc4d54f73f88f3a84f68287a574e8` / LearningUnit `unit-directed-condensation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-directed-condensation`
