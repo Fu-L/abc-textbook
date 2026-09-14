@@ -42,6 +42,8 @@
     "corpus:policy-fingerprints": "tsx scripts/corpus/policy-fingerprints.ts",
     "corpus:acquire-metadata": "tsx scripts/corpus/acquire-metadata.ts",
     "corpus:verify-metadata": "tsx scripts/corpus/verify-metadata.ts",
+    "corpus:acquire-atcoder-problems-metrics": "tsx scripts/corpus/acquire-atcoder-problems-metrics.ts",
+    "corpus:verify-atcoder-problems-metrics": "tsx scripts/corpus/verify-atcoder-problems-metrics.ts",
     "corpus:materialize-metadata": "tsx scripts/corpus/materialize-metadata.ts",
     "corpus:author-inventory": "tsx scripts/corpus/author-inventory.ts",
     "corpus:export-inventory-review-packets": "tsx scripts/corpus/export-inventory-review-packets.ts",

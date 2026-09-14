@@ -1,0 +1,5219 @@
+{
+  "schemaVersion": "1.0.0",
+  "provider": "atcoder-problems",
+  "checkedAt": "2026-09-14T18:34:00+09:00",
+  "sources": {
+    "problemModels": "https://kenkoooo.com/atcoder/resources/problem-models.json",
+    "mergedProblems": "https://kenkoooo.com/atcoder/resources/merged-problems.json"
+  },
+  "problems": {
+    "abc212-e": {
+      "officialTaskId": "abc212_e",
+      "difficulty": 1410,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc212-f": {
+      "officialTaskId": "abc212_f",
+      "difficulty": 2332,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc212-g": {
+      "officialTaskId": "abc212_g",
+      "difficulty": 2150,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc212-h": {
+      "officialTaskId": "abc212_h",
+      "difficulty": 2741,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc213-e": {
+      "officialTaskId": "abc213_e",
+      "difficulty": 1423,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc213-f": {
+      "officialTaskId": "abc213_f",
+      "difficulty": 2215,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc213-g": {
+      "officialTaskId": "abc213_g",
+      "difficulty": 2663,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc213-h": {
+      "officialTaskId": "abc213_h",
+      "difficulty": 2806,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc214-e": {
+      "officialTaskId": "abc214_e",
+      "difficulty": 1835,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc214-f": {
+      "officialTaskId": "abc214_f",
+      "difficulty": 1973,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc214-g": {
+      "officialTaskId": "abc214_g",
+      "difficulty": 2893,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc214-h": {
+      "officialTaskId": "abc214_h",
+      "difficulty": 3138,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc215-e": {
+      "officialTaskId": "abc215_e",
+      "difficulty": 1413,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc215-f": {
+      "officialTaskId": "abc215_f",
+      "difficulty": 1853,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc215-g": {
+      "officialTaskId": "abc215_g",
+      "difficulty": 2276,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc215-h": {
+      "officialTaskId": "abc215_h",
+      "difficulty": 3101,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc216-e": {
+      "officialTaskId": "abc216_e",
+      "difficulty": 1084,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc216-f": {
+      "officialTaskId": "abc216_f",
+      "difficulty": 1541,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc216-g": {
+      "officialTaskId": "abc216_g",
+      "difficulty": 1963,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc216-h": {
+      "officialTaskId": "abc216_h",
+      "difficulty": 3295,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc217-e": {
+      "officialTaskId": "abc217_e",
+      "difficulty": 986,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc217-f": {
+      "officialTaskId": "abc217_f",
+      "difficulty": 1954,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc217-g": {
+      "officialTaskId": "abc217_g",
+      "difficulty": 2047,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc217-h": {
+      "officialTaskId": "abc217_h",
+      "difficulty": 3112,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc218-e": {
+      "officialTaskId": "abc218_e",
+      "difficulty": 1004,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc218-f": {
+      "officialTaskId": "abc218_f",
+      "difficulty": 1753,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc218-g": {
+      "officialTaskId": "abc218_g",
+      "difficulty": 2217,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc218-h": {
+      "officialTaskId": "abc218_h",
+      "difficulty": 2805,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc219-e": {
+      "officialTaskId": "abc219_e",
+      "difficulty": 1690,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc219-f": {
+      "officialTaskId": "abc219_f",
+      "difficulty": 2542,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc219-g": {
+      "officialTaskId": "abc219_g",
+      "difficulty": 2287,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc219-h": {
+      "officialTaskId": "abc219_h",
+      "difficulty": 3297,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc220-e": {
+      "officialTaskId": "abc220_e",
+      "difficulty": 1593,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc220-f": {
+      "officialTaskId": "abc220_f",
+      "difficulty": 1304,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc220-g": {
+      "officialTaskId": "abc220_g",
+      "difficulty": 2439,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc220-h": {
+      "officialTaskId": "abc220_h",
+      "difficulty": 3047,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc221-e": {
+      "officialTaskId": "abc221_e",
+      "difficulty": 1515,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc221-f": {
+      "officialTaskId": "abc221_f",
+      "difficulty": 2093,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc221-g": {
+      "officialTaskId": "abc221_g",
+      "difficulty": 2914,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc221-h": {
+      "officialTaskId": "abc221_h",
+      "difficulty": 2793,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc222-e": {
+      "officialTaskId": "abc222_e",
+      "difficulty": 1491,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc222-f": {
+      "officialTaskId": "abc222_f",
+      "difficulty": 1934,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc222-g": {
+      "officialTaskId": "abc222_g",
+      "difficulty": 2242,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc222-h": {
+      "officialTaskId": "abc222_h",
+      "difficulty": 3477,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc223-e": {
+      "officialTaskId": "abc223_e",
+      "difficulty": 1510,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc223-f": {
+      "officialTaskId": "abc223_f",
+      "difficulty": 1641,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc223-g": {
+      "officialTaskId": "abc223_g",
+      "difficulty": 2351,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc223-h": {
+      "officialTaskId": "abc223_h",
+      "difficulty": 2771,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc224-e": {
+      "officialTaskId": "abc224_e",
+      "difficulty": 1657,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc224-f": {
+      "officialTaskId": "abc224_f",
+      "difficulty": 1733,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc224-g": {
+      "officialTaskId": "abc224_g",
+      "difficulty": 2374,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc224-h": {
+      "officialTaskId": "abc224_h",
+      "difficulty": 2887,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc225-e": {
+      "officialTaskId": "abc225_e",
+      "difficulty": 1678,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc225-f": {
+      "officialTaskId": "abc225_f",
+      "difficulty": 2612,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc225-g": {
+      "officialTaskId": "abc225_g",
+      "difficulty": 2566,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc225-h": {
+      "officialTaskId": "abc225_h",
+      "difficulty": 3061,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc226-e": {
+      "officialTaskId": "abc226_e",
+      "difficulty": 1327,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc226-f": {
+      "officialTaskId": "abc226_f",
+      "difficulty": 2086,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc226-g": {
+      "officialTaskId": "abc226_g",
+      "difficulty": 2373,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc226-h": {
+      "officialTaskId": "abc226_h",
+      "difficulty": 2813,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc227-e": {
+      "officialTaskId": "abc227_e",
+      "difficulty": 2377,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc227-f": {
+      "officialTaskId": "abc227_f",
+      "difficulty": 2323,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc227-g": {
+      "officialTaskId": "abc227_g",
+      "difficulty": 2207,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc227-h": {
+      "officialTaskId": "abc227_h",
+      "difficulty": 3229,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc228-e": {
+      "officialTaskId": "abc228_e",
+      "difficulty": 1579,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc228-f": {
+      "officialTaskId": "abc228_f",
+      "difficulty": 2179,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc228-g": {
+      "officialTaskId": "abc228_g",
+      "difficulty": 2711,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc228-h": {
+      "officialTaskId": "abc228_h",
+      "difficulty": 2729,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc229-e": {
+      "officialTaskId": "abc229_e",
+      "difficulty": 1015,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc229-f": {
+      "officialTaskId": "abc229_f",
+      "difficulty": 1917,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc229-g": {
+      "officialTaskId": "abc229_g",
+      "difficulty": 2121,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc229-h": {
+      "officialTaskId": "abc229_h",
+      "difficulty": 3308,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc230-e": {
+      "officialTaskId": "abc230_e",
+      "difficulty": 969,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc230-f": {
+      "officialTaskId": "abc230_f",
+      "difficulty": 2113,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc230-g": {
+      "officialTaskId": "abc230_g",
+      "difficulty": 2516,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc230-h": {
+      "officialTaskId": "abc230_h",
+      "difficulty": 3528,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc231-e": {
+      "officialTaskId": "abc231_e",
+      "difficulty": 1740,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc231-f": {
+      "officialTaskId": "abc231_f",
+      "difficulty": 1580,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc231-g": {
+      "officialTaskId": "abc231_g",
+      "difficulty": 2606,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc231-h": {
+      "officialTaskId": "abc231_h",
+      "difficulty": 2681,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc232-e": {
+      "officialTaskId": "abc232_e",
+      "difficulty": 1380,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc232-f": {
+      "officialTaskId": "abc232_f",
+      "difficulty": 1857,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc232-g": {
+      "officialTaskId": "abc232_g",
+      "difficulty": 2550,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc232-h": {
+      "officialTaskId": "abc232_h",
+      "difficulty": 2780,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc233-e": {
+      "officialTaskId": "abc233_e",
+      "difficulty": 969,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc233-ex": {
+      "officialTaskId": "abc233_h",
+      "difficulty": 2530,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc233-f": {
+      "officialTaskId": "abc233_f",
+      "difficulty": 2038,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc233-g": {
+      "officialTaskId": "abc233_g",
+      "difficulty": 2438,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc234-e": {
+      "officialTaskId": "abc234_e",
+      "difficulty": 899,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc234-ex": {
+      "officialTaskId": "abc234_h",
+      "difficulty": 2505,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc234-f": {
+      "officialTaskId": "abc234_f",
+      "difficulty": 1596,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc234-g": {
+      "officialTaskId": "abc234_g",
+      "difficulty": 2306,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc235-e": {
+      "officialTaskId": "abc235_e",
+      "difficulty": 1304,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc235-ex": {
+      "officialTaskId": "abc235_h",
+      "difficulty": 2967,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc235-f": {
+      "officialTaskId": "abc235_f",
+      "difficulty": 2129,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc235-g": {
+      "officialTaskId": "abc235_g",
+      "difficulty": 2462,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc236-e": {
+      "officialTaskId": "abc236_e",
+      "difficulty": 1893,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc236-ex": {
+      "officialTaskId": "abc236_h",
+      "difficulty": 2898,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc236-f": {
+      "officialTaskId": "abc236_f",
+      "difficulty": 1943,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc236-g": {
+      "officialTaskId": "abc236_g",
+      "difficulty": 2438,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc237-e": {
+      "officialTaskId": "abc237_e",
+      "difficulty": 1208,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc237-ex": {
+      "officialTaskId": "abc237_h",
+      "difficulty": 2807,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc237-f": {
+      "officialTaskId": "abc237_f",
+      "difficulty": 1857,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc237-g": {
+      "officialTaskId": "abc237_g",
+      "difficulty": 2088,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc238-e": {
+      "officialTaskId": "abc238_e",
+      "difficulty": 1577,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc238-ex": {
+      "officialTaskId": "abc238_h",
+      "difficulty": 3247,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc238-f": {
+      "officialTaskId": "abc238_f",
+      "difficulty": 2058,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc238-g": {
+      "officialTaskId": "abc238_g",
+      "difficulty": 2254,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc239-e": {
+      "officialTaskId": "abc239_e",
+      "difficulty": 1084,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc239-ex": {
+      "officialTaskId": "abc239_h",
+      "difficulty": 2686,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc239-f": {
+      "officialTaskId": "abc239_f",
+      "difficulty": 1959,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc239-g": {
+      "officialTaskId": "abc239_g",
+      "difficulty": 2215,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc240-e": {
+      "officialTaskId": "abc240_e",
+      "difficulty": 1068,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc240-ex": {
+      "officialTaskId": "abc240_h",
+      "difficulty": 3184,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc240-f": {
+      "officialTaskId": "abc240_f",
+      "difficulty": 1589,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc240-g": {
+      "officialTaskId": "abc240_g",
+      "difficulty": 2462,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc241-e": {
+      "officialTaskId": "abc241_e",
+      "difficulty": 1248,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc241-ex": {
+      "officialTaskId": "abc241_h",
+      "difficulty": 2881,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc241-f": {
+      "officialTaskId": "abc241_f",
+      "difficulty": 1888,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc241-g": {
+      "officialTaskId": "abc241_g",
+      "difficulty": 2422,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc242-e": {
+      "officialTaskId": "abc242_e",
+      "difficulty": 1365,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc242-ex": {
+      "officialTaskId": "abc242_h",
+      "difficulty": 2835,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc242-f": {
+      "officialTaskId": "abc242_f",
+      "difficulty": 2268,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc242-g": {
+      "officialTaskId": "abc242_g",
+      "difficulty": 1828,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc243-e": {
+      "officialTaskId": "abc243_e",
+      "difficulty": 1637,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc243-ex": {
+      "officialTaskId": "abc243_h",
+      "difficulty": 3884,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc243-f": {
+      "officialTaskId": "abc243_f",
+      "difficulty": 2125,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc243-g": {
+      "officialTaskId": "abc243_g",
+      "difficulty": 2032,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc244-e": {
+      "officialTaskId": "abc244_e",
+      "difficulty": 1125,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc244-ex": {
+      "officialTaskId": "abc244_h",
+      "difficulty": 2878,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc244-f": {
+      "officialTaskId": "abc244_f",
+      "difficulty": 1661,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc244-g": {
+      "officialTaskId": "abc244_g",
+      "difficulty": 2117,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc245-e": {
+      "officialTaskId": "abc245_e",
+      "difficulty": 1571,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc245-ex": {
+      "officialTaskId": "abc245_h",
+      "difficulty": 3057,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc245-f": {
+      "officialTaskId": "abc245_f",
+      "difficulty": 1451,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc245-g": {
+      "officialTaskId": "abc245_g",
+      "difficulty": 2270,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc246-e": {
+      "officialTaskId": "abc246_e",
+      "difficulty": 1476,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc246-ex": {
+      "officialTaskId": "abc246_h",
+      "difficulty": 2677,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc246-f": {
+      "officialTaskId": "abc246_f",
+      "difficulty": 1677,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc246-g": {
+      "officialTaskId": "abc246_g",
+      "difficulty": 2313,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc247-e": {
+      "officialTaskId": "abc247_e",
+      "difficulty": 1256,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc247-ex": {
+      "officialTaskId": "abc247_h",
+      "difficulty": 2664,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc247-f": {
+      "officialTaskId": "abc247_f",
+      "difficulty": 1697,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc247-g": {
+      "officialTaskId": "abc247_g",
+      "difficulty": 2159,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc248-e": {
+      "officialTaskId": "abc248_e",
+      "difficulty": 1292,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc248-ex": {
+      "officialTaskId": "abc248_h",
+      "difficulty": 2960,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc248-f": {
+      "officialTaskId": "abc248_f",
+      "difficulty": 1828,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc248-g": {
+      "officialTaskId": "abc248_g",
+      "difficulty": 2514,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc249-e": {
+      "officialTaskId": "abc249_e",
+      "difficulty": 1970,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc249-ex": {
+      "officialTaskId": "abc249_h",
+      "difficulty": 3487,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc249-f": {
+      "officialTaskId": "abc249_f",
+      "difficulty": 1786,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc249-g": {
+      "officialTaskId": "abc249_g",
+      "difficulty": 2756,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc250-e": {
+      "officialTaskId": "abc250_e",
+      "difficulty": 1421,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc250-ex": {
+      "officialTaskId": "abc250_h",
+      "difficulty": 2773,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc250-f": {
+      "officialTaskId": "abc250_f",
+      "difficulty": 2044,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc250-g": {
+      "officialTaskId": "abc250_g",
+      "difficulty": 2219,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc251-e": {
+      "officialTaskId": "abc251_e",
+      "difficulty": 1227,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc251-ex": {
+      "officialTaskId": "abc251_h",
+      "difficulty": 3108,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc251-f": {
+      "officialTaskId": "abc251_f",
+      "difficulty": 1703,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc251-g": {
+      "officialTaskId": "abc251_g",
+      "difficulty": 2468,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc252-e": {
+      "officialTaskId": "abc252_e",
+      "difficulty": 1294,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc252-ex": {
+      "officialTaskId": "abc252_h",
+      "difficulty": 3015,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc252-f": {
+      "officialTaskId": "abc252_f",
+      "difficulty": 1609,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc252-g": {
+      "officialTaskId": "abc252_g",
+      "difficulty": 2153,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc253-e": {
+      "officialTaskId": "abc253_e",
+      "difficulty": 1073,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc253-ex": {
+      "officialTaskId": "abc253_h",
+      "difficulty": 2758,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc253-f": {
+      "officialTaskId": "abc253_f",
+      "difficulty": 1756,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc253-g": {
+      "officialTaskId": "abc253_g",
+      "difficulty": 2051,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc254-e": {
+      "officialTaskId": "abc254_e",
+      "difficulty": 1202,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc254-ex": {
+      "officialTaskId": "abc254_h",
+      "difficulty": 2499,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc254-f": {
+      "officialTaskId": "abc254_f",
+      "difficulty": 1764,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc254-g": {
+      "officialTaskId": "abc254_g",
+      "difficulty": 2890,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc255-e": {
+      "officialTaskId": "abc255_e",
+      "difficulty": 1519,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc255-ex": {
+      "officialTaskId": "abc255_h",
+      "difficulty": 2430,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc255-f": {
+      "officialTaskId": "abc255_f",
+      "difficulty": 1797,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc255-g": {
+      "officialTaskId": "abc255_g",
+      "difficulty": 2734,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc256-e": {
+      "officialTaskId": "abc256_e",
+      "difficulty": 1224,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc256-ex": {
+      "officialTaskId": "abc256_h",
+      "difficulty": 2531,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc256-f": {
+      "officialTaskId": "abc256_f",
+      "difficulty": 2067,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc256-g": {
+      "officialTaskId": "abc256_g",
+      "difficulty": 2250,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc257-e": {
+      "officialTaskId": "abc257_e",
+      "difficulty": 1385,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc257-ex": {
+      "officialTaskId": "abc257_h",
+      "difficulty": 3461,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc257-f": {
+      "officialTaskId": "abc257_f",
+      "difficulty": 1775,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc257-g": {
+      "officialTaskId": "abc257_g",
+      "difficulty": 2078,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc258-e": {
+      "officialTaskId": "abc258_e",
+      "difficulty": 1545,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc258-ex": {
+      "officialTaskId": "abc258_h",
+      "difficulty": 2708,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc258-f": {
+      "officialTaskId": "abc258_f",
+      "difficulty": 2306,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc258-g": {
+      "officialTaskId": "abc258_g",
+      "difficulty": 1944,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc259-e": {
+      "officialTaskId": "abc259_e",
+      "difficulty": 1370,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc259-ex": {
+      "officialTaskId": "abc259_h",
+      "difficulty": 2406,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc259-f": {
+      "officialTaskId": "abc259_f",
+      "difficulty": 1961,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc259-g": {
+      "officialTaskId": "abc259_g",
+      "difficulty": 2428,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc260-e": {
+      "officialTaskId": "abc260_e",
+      "difficulty": 1692,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc260-ex": {
+      "officialTaskId": "abc260_h",
+      "difficulty": 3339,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc260-f": {
+      "officialTaskId": "abc260_f",
+      "difficulty": 1995,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc260-g": {
+      "officialTaskId": "abc260_g",
+      "difficulty": 2339,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc261-e": {
+      "officialTaskId": "abc261_e",
+      "difficulty": 1261,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc261-ex": {
+      "officialTaskId": "abc261_h",
+      "difficulty": 2531,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc261-f": {
+      "officialTaskId": "abc261_f",
+      "difficulty": 1587,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc261-g": {
+      "officialTaskId": "abc261_g",
+      "difficulty": 2803,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc262-e": {
+      "officialTaskId": "abc262_e",
+      "difficulty": 1719,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc262-ex": {
+      "officialTaskId": "abc262_h",
+      "difficulty": 2957,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc262-f": {
+      "officialTaskId": "abc262_f",
+      "difficulty": 2334,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc262-g": {
+      "officialTaskId": "abc262_g",
+      "difficulty": 3114,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc263-e": {
+      "officialTaskId": "abc263_e",
+      "difficulty": 1659,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc263-ex": {
+      "officialTaskId": "abc263_h",
+      "difficulty": 3041,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc263-f": {
+      "officialTaskId": "abc263_f",
+      "difficulty": 2066,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc263-g": {
+      "officialTaskId": "abc263_g",
+      "difficulty": 2261,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc264-e": {
+      "officialTaskId": "abc264_e",
+      "difficulty": 1229,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc264-ex": {
+      "officialTaskId": "abc264_h",
+      "difficulty": 2660,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc264-f": {
+      "officialTaskId": "abc264_f",
+      "difficulty": 1878,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc264-g": {
+      "officialTaskId": "abc264_g",
+      "difficulty": 2348,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc265-e": {
+      "officialTaskId": "abc265_e",
+      "difficulty": 1531,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc265-ex": {
+      "officialTaskId": "abc265_h",
+      "difficulty": 3319,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc265-f": {
+      "officialTaskId": "abc265_f",
+      "difficulty": 2290,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc265-g": {
+      "officialTaskId": "abc265_g",
+      "difficulty": 2436,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc266-e": {
+      "officialTaskId": "abc266_e",
+      "difficulty": 1227,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc266-ex": {
+      "officialTaskId": "abc266_h",
+      "difficulty": 2865,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc266-f": {
+      "officialTaskId": "abc266_f",
+      "difficulty": 1525,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc266-g": {
+      "officialTaskId": "abc266_g",
+      "difficulty": 2045,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc267-e": {
+      "officialTaskId": "abc267_e",
+      "difficulty": 1313,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc267-ex": {
+      "officialTaskId": "abc267_h",
+      "difficulty": 2422,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc267-f": {
+      "officialTaskId": "abc267_f",
+      "difficulty": 1939,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc267-g": {
+      "officialTaskId": "abc267_g",
+      "difficulty": 2561,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc268-e": {
+      "officialTaskId": "abc268_e",
+      "difficulty": 1927,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc268-ex": {
+      "officialTaskId": "abc268_h",
+      "difficulty": 2560,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc268-f": {
+      "officialTaskId": "abc268_f",
+      "difficulty": 1807,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc268-g": {
+      "officialTaskId": "abc268_g",
+      "difficulty": 2311,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc269-e": {
+      "officialTaskId": "abc269_e",
+      "difficulty": 1030,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc269-ex": {
+      "officialTaskId": "abc269_h",
+      "difficulty": 3178,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc269-f": {
+      "officialTaskId": "abc269_f",
+      "difficulty": 1601,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc269-g": {
+      "officialTaskId": "abc269_g",
+      "difficulty": 2440,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc270-e": {
+      "officialTaskId": "abc270_e",
+      "difficulty": 1211,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc270-ex": {
+      "officialTaskId": "abc270_h",
+      "difficulty": 3159,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc270-f": {
+      "officialTaskId": "abc270_f",
+      "difficulty": 1834,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc270-g": {
+      "officialTaskId": "abc270_g",
+      "difficulty": 2220,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc271-e": {
+      "officialTaskId": "abc271_e",
+      "difficulty": 1402,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc271-ex": {
+      "officialTaskId": "abc271_h",
+      "difficulty": 2908,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc271-f": {
+      "officialTaskId": "abc271_f",
+      "difficulty": 1669,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc271-g": {
+      "officialTaskId": "abc271_g",
+      "difficulty": 2323,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc272-e": {
+      "officialTaskId": "abc272_e",
+      "difficulty": 1434,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc272-ex": {
+      "officialTaskId": "abc272_h",
+      "difficulty": 3740,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc272-f": {
+      "officialTaskId": "abc272_f",
+      "difficulty": 2238,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc272-g": {
+      "officialTaskId": "abc272_g",
+      "difficulty": 2187,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc273-e": {
+      "officialTaskId": "abc273_e",
+      "difficulty": 1624,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc273-ex": {
+      "officialTaskId": "abc273_h",
+      "difficulty": 3598,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc273-f": {
+      "officialTaskId": "abc273_f",
+      "difficulty": 2277,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc273-g": {
+      "officialTaskId": "abc273_g",
+      "difficulty": 2521,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc274-e": {
+      "officialTaskId": "abc274_e",
+      "difficulty": 1520,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc274-ex": {
+      "officialTaskId": "abc274_h",
+      "difficulty": 3191,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc274-f": {
+      "officialTaskId": "abc274_f",
+      "difficulty": 2212,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc274-g": {
+      "officialTaskId": "abc274_g",
+      "difficulty": 2340,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc275-e": {
+      "officialTaskId": "abc275_e",
+      "difficulty": 1264,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc275-ex": {
+      "officialTaskId": "abc275_h",
+      "difficulty": 3210,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc275-f": {
+      "officialTaskId": "abc275_f",
+      "difficulty": 1608,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc275-g": {
+      "officialTaskId": "abc275_g",
+      "difficulty": 2522,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc276-e": {
+      "officialTaskId": "abc276_e",
+      "difficulty": 1058,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc276-ex": {
+      "officialTaskId": "abc276_h",
+      "difficulty": 3087,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc276-f": {
+      "officialTaskId": "abc276_f",
+      "difficulty": 1562,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc276-g": {
+      "officialTaskId": "abc276_g",
+      "difficulty": 2278,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc277-e": {
+      "officialTaskId": "abc277_e",
+      "difficulty": 1183,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc277-ex": {
+      "officialTaskId": "abc277_h",
+      "difficulty": 2917,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc277-f": {
+      "officialTaskId": "abc277_f",
+      "difficulty": 2400,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc277-g": {
+      "officialTaskId": "abc277_g",
+      "difficulty": 2491,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc278-e": {
+      "officialTaskId": "abc278_e",
+      "difficulty": 996,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc278-ex": {
+      "officialTaskId": "abc278_h",
+      "difficulty": 3768,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc278-f": {
+      "officialTaskId": "abc278_f",
+      "difficulty": 1452,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc278-g": {
+      "officialTaskId": "abc278_g",
+      "difficulty": 2533,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc279-e": {
+      "officialTaskId": "abc279_e",
+      "difficulty": 1390,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc279-ex": {
+      "officialTaskId": "abc279_h",
+      "difficulty": 3279,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc279-f": {
+      "officialTaskId": "abc279_f",
+      "difficulty": 1777,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc279-g": {
+      "officialTaskId": "abc279_g",
+      "difficulty": 2431,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc280-e": {
+      "officialTaskId": "abc280_e",
+      "difficulty": 1251,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc280-ex": {
+      "officialTaskId": "abc280_h",
+      "difficulty": 3307,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc280-f": {
+      "officialTaskId": "abc280_f",
+      "difficulty": 1819,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc280-g": {
+      "officialTaskId": "abc280_g",
+      "difficulty": 2842,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc281-e": {
+      "officialTaskId": "abc281_e",
+      "difficulty": 1334,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc281-ex": {
+      "officialTaskId": "abc281_h",
+      "difficulty": 3180,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc281-f": {
+      "officialTaskId": "abc281_f",
+      "difficulty": 1714,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc281-g": {
+      "officialTaskId": "abc281_g",
+      "difficulty": 2304,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc282-e": {
+      "officialTaskId": "abc282_e",
+      "difficulty": 1604,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc282-ex": {
+      "officialTaskId": "abc282_h",
+      "difficulty": 2621,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc282-f": {
+      "officialTaskId": "abc282_f",
+      "difficulty": 1734,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc282-g": {
+      "officialTaskId": "abc282_g",
+      "difficulty": 2412,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc283-e": {
+      "officialTaskId": "abc283_e",
+      "difficulty": 1802,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc283-ex": {
+      "officialTaskId": "abc283_h",
+      "difficulty": 2682,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc283-f": {
+      "officialTaskId": "abc283_f",
+      "difficulty": 1771,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc283-g": {
+      "officialTaskId": "abc283_g",
+      "difficulty": 2173,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc284-e": {
+      "officialTaskId": "abc284_e",
+      "difficulty": 1043,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc284-ex": {
+      "officialTaskId": "abc284_h",
+      "difficulty": 3125,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc284-f": {
+      "officialTaskId": "abc284_f",
+      "difficulty": 1575,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc284-g": {
+      "officialTaskId": "abc284_g",
+      "difficulty": 2218,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc285-e": {
+      "officialTaskId": "abc285_e",
+      "difficulty": 1466,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc285-ex": {
+      "officialTaskId": "abc285_h",
+      "difficulty": 3192,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc285-f": {
+      "officialTaskId": "abc285_f",
+      "difficulty": 1876,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc285-g": {
+      "officialTaskId": "abc285_g",
+      "difficulty": 2566,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc286-e": {
+      "officialTaskId": "abc286_e",
+      "difficulty": 1128,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc286-ex": {
+      "officialTaskId": "abc286_h",
+      "difficulty": 2526,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc286-f": {
+      "officialTaskId": "abc286_f",
+      "difficulty": 1841,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc286-g": {
+      "officialTaskId": "abc286_g",
+      "difficulty": 2135,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc287-e": {
+      "officialTaskId": "abc287_e",
+      "difficulty": 1093,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc287-ex": {
+      "officialTaskId": "abc287_h",
+      "difficulty": 2639,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc287-f": {
+      "officialTaskId": "abc287_f",
+      "difficulty": 2034,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc287-g": {
+      "officialTaskId": "abc287_g",
+      "difficulty": 2180,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc288-e": {
+      "officialTaskId": "abc288_e",
+      "difficulty": 2000,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc288-ex": {
+      "officialTaskId": "abc288_h",
+      "difficulty": 3282,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc288-f": {
+      "officialTaskId": "abc288_f",
+      "difficulty": 2024,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc288-g": {
+      "officialTaskId": "abc288_g",
+      "difficulty": 2606,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc289-e": {
+      "officialTaskId": "abc289_e",
+      "difficulty": 1318,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc289-ex": {
+      "officialTaskId": "abc289_h",
+      "difficulty": 3246,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc289-f": {
+      "officialTaskId": "abc289_f",
+      "difficulty": 2100,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc289-g": {
+      "officialTaskId": "abc289_g",
+      "difficulty": 2109,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc290-e": {
+      "officialTaskId": "abc290_e",
+      "difficulty": 1485,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc290-ex": {
+      "officialTaskId": "abc290_h",
+      "difficulty": 3569,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc290-f": {
+      "officialTaskId": "abc290_f",
+      "difficulty": 2300,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc290-g": {
+      "officialTaskId": "abc290_g",
+      "difficulty": 2407,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc291-e": {
+      "officialTaskId": "abc291_e",
+      "difficulty": 1069,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc291-ex": {
+      "officialTaskId": "abc291_h",
+      "difficulty": 2097,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc291-f": {
+      "officialTaskId": "abc291_f",
+      "difficulty": 1449,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc291-g": {
+      "officialTaskId": "abc291_g",
+      "difficulty": 2176,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc292-e": {
+      "officialTaskId": "abc292_e",
+      "difficulty": 1272,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc292-ex": {
+      "officialTaskId": "abc292_h",
+      "difficulty": 2248,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc292-f": {
+      "officialTaskId": "abc292_f",
+      "difficulty": 1522,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc292-g": {
+      "officialTaskId": "abc292_g",
+      "difficulty": 2340,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc293-e": {
+      "officialTaskId": "abc293_e",
+      "difficulty": 1453,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc293-ex": {
+      "officialTaskId": "abc293_h",
+      "difficulty": 2831,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc293-f": {
+      "officialTaskId": "abc293_f",
+      "difficulty": 2038,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc293-g": {
+      "officialTaskId": "abc293_g",
+      "difficulty": 1753,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc294-e": {
+      "officialTaskId": "abc294_e",
+      "difficulty": 792,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc294-ex": {
+      "officialTaskId": "abc294_h",
+      "difficulty": 3058,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc294-f": {
+      "officialTaskId": "abc294_f",
+      "difficulty": 1891,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc294-g": {
+      "officialTaskId": "abc294_g",
+      "difficulty": 1702,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc295-e": {
+      "officialTaskId": "abc295_e",
+      "difficulty": 2157,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc295-ex": {
+      "officialTaskId": "abc295_h",
+      "difficulty": 2728,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc295-f": {
+      "officialTaskId": "abc295_f",
+      "difficulty": 2306,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc295-g": {
+      "officialTaskId": "abc295_g",
+      "difficulty": 2091,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc296-e": {
+      "officialTaskId": "abc296_e",
+      "difficulty": 1285,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc296-ex": {
+      "officialTaskId": "abc296_h",
+      "difficulty": 2822,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc296-f": {
+      "officialTaskId": "abc296_f",
+      "difficulty": 1811,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc296-g": {
+      "officialTaskId": "abc296_g",
+      "difficulty": 2241,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc297-e": {
+      "officialTaskId": "abc297_e",
+      "difficulty": 1176,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc297-ex": {
+      "officialTaskId": "abc297_h",
+      "difficulty": 2855,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc297-f": {
+      "officialTaskId": "abc297_f",
+      "difficulty": 1990,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc297-g": {
+      "officialTaskId": "abc297_g",
+      "difficulty": 1834,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc298-e": {
+      "officialTaskId": "abc298_e",
+      "difficulty": 1300,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc298-ex": {
+      "officialTaskId": "abc298_h",
+      "difficulty": 2792,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc298-f": {
+      "officialTaskId": "abc298_f",
+      "difficulty": 1535,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc298-g": {
+      "officialTaskId": "abc298_g",
+      "difficulty": 2405,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc299-e": {
+      "officialTaskId": "abc299_e",
+      "difficulty": 1216,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc299-ex": {
+      "officialTaskId": "abc299_h",
+      "difficulty": 2984,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc299-f": {
+      "officialTaskId": "abc299_f",
+      "difficulty": 2349,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc299-g": {
+      "officialTaskId": "abc299_g",
+      "difficulty": 2066,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc300-e": {
+      "officialTaskId": "abc300_e",
+      "difficulty": 1354,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc300-ex": {
+      "officialTaskId": "abc300_h",
+      "difficulty": 3209,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc300-f": {
+      "officialTaskId": "abc300_f",
+      "difficulty": 1846,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc300-g": {
+      "officialTaskId": "abc300_g",
+      "difficulty": 2343,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc301-e": {
+      "officialTaskId": "abc301_e",
+      "difficulty": 1673,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc301-ex": {
+      "officialTaskId": "abc301_h",
+      "difficulty": 2898,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc301-f": {
+      "officialTaskId": "abc301_f",
+      "difficulty": 2548,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc301-g": {
+      "officialTaskId": "abc301_g",
+      "difficulty": 3262,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc302-e": {
+      "officialTaskId": "abc302_e",
+      "difficulty": 988,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc302-ex": {
+      "officialTaskId": "abc302_h",
+      "difficulty": 2407,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc302-f": {
+      "officialTaskId": "abc302_f",
+      "difficulty": 1430,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc302-g": {
+      "officialTaskId": "abc302_g",
+      "difficulty": 1891,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc303-e": {
+      "officialTaskId": "abc303_e",
+      "difficulty": 1113,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc303-ex": {
+      "officialTaskId": "abc303_h",
+      "difficulty": 2501,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc303-f": {
+      "officialTaskId": "abc303_f",
+      "difficulty": 2381,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc303-g": {
+      "officialTaskId": "abc303_g",
+      "difficulty": 2736,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc304-e": {
+      "officialTaskId": "abc304_e",
+      "difficulty": 971,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc304-ex": {
+      "officialTaskId": "abc304_h",
+      "difficulty": 2642,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc304-f": {
+      "officialTaskId": "abc304_f",
+      "difficulty": 1619,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc304-g": {
+      "officialTaskId": "abc304_g",
+      "difficulty": 3177,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc305-e": {
+      "officialTaskId": "abc305_e",
+      "difficulty": 1158,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc305-ex": {
+      "officialTaskId": "abc305_h",
+      "difficulty": 3344,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc305-f": {
+      "officialTaskId": "abc305_f",
+      "difficulty": 1420,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc305-g": {
+      "officialTaskId": "abc305_g",
+      "difficulty": 1989,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc306-e": {
+      "officialTaskId": "abc306_e",
+      "difficulty": 1268,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc306-ex": {
+      "officialTaskId": "abc306_h",
+      "difficulty": 3335,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc306-f": {
+      "officialTaskId": "abc306_f",
+      "difficulty": 1557,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc306-g": {
+      "officialTaskId": "abc306_g",
+      "difficulty": 2563,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc307-e": {
+      "officialTaskId": "abc307_e",
+      "difficulty": 1240,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc307-ex": {
+      "officialTaskId": "abc307_h",
+      "difficulty": 2754,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc307-f": {
+      "officialTaskId": "abc307_f",
+      "difficulty": 2139,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc307-g": {
+      "officialTaskId": "abc307_g",
+      "difficulty": 2330,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc308-e": {
+      "officialTaskId": "abc308_e",
+      "difficulty": 1042,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc308-ex": {
+      "officialTaskId": "abc308_h",
+      "difficulty": 2861,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc308-f": {
+      "officialTaskId": "abc308_f",
+      "difficulty": 1284,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc308-g": {
+      "officialTaskId": "abc308_g",
+      "difficulty": 2008,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc309-e": {
+      "officialTaskId": "abc309_e",
+      "difficulty": 957,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc309-ex": {
+      "officialTaskId": "abc309_h",
+      "difficulty": 3029,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc309-f": {
+      "officialTaskId": "abc309_f",
+      "difficulty": 1619,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc309-g": {
+      "officialTaskId": "abc309_g",
+      "difficulty": 2372,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc310-e": {
+      "officialTaskId": "abc310_e",
+      "difficulty": 1261,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc310-ex": {
+      "officialTaskId": "abc310_h",
+      "difficulty": 3343,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc310-f": {
+      "officialTaskId": "abc310_f",
+      "difficulty": 1938,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc310-g": {
+      "officialTaskId": "abc310_g",
+      "difficulty": 2696,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc311-e": {
+      "officialTaskId": "abc311_e",
+      "difficulty": 1293,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc311-ex": {
+      "officialTaskId": "abc311_h",
+      "difficulty": 3605,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc311-f": {
+      "officialTaskId": "abc311_f",
+      "difficulty": 1984,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc311-g": {
+      "officialTaskId": "abc311_g",
+      "difficulty": 2265,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc312-e": {
+      "officialTaskId": "abc312_e",
+      "difficulty": 2047,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc312-ex": {
+      "officialTaskId": "abc312_h",
+      "difficulty": 2477,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc312-f": {
+      "officialTaskId": "abc312_f",
+      "difficulty": 1534,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc312-g": {
+      "officialTaskId": "abc312_g",
+      "difficulty": 1819,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc313-e": {
+      "officialTaskId": "abc313_e",
+      "difficulty": 1672,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc313-ex": {
+      "officialTaskId": "abc313_h",
+      "difficulty": 3008,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc313-f": {
+      "officialTaskId": "abc313_f",
+      "difficulty": 3100,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc313-g": {
+      "officialTaskId": "abc313_g",
+      "difficulty": 2454,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc314-e": {
+      "officialTaskId": "abc314_e",
+      "difficulty": 1722,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc314-ex": {
+      "officialTaskId": "abc314_h",
+      "difficulty": 2938,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc314-f": {
+      "officialTaskId": "abc314_f",
+      "difficulty": 1736,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc314-g": {
+      "officialTaskId": "abc314_g",
+      "difficulty": 2301,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc315-e": {
+      "officialTaskId": "abc315_e",
+      "difficulty": 921,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc315-ex": {
+      "officialTaskId": "abc315_h",
+      "difficulty": 2807,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc315-f": {
+      "officialTaskId": "abc315_f",
+      "difficulty": 1674,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc315-g": {
+      "officialTaskId": "abc315_g",
+      "difficulty": 2315,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc317-e": {
+      "officialTaskId": "abc317_e",
+      "difficulty": 1085,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc317-ex": {
+      "officialTaskId": "abc317_h",
+      "difficulty": 3426,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc317-f": {
+      "officialTaskId": "abc317_f",
+      "difficulty": 2072,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc317-g": {
+      "officialTaskId": "abc317_g",
+      "difficulty": 2649,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc318-e": {
+      "officialTaskId": "abc318_e",
+      "difficulty": 1004,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc318-ex": {
+      "officialTaskId": "abc318_h",
+      "difficulty": 2785,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc318-f": {
+      "officialTaskId": "abc318_f",
+      "difficulty": 2009,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc318-g": {
+      "officialTaskId": "abc318_g",
+      "difficulty": 2260,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc319-e": {
+      "officialTaskId": "abc319_e",
+      "difficulty": 1353,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc319-f": {
+      "officialTaskId": "abc319_f",
+      "difficulty": 2480,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc319-g": {
+      "officialTaskId": "abc319_g",
+      "difficulty": 2185,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc320-e": {
+      "officialTaskId": "abc320_e",
+      "difficulty": 1096,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc320-f": {
+      "officialTaskId": "abc320_f",
+      "difficulty": 2042,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc320-g": {
+      "officialTaskId": "abc320_g",
+      "difficulty": 2575,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc321-e": {
+      "officialTaskId": "abc321_e",
+      "difficulty": 1627,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc321-f": {
+      "officialTaskId": "abc321_f",
+      "difficulty": 1645,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc321-g": {
+      "officialTaskId": "abc321_g",
+      "difficulty": 2439,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc322-e": {
+      "officialTaskId": "abc322_e",
+      "difficulty": 1193,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc322-f": {
+      "officialTaskId": "abc322_f",
+      "difficulty": 1806,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc322-g": {
+      "officialTaskId": "abc322_g",
+      "difficulty": 2876,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc323-e": {
+      "officialTaskId": "abc323_e",
+      "difficulty": 1279,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc323-f": {
+      "officialTaskId": "abc323_f",
+      "difficulty": 1532,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc323-g": {
+      "officialTaskId": "abc323_g",
+      "difficulty": 3091,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc324-e": {
+      "officialTaskId": "abc324_e",
+      "difficulty": 1153,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc324-f": {
+      "officialTaskId": "abc324_f",
+      "difficulty": 1815,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc324-g": {
+      "officialTaskId": "abc324_g",
+      "difficulty": 2501,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc325-e": {
+      "officialTaskId": "abc325_e",
+      "difficulty": 1093,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc325-f": {
+      "officialTaskId": "abc325_f",
+      "difficulty": 1769,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc325-g": {
+      "officialTaskId": "abc325_g",
+      "difficulty": 2388,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc326-e": {
+      "officialTaskId": "abc326_e",
+      "difficulty": 1363,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc326-f": {
+      "officialTaskId": "abc326_f",
+      "difficulty": 1870,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc326-g": {
+      "officialTaskId": "abc326_g",
+      "difficulty": 2470,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc327-e": {
+      "officialTaskId": "abc327_e",
+      "difficulty": 1227,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc327-f": {
+      "officialTaskId": "abc327_f",
+      "difficulty": 1624,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc327-g": {
+      "officialTaskId": "abc327_g",
+      "difficulty": 2968,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc328-e": {
+      "officialTaskId": "abc328_e",
+      "difficulty": 1160,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc328-f": {
+      "officialTaskId": "abc328_f",
+      "difficulty": 1477,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc328-g": {
+      "officialTaskId": "abc328_g",
+      "difficulty": 2193,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc329-e": {
+      "officialTaskId": "abc329_e",
+      "difficulty": 1539,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc329-f": {
+      "officialTaskId": "abc329_f",
+      "difficulty": 1207,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc329-g": {
+      "officialTaskId": "abc329_g",
+      "difficulty": 2995,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc330-e": {
+      "officialTaskId": "abc330_e",
+      "difficulty": 1004,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc330-f": {
+      "officialTaskId": "abc330_f",
+      "difficulty": 1718,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc330-g": {
+      "officialTaskId": "abc330_g",
+      "difficulty": 3455,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc331-e": {
+      "officialTaskId": "abc331_e",
+      "difficulty": 1018,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc331-f": {
+      "officialTaskId": "abc331_f",
+      "difficulty": 1666,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc331-g": {
+      "officialTaskId": "abc331_g",
+      "difficulty": 2668,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc332-e": {
+      "officialTaskId": "abc332_e",
+      "difficulty": 1883,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc332-f": {
+      "officialTaskId": "abc332_f",
+      "difficulty": 1786,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc332-g": {
+      "officialTaskId": "abc332_g",
+      "difficulty": 2775,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc333-e": {
+      "officialTaskId": "abc333_e",
+      "difficulty": 948,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc333-f": {
+      "officialTaskId": "abc333_f",
+      "difficulty": 1770,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc333-g": {
+      "officialTaskId": "abc333_g",
+      "difficulty": 2536,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc334-e": {
+      "officialTaskId": "abc334_e",
+      "difficulty": 1195,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc334-f": {
+      "officialTaskId": "abc334_f",
+      "difficulty": 1813,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc334-g": {
+      "officialTaskId": "abc334_g",
+      "difficulty": 2242,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc335-e": {
+      "officialTaskId": "abc335_e",
+      "difficulty": 1540,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc335-f": {
+      "officialTaskId": "abc335_f",
+      "difficulty": 1690,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc335-g": {
+      "officialTaskId": "abc335_g",
+      "difficulty": 2614,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc336-e": {
+      "officialTaskId": "abc336_e",
+      "difficulty": 1538,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc336-f": {
+      "officialTaskId": "abc336_f",
+      "difficulty": 2018,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc336-g": {
+      "officialTaskId": "abc336_g",
+      "difficulty": 3138,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc337-e": {
+      "officialTaskId": "abc337_e",
+      "difficulty": 1155,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc337-f": {
+      "officialTaskId": "abc337_f",
+      "difficulty": 2386,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc337-g": {
+      "officialTaskId": "abc337_g",
+      "difficulty": 2080,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc338-e": {
+      "officialTaskId": "abc338_e",
+      "difficulty": 1220,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc338-f": {
+      "officialTaskId": "abc338_f",
+      "difficulty": 1835,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc338-g": {
+      "officialTaskId": "abc338_g",
+      "difficulty": 2573,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc339-e": {
+      "officialTaskId": "abc339_e",
+      "difficulty": 1109,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc339-f": {
+      "officialTaskId": "abc339_f",
+      "difficulty": 1716,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc339-g": {
+      "officialTaskId": "abc339_g",
+      "difficulty": 1792,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc340-e": {
+      "officialTaskId": "abc340_e",
+      "difficulty": 1157,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc340-f": {
+      "officialTaskId": "abc340_f",
+      "difficulty": 1516,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc340-g": {
+      "officialTaskId": "abc340_g",
+      "difficulty": 2401,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc341-e": {
+      "officialTaskId": "abc341_e",
+      "difficulty": 1223,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc341-f": {
+      "officialTaskId": "abc341_f",
+      "difficulty": 1604,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc341-g": {
+      "officialTaskId": "abc341_g",
+      "difficulty": 2208,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc342-e": {
+      "officialTaskId": "abc342_e",
+      "difficulty": 1476,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc342-f": {
+      "officialTaskId": "abc342_f",
+      "difficulty": 2141,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc342-g": {
+      "officialTaskId": "abc342_g",
+      "difficulty": 2107,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc343-e": {
+      "officialTaskId": "abc343_e",
+      "difficulty": 1802,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc343-f": {
+      "officialTaskId": "abc343_f",
+      "difficulty": 1370,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc343-g": {
+      "officialTaskId": "abc343_g",
+      "difficulty": 2114,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc344-e": {
+      "officialTaskId": "abc344_e",
+      "difficulty": 973,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc344-f": {
+      "officialTaskId": "abc344_f",
+      "difficulty": 1922,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc344-g": {
+      "officialTaskId": "abc344_g",
+      "difficulty": 3032,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc345-e": {
+      "officialTaskId": "abc345_e",
+      "difficulty": 2356,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc345-f": {
+      "officialTaskId": "abc345_f",
+      "difficulty": 2157,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc345-g": {
+      "officialTaskId": "abc345_g",
+      "difficulty": 3343,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc346-e": {
+      "officialTaskId": "abc346_e",
+      "difficulty": 1053,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc346-f": {
+      "officialTaskId": "abc346_f",
+      "difficulty": 1840,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc346-g": {
+      "officialTaskId": "abc346_g",
+      "difficulty": 2166,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc347-e": {
+      "officialTaskId": "abc347_e",
+      "difficulty": 1166,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc347-f": {
+      "officialTaskId": "abc347_f",
+      "difficulty": 2179,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc347-g": {
+      "officialTaskId": "abc347_g",
+      "difficulty": 2876,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc348-e": {
+      "officialTaskId": "abc348_e",
+      "difficulty": 1347,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc348-f": {
+      "officialTaskId": "abc348_f",
+      "difficulty": 1955,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc348-g": {
+      "officialTaskId": "abc348_g",
+      "difficulty": 2559,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc349-e": {
+      "officialTaskId": "abc349_e",
+      "difficulty": 1464,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc349-f": {
+      "officialTaskId": "abc349_f",
+      "difficulty": 2169,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc349-g": {
+      "officialTaskId": "abc349_g",
+      "difficulty": 2655,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc350-e": {
+      "officialTaskId": "abc350_e",
+      "difficulty": 1385,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc350-f": {
+      "officialTaskId": "abc350_f",
+      "difficulty": 1601,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc350-g": {
+      "officialTaskId": "abc350_g",
+      "difficulty": 2058,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc351-e": {
+      "officialTaskId": "abc351_e",
+      "difficulty": 1627,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc351-f": {
+      "officialTaskId": "abc351_f",
+      "difficulty": 1253,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc351-g": {
+      "officialTaskId": "abc351_g",
+      "difficulty": 2920,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc352-e": {
+      "officialTaskId": "abc352_e",
+      "difficulty": 1030,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc352-f": {
+      "officialTaskId": "abc352_f",
+      "difficulty": 2052,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc352-g": {
+      "officialTaskId": "abc352_g",
+      "difficulty": 2413,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc353-e": {
+      "officialTaskId": "abc353_e",
+      "difficulty": 1217,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc353-f": {
+      "officialTaskId": "abc353_f",
+      "difficulty": 2201,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc353-g": {
+      "officialTaskId": "abc353_g",
+      "difficulty": 1765,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc354-e": {
+      "officialTaskId": "abc354_e",
+      "difficulty": 1223,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc354-f": {
+      "officialTaskId": "abc354_f",
+      "difficulty": 1639,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc354-g": {
+      "officialTaskId": "abc354_g",
+      "difficulty": 2665,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc355-e": {
+      "officialTaskId": "abc355_e",
+      "difficulty": 2299,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc355-f": {
+      "officialTaskId": "abc355_f",
+      "difficulty": 1924,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc355-g": {
+      "officialTaskId": "abc355_g",
+      "difficulty": 2991,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc356-e": {
+      "officialTaskId": "abc356_e",
+      "difficulty": 1506,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc356-f": {
+      "officialTaskId": "abc356_f",
+      "difficulty": 2152,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc356-g": {
+      "officialTaskId": "abc356_g",
+      "difficulty": 3022,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc357-e": {
+      "officialTaskId": "abc357_e",
+      "difficulty": 1295,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc357-f": {
+      "officialTaskId": "abc357_f",
+      "difficulty": 1793,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc357-g": {
+      "officialTaskId": "abc357_g",
+      "difficulty": 3159,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc358-e": {
+      "officialTaskId": "abc358_e",
+      "difficulty": 1397,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc358-f": {
+      "officialTaskId": "abc358_f",
+      "difficulty": 2098,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc358-g": {
+      "officialTaskId": "abc358_g",
+      "difficulty": 1737,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc359-e": {
+      "officialTaskId": "abc359_e",
+      "difficulty": 1275,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc359-f": {
+      "officialTaskId": "abc359_f",
+      "difficulty": 1792,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc359-g": {
+      "officialTaskId": "abc359_g",
+      "difficulty": 2099,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc360-e": {
+      "officialTaskId": "abc360_e",
+      "difficulty": 1249,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc360-f": {
+      "officialTaskId": "abc360_f",
+      "difficulty": 2563,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc360-g": {
+      "officialTaskId": "abc360_g",
+      "difficulty": 1982,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc361-e": {
+      "officialTaskId": "abc361_e",
+      "difficulty": 1213,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc361-f": {
+      "officialTaskId": "abc361_f",
+      "difficulty": 1606,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc361-g": {
+      "officialTaskId": "abc361_g",
+      "difficulty": 2613,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc362-e": {
+      "officialTaskId": "abc362_e",
+      "difficulty": 1225,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc362-f": {
+      "officialTaskId": "abc362_f",
+      "difficulty": 2186,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc362-g": {
+      "officialTaskId": "abc362_g",
+      "difficulty": 1625,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc363-e": {
+      "officialTaskId": "abc363_e",
+      "difficulty": 1307,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc363-f": {
+      "officialTaskId": "abc363_f",
+      "difficulty": 1913,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc363-g": {
+      "officialTaskId": "abc363_g",
+      "difficulty": 3358,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc364-e": {
+      "officialTaskId": "abc364_e",
+      "difficulty": 1496,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc364-f": {
+      "officialTaskId": "abc364_f",
+      "difficulty": 1878,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc364-g": {
+      "officialTaskId": "abc364_g",
+      "difficulty": 2455,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc365-e": {
+      "officialTaskId": "abc365_e",
+      "difficulty": 1102,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc365-f": {
+      "officialTaskId": "abc365_f",
+      "difficulty": 2561,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc365-g": {
+      "officialTaskId": "abc365_g",
+      "difficulty": 2254,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc366-e": {
+      "officialTaskId": "abc366_e",
+      "difficulty": 1515,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc366-f": {
+      "officialTaskId": "abc366_f",
+      "difficulty": 1819,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc366-g": {
+      "officialTaskId": "abc366_g",
+      "difficulty": 2409,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc367-e": {
+      "officialTaskId": "abc367_e",
+      "difficulty": 1370,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc367-f": {
+      "officialTaskId": "abc367_f",
+      "difficulty": 1540,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc367-g": {
+      "officialTaskId": "abc367_g",
+      "difficulty": 3110,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc368-e": {
+      "officialTaskId": "abc368_e",
+      "difficulty": 2140,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc368-f": {
+      "officialTaskId": "abc368_f",
+      "difficulty": 1180,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc368-g": {
+      "officialTaskId": "abc368_g",
+      "difficulty": 1841,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc369-e": {
+      "officialTaskId": "abc369_e",
+      "difficulty": 1301,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc369-f": {
+      "officialTaskId": "abc369_f",
+      "difficulty": 1618,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc369-g": {
+      "officialTaskId": "abc369_g",
+      "difficulty": 2055,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc370-e": {
+      "officialTaskId": "abc370_e",
+      "difficulty": 1453,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc370-f": {
+      "officialTaskId": "abc370_f",
+      "difficulty": 2102,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc370-g": {
+      "officialTaskId": "abc370_g",
+      "difficulty": 3428,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc371-e": {
+      "officialTaskId": "abc371_e",
+      "difficulty": 981,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc371-f": {
+      "officialTaskId": "abc371_f",
+      "difficulty": 2109,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc371-g": {
+      "officialTaskId": "abc371_g",
+      "difficulty": 2348,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc372-e": {
+      "officialTaskId": "abc372_e",
+      "difficulty": 1042,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc372-f": {
+      "officialTaskId": "abc372_f",
+      "difficulty": 1722,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc372-g": {
+      "officialTaskId": "abc372_g",
+      "difficulty": 2925,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc373-e": {
+      "officialTaskId": "abc373_e",
+      "difficulty": 1592,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc373-f": {
+      "officialTaskId": "abc373_f",
+      "difficulty": 2018,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc373-g": {
+      "officialTaskId": "abc373_g",
+      "difficulty": 2377,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc374-e": {
+      "officialTaskId": "abc374_e",
+      "difficulty": 1504,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc374-f": {
+      "officialTaskId": "abc374_f",
+      "difficulty": 2026,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc374-g": {
+      "officialTaskId": "abc374_g",
+      "difficulty": 2608,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc375-e": {
+      "officialTaskId": "abc375_e",
+      "difficulty": 1424,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc375-f": {
+      "officialTaskId": "abc375_f",
+      "difficulty": 1546,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc375-g": {
+      "officialTaskId": "abc375_g",
+      "difficulty": 2014,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc376-e": {
+      "officialTaskId": "abc376_e",
+      "difficulty": 1063,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc376-f": {
+      "officialTaskId": "abc376_f",
+      "difficulty": 2089,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc376-g": {
+      "officialTaskId": "abc376_g",
+      "difficulty": 2858,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc377-e": {
+      "officialTaskId": "abc377_e",
+      "difficulty": 1685,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc377-f": {
+      "officialTaskId": "abc377_f",
+      "difficulty": 2232,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc377-g": {
+      "officialTaskId": "abc377_g",
+      "difficulty": 1782,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc378-e": {
+      "officialTaskId": "abc378_e",
+      "difficulty": 1406,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc378-f": {
+      "officialTaskId": "abc378_f",
+      "difficulty": 1436,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc378-g": {
+      "officialTaskId": "abc378_g",
+      "difficulty": 3051,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc379-e": {
+      "officialTaskId": "abc379_e",
+      "difficulty": 1246,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc379-f": {
+      "officialTaskId": "abc379_f",
+      "difficulty": 1659,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc379-g": {
+      "officialTaskId": "abc379_g",
+      "difficulty": 2304,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc380-e": {
+      "officialTaskId": "abc380_e",
+      "difficulty": 1230,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc380-f": {
+      "officialTaskId": "abc380_f",
+      "difficulty": 1769,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc380-g": {
+      "officialTaskId": "abc380_g",
+      "difficulty": 1995,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc381-e": {
+      "officialTaskId": "abc381_e",
+      "difficulty": 1396,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc381-f": {
+      "officialTaskId": "abc381_f",
+      "difficulty": 1739,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc381-g": {
+      "officialTaskId": "abc381_g",
+      "difficulty": 3313,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc382-e": {
+      "officialTaskId": "abc382_e",
+      "difficulty": 1671,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc382-f": {
+      "officialTaskId": "abc382_f",
+      "difficulty": 1443,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc382-g": {
+      "officialTaskId": "abc382_g",
+      "difficulty": 3278,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc383-e": {
+      "officialTaskId": "abc383_e",
+      "difficulty": 1616,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc383-f": {
+      "officialTaskId": "abc383_f",
+      "difficulty": 1706,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc383-g": {
+      "officialTaskId": "abc383_g",
+      "difficulty": 3026,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc384-e": {
+      "officialTaskId": "abc384_e",
+      "difficulty": 1002,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc384-f": {
+      "officialTaskId": "abc384_f",
+      "difficulty": 1908,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc384-g": {
+      "officialTaskId": "abc384_g",
+      "difficulty": 2343,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc385-e": {
+      "officialTaskId": "abc385_e",
+      "difficulty": 1406,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc385-f": {
+      "officialTaskId": "abc385_f",
+      "difficulty": 1905,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc385-g": {
+      "officialTaskId": "abc385_g",
+      "difficulty": 2492,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc386-e": {
+      "officialTaskId": "abc386_e",
+      "difficulty": 1518,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc386-f": {
+      "officialTaskId": "abc386_f",
+      "difficulty": 1875,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc386-g": {
+      "officialTaskId": "abc386_g",
+      "difficulty": 2930,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc387-e": {
+      "officialTaskId": "abc387_e",
+      "difficulty": 2097,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc387-f": {
+      "officialTaskId": "abc387_f",
+      "difficulty": 1760,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc387-g": {
+      "officialTaskId": "abc387_g",
+      "difficulty": 2986,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc388-e": {
+      "officialTaskId": "abc388_e",
+      "difficulty": 1068,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc388-f": {
+      "officialTaskId": "abc388_f",
+      "difficulty": 2214,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc388-g": {
+      "officialTaskId": "abc388_g",
+      "difficulty": 2001,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc389-e": {
+      "officialTaskId": "abc389_e",
+      "difficulty": 1897,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc389-f": {
+      "officialTaskId": "abc389_f",
+      "difficulty": 1642,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc389-g": {
+      "officialTaskId": "abc389_g",
+      "difficulty": 2762,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc390-e": {
+      "officialTaskId": "abc390_e",
+      "difficulty": 1227,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc390-f": {
+      "officialTaskId": "abc390_f",
+      "difficulty": 1801,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc390-g": {
+      "officialTaskId": "abc390_g",
+      "difficulty": 2508,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc391-e": {
+      "officialTaskId": "abc391_e",
+      "difficulty": 1165,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc391-f": {
+      "officialTaskId": "abc391_f",
+      "difficulty": 1554,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc391-g": {
+      "officialTaskId": "abc391_g",
+      "difficulty": 2247,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc392-e": {
+      "officialTaskId": "abc392_e",
+      "difficulty": 1218,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc392-f": {
+      "officialTaskId": "abc392_f",
+      "difficulty": 1395,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc392-g": {
+      "officialTaskId": "abc392_g",
+      "difficulty": 1817,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc393-e": {
+      "officialTaskId": "abc393_e",
+      "difficulty": 1253,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc393-f": {
+      "officialTaskId": "abc393_f",
+      "difficulty": 1284,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc393-g": {
+      "officialTaskId": "abc393_g",
+      "difficulty": 3731,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc394-e": {
+      "officialTaskId": "abc394_e",
+      "difficulty": 1403,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc394-f": {
+      "officialTaskId": "abc394_f",
+      "difficulty": 1549,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc394-g": {
+      "officialTaskId": "abc394_g",
+      "difficulty": 2031,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc395-e": {
+      "officialTaskId": "abc395_e",
+      "difficulty": 978,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc395-f": {
+      "officialTaskId": "abc395_f",
+      "difficulty": 1437,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc395-g": {
+      "officialTaskId": "abc395_g",
+      "difficulty": 2561,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc396-e": {
+      "officialTaskId": "abc396_e",
+      "difficulty": 1379,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc396-f": {
+      "officialTaskId": "abc396_f",
+      "difficulty": 1479,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc396-g": {
+      "officialTaskId": "abc396_g",
+      "difficulty": 2195,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc397-e": {
+      "officialTaskId": "abc397_e",
+      "difficulty": 1484,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc397-f": {
+      "officialTaskId": "abc397_f",
+      "difficulty": 1753,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc397-g": {
+      "officialTaskId": "abc397_g",
+      "difficulty": 2947,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc398-e": {
+      "officialTaskId": "abc398_e",
+      "difficulty": 1238,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc398-f": {
+      "officialTaskId": "abc398_f",
+      "difficulty": 1033,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc398-g": {
+      "officialTaskId": "abc398_g",
+      "difficulty": 3352,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc399-e": {
+      "officialTaskId": "abc399_e",
+      "difficulty": 2045,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc399-f": {
+      "officialTaskId": "abc399_f",
+      "difficulty": 1558,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc399-g": {
+      "officialTaskId": "abc399_g",
+      "difficulty": 3625,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc400-e": {
+      "officialTaskId": "abc400_e",
+      "difficulty": 1226,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc400-f": {
+      "officialTaskId": "abc400_f",
+      "difficulty": 2263,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc400-g": {
+      "officialTaskId": "abc400_g",
+      "difficulty": 2813,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc401-e": {
+      "officialTaskId": "abc401_e",
+      "difficulty": 1270,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc401-f": {
+      "officialTaskId": "abc401_f",
+      "difficulty": 1666,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc401-g": {
+      "officialTaskId": "abc401_g",
+      "difficulty": 2022,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc402-e": {
+      "officialTaskId": "abc402_e",
+      "difficulty": 1409,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc402-f": {
+      "officialTaskId": "abc402_f",
+      "difficulty": 1645,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc402-g": {
+      "officialTaskId": "abc402_g",
+      "difficulty": 3381,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc403-e": {
+      "officialTaskId": "abc403_e",
+      "difficulty": 1447,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc403-f": {
+      "officialTaskId": "abc403_f",
+      "difficulty": 1733,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc403-g": {
+      "officialTaskId": "abc403_g",
+      "difficulty": 2028,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc404-e": {
+      "officialTaskId": "abc404_e",
+      "difficulty": 1286,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc404-f": {
+      "officialTaskId": "abc404_f",
+      "difficulty": 2162,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc404-g": {
+      "officialTaskId": "abc404_g",
+      "difficulty": 1894,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc405-e": {
+      "officialTaskId": "abc405_e",
+      "difficulty": 1259,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc405-f": {
+      "officialTaskId": "abc405_f",
+      "difficulty": 1588,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc405-g": {
+      "officialTaskId": "abc405_g",
+      "difficulty": 2354,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc406-e": {
+      "officialTaskId": "abc406_e",
+      "difficulty": 1365,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc406-f": {
+      "officialTaskId": "abc406_f",
+      "difficulty": 1470,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc406-g": {
+      "officialTaskId": "abc406_g",
+      "difficulty": 3197,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc407-e": {
+      "officialTaskId": "abc407_e",
+      "difficulty": 1531,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc407-f": {
+      "officialTaskId": "abc407_f",
+      "difficulty": 1740,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc407-g": {
+      "officialTaskId": "abc407_g",
+      "difficulty": 2190,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc408-e": {
+      "officialTaskId": "abc408_e",
+      "difficulty": 1222,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc408-f": {
+      "officialTaskId": "abc408_f",
+      "difficulty": 1472,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc408-g": {
+      "officialTaskId": "abc408_g",
+      "difficulty": 2167,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc409-e": {
+      "officialTaskId": "abc409_e",
+      "difficulty": 973,
+      "difficultyExperimental": false,
+      "point": 425
+    },
+    "abc409-f": {
+      "officialTaskId": "abc409_f",
+      "difficulty": 1580,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc409-g": {
+      "officialTaskId": "abc409_g",
+      "difficulty": 2616,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc410-e": {
+      "officialTaskId": "abc410_e",
+      "difficulty": 1077,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc410-f": {
+      "officialTaskId": "abc410_f",
+      "difficulty": 1732,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc410-g": {
+      "officialTaskId": "abc410_g",
+      "difficulty": 2242,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc411-e": {
+      "officialTaskId": "abc411_e",
+      "difficulty": 1400,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc411-f": {
+      "officialTaskId": "abc411_f",
+      "difficulty": 1898,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc411-g": {
+      "officialTaskId": "abc411_g",
+      "difficulty": 2093,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc412-e": {
+      "officialTaskId": "abc412_e",
+      "difficulty": 1496,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc412-f": {
+      "officialTaskId": "abc412_f",
+      "difficulty": 2038,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc412-g": {
+      "officialTaskId": "abc412_g",
+      "difficulty": 3402,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc413-e": {
+      "officialTaskId": "abc413_e",
+      "difficulty": 1241,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc413-f": {
+      "officialTaskId": "abc413_f",
+      "difficulty": 1635,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc413-g": {
+      "officialTaskId": "abc413_g",
+      "difficulty": 1723,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc414-e": {
+      "officialTaskId": "abc414_e",
+      "difficulty": 1296,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc414-f": {
+      "officialTaskId": "abc414_f",
+      "difficulty": 2357,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc414-g": {
+      "officialTaskId": "abc414_g",
+      "difficulty": 3020,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc415-e": {
+      "officialTaskId": "abc415_e",
+      "difficulty": 1212,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc415-f": {
+      "officialTaskId": "abc415_f",
+      "difficulty": 1552,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc415-g": {
+      "officialTaskId": "abc415_g",
+      "difficulty": 2180,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc416-e": {
+      "officialTaskId": "abc416_e",
+      "difficulty": 1428,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc416-f": {
+      "officialTaskId": "abc416_f",
+      "difficulty": 2115,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc416-g": {
+      "officialTaskId": "abc416_g",
+      "difficulty": 2542,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc417-e": {
+      "officialTaskId": "abc417_e",
+      "difficulty": 1111,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc417-f": {
+      "officialTaskId": "abc417_f",
+      "difficulty": 1414,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc417-g": {
+      "officialTaskId": "abc417_g",
+      "difficulty": 2778,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc418-e": {
+      "officialTaskId": "abc418_e",
+      "difficulty": 1282,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc418-f": {
+      "officialTaskId": "abc418_f",
+      "difficulty": 2496,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc418-g": {
+      "officialTaskId": "abc418_g",
+      "difficulty": 3038,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc419-e": {
+      "officialTaskId": "abc419_e",
+      "difficulty": 1298,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc419-f": {
+      "officialTaskId": "abc419_f",
+      "difficulty": 1726,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc419-g": {
+      "officialTaskId": "abc419_g",
+      "difficulty": 2677,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc420-e": {
+      "officialTaskId": "abc420_e",
+      "difficulty": 790,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc420-f": {
+      "officialTaskId": "abc420_f",
+      "difficulty": 2420,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc420-g": {
+      "officialTaskId": "abc420_g",
+      "difficulty": 1427,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc421-e": {
+      "officialTaskId": "abc421_e",
+      "difficulty": 2122,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc421-f": {
+      "officialTaskId": "abc421_f",
+      "difficulty": 1805,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc421-g": {
+      "officialTaskId": "abc421_g",
+      "difficulty": 2410,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc422-e": {
+      "officialTaskId": "abc422_e",
+      "difficulty": 1580,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc422-f": {
+      "officialTaskId": "abc422_f",
+      "difficulty": 2028,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc422-g": {
+      "officialTaskId": "abc422_g",
+      "difficulty": 2130,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc423-e": {
+      "officialTaskId": "abc423_e",
+      "difficulty": 1183,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc423-f": {
+      "officialTaskId": "abc423_f",
+      "difficulty": 1691,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc423-g": {
+      "officialTaskId": "abc423_g",
+      "difficulty": 2625,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc424-e": {
+      "officialTaskId": "abc424_e",
+      "difficulty": 1482,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc424-f": {
+      "officialTaskId": "abc424_f",
+      "difficulty": 1521,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc424-g": {
+      "officialTaskId": "abc424_g",
+      "difficulty": 2552,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc425-e": {
+      "officialTaskId": "abc425_e",
+      "difficulty": 1221,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc425-f": {
+      "officialTaskId": "abc425_f",
+      "difficulty": 1831,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc425-g": {
+      "officialTaskId": "abc425_g",
+      "difficulty": 2205,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc426-e": {
+      "officialTaskId": "abc426_e",
+      "difficulty": 1584,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc426-f": {
+      "officialTaskId": "abc426_f",
+      "difficulty": 1776,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc426-g": {
+      "officialTaskId": "abc426_g",
+      "difficulty": 2119,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc427-e": {
+      "officialTaskId": "abc427_e",
+      "difficulty": 1734,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc427-f": {
+      "officialTaskId": "abc427_f",
+      "difficulty": 1605,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc427-g": {
+      "officialTaskId": "abc427_g",
+      "difficulty": 2975,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc428-e": {
+      "officialTaskId": "abc428_e",
+      "difficulty": 1167,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc428-f": {
+      "officialTaskId": "abc428_f",
+      "difficulty": 2073,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc428-g": {
+      "officialTaskId": "abc428_g",
+      "difficulty": 2472,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc429-e": {
+      "officialTaskId": "abc429_e",
+      "difficulty": 1313,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc429-f": {
+      "officialTaskId": "abc429_f",
+      "difficulty": 1859,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc429-g": {
+      "officialTaskId": "abc429_g",
+      "difficulty": 3295,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc430-e": {
+      "officialTaskId": "abc430_e",
+      "difficulty": 1109,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc430-f": {
+      "officialTaskId": "abc430_f",
+      "difficulty": 1615,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc430-g": {
+      "officialTaskId": "abc430_g",
+      "difficulty": 2371,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc431-e": {
+      "officialTaskId": "abc431_e",
+      "difficulty": 1424,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc431-f": {
+      "officialTaskId": "abc431_f",
+      "difficulty": 1613,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc431-g": {
+      "officialTaskId": "abc431_g",
+      "difficulty": 2490,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc432-e": {
+      "officialTaskId": "abc432_e",
+      "difficulty": 1133,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc432-f": {
+      "officialTaskId": "abc432_f",
+      "difficulty": 2273,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc432-g": {
+      "officialTaskId": "abc432_g",
+      "difficulty": 1984,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc433-e": {
+      "officialTaskId": "abc433_e",
+      "difficulty": 1674,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc433-f": {
+      "officialTaskId": "abc433_f",
+      "difficulty": 1617,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc433-g": {
+      "officialTaskId": "abc433_g",
+      "difficulty": 2060,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc434-e": {
+      "officialTaskId": "abc434_e",
+      "difficulty": 1317,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc434-f": {
+      "officialTaskId": "abc434_f",
+      "difficulty": 2600,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc434-g": {
+      "officialTaskId": "abc434_g",
+      "difficulty": 3645,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc435-e": {
+      "officialTaskId": "abc435_e",
+      "difficulty": 982,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc435-f": {
+      "officialTaskId": "abc435_f",
+      "difficulty": 1385,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc435-g": {
+      "officialTaskId": "abc435_g",
+      "difficulty": 2519,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc436-e": {
+      "officialTaskId": "abc436_e",
+      "difficulty": 958,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc436-f": {
+      "officialTaskId": "abc436_f",
+      "difficulty": 1336,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc436-g": {
+      "officialTaskId": "abc436_g",
+      "difficulty": 2164,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc437-e": {
+      "officialTaskId": "abc437_e",
+      "difficulty": 1279,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc437-f": {
+      "officialTaskId": "abc437_f",
+      "difficulty": 1332,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc437-g": {
+      "officialTaskId": "abc437_g",
+      "difficulty": 2806,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc438-e": {
+      "officialTaskId": "abc438_e",
+      "difficulty": 1226,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc438-f": {
+      "officialTaskId": "abc438_f",
+      "difficulty": 1852,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc438-g": {
+      "officialTaskId": "abc438_g",
+      "difficulty": 2455,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc439-e": {
+      "officialTaskId": "abc439_e",
+      "difficulty": 1071,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc439-f": {
+      "officialTaskId": "abc439_f",
+      "difficulty": 1488,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc439-g": {
+      "officialTaskId": "abc439_g",
+      "difficulty": 3023,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc440-e": {
+      "officialTaskId": "abc440_e",
+      "difficulty": 1603,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc440-f": {
+      "officialTaskId": "abc440_f",
+      "difficulty": 2108,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc440-g": {
+      "officialTaskId": "abc440_g",
+      "difficulty": 2993,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc441-e": {
+      "officialTaskId": "abc441_e",
+      "difficulty": 969,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc441-f": {
+      "officialTaskId": "abc441_f",
+      "difficulty": 1455,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc441-g": {
+      "officialTaskId": "abc441_g",
+      "difficulty": 1985,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc442-e": {
+      "officialTaskId": "abc442_e",
+      "difficulty": 1355,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc442-f": {
+      "officialTaskId": "abc442_f",
+      "difficulty": 1295,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc442-g": {
+      "officialTaskId": "abc442_g",
+      "difficulty": 2347,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc443-e": {
+      "officialTaskId": "abc443_e",
+      "difficulty": 1301,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc443-f": {
+      "officialTaskId": "abc443_f",
+      "difficulty": 1967,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc443-g": {
+      "officialTaskId": "abc443_g",
+      "difficulty": 2268,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc444-e": {
+      "officialTaskId": "abc444_e",
+      "difficulty": 1107,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc444-f": {
+      "officialTaskId": "abc444_f",
+      "difficulty": 2654,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc444-g": {
+      "officialTaskId": "abc444_g",
+      "difficulty": 3117,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc445-e": {
+      "officialTaskId": "abc445_e",
+      "difficulty": 1337,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc445-f": {
+      "officialTaskId": "abc445_f",
+      "difficulty": 1514,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc445-g": {
+      "officialTaskId": "abc445_g",
+      "difficulty": 2250,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc446-e": {
+      "officialTaskId": "abc446_e",
+      "difficulty": 1209,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc446-f": {
+      "officialTaskId": "abc446_f",
+      "difficulty": 1543,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc446-g": {
+      "officialTaskId": "abc446_g",
+      "difficulty": 1955,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc447-e": {
+      "officialTaskId": "abc447_e",
+      "difficulty": 955,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc447-f": {
+      "officialTaskId": "abc447_f",
+      "difficulty": 1480,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc447-g": {
+      "officialTaskId": "abc447_g",
+      "difficulty": 2391,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc448-e": {
+      "officialTaskId": "abc448_e",
+      "difficulty": 1359,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc448-f": {
+      "officialTaskId": "abc448_f",
+      "difficulty": 1719,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc448-g": {
+      "officialTaskId": "abc448_g",
+      "difficulty": 3305,
+      "difficultyExperimental": false,
+      "point": 675
+    },
+    "abc449-e": {
+      "officialTaskId": "abc449_e",
+      "difficulty": 1556,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc449-f": {
+      "officialTaskId": "abc449_f",
+      "difficulty": 1987,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc449-g": {
+      "officialTaskId": "abc449_g",
+      "difficulty": 2631,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc450-e": {
+      "officialTaskId": "abc450_e",
+      "difficulty": 1352,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc450-f": {
+      "officialTaskId": "abc450_f",
+      "difficulty": 1967,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc450-g": {
+      "officialTaskId": "abc450_g",
+      "difficulty": 2227,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc451-e": {
+      "officialTaskId": "abc451_e",
+      "difficulty": 1215,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc451-f": {
+      "officialTaskId": "abc451_f",
+      "difficulty": 1540,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc451-g": {
+      "officialTaskId": "abc451_g",
+      "difficulty": 2221,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc452-e": {
+      "officialTaskId": "abc452_e",
+      "difficulty": 1318,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc452-f": {
+      "officialTaskId": "abc452_f",
+      "difficulty": 1630,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc452-g": {
+      "officialTaskId": "abc452_g",
+      "difficulty": 2255,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc453-e": {
+      "officialTaskId": "abc453_e",
+      "difficulty": 1513,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc453-f": {
+      "officialTaskId": "abc453_f",
+      "difficulty": 2811,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc453-g": {
+      "officialTaskId": "abc453_g",
+      "difficulty": 1735,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc454-e": {
+      "officialTaskId": "abc454_e",
+      "difficulty": 1627,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc454-f": {
+      "officialTaskId": "abc454_f",
+      "difficulty": 2169,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc454-g": {
+      "officialTaskId": "abc454_g",
+      "difficulty": 2253,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc455-e": {
+      "officialTaskId": "abc455_e",
+      "difficulty": 1157,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc455-f": {
+      "officialTaskId": "abc455_f",
+      "difficulty": 1549,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc455-g": {
+      "officialTaskId": "abc455_g",
+      "difficulty": 3092,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc456-e": {
+      "officialTaskId": "abc456_e",
+      "difficulty": 1214,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc456-f": {
+      "officialTaskId": "abc456_f",
+      "difficulty": 1888,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc456-g": {
+      "officialTaskId": "abc456_g",
+      "difficulty": 2488,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc457-e": {
+      "officialTaskId": "abc457_e",
+      "difficulty": 1428,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc457-f": {
+      "officialTaskId": "abc457_f",
+      "difficulty": 2167,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc457-g": {
+      "officialTaskId": "abc457_g",
+      "difficulty": 1928,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc458-e": {
+      "officialTaskId": "abc458_e",
+      "difficulty": 1309,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc458-f": {
+      "officialTaskId": "abc458_f",
+      "difficulty": 1744,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc458-g": {
+      "officialTaskId": "abc458_g",
+      "difficulty": 2831,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc459-e": {
+      "officialTaskId": "abc459_e",
+      "difficulty": 1298,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc459-f": {
+      "officialTaskId": "abc459_f",
+      "difficulty": 2163,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc459-g": {
+      "officialTaskId": "abc459_g",
+      "difficulty": 3123,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc460-e": {
+      "officialTaskId": "abc460_e",
+      "difficulty": 1362,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc460-f": {
+      "officialTaskId": "abc460_f",
+      "difficulty": 1987,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc460-g": {
+      "officialTaskId": "abc460_g",
+      "difficulty": 2838,
+      "difficultyExperimental": false,
+      "point": 650
+    },
+    "abc461-e": {
+      "officialTaskId": "abc461_e",
+      "difficulty": 1431,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc461-f": {
+      "officialTaskId": "abc461_f",
+      "difficulty": 1940,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc461-g": {
+      "officialTaskId": "abc461_g",
+      "difficulty": 2391,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc462-e": {
+      "officialTaskId": "abc462_e",
+      "difficulty": 1226,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc462-f": {
+      "officialTaskId": "abc462_f",
+      "difficulty": 1952,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc462-g": {
+      "officialTaskId": "abc462_g",
+      "difficulty": 2232,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc463-e": {
+      "officialTaskId": "abc463_e",
+      "difficulty": 1055,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc463-f": {
+      "officialTaskId": "abc463_f",
+      "difficulty": 2127,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc463-g": {
+      "officialTaskId": "abc463_g",
+      "difficulty": 2452,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc464-e": {
+      "officialTaskId": "abc464_e",
+      "difficulty": 1075,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc464-f": {
+      "officialTaskId": "abc464_f",
+      "difficulty": 2225,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc464-g": {
+      "officialTaskId": "abc464_g",
+      "difficulty": 2592,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc465-e": {
+      "officialTaskId": "abc465_e",
+      "difficulty": 1417,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc465-f": {
+      "officialTaskId": "abc465_f",
+      "difficulty": 1754,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc465-g": {
+      "officialTaskId": "abc465_g",
+      "difficulty": 3082,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc466-e": {
+      "officialTaskId": "abc466_e",
+      "difficulty": 1027,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc466-f": {
+      "officialTaskId": "abc466_f",
+      "difficulty": 1887,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc466-g": {
+      "officialTaskId": "abc466_g",
+      "difficulty": 3347,
+      "difficultyExperimental": false,
+      "point": 600
+    }
+  }
+}
