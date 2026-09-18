@@ -3,10 +3,12 @@ title: "区間更新を要約へ作用させる"
 description: "「区間更新を要約へ作用させる」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 46
 ---
 
 # 区間更新を要約へ作用させる
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 区間monoid要約。
+追加前提: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
 
 結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。
 
@@ -28,7 +30,7 @@ sidebar:
 
 ## 下位単元
 
-- [Segment Tree Beats](/learn/query/segment-tree-beats/)
+- [Segment Tree Beats](/learn/query/segment-tree-beats/) — 発展
 
 ## 問題一覧
 

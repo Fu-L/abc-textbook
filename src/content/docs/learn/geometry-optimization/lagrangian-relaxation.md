@@ -3,10 +3,12 @@ title: "Lagrangian relaxation・Aliens trick"
 description: "「Lagrangian relaxation・Aliens trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 168
+  order: 228
 ---
 
 # Lagrangian relaxation・Aliens trick
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 一次元凸・単峰最適化。
+追加前提: [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/)。
 
 一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。
 

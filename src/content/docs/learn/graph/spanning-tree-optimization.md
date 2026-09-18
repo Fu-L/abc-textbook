@@ -3,10 +3,12 @@ title: "cut・cycle性質から最適全域木を構成する"
 description: "「cut・cycle性質から最適全域木を構成する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 54
+  order: 109
 ---
 
 # cut・cycle性質から最適全域木を構成する
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 交換論から選択順を導く。
+追加前提: [交換論から選択順を導く](/learn/modeling/greedy-exchange/)。
 
 貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。
 
@@ -28,7 +30,7 @@ sidebar:
 
 ## 下位単元
 
-- [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/)
+- [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 応用
 
 ## 問題一覧
 

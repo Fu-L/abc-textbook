@@ -3,10 +3,12 @@ title: "lowlinkで橋・関節点を特定する"
 description: "「lowlinkで橋・関節点を特定する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 26
+  order: 108
 ---
 
 # lowlinkで橋・関節点を特定する
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ DFS木の到達時刻とlowlink値から、除去で連結性が変わる辺・�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 状態グラフのモデリングと探索。
+追加前提: [状態グラフのモデリングと探索](/learn/graph/state-graph-search/)。
 
 DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。
 

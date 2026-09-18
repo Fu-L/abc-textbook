@@ -3,10 +3,12 @@ title: "候補数を界して全列挙・有限case分解する"
 description: "「候補数を界して全列挙・有限case分解する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 12
+  order: 4
 ---
 
 # 候補数を界して全列挙・有限case分解する
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

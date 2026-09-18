@@ -3,10 +3,12 @@ title: "幾何の基本判定と座標変換"
 description: "「幾何の基本判定と座標変換」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 14
+  order: 216
 ---
 
 # 幾何の基本判定と座標変換
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -28,7 +30,7 @@ sidebar:
 
 ## 下位単元
 
-- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/)
+- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 応用
 
 ## 問題一覧
 

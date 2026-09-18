@@ -3,10 +3,12 @@ title: "parallel binary search・多数境界の判定共有"
 description: "「parallel binary search・多数境界の判定共有」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 116
+  order: 19
 ---
 
 # parallel binary search・多数境界の判定共有
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 単調境界を証明して探索する。
+追加前提: [単調境界を証明して探索する](/learn/modeling/monotone-search/)。
 
 単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。
 

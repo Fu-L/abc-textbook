@@ -3,10 +3,12 @@ title: "near-tree graphのkernel化"
 description: "「near-tree graphのkernel化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 147
+  order: 114
 ---
 
 # near-tree graphのkernel化
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: cycle space・fundamental cycle basis、graph core・leaf peeling。
+追加前提: [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/)、[graph core・leaf peeling](/learn/graph/graph-core/)。
 
 cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。
 

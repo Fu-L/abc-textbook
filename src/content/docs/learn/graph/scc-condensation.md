@@ -3,10 +3,12 @@ title: "SCC・縮約DAG・トポロジカル順序"
 description: "「SCC・縮約DAG・トポロジカル順序」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 25
+  order: 96
 ---
 
 # SCC・縮約DAG・トポロジカル順序
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: DAGのtopological processing。
+追加前提: [DAGのtopological processing](/learn/graph/dag-topological-processing/)。
 
 DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。
 

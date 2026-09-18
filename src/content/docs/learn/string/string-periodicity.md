@@ -3,10 +3,12 @@ title: "文字列周期・primitive word"
 description: "「文字列周期・primitive word」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 108
+  order: 151
 ---
 
 # 文字列周期・primitive word
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ prefix一致またはborderから最小periodを求め、文字列をprimitive r
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: Z algorithmによるprefix matching。
+追加前提: [Z algorithmによるprefix matching](/learn/string/z-algorithm/)。
 
 Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。
 

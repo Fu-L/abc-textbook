@@ -3,10 +3,12 @@ title: "乱択の成功条件と誤り確率を設計する"
 description: "「乱択の成功条件と誤り確率を設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 95
+  order: 24
 ---
 
 # 乱択の成功条件と誤り確率を設計する
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -28,7 +30,7 @@ sidebar:
 
 ## 下位単元
 
-- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/)
+- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 応用
 
 ## 問題一覧
 

@@ -3,10 +3,12 @@ title: "乱択代数fingerprint"
 description: "「乱択代数fingerprint」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 129
+  order: 25
 ---
 
 # 乱択代数fingerprint
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 乱択の成功条件と誤り確率を設計する。
+追加前提: [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)。
 
 乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。
 

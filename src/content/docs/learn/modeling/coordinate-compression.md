@@ -3,10 +3,12 @@ title: "疎なkeyの順序を保ってdense indexへ圧縮する"
 description: "「疎なkeyの順序を保ってdense indexへ圧縮する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 4
+  order: 2
 ---
 
 # 疎なkeyの順序を保ってdense indexへ圧縮する
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

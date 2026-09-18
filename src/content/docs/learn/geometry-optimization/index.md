@@ -3,12 +3,14 @@ title: "幾何・凸最適化"
 description: "「幾何・凸最適化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 14
+  order: 215
 ---
 
 # 幾何・凸最適化
 
 ## 概要
+
+位置関係と凸性から、調べる候補を絞る。まず座標・向き・円環順序の判定を揃え、凸包と半平面の共通部分を扱う。直線包絡を境に、幾何的な境界から関数の最適化へ視点を移す。限界費用、傾き、順序制約、罰則係数、Monge性を比較し、各条件が探索やDP遷移をどう減らすかを学ぶ。DP・データ構造・flowで得た表現を組み合わせる章として読む。
 
 ### 幾何・凸最適化への変換
 
@@ -26,13 +28,22 @@ orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/)
-- [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
-- [凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/)
-- [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/)
-- [Convex Hull Trick・直線包絡](/learn/geometry-optimization/line-envelope/)
+- [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/) — 基礎
+- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 応用
+- [凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/) — 節案内
+- [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 応用
+- [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 応用
+- [Convex Hull Trick・直線包絡](/learn/geometry-optimization/line-envelope/) — 応用
+- [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/) — 節案内
+- [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 応用
+- [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 応用
+- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 発展
+- [slope trick](/learn/geometry-optimization/slope-trick/) — 発展
+- [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/) — 応用
+- [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 発展
+- [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 発展
 
 ## 問題一覧
 

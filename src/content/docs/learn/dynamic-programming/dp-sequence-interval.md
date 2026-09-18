@@ -3,7 +3,7 @@ title: "列・区間・分割のDP"
 description: "「列・区間・分割のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 30
+  order: 61
 ---
 
 # 列・区間・分割のDP
@@ -20,7 +20,7 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 ### このUnitでは扱わないもの
 
@@ -28,12 +28,12 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 
 ## 下位単元
 
-- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)
-- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/)
-- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/)
-- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/)
-- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)
-- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/)
+- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 基礎
+- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 標準
+- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 標準
+- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 基礎
+- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 標準
+- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 標準
 
 ## 問題一覧
 

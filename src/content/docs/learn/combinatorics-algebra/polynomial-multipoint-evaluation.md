@@ -3,10 +3,12 @@ title: "多項式の多点評価・補間"
 description: "「多項式の多点評価・補間」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 190
+  order: 206
 ---
 
 # 多項式の多点評価・補間
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ product treeとremainder treeを構築し、一つの多項式を多数の点へ
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: FPS演算・多点評価・合成を行う、再帰分割・分割統治。
+追加前提: [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)、[再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/)。
 
 形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。
 

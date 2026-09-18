@@ -3,10 +3,12 @@ title: "gcdと整数解の成立条件"
 description: "「gcdと整数解の成立条件」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 20
+  order: 164
 ---
 
 # gcdと整数解の成立条件
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

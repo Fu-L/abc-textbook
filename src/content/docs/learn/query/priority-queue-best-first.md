@@ -3,10 +3,12 @@ title: "priority queue・best-first列挙"
 description: "「priority queue・best-first列挙」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 23
+  order: 31
 ---
 
 # priority queue・best-first列挙
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

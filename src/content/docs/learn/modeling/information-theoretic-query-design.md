@@ -3,10 +3,12 @@ title: "情報量下界・query符号設計"
 description: "「情報量下界・query符号設計」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 122
+  order: 27
 ---
 
 # 情報量下界・query符号設計
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

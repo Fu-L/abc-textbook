@@ -3,10 +3,12 @@ title: "LIS・末尾の支配関係"
 description: "「LIS・末尾の支配関係」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 31
+  order: 63
 ---
 
 # LIS・末尾の支配関係
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,7 +26,7 @@ ABC237 Fは、LISの長さを求める算法そのものを数え上げDPの遷�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 列・subsequence DP。
+追加前提: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)。
 
 列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。
 

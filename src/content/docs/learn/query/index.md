@@ -3,12 +3,14 @@ title: "データ構造と問い合わせ"
 description: "「データ構造と問い合わせ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 2
+  order: 28
 ---
 
 # データ構造と問い合わせ
 
 ## 概要
+
+保持する情報と許す操作からデータ構造を選ぶ。局所的な接続・順序の管理から、累積和、結合的な区間要約、その要約への作用へ進む。静的問い合わせ、窓の移動、疎な座標、過去の版という条件の違いを比較し、最後にbit列とfingerprintによる表現を扱う。DPや木の章では、この章で定めた要約と更新の契約を再利用する。
 
 ### 更新可能な最小十分要約
 
@@ -26,23 +28,37 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [一次元・二次元累積和と差分で区間情報を線形化する](/learn/query/prefix-aggregate/)
-- [要素索引と連結リストで局所linkを更新する](/learn/query/linked-list-index/)
-- [支配関係から不要な候補を単調stack・queueで削る](/learn/query/monotone-stack-queue/)
-- [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/)
-- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/)
-- [bitsetで集合演算をword並列化する](/learn/query/bitset-word-parallel/)
-- [bit列をTrieで索引化する](/learn/query/binary-trie/)
-- [結合的要約と列・区間の合成](/learn/query/monoid-segment-tree/)
-- [Rolling fingerprintで列の同値性を比較する](/learn/query/string-hash/)
-- [区間更新を要約へ作用させる](/learn/query/range-actions/)
-- [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/)
-- [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/)
-- [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/)
-- [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/)
-- [上位bitの支配関係によるXOR minimax](/learn/query/bitwise-minimax-partition/)
+- [要素索引と連結リストで局所linkを更新する](/learn/query/linked-list-index/) — 基礎
+- [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/) — 節案内
+- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 基礎
+- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 基礎
+- [ordered interval partition・ODT](/learn/query/ordered-interval-partition/) — 応用
+- [支配関係から不要な候補を単調stack・queueで削る](/learn/query/monotone-stack-queue/) — 基礎
+- [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/) — 応用
+- [一次元・二次元累積和と差分で区間情報を線形化する](/learn/query/prefix-aggregate/) — 基礎
+- [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/) — 標準
+- [結合的要約と列・区間の合成](/learn/query/monoid-segment-tree/) — 節案内
+- [区間monoid要約](/learn/query/range-monoid-aggregation/) — 標準
+- [有限関数・作用の合成](/learn/query/finite-function-composition/) — 標準
+- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 標準
+- [SWAG・two-stack queue aggregation](/learn/query/swag/) — 応用
+- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 応用
+- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 応用
+- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 応用
+- [区間更新を要約へ作用させる](/learn/query/range-actions/) — 標準
+- [Segment Tree Beats](/learn/query/segment-tree-beats/) — 発展
+- [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/) — 標準
+- [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/) — 応用
+- [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/) — 節案内
+- [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 応用
+- [永続data structure・structural sharing](/learn/query/persistence/) — 応用
+- [bitsetで集合演算をword並列化する](/learn/query/bitset-word-parallel/) — 標準
+- [bit列をTrieで索引化する](/learn/query/binary-trie/) — 標準
+- [上位bitの支配関係によるXOR minimax](/learn/query/bitwise-minimax-partition/) — 応用
+- [Rolling fingerprintで列の同値性を比較する](/learn/query/string-hash/) — 節案内
+- [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 標準
 
 ## 問題一覧
 

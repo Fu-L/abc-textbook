@@ -3,10 +3,12 @@ title: "Bostan–Mori・有理生成関数の係数抽出"
 description: "「Bostan–Mori・有理生成関数の係数抽出」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 178
+  order: 207
 ---
 
 # Bostan–Mori・有理生成関数の係数抽出
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 組合せを生成関数へ符号化する。
+追加前提: [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)。
 
 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。
 

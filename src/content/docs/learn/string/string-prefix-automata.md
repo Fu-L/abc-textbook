@@ -3,7 +3,7 @@ title: "接頭辞との一致長を再利用する"
 description: "「接頭辞との一致長を再利用する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 35
+  order: 149
 ---
 
 # 接頭辞との一致長を再利用する
@@ -24,7 +24,7 @@ sidebar:
 
 ## 下位単元
 
-- [Z algorithmによるprefix matching](/learn/string/z-algorithm/)
+- [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 基礎
 
 ## 問題一覧
 

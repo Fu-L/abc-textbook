@@ -3,10 +3,12 @@ title: "path matchingのheap縮約greedy"
 description: "「path matchingのheap縮約greedy」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 186
+  order: 126
 ---
 
 # path matchingのheap縮約greedy
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ pathの非隣接edgeからk本を選ぶ最小重みmatchingを、最小edgeの�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 交換論から選択順を導く、priority queue・best-first列挙。
+追加前提: [交換論から選択順を導く](/learn/modeling/greedy-exchange/)、[priority queue・best-first列挙](/learn/query/priority-queue-best-first/)。
 
 path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。
 

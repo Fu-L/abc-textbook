@@ -3,10 +3,12 @@ title: "約数格子のzeta・Möbius反転"
 description: "「約数格子のzeta・Möbius反転」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 119
+  order: 191
 ---
 
 # 約数格子のzeta・Möbius反転
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 素因数分解と約数構造。
+追加前提: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)。
 
 素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。
 

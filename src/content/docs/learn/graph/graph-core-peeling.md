@@ -3,7 +3,7 @@ title: "次数構造からgraph coreまたは小さなkernelへ縮約する"
 description: "「次数構造からgraph coreまたは小さなkernelへ縮約する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 63
+  order: 112
 ---
 
 # 次数構造からgraph coreまたは小さなkernelへ縮約する
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [graph core・leaf peeling](/learn/graph/graph-core/)
-- [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/)
+- [graph core・leaf peeling](/learn/graph/graph-core/) — 標準
+- [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 応用
 
 ## 問題一覧
 

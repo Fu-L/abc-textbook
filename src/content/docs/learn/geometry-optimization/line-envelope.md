@@ -3,10 +3,12 @@ title: "Convex Hull Trick・直線包絡"
 description: "「Convex Hull Trick・直線包絡」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 146
+  order: 221
 ---
 
 # Convex Hull Trick・直線包絡
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

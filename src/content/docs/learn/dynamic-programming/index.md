@@ -3,12 +3,14 @@ title: "動的計画法"
 description: "「動的計画法」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 0
+  order: 58
 ---
 
 # 動的計画法
 
 ## 概要
+
+未来に必要な情報と依存関係を定め、同じ状態へ到達する履歴をまとめる。列・区間・集合という状態の形を比較してから、境界圧縮と桁・automatonの状態へ進む。確率では何を平均し、ゲームでは誰が選ぶのかを明示する。最後に遷移の共通部分や線形性を取り出し、後の代数・凸最適化の章で使う式へつなぐ。automatonの構成は文字列章、Steiner tree DPの距離計算はグラフ章を参照する。
 
 ### DP状態と遷移
 
@@ -26,22 +28,34 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)
-- [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/)
-- [列・区間・分割のDP](/learn/dynamic-programming/dp-sequence-interval/)
-- [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)
-- [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/)
-- [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)
-- [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)
-- [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/)
-- [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/)
-- [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)
-- [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/)
-- [循環局面の後退解析とminimax距離](/learn/dynamic-programming/cyclic-minimax-game/)
-- [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/)
-- [Steiner tree subset DP](/learn/dynamic-programming/steiner-tree-dp/)
+- [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/) — 基礎
+- [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/) — 基礎
+- [列・区間・分割のDP](/learn/dynamic-programming/dp-sequence-interval/) — 節案内
+- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 基礎
+- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 標準
+- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 標準
+- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 基礎
+- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 標準
+- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 標準
+- [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/) — 標準
+- [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/) — 発展
+- [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/) — 標準
+- [Steiner tree subset DP](/learn/dynamic-programming/steiner-tree-dp/) — 発展
+- [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/) — 発展
+- [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/) — 節案内
+- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 標準
+- [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/) — 標準
+- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 応用
+- [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/) — 標準
+- [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/) — 発展
+- [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/) — 標準
+- [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/) — 標準
+- [循環局面の後退解析とminimax距離](/learn/dynamic-programming/cyclic-minimax-game/) — 応用
+- [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/) — 発展
+- [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/) — 応用
+- [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/) — 応用
 
 ## 問題一覧
 

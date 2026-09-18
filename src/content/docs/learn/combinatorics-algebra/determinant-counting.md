@@ -3,10 +3,12 @@ title: "行列式による数え上げ"
 description: "「行列式による数え上げ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 164
+  order: 210
 ---
 
 # 行列式による数え上げ
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -34,7 +36,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 線形方程式・rank。
+追加前提: [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/)。
 
 線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。
 

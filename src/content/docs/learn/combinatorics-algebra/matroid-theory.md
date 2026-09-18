@@ -3,7 +3,7 @@ title: "Matroidの独立性・greedy・線形交差"
 description: "「Matroidの独立性・greedy・線形交差」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 165
+  order: 212
 ---
 
 # Matroidの独立性・greedy・線形交差
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/)
-- [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/)
+- [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/) — 発展
+- [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/) — 専門
 
 ## 問題一覧
 

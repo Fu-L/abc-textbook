@@ -3,7 +3,7 @@ title: "凸性・傾き・限界費用・slope trick"
 description: "「凸性・傾き・限界費用・slope trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 101
+  order: 222
 ---
 
 # 凸性・傾き・限界費用・slope trick
@@ -24,12 +24,12 @@ sidebar:
 
 ## 下位単元
 
-- [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/)
-- [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/)
-- [slope trick](/learn/geometry-optimization/slope-trick/)
-- [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/)
-- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/)
-- [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/)
+- [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 応用
+- [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 応用
+- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 発展
+- [slope trick](/learn/geometry-optimization/slope-trick/) — 発展
+- [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 発展
+- [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 発展
 
 ## 問題一覧
 

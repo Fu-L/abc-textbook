@@ -3,7 +3,7 @@ title: "法上の演算と積の保守"
 description: "「法上の演算と積の保守」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 5
+  order: 165
 ---
 
 # 法上の演算と積の保守
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)
-- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/)
+- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 基礎
+- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 標準
 
 ## 問題一覧
 

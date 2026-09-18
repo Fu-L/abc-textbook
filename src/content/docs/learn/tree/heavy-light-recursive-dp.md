@@ -3,10 +3,12 @@ title: "資源DPを引数で渡すHLRecDP"
 description: "「資源DPを引数で渡すHLRecDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 158
+  order: 144
 ---
 
 # 資源DPを引数で渡すHLRecDP
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ dfs(v,dp)の引数は外部で既に選んだ候補の資源別最適値であ�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 集合・資源軸のDP、根付き木DP・部分木集約。
+追加前提: [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)、[根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
 
 資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。
 

@@ -3,10 +3,12 @@ title: "Steiner tree subset DP"
 description: "「Steiner tree subset DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 163
+  order: 71
 ---
 
 # Steiner tree subset DP
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 部分集合・bitmask状態DP、最短路モデル。
+追加前提: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)、[最短路モデル](/learn/graph/weighted-shortest-path/)（後の章）。
 
 最短路モデル・部分集合・bitmask状態DPで得た考え方と実装を再利用し、Steiner tree subset DPの発動条件・正当化・境界を重複なく学ぶ。
 

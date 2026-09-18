@@ -3,10 +3,12 @@ title: "frontier/profile DP・境界状態圧縮"
 description: "「frontier/profile DP・境界状態圧縮」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 157
+  order: 72
 ---
 
 # frontier/profile DP・境界状態圧縮
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,7 +26,7 @@ ABC296 Exでは色や使用済みbitだけでは足りず、境界上の黒マ�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。
 

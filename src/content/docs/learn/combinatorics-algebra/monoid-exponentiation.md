@@ -3,10 +3,12 @@ title: "monoid exponentiation・連結演算doubling"
 description: "「monoid exponentiation・連結演算doubling」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 84
+  order: 193
 ---
 
 # monoid exponentiation・連結演算doubling
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

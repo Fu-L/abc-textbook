@@ -3,10 +3,12 @@ title: "線形matroid交差の乱択rank判定"
 description: "「線形matroid交差の乱択rank判定」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 195
+  order: 214
 ---
 
 # 線形matroid交差の乱択rank判定
+
+難度の目安: **専門**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 線形方程式・rank、matroid greedy、乱択の成功条件と誤り確率を設計する。
+追加前提: [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/)、[matroid greedy](/learn/combinatorics-algebra/matroid-greedy/)、[乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)。
 
 matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。
 

@@ -3,10 +3,12 @@ title: "大容量unbounded knapsackのeventual linearity"
 description: "「大容量unbounded knapsackのeventual linearity」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 182
+  order: 69
 ---
 
 # 大容量unbounded knapsackのeventual linearity
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 集合・資源軸のDP。
+追加前提: [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)。
 
 通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。
 

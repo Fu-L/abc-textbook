@@ -3,12 +3,14 @@ title: "グラフアルゴリズム"
 description: "「グラフアルゴリズム」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 9
+  order: 85
 ---
 
 # グラフアルゴリズム
 
 ## 概要
+
+状態と遷移をグラフへ写し、到達性、距離、連結性の順に構造を調べる。有向グラフではDAGとSCC、無向グラフでは連結成分・橋・全域木を軸に整理し、閉路と次数の構造へ進む。後半は一対一対応から容量付き割当て、費用、双対性へ広げる。matching・flowの各Unitでは、元の問題の制約が頂点・辺・容量のどこに現れるかを確かめる。
 
 ### グラフモデルと構造
 
@@ -26,22 +28,50 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/)
-- [状態グラフ探索・到達関係](/learn/graph/graph-search/)
-- [SCCで閉路・DAG順・2-SATを処理する](/learn/graph/directed-condensation/)
-- [連結成分を管理し縮約する](/learn/graph/connectivity/)
-- [lowlinkで橋・関節点を特定する](/learn/graph/lowlink-critical-structure/)
-- [cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/)
-- [一意な後続・サイクル・ダブリング](/learn/graph/functional-graph/)
-- [次数構造からgraph coreまたは小さなkernelへ縮約する](/learn/graph/graph-core-peeling/)
-- [重み付き最短路・経路復元・差分制約](/learn/graph/shortest-path-certificates/)
-- [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/)
-- [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
-- [単調path contraction・DSU jump](/learn/graph/monotone-path-contraction/)
-- [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/)
-- [平面graph双対・cut/path対応](/learn/graph/planar-duality/)
+- [状態グラフ探索・到達関係](/learn/graph/graph-search/) — 節案内
+- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 基礎
+- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 応用
+- [推移閉包](/learn/graph/transitive-closure/) — 標準
+- [重み付き最短路・経路復元・差分制約](/learn/graph/shortest-path-certificates/) — 節案内
+- [最短路モデル](/learn/graph/weighted-shortest-path/) — 標準
+- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 標準
+- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/) — 応用
+- [SCCで閉路・DAG順・2-SATを処理する](/learn/graph/directed-condensation/) — 節案内
+- [DAGのtopological processing](/learn/graph/dag-topological-processing/) — 基礎
+- [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 標準
+- [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) — 標準
+- [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 応用
+- [2-SAT・含意グラフ](/learn/graph/two-sat/) — 応用
+- [一意な後続・サイクル・ダブリング](/learn/graph/functional-graph/) — 節案内
+- [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) — 標準
+- [doubling・binary lifting](/learn/graph/binary-lifting/) — 標準
+- [連結成分を管理し縮約する](/learn/graph/connectivity/) — 節案内
+- [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/) — 基礎
+- [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/) — 基礎
+- [potential・weighted DSU](/learn/graph/potential-dsu/) — 標準
+- [単調path contraction・DSU jump](/learn/graph/monotone-path-contraction/) — 応用
+- [lowlinkで橋・関節点を特定する](/learn/graph/lowlink-critical-structure/) — 標準
+- [cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/) — 標準
+- [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 応用
+- [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/) — 応用
+- [次数構造からgraph coreまたは小さなkernelへ縮約する](/learn/graph/graph-core-peeling/) — 節案内
+- [graph core・leaf peeling](/learn/graph/graph-core/) — 標準
+- [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 応用
+- [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/) — 節案内
+- [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 標準
+- [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 応用
+- [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/) — 基礎
+- [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/) — 節案内
+- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 標準
+- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 標準
+- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 応用
+- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 応用
+- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 発展
+- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 発展
+- [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 発展
+- [平面graph双対・cut/path対応](/learn/graph/planar-duality/) — 発展
 
 ## 問題一覧
 

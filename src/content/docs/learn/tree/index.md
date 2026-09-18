@@ -3,12 +3,14 @@ title: "木構造"
 description: "「木構造」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 41
+  order: 128
 ---
 
 # 木構造
 
 ## 概要
+
+木の一意な経路と部分木への分解を使う。距離・直径から始め、Euler順とLCAで位置関係を表し、部分木集約と全方位DPへ進む。続いてpath・分離点による分解、必要頂点だけの圧縮、併合履歴の木を比較する。後半の木DPでは、軽い子の処理回数、path上の合成、rake・compressがそれぞれ何を高速化するかを区別する。多項式木DPに進むときは代数章の畳み込みを参照する。
 
 ### 木モデルと構造
 
@@ -26,18 +28,26 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)
-- [木DP・集約・rerooting](/learn/tree/tree-aggregation/)
-- [包含木の構築とancestor・path分解](/learn/tree/tree-decomposition/)
-- [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/)
-- [重心を分離点として木を再帰分解する](/learn/tree/tree-balanced-separators/)
-- [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/)
-- [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/)
-- [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)
-- [01 on Tree・親先行順序のcluster縮約](/learn/tree/tree-precedence-contraction/)
-- [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/)
+- [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/) — 標準
+- [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/) — 発展
+- [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/) — 応用
+- [包含木の構築とancestor・path分解](/learn/tree/tree-decomposition/) — 節案内
+- [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 応用
+- [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 標準
+- [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 標準
+- [木DP・集約・rerooting](/learn/tree/tree-aggregation/) — 節案内
+- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 標準
+- [rerooting・全方位木DP](/learn/tree/rerooting/) — 標準
+- [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 応用
+- [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 応用
+- [重心を分離点として木を再帰分解する](/learn/tree/tree-balanced-separators/) — 応用
+- [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/) — 応用
+- [01 on Tree・親先行順序のcluster縮約](/learn/tree/tree-precedence-contraction/) — 発展
+- [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/) — 発展
+- [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/) — 発展
+- [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/) — 発展
 
 ## 問題一覧
 

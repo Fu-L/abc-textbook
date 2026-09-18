@@ -3,7 +3,7 @@ title: "heap・ordered setで全候補の極値を保つ"
 description: "「heap・ordered setで全候補の極値を保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 23
+  order: 30
 ---
 
 # heap・ordered setで全候補の極値を保つ
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/)
-- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/)
-- [ordered interval partition・ODT](/learn/query/ordered-interval-partition/)
+- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 基礎
+- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 基礎
+- [ordered interval partition・ODT](/learn/query/ordered-interval-partition/) — 応用
 
 ## 問題一覧
 

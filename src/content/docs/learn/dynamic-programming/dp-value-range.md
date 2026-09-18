@@ -3,10 +3,12 @@ title: "値域集約による部分列DP"
 description: "「値域集約による部分列DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 80
+  order: 64
 ---
 
 # 値域集約による部分列DP
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,7 +26,7 @@ ABC354 Fの採用解法では左右から値域最大DPを行い、l_i+r_i−1=L
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 列・subsequence DP、区間monoid要約。
+追加前提: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)、[区間monoid要約](/learn/query/range-monoid-aggregation/)。
 
 区間monoid要約・列・subsequence DPで得た考え方と実装を再利用し、値域集約による部分列DPの発動条件・正当化・境界を重複なく学ぶ。
 

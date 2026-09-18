@@ -3,10 +3,12 @@ title: "包除・Möbius反転で重複を補正する"
 description: "「包除・Möbius反転で重複を補正する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 50
+  order: 190
 ---
 
 # 包除・Möbius反転で重複を補正する
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -28,8 +30,8 @@ sidebar:
 
 ## 下位単元
 
-- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/)
-- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/)
+- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 応用
+- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 応用
 
 ## 問題一覧
 

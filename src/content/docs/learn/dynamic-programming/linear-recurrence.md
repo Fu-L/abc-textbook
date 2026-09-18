@@ -3,10 +3,12 @@ title: "固定線形遷移を巨大回数進める"
 description: "「固定線形遷移を巨大回数進める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 96
+  order: 84
 ---
 
 # 固定線形遷移を巨大回数進める
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。
 

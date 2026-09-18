@@ -3,10 +3,12 @@ title: "静的graph等式制約のpotential伝播"
 description: "「静的graph等式制約のpotential伝播」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 37
+  order: 105
 ---
 
 # 静的graph等式制約のpotential伝播
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 状態グラフのモデリングと探索。
+追加前提: [状態グラフのモデリングと探索](/learn/graph/state-graph-search/)。
 
 通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。
 

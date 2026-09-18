@@ -3,10 +3,12 @@ title: "FPS演算・多点評価・合成を行う"
 description: "「FPS演算・多点評価・合成を行う」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 189
+  order: 205
 ---
 
 # FPS演算・多点評価・合成を行う
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 組合せを生成関数へ符号化する、NTT・FFTで畳み込みと相互相関を求める。
+追加前提: [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)、[NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)。
 
 生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。
 
@@ -28,9 +30,9 @@ sidebar:
 
 ## 下位単元
 
-- [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/)
-- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/)
-- [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/)
+- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/) — 発展
+- [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/) — 発展
+- [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/) — 専門
 
 ## 問題一覧
 

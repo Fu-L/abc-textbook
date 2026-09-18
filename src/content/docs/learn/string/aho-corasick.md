@@ -3,10 +3,12 @@ title: "Aho–Corasick"
 description: "「Aho–Corasick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 132
+  order: 156
 ---
 
 # Aho–Corasick
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 有限状態automatonの構成、Trieで共有接頭辞を索引化する。
+追加前提: [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)、[Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/)。
 
 有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。
 

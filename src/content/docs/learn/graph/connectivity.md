@@ -3,7 +3,7 @@ title: "連結成分を管理し縮約する"
 description: "「連結成分を管理し縮約する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 24
+  order: 103
 ---
 
 # 連結成分を管理し縮約する
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/)
-- [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/)
-- [potential・weighted DSU](/learn/graph/potential-dsu/)
+- [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/) — 基礎
+- [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/) — 基礎
+- [potential・weighted DSU](/learn/graph/potential-dsu/) — 標準
 
 ## 問題一覧
 

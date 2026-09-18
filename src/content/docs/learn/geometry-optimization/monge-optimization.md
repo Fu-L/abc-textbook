@@ -3,10 +3,12 @@ title: "Monge・monotone minima最適化"
 description: "「Monge・monotone minima最適化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 172
+  order: 229
 ---
 
 # Monge・monotone minima最適化
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ ABC348 Gでは行最大位置の単調性から探索区間を制限する。ABC
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: DP遷移を因数分解・集約して加速する。
+追加前提: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。
 
 DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge・monotone minima最適化の発動条件・正当化・境界を重複なく学ぶ。
 

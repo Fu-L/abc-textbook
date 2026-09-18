@@ -3,10 +3,12 @@ title: "difference constraints・不等式系の最短路化"
 description: "「difference constraints・不等式系の最短路化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 75
+  order: 93
 ---
 
 # difference constraints・不等式系の最短路化
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最短路モデル。
+追加前提: [最短路モデル](/learn/graph/weighted-shortest-path/)。
 
 最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。
 

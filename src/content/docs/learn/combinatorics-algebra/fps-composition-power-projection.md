@@ -3,10 +3,12 @@ title: "FPS合成・power projection"
 description: "「FPS合成・power projection」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 193
+  order: 209
 ---
 
 # FPS合成・power projection
+
+難度の目安: **専門**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: FPS演算・多点評価・合成を行う。
+追加前提: [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)。
 
 形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。
 

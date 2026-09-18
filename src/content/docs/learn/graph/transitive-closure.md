@@ -3,10 +3,12 @@ title: "推移閉包"
 description: "「推移閉包」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 53
+  order: 89
 ---
 
 # 推移閉包
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

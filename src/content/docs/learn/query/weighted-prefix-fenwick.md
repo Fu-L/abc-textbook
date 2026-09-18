@@ -3,10 +3,12 @@ title: "反転数・重み付き接頭辞統計をFenwick Treeで保つ"
 description: "「反転数・重み付き接頭辞統計をFenwick Treeで保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 43
+  order: 37
 ---
 
 # 反転数・重み付き接頭辞統計をFenwick Treeで保つ
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -20,7 +22,7 @@ ABC296 Fでは、二列のmultisetが一致し、値がすべて異なる場合�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 一次元・二次元累積和と差分で区間情報を線形化する。
+追加前提: [一次元・二次元累積和と差分で区間情報を線形化する](/learn/query/prefix-aggregate/)。
 
 静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。
 

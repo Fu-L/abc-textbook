@@ -3,10 +3,12 @@ title: "laminar区間族の包含木構築"
 description: "「laminar区間族の包含木構築」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 123
+  order: 133
 ---
 
 # laminar区間族の包含木構築
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

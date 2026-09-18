@@ -1,6 +1,7 @@
 import type { z } from 'zod';
 import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
 import { PROBLEM_READING_ORDER_REASON } from './problem-reading-order.js';
+import { TEXTBOOK_CHAPTERS, textbookIndex, unitLevelLabel } from './textbook-order.js';
 
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
@@ -91,7 +92,7 @@ interface ChildLearningUnitLink {
   readonly id: string;
   readonly title: string;
   readonly documentPath: string;
-  readonly globalIndex: number;
+  readonly stageRank: number;
   readonly learningOutcomeIds: readonly string[];
   readonly ownedLearningOutcomeIds: readonly string[];
   readonly excludedTopics: readonly string[];
@@ -242,11 +243,13 @@ const renderLearningUnitDocument = (input: {
   readonly tags: readonly TechniqueTag[];
   readonly childUnits: readonly ChildLearningUnitLink[];
   readonly prerequisiteTitles: readonly string[];
+  readonly chapterLinks: readonly string[];
   readonly sources: readonly SourceRevision[];
   readonly problems: ReadonlyMap<string, Problem>;
   readonly sourceBuild: { readonly id: string; readonly digest: string };
 }): string => {
   const { unit } = input;
+  const chapter = TEXTBOOK_CHAPTERS.find(({ id }) => id === unit.id);
   const problemLinks = (ids: readonly string[]): string[] =>
     ids.map((id) => {
       const problem = input.problems.get(id);
@@ -260,13 +263,38 @@ const renderLearningUnitDocument = (input: {
     `description: ${yamlString(`「${unit.title}」で学ぶ概念と、基礎から応用へ進む問題一覧。`)}`,
     'draft: true',
     'sidebar:',
-    `  order: ${String(unit.globalIndex)}`,
+    `  order: ${String(textbookIndex(unit.id))}`,
     '---',
     '',
     `# ${unit.title}`,
     '',
+    ...(unit.stageRank > 0
+      ? [
+          `難度の目安: **${unitLevelLabel(unit.stageRank)}**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。`,
+          '',
+        ]
+      : []),
+    ...(unit.id === 'unit-chapter-modeling'
+      ? [
+          '## 本書の読み方',
+          '',
+          '本書は、同じ対象や原理の基本から発展までを一つの章で見渡せるように並べています。先頭から全問を解き切る必要はありません。各Unitの難度の目安と追加前提を確認し、今必要な範囲を選んでください。',
+          '',
+          '難度の目安は、Unitで扱う概念についての編集上の区分です。「基礎」は各分野の定式化と基本操作、「標準」は主要な算法、「応用」は標準技能の組合せや個別原理、「発展」は強い構造条件・代数的道具を使う算法、「専門」は高度な個別理論を扱います。掲載問題の推定ratingや必要な到達レートを示すものではありません。「節案内」は関連Unitをまとめる見出しです。',
+          '',
+          '初読では基礎・標準のUnitで定義と不変量を押さえ、発展的なUnitは後回しにして構いません。章をまたぐ前提は後方にも現れます。未習の前提があればリンク先で補うか、そのUnitへ後で戻ってください。問題ごとに複数分野の知識を使うこともあるため、Unitの難度と各問題の難しさは分けて考えます。',
+          '',
+          'ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現した後で、成立条件を一つ外すと何が壊れるか、他の章の表現へ写せるかを考えてください。たとえばDP遷移を区間要約・行列・多項式へ写す、割当てをmatching・flowへ写す、といった接続を自分で導けるようにすることが目標です。',
+          '',
+          '## 全体の構成',
+          '',
+          ...input.chapterLinks.map((link, index) => `${String(index + 1)}. ${link}`),
+          '',
+        ]
+      : []),
     '## 概要',
     '',
+    ...(chapter === undefined ? [] : [chapter.introduction, '']),
     ...input.tags.flatMap((tag) => [`### ${tag.name}`, '', tag.definition, '']),
     ...(CANONICAL_UNIT_CONTENT[unit.id] ?? []).flatMap((paragraph) => [paragraph, '']),
     ...(input.tags.length === 0 ? [unit.orderReason, ''] : []),
@@ -284,11 +312,11 @@ const renderLearningUnitDocument = (input: {
     ...(input.childUnits.length === 0
       ? []
       : [
-          '## 下位単元',
+          chapter === undefined ? '## 下位単元' : '## 章の構成',
           '',
           ...input.childUnits.map(
             (child) =>
-              `- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/)`,
+              `- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/) — ${unitLevelLabel(child.stageRank)}`,
           ),
           '',
         ]),
@@ -435,22 +463,35 @@ export const buildCanonicalTaxonomyMaterialization = (
   const unitById = new Map(
     unitCandidates.map(({ entity }) => [entity.id, { id: entity.id, parentId: entity.parentId }]),
   );
+  const unitLink = (unit: (typeof unitCandidates)[number]['entity']): string =>
+    `[${unit.title}](/learn/${learningUnitDocumentPath(unit, unitById)
+      .replace(/^src\/content\/docs\/learn\//u, '')
+      .replace(/(?:\/index)?\.md$/u, '')}/)`;
+  const chapterLinks = TEXTBOOK_CHAPTERS.flatMap(({ id }) => {
+    const chapter = unitCandidateById.get(id);
+    return chapter === undefined ? [] : [unitLink(chapter.entity)];
+  });
   const learningUnits: CanonicalLearningUnitOutput[] = unitCandidates
     .map((candidate) => {
       const unit = candidate.entity;
+      const chapterUnitIds = new Set<string>(
+        TEXTBOOK_CHAPTERS.find(({ id }) => id === unit.id)?.unitIds,
+      );
       const childUnits = unitCandidates
-        .filter(({ entity }) => entity.parentId === unit.id)
+        .filter(({ entity }) =>
+          unit.kind === 'chapter' ? chapterUnitIds.has(entity.id) : entity.parentId === unit.id,
+        )
         .map(({ entity }) => ({
           id: entity.id,
           title: entity.title,
           documentPath: learningUnitDocumentPath(entity, unitById),
-          globalIndex: entity.globalIndex,
+          stageRank: entity.stageRank,
           learningOutcomeIds: entity.learningOutcomeIds,
           ownedLearningOutcomeIds: entity.ownedLearningOutcomeIds,
           excludedTopics: entity.excludedTopics,
           orderReason: entity.orderReason,
         }))
-        .sort((left, right) => left.globalIndex - right.globalIndex);
+        .sort((left, right) => textbookIndex(left.id) - textbookIndex(right.id));
       const sourceRevisionIds = unit.sourceRevisionIds;
       const documentPath = learningUnitDocumentPath(unit, unitById);
       const materializedUnit = LearningUnitSchema.parse({
@@ -471,9 +512,11 @@ export const buildCanonicalTaxonomyMaterialization = (
         }
         return tag;
       });
-      const prerequisiteTitles = materializedUnit.additionalPrerequisiteUnitIds.map(
-        (prerequisiteId) => unitCandidateById.get(prerequisiteId)?.entity.title ?? prerequisiteId,
-      );
+      const prerequisiteTitles = materializedUnit.additionalPrerequisiteUnitIds.map((id) => {
+        const prerequisite = unitCandidateById.get(id);
+        if (prerequisite === undefined) return id;
+        return `${unitLink(prerequisite.entity)}${textbookIndex(id) > textbookIndex(unit.id) ? '（後の章）' : ''}`;
+      });
       const materializedSources = materializedUnit.sourceRevisionIds.map((sourceId) => {
         const source = sourceById.get(sourceId);
         if (source === undefined) {
@@ -494,6 +537,7 @@ export const buildCanonicalTaxonomyMaterialization = (
           problems: problemById,
           childUnits,
           prerequisiteTitles,
+          chapterLinks,
           sources: materializedSources,
           sourceBuild,
         }),

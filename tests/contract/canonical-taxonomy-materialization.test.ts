@@ -19,6 +19,11 @@ import {
 } from '../../src/lib/taxonomy/canonical-taxonomy-materialization.js';
 import { loadFinalTaxonomySourceContext } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
+import {
+  TEXTBOOK_CHAPTERS,
+  textbookIndex,
+  unitLevelLabel,
+} from '../../src/lib/taxonomy/textbook-order.js';
 
 const BUILD_PATH = 'staging/taxonomy/initial/final-taxonomy-build.json';
 
@@ -39,6 +44,61 @@ const loadMaterializationInput = async () => {
 };
 
 describe('T047–T050 canonical taxonomy materialization', () => {
+  it('presents every Unit by subject with levels and prerequisite links, preserving placements', async () => {
+    const input = await loadMaterializationInput();
+    const result = buildCanonicalTaxonomyMaterialization(input);
+    const byId = new Map(result.learningUnits.map((output) => [output.value.id, output]));
+    const orderedIds = TEXTBOOK_CHAPTERS.flatMap((chapter) => [chapter.id, ...chapter.unitIds]);
+    expect([...orderedIds].sort()).toEqual([...byId.keys()].sort());
+
+    for (const chapter of TEXTBOOK_CHAPTERS) {
+      const chapterDocument = byId.get(chapter.id)?.document ?? '';
+      let previousLinkPosition = -1;
+      for (const id of chapter.unitIds) {
+        const output = byId.get(id);
+        if (output === undefined) throw new Error(`Missing Unit: ${id}`);
+        const { value: unit, document } = output;
+        let root = unit;
+        while (root.parentId !== null) {
+          const parent = byId.get(root.parentId)?.value;
+          if (parent === undefined) throw new Error(`Missing parent: ${root.parentId}`);
+          root = parent;
+        }
+        expect(root.id, id).toBe(chapter.id);
+        expect(document).toContain(`  order: ${String(textbookIndex(id))}\n`);
+        if (unit.stageRank > 0) {
+          expect(document).toContain(`難度の目安: **${unitLevelLabel(unit.stageRank)}**`);
+        }
+        const linkPosition = chapterDocument.indexOf(`- [${unit.title}](`);
+        expect(linkPosition, id).toBeGreaterThan(previousLinkPosition);
+        previousLinkPosition = linkPosition;
+        for (const prerequisiteId of unit.additionalPrerequisiteUnitIds) {
+          const prerequisite = byId.get(prerequisiteId)?.value;
+          if (prerequisite === undefined)
+            throw new Error(`Missing prerequisite: ${prerequisiteId}`);
+          expect(document).toContain(`[${prerequisite.title}](/learn/`);
+          if (new Set<string>(chapter.unitIds).has(prerequisiteId)) {
+            expect(textbookIndex(prerequisiteId), `${prerequisiteId} before ${id}`).toBeLessThan(
+              textbookIndex(id),
+            );
+          }
+        }
+        const accepted = input.build.finalCandidates.find(
+          (candidate) => candidate.kind === 'unit' && candidate.entity.id === id,
+        );
+        if (accepted?.kind !== 'unit') throw new Error(`Missing accepted Unit: ${id}`);
+        expect(unit.directProblemIds).toEqual(accepted.entity.directProblemIds);
+        expect(unit.relatedProblemIds).toEqual(accepted.entity.relatedProblemIds);
+      }
+    }
+    expect(textbookIndex('unit-segment-tree-beats')).toBeLessThan(
+      textbookIndex('unit-dp-state-design'),
+    );
+    expect(byId.get('unit-automaton-dp')?.document).toContain('（後の章）');
+    expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
+    expect(result.learningOrder.standardOrder).toEqual(input.build.standardOrder);
+  }, 30_000);
+
   it('fixes unique presentation and descendant coverage without prescribed teaching blocks', async () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);

@@ -3,10 +3,12 @@ title: "gcd不変量・差分構造"
 description: "「gcd不変量・差分構造」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 19
+  order: 163
 ---
 
 # gcd不変量・差分構造
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

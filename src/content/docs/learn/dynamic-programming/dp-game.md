@@ -3,10 +3,12 @@ title: "ゲーム状態の勝敗とGrundy数"
 description: "「ゲーム状態の勝敗とGrundy数」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 48
+  order: 79
 ---
 
 # ゲーム状態の勝敗とGrundy数
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ ABC354 Eはこの勝敗再帰を残存カード集合へ適用する複合例で
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。
 

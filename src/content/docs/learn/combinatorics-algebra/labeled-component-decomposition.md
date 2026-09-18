@@ -3,10 +3,12 @@ title: "label付き連結成分分解・exponential formula"
 description: "「label付き連結成分分解・exponential formula」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 167
+  order: 200
 ---
 
 # label付き連結成分分解・exponential formula
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 組合せを生成関数へ符号化する。
+追加前提: [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)。
 
 生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。
 

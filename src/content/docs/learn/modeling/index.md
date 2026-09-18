@@ -3,12 +3,36 @@ title: "モデル変換とアルゴリズム設計"
 description: "「モデル変換とアルゴリズム設計」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 1
+  order: 0
 ---
 
 # モデル変換とアルゴリズム設計
 
+## 本書の読み方
+
+本書は、同じ対象や原理の基本から発展までを一つの章で見渡せるように並べています。先頭から全問を解き切る必要はありません。各Unitの難度の目安と追加前提を確認し、今必要な範囲を選んでください。
+
+難度の目安は、Unitで扱う概念についての編集上の区分です。「基礎」は各分野の定式化と基本操作、「標準」は主要な算法、「応用」は標準技能の組合せや個別原理、「発展」は強い構造条件・代数的道具を使う算法、「専門」は高度な個別理論を扱います。掲載問題の推定ratingや必要な到達レートを示すものではありません。「節案内」は関連Unitをまとめる見出しです。
+
+初読では基礎・標準のUnitで定義と不変量を押さえ、発展的なUnitは後回しにして構いません。章をまたぐ前提は後方にも現れます。未習の前提があればリンク先で補うか、そのUnitへ後で戻ってください。問題ごとに複数分野の知識を使うこともあるため、Unitの難度と各問題の難しさは分けて考えます。
+
+ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現した後で、成立条件を一つ外すと何が壊れるか、他の章の表現へ写せるかを考えてください。たとえばDP遷移を区間要約・行列・多項式へ写す、割当てをmatching・flowへ写す、といった接続を自分で導けるようにすることが目標です。
+
+## 全体の構成
+
+1. [モデル変換とアルゴリズム設計](/learn/modeling/)
+2. [データ構造と問い合わせ](/learn/query/)
+3. [動的計画法](/learn/dynamic-programming/)
+4. [グラフアルゴリズム](/learn/graph/)
+5. [木構造](/learn/tree/)
+6. [文字列アルゴリズム](/learn/string/)
+7. [数論](/learn/number-theory/)
+8. [組合せ・多項式・線形代数](/learn/combinatorics-algebra/)
+9. [幾何・凸最適化](/learn/geometry-optimization/)
+
 ## 概要
+
+問題を既知の算法へ写すための共通言語を学ぶ。状態の同一視と寄与の分解から始め、探索空間の分割、交換論による貪欲法、単調性による探索へ進む。後半では処理順と総仕事量を設計し、乱択・対話によって使える情報そのものを考える。以後の各章でも、何を保存する変換なのか、候補を捨ててよい理由は何かをこの章へ戻って確認する。
 
 ### モデル変換
 
@@ -34,28 +58,35 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [単調境界を証明して探索する](/learn/modeling/monotone-search/)
-- [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/)
-- [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/)
-- [同値な状態を正規化する](/learn/modeling/normalization/)
-- [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/)
-- [交換論から選択順を導く](/learn/modeling/greedy-exchange/)
-- [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/)
-- [成立証明から構成解を復元する](/learn/modeling/constructive-witness/)
-- [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/)
-- [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/)
-- [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/)
-- [event順にactive集合を更新する](/learn/modeling/event-sweep/)
-- [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/)
-- [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/)
-- [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/)
-- [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)
-- [bitwise greedyによるmask最適化](/learn/modeling/bitwise-greedy-feasibility/)
-- [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/)
-- [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/)
-- [二進操作の木へのモデル化と祖先マッチング](/learn/modeling/binary-tree-ancestor-matching/)
+- [同値な状態を正規化する](/learn/modeling/normalization/) — 基礎
+- [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/) — 基礎
+- [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/) — 基礎
+- [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/) — 基礎
+- [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/) — 基礎
+- [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/) — 節案内
+- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 基礎
+- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 基礎
+- [交換論から選択順を導く](/learn/modeling/greedy-exchange/) — 基礎
+- [bitwise greedyによるmask最適化](/learn/modeling/bitwise-greedy-feasibility/) — 応用
+- [二進操作の木へのモデル化と祖先マッチング](/learn/modeling/binary-tree-ancestor-matching/) — 応用
+- [成立証明から構成解を復元する](/learn/modeling/constructive-witness/) — 基礎
+- [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 応用
+- [単調境界を証明して探索する](/learn/modeling/monotone-search/) — 基礎
+- [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/) — 基礎
+- [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 標準
+- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 発展
+- [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 標準
+- [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 応用
+- [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 節案内
+- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 基礎
+- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 応用
+- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 応用
+- [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 応用
+- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 応用
+- [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 応用
+- [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 応用
 
 ## 問題一覧
 

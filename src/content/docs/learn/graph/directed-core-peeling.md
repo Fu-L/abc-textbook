@@ -3,10 +3,12 @@ title: "有向cycle検出・sink/source peeling"
 description: "「有向cycle検出・sink/source peeling」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 56
+  order: 97
 ---
 
 # 有向cycle検出・sink/source peeling
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

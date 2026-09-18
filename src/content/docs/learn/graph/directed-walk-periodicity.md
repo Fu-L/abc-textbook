@@ -3,10 +3,12 @@ title: "有向walkの周期・cycle差分gcd"
 description: "「有向walkの周期・cycle差分gcd」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 143
+  order: 98
 ---
 
 # 有向walkの周期・cycle差分gcd
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: gcd不変量・差分構造、SCC・縮約DAG・トポロジカル順序。
+追加前提: [gcd不変量・差分構造](/learn/number-theory/gcd-structure/)（後の章）、[SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/)。
 
 gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、有向walkの周期・cycle差分gcdの発動条件・正当化・境界を重複なく学ぶ。
 

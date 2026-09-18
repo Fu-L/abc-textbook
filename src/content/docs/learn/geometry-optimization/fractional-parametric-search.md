@@ -3,10 +3,12 @@ title: "fractional programming・比率parametric search"
 description: "「fractional programming・比率parametric search」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 134
+  order: 227
 ---
 
 # fractional programming・比率parametric search
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,7 +26,7 @@ ABC324 Fでは各辺の利得−x·費用をDAG上で最大化する。ABC294 F�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 単調境界を証明して探索する。
+追加前提: [単調境界を証明して探索する](/learn/modeling/monotone-search/)。
 
 単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。
 

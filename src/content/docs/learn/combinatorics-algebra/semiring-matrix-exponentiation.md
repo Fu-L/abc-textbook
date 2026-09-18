@@ -3,10 +3,12 @@ title: "半環行列・min-plus/max-min遷移"
 description: "「半環行列・min-plus/max-min遷移」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 141
+  order: 197
 ---
 
 # 半環行列・min-plus/max-min遷移
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 固定線形遷移を巨大回数進める。
+追加前提: [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/)。
 
 線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。
 

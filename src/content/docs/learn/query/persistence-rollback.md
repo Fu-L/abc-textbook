@@ -3,7 +3,7 @@ title: "構造を共有して過去の版を保存・復元する"
 description: "「構造を共有して過去の版を保存・復元する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 121
+  order: 50
 ---
 
 # 構造を共有して過去の版を保存・復元する
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [rollback・DFS入退場の状態復元](/learn/query/rollback/)
-- [永続data structure・structural sharing](/learn/query/persistence/)
+- [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 応用
+- [永続data structure・structural sharing](/learn/query/persistence/) — 応用
 
 ## 問題一覧
 

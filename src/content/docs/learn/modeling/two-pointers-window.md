@@ -3,10 +3,12 @@ title: "尺取り法・sliding windowで連続区間を走査する"
 description: "「尺取り法・sliding windowで連続区間を走査する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 3
+  order: 15
 ---
 
 # 尺取り法・sliding windowで連続区間を走査する
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

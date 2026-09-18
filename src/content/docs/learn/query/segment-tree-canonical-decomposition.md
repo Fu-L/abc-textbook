@@ -3,10 +3,12 @@ title: "Segment Treeのcanonical区間分解"
 description: "「Segment Treeのcanonical区間分解」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 110
+  order: 43
 ---
 
 # Segment Treeのcanonical区間分解
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 区間monoid要約。
+追加前提: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
 
 区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。
 

@@ -3,7 +3,7 @@ title: "木DP・集約・rerooting"
 description: "「木DP・集約・rerooting」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 58
+  order: 136
 ---
 
 # 木DP・集約・rerooting
@@ -16,7 +16,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 ### このUnitでは扱わないもの
 
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)
-- [rerooting・全方位木DP](/learn/tree/rerooting/)
-- [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/)
+- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 標準
+- [rerooting・全方位木DP](/learn/tree/rerooting/) — 標準
+- [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/) — 発展
 
 ## 問題一覧
 

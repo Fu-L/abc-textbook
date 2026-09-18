@@ -3,10 +3,12 @@ title: "大小関係をCartesian treeへ変換する"
 description: "「大小関係をCartesian treeへ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 100
+  order: 35
 ---
 
 # 大小関係をCartesian treeへ変換する
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 支配関係から不要な候補を単調stack・queueで削る。
+追加前提: [支配関係から不要な候補を単調stack・queueで削る](/learn/query/monotone-stack-queue/)。
 
 単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。
 

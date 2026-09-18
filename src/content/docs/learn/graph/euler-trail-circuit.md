@@ -3,10 +3,12 @@ title: "Euler trail・circuit"
 description: "「Euler trail・circuit」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 77
+  order: 116
 ---
 
 # Euler trail・circuit
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

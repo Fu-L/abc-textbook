@@ -3,10 +3,12 @@ title: "加法的tree metric復元"
 description: "「加法的tree metric復元」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 175
+  order: 130
 ---
 
 # 加法的tree metric復元
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 木距離を基準点・直径・中心から捉える。
+追加前提: [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)。
 
 木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。
 

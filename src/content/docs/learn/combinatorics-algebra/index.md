@@ -3,12 +3,14 @@ title: "組合せ・多項式・線形代数"
 description: "「組合せ・多項式・線形代数」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 16
+  order: 182
 ---
 
 # 組合せ・多項式・線形代数
 
 ## 概要
+
+数えたい対象の分解と、それを計算する代数的な表現を結び付ける。係数・全単射・対称性による計数から包除と反転へ進み、線形写像・行列・基底を揃える。母関数で式を立て、畳み込みとFPSで評価し、高度な係数抽出へ広げる。最後に行列式によるグラフ計数と独立性の構造を扱う。式を導く段階と式を高速に計算する段階を分けて説明できることを目指す。
 
 ### 組合せ・多項式・線形代数への変換
 
@@ -26,27 +28,40 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)
-- [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
-- [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
-- [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/)
-- [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)
-- [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)
-- [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/)
-- [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/)
-- [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/)
-- [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/)
-- [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/)
-- [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/)
-- [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/)
-- [半順序・Dilworth・最大反鎖](/learn/combinatorics-algebra/poset-dilworth-antichain/)
-- [Prüfer code・次数制約付きlabel木](/learn/combinatorics-algebra/prufer-code/)
-- [BEST定理によるEuler circuit数え上げ](/learn/combinatorics-algebra/euler-circuit-counting/)
-- [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)
-- [母関数方程式・高度な係数抽出](/learn/combinatorics-algebra/generating-function-coefficients/)
-- [Robinson–Schensted対応・Young tableau](/learn/combinatorics-algebra/rsk-young-tableaux/)
+- [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/) — 基礎
+- [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/) — 発展
+- [Prüfer code・次数制約付きlabel木](/learn/combinatorics-algebra/prufer-code/) — 発展
+- [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/) — 発展
+- [半順序・Dilworth・最大反鎖](/learn/combinatorics-algebra/poset-dilworth-antichain/) — 発展
+- [Robinson–Schensted対応・Young tableau](/learn/combinatorics-algebra/rsk-young-tableaux/) — 専門
+- [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/) — 発展
+- [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/) — 標準
+- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 応用
+- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 応用
+- [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/) — 標準
+- [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/) — 節案内
+- [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) — 標準
+- [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) — 標準
+- [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/) — 応用
+- [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/) — 応用
+- [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/) — 応用
+- [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/) — 発展
+- [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/) — 応用
+- [subset convolution](/learn/combinatorics-algebra/subset-convolution/) — 発展
+- [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/) — 発展
+- [Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/) — 発展
+- [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/) — 発展
+- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/) — 発展
+- [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/) — 発展
+- [母関数方程式・高度な係数抽出](/learn/combinatorics-algebra/generating-function-coefficients/) — 専門
+- [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/) — 専門
+- [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/) — 発展
+- [BEST定理によるEuler circuit数え上げ](/learn/combinatorics-algebra/euler-circuit-counting/) — 発展
+- [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/) — 節案内
+- [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/) — 発展
+- [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/) — 専門
 
 ## 問題一覧
 

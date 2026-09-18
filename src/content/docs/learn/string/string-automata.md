@@ -3,7 +3,7 @@ title: "禁止・要求patternを有限状態へ圧縮する"
 description: "「禁止・要求patternを有限状態へ圧縮する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 67
+  order: 154
 ---
 
 # 禁止・要求patternを有限状態へ圧縮する
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)
-- [Aho–Corasick](/learn/string/aho-corasick/)
-- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/)
+- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 標準
+- [Aho–Corasick](/learn/string/aho-corasick/) — 応用
+- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 発展
 
 ## 問題一覧
 

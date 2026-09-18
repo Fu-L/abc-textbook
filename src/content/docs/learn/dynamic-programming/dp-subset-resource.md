@@ -3,10 +3,12 @@ title: "集合・資源軸のDP"
 description: "「集合・資源軸のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 38
+  order: 68
 ---
 
 # 集合・資源軸のDP
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。
 
@@ -28,8 +30,8 @@ sidebar:
 
 ## 下位単元
 
-- [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)
-- [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/)
+- [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/) — 発展
+- [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/) — 標準
 
 ## 問題一覧
 

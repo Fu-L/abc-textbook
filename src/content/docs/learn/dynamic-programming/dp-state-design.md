@@ -3,10 +3,12 @@ title: "最小十分状態からDPを設計する"
 description: "「最小十分状態からDPを設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 0
+  order: 59
 ---
 
 # 最小十分状態からDPを設計する
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -28,7 +30,7 @@ sidebar:
 
 ## 下位単元
 
-- [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)
+- [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/) — 発展
 
 ## 問題一覧
 

@@ -3,7 +3,7 @@ title: "次数parityからwalkや選択辺集合を判定・構成する"
 description: "「次数parityからwalkや選択辺集合を判定・構成する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 77
+  order: 115
 ---
 
 # 次数parityからwalkや選択辺集合を判定・構成する
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [Euler trail・circuit](/learn/graph/euler-trail-circuit/)
-- [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/)
+- [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 標準
+- [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 応用
 
 ## 問題一覧
 

@@ -3,7 +3,7 @@ title: "軽重分類と償却解析で総仕事量を抑える"
 description: "「軽重分類と償却解析で総仕事量を抑える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 29
+  order: 20
 ---
 
 # 軽重分類と償却解析で総仕事量を抑える
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/)
-- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/)
-- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/)
+- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 基礎
+- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 応用
+- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 応用
 
 ## 問題一覧
 

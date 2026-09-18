@@ -3,7 +3,7 @@ title: "結合的要約と列・区間の合成"
 description: "「結合的要約と列・区間の合成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 60
+  order: 38
 ---
 
 # 結合的要約と列・区間の合成
@@ -24,13 +24,13 @@ sidebar:
 
 ## 下位単元
 
-- [有限関数・作用の合成](/learn/query/finite-function-composition/)
-- [区間monoid要約](/learn/query/range-monoid-aggregation/)
-- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/)
-- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/)
-- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/)
-- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/)
-- [SWAG・two-stack queue aggregation](/learn/query/swag/)
+- [区間monoid要約](/learn/query/range-monoid-aggregation/) — 標準
+- [有限関数・作用の合成](/learn/query/finite-function-composition/) — 標準
+- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 標準
+- [SWAG・two-stack queue aggregation](/learn/query/swag/) — 応用
+- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 応用
+- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 応用
+- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 応用
 
 ## 問題一覧
 

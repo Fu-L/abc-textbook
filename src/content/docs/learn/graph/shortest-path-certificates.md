@@ -3,7 +3,7 @@ title: "重み付き最短路・経路復元・差分制約"
 description: "「重み付き最短路・経路復元・差分制約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 73
+  order: 90
 ---
 
 # 重み付き最短路・経路復元・差分制約
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [最短路モデル](/learn/graph/weighted-shortest-path/)
-- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/)
-- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/)
+- [最短路モデル](/learn/graph/weighted-shortest-path/) — 標準
+- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 標準
+- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/) — 応用
 
 ## 問題一覧
 

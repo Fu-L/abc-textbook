@@ -3,10 +3,12 @@ title: "標数pのFrobenius恒等式による反復高速化"
 description: "「標数pのFrobenius恒等式による反復高速化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 183
+  order: 180
 ---
 
 # 標数pのFrobenius恒等式による反復高速化
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ ABC251 Exでは大きい7冪から各幅を高々6回適用する。同じ幅q�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 法上の四則演算・高速累乗・逆元。
+追加前提: [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)。
 
 法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ。
 

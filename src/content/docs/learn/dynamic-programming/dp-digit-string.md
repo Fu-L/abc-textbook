@@ -3,7 +3,7 @@ title: "接頭辞から更新する有限状態DP"
 description: "「接頭辞から更新する有限状態DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 82
+  order: 73
 ---
 
 # 接頭辞から更新する有限状態DP
@@ -16,7 +16,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 ### このUnitでは扱わないもの
 
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/)
-- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/)
+- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 標準
+- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 応用
 
 ## 問題一覧
 

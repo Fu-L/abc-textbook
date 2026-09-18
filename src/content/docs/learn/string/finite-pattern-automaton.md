@@ -3,10 +3,12 @@ title: "有限状態automatonの構成"
 description: "「有限状態automatonの構成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 67
+  order: 155
 ---
 
 # 有限状態automatonの構成
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

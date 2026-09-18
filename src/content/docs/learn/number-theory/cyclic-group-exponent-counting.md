@@ -3,10 +3,12 @@ title: "巡回群を指数化して数える"
 description: "「巡回群を指数化して数える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 149
+  order: 172
 ---
 
 # 巡回群を指数化して数える
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 乗法的位数から最小周期を求める。
+追加前提: [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)。
 
 乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。
 

@@ -3,10 +3,12 @@ title: "factorial convolutionによる多項式Taylor shift"
 description: "「factorial convolutionによる多項式Taylor shift」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 176
+  order: 203
 ---
 
 # factorial convolutionによる多項式Taylor shift
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ P(x+a) の全係数を二項展開し、階乗倍した係数列と a^i/i! の�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 組合せ係数と対称性で数える、NTT・FFTで畳み込みと相互相関を求める。
+追加前提: [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)、[NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)。
 
 畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。
 

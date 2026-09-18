@@ -3,10 +3,12 @@ title: "一般グラフの最小重み完全matching"
 description: "「一般グラフの最小重み完全matching」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 185
+  order: 125
 ---
 
 # 一般グラフの最小重み完全matching
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 二部matching・Hall・Kőnig。
+追加前提: [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/)。
 
 二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。
 

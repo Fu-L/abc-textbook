@@ -3,10 +3,12 @@ title: "kinetic sorting・交差event順序更新"
 description: "「kinetic sorting・交差event順序更新」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 171
+  order: 17
 ---
 
 # kinetic sorting・交差event順序更新
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: event順にactive集合を更新する。
+追加前提: [event順にactive集合を更新する](/learn/modeling/event-sweep/)。
 
 event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。
 

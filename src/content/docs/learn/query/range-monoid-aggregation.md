@@ -3,10 +3,12 @@ title: "区間monoid要約"
 description: "「区間monoid要約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 68
+  order: 39
 ---
 
 # 区間monoid要約
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

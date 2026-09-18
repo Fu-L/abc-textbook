@@ -3,10 +3,12 @@ title: "Robinson–Schensted対応・Young tableau"
 description: "「Robinson–Schensted対応・Young tableau」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 194
+  order: 188
 ---
 
 # Robinson–Schensted対応・Young tableau
+
+難度の目安: **専門**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

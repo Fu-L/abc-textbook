@@ -3,10 +3,12 @@ title: "一次合同・CRTで解の類を統合する"
 description: "「一次合同・CRTで解の類を統合する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 21
+  order: 168
 ---
 
 # 一次合同・CRTで解の類を統合する
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: gcdと整数解の成立条件、法上の四則演算・高速累乗・逆元。
+追加前提: [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/)、[法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)。
 
 法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。
 

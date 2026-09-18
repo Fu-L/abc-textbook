@@ -3,10 +3,12 @@ title: "subset zeta・Möbius変換"
 description: "「subset zeta・Möbius変換」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 128
+  order: 192
 ---
 
 # subset zeta・Möbius変換
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 部分集合・bitmask状態DP、包除・Möbius反転で重複を補正する。
+追加前提: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)、[包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)。
 
 集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。
 
@@ -28,7 +30,7 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 ## 下位単元
 
-- [subset convolution](/learn/combinatorics-algebra/subset-convolution/)
+- [subset convolution](/learn/combinatorics-algebra/subset-convolution/) — 発展
 
 ## 問題一覧
 

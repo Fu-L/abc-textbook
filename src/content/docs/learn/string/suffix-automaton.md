@@ -3,10 +3,12 @@ title: "Suffix Automatonで部分文字列集合を表す"
 description: "「Suffix Automatonで部分文字列集合を表す」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 151
+  order: 158
 ---
 
 # Suffix Automatonで部分文字列集合を表す
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 有限状態automatonの構成。
+追加前提: [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)。
 
 有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。
 

@@ -3,10 +3,12 @@ title: "Trieで共有接頭辞を索引化する"
 description: "「Trieで共有接頭辞を索引化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 6
+  order: 148
 ---
 
 # Trieで共有接頭辞を索引化する
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

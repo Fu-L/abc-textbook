@@ -3,10 +3,12 @@ title: "冪等演算のoverlap range query・Sparse Table"
 description: "「冪等演算のoverlap range query・Sparse Table」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 70
+  order: 41
 ---
 
 # 冪等演算のoverlap range query・Sparse Table
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -20,7 +22,7 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 区間monoid要約。
+追加前提: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
 
 区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。
 

@@ -3,10 +3,12 @@ title: "列・文字列のrolling fingerprint"
 description: "「列・文字列のrolling fingerprint」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 66
+  order: 57
 ---
 
 # 列・文字列のrolling fingerprint
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ sidebar:
 
 回文なら順方向と逆方向のhashは等しい。例えばabaは常に一致するが、異なる列でも衝突し得る。固定された長さLの異なる二列と一様な非零基数に対し、差の非零多項式の次数は高々L-1なので、衝突確率は高々(L-1)/(p-1)。多数比較ではその総数も含めて評価する。
 
-ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と回文queryを扱える。ここでは要約と結合式までを導出し、後続のデータ構造からそのまま再利用する。
+ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と回文queryを扱える。ここで導出した要約と結合式を、[区間monoid要約の節](/learn/query/range-monoid-aggregation/)で学んだデータ構造へ適用する。
 
 ## 前提と範囲
 

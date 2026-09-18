@@ -3,10 +3,12 @@ title: "rake・compressで動的木DPを保つ"
 description: "「rake・compressで動的木DPを保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 187
+  order: 146
 ---
 
 # rake・compressで動的木DPを保つ
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 根付き木DP・部分木集約。
+追加前提: [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
 
 木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。
 

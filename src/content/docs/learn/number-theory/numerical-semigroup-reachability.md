@@ -3,10 +3,12 @@ title: "数値半群のconductor以後を一括到達とみなす"
 description: "「数値半群のconductor以後を一括到達とみなす」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 148
+  order: 177
 ---
 
 # 数値半群のconductor以後を一括到達とみなす
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: gcdと整数解の成立条件。
+追加前提: [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/)。
 
 生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。
 

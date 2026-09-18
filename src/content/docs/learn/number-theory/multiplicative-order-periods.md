@@ -3,10 +3,12 @@ title: "乗法的位数から最小周期を求める"
 description: "「乗法的位数から最小周期を求める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 93
+  order: 170
 ---
 
 # 乗法的位数から最小周期を求める
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 法上の四則演算・高速累乗・逆元、素因数分解と約数構造。
+追加前提: [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)、[素因数分解と約数構造](/learn/number-theory/prime-divisor/)。
 
 合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。
 

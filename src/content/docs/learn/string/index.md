@@ -3,12 +3,14 @@ title: "文字列アルゴリズム"
 description: "「文字列アルゴリズム」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 6
+  order: 147
 ---
 
 # 文字列アルゴリズム
 
 ## 概要
+
+文字列の一致をどの単位で共有するかを軸に読む。接頭辞の共有と一致長から、周期・回文・接尾辞の順序へ進む。次に読んだprefixを有限状態へまとめ、複数pattern、非決定性、部分文字列集合へ広げる。最後に入力自体が圧縮されている場合の再帰とrunの変化を扱う。rolling fingerprintはデータ構造章、構成したautomaton上の計数はDP章へ接続する。
 
 ### 文字列状態表現
 
@@ -26,17 +28,21 @@ sidebar:
 
 - なし
 
-## 下位単元
+## 章の構成
 
-- [Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/)
-- [接頭辞との一致長を再利用する](/learn/string/string-prefix-automata/)
-- [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)
-- [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
-- [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/)
-- [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/)
-- [文字列周期・primitive word](/learn/string/string-periodicity/)
-- [run-length状態の動的遷移](/learn/string/run-length-dynamics/)
-- [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/)
+- [Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/) — 基礎
+- [接頭辞との一致長を再利用する](/learn/string/string-prefix-automata/) — 節案内
+- [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 基礎
+- [文字列周期・primitive word](/learn/string/string-periodicity/) — 応用
+- [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/) — 標準
+- [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/) — 応用
+- [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/) — 節案内
+- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 標準
+- [Aho–Corasick](/learn/string/aho-corasick/) — 応用
+- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 発展
+- [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/) — 発展
+- [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/) — 応用
+- [run-length状態の動的遷移](/learn/string/run-length-dynamics/) — 発展
 
 ## 問題一覧
 

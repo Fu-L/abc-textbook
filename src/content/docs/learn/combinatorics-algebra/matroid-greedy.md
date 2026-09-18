@@ -3,10 +3,12 @@ title: "matroid greedy"
 description: "「matroid greedy」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 165
+  order: 213
 ---
 
 # matroid greedy
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 交換論から選択順を導く。
+追加前提: [交換論から選択順を導く](/learn/modeling/greedy-exchange/)。
 
 Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。
 

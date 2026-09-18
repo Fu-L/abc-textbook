@@ -3,7 +3,7 @@ title: "フロー・マッチング・カットへ帰着する"
 description: "「フロー・マッチング・カットへ帰着する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 81
+  order: 119
 ---
 
 # フロー・マッチング・カットへ帰着する
@@ -24,13 +24,13 @@ sidebar:
 
 ## 下位単元
 
-- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/)
-- [最大流・最小カット](/learn/graph/max-flow-min-cut/)
-- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/)
-- [最小費用流・circulation](/learn/graph/min-cost-flow/)
-- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/)
-- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/)
-- [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/)
+- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 標準
+- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 標準
+- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 応用
+- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 応用
+- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 発展
+- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 発展
+- [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 発展
 
 ## 問題一覧
 

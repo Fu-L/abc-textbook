@@ -3,10 +3,12 @@ title: "event順にactive集合を更新する"
 description: "「event順にactive集合を更新する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 39
+  order: 16
 ---
 
 # event順にactive集合を更新する
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -28,7 +30,7 @@ sidebar:
 
 ## 下位単元
 
-- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/)
+- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 発展
 
 ## 問題一覧
 

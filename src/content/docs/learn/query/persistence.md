@@ -3,10 +3,12 @@ title: "永続data structure・structural sharing"
 description: "「永続data structure・structural sharing」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 124
+  order: 52
 ---
 
 # 永続data structure・structural sharing
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

@@ -3,10 +3,12 @@ title: "SWAG・two-stack queue aggregation"
 description: "「SWAG・two-stack queue aggregation」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 133
+  order: 42
 ---
 
 # SWAG・two-stack queue aggregation
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 区間monoid要約。
+追加前提: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
 
 区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。
 

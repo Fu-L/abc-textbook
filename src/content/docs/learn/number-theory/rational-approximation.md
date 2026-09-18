@@ -3,10 +3,12 @@ title: "連分数・Stern–Brocotで有理近似する"
 description: "「連分数・Stern–Brocotで有理近似する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 88
+  order: 175
 ---
 
 # 連分数・Stern–Brocotで有理近似する
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

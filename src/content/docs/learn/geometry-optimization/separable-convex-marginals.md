@@ -3,10 +3,12 @@ title: "分離凸・凹の単調限界値選択"
 description: "「分離凸・凹の単調限界値選択」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 109
+  order: 224
 ---
 
 # 分離凸・凹の単調限界値選択
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 一次元凸・単峰最適化。
+追加前提: [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/)。
 
 離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。
 

@@ -3,7 +3,7 @@ title: "一意な後続・サイクル・ダブリング"
 description: "「一意な後続・サイクル・ダブリング」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 55
+  order: 100
 ---
 
 # 一意な後続・サイクル・ダブリング
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/)
-- [doubling・binary lifting](/learn/graph/binary-lifting/)
+- [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) — 標準
+- [doubling・binary lifting](/learn/graph/binary-lifting/) — 標準
 
 ## 問題一覧
 

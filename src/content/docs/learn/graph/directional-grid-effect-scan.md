@@ -3,10 +3,12 @@ title: "方向別grid scanによる長距離効果の前計算"
 description: "「方向別grid scanによる長距離効果の前計算」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 102
+  order: 88
 ---
 
 # 方向別grid scanによる長距離効果の前計算
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

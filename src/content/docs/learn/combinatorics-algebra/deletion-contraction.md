@@ -3,10 +3,12 @@ title: "削除・縮約recurrence"
 description: "「削除・縮約recurrence」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 160
+  order: 189
 ---
 
 # 削除・縮約recurrence
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

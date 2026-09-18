@@ -3,7 +3,7 @@ title: "線形方程式・基底・分離可能変換へ変換する"
 description: "「線形方程式・基底・分離可能変換へ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 64
+  order: 194
 ---
 
 # 線形方程式・基底・分離可能変換へ変換する
@@ -24,9 +24,9 @@ sidebar:
 
 ## 下位単元
 
-- [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/)
-- [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/)
-- [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/)
+- [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) — 標準
+- [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) — 標準
+- [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/) — 応用
 
 ## 問題一覧
 

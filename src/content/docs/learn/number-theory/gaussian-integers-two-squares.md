@@ -3,10 +3,12 @@ title: "Gaussian整数・二平方和"
 description: "「Gaussian整数・二平方和」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 184
+  order: 178
 ---
 
 # Gaussian整数・二平方和
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ Z[i]での素因数分解と共役を用い、整数の二平方和表現をprim
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 素因数分解と約数構造。
+追加前提: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)。
 
 素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。
 

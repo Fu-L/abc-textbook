@@ -3,10 +3,12 @@ title: "rerooting・全方位木DP"
 description: "「rerooting・全方位木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 71
+  order: 138
 ---
 
 # rerooting・全方位木DP
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 根付き木DP・部分木集約。
+追加前提: [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
 
 根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。
 

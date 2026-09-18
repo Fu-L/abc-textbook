@@ -3,10 +3,12 @@ title: "Kruskal順の閾値DSU sweep"
 description: "「Kruskal順の閾値DSU sweep」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 145
+  order: 110
 ---
 
 # Kruskal順の閾値DSU sweep
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: DSUによる連結成分管理・縮約、cut・cycle性質から最適全域木を構成する。
+追加前提: [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/)、[cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/)。
 
 DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。
 

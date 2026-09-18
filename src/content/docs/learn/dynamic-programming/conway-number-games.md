@@ -3,10 +3,12 @@ title: "独立な数ゲームの和"
 description: "「独立な数ゲームの和」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 156
+  order: 82
 ---
 
 # 独立な数ゲームの和
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -22,7 +24,7 @@ ABC229 Hでは列間で手が干渉しない独立和と、全ての列局面が
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: minimax・得点差・局面値を評価するゲームDP。
+追加前提: [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/)。
 
 有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。
 

@@ -3,10 +3,12 @@ title: "heavy path上の多項式木DP"
 description: "「heavy path上の多項式木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 161
+  order: 145
 ---
 
 # heavy path上の多項式木DP
+
+難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -20,7 +22,7 @@ ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: NTT・FFTで畳み込みと相互相関を求める、根付き木DP・部分木集約。
+追加前提: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)（後の章）、[根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
 
 畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。
 

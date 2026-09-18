@@ -3,10 +3,12 @@ title: "下限制約付きflowの実現可能性"
 description: "「下限制約付きflowの実現可能性」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 140
+  order: 122
 ---
 
 # 下限制約付きflowの実現可能性
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -18,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最大流・最小カット。
+追加前提: [最大流・最小カット](/learn/graph/max-flow-min-cut/)。
 
 最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ。
 

@@ -3,10 +3,12 @@ title: "rollback・DFS入退場の状態復元"
 description: "「rollback・DFS入退場の状態復元」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 121
+  order: 51
 ---
 
 # rollback・DFS入退場の状態復元
+
+難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

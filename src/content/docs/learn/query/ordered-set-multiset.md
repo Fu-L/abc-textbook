@@ -3,10 +3,12 @@ title: "ordered set・multisetの動的順序管理"
 description: "「ordered set・multisetの動的順序管理」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 28
+  order: 32
 ---
 
 # ordered set・multisetの動的順序管理
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

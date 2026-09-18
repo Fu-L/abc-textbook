@@ -3,10 +3,12 @@ title: "二部matching・Hall・Kőnig"
 description: "「二部matching・Hall・Kőnig」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 81
+  order: 120
 ---
 
 # 二部matching・Hall・Kőnig
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,7 +26,7 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 二部彩色と成分構造を扱う。
+追加前提: [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/)。
 
 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。
 

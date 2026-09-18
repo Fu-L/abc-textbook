@@ -3,10 +3,12 @@ title: "確率過程・期待値DP"
 description: "「確率過程・期待値DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 47
+  order: 77
 ---
 
 # 確率過程・期待値DP
+
+難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -50,7 +52,7 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: 最小十分状態からDPを設計する。
+追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 
 状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。
 
@@ -60,7 +62,7 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 ## 下位単元
 
-- [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/)
+- [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/) — 発展
 
 ## 問題一覧
 

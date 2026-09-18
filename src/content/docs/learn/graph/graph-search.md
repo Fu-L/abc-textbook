@@ -3,7 +3,7 @@ title: "状態グラフ探索・到達関係"
 description: "「状態グラフ探索・到達関係」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 18
+  order: 86
 ---
 
 # 状態グラフ探索・到達関係
@@ -25,9 +25,9 @@ sidebar:
 
 ## 下位単元
 
-- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/)
-- [推移閉包](/learn/graph/transitive-closure/)
-- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/)
+- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 基礎
+- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 応用
+- [推移閉包](/learn/graph/transitive-closure/) — 標準
 
 ## 問題一覧
 

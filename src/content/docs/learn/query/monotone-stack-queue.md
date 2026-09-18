@@ -3,10 +3,12 @@ title: "支配関係から不要な候補を単調stack・queueで削る"
 description: "「支配関係から不要な候補を単調stack・queueで削る」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 17
+  order: 34
 ---
 
 # 支配関係から不要な候補を単調stack・queueで削る
+
+難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

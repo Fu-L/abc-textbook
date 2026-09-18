@@ -3,7 +3,7 @@ title: "探索空間を分けて照合・再帰分割する"
 description: "「探索空間を分けて照合・再帰分割する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 33
+  order: 6
 ---
 
 # 探索空間を分けて照合・再帰分割する
@@ -24,8 +24,8 @@ sidebar:
 
 ## 下位単元
 
-- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/)
-- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/)
+- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 基礎
+- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 基礎
 
 ## 問題一覧
 
