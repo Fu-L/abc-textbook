@@ -8,6 +8,10 @@ sidebar:
 
 # 次数parityからwalkや選択辺集合を判定・構成する
 
+導入対象の目安: **水色（1200–1599）**。次数と連結性から全辺を使う歩道や選択辺集合の条件を読む入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 標準
-- [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 応用
+- [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 水色
+- [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 青色
 
 ## 問題一覧
 

@@ -8,7 +8,9 @@ sidebar:
 
 # Robinson–Schensted対応・Young tableau
 
-難度の目安: **専門**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **赤色（2800以上）**。挿入対応とYoung図形を理解し、LIS・LDS条件をshapeの計数へ移す。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

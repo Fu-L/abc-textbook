@@ -8,13 +8,31 @@ sidebar:
 
 # モデル変換とアルゴリズム設計
 
+導入対象の目安: **緑色（800–1199）**。探索・集計・貪欲法を選ぶ前に、保存すべき条件を言葉にする習慣を付ける。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 本書の読み方
 
-本書は、同じ対象や原理の基本から発展までを一つの章で見渡せるように並べています。先頭から全問を解き切る必要はありません。各Unitの難度の目安と追加前提を確認し、今必要な範囲を選んでください。
+本書は、親Unitに続けてその子Unitをまとめ、同じ対象や原理の基本から発展までを連続して読める構成です。章の目次の字下げは親子関係を表します。各Unitの習得対象と追加前提を確認し、今必要な範囲を選んでください。
 
-難度の目安は、Unitで扱う概念についての編集上の区分です。「基礎」は各分野の定式化と基本操作、「標準」は主要な算法、「応用」は標準技能の組合せや個別原理、「発展」は強い構造条件・代数的道具を使う算法、「専門」は高度な個別理論を扱います。掲載問題の推定ratingや必要な到達レートを示すものではありません。「節案内」は関連Unitをまとめる見出しです。
+「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。
 
-初読では基礎・標準のUnitで定義と不変量を押さえ、発展的なUnitは後回しにして構いません。章をまたぐ前提は後方にも現れます。未習の前提があればリンク先で補うか、そのUnitへ後で戻ってください。問題ごとに複数分野の知識を使うこともあるため、Unitの難度と各問題の難しさは分けて考えます。
+色と数値の境界は[AtCoder公式のAlgorithmレーティング区分](https://info.atcoder.jp/overview/contest/rating)に合わせています。各Unitへの割当ては、前提知識の量、標準形の実装・正当化に必要な理解、他分野への応用範囲を共通基準にした本書の編集判断です。AtCoder公式の履修基準ではありません。
+
+| 習得対象 | レーティング | 本書での判断の軸・代表例 |
+| --- | --- | --- |
+| 茶色 | 400–799 | 基本操作を直接使う。累積和・差分、要素索引と連結リスト。 |
+| 緑色 | 800–1199 | 状態・順序・計算量を明示する。基本DP、DSU、最短路、二分探索。 |
+| 水色 | 1200–1599 | 標準的な抽象化と不変量を使う。Fenwick Tree、LIS、桁DP、SCC。 |
+| 青色 | 1600–1999 | 複数の標準技能をつなぎ、作用や還元を設計する。遅延Segment Tree、2-SAT、HLD。 |
+| 黄色 | 2000–2399 | 代数的表現や構造定理を使う。畳み込み、母関数、最小費用流、重心分解。 |
+| 橙色 | 2400–2799 | 複雑な合成や償却・双対性まで理解する。FPS、Segment Tree Beats、Aliens trick。 |
+| 赤色 | 2800以上 | 専門理論を必要に応じて習得する。一般重み付きmatching、FPS合成、線形matroid交差。 |
+
+章や案内節の「導入対象」は、その見取り図を理解する目安です。子Unitには独立した対象色を付けています。親を読んだ後、高い色の子をいったん飛ばして次のまとまりへ進んで構いません。赤色の専門Unitも、全てを習得することがその色になる条件という意味ではありません。
+
+表示色は先取りを制限するものではありません。自分の色以下でも未習なら優先して補い、高い色でも必要になったUnitから読んでください。親子のまとまりを優先するため、前提が後の節や章にある場合はリンク先を案内します。未習の前提を補ってから戻るか、その子Unitを後回しにしてください。
 
 ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現した後で、成立条件を一つ外すと何が壊れるか、他の章の表現へ写せるかを考えてください。たとえばDP遷移を区間要約・行列・多項式へ写す、割当てをmatching・flowへ写す、といった接続を自分で導けるようにすることが目標です。
 
@@ -60,33 +78,33 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 
 ## 章の構成
 
-- [同値な状態を正規化する](/learn/modeling/normalization/) — 基礎
-- [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/) — 基礎
-- [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/) — 基礎
-- [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/) — 基礎
-- [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/) — 基礎
-- [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/) — 節案内
-- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 基礎
-- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 基礎
-- [交換論から選択順を導く](/learn/modeling/greedy-exchange/) — 基礎
-- [bitwise greedyによるmask最適化](/learn/modeling/bitwise-greedy-feasibility/) — 応用
-- [二進操作の木へのモデル化と祖先マッチング](/learn/modeling/binary-tree-ancestor-matching/) — 応用
-- [成立証明から構成解を復元する](/learn/modeling/constructive-witness/) — 基礎
-- [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 応用
-- [単調境界を証明して探索する](/learn/modeling/monotone-search/) — 基礎
-- [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/) — 基礎
-- [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 標準
-- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 発展
-- [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 標準
-- [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 応用
-- [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 節案内
-- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 基礎
-- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 応用
-- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 応用
-- [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 応用
-- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 応用
-- [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 応用
-- [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 応用
+- [同値な状態を正規化する](/learn/modeling/normalization/) — 水色
+- [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/) — 緑色
+- [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/) — 緑色
+- [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/) — 緑色
+- [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/) — 緑色
+- [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/) — 水色（導入）
+  - [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色
+  - [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色
+- [交換論から選択順を導く](/learn/modeling/greedy-exchange/) — 水色
+- [bitwise greedyによるmask最適化](/learn/modeling/bitwise-greedy-feasibility/) — 水色
+- [二進操作の木へのモデル化と祖先マッチング](/learn/modeling/binary-tree-ancestor-matching/) — 青色
+- [成立証明から構成解を復元する](/learn/modeling/constructive-witness/) — 水色
+- [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 青色
+- [単調境界を証明して探索する](/learn/modeling/monotone-search/) — 緑色
+- [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/) — 緑色
+- [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 水色
+  - [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 橙色
+- [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 水色
+- [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 青色
+- [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 水色（導入）
+  - [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 水色
+  - [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 青色
+  - [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色
+- [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 青色
+  - [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色
+- [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 緑色
+- [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 水色
 
 ## 問題一覧
 

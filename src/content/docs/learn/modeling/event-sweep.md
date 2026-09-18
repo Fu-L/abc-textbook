@@ -8,7 +8,9 @@ sidebar:
 
 # event順にactive集合を更新する
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。時刻・座標で整列し、同時eventの順序とactive集合の不変量を保つ。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ sidebar:
 
 ## 下位単元
 
-- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 発展
+- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 橙色
 
 ## 問題一覧
 

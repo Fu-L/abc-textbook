@@ -3,12 +3,14 @@ title: "部分集合・bitmask状態DP"
 description: "「部分集合・bitmask状態DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 70
+  order: 71
 ---
 
 # 部分集合・bitmask状態DP
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。使用集合をbitmaskで持ち、集合の増減と遷移順から指数時間DPを設計する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

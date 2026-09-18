@@ -8,6 +8,10 @@ sidebar:
 
 # 次数構造からgraph coreまたは小さなkernelへ縮約する
 
+導入対象の目安: **水色（1200–1599）**。次数条件で頂点を取り除き、残る核を取り出す入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [graph core・leaf peeling](/learn/graph/graph-core/) — 標準
-- [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 応用
+- [graph core・leaf peeling](/learn/graph/graph-core/) — 水色
+- [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 黄色
 
 ## 問題一覧
 

@@ -8,6 +8,10 @@ sidebar:
 
 # 接頭辞との一致長を再利用する
 
+導入対象の目安: **水色（1200–1599）**。既に調べた一致区間を再利用する考え方へ進む入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 各位置から接頭辞との一致長を求める。既に得られた一致区間の情報を再利用し、Z algorithmで全位置を線形時間に処理する。
@@ -24,7 +28,7 @@ sidebar:
 
 ## 下位単元
 
-- [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 基礎
+- [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 水色
 
 ## 問題一覧
 

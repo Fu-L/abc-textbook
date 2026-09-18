@@ -3,12 +3,14 @@ title: "FPS合成・power projection"
 description: "「FPS合成・power projection」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 209
+  order: 208
 ---
 
 # FPS合成・power projection
 
-難度の目安: **専門**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **赤色（2800以上）**。FPS合成と転置の対応を理解し、block分割や有理関数への還元を扱う。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

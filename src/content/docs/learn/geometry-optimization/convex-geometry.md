@@ -8,6 +8,10 @@ sidebar:
 
 # 凸境界・半平面制約を扱う
 
+導入対象の目安: **青色（1600–1999）**。凸性によって内部の候補を捨て、境界と半平面で領域を表す入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 応用
-- [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 応用
+- [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 青色
+- [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 黄色
 
 ## 問題一覧
 

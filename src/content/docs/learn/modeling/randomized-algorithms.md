@@ -8,7 +8,9 @@ sidebar:
 
 # 乱択の成功条件と誤り確率を設計する
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。一回の成功確率と試行回数を結び付け、乱択が許す誤りを評価する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ sidebar:
 
 ## 下位単元
 
-- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 応用
+- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色
 
 ## 問題一覧
 

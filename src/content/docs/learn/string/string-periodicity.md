@@ -8,7 +8,9 @@ sidebar:
 
 # 文字列周期・primitive word
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。prefix一致・border・primitive rootを結び付け、周期の必要十分条件を扱う。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

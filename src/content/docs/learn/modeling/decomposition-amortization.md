@@ -8,6 +8,10 @@ sidebar:
 
 # 軽重分類と償却解析で総仕事量を抑える
 
+導入対象の目安: **水色（1200–1599）**。一操作の最悪時間から離れ、総仕事量と軽重分類で計算量を設計する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 基礎
-- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 応用
-- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 応用
+- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 水色
+- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 青色
+- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色
 
 ## 問題一覧
 

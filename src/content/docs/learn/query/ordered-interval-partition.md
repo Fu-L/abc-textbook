@@ -8,7 +8,9 @@ sidebar:
 
 # ordered interval partition・ODT
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。ordered setに区間を載せ、split・mergeと消去区間数の償却評価を組み合わせる。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

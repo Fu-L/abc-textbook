@@ -8,6 +8,10 @@ sidebar:
 
 # 重み付き最短路・経路復元・差分制約
 
+導入対象の目安: **緑色（800–1199）**。辺の重みに合う距離計算を選び、最短路の復元へ進む入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 辺重みに応じた距離計算、距離等式による経路復元、差の不等式を緩和へ写す制約系への応用を順に学ぶ。
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [最短路モデル](/learn/graph/weighted-shortest-path/) — 標準
-- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 標準
-- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/) — 応用
+- [最短路モデル](/learn/graph/weighted-shortest-path/) — 緑色
+- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 水色
+- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/) — 青色
 
 ## 問題一覧
 

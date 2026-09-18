@@ -3,10 +3,14 @@ title: "列・区間・分割のDP"
 description: "「列・区間・分割のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 61
+  order: 62
 ---
 
 # 列・区間・分割のDP
+
+導入対象の目安: **緑色（800–1199）**。prefix・最後の要素・区間という状態の違いを見渡す入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -28,12 +32,12 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 
 ## 下位単元
 
-- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 基礎
-- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 標準
-- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 標準
-- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 基礎
-- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 標準
-- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 標準
+- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 緑色
+- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
+- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
+- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色
+- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色
+- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色
 
 ## 問題一覧
 

@@ -3,12 +3,14 @@ title: "fractional programming・比率parametric search"
 description: "「fractional programming・比率parametric search」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 227
+  order: 229
 ---
 
 # fractional programming・比率parametric search
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。分母の正性を確認し、比率を加法的な判定へ変換して二分探索する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

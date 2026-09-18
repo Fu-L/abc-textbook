@@ -8,6 +8,10 @@ sidebar:
 
 # 連結成分を管理し縮約する
 
+導入対象の目安: **緑色（800–1199）**。連結成分を単位に情報を管理し、探索と成分併合を使い分ける入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/) — 基礎
-- [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/) — 基礎
-- [potential・weighted DSU](/learn/graph/potential-dsu/) — 標準
+- [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/) — 緑色
+- [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/) — 水色
+- [potential・weighted DSU](/learn/graph/potential-dsu/) — 青色
 
 ## 問題一覧
 

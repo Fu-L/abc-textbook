@@ -8,6 +8,10 @@ sidebar:
 
 # 接頭辞から更新する有限状態DP
 
+導入対象の目安: **水色（1200–1599）**。prefixの有限情報だけを持つDPを、桁の上限や文字列の制約へ使う入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 標準
-- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 応用
+- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 水色
+- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 青色
 
 ## 問題一覧
 

@@ -8,7 +8,9 @@ sidebar:
 
 # ancestor query・LCA
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。深さ調整とbinary liftingを用い、LCA・祖先・距離のqueryを処理する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

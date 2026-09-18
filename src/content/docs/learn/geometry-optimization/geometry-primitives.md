@@ -8,7 +8,9 @@ sidebar:
 
 # 幾何の基本判定と座標変換
 
-難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。外積・端点順・座標変換を用い、退化ケースを含む位置関係を判定する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ sidebar:
 
 ## 下位単元
 
-- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 応用
+- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 青色
 
 ## 問題一覧
 

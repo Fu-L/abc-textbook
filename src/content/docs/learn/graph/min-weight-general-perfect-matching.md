@@ -8,7 +8,9 @@ sidebar:
 
 # 一般グラフの最小重み完全matching
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **赤色（2800以上）**。奇cycleのblossom縮約またはTutte多項式を使う一般matchingの理論を学ぶ。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

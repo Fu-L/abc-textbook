@@ -8,7 +8,9 @@ sidebar:
 
 # 冪等演算のoverlap range query・Sparse Table
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。冪等性が区間の重複を許す理由を理解し、静的queryをSparse Tableで処理する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

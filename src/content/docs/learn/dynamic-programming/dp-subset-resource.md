@@ -3,12 +3,14 @@ title: "集合・資源軸のDP"
 description: "「集合・資源軸のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 68
+  order: 69
 ---
 
 # 集合・資源軸のDP
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **緑色（800–1199）**。個数・容量を軸とするナップサック型DPを実装し、更新方向を説明する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,8 +32,8 @@ sidebar:
 
 ## 下位単元
 
-- [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/) — 発展
-- [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/) — 標準
+- [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/) — 橙色
+- [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/) — 水色
 
 ## 問題一覧
 

@@ -8,7 +8,9 @@ sidebar:
 
 # 最小十分状態からDPを設計する
 
-難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **緑色（800–1199）**。未来の選択に必要な情報だけを残し、履歴を同じ状態へまとめる。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ sidebar:
 
 ## 下位単元
 
-- [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/) — 発展
+- [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/) — 黄色
 
 ## 問題一覧
 

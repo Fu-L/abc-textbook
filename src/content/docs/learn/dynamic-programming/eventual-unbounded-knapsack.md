@@ -3,12 +3,14 @@ title: "大容量unbounded knapsackのeventual linearity"
 description: "「大容量unbounded knapsackのeventual linearity」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 70
 ---
 
 # 大容量unbounded knapsackのeventual linearity
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。交換論で例外部分を有限に界し、巨大容量を小さなDPと線形部分へ分ける。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

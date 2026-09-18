@@ -3,12 +3,14 @@ title: "Monge・monotone minima最適化"
 description: "「Monge・monotone minima最適化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 229
+  order: 228
 ---
 
 # Monge・monotone minima最適化
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。Monge性から最適位置の単調性を導き、分割統治やSMAWKの条件を確認する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

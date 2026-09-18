@@ -8,6 +8,10 @@ sidebar:
 
 # Matroidの独立性・greedy・線形交差
 
+導入対象の目安: **黄色（2000–2399）**。独立性と交換公理を使い、貪欲法の成立範囲を整理する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/) — 発展
-- [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/) — 専門
+- [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/) — 黄色
+- [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/) — 赤色
 
 ## 問題一覧
 

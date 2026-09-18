@@ -8,6 +8,10 @@ sidebar:
 
 # 一意な後続・サイクル・ダブリング
 
+導入対象の目安: **水色（1200–1599）**。後続が一意な遷移をcycleと流入木に分け、反復を圧縮する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) — 標準
-- [doubling・binary lifting](/learn/graph/binary-lifting/) — 標準
+- [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) — 水色
+- [doubling・binary lifting](/learn/graph/binary-lifting/) — 水色
 
 ## 問題一覧
 

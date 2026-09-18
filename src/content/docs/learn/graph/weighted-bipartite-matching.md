@@ -8,7 +8,9 @@ sidebar:
 
 # 重み付き二部完全matching
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。assignmentの双対potentialとtight edgeを理解し、Hungarian法や費用流を選ぶ。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

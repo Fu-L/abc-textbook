@@ -8,6 +8,10 @@ sidebar:
 
 # 構造を共有して過去の版を保存・復元する
 
+導入対象の目安: **青色（1600–1999）**。過去へ戻す操作と過去の版を残す操作の違いを理解する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 応用
-- [永続data structure・structural sharing](/learn/query/persistence/) — 応用
+- [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 青色
+- [永続data structure・structural sharing](/learn/query/persistence/) — 黄色
 
 ## 問題一覧
 

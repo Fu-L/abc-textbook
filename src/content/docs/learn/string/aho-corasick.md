@@ -8,7 +8,9 @@ sidebar:
 
 # Aho–Corasick
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。Trieのfailure linkで最長suffixを保ち、複数patternの検出情報を伝播する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

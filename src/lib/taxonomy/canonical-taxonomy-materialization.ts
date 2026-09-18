@@ -1,7 +1,9 @@
 import type { z } from 'zod';
 import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
 import { PROBLEM_READING_ORDER_REASON } from './problem-reading-order.js';
-import { TEXTBOOK_CHAPTERS, textbookIndex, unitLevelLabel } from './textbook-order.js';
+import { TEXTBOOK_CHAPTERS, textbookIndex } from './textbook-order.js';
+import { isCurriculumUnit } from './learning-unit-order.js';
+import { unitLearningTarget } from './unit-learning-targets.js';
 
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
@@ -92,7 +94,8 @@ interface ChildLearningUnitLink {
   readonly id: string;
   readonly title: string;
   readonly documentPath: string;
-  readonly stageRank: number;
+  readonly depth: number;
+  readonly isGuide: boolean;
   readonly learningOutcomeIds: readonly string[];
   readonly ownedLearningOutcomeIds: readonly string[];
   readonly excludedTopics: readonly string[];
@@ -250,6 +253,8 @@ const renderLearningUnitDocument = (input: {
 }): string => {
   const { unit } = input;
   const chapter = TEXTBOOK_CHAPTERS.find(({ id }) => id === unit.id);
+  const target = unitLearningTarget(unit.id);
+  const targetLabel = isCurriculumUnit(unit) ? '習得対象の目安' : '導入対象の目安';
   const problemLinks = (ids: readonly string[]): string[] =>
     ids.map((id) => {
       const problem = input.problems.get(id);
@@ -268,21 +273,33 @@ const renderLearningUnitDocument = (input: {
     '',
     `# ${unit.title}`,
     '',
-    ...(unit.stageRank > 0
-      ? [
-          `難度の目安: **${unitLevelLabel(unit.stageRank)}**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。`,
-          '',
-        ]
-      : []),
+    `${targetLabel}: **${target.color}（${target.rating}）**。${target.reason}`,
+    '',
+    '対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。',
+    '',
     ...(unit.id === 'unit-chapter-modeling'
       ? [
           '## 本書の読み方',
           '',
-          '本書は、同じ対象や原理の基本から発展までを一つの章で見渡せるように並べています。先頭から全問を解き切る必要はありません。各Unitの難度の目安と追加前提を確認し、今必要な範囲を選んでください。',
+          '本書は、親Unitに続けてその子Unitをまとめ、同じ対象や原理の基本から発展までを連続して読める構成です。章の目次の字下げは親子関係を表します。各Unitの習得対象と追加前提を確認し、今必要な範囲を選んでください。',
           '',
-          '難度の目安は、Unitで扱う概念についての編集上の区分です。「基礎」は各分野の定式化と基本操作、「標準」は主要な算法、「応用」は標準技能の組合せや個別原理、「発展」は強い構造条件・代数的道具を使う算法、「専門」は高度な個別理論を扱います。掲載問題の推定ratingや必要な到達レートを示すものではありません。「節案内」は関連Unitをまとめる見出しです。',
+          '「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。',
           '',
-          '初読では基礎・標準のUnitで定義と不変量を押さえ、発展的なUnitは後回しにして構いません。章をまたぐ前提は後方にも現れます。未習の前提があればリンク先で補うか、そのUnitへ後で戻ってください。問題ごとに複数分野の知識を使うこともあるため、Unitの難度と各問題の難しさは分けて考えます。',
+          '色と数値の境界は[AtCoder公式のAlgorithmレーティング区分](https://info.atcoder.jp/overview/contest/rating)に合わせています。各Unitへの割当ては、前提知識の量、標準形の実装・正当化に必要な理解、他分野への応用範囲を共通基準にした本書の編集判断です。AtCoder公式の履修基準ではありません。',
+          '',
+          '| 習得対象 | レーティング | 本書での判断の軸・代表例 |',
+          '| --- | --- | --- |',
+          '| 茶色 | 400–799 | 基本操作を直接使う。累積和・差分、要素索引と連結リスト。 |',
+          '| 緑色 | 800–1199 | 状態・順序・計算量を明示する。基本DP、DSU、最短路、二分探索。 |',
+          '| 水色 | 1200–1599 | 標準的な抽象化と不変量を使う。Fenwick Tree、LIS、桁DP、SCC。 |',
+          '| 青色 | 1600–1999 | 複数の標準技能をつなぎ、作用や還元を設計する。遅延Segment Tree、2-SAT、HLD。 |',
+          '| 黄色 | 2000–2399 | 代数的表現や構造定理を使う。畳み込み、母関数、最小費用流、重心分解。 |',
+          '| 橙色 | 2400–2799 | 複雑な合成や償却・双対性まで理解する。FPS、Segment Tree Beats、Aliens trick。 |',
+          '| 赤色 | 2800以上 | 専門理論を必要に応じて習得する。一般重み付きmatching、FPS合成、線形matroid交差。 |',
+          '',
+          '章や案内節の「導入対象」は、その見取り図を理解する目安です。子Unitには独立した対象色を付けています。親を読んだ後、高い色の子をいったん飛ばして次のまとまりへ進んで構いません。赤色の専門Unitも、全てを習得することがその色になる条件という意味ではありません。',
+          '',
+          '表示色は先取りを制限するものではありません。自分の色以下でも未習なら優先して補い、高い色でも必要になったUnitから読んでください。親子のまとまりを優先するため、前提が後の節や章にある場合はリンク先を案内します。未習の前提を補ってから戻るか、その子Unitを後回しにしてください。',
           '',
           'ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現した後で、成立条件を一つ外すと何が壊れるか、他の章の表現へ写せるかを考えてください。たとえばDP遷移を区間要約・行列・多項式へ写す、割当てをmatching・flowへ写す、といった接続を自分で導けるようにすることが目標です。',
           '',
@@ -316,7 +333,7 @@ const renderLearningUnitDocument = (input: {
           '',
           ...input.childUnits.map(
             (child) =>
-              `- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/) — ${unitLevelLabel(child.stageRank)}`,
+              `${'  '.repeat(child.depth)}- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/) — ${unitLearningTarget(child.id).color}${child.isGuide ? '（導入）' : ''}`,
           ),
           '',
         ]),
@@ -481,16 +498,25 @@ export const buildCanonicalTaxonomyMaterialization = (
         .filter(({ entity }) =>
           unit.kind === 'chapter' ? chapterUnitIds.has(entity.id) : entity.parentId === unit.id,
         )
-        .map(({ entity }) => ({
-          id: entity.id,
-          title: entity.title,
-          documentPath: learningUnitDocumentPath(entity, unitById),
-          stageRank: entity.stageRank,
-          learningOutcomeIds: entity.learningOutcomeIds,
-          ownedLearningOutcomeIds: entity.ownedLearningOutcomeIds,
-          excludedTopics: entity.excludedTopics,
-          orderReason: entity.orderReason,
-        }))
+        .map(({ entity }) => {
+          let depth = 0;
+          let parentId = entity.parentId;
+          while (parentId !== null && parentId !== unit.id) {
+            depth += 1;
+            parentId = unitById.get(parentId)?.parentId ?? null;
+          }
+          return {
+            id: entity.id,
+            title: entity.title,
+            documentPath: learningUnitDocumentPath(entity, unitById),
+            depth,
+            isGuide: !isCurriculumUnit(entity),
+            learningOutcomeIds: entity.learningOutcomeIds,
+            ownedLearningOutcomeIds: entity.ownedLearningOutcomeIds,
+            excludedTopics: entity.excludedTopics,
+            orderReason: entity.orderReason,
+          };
+        })
         .sort((left, right) => textbookIndex(left.id) - textbookIndex(right.id));
       const sourceRevisionIds = unit.sourceRevisionIds;
       const documentPath = learningUnitDocumentPath(unit, unitById);
@@ -515,7 +541,13 @@ export const buildCanonicalTaxonomyMaterialization = (
       const prerequisiteTitles = materializedUnit.additionalPrerequisiteUnitIds.map((id) => {
         const prerequisite = unitCandidateById.get(id);
         if (prerequisite === undefined) return id;
-        return `${unitLink(prerequisite.entity)}${textbookIndex(id) > textbookIndex(unit.id) ? '（後の章）' : ''}`;
+        const forwardReference =
+          textbookIndex(id) > textbookIndex(unit.id)
+            ? rootChapterId(id, unitById) === rootChapterId(unit.id, unitById)
+              ? '（後の節）'
+              : '（後の章）'
+            : '';
+        return `${unitLink(prerequisite.entity)}${forwardReference}`;
       });
       const materializedSources = materializedUnit.sourceRevisionIds.map((sourceId) => {
         const source = sourceById.get(sourceId);

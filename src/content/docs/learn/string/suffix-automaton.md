@@ -8,7 +8,9 @@ sidebar:
 
 # Suffix Automatonで部分文字列集合を表す
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。endpos同値類・suffix link・cloneを理解し、全部分文字列を線形状態数で表す。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

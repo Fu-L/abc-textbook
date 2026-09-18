@@ -8,7 +8,9 @@ sidebar:
 
 # rake・compressで動的木DPを保つ
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。境界付きclusterのrake・compressを設計し、更新の影響を木DPの合成で伝播する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

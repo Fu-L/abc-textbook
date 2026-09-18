@@ -8,6 +8,10 @@ sidebar:
 
 # フロー・マッチング・カットへ帰着する
 
+導入対象の目安: **青色（1600–1999）**。割当て・容量・cutの制約を読み、matchingとflowへの還元を選ぶ入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。
@@ -24,13 +28,13 @@ sidebar:
 
 ## 下位単元
 
-- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 標準
-- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 標準
-- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 応用
-- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 応用
-- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 発展
-- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 発展
-- [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 発展
+- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色
+- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色
+- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色
+- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色
+- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色
+- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 赤色
+- [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 橙色
 
 ## 問題一覧
 

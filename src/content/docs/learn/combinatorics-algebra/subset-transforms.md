@@ -8,7 +8,9 @@ sidebar:
 
 # subset zeta・Möbius変換
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。集合の包含方向に一bitずつ和を集め、zeta変換と逆変換を導く。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 ## 下位単元
 
-- [subset convolution](/learn/combinatorics-algebra/subset-convolution/) — 発展
+- [subset convolution](/learn/combinatorics-algebra/subset-convolution/) — 橙色
 
 ## 問題一覧
 

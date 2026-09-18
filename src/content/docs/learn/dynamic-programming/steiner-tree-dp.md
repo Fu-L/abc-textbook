@@ -3,12 +3,14 @@ title: "Steiner tree subset DP"
 description: "「Steiner tree subset DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 71
+  order: 72
 ---
 
 # Steiner tree subset DP
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。terminal集合の分割と多始点最短路を交互に使い、部分解の合成を正当化する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

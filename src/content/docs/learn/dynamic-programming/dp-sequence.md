@@ -3,12 +3,14 @@ title: "列・subsequence DP"
 description: "「列・subsequence DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 62
+  order: 63
 ---
 
 # 列・subsequence DP
 
-難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **緑色（800–1199）**。選ぶ・選ばない遷移と最後の要素を状態にし、同じ要素の重複利用を避ける。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

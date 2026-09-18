@@ -8,6 +8,10 @@ sidebar:
 
 # 結合的要約と列・区間の合成
 
+導入対象の目安: **水色（1200–1599）**。結合則・単位元・順序を区間集約の共通言語として使う入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。
@@ -24,13 +28,13 @@ sidebar:
 
 ## 下位単元
 
-- [区間monoid要約](/learn/query/range-monoid-aggregation/) — 標準
-- [有限関数・作用の合成](/learn/query/finite-function-composition/) — 標準
-- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 標準
-- [SWAG・two-stack queue aggregation](/learn/query/swag/) — 応用
-- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 応用
-- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 応用
-- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 応用
+- [区間monoid要約](/learn/query/range-monoid-aggregation/) — 水色
+- [有限関数・作用の合成](/learn/query/finite-function-composition/) — 水色
+- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色
+- [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色
+- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色
+- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色
+- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色
 
 ## 問題一覧
 

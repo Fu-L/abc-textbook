@@ -3,12 +3,14 @@ title: "半環行列・min-plus/max-min遷移"
 description: "「半環行列・min-plus/max-min遷移」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 197
+  order: 199
 ---
 
 # 半環行列・min-plus/max-min遷移
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。行列の和と積を遷移の選択・連結に対応させ、min-plusなどへ一般化する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

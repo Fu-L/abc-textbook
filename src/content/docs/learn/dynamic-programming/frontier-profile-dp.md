@@ -3,12 +3,14 @@ title: "frontier/profile DP・境界状態圧縮"
 description: "「frontier/profile DP・境界状態圧縮」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 72
+  order: 60
 ---
 
 # frontier/profile DP・境界状態圧縮
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。境界から離れた情報を忘れ、接続関係を正規化した幅指数の状態を設計する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

@@ -3,12 +3,14 @@ title: "automaton上のDP・行列遷移"
 description: "「automaton上のDP・行列遷移」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 76
+  order: 75
 ---
 
 # automaton上のDP・行列遷移
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。構成済みautomatonと位置の直積を使い、禁止状態と受理状態を区別して数える。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

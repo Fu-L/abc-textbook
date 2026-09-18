@@ -3,12 +3,14 @@ title: "monoid exponentiation・連結演算doubling"
 description: "「monoid exponentiation・連結演算doubling」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 193
+  order: 194
 ---
 
 # monoid exponentiation・連結演算doubling
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。結合則と単位元を定義し、数値以外の反復合成にも二分累乗を使う。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

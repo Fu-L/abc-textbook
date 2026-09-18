@@ -8,7 +8,9 @@ sidebar:
 
 # 平面graph双対・cut/path対応
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。平面埋め込みのfaceを構成し、primalのcutとdualのpath・cycleを対応させる。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

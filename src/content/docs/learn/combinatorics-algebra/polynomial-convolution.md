@@ -3,12 +3,14 @@ title: "NTT・FFTで畳み込みと相互相関を求める"
 description: "「NTT・FFTで畳み込みと相互相関を求める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 201
+  order: 202
 ---
 
 # NTT・FFTで畳み込みと相互相関を求める
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。係数積和へ還元し、NTT・FFTの法・長さ・次数の条件を理解して利用する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -40,8 +42,8 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 ## 下位単元
 
-- [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/) — 発展
-- [Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/) — 発展
+- [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/) — 橙色
+- [Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/) — 橙色
 
 ## 問題一覧
 

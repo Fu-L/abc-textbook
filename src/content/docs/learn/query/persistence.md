@@ -8,7 +8,9 @@ sidebar:
 
 # 永続data structure・structural sharing
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。更新pathだけの複製と共有部分の不変性を理解し、複数versionを管理する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

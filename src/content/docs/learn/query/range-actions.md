@@ -8,7 +8,9 @@ sidebar:
 
 # 区間更新を要約へ作用させる
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。要約に対する作用と作用同士の合成を定義し、遅延評価の整合性を説明する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ sidebar:
 
 ## 下位単元
 
-- [Segment Tree Beats](/learn/query/segment-tree-beats/) — 発展
+- [Segment Tree Beats](/learn/query/segment-tree-beats/) — 橙色
 
 ## 問題一覧
 

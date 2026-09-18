@@ -3,12 +3,14 @@ title: "heavy path上の多項式木DP"
 description: "「heavy path上の多項式木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 145
+  order: 141
 ---
 
 # heavy path上の多項式木DP
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。多項式の木DPをheavy path上の合成にまとめ、軽い部分木の総費用を評価する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

@@ -8,6 +8,10 @@ sidebar:
 
 # 数論
 
+導入対象の目安: **緑色（800–1199）**。素因数・gcd・剰余を整数条件の表現として使い分ける入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 割り切れる条件から出発し、整数解、合同式、乗法的な周期へ進む。gcdとBézout、CRT、位数と指数化をつなぎ、整数の値を列挙する代わりに同じ振る舞いをする類へまとめる。続いて床関数の境界、Euclidによる格子点計数、有理近似を比較する。発展では到達可能な整数集合、数の拡張、総和篩を扱う。法上の計算は次章の組合せ係数・多項式でも繰り返し使う。
@@ -30,26 +34,26 @@ sidebar:
 
 ## 章の構成
 
-- [素因数分解と約数構造](/learn/number-theory/prime-divisor/) — 基礎
-- [gcd不変量・差分構造](/learn/number-theory/gcd-structure/) — 基礎
-- [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/) — 基礎
-- [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/) — 節案内
-- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 基礎
-- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 標準
-- [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/) — 標準
-- [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/) — 応用
-- [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/) — 応用
-- [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/) — 応用
-- [巡回群を指数化して数える](/learn/number-theory/cyclic-group-exponent-counting/) — 発展
-- [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/) — 標準
-- [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/) — 応用
-- [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/) — 応用
-- [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/) — 応用
-- [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/) — 発展
-- [Gaussian整数・二平方和](/learn/number-theory/gaussian-integers-two-squares/) — 発展
-- [拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/) — 発展
-- [標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/) — 発展
-- [Min_25・Lucy DP型の総和篩](/learn/number-theory/min25-sieve/) — 専門
+- [素因数分解と約数構造](/learn/number-theory/prime-divisor/) — 緑色
+- [gcd不変量・差分構造](/learn/number-theory/gcd-structure/) — 水色
+- [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/) — 水色
+- [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/) — 緑色（導入）
+  - [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 緑色
+  - [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 水色
+- [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/) — 青色
+- [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/) — 青色
+- [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/) — 青色
+- [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/) — 黄色
+- [巡回群を指数化して数える](/learn/number-theory/cyclic-group-exponent-counting/) — 黄色
+- [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/) — 水色
+- [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/) — 黄色
+- [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/) — 橙色
+- [Stern–Brocot木の経路と祖先](/learn/number-theory/stern-brocot-ancestry/) — 橙色
+- [数値半群のconductor以後を一括到達とみなす](/learn/number-theory/numerical-semigroup-reachability/) — 橙色
+- [Gaussian整数・二平方和](/learn/number-theory/gaussian-integers-two-squares/) — 赤色
+- [拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/) — 橙色
+- [標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/) — 橙色
+- [Min_25・Lucy DP型の総和篩](/learn/number-theory/min25-sieve/) — 赤色
 
 ## 問題一覧
 

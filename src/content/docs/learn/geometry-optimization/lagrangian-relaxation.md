@@ -3,12 +3,14 @@ title: "Lagrangian relaxation・Aliens trick"
 description: "「Lagrangian relaxation・Aliens trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 228
+  order: 227
 ---
 
 # Lagrangian relaxation・Aliens trick
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。罰則係数による個数単調性に加え、双対ギャップなく復元できる条件を証明する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

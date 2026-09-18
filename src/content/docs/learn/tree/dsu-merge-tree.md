@@ -3,12 +3,14 @@ title: "DSU merge tree・Kruskal reconstruction tree"
 description: "「DSU merge tree・Kruskal reconstruction tree」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 142
+  order: 143
 ---
 
 # DSU merge tree・Kruskal reconstruction tree
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。DSUの併合履歴を木に保存し、時刻や閾値のqueryを祖先関係へ写す。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

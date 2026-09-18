@@ -3,12 +3,14 @@ title: "rerooting・全方位木DP"
 description: "「rerooting・全方位木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 138
+  order: 140
 ---
 
 # rerooting・全方位木DP
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。各辺の両側の情報を設計し、prefix・suffix合成で全根の答えを求める。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

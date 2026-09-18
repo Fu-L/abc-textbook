@@ -8,6 +8,10 @@ sidebar:
 
 # Rolling fingerprintで列の同値性を比較する
 
+導入対象の目安: **水色（1200–1599）**。列の一致判定を連結可能な要約へ写し、衝突のある比較として扱う入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 列の順序と長さを保つrolling fingerprintを作り、連結・部分列の切り出し・回文比較へ使う。集合や代数式の乱択fingerprintは乱択アルゴリズムの単元で扱う。
@@ -24,7 +28,7 @@ sidebar:
 
 ## 下位単元
 
-- [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 標準
+- [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 水色
 
 ## 問題一覧
 

@@ -8,6 +8,10 @@ sidebar:
 
 # 文字列アルゴリズム
 
+導入対象の目安: **水色（1200–1599）**。prefix・suffix・一致長・有限状態という文字列の共有単位を学ぶ入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 文字列の一致をどの単位で共有するかを軸に読む。接頭辞の共有と一致長から、周期・回文・接尾辞の順序へ進む。次に読んだprefixを有限状態へまとめ、複数pattern、非決定性、部分文字列集合へ広げる。最後に入力自体が圧縮されている場合の再帰とrunの変化を扱う。rolling fingerprintはデータ構造章、構成したautomaton上の計数はDP章へ接続する。
@@ -30,19 +34,19 @@ sidebar:
 
 ## 章の構成
 
-- [Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/) — 基礎
-- [接頭辞との一致長を再利用する](/learn/string/string-prefix-automata/) — 節案内
-- [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 基礎
-- [文字列周期・primitive word](/learn/string/string-periodicity/) — 応用
-- [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/) — 標準
-- [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/) — 応用
-- [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/) — 節案内
-- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 標準
-- [Aho–Corasick](/learn/string/aho-corasick/) — 応用
-- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 発展
-- [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/) — 発展
-- [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/) — 応用
-- [run-length状態の動的遷移](/learn/string/run-length-dynamics/) — 発展
+- [Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/) — 水色
+- [接頭辞との一致長を再利用する](/learn/string/string-prefix-automata/) — 水色（導入）
+  - [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 水色
+- [文字列周期・primitive word](/learn/string/string-periodicity/) — 青色
+- [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/) — 青色
+- [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/) — 青色
+- [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/) — 青色（導入）
+  - [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 青色
+  - [Aho–Corasick](/learn/string/aho-corasick/) — 黄色
+  - [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 黄色
+- [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/) — 橙色
+- [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/) — 青色
+- [run-length状態の動的遷移](/learn/string/run-length-dynamics/) — 青色
 
 ## 問題一覧
 

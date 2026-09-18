@@ -8,6 +8,10 @@ sidebar:
 
 # 状態グラフ探索・到達関係
 
+導入対象の目安: **緑色（800–1199）**。入力の頂点以外にも状態を作り、探索と到達関係を使う入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。
@@ -25,9 +29,9 @@ sidebar:
 
 ## 下位単元
 
-- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 基礎
-- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 応用
-- [推移閉包](/learn/graph/transitive-closure/) — 標準
+- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 緑色
+- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色
+- [推移閉包](/learn/graph/transitive-closure/) — 水色
 
 ## 問題一覧
 

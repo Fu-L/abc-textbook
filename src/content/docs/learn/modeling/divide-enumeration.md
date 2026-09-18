@@ -8,6 +8,10 @@ sidebar:
 
 # 探索空間を分けて照合・再帰分割する
 
+導入対象の目安: **水色（1200–1599）**。探索空間を独立に分ける場合と、再帰的な小問題へ分ける場合を区別する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 基礎
-- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 基礎
+- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色
+- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色
 
 ## 問題一覧
 

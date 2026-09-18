@@ -8,7 +8,9 @@ sidebar:
 
 # 確率過程・期待値DP
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。一段先で条件分けし、確率・期待値の式と自己ループの移項を扱う。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -62,7 +64,7 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 ## 下位単元
 
-- [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/) — 発展
+- [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/) — 橙色
 
 ## 問題一覧
 

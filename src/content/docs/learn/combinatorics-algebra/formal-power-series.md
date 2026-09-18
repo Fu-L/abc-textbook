@@ -8,7 +8,9 @@ sidebar:
 
 # FPS演算・多点評価・合成を行う
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。定数項と打切り次数の条件を押さえ、Newton反復で逆数・log・expを構成する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,9 +32,9 @@ sidebar:
 
 ## 下位単元
 
-- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/) — 発展
-- [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/) — 発展
-- [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/) — 専門
+- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/) — 橙色
+- [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/) — 橙色
+- [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/) — 赤色
 
 ## 問題一覧
 

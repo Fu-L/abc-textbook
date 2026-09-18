@@ -3,12 +3,14 @@ title: "virtual tree・auxiliary tree"
 description: "「virtual tree・auxiliary tree」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 140
+  order: 137
 ---
 
 # virtual tree・auxiliary tree
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **黄色（2000–2399）**。Euler順と隣接LCAで必要な分岐点だけを残し、小さな木上で計算する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

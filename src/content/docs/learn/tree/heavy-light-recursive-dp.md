@@ -3,12 +3,14 @@ title: "資源DPを引数で渡すHLRecDP"
 description: "「資源DPを引数で渡すHLRecDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 144
+  order: 145
 ---
 
 # 資源DPを引数で渡すHLRecDP
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **赤色（2800以上）**。資源DPを再帰の引数にし、軽い子への重複呼出しまで含めて計算量を証明する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

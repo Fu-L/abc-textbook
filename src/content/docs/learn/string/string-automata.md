@@ -8,6 +8,10 @@ sidebar:
 
 # 禁止・要求patternを有限状態へ圧縮する
 
+導入対象の目安: **青色（1600–1999）**。未来の受理条件が同じprefixをまとめ、有限状態へ変換する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 標準
-- [Aho–Corasick](/learn/string/aho-corasick/) — 応用
-- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 発展
+- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 青色
+- [Aho–Corasick](/learn/string/aho-corasick/) — 黄色
+- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 黄色
 
 ## 問題一覧
 

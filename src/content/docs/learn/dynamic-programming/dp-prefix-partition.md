@@ -3,12 +3,14 @@ title: "prefix分割DP"
 description: "「prefix分割DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 65
+  order: 66
 ---
 
 # prefix分割DP
 
-難度の目安: **基礎**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。最後の切れ目を固定し、漏れと重複のない分割の漸化式を立てる。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

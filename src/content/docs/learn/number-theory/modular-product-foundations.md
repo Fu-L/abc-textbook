@@ -8,6 +8,10 @@ sidebar:
 
 # 法上の演算と積の保守
 
+導入対象の目安: **緑色（800–1199）**。法上の四則演算と逆元の存在条件を確認し、積の更新へ進む入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 法上の基本演算を先に確立し、そのうえで「積から旧因子を逆元で外す」操作に必要な可逆性と、法 m で剰余 0 となる因子では逆元が存在しない境界を独立した動的保守技能として学ぶ。
@@ -24,8 +28,8 @@ sidebar:
 
 ## 下位単元
 
-- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 基礎
-- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 標準
+- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 緑色
+- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 水色
 
 ## 問題一覧
 

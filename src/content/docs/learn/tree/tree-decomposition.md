@@ -8,6 +8,10 @@ sidebar:
 
 # 包含木の構築とancestor・path分解
 
+導入対象の目安: **水色（1200–1599）**。木を区間や祖先関係へ写し、配列上の算法へ接続する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。
@@ -24,11 +28,11 @@ sidebar:
 
 ## 下位単元
 
-- [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 応用
-- [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 標準
-- [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 標準
-- [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 応用
-- [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 応用
+- [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
+- [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
+- [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
+- [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
+- [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
 
 ## 問題一覧
 

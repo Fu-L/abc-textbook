@@ -19,11 +19,11 @@ import {
 } from '../../src/lib/taxonomy/canonical-taxonomy-materialization.js';
 import { loadFinalTaxonomySourceContext } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
+import { TEXTBOOK_CHAPTERS, textbookIndex } from '../../src/lib/taxonomy/textbook-order.js';
 import {
-  TEXTBOOK_CHAPTERS,
-  textbookIndex,
-  unitLevelLabel,
-} from '../../src/lib/taxonomy/textbook-order.js';
+  UNIT_LEARNING_TARGETS,
+  unitLearningTarget,
+} from '../../src/lib/taxonomy/unit-learning-targets.js';
 
 const BUILD_PATH = 'staging/taxonomy/initial/final-taxonomy-build.json';
 
@@ -50,6 +50,24 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     const byId = new Map(result.learningUnits.map((output) => [output.value.id, output]));
     const orderedIds = TEXTBOOK_CHAPTERS.flatMap((chapter) => [chapter.id, ...chapter.unitIds]);
     expect([...orderedIds].sort()).toEqual([...byId.keys()].sort());
+    expect(Object.keys(UNIT_LEARNING_TARGETS).sort()).toEqual([...byId.keys()].sort());
+    const subtreeIds = (id: string): string[] => [
+      id,
+      ...result.learningUnits
+        .filter(({ value }) => value.parentId === id)
+        .flatMap(({ value }) => subtreeIds(value.id)),
+    ];
+    for (const id of orderedIds) {
+      const subtree = subtreeIds(id);
+      expect(
+        orderedIds.slice(textbookIndex(id), textbookIndex(id) + subtree.length).sort(),
+        `Contiguous parent and descendants: ${id}`,
+      ).toEqual(subtree.sort());
+      const target = unitLearningTarget(id);
+      expect(byId.get(id)?.document).toContain(`**${target.color}（${target.rating}）**`);
+      expect(target.reason.length).toBeGreaterThan(0);
+      expect(byId.get(id)?.document).toContain(target.reason);
+    }
 
     for (const chapter of TEXTBOOK_CHAPTERS) {
       const chapterDocument = byId.get(chapter.id)?.document ?? '';
@@ -66,9 +84,8 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         }
         expect(root.id, id).toBe(chapter.id);
         expect(document).toContain(`  order: ${String(textbookIndex(id))}\n`);
-        if (unit.stageRank > 0) {
-          expect(document).toContain(`難度の目安: **${unitLevelLabel(unit.stageRank)}**`);
-        }
+        const targetLabel = isCurriculumUnit(unit) ? '習得対象の目安' : '導入対象の目安';
+        expect(document).toContain(`${targetLabel}:`);
         const linkPosition = chapterDocument.indexOf(`- [${unit.title}](`);
         expect(linkPosition, id).toBeGreaterThan(previousLinkPosition);
         previousLinkPosition = linkPosition;
@@ -77,10 +94,11 @@ describe('T047–T050 canonical taxonomy materialization', () => {
           if (prerequisite === undefined)
             throw new Error(`Missing prerequisite: ${prerequisiteId}`);
           expect(document).toContain(`[${prerequisite.title}](/learn/`);
-          if (new Set<string>(chapter.unitIds).has(prerequisiteId)) {
-            expect(textbookIndex(prerequisiteId), `${prerequisiteId} before ${id}`).toBeLessThan(
-              textbookIndex(id),
-            );
+          if (textbookIndex(prerequisiteId) > textbookIndex(id)) {
+            const suffix = new Set<string>(chapter.unitIds).has(prerequisiteId)
+              ? '（後の節）'
+              : '（後の章）';
+            expect(document).toContain(`${prerequisiteId.replace(/^unit-/u, '')}/)${suffix}`);
           }
         }
         const accepted = input.build.finalCandidates.find(
@@ -95,6 +113,12 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       textbookIndex('unit-dp-state-design'),
     );
     expect(byId.get('unit-automaton-dp')?.document).toContain('（後の章）');
+    expect(byId.get('unit-subset-convolution')?.document).toContain('（後の節）');
+    expect(byId.get('unit-chapter-combinatorics-algebra')?.document).toContain(
+      '    - [subset convolution]',
+    );
+    expect(unitLearningTarget('unit-dp-state-design').color).toBe('緑色');
+    expect(unitLearningTarget('unit-frontier-profile-dp').color).toBe('黄色');
     expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
     expect(result.learningOrder.standardOrder).toEqual(input.build.standardOrder);
   }, 30_000);

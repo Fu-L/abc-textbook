@@ -3,12 +3,14 @@ title: "01 on Tree・親先行順序のcluster縮約"
 description: "「01 on Tree・親先行順序のcluster縮約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 143
+  order: 144
 ---
 
 # 01 on Tree・親先行順序のcluster縮約
 
-難度の目安: **発展**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **橙色（2400–2799）**。親先行制約の交換比較量を導き、clusterをheapとDSUで縮約する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

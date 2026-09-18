@@ -3,10 +3,14 @@ title: "木DP・集約・rerooting"
 description: "「木DP・集約・rerooting」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 136
+  order: 138
 ---
 
 # 木DP・集約・rerooting
+
+導入対象の目安: **水色（1200–1599）**。部分木から親へ渡す要約を定め、根の移動やpath上の合成へ進む入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 標準
-- [rerooting・全方位木DP](/learn/tree/rerooting/) — 標準
-- [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/) — 発展
+- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色
+- [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色
+- [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/) — 橙色
 
 ## 問題一覧
 

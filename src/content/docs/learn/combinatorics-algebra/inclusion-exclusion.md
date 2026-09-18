@@ -8,7 +8,9 @@ sidebar:
 
 # 包除・Möbius反転で重複を補正する
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。条件の共通部分を数え、交互符号が重複を打ち消す理由を説明する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,8 +32,8 @@ sidebar:
 
 ## 下位単元
 
-- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 応用
-- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 応用
+- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 青色
+- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 青色
 
 ## 問題一覧
 

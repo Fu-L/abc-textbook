@@ -8,7 +8,9 @@ sidebar:
 
 # 動的・implicit Segment Tree
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。通常のSegment Treeを疎なnode生成へ拡張し、座標域とnode数を別々に評価する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

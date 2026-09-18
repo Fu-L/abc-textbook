@@ -8,7 +8,9 @@ sidebar:
 
 # cut・cycle性質から最適全域木を構成する
 
-難度の目安: **標準**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **水色（1200–1599）**。DSUやheapを用い、cut・cycle性質で全域木の辺選択を正当化する。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -30,7 +32,7 @@ sidebar:
 
 ## 下位単元
 
-- [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 応用
+- [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 青色
 
 ## 問題一覧
 

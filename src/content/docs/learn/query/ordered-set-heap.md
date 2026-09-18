@@ -8,6 +8,10 @@ sidebar:
 
 # heap・ordered setで全候補の極値を保つ
 
+導入対象の目安: **緑色（800–1199）**。極値の取得と近傍の検索を区別し、heapとordered setを使い分ける入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 比較可能な候補全体から極値・順位・隣接を繰り返し取り出すため、動的な順序を保つ。
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 基礎
-- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 基礎
-- [ordered interval partition・ODT](/learn/query/ordered-interval-partition/) — 応用
+- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 緑色
+- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 緑色
+- [ordered interval partition・ODT](/learn/query/ordered-interval-partition/) — 青色
 
 ## 問題一覧
 

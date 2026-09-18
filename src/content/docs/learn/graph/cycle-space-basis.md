@@ -8,7 +8,9 @@ sidebar:
 
 # cycle space・fundamental cycle basis
 
-難度の目安: **応用**。段階の説明は[本書の読み方](/learn/modeling/)を参照してください。
+習得対象の目安: **青色（1600–1999）**。非木辺と基本cycleを対応させ、偶数次数の辺集合をF₂上の基底で表す。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 

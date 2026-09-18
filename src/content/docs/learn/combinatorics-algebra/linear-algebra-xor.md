@@ -3,10 +3,14 @@ title: "線形方程式・基底・分離可能変換へ変換する"
 description: "「線形方程式・基底・分離可能変換へ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 194
+  order: 195
 ---
 
 # 線形方程式・基底・分離可能変換へ変換する
+
+導入対象の目安: **青色（1600–1999）**。rank・基底・線形写像を制約と変換の共通言語として学ぶ入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
 ## 概要
 
@@ -24,9 +28,9 @@ sidebar:
 
 ## 下位単元
 
-- [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) — 標準
-- [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) — 標準
-- [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/) — 応用
+- [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) — 青色
+- [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) — 青色
+- [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/) — 黄色
 
 ## 問題一覧
 

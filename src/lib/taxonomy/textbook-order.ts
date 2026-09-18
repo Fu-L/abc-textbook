@@ -1,7 +1,7 @@
 /**
  * 教科書の掲載順。同じ対象・原理を続けて読むための編集上の順序であり、
  * 問題の所属を決める既存の履修順（learning-order）とは独立に管理する。
- * 章内では前提を先に紹介し、章をまたぐ前提は本文のリンクで案内する。
+ * 親とその子孫を深さ優先で連続配置する。前提が後にある場合は本文で案内する。
  */
 export const TEXTBOOK_CHAPTERS = [
   {
@@ -77,9 +77,10 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-dynamic-programming',
     introduction:
-      '未来に必要な情報と依存関係を定め、同じ状態へ到達する履歴をまとめる。列・区間・集合という状態の形を比較してから、境界圧縮と桁・automatonの状態へ進む。確率では何を平均し、ゲームでは誰が選ぶのかを明示する。最後に遷移の共通部分や線形性を取り出し、後の代数・凸最適化の章で使う式へつなぐ。automatonの構成は文字列章、Steiner tree DPの距離計算はグラフ章を参照する。',
+      '未来に必要な情報と依存関係を定め、同じ状態へ到達する履歴をまとめる。状態設計の発展として境界圧縮を置き、列・区間・集合、桁・automatonという状態の形を比較する。確率では何を平均し、ゲームでは誰が選ぶのかを明示する。最後に遷移の共通部分や線形性を取り出し、後の代数・凸最適化の章で使う式へつなぐ。automatonの構成は文字列章、Steiner tree DPの距離計算はグラフ章を参照する。',
     unitIds: [
       'unit-dp-state-design',
+      'unit-frontier-profile-dp',
       'unit-dp-grid-table',
       'unit-dp-sequence-interval',
       'unit-dp-sequence',
@@ -92,11 +93,10 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-eventual-unbounded-knapsack',
       'unit-dp-subset-state',
       'unit-steiner-tree-dp',
-      'unit-frontier-profile-dp',
       'unit-dp-digit-string',
       'unit-digit-dp',
-      'unit-dp-carry-mixed-radix',
       'unit-automaton-dp',
+      'unit-dp-carry-mixed-radix',
       'unit-dp-stochastic',
       'unit-additive-expectation-potential',
       'unit-dp-game',
@@ -159,7 +159,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-tree',
     introduction:
-      '木の一意な経路と部分木への分解を使う。距離・直径から始め、Euler順とLCAで位置関係を表し、部分木集約と全方位DPへ進む。続いてpath・分離点による分解、必要頂点だけの圧縮、併合履歴の木を比較する。後半の木DPでは、軽い子の処理回数、path上の合成、rake・compressがそれぞれ何を高速化するかを区別する。多項式木DPに進むときは代数章の畳み込みを参照する。',
+      '木の一意な経路と部分木への分解を使う。距離・直径から始め、Euler順とLCAで位置関係を表し、path分解と必要頂点だけの圧縮へ進む。次に木DPのまとまりで部分木集約・全方位DP・多項式合成を比較し、重心分解、併合履歴、縮約による最適化へ広げる。軽い子の処理回数、path上の合成、rake・compressがそれぞれ何を高速化するかを区別する。多項式木DPに進むときは代数章の畳み込みを参照する。',
     unitIds: [
       'unit-tree-metric',
       'unit-additive-tree-metric-reconstruction',
@@ -168,16 +168,16 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-laminar-interval-containment-tree',
       'unit-tree-euler-flattening',
       'unit-tree-ancestor-lca',
+      'unit-heavy-light-decomposition',
+      'unit-virtual-tree',
       'unit-tree-aggregation',
       'unit-rooted-tree-aggregation',
       'unit-rerooting',
-      'unit-heavy-light-decomposition',
-      'unit-virtual-tree',
+      'unit-heavy-path-tree-dp',
       'unit-tree-balanced-separators',
       'unit-dsu-merge-tree',
       'unit-tree-precedence-contraction',
       'unit-heavy-light-recursive-dp',
-      'unit-heavy-path-tree-dp',
       'unit-static-top-tree',
     ],
   },
@@ -243,23 +243,23 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-inclusion-exclusion',
       'unit-divisor-mobius-inversion',
       'unit-subset-transforms',
+      'unit-subset-convolution',
       'unit-monoid-exponentiation',
       'unit-linear-algebra-xor',
       'unit-linear-system-rank',
       'unit-xor-linear-basis',
-      'unit-semiring-matrix-exponentiation',
       'unit-separable-linear-transform',
+      'unit-semiring-matrix-exponentiation',
       'unit-generating-functions',
       'unit-labeled-component-decomposition',
       'unit-polynomial-convolution',
-      'unit-subset-convolution',
       'unit-polynomial-taylor-shift',
       'unit-relaxed-convolution',
       'unit-formal-power-series',
       'unit-polynomial-multipoint-evaluation',
       'unit-bostan-mori',
-      'unit-generating-function-coefficients',
       'unit-fps-composition-power-projection',
+      'unit-generating-function-coefficients',
       'unit-determinant-counting',
       'unit-euler-circuit-counting',
       'unit-matroid-theory',
@@ -270,7 +270,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-geometry-optimization',
     introduction:
-      '位置関係と凸性から、調べる候補を絞る。まず座標・向き・円環順序の判定を揃え、凸包と半平面の共通部分を扱う。直線包絡を境に、幾何的な境界から関数の最適化へ視点を移す。限界費用、傾き、順序制約、罰則係数、Monge性を比較し、各条件が探索やDP遷移をどう減らすかを学ぶ。DP・データ構造・flowで得た表現を組み合わせる章として読む。',
+      '位置関係と凸性から、調べる候補を絞る。まず座標・向き・円環順序の判定を揃え、凸包と半平面の共通部分を扱う。直線包絡を境に、幾何的な境界から関数の最適化へ視点を移す。凸最適化のまとまりで限界費用、傾き、順序制約、罰則係数、Monge性を比較し、比率目的の判定問題への変換へ進む。DP・データ構造・flowで得た表現を組み合わせる章として読む。',
     unitIds: [
       'unit-geometry-primitives',
       'unit-cyclic-order-crossing',
@@ -283,9 +283,9 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-separable-convex-marginals',
       'unit-isotonic-regression',
       'unit-slope-trick',
-      'unit-fractional-parametric-search',
       'unit-lagrangian-relaxation',
       'unit-monge-optimization',
+      'unit-fractional-parametric-search',
     ],
   },
 ] as const;
@@ -301,13 +301,4 @@ export const textbookIndex = (unitId: string): number => {
   const index = textbookIndexById.get(unitId);
   if (index === undefined) throw new Error(`TEXTBOOK_UNIT_ORDER_MISSING:${unitId}`);
   return index;
-};
-
-/** 既存の内容査読による段階を読者向けに表示する。問題の推定ratingではない。 */
-const UNIT_LEVEL_LABELS = ['節案内', '基礎', '標準', '応用', '発展', '専門'] as const;
-
-export const unitLevelLabel = (stageRank: number): string => {
-  const label = UNIT_LEVEL_LABELS[stageRank];
-  if (label === undefined) throw new Error(`TEXTBOOK_UNIT_LEVEL_UNKNOWN:${String(stageRank)}`);
-  return label;
 };

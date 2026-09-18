@@ -8,6 +8,10 @@ sidebar:
 
 # SCCで閉路・DAG順・2-SATを処理する
 
+導入対象の目安: **水色（1200–1599）**。有向グラフの循環部分と非循環部分を区別し、縮約して処理する入口。
+
+対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
 ## 概要
 
 到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。
@@ -24,11 +28,11 @@ sidebar:
 
 ## 下位単元
 
-- [DAGのtopological processing](/learn/graph/dag-topological-processing/) — 基礎
-- [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 標準
-- [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) — 標準
-- [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 応用
-- [2-SAT・含意グラフ](/learn/graph/two-sat/) — 応用
+- [DAGのtopological processing](/learn/graph/dag-topological-processing/) — 緑色
+- [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 水色
+- [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) — 水色
+- [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 黄色
+- [2-SAT・含意グラフ](/learn/graph/two-sat/) — 青色
 
 ## 問題一覧
 
