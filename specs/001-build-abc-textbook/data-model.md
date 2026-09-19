@@ -297,12 +297,16 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `exercises` | 任意の通常本文の演習。生成skeletonでは空配列。Outcomeごとの評価課題を要求しない |
 | `problemIds` | 自身のdirectProblemIdsと子のproblemIdsの和集合。coverageであり直接配置ではない |
 | `directProblemIds` / `relatedProblemIds` | 主配置問題の読む順序 / coverage外の関連参照。各Problemの主配置はpresentationUnitIdと一致し全Unitで一意 |
-| `stageRank` / `difficultyRank` / `representativeRank` | 0以上の整数 |
-| `globalIndex` / `orderReason` | 学習Unitは標準順の位置と説明。章・構造Unitの表示位置は最初の学習子孫から導出 |
+| `stageRank` / `difficultyRank` / `representativeRank` | 内部の前提順・問題配置に使う0以上の整数。読者向けの習得対象色ではない |
+| `globalIndex` / `orderReason` | 内部の標準順の位置と説明。章・構造Unitの内部位置は最初の学習子孫から導出する。教科書掲載順には使わない |
 
-`parentId`は目次・navigationだけを表し、前提辺にはしない。章と所有技能・直接配置問題を持たない構造Unitは`standardOrder`から除外する。親子関係と前提関係は別に検証する。標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを3 rank、最後にUnit IDのUTF-8 byte順で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
+`parentId`は目次・navigationだけを表し、前提辺にはしない。章と所有技能・直接配置問題を持たない構造Unitは`standardOrder`から除外する。親子関係と前提関係は別に検証する。内部の標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを`learning-unit-order.ts`の概念連鎖のanchorの3 rank・安定IDと連鎖内位置で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
+
+教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べ、各親と全子孫を連続させる。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。後にある前提も明示的にリンクし、掲載順から前提DAGや問題配置を再計算しない。
 
 各Problemは、想定解法の再構成・実装に必要な全Outcome（supportingも含む）の最遅Unitへ主配置する。原則としてそのUnitの技能をprimaryにし、従来の主技能はco-primaryとして根拠を保持する。意味上の主技法を保持する例外は`primaryOverride`（`primaryOutcomeId`・`rationale`・`decisionAuthorId`）で明示し、例外でも掲載Unitは必須Outcome全体の最遅Unitとする。Unit内では基本的な解法を先に置き、技能集合の包含だけでは問題間の前提辺を作らない。学習段階のrankは内容の基本性に基づき、見出しの深さから決めない。全Unitに段階を明示し、未査読Unitを旧rankへfallbackさせない。Tag・Outcomeの前提は技能自体の習得に限定し、Problem固有のreadinessは必須Outcome集合で表す。
+
+上記の「最遅Unit」と段階rankは内部の`standardOrder`に対するものであり、教科書掲載位置や読者向けの対象色とは独立である。
 
 T050のcanonical skeletonは配置・順序と簡潔な概説を固定し、公開mappingが未受理の間は`draft: true`にする。`contentPhase=full_authoring`へ引き継いだ後は本文を上書きせず、所属・coverage・前提・出典・文書骨格の整合を確認する。T160が公開projectionを切り替える。
 
@@ -320,7 +324,7 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 | `checkIds` / `evidencePaths` | 概念・計算量・根拠の確認と、配置・順序・navigation reviewを追跡する |
 | `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
 
-全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は前提順・主配置の一意性・coverage・導線を、T058は通常本文の数学的正確性を確認する。全Problemの固有解説はProblem authoring unitが所有する。
+全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は内部の前提順・主配置の一意性・coverageと、教科書掲載順の親子連続性・対象色・前提リンク・導線を、T058は通常本文の数学的正確性を確認する。全Problemの固有解説はProblem authoring unitが所有する。
 
 ### ProblemPlacement
 

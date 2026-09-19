@@ -215,6 +215,8 @@ preview後も、公開taxonomyは全コーパスから再計算する。初期�
 6. domain別のLearning Unit概説と各Problemの解説を作り、全Problemが教科書順またはTag問題集から到達できることを検証する。
 7. T057/T075–T076/T078のfull-corpus content・explanation・mapping acceptance後にT160を実行し、preview fixtureへ接続していた共有catalog、route、matrix、search、Pagefind、sitemap/feedをcanonical full-corpus sourceへ一度だけ切り替えてdigestをfreezeする。T138/T140/T145/T146はこの固定projectionを検証・消費し、切替を暗黙に実行しない。
 
+上記のUnit標準順は問題配置を決める内部順を指す。読者向けの掲載順と対象色は後述の編集データから文書へ反映し、accepted buildのtaxonomy・配置・Unit内問題順を変更しない。
+
 previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomyBuild`で全Inventoryを入力に一度だけ決定・review・acceptし、T047–T050がaccepted digestをmaterializeする。次の規則を必ず適用する。
 
 - 仮Tag/Outcome/Unitは`staging/previews/`のnamespaceにのみ存在し、`src/content/tags/`、`learning-outcomes/`、`learning-units/`、公開catalogへ直接コピーしない。
@@ -231,7 +233,12 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 
 共通前提baseline、problem placement decision table、glossaryを別々の唯一の正本にする。全LearningUnitとProblemAuthoringUnitはbaseline、追加前提または追加前提なし、対象外を直接参照する。placementは`full`既定で、主要解説と主成果・前提・解法・証明・漸近計算量が同じ場合だけ`similar`、単一の副次的技能だけを追加する場合だけ`supplement`を許す。どの行にも一意に一致しない場合は保留する。
 
-学習順は前提DAGをhard constraintとし、同時に配置可能なUnitの安定rankとUnit IDで決定する。表示上は前提、難易度、代表性による順序理由を確認できるようにする。
+順序は次の二つを区別する。
+
+- 問題配置・前提検証用の内部順（`standardOrder`）は前提DAGをhard constraintとする。`learning-unit-order.ts`の概念連鎖のanchor優先度、stage/difficulty/representative rankと安定IDによる決定性を維持する。accepted buildの配置・Unit内問題順は、この順序を基準に保持する。
+- 読者向けの教科書掲載順は`textbook-order.ts`を正本とし、章ごとに親Unitと全子孫を連続して置く。章目次は階層を字下げし、Markdownの`sidebar.order`は`textbookIndex`から生成する。前提が後にある場合は「後の節」「後の章」のリンクで補い、前提順へ並べ直さない。グラフ章の二部構造は探索のまとまりの直後、最短路の前に置き、二部マッチングはflow/matchingのまとまりに置く。
+
+全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。内部rankや掲載問題の完答難度を対象色に流用しない。掲載順・対象色の編集ではaccepted taxonomy、問題配置、Unit内問題順を変更せず、materializerで文書と証跡を再生成する。T160までdraftであることと、将来の公開projectionへの引継ぎは変えない。
 
 ### Initial Release Cutoff and Catch-up
 

@@ -3,7 +3,7 @@ title: "SCCで閉路・DAG順・2-SATを処理する"
 description: "「SCCで閉路・DAG順・2-SATを処理する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 94
+  order: 95
 ---
 
 # SCCで閉路・DAG順・2-SATを処理する

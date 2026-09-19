@@ -3,7 +3,7 @@ title: "連結成分を管理し縮約する"
 description: "「連結成分を管理し縮約する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 103
+  order: 104
 ---
 
 # 連結成分を管理し縮約する

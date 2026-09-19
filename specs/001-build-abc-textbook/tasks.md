@@ -96,9 +96,11 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 
 ---
 
-## Phase 3: User Story 2 - 典型テクニックを学習順にたどる (Priority: P1)
+## Phase 3: User Story 2 - 典型テクニックを体系的にたどる (Priority: P1)
 
-**Goal**: 全対象問題の技法棚卸しから重複のない典型体系・前提DAG・標準学習順を作り、教科書と典型別問題集をたどれるようにする。
+**Goal**: 全対象問題の技法棚卸しから重複のない典型体系・前提DAG・内部の標準学習順を作り、親子Unitが連続する分野別の教科書と典型別問題集をたどれるようにする。対象色と前提リンクから読む範囲を選べるようにする。
+
+**掲載順の編集方針**: T050の文書生成では`src/lib/taxonomy/textbook-order.ts`と`unit-learning-targets.ts`を使う。accepted buildの`standardOrder`は問題配置・前提検証用として保持し、教科書掲載順とは分離する。親子subtreeの連続性、全Unitの対象色・理由、後の節・章への前提リンク、配置とUnit内問題順の不変性は`tests/contract/canonical-taxonomy-materialization.test.ts`で検証する。後続の本文執筆とT160もこの表示方針を引き継ぎ、内部rank順へ戻さない。canonical文書はT160までdraftのままとし、今回の掲載順編集では公開projectionを切り替えない。
 
 **Independent Test**: 全 TechniqueInventoryItem を入力に taxonomy を再生成し、正式タグの成果・代表問題、二つの非循環DAG、決定的順序、全Problemの到達可能性を確認し、5つの現在地から教材だけで次の単位を80%以上正しく特定する。
 
@@ -139,7 +141,7 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 - [X] T054 [P] [US2] After T046 and T064, freeze one work manifest per preview candidate Outcome and author only the mathematics/combinatorics `initial-v1` learning path before T154 using the fixed authoring-skill/source packet; write the preview component digest, `authoringSkillVersion`, `authoringSkillDigest`, and all preview-only items under `staging/previews/initial-v1/learning/mathematics/`, `docs/work-manifests/initial/us2/preview-content/mathematics/`, and `docs/verification/previews/initial-v1/components/content/mathematics.json`
 - [ ] T055 [P] [US2] After T050 and passed T154, author concise Unit concepts and navigation for the complete unit-chapter-string and unit-chapter-geometry-optimization subtrees. Freeze one manifest per Unit at `docs/work-manifests/initial/us2/full-learning-units/<learningUnitId>/manifest.json`, preserve classification metadata and accepted Problem placement/order, and claim full_authoring before editing the canonical JSON/Markdown in place. These task worksets must be disjoint and cover every Unit. Each Problem retains its own full explanation authoring unit; do not duplicate explanations into Outcome-owned teaching blocks.
 - [ ] T056 [P] [US2] After T050 and passed T154, author concise Unit concepts and navigation for the complete unit-chapter-modeling subtrees. Freeze one manifest per Unit at `docs/work-manifests/initial/us2/full-learning-units/<learningUnitId>/manifest.json`, preserve classification metadata and accepted Problem placement/order, and claim full_authoring before editing the canonical JSON/Markdown in place. These task worksets must be disjoint and cover every Unit. Each Problem retains its own full explanation authoring unit; do not duplicate explanations into Outcome-owned teaching blocks.
-- [ ] T057 [US2] After Unit authoring, review prerequisite-based Unit and Problem order, unique main placement, coverage and related references, and navigation in `src/lib/catalog/build-learning-path.ts` against the accepted taxonomy.
+- [ ] T057 [US2] After Unit authoring, review internal prerequisite order and accepted Problem order/placement separately from subject-based textbook order. Verify contiguous parent subtrees, target-color labels and reasons, forward prerequisite links, unique main placement, coverage and related references, and navigation in `src/lib/catalog/build-learning-path.ts` against the accepted taxonomy and the editorial data in `src/lib/taxonomy/textbook-order.ts` and `unit-learning-targets.ts`.
 - [ ] T058 [US2] After Unit authoring, verify ordinary conceptual prose, algorithms, assumptions, complexity and mathematical claims against sources; record evidence in `docs/verification/bootstrap/learning-unit-content.json`. Fixed Outcome assessment blocks are not required. Problem explanations retain their separate authoring and verification workflow.
 - [ ] T059 [US2] After T057–T058, have the policy-selected reviewer confirm outcome coverage and run the taxonomy/DAG/placement/reachability/learning-path/terminology/cross-reference suites (`self` for normal changes, `third_party` instead of `self` for fixed high-risk classification changes), and record mode-labeled current-subject MergeReviewEvidence in `docs/verification/bootstrap/us2.json` and `docs/reviews/human-content/bootstrap/us2/merge-review.json`
 - [ ] T060 [US2] After T059, pre-fix and execute the five-position graph/DP/data-structure/mathematics learning-path self-study for SC-010 in `docs/verification/learner-outcomes/bootstrap/sc-010.json`

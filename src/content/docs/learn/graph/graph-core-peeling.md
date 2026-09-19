@@ -3,7 +3,7 @@ title: "次数構造からgraph coreまたは小さなkernelへ縮約する"
 description: "「次数構造からgraph coreまたは小さなkernelへ縮約する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 112
+  order: 113
 ---
 
 # 次数構造からgraph coreまたは小さなkernelへ縮約する

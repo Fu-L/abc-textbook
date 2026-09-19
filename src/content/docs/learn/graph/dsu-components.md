@@ -3,7 +3,7 @@ title: "DSUによる連結成分管理・縮約"
 description: "「DSUによる連結成分管理・縮約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 104
+  order: 105
 ---
 
 # DSUによる連結成分管理・縮約

@@ -112,6 +112,12 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(textbookIndex('unit-segment-tree-beats')).toBeLessThan(
       textbookIndex('unit-dp-state-design'),
     );
+    expect(textbookIndex('unit-bipartite-structure')).toBe(
+      textbookIndex('unit-transitive-closure') + 1,
+    );
+    expect(textbookIndex('unit-bipartite-structure')).toBeLessThan(
+      textbookIndex('unit-shortest-path-certificates'),
+    );
     expect(byId.get('unit-automaton-dp')?.document).toContain('（後の章）');
     expect(byId.get('unit-subset-convolution')?.document).toContain('（後の節）');
     expect(byId.get('unit-chapter-combinatorics-algebra')?.document).toContain(

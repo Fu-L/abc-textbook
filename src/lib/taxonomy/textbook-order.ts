@@ -110,12 +110,13 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-graph',
     introduction:
-      '状態と遷移をグラフへ写し、到達性、距離、連結性の順に構造を調べる。有向グラフではDAGとSCC、無向グラフでは連結成分・橋・全域木を軸に整理し、閉路と次数の構造へ進む。後半は一対一対応から容量付き割当て、費用、双対性へ広げる。matching・flowの各Unitでは、元の問題の制約が頂点・辺・容量のどこに現れるかを確かめる。',
+      '状態と遷移をグラフへ写し、探索による到達性と二部彩色から始めて、距離、連結性の順に構造を調べる。有向グラフではDAGとSCC、無向グラフでは連結成分・橋・全域木を軸に整理し、閉路と次数の構造へ進む。後半は一対一対応から容量付き割当て、費用、双対性へ広げる。matching・flowの各Unitでは、元の問題の制約が頂点・辺・容量のどこに現れるかを確かめる。',
     unitIds: [
       'unit-graph-search',
       'unit-state-graph-search',
       'unit-directional-grid-effect-scan',
       'unit-transitive-closure',
+      'unit-bipartite-structure',
       'unit-shortest-path-certificates',
       'unit-weighted-shortest-path',
       'unit-shortest-path-reconstruction',
@@ -144,7 +145,6 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-euler-degree',
       'unit-euler-trail-circuit',
       'unit-degree-parity-subgraph',
-      'unit-bipartite-structure',
       'unit-flow-matching',
       'unit-bipartite-matching',
       'unit-max-flow-min-cut',

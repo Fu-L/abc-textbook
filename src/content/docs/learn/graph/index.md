@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-状態と遷移をグラフへ写し、到達性、距離、連結性の順に構造を調べる。有向グラフではDAGとSCC、無向グラフでは連結成分・橋・全域木を軸に整理し、閉路と次数の構造へ進む。後半は一対一対応から容量付き割当て、費用、双対性へ広げる。matching・flowの各Unitでは、元の問題の制約が頂点・辺・容量のどこに現れるかを確かめる。
+状態と遷移をグラフへ写し、探索による到達性と二部彩色から始めて、距離、連結性の順に構造を調べる。有向グラフではDAGとSCC、無向グラフでは連結成分・橋・全域木を軸に整理し、閉路と次数の構造へ進む。後半は一対一対応から容量付き割当て、費用、双対性へ広げる。matching・flowの各Unitでは、元の問題の制約が頂点・辺・容量のどこに現れるかを確かめる。
 
 ### グラフモデルと構造
 
@@ -38,6 +38,7 @@ sidebar:
   - [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 緑色
   - [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色
   - [推移閉包](/learn/graph/transitive-closure/) — 水色
+- [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/) — 緑色
 - [重み付き最短路・経路復元・差分制約](/learn/graph/shortest-path-certificates/) — 緑色（導入）
   - [最短路モデル](/learn/graph/weighted-shortest-path/) — 緑色
   - [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 水色
@@ -66,7 +67,6 @@ sidebar:
 - [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/) — 水色（導入）
   - [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 水色
   - [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 青色
-- [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/) — 緑色
 - [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/) — 青色（導入）
   - [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色
   - [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色

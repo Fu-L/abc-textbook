@@ -7,9 +7,9 @@
 
 | Route | Source | Contract |
 |---|---|---|
-| `/` | generated | 対象範囲、標準学習経路、コンテスト索引、要復習一覧、release 情報への入口 |
-| `/learn/` | LearningUnit graph | 全体学習順、前提、順序理由、chapter/section/subsection 階層 |
-| `/learn/<unit-slug>/` | LearningUnit + docs | 分類、前提、概説、基礎→応用順の問題と解説への導線、前後ナビ |
+| `/` | generated | 対象範囲、分野別の教科書目次、コンテスト索引、要復習一覧、release 情報への入口 |
+| `/learn/` | LearningUnit graph + textbook editorial data | 分野別掲載順、親子が連続するchapter/section/subsection階層、対象色と前提への導線 |
+| `/learn/<unit-slug>/` | LearningUnit + docs | 分類、前提、対象色・レーティング帯・理由、概説、既存のUnit内問題順と解説への導線、掲載順の前後ナビ |
 | `/problems/` | catalog + IndexedDB | 全問題一覧と静的属性・学習状態の複合絞り込み |
 | `/problems/<problemId>/` | Problem + Explanation | 問題情報、公式参照、解説、タグ、学習単位、類題、学習記録 |
 | `/tags/` | TechniqueTag | 深さ可変のタグ木、前提関係、同義語・旧名称検索 |
@@ -22,6 +22,8 @@
 | `/data/catalog.json` | generated endpoint | [catalog.schema.json](./catalog.schema.json) 準拠の公開カタログ |
 
 HTML route は末尾 slash を正規形とし、GitHub Pages の project base path でも同じ相対関係を保つ。
+
+教科書掲載順は内部の`standardOrder`/`globalIndex`とは別に定める。章目次では親子階層を字下げし、親と全子孫を連続させる。前提が後に掲載される場合は「後の節」「後の章」と明記する。全Unitの対象色は色名と数値帯と理由を文字で示し、章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とする。全問題を解く難易度や公式の履修基準ではないことを読み方に示す。このcanonical表示契約を公開routeへ反映するのはT160であり、それまではcanonical文書をdraftのまま保持する。
 
 ## 2. Common page contract
 

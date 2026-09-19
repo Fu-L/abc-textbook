@@ -3,7 +3,7 @@ title: "cut・cycle性質から最適全域木を構成する"
 description: "「cut・cycle性質から最適全域木を構成する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 109
+  order: 110
 ---
 
 # cut・cycle性質から最適全域木を構成する

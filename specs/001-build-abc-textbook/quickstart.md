@@ -90,7 +90,8 @@ npm run test:integration -- problem-placement
 期待結果:
 
 - Tag親関係、Tag前提DAG、Unit親関係、Unit前提DAGを別々に検証する。
-- 前提が必ず先行し、同じ入力から同じ全体順と順序理由が得られる。
+- 内部の標準学習順では前提が必ず先行し、同じ入力から同じ順序と理由が得られる。
+- 教科書掲載順では全Unitが一度ずつ現れ、各親と全子孫が連続する。対象色・レーティング帯・理由を確認でき、後にある前提には「後の節」「後の章」を表示する。掲載順の編集で問題配置・Unit内問題順は変わらない。
 - cycle、自己辺、未知参照、生成順改ざんを拒否する。
 - 新しい主成果・前提・解法・証明着眼点・漸近計算量を持つ問題をsimilar/supplementにできない。
 - preview taxonomyは直接canonicalへコピーせず、T159が全Inventoryから`FinalTaxonomyBuild`と全件`TaxonomyIntegrationMap`を生成し、review後にacceptしたdigestだけがT047–T050でmaterializeされる。
@@ -118,7 +119,7 @@ npm run test:e2e -- learning-path contest-index search
 
 期待結果:
 
-- 標準学習順、Tag tree、Tag別問題集、Problem detailが相互参照できる。
+- 分野別の教科書目次、Tag tree、Tag別問題集、Problem detailが相互参照できる（canonical目次の公開反映はT160）。
 - Contest表はAdvancedSlotRegistryの全labelを公式順に表示し、同内容のlist alternativeを持つ。
 - 収録済みcellからProblem、Explanation、Learning Unit、primary/secondary Tag、similar problemsへ各一操作で到達する。
 - Problem/Tag/Learning Unit/Contestの検索結果と明瞭な0件結果がある。

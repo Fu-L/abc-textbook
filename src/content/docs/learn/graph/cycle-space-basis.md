@@ -3,7 +3,7 @@ title: "cycle space・fundamental cycle basis"
 description: "「cycle space・fundamental cycle basis」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 111
+  order: 112
 ---
 
 # cycle space・fundamental cycle basis
