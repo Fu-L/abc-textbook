@@ -54,21 +54,21 @@
     "abc442-e"
   ],
   "directProblemIds": [
-    "abc223-e",
-    "abc225-e",
     "abc248-e",
-    "abc351-e",
+    "abc442-e",
+    "abc223-e",
+    "abc323-f",
     "abc366-e",
     "abc426-e",
-    "abc442-e",
-    "abc250-f",
-    "abc258-f",
-    "abc323-f",
-    "abc353-f",
+    "abc351-e",
+    "abc225-e",
     "abc385-f",
+    "abc250-f",
+    "abc353-f",
+    "abc258-f",
     "abc220-g",
-    "abc301-g",
-    "abc234-ex"
+    "abc234-ex",
+    "abc301-g"
   ],
   "relatedProblemIds": [
     "abc221-g",

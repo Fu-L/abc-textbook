@@ -32,13 +32,11 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC229 E「Graph Destruction」](https://atcoder.jp/contests/abc229/tasks/abc229_e)
-2. [ABC264 E「Blackout 2」](https://atcoder.jp/contests/abc264/tasks/abc264_e)
-3. [ABC329 E「Stamp」](https://atcoder.jp/contests/abc329/tasks/abc329_e)
-4. [ABC346 E「Paint」](https://atcoder.jp/contests/abc346/tasks/abc346_e)
-5. [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
+2. [ABC346 E「Paint」](https://atcoder.jp/contests/abc346/tasks/abc346_e)
+3. [ABC464 E「Fill-Rect Query」](https://atcoder.jp/contests/abc464/tasks/abc464_e)
+4. [ABC264 E「Blackout 2」](https://atcoder.jp/contests/abc264/tasks/abc264_e)
+5. [ABC329 E「Stamp」](https://atcoder.jp/contests/abc329/tasks/abc329_e)
 6. [ABC249 F「Ignore Operations」](https://atcoder.jp/contests/abc249/tasks/abc249_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

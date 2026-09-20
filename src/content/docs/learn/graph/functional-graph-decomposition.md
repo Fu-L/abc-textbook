@@ -32,16 +32,14 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC241 E「Putting Candies」](https://atcoder.jp/contests/abc241/tasks/abc241_e)
-2. [ABC256 E「Takahashi's Anguish」](https://atcoder.jp/contests/abc256/tasks/abc256_e)
-3. [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
-4. [ABC296 E「Transition Game」](https://atcoder.jp/contests/abc296/tasks/abc296_e)
+1. [ABC436 E「Minimum Swap」](https://atcoder.jp/contests/abc436/tasks/abc436_e)
+2. [ABC241 E「Putting Candies」](https://atcoder.jp/contests/abc241/tasks/abc241_e)
+3. [ABC296 E「Transition Game」](https://atcoder.jp/contests/abc296/tasks/abc296_e)
+4. [ABC256 E「Takahashi's Anguish」](https://atcoder.jp/contests/abc256/tasks/abc256_e)
 5. [ABC357 E「Reachability in Functional Graph」](https://atcoder.jp/contests/abc357/tasks/abc357_e)
-6. [ABC377 E「Permute K times 2」](https://atcoder.jp/contests/abc377/tasks/abc377_e)
-7. [ABC399 E「Replace」](https://atcoder.jp/contests/abc399/tasks/abc399_e)
-8. [ABC436 E「Minimum Swap」](https://atcoder.jp/contests/abc436/tasks/abc436_e)
+6. [ABC258 E「Packing Potatoes」](https://atcoder.jp/contests/abc258/tasks/abc258_e)
+7. [ABC377 E「Permute K times 2」](https://atcoder.jp/contests/abc377/tasks/abc377_e)
+8. [ABC399 E「Replace」](https://atcoder.jp/contests/abc399/tasks/abc399_e)
 9. [ABC284 G「Only Once」](https://atcoder.jp/contests/abc284/tasks/abc284_g)
 10. [ABC371 G「Lexicographically Smallest Permutation」](https://atcoder.jp/contests/abc371/tasks/abc371_g)
 

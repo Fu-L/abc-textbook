@@ -32,13 +32,11 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC289 G「Shopping in AtCoder store」](https://atcoder.jp/contests/abc289/tasks/abc289_g)
-2. [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g)
-3. [ABC448 G「Conquest」](https://atcoder.jp/contests/abc448/tasks/abc448_g)
-4. [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
-5. [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
+2. [ABC228 H「Histogram」](https://atcoder.jp/contests/abc228/tasks/abc228_h)
+3. [ABC244 Ex「Linear Maximization」](https://atcoder.jp/contests/abc244/tasks/abc244_h)
+4. [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g)
+5. [ABC448 G「Conquest」](https://atcoder.jp/contests/abc448/tasks/abc448_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

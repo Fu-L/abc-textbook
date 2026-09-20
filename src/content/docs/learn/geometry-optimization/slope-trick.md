@@ -32,12 +32,10 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC250 G「Stonks」](https://atcoder.jp/contests/abc250/tasks/abc250_g)
-2. [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
+2. [ABC217 H「Snuketoon」](https://atcoder.jp/contests/abc217/tasks/abc217_h)
 3. [ABC458 G「Children Yearn for the Evil Kindergarten」](https://atcoder.jp/contests/abc458/tasks/abc458_g)
-4. [ABC217 H「Snuketoon」](https://atcoder.jp/contests/abc217/tasks/abc217_h)
+4. [ABC406 G「Travelling Salesman Problem」](https://atcoder.jp/contests/abc406/tasks/abc406_g)
 5. [ABC275 Ex「Monster」](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

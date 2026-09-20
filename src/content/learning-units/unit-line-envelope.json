@@ -40,10 +40,10 @@
   ],
   "directProblemIds": [
     "abc289-g",
-    "abc372-g",
-    "abc448-g",
     "abc228-h",
-    "abc244-ex"
+    "abc244-ex",
+    "abc372-g",
+    "abc448-g"
   ],
   "relatedProblemIds": [],
   "examples": [],

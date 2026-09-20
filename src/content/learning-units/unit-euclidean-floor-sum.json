@@ -40,8 +40,8 @@
   "directProblemIds": [
     "abc443-g",
     "abc313-g",
-    "abc402-g",
-    "abc283-ex"
+    "abc283-ex",
+    "abc402-g"
   ],
   "relatedProblemIds": [
     "abc372-g"

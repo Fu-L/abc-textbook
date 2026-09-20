@@ -36,10 +36,8 @@ Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC333 G「Nearest Fraction」](https://atcoder.jp/contests/abc333/tasks/abc333_g)
-2. [ABC408 G「A/B < p/q < C/D」](https://atcoder.jp/contests/abc408/tasks/abc408_g)
+1. [ABC408 G「A/B < p/q < C/D」](https://atcoder.jp/contests/abc408/tasks/abc408_g)
+2. [ABC333 G「Nearest Fraction」](https://atcoder.jp/contests/abc333/tasks/abc333_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

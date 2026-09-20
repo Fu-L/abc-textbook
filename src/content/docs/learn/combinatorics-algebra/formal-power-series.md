@@ -38,14 +38,12 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC449 G「Many Repunit Sum 2」](https://atcoder.jp/contests/abc449/tasks/abc449_g)
-2. [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
-3. [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
-4. [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
-5. [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
-6. [ABC318 Ex「Count Strong Test Cases」](https://atcoder.jp/contests/abc318/tasks/abc318_h)
+2. [ABC297 Ex「Diff Adjacent」](https://atcoder.jp/contests/abc297/tasks/abc297_h)
+3. [ABC318 Ex「Count Strong Test Cases」](https://atcoder.jp/contests/abc318/tasks/abc318_h)
+4. [ABC289 Ex「Trio」](https://atcoder.jp/contests/abc289/tasks/abc289_h)
+5. [ABC260 Ex「Colorfulness」](https://atcoder.jp/contests/abc260/tasks/abc260_h)
+6. [ABC317 Ex「Walk」](https://atcoder.jp/contests/abc317/tasks/abc317_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

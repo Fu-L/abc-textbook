@@ -32,16 +32,14 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC259 E「LCM on Whiteboard」](https://atcoder.jp/contests/abc259/tasks/abc259_e)
+1. [ABC400 E「Ringo's Favorite Numbers 3」](https://atcoder.jp/contests/abc400/tasks/abc400_e)
 2. [ABC393 E「GCD of Subset」](https://atcoder.jp/contests/abc393/tasks/abc393_e)
-3. [ABC400 E「Ringo's Favorite Numbers 3」](https://atcoder.jp/contests/abc400/tasks/abc400_e)
-4. [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e)
-5. [ABC445 E「Many LCMs」](https://atcoder.jp/contests/abc445/tasks/abc445_e)
-6. [ABC384 F「Double Sum 2」](https://atcoder.jp/contests/abc384/tasks/abc384_f)
-7. [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
-8. [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g)
+3. [ABC259 E「LCM on Whiteboard」](https://atcoder.jp/contests/abc259/tasks/abc259_e)
+4. [ABC445 E「Many LCMs」](https://atcoder.jp/contests/abc445/tasks/abc445_e)
+5. [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g)
+6. [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e)
+7. [ABC384 F「Double Sum 2」](https://atcoder.jp/contests/abc384/tasks/abc384_f)
+8. [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

@@ -1,57 +1,52 @@
 import { describe, expect, it } from 'vitest';
-import { orderProblemsByPrerequisites } from '../../src/lib/taxonomy/problem-reading-order.js';
+import {
+  orderUnitProblemsByDifficulty,
+  UNIT_PROBLEM_READING_ORDER,
+} from '../../src/lib/taxonomy/problem-reading-order.js';
 
-const skills = [
-  { id: 'tag-base', prerequisiteIds: [] },
-  { id: 'tag-advanced', prerequisiteIds: ['tag-base'] },
-];
-const problem = (problemId: string, advanced = false) => ({
-  problemId,
-  primaryTagIds: [advanced ? 'tag-advanced' : 'tag-base'],
-  supportingTagIds: [],
-  primaryOutcomeId: 'tag-base',
-  additionalPrimaryOutcomeIds: [],
-  supportingOutcomeIds: [],
-});
+describe('editorial problem difficulty order', () => {
+  it('uses the full editorial order independently of incoming order', () => {
+    const expected = ['abc294-g', 'abc267-f', 'abc438-f', 'abc298-ex', 'abc329-g'];
+    expect(
+      orderUnitProblemsByDifficulty('unit-tree-ancestor-lca', [...expected].reverse()),
+    ).toEqual(expected);
+  });
 
-describe('problem reading order', () => {
-  it('uses ABC slots before skill counts, representatives, and contest IDs', () => {
-    const input = [
-      problem('abc212-ex'),
-      problem('abc226-h'),
-      problem('abc213-g'),
-      problem('abc466-e', true),
-      problem('abc300-f'),
-    ];
-    const expected = ['abc466-e', 'abc300-f', 'abc213-g', 'abc212-ex', 'abc226-h'];
-    expect(orderProblemsByPrerequisites(input, skills)).toEqual(expected);
-    expect(orderProblemsByPrerequisites([...input].reverse(), [...skills].reverse())).toEqual(
-      expected,
+  it('preserves content-based decisions across slots and close measured difficulties', () => {
+    // 294 G is a standard LCA/distance query; 438 F combines path constraints and counting.
+    // 351 G has fixed-root affine composition; 460 G also needs reversed cluster DP.
+    expect(orderUnitProblemsByDifficulty('unit-static-top-tree', ['abc460-g', 'abc351-g'])).toEqual(
+      ['abc351-g', 'abc460-g'],
+    );
+    expect(UNIT_PROBLEM_READING_ORDER['unit-dsu-components']?.[0]).toBe('abc420-e');
+    expect(UNIT_PROBLEM_READING_ORDER['unit-dsu-components']?.at(-1)).toBe('abc440-g');
+  });
+
+  it('does not silently append, drop, duplicate, or mechanically sort unedited problems', () => {
+    for (const input of [
+      ['abc351-g'],
+      ['abc351-g', 'abc460-g', 'abc999-g'],
+      ['abc351-g', 'abc351-g'],
+      ['abc351-g', 'abc999-g'],
+    ]) {
+      expect(() => orderUnitProblemsByDifficulty('unit-static-top-tree', input)).toThrow(
+        'UNIT_PROBLEM_READING_ORDER_INCOMPLETE',
+      );
+    }
+    expect(() => orderUnitProblemsByDifficulty('unit-unedited', ['abc999-e'])).toThrow(
+      'UNIT_PROBLEM_READING_ORDER_INCOMPLETE',
     );
   });
-  it('starts event sweep and probability with E problems before complex later slots', () => {
-    expect(
-      orderProblemsByPrerequisites(
-        ['abc226-h', 'abc320-e', 'abc214-e', 'abc275-e', 'abc298-e', 'abc300-f'].map((id) =>
-          problem(id),
-        ),
-        skills,
-      ),
-    ).toEqual(['abc214-e', 'abc275-e', 'abc298-e', 'abc320-e', 'abc300-f', 'abc226-h']);
-  });
-  it('keeps a local floor-sum exception inside its original slots', () => {
-    const input = ['abc402-g', 'abc283-ex', 'abc443-g', 'abc300-f'].map((id) => problem(id));
-    expect(orderProblemsByPrerequisites(input, skills, 'unit-euclidean-floor-sum')).toEqual([
-      'abc300-f',
-      'abc443-g',
-      'abc402-g',
-      'abc283-ex',
-    ]);
-    expect(orderProblemsByPrerequisites(input, skills, 'unit-unrelated')).toEqual([
-      'abc300-f',
-      'abc402-g',
-      'abc443-g',
-      'abc283-ex',
-    ]);
+
+  it('keeps empty and singleton Units and returns a copy of the editorial data', () => {
+    expect(orderUnitProblemsByDifficulty('unit-chapter-tree', [])).toEqual([]);
+    const singleton = Object.entries(UNIT_PROBLEM_READING_ORDER).find(
+      ([, ids]) => ids.length === 1,
+    );
+    if (!singleton) throw new Error('Missing singleton Unit');
+    const [id, ids] = singleton;
+    const result = orderUnitProblemsByDifficulty(id, ids);
+    expect(result).toEqual(ids);
+    expect(result).not.toBe(ids);
   });
 });

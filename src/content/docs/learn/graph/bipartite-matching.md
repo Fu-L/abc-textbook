@@ -38,17 +38,15 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
-2. [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
-3. [ABC317 G「Rearranging」](https://atcoder.jp/contests/abc317/tasks/abc317_g)
-4. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
-5. [ABC401 G「Push Simultaneously」](https://atcoder.jp/contests/abc401/tasks/abc401_g)
+1. [ABC401 G「Push Simultaneously」](https://atcoder.jp/contests/abc401/tasks/abc401_g)
+2. [ABC318 F「Octopus」](https://atcoder.jp/contests/abc318/tasks/abc318_f)
+3. [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
+4. [ABC274 G「Security Camera 3」](https://atcoder.jp/contests/abc274/tasks/abc274_g)
+5. [ABC461 G「Graph Problem 2026」](https://atcoder.jp/contests/abc461/tasks/abc461_g)
 6. [ABC424 G「Set list」](https://atcoder.jp/contests/abc424/tasks/abc424_g)
-7. [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
-8. [ABC445 G「Knight Placement」](https://atcoder.jp/contests/abc445/tasks/abc445_g)
-9. [ABC461 G「Graph Problem 2026」](https://atcoder.jp/contests/abc461/tasks/abc461_g)
+7. [ABC374 G「Only One Product Name」](https://atcoder.jp/contests/abc374/tasks/abc374_g)
+8. [ABC317 G「Rearranging」](https://atcoder.jp/contests/abc317/tasks/abc317_g)
+9. [ABC437 G「Colorful Christmas Tree」](https://atcoder.jp/contests/abc437/tasks/abc437_g)
 10. [ABC313 Ex「Group Photo」](https://atcoder.jp/contests/abc313/tasks/abc313_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

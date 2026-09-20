@@ -32,8 +32,6 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC287 E「Karuta」](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 2. [ABC437 E「Sort Arrays」](https://atcoder.jp/contests/abc437/tasks/abc437_e)
 3. [ABC377 G「Edit to Match」](https://atcoder.jp/contests/abc377/tasks/abc377_g)

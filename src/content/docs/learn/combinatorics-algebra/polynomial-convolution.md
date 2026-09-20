@@ -47,11 +47,9 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC291 G「OR Sum」](https://atcoder.jp/contests/abc291/tasks/abc291_g)
-2. [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
-3. [ABC307 Ex「Marquee」](https://atcoder.jp/contests/abc307/tasks/abc307_h)
+2. [ABC307 Ex「Marquee」](https://atcoder.jp/contests/abc307/tasks/abc307_h)
+3. [ABC278 Ex「make 1」](https://atcoder.jp/contests/abc278/tasks/abc278_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

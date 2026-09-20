@@ -40,10 +40,10 @@
     "abc356-g"
   ],
   "directProblemIds": [
-    "abc275-g",
     "abc341-g",
-    "abc356-g",
-    "abc286-ex"
+    "abc275-g",
+    "abc286-ex",
+    "abc356-g"
   ],
   "relatedProblemIds": [
     "abc244-ex",

@@ -32,16 +32,14 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC293 E「Geometric Progression」](https://atcoder.jp/contests/abc293/tasks/abc293_e)
 2. [ABC256 G「Black and White Stones」](https://atcoder.jp/contests/abc256/tasks/abc256_g)
 3. [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
-4. [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
-5. [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
-6. [ABC258 Ex「Odd Steps」](https://atcoder.jp/contests/abc258/tasks/abc258_h)
+4. [ABC258 Ex「Odd Steps」](https://atcoder.jp/contests/abc258/tasks/abc258_h)
+5. [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+6. [ABC245 Ex「Product Modulo 2」](https://atcoder.jp/contests/abc245/tasks/abc245_h)
 7. [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
-8. [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
+8. [ABC429 G「Sum of Pow of Mod of Linear」](https://atcoder.jp/contests/abc429/tasks/abc429_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

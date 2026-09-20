@@ -68,26 +68,24 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
-2. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
+1. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
+2. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
 3. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
-4. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
+4. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
 5. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
-6. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
-7. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
-8. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
-9. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
-10. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
-11. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
-12. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
+6. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
+7. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
+8. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
+9. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
+10. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
+11. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
+12. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
 13. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
 14. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
-15. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
-16. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
-17. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
-18. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+15. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
+16. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
+17. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
+18. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
 19. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

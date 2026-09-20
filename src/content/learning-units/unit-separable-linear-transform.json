@@ -39,9 +39,9 @@
   ],
   "directProblemIds": [
     "abc288-g",
-    "abc367-g",
     "abc212-h",
-    "abc220-h"
+    "abc220-h",
+    "abc367-g"
   ],
   "relatedProblemIds": [
     "abc265-ex"

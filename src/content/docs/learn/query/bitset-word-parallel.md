@@ -32,11 +32,9 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC348 F「Oddly Similar」](https://atcoder.jp/contests/abc348/tasks/abc348_f)
-2. [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
-3. [ABC258 G「Triangle」](https://atcoder.jp/contests/abc258/tasks/abc258_g)
+1. [ABC258 G「Triangle」](https://atcoder.jp/contests/abc258/tasks/abc258_g)
+2. [ABC348 F「Oddly Similar」](https://atcoder.jp/contests/abc348/tasks/abc348_f)
+3. [ABC221 G「Jumping sequence」](https://atcoder.jp/contests/abc221/tasks/abc221_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

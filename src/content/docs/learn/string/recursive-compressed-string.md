@@ -32,11 +32,9 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC450 E「Fibonacci String」](https://atcoder.jp/contests/abc450/tasks/abc450_e)
-2. [ABC346 F「SSttrriinngg in StringString」](https://atcoder.jp/contests/abc346/tasks/abc346_f)
-3. [ABC350 F「Transpose」](https://atcoder.jp/contests/abc350/tasks/abc350_f)
+2. [ABC350 F「Transpose」](https://atcoder.jp/contests/abc350/tasks/abc350_f)
+3. [ABC346 F「SSttrriinngg in StringString」](https://atcoder.jp/contests/abc346/tasks/abc346_f)
 4. [ABC417 G「Binary Cat」](https://atcoder.jp/contests/abc417/tasks/abc417_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

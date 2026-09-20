@@ -32,12 +32,10 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC335 F「Hop Sugoroku」](https://atcoder.jp/contests/abc335/tasks/abc335_f)
-2. [ABC219 G「Propagation」](https://atcoder.jp/contests/abc219/tasks/abc219_g)
-3. [ABC350 G「Mediator」](https://atcoder.jp/contests/abc350/tasks/abc350_g)
-4. [ABC365 G「AtCoder Office」](https://atcoder.jp/contests/abc365/tasks/abc365_g)
+2. [ABC350 G「Mediator」](https://atcoder.jp/contests/abc350/tasks/abc350_g)
+3. [ABC365 G「AtCoder Office」](https://atcoder.jp/contests/abc365/tasks/abc365_g)
+4. [ABC219 G「Propagation」](https://atcoder.jp/contests/abc219/tasks/abc219_g)
 5. [ABC259 Ex「Yet Another Path Counting」](https://atcoder.jp/contests/abc259/tasks/abc259_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

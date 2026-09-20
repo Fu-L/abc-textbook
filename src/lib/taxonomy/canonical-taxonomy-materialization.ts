@@ -1,6 +1,9 @@
 import type { z } from 'zod';
 import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
-import { PROBLEM_READING_ORDER_REASON } from './problem-reading-order.js';
+import {
+  orderUnitProblemsByDifficulty,
+  PROBLEM_READING_ORDER_REASON,
+} from './problem-reading-order.js';
 import { TEXTBOOK_CHAPTERS, textbookIndex } from './textbook-order.js';
 import { isCurriculumUnit } from './learning-unit-order.js';
 import { unitLearningTarget } from './unit-learning-targets.js';
@@ -339,8 +342,6 @@ const renderLearningUnitDocument = (input: {
         ]),
     '## 問題一覧',
     '',
-    '基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。',
-    '',
     ...(unit.directProblemIds?.length
       ? problemLinks(unit.directProblemIds).map((link, i) => `${String(i + 1)}. ${link}`)
       : ['この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。']),
@@ -522,6 +523,7 @@ export const buildCanonicalTaxonomyMaterialization = (
       const documentPath = learningUnitDocumentPath(unit, unitById);
       const materializedUnit = LearningUnitSchema.parse({
         ...unit,
+        directProblemIds: orderUnitProblemsByDifficulty(unit.id, unit.directProblemIds),
         sourceRevisionIds,
         contentPhase: 'canonical_skeleton',
         docPath: documentPath,
@@ -864,7 +866,10 @@ export const validateCanonicalMaterialization = (
       ),
     );
     const expectedProjection = Object.fromEntries(
-      Object.entries(expected).filter(([field]) => field !== 'sourceRevisionIds'),
+      Object.entries({
+        ...expected,
+        directProblemIds: orderUnitProblemsByDifficulty(expected.id, expected.directProblemIds),
+      }).filter(([field]) => field !== 'sourceRevisionIds'),
     );
     if (canonicalJson(fixedProjection) !== canonicalJson(expectedProjection)) {
       diagnostics.push(`UNIT_TAXONOMY_DRIFT:${output.value.id}`);

@@ -32,11 +32,9 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
+1. [ABC362 G「Count Substring Query」](https://atcoder.jp/contests/abc362/tasks/abc362_g)
 2. [ABC272 F「Two Strings」](https://atcoder.jp/contests/abc272/tasks/abc272_f)
-3. [ABC362 G「Count Substring Query」](https://atcoder.jp/contests/abc362/tasks/abc362_g)
+3. [ABC213 F「Common Prefixes」](https://atcoder.jp/contests/abc213/tasks/abc213_f)
 4. [ABC452 G「221 Substring」](https://atcoder.jp/contests/abc452/tasks/abc452_g)
 5. [ABC268 Ex「Taboo」](https://atcoder.jp/contests/abc268/tasks/abc268_h)
 6. [ABC280 Ex「Substring Sort」](https://atcoder.jp/contests/abc280/tasks/abc280_h)

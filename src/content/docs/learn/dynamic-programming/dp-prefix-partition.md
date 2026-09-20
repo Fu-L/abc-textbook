@@ -40,12 +40,10 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC285 E「Work or Rest」](https://atcoder.jp/contests/abc285/tasks/abc285_e)
-2. [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
-3. [ABC230 F「Predilection」](https://atcoder.jp/contests/abc230/tasks/abc230_f)
-4. [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+1. [ABC466 E「Range Flip」](https://atcoder.jp/contests/abc466/tasks/abc466_e)
+2. [ABC285 E「Work or Rest」](https://atcoder.jp/contests/abc285/tasks/abc285_e)
+3. [ABC374 F「Shipping」](https://atcoder.jp/contests/abc374/tasks/abc374_f)
+4. [ABC230 F「Predilection」](https://atcoder.jp/contests/abc230/tasks/abc230_f)
 5. [ABC234 G「Divide a Sequence」](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

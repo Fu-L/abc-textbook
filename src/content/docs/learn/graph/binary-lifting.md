@@ -32,14 +32,12 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC367 E「Permute K times」](https://atcoder.jp/contests/abc367/tasks/abc367_e)
 2. [ABC438 E「Heavy Buckets」](https://atcoder.jp/contests/abc438/tasks/abc438_e)
-3. [ABC212 F「Greedy Takahashi」](https://atcoder.jp/contests/abc212/tasks/abc212_f)
-4. [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
-5. [ABC254 G「Elevators」](https://atcoder.jp/contests/abc254/tasks/abc254_g)
-6. [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+3. [ABC370 F「Cake Division」](https://atcoder.jp/contests/abc370/tasks/abc370_f)
+4. [ABC212 F「Greedy Takahashi」](https://atcoder.jp/contests/abc212/tasks/abc212_f)
+5. [ABC310 G「Takahashi And Pass-The-Ball Game」](https://atcoder.jp/contests/abc310/tasks/abc310_g)
+6. [ABC254 G「Elevators」](https://atcoder.jp/contests/abc254/tasks/abc254_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

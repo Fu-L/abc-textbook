@@ -55,11 +55,11 @@
   ],
   "directProblemIds": [
     "abc449-g",
-    "abc260-ex",
-    "abc289-ex",
     "abc297-ex",
-    "abc317-ex",
-    "abc318-ex"
+    "abc318-ex",
+    "abc289-ex",
+    "abc260-ex",
+    "abc317-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],

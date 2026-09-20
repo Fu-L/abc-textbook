@@ -36,8 +36,6 @@ ABC229 Hでは列間で手が干渉しない独立和と、全ての列局面が
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC229 H「Advance or Eat」](https://atcoder.jp/contests/abc229/tasks/abc229_h)
 2. [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 

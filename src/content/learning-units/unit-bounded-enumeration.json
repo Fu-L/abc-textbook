@@ -47,19 +47,19 @@
     "abc442-g"
   ],
   "directProblemIds": [
-    "abc219-e",
     "abc234-e",
     "abc254-e",
     "abc272-e",
-    "abc312-e",
     "abc386-e",
-    "abc227-f",
+    "abc219-e",
+    "abc410-f",
+    "abc312-e",
+    "abc302-g",
     "abc260-f",
     "abc347-f",
-    "abc410-f",
-    "abc290-g",
-    "abc302-g",
-    "abc442-g"
+    "abc227-f",
+    "abc442-g",
+    "abc290-g"
   ],
   "relatedProblemIds": [
     "abc220-g",

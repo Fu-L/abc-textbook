@@ -32,11 +32,9 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
-2. [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
-3. [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
+1. [ABC305 G「Banned Substrings」](https://atcoder.jp/contests/abc305/tasks/abc305_g)
+2. [ABC391 G「Many LCS」](https://atcoder.jp/contests/abc391/tasks/abc391_g)
+3. [ABC301 F「Anti-DDoS」](https://atcoder.jp/contests/abc301/tasks/abc301_f)
 4. [ABC418 G「Binary Operation」](https://atcoder.jp/contests/abc418/tasks/abc418_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

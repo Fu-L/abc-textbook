@@ -32,14 +32,12 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC247 G「Dream Team」](https://atcoder.jp/contests/abc247/tasks/abc247_g)
 2. [ABC407 G「Domino Covering SUM」](https://atcoder.jp/contests/abc407/tasks/abc407_g)
 3. [ABC421 G「Increase to make it Increasing」](https://atcoder.jp/contests/abc421/tasks/abc421_g)
-4. [ABC214 H「Collecting」](https://atcoder.jp/contests/abc214/tasks/abc214_h)
-5. [ABC224 H「Security Camera 2」](https://atcoder.jp/contests/abc224/tasks/abc224_h)
-6. [ABC231 H「Minimum Coloring」](https://atcoder.jp/contests/abc231/tasks/abc231_h)
+4. [ABC224 H「Security Camera 2」](https://atcoder.jp/contests/abc224/tasks/abc224_h)
+5. [ABC231 H「Minimum Coloring」](https://atcoder.jp/contests/abc231/tasks/abc231_h)
+6. [ABC214 H「Collecting」](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

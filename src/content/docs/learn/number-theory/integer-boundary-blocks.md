@@ -36,16 +36,14 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC230 E「Fraction Floor Sum」](https://atcoder.jp/contests/abc230/tasks/abc230_e)
-2. [ABC356 E「Max/Min」](https://atcoder.jp/contests/abc356/tasks/abc356_e)
-3. [ABC414 E「Count A%B=C」](https://atcoder.jp/contests/abc414/tasks/abc414_e)
-4. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
-5. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
-6. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
-7. [ABC253 G「Swap Many Times」](https://atcoder.jp/contests/abc253/tasks/abc253_g)
-8. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+2. [ABC414 E「Count A%B=C」](https://atcoder.jp/contests/abc414/tasks/abc414_e)
+3. [ABC452 E「You WILL Like Sigma Problem」](https://atcoder.jp/contests/abc452/tasks/abc452_e)
+4. [ABC356 E「Max/Min」](https://atcoder.jp/contests/abc356/tasks/abc356_e)
+5. [ABC253 G「Swap Many Times」](https://atcoder.jp/contests/abc253/tasks/abc253_g)
+6. [ABC293 F「Zero or One」](https://atcoder.jp/contests/abc293/tasks/abc293_f)
+7. [ABC315 G「Ai + Bj + Ck = X (1 <= i, j, k <= N)」](https://atcoder.jp/contests/abc315/tasks/abc315_g)
+8. [ABC444 F「Half and Median」](https://atcoder.jp/contests/abc444/tasks/abc444_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

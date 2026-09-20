@@ -5,7 +5,7 @@ import {
 } from './learning-unit-order.js';
 import { lstat, readFile, readdir, realpath } from 'node:fs/promises';
 import path from 'node:path';
-import { orderProblemsByPrerequisites } from './problem-reading-order.js';
+import { orderTaxonomySnapshotProblems } from './taxonomy-snapshot-problem-order.js';
 
 import {
   buildTechniqueInventoryAuthoringEvidence,
@@ -1814,7 +1814,7 @@ const materializePolicyLearningUnits = (
       ...unit,
       problemIds,
       relatedProblemIds,
-      directProblemIds: orderProblemsByPrerequisites(
+      directProblemIds: orderTaxonomySnapshotProblems(
         decisions.filter(({ presentationUnitId }) => presentationUnitId === unit.id),
         skills,
         unit.id,
@@ -2951,7 +2951,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   }
   for (const { entity: unit } of unitCandidates) {
     const children = unitCandidates.filter(({ entity }) => entity.parentId === unit.id);
-    const expectedDirectIds = orderProblemsByPrerequisites(
+    const expectedDirectIds = orderTaxonomySnapshotProblems(
       build.placements.filter(({ presentationUnitId }) => presentationUnitId === unit.id),
       [
         ...tagCandidates.map(({ entity }) => ({

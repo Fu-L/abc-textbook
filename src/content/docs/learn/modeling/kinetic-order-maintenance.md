@@ -32,8 +32,6 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC344 G「Points and Comparison」](https://atcoder.jp/contests/abc344/tasks/abc344_g)
 2. [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 

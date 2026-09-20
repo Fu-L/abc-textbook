@@ -32,15 +32,13 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC331 E「Set Meal」](https://atcoder.jp/contests/abc331/tasks/abc331_e)
-2. [ABC376 E「Max × Sum」](https://atcoder.jp/contests/abc376/tasks/abc376_e)
-3. [ABC384 E「Takahashi is Slime 2」](https://atcoder.jp/contests/abc384/tasks/abc384_e)
-4. [ABC407 E「Most Valuable Parentheses」](https://atcoder.jp/contests/abc407/tasks/abc407_e)
-5. [ABC440 E「Cookies」](https://atcoder.jp/contests/abc440/tasks/abc440_e)
-6. [ABC252 F「Bread」](https://atcoder.jp/contests/abc252/tasks/abc252_f)
-7. [ABC391 F「K-th Largest Triplet」](https://atcoder.jp/contests/abc391/tasks/abc391_f)
+1. [ABC384 E「Takahashi is Slime 2」](https://atcoder.jp/contests/abc384/tasks/abc384_e)
+2. [ABC331 E「Set Meal」](https://atcoder.jp/contests/abc331/tasks/abc331_e)
+3. [ABC376 E「Max × Sum」](https://atcoder.jp/contests/abc376/tasks/abc376_e)
+4. [ABC252 F「Bread」](https://atcoder.jp/contests/abc252/tasks/abc252_f)
+5. [ABC391 F「K-th Largest Triplet」](https://atcoder.jp/contests/abc391/tasks/abc391_f)
+6. [ABC407 E「Most Valuable Parentheses」](https://atcoder.jp/contests/abc407/tasks/abc407_e)
+7. [ABC440 E「Cookies」](https://atcoder.jp/contests/abc440/tasks/abc440_e)
 8. [ABC304 Ex「Constrained Topological Sort」](https://atcoder.jp/contests/abc304/tasks/abc304_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

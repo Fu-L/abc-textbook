@@ -40,7 +40,7 @@
     "T049",
     "T050"
   ],
-  "problemReadingOrderReason": "基本から応用へ進むため、ABCの問題アルファベット順（E→F→G→H/Ex）を基準とする。現corpusではDifficulty・配点が揃っていないため推測値は作らない。同じ出題枠ではProblem ID順とし、contest番号自体に難易度の意味は持たせない。教育的に不自然な箇所だけUnit内の例外で補正し、技能数や本文中の例示順は難易度の代用にしない。",
+  "problemReadingOrderReason": "Unit内の問題をやさしい順に個別編集。出題スロット・配点・difficultyとInventoryの解法概要を照合し、発想・考察・実装の難しさを総合判断した。数値の機械的ソートや学習経路の指定は行わない。",
   "counts": {
     "tags": 205,
     "learningOutcomes": 214,
@@ -65,10 +65,10 @@
   "digests": {
     "tags": "6bc71578392f208f8800a1e54d9006c53745c545731e0ce6a2dea1d77c9bf586",
     "learningOutcomes": "a76471d2127429aa647df21f7c2b6cc878d5f299500fb1138bd4d8d5df3ddd27",
-    "learningUnits": "44fbe47ddf3fc0c82fef95600fe490c4e12ae1498ce8a83879569b0a3991721f",
-    "learningDocuments": "a3e7e97603bd9e6b722c1825b9946e78468d07f925623906d159489dcc61c85e",
+    "learningUnits": "3ae0c711291c8e9be68f3372a9089cf267f13e38fd39196a44136af4d51f0cce",
+    "learningDocuments": "5b6d26564e16a6edcacc49d3cd83f185bd49b9ac541b3d51d1fb92b2eba7e869",
     "learningOrderDigest": "f09bc94807b80879bfc3ea2a75d67d88d8430384583427e2061f79f9ba43d780",
     "problemPlacementPolicyDigest": "4f273397ef26d8fdd6f405803888bd3e760008f0ab8b7992d27a4d157863c662"
   },
-  "materializationDigest": "31c85d6721a5636b98d3efa802ffaddc932b6cc2bc71f9559ada2b705253ad1a"
+  "materializationDigest": "6d4849ddc9a876ed86a3859e3592f24b340956cf887a535949795ae3b61310a8"
 }

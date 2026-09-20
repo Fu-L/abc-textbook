@@ -32,12 +32,10 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
-2. [ABC306 E「Best Performances」](https://atcoder.jp/contests/abc306/tasks/abc306_e)
-3. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
-4. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+1. [ABC330 E「Mex and Update」](https://atcoder.jp/contests/abc330/tasks/abc330_e)
+2. [ABC444 E「Sparse Range」](https://atcoder.jp/contests/abc444/tasks/abc444_e)
+3. [ABC306 E「Best Performances」](https://atcoder.jp/contests/abc306/tasks/abc306_e)
+4. [ABC281 E「Least Elements」](https://atcoder.jp/contests/abc281/tasks/abc281_e)
 5. [ABC308 G「Minimum Xor Pair Query」](https://atcoder.jp/contests/abc308/tasks/abc308_g)
 6. [ABC314 G「Amulets」](https://atcoder.jp/contests/abc314/tasks/abc314_g)
 

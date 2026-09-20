@@ -44,8 +44,6 @@ DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC348 G「Max (Sum - Max)」](https://atcoder.jp/contests/abc348/tasks/abc348_g)
 2. [ABC355 G「Baseball」](https://atcoder.jp/contests/abc355/tasks/abc355_g)
 3. [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g)

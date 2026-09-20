@@ -32,13 +32,11 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC271 F「XOR on Grid Path」](https://atcoder.jp/contests/abc271/tasks/abc271_f)
-2. [ABC326 F「Robot Rotation」](https://atcoder.jp/contests/abc326/tasks/abc326_f)
-3. [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
-4. [ABC402 F「Path to Integer」](https://atcoder.jp/contests/abc402/tasks/abc402_f)
-5. [ABC427 F「Not Adjacent」](https://atcoder.jp/contests/abc427/tasks/abc427_f)
+2. [ABC402 F「Path to Integer」](https://atcoder.jp/contests/abc402/tasks/abc402_f)
+3. [ABC427 F「Not Adjacent」](https://atcoder.jp/contests/abc427/tasks/abc427_f)
+4. [ABC326 F「Robot Rotation」](https://atcoder.jp/contests/abc326/tasks/abc326_f)
+5. [ABC336 F「Rotation Puzzle」](https://atcoder.jp/contests/abc336/tasks/abc336_f)
 6. [ABC464 F「Random Vault Heist」](https://atcoder.jp/contests/abc464/tasks/abc464_f)
 7. [ABC300 G「P-smooth number」](https://atcoder.jp/contests/abc300/tasks/abc300_g)
 8. [ABC423 G「Small Multiple 2」](https://atcoder.jp/contests/abc423/tasks/abc423_g)

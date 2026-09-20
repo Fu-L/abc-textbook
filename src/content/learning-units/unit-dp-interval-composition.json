@@ -47,14 +47,14 @@
   ],
   "directProblemIds": [
     "abc217-f",
-    "abc400-f",
-    "abc233-g",
     "abc252-g",
-    "abc261-g",
-    "abc262-g",
+    "abc233-g",
+    "abc400-f",
+    "abc325-g",
     "abc292-g",
     "abc298-g",
-    "abc325-g",
+    "abc261-g",
+    "abc262-g",
     "abc238-ex"
   ],
   "relatedProblemIds": [

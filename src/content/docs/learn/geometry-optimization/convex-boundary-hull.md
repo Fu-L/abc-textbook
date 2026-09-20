@@ -32,12 +32,10 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC275 G「Infinite Knapsack」](https://atcoder.jp/contests/abc275/tasks/abc275_g)
-2. [ABC341 G「Highest Ratio」](https://atcoder.jp/contests/abc341/tasks/abc341_g)
-3. [ABC356 G「Freestyle」](https://atcoder.jp/contests/abc356/tasks/abc356_g)
-4. [ABC286 Ex「Don't Swim」](https://atcoder.jp/contests/abc286/tasks/abc286_h)
+1. [ABC341 G「Highest Ratio」](https://atcoder.jp/contests/abc341/tasks/abc341_g)
+2. [ABC275 G「Infinite Knapsack」](https://atcoder.jp/contests/abc275/tasks/abc275_g)
+3. [ABC286 Ex「Don't Swim」](https://atcoder.jp/contests/abc286/tasks/abc286_h)
+4. [ABC356 G「Freestyle」](https://atcoder.jp/contests/abc356/tasks/abc356_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

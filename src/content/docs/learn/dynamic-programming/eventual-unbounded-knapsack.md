@@ -36,8 +36,6 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g)
 2. [ABC310 Ex「Negative Cost」](https://atcoder.jp/contests/abc310/tasks/abc310_h)
 

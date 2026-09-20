@@ -32,16 +32,14 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC462 E「Alternating Costs」](https://atcoder.jp/contests/abc462/tasks/abc462_e)
 2. [ABC240 F「Sum Sum Max」](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 3. [ABC330 F「Minimize Bounding Square」](https://atcoder.jp/contests/abc330/tasks/abc330_f)
-4. [ABC224 G「Roll or Increment」](https://atcoder.jp/contests/abc224/tasks/abc224_g)
-5. [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
+4. [ABC229 G「Longest Y」](https://atcoder.jp/contests/abc229/tasks/abc229_g)
+5. [ABC224 G「Roll or Increment」](https://atcoder.jp/contests/abc224/tasks/abc224_g)
 6. [ABC263 G「Erasing Prime Pairs」](https://atcoder.jp/contests/abc263/tasks/abc263_g)
-7. [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
-8. [ABC314 Ex「Disk and Segments」](https://atcoder.jp/contests/abc314/tasks/abc314_h)
+7. [ABC314 Ex「Disk and Segments」](https://atcoder.jp/contests/abc314/tasks/abc314_h)
+8. [ABC459 G「Golf 2」](https://atcoder.jp/contests/abc459/tasks/abc459_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

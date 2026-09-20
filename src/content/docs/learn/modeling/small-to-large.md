@@ -36,13 +36,11 @@ ABC324 Gの分割は、分割前の各要素が一方だけに属し、小さい
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC329 F「Colored Ball」](https://atcoder.jp/contests/abc329/tasks/abc329_f)
-2. [ABC411 F「Contraction」](https://atcoder.jp/contests/abc411/tasks/abc411_f)
-3. [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
-4. [ABC324 G「Generate Arrays」](https://atcoder.jp/contests/abc324/tasks/abc324_g)
-5. [ABC454 G「Mode in the Subtree」](https://atcoder.jp/contests/abc454/tasks/abc454_g)
+2. [ABC451 F「Make Bipartite 3」](https://atcoder.jp/contests/abc451/tasks/abc451_f)
+3. [ABC411 F「Contraction」](https://atcoder.jp/contests/abc411/tasks/abc411_f)
+4. [ABC454 G「Mode in the Subtree」](https://atcoder.jp/contests/abc454/tasks/abc454_g)
+5. [ABC324 G「Generate Arrays」](https://atcoder.jp/contests/abc324/tasks/abc324_g)
 6. [ABC273 Ex「Inv(0,1)ving Insert(1,0)n」](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

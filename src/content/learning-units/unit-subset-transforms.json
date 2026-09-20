@@ -44,10 +44,10 @@
     "abc423-f"
   ],
   "directProblemIds": [
-    "abc349-f",
     "abc423-f",
-    "abc215-h",
-    "abc295-ex"
+    "abc349-f",
+    "abc295-ex",
+    "abc215-h"
   ],
   "relatedProblemIds": [],
   "examples": [],

@@ -36,20 +36,18 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
-2. [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
-3. [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
-4. [ABC368 E「Train Delay」](https://atcoder.jp/contests/abc368/tasks/abc368_e)
-5. [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
-6. [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
-7. [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
-8. [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
-9. [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
-10. [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
-11. [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
-12. [ABC449 F「Grid Clipping」](https://atcoder.jp/contests/abc449/tasks/abc449_f)
+1. [ABC320 E「Somen Nagashi」](https://atcoder.jp/contests/abc320/tasks/abc320_e)
+2. [ABC308 F「Vouchers」](https://atcoder.jp/contests/abc308/tasks/abc308_f)
+3. [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f)
+4. [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e)
+5. [ABC453 E「Team Division」](https://atcoder.jp/contests/abc453/tasks/abc453_e)
+6. [ABC245 E「Wrapping Chocolate」](https://atcoder.jp/contests/abc245/tasks/abc245_e)
+7. [ABC433 E「Max Matrix 2」](https://atcoder.jp/contests/abc433/tasks/abc433_e)
+8. [ABC407 F「Sums of Sliding Window Maximum」](https://atcoder.jp/contests/abc407/tasks/abc407_f)
+9. [ABC214 E「Packing Under Range Regulations」](https://atcoder.jp/contests/abc214/tasks/abc214_e)
+10. [ABC449 F「Grid Clipping」](https://atcoder.jp/contests/abc449/tasks/abc449_f)
+11. [ABC368 E「Train Delay」](https://atcoder.jp/contests/abc368/tasks/abc368_e)
+12. [ABC274 F「Fishing」](https://atcoder.jp/contests/abc274/tasks/abc274_f)
 13. [ABC296 G「Polygon and Points」](https://atcoder.jp/contests/abc296/tasks/abc296_g)
 14. [ABC311 G「One More Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_g)
 15. [ABC361 G「Go Territory」](https://atcoder.jp/contests/abc361/tasks/abc361_g)

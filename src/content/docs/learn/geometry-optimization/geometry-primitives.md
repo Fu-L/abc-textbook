@@ -36,23 +36,21 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
-2. [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
-3. [ABC248 E「K-colinear Line」](https://atcoder.jp/contests/abc248/tasks/abc248_e)
-4. [ABC351 E「Jump Distance Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_e)
+1. [ABC248 E「K-colinear Line」](https://atcoder.jp/contests/abc248/tasks/abc248_e)
+2. [ABC442 E「Laser Takahashi」](https://atcoder.jp/contests/abc442/tasks/abc442_e)
+3. [ABC223 E「Placing Rectangles」](https://atcoder.jp/contests/abc223/tasks/abc223_e)
+4. [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
 5. [ABC366 E「Manhattan Multifocal Ellipse」](https://atcoder.jp/contests/abc366/tasks/abc366_e)
 6. [ABC426 E「Closest Moment」](https://atcoder.jp/contests/abc426/tasks/abc426_e)
-7. [ABC442 E「Laser Takahashi」](https://atcoder.jp/contests/abc442/tasks/abc442_e)
-8. [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
-9. [ABC258 F「Main Street」](https://atcoder.jp/contests/abc258/tasks/abc258_f)
-10. [ABC323 F「Push and Carry」](https://atcoder.jp/contests/abc323/tasks/abc323_f)
+7. [ABC351 E「Jump Distance Sum」](https://atcoder.jp/contests/abc351/tasks/abc351_e)
+8. [ABC225 E「7」](https://atcoder.jp/contests/abc225/tasks/abc225_e)
+9. [ABC385 F「Visible Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_f)
+10. [ABC250 F「One Fourth」](https://atcoder.jp/contests/abc250/tasks/abc250_f)
 11. [ABC353 F「Tile Distance」](https://atcoder.jp/contests/abc353/tasks/abc353_f)
-12. [ABC385 F「Visible Buildings」](https://atcoder.jp/contests/abc385/tasks/abc385_f)
+12. [ABC258 F「Main Street」](https://atcoder.jp/contests/abc258/tasks/abc258_f)
 13. [ABC220 G「Isosceles Trapezium」](https://atcoder.jp/contests/abc220/tasks/abc220_g)
-14. [ABC301 G「Worst Picture」](https://atcoder.jp/contests/abc301/tasks/abc301_g)
-15. [ABC234 Ex「Enumerate Pairs」](https://atcoder.jp/contests/abc234/tasks/abc234_h)
+14. [ABC234 Ex「Enumerate Pairs」](https://atcoder.jp/contests/abc234/tasks/abc234_h)
+15. [ABC301 G「Worst Picture」](https://atcoder.jp/contests/abc301/tasks/abc301_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

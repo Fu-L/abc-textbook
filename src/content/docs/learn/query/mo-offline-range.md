@@ -38,10 +38,8 @@ Moはquery順の再配置、値bucketは座標軸のblock分割、heavy/lightは
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
-2. [ABC293 G「Triple Index」](https://atcoder.jp/contests/abc293/tasks/abc293_g)
+1. [ABC293 G「Triple Index」](https://atcoder.jp/contests/abc293/tasks/abc293_g)
+2. [ABC242 G「Range Pairing Query」](https://atcoder.jp/contests/abc242/tasks/abc242_g)
 3. [ABC384 G「Abs Sum」](https://atcoder.jp/contests/abc384/tasks/abc384_g)
 4. [ABC405 G「Range Shuffle Query」](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 5. [ABC463 G「Random Walk Distance」](https://atcoder.jp/contests/abc463/tasks/abc463_g)

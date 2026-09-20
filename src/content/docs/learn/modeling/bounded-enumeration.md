@@ -36,21 +36,19 @@ ABC260 Fでは小さい側の端点対(u,v)に、その二点と隣接する中�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
-2. [ABC234 E「Arithmetic Number」](https://atcoder.jp/contests/abc234/tasks/abc234_e)
-3. [ABC254 E「Small d and k」](https://atcoder.jp/contests/abc254/tasks/abc254_e)
-4. [ABC272 E「Add and Mex」](https://atcoder.jp/contests/abc272/tasks/abc272_e)
-5. [ABC312 E「Tangency of Cuboids」](https://atcoder.jp/contests/abc312/tasks/abc312_e)
-6. [ABC386 E「Maximize XOR」](https://atcoder.jp/contests/abc386/tasks/abc386_e)
-7. [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
-8. [ABC260 F「Find 4-cycle」](https://atcoder.jp/contests/abc260/tasks/abc260_f)
-9. [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
-10. [ABC410 F「Balanced Rectangles」](https://atcoder.jp/contests/abc410/tasks/abc410_f)
-11. [ABC290 G「Edge Elimination」](https://atcoder.jp/contests/abc290/tasks/abc290_g)
-12. [ABC302 G「Sort from 1 to 4」](https://atcoder.jp/contests/abc302/tasks/abc302_g)
-13. [ABC442 G「Lightweight Knapsack」](https://atcoder.jp/contests/abc442/tasks/abc442_g)
+1. [ABC234 E「Arithmetic Number」](https://atcoder.jp/contests/abc234/tasks/abc234_e)
+2. [ABC254 E「Small d and k」](https://atcoder.jp/contests/abc254/tasks/abc254_e)
+3. [ABC272 E「Add and Mex」](https://atcoder.jp/contests/abc272/tasks/abc272_e)
+4. [ABC386 E「Maximize XOR」](https://atcoder.jp/contests/abc386/tasks/abc386_e)
+5. [ABC219 E「Moat」](https://atcoder.jp/contests/abc219/tasks/abc219_e)
+6. [ABC410 F「Balanced Rectangles」](https://atcoder.jp/contests/abc410/tasks/abc410_f)
+7. [ABC312 E「Tangency of Cuboids」](https://atcoder.jp/contests/abc312/tasks/abc312_e)
+8. [ABC302 G「Sort from 1 to 4」](https://atcoder.jp/contests/abc302/tasks/abc302_g)
+9. [ABC260 F「Find 4-cycle」](https://atcoder.jp/contests/abc260/tasks/abc260_f)
+10. [ABC347 F「Non-overlapping Squares」](https://atcoder.jp/contests/abc347/tasks/abc347_f)
+11. [ABC227 F「Treasure Hunting」](https://atcoder.jp/contests/abc227/tasks/abc227_f)
+12. [ABC442 G「Lightweight Knapsack」](https://atcoder.jp/contests/abc442/tasks/abc442_g)
+13. [ABC290 G「Edge Elimination」](https://atcoder.jp/contests/abc290/tasks/abc290_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

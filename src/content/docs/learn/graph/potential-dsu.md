@@ -36,8 +36,6 @@ DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC328 F「Good Set Query」](https://atcoder.jp/contests/abc328/tasks/abc328_f)
 2. [ABC466 G「Segment Sum Constraints」](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 

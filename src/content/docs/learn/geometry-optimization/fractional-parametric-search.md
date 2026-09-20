@@ -38,11 +38,9 @@ ABC324 Fでは各辺の利得−x·費用をDAG上で最大化する。ABC294 F�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+1. [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
 2. [ABC294 F「Sugar Water 2」](https://atcoder.jp/contests/abc294/tasks/abc294_f)
-3. [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
+3. [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

@@ -32,10 +32,8 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC260 E「At Least One」](https://atcoder.jp/contests/abc260/tasks/abc260_e)
-2. [ABC294 E「2xN Grid」](https://atcoder.jp/contests/abc294/tasks/abc294_e)
+1. [ABC294 E「2xN Grid」](https://atcoder.jp/contests/abc294/tasks/abc294_e)
+2. [ABC260 E「At Least One」](https://atcoder.jp/contests/abc260/tasks/abc260_e)
 3. [ABC215 F「Dist Max 2」](https://atcoder.jp/contests/abc215/tasks/abc215_f)
 4. [ABC337 F「Usual Color Ball Problems」](https://atcoder.jp/contests/abc337/tasks/abc337_f)
 

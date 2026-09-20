@@ -42,14 +42,14 @@
     "abc445-e"
   ],
   "directProblemIds": [
-    "abc259-e",
-    "abc393-e",
     "abc400-e",
-    "abc412-e",
+    "abc393-e",
+    "abc259-e",
     "abc445-e",
+    "abc420-g",
+    "abc412-e",
     "abc384-f",
-    "abc322-g",
-    "abc420-g"
+    "abc322-g"
   ],
   "relatedProblemIds": [
     "abc212-g",

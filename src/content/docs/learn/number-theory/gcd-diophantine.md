@@ -42,8 +42,6 @@ ABC340 Fの整数座標の三角形を例に、一次不定方程式へ帰着す
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC340 F「S = 1」](https://atcoder.jp/contests/abc340/tasks/abc340_f)
 2. [ABC271 Ex「General General」](https://atcoder.jp/contests/abc271/tasks/abc271_h)
 

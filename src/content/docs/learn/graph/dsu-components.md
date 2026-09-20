@@ -32,20 +32,18 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
-2. [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
-3. [ABC276 E「Round Trip」](https://atcoder.jp/contests/abc276/tasks/abc276_e)
-4. [ABC304 E「Good Graph」](https://atcoder.jp/contests/abc304/tasks/abc304_e)
+1. [ABC420 E「Reachability Query」](https://atcoder.jp/contests/abc420/tasks/abc420_e)
+2. [ABC304 E「Good Graph」](https://atcoder.jp/contests/abc304/tasks/abc304_e)
+3. [ABC372 E「K-th Largest Connected Components」](https://atcoder.jp/contests/abc372/tasks/abc372_e)
+4. [ABC276 E「Round Trip」](https://atcoder.jp/contests/abc276/tasks/abc276_e)
 5. [ABC328 E「Modulo MST」](https://atcoder.jp/contests/abc328/tasks/abc328_e)
-6. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
-7. [ABC372 E「K-th Largest Connected Components」](https://atcoder.jp/contests/abc372/tasks/abc372_e)
-8. [ABC420 E「Reachability Query」](https://atcoder.jp/contests/abc420/tasks/abc420_e)
-9. [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
-10. [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
-11. [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
-12. [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+6. [ABC447 E「Divide Graph」](https://atcoder.jp/contests/abc447/tasks/abc447_e)
+7. [ABC226 E「Just one」](https://atcoder.jp/contests/abc226/tasks/abc226_e)
+8. [ABC434 E「Distribute Bunnies」](https://atcoder.jp/contests/abc434/tasks/abc434_e)
+9. [ABC238 E「Range Sums」](https://atcoder.jp/contests/abc238/tasks/abc238_e)
+10. [ABC335 E「Non-Decreasing Colorful Path」](https://atcoder.jp/contests/abc335/tasks/abc335_e)
+11. [ABC409 F「Connecting Points」](https://atcoder.jp/contests/abc409/tasks/abc409_f)
+12. [ABC279 F「BOX」](https://atcoder.jp/contests/abc279/tasks/abc279_f)
 13. [ABC440 G「Haunted House」](https://atcoder.jp/contests/abc440/tasks/abc440_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

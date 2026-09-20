@@ -41,11 +41,11 @@
     "abc465-g"
   ],
   "directProblemIds": [
-    "abc380-e",
     "abc435-e",
-    "abc465-g",
+    "abc380-e",
     "abc255-ex",
-    "abc256-ex"
+    "abc256-ex",
+    "abc465-g"
   ],
   "relatedProblemIds": [
     "abc251-ex"

@@ -32,8 +32,6 @@ DSUによる連結成分管理・縮約で得た考え方と実装を再利用�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 2. [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 

@@ -36,12 +36,10 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
-2. [ABC423 F「Loud Cicada」](https://atcoder.jp/contests/abc423/tasks/abc423_f)
-3. [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
-4. [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+1. [ABC423 F「Loud Cicada」](https://atcoder.jp/contests/abc423/tasks/abc423_f)
+2. [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f)
+3. [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+4. [ABC215 H「Cabbage Master」](https://atcoder.jp/contests/abc215/tasks/abc215_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

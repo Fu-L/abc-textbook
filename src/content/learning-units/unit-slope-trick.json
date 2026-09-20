@@ -42,9 +42,9 @@
   ],
   "directProblemIds": [
     "abc250-g",
-    "abc406-g",
-    "abc458-g",
     "abc217-h",
+    "abc458-g",
+    "abc406-g",
     "abc275-ex"
   ],
   "relatedProblemIds": [],

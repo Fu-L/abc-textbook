@@ -44,10 +44,10 @@
   "directProblemIds": [
     "abc213-g",
     "abc321-g",
-    "abc327-g",
-    "abc386-g",
+    "abc253-ex",
     "abc236-ex",
-    "abc253-ex"
+    "abc386-g",
+    "abc327-g"
   ],
   "relatedProblemIds": [
     "abc318-ex"

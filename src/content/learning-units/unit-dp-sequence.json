@@ -45,13 +45,13 @@
   ],
   "directProblemIds": [
     "abc327-e",
-    "abc345-e",
     "abc362-e",
-    "abc225-f",
-    "abc238-f",
-    "abc299-f",
     "abc315-f",
-    "abc386-f"
+    "abc386-f",
+    "abc238-f",
+    "abc345-e",
+    "abc299-f",
+    "abc225-f"
   ],
   "relatedProblemIds": [
     "abc214-f",

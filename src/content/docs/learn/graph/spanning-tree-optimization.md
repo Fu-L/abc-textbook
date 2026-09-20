@@ -36,14 +36,12 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC218 E「Destruction」](https://atcoder.jp/contests/abc218/tasks/abc218_e)
-2. [ABC282 E「Choose Two and Eat One」](https://atcoder.jp/contests/abc282/tasks/abc282_e)
-3. [ABC352 E「Clique Connect」](https://atcoder.jp/contests/abc352/tasks/abc352_e)
+2. [ABC352 E「Clique Connect」](https://atcoder.jp/contests/abc352/tasks/abc352_e)
+3. [ABC282 E「Choose Two and Eat One」](https://atcoder.jp/contests/abc282/tasks/abc282_e)
 4. [ABC270 F「Transportation」](https://atcoder.jp/contests/abc270/tasks/abc270_f)
-5. [ABC355 F「MST Query」](https://atcoder.jp/contests/abc355/tasks/abc355_f)
-6. [ABC364 F「Range Connect MST」](https://atcoder.jp/contests/abc364/tasks/abc364_f)
+5. [ABC364 F「Range Connect MST」](https://atcoder.jp/contests/abc364/tasks/abc364_f)
+6. [ABC355 F「MST Query」](https://atcoder.jp/contests/abc355/tasks/abc355_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

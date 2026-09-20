@@ -48,15 +48,15 @@
     "abc461-g"
   ],
   "directProblemIds": [
-    "abc318-f",
-    "abc274-g",
-    "abc317-g",
-    "abc374-g",
     "abc401-g",
-    "abc424-g",
-    "abc437-g",
+    "abc318-f",
     "abc445-g",
+    "abc274-g",
     "abc461-g",
+    "abc424-g",
+    "abc374-g",
+    "abc317-g",
+    "abc437-g",
     "abc313-ex"
   ],
   "relatedProblemIds": [

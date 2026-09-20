@@ -36,8 +36,6 @@ path matchingの交互構造を使い、最小edgeの採用後も残りの全car
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC464 G「Celester 2」](https://atcoder.jp/contests/abc464/tasks/abc464_g)
 2. [ABC218 H「Red and Blue Lamps」](https://atcoder.jp/contests/abc218/tasks/abc218_h)
 

@@ -40,10 +40,10 @@
     "abc444-e"
   ],
   "directProblemIds": [
-    "abc281-e",
-    "abc306-e",
     "abc330-e",
     "abc444-e",
+    "abc306-e",
+    "abc281-e",
     "abc308-g",
     "abc314-g"
   ],

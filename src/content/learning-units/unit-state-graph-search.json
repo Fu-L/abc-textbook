@@ -45,17 +45,17 @@
     "abc446-f"
   ],
   "directProblemIds": [
-    "abc289-e",
-    "abc394-e",
     "abc417-e",
-    "abc427-e",
-    "abc429-e",
     "abc446-e",
-    "abc241-f",
-    "abc244-f",
+    "abc289-e",
     "abc302-f",
-    "abc414-f",
-    "abc446-f"
+    "abc429-e",
+    "abc394-e",
+    "abc446-f",
+    "abc244-f",
+    "abc427-e",
+    "abc241-f",
+    "abc414-f"
   ],
   "relatedProblemIds": [
     "abc257-g",

@@ -39,8 +39,8 @@
     "abc445-f"
   ],
   "directProblemIds": [
-    "abc429-f",
     "abc445-f",
+    "abc429-f",
     "abc236-g"
   ],
   "relatedProblemIds": [],

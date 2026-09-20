@@ -42,10 +42,10 @@
   "directProblemIds": [
     "abc367-e",
     "abc438-e",
-    "abc212-f",
     "abc370-f",
-    "abc254-g",
-    "abc310-g"
+    "abc212-f",
+    "abc310-g",
+    "abc254-g"
   ],
   "relatedProblemIds": [
     "abc417-g"

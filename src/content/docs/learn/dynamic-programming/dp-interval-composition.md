@@ -36,17 +36,15 @@ DPの最小十分状態で得た考え方と実装を再利用し、区間合成
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC217 F「Make Pair」](https://atcoder.jp/contests/abc217/tasks/abc217_f)
-2. [ABC400 F「Happy Birthday! 3」](https://atcoder.jp/contests/abc400/tasks/abc400_f)
+2. [ABC252 G「Pre-Order」](https://atcoder.jp/contests/abc252/tasks/abc252_g)
 3. [ABC233 G「Strongest Takahashi」](https://atcoder.jp/contests/abc233/tasks/abc233_g)
-4. [ABC252 G「Pre-Order」](https://atcoder.jp/contests/abc252/tasks/abc252_g)
-5. [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
-6. [ABC262 G「LIS with Stack」](https://atcoder.jp/contests/abc262/tasks/abc262_g)
-7. [ABC292 G「Count Strictly Increasing Sequences」](https://atcoder.jp/contests/abc292/tasks/abc292_g)
-8. [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
-9. [ABC325 G「offence」](https://atcoder.jp/contests/abc325/tasks/abc325_g)
+4. [ABC400 F「Happy Birthday! 3」](https://atcoder.jp/contests/abc400/tasks/abc400_f)
+5. [ABC325 G「offence」](https://atcoder.jp/contests/abc325/tasks/abc325_g)
+6. [ABC292 G「Count Strictly Increasing Sequences」](https://atcoder.jp/contests/abc292/tasks/abc292_g)
+7. [ABC298 G「Strawberry War」](https://atcoder.jp/contests/abc298/tasks/abc298_g)
+8. [ABC261 G「Replace」](https://atcoder.jp/contests/abc261/tasks/abc261_g)
+9. [ABC262 G「LIS with Stack」](https://atcoder.jp/contests/abc262/tasks/abc262_g)
 10. [ABC238 Ex「Removing People」](https://atcoder.jp/contests/abc238/tasks/abc238_h)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

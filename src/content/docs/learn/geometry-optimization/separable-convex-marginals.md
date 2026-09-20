@@ -32,11 +32,9 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC216 E「Amusement Park」](https://atcoder.jp/contests/abc216/tasks/abc216_e)
-2. [ABC389 E「Square Price」](https://atcoder.jp/contests/abc389/tasks/abc389_e)
-3. [ABC359 F「Tree Degree Optimization」](https://atcoder.jp/contests/abc359/tasks/abc359_f)
+2. [ABC359 F「Tree Degree Optimization」](https://atcoder.jp/contests/abc359/tasks/abc359_f)
+3. [ABC389 E「Square Price」](https://atcoder.jp/contests/abc389/tasks/abc389_e)
 4. [ABC373 F「Knapsack with Diminishing Values」](https://atcoder.jp/contests/abc373/tasks/abc373_f)
 5. [ABC369 G「As far as possible」](https://atcoder.jp/contests/abc369/tasks/abc369_g)
 

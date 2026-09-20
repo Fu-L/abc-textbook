@@ -32,11 +32,9 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC336 E「Digit Sum Divisible」](https://atcoder.jp/contests/abc336/tasks/abc336_e)
-2. [ABC406 E「Popcount Sum 3」](https://atcoder.jp/contests/abc406/tasks/abc406_e)
-3. [ABC465 E「Digit Circus」](https://atcoder.jp/contests/abc465/tasks/abc465_e)
+1. [ABC406 E「Popcount Sum 3」](https://atcoder.jp/contests/abc406/tasks/abc406_e)
+2. [ABC465 E「Digit Circus」](https://atcoder.jp/contests/abc465/tasks/abc465_e)
+3. [ABC336 E「Digit Sum Divisible」](https://atcoder.jp/contests/abc336/tasks/abc336_e)
 4. [ABC235 F「Variety of Digits」](https://atcoder.jp/contests/abc235/tasks/abc235_f)
 5. [ABC317 F「Nim」](https://atcoder.jp/contests/abc317/tasks/abc317_f)
 6. [ABC288 Ex「A Nameless Counting Problem」](https://atcoder.jp/contests/abc288/tasks/abc288_h)

@@ -41,11 +41,11 @@
     "abc438-f"
   ],
   "directProblemIds": [
+    "abc294-g",
     "abc267-f",
     "abc438-f",
-    "abc294-g",
-    "abc329-g",
-    "abc298-ex"
+    "abc298-ex",
+    "abc329-g"
   ],
   "relatedProblemIds": [
     "abc405-f",

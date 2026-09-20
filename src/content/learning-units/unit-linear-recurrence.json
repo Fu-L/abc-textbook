@@ -47,11 +47,11 @@
     "abc293-e",
     "abc256-g",
     "abc271-g",
-    "abc429-g",
-    "abc245-ex",
     "abc258-ex",
+    "abc299-ex",
+    "abc245-ex",
     "abc270-ex",
-    "abc299-ex"
+    "abc429-g"
   ],
   "relatedProblemIds": [
     "abc300-ex",

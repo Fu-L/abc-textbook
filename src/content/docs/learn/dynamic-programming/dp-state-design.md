@@ -36,20 +36,18 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC232 E「Rook Path」](https://atcoder.jp/contests/abc232/tasks/abc232_e)
-2. [ABC244 E「King Bombee」](https://atcoder.jp/contests/abc244/tasks/abc244_e)
-3. [ABC251 E「Takahashi and Animals」](https://atcoder.jp/contests/abc251/tasks/abc251_e)
-4. [ABC283 E「Don't Isolate Elements」](https://atcoder.jp/contests/abc283/tasks/abc283_e)
-5. [ABC310 E「NAND repeatedly」](https://atcoder.jp/contests/abc310/tasks/abc310_e)
-6. [ABC229 F「Make Bipartite」](https://atcoder.jp/contests/abc229/tasks/abc229_f)
-7. [ABC247 F「Cards」](https://atcoder.jp/contests/abc247/tasks/abc247_f)
-8. [ABC264 F「Monochromatic Path」](https://atcoder.jp/contests/abc264/tasks/abc264_f)
+1. [ABC244 E「King Bombee」](https://atcoder.jp/contests/abc244/tasks/abc244_e)
+2. [ABC251 E「Takahashi and Animals」](https://atcoder.jp/contests/abc251/tasks/abc251_e)
+3. [ABC310 E「NAND repeatedly」](https://atcoder.jp/contests/abc310/tasks/abc310_e)
+4. [ABC232 E「Rook Path」](https://atcoder.jp/contests/abc232/tasks/abc232_e)
+5. [ABC247 F「Cards」](https://atcoder.jp/contests/abc247/tasks/abc247_f)
+6. [ABC283 E「Don't Isolate Elements」](https://atcoder.jp/contests/abc283/tasks/abc283_e)
+7. [ABC264 F「Monochromatic Path」](https://atcoder.jp/contests/abc264/tasks/abc264_f)
+8. [ABC229 F「Make Bipartite」](https://atcoder.jp/contests/abc229/tasks/abc229_f)
 9. [ABC344 F「Earn to Advance」](https://atcoder.jp/contests/abc344/tasks/abc344_f)
-10. [ABC376 F「Hands on Ring (Hard)」](https://atcoder.jp/contests/abc376/tasks/abc376_f)
-11. [ABC462 F「More ABC」](https://atcoder.jp/contests/abc462/tasks/abc462_f)
-12. [ABC217 G「Groups」](https://atcoder.jp/contests/abc217/tasks/abc217_g)
+10. [ABC462 F「More ABC」](https://atcoder.jp/contests/abc462/tasks/abc462_f)
+11. [ABC217 G「Groups」](https://atcoder.jp/contests/abc217/tasks/abc217_g)
+12. [ABC376 F「Hands on Ring (Hard)」](https://atcoder.jp/contests/abc376/tasks/abc376_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

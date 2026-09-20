@@ -34,12 +34,10 @@ ABC465 Fの添字は{0,…,9}の6軸の直積。各軸を小さい桁値から�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
-2. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
+1. [ABC278 E「Grid Filling」](https://atcoder.jp/contests/abc278/tasks/abc278_e)
+2. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
 3. [ABC300 F「More Holidays」](https://atcoder.jp/contests/abc300/tasks/abc300_f)
-4. [ABC430 F「Back and Forth Filling」](https://atcoder.jp/contests/abc430/tasks/abc430_f)
+4. [ABC268 E「Chinese Restaurant (Three-Star Version)」](https://atcoder.jp/contests/abc268/tasks/abc268_e)
 5. [ABC260 G「Scalene Triangle Area」](https://atcoder.jp/contests/abc260/tasks/abc260_g)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。

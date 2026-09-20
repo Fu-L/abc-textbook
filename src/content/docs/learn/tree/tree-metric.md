@@ -32,14 +32,12 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC303 E「A Gift From the Stars」](https://atcoder.jp/contests/abc303/tasks/abc303_e)
 2. [ABC361 E「Tree and Hamilton Path 2」](https://atcoder.jp/contests/abc361/tasks/abc361_e)
 3. [ABC428 E「Farthest Vertex」](https://atcoder.jp/contests/abc428/tasks/abc428_e)
-4. [ABC221 F「Diameter set」](https://atcoder.jp/contests/abc221/tasks/abc221_f)
+4. [ABC401 F「Add One Edge 3」](https://atcoder.jp/contests/abc401/tasks/abc401_f)
 5. [ABC222 F「Expensive Expense」](https://atcoder.jp/contests/abc222/tasks/abc222_f)
-6. [ABC401 F「Add One Edge 3」](https://atcoder.jp/contests/abc401/tasks/abc401_f)
+6. [ABC221 F「Diameter set」](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 
 各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
 

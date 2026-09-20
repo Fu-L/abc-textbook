@@ -36,8 +36,6 @@ ABC261 Exの非負重みではminimax距離順の確定を使う。ABC413 Fで�
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
 1. [ABC413 F「No Passage」](https://atcoder.jp/contests/abc413/tasks/abc413_f)
 2. [ABC261 Ex「Game on Graph」](https://atcoder.jp/contests/abc261/tasks/abc261_h)
 

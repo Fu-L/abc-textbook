@@ -32,19 +32,17 @@ sidebar:
 
 ## 問題一覧
 
-基本から応用へ進む目安として、原則としてABCの出題枠順（E→F→G→H/Ex）に並べています。同じ枠では問題ID順とし、導入に適した問題を先に読むべき明確な理由がある場合だけ順序を補正しています。
-
-1. [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
+1. [ABC388 E「Simultaneous Kagamimochi」](https://atcoder.jp/contests/abc388/tasks/abc388_e)
 2. [ABC257 E「Addition and Multiplication 2」](https://atcoder.jp/contests/abc257/tasks/abc257_e)
-3. [ABC374 E「Sensor Optimization Dilemma 2」](https://atcoder.jp/contests/abc374/tasks/abc374_e)
-4. [ABC385 E「Snowflake Tree」](https://atcoder.jp/contests/abc385/tasks/abc385_e)
-5. [ABC388 E「Simultaneous Kagamimochi」](https://atcoder.jp/contests/abc388/tasks/abc388_e)
-6. [ABC404 E「Bowls and Beans」](https://atcoder.jp/contests/abc404/tasks/abc404_e)
-7. [ABC457 E「Crossing Table Cloth」](https://atcoder.jp/contests/abc457/tasks/abc457_e)
-8. [ABC268 F「Best Concatenation」](https://atcoder.jp/contests/abc268/tasks/abc268_f)
-9. [ABC298 F「Rook Score」](https://atcoder.jp/contests/abc298/tasks/abc298_f)
-10. [ABC312 F「Cans and Openers」](https://atcoder.jp/contests/abc312/tasks/abc312_f)
-11. [ABC454 F「Make it Palindrome 2」](https://atcoder.jp/contests/abc454/tasks/abc454_f)
+3. [ABC385 E「Snowflake Tree」](https://atcoder.jp/contests/abc385/tasks/abc385_e)
+4. [ABC404 E「Bowls and Beans」](https://atcoder.jp/contests/abc404/tasks/abc404_e)
+5. [ABC374 E「Sensor Optimization Dilemma 2」](https://atcoder.jp/contests/abc374/tasks/abc374_e)
+6. [ABC298 F「Rook Score」](https://atcoder.jp/contests/abc298/tasks/abc298_f)
+7. [ABC312 F「Cans and Openers」](https://atcoder.jp/contests/abc312/tasks/abc312_f)
+8. [ABC457 E「Crossing Table Cloth」](https://atcoder.jp/contests/abc457/tasks/abc457_e)
+9. [ABC268 F「Best Concatenation」](https://atcoder.jp/contests/abc268/tasks/abc268_f)
+10. [ABC454 F「Make it Palindrome 2」](https://atcoder.jp/contests/abc454/tasks/abc454_f)
+11. [ABC227 E「Swap」](https://atcoder.jp/contests/abc227/tasks/abc227_e)
 12. [ABC226 G「The baggage」](https://atcoder.jp/contests/abc226/tasks/abc226_g)
 13. [ABC416 G「Concat (1st)」](https://atcoder.jp/contests/abc416/tasks/abc416_g)
 

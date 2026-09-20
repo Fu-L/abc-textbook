@@ -49,18 +49,18 @@
     "abc447-e"
   ],
   "directProblemIds": [
-    "abc226-e",
-    "abc238-e",
-    "abc276-e",
-    "abc304-e",
-    "abc328-e",
-    "abc335-e",
-    "abc372-e",
     "abc420-e",
-    "abc434-e",
+    "abc304-e",
+    "abc372-e",
+    "abc276-e",
+    "abc328-e",
     "abc447-e",
-    "abc279-f",
+    "abc226-e",
+    "abc434-e",
+    "abc238-e",
+    "abc335-e",
     "abc409-f",
+    "abc279-f",
     "abc440-g"
   ],
   "relatedProblemIds": [

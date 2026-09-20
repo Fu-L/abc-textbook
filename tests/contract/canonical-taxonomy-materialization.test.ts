@@ -1,4 +1,8 @@
 import { isCurriculumUnit } from '../../src/lib/taxonomy/learning-unit-order.js';
+import {
+  orderUnitProblemsByDifficulty,
+  UNIT_PROBLEM_READING_ORDER,
+} from '../../src/lib/taxonomy/problem-reading-order.js';
 import { readFile } from 'node:fs/promises';
 
 import { describe, expect, it } from 'vitest';
@@ -105,7 +109,12 @@ describe('T047–T050 canonical taxonomy materialization', () => {
           (candidate) => candidate.kind === 'unit' && candidate.entity.id === id,
         );
         if (accepted?.kind !== 'unit') throw new Error(`Missing accepted Unit: ${id}`);
-        expect(unit.directProblemIds).toEqual(accepted.entity.directProblemIds);
+        expect(unit.directProblemIds).toEqual(
+          orderUnitProblemsByDifficulty(id, accepted.entity.directProblemIds),
+        );
+        expect([...(unit.directProblemIds ?? [])].sort()).toEqual(
+          [...accepted.entity.directProblemIds].sort(),
+        );
         expect(unit.relatedProblemIds).toEqual(accepted.entity.relatedProblemIds);
       }
     }
@@ -133,12 +142,28 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);
     const occurrences = new Map<string, string[]>();
+    expect(Object.keys(UNIT_PROBLEM_READING_ORDER).sort()).toEqual(
+      result.learningUnits
+        .filter(({ value }) => (value.directProblemIds?.length ?? 0) > 0)
+        .map(({ value }) => value.id)
+        .sort(),
+    );
     for (const { value: unit, document } of result.learningUnits) {
       expect(unit.examples).toEqual([]);
       expect(unit.exercises).toEqual([]);
       expect(document).toContain('## 概要');
       expect(document).toContain('### このUnitでは扱わないもの');
       expect(document).toContain('## 問題一覧');
+      expect(document).not.toContain('出題枠順');
+      const problemSection = document.split('## 問題一覧').at(1)?.split('## 関連問題').at(0) ?? '';
+      const listedIds = [...problemSection.matchAll(/^\d+\. \[ABC(\d+) (E|F|G|H|Ex)「/gmu)].map(
+        (match) => {
+          const [, contest, slot] = match;
+          if (contest === undefined || slot === undefined) throw new Error('Invalid problem link');
+          return `abc${contest}-${slot.toLowerCase()}`;
+        },
+      );
+      expect(listedIds).toEqual(unit.directProblemIds);
       expect(document).not.toMatch(/ガイド例|到達確認|自己評価|curriculum/u);
       for (const id of unit.directProblemIds ?? [])
         occurrences.set(id, [...(occurrences.get(id) ?? []), unit.id]);
