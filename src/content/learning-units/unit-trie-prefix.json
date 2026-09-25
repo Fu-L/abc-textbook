@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"
   ],
@@ -33,25 +32,22 @@
   "docPath": "src/content/docs/learn/string/trie-prefix.md",
   "problemIds": [
     "abc287-e",
+    "abc353-e",
     "abc377-g",
     "abc437-e"
   ],
   "directProblemIds": [
     "abc287-e",
+    "abc353-e",
     "abc437-e",
     "abc377-g"
   ],
   "relatedProblemIds": [
     "abc240-ex",
     "abc268-g",
-    "abc353-e",
     "abc403-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 1,
-  "representativeRank": 0,
-  "globalIndex": 6,
-  "orderReason": "文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。"
+  "learningRationale": "文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。"
 }

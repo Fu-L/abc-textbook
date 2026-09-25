@@ -26,7 +26,6 @@ describe('trusted publication diff', () => {
       affectedContentLocators: [
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
     };
@@ -122,7 +121,6 @@ describe('trusted publication diff', () => {
       affectedContentLocators: [
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
     });
@@ -232,7 +230,7 @@ describe('trusted publication diff', () => {
     const learningUnit = currentCatalog.learningUnits[0];
     if (!explanation || !learningUnit) throw new Error('Fixture learning entities are missing.');
     explanation.revision = 2;
-    learningUnit.orderReason = 'Changed order reason.';
+    learningUnit.learningRationale = 'The graph method is learned as a reusable technique.';
     const path = 'src/content/docs/index.md';
     const update = makeUpdate([
       makeOperation({
@@ -310,7 +308,7 @@ describe('trusted publication diff', () => {
     if (!baseUnit || !currentUnit) throw new Error('LearningUnit fixture is missing.');
     baseUnit.docPath = 'src/content/docs/unit-graphs.md';
     currentUnit.docPath = baseUnit.docPath;
-    currentUnit.orderReason = 'Changed order reason.';
+    currentUnit.learningRationale = 'The graph method is learned as a reusable technique.';
 
     const update = makeUpdate([
       makeOperation({
@@ -456,7 +454,6 @@ describe('trusted publication diff', () => {
     independentUnit.id = 'unit-independent';
     independentUnit.title = 'Independent shared owner';
     independentUnit.problemIds = ['abc212-x46'];
-    independentUnit.globalIndex = 1;
     baseCatalog.learningUnits.push(independentUnit);
     const currentCatalog = structuredClone(baseCatalog);
     const path = 'src/content/docs/index.md';
@@ -585,7 +582,7 @@ describe('trusted publication diff', () => {
     if (!baseUnit || !currentUnit) throw new Error('LearningUnit fixture is missing.');
     baseUnit.docPath = 'src/content/docs/unit-graphs.md';
     currentUnit.docPath = baseUnit.docPath;
-    currentUnit.orderReason = 'Changed order reason.';
+    currentUnit.learningRationale = 'The graph method is learned as a reusable technique.';
 
     const update = makeUpdate([
       makeOperation({
@@ -687,7 +684,6 @@ describe('trusted publication diff', () => {
       affectedContentLocators: [
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified' as const,
     };

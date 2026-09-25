@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"
   ],
@@ -42,9 +39,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 2,
-  "representativeRank": 3,
-  "globalIndex": 44,
-  "orderReason": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"
+  "learningRationale": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"
 }

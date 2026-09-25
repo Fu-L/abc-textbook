@@ -5,9 +5,6 @@
   "parentId": "unit-polynomial-convolution",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-polynomial-convolution"
-  ],
   "excludedTopics": [
     "Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,24 +32,18 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
   "problemIds": [
     "abc213-h",
-    "abc281-ex",
-    "abc315-ex",
-    "abc357-g"
+    "abc315-ex"
   ],
   "directProblemIds": [
     "abc213-h",
-    "abc315-ex",
-    "abc357-g",
-    "abc281-ex"
+    "abc315-ex"
   ],
   "relatedProblemIds": [
-    "abc230-h"
+    "abc230-h",
+    "abc281-ex",
+    "abc357-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 96,
-  "globalIndex": 179,
-  "orderReason": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "畳み込み・相互相関で得た考え方と実装を再利用し、Relaxed・online convolutionの発動条件・正当化・境界を重複なく学ぶ。"
 }

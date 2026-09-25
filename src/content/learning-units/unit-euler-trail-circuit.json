@@ -5,7 +5,6 @@
   "parentId": "unit-euler-degree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -32,20 +31,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/euler-trail-circuit.md",
   "problemIds": [
+    "abc227-h",
     "abc286-g"
   ],
   "directProblemIds": [
-    "abc286-g"
+    "abc286-g",
+    "abc227-h"
   ],
   "relatedProblemIds": [
-    "abc227-h",
     "abc336-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 76,
-  "globalIndex": 77,
-  "orderReason": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -5,10 +5,6 @@
   "parentId": "unit-connectivity",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dsu-components",
-    "unit-graph-potential-propagation"
-  ],
   "excludedTopics": [
     "potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -43,9 +39,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 73,
-  "globalIndex": 65,
-  "orderReason": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
 }

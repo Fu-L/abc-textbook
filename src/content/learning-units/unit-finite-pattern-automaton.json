@@ -5,7 +5,6 @@
   "parentId": "unit-string-automata",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -31,19 +30,20 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/string/finite-pattern-automaton.md",
-  "problemIds": [],
-  "directProblemIds": [],
-  "relatedProblemIds": [
+  "problemIds": [
     "abc264-g",
     "abc301-f",
     "abc305-g",
     "abc418-g"
   ],
+  "directProblemIds": [
+    "abc301-f",
+    "abc264-g",
+    "abc305-g",
+    "abc418-g"
+  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 74,
-  "globalIndex": 67,
-  "orderReason": "文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

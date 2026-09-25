@@ -186,7 +186,7 @@ const impact = (
     'example',
     'exercise',
     'answer',
-    'standard_order',
+    'prerequisite_graph',
     'derived_index',
   ] as const;
   const subject = {
@@ -224,7 +224,6 @@ const impact = (
         evidenceRefs,
       },
     ],
-    affectedLearningUnitOrderIds: ['unit-core'],
     derivedIndexPaths: ['docs/verification/bootstrap/final-taxonomy-index.json'],
     canonicalMaterializationTask: 'T049' as const,
     coverageStatus: 'complete' as const,
@@ -316,7 +315,6 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       parentId: null,
       baselineId: 'prereq-abc-advanced-v1',
       baselineVersion: '1.0.0',
-      additionalPrerequisiteUnitIds: [],
       excludedTopics: [],
       sourceRevisionIds: [...sourceIds],
       tagIds: ['tag-algorithms', 'tag-core'],
@@ -326,11 +324,7 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       problemIds: [...problemIds],
       directProblemIds: [...problemIds],
       relatedProblemIds: [],
-      stageRank: 0,
-      difficultyRank: 0,
-      representativeRank: 0,
-      globalIndex: 0,
-      orderReason: 'This is the first and only Unit in the fixture.',
+      learningRationale: 'Learn the core technique and its standard use.',
     },
     sourceRevisionIds: [...sourceIds],
     evidenceRefs,
@@ -362,8 +356,6 @@ const placements = (): z.input<typeof FinalProblemPlacementProjectionSchema>[] =
     primaryOutcomeId: 'outcome-core',
     additionalPrimaryOutcomeIds: [],
     supportingOutcomeIds: [],
-    learningUnitIds: ['unit-core'],
-    presentationUnitId: 'unit-core',
     adHocElements: index === 0 ? ['Problem-specific boundary handling.'] : [],
     claimDispositions: [
       {
@@ -446,7 +438,6 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements: placementValues,
     correctionImpacts: correctionImpacts.map((correctionImpact) =>
       Object.fromEntries(
@@ -482,7 +473,6 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements: placementValues,
     correctionImpacts,
     sourceRevisionIds: [...sourceIds],
@@ -491,7 +481,6 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
     taxonomyDigest: canonicalDigest(candidates),
     tagDagDigest: canonicalDigest([]),
     learningUnitDagDigest: canonicalDigest([]),
-    orderDigest: canonicalDigest(['unit-core']),
     placementDigest: canonicalDigest(placementValues),
     correctionImpactDigest: canonicalDigest(correctionImpacts),
     status,

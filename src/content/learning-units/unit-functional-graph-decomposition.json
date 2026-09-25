@@ -5,9 +5,6 @@
   "parentId": "unit-functional-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-state-graph-search"
-  ],
   "excludedTopics": [
     "関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,38 +33,34 @@
   "problemIds": [
     "abc241-e",
     "abc256-e",
-    "abc258-e",
     "abc284-g",
     "abc296-e",
     "abc357-e",
     "abc371-g",
     "abc377-e",
+    "abc387-f",
     "abc399-e",
     "abc436-e"
   ],
   "directProblemIds": [
-    "abc436-e",
     "abc241-e",
-    "abc296-e",
     "abc256-e",
+    "abc296-e",
     "abc357-e",
-    "abc258-e",
     "abc377-e",
     "abc399-e",
+    "abc436-e",
+    "abc387-f",
     "abc284-g",
     "abc371-g"
   ],
   "relatedProblemIds": [
     "abc247-ex",
+    "abc258-e",
     "abc286-f",
-    "abc387-f",
     "abc444-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 60,
-  "globalIndex": 55,
-  "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
 }

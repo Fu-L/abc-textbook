@@ -5,7 +5,6 @@
   "parentId": null,
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [],
   "sourceRevisionIds": [
     "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
@@ -63,7 +62,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/tree/index.md",
   "problemIds": [
-    "abc220-e",
     "abc220-f",
     "abc221-f",
     "abc222-f",
@@ -71,7 +69,6 @@
     "abc235-ex",
     "abc239-e",
     "abc240-e",
-    "abc246-g",
     "abc248-g",
     "abc259-f",
     "abc263-f",
@@ -80,7 +77,6 @@
     "abc269-ex",
     "abc287-f",
     "abc291-ex",
-    "abc293-ex",
     "abc294-g",
     "abc298-ex",
     "abc303-e",
@@ -106,28 +102,27 @@
     "abc406-f",
     "abc409-e",
     "abc416-f",
-    "abc424-e",
     "abc428-e",
-    "abc438-f",
     "abc447-f",
     "abc451-e",
-    "abc453-f",
     "abc459-e",
     "abc460-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc220-e",
+    "abc246-g",
     "abc275-ex",
+    "abc293-ex",
     "abc369-g",
     "abc387-f",
+    "abc424-e",
     "abc435-f",
+    "abc438-f",
+    "abc453-f",
     "abc460-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 0,
-  "representativeRank": 3,
-  "globalIndex": 41,
-  "orderReason": "一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。"
+  "learningRationale": "一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。"
 }

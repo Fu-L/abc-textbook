@@ -5,7 +5,6 @@
   "parentId": "unit-persistence-rollback",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -40,9 +39,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 84,
-  "globalIndex": 124,
-  "orderReason": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

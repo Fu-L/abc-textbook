@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "ord/lowを用いた橋・関節点の検出、および偶数次数辺集合のcycle-space構造を使わない単なるcycle検出。"
   ],
@@ -34,9 +33,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 92,
-  "globalIndex": 142,
-  "orderReason": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
+  "learningRationale": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
 }

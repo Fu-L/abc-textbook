@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "勝敗だけを分類する通常の後退解析・Grundy数。"
   ],
@@ -46,9 +43,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 2,
-  "representativeRank": 6,
-  "globalIndex": 49,
-  "orderReason": "状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。"
+  "learningRationale": "状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。"
 }

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"
   ],
@@ -36,17 +35,13 @@
     "abc408-g"
   ],
   "directProblemIds": [
-    "abc408-g",
-    "abc333-g"
+    "abc333-g",
+    "abc408-g"
   ],
   "relatedProblemIds": [
     "abc393-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 2,
-  "representativeRank": 2,
-  "globalIndex": 88,
-  "orderReason": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
+  "learningRationale": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
 }

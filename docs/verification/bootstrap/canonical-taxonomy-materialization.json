@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7",
-    "acceptedAt": "2026-09-24T14:15:36.959Z"
+    "digest": "2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779",
+    "acceptedAt": "2026-09-25T04:48:07.395Z"
   },
   "taskIds": [
     "T047",
@@ -40,7 +40,6 @@
     "T049",
     "T050"
   ],
-  "problemReadingOrderReason": "前提を満たすUnitへ提示したうえで、基本模型から複合問題へ個別編集する。算法名や数値難度だけで並べず、各問の既習技能と新たな式変形・不変量を照合する。",
   "counts": {
     "tags": 205,
     "learningOutcomes": 225,
@@ -57,7 +56,7 @@
     "learningOutcomes": "src/content/learning-outcomes",
     "learningUnits": "src/content/learning-units",
     "learningDocuments": "src/content/docs/learn",
-    "learningOrder": "src/content/policies/learning-order.json",
+    "learningPrerequisites": "src/content/policies/learning-prerequisites.json",
     "problemPlacements": "src/content/policies/problem-placements.json",
     "problemPlacementEvidence": "docs/verification/bootstrap/problem-placements.json",
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
@@ -65,10 +64,10 @@
   "digests": {
     "tags": "3ddf77128c4e312f726bd4b5f7defaf2c7b69d62707087c77ee278fa45860eb9",
     "learningOutcomes": "d299566283670a955ae5c380c5dc9ee7efa58b5e5701b1ddb3fe851a1f5d0e49",
-    "learningUnits": "ef5f1e6cd02e139503698e321985c3ad4dca94438e9e0522b69028031b96e719",
-    "learningDocuments": "f6eb2f113f06d484d80a4e2806da6d6368174fddc45b0741f39e6bbec0485438",
-    "learningOrderDigest": "48249d1af0199dbe8bce51b3372c32b1cb924890bf4d28a5371ee12219422f59",
-    "problemPlacementPolicyDigest": "85e22d6c33526ac27f42869d8a80a3cb71cfe5ad5deafd51ef413cd98ba8f29f"
+    "learningUnits": "06f2becd94edc49ee82135e4f277e28bd4d7de6176821a976c95b825b72bc9d4",
+    "learningDocuments": "d1485ec45a8db6004f9b4c683d492300774a63bef61edd14c4e6d38c9485f345",
+    "learningPrerequisitesDigest": "be949cfb3e565c98a70a9118e4c4f00d2dc6cca89b1762ba264b90ac235b09d5",
+    "problemPlacementPolicyDigest": "3323612f35f93bf40ed25d14e6eb25976632b4b82980566908474ba524cbfb6a"
   },
-  "materializationDigest": "59587336c5a967ada6f4184da486a7fb892535e7c60ba079f5e22f663114b2c4"
+  "materializationDigest": "ca25e8f09ca49de24764413dc3a489003312402bba1abf6d7f2029f76402605b"
 }

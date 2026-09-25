@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-linear-system-rank"
-  ],
   "excludedTopics": [
     "行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,21 +33,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/determinant-counting.md",
   "problemIds": [
-    "abc216-h"
+    "abc216-h",
+    "abc253-ex",
+    "abc323-g"
   ],
   "directProblemIds": [
-    "abc216-h"
+    "abc323-g",
+    "abc216-h",
+    "abc253-ex"
   ],
   "relatedProblemIds": [
-    "abc253-ex",
-    "abc323-g",
     "abc336-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 92,
-  "globalIndex": 164,
-  "orderReason": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
 }

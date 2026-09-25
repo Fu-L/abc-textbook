@@ -7,7 +7,7 @@ import {
   LearningUnitSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 import {
-  CANONICAL_LEARNING_ORDER_PATH,
+  CANONICAL_LEARNING_PREREQUISITES_PATH,
   CANONICAL_PROBLEM_PLACEMENT_EVIDENCE_PATH,
   CANONICAL_PROBLEM_PLACEMENTS_PATH,
   CANONICAL_TAXONOMY_BUILD_PATH,
@@ -298,7 +298,7 @@ try {
       expectedJson(relativePath, value, value.id),
       expectedText(documentPath, document, value.id),
     ]),
-    expectedJson(CANONICAL_LEARNING_ORDER_PATH, materialization.learningOrder),
+    expectedJson(CANONICAL_LEARNING_PREREQUISITES_PATH, materialization.learningPrerequisites),
     expectedJson(CANONICAL_PROBLEM_PLACEMENTS_PATH, materialization.problemPlacementPolicy),
     expectedJson(
       CANONICAL_PROBLEM_PLACEMENT_EVIDENCE_PATH,

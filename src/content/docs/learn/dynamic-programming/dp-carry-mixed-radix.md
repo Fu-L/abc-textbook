@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第45単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/) ／ 次: [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)
-
 ## 概要
 
 ### 繰り上がり・混合基数DP
@@ -32,7 +26,9 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+直接の前提単元: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+
+このUnitを直接前提とする単元: なし。
 
 状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。
 
@@ -42,15 +38,15 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC231 E「Minimal payments」](https://atcoder.jp/contests/abc231/tasks/abc231_e) — 主題: [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/)。
+- [ABC231 E「Minimal payments」](https://atcoder.jp/contests/abc231/tasks/abc231_e) — 主題: [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/)（整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 関連問題
 
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。
 
-- [ABC466 G「Segment Sum Constraints」](https://atcoder.jp/contests/abc466/tasks/abc466_g) — 主題: [potential・weighted DSU](/learn/graph/potential-dsu/)。
+- [ABC466 G「Segment Sum Constraints」](https://atcoder.jp/contests/abc466/tasks/abc466_g) — 主題: [potential・weighted DSU](/learn/graph/potential-dsu/)（DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。）。追加で学ぶ技能: [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/)（整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。）。
 
 ## 根拠
 
@@ -59,4 +55,4 @@ sidebar:
 - [ABC466 G 公式解説](https://atcoder.jp/contests/abc466/editorial/22603)
 - [ABC466 G 公式問題文](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-dp-carry-mixed-radix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-dp-carry-mixed-radix`

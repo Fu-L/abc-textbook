@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
   ],
@@ -34,6 +33,7 @@
   "problemIds": [
     "abc221-f",
     "abc222-f",
+    "abc267-f",
     "abc303-e",
     "abc361-e",
     "abc401-f",
@@ -43,19 +43,15 @@
     "abc303-e",
     "abc361-e",
     "abc428-e",
-    "abc401-f",
+    "abc221-f",
     "abc222-f",
-    "abc221-f"
+    "abc267-f",
+    "abc401-f"
   ],
   "relatedProblemIds": [
-    "abc267-f",
     "abc460-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 1,
-  "representativeRank": 5,
-  "globalIndex": 41,
-  "orderReason": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
+  "learningRationale": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
 }

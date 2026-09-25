@@ -5,9 +5,6 @@
   "parentId": "unit-dp-stochastic",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-stochastic"
-  ],
   "excludedTopics": [
     "期待値の頻度圧縮と加法的ポテンシャルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -38,9 +35,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 90,
-  "globalIndex": 155,
-  "orderReason": "確率・期待値DPで得た考え方と実装を再利用し、期待値の頻度圧縮と加法的ポテンシャルの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "確率・期待値DPで得た考え方と実装を再利用し、期待値の頻度圧縮と加法的ポテンシャルの発動条件・正当化・境界を重複なく学ぶ。"
 }

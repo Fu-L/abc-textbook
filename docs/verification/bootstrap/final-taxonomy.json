@@ -2,21 +2,20 @@
   "schemaVersion": "1.0.0",
   "evidenceId": "bootstrap-final-taxonomy",
   "taskId": "T159",
-  "generatedAt": "2026-09-24T14:15:36.959Z",
+  "generatedAt": "2026-09-25T04:48:07.395Z",
   "status": "passed",
   "buildPath": "staging/taxonomy/initial/final-taxonomy-build.json",
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "7815fbcd4e36fb63f51b74d9f6157a527a46a09676be8dfcc4c86b9d517b572e",
-  "buildDigest": "651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7",
+  "taxonomySubjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+  "buildDigest": "2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779",
   "integrationMapDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23",
-  "taxonomyDigest": "8c5542fb44d088940a0a8e115f673d805c90e4b2f97d6a1d6bc6b37217c27060",
+  "taxonomyDigest": "455306e0d91be32b5e94e3c7a96de8bdc27d198594cb00d74200ca6912d6fd91",
   "tagDagDigest": "dfe87d8e728cbc39f5c2f8c48d48b640354617a5acccb40a4b1831e11c87a21e",
   "learningUnitDagDigest": "a6f4fcba42c9b2913776f8201d08cc389fdd87029773caf8dea8555c4985113f",
-  "orderDigest": "dad14139c7ab38102d76d636f6739f166805ac34829282ebbcd95078284763ed",
-  "placementDigest": "0f2747a8d7d2a6451ef486745cbe952cd7ec26cdb303caa1c035b90ef1d26e86",
-  "correctionImpactDigest": "c84fe7608952547d6672a1ea12812d27f00df2d4aef59724748e369f57311467",
+  "placementDigest": "81bc6c11e5c9f0557a0977bc07029f5ccf57ce66bcf3d2f68f295fbc480c1982",
+  "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "problemCount": 868,
   "sourceRevisionCount": 1738,
   "knownCorpusSourceRevisionCount": 2246,
@@ -30,8 +29,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "57f809b7ba58a23f8988ee0e77014f4fe1507633531961cd3a8d51c87917605b",
-      "subjectDigest": "7815fbcd4e36fb63f51b74d9f6157a527a46a09676be8dfcc4c86b9d517b572e",
+      "digest": "6c38d0f766fcb27f7774a9ea1574de723ad5ed1819918dac6efc78c8e9bb7279",
+      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
       "authorIds": [
         "person-maintainer"
       ],
@@ -45,5 +44,5 @@
   "canonicalMaterializationAllowed": true,
   "holdReasons": [],
   "diagnosticCodes": [],
-  "evidenceDigest": "b628aa2d07f7716ae2fb21118eb4ca955cbb8778d37187976769bece2ff99d7a"
+  "evidenceDigest": "e4e1d3927f146155a79b81888904ba7aa318526860fd046d011b16d4ef119374"
 }

@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-modular-arithmetic"
-  ],
   "excludedTopics": [
     "Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -38,9 +35,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 90,
-  "globalIndex": 136,
-  "orderReason": "有限集合上の可逆な作用と逆作用を定義し、離散対数やaffine反復を含む反復到達時刻をbaby/giantの衝突へ変換して平方根時間で求める。合同算術が必要な問題では個別のreadinessとして接続する。"
+  "learningRationale": "有限集合上の可逆な作用と逆作用を定義し、離散対数やaffine反復を含む反復到達時刻をbaby/giantの衝突へ変換して平方根時間で求める。合同算術が必要な問題では個別のreadinessとして接続する。"
 }

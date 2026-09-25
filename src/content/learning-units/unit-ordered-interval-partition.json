@@ -5,9 +5,6 @@
   "parentId": "unit-ordered-set-heap",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-ordered-set-multiset"
-  ],
   "excludedTopics": [
     "ordered interval partition・ODTの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,26 +32,21 @@
   "docPath": "src/content/docs/learn/query/ordered-interval-partition.md",
   "problemIds": [
     "abc255-ex",
-    "abc256-ex",
     "abc380-e",
     "abc435-e",
     "abc465-g"
   ],
   "directProblemIds": [
-    "abc435-e",
     "abc380-e",
-    "abc255-ex",
-    "abc256-ex",
-    "abc465-g"
+    "abc435-e",
+    "abc465-g",
+    "abc255-ex"
   ],
   "relatedProblemIds": [
-    "abc251-ex"
+    "abc251-ex",
+    "abc256-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 79,
-  "globalIndex": 111,
-  "orderReason": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
 }

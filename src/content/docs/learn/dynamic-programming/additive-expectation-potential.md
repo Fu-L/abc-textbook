@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第156単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [slope trick](/learn/geometry-optimization/slope-trick/) ／ 次: [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/)
-
 ## 概要
 
 ### 期待値の頻度圧縮と加法的ポテンシャル
@@ -38,7 +32,9 @@ ABC249 Exではg(j)=1/N+Σ_k P[j][k]g(k)を0≤j<Nについて課す。自己ル
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。
+直接の前提単元: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。
+
+このUnitを直接前提とする単元: なし。
 
 確率・期待値DPで得た考え方と実装を再利用し、期待値の頻度圧縮と加法的ポテンシャルの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -48,13 +44,13 @@ ABC249 Exではg(j)=1/N+Σ_k P[j][k]g(k)を0≤j<Nについて課す。自己ル
 
 ## 問題一覧
 
-1. [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h) — 主題: [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/)。既習技能: 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。 / 状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。
+- [ABC249 Ex「Dye Color」](https://atcoder.jp/contests/abc249/tasks/abc249_h) — 主題: [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/)（対称な確率過程の期待費用を頻度別関数の和へ分離し、自己ループを含む一段方程式と終端の較正から吸収までの期待費用を求められる。）。既習技能: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)（係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。） / [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)（選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。） / [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)（状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
 - [ABC249 H 公式解説](https://atcoder.jp/contests/abc249/editorial/3842)
 - [ABC249 H 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-additive-expectation-potential`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-additive-expectation-potential`

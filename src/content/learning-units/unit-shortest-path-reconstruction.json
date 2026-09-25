@@ -5,9 +5,6 @@
   "parentId": "unit-shortest-path-certificates",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-weighted-shortest-path"
-  ],
   "excludedTopics": [
     "最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -47,9 +44,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 4,
-  "representativeRank": 92,
-  "globalIndex": 74,
-  "orderReason": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
+  "learningRationale": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
 }

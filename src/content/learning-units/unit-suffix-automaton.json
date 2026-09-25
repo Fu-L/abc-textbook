@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-finite-pattern-automaton"
-  ],
   "excludedTopics": [
     "接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。"
   ],
@@ -38,9 +35,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 3,
-  "globalIndex": 151,
-  "orderReason": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
+  "learningRationale": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
 }

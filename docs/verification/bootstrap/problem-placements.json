@@ -24,8 +24,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7",
-    "acceptedAt": "2026-09-24T14:15:36.959Z"
+    "digest": "2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779",
+    "acceptedAt": "2026-09-25T04:48:07.395Z"
   },
   "problemCount": 868,
   "uniqueProblemCount": 868,
@@ -38,8 +38,8 @@
   "tagAssignmentCount": 1743,
   "correctionImpactCount": 12,
   "previewTaxonomyChangeCount": 12,
-  "placementDigest": "0f2747a8d7d2a6451ef486745cbe952cd7ec26cdb303caa1c035b90ef1d26e86",
-  "correctionImpactDigest": "d5154d05bb81da28d7b15fe937af487ec8770b9d81bf577062605f30d47e046e",
+  "placementDigest": "81bc6c11e5c9f0557a0977bc07029f5ccf57ce66bcf3d2f68f295fbc480c1982",
+  "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "checks": [
     {
       "checkId": "accepted-build-binding",
@@ -58,7 +58,7 @@
       "passed": true
     },
     {
-      "checkId": "unique-primary-outcome-review-unit",
+      "checkId": "unique-primary-outcome-home-unit",
       "passed": true
     },
     {

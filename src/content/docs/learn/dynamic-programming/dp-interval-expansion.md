@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第80単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) ／ 次: [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/)
-
 ## 概要
 
 ### 区間拡張DP
@@ -36,7 +30,9 @@ ABC273 Fでは壁を越えるのに必要な鍵が訪問済み区間にあるか
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+直接の前提単元: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+
+このUnitを直接前提とする単元: なし。
 
 DPの最小十分状態で得た考え方と実装を再利用し、区間拡張DPの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -46,10 +42,10 @@ DPの最小十分状態で得た考え方と実装を再利用し、区間拡張
 
 ## 問題一覧
 
-1. [ABC273 F「Hammer 2」](https://atcoder.jp/contests/abc273/tasks/abc273_f) — 主題: [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)。既習技能: 初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる。
-2. [ABC219 H「Candles」](https://atcoder.jp/contests/abc219/tasks/abc219_h) — 主題: [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)。既習技能: 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+- [ABC273 F「Hammer 2」](https://atcoder.jp/contests/abc273/tasks/abc273_f) — 主題: [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)（訪問済み範囲と現在いる端を状態にし、未訪問の左右の隣点へ拡張する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/)（初期値・将来更新値・疎なevent座標をsort-uniqueし、順序と等値性を保つdense indexまたは有限状態へ写せる。）。
+- [ABC219 H「Candles」](https://atcoder.jp/contests/abc219/tasks/abc219_h) — 主題: [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/)（訪問済み範囲と現在いる端を状態にし、未訪問の左右の隣点へ拡張する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/)（答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
@@ -58,4 +54,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、区間拡張
 - [ABC273 F 公式解説](https://atcoder.jp/contests/abc273/editorial/5034)
 - [ABC273 F 公式問題文](https://atcoder.jp/contests/abc273/tasks/abc273_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-dp-interval-expansion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-dp-interval-expansion`

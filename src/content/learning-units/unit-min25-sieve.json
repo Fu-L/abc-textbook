@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-prime-divisor"
-  ],
   "excludedTopics": [
     "Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -38,9 +35,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 5,
-  "difficultyRank": 4,
-  "representativeRank": 98,
-  "globalIndex": 192,
-  "orderReason": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
 }

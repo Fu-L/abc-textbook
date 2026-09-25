@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"
   ],
@@ -33,22 +32,20 @@
   "docPath": "src/content/docs/learn/number-theory/gcd-diophantine.md",
   "problemIds": [
     "abc271-ex",
-    "abc340-f"
+    "abc315-g",
+    "abc340-f",
+    "abc459-g"
   ],
   "directProblemIds": [
     "abc340-f",
+    "abc315-g",
+    "abc459-g",
     "abc271-ex"
   ],
   "relatedProblemIds": [
-    "abc315-g",
-    "abc459-g",
     "abc460-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 1,
-  "representativeRank": 1,
-  "globalIndex": 20,
-  "orderReason": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
+  "learningRationale": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
 }

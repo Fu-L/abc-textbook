@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "各頂点から複数の後続を選べる一般のグラフ探索・強連結成分への縮約。"
   ],
@@ -34,15 +33,14 @@
     "abc241-e",
     "abc254-g",
     "abc256-e",
-    "abc258-e",
     "abc284-g",
     "abc296-e",
     "abc310-g",
     "abc357-e",
     "abc367-e",
-    "abc370-f",
     "abc371-g",
     "abc377-e",
+    "abc387-f",
     "abc399-e",
     "abc436-e",
     "abc438-e"
@@ -50,16 +48,13 @@
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc247-ex",
+    "abc258-e",
     "abc286-f",
-    "abc387-f",
+    "abc370-f",
     "abc417-g",
     "abc444-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 1,
-  "representativeRank": 4,
-  "globalIndex": 55,
-  "orderReason": "状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。"
+  "learningRationale": "状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。"
 }

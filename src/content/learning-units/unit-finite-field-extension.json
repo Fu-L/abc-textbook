@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-modular-arithmetic"
-  ],
   "excludedTopics": [
     "素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"
   ],
@@ -32,19 +29,15 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/finite-field-extension.md",
   "problemIds": [
-    "abc274-ex"
+    "abc381-g"
   ],
   "directProblemIds": [
-    "abc274-ex"
+    "abc381-g"
   ],
   "relatedProblemIds": [
-    "abc381-g"
+    "abc274-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 5,
-  "representativeRank": 10,
-  "globalIndex": 188,
-  "orderReason": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
+  "learningRationale": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
 }

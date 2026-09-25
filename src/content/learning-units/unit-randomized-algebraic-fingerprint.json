@@ -5,9 +5,6 @@
   "parentId": "unit-randomized-algorithms",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-randomized-algorithms"
-  ],
   "excludedTopics": [
     "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -40,17 +37,13 @@
     "abc455-g"
   ],
   "directProblemIds": [
-    "abc367-f",
     "abc339-f",
+    "abc367-f",
     "abc238-g",
     "abc455-g"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 87,
-  "globalIndex": 129,
-  "orderReason": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
 }

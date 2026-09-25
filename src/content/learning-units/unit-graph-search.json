@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "eventをsortしてactive集合を増減するsweep line。",
     "非負重み付き距離の緩和・確定と最短路certificateの復元。"
@@ -39,33 +38,29 @@
     "abc289-e",
     "abc292-e",
     "abc302-f",
+    "abc305-f",
     "abc317-e",
+    "abc319-g",
+    "abc355-e",
+    "abc361-g",
     "abc394-e",
     "abc414-f",
-    "abc417-e",
     "abc427-e",
     "abc429-e",
+    "abc443-f",
     "abc446-e",
     "abc446-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc257-g",
-    "abc305-f",
-    "abc319-g",
     "abc329-e",
     "abc336-f",
-    "abc355-e",
-    "abc361-g",
     "abc374-g",
     "abc413-f",
-    "abc443-f"
+    "abc417-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 0,
-  "representativeRank": 0,
-  "globalIndex": 18,
-  "orderReason": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
+  "learningRationale": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
 }

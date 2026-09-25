@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第66単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) ／ 次: [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/)
-
 ## 概要
 
 ### potential・weighted DSU
@@ -36,7 +30,9 @@ ABC328 Fは制約を順次追加して矛盾する追加を棄却するので、
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/)、[静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/)。
+直接の前提単元: [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/)、[静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/)。
+
+このUnitを直接前提とする単元: なし。
 
 DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -46,10 +42,10 @@ DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝
 
 ## 問題一覧
 
-1. [ABC328 F「Good Set Query」](https://atcoder.jp/contests/abc328/tasks/abc328_f) — 主題: [potential・weighted DSU](/learn/graph/potential-dsu/)。
-2. [ABC466 G「Segment Sum Constraints」](https://atcoder.jp/contests/abc466/tasks/abc466_g) — 主題: [potential・weighted DSU](/learn/graph/potential-dsu/)。
+- [ABC328 F「Good Set Query」](https://atcoder.jp/contests/abc328/tasks/abc328_f) — 主題: [potential・weighted DSU](/learn/graph/potential-dsu/)（DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。）。
+- [ABC466 G「Segment Sum Constraints」](https://atcoder.jp/contests/abc466/tasks/abc466_g) — 主題: [potential・weighted DSU](/learn/graph/potential-dsu/)（DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。）。追加で学ぶ技能: [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/)（整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
@@ -58,4 +54,4 @@ DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝
 - [ABC466 G 公式解説](https://atcoder.jp/contests/abc466/editorial/22603)
 - [ABC466 G 公式問題文](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-potential-dsu`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-potential-dsu`

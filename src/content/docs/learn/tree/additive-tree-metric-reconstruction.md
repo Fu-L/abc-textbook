@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第176単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [subset convolution](/learn/combinatorics-algebra/subset-convolution/) ／ 次: [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/)
-
 ## 概要
 
 ### 加法的tree metric復元
@@ -32,7 +26,9 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)。
+直接の前提単元: [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)。
+
+このUnitを直接前提とする単元: なし。
 
 木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。
 
@@ -42,13 +38,13 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC451 E「Tree Distance」](https://atcoder.jp/contests/abc451/tasks/abc451_e) — 主題: [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)。既習技能: 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
+- [ABC451 E「Tree Distance」](https://atcoder.jp/contests/abc451/tasks/abc451_e) — 主題: [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)（加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。）。既習技能: [成立証明から構成解を復元する](/learn/modeling/constructive-witness/)（成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
 - [ABC451 E 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 - [ABC451 E 公式解説](https://atcoder.jp/contests/abc451/editorial/18053)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-additive-tree-metric-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-additive-tree-metric-reconstruction`

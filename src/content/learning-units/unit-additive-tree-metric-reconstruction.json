@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-tree-metric"
-  ],
   "excludedTopics": [
     "加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -38,9 +35,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 95,
-  "globalIndex": 175,
-  "orderReason": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -5,10 +5,6 @@
   "parentId": "unit-flow-matching",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-greedy-exchange",
-    "unit-priority-queue-best-first"
-  ],
   "excludedTopics": [
     "path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -43,9 +39,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 99,
-  "globalIndex": 186,
-  "orderReason": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
+  "learningRationale": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
 }

@@ -5,9 +5,6 @@
   "parentId": "unit-discrete-convex",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-basic-convex-optimization"
-  ],
   "excludedTopics": [
     "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -42,17 +39,13 @@
   ],
   "directProblemIds": [
     "abc216-e",
-    "abc359-f",
     "abc389-e",
+    "abc359-f",
     "abc373-f",
     "abc369-g"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 77,
-  "globalIndex": 109,
-  "orderReason": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
+  "learningRationale": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
 }

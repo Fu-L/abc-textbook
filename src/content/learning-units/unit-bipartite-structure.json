@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"
   ],
@@ -31,22 +30,21 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/bipartite-structure.md",
-  "problemIds": [],
-  "directProblemIds": [],
+  "problemIds": [
+    "abc451-f"
+  ],
+  "directProblemIds": [
+    "abc451-f"
+  ],
   "relatedProblemIds": [
     "abc327-g",
     "abc398-e",
     "abc398-g",
     "abc437-g",
     "abc445-g",
-    "abc451-f",
     "abc454-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 1,
-  "representativeRank": 3,
-  "globalIndex": 9,
-  "orderReason": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
+  "learningRationale": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
 }

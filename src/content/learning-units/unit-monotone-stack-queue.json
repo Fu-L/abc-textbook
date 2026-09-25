@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "全候補から極値を反復取得するheap・ordered set。"
   ],
@@ -33,18 +32,20 @@
   "docPath": "src/content/docs/learn/query/monotone-stack-queue.md",
   "problemIds": [
     "abc228-f",
+    "abc234-g",
+    "abc248-ex",
     "abc359-e",
     "abc379-f"
   ],
   "directProblemIds": [
     "abc359-e",
+    "abc228-f",
     "abc379-f",
-    "abc228-f"
+    "abc234-g",
+    "abc248-ex"
   ],
   "relatedProblemIds": [
     "abc213-f",
-    "abc234-g",
-    "abc248-ex",
     "abc280-ex",
     "abc303-g",
     "abc334-f",
@@ -53,9 +54,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 2,
-  "representativeRank": 7,
-  "globalIndex": 17,
-  "orderReason": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
+  "learningRationale": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
 }

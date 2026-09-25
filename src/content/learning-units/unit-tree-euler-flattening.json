@@ -5,7 +5,6 @@
   "parentId": "unit-tree-decomposition",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -33,22 +32,18 @@
   "docPath": "src/content/docs/learn/tree/tree-euler-flattening.md",
   "problemIds": [
     "abc240-e",
+    "abc294-g",
     "abc337-g",
     "abc406-f"
   ],
   "directProblemIds": [
     "abc240-e",
     "abc406-f",
+    "abc294-g",
     "abc337-g"
   ],
-  "relatedProblemIds": [
-    "abc294-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 67,
-  "globalIndex": 61,
-  "orderReason": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

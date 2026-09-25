@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"
   ],
@@ -32,21 +31,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/binary-trie.md",
   "problemIds": [
-    "abc252-ex",
-    "abc425-g"
+    "abc425-g",
+    "abc451-g"
   ],
   "directProblemIds": [
     "abc425-g",
-    "abc252-ex"
+    "abc451-g"
   ],
   "relatedProblemIds": [
-    "abc451-g"
+    "abc252-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 2,
-  "representativeRank": 11,
-  "globalIndex": 52,
-  "orderReason": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
+  "learningRationale": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
 }

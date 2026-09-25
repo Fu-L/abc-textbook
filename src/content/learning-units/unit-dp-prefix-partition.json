@@ -5,9 +5,6 @@
   "parentId": "unit-dp-sequence-interval",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,27 +32,24 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-prefix-partition.md",
   "problemIds": [
     "abc230-f",
-    "abc234-g",
+    "abc262-ex",
     "abc285-e",
+    "abc288-f",
     "abc374-f",
     "abc466-e"
   ],
   "directProblemIds": [
-    "abc466-e",
     "abc285-e",
-    "abc374-f",
+    "abc466-e",
     "abc230-f",
-    "abc234-g"
+    "abc288-f",
+    "abc374-f",
+    "abc262-ex"
   ],
   "relatedProblemIds": [
-    "abc262-ex",
-    "abc288-f"
+    "abc234-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 4,
-  "representativeRank": 80,
-  "globalIndex": 32,
-  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、prefix分割DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "rolling hashによる一致比較と回文半径。"
   ],
@@ -40,9 +39,9 @@
     "abc452-g"
   ],
   "directProblemIds": [
-    "abc362-g",
-    "abc272-f",
     "abc213-f",
+    "abc272-f",
+    "abc362-g",
     "abc452-g",
     "abc268-ex",
     "abc280-ex"
@@ -50,9 +49,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 2,
-  "representativeRank": 2,
-  "globalIndex": 91,
-  "orderReason": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
+  "learningRationale": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
 }

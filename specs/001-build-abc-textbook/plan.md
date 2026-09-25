@@ -209,20 +209,20 @@ preview後も、公開taxonomyは全コーパスから再計算する。初期�
 
 1. ABC 212〜466の全ContestとDより後の全slot/problem metadataを収集し、欠落・公式状態を確定する。
 2. 全Problemについて、公式根拠から主たる解法、証明着眼点、必要前提、実装上の注意、候補成果を`TechniqueInventoryItem`として棚卸しする。初期棚卸しでは公式解説の用語検出による候補を`draft`のまま保持し、その後、問題単位で公式Source Revisionとwriting policyを確認して執筆・self-reviewした項目だけを`reviewed`にする。自動検出だけでの昇格は行わず、全コーパスjoinは未確認`draft`、`changes_requested`、既知scaffoldを拒否する。計算量解析自体が解法選択や実現可能性の本質となる特殊な場合に限り、公式解説または問題固有の解析で確定した解法全体の計算量を任意欄へ記録する。通常の計算量と、部分テクニックの汎用fallback計算量は生成しない。
-3. 全inventoryを横断して、正式Tag、Learning Outcome、Tag前提DAG、Learning Unit前提DAG、標準学習順、Problem Placementを設計する。同義の仮Tagや一問専用Unitを正本へ残さない。
-4. T154のpreview PASS後に、T159が全InventoryからTag / Outcome / Unit、前提DAG、全ProblemPlacement、Unit標準順とUnit内Problem順、TaxonomyIntegrationMapを生成し、review後に一つのFinalTaxonomyBuildとして受理する。T047–T050はそのaccepted buildをcanonicalへmaterializeする。Tag / Outcomeは分類metadataとし、主配置はProblemごとに一意、親UnitのproblemIdsはcoverageとする。T055–T056とT155–T158はchapter subtreeを非重複に分割し、Unitごとのmanifestで通常本文を引き継ぐ。固定のガイド・転移・評価課題は持たない。T065以降で各Problem固有のauthoring unitへfull解説を執筆し、読む順番はcanonical配置・順序に従う。作業shardの分割順を教材順に流用しない。
+3. 全inventoryを横断して、正式Tag、Learning Outcome、3つの直接前提DAG、Problem Placementを設計する。同義の仮Tagや一問専用Unitを正本へ残さない。
+4. T154のpreview PASS後に、T159が全InventoryからTag / Outcome / Unit、3つの前提DAG、全ProblemPlacement、TaxonomyIntegrationMapを生成し、review後に一つのFinalTaxonomyBuildとして受理する。canonical modelに全体履修順を生成しない。T047–T050はaccepted buildをcanonicalへmaterializeする。各Problemのhome Unitはprimary Outcomeの唯一のownerとし、親UnitのproblemIdsはcoverageとする。T055–T056とT155–T158はchapter subtreeを非重複に分割し、Unitごとのmanifestで通常本文を引き継ぐ。固定のガイド・転移・評価課題は持たない。T065以降で各Problem固有のauthoring unitへfull解説を執筆する。作業shardの分割順を教材順に流用しない。
 5. 各Problemを主たるLearning Outcomeのshardへ一意に割り当て、完全解説または根拠付きの類題/補充問題を執筆する。
 6. domain別のLearning Unit概説と各Problemの解説を作り、全Problemが教科書順またはTag問題集から到達できることを検証する。
 7. T057/T075–T076/T078のfull-corpus content・explanation・mapping acceptance後にT160を実行し、preview fixtureへ接続していた共有catalog、route、matrix、search、Pagefind、sitemap/feedをcanonical full-corpus sourceへ一度だけ切り替えてdigestをfreezeする。T138/T140/T145/T146はこの固定projectionを検証・消費し、切替を暗黙に実行しない。
 
-上記のUnit標準順は問題配置を決める内部順を指す。読者向けの掲載順と対象色は後述の編集データから文書へ反映し、accepted buildのtaxonomy・配置・Unit内問題順を変更しない。
+Problemの唯一homeはprimary Outcomeのownerから導出し、Unit prerequisite DAGやsidebar順からは導出しない。読者向けの目次順は独立した編集データから反映する。Unit内Problem reading orderの再設計は別作業とする。
 
 previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomyBuild`で全Inventoryを入力に一度だけ決定・review・acceptし、T047–T050がaccepted digestをmaterializeする。次の規則を必ず適用する。
 
 - 仮Tag/Outcome/Unitは`staging/previews/`のnamespaceにのみ存在し、`src/content/tags/`、`learning-outcomes/`、`learning-units/`、公開catalogへ直接コピーしない。
 - 全ProblemのInventory digestを入力に、各仮entityを`promote`、既存entityへの`merge`、複数entityへの`split`、`retire`のいずれかへ一度だけ対応付ける。対応表にはpreview ID、final ID、影響Problem ID、根拠、review policy、旧IDのalias/redirectを記録する。
 - `merge`は定義・前提・成果が包含関係にあり、重複Tagを一つへ縮約できる場合だけ許す。`split`は全コーパスの該当Problemを再分類し、各分割先に定義・成果・代表問題・前提を満たす証拠がある場合だけ許す。単純な名称一致で昇格させない。
-- 仮DAGのedgeをそのまま最終DAGへ持ち込まず、final Inventory全件からTag/Outcome/Unitの各DAGと標準順を再生成し、循環・未知参照・前提違反が0件であることを確認する。
+- 仮DAGのedgeをそのまま最終DAGへ持ち込まず、final Inventory全件からTag/Outcome/Unitの直接前提DAGを再生成し、循環・未知参照が0件であることを確認する。全体の学習順や隣接関係は生成しない。
 - Problem ID、Source Revision、LearningRecordのkeyは変更せず、taxonomy再編で影響する本文、例、演習、解答、placement、索引を`CorrectionImpact`へ完全列挙する。対応未確定の仮entityまたは影響未確認Problemが一つでもあればfinal taxonomyを受理しない。
 - final taxonomyの受理後にのみcanonical contentへmaterializeし、preview snapshotはimmutableな検証証跡として残す。previewの成果物を公開Releaseへ混在させない。
 - T050のcanonical skeletonはJSONを`contentPhase=canonical_skeleton`、Markdownを`draft: true`としてT160までroute・sidebar・Pagefindから除外する。後続のUnit執筆taskは担当Unitを`contentPhase=full_authoring`へ移して同じJSON/Markdownを引き継ぎ、materializerは本文byteを上書きせずtaxonomy projectionだけを検証する。
@@ -233,12 +233,9 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 
 共通前提baseline、problem placement decision table、glossaryを別々の唯一の正本にする。全LearningUnitとProblemAuthoringUnitはbaseline、追加前提または追加前提なし、対象外を直接参照する。placementは`full`既定で、主要解説と主成果・前提・解法・証明・漸近計算量が同じ場合だけ`similar`、単一の副次的技能だけを追加する場合だけ`supplement`を許す。どの行にも一意に一致しない場合は保留する。
 
-順序は次の二つを区別する。
+分類・前提・掲載表示を分離する。Tag / Outcome / LearningUnitの前提DAGは`src/content/policies/learning-prerequisites.json`に直接辺として保持し、全体順序・前後リンク・rankへ畳み込まない。分野別目次は`textbook-order.ts`を正本とし、Markdownの`sidebar.order`は`textbookIndex`から生成する。各Problemのhomeはprimary Outcomeの唯一のownerであり、additional-primary Outcomeは新たに学ぶ技能、supporting Outcomeは既習技能として別に表示する。Unit内Problem順は次ターンの作業対象とし、この変更では既存列をそのまま保つ。
 
-- 問題配置・前提検証用の内部順（`standardOrder`）は前提DAGをhard constraintとする。`learning-unit-order.ts`の概念連鎖のanchor優先度、stage/difficulty/representative rankと安定IDによる決定性を維持する。accepted buildの配置・Unit内問題順は、この順序を基準に保持する。
-- 分野別目次は`textbook-order.ts`を正本とし、章目次の階層を字下げし、Markdownの`sidebar.order`は`textbookIndex`から生成する。通常の学習経路はaccepted buildの`standardOrder`を使い、読み方の全順序と各Unitの前後リンクを生成する。必須前提を満たすために親子Unitを離して履修してよい。問題の意味的なprimaryと前提充足による提示先を分離する。グラフ章の二部構造は探索のまとまりの直後、最短路の前に置き、二部マッチングはflow/matchingのまとまりに置く。
-
-全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。内部rankや掲載問題の完答難度を対象色に流用しない。掲載順・対象色の編集ではaccepted taxonomy、問題配置、Unit内問題順を変更せず、materializerで文書と証跡を再生成する。T160までdraftであることと、将来の公開projectionへの引継ぎは変えない。
+全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。DAGに全体順位を与えず、`textbook-order.ts`の編集だけでは前提やProblemのhomeを変更しない。Unit内Problem順の再設計は次ターンで行う。T160までdraftであることと、将来の公開projectionへの引継ぎは変えない。
 
 ### Initial Release Cutoff and Catch-up
 

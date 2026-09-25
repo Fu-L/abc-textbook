@@ -5,9 +5,6 @@
   "parentId": "unit-shortest-path-certificates",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-weighted-shortest-path"
-  ],
   "excludedTopics": [
     "difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,15 +33,11 @@
     "abc404-g"
   ],
   "directProblemIds": [
-    "abc404-g",
-    "abc216-g"
+    "abc216-g",
+    "abc404-g"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 93,
-  "globalIndex": 75,
-  "orderReason": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
+  "learningRationale": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
 }

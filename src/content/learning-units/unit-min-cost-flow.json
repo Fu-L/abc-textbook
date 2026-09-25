@@ -5,10 +5,6 @@
   "parentId": "unit-flow-matching",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-max-flow-min-cut",
-    "unit-weighted-shortest-path"
-  ],
   "excludedTopics": [
     "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,7 +31,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/min-cost-flow.md",
   "problemIds": [
-    "abc214-h",
     "abc224-h",
     "abc231-h",
     "abc247-g",
@@ -47,17 +42,13 @@
     "abc407-g",
     "abc421-g",
     "abc224-h",
-    "abc231-h",
-    "abc214-h"
+    "abc231-h"
   ],
   "relatedProblemIds": [
+    "abc214-h",
     "abc393-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 92,
-  "globalIndex": 144,
-  "orderReason": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "候補数を制約・生成パラメータ・有限caseで直接界して全列挙する探索、軽重分類による償却解析、および入力木・trie・区間DPの構造をそのまま辿るだけの再帰。"
   ],
@@ -30,24 +29,24 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/divide-enumeration.md",
   "problemIds": [
+    "abc220-h",
+    "abc252-ex",
     "abc271-f",
+    "abc282-ex",
     "abc300-g",
-    "abc304-g",
     "abc326-f",
     "abc336-f",
     "abc402-f",
     "abc413-e",
-    "abc423-g",
+    "abc426-g",
     "abc427-f",
     "abc464-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc213-h",
-    "abc220-h",
     "abc230-h",
     "abc247-ex",
-    "abc252-ex",
     "abc260-ex",
     "abc267-ex",
     "abc269-ex",
@@ -55,7 +54,7 @@
     "abc273-ex",
     "abc281-ex",
     "abc281-f",
-    "abc282-ex",
+    "abc304-g",
     "abc317-ex",
     "abc331-g",
     "abc345-g",
@@ -65,15 +64,11 @@
     "abc381-g",
     "abc383-g",
     "abc385-g",
+    "abc423-g",
     "abc425-g",
-    "abc426-g",
     "abc439-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 4,
-  "globalIndex": 33,
-  "orderReason": "探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。"
+  "learningRationale": "探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。"
 }

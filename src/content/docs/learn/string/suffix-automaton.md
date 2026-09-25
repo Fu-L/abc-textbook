@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第152単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [run-length状態の動的遷移](/learn/string/run-length-dynamics/) ／ 次: [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/)
-
 ## 概要
 
 ### Suffix Automaton
@@ -32,7 +26,9 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)。
+直接の前提単元: [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)。
+
+このUnitを直接前提とする単元: なし。
 
 有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。
 
@@ -42,13 +38,13 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 
 ## 問題一覧
 
-1. [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g) — 主題: [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/)。既習技能: 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。
+- [ABC433 G「Substring Game」](https://atcoder.jp/contests/abc433/tasks/abc433_g) — 主題: [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/)（endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。）。既習技能: [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)（後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
 - [ABC433 G 公式解説](https://atcoder.jp/contests/abc433/editorial/14604)
 - [ABC433 G 公式問題文](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-suffix-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-suffix-automaton`

@@ -209,7 +209,7 @@ const createImpact = (id: string, previewEntityId: string) => {
     'example',
     'exercise',
     'answer',
-    'standard_order',
+    'prerequisite_graph',
     'derived_index',
   ] as const;
   const subject = {
@@ -247,7 +247,6 @@ const createImpact = (id: string, previewEntityId: string) => {
         evidenceRefs,
       },
     ],
-    affectedLearningUnitOrderIds: ['unit-core'],
     derivedIndexPaths: ['docs/verification/bootstrap/final-taxonomy-index.json'],
     canonicalMaterializationTask: 'T049' as const,
     coverageStatus: 'complete' as const,
@@ -347,7 +346,6 @@ const createBuild = (
         parentId: null,
         baselineId: 'prereq-abc-advanced-v1',
         baselineVersion: '1.0.0',
-        additionalPrerequisiteUnitIds: [],
         excludedTopics: [],
         sourceRevisionIds,
         tagIds: ['tag-algorithms', 'tag-core'],
@@ -357,11 +355,7 @@ const createBuild = (
         problemIds,
         directProblemIds: problemIds,
         relatedProblemIds: [],
-        stageRank: 0,
-        difficultyRank: 0,
-        representativeRank: 0,
-        globalIndex: 0,
-        orderReason: 'The single fixture Unit is first.',
+        learningRationale: 'Learn the core technique and its standard use.',
       },
       sourceRevisionIds,
       evidenceRefs,
@@ -391,8 +385,6 @@ const createBuild = (
     primaryOutcomeId: outcomeIds[0] ?? 'outcome-core',
     additionalPrimaryOutcomeIds: [],
     supportingOutcomeIds: [],
-    learningUnitIds: ['unit-core'],
-    presentationUnitId: 'unit-core',
     adHocElements: [],
     claimDispositions: [
       {
@@ -464,7 +456,6 @@ const createBuild = (
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements,
     correctionImpacts: correctionImpacts.map((impact) =>
       Object.fromEntries(
@@ -484,7 +475,6 @@ const createBuild = (
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements,
     correctionImpacts,
     sourceRevisionIds,
@@ -493,7 +483,6 @@ const createBuild = (
     taxonomyDigest: canonicalDigest(candidates),
     tagDagDigest: canonicalDigest([]),
     learningUnitDagDigest: canonicalDigest([]),
-    orderDigest: canonicalDigest(['unit-core']),
     placementDigest: canonicalDigest(placements),
     correctionImpactDigest: canonicalDigest(correctionImpacts),
     status: 'proposed' as const,

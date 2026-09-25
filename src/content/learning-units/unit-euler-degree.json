@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "容量付きフロー・マッチング・最小カットへの帰着。"
   ],
@@ -30,19 +29,15 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/euler-degree.md",
   "problemIds": [
+    "abc227-h",
     "abc286-g",
     "abc345-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc227-h",
     "abc336-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 10,
-  "globalIndex": 77,
-  "orderReason": "グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。"
+  "learningRationale": "グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。"
 }

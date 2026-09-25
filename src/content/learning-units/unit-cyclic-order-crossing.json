@@ -5,9 +5,6 @@
   "parentId": "unit-geometry-primitives",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-geometry-primitives"
-  ],
   "excludedTopics": [
     "円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -34,23 +31,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
   "problemIds": [
-    "abc263-ex",
-    "abc338-e",
-    "abc424-f"
+    "abc338-e"
   ],
   "directProblemIds": [
-    "abc338-e",
-    "abc424-f",
-    "abc263-ex"
+    "abc338-e"
   ],
   "relatedProblemIds": [
-    "abc405-f"
+    "abc263-ex",
+    "abc405-f",
+    "abc424-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 82,
-  "globalIndex": 118,
-  "orderReason": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
 }

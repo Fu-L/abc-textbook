@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第157単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [期待値の頻度圧縮と加法的ポテンシャル](/learn/dynamic-programming/additive-expectation-potential/) ／ 次: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)
-
 ## 概要
 
 ### 独立な数ゲームの和
@@ -36,7 +30,9 @@ ABC229 Hでは列間で手が干渉しない独立和と、全ての列局面が
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/)。
+直接の前提単元: [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/)。
+
+このUnitを直接前提とする単元: なし。
 
 有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。
 
@@ -46,10 +42,15 @@ ABC229 Hでは列間で手が干渉しない独立和と、全ての列局面が
 
 ## 問題一覧
 
-1. [ABC229 H「Advance or Eat」](https://atcoder.jp/contests/abc229/tasks/abc229_h) — 主題: [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/)。
-2. [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h) — 主題: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)。既習技能: 全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。 / 後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。 / Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。
+- [ABC229 H「Advance or Eat」](https://atcoder.jp/contests/abc229/tasks/abc229_h) — 主題: [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/)（全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
+
+## 関連問題
+
+以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。
+
+- [ABC265 Ex「No-capture Lance Game」](https://atcoder.jp/contests/abc265/tasks/abc265_h) — 主題: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)（係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。）。既習技能: [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/)（全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。） / [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)（後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。） / [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/)（Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。）。
 
 ## 根拠
 
@@ -58,4 +59,4 @@ ABC229 Hでは列間で手が干渉しない独立和と、全ての列局面が
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-conway-number-games`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-conway-number-games`

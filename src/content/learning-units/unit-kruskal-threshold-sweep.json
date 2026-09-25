@@ -5,10 +5,6 @@
   "parentId": "unit-spanning-tree-optimization",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dsu-components",
-    "unit-spanning-tree-optimization"
-  ],
   "excludedTopics": [
     "Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,22 +32,17 @@
   "docPath": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
   "problemIds": [
     "abc235-e",
-    "abc250-ex",
-    "abc301-ex",
     "abc383-e"
   ],
   "directProblemIds": [
     "abc235-e",
-    "abc383-e",
+    "abc383-e"
+  ],
+  "relatedProblemIds": [
     "abc250-ex",
     "abc301-ex"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 93,
-  "globalIndex": 145,
-  "orderReason": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
+  "learningRationale": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
 }

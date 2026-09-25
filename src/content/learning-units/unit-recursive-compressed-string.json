@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "明示された文字列への接尾辞索引の構築。"
   ],
@@ -39,16 +38,12 @@
   ],
   "directProblemIds": [
     "abc450-e",
-    "abc350-f",
     "abc346-f",
+    "abc350-f",
     "abc417-g"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 2,
-  "representativeRank": 2,
-  "globalIndex": 90,
-  "orderReason": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
+  "learningRationale": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
 }

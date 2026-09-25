@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "LCAという概念で対象を一意分類するだけで、ancestor query・Euler区間化・HLD・virtual treeを実装利用しない数え上げ、および重心による再帰分解。"
   ],
@@ -37,26 +36,22 @@
   "docPath": "src/content/docs/learn/tree/tree-decomposition.md",
   "problemIds": [
     "abc240-e",
-    "abc267-f",
     "abc294-g",
     "abc298-ex",
-    "abc329-g",
     "abc337-g",
     "abc340-g",
     "abc405-f",
-    "abc406-f",
-    "abc438-f"
+    "abc406-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc267-f",
+    "abc329-g",
     "abc351-g",
+    "abc438-f",
     "abc460-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 3,
-  "representativeRank": 7,
-  "globalIndex": 61,
-  "orderReason": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
+  "learningRationale": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
 }

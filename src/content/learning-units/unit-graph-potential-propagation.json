@@ -5,9 +5,6 @@
   "parentId": "unit-connectivity",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-state-graph-search"
-  ],
   "excludedTopics": [
     "静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -46,9 +43,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 4,
-  "representativeRank": 86,
-  "globalIndex": 37,
-  "orderReason": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
+  "learningRationale": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
 }

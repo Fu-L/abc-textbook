@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"
   ],
@@ -35,32 +32,32 @@
   "docPath": "src/content/docs/learn/dynamic-programming/dp-game.md",
   "problemIds": [
     "abc255-g",
+    "abc278-f",
+    "abc278-g",
     "abc297-g",
+    "abc354-e",
     "abc368-f",
     "abc380-f",
+    "abc398-e",
     "abc398-g"
   ],
   "directProblemIds": [
+    "abc354-e",
+    "abc398-e",
+    "abc278-f",
     "abc368-f",
     "abc380-f",
-    "abc297-g",
     "abc255-g",
+    "abc278-g",
+    "abc297-g",
     "abc398-g"
   ],
   "relatedProblemIds": [
     "abc212-h",
     "abc265-ex",
-    "abc278-f",
-    "abc278-g",
-    "abc354-e",
-    "abc398-e",
     "abc433-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 2,
-  "representativeRank": 5,
-  "globalIndex": 48,
-  "orderReason": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
+  "learningRationale": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
 }

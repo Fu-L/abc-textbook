@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "交換論による貪欲順の証明。"
   ],
@@ -35,43 +34,46 @@
     "abc219-f",
     "abc242-e",
     "abc250-e",
-    "abc307-e",
-    "abc382-g"
+    "abc296-f",
+    "abc302-g",
+    "abc313-g",
+    "abc323-f",
+    "abc382-g",
+    "abc427-g",
+    "abc446-g",
+    "abc462-e",
+    "abc463-f"
   ],
   "directProblemIds": [
-    "abc307-e",
     "abc242-e",
     "abc250-e",
+    "abc462-e",
     "abc219-f",
-    "abc382-g"
+    "abc296-f",
+    "abc323-f",
+    "abc463-f",
+    "abc302-g",
+    "abc313-g",
+    "abc382-g",
+    "abc427-g",
+    "abc446-g"
   ],
   "relatedProblemIds": [
     "abc218-h",
     "abc232-h",
     "abc278-g",
     "abc284-g",
-    "abc296-f",
     "abc301-f",
-    "abc302-g",
-    "abc313-g",
-    "abc323-f",
+    "abc307-e",
     "abc328-g",
     "abc360-e",
     "abc404-f",
     "abc411-g",
     "abc421-e",
     "abc425-f",
-    "abc427-g",
-    "abc446-g",
-    "abc450-g",
-    "abc462-e",
-    "abc463-f"
+    "abc450-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 1,
-  "representativeRank": 2,
-  "globalIndex": 8,
-  "orderReason": "対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。"
+  "learningRationale": "対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。"
 }

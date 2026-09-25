@@ -1,5 +1,3 @@
-import { CURRICULUM_STAGES } from '../../src/lib/taxonomy/final-taxonomy-curriculum.js';
-import { isCurriculumUnit } from '../../src/lib/taxonomy/learning-unit-order.js';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -8,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import {
   EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
   FINAL_LEARNING_UNIT_CANDIDATES,
-  FINAL_LEARNING_UNIT_ORDER_POLICY,
+  FINAL_LEARNING_UNIT_PREREQUISITES,
   FINAL_TAXONOMY_OUTCOMES,
   FINAL_TAXONOMY_PLACEMENT_PRINCIPLES,
   FINAL_TAXONOMY_TAGS,
@@ -17,7 +15,6 @@ import {
   PREVIEW_FINAL_TAXONOMY_DECISIONS,
   SINGLE_PROBLEM_OUTCOME_IDS,
   SINGLE_PROBLEM_TAG_IDS,
-  SINGLE_PROBLEM_UNIT_IDS,
   buildFullCorpusPrimaryDecisionTable,
   materializeLearningUnitCandidates,
   validateFinalTaxonomyPolicy,
@@ -34,6 +31,15 @@ const manifestPath = path.join(
   process.cwd(),
   'docs/work-manifests/initial/us2/final-taxonomy/manifest.json',
 );
+
+const prerequisiteIdsForUnit = (unitId: string): string[] =>
+  FINAL_LEARNING_UNIT_PREREQUISITES.filter(({ nodeId }) => nodeId === unitId)
+    .map(({ prerequisiteId }) => prerequisiteId)
+    .sort();
+
+const ownerUnitIdForOutcome = (outcomeId: string): string | undefined =>
+  FINAL_LEARNING_UNIT_CANDIDATES.find((unit) => unit.ownedLearningOutcomeIds.includes(outcomeId))
+    ?.id;
 
 const loadRecords = async (): Promise<readonly ProblemAnalysisInput[]> => {
   const shardNames = (await readdir(inventoryRoot, { withFileTypes: true }))
@@ -238,32 +244,26 @@ describe('final taxonomy policy', () => {
       [],
     );
 
-    const orderIndex = new Map(
-      FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
+    const prerequisiteEdgeKeys = FINAL_LEARNING_UNIT_PREREQUISITES.map(
+      ({ nodeId, prerequisiteId }) => `${nodeId}->${prerequisiteId}`,
     );
-    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds).toHaveLength(
-      FINAL_LEARNING_UNIT_CANDIDATES.filter(isCurriculumUnit).length,
-    );
+    expect(new Set(prerequisiteEdgeKeys).size).toBe(prerequisiteEdgeKeys.length);
     expect(FINAL_LEARNING_UNIT_CANDIDATES.filter((unit) => unit.kind === 'chapter')).toHaveLength(
       9,
     );
-    expect(
-      FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.filter(
-        (unitId) => unitById.get(unitId)?.kind === 'chapter',
-      ),
-    ).toEqual([]);
-    expect(new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.orderReason)).size).toBe(
+    expect(new Set(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.learningRationale)).size).toBe(
       FINAL_LEARNING_UNIT_CANDIDATES.length,
     );
     for (const unit of FINAL_LEARNING_UNIT_CANDIDATES) {
       expect(unit.tagIds.length).toBeGreaterThan(0);
       expect(unit.learningOutcomeIds.length).toBeGreaterThan(0);
-      expect(unit.orderReason).not.toMatch(/(?:unit|tag|outcome)-/u);
+      expect(unit.learningRationale).not.toMatch(/(?:unit|tag|outcome)-/u);
       if (unit.kind !== 'chapter') expect(unit.excludedTopics.length).toBeGreaterThan(0);
-      if (!isCurriculumUnit(unit)) continue;
-      for (const prerequisiteId of unit.additionalPrerequisiteUnitIds) {
-        expect(orderIndex.get(prerequisiteId)).toBeLessThan(orderIndex.get(unit.id) ?? -1);
-      }
+    }
+    for (const { nodeId, prerequisiteId } of FINAL_LEARNING_UNIT_PREREQUISITES) {
+      expect(unitById.has(nodeId), nodeId).toBe(true);
+      expect(unitById.has(prerequisiteId), prerequisiteId).toBe(true);
+      expect(prerequisiteId).not.toBe(nodeId);
     }
 
     expect(tagById.get('tag-spanning-tree-optimization')?.prerequisiteTagIds).toEqual([
@@ -272,7 +272,7 @@ describe('final taxonomy policy', () => {
     expect(
       outcomeById.get('outcome-construct-optimal-spanning-tree')?.prerequisiteOutcomeIds,
     ).toEqual(['outcome-prove-greedy-order']);
-    expect(unitById.get('unit-spanning-tree-optimization')?.additionalPrerequisiteUnitIds).toEqual([
+    expect(prerequisiteIdsForUnit('unit-spanning-tree-optimization')).toEqual([
       'unit-greedy-exchange',
     ]);
     expect(unitById.get('unit-graph-search')?.title).toBe('状態グラフ探索・到達関係');
@@ -305,14 +305,11 @@ describe('final taxonomy policy', () => {
     ).toContain('outcome-aggregate-rooted-tree');
     expect(unitById.get('unit-heavy-path-tree-dp')).toMatchObject({
       parentId: 'unit-tree-aggregation',
-      additionalPrerequisiteUnitIds: [
-        'unit-polynomial-convolution',
-        'unit-rooted-tree-aggregation',
-      ],
     });
-    expect(orderIndex.get('unit-rooted-tree-aggregation')).toBeLessThan(
-      orderIndex.get('unit-heavy-path-tree-dp') ?? -1,
-    );
+    expect(prerequisiteIdsForUnit('unit-heavy-path-tree-dp')).toEqual([
+      'unit-polynomial-convolution',
+      'unit-rooted-tree-aggregation',
+    ]);
     expect(tagById.get('tag-z-algorithm-prefix-matching')).toMatchObject({
       learningOutcomeIds: ['outcome-build-prefix-match-state'],
       learningUnitCandidateIds: ['unit-z-algorithm'],
@@ -394,10 +391,12 @@ describe('final taxonomy policy', () => {
     expect(unitById.get('unit-dynamic-modular-product')).toMatchObject({
       kind: 'subsection',
       parentId: 'unit-modular-product-foundations',
-      additionalPrerequisiteUnitIds: ['unit-modular-arithmetic'],
       learningOutcomeIds: ['outcome-maintain-modular-product-under-factor-updates'],
       ownedLearningOutcomeIds: ['outcome-maintain-modular-product-under-factor-updates'],
     });
+    expect(prerequisiteIdsForUnit('unit-dynamic-modular-product')).toEqual([
+      'unit-modular-arithmetic',
+    ]);
     expect(unitById.get('unit-dynamic-modular-product')?.excludedTopics).toEqual(
       expect.arrayContaining([expect.stringMatching(/合成数法.*非零の非可逆因子/u)]),
     );
@@ -423,9 +422,9 @@ describe('final taxonomy policy', () => {
     expect(
       outcomeById.get('outcome-count-labeled-structures-by-components')?.prerequisiteOutcomeIds,
     ).toEqual(['outcome-encode-counting-by-generating-function']);
-    expect(
-      unitById.get('unit-labeled-component-decomposition')?.additionalPrerequisiteUnitIds,
-    ).toEqual(['unit-generating-functions']);
+    expect(prerequisiteIdsForUnit('unit-labeled-component-decomposition')).toEqual([
+      'unit-generating-functions',
+    ]);
     expect(tagById.get('tag-parallel-binary-search')?.prerequisiteTagIds).toEqual([
       'tag-monotone-threshold-search',
     ]);
@@ -445,10 +444,8 @@ describe('final taxonomy policy', () => {
     expect(unitById.has('unit-periodic-tree-role-recovery')).toBe(false);
     expect(unitById.has('unit-prefix-interval-multiset-transform')).toBe(false);
     expect(unitById.get('unit-directional-grid-effect-scan')?.parentId).toBe('unit-graph-search');
-    expect(
-      unitById.get('unit-directional-grid-effect-scan')?.additionalPrerequisiteUnitIds,
-    ).toEqual([]);
-    expect(unitById.get('unit-line-envelope')?.additionalPrerequisiteUnitIds).toEqual([]);
+    expect(prerequisiteIdsForUnit('unit-directional-grid-effect-scan')).toEqual([]);
+    expect(prerequisiteIdsForUnit('unit-line-envelope')).toEqual([]);
     expect(unitById.get('unit-flow-matching')?.kind).toBe('section');
     expect(unitById.get('unit-max-flow-min-cut')?.parentId).toBe('unit-flow-matching');
     expect(unitById.has('unit-events-offline')).toBe(false);
@@ -467,27 +464,19 @@ describe('final taxonomy policy', () => {
       expect(unitById.get(unitId)).toMatchObject({
         kind: 'section',
         parentId: 'unit-chapter-modeling',
-        stageRank: unitId === 'unit-contribution-reordering' ? 1 : 2,
       });
     }
     expect(unitById.get('unit-kinetic-order-maintenance')?.parentId).toBe('unit-event-sweep');
-    expect(unitById.get('unit-multiplicative-order-periods')?.stageRank).toBe(3);
-    expect(orderIndex.get('unit-prime-divisor')).toBeLessThan(
-      orderIndex.get('unit-multiplicative-order-periods') ?? -1,
-    );
-    expect(orderIndex.get('unit-multiplicative-order-periods')).toBeLessThan(
-      orderIndex.get('unit-cyclic-group-exponent-counting') ?? -1,
-    );
 
-    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('必須な全Outcome');
-    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain('supportingを含む');
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain(
+      'primary Outcomeのowner Unit',
+    );
+    expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain(
+      'home placementを変えない',
+    );
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.prerequisite).toContain('curriculum prerequisite');
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.prerequisite).toContain('precedence constraint');
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.relatedTags).toContain('often_combined');
-    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.precedenceConstraintField).toBe(
-      'additionalPrerequisiteUnitIds',
-    );
-    expect(FINAL_LEARNING_UNIT_ORDER_POLICY.semantics).toContain('教材上の前提');
 
     expect(tagById.get('tag-event-sweep')?.relatedTags).toEqual(
       expect.arrayContaining([
@@ -667,9 +656,6 @@ describe('final taxonomy policy', () => {
     const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
     const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
     const unitById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
-    const orderIndex = new Map(
-      FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
-    );
     const problemsByTag = new Map<string, Set<string>>();
     const problemsByOutcome = new Map<string, Set<string>>();
 
@@ -747,21 +733,8 @@ describe('final taxonomy policy', () => {
         ...decision.additionalPrimaryOutcomeIds,
       ];
       const assignedOutcomeIds = [...primaryOutcomeIds, ...decision.supportingOutcomeIds];
-      const assignedUnitIds = FINAL_LEARNING_UNIT_CANDIDATES.filter((unit) =>
-        assignedOutcomeIds.some((outcomeId) => unit.ownedLearningOutcomeIds.includes(outcomeId)),
-      ).map((unit) => unit.id);
-      expect([...decision.learningUnitCandidateIds].sort(), decision.problemId).toEqual(
-        [...assignedUnitIds].sort(),
-      );
-      expect(decision.presentationUnitId, decision.problemId).toBe(
-        [...assignedUnitIds]
-          .sort(
-            (left, right) =>
-              (orderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
-                (orderIndex.get(right) ?? Number.POSITIVE_INFINITY) || left.localeCompare(right),
-          )
-          .at(-1),
-      );
+      expect(ownerUnitIdForOutcome(decision.primaryOutcomeId), decision.problemId).toBeDefined();
+      expect(assignedOutcomeIds.every((outcomeId) => outcomeById.has(outcomeId))).toBe(true);
 
       for (const tagId of [...decision.primaryTagIds, ...decision.supportingTagIds]) {
         problemsByTag.set(
@@ -802,7 +775,9 @@ describe('final taxonomy policy', () => {
     expect(abc411e?.additionalPrimaryOutcomeIds).toEqual([
       'outcome-maintain-modular-product-under-factor-updates',
     ]);
-    expect(abc411e?.presentationUnitId).toBe('unit-dynamic-modular-product');
+    expect(
+      abc411e === undefined ? undefined : ownerUnitIdForOutcome(abc411e.primaryOutcomeId),
+    ).toBe('unit-contribution-reordering');
     expect(abc411e?.supportingTagIds).toContain('tag-modular-arithmetic');
     expect(abc411e?.supportingOutcomeIds).toContain('outcome-compute-in-modular-arithmetic');
     expect(
@@ -864,18 +839,31 @@ describe('final taxonomy policy', () => {
     }
 
     const materializedUnits = materializeLearningUnitCandidates(table.decisions);
+    const unitAncestors = (unitId: string): readonly string[] => {
+      const result: string[] = [];
+      let currentId: string | null = unitId;
+      while (currentId !== null) {
+        result.push(currentId);
+        currentId = unitById.get(currentId)?.parentId ?? null;
+      }
+      return result;
+    };
+    const expectedProblemIdsByUnit = new Map<string, Set<string>>();
+    for (const decision of table.decisions) {
+      const homeUnitId = ownerUnitIdForOutcome(decision.primaryOutcomeId);
+      expect(homeUnitId, decision.problemId).toBeDefined();
+      for (const unitId of unitAncestors(homeUnitId ?? '')) {
+        const problemIds = expectedProblemIdsByUnit.get(unitId) ?? new Set<string>();
+        problemIds.add(decision.problemId);
+        expectedProblemIdsByUnit.set(unitId, problemIds);
+      }
+    }
     for (const unit of materializedUnits) {
-      if (unit.kind === 'chapter') continue;
-      expect(new Set(unit.problemIds).size).toBeGreaterThanOrEqual(
-        SINGLE_PROBLEM_UNIT_IDS.includes(unit.id) ? 1 : 2,
+      expect(unit.problemIds, `${unit.id}/subtree homes`).toEqual(
+        [...(expectedProblemIdsByUnit.get(unit.id) ?? [])].sort(),
       );
     }
 
-    const actualSingletonTags = FINAL_TAXONOMY_TAGS.filter(
-      (tag) => tag.parentId !== null && (problemsByTag.get(tag.id)?.size ?? 0) === 1,
-    )
-      .map((tag) => tag.id)
-      .sort();
     const actualSingletonOutcomes = FINAL_TAXONOMY_OUTCOMES.filter(
       (outcome) =>
         !NON_PRIMARY_OUTCOME_IDS.includes(outcome.id) &&
@@ -883,27 +871,15 @@ describe('final taxonomy policy', () => {
     )
       .map((outcome) => outcome.id)
       .sort();
-    const actualSingletonUnits = materializedUnits
-      .filter((unit) => unit.kind !== 'chapter' && new Set(unit.problemIds).size === 1)
-      .map((unit) => unit.id)
-      .sort();
-    expect(actualSingletonTags).toEqual([...SINGLE_PROBLEM_TAG_IDS].sort());
     expect(actualSingletonOutcomes).toEqual([...SINGLE_PROBLEM_OUTCOME_IDS].sort());
-    expect(actualSingletonUnits).toEqual([...SINGLE_PROBLEM_UNIT_IDS].sort());
 
-    const supportingCanBeLearnedAfterHome = table.decisions.some((decision) => {
-      const primaryUnitIds = [
-        decision.primaryOutcomeId,
-        ...decision.additionalPrimaryOutcomeIds,
-      ].flatMap((outcomeId) => outcomeById.get(outcomeId)?.learningUnitCandidateIds ?? []);
-      return decision.learningUnitCandidateIds.some(
-        (unitId) =>
-          !primaryUnitIds.includes(unitId) &&
-          (orderIndex.get(unitId) ?? -1) >
-            (orderIndex.get(decision.presentationUnitId) ?? Number.POSITIVE_INFINITY),
-      );
-    });
-    expect(supportingCanBeLearnedAfterHome).toBe(false);
+    expect(
+      table.decisions.every((decision) =>
+        FINAL_LEARNING_UNIT_CANDIDATES.some((unit) =>
+          unit.ownedLearningOutcomeIds.includes(decision.primaryOutcomeId),
+        ),
+      ),
+    ).toBe(true);
     expect(unitById.size).toBe(FINAL_LEARNING_UNIT_CANDIDATES.length);
   });
 
@@ -913,9 +889,6 @@ describe('final taxonomy policy', () => {
     const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
     const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
     const unitById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
-    const orderIndex = new Map(
-      FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
-    );
 
     expect(decision?.primaryTagIds).toEqual([
       'tag-cycle-space-basis',
@@ -923,7 +896,9 @@ describe('final taxonomy policy', () => {
     ]);
     expect(decision?.primaryOutcomeId).toBe('outcome-kernelize-near-tree-graph');
     expect(decision?.additionalPrimaryOutcomeIds).toEqual(['outcome-use-cycle-space-basis']);
-    expect(decision?.presentationUnitId).toBe('unit-near-tree-kernelization');
+    expect(
+      decision === undefined ? undefined : ownerUnitIdForOutcome(decision.primaryOutcomeId),
+    ).toBe('unit-near-tree-kernelization');
     expect(decision?.supportingTagIds).toEqual([
       'tag-backtracking-search',
       'tag-bounded-enumeration',
@@ -961,13 +936,10 @@ describe('final taxonomy policy', () => {
       '連結成分',
     );
     expect(tagById.get('tag-cycle-space-basis')?.definition).toContain('連結graphではC=1');
-    expect(unitById.get('unit-near-tree-kernelization')?.additionalPrerequisiteUnitIds).toEqual([
+    expect(prerequisiteIdsForUnit('unit-near-tree-kernelization')).toEqual([
       'unit-cycle-space-basis',
       'unit-graph-core',
     ]);
-    expect(orderIndex.get('unit-cycle-space-basis') ?? Number.POSITIVE_INFINITY).toBeLessThan(
-      orderIndex.get('unit-near-tree-kernelization') ?? -1,
-    );
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toMatch(
       /spanning forest.*dim C\(G\)=M-N\+C/u,
     );
@@ -981,7 +953,7 @@ describe('final taxonomy policy', () => {
     expect(outcomeById.get('outcome-use-cycle-space-basis')?.statement).toContain('P XOR P_0');
   });
 
-  it('preserves adopted skills while placing each problem at its latest required Unit', async () => {
+  it('preserves adopted skills and derives each home from its primary Outcome owner', async () => {
     const table = await loadedDecisionTable;
     const byProblemId = new Map(table.decisions.map((decision) => [decision.problemId, decision]));
     const expectedPrimary: Readonly<Record<string, readonly [string, string]>> = {
@@ -1009,7 +981,7 @@ describe('final taxonomy policy', () => {
         'outcome-accelerate-iteration-by-characteristic-p-frobenius',
         'unit-finite-field-frobenius',
       ],
-      'abc250-ex': ['outcome-model-and-compute-shortest-path', 'unit-kruskal-threshold-sweep'],
+      'abc250-ex': ['outcome-model-and-compute-shortest-path', 'unit-weighted-shortest-path'],
       'abc261-e': ['outcome-compose-finite-functions', 'unit-finite-function-composition'],
       'abc270-g': ['outcome-find-orbit-hit-by-bsgs', 'unit-baby-step-giant-step'],
       'abc282-f': ['outcome-answer-idempotent-range-query', 'unit-idempotent-overlap-range-query'],
@@ -1133,15 +1105,12 @@ describe('final taxonomy policy', () => {
       'abc466-f': ['outcome-bound-monotone-total-work', 'unit-amortized-monotone-progress'],
     };
 
-    for (const [problemId, [primaryOutcomeId, presentationUnitId]] of Object.entries(
+    for (const [problemId, [primaryOutcomeId, expectedHomeUnitId]] of Object.entries(
       expectedPrimary,
     )) {
       const decision = byProblemId.get(problemId);
-      expect(
-        [decision?.primaryOutcomeId, ...(decision?.additionalPrimaryOutcomeIds ?? [])],
-        problemId,
-      ).toContain(primaryOutcomeId);
-      expect(decision?.learningUnitCandidateIds, problemId).toContain(presentationUnitId);
+      expect(decision?.primaryOutcomeId, problemId).toBe(primaryOutcomeId);
+      expect(ownerUnitIdForOutcome(primaryOutcomeId), problemId).toBe(expectedHomeUnitId);
     }
 
     const expectedSupporting: Readonly<Record<string, readonly string[]>> = {
@@ -1358,21 +1327,11 @@ describe('final taxonomy policy', () => {
     ]);
   });
 
-  it('preserves semantic roles under reordering and registers adopted-solution prerequisites', async () => {
+  it('preserves semantic roles under input reordering and keeps prerequisite DAGs separate', async () => {
     const records = await loadedRecords;
     const normal = buildFullCorpusPrimaryDecisionTable(records);
-    const reversed = buildFullCorpusPrimaryDecisionTable(
-      records,
-      [...FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds].reverse(),
-    );
-    const roles = (table: typeof normal) =>
-      table.decisions.map((decision) => ({ ...decision, presentationUnitId: null }));
-    expect(roles(reversed)).toEqual(roles(normal));
-    expect(
-      reversed.decisions.some(
-        (d, i) => d.presentationUnitId !== normal.decisions[i]?.presentationUnitId,
-      ),
-    ).toBe(true);
+    const reversed = buildFullCorpusPrimaryDecisionTable([...records].reverse());
+    expect(reversed).toEqual(normal);
     const byId = new Map(normal.decisions.map((d) => [d.problemId, d]));
     // Independently read from the adopted Inventory solution, not inferred from current assignments.
     const adoptedSkills = {
@@ -1409,12 +1368,25 @@ describe('final taxonomy policy', () => {
     expect(byId.get('abc265-e')?.primaryOutcomeId).toBe('outcome-design-minimal-sufficient-state');
     expect(byId.get('abc227-g')?.primaryOutcomeId).toBe('outcome-decompose-by-prime-or-divisor');
     expect(byId.get('abc437-g')?.primaryOutcomeId).toBe('outcome-model-max-flow-min-cut');
+    expect(ownerUnitIdForOutcome(byId.get('abc301-e')?.primaryOutcomeId ?? '')).toBe(
+      'unit-dp-subset-state',
+    );
+    expect(byId.get('abc301-e')?.supportingOutcomeIds).toContain(
+      'outcome-model-and-compute-shortest-path',
+    );
+    expect(ownerUnitIdForOutcome(byId.get('abc375-g')?.primaryOutcomeId ?? '')).toBe(
+      'unit-lowlink-critical-structure',
+    );
+    expect(byId.get('abc375-g')?.supportingOutcomeIds).toContain(
+      'outcome-model-and-compute-shortest-path',
+    );
+    expect(prerequisiteIdsForUnit('unit-heavy-path-tree-dp')).toEqual([
+      'unit-polynomial-convolution',
+      'unit-rooted-tree-aggregation',
+    ]);
   });
 
-  it('reviews every Unit stage and separates intrinsic prerequisites from problem readiness', async () => {
-    expect(CURRICULUM_STAGES.flatMap((stage) => [...stage.unitIds]).sort()).toEqual(
-      FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.id).sort(),
-    );
+  it('keeps problem readiness separate from Unit prerequisites', async () => {
     const outcomes = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
     expect(outcomes.get('outcome-classify-game-states')?.prerequisiteOutcomeIds).toEqual([
       'outcome-design-minimal-sufficient-state',
@@ -1426,20 +1398,25 @@ describe('final taxonomy policy', () => {
     const game = table.decisions.find((decision) => decision.problemId === 'abc354-e');
     expect(game?.primaryOutcomeId).toBe('outcome-classify-game-states');
     expect(game?.supportingOutcomeIds).toContain('outcome-enumerate-subset-state-space');
-    expect(game?.presentationUnitId).toBe('unit-dp-subset-state');
+    expect(game === undefined ? undefined : ownerUnitIdForOutcome(game.primaryOutcomeId)).toBe(
+      ownerUnitIdForOutcome('outcome-classify-game-states'),
+    );
+    expect(ownerUnitIdForOutcome(game?.primaryOutcomeId ?? '')).not.toBe('unit-dp-subset-state');
     for (const id of ['abc297-g', 'abc255-g', 'abc368-f']) {
       const decision = table.decisions.find((decision) => decision.problemId === id);
-      expect(decision?.learningUnitCandidateIds, id).not.toContain('unit-dp-subset-state');
+      expect(ownerUnitIdForOutcome(decision?.primaryOutcomeId ?? ''), id).not.toBe(
+        'unit-dp-subset-state',
+      );
     }
     for (const id of ['abc369-f', 'abc393-f', 'abc439-e']) {
       const decision = table.decisions.find((decision) => decision.problemId === id);
-      expect(decision?.learningUnitCandidateIds, id).toContain('unit-dp-lis');
-      expect(decision?.learningUnitCandidateIds, id).not.toContain('unit-range-monoid-aggregation');
+      expect(ownerUnitIdForOutcome(decision?.primaryOutcomeId ?? ''), id).toBe('unit-dp-lis');
     }
     for (const id of ['abc339-e', 'abc354-f', 'abc360-g']) {
       const decision = table.decisions.find((decision) => decision.problemId === id);
-      expect(decision?.learningUnitCandidateIds, id).toContain('unit-dp-value-range');
-      expect(decision?.learningUnitCandidateIds, id).toContain('unit-range-monoid-aggregation');
+      expect(ownerUnitIdForOutcome(decision?.primaryOutcomeId ?? ''), id).toBe(
+        'unit-dp-value-range',
+      );
     }
   });
 

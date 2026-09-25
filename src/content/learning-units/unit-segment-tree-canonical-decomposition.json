@@ -5,9 +5,6 @@
   "parentId": "unit-monoid-segment-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-range-monoid-aggregation"
-  ],
   "excludedTopics": [
     "Segment Treeのcanonical区間分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -33,23 +30,15 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
-  "problemIds": [
-    "abc342-g",
-    "abc414-g"
-  ],
-  "directProblemIds": [
-    "abc342-g",
-    "abc414-g"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
     "abc244-ex",
-    "abc363-g"
+    "abc342-g",
+    "abc363-g",
+    "abc414-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 78,
-  "globalIndex": 110,
-  "orderReason": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
 }

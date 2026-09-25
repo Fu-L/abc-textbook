@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "整除鎖・加算式のcarryだけを下位桁から渡すDP、および接頭辞状態を使わない一般の表DP。"
   ],
@@ -34,26 +31,22 @@
   "problemIds": [
     "abc235-f",
     "abc288-ex",
-    "abc301-f",
-    "abc305-g",
     "abc317-f",
     "abc336-e",
-    "abc391-g",
     "abc406-e",
-    "abc418-g",
     "abc465-e"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc228-g",
+    "abc301-f",
+    "abc305-g",
+    "abc391-g",
+    "abc418-g",
     "abc419-f",
     "abc458-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 3,
-  "globalIndex": 82,
-  "orderReason": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
+  "learningRationale": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
 }

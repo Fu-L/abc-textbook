@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"
   ],
@@ -51,9 +50,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 7,
-  "globalIndex": 95,
-  "orderReason": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
+  "learningRationale": "乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。"
 }

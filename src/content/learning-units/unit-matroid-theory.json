@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "線形方程式一般、graph matching一般、および交換公理を用いない単なる貪欲選択。"
   ],
@@ -35,9 +34,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 4,
-  "representativeRank": 12,
-  "globalIndex": 165,
-  "orderReason": "独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。"
+  "learningRationale": "独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。"
 }

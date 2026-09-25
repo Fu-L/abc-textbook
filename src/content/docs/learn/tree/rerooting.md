@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第72単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) ／ 次: [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/)
-
 ## 概要
 
 ### rerooting・全方位木DP
@@ -32,7 +26,9 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
+直接の前提単元: [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
+
+このUnitを直接前提とする単元: なし。
 
 根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -42,18 +38,18 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC220 F「Distance Sums 2」](https://atcoder.jp/contests/abc220/tasks/abc220_f) — 主題: [rerooting・全方位木DP](/learn/tree/rerooting/)。
-2. [ABC348 E「Minimize Sum of Distances」](https://atcoder.jp/contests/abc348/tasks/abc348_e) — 主題: [rerooting・全方位木DP](/learn/tree/rerooting/)。
-3. [ABC223 G「Vertex Deletion」](https://atcoder.jp/contests/abc223/tasks/abc223_g) — 主題: [rerooting・全方位木DP](/learn/tree/rerooting/)。
+- [ABC348 E「Minimize Sum of Distances」](https://atcoder.jp/contests/abc348/tasks/abc348_e) — 主題: [rerooting・全方位木DP](/learn/tree/rerooting/)（子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。）。
+- [ABC220 F「Distance Sums 2」](https://atcoder.jp/contests/abc220/tasks/abc220_f) — 主題: [rerooting・全方位木DP](/learn/tree/rerooting/)（子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。）。
+- [ABC223 G「Vertex Deletion」](https://atcoder.jp/contests/abc223/tasks/abc223_g) — 主題: [rerooting・全方位木DP](/learn/tree/rerooting/)（子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 関連問題
 
-以下はこの技能を用い、解説本文を別の単元に配置する問題です。
+以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。
 
-- [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h) — 主題: [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/)。既習技能: 資源軸の上限と更新順を選び、選択の重複を避けられる。 / 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。
-- [ABC460 G「Vertex Flip Query」](https://atcoder.jp/contests/abc460/tasks/abc460_g) — 主題: [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/)。既習技能: 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。
+- [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h) — 主題: [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/)（外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)（資源軸の上限と更新順を選び、選択の重複を避けられる。） / [rerooting・全方位木DP](/learn/tree/rerooting/)（子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。）。
+- [ABC460 G「Vertex Flip Query」](https://atcoder.jp/contests/abc460/tasks/abc460_g) — 主題: [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/)（境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。）。既習技能: [rerooting・全方位木DP](/learn/tree/rerooting/)（子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。）。
 
 ## 根拠
 
@@ -64,4 +60,4 @@ sidebar:
 - [ABC311 H 公式解説](https://atcoder.jp/contests/abc311/editorial/6814)
 - [ABC311 H 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-rerooting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-rerooting`

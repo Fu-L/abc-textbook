@@ -5,7 +5,6 @@
   "parentId": "unit-persistence-rollback",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -38,15 +37,11 @@
   ],
   "directProblemIds": [
     "abc218-g",
-    "abc302-ex",
-    "abc363-g"
+    "abc363-g",
+    "abc302-ex"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 83,
-  "globalIndex": 121,
-  "orderReason": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

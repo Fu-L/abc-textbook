@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-geometry-optimization",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "真偽値の単調境界探索と、交換論だけで決まる貪欲順。"
   ],
@@ -41,14 +40,9 @@
     "abc216-e",
     "abc217-h",
     "abc224-g",
-    "abc229-g",
-    "abc240-f",
     "abc250-g",
-    "abc263-g",
-    "abc275-ex",
     "abc305-ex",
     "abc314-ex",
-    "abc330-f",
     "abc348-g",
     "abc355-g",
     "abc359-f",
@@ -59,18 +53,20 @@
     "abc393-g",
     "abc400-g",
     "abc406-g",
+    "abc459-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc229-g",
+    "abc240-f",
+    "abc263-g",
+    "abc275-ex",
+    "abc330-f",
     "abc458-g",
-    "abc459-f",
     "abc459-g",
     "abc462-e"
   ],
-  "directProblemIds": [],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 4,
-  "representativeRank": 12,
-  "globalIndex": 101,
-  "orderReason": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
+  "learningRationale": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
 }

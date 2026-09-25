@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-state-graph-search"
-  ],
   "excludedTopics": [
     "次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"
   ],
@@ -34,20 +31,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/lowlink-critical-structure.md",
   "problemIds": [
-    "abc334-g"
-  ],
-  "directProblemIds": [
-    "abc334-g"
-  ],
-  "relatedProblemIds": [
     "abc301-ex",
+    "abc334-g",
     "abc375-g"
   ],
+  "directProblemIds": [
+    "abc334-g",
+    "abc375-g",
+    "abc301-ex"
+  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 4,
-  "representativeRank": 11,
-  "globalIndex": 26,
-  "orderReason": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
+  "learningRationale": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
 }

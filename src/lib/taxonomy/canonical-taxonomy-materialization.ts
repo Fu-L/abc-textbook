@@ -1,17 +1,13 @@
 import type { z } from 'zod';
 import { PROBLEM_LEARNING_NOTES } from './reviewed-problem-learning-notes.js';
 import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
-import {
-  orderUnitProblemsByDifficulty,
-  PROBLEM_READING_ORDER_REASON,
-} from './problem-reading-order.js';
 import { TEXTBOOK_CHAPTERS, textbookIndex } from './textbook-order.js';
-import { isCurriculumUnit } from './learning-unit-order.js';
+import { isCurriculumUnit } from './curriculum-unit.js';
 import { unitLearningTarget } from './unit-learning-targets.js';
 
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
-  CanonicalLearningOrderSchema,
+  CanonicalLearningPrerequisitesSchema,
   CanonicalProblemPlacementPolicySchema,
   CorrectionImpactSchema,
   FinalTaxonomyBuildSchema,
@@ -32,7 +28,7 @@ type ProblemPlacementDecisionTable = z.infer<typeof ProblemPlacementDecisionTabl
 type TechniqueTag = z.infer<typeof TechniqueTagSchema>;
 type LearningOutcome = z.infer<typeof LearningOutcomeSchema>;
 type LearningUnit = z.infer<typeof LearningUnitSchema>;
-type CanonicalLearningOrder = z.infer<typeof CanonicalLearningOrderSchema>;
+type CanonicalLearningPrerequisites = z.infer<typeof CanonicalLearningPrerequisitesSchema>;
 type CanonicalProblemPlacementPolicy = z.infer<typeof CanonicalProblemPlacementPolicySchema>;
 type CorrectionImpact = z.infer<typeof CorrectionImpactSchema>;
 type CorrectionImpactLocator = CorrectionImpact['affectedContentLocators'][number];
@@ -48,7 +44,8 @@ const SOURCE_KIND_LABEL = {
 } as const;
 
 export const CANONICAL_TAXONOMY_BUILD_PATH = 'staging/taxonomy/initial/final-taxonomy-build.json';
-export const CANONICAL_LEARNING_ORDER_PATH = 'src/content/policies/learning-order.json';
+export const CANONICAL_LEARNING_PREREQUISITES_PATH =
+  'src/content/policies/learning-prerequisites.json';
 export const CANONICAL_PROBLEM_PLACEMENTS_PATH = 'src/content/policies/problem-placements.json';
 export const CANONICAL_PROBLEM_PLACEMENT_EVIDENCE_PATH =
   'docs/verification/bootstrap/problem-placements.json';
@@ -88,7 +85,7 @@ export interface CanonicalTaxonomyMaterialization {
   readonly tags: readonly CanonicalJsonOutput<TechniqueTag>[];
   readonly learningOutcomes: readonly CanonicalJsonOutput<LearningOutcome>[];
   readonly learningUnits: readonly CanonicalLearningUnitOutput[];
-  readonly learningOrder: CanonicalLearningOrder;
+  readonly learningPrerequisites: CanonicalLearningPrerequisites;
   readonly problemPlacementPolicy: CanonicalProblemPlacementPolicy;
   readonly problemPlacementEvidence: Readonly<Record<string, unknown>>;
   readonly materializationEvidence: Readonly<Record<string, unknown>>;
@@ -103,7 +100,7 @@ interface ChildLearningUnitLink {
   readonly learningOutcomeIds: readonly string[];
   readonly ownedLearningOutcomeIds: readonly string[];
   readonly excludedTopics: readonly string[];
-  readonly orderReason: string;
+  readonly learningRationale: string;
 }
 
 const compareCodeUnits = (left: string, right: string): number =>
@@ -250,9 +247,8 @@ const renderLearningUnitDocument = (input: {
   readonly tags: readonly TechniqueTag[];
   readonly childUnits: readonly ChildLearningUnitLink[];
   readonly prerequisiteTitles: readonly string[];
+  readonly dependentTitles: readonly string[];
   readonly chapterLinks: readonly string[];
-  readonly readingLinks: readonly string[];
-  readonly readingIndex: number;
   readonly outcomeStatements: readonly string[];
   readonly problemRoles: ReadonlyMap<string, string>;
   readonly sources: readonly SourceRevision[];
@@ -289,7 +285,7 @@ const renderLearningUnitDocument = (input: {
       ? [
           '## 本書の読み方',
           '',
-          '分野別の目次は概念の親子関係を表します。初めから学ぶときは下の標準履修順に沿い、各単元の「次」へ進んでください。この経路では必要な技能を先に学び、分野をまたぐ複合問題は全前提を履修した後に提示します。',
+          '分野別の目次は概念の親子関係を表し、目次の並びは編集上の案内です。必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。',
           '',
           '「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。',
           '',
@@ -307,7 +303,7 @@ const renderLearningUnitDocument = (input: {
           '',
           '章や案内節の「導入対象」は、その見取り図を理解する目安です。子Unitには独立した対象色を付けています。親を読んだ後、高い色の子をいったん飛ばして次のまとまりへ進んで構いません。赤色の専門Unitも、全てを習得することがその色になる条件という意味ではありません。',
           '',
-          '既習の単元は飛ばして構いません。問題の主題と提示先は別です。関連問題のリンクは分野から探すためのもので、標準履修順では前提の説明が終わった単元で演習します。各問題には主題と既習技能を示します。',
+          '既習の単元は飛ばして構いません。各問題は主題となるOutcomeの所有Unitに配置します。追加で学ぶ技能と、すでに必要な技能はそれぞれ別の役割で示します。関連問題のリンクは分野から探すための参照です。',
           '',
           'ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現した後で、成立条件を一つ外すと何が壊れるか、他の章の表現へ写せるかを考えてください。たとえばDP遷移を区間要約・行列・多項式へ写す、割当てをmatching・flowへ写す、といった接続を自分で導けるようにすることが目標です。',
           '',
@@ -315,28 +311,14 @@ const renderLearningUnitDocument = (input: {
           '',
           ...input.chapterLinks.map((link, index) => `${String(index + 1)}. ${link}`),
           '',
-          '## 標準履修順',
-          '',
-          ...input.readingLinks.map((link, index) => `${String(index + 1)}. ${link}`),
-          '',
         ]
       : []),
-    ...(input.readingIndex < 0
-      ? []
-      : [
-          '## 標準履修順',
-          '',
-          `第${String(input.readingIndex + 1)}単元。技能の説明を学んでから問題一覧へ進んでください。`,
-          '',
-          `前: ${input.readingLinks[input.readingIndex - 1] ?? '開始'} ／ 次: ${input.readingLinks[input.readingIndex + 1] ?? '完了'}`,
-          '',
-        ]),
     '## 概要',
     '',
     ...(chapter === undefined ? [] : [chapter.introduction, '']),
     ...input.tags.flatMap((tag) => [`### ${tag.name}`, '', tag.definition, '']),
     ...(CANONICAL_UNIT_CONTENT[unit.id] ?? []).flatMap((paragraph) => [paragraph, '']),
-    ...(input.tags.length === 0 ? [unit.orderReason, ''] : []),
+    ...(input.tags.length === 0 ? [unit.learningRationale, ''] : []),
     ...(input.outcomeStatements.length === 0
       ? []
       : ['### 習得する技能', '', markdownList(input.outcomeStatements), '']),
@@ -344,9 +326,11 @@ const renderLearningUnitDocument = (input: {
     '',
     `共通前提: ${unit.baselineId} (${unit.baselineVersion})。`,
     '',
-    `追加前提: ${input.prerequisiteTitles.join('、') || 'なし'}。`,
+    `直接の前提単元: ${input.prerequisiteTitles.join('、') || 'なし'}。`,
     '',
-    ...(input.tags.length > 0 ? [unit.orderReason, ''] : []),
+    `このUnitを直接前提とする単元: ${input.dependentTitles.join('、') || 'なし'}。`,
+    '',
+    ...(input.tags.length > 0 ? [unit.learningRationale, ''] : []),
     '### このUnitでは扱わないもの',
     '',
     markdownList(unit.excludedTopics),
@@ -365,16 +349,16 @@ const renderLearningUnitDocument = (input: {
     '## 問題一覧',
     '',
     ...(unit.directProblemIds?.length
-      ? problemLinks(unit.directProblemIds).map((link, i) => `${String(i + 1)}. ${link}`)
+      ? [markdownList(problemLinks(unit.directProblemIds))]
       : ['この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。']),
     '',
-    '各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。',
+    '各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。',
     '',
     ...(unit.relatedProblemIds?.length
       ? [
           '## 関連問題',
           '',
-          '以下はこの技能を用い、解説本文を別の単元に配置する問題です。',
+          '以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。',
           '',
           markdownList(problemLinks(unit.relatedProblemIds)),
           '',
@@ -421,6 +405,14 @@ const canonicalCorrectionImpacts = (
           : [{ ownerType: 'problem' as const, problemId: assessment.problemId, path }];
       }
       if (assessment.ownerType === 'learning_unit_candidate') {
+        if (assessment.surface === 'prerequisite_graph') {
+          return [
+            {
+              ownerType: 'learning_prerequisites' as const,
+              path: CANONICAL_LEARNING_PREREQUISITES_PATH,
+            },
+          ];
+        }
         if (assessment.surface === 'body') {
           return [
             {
@@ -464,7 +456,6 @@ const canonicalCorrectionImpacts = (
       sourceRevisionIds: impact.sourceRevisionIds,
       changeSummary: impact.changeSummary,
       affectedContentLocators: uniqueLocators,
-      affectedLearningUnitOrderIds: impact.affectedLearningUnitOrderIds,
       derivedIndexPaths: impact.derivedIndexPaths,
       verificationStatus: 'pending',
     });
@@ -511,33 +502,53 @@ export const buildCanonicalTaxonomyMaterialization = (
     const chapter = unitCandidateById.get(id);
     return chapter === undefined ? [] : [unitLink(chapter.entity)];
   });
-  const readingLinks = build.standardOrder.map((id) => {
-    const candidate = unitCandidateById.get(id);
-    if (candidate === undefined)
-      throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_UNKNOWN', id);
-    return unitLink(candidate.entity);
-  });
   const outcomeStatement = (id: string): string => {
     const outcome = outcomeById.get(id);
     if (outcome === undefined)
       throw new CanonicalTaxonomyMaterializationError('CANONICAL_OUTCOME_UNKNOWN', id);
     return outcome.statement;
   };
+  const ownerUnitForOutcome = (outcomeId: string) => {
+    const owner = unitCandidates.find(({ entity }) =>
+      entity.ownedLearningOutcomeIds.includes(outcomeId),
+    );
+    if (owner === undefined) {
+      throw new CanonicalTaxonomyMaterializationError('CANONICAL_OUTCOME_OWNER_MISSING', outcomeId);
+    }
+    return owner.entity;
+  };
   const problemRoles = new Map(
     build.placements.map((placement) => {
-      const primaryStatement = outcomeStatement(placement.primaryOutcomeId);
-      const home = unitCandidates.find(({ entity }) =>
-        entity.ownedLearningOutcomeIds.includes(placement.primaryOutcomeId),
-      )?.entity;
-      const required = placement.supportingOutcomeIds
-        .map((id) => outcomeById.get(id)?.statement)
-        .filter(Boolean);
+      const home = ownerUnitForOutcome(placement.primaryOutcomeId);
+      const additional = placement.additionalPrimaryOutcomeIds.map(
+        (id) => `${unitLink(ownerUnitForOutcome(id))}（${outcomeStatement(id)}）`,
+      );
+      const supporting = placement.supportingOutcomeIds.map(
+        (id) => `${unitLink(ownerUnitForOutcome(id))}（${outcomeStatement(id)}）`,
+      );
       return [
         placement.problemId,
-        `主題: ${home === undefined ? primaryStatement : unitLink(home)}。${required.length === 0 ? '' : `既習技能: ${required.join(' / ')}`}`,
+        `主題: ${unitLink(home)}（${outcomeStatement(placement.primaryOutcomeId)}）。${additional.length === 0 ? '' : `追加で学ぶ技能: ${additional.join(' / ')}。`}${supporting.length === 0 ? '' : `既習技能: ${supporting.join(' / ')}。`}`,
       ];
     }),
   );
+  const prerequisitesByUnitId = new Map(
+    unitCandidates.map(({ entity }) => [entity.id, [] as string[]]),
+  );
+  const dependentsByUnitId = new Map(
+    unitCandidates.map(({ entity }) => [entity.id, [] as string[]]),
+  );
+  for (const { nodeId, prerequisiteId } of build.learningUnitPrerequisites) {
+    prerequisitesByUnitId.get(nodeId)?.push(prerequisiteId);
+    dependentsByUnitId.get(prerequisiteId)?.push(nodeId);
+  }
+  const unitLinksForIds = (unitIds: readonly string[]): string[] =>
+    [...unitIds].sort(compareCodeUnits).map((id) => {
+      const candidate = unitCandidateById.get(id);
+      if (candidate === undefined)
+        throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_UNKNOWN', id);
+      return unitLink(candidate.entity);
+    });
   const learningUnits: CanonicalLearningUnitOutput[] = unitCandidates
     .map((candidate) => {
       const unit = candidate.entity;
@@ -564,7 +575,7 @@ export const buildCanonicalTaxonomyMaterialization = (
             learningOutcomeIds: entity.learningOutcomeIds,
             ownedLearningOutcomeIds: entity.ownedLearningOutcomeIds,
             excludedTopics: entity.excludedTopics,
-            orderReason: entity.orderReason,
+            learningRationale: entity.learningRationale,
           };
         })
         .sort((left, right) => textbookIndex(left.id) - textbookIndex(right.id));
@@ -572,7 +583,7 @@ export const buildCanonicalTaxonomyMaterialization = (
       const documentPath = learningUnitDocumentPath(unit, unitById);
       const materializedUnit = LearningUnitSchema.parse({
         ...unit,
-        directProblemIds: orderUnitProblemsByDifficulty(unit.id, unit.directProblemIds),
+        directProblemIds: unit.directProblemIds,
         sourceRevisionIds,
         contentPhase: 'canonical_skeleton',
         docPath: documentPath,
@@ -589,11 +600,8 @@ export const buildCanonicalTaxonomyMaterialization = (
         }
         return tag;
       });
-      const prerequisiteTitles = materializedUnit.additionalPrerequisiteUnitIds.map((id) => {
-        const prerequisite = unitCandidateById.get(id);
-        if (prerequisite === undefined) return id;
-        return unitLink(prerequisite.entity);
-      });
+      const prerequisiteTitles = unitLinksForIds(prerequisitesByUnitId.get(unit.id) ?? []);
+      const dependentTitles = unitLinksForIds(dependentsByUnitId.get(unit.id) ?? []);
       const materializedSources = materializedUnit.sourceRevisionIds.map((sourceId) => {
         const source = sourceById.get(sourceId);
         if (source === undefined) {
@@ -614,9 +622,8 @@ export const buildCanonicalTaxonomyMaterialization = (
           problems: problemById,
           childUnits,
           prerequisiteTitles,
+          dependentTitles,
           chapterLinks,
-          readingLinks,
-          readingIndex: build.standardOrder.indexOf(unit.id),
           outcomeStatements: unit.ownedLearningOutcomeIds.map(outcomeStatement),
           problemRoles,
           sources: materializedSources,
@@ -632,26 +639,15 @@ export const buildCanonicalTaxonomyMaterialization = (
       prerequisiteId,
     })),
   );
-  const orderReasons = unitCandidates
-    .filter(({ entity }) => build.standardOrder.includes(entity.id))
-    .map(({ entity }) => ({
-      unitId: entity.id,
-      globalIndex: entity.globalIndex,
-      reason: entity.orderReason,
-    }))
-    .sort((left, right) => left.globalIndex - right.globalIndex);
-  const learningOrder = CanonicalLearningOrderSchema.parse({
+  const learningPrerequisites = CanonicalLearningPrerequisitesSchema.parse({
     schemaVersion: '1.0.0',
     sourceBuild,
     tagPrerequisites: build.tagPrerequisites,
     learningOutcomePrerequisites,
     learningUnitPrerequisites: build.learningUnitPrerequisites,
-    standardOrder: build.standardOrder,
-    orderReasons,
     tagDagDigest: canonicalDigest(build.tagPrerequisites),
     learningOutcomeDagDigest: canonicalDigest(learningOutcomePrerequisites),
     learningUnitDagDigest: canonicalDigest(build.learningUnitPrerequisites),
-    orderDigest: canonicalDigest(build.standardOrder),
   });
   const correctionImpacts = canonicalCorrectionImpacts(build, learningUnits);
   const problemPlacementPolicy = CanonicalProblemPlacementPolicySchema.parse({
@@ -674,7 +670,7 @@ export const buildCanonicalTaxonomyMaterialization = (
     tags: outputById('src/content/tags', tags),
     learningOutcomes: outputById('src/content/learning-outcomes', outcomes),
     learningUnits,
-    learningOrder,
+    learningPrerequisites,
     problemPlacementPolicy,
   };
   const diagnostics = validateCanonicalMaterialization(input, {
@@ -720,11 +716,13 @@ export const buildCanonicalTaxonomyMaterialization = (
       ),
     },
     {
-      checkId: 'unique-primary-outcome-review-unit',
-      passed: build.placements.every(
-        ({ primaryOutcomeId, learningUnitIds, presentationUnitId }) =>
-          outcomeById.has(primaryOutcomeId) && learningUnitIds.includes(presentationUnitId),
-      ),
+      checkId: 'unique-primary-outcome-home-unit',
+      passed: build.placements.every(({ primaryOutcomeId }) => {
+        const ownerCount = unitCandidates.filter(({ entity }) =>
+          entity.ownedLearningOutcomeIds.includes(primaryOutcomeId),
+        ).length;
+        return outcomeById.has(primaryOutcomeId) && ownerCount === 1;
+      }),
     },
     {
       checkId: 'full-similar-supplement-decision-evidence',
@@ -801,7 +799,7 @@ export const buildCanonicalTaxonomyMaterialization = (
     learningDocuments: canonicalDigest(
       learningUnits.map(({ documentPath, document }) => ({ documentPath, document })),
     ),
-    learningOrderDigest: canonicalDigest(learningOrder),
+    learningPrerequisitesDigest: canonicalDigest(learningPrerequisites),
     problemPlacementPolicyDigest: canonicalDigest(problemPlacementPolicy),
   };
   const materializationSubject = { sourceBuild, ...materializationDigests };
@@ -826,7 +824,6 @@ export const buildCanonicalTaxonomyMaterialization = (
     ],
     sourceBuild,
     taskIds: ['T047', 'T048', 'T049', 'T050'],
-    problemReadingOrderReason: PROBLEM_READING_ORDER_REASON,
     counts: {
       tags: outputs.tags.length,
       learningOutcomes: outputs.learningOutcomes.length,
@@ -852,7 +849,7 @@ export const buildCanonicalTaxonomyMaterialization = (
       learningOutcomes: 'src/content/learning-outcomes',
       learningUnits: 'src/content/learning-units',
       learningDocuments: 'src/content/docs/learn',
-      learningOrder: CANONICAL_LEARNING_ORDER_PATH,
+      learningPrerequisites: CANONICAL_LEARNING_PREREQUISITES_PATH,
       problemPlacements: CANONICAL_PROBLEM_PLACEMENTS_PATH,
       problemPlacementEvidence: CANONICAL_PROBLEM_PLACEMENT_EVIDENCE_PATH,
       materializationEvidence: CANONICAL_TAXONOMY_MATERIALIZATION_EVIDENCE_PATH,
@@ -915,7 +912,7 @@ export const validateCanonicalMaterialization = (
     const expectedProjection = Object.fromEntries(
       Object.entries({
         ...expected,
-        directProblemIds: orderUnitProblemsByDifficulty(expected.id, expected.directProblemIds),
+        directProblemIds: expected.directProblemIds,
       }).filter(([field]) => field !== 'sourceRevisionIds'),
     );
     if (canonicalJson(fixedProjection) !== canonicalJson(expectedProjection)) {
@@ -969,13 +966,12 @@ export const validateCanonicalMaterialization = (
     if (directOutcomeOwnerCount.get(id) !== 1) diagnostics.push(`OUTCOME_OWNER_COUNT:${id}`);
   }
   if (
-    canonicalJson(result.learningOrder.tagPrerequisites) !==
+    canonicalJson(result.learningPrerequisites.tagPrerequisites) !==
       canonicalJson(input.build.tagPrerequisites) ||
-    canonicalJson(result.learningOrder.learningUnitPrerequisites) !==
-      canonicalJson(input.build.learningUnitPrerequisites) ||
-    canonicalJson(result.learningOrder.standardOrder) !== canonicalJson(input.build.standardOrder)
+    canonicalJson(result.learningPrerequisites.learningUnitPrerequisites) !==
+      canonicalJson(input.build.learningUnitPrerequisites)
   ) {
-    diagnostics.push('LEARNING_ORDER_DRIFT');
+    diagnostics.push('LEARNING_PREREQUISITES_DRIFT');
   }
   if (
     canonicalJson(result.problemPlacementPolicy.placements) !==
@@ -1003,32 +999,35 @@ export const validateCanonicalMaterialization = (
         .map(({ value }) => value.id),
     ]),
   );
-  const standardOrderIndex = new Map(
-    result.learningOrder.standardOrder.map((unitId, index) => [unitId, index]),
-  );
   for (const placement of result.problemPlacementPolicy.placements) {
-    const primaryOutcomeIds = [
-      placement.primaryOutcomeId,
-      ...placement.additionalPrimaryOutcomeIds,
-    ];
-    const assignedOutcomeIds = [...primaryOutcomeIds, ...placement.supportingOutcomeIds];
-    const expectedUnitIds = sortedUnique(
-      assignedOutcomeIds.flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []),
-    );
-    if (canonicalJson(sortedUnique(placement.learningUnitIds)) !== canonicalJson(expectedUnitIds)) {
-      diagnostics.push(`PLACEMENT_UNIT_OWNERSHIP:${placement.problemId}`);
+    const homeUnitIds = ownerUnitIdsByOutcomeId.get(placement.primaryOutcomeId) ?? [];
+    if (homeUnitIds.length !== 1) {
+      diagnostics.push(`PLACEMENT_PRIMARY_OUTCOME_OWNER:${placement.problemId}`);
+      continue;
     }
-    const expectedPresentationUnitId = assignedOutcomeIds
-      .flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? [])
-      .sort(
-        (left, right) =>
-          (standardOrderIndex.get(left) ?? Number.POSITIVE_INFINITY) -
-            (standardOrderIndex.get(right) ?? Number.POSITIVE_INFINITY) ||
-          compareCodeUnits(left, right),
-      )
-      .at(-1);
-    if (placement.presentationUnitId !== expectedPresentationUnitId) {
-      diagnostics.push(`PLACEMENT_PRESENTATION_OWNER:${placement.problemId}`);
+    const homeUnit = homeUnitIds[0];
+    if (homeUnit === undefined) {
+      diagnostics.push(`PLACEMENT_PRIMARY_OUTCOME_OWNER:${placement.problemId}`);
+      continue;
+    }
+    const homeAncestors = new Set<string>();
+    let current = expectedUnits.get(homeUnit);
+    while (current !== undefined) {
+      homeAncestors.add(current.id);
+      current = current.parentId === null ? undefined : expectedUnits.get(current.parentId);
+    }
+    const problemId = placement.problemId;
+    for (const unitId of expectedUnits.keys()) {
+      const materialized = result.learningUnits.find(({ value }) => value.id === unitId)?.value;
+      if (materialized === undefined) continue;
+      const isHomeSubtree = homeAncestors.has(unitId);
+      if (isHomeSubtree && unitId === homeUnit) {
+        if (!materialized.directProblemIds?.includes(problemId)) {
+          diagnostics.push(`PLACEMENT_HOME_DIRECT_MISSING:${problemId}:${unitId}`);
+        }
+      } else if (materialized.directProblemIds?.includes(problemId)) {
+        diagnostics.push(`PLACEMENT_DIRECT_OUTSIDE_HOME:${problemId}:${unitId}`);
+      }
     }
   }
   if (

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"
   ],
@@ -32,21 +31,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/tree/implicit-binary-tree.md",
   "problemIds": [
-    "abc220-e",
-    "abc321-e",
-    "abc424-e"
+    "abc321-e"
   ],
   "directProblemIds": [
+    "abc321-e"
+  ],
+  "relatedProblemIds": [
     "abc220-e",
-    "abc321-e",
     "abc424-e"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 1,
-  "representativeRank": 6,
-  "globalIndex": 86,
-  "orderReason": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
+  "learningRationale": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
 }

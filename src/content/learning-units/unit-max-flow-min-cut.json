@@ -5,9 +5,6 @@
   "parentId": "unit-flow-matching",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-state-graph-search"
-  ],
   "excludedTopics": [
     "最大流・最小カットの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,10 +32,10 @@
   "docPath": "src/content/docs/learn/graph/max-flow-min-cut.md",
   "problemIds": [
     "abc225-g",
-    "abc227-h",
     "abc239-g",
     "abc241-g",
     "abc259-g",
+    "abc263-g",
     "abc318-g",
     "abc326-g",
     "abc332-g",
@@ -47,29 +44,25 @@
     "abc437-g"
   ],
   "directProblemIds": [
-    "abc318-g",
+    "abc225-g",
     "abc239-g",
     "abc241-g",
     "abc259-g",
+    "abc263-g",
+    "abc318-g",
     "abc326-g",
-    "abc225-g",
-    "abc437-g",
     "abc332-g",
     "abc347-g",
     "abc397-g",
-    "abc227-h"
+    "abc437-g"
   ],
   "relatedProblemIds": [
-    "abc263-g",
+    "abc227-h",
     "abc285-g",
     "abc354-g",
     "abc413-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 4,
-  "representativeRank": 86,
-  "globalIndex": 83,
-  "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、最大流・最小カットの発動条件・正当化・境界を重複なく学ぶ。"
 }

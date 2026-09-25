@@ -5,9 +5,6 @@
   "parentId": "unit-dp-sequence-interval",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-sequence"
-  ],
   "excludedTopics": [
     "LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -34,23 +31,19 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-lis.md",
   "problemIds": [
-    "abc237-f",
     "abc369-f",
+    "abc393-f",
     "abc439-e"
   ],
   "directProblemIds": [
     "abc439-e",
     "abc369-f",
-    "abc237-f"
+    "abc393-f"
   ],
   "relatedProblemIds": [
-    "abc393-f"
+    "abc237-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 4,
-  "representativeRank": 80,
-  "globalIndex": 31,
-  "orderReason": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
 }

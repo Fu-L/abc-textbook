@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
   ],
@@ -32,39 +31,39 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/two-pointers-window.md",
   "problemIds": [
-    "abc215-f",
-    "abc260-e",
-    "abc294-e",
-    "abc337-f"
-  ],
-  "directProblemIds": [
-    "abc294-e",
-    "abc260-e",
-    "abc215-f",
-    "abc337-f"
-  ],
-  "relatedProblemIds": [
     "abc250-f",
     "abc258-e",
+    "abc260-e",
+    "abc294-e",
+    "abc337-f",
+    "abc370-f",
+    "abc444-e",
+    "abc452-f"
+  ],
+  "directProblemIds": [
+    "abc258-e",
+    "abc260-e",
+    "abc294-e",
+    "abc444-e",
+    "abc250-f",
+    "abc337-f",
+    "abc370-f",
+    "abc452-f"
+  ],
+  "relatedProblemIds": [
+    "abc215-f",
     "abc281-e",
     "abc290-e",
     "abc300-g",
     "abc314-g",
     "abc365-g",
     "abc366-e",
-    "abc370-f",
     "abc380-g",
     "abc388-g",
     "abc431-f",
-    "abc444-e",
-    "abc452-f",
     "abc455-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 0,
-  "representativeRank": 1,
-  "globalIndex": 3,
-  "orderReason": "窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。"
+  "learningRationale": "窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。"
 }

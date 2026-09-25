@@ -1,6 +1,4 @@
-import { curriculumStageForUnit } from './final-taxonomy-curriculum.js';
 import { deterministicTopologicalOrder } from '../validation/validate.js';
-import { CONCEPT_READING_CHAINS, orderCurriculumUnits } from './learning-unit-order.js';
 import {
   FINAL_TAG_DIRECTED_RELATION_SEEDS,
   FINAL_TAG_FORMER_NAMES,
@@ -18,6 +16,9 @@ import { CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 } from './final-taxonomy-decisi
 import { CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 } from './final-taxonomy-decisions-300-383.js';
 import { CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 } from './final-taxonomy-decisions-384-466.js';
 
+const compareIds = (left: string, right: string): number =>
+  left < right ? -1 : left > right ? 1 : 0;
+
 export type TaxonomyIntegrationAction = 'promote' | 'merge' | 'split' | 'retire';
 export type TaxonomyEntityKind = 'tag' | 'outcome' | 'unit';
 
@@ -33,7 +34,7 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   supporting:
     '主解法とは別の観察可能な技能を実際に発動するときだけsupportingとし、用語が説明に現れるだけではUnitを付与しない。',
   homeAndReadiness:
-    'presentationUnitIdは想定解法の再構成・実装に必須な全Outcome（supportingを含む）を履修済みにする最遅Unitとする。primaryは採用解法の核心として固定し、掲載順から変更しない。primaryは新たに学ぶ技能、supportingは既習必須技能を表す。問題は掲載Unitの技能説明後に提示する。用語だけ・別解だけの技能は後ろ倒し要因にしない。',
+    'Problemの唯一のhomeはprimary Outcomeのowner Unitとする。additional primaryは追加で学ぶ技能、supportingは解法の再構成・実装に必要な既習技能として別々に保持し、どちらもhome placementを変えない。Problem固有のsupportingを理由にUnit prerequisiteを追加しない。',
   prerequisite:
     'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。その技能自体の習得に必要な前提だけを課し、特定Problemのreadinessを修正するためにTag・Outcome全体の前提を強めない。問題固有の複合前提はrequired Outcome集合で表し、単なる併用・類似・対比はtyped relationへ分離する。',
   relatedTags:
@@ -118,7 +119,7 @@ export interface FinalTaxonomyTagPolicy {
   readonly formerNames: readonly string[];
   readonly representativeProblemIds: readonly string[];
   readonly parentId: string | null;
-  /** Textbook-order predecessor, not a claim of logical necessity. */
+  /** Direct reusable-skill prerequisites for this Tag; display order is managed separately. */
   readonly prerequisiteTagIds: readonly string[];
   readonly relatedTags: readonly FinalTaxonomyTagRelationPolicy[];
   readonly learningOutcomeIds: readonly string[];
@@ -142,16 +143,12 @@ export interface MetadataLearningUnitCandidate {
   readonly kind: 'chapter' | 'section' | 'subsection';
   readonly title: string;
   readonly parentId: string | null;
-  readonly additionalPrerequisiteUnitIds: readonly string[];
   readonly tagIds: readonly string[];
   readonly ownedTagIds: readonly string[];
   readonly learningOutcomeIds: readonly string[];
   readonly ownedLearningOutcomeIds: readonly string[];
   readonly problemIds: readonly string[];
-  readonly stageRank: number;
-  readonly difficultyRank: number;
-  readonly representativeRank: number;
-  readonly orderReason: string;
+  readonly learningRationale: string;
   readonly excludedTopics: readonly string[];
 }
 
@@ -227,8 +224,6 @@ export interface FinalPrimaryDecision {
   readonly supportingTagIds: readonly string[];
   readonly supportingOutcomeIds: readonly string[];
   readonly supportingTagDecisions: readonly SupportingTagDecision[];
-  readonly learningUnitCandidateIds: readonly string[];
-  readonly presentationUnitId: string;
   readonly primaryOverride?: ReadinessPrimaryOverride;
   readonly decisionKind: 'explicit_inventory_assignment' | 'curated_semantic_override';
   readonly ambiguityStatus: 'proposed_assignment' | 'curated_override';
@@ -281,10 +276,7 @@ interface LearningUnitSeed {
   readonly title: string;
   readonly parentId: string | null;
   readonly prerequisiteIds: readonly string[];
-  readonly stageRank: number;
-  readonly difficultyRank: number;
-  readonly representativeRank: number;
-  readonly orderReason: string;
+  readonly learningRationale: string;
   readonly excludedTopics: readonly string[];
 }
 
@@ -478,16 +470,13 @@ const excludedTopicsFor = (
   kind: MetadataLearningUnitCandidate['kind'],
 ): readonly string[] => (kind === 'chapter' ? [] : (UNIT_EXCLUDED_TOPICS[id] ?? []));
 
-const chapter = (id: string, title: string, representativeRank: number): LearningUnitSeed => ({
+const chapter = (id: string, title: string): LearningUnitSeed => ({
   id,
   kind: 'chapter',
   title,
   parentId: null,
   prerequisiteIds: [],
-  stageRank: 0,
-  difficultyRank: 0,
-  representativeRank,
-  orderReason: '',
+  learningRationale: '',
   excludedTopics: excludedTopicsFor(id, 'chapter'),
 });
 
@@ -496,19 +485,13 @@ const section = (
   title: string,
   parentId: string,
   prerequisiteIds: readonly string[],
-  stageRank: number,
-  difficultyRank: number,
-  representativeRank: number,
 ): LearningUnitSeed => ({
   id,
   kind: 'section',
   title,
   parentId,
   prerequisiteIds,
-  stageRank,
-  difficultyRank,
-  representativeRank,
-  orderReason: '',
+  learningRationale: '',
   excludedTopics: excludedTopicsFor(id, 'section'),
 });
 
@@ -517,715 +500,383 @@ const subsection = (
   title: string,
   parentId: string,
   prerequisiteIds: readonly string[],
-  stageRank: number,
-  difficultyRank: number,
-  representativeRank: number,
 ): LearningUnitSeed => ({
   id,
   kind: 'subsection',
   title,
   parentId,
   prerequisiteIds,
-  stageRank,
-  difficultyRank,
-  representativeRank,
-  orderReason: '',
+  learningRationale: '',
   excludedTopics: excludedTopicsFor(id, 'subsection'),
 });
 
 const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
-  chapter('unit-chapter-modeling', 'モデル変換とアルゴリズム設計', 0),
-  chapter('unit-chapter-dynamic-programming', '動的計画法', 1),
-  chapter('unit-chapter-graph', 'グラフ・木構造', 2),
-  chapter('unit-chapter-query', 'データ構造と問い合わせ', 3),
-  chapter('unit-chapter-string', '文字列アルゴリズム', 4),
-  chapter('unit-chapter-math-geometry', '数学・数え上げ・幾何', 5),
-  section(
-    'unit-monotone-search',
-    '単調境界を証明して探索する',
-    'unit-chapter-modeling',
-    [],
-    1,
-    0,
-    0,
-  ),
+  chapter('unit-chapter-modeling', 'モデル変換とアルゴリズム設計'),
+  chapter('unit-chapter-dynamic-programming', '動的計画法'),
+  chapter('unit-chapter-graph', 'グラフ・木構造'),
+  chapter('unit-chapter-query', 'データ構造と問い合わせ'),
+  chapter('unit-chapter-string', '文字列アルゴリズム'),
+  chapter('unit-chapter-math-geometry', '数学・数え上げ・幾何'),
+  section('unit-monotone-search', '単調境界を証明して探索する', 'unit-chapter-modeling', []),
   section(
     'unit-two-pointers-window',
     '尺取り法・sliding windowで連続区間を走査する',
     'unit-chapter-modeling',
     [],
-    1,
-    0,
-    1,
   ),
-  section(
-    'unit-event-sweep',
-    'event順にactive集合を更新する',
-    'unit-chapter-modeling',
-    [],
-    1,
-    1,
-    1,
-  ),
-  section(
-    'unit-reverse-offline',
-    '時間を逆向きにして未来依存を消す',
-    'unit-chapter-modeling',
-    [],
-    1,
-    1,
-    2,
-  ),
+  section('unit-event-sweep', 'event順にactive集合を更新する', 'unit-chapter-modeling', []),
+  section('unit-reverse-offline', '時間を逆向きにして未来依存を消す', 'unit-chapter-modeling', []),
   section(
     'unit-contribution-reordering',
     '局所寄与へ分解して集計順を交換する',
     'unit-chapter-modeling',
     [],
-    1,
-    1,
-    3,
   ),
   section(
     'unit-coordinate-compression',
     '疎なkeyの順序を保ってdense indexへ圧縮する',
     'unit-chapter-modeling',
     [],
-    1,
-    0,
-    2,
   ),
-  section('unit-normalization', '同値な状態を正規化する', 'unit-chapter-modeling', [], 1, 1, 2),
-  section('unit-greedy-exchange', '交換論から選択順を導く', 'unit-chapter-modeling', [], 1, 1, 3),
+  section('unit-normalization', '同値な状態を正規化する', 'unit-chapter-modeling', []),
+  section('unit-greedy-exchange', '交換論から選択順を導く', 'unit-chapter-modeling', []),
   section(
     'unit-bounded-enumeration',
     '候補数を界して全列挙・有限case分解する',
     'unit-chapter-modeling',
     [],
-    1,
-    1,
-    4,
   ),
   section(
     'unit-divide-enumeration',
     '探索空間を分けて照合・再帰分割する',
     'unit-chapter-modeling',
     [],
-    2,
-    2,
-    4,
   ),
   section(
     'unit-decomposition-amortization',
     '軽重分類と償却解析で総仕事量を抑える',
     'unit-chapter-modeling',
     [],
-    2,
-    2,
-    5,
   ),
   section(
     'unit-change-impact-localization',
     '基準witnessから変更影響を局所化する',
     'unit-chapter-modeling',
     [],
-    2,
-    2,
-    6,
   ),
   section(
     'unit-randomized-algorithms',
     '乱択の成功条件と誤り確率を設計する',
     'unit-chapter-modeling',
     [],
-    3,
-    3,
-    7,
   ),
   section(
     'unit-interactive-protocol',
     '対話protocolを守って情報を取得する',
     'unit-chapter-modeling',
     [],
-    1,
-    1,
-    8,
   ),
   section(
     'unit-dp-state-design',
     '最小十分状態からDPを設計する',
     'unit-chapter-dynamic-programming',
     [],
-    1,
-    0,
-    0,
   ),
   section(
     'unit-dp-grid-table',
     'グリッド・多次元表の局所DPを設計する',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
-    2,
-    1,
-    1,
   ),
-  section(
-    'unit-dp-subset-resource',
-    '集合・資源軸のDP',
-    'unit-chapter-dynamic-programming',
-    ['unit-dp-state-design'],
-    2,
-    1,
-    1,
-  ),
-  section(
-    'unit-dp-sequence-interval',
-    '列・区間・分割のDP',
-    'unit-chapter-dynamic-programming',
-    ['unit-dp-state-design'],
-    2,
-    1,
-    2,
-  ),
+  section('unit-dp-subset-resource', '集合・資源軸のDP', 'unit-chapter-dynamic-programming', [
+    'unit-dp-state-design',
+  ]),
+  section('unit-dp-sequence-interval', '列・区間・分割のDP', 'unit-chapter-dynamic-programming', [
+    'unit-dp-state-design',
+  ]),
   section(
     'unit-dp-digit-string',
     '接頭辞から更新する有限状態DP',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
-    3,
-    2,
-    3,
   ),
   section(
     'unit-dp-carry-mixed-radix',
     '繰り上がり・借り・混合基数を状態にするDP',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
-    2,
-    2,
-    3,
   ),
-  section(
-    'unit-dp-stochastic',
-    '確率過程・期待値DP',
-    'unit-chapter-dynamic-programming',
-    ['unit-dp-state-design'],
-    2,
-    2,
-    4,
-  ),
-  section(
-    'unit-dp-game',
-    'ゲーム状態の勝敗とGrundy数',
-    'unit-chapter-dynamic-programming',
-    ['unit-dp-state-design'],
-    2,
-    2,
-    5,
-  ),
+  section('unit-dp-stochastic', '確率過程・期待値DP', 'unit-chapter-dynamic-programming', [
+    'unit-dp-state-design',
+  ]),
+  section('unit-dp-game', 'ゲーム状態の勝敗とGrundy数', 'unit-chapter-dynamic-programming', [
+    'unit-dp-state-design',
+  ]),
   section(
     'unit-dp-game-value',
     'minimax・得点差・局面値を評価するゲームDP',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
-    2,
-    2,
-    6,
   ),
   section(
     'unit-dp-transition-optimization',
     'DP遷移を因数分解・集約して加速する',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
-    3,
-    3,
-    7,
   ),
   section(
     'unit-linear-recurrence',
     '固定線形遷移を巨大回数進める',
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
-    3,
-    3,
-    8,
   ),
-  section('unit-graph-search', '状態グラフ探索・到達関係', 'unit-chapter-graph', [], 1, 0, 0),
+  section('unit-graph-search', '状態グラフ探索・到達関係', 'unit-chapter-graph', []),
   section(
     'unit-shortest-path-certificates',
     '重み付き最短路・経路復元・差分制約',
     'unit-chapter-graph',
     [],
-    2,
-    2,
-    1,
   ),
-  section('unit-connectivity', '連結成分を管理し縮約する', 'unit-chapter-graph', [], 2, 1, 2),
-  section(
-    'unit-bipartite-structure',
-    '二部彩色と成分構造を扱う',
-    'unit-chapter-graph',
-    [],
-    2,
-    1,
-    3,
-  ),
+  section('unit-connectivity', '連結成分を管理し縮約する', 'unit-chapter-graph', []),
+  section('unit-bipartite-structure', '二部彩色と成分構造を扱う', 'unit-chapter-graph', []),
   section(
     'unit-spanning-tree-optimization',
     'cut・cycle性質から最適全域木を構成する',
     'unit-chapter-graph',
     ['unit-greedy-exchange'],
-    3,
-    3,
-    3,
   ),
   section(
     'unit-directed-condensation',
     'SCCで閉路・DAG順・2-SATを処理する',
     'unit-chapter-graph',
     [],
-    2,
-    2,
-    3,
   ),
-  section(
-    'unit-functional-graph',
-    '一意な後続・サイクル・ダブリング',
-    'unit-chapter-graph',
-    [],
-    2,
-    1,
-    4,
-  ),
-  section(
-    'unit-tree-metric',
-    '木距離を基準点・直径・中心から捉える',
-    'unit-chapter-graph',
-    [],
-    2,
-    1,
-    5,
-  ),
-  section(
-    'unit-tree-aggregation',
-    '木DP・集約・rerooting',
-    'unit-chapter-graph',
-    ['unit-dp-state-design'],
-    2,
-    2,
-    6,
-  ),
+  section('unit-functional-graph', '一意な後続・サイクル・ダブリング', 'unit-chapter-graph', []),
+  section('unit-tree-metric', '木距離を基準点・直径・中心から捉える', 'unit-chapter-graph', []),
+  section('unit-tree-aggregation', '木DP・集約・rerooting', 'unit-chapter-graph', [
+    'unit-dp-state-design',
+  ]),
   section(
     'unit-implicit-binary-tree',
     '対称性・深さ・label区間で巨大な完全二分木を数える',
     'unit-chapter-graph',
     [],
-    2,
-    1,
-    6,
   ),
-  section(
-    'unit-static-top-tree',
-    'rake・compressで動的木DPを保つ',
-    'unit-chapter-graph',
-    [],
-    4,
-    5,
-    7,
-  ),
-  section(
-    'unit-tree-decomposition',
-    '包含木の構築とancestor・path分解',
-    'unit-chapter-graph',
-    [],
-    3,
-    3,
-    7,
-  ),
+  section('unit-static-top-tree', 'rake・compressで動的木DPを保つ', 'unit-chapter-graph', []),
+  section('unit-tree-decomposition', '包含木の構築とancestor・path分解', 'unit-chapter-graph', []),
   section(
     'unit-tree-balanced-separators',
     '木の均衡分離点から重心分解へ進む',
     'unit-chapter-graph',
     [],
-    3,
-    3,
-    8,
   ),
-  section(
-    'unit-flow-matching',
-    'フロー・マッチング・カットへ帰着する',
-    'unit-chapter-graph',
-    [],
-    3,
-    3,
-    9,
-  ),
+  section('unit-flow-matching', 'フロー・マッチング・カットへ帰着する', 'unit-chapter-graph', []),
   section(
     'unit-euler-degree',
     '次数parityからwalkや選択辺集合を判定・構成する',
     'unit-chapter-graph',
     [],
-    2,
-    2,
-    10,
   ),
   section(
     'unit-lowlink-critical-structure',
     'lowlinkで橋・関節点を特定する',
     'unit-chapter-graph',
     [],
-    3,
-    4,
-    11,
   ),
   section(
     'unit-graph-core-peeling',
     '次数構造からgraph coreまたは小さなkernelへ縮約する',
     'unit-chapter-graph',
     [],
-    2,
-    2,
-    12,
   ),
   section(
     'unit-prefix-aggregate',
     '一次元・二次元累積和と差分で区間情報を線形化する',
     'unit-chapter-query',
     [],
-    1,
-    0,
-    0,
   ),
-  section(
-    'unit-monoid-segment-tree',
-    '結合的要約と列・区間の合成',
-    'unit-chapter-query',
-    [],
-    2,
-    2,
-    1,
-  ),
+  section('unit-monoid-segment-tree', '結合的要約と列・区間の合成', 'unit-chapter-query', []),
   section(
     'unit-weighted-prefix-fenwick',
     '反転数・重み付き接頭辞統計をFenwick Treeで保つ',
     'unit-chapter-query',
     ['unit-prefix-aggregate'],
-    2,
-    2,
-    2,
   ),
-  section('unit-range-actions', '区間更新を要約へ作用させる', 'unit-chapter-query', [], 3, 3, 3),
+  section('unit-range-actions', '区間更新を要約へ作用させる', 'unit-chapter-query', []),
   section(
     'unit-persistence-rollback',
     '構造を共有して過去の版を保存・復元する',
     'unit-chapter-query',
     [],
-    2,
-    2,
-    4,
   ),
   section(
     'unit-linked-list-index',
     '要素索引と連結リストで局所linkを更新する',
     'unit-chapter-query',
     [],
-    1,
-    1,
-    5,
   ),
   section(
     'unit-ordered-set-heap',
     'heap・ordered setで全候補の極値を保つ',
     'unit-chapter-query',
     [],
-    2,
-    2,
-    6,
   ),
   section(
     'unit-monotone-stack-queue',
     '支配関係から不要な候補を単調stack・queueで削る',
     'unit-chapter-query',
     [],
-    2,
-    2,
-    7,
   ),
   section(
     'unit-mo-offline-range',
     'Moの順序で区間問い合わせの差分を更新する',
     'unit-chapter-query',
     [],
-    3,
-    3,
-    8,
   ),
   section(
     'unit-bitset-word-parallel',
     'bitsetで集合演算をword並列化する',
     'unit-chapter-query',
     [],
-    2,
-    2,
-    9,
   ),
-  section(
-    'unit-cartesian-tree',
-    '大小関係をCartesian treeへ変換する',
-    'unit-chapter-query',
-    ['unit-monotone-stack-queue'],
-    3,
-    3,
-    10,
-  ),
-  section('unit-binary-trie', 'bit列をTrieで索引化する', 'unit-chapter-query', [], 2, 2, 11),
-  section('unit-trie-prefix', 'Trieで共有接頭辞を索引化する', 'unit-chapter-string', [], 1, 1, 0),
-  section(
-    'unit-string-prefix-automata',
-    '接頭辞との一致長を再利用する',
-    'unit-chapter-string',
-    [],
-    1,
-    1,
-    1,
-  ),
+  section('unit-cartesian-tree', '大小関係をCartesian treeへ変換する', 'unit-chapter-query', [
+    'unit-monotone-stack-queue',
+  ]),
+  section('unit-binary-trie', 'bit列をTrieで索引化する', 'unit-chapter-query', []),
+  section('unit-trie-prefix', 'Trieで共有接頭辞を索引化する', 'unit-chapter-string', []),
+  section('unit-string-prefix-automata', '接頭辞との一致長を再利用する', 'unit-chapter-string', []),
   section(
     'unit-string-automata',
     '禁止・要求patternを有限状態へ圧縮する',
     'unit-chapter-string',
     [],
-    2,
-    3,
-    2,
   ),
   section(
     'unit-suffix-automaton',
     'Suffix Automatonで部分文字列集合を表す',
     'unit-chapter-string',
     [],
-    3,
-    4,
-    3,
   ),
-  section(
-    'unit-suffix-lcp-index',
-    '接尾辞の順序とLCPを索引化する',
-    'unit-chapter-string',
-    [],
-    2,
-    2,
-    2,
-  ),
+  section('unit-suffix-lcp-index', '接尾辞の順序とLCPを索引化する', 'unit-chapter-string', []),
   section(
     'unit-string-hash',
     'Rolling fingerprintで列の同値性を比較する',
     'unit-chapter-query',
     [],
-    2,
-    2,
-    9,
   ),
-  section(
-    'unit-palindrome-radius',
-    '回文半径と左右対称区間を特定する',
-    'unit-chapter-string',
-    [],
-    2,
-    2,
-    3,
-  ),
+  section('unit-palindrome-radius', '回文半径と左右対称区間を特定する', 'unit-chapter-string', []),
   section(
     'unit-recursive-compressed-string',
     '圧縮・反復・再帰文字列へ問い合わせる',
     'unit-chapter-string',
     [],
-    4,
-    2,
-    2,
   ),
   section(
     'unit-modular-arithmetic',
     '法上の四則演算・高速累乗・逆元',
     'unit-chapter-math-geometry',
     [],
-    1,
-    1,
-    0,
   ),
   section(
     'unit-modular-congruence',
     '一次合同・CRTで解の類を統合する',
     'unit-chapter-math-geometry',
     ['unit-gcd-diophantine', 'unit-modular-arithmetic'],
-    2,
-    2,
-    1,
   ),
   section(
     'unit-modular-periodicity',
     '剰余周期と指数法則を利用する',
     'unit-chapter-math-geometry',
     [],
-    2,
-    1,
-    0,
   ),
-  section(
-    'unit-gcd-diophantine',
-    'gcdと整数解の成立条件',
-    'unit-chapter-math-geometry',
-    [],
-    1,
-    1,
-    1,
-  ),
+  section('unit-gcd-diophantine', 'gcdと整数解の成立条件', 'unit-chapter-math-geometry', []),
   section(
     'unit-numerical-semigroup-reachability',
     '数値半群のconductor以後を一括到達とみなす',
     'unit-chapter-math-geometry',
     [],
-    2,
-    3,
-    3,
   ),
   section(
     'unit-rational-approximation',
     '連分数・Stern–Brocotで有理近似する',
     'unit-chapter-math-geometry',
     [],
-    2,
-    2,
-    2,
   ),
-  section('unit-prime-divisor', '素因数分解と約数構造', 'unit-chapter-math-geometry', [], 2, 2, 2),
+  section('unit-prime-divisor', '素因数分解と約数構造', 'unit-chapter-math-geometry', []),
   section(
     'unit-integer-boundary-blocks',
     '整数境界と同値区間を正確に分ける',
     'unit-chapter-math-geometry',
     [],
-    2,
-    2,
-    3,
   ),
   section(
     'unit-cyclic-group-exponent-counting',
     '巡回群を指数化して数える',
     'unit-chapter-math-geometry',
     ['unit-multiplicative-order-periods'],
-    3,
-    3,
-    4,
   ),
   section(
     'unit-multiplicative-order-periods',
     '乗法的位数から最小周期を求める',
     'unit-chapter-math-geometry',
     ['unit-modular-arithmetic', 'unit-prime-divisor'],
-    3,
-    3,
-    3,
   ),
   section(
     'unit-combinatorial-coefficients',
     '組合せ係数と対称性で数える',
     'unit-chapter-math-geometry',
     [],
-    1,
-    2,
-    6,
   ),
   section(
     'unit-inclusion-exclusion',
     '包除・Möbius反転で重複を補正する',
     'unit-chapter-math-geometry',
     [],
-    2,
-    2,
-    7,
   ),
   section(
     'unit-polynomial-convolution',
     'NTT・FFTで畳み込みと相互相関を求める',
     'unit-chapter-math-geometry',
     [],
-    2,
-    3,
-    8,
   ),
   section(
     'unit-generating-functions',
     '組合せを生成関数へ符号化する',
     'unit-chapter-math-geometry',
     [],
-    3,
-    4,
-    9,
   ),
   section(
     'unit-formal-power-series',
     'FPS演算・多点評価・合成を行う',
     'unit-chapter-math-geometry',
     ['unit-generating-functions'],
-    4,
-    5,
-    10,
   ),
   section(
     'unit-linear-algebra-xor',
     '線形方程式・基底・分離可能変換へ変換する',
     'unit-chapter-math-geometry',
     [],
-    3,
-    4,
-    9,
   ),
   section(
     'unit-finite-field-extension',
     '拡大有限体の表現と四則演算を構成する',
     'unit-chapter-math-geometry',
     ['unit-modular-arithmetic'],
-    4,
-    5,
-    10,
   ),
-  section(
+  section('unit-geometry-primitives', '幾何の基本判定と座標変換', 'unit-chapter-math-geometry', []),
+  section('unit-convex-geometry', '凸境界・半平面制約を扱う', 'unit-chapter-math-geometry', [
     'unit-geometry-primitives',
-    '幾何の基本判定と座標変換',
-    'unit-chapter-math-geometry',
-    [],
-    1,
-    1,
-    10,
-  ),
-  section(
-    'unit-convex-geometry',
-    '凸境界・半平面制約を扱う',
-    'unit-chapter-math-geometry',
-    ['unit-geometry-primitives'],
-    2,
-    3,
-    11,
-  ),
+  ]),
   section(
     'unit-discrete-convex',
     '凸性・傾き・限界費用・slope trick',
     'unit-chapter-math-geometry',
     [],
-    3,
-    4,
-    12,
   ),
-  section(
-    'unit-constructive-witness',
-    '成立証明から構成解を復元する',
-    'unit-chapter-modeling',
-    [],
-    3,
-    3,
-    4,
-  ),
+  section('unit-constructive-witness', '成立証明から構成解を復元する', 'unit-chapter-modeling', []),
 ];
 
-const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
+const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-chapter-modeling':
     '問題文の操作を再利用可能な対象・不変量へ言い換え、探索・貪欲・分割手法を選ぶ共通の視点を最初に作る。',
   'unit-chapter-dynamic-programming':
@@ -6767,22 +6418,22 @@ const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id
 
 const REFINED_CHAPTER_SEEDS: readonly LearningUnitSeed[] = [
   {
-    ...chapter('unit-chapter-tree', '木構造', 3),
-    orderReason:
+    ...chapter('unit-chapter-tree', '木構造'),
+    learningRationale:
       '一般グラフから独立させ、根・部分木・一意path・separatorという木固有の不変量を体系的に積み上げる。',
   },
   {
-    ...chapter('unit-chapter-number-theory', '数論', 6),
-    orderReason:
+    ...chapter('unit-chapter-number-theory', '数論'),
+    learningRationale:
       '整数条件をgcd・合同・素因数指数・約数格子へ翻訳し、有限状態化と反転の基礎を作る。',
   },
   {
-    ...chapter('unit-chapter-combinatorics-algebra', '組合せ・多項式・線形代数', 7),
-    orderReason: '数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。',
+    ...chapter('unit-chapter-combinatorics-algebra', '組合せ・多項式・線形代数'),
+    learningRationale: '数え上げを全単射・係数列・線形写像へ変換し、高速変換と構造定理へ接続する。',
   },
   {
-    ...chapter('unit-chapter-geometry-optimization', '幾何・凸最適化', 8),
-    orderReason:
+    ...chapter('unit-chapter-geometry-optimization', '幾何・凸最適化'),
+    learningRationale:
       'orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進み、候補を構造的に削減する。',
   },
 ];
@@ -6793,27 +6444,18 @@ const REFINED_SECTION_SEEDS: readonly LearningUnitSeed[] = [
     '法上の演算と積の保守',
     'unit-chapter-number-theory',
     [],
-    1,
-    1,
-    0,
   ),
   subsection(
     'unit-dynamic-modular-product',
     '可逆な非零剰余と剰余 0 因子を含む法上の動的積',
     'unit-modular-product-foundations',
     ['unit-modular-arithmetic'],
-    2,
-    2,
-    1,
   ),
   section(
     'unit-matroid-theory',
     'Matroidの独立性・greedy・線形交差',
     'unit-chapter-combinatorics-algebra',
     [],
-    3,
-    4,
-    12,
   ),
 ];
 
@@ -6977,12 +6619,6 @@ const refinedLegacyUnitSeeds = LEGACY_LEARNING_UNIT_SEEDS.filter(
   kind: unit.id === 'unit-modular-arithmetic' ? 'subsection' : unit.kind,
   title: unit.id === 'unit-chapter-graph' ? 'グラフアルゴリズム' : unit.title,
   parentId: LEGACY_UNIT_PARENT_OVERRIDES[unit.id] ?? unit.parentId,
-  representativeRank:
-    unit.id === 'unit-chapter-query'
-      ? 4
-      : unit.id === 'unit-chapter-string'
-        ? 5
-        : unit.representativeRank,
 }));
 
 const declaredUnitIds = new Set([
@@ -7017,10 +6653,7 @@ for (const tag of FINAL_TAXONOMY_TAGS) {
       title: tag.name,
       parentId,
       prerequisiteIds,
-      stageRank: 3,
-      difficultyRank: Math.max(1, Math.floor(tag.primaryPriority / 20)),
-      representativeRank: tag.primaryPriority,
-      orderReason:
+      learningRationale:
         prerequisiteNames.length === 0
           ? `${tag.definition}その発動条件と正当化原理を比較可能な独立教材として学ぶ。`
           : `${prerequisiteNames.join('・')}で得た考え方と実装を再利用し、${tag.name}の発動条件・正当化・境界を重複なく学ぶ。`,
@@ -7068,7 +6701,6 @@ for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
 
 const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = BASE_LEARNING_UNIT_SEEDS.map((unit) => ({
   ...unit,
-  stageRank: curriculumStageForUnit(unit.id).rank,
   prerequisiteIds: [
     ...new Set([
       ...unit.prerequisiteIds,
@@ -7077,26 +6709,12 @@ const LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = BASE_LEARNING_UNIT_SEED
   ].sort(),
 }));
 
-const unitSeedById = new Map(LEARNING_UNIT_SEEDS.map((unit) => [unit.id, unit]));
-const orderedUnitSeeds: readonly LearningUnitSeed[] = orderCurriculumUnits(
-  LEARNING_UNIT_SEEDS.map((unit) => ({
-    ...unit,
-    prerequisiteIds: unit.prerequisiteIds,
-  })),
-).map((orderedUnit) => {
-  const originalUnit = unitSeedById.get(orderedUnit.id);
-  if (originalUnit === undefined)
-    throw new Error(`FINAL_TAXONOMY_ORDERED_UNIT_MISSING:${orderedUnit.id}`);
-  return originalUnit;
-});
-
 export const FINAL_LEARNING_UNIT_CANDIDATES: readonly MetadataLearningUnitCandidate[] =
-  orderedUnitSeeds.map((unit) => ({
+  LEARNING_UNIT_SEEDS.map((unit) => ({
     id: unit.id,
     kind: unit.kind,
     title: unit.title,
     parentId: unit.parentId,
-    additionalPrerequisiteUnitIds: unit.prerequisiteIds,
     tagIds: FINAL_TAXONOMY_TAGS.filter((tag) =>
       tag.learningUnitCandidateIds.some((tagUnitId) => unitIsSameOrDescendant(tagUnitId, unit.id)),
     ).map((tag) => tag.id),
@@ -7112,40 +6730,17 @@ export const FINAL_LEARNING_UNIT_CANDIDATES: readonly MetadataLearningUnitCandid
       outcome.learningUnitCandidateIds.includes(unit.id),
     ).map((outcome) => outcome.id),
     problemIds: [],
-    stageRank: unit.stageRank,
-    difficultyRank: unit.difficultyRank,
-    representativeRank: unit.representativeRank,
-    orderReason: UNIT_ORDER_REASONS[unit.id] ?? unit.orderReason,
+    learningRationale: UNIT_LEARNING_RATIONALES[unit.id] ?? unit.learningRationale,
     excludedTopics: unit.excludedTopics,
   }));
 
-export const FINAL_LEARNING_UNIT_ORDER_POLICY = {
-  policyVersion: '1.0.0' as const,
-  precedenceConstraintField: 'additionalPrerequisiteUnitIds',
-  semantics:
-    '教材上の前提を必ず先行させ、履修可能なUnitの中では概念の連続性・stage・難度を優先する。親子関係は意味的な目次、標準履修順は前提DAGに従う経路として分離する。',
-  conceptReadingChains: CONCEPT_READING_CHAINS,
-  tieBreakRanks: ['stageRank', 'difficultyRank', 'representativeRank', 'id'] as const,
-  orderedUnitIds: FINAL_LEARNING_UNIT_CANDIDATES.filter(
-    (unit) =>
-      unit.kind !== 'chapter' &&
-      (unit.ownedTagIds.length > 0 || unit.ownedLearningOutcomeIds.length > 0),
-  ).map((unit) => unit.id),
-};
-
-const latestLearningUnitId = (
-  unitIds: readonly string[],
-  orderIndex: ReadonlyMap<string, number>,
-): string => {
-  const latest = [...unitIds]
-    .sort(
-      (left, right) =>
-        (orderIndex.get(left) ?? -1) - (orderIndex.get(right) ?? -1) || compareIds(left, right),
-    )
-    .at(-1);
-  if (latest === undefined) throw new Error('FINAL_TAXONOMY_PRESENTATION_UNIT_MISSING');
-  return latest;
-};
+export const FINAL_LEARNING_UNIT_PREREQUISITES = LEARNING_UNIT_SEEDS.flatMap(
+  ({ id, prerequisiteIds }) =>
+    prerequisiteIds.map((prerequisiteId) => ({ nodeId: id, prerequisiteId })),
+).sort(
+  (left, right) =>
+    compareIds(left.nodeId, right.nodeId) || compareIds(left.prerequisiteId, right.prerequisiteId),
+);
 
 export const KNOWN_UNMATCHED_CURATED_OVERRIDE_PROBLEM_IDS = [
   'abc273-e',
@@ -7983,8 +7578,6 @@ export const PREVIEW_FINAL_TAXONOMY_DECISIONS: readonly PreviewFinalDecision[] =
   },
 ];
 
-const compareIds = (left: string, right: string): number =>
-  left < right ? -1 : left > right ? 1 : 0;
 const sortedUnique = (values: readonly string[]): string[] => [...new Set(values)].sort(compareIds);
 
 const RAW_FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProblemClaimDecision>> =
@@ -9818,7 +9411,6 @@ const adHocElementsFor = (record: ProblemAnalysisInput): readonly AdHocElementPr
 
 export const buildFullCorpusPrimaryDecisionTable = (
   records: readonly ProblemAnalysisInput[],
-  presentationOrder: readonly string[] = FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds,
 ): FullCorpusPrimaryDecisionTable => {
   const policyDiagnostics = validateFinalTaxonomyPolicy();
   if (policyDiagnostics.length > 0) {
@@ -9974,26 +9566,11 @@ export const buildFullCorpusPrimaryDecisionTable = (
         (outcomeId) =>
           outcomeId !== primaryOutcomeId && !additionalPrimaryOutcomeIds.includes(outcomeId),
       );
-      const assignedOutcomeIds = sortedUnique([
-        primaryOutcomeId,
-        ...additionalPrimaryOutcomeIds,
-        ...supportingOutcomeIds,
-      ]);
-      const learningUnitCandidateIds = sortedUnique([
-        ...assignedOutcomeIds.flatMap(
-          (outcomeId) => outcomeById.get(outcomeId)?.learningUnitCandidateIds ?? [],
-        ),
-      ]);
-      const primaryLearningUnitIds = sortedUnique(
-        [primaryOutcomeId, ...additionalPrimaryOutcomeIds].flatMap(
-          (outcomeId) => outcomeById.get(outcomeId)?.learningUnitCandidateIds ?? [],
-        ),
-      );
-      if (learningUnitCandidateIds.length === 0) {
-        throw new Error(`FINAL_TAXONOMY_LEARNING_UNIT_MISSING: ${record.problemId}`);
-      }
-      if (primaryLearningUnitIds.length === 0) {
-        throw new Error(`FINAL_TAXONOMY_PRIMARY_LEARNING_UNIT_MISSING: ${record.problemId}`);
+      const primaryOwnerUnitIds = outcomeById.get(primaryOutcomeId)?.learningUnitCandidateIds ?? [];
+      if (primaryOwnerUnitIds.length !== 1) {
+        throw new Error(
+          `FINAL_TAXONOMY_PRIMARY_OUTCOME_OWNER_INVALID: ${record.problemId}/${primaryOutcomeId}`,
+        );
       }
       return {
         problemId: record.problemId,
@@ -10003,11 +9580,6 @@ export const buildFullCorpusPrimaryDecisionTable = (
         supportingTagIds,
         supportingOutcomeIds,
         supportingTagDecisions,
-        learningUnitCandidateIds,
-        presentationUnitId: latestLearningUnitId(
-          learningUnitCandidateIds,
-          new Map(presentationOrder.map((id, index) => [id, index])),
-        ),
         ...(readinessOverride === undefined
           ? {}
           : {
@@ -10092,7 +9664,14 @@ export const materializeLearningUnitCandidates = (
 ): readonly MetadataLearningUnitCandidate[] => {
   const problemsByUnitId = new Map<string, string[]>();
   for (const decision of decisions) {
-    for (const directUnitId of decision.learningUnitCandidateIds) {
+    const primaryOwnerUnitIds =
+      outcomeById.get(decision.primaryOutcomeId)?.learningUnitCandidateIds ?? [];
+    if (primaryOwnerUnitIds.length !== 1) {
+      throw new Error(
+        `FINAL_TAXONOMY_PRIMARY_OUTCOME_OWNER_INVALID: ${decision.problemId}/${decision.primaryOutcomeId}`,
+      );
+    }
+    for (const directUnitId of primaryOwnerUnitIds) {
       for (const unitId of unitAndAncestors(directUnitId)) {
         const problemIds = problemsByUnitId.get(unitId) ?? [];
         problemIds.push(decision.problemId);
@@ -10261,9 +9840,9 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
   for (const tagId of SINGLE_PROBLEM_TAG_IDS) {
     if (!knownTagIds.has(tagId)) diagnostics.push(`UNKNOWN_SINGLE_PROBLEM_TAG:${tagId}`);
   }
-  for (const unitId of Object.keys(UNIT_ORDER_REASONS)) {
+  for (const unitId of Object.keys(UNIT_LEARNING_RATIONALES)) {
     if (!knownUnitIds.has(unitId) && unitId !== 'unit-chapter-math-geometry')
-      diagnostics.push(`UNKNOWN_UNIT_ORDER_REASON:${unitId}`);
+      diagnostics.push(`UNKNOWN_UNIT_LEARNING_RATIONALE:${unitId}`);
   }
   for (const unitId of Object.keys(UNIT_EXCLUDED_TOPICS)) {
     if (!knownUnitIds.has(unitId)) diagnostics.push(`UNKNOWN_UNIT_EXCLUDED_TOPICS:${unitId}`);
@@ -10368,32 +9947,11 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
         diagnostics.push(`UNKNOWN_OUTCOME_UNIT:${outcome.id}/${unitId}`);
     }
   }
-  const unitOrderIndex = new Map(
-    FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
-  );
-  for (const outcome of FINAL_TAXONOMY_OUTCOMES) {
-    for (const prerequisiteOutcomeId of outcome.prerequisiteOutcomeIds) {
-      const prerequisiteOutcome = outcomeById.get(prerequisiteOutcomeId);
-      if (prerequisiteOutcome === undefined) continue;
-      for (const unitId of outcome.learningUnitCandidateIds) {
-        for (const prerequisiteUnitId of prerequisiteOutcome.learningUnitCandidateIds) {
-          if (
-            prerequisiteUnitId !== unitId &&
-            (unitOrderIndex.get(prerequisiteUnitId) ?? Number.POSITIVE_INFINITY) >=
-              (unitOrderIndex.get(unitId) ?? Number.NEGATIVE_INFINITY)
-          ) {
-            diagnostics.push(
-              `OUTCOME_UNIT_PREREQUISITE_ORDER:${outcome.id}/${unitId}/${prerequisiteOutcomeId}/${prerequisiteUnitId}`,
-            );
-          }
-        }
-      }
-    }
-  }
   for (const unit of FINAL_LEARNING_UNIT_CANDIDATES) {
-    if (!unit.orderReason.trim()) diagnostics.push(`UNIT_ORDER_REASON_MISSING:${unit.id}`);
-    if (/(?:unit|tag|outcome)-/u.test(unit.orderReason)) {
-      diagnostics.push(`UNIT_ORDER_REASON_INTERNAL_ID:${unit.id}`);
+    if (!unit.learningRationale.trim())
+      diagnostics.push(`UNIT_LEARNING_RATIONALE_MISSING:${unit.id}`);
+    if (/(?:unit|tag|outcome)-/u.test(unit.learningRationale)) {
+      diagnostics.push(`UNIT_LEARNING_RATIONALE_INTERNAL_ID:${unit.id}`);
     }
     if (unit.kind !== 'chapter' && unit.excludedTopics.length === 0) {
       diagnostics.push(`UNIT_EXCLUDED_TOPICS_MISSING:${unit.id}`);
@@ -10409,15 +9967,23 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
       diagnostics.push(`UNKNOWN_UNIT_PARENT:${unit.id}/${unit.parentId}`);
     }
   }
-  for (const [orderReason, count] of new Map(
+  for (const [learningRationale, count] of new Map(
     FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [
-      unit.orderReason,
+      unit.learningRationale,
       FINAL_LEARNING_UNIT_CANDIDATES.filter(
-        (candidate) => candidate.orderReason === unit.orderReason,
+        (candidate) => candidate.learningRationale === unit.learningRationale,
       ).length,
     ]),
   )) {
-    if (count > 1) diagnostics.push(`UNIT_ORDER_REASON_REUSED:${orderReason}`);
+    if (count > 1) diagnostics.push(`UNIT_LEARNING_RATIONALE_REUSED:${learningRationale}`);
+  }
+  for (const { nodeId, prerequisiteId } of FINAL_LEARNING_UNIT_PREREQUISITES) {
+    if (!knownUnitIds.has(nodeId)) {
+      diagnostics.push(`UNKNOWN_UNIT_PREREQUISITE_OWNER:${nodeId}`);
+    }
+    if (!knownUnitIds.has(prerequisiteId)) {
+      diagnostics.push(`UNKNOWN_UNIT_PREREQUISITE_TARGET:${nodeId}/${prerequisiteId}`);
+    }
   }
   try {
     deterministicTopologicalOrder(
@@ -10432,7 +9998,9 @@ export const validateFinalTaxonomyPolicy = (): readonly string[] => {
     deterministicTopologicalOrder(
       FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => ({
         id: unit.id,
-        prerequisiteIds: [...new Set([...unit.additionalPrerequisiteUnitIds])],
+        prerequisiteIds: FINAL_LEARNING_UNIT_PREREQUISITES.filter(
+          ({ nodeId }) => nodeId === unit.id,
+        ).map(({ prerequisiteId }) => prerequisiteId),
       })),
     );
   } catch (error) {

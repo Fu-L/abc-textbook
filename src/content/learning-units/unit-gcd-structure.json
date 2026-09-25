@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"
   ],
@@ -32,25 +31,22 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/gcd-structure.md",
   "problemIds": [
-    "abc418-e"
+    "abc254-f",
+    "abc438-g"
   ],
   "directProblemIds": [
-    "abc418-e"
+    "abc254-f",
+    "abc438-g"
   ],
   "relatedProblemIds": [
     "abc212-g",
     "abc222-g",
     "abc248-g",
-    "abc254-f",
     "abc306-g",
-    "abc438-g",
+    "abc418-e",
     "abc445-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 2,
-  "representativeRank": 54,
-  "globalIndex": 19,
-  "orderReason": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

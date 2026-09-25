@@ -5,10 +5,6 @@
   "parentId": "unit-polynomial-convolution",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-combinatorial-coefficients",
-    "unit-polynomial-convolution"
-  ],
   "excludedTopics": [
     "factorial convolutionによる多項式Taylor shiftの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -30,18 +26,12 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc323-g"
   ],
-  "directProblemIds": [
-    "abc323-g"
-  ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 95,
-  "globalIndex": 176,
-  "orderReason": "畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。"
+  "learningRationale": "畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。"
 }

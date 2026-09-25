@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第134単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [Aho–Corasick](/learn/string/aho-corasick/) ／ 次: [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/)
-
 ## 概要
 
 ### SWAG・two-stack queue aggregation
@@ -32,7 +26,9 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
+直接の前提単元: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
+
+このUnitを直接前提とする単元: なし。
 
 区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -42,13 +38,13 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 
 ## 問題一覧
 
-1. [ABC456 F「Plan Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_f) — 主題: [SWAG・two-stack queue aggregation](/learn/query/swag/)。
+- [ABC456 F「Plan Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_f) — 主題: [SWAG・two-stack queue aggregation](/learn/query/swag/)（queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
 - [ABC456 F 公式解説](https://atcoder.jp/contests/abc456/editorial/19850)
 - [ABC456 F 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-swag`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-swag`

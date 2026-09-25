@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第172単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) ／ 次: [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/)
-
 ## 概要
 
 ### kinetic sorting・交差event順序更新
@@ -32,7 +26,9 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [event順にactive集合を更新する](/learn/modeling/event-sweep/)。
+直接の前提単元: [event順にactive集合を更新する](/learn/modeling/event-sweep/)。
+
+このUnitを直接前提とする単元: なし。
 
 event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。
 
@@ -42,10 +38,15 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 
 ## 問題一覧
 
-1. [ABC344 G「Points and Comparison」](https://atcoder.jp/contests/abc344/tasks/abc344_g) — 主題: [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/)。既習技能: 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。
-2. [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h) — 主題: [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/)。既習技能: 隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。
+- [ABC344 G「Points and Comparison」](https://atcoder.jp/contests/abc344/tasks/abc344_g) — 主題: [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/)（隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。）。既習技能: [event順にactive集合を更新する](/learn/modeling/event-sweep/)（値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
+
+## 関連問題
+
+以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。
+
+- [ABC257 Ex「Dice Sum 2」](https://atcoder.jp/contests/abc257/tasks/abc257_h) — 主題: [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/)（目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。）。既習技能: [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/)（隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。）。
 
 ## 根拠
 
@@ -54,4 +55,4 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 - [ABC344 G 公式解説](https://atcoder.jp/contests/abc344/editorial/9491)
 - [ABC344 G 公式問題文](https://atcoder.jp/contests/abc344/tasks/abc344_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-kinetic-order-maintenance`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-kinetic-order-maintenance`

@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-greedy-exchange"
-  ],
   "excludedTopics": [
     "任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"
   ],
@@ -38,10 +35,8 @@
   "problemIds": [
     "abc218-e",
     "abc235-e",
-    "abc250-ex",
     "abc270-f",
     "abc282-e",
-    "abc301-ex",
     "abc352-e",
     "abc355-f",
     "abc364-f",
@@ -49,20 +44,18 @@
   ],
   "directProblemIds": [
     "abc218-e",
-    "abc352-e",
     "abc282-e",
+    "abc352-e",
     "abc270-f",
-    "abc364-f",
-    "abc355-f"
+    "abc355-f",
+    "abc364-f"
   ],
   "relatedProblemIds": [
+    "abc250-ex",
+    "abc301-ex",
     "abc386-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 3,
-  "globalIndex": 54,
-  "orderReason": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
+  "learningRationale": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
 }

@@ -1,8 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
 import { validateCatalogSemantics, type CatalogLike } from '../../src/lib/catalog/build-catalog.js';
-import { CatalogSchema, TechniqueTagSchema } from '../../src/lib/domain/schema-parts/catalog.js';
-import { deterministicTopologicalOrder } from '../../src/lib/validation/validate.js';
+import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
+import {
+  CanonicalLearningPrerequisitesSchema,
+  CatalogSchema,
+  TechniqueTagSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 
 const catalogFixture = () => CatalogSchema.parse(makeTrustedCatalog({}));
@@ -32,31 +36,43 @@ describe('US2 taxonomy contract', () => {
     );
   });
 
-  it('validates Tag and LearningUnit prerequisite graphs separately', () => {
+  it('validates Tag prerequisites in the Catalog and separate prerequisite policy graphs', () => {
     const tagCycle = catalogFixture();
     const tag = tagCycle.tags[0];
     if (!tag) throw new Error('Technique Tag fixture is missing.');
     tag.prerequisiteTagIds = [tag.id];
     expect(codes(tagCycle)).toContain('DEPENDENCY_CYCLE');
 
-    const unitCycle = catalogFixture();
-    const unit = unitCycle.learningUnits[0];
-    if (!unit) throw new Error('Learning Unit fixture is missing.');
-    unit.additionalPrerequisiteUnitIds = [unit.id];
-    expect(codes(unitCycle)).toContain('DEPENDENCY_CYCLE');
-  });
-
-  it('orders ready LearningUnits deterministically after all prerequisites', () => {
-    const nodes = [
-      { id: 'unit-b', prerequisiteIds: [], ranks: [0, 0, 0] },
-      { id: 'unit-c', prerequisiteIds: ['unit-a'], ranks: [0, 0, 0] },
-      { id: 'unit-a', prerequisiteIds: [], ranks: [0, 0, 0] },
-    ];
-    const order = (input: typeof nodes): string[] =>
-      deterministicTopologicalOrder(input, ({ ranks }) => ranks).map(({ id }) => id);
-
-    expect(order(nodes)).toEqual(['unit-a', 'unit-b', 'unit-c']);
-    expect(order([...nodes].reverse())).toEqual(['unit-a', 'unit-b', 'unit-c']);
+    const sourceBuild = {
+      id: 'final-taxonomy-test',
+      digest: 'a'.repeat(64),
+      acceptedAt: '2026-07-27T23:21:00+09:00',
+    };
+    for (const field of [
+      'tagPrerequisites',
+      'learningOutcomePrerequisites',
+      'learningUnitPrerequisites',
+    ] as const) {
+      const edges = [
+        { nodeId: 'node-a', prerequisiteId: 'node-b' },
+        { nodeId: 'node-b', prerequisiteId: 'node-a' },
+      ];
+      const empty = {
+        tagPrerequisites: [],
+        learningOutcomePrerequisites: [],
+        learningUnitPrerequisites: [],
+      };
+      const graph = { ...empty, [field]: edges };
+      const invalid = {
+        schemaVersion: '1.0.0',
+        sourceBuild,
+        ...graph,
+        tagDagDigest: canonicalDigest(graph.tagPrerequisites),
+        learningOutcomeDagDigest: canonicalDigest(graph.learningOutcomePrerequisites),
+        learningUnitDagDigest: canonicalDigest(graph.learningUnitPrerequisites),
+      };
+      expect(CanonicalLearningPrerequisitesSchema.safeParse(invalid).success, field).toBe(false);
+    }
   });
 
   it('rejects published Problems without a primary Tag, Placement, and authoring unit', () => {

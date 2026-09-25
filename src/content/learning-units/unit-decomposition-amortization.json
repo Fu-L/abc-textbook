@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "探索空間を分けて候補を列挙・照合するmeet-in-the-middleや分割統治。"
   ],
@@ -34,27 +33,25 @@
   "problemIds": [
     "abc217-e",
     "abc219-g",
+    "abc256-ex",
     "abc259-ex",
-    "abc273-ex",
     "abc302-e",
     "abc324-g",
     "abc329-f",
     "abc335-f",
     "abc350-g",
     "abc365-g",
+    "abc368-g",
     "abc403-e",
     "abc411-f",
-    "abc421-f",
-    "abc427-g",
     "abc428-f",
-    "abc451-f",
     "abc454-g",
     "abc466-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc255-ex",
-    "abc256-ex",
+    "abc273-ex",
     "abc275-ex",
     "abc295-g",
     "abc305-f",
@@ -62,19 +59,17 @@
     "abc312-ex",
     "abc319-g",
     "abc345-g",
-    "abc368-g",
     "abc369-g",
     "abc417-g",
+    "abc421-f",
     "abc426-f",
+    "abc427-g",
     "abc430-g",
     "abc435-e",
+    "abc451-f",
     "abc462-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 5,
-  "globalIndex": 29,
-  "orderReason": "各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。"
+  "learningRationale": "各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。"
 }

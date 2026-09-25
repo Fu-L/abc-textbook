@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "全候補の大小順や区間集約を保つ平衡木・heap。"
   ],
@@ -32,20 +31,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/linked-list-index.md",
   "problemIds": [
-    "abc344-e"
+    "abc344-e",
+    "abc421-f"
   ],
   "directProblemIds": [
-    "abc344-e"
+    "abc344-e",
+    "abc421-f"
   ],
   "relatedProblemIds": [
-    "abc218-h",
-    "abc421-f"
+    "abc218-h"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 1,
-  "representativeRank": 5,
-  "globalIndex": 13,
-  "orderReason": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
+  "learningRationale": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
 }

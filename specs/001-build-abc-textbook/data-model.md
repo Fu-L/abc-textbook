@@ -124,7 +124,7 @@ taxonomy・最終Outcome・公開解説の作成前に、全Problemへちょう�
 
 recordの`evidence[]`はlocal evidence ID、`sourceRevisionIds`、根拠説明を持つ。`observations`、候補方針、鍵、アルゴリズム接続、典型、問題固有の着眼点、計算量、前提、実装注意、成果候補、復習助言は、いずれも一つ以上の`evidenceIds`からこの構造を参照する。未定義または未使用のevidence IDを許さず、evidenceのSource Revisionはrecordの`sourceRevisionIds`に含まれ、recordへ宣言したSource Revisionは一つ以上のevidenceから利用されなければならない。Catalog/corpus検証はSource Revisionの存在に加え、公式Problem revisionの存在、同一Contest・同一`officialTaskId`への結び付きを確認する。
 
-公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。Problem Analysisはfinal Tag、Outcome、Unit、DAG、標準学習順、Problem Placementの`full / similar / supplement`を確定せず、これらはT159とProblemAuthoringUnit側で決定する。
+公開taxonomyを作る前に、対象Problem ID集合とInventoryのProblem ID集合が完全一致しなければならない。Problem Analysisはfinal Tag、Outcome、Unit、3つの直接前提DAG、Problem Placementの`full / similar / supplement`を確定せず、これらはT159とProblemAuthoringUnit側で決定する。全体学習順は生成しない。
 T044の初期freezeは全Problemのsource-boundなrecord coverageを固定する段階であり、heuristic draftを`reviewed`と偽装しない。その後の全コーパス執筆レビューでは、自動検出結果を昇格させず、問題ごとに公式Problem・公式解説revisionと上記writing policyを確認する。現在のcanonical corpus検証は全件`reviewed`、finding 0、既知scaffold不在を要求し、`draft`または`changes_requested`を正式なTag・Outcome・Unitの根拠として受理しない。使用したauthoring skill、writing policy、Source Revision集合、各recordのcontent digestは`docs/verification/bootstrap/technique-inventory-authoring.json`へ固定する。preview cohortは後続の設計検証へ進むため、T038時点から全件`reviewed`を要求する。
 Problem Analysisは、平方根分割、償却解析、出力依存、実用上重要な定数倍などの計算量解析が主テクニックの成立理由となり、かつ解法全体の計算量が根拠から確定できる場合だけ`asymptoticComplexity`を持つ。通常の計算量は公式解説に明記されていても省略する。計算量を明示しない公式解説に対して、主テクニック単体の典型計算量や入力サイズを仮定した時間・空間上界を補完しない。完全解説を公開する後続工程では、問題固有の実装を確定したうえでFR-005の計算量・制約整合を別途満たす。
 
@@ -209,7 +209,7 @@ Previewの仮taxonomyを全コーパスから再生成したfinal taxonomyへ統
 | `reviewMode` / `reviewEvidenceId` | major classification changeを含む場合は原則`third_party`。solo maintainerを明示した場合はrisk reasonを保持した`self`を許可する |
 | `status` | `proposed`, `accepted`, `rejected`。未acceptedはcanonicalへmaterialize不可 |
 
-Integration mapは仮DAGをfinalへコピーする記録ではない。final Inventory全件からTag/Outcome/UnitのDAG、標準順、ProblemPlacementを再計算した結果と照合し、未知参照、循環、未分類Problem、影響未列挙が0件の場合だけ`accepted`にできる。
+Integration mapは仮DAGをfinalへコピーする記録ではない。final Inventory全件からTag/Outcome/Unitの直接前提DAGとProblemPlacementを再計算した結果と照合し、未知参照、循環、未分類Problem、影響未列挙が0件の場合だけ`accepted`にできる。DAGから全体の学習順や前後関係を生成しない。
 
 ### FinalTaxonomyBuild
 
@@ -223,7 +223,7 @@ Integration mapは仮DAGをfinalへコピーする記録ではない。final Inv
 | `integrationMapDigest` | 仮Tag/Outcome/Unit全件の`promote`/`merge`/`split`/`retire`対応表 |
 | `taxonomyDigest` | final Tag/Outcome/LearningUnit候補、定義、成果、代表問題のdigest |
 | `tagDagDigest` / `learningUnitDagDigest` | 別々に再計算した前提DAGと未知参照・循環なしの証跡 |
-| `orderDigest` / `placementDigest` | 決定的標準順と全ProblemPlacementのdigest |
+| `placementDigest` | 全ProblemPlacementのdigest。配置はprimary Outcome所有Unitから導出する |
 | `correctionImpactDigest` | taxonomy再編が本文、例、演習、解答、順序、索引へ与える影響の全件digest |
 | `sourceRevisionIds` | 候補と分類判断の根拠。staleまたは矛盾した根拠は受理不可 |
 | `reviewEvidenceIds` | 固定policyに従ったcurrent-subject self/third-party evidence |
@@ -287,7 +287,6 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `id` / `kind` | chapter, section, subsection |
 | `parentId` | 階層上の親またはnull |
 | `baselineId` / `baselineVersion` | 共通前提 |
-| `additionalPrerequisiteUnitIds` | 追加curriculum prerequisiteまたは空配列。単独学習が論理的に不可能という意味には限定しない |
 | `excludedTopics` | 意図的対象外 |
 | `sourceRevisionIds` | 単位本文と所有例の根拠 |
 | `tagIds` / `learningOutcomeIds` | このUnit自身または子孫が所有するTag / Outcomeのnavigation closure。各一つ以上 |
@@ -296,17 +295,18 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `examples` | 任意の通常本文の例。生成skeletonでは空配列。特定問題・Outcomeの例を必須にしない |
 | `exercises` | 任意の通常本文の演習。生成skeletonでは空配列。Outcomeごとの評価課題を要求しない |
 | `problemIds` | 自身のdirectProblemIdsと子のproblemIdsの和集合。coverageであり直接配置ではない |
-| `directProblemIds` / `relatedProblemIds` | 主配置問題の読む順序 / coverage外の関連参照。各Problemの主配置はpresentationUnitIdと一致し全Unitで一意 |
-| `stageRank` / `difficultyRank` / `representativeRank` | 内部の前提順・問題配置に使う0以上の整数。読者向けの習得対象色ではない |
-| `globalIndex` / `orderReason` | 内部の標準順の位置と説明。章・構造Unitの内部位置は最初の学習子孫から導出する。教科書掲載順には使わない |
+| `directProblemIds` | primary Outcomeを直接所有するhome UnitのProblem集合 |
+| `problemIds` | 自身と子孫がhome UnitであるProblem集合。直接配置を含むcoverage |
+| `relatedProblemIds` | homeが別subtreeにあり、当Unitのadditional-primaryまたはsupporting Outcomeを参照するProblem集合 |
+| `learningRationale` | Unit固有の学習意図。全体順序や隣接位置は符号化しない |
 
-`parentId`は目次・navigationだけを表し、前提辺にはしない。章と所有技能・直接配置問題を持たない構造Unitは`standardOrder`から除外する。親子関係と前提関係は別に検証する。内部の標準順はcurriculum prerequisite DAGをprecedence constraintとし、入次数0の候補だけを`learning-unit-order.ts`の概念連鎖のanchorの3 rank・安定IDと連鎖内位置で比較する。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
+`parentId`は意味的なUnit階層とnavigationだけを表し、前提辺にはしない。3つの前提DAGは`src/content/policies/learning-prerequisites.json`に独立してmaterializeし、各辺は`nodeId`と直接の`prerequisiteId`で表す。DAGから全体順、隣接リンク、順位、rankを生成・保存しない。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
 
 教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べ、各親と全子孫を連続させる。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。後にある前提も明示的にリンクし、掲載順から前提DAGや問題配置を再計算しない。
 
-各Problemは、想定解法の再構成・実装に必要な全Outcome（supportingも含む）の最遅Unitへ主配置する。原則としてそのUnitの技能をprimaryにし、従来の主技能はco-primaryとして根拠を保持する。意味上の主技法を保持する例外は`primaryOverride`（`primaryOutcomeId`・`rationale`・`decisionAuthorId`）で明示し、例外でも掲載Unitは必須Outcome全体の最遅Unitとする。Unit内では基本的な解法を先に置き、技能集合の包含だけでは問題間の前提辺を作らない。学習段階のrankは内容の基本性に基づき、見出しの深さから決めない。全Unitに段階を明示し、未査読Unitを旧rankへfallbackさせない。Tag・Outcomeの前提は技能自体の習得に限定し、Problem固有のreadinessは必須Outcome集合で表す。
+各Problemのhome Unitは`primaryOutcomeId`の唯一の所有Unitである。追加primary Outcomeは新しく学ぶ技能を、supporting Outcomeはすでに必要な技能を示し、home Unitを決めない。個別Problemのsupportingを理由にLearningUnit DAGへ辺を追加してはならない。Unitの`relatedProblemIds`はhome Unitのsubtree外から追加primaryまたはsupporting Outcomeを参照するProblemだけを含む。
 
-上記の「最遅Unit」と段階rankは内部の`standardOrder`に対するものであり、教科書掲載位置や読者向けの対象色とは独立である。
+教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べ、各親と全子孫を連続させる。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。Unit内Problemの読む順はこの変更の範囲外とする。
 
 T050のcanonical skeletonは配置・順序と簡潔な概説を固定し、公開mappingが未受理の間は`draft: true`にする。`contentPhase=full_authoring`へ引き継いだ後は本文を上書きせず、所属・coverage・前提・出典・文書骨格の整合を確認する。T160が公開projectionを切り替える。
 
@@ -324,7 +324,7 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 | `checkIds` / `evidencePaths` | 概念・計算量・根拠の確認と、配置・順序・navigation reviewを追跡する |
 | `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
 
-全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は内部の前提順・主配置の一意性・coverageと、教科書掲載順の親子連続性・対象色・前提リンク・導線を、T058は通常本文の数学的正確性を確認する。全Problemの固有解説はProblem authoring unitが所有する。
+全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は3つの前提DAG・primary Outcome ownerによるhome配置・coverageと、教科書掲載順の親子連続性・対象色・直接前提リンク・導線を、T058は通常本文の数学的正確性を確認する。全Problemの固有解説はProblem authoring unitが所有する。
 
 ### ProblemPlacement
 
@@ -338,6 +338,10 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 | `comparison` | 解法、証明、計算量、制約、前提、実装差 |
 | `additionalElement` | supplementではちょうど一つ、similarではnone明示 |
 | `rationale` / `evidenceIds` | 判定根拠 |
+| `primaryOutcomeId` | 解法の中心となるOutcome。唯一のowner UnitがProblemのhome Unitを決める |
+| `additionalPrimaryOutcomeIds` | Problemで新たに学ぶ追加技能。home Unitの決定には使わない |
+| `supportingOutcomeIds` | 解法で既に使う必要技能。Unit間のDAG辺の導出には使わない |
+| `primaryTagIds` / `supportingTagIds` | 問題の意味分類。Unit配置とは独立して分類する |
 
 `full`が既定である。新しい主成果、前提、主解法、証明着眼点、漸近計算量があれば`full`以外を拒否する。
 
@@ -376,7 +380,7 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。問題pageまたは個別公式解説のSourceRevisionは`officialTaskId`を保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionでは`officialTaskId`をnullにする。公式解説index (`/editorial`) と個別公式解説 (`/editorial/<id>`) は別resourceとして扱い、Technique Inventoryの問題固有根拠にindexだけを使ってはならない。CorrectionImpactは本文と別の訂正ライフサイクルを持つため独立entityとする。`sourceRevisionIds`は影響判断に使った重複のないSource Revisionをすべて保持し、互換用の主revisionである`sourceRevisionId`を必ず含む。`affectedContentLocators`は`{ownerType: "problem", problemId, path}`、`{ownerType: "learning_unit", learningUnitId, path}`、または配置policyを指す`{ownerType: "problem_placement", problemId, path}`の判別付きunionで、ProblemAuthoringUnitのsection/local block、LearningUnitの本文/Example/Exercise/Assessment/Answer、Problem配置を対象にする。これとは別に`affectedLearningUnitOrderIds`と`derivedIndexPaths`でUnit順と派生indexを列挙する。previewで評価したProblemのbody/example/exercise/answer/placement/derived_index、Learning Unit候補のbody/example/exercise/answer/standard_order/derived_index、およびderived index ownerの各surfaceは、canonical側の対応するlocator・Unit順・index pathが一つでも欠ければ受理しない。T049でこの写像完全性を`passed`にしてもcanonical CorrectionImpactの`verificationStatus`は`pending`のままとし、Problem本文の執筆、T057のcurriculum-routing検証、T058のOutcome到達度検証、T160の派生index投影を完了して実targetを検証した後にだけ`verified`へ昇格する。重複するowner ID配列を正本にせず、各locatorが選択したownerの実データへ解決できない限り公開不可である。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。Problem pageまたは個別公式解説のSourceRevisionはofficialTaskIdを保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionではofficialTaskIdをnullにする。CorrectionImpactは本文と別の訂正ライフサイクルを持つ。sourceRevisionIdsは影響判断に使った重複のないSource Revisionを保持し、sourceRevisionIdを必ず含む。affectedContentLocatorsはproblem、learning_unit、problem_placement、learning_prerequisitesのownerを識別し、ProblemAuthoringUnitのsection/local block、LearningUnitの本文・Example・Exercise・Assessment・Answer、Problem配置、Unit prerequisite policyを対象にする。Unit prerequisite policyのlocatorはsrc/content/policies/learning-prerequisites.jsonを指す。Unit全順序・navigation metadataをCorrectionImpactのownerや派生indexとして保存しない。derivedIndexPathsは別個の派生indexを列挙する。previewで評価したProblemとLearning Unit候補の各surfaceはcanonical locator・prerequisite policy path・index pathへ完全に対応しなければならず、Learning Unit候補のprerequisite_graphはlearning_prerequisites locatorへ対応させる。standard_orderとaffectedLearningUnitOrderIdsは保持しない。T049で写像完全性をpassedにしてもverificationStatusはpendingとし、本文執筆、T057のcurriculum-routing検証、T058のOutcome到達度検証、T160の派生index投影を完了して実targetを検証した後にだけverifiedへ昇格する。各locatorが選択したownerの実データへ解決できない限り公開不可である。
 
 ## 5. Learning records
 

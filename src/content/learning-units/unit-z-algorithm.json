@@ -5,7 +5,6 @@
   "parentId": "unit-string-prefix-automata",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -34,24 +33,19 @@
   "problemIds": [
     "abc257-g",
     "abc284-f",
-    "abc430-e",
-    "abc434-f"
+    "abc430-e"
   ],
   "directProblemIds": [
     "abc430-e",
     "abc284-f",
-    "abc257-g",
-    "abc434-f"
+    "abc257-g"
   ],
   "relatedProblemIds": [
     "abc312-ex",
-    "abc343-g"
+    "abc343-g",
+    "abc434-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 3,
-  "representativeRank": 71,
-  "globalIndex": 35,
-  "orderReason": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

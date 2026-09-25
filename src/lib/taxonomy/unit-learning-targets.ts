@@ -1,5 +1,5 @@
 /**
- * 習得を勧める読者のAlgorithmレーティング帯。問題Difficultyや旧stageRankからは計算しない。
+ * 習得を勧める読者のAlgorithmレーティング帯。問題Difficultyや履修順からは計算しない。
  * 標準形で発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができる段階を評価する。
  * 章・案内節は導入部分の対象を示す。子Unitの習得対象はそれぞれ独立に評価する。
  * 色の境界: https://info.atcoder.jp/overview/contest/rating （2026-09-18確認）

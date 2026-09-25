@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"
   ],
@@ -34,27 +31,22 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
   "problemIds": [
-    "abc311-e",
     "abc415-e",
     "abc443-e"
   ],
   "directProblemIds": [
-    "abc311-e",
     "abc415-e",
     "abc443-e"
   ],
   "relatedProblemIds": [
     "abc221-h",
     "abc227-f",
+    "abc311-e",
     "abc347-f",
     "abc358-g",
     "abc464-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 1,
-  "representativeRank": 1,
-  "globalIndex": 7,
-  "orderReason": "状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。"
+  "learningRationale": "状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。"
 }

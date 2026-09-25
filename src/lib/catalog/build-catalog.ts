@@ -1,4 +1,3 @@
-import { isCurriculumUnit, unitNavigationIndices } from '../taxonomy/learning-unit-order.js';
 import {
   CatalogContract,
   parseAtCoderContestResourceUrl,
@@ -30,17 +29,12 @@ export class CatalogBuildError extends Error {
 }
 
 interface Entity {
-  readonly globalIndex?: number;
   readonly id?: string;
   readonly problemId?: string | null;
   readonly contestId?: string;
   readonly number?: number;
   readonly label?: string;
   readonly officialOrder?: number | null;
-  readonly additionalPrerequisiteUnitIds?: readonly string[];
-  readonly stageRank?: number;
-  readonly difficultyRank?: number;
-  readonly representativeRank?: number;
 }
 
 export interface TrustedCatalogReleaseEvidenceInventory {
@@ -211,11 +205,6 @@ export interface CatalogLike {
     readonly kind?: string;
     readonly id: string;
     readonly sourceRevisionIds: readonly string[];
-    readonly additionalPrerequisiteUnitIds: readonly string[];
-    readonly stageRank: number;
-    readonly difficultyRank: number;
-    readonly representativeRank: number;
-    readonly globalIndex: number;
     readonly parentId: string | null;
     readonly tagIds: readonly string[];
     readonly ownedTagIds?: readonly string[] | undefined;
@@ -303,8 +292,11 @@ export interface CatalogLike {
           readonly problemId: string;
           readonly path: string;
         }
+      | {
+          readonly ownerType: 'learning_prerequisites';
+          readonly path: 'src/content/policies/learning-prerequisites.json';
+        }
     )[];
-    readonly affectedLearningUnitOrderIds: readonly string[];
     readonly verificationStatus: string;
   }[];
   readonly [key: string]: unknown;
@@ -445,27 +437,7 @@ export const sortCatalogEntityArray = (
     return compareCodeUnits(a, b);
   };
   if (key === 'learningUnits') {
-    if (items.every((item) => 'ownedTagIds' in item))
-      return [...items].sort(
-        (a, b) =>
-          Number(a.globalIndex) - Number(b.globalIndex) || compareCodeUnits(a.id ?? '', b.id ?? ''),
-      );
-    try {
-      const ordered = deterministicTopologicalOrder(
-        items.map((item) => ({
-          item,
-          id: item.id ?? '',
-          prerequisiteIds: item.additionalPrerequisiteUnitIds ?? [],
-          ranks: [item.stageRank ?? 0, item.difficultyRank ?? 0, item.representativeRank ?? 0],
-        })),
-        (node) => node.ranks,
-      );
-      return ordered.map(({ item }) => item);
-    } catch {
-      // Semantic validation reports the actual dependency error below;
-      // retain a deterministic fallback order until then.
-      return [...items].sort((left, right) => compareCodeUnits(left.id ?? '', right.id ?? ''));
-    }
+    return [...items].sort((left, right) => compareCodeUnits(left.id ?? '', right.id ?? ''));
   }
   return [...items].sort((left, right) => {
     if (key === 'contestGaps') {
@@ -1260,12 +1232,6 @@ export const validateCatalogSemantics = (
   for (const unit of catalog.learningUnits) {
     if (unit.parentId) requireRefs(unit.id, 'parentId', [unit.parentId], unitIds);
     requireRefs(unit.id, 'sourceRevisionIds', unit.sourceRevisionIds, sourceIds);
-    requireRefs(
-      unit.id,
-      'additionalPrerequisiteUnitIds',
-      unit.additionalPrerequisiteUnitIds,
-      unitIds,
-    );
     requireRefs(unit.id, 'tagIds', unit.tagIds, tagIds);
     if (unit.ownedTagIds !== undefined) {
       requireRefs(unit.id, 'ownedTagIds', unit.ownedTagIds, tagIds);
@@ -1535,7 +1501,9 @@ export const validateCatalogSemantics = (
       ? `problem:${locator.problemId}:${locator.path}`
       : locator.ownerType === 'learning_unit'
         ? `learning_unit:${locator.learningUnitId}:${locator.path}`
-        : `problem_placement:${locator.problemId}:${locator.path}`;
+        : locator.ownerType === 'problem_placement'
+          ? `problem_placement:${locator.problemId}:${locator.path}`
+          : `learning_prerequisites:${locator.path}`;
   const authoringVisitState = new Map<string, 'visiting' | 'visited'>();
   const visitAuthoringUnit = (problemId: string, path: readonly string[]): void => {
     const state = authoringVisitState.get(problemId);
@@ -1564,12 +1532,6 @@ export const validateCatalogSemantics = (
       impact.sourceRevisionIds ?? [impact.sourceRevisionId],
       sourceIds,
     );
-    requireRefs(
-      impact.id,
-      'affectedLearningUnitOrderIds',
-      impact.affectedLearningUnitOrderIds,
-      unitIds,
-    );
     if (impact.affectedContentLocators.length === 0) {
       diagnostics.push({
         code: 'CORRECTION_IMPACT_LOCATORS_EMPTY',
@@ -1578,11 +1540,7 @@ export const validateCatalogSemantics = (
       });
     }
     const locatorKeys = impact.affectedContentLocators.map(correctionLocatorKey);
-    if (
-      new Set(locatorKeys).size !== locatorKeys.length ||
-      new Set(impact.affectedLearningUnitOrderIds).size !==
-        impact.affectedLearningUnitOrderIds.length
-    ) {
+    if (new Set(locatorKeys).size !== locatorKeys.length) {
       diagnostics.push({
         code: 'CORRECTION_IMPACT_LOCATOR_DUPLICATE',
         entityId: impact.id,
@@ -1620,6 +1578,7 @@ export const validateCatalogSemantics = (
         }
         continue;
       }
+      if (locator.ownerType === 'learning_prerequisites') continue;
       const unit = learningUnitById.get(locator.learningUnitId);
       if (!unit) {
         diagnostics.push({
@@ -1648,15 +1607,10 @@ export const validateCatalogSemantics = (
   interface CatalogDagNode {
     readonly id: string;
     readonly prerequisiteIds: readonly string[];
-    readonly ranks?: readonly number[];
   }
-  const validateDag = (
-    code: string,
-    nodes: readonly CatalogDagNode[],
-    ranks: (node: CatalogDagNode) => readonly number[] = (node) => node.ranks ?? [],
-  ): void => {
+  const validateDag = (code: string, nodes: readonly CatalogDagNode[]): void => {
     try {
-      deterministicTopologicalOrder(nodes, ranks);
+      deterministicTopologicalOrder(nodes);
     } catch (error) {
       diagnostics.push({
         code: error instanceof DomainValidationError ? error.code : code,
@@ -1688,47 +1642,8 @@ export const validateCatalogSemantics = (
       prerequisiteIds: outcome.prerequisiteOutcomeIds,
     })),
   );
-  validateDag(
-    'LEARNING_UNIT_PREREQUISITE_DAG_INVALID',
-    catalog.learningUnits.map((unit) => ({
-      id: unit.id,
-      prerequisiteIds: unit.additionalPrerequisiteUnitIds,
-      ranks: [unit.stageRank, unit.difficultyRank, unit.representativeRank],
-    })),
-    (unit) => unit.ranks ?? [],
-  );
-  try {
-    const orderedLearningUnits = deterministicTopologicalOrder(
-      catalog.learningUnits.filter(isCurriculumUnit).map((unit) => ({
-        unit,
-        id: unit.id,
-        prerequisiteIds: unit.additionalPrerequisiteUnitIds,
-        ranks: [unit.stageRank, unit.difficultyRank, unit.representativeRank],
-      })),
-      (node) => node.ranks,
-    );
-    const expectedIds = orderedLearningUnits.map(({ id }) => id);
-    const actualIds = catalog.learningUnits.filter(isCurriculumUnit).map(({ id }) => id);
-    if (expectedIds.some((id, index) => actualIds[index] !== id)) {
-      diagnostics.push({
-        code: 'LEARNING_UNIT_ORDER_MISMATCH',
-        message: 'Learning units must be stored in deterministic prerequisite order.',
-      });
-    }
-    const navigationIndices = unitNavigationIndices(catalog.learningUnits, expectedIds);
-    for (const unit of catalog.learningUnits) {
-      if (unit.globalIndex !== navigationIndices.get(unit.id)) {
-        diagnostics.push({
-          code: 'LEARNING_UNIT_GLOBAL_INDEX_MISMATCH',
-          entityId: unit.id,
-          message: `${unit.id} must have globalIndex ${String(expectedIds.indexOf(unit.id))}.`,
-        });
-      }
-    }
-  } catch {
-    // The dedicated DAG validator above reports the actionable cycle or
-    // unknown-dependency diagnostic.
-  }
+  // Unit prerequisites are authored in the canonical learning-prerequisites
+  // policy, independently of the hierarchy and the serialized Catalog order.
   validateDag(
     'LEARNING_UNIT_PARENT_HIERARCHY_INVALID',
     catalog.learningUnits.map((unit) => ({

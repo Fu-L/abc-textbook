@@ -5,9 +5,6 @@
   "parentId": "unit-tree-aggregation",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,15 +32,14 @@
   "docPath": "src/content/docs/learn/tree/rooted-tree-aggregation.md",
   "problemIds": [
     "abc239-e",
-    "abc246-g",
     "abc248-g",
     "abc259-f",
     "abc263-f",
     "abc264-ex",
     "abc287-f",
-    "abc293-ex",
     "abc309-e",
     "abc312-g",
+    "abc329-g",
     "abc378-f",
     "abc391-e",
     "abc394-f",
@@ -54,31 +50,31 @@
     "abc459-e"
   ],
   "directProblemIds": [
-    "abc309-e",
-    "abc409-e",
     "abc239-e",
+    "abc309-e",
     "abc391-e",
-    "abc459-e",
-    "abc378-f",
-    "abc447-f",
     "abc397-e",
-    "abc394-f",
-    "abc312-g",
+    "abc409-e",
+    "abc459-e",
     "abc259-f",
     "abc263-f",
     "abc287-f",
+    "abc378-f",
+    "abc394-f",
     "abc416-f",
-    "abc246-g",
+    "abc447-f",
     "abc248-g",
-    "abc264-ex",
-    "abc293-ex"
+    "abc312-g",
+    "abc329-g",
+    "abc264-ex"
   ],
   "relatedProblemIds": [
+    "abc246-g",
     "abc269-ex",
     "abc275-ex",
+    "abc293-ex",
     "abc298-ex",
     "abc314-f",
-    "abc329-g",
     "abc340-g",
     "abc369-g",
     "abc387-f",
@@ -87,9 +83,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 63,
-  "globalIndex": 58,
-  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
 }

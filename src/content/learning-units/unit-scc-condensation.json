@@ -5,9 +5,6 @@
   "parentId": "unit-directed-condensation",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dag-topological-processing"
-  ],
   "excludedTopics": [
     "SCC・縮約DAG・トポロジカル順序の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -33,18 +30,17 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/scc-condensation.md",
-  "problemIds": [],
-  "directProblemIds": [],
+  "problemIds": [
+    "abc214-h"
+  ],
+  "directProblemIds": [
+    "abc214-h"
+  ],
   "relatedProblemIds": [
-    "abc214-h",
     "abc306-g",
     "abc374-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 71,
-  "globalIndex": 25,
-  "orderReason": "DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -5,9 +5,6 @@
   "parentId": "unit-discrete-convex",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-basic-convex-optimization"
-  ],
   "excludedTopics": [
     "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,23 +33,18 @@
   "problemIds": [
     "abc217-h",
     "abc250-g",
-    "abc275-ex",
-    "abc406-g",
-    "abc458-g"
+    "abc406-g"
   ],
   "directProblemIds": [
     "abc250-g",
-    "abc217-h",
-    "abc458-g",
     "abc406-g",
-    "abc275-ex"
+    "abc217-h"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc275-ex",
+    "abc458-g"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 89,
-  "globalIndex": 154,
-  "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
 }

@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-generating-functions"
-  ],
   "excludedTopics": [
     "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,28 +32,22 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
   "problemIds": [
     "abc213-g",
-    "abc236-ex",
-    "abc253-ex",
+    "abc318-ex",
     "abc321-g",
-    "abc327-g",
-    "abc386-g"
+    "abc327-g"
   ],
   "directProblemIds": [
     "abc213-g",
     "abc321-g",
-    "abc253-ex",
-    "abc236-ex",
-    "abc386-g",
-    "abc327-g"
+    "abc327-g",
+    "abc318-ex"
   ],
   "relatedProblemIds": [
-    "abc318-ex"
+    "abc236-ex",
+    "abc253-ex",
+    "abc386-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 93,
-  "globalIndex": 167,
-  "orderReason": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
 }

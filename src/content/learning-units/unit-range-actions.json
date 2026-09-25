@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-range-monoid-aggregation"
-  ],
   "excludedTopics": [
     "過去の版の保存・rollback・構造共有。"
   ],
@@ -37,16 +34,10 @@
   "docPath": "src/content/docs/learn/query/range-actions.md",
   "problemIds": [
     "abc237-g",
-    "abc248-ex",
-    "abc262-ex",
     "abc265-g",
     "abc322-f",
-    "abc327-f",
-    "abc332-f",
     "abc340-e",
-    "abc346-g",
     "abc357-f",
-    "abc360-f",
     "abc371-f",
     "abc382-f",
     "abc389-f",
@@ -55,40 +46,35 @@
     "abc426-f",
     "abc430-g",
     "abc441-g",
-    "abc450-f",
     "abc455-f"
   ],
   "directProblemIds": [
     "abc340-e",
-    "abc417-f",
-    "abc382-f",
-    "abc455-f",
-    "abc327-f",
-    "abc389-f",
-    "abc332-f",
-    "abc357-f",
     "abc322-f",
-    "abc397-f",
-    "abc426-f",
-    "abc441-g",
-    "abc450-f",
-    "abc237-g",
+    "abc357-f",
     "abc371-f",
-    "abc346-g",
+    "abc382-f",
+    "abc389-f",
+    "abc397-f",
+    "abc417-f",
+    "abc426-f",
+    "abc455-f",
+    "abc237-g",
     "abc265-g",
-    "abc360-f",
-    "abc248-ex",
-    "abc262-ex"
+    "abc441-g"
   ],
   "relatedProblemIds": [
+    "abc248-ex",
     "abc256-ex",
-    "abc363-g"
+    "abc262-ex",
+    "abc327-f",
+    "abc332-f",
+    "abc346-g",
+    "abc360-f",
+    "abc363-g",
+    "abc450-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 3,
-  "globalIndex": 69,
-  "orderReason": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
+  "learningRationale": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
 }

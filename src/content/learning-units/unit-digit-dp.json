@@ -5,9 +5,6 @@
   "parentId": "unit-dp-digit-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -42,9 +39,9 @@
     "abc465-e"
   ],
   "directProblemIds": [
+    "abc336-e",
     "abc406-e",
     "abc465-e",
-    "abc336-e",
     "abc235-f",
     "abc317-f",
     "abc288-ex"
@@ -52,9 +49,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 4,
-  "representativeRank": 82,
-  "globalIndex": 82,
-  "orderReason": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
+  "learningRationale": "接頭辞状態DPの共通像を得た後、数値上限とのtight・started・剰余・digit maskだけを状態にして、上限以下の整数を数える。"
 }

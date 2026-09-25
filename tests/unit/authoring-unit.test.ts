@@ -270,7 +270,6 @@ describe('Problem authoring unit', () => {
       affectedContentLocators: [
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctnes' },
       ],
-      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
@@ -293,7 +292,6 @@ describe('Problem authoring unit', () => {
           path: 'exercises.unit-check.assessment',
         },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
@@ -313,7 +311,6 @@ describe('Problem authoring unit', () => {
           path: 'examples.missing-example',
         },
       ],
-      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: [],
       verificationStatus: 'verified',
     });
@@ -329,7 +326,6 @@ describe('Problem authoring unit', () => {
       affectedContentLocators: [
         { ownerType: 'learning_unit', learningUnitId: 'unit-missing', path: 'content' },
       ],
-      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: [],
       verificationStatus: 'verified',
     });
@@ -346,7 +342,6 @@ describe('Problem authoring unit', () => {
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs', 'unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });

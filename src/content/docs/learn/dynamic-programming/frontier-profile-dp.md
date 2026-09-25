@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第158単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [独立な数ゲームの和](/learn/dynamic-programming/conway-number-games/) ／ 次: [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/)
-
 ## 概要
 
 ### frontier/profile DP・境界状態圧縮
@@ -38,7 +32,9 @@ ABC296 Exでは色や使用済みbitだけでは足りず、境界上の黒マ�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/)、[最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)、[部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。
+直接の前提単元: [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/)、[最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)、[部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。
+
+このUnitを直接前提とする単元: なし。
 
 DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。
 
@@ -48,12 +44,17 @@ DPの最小十分状態で得た考え方と実装を再利用し、frontier/pro
 
 ## 問題一覧
 
-1. [ABC248 F「Keep Connect」](https://atcoder.jp/contests/abc248/tasks/abc248_f) — 主題: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)。
-2. [ABC379 G「Count Grid 3-coloring」](https://atcoder.jp/contests/abc379/tasks/abc379_g) — 主題: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
-3. [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g) — 主題: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)。既習技能: 未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。 / bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
-4. [ABC296 Ex「Unite」](https://atcoder.jp/contests/abc296/tasks/abc296_h) — 主題: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
+- [ABC248 F「Keep Connect」](https://atcoder.jp/contests/abc248/tasks/abc248_f) — 主題: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)（未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。）。
+- [ABC379 G「Count Grid 3-coloring」](https://atcoder.jp/contests/abc379/tasks/abc379_g) — 主題: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)（未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。）。既習技能: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)（採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。）。
+- [ABC296 Ex「Unite」](https://atcoder.jp/contests/abc296/tasks/abc296_h) — 主題: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)（未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。）。既習技能: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)（採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
+
+## 関連問題
+
+以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。
+
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g) — 主題: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)（条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。）。既習技能: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/)（未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。） / [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)（bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。） / [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/)（選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。）。
 
 ## 根拠
 
@@ -64,4 +65,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、frontier/pro
 - [ABC309 G 公式解説](https://atcoder.jp/contests/abc309/editorial/6745)
 - [ABC309 G 公式問題文](https://atcoder.jp/contests/abc309/tasks/abc309_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-frontier-profile-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-frontier-profile-dp`

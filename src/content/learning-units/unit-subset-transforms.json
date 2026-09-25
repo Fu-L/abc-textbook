@@ -5,10 +5,6 @@
   "parentId": "unit-inclusion-exclusion",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-subset-state",
-    "unit-inclusion-exclusion"
-  ],
   "excludedTopics": [
     "subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -37,24 +33,20 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/subset-transforms.md",
   "problemIds": [
-    "abc215-h",
     "abc294-ex",
     "abc295-ex",
     "abc349-f",
     "abc423-f"
   ],
   "directProblemIds": [
-    "abc423-f",
     "abc349-f",
-    "abc295-ex",
+    "abc423-f",
+    "abc295-ex"
+  ],
+  "relatedProblemIds": [
     "abc215-h"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 86,
-  "globalIndex": 128,
-  "orderReason": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
 }

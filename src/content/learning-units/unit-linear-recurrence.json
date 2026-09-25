@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "一般のDP遷移の区間集約・単調最適化。"
   ],
@@ -34,35 +31,27 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/linear-recurrence.md",
   "problemIds": [
-    "abc245-ex",
     "abc256-g",
     "abc258-ex",
-    "abc270-ex",
     "abc271-g",
-    "abc293-e",
-    "abc299-ex",
-    "abc429-g"
+    "abc293-e"
   ],
   "directProblemIds": [
     "abc293-e",
     "abc256-g",
     "abc271-g",
-    "abc258-ex",
-    "abc299-ex",
-    "abc245-ex",
-    "abc270-ex",
-    "abc429-g"
+    "abc258-ex"
   ],
   "relatedProblemIds": [
+    "abc245-ex",
+    "abc270-ex",
+    "abc299-ex",
     "abc300-ex",
     "abc305-g",
+    "abc429-g",
     "abc458-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 8,
-  "globalIndex": 96,
-  "orderReason": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
+  "learningRationale": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
 }

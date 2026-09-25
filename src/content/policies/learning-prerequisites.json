@@ -1,0 +1,1925 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceBuild": {
+    "id": "final-taxonomy-build-initial",
+    "digest": "2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779",
+    "acceptedAt": "2026-09-25T04:48:07.395Z"
+  },
+  "tagPrerequisites": [
+    {
+      "nodeId": "tag-additive-expectation-potential",
+      "prerequisiteId": "tag-stochastic-expectation-dp"
+    },
+    {
+      "nodeId": "tag-additive-tree-metric-reconstruction",
+      "prerequisiteId": "tag-tree-metric-diameter"
+    },
+    {
+      "nodeId": "tag-aho-corasick",
+      "prerequisiteId": "tag-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "tag-aho-corasick",
+      "prerequisiteId": "tag-trie-prefix"
+    },
+    {
+      "nodeId": "tag-automaton-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-automaton-dp",
+      "prerequisiteId": "tag-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "tag-automaton-subset-construction",
+      "prerequisiteId": "tag-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "tag-baby-step-giant-step",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-binary-tree-ancestor-matching",
+      "prerequisiteId": "tag-greedy-exchange-order"
+    },
+    {
+      "nodeId": "tag-bipartite-matching-hall",
+      "prerequisiteId": "tag-bipartite-structure"
+    },
+    {
+      "nodeId": "tag-bostan-mori",
+      "prerequisiteId": "tag-generating-functions"
+    },
+    {
+      "nodeId": "tag-carry-mixed-radix-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-cartesian-tree",
+      "prerequisiteId": "tag-monotone-stack-queue"
+    },
+    {
+      "nodeId": "tag-convex-boundary-hull",
+      "prerequisiteId": "tag-geometry-orientation-transform"
+    },
+    {
+      "nodeId": "tag-conway-number-games",
+      "prerequisiteId": "tag-game-value-dp"
+    },
+    {
+      "nodeId": "tag-cyclic-exponent-counting",
+      "prerequisiteId": "tag-multiplicative-order"
+    },
+    {
+      "nodeId": "tag-cyclic-minimax-game",
+      "prerequisiteId": "tag-game-value-dp"
+    },
+    {
+      "nodeId": "tag-cyclic-order-crossing",
+      "prerequisiteId": "tag-geometry-orientation-transform"
+    },
+    {
+      "nodeId": "tag-dag-topological-processing",
+      "prerequisiteId": "tag-state-graph-search"
+    },
+    {
+      "nodeId": "tag-degree-parity-subgraph",
+      "prerequisiteId": "tag-euler-trail-circuit"
+    },
+    {
+      "nodeId": "tag-determinant-counting",
+      "prerequisiteId": "tag-linear-system-rank"
+    },
+    {
+      "nodeId": "tag-difference-constraints",
+      "prerequisiteId": "tag-shortest-path"
+    },
+    {
+      "nodeId": "tag-digit-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-directed-walk-periodicity",
+      "prerequisiteId": "tag-gcd-structure"
+    },
+    {
+      "nodeId": "tag-directed-walk-periodicity",
+      "prerequisiteId": "tag-scc-condensation"
+    },
+    {
+      "nodeId": "tag-divisor-mobius-inversion",
+      "prerequisiteId": "tag-prime-divisor-decomposition"
+    },
+    {
+      "nodeId": "tag-dp-interval-expansion",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-dp-prefix-partition",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-dp-transition-acceleration",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-dsu-merge-tree",
+      "prerequisiteId": "tag-dsu-components"
+    },
+    {
+      "nodeId": "tag-dynamic-modular-product",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-dynamic-segment-tree",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-euler-circuit-counting",
+      "prerequisiteId": "tag-determinant-counting"
+    },
+    {
+      "nodeId": "tag-euler-circuit-counting",
+      "prerequisiteId": "tag-euler-trail-circuit"
+    },
+    {
+      "nodeId": "tag-eventual-unbounded-knapsack",
+      "prerequisiteId": "tag-knapsack-resource"
+    },
+    {
+      "nodeId": "tag-fenwick-weighted-prefix",
+      "prerequisiteId": "tag-prefix-difference"
+    },
+    {
+      "nodeId": "tag-finite-field-extension",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-finite-field-frobenius",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-flow-feasibility-lower-bounds",
+      "prerequisiteId": "tag-max-flow-min-cut"
+    },
+    {
+      "nodeId": "tag-formal-power-series",
+      "prerequisiteId": "tag-convolution"
+    },
+    {
+      "nodeId": "tag-formal-power-series",
+      "prerequisiteId": "tag-generating-functions"
+    },
+    {
+      "nodeId": "tag-fps-composition-power-projection",
+      "prerequisiteId": "tag-formal-power-series"
+    },
+    {
+      "nodeId": "tag-fractional-parametric-search",
+      "prerequisiteId": "tag-monotone-threshold-search"
+    },
+    {
+      "nodeId": "tag-frontier-profile-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-functional-graph-decomposition",
+      "prerequisiteId": "tag-state-graph-search"
+    },
+    {
+      "nodeId": "tag-game-grundy-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-game-value-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-gaussian-integers-two-squares",
+      "prerequisiteId": "tag-prime-divisor-decomposition"
+    },
+    {
+      "nodeId": "tag-generating-function-coefficients",
+      "prerequisiteId": "tag-generating-functions"
+    },
+    {
+      "nodeId": "tag-generating-functions",
+      "prerequisiteId": "tag-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "tag-graph-potential-propagation",
+      "prerequisiteId": "tag-state-graph-search"
+    },
+    {
+      "nodeId": "tag-grid-table-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-group-action-orbit-counting",
+      "prerequisiteId": "tag-state-normalization"
+    },
+    {
+      "nodeId": "tag-half-plane-constraints",
+      "prerequisiteId": "tag-geometry-orientation-transform"
+    },
+    {
+      "nodeId": "tag-heavy-light-decomposition",
+      "prerequisiteId": "tag-tree-ancestor-lca"
+    },
+    {
+      "nodeId": "tag-heavy-light-decomposition",
+      "prerequisiteId": "tag-tree-euler-flattening"
+    },
+    {
+      "nodeId": "tag-heavy-light-recursive-dp",
+      "prerequisiteId": "tag-knapsack-resource"
+    },
+    {
+      "nodeId": "tag-heavy-light-recursive-dp",
+      "prerequisiteId": "tag-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "tag-heavy-path-tree-dp",
+      "prerequisiteId": "tag-convolution"
+    },
+    {
+      "nodeId": "tag-heavy-path-tree-dp",
+      "prerequisiteId": "tag-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "tag-idempotent-overlap-range-query",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-interval-partition-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-isotonic-regression-pav",
+      "prerequisiteId": "tag-basic-convex-optimization"
+    },
+    {
+      "nodeId": "tag-kinetic-order-maintenance",
+      "prerequisiteId": "tag-event-sweep"
+    },
+    {
+      "nodeId": "tag-knapsack-resource",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-kruskal-threshold-sweep",
+      "prerequisiteId": "tag-dsu-components"
+    },
+    {
+      "nodeId": "tag-kruskal-threshold-sweep",
+      "prerequisiteId": "tag-spanning-tree-optimization"
+    },
+    {
+      "nodeId": "tag-labeled-component-decomposition",
+      "prerequisiteId": "tag-generating-functions"
+    },
+    {
+      "nodeId": "tag-lagrangian-relaxation",
+      "prerequisiteId": "tag-basic-convex-optimization"
+    },
+    {
+      "nodeId": "tag-lazy-segment-action",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-linear-matroid-intersection",
+      "prerequisiteId": "tag-linear-system-rank"
+    },
+    {
+      "nodeId": "tag-linear-matroid-intersection",
+      "prerequisiteId": "tag-matroid-greedy"
+    },
+    {
+      "nodeId": "tag-linear-matroid-intersection",
+      "prerequisiteId": "tag-randomized-algorithm"
+    },
+    {
+      "nodeId": "tag-linear-recurrence-matrix",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-lis-state",
+      "prerequisiteId": "tag-sequence-subsequence-dp"
+    },
+    {
+      "nodeId": "tag-lowlink-critical-structure",
+      "prerequisiteId": "tag-state-graph-search"
+    },
+    {
+      "nodeId": "tag-matroid-greedy",
+      "prerequisiteId": "tag-greedy-exchange-order"
+    },
+    {
+      "nodeId": "tag-max-flow-min-cut",
+      "prerequisiteId": "tag-state-graph-search"
+    },
+    {
+      "nodeId": "tag-min-cost-flow",
+      "prerequisiteId": "tag-max-flow-min-cut"
+    },
+    {
+      "nodeId": "tag-min-cost-flow",
+      "prerequisiteId": "tag-shortest-path"
+    },
+    {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-bipartite-matching-hall"
+    },
+    {
+      "nodeId": "tag-min25-sieve",
+      "prerequisiteId": "tag-prime-divisor-decomposition"
+    },
+    {
+      "nodeId": "tag-modular-congruence-crt",
+      "prerequisiteId": "tag-bezout-diophantine"
+    },
+    {
+      "nodeId": "tag-modular-congruence-crt",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-modular-periodicity",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-monge-optimization",
+      "prerequisiteId": "tag-dp-transition-acceleration"
+    },
+    {
+      "nodeId": "tag-multiplicative-order",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-multiplicative-order",
+      "prerequisiteId": "tag-prime-divisor-decomposition"
+    },
+    {
+      "nodeId": "tag-near-tree-kernelization",
+      "prerequisiteId": "tag-cycle-space-basis"
+    },
+    {
+      "nodeId": "tag-near-tree-kernelization",
+      "prerequisiteId": "tag-graph-core-peeling"
+    },
+    {
+      "nodeId": "tag-numerical-semigroup",
+      "prerequisiteId": "tag-bezout-diophantine"
+    },
+    {
+      "nodeId": "tag-ordered-interval-partition",
+      "prerequisiteId": "tag-ordered-set-multiset"
+    },
+    {
+      "nodeId": "tag-parallel-binary-search",
+      "prerequisiteId": "tag-monotone-threshold-search"
+    },
+    {
+      "nodeId": "tag-path-matching-contraction",
+      "prerequisiteId": "tag-greedy-exchange-order"
+    },
+    {
+      "nodeId": "tag-path-matching-contraction",
+      "prerequisiteId": "tag-priority-queue-best-first"
+    },
+    {
+      "nodeId": "tag-planar-duality",
+      "prerequisiteId": "tag-max-flow-min-cut"
+    },
+    {
+      "nodeId": "tag-planar-duality",
+      "prerequisiteId": "tag-shortest-path"
+    },
+    {
+      "nodeId": "tag-polynomial-multipoint-evaluation",
+      "prerequisiteId": "tag-formal-power-series"
+    },
+    {
+      "nodeId": "tag-polynomial-multipoint-evaluation",
+      "prerequisiteId": "tag-recursive-divide-and-conquer"
+    },
+    {
+      "nodeId": "tag-polynomial-taylor-shift",
+      "prerequisiteId": "tag-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "tag-polynomial-taylor-shift",
+      "prerequisiteId": "tag-convolution"
+    },
+    {
+      "nodeId": "tag-poset-dilworth-antichain",
+      "prerequisiteId": "tag-bipartite-matching-hall"
+    },
+    {
+      "nodeId": "tag-poset-dilworth-antichain",
+      "prerequisiteId": "tag-sequence-subsequence-dp"
+    },
+    {
+      "nodeId": "tag-potential-dsu",
+      "prerequisiteId": "tag-dsu-components"
+    },
+    {
+      "nodeId": "tag-potential-dsu",
+      "prerequisiteId": "tag-graph-potential-propagation"
+    },
+    {
+      "nodeId": "tag-prufer-code",
+      "prerequisiteId": "tag-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "tag-randomized-algebraic-fingerprint",
+      "prerequisiteId": "tag-randomized-algorithm"
+    },
+    {
+      "nodeId": "tag-reflection-principle",
+      "prerequisiteId": "tag-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "tag-relaxed-convolution",
+      "prerequisiteId": "tag-convolution"
+    },
+    {
+      "nodeId": "tag-rerooting",
+      "prerequisiteId": "tag-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "tag-rooted-tree-aggregation",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-scc-condensation",
+      "prerequisiteId": "tag-dag-topological-processing"
+    },
+    {
+      "nodeId": "tag-segment-tree-beats",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-segment-tree-canonical-decomposition",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-semiring-matrix-exponentiation",
+      "prerequisiteId": "tag-linear-recurrence-matrix"
+    },
+    {
+      "nodeId": "tag-separable-convex-marginals",
+      "prerequisiteId": "tag-basic-convex-optimization"
+    },
+    {
+      "nodeId": "tag-sequence-subsequence-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-shortest-path",
+      "prerequisiteId": "tag-state-graph-search"
+    },
+    {
+      "nodeId": "tag-shortest-path-certificate",
+      "prerequisiteId": "tag-shortest-path"
+    },
+    {
+      "nodeId": "tag-slope-trick",
+      "prerequisiteId": "tag-basic-convex-optimization"
+    },
+    {
+      "nodeId": "tag-spanning-tree-optimization",
+      "prerequisiteId": "tag-greedy-exchange-order"
+    },
+    {
+      "nodeId": "tag-static-sorted-range-index",
+      "prerequisiteId": "tag-segment-tree-canonical-decomposition"
+    },
+    {
+      "nodeId": "tag-static-top-tree",
+      "prerequisiteId": "tag-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "tag-steiner-tree-dp",
+      "prerequisiteId": "tag-shortest-path"
+    },
+    {
+      "nodeId": "tag-steiner-tree-dp",
+      "prerequisiteId": "tag-subset-bitmask-dp"
+    },
+    {
+      "nodeId": "tag-stern-brocot-ancestry",
+      "prerequisiteId": "tag-gcd-structure"
+    },
+    {
+      "nodeId": "tag-stochastic-expectation-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-string-periodicity",
+      "prerequisiteId": "tag-z-algorithm-prefix-matching"
+    },
+    {
+      "nodeId": "tag-subset-bitmask-dp",
+      "prerequisiteId": "tag-dp-state-equivalence"
+    },
+    {
+      "nodeId": "tag-subset-convolution",
+      "prerequisiteId": "tag-convolution"
+    },
+    {
+      "nodeId": "tag-subset-convolution",
+      "prerequisiteId": "tag-subset-zeta-mobius-transform"
+    },
+    {
+      "nodeId": "tag-subset-zeta-mobius-transform",
+      "prerequisiteId": "tag-inclusion-exclusion"
+    },
+    {
+      "nodeId": "tag-subset-zeta-mobius-transform",
+      "prerequisiteId": "tag-subset-bitmask-dp"
+    },
+    {
+      "nodeId": "tag-suffix-automaton",
+      "prerequisiteId": "tag-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "tag-swag",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-tree-ancestor-lca",
+      "prerequisiteId": "tag-binary-lifting"
+    },
+    {
+      "nodeId": "tag-tree-precedence-contraction",
+      "prerequisiteId": "tag-dsu-components"
+    },
+    {
+      "nodeId": "tag-tree-precedence-contraction",
+      "prerequisiteId": "tag-greedy-exchange-order"
+    },
+    {
+      "nodeId": "tag-two-sat",
+      "prerequisiteId": "tag-scc-condensation"
+    },
+    {
+      "nodeId": "tag-value-range-dp",
+      "prerequisiteId": "tag-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "tag-value-range-dp",
+      "prerequisiteId": "tag-sequence-subsequence-dp"
+    },
+    {
+      "nodeId": "tag-virtual-tree",
+      "prerequisiteId": "tag-tree-ancestor-lca"
+    },
+    {
+      "nodeId": "tag-virtual-tree",
+      "prerequisiteId": "tag-tree-euler-flattening"
+    },
+    {
+      "nodeId": "tag-weighted-bipartite-matching",
+      "prerequisiteId": "tag-bipartite-matching-hall"
+    }
+  ],
+  "learningOutcomePrerequisites": [
+    {
+      "nodeId": "outcome-accelerate-fixed-linear-transition",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-accelerate-iteration-by-characteristic-p-frobenius",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-accelerate-tree-dp-by-heavy-path",
+      "prerequisiteId": "outcome-aggregate-rooted-tree"
+    },
+    {
+      "nodeId": "outcome-accelerate-tree-dp-by-heavy-path",
+      "prerequisiteId": "outcome-compute-convolution-or-correlation"
+    },
+    {
+      "nodeId": "outcome-add-conway-number-games",
+      "prerequisiteId": "outcome-evaluate-adversarial-game-value"
+    },
+    {
+      "nodeId": "outcome-aggregate-rooted-tree",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-aggregate-subsequence-transitions-by-value",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-aggregate-subsequence-transitions-by-value",
+      "prerequisiteId": "outcome-design-order-preserving-dp"
+    },
+    {
+      "nodeId": "outcome-allocate-by-convex-marginal-costs",
+      "prerequisiteId": "outcome-optimize-univariate-convex-function"
+    },
+    {
+      "nodeId": "outcome-answer-idempotent-range-query",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-answer-tree-ancestor-queries",
+      "prerequisiteId": "outcome-jump-deterministic-transition"
+    },
+    {
+      "nodeId": "outcome-apply-formal-power-series-operations",
+      "prerequisiteId": "outcome-compute-convolution-or-correlation"
+    },
+    {
+      "nodeId": "outcome-apply-formal-power-series-operations",
+      "prerequisiteId": "outcome-encode-counting-by-generating-function"
+    },
+    {
+      "nodeId": "outcome-apply-heavy-light-decomposition",
+      "prerequisiteId": "outcome-answer-tree-ancestor-queries"
+    },
+    {
+      "nodeId": "outcome-apply-heavy-light-decomposition",
+      "prerequisiteId": "outcome-flatten-tree-by-euler-order"
+    },
+    {
+      "nodeId": "outcome-apply-subset-zeta-mobius-transform",
+      "prerequisiteId": "outcome-correct-overlap-by-inversion"
+    },
+    {
+      "nodeId": "outcome-apply-subset-zeta-mobius-transform",
+      "prerequisiteId": "outcome-enumerate-subset-state-space"
+    },
+    {
+      "nodeId": "outcome-bound-reachability-in-numerical-semigroup",
+      "prerequisiteId": "outcome-characterize-integer-solvability"
+    },
+    {
+      "nodeId": "outcome-build-balanced-separator-decomposition",
+      "prerequisiteId": "outcome-find-weighted-balanced-separator"
+    },
+    {
+      "nodeId": "outcome-build-cartesian-tree-decomposition",
+      "prerequisiteId": "outcome-prune-dominated-candidates-once"
+    },
+    {
+      "nodeId": "outcome-build-component-merge-tree",
+      "prerequisiteId": "outcome-augment-components-with-metadata"
+    },
+    {
+      "nodeId": "outcome-build-component-merge-tree",
+      "prerequisiteId": "outcome-maintain-connectivity-components"
+    },
+    {
+      "nodeId": "outcome-build-multi-pattern-automaton",
+      "prerequisiteId": "outcome-build-finite-string-automaton"
+    },
+    {
+      "nodeId": "outcome-build-multi-pattern-automaton",
+      "prerequisiteId": "outcome-index-shared-prefixes-with-trie"
+    },
+    {
+      "nodeId": "outcome-build-shortest-path-certificate",
+      "prerequisiteId": "outcome-model-and-compute-shortest-path"
+    },
+    {
+      "nodeId": "outcome-build-static-sorted-range-index",
+      "prerequisiteId": "outcome-decompose-ranges-into-segment-tree-nodes"
+    },
+    {
+      "nodeId": "outcome-build-suffix-automaton",
+      "prerequisiteId": "outcome-build-finite-string-automaton"
+    },
+    {
+      "nodeId": "outcome-build-virtual-tree",
+      "prerequisiteId": "outcome-answer-tree-ancestor-queries"
+    },
+    {
+      "nodeId": "outcome-build-virtual-tree",
+      "prerequisiteId": "outcome-flatten-tree-by-euler-order"
+    },
+    {
+      "nodeId": "outcome-characterize-bipartite-feasibility-by-hall",
+      "prerequisiteId": "outcome-color-and-classify-bipartite-components"
+    },
+    {
+      "nodeId": "outcome-classify-game-states",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-close-eventual-dp-tail",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-compare-algebraic-objects-by-random-fingerprint",
+      "prerequisiteId": "outcome-design-and-bound-randomized-algorithm"
+    },
+    {
+      "nodeId": "outcome-compose-dynamic-tree-clusters",
+      "prerequisiteId": "outcome-aggregate-rooted-tree"
+    },
+    {
+      "nodeId": "outcome-compose-series-and-project-powers",
+      "prerequisiteId": "outcome-apply-formal-power-series-operations"
+    },
+    {
+      "nodeId": "outcome-compress-dp-sufficient-aggregates",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-compute-all-pairs-distance",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-compute-directed-walk-period",
+      "prerequisiteId": "outcome-condense-and-order-directed-graph"
+    },
+    {
+      "nodeId": "outcome-compute-directed-walk-period",
+      "prerequisiteId": "outcome-reduce-integer-structure-by-gcd"
+    },
+    {
+      "nodeId": "outcome-compute-in-finite-field-extension",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-compute-online-relaxed-convolution",
+      "prerequisiteId": "outcome-compute-convolution-or-correlation"
+    },
+    {
+      "nodeId": "outcome-compute-subset-convolution",
+      "prerequisiteId": "outcome-apply-subset-zeta-mobius-transform"
+    },
+    {
+      "nodeId": "outcome-compute-subset-convolution",
+      "prerequisiteId": "outcome-compute-convolution-or-correlation"
+    },
+    {
+      "nodeId": "outcome-condense-and-order-directed-graph",
+      "prerequisiteId": "outcome-process-dag-in-topological-order"
+    },
+    {
+      "nodeId": "outcome-construct-degree-parity-subgraph",
+      "prerequisiteId": "outcome-construct-euler-trail-or-circuit"
+    },
+    {
+      "nodeId": "outcome-construct-optimal-spanning-tree",
+      "prerequisiteId": "outcome-prove-greedy-order"
+    },
+    {
+      "nodeId": "outcome-count-combinatorial-objects-by-determinant",
+      "prerequisiteId": "outcome-solve-linear-system-and-rank"
+    },
+    {
+      "nodeId": "outcome-count-euler-circuits-by-best",
+      "prerequisiteId": "outcome-construct-euler-trail-or-circuit"
+    },
+    {
+      "nodeId": "outcome-count-euler-circuits-by-best",
+      "prerequisiteId": "outcome-count-combinatorial-objects-by-determinant"
+    },
+    {
+      "nodeId": "outcome-count-labeled-structures-by-components",
+      "prerequisiteId": "outcome-encode-counting-by-generating-function"
+    },
+    {
+      "nodeId": "outcome-count-nonintersecting-paths-by-lgv",
+      "prerequisiteId": "outcome-solve-linear-system-and-rank"
+    },
+    {
+      "nodeId": "outcome-count-orbits-by-fixed-points",
+      "prerequisiteId": "outcome-normalize-equivalent-states"
+    },
+    {
+      "nodeId": "outcome-count-prefix-constrained-objects",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-count-through-cyclic-exponents",
+      "prerequisiteId": "outcome-find-period-by-multiplicative-order"
+    },
+    {
+      "nodeId": "outcome-decompose-expectation-by-additive-potential",
+      "prerequisiteId": "outcome-optimize-stochastic-actions"
+    },
+    {
+      "nodeId": "outcome-decompose-expectation-by-additive-potential",
+      "prerequisiteId": "outcome-propagate-probability-distribution"
+    },
+    {
+      "nodeId": "outcome-decompose-expectation-by-additive-potential",
+      "prerequisiteId": "outcome-solve-stochastic-recurrence"
+    },
+    {
+      "nodeId": "outcome-decompose-functional-graph",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-decompose-ranges-into-segment-tree-nodes",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-derive-coefficient-recurrence-by-differentiation",
+      "prerequisiteId": "outcome-encode-counting-by-generating-function"
+    },
+    {
+      "nodeId": "outcome-design-carry-or-mixed-radix-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-frontier-profile-dp",
+      "prerequisiteId": "outcome-design-grid-table-dp"
+    },
+    {
+      "nodeId": "outcome-design-frontier-profile-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-frontier-profile-dp",
+      "prerequisiteId": "outcome-enumerate-subset-state-space"
+    },
+    {
+      "nodeId": "outcome-design-grid-table-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-interval-expansion-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-interval-split-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-lis-frontier",
+      "prerequisiteId": "outcome-design-order-preserving-dp"
+    },
+    {
+      "nodeId": "outcome-design-order-preserving-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-prefix-partition-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-range-update-action",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-design-resource-dp",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-detect-crossing-by-cyclic-order",
+      "prerequisiteId": "outcome-reduce-geometry-to-algebraic-predicates"
+    },
+    {
+      "nodeId": "outcome-detect-improving-cycles",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-determinize-automaton-by-subsets",
+      "prerequisiteId": "outcome-build-finite-string-automaton"
+    },
+    {
+      "nodeId": "outcome-dualize-planar-cut-to-path",
+      "prerequisiteId": "outcome-model-and-compute-shortest-path"
+    },
+    {
+      "nodeId": "outcome-dualize-planar-cut-to-path",
+      "prerequisiteId": "outcome-model-max-flow-min-cut"
+    },
+    {
+      "nodeId": "outcome-encode-counting-by-generating-function",
+      "prerequisiteId": "outcome-compute-binomial-by-lucas"
+    },
+    {
+      "nodeId": "outcome-encode-counting-by-generating-function",
+      "prerequisiteId": "outcome-formulate-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "outcome-encode-labeled-trees-by-prufer-code",
+      "prerequisiteId": "outcome-compute-binomial-by-lucas"
+    },
+    {
+      "nodeId": "outcome-encode-labeled-trees-by-prufer-code",
+      "prerequisiteId": "outcome-formulate-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "outcome-encode-threshold-constraints-as-two-sat",
+      "prerequisiteId": "outcome-condense-and-order-directed-graph"
+    },
+    {
+      "nodeId": "outcome-enumerate-subset-state-space",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-evaluate-adversarial-game-value",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-evaluate-at-geometric-points",
+      "prerequisiteId": "outcome-apply-formal-power-series-operations"
+    },
+    {
+      "nodeId": "outcome-evaluate-at-geometric-points",
+      "prerequisiteId": "outcome-divide-search-space-recursively"
+    },
+    {
+      "nodeId": "outcome-evaluate-polynomial-at-many-points",
+      "prerequisiteId": "outcome-apply-formal-power-series-operations"
+    },
+    {
+      "nodeId": "outcome-evaluate-polynomial-at-many-points",
+      "prerequisiteId": "outcome-divide-search-space-recursively"
+    },
+    {
+      "nodeId": "outcome-expand-euler-product-sparsely",
+      "prerequisiteId": "outcome-encode-counting-by-generating-function"
+    },
+    {
+      "nodeId": "outcome-exploit-modular-periodicity",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-exponentiate-transition-over-semiring",
+      "prerequisiteId": "outcome-accelerate-fixed-linear-transition"
+    },
+    {
+      "nodeId": "outcome-extract-rational-series-coefficient",
+      "prerequisiteId": "outcome-encode-counting-by-generating-function"
+    },
+    {
+      "nodeId": "outcome-factor-and-accelerate-transitions",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-find-orbit-hit-by-bsgs",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-find-period-by-multiplicative-order",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-find-period-by-multiplicative-order",
+      "prerequisiteId": "outcome-decompose-by-prime-or-divisor"
+    },
+    {
+      "nodeId": "outcome-identify-bridges-and-articulations",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-invert-divisor-lattice-by-mobius",
+      "prerequisiteId": "outcome-decompose-by-prime-or-divisor"
+    },
+    {
+      "nodeId": "outcome-invert-generating-function-equation",
+      "prerequisiteId": "outcome-encode-counting-by-generating-function"
+    },
+    {
+      "nodeId": "outcome-kernelize-near-tree-graph",
+      "prerequisiteId": "outcome-peel-graph-core"
+    },
+    {
+      "nodeId": "outcome-kernelize-near-tree-graph",
+      "prerequisiteId": "outcome-use-cycle-space-basis"
+    },
+    {
+      "nodeId": "outcome-maintain-modular-product-under-factor-updates",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-maintain-order-through-crossing-events",
+      "prerequisiteId": "outcome-linearize-events"
+    },
+    {
+      "nodeId": "outcome-maintain-ordered-interval-partition",
+      "prerequisiteId": "outcome-maintain-ordered-set-statistics"
+    },
+    {
+      "nodeId": "outcome-maintain-piecewise-linear-convex-function",
+      "prerequisiteId": "outcome-optimize-univariate-convex-function"
+    },
+    {
+      "nodeId": "outcome-maintain-potential-differences",
+      "prerequisiteId": "outcome-augment-components-with-metadata"
+    },
+    {
+      "nodeId": "outcome-maintain-potential-differences",
+      "prerequisiteId": "outcome-maintain-connectivity-components"
+    },
+    {
+      "nodeId": "outcome-maintain-potential-differences",
+      "prerequisiteId": "outcome-propagate-static-graph-potentials"
+    },
+    {
+      "nodeId": "outcome-maintain-queue-aggregate-with-swag",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-maintain-sparse-domain-segment-tree",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-maintain-weighted-prefix-statistics",
+      "prerequisiteId": "outcome-linearize-static-range-information"
+    },
+    {
+      "nodeId": "outcome-match-binary-tree-ancestors",
+      "prerequisiteId": "outcome-prove-greedy-order"
+    },
+    {
+      "nodeId": "outcome-model-and-compute-shortest-path",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-model-max-flow-min-cut",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-model-min-cost-flow",
+      "prerequisiteId": "outcome-model-and-compute-shortest-path"
+    },
+    {
+      "nodeId": "outcome-model-min-cost-flow",
+      "prerequisiteId": "outcome-model-max-flow-min-cut"
+    },
+    {
+      "nodeId": "outcome-normalize-common-dp-action",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-normalize-string-to-primitive-period",
+      "prerequisiteId": "outcome-build-prefix-match-state"
+    },
+    {
+      "nodeId": "outcome-optimize-by-lagrangian-relaxation",
+      "prerequisiteId": "outcome-optimize-univariate-convex-function"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-close-eventual-dp-tail"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-compress-dp-sufficient-aggregates"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-factor-and-accelerate-transitions"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-normalize-common-dp-action"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-slide-transition-recurrence"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-subtract-exception-transitions"
+    },
+    {
+      "nodeId": "outcome-optimize-path-matching-by-contraction",
+      "prerequisiteId": "outcome-enumerate-frontier-best-first"
+    },
+    {
+      "nodeId": "outcome-optimize-path-matching-by-contraction",
+      "prerequisiteId": "outcome-prove-greedy-order"
+    },
+    {
+      "nodeId": "outcome-optimize-poset-antichain-by-dilworth",
+      "prerequisiteId": "outcome-characterize-bipartite-feasibility-by-hall"
+    },
+    {
+      "nodeId": "outcome-optimize-poset-antichain-by-dilworth",
+      "prerequisiteId": "outcome-design-order-preserving-dp"
+    },
+    {
+      "nodeId": "outcome-optimize-poset-antichain-by-dilworth",
+      "prerequisiteId": "outcome-solve-bipartite-matching"
+    },
+    {
+      "nodeId": "outcome-optimize-ratio-by-parametric-search",
+      "prerequisiteId": "outcome-prove-and-search-threshold"
+    },
+    {
+      "nodeId": "outcome-optimize-stochastic-actions",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-optimize-stochastic-actions",
+      "prerequisiteId": "outcome-solve-stochastic-recurrence"
+    },
+    {
+      "nodeId": "outcome-optimize-tree-order-by-cluster-contraction",
+      "prerequisiteId": "outcome-augment-components-with-metadata"
+    },
+    {
+      "nodeId": "outcome-optimize-tree-order-by-cluster-contraction",
+      "prerequisiteId": "outcome-maintain-connectivity-components"
+    },
+    {
+      "nodeId": "outcome-optimize-tree-order-by-cluster-contraction",
+      "prerequisiteId": "outcome-prove-greedy-order"
+    },
+    {
+      "nodeId": "outcome-optimize-weighted-matroid-basis",
+      "prerequisiteId": "outcome-prove-greedy-order"
+    },
+    {
+      "nodeId": "outcome-pass-resource-dp-through-heavy-recursion",
+      "prerequisiteId": "outcome-aggregate-rooted-tree"
+    },
+    {
+      "nodeId": "outcome-pass-resource-dp-through-heavy-recursion",
+      "prerequisiteId": "outcome-design-resource-dp"
+    },
+    {
+      "nodeId": "outcome-process-dag-in-topological-order",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-propagate-probability-distribution",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-propagate-static-graph-potentials",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-prune-range-actions-by-node-invariant",
+      "prerequisiteId": "outcome-design-associative-range-summary"
+    },
+    {
+      "nodeId": "outcome-reconstruct-tree-from-distance-matrix",
+      "prerequisiteId": "outcome-use-tree-diameter-extrema"
+    },
+    {
+      "nodeId": "outcome-relax-in-dependency-order",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
+      "nodeId": "outcome-remove-boundaries-by-reflection",
+      "prerequisiteId": "outcome-compute-binomial-by-lucas"
+    },
+    {
+      "nodeId": "outcome-remove-boundaries-by-reflection",
+      "prerequisiteId": "outcome-formulate-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "outcome-represent-convex-intersection-by-halfplanes",
+      "prerequisiteId": "outcome-reduce-geometry-to-algebraic-predicates"
+    },
+    {
+      "nodeId": "outcome-represent-integers-as-two-squares",
+      "prerequisiteId": "outcome-decompose-by-prime-or-divisor"
+    },
+    {
+      "nodeId": "outcome-reroot-tree-aggregation",
+      "prerequisiteId": "outcome-aggregate-rooted-tree"
+    },
+    {
+      "nodeId": "outcome-restrict-geometric-candidates-to-boundary",
+      "prerequisiteId": "outcome-reduce-geometry-to-algebraic-predicates"
+    },
+    {
+      "nodeId": "outcome-run-dp-on-finite-automaton",
+      "prerequisiteId": "outcome-build-finite-string-automaton"
+    },
+    {
+      "nodeId": "outcome-run-dp-on-finite-automaton",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-share-threshold-checks-by-parallel-binary-search",
+      "prerequisiteId": "outcome-prove-and-search-threshold"
+    },
+    {
+      "nodeId": "outcome-shift-polynomial-by-factorial-convolution",
+      "prerequisiteId": "outcome-compute-binomial-by-lucas"
+    },
+    {
+      "nodeId": "outcome-shift-polynomial-by-factorial-convolution",
+      "prerequisiteId": "outcome-compute-convolution-or-correlation"
+    },
+    {
+      "nodeId": "outcome-shift-polynomial-by-factorial-convolution",
+      "prerequisiteId": "outcome-formulate-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "outcome-slide-transition-recurrence",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-solve-bipartite-matching",
+      "prerequisiteId": "outcome-color-and-classify-bipartite-components"
+    },
+    {
+      "nodeId": "outcome-solve-cyclic-minimax-game",
+      "prerequisiteId": "outcome-evaluate-adversarial-game-value"
+    },
+    {
+      "nodeId": "outcome-solve-difference-constraints",
+      "prerequisiteId": "outcome-detect-improving-cycles"
+    },
+    {
+      "nodeId": "outcome-solve-difference-constraints",
+      "prerequisiteId": "outcome-model-and-compute-shortest-path"
+    },
+    {
+      "nodeId": "outcome-solve-flow-with-lower-bounds",
+      "prerequisiteId": "outcome-model-max-flow-min-cut"
+    },
+    {
+      "nodeId": "outcome-solve-isotonic-regression-by-pav",
+      "prerequisiteId": "outcome-optimize-univariate-convex-function"
+    },
+    {
+      "nodeId": "outcome-solve-min-weight-general-perfect-matching",
+      "prerequisiteId": "outcome-characterize-bipartite-feasibility-by-hall"
+    },
+    {
+      "nodeId": "outcome-solve-min-weight-general-perfect-matching",
+      "prerequisiteId": "outcome-solve-bipartite-matching"
+    },
+    {
+      "nodeId": "outcome-solve-modular-constraints",
+      "prerequisiteId": "outcome-characterize-integer-solvability"
+    },
+    {
+      "nodeId": "outcome-solve-modular-constraints",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-solve-steiner-tree-by-subset-dp",
+      "prerequisiteId": "outcome-enumerate-subset-state-space"
+    },
+    {
+      "nodeId": "outcome-solve-steiner-tree-by-subset-dp",
+      "prerequisiteId": "outcome-model-and-compute-shortest-path"
+    },
+    {
+      "nodeId": "outcome-solve-stochastic-recurrence",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-solve-weighted-bipartite-matching",
+      "prerequisiteId": "outcome-characterize-bipartite-feasibility-by-hall"
+    },
+    {
+      "nodeId": "outcome-solve-weighted-bipartite-matching",
+      "prerequisiteId": "outcome-solve-bipartite-matching"
+    },
+    {
+      "nodeId": "outcome-stabilize-unbounded-knapsack-by-best-density",
+      "prerequisiteId": "outcome-design-resource-dp"
+    },
+    {
+      "nodeId": "outcome-subtract-exception-transitions",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-sum-multiplicative-function-by-min25-sieve",
+      "prerequisiteId": "outcome-decompose-by-prime-or-divisor"
+    },
+    {
+      "nodeId": "outcome-sweep-connectivity-by-kruskal-threshold",
+      "prerequisiteId": "outcome-augment-components-with-metadata"
+    },
+    {
+      "nodeId": "outcome-sweep-connectivity-by-kruskal-threshold",
+      "prerequisiteId": "outcome-construct-optimal-spanning-tree"
+    },
+    {
+      "nodeId": "outcome-sweep-connectivity-by-kruskal-threshold",
+      "prerequisiteId": "outcome-maintain-connectivity-components"
+    },
+    {
+      "nodeId": "outcome-test-linear-matroid-intersection-rank",
+      "prerequisiteId": "outcome-design-and-bound-randomized-algorithm"
+    },
+    {
+      "nodeId": "outcome-test-linear-matroid-intersection-rank",
+      "prerequisiteId": "outcome-optimize-weighted-matroid-basis"
+    },
+    {
+      "nodeId": "outcome-test-linear-matroid-intersection-rank",
+      "prerequisiteId": "outcome-solve-linear-system-and-rank"
+    },
+    {
+      "nodeId": "outcome-traverse-stern-brocot-ancestors",
+      "prerequisiteId": "outcome-reduce-integer-structure-by-gcd"
+    }
+  ],
+  "learningUnitPrerequisites": [
+    {
+      "nodeId": "unit-additive-expectation-potential",
+      "prerequisiteId": "unit-dp-stochastic"
+    },
+    {
+      "nodeId": "unit-additive-tree-metric-reconstruction",
+      "prerequisiteId": "unit-tree-metric"
+    },
+    {
+      "nodeId": "unit-aho-corasick",
+      "prerequisiteId": "unit-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "unit-aho-corasick",
+      "prerequisiteId": "unit-trie-prefix"
+    },
+    {
+      "nodeId": "unit-automaton-dp",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-automaton-dp",
+      "prerequisiteId": "unit-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "unit-automaton-subset-construction",
+      "prerequisiteId": "unit-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "unit-baby-step-giant-step",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-binary-tree-ancestor-matching",
+      "prerequisiteId": "unit-greedy-exchange"
+    },
+    {
+      "nodeId": "unit-bipartite-matching",
+      "prerequisiteId": "unit-bipartite-structure"
+    },
+    {
+      "nodeId": "unit-bostan-mori",
+      "prerequisiteId": "unit-generating-functions"
+    },
+    {
+      "nodeId": "unit-cartesian-tree",
+      "prerequisiteId": "unit-monotone-stack-queue"
+    },
+    {
+      "nodeId": "unit-convex-boundary-hull",
+      "prerequisiteId": "unit-geometry-primitives"
+    },
+    {
+      "nodeId": "unit-convex-geometry",
+      "prerequisiteId": "unit-geometry-primitives"
+    },
+    {
+      "nodeId": "unit-conway-number-games",
+      "prerequisiteId": "unit-dp-game-value"
+    },
+    {
+      "nodeId": "unit-cyclic-group-exponent-counting",
+      "prerequisiteId": "unit-multiplicative-order-periods"
+    },
+    {
+      "nodeId": "unit-cyclic-minimax-game",
+      "prerequisiteId": "unit-dp-game-value"
+    },
+    {
+      "nodeId": "unit-cyclic-order-crossing",
+      "prerequisiteId": "unit-geometry-primitives"
+    },
+    {
+      "nodeId": "unit-dag-topological-processing",
+      "prerequisiteId": "unit-state-graph-search"
+    },
+    {
+      "nodeId": "unit-degree-parity-subgraph",
+      "prerequisiteId": "unit-euler-trail-circuit"
+    },
+    {
+      "nodeId": "unit-determinant-counting",
+      "prerequisiteId": "unit-linear-system-rank"
+    },
+    {
+      "nodeId": "unit-difference-constraints",
+      "prerequisiteId": "unit-weighted-shortest-path"
+    },
+    {
+      "nodeId": "unit-digit-dp",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-directed-walk-periodicity",
+      "prerequisiteId": "unit-gcd-structure"
+    },
+    {
+      "nodeId": "unit-directed-walk-periodicity",
+      "prerequisiteId": "unit-scc-condensation"
+    },
+    {
+      "nodeId": "unit-divisor-mobius-inversion",
+      "prerequisiteId": "unit-prime-divisor"
+    },
+    {
+      "nodeId": "unit-dp-carry-mixed-radix",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-digit-string",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-game",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-game-value",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-grid-table",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-interval-composition",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-interval-expansion",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-lis",
+      "prerequisiteId": "unit-dp-sequence"
+    },
+    {
+      "nodeId": "unit-dp-prefix-partition",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-sequence",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-sequence-interval",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-stochastic",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-subset-resource",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-subset-state",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-transition-optimization",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-dp-value-range",
+      "prerequisiteId": "unit-dp-sequence"
+    },
+    {
+      "nodeId": "unit-dp-value-range",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-dsu-merge-tree",
+      "prerequisiteId": "unit-dsu-components"
+    },
+    {
+      "nodeId": "unit-dynamic-modular-product",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-dynamic-segment-tree",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-euler-circuit-counting",
+      "prerequisiteId": "unit-determinant-counting"
+    },
+    {
+      "nodeId": "unit-euler-circuit-counting",
+      "prerequisiteId": "unit-euler-trail-circuit"
+    },
+    {
+      "nodeId": "unit-eventual-unbounded-knapsack",
+      "prerequisiteId": "unit-dp-subset-resource"
+    },
+    {
+      "nodeId": "unit-finite-field-extension",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-finite-field-frobenius",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-flow-lower-bounds",
+      "prerequisiteId": "unit-max-flow-min-cut"
+    },
+    {
+      "nodeId": "unit-formal-power-series",
+      "prerequisiteId": "unit-generating-functions"
+    },
+    {
+      "nodeId": "unit-formal-power-series",
+      "prerequisiteId": "unit-polynomial-convolution"
+    },
+    {
+      "nodeId": "unit-fps-composition-power-projection",
+      "prerequisiteId": "unit-formal-power-series"
+    },
+    {
+      "nodeId": "unit-fractional-parametric-search",
+      "prerequisiteId": "unit-monotone-search"
+    },
+    {
+      "nodeId": "unit-frontier-profile-dp",
+      "prerequisiteId": "unit-dp-grid-table"
+    },
+    {
+      "nodeId": "unit-frontier-profile-dp",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-frontier-profile-dp",
+      "prerequisiteId": "unit-dp-subset-state"
+    },
+    {
+      "nodeId": "unit-functional-graph-decomposition",
+      "prerequisiteId": "unit-state-graph-search"
+    },
+    {
+      "nodeId": "unit-gaussian-integers-two-squares",
+      "prerequisiteId": "unit-prime-divisor"
+    },
+    {
+      "nodeId": "unit-generating-function-coefficients",
+      "prerequisiteId": "unit-generating-functions"
+    },
+    {
+      "nodeId": "unit-generating-functions",
+      "prerequisiteId": "unit-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "unit-graph-potential-propagation",
+      "prerequisiteId": "unit-state-graph-search"
+    },
+    {
+      "nodeId": "unit-half-plane-constraints",
+      "prerequisiteId": "unit-geometry-primitives"
+    },
+    {
+      "nodeId": "unit-heavy-light-decomposition",
+      "prerequisiteId": "unit-tree-ancestor-lca"
+    },
+    {
+      "nodeId": "unit-heavy-light-decomposition",
+      "prerequisiteId": "unit-tree-euler-flattening"
+    },
+    {
+      "nodeId": "unit-heavy-light-recursive-dp",
+      "prerequisiteId": "unit-dp-subset-resource"
+    },
+    {
+      "nodeId": "unit-heavy-light-recursive-dp",
+      "prerequisiteId": "unit-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "unit-heavy-path-tree-dp",
+      "prerequisiteId": "unit-polynomial-convolution"
+    },
+    {
+      "nodeId": "unit-heavy-path-tree-dp",
+      "prerequisiteId": "unit-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "unit-idempotent-overlap-range-query",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-isotonic-regression",
+      "prerequisiteId": "unit-basic-convex-optimization"
+    },
+    {
+      "nodeId": "unit-kinetic-order-maintenance",
+      "prerequisiteId": "unit-event-sweep"
+    },
+    {
+      "nodeId": "unit-kruskal-threshold-sweep",
+      "prerequisiteId": "unit-dsu-components"
+    },
+    {
+      "nodeId": "unit-kruskal-threshold-sweep",
+      "prerequisiteId": "unit-spanning-tree-optimization"
+    },
+    {
+      "nodeId": "unit-labeled-component-decomposition",
+      "prerequisiteId": "unit-generating-functions"
+    },
+    {
+      "nodeId": "unit-lagrangian-relaxation",
+      "prerequisiteId": "unit-basic-convex-optimization"
+    },
+    {
+      "nodeId": "unit-linear-matroid-intersection",
+      "prerequisiteId": "unit-linear-system-rank"
+    },
+    {
+      "nodeId": "unit-linear-matroid-intersection",
+      "prerequisiteId": "unit-matroid-greedy"
+    },
+    {
+      "nodeId": "unit-linear-matroid-intersection",
+      "prerequisiteId": "unit-randomized-algorithms"
+    },
+    {
+      "nodeId": "unit-linear-recurrence",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-lowlink-critical-structure",
+      "prerequisiteId": "unit-state-graph-search"
+    },
+    {
+      "nodeId": "unit-matroid-greedy",
+      "prerequisiteId": "unit-greedy-exchange"
+    },
+    {
+      "nodeId": "unit-max-flow-min-cut",
+      "prerequisiteId": "unit-state-graph-search"
+    },
+    {
+      "nodeId": "unit-min-cost-flow",
+      "prerequisiteId": "unit-max-flow-min-cut"
+    },
+    {
+      "nodeId": "unit-min-cost-flow",
+      "prerequisiteId": "unit-weighted-shortest-path"
+    },
+    {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-bipartite-matching"
+    },
+    {
+      "nodeId": "unit-min25-sieve",
+      "prerequisiteId": "unit-prime-divisor"
+    },
+    {
+      "nodeId": "unit-modular-congruence",
+      "prerequisiteId": "unit-gcd-diophantine"
+    },
+    {
+      "nodeId": "unit-modular-congruence",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-modular-periodicity",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-monge-optimization",
+      "prerequisiteId": "unit-dp-transition-optimization"
+    },
+    {
+      "nodeId": "unit-multiplicative-order-periods",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-multiplicative-order-periods",
+      "prerequisiteId": "unit-prime-divisor"
+    },
+    {
+      "nodeId": "unit-near-tree-kernelization",
+      "prerequisiteId": "unit-cycle-space-basis"
+    },
+    {
+      "nodeId": "unit-near-tree-kernelization",
+      "prerequisiteId": "unit-graph-core"
+    },
+    {
+      "nodeId": "unit-numerical-semigroup-reachability",
+      "prerequisiteId": "unit-gcd-diophantine"
+    },
+    {
+      "nodeId": "unit-orbit-counting",
+      "prerequisiteId": "unit-normalization"
+    },
+    {
+      "nodeId": "unit-ordered-interval-partition",
+      "prerequisiteId": "unit-ordered-set-multiset"
+    },
+    {
+      "nodeId": "unit-parallel-binary-search",
+      "prerequisiteId": "unit-monotone-search"
+    },
+    {
+      "nodeId": "unit-path-matching-contraction",
+      "prerequisiteId": "unit-greedy-exchange"
+    },
+    {
+      "nodeId": "unit-path-matching-contraction",
+      "prerequisiteId": "unit-priority-queue-best-first"
+    },
+    {
+      "nodeId": "unit-planar-duality",
+      "prerequisiteId": "unit-max-flow-min-cut"
+    },
+    {
+      "nodeId": "unit-planar-duality",
+      "prerequisiteId": "unit-weighted-shortest-path"
+    },
+    {
+      "nodeId": "unit-polynomial-multipoint-evaluation",
+      "prerequisiteId": "unit-formal-power-series"
+    },
+    {
+      "nodeId": "unit-polynomial-multipoint-evaluation",
+      "prerequisiteId": "unit-recursive-divide-and-conquer"
+    },
+    {
+      "nodeId": "unit-polynomial-taylor-shift",
+      "prerequisiteId": "unit-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "unit-polynomial-taylor-shift",
+      "prerequisiteId": "unit-polynomial-convolution"
+    },
+    {
+      "nodeId": "unit-poset-dilworth-antichain",
+      "prerequisiteId": "unit-bipartite-matching"
+    },
+    {
+      "nodeId": "unit-poset-dilworth-antichain",
+      "prerequisiteId": "unit-dp-sequence"
+    },
+    {
+      "nodeId": "unit-potential-dsu",
+      "prerequisiteId": "unit-dsu-components"
+    },
+    {
+      "nodeId": "unit-potential-dsu",
+      "prerequisiteId": "unit-graph-potential-propagation"
+    },
+    {
+      "nodeId": "unit-prufer-code",
+      "prerequisiteId": "unit-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "unit-randomized-algebraic-fingerprint",
+      "prerequisiteId": "unit-randomized-algorithms"
+    },
+    {
+      "nodeId": "unit-range-actions",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-reflection-principle",
+      "prerequisiteId": "unit-combinatorial-coefficients"
+    },
+    {
+      "nodeId": "unit-relaxed-convolution",
+      "prerequisiteId": "unit-polynomial-convolution"
+    },
+    {
+      "nodeId": "unit-rerooting",
+      "prerequisiteId": "unit-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "unit-rooted-tree-aggregation",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-scc-condensation",
+      "prerequisiteId": "unit-dag-topological-processing"
+    },
+    {
+      "nodeId": "unit-segment-tree-beats",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-segment-tree-canonical-decomposition",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-semiring-matrix-exponentiation",
+      "prerequisiteId": "unit-linear-recurrence"
+    },
+    {
+      "nodeId": "unit-separable-convex-marginals",
+      "prerequisiteId": "unit-basic-convex-optimization"
+    },
+    {
+      "nodeId": "unit-shortest-path-reconstruction",
+      "prerequisiteId": "unit-weighted-shortest-path"
+    },
+    {
+      "nodeId": "unit-slope-trick",
+      "prerequisiteId": "unit-basic-convex-optimization"
+    },
+    {
+      "nodeId": "unit-spanning-tree-optimization",
+      "prerequisiteId": "unit-greedy-exchange"
+    },
+    {
+      "nodeId": "unit-static-sorted-range-index",
+      "prerequisiteId": "unit-segment-tree-canonical-decomposition"
+    },
+    {
+      "nodeId": "unit-static-top-tree",
+      "prerequisiteId": "unit-rooted-tree-aggregation"
+    },
+    {
+      "nodeId": "unit-steiner-tree-dp",
+      "prerequisiteId": "unit-dp-subset-state"
+    },
+    {
+      "nodeId": "unit-steiner-tree-dp",
+      "prerequisiteId": "unit-weighted-shortest-path"
+    },
+    {
+      "nodeId": "unit-stern-brocot-ancestry",
+      "prerequisiteId": "unit-gcd-structure"
+    },
+    {
+      "nodeId": "unit-string-periodicity",
+      "prerequisiteId": "unit-z-algorithm"
+    },
+    {
+      "nodeId": "unit-subset-convolution",
+      "prerequisiteId": "unit-polynomial-convolution"
+    },
+    {
+      "nodeId": "unit-subset-convolution",
+      "prerequisiteId": "unit-subset-transforms"
+    },
+    {
+      "nodeId": "unit-subset-transforms",
+      "prerequisiteId": "unit-dp-subset-state"
+    },
+    {
+      "nodeId": "unit-subset-transforms",
+      "prerequisiteId": "unit-inclusion-exclusion"
+    },
+    {
+      "nodeId": "unit-suffix-automaton",
+      "prerequisiteId": "unit-finite-pattern-automaton"
+    },
+    {
+      "nodeId": "unit-swag",
+      "prerequisiteId": "unit-range-monoid-aggregation"
+    },
+    {
+      "nodeId": "unit-tree-aggregation",
+      "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-tree-ancestor-lca",
+      "prerequisiteId": "unit-binary-lifting"
+    },
+    {
+      "nodeId": "unit-tree-precedence-contraction",
+      "prerequisiteId": "unit-dsu-components"
+    },
+    {
+      "nodeId": "unit-tree-precedence-contraction",
+      "prerequisiteId": "unit-greedy-exchange"
+    },
+    {
+      "nodeId": "unit-two-sat",
+      "prerequisiteId": "unit-scc-condensation"
+    },
+    {
+      "nodeId": "unit-virtual-tree",
+      "prerequisiteId": "unit-tree-ancestor-lca"
+    },
+    {
+      "nodeId": "unit-virtual-tree",
+      "prerequisiteId": "unit-tree-euler-flattening"
+    },
+    {
+      "nodeId": "unit-weighted-bipartite-matching",
+      "prerequisiteId": "unit-bipartite-matching"
+    },
+    {
+      "nodeId": "unit-weighted-prefix-fenwick",
+      "prerequisiteId": "unit-prefix-aggregate"
+    },
+    {
+      "nodeId": "unit-weighted-shortest-path",
+      "prerequisiteId": "unit-state-graph-search"
+    }
+  ],
+  "tagDagDigest": "dfe87d8e728cbc39f5c2f8c48d48b640354617a5acccb40a4b1831e11c87a21e",
+  "learningOutcomeDagDigest": "1d68021d6f470d1e0ec8ffb940e85b439e93ed583b559e8642ed1a6690d95329",
+  "learningUnitDagDigest": "a6f4fcba42c9b2913776f8201d08cc389fdd87029773caf8dea8555c4985113f"
+}

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "数値上限・桁・繰り上がりを状態にする桁DP、および接頭辞一致長だけを求めるKMP・Z法。"
   ],
@@ -33,21 +32,16 @@
   "docPath": "src/content/docs/learn/string/string-automata.md",
   "problemIds": [
     "abc228-g",
+    "abc264-g",
+    "abc301-f",
+    "abc305-g",
+    "abc418-g",
     "abc419-f",
     "abc458-f"
   ],
   "directProblemIds": [],
-  "relatedProblemIds": [
-    "abc264-g",
-    "abc301-f",
-    "abc305-g",
-    "abc418-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 3,
-  "representativeRank": 2,
-  "globalIndex": 67,
-  "orderReason": "未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。"
+  "learningRationale": "未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。"
 }

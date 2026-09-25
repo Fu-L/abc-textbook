@@ -1,15 +1,11 @@
-import { isCurriculumUnit } from '../../src/lib/taxonomy/learning-unit-order.js';
-import {
-  orderUnitProblemsByDifficulty,
-  UNIT_PROBLEM_READING_ORDER,
-} from '../../src/lib/taxonomy/problem-reading-order.js';
+import { isCurriculumUnit } from '../../src/lib/taxonomy/curriculum-unit.js';
 import { readFile } from 'node:fs/promises';
 
 import { describe, expect, it } from 'vitest';
 
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
-  CanonicalLearningOrderSchema,
+  CanonicalLearningPrerequisitesSchema,
   CanonicalProblemPlacementPolicySchema,
   CorrectionImpactSchema,
   FinalTaxonomyBuildSchema,
@@ -48,7 +44,7 @@ const loadMaterializationInput = async () => {
 };
 
 describe('T047–T050 canonical taxonomy materialization', () => {
-  it('presents every Unit by subject with levels and prerequisite links, preserving placements', async () => {
+  it('keeps display order, semantic hierarchy, and direct prerequisite edges separate', async () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);
     const byId = new Map(result.learningUnits.map((output) => [output.value.id, output]));
@@ -62,25 +58,23 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(byId.get(id)?.document).toContain(target.reason);
     }
 
-    const route = result.learningOrder.standardOrder;
-    expect(byId.get('unit-chapter-modeling')?.document).toContain('## 標準履修順');
-    for (const [index, id] of route.entries()) {
-      const document = byId.get(id)?.document ?? '';
-      expect(document).toContain(`第${String(index + 1)}単元`);
-      const next = byId.get(route[index + 1] ?? '');
-      if (next !== undefined) expect(document).toContain(`次: [${next.value.title}]`);
-    }
-    for (const prerequisite of ['unit-dp-grid-table', 'unit-dp-subset-state']) {
-      expect(route.indexOf(prerequisite)).toBeLessThan(route.indexOf('unit-frontier-profile-dp'));
-    }
-    expect(byId.get('unit-max-flow-min-cut')?.value.directProblemIds?.slice(0, 4)).toEqual([
-      'abc241-g',
-      'abc318-g',
-      'abc239-g',
-      'abc437-g',
-    ]);
     expect(byId.get('unit-dp-transition-optimization')?.document).toContain('全体から例外を引く');
     expect(byId.get('unit-polynomial-multipoint-evaluation')?.document).toContain('chirp-z');
+
+    const candidateById = new Map(
+      input.build.finalCandidates
+        .filter((candidate) => candidate.kind === 'unit')
+        .map(({ entity }) => [entity.id, entity]),
+    );
+    for (const { nodeId, prerequisiteId } of result.learningPrerequisites
+      .learningUnitPrerequisites) {
+      const dependent = byId.get(nodeId);
+      const prerequisite = byId.get(prerequisiteId);
+      if (!dependent || !prerequisite)
+        throw new Error(`Missing prerequisite edge: ${nodeId}/${prerequisiteId}`);
+      expect(dependent.document).toContain(`[${prerequisite.value.title}](/learn/`);
+      expect(prerequisite.document).toContain(`[${dependent.value.title}](/learn/`);
+    }
 
     for (const chapter of TEXTBOOK_CHAPTERS) {
       const chapterDocument = byId.get(chapter.id)?.document ?? '';
@@ -102,28 +96,18 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         const linkPosition = chapterDocument.indexOf(`- [${unit.title}](`);
         expect(linkPosition, id).toBeGreaterThan(previousLinkPosition);
         previousLinkPosition = linkPosition;
-        for (const prerequisiteId of unit.additionalPrerequisiteUnitIds) {
-          const prerequisite = byId.get(prerequisiteId)?.value;
-          if (prerequisite === undefined)
-            throw new Error(`Missing prerequisite: ${prerequisiteId}`);
-          expect(document).toContain(`[${prerequisite.title}](/learn/`);
-          if (input.build.standardOrder.includes(id)) {
-            expect(input.build.standardOrder.indexOf(prerequisiteId)).toBeLessThan(
-              input.build.standardOrder.indexOf(id),
-            );
-          }
-        }
-        const accepted = input.build.finalCandidates.find(
-          (candidate) => candidate.kind === 'unit' && candidate.entity.id === id,
-        );
-        if (accepted?.kind !== 'unit') throw new Error(`Missing accepted Unit: ${id}`);
-        expect(unit.directProblemIds).toEqual(
-          orderUnitProblemsByDifficulty(id, accepted.entity.directProblemIds),
-        );
+        const accepted = candidateById.get(id);
+        if (accepted === undefined) throw new Error(`Missing accepted Unit: ${id}`);
         expect([...(unit.directProblemIds ?? [])].sort()).toEqual(
-          [...accepted.entity.directProblemIds].sort(),
+          [...accepted.directProblemIds].sort(),
         );
-        expect(unit.relatedProblemIds).toEqual(accepted.entity.relatedProblemIds);
+        if (accepted.directProblemIds.length > 0) {
+          expect(document).toContain('\n- [');
+          expect(document).not.toContain('\n1. [');
+        }
+        expect(unit.relatedProblemIds).toEqual(accepted.relatedProblemIds);
+        expect(document).not.toContain('## 標準履修順');
+        expect(document).not.toMatch(/第\d+単元|前:|次:/u);
       }
     }
     expect(textbookIndex('unit-segment-tree-beats')).toBeLessThan(
@@ -135,31 +119,27 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(textbookIndex('unit-bipartite-structure')).toBeLessThan(
       textbookIndex('unit-shortest-path-certificates'),
     );
-    expect(route.indexOf('unit-finite-pattern-automaton')).toBeLessThan(
-      route.indexOf('unit-automaton-dp'),
-    );
-    expect(route.indexOf('unit-subset-transforms')).toBeLessThan(
-      route.indexOf('unit-subset-convolution'),
-    );
     expect(byId.get('unit-chapter-combinatorics-algebra')?.document).toContain(
       '    - [subset convolution]',
     );
     expect(unitLearningTarget('unit-dp-state-design').color).toBe('緑色');
     expect(unitLearningTarget('unit-frontier-profile-dp').color).toBe('黄色');
     expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
-    expect(result.learningOrder.standardOrder).toEqual(input.build.standardOrder);
+    expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
+    expect(byId.get('unit-chapter-modeling')?.document).toContain('編集上の案内');
   }, 30_000);
 
   it('fixes unique presentation and descendant coverage without prescribed teaching blocks', async () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);
     const occurrences = new Map<string, string[]>();
-    expect(Object.keys(UNIT_PROBLEM_READING_ORDER).sort()).toEqual(
-      result.learningUnits
-        .filter(({ value }) => (value.directProblemIds?.length ?? 0) > 0)
-        .map(({ value }) => value.id)
-        .sort(),
-    );
+    const ownerUnitByOutcomeId = new Map<string, string>();
+    for (const { value } of result.learningUnits) {
+      for (const outcomeId of value.ownedLearningOutcomeIds ?? []) {
+        expect(ownerUnitByOutcomeId.has(outcomeId), outcomeId).toBe(false);
+        ownerUnitByOutcomeId.set(outcomeId, value.id);
+      }
+    }
     for (const { value: unit, document } of result.learningUnits) {
       expect(unit.examples).toEqual([]);
       expect(unit.exercises).toEqual([]);
@@ -168,7 +148,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(document).toContain('## 問題一覧');
       expect(document).not.toContain('出題枠順');
       const problemSection = document.split('## 問題一覧').at(1)?.split('## 関連問題').at(0) ?? '';
-      const listedIds = [...problemSection.matchAll(/^\d+\. \[ABC(\d+) (E|F|G|H|Ex)「/gmu)].map(
+      const listedIds = [...problemSection.matchAll(/^- \[ABC(\d+) (E|F|G|H|Ex)「/gmu)].map(
         (match) => {
           const [, contest, slot] = match;
           if (contest === undefined || slot === undefined) throw new Error('Invalid problem link');
@@ -189,8 +169,13 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         ].sort(),
       );
     }
-    for (const placement of input.build.placements)
-      expect(occurrences.get(placement.problemId)).toEqual([placement.presentationUnitId]);
+    for (const placement of input.build.placements) {
+      const homeUnitId = ownerUnitByOutcomeId.get(placement.primaryOutcomeId);
+      expect(homeUnitId, placement.problemId).toBeDefined();
+      expect(occurrences.get(placement.problemId)).toEqual([homeUnitId]);
+      expect(placement).not.toHaveProperty('learningUnitIds');
+      expect(placement).not.toHaveProperty('presentationUnitId');
+    }
     expect(occurrences.size).toBe(868);
     expect(result.learningOutcomes).toHaveLength(225);
   }, 30_000);
@@ -224,6 +209,8 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     }
     for (const { value } of result.learningUnits) {
       expect(LearningUnitSchema.parse(value)).toEqual(value);
+      expect(value).not.toHaveProperty('globalIndex');
+      expect(LearningUnitSchema.safeParse({ ...value, globalIndex: 0 }).success).toBe(false);
       expect(value.contentPhase).toBe('canonical_skeleton');
     }
     for (const { document } of result.learningUnits) {
@@ -231,7 +218,11 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(document).toContain(input.build.id);
       expect(document).toContain(input.build.buildDigest);
     }
-    expect(CanonicalLearningOrderSchema.parse(result.learningOrder)).toEqual(result.learningOrder);
+    expect(CanonicalLearningPrerequisitesSchema.parse(result.learningPrerequisites)).toEqual(
+      result.learningPrerequisites,
+    );
+    expect(result.learningPrerequisites).not.toHaveProperty('standardOrder');
+    expect(result.learningPrerequisites).not.toHaveProperty('orderReasons');
     expect(CanonicalProblemPlacementPolicySchema.parse(result.problemPlacementPolicy)).toEqual(
       result.problemPlacementPolicy,
     );
@@ -267,31 +258,65 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     );
   }, 30_000);
 
-  it('preserves the two accepted DAGs, Outcome closure, and deterministic standard order', async () => {
+  it('preserves direct prerequisite DAGs and binds each Problem home to its primary Outcome owner', async () => {
     const input = await loadMaterializationInput();
     const result = buildCanonicalTaxonomyMaterialization(input);
     const outcomeIds = new Set(result.learningOutcomes.map(({ value }) => value.id));
+    const ownerUnitByOutcomeId = new Map<string, string>();
+    for (const { value } of result.learningUnits) {
+      for (const outcomeId of value.ownedLearningOutcomeIds ?? []) {
+        ownerUnitByOutcomeId.set(outcomeId, value.id);
+      }
+    }
 
-    expect(result.learningOrder.tagPrerequisites).toEqual(input.build.tagPrerequisites);
-    expect(result.learningOrder.learningUnitPrerequisites).toEqual(
-      input.build.learningUnitPrerequisites,
+    expect(result.learningPrerequisites.tagPrerequisites).toEqual(input.build.tagPrerequisites);
+    expect(result.learningPrerequisites.learningOutcomePrerequisites).toEqual(
+      input.build.finalCandidates
+        .filter((candidate) => candidate.kind === 'outcome')
+        .flatMap(({ entity }) =>
+          entity.prerequisiteOutcomeIds.map((prerequisiteId) => ({
+            nodeId: entity.id,
+            prerequisiteId,
+          })),
+        ),
     );
-    expect(result.learningOrder.standardOrder).toEqual(input.build.standardOrder);
-    expect(result.learningOrder.standardOrder).toEqual(
-      result.learningUnits
-        .map(({ value }) => value)
-        .filter(isCurriculumUnit)
-        .sort((left, right) => left.globalIndex - right.globalIndex)
-        .map(({ id }) => id),
+    expect(result.learningPrerequisites.learningUnitPrerequisites).toEqual(
+      input.build.learningUnitPrerequisites,
     );
     for (const placement of result.problemPlacementPolicy.placements) {
       expect(outcomeIds.has(placement.primaryOutcomeId)).toBe(true);
+      const homeUnitId = ownerUnitByOutcomeId.get(placement.primaryOutcomeId);
+      expect(homeUnitId, placement.problemId).toBeDefined();
+      expect(
+        result.learningUnits.find(({ value }) => value.id === homeUnitId)?.value.directProblemIds,
+      ).toContain(placement.problemId);
       expect(
         [...placement.additionalPrimaryOutcomeIds, ...placement.supportingOutcomeIds].every((id) =>
           outcomeIds.has(id),
         ),
       ).toBe(true);
     }
+    const unitById = new Map(result.learningUnits.map(({ value }) => [value.id, value]));
+    for (const [problemId, homeUnitId] of [
+      ['abc301-e', 'unit-dp-subset-state'],
+      ['abc375-g', 'unit-lowlink-critical-structure'],
+    ] as const) {
+      expect(unitById.get(homeUnitId)?.directProblemIds, problemId).toContain(problemId);
+      expect(
+        unitById.get('unit-weighted-shortest-path')?.directProblemIds,
+        problemId,
+      ).not.toContain(problemId);
+      expect(unitById.get('unit-weighted-shortest-path')?.relatedProblemIds, problemId).toContain(
+        problemId,
+      );
+    }
+    expect(
+      result.learningUnits.find(({ value }) => value.id === 'unit-dp-subset-state')?.document,
+    ).toContain('既習技能:');
+    expect(
+      result.learningUnits.find(({ value }) => value.id === 'unit-lowlink-critical-structure')
+        ?.document,
+    ).toContain('既習技能:');
   }, 30_000);
 
   it('materializes every preview taxonomy change as a complete but pending CorrectionImpact mapping', async () => {
@@ -359,7 +384,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       'learning_unit_candidate:example',
       'learning_unit_candidate:exercise',
       'learning_unit_candidate:answer',
-      'learning_unit_candidate:standard_order',
+      'learning_unit_candidate:prerequisite_graph',
       'learning_unit_candidate:derived_index',
       'derived_index:index',
     ];
@@ -415,11 +440,10 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         }
       } else if (assessment.ownerType === 'learning_unit_candidate') {
         expectedMessage = `Canonical CorrectionImpact ${previewImpact.id} omits ${assessment.learningUnitId}'s ${assessment.surface} surface.`;
-        if (assessment.surface === 'standard_order') {
-          canonicalImpact.affectedLearningUnitOrderIds =
-            canonicalImpact.affectedLearningUnitOrderIds.filter(
-              (unitId) => unitId !== assessment.learningUnitId,
-            );
+        if (assessment.surface === 'prerequisite_graph') {
+          canonicalImpact.affectedContentLocators = canonicalImpact.affectedContentLocators.filter(
+            (locator) => locator.ownerType !== 'learning_prerequisites',
+          );
         } else if (assessment.surface === 'derived_index') {
           canonicalImpact.derivedIndexPaths = canonicalImpact.derivedIndexPaths.slice(1);
         } else {

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "区間更新作用の遅延評価。"
   ],
@@ -40,9 +39,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 4,
-  "globalIndex": 121,
-  "orderReason": "更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。"
+  "learningRationale": "更新で変わる箇所を局所化し、未変更部分の共有または履歴の巻き戻しで過去の版を扱う。"
 }

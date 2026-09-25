@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-linear-recurrence"
-  ],
   "excludedTopics": [
     "半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,20 +32,16 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
   "problemIds": [
     "abc236-g",
-    "abc429-f",
     "abc445-f"
   ],
   "directProblemIds": [
     "abc445-f",
-    "abc429-f",
     "abc236-g"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc429-f"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 91,
-  "globalIndex": 141,
-  "orderReason": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
 }

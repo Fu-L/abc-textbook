@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"
   ],
@@ -33,31 +32,30 @@
   "docPath": "src/content/docs/learn/modeling/reverse-offline.md",
   "problemIds": [
     "abc229-e",
+    "abc238-ex",
     "abc249-f",
+    "abc253-f",
     "abc264-e",
     "abc329-e",
     "abc346-e",
+    "abc375-f",
+    "abc392-f",
     "abc464-e"
   ],
   "directProblemIds": [
     "abc229-e",
-    "abc346-e",
-    "abc464-e",
     "abc264-e",
     "abc329-e",
-    "abc249-f"
-  ],
-  "relatedProblemIds": [
-    "abc238-ex",
+    "abc346-e",
+    "abc464-e",
+    "abc249-f",
     "abc253-f",
     "abc375-f",
-    "abc392-f"
+    "abc392-f",
+    "abc238-ex"
   ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 1,
-  "representativeRank": 2,
-  "globalIndex": 40,
-  "orderReason": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
+  "learningRationale": "削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。"
 }

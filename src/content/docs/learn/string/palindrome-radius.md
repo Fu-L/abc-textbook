@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第47単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/) ／ 次: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)
-
 ## 概要
 
 ### 回文半径・Manacher
@@ -32,7 +26,9 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: なし。
+直接の前提単元: なし。
+
+このUnitを直接前提とする単元: なし。
 
 各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。
 
@@ -42,10 +38,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC398 F「ABCBA」](https://atcoder.jp/contests/abc398/tasks/abc398_f) — 主題: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)。
-2. [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g) — 主題: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)。既習技能: 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。 / 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
+- [ABC398 F「ABCBA」](https://atcoder.jp/contests/abc398/tasks/abc398_f) — 主題: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)（各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。）。
+- [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g) — 主題: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)（各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。）。既習技能: [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/)（静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。） / [成立証明から構成解を復元する](/learn/modeling/constructive-witness/)（成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
@@ -54,4 +50,4 @@ sidebar:
 - [ABC398 F 公式解説](https://atcoder.jp/contests/abc398/editorial/12501)
 - [ABC398 F 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-palindrome-radius`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-palindrome-radius`

@@ -5,7 +5,6 @@
   "parentId": "unit-functional-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,25 +35,20 @@
     "abc254-g",
     "abc310-g",
     "abc367-e",
-    "abc370-f",
     "abc438-e"
   ],
   "directProblemIds": [
     "abc367-e",
     "abc438-e",
-    "abc370-f",
     "abc212-f",
-    "abc310-g",
-    "abc254-g"
+    "abc254-g",
+    "abc310-g"
   ],
   "relatedProblemIds": [
+    "abc370-f",
     "abc417-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 64,
-  "globalIndex": 59,
-  "orderReason": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

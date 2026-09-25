@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "heap番号で暗黙に表された完全二分木の区間算術、木上パスの連続区間分解、重心による再帰分解、および更新のためのTop Tree cluster化。"
   ],
@@ -37,16 +34,15 @@
     "abc220-f",
     "abc223-g",
     "abc239-e",
-    "abc246-g",
     "abc248-g",
     "abc259-f",
     "abc263-f",
     "abc264-ex",
     "abc269-ex",
     "abc287-f",
-    "abc293-ex",
     "abc309-e",
     "abc312-g",
+    "abc329-g",
     "abc348-e",
     "abc378-f",
     "abc391-e",
@@ -59,11 +55,12 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc246-g",
     "abc275-ex",
+    "abc293-ex",
     "abc298-ex",
     "abc311-ex",
     "abc314-f",
-    "abc329-g",
     "abc340-g",
     "abc369-g",
     "abc387-f",
@@ -73,9 +70,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 6,
-  "globalIndex": 58,
-  "orderReason": "探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。"
+  "learningRationale": "探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。"
 }

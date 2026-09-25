@@ -5,9 +5,6 @@
   "parentId": "unit-dp-sequence-interval",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
-  ],
   "excludedTopics": [
     "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,7 +33,6 @@
   "problemIds": [
     "abc217-f",
     "abc233-g",
-    "abc238-ex",
     "abc252-g",
     "abc261-g",
     "abc262-g",
@@ -47,26 +43,22 @@
   ],
   "directProblemIds": [
     "abc217-f",
-    "abc252-g",
-    "abc233-g",
     "abc400-f",
-    "abc325-g",
-    "abc292-g",
-    "abc298-g",
+    "abc233-g",
+    "abc252-g",
     "abc261-g",
     "abc262-g",
-    "abc238-ex"
+    "abc292-g",
+    "abc298-g",
+    "abc325-g"
   ],
   "relatedProblemIds": [
     "abc228-h",
+    "abc238-ex",
     "abc305-ex",
     "abc418-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 76,
-  "globalIndex": 76,
-  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

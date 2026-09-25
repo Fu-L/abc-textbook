@@ -5,11 +5,6 @@
   "parentId": "unit-dp-state-design",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-dp-grid-table",
-    "unit-dp-state-design",
-    "unit-dp-subset-state"
-  ],
   "excludedTopics": [
     "frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -38,21 +33,17 @@
   "problemIds": [
     "abc248-f",
     "abc296-ex",
-    "abc309-g",
     "abc379-g"
   ],
   "directProblemIds": [
     "abc248-f",
     "abc379-g",
-    "abc309-g",
     "abc296-ex"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc309-g"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 90,
-  "globalIndex": 157,
-  "orderReason": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
 }

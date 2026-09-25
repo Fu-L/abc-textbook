@@ -5,10 +5,6 @@
   "parentId": "unit-chapter-number-theory",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-gcd-diophantine",
-    "unit-modular-arithmetic"
-  ],
   "excludedTopics": [
     "可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"
   ],
@@ -35,22 +31,21 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/modular-congruence.md",
   "problemIds": [
+    "abc245-ex",
+    "abc286-f",
+    "abc423-g",
     "abc460-e"
   ],
   "directProblemIds": [
-    "abc460-e"
+    "abc460-e",
+    "abc286-f",
+    "abc423-g",
+    "abc245-ex"
   ],
   "relatedProblemIds": [
-    "abc245-ex",
-    "abc286-f",
-    "abc371-g",
-    "abc423-g"
+    "abc371-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 2,
-  "representativeRank": 1,
-  "globalIndex": 21,
-  "orderReason": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
+  "learningRationale": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
 }

@@ -5,10 +5,6 @@
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-generating-functions",
-    "unit-polynomial-convolution"
-  ],
   "excludedTopics": [
     "積を一回求めるだけの畳み込み、および生成関数へ符号化するだけで高度な多項式演算を使わない計数。"
   ],
@@ -42,32 +38,24 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
   "problemIds": [
-    "abc260-ex",
     "abc272-ex",
     "abc289-ex",
-    "abc297-ex",
     "abc300-ex",
+    "abc387-g",
+    "abc439-g"
+  ],
+  "directProblemIds": [
+    "abc289-ex"
+  ],
+  "relatedProblemIds": [
+    "abc260-ex",
+    "abc297-ex",
     "abc317-ex",
     "abc318-ex",
     "abc381-g",
-    "abc387-g",
-    "abc439-g",
     "abc449-g"
   ],
-  "directProblemIds": [
-    "abc449-g",
-    "abc297-ex",
-    "abc318-ex",
-    "abc289-ex",
-    "abc260-ex",
-    "abc317-ex"
-  ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 5,
-  "representativeRank": 10,
-  "globalIndex": 189,
-  "orderReason": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
+  "learningRationale": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
 }

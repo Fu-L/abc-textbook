@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。"
   ],
@@ -35,14 +34,22 @@
     "abc260-g",
     "abc268-e",
     "abc278-e",
-    "abc300-f",
-    "abc430-f"
+    "abc341-e",
+    "abc410-f",
+    "abc430-f",
+    "abc441-e",
+    "abc454-f",
+    "abc465-f"
   ],
   "directProblemIds": [
-    "abc278-e",
-    "abc430-f",
-    "abc300-f",
     "abc268-e",
+    "abc278-e",
+    "abc341-e",
+    "abc441-e",
+    "abc410-f",
+    "abc430-f",
+    "abc454-f",
+    "abc465-f",
     "abc260-g"
   ],
   "relatedProblemIds": [
@@ -55,34 +62,26 @@
     "abc276-ex",
     "abc282-g",
     "abc298-g",
+    "abc300-f",
     "abc307-g",
     "abc311-g",
     "abc330-f",
     "abc330-g",
     "abc333-e",
-    "abc341-e",
     "abc347-f",
     "abc404-g",
     "abc407-f",
-    "abc410-f",
     "abc419-e",
     "abc420-f",
     "abc421-g",
     "abc423-e",
     "abc427-e",
-    "abc441-e",
     "abc452-e",
-    "abc454-f",
     "abc455-e",
     "abc464-g",
-    "abc465-f",
     "abc465-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 0,
-  "representativeRank": 0,
-  "globalIndex": 2,
-  "orderReason": "一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。"
+  "learningRationale": "一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。"
 }

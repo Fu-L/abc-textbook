@@ -5,7 +5,6 @@
   "parentId": "unit-discrete-convex",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -33,30 +32,21 @@
   "docPath": "src/content/docs/learn/geometry-optimization/basic-convex-optimization.md",
   "problemIds": [
     "abc224-g",
+    "abc314-ex"
+  ],
+  "directProblemIds": [
+    "abc224-g",
+    "abc314-ex"
+  ],
+  "relatedProblemIds": [
     "abc229-g",
     "abc240-f",
     "abc263-g",
-    "abc314-ex",
     "abc330-f",
     "abc459-g",
     "abc462-e"
   ],
-  "directProblemIds": [
-    "abc462-e",
-    "abc240-f",
-    "abc330-f",
-    "abc229-g",
-    "abc224-g",
-    "abc263-g",
-    "abc314-ex",
-    "abc459-g"
-  ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 61,
-  "globalIndex": 101,
-  "orderReason": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

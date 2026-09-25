@@ -5,7 +5,6 @@
   "parentId": "unit-linear-algebra-xor",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -33,24 +32,19 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
   "problemIds": [
     "abc212-h",
-    "abc220-h",
     "abc288-g",
     "abc367-g"
   ],
   "directProblemIds": [
     "abc288-g",
-    "abc212-h",
-    "abc220-h",
-    "abc367-g"
+    "abc367-g",
+    "abc212-h"
   ],
   "relatedProblemIds": [
+    "abc220-h",
     "abc265-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 87,
-  "globalIndex": 130,
-  "orderReason": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-monotone-stack-queue"
-  ],
   "excludedTopics": [
     "最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"
   ],
@@ -34,21 +31,17 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/cartesian-tree.md",
   "problemIds": [
+    "abc275-ex",
     "abc420-f",
     "abc435-f"
   ],
   "directProblemIds": [
+    "abc420-f",
     "abc435-f",
-    "abc420-f"
-  ],
-  "relatedProblemIds": [
     "abc275-ex"
   ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 10,
-  "globalIndex": 100,
-  "orderReason": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
+  "learningRationale": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
 }

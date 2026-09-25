@@ -12,12 +12,6 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
-## 標準履修順
-
-第160単元。技能の説明を学んでから問題一覧へ進んでください。
-
-前: [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/) ／ 次: [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/)
-
 ## 概要
 
 ### Segment Tree Beats
@@ -32,7 +26,9 @@ nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
+直接の前提単元: [区間monoid要約](/learn/query/range-monoid-aggregation/)。
+
+このUnitを直接前提とする単元: なし。
 
 区間monoid要約で得た考え方と実装を再利用し、Segment Tree Beatsの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -42,13 +38,13 @@ nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条
 
 ## 問題一覧
 
-1. [ABC430 G「Range Set Modifying Query」](https://atcoder.jp/contests/abc430/tasks/abc430_g) — 主題: [Segment Tree Beats](/learn/query/segment-tree-beats/)。既習技能: 集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。 / 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+- [ABC430 G「Range Set Modifying Query」](https://atcoder.jp/contests/abc430/tasks/abc430_g) — 主題: [Segment Tree Beats](/learn/query/segment-tree-beats/)（nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条件を判定し、失敗時だけ子へ降りる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [bitsetで集合演算をword並列化する](/learn/query/bitset-word-parallel/)（集合をbit列へ符号化し、交差・和・shift・popcountをword並列に実行した計算量を評価できる。） / [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/)（要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
+各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
 ## 根拠
 
 - [ABC430 G 公式解説](https://atcoder.jp/contests/abc430/editorial/14300)
 - [ABC430 G 公式問題文](https://atcoder.jp/contests/abc430/tasks/abc430_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-segment-tree-beats`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-segment-tree-beats`

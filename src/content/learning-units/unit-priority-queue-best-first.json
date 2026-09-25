@@ -5,7 +5,6 @@
   "parentId": "unit-ordered-set-heap",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -32,24 +31,26 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/priority-queue-best-first.md",
   "problemIds": [
-    "abc252-f",
-    "abc304-ex",
+    "abc297-e",
+    "abc305-e",
+    "abc308-f",
     "abc331-e",
-    "abc376-e",
+    "abc342-g",
     "abc384-e",
     "abc391-f",
-    "abc407-e",
+    "abc409-f",
     "abc440-e"
   ],
   "directProblemIds": [
-    "abc384-e",
+    "abc297-e",
+    "abc305-e",
     "abc331-e",
-    "abc376-e",
-    "abc252-f",
-    "abc391-f",
-    "abc407-e",
+    "abc384-e",
     "abc440-e",
-    "abc304-ex"
+    "abc308-f",
+    "abc391-f",
+    "abc409-f",
+    "abc342-g"
   ],
   "relatedProblemIds": [
     "abc214-e",
@@ -57,24 +58,19 @@
     "abc218-h",
     "abc249-f",
     "abc250-g",
-    "abc297-e",
-    "abc305-e",
+    "abc252-f",
+    "abc304-ex",
     "abc307-f",
-    "abc308-f",
     "abc319-f",
     "abc320-e",
-    "abc342-g",
     "abc359-f",
     "abc373-f",
+    "abc376-e",
     "abc376-g",
-    "abc409-f",
+    "abc407-e",
     "abc433-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 2,
-  "representativeRank": 57,
-  "globalIndex": 23,
-  "orderReason": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

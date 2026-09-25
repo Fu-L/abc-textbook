@@ -5,9 +5,6 @@
   "parentId": "unit-directed-condensation",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-state-graph-search"
-  ],
   "excludedTopics": [
     "DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,16 +33,17 @@
   "problemIds": [
     "abc277-f",
     "abc291-e",
+    "abc304-ex",
     "abc315-e"
   ],
   "directProblemIds": [
-    "abc315-e",
     "abc291-e",
-    "abc277-f"
+    "abc315-e",
+    "abc277-f",
+    "abc304-ex"
   ],
   "relatedProblemIds": [
     "abc224-e",
-    "abc304-ex",
     "abc306-ex",
     "abc324-f",
     "abc335-e",
@@ -53,9 +51,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 2,
-  "representativeRank": 56,
-  "globalIndex": 22,
-  "orderReason": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
 }

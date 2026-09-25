@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "LCA・HLDによる固定木上パスの区間分解。"
   ],
@@ -35,20 +34,16 @@
   "docPath": "src/content/docs/learn/tree/tree-balanced-separators.md",
   "problemIds": [
     "abc291-ex",
-    "abc359-g",
-    "abc453-f"
+    "abc359-g"
   ],
   "directProblemIds": [
-    "abc291-ex",
     "abc359-g",
+    "abc291-ex"
+  ],
+  "relatedProblemIds": [
     "abc453-f"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 3,
-  "representativeRank": 8,
-  "globalIndex": 99,
-  "orderReason": "部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。"
+  "learningRationale": "部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。"
 }

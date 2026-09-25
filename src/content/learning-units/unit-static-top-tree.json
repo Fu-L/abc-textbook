@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-rooted-tree-aggregation"
-  ],
   "excludedTopics": [
     "更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。"
   ],
@@ -42,9 +39,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 5,
-  "representativeRank": 7,
-  "globalIndex": 187,
-  "orderReason": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
+  "learningRationale": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
 }

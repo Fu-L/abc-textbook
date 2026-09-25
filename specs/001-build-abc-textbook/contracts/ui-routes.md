@@ -8,8 +8,8 @@
 | Route | Source | Contract |
 |---|---|---|
 | `/` | generated | 対象範囲、分野別の教科書目次、コンテスト索引、要復習一覧、release 情報への入口 |
-| `/learn/` | LearningUnit graph + textbook editorial data | 分野別のchapter/section/subsection階層、前提を満たす標準履修順と前後リンク、対象色 |
-| `/learn/<unit-slug>/` | LearningUnit + docs | 分類、前提、対象色・レーティング帯・理由、概説、既存のUnit内問題順と解説への導線、掲載順の前後ナビ |
+| `/learn/` | LearningUnit graph + textbook editorial data | 分野別のchapter/section/subsection階層、目次・sidebarの表示順、対象色 |
+| `/learn/<unit-slug>/` | LearningUnit + docs | 分類、直接前提Unitと直接の依存先、対象色・レーティング帯・理由、概説、Unit内問題一覧と解説への導線 |
 | `/problems/` | catalog + IndexedDB | 全問題一覧と静的属性・学習状態の複合絞り込み |
 | `/problems/<problemId>/` | Problem + Explanation | 問題情報、公式参照、解説、タグ、学習単位、類題、学習記録 |
 | `/tags/` | TechniqueTag | 深さ可変のタグ木、前提関係、同義語・旧名称検索 |
@@ -23,7 +23,7 @@
 
 HTML route は末尾 slash を正規形とし、GitHub Pages の project base path でも同じ相対関係を保つ。
 
-分野別目次は意味的な階層を表し、`standardOrder`/`globalIndex`に従う通常の学習経路とは分離する。読み方に全順序、各教学Unitに前後リンクを示し、必須前提を先に履修させる。問題は全必要技能の説明後に提示し、主題と既習技能を明示する。全Unitの対象色は色名と数値帯と理由を文字で示し、章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とする。全問題を解く難易度や公式の履修基準ではないことを読み方に示す。このcanonical表示契約を公開routeへ反映するのはT160であり、それまではcanonical文書をdraftのまま保持する。
+分野別目次は意味的な階層と編集上の表示順を表す。3つの前提DAGは別のcanonical policyに保持し、直接の前提・依存Unitリンクとして表示する。全体順、前後リンク、順位は生成しない。各Problemのhome Unitはprimary Outcomeの唯一のownerであり、problem listでは主題・追加で学ぶ技能・既習技能を区別する。全Unitの対象色は色名と数値帯と理由を文字で示し、章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とする。全問題を解く難易度や公式の履修基準ではないことを読み方に示す。このcanonical表示契約を公開routeへ反映するのはT160であり、それまではcanonical文書をdraftのまま保持する。
 
 ## 2. Common page contract
 

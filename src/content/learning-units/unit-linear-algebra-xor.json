@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "行列式による全域木・非交差pathの計数は行列式計数の単元で扱う。通常の多項式畳み込み・生成関数と、幾何の面積行列式も対象外とする。"
   ],
@@ -33,30 +32,26 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
   "problemIds": [
     "abc212-h",
-    "abc220-h",
     "abc223-h",
     "abc249-g",
     "abc276-ex",
+    "abc278-ex",
     "abc283-g",
     "abc288-g",
     "abc366-g",
-    "abc367-g",
-    "abc451-g"
+    "abc367-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc220-h",
     "abc236-f",
     "abc265-ex",
-    "abc278-ex",
     "abc323-g",
     "abc399-g",
-    "abc412-g"
+    "abc412-g",
+    "abc451-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 4,
-  "representativeRank": 9,
-  "globalIndex": 64,
-  "orderReason": "制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。"
+  "learningRationale": "制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。"
 }

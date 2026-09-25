@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-geometry-optimization",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-monotone-search"
-  ],
   "excludedTopics": [
     "fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -39,16 +36,12 @@
     "abc324-f"
   ],
   "directProblemIds": [
-    "abc324-f",
+    "abc236-e",
     "abc294-f",
-    "abc236-e"
+    "abc324-f"
   ],
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 4,
-  "representativeRank": 89,
-  "globalIndex": 134,
-  "orderReason": "単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。"
 }

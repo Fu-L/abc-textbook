@@ -5,7 +5,6 @@
   "parentId": "unit-graph-core-peeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "graph core・leaf peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -30,19 +29,15 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/graph-core.md",
   "problemIds": [
-    "abc266-f",
-    "abc267-e"
-  ],
-  "directProblemIds": [
-    "abc267-e",
     "abc266-f"
   ],
-  "relatedProblemIds": [],
+  "directProblemIds": [
+    "abc266-f"
+  ],
+  "relatedProblemIds": [
+    "abc267-e"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 69,
-  "globalIndex": 63,
-  "orderReason": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

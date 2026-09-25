@@ -5,7 +5,6 @@
   "parentId": "unit-graph-search",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -36,44 +35,44 @@
     "abc244-f",
     "abc289-e",
     "abc302-f",
+    "abc305-f",
+    "abc319-g",
+    "abc355-e",
+    "abc361-g",
     "abc394-e",
     "abc414-f",
-    "abc417-e",
     "abc427-e",
     "abc429-e",
+    "abc443-f",
     "abc446-e",
     "abc446-f"
   ],
   "directProblemIds": [
-    "abc417-e",
-    "abc446-e",
     "abc289-e",
-    "abc302-f",
-    "abc429-e",
+    "abc355-e",
     "abc394-e",
-    "abc446-f",
-    "abc244-f",
     "abc427-e",
+    "abc429-e",
+    "abc446-e",
     "abc241-f",
-    "abc414-f"
+    "abc244-f",
+    "abc302-f",
+    "abc305-f",
+    "abc414-f",
+    "abc443-f",
+    "abc446-f",
+    "abc319-g",
+    "abc361-g"
   ],
   "relatedProblemIds": [
     "abc257-g",
-    "abc305-f",
     "abc317-e",
-    "abc319-g",
     "abc329-e",
     "abc336-f",
-    "abc355-e",
-    "abc361-g",
     "abc413-f",
-    "abc443-f"
+    "abc417-e"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 2,
-  "representativeRank": 43,
-  "globalIndex": 18,
-  "orderReason": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-string",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "接尾辞・LCPの索引、文字列hash、回文半径。KMPのfailure linkによる逐次照合も本Unitの対象に含めない。"
   ],
@@ -30,19 +29,15 @@
   "problemIds": [
     "abc257-g",
     "abc284-f",
-    "abc430-e",
-    "abc434-f"
+    "abc430-e"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc312-ex",
-    "abc343-g"
+    "abc343-g",
+    "abc434-f"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 1,
-  "representativeRank": 1,
-  "globalIndex": 35,
-  "orderReason": "各位置から接頭辞との一致長を求める。既に得られた一致区間の情報を再利用し、Z algorithmで全位置を線形時間に処理する。"
+  "learningRationale": "各位置から接頭辞との一致長を求める。既に得られた一致区間の情報を再利用し、Z algorithmで全位置を線形時間に処理する。"
 }

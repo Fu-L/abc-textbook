@@ -5,9 +5,6 @@
   "parentId": "unit-tree-aggregation",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-rooted-tree-aggregation"
-  ],
   "excludedTopics": [
     "rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -39,8 +36,8 @@
     "abc348-e"
   ],
   "directProblemIds": [
-    "abc220-f",
     "abc348-e",
+    "abc220-f",
     "abc223-g"
   ],
   "relatedProblemIds": [
@@ -49,9 +46,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 2,
-  "difficultyRank": 3,
-  "representativeRank": 75,
-  "globalIndex": 71,
-  "orderReason": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
 }

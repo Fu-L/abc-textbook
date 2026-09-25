@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。"
   ],
@@ -33,22 +32,17 @@
   "docPath": "src/content/docs/learn/modeling/change-impact-localization.md",
   "problemIds": [
     "abc218-f",
-    "abc243-e",
     "abc279-e"
   ],
   "directProblemIds": [
     "abc279-e",
-    "abc243-e",
     "abc218-f"
   ],
   "relatedProblemIds": [
+    "abc243-e",
     "abc448-g"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 2,
-  "representativeRank": 6,
-  "globalIndex": 92,
-  "orderReason": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
+  "learningRationale": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
 }

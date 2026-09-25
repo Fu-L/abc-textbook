@@ -83,15 +83,16 @@ npm run corpus:verify-authoring
 ## Scenario D — 学習順と問題配置
 
 ```bash
-npm run test:integration -- learning-order
-npm run test:integration -- problem-placement
+npm run test:contract -- final-taxonomy
+npm run test:contract -- canonical-taxonomy-materialization
 ```
 
 期待結果:
 
-- Tag親関係、Tag前提DAG、Unit親関係、Unit前提DAGを別々に検証する。
-- 内部の標準学習順では前提が必ず先行し、同じ入力から同じ順序と理由が得られる。
-- 教科書掲載順では全Unitが一度ずつ現れ、各親と全子孫が連続する。対象色・レーティング帯・理由を確認でき、後にある前提には「後の節」「後の章」を表示する。掲載順の編集で問題配置・Unit内問題順は変わらない。
+- Tag/Outcome/Unitの前提DAGと、Tag・Unitの意味階層を独立に検証する。
+- primary Outcomeの唯一のowner Unitが各Problemのhomeとなり、additional-primary/supportingはrelated参照だけに使う。
+- sidebar/目次順で全Unitが一度ずつ現れ、Unit文書は直接前提と直接の依存先を複数件表示する。全体履修順や前後リンクを生成しない。
+- 目次順とUnit prerequisite DAGの編集でProblem配置は変わらない。
 - cycle、自己辺、未知参照、生成順改ざんを拒否する。
 - 新しい主成果・前提・解法・証明着眼点・漸近計算量を持つ問題をsimilar/supplementにできない。
 - preview taxonomyは直接canonicalへコピーせず、T159が全Inventoryから`FinalTaxonomyBuild`と全件`TaxonomyIntegrationMap`を生成し、review後にacceptしたdigestだけがT047–T050でmaterializeされる。

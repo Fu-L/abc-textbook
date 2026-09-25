@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "DFS時刻とlowlink値による橋・関節点の判定。"
   ],
@@ -31,16 +30,13 @@
   "docPath": "src/content/docs/learn/graph/graph-core-peeling.md",
   "problemIds": [
     "abc266-f",
-    "abc267-e",
     "abc419-g"
   ],
   "directProblemIds": [],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc267-e"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 2,
-  "representativeRank": 12,
-  "globalIndex": 63,
-  "orderReason": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
+  "learningRationale": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
 }

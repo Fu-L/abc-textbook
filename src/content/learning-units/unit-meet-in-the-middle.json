@@ -5,7 +5,6 @@
   "parentId": "unit-divide-enumeration",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -32,34 +31,31 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/meet-in-the-middle.md",
   "problemIds": [
+    "abc220-h",
+    "abc252-ex",
     "abc271-f",
     "abc300-g",
     "abc326-f",
     "abc336-f",
     "abc402-f",
-    "abc423-g",
     "abc427-f",
     "abc464-f"
   ],
   "directProblemIds": [
     "abc271-f",
-    "abc402-f",
-    "abc427-f",
     "abc326-f",
     "abc336-f",
+    "abc402-f",
+    "abc427-f",
     "abc464-f",
     "abc300-g",
-    "abc423-g"
-  ],
-  "relatedProblemIds": [
     "abc220-h",
     "abc252-ex"
   ],
+  "relatedProblemIds": [
+    "abc423-g"
+  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 1,
-  "difficultyRank": 3,
-  "representativeRank": 67,
-  "globalIndex": 33,
-  "orderReason": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

@@ -5,7 +5,6 @@
   "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [],
   "excludedTopics": [
     "入力を最初からすべて読める通常問題、および問い合わせ上限やflushを持たない模擬入出力。"
   ],
@@ -31,32 +30,19 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/interactive-protocol.md",
-  "problemIds": [
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
     "abc269-e",
     "abc278-g",
     "abc282-f",
     "abc286-f",
     "abc305-f",
+    "abc337-e",
     "abc355-e",
     "abc398-e"
   ],
-  "directProblemIds": [
-    "abc269-e",
-    "abc398-e",
-    "abc305-f",
-    "abc282-f",
-    "abc286-f",
-    "abc355-e",
-    "abc278-g"
-  ],
-  "relatedProblemIds": [
-    "abc337-e"
-  ],
   "examples": [],
   "exercises": [],
-  "stageRank": 3,
-  "difficultyRank": 1,
-  "representativeRank": 8,
-  "globalIndex": 87,
-  "orderReason": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
+  "learningRationale": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
 }

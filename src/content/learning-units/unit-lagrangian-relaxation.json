@@ -5,9 +5,6 @@
   "parentId": "unit-discrete-convex",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-basic-convex-optimization"
-  ],
   "excludedTopics": [
     "Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
@@ -35,22 +32,18 @@
   "docPath": "src/content/docs/learn/geometry-optimization/lagrangian-relaxation.md",
   "problemIds": [
     "abc305-ex",
+    "abc355-g",
     "abc393-g",
     "abc400-g"
   ],
   "directProblemIds": [
+    "abc355-g",
+    "abc393-g",
     "abc400-g",
-    "abc305-ex",
-    "abc393-g"
+    "abc305-ex"
   ],
-  "relatedProblemIds": [
-    "abc355-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "stageRank": 4,
-  "difficultyRank": 4,
-  "representativeRank": 93,
-  "globalIndex": 168,
-  "orderReason": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "一次元凸・単峰最適化で得た考え方と実装を再利用し、Lagrangian relaxation・Aliens trickの発動条件・正当化・境界を重複なく学ぶ。"
 }

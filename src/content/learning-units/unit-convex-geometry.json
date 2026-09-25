@@ -5,9 +5,6 @@
   "parentId": "unit-chapter-geometry-optimization",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
-  "additionalPrerequisiteUnitIds": [
-    "unit-geometry-primitives"
-  ],
   "excludedTopics": [
     "直線群の最小値・最大値queryはConvex Hull Trick・直線包絡で扱う。凸性を使わない一般のevent sweepや座標圧縮も対象外とする。"
   ],
@@ -33,6 +30,7 @@
   "docPath": "src/content/docs/learn/geometry-optimization/convex-geometry.md",
   "problemIds": [
     "abc251-g",
+    "abc257-ex",
     "abc275-g",
     "abc286-ex",
     "abc341-g",
@@ -40,14 +38,9 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc244-ex",
-    "abc257-ex"
+    "abc244-ex"
   ],
   "examples": [],
   "exercises": [],
-  "stageRank": 0,
-  "difficultyRank": 3,
-  "representativeRank": 11,
-  "globalIndex": 114,
-  "orderReason": "向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。"
+  "learningRationale": "向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。"
 }
