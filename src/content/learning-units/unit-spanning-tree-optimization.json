@@ -39,7 +39,6 @@
     "abc270-f",
     "abc282-e",
     "abc352-e",
-    "abc355-f",
     "abc364-f",
     "abc383-e"
   ],
@@ -48,11 +47,11 @@
     "abc282-e",
     "abc352-e",
     "abc270-f",
-    "abc355-f",
     "abc364-f"
   ],
   "relatedProblemIds": [
-    "abc301-ex"
+    "abc301-ex",
+    "abc355-f"
   ],
   "examples": [],
   "exercises": [],

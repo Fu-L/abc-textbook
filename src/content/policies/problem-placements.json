@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f",
-    "acceptedAt": "2026-09-25T16:10:16.727Z"
+    "digest": "92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb",
+    "acceptedAt": "2026-09-25T18:35:55.894Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -112896,22 +112896,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「区間affine作用を持つlazy segment treeで期待値列を更新する」、解法への接続「期待値配列をAで初期化し、各queryのλ=R-L+1と逆元を求め、区間[L,R]へf(x)=((λ-1)/λ)x+X/λをlazy適用する。全操作後に各点を取得しmod 998244353で出力する。」、学習成果「乱択区間代入後の各期待値をaffine変換へ閉じ、lazy propagationで全queryを処理できる。」を照合し、tag-stochastic-expectation-dp / outcome-solve-stochastic-recurrence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-lazy-segment-action; 補助Outcome=outcome-design-range-update-action; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-lazy-segment-action / outcome-design-range-update-action を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「区間affine作用を持つlazy segment treeで期待値列を更新する」、解法への接続「期待値配列をAで初期化し、各queryのλ=R-L+1と逆元を求め、区間[L,R]へf(x)=((λ-1)/λ)x+X/λをlazy適用する。全操作後に各点を取得しmod 998244353で出力する。」、学習成果「乱択区間代入後の各期待値をaffine変換へ閉じ、lazy propagationで全queryを処理できる。」を照合し、tag-lazy-segment-action / outcome-design-range-update-action をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-stochastic-expectation-dp"
+        "tag-lazy-segment-action"
       ],
       "supportingTagIds": [
-        "tag-lazy-segment-action",
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+      "primaryOutcomeId": "outcome-design-range-update-action",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-compute-in-modular-arithmetic",
-        "outcome-design-range-update-action"
+        "outcome-compute-in-modular-arithmetic"
       ],
       "adHocElements": [
         "同じ操作内では「どれか一位置だけ」が更新されるという負の相関があるが、各最終A_iの期待値には影響せず周辺期待値だけで完結する。（再利用可能な見方: 確率過程でjoint distributionを持つ前に、求める統計量が線形性で閉じるかを確認する。）"
@@ -112929,11 +112927,9 @@
               "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-stochastic-expectation-dp"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -112947,29 +112943,11 @@
               "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-lazy-segment-action"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc332-f",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc332-editorial-7890-b6db5da6f35bcbe75e94efe972aacbb1dae17b24e342dcdc8e307f8062e698fe",
-              "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2"
-            ]
-          },
-          "kind": "same_tag",
-          "tagIds": [
-            "tag-stochastic-expectation-dp"
-          ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -113001,11 +112979,11 @@
               "source-abc332-f-problem-24a1fcf4e5c5bb6779072ea00c387425b9402686d993728c49921369d0cd6fd2"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
             "tag-lazy-segment-action"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -127845,20 +127823,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。」、解法への接続「10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans-- し、更新後 ans を出力する。」、学習成果「一般の動的 MST を10層の追加専用連結性へ変換し、O(10(N+Q)α(N)) で各重み和を更新できる。」を照合し、tag-spanning-tree-optimization / outcome-construct-optimal-spanning-tree をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。」、解法への接続「10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans-- し、更新後 ans を出力する。」、学習成果「一般の動的 MST を10層の追加専用連結性へ変換し、O(10(N+Q)α(N)) で各重み和を更新できる。」を照合し、tag-dsu-components / outcome-maintain-connectivity-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-spanning-tree-optimization; 補助Outcome=outcome-construct-optimal-spanning-tree; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-spanning-tree-optimization / outcome-construct-optimal-spanning-tree を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-spanning-tree-optimization"
-      ],
-      "supportingTagIds": [
         "tag-dsu-components"
       ],
-      "primaryOutcomeId": "outcome-construct-optimal-spanning-tree",
+      "supportingTagIds": [
+        "tag-spanning-tree-optimization"
+      ],
+      "primaryOutcomeId": "outcome-maintain-connectivity-components",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-maintain-connectivity-components"
+        "outcome-construct-optimal-spanning-tree"
       ],
       "adHocElements": [
         "動的 MST の一般データ構造ではなく、重み上限10を使って MST重みそのものを connectivity layers の面積として表す。（再利用可能な見方: 重み値域が小さいとき、weighted quantity を threshold indicator の総和へ主客転倒する。）"
@@ -127876,11 +127854,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-spanning-tree-optimization"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -127894,11 +127872,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-dsu-components"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -127912,11 +127890,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
             "tag-spanning-tree-optimization"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -127930,11 +127908,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
             "tag-dsu-components"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -133563,15 +133541,15 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「外周を初期海岸として、沈没年bucketを1..Yの順に処理し、新たに接した隣接区画を予定年へ登録する。」、解法への接続「remaining=HWとし、外周の未登録cellを標高bucketへ入れる。k=1..Yでbucket[k]をqueueとして最後まで処理し、cellを沈めてremainingを減らす。未登録の四近傍はyear=max(k,A)がY以下ならそのbucketへ登録する。各年処理後のremainingを出力する。」、学習成果「各区画の初回海接触だけをevent化し、年ごとの残存面積を一度のgrid伝播で得られる。」を照合し、tag-shortest-path / outcome-model-and-compute-shortest-path をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「外周を初期海岸として、沈没年bucketを1..Yの順に処理し、新たに接した隣接区画を予定年へ登録する。」、解法への接続「remaining=HWとし、外周の未登録cellを標高bucketへ入れる。k=1..Yでbucket[k]をqueueとして最後まで処理し、cellを沈めてremainingを減らす。未登録の四近傍はyear=max(k,A)がY以下ならそのbucketへ登録する。各年処理後のremainingを出力する。」、学習成果「各区画の初回海接触だけをevent化し、年ごとの残存面積を一度のgrid伝播で得られる。」を照合し、tag-event-sweep / outcome-linearize-events をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-shortest-path"
+        "tag-event-sweep"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-model-and-compute-shortest-path",
+      "primaryOutcomeId": "outcome-linearize-events",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "adHocElements": [
@@ -133590,11 +133568,11 @@
               "source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"
             ]
           },
-          "kind": "same_tag",
+          "kind": "primary",
           "tagIds": [
-            "tag-shortest-path"
+            "tag-event-sweep"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -133608,11 +133586,11 @@
               "source-abc363-editorial-10482-adabf182c02241c331f157b781a3142d6592aad70f48fd468d17ba6e9c67d5ec"
             ]
           },
-          "kind": "primary",
+          "kind": "same_tag",
           "tagIds": [
-            "tag-shortest-path"
+            "tag-event-sweep"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -133644,7 +133622,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-shortest-path"
+            "tag-event-sweep"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -285120,7 +285098,7 @@
       "impactSubjectDigest": "40b36906779261a3768787e7e6a1f741f39f56b58bfeadedebb593a3444339fb"
     }
   ],
-  "placementDigest": "a2adb0da95af3f4e6b06581558337ad624b8f6a43998754771f808f9052563e9",
+  "placementDigest": "b5958406856e5dd529027617ed0e447f28b20a215a2c59ebe9e80999a4decb23",
   "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "previewTaxonomyChangeDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877"
 }

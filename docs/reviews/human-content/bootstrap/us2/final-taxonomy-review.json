@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+  "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
   "inventoryDigest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
   "reviewPolicy": {
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
+      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T16:09:56.234Z",
+      "completedAt": "2026-09-25T18:35:34.721Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
+      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T16:10:03.704Z",
+      "completedAt": "2026-09-25T18:35:42.494Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
+      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T16:10:04.149Z",
+      "completedAt": "2026-09-25T18:35:43.050Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
+      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T16:10:04.368Z",
+      "completedAt": "2026-09-25T18:35:43.268Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
+      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T16:10:11.228Z",
+      "completedAt": "2026-09-25T18:35:50.290Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "9d356634be5dfcd52cd2961005b356eca194a46a88a364cfcdad88742e979a31",
+  "reviewerExecutedCheckSetDigest": "81e916d4307abae4b5131a1da59edb3eb2f5c5badbc3a9344583b5a4c32dcedd",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -329,10 +329,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "Fu-Lの明示指示に基づくsemantic audit。Inventoryを真として全868問を再照合し、解法工程から6件のprimary・coprimary・supportingを修正した。修正後の規定レビュー検査に合格。Codexによる実施であり、第三者による独立レビューを表すものではない。",
+      "reviewBasis": "Maintainer-directed semantic audit of all 868 Inventory records. Corrected ABC332-F to affine lazy range actions, ABC355-F to component maintenance with Kruskal MST reasoning as supporting knowledge, and ABC363-E to time-bucket activation flood fill. Checked the revised placements against each Inventory algorithm connection; generated 868 placements and found no taxonomy diagnostics.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-25T16:10:16.727Z"
+      "reviewedAt": "2026-09-25T18:35:55.894Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -580,12 +580,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "Fu-Lの明示指示に基づくsemantic audit。Inventoryを真として全868問を再照合し、解法工程から6件のprimary・coprimary・supportingを修正した。修正後の規定レビュー検査に合格。Codexによる実施であり、第三者による独立レビューを表すものではない。",
+    "rationale": "Maintainer-directed semantic audit of all 868 Inventory records. Corrected ABC332-F to affine lazy range actions, ABC355-F to component maintenance with Kruskal MST reasoning as supporting knowledge, and ABC363-E to time-bucket activation flood fill. Checked the revised placements against each Inventory algorithm connection; generated 868 placements and found no taxonomy diagnostics.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-25T16:10:16.727Z"
+    "confirmedAt": "2026-09-25T18:35:55.894Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-25T16:10:16.727Z",
-  "evidenceDigest": "f2b261c623e866e383490ca303fe3a93e6728e99427596d8adedef80c658de72"
+  "generatedAt": "2026-09-25T18:35:55.894Z",
+  "evidenceDigest": "333c852ced32847310205a65b1f75260ff9533dfb0419d69203770c51372ad13"
 }

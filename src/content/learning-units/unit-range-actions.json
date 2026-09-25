@@ -36,6 +36,7 @@
     "abc237-g",
     "abc265-g",
     "abc322-f",
+    "abc332-f",
     "abc340-e",
     "abc357-f",
     "abc371-f",
@@ -51,6 +52,7 @@
   "directProblemIds": [
     "abc340-e",
     "abc322-f",
+    "abc332-f",
     "abc357-f",
     "abc371-f",
     "abc382-f",
@@ -68,7 +70,6 @@
     "abc256-ex",
     "abc262-ex",
     "abc327-f",
-    "abc332-f",
     "abc346-g",
     "abc360-f",
     "abc363-g",

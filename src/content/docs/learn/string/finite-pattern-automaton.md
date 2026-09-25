@@ -56,4 +56,4 @@ ABC301 FはDDoS型の部分列を含まない埋め方を求める。禁止部�
 - [ABC305 G 公式解説](https://atcoder.jp/contests/abc305/editorial/6540)
 - [ABC305 G 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-finite-pattern-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-finite-pattern-automaton`

@@ -66,4 +66,4 @@ ABC381 Gでは、拡大体で数列を表す→等比的な因子積を倍化構
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-polynomial-multipoint-evaluation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-polynomial-multipoint-evaluation`

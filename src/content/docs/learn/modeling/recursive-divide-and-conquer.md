@@ -79,4 +79,4 @@ pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結
 - [ABC247 H 公式解説](https://atcoder.jp/contests/abc247/editorial/3737)
 - [ABC247 H 公式問題文](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-recursive-divide-and-conquer`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-recursive-divide-and-conquer`

@@ -70,4 +70,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、prefix分割
 - [ABC262 H 公式解説](https://atcoder.jp/contests/abc262/editorial/4481)
 - [ABC262 H 公式問題文](https://atcoder.jp/contests/abc262/tasks/abc262_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-dp-prefix-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-dp-prefix-partition`

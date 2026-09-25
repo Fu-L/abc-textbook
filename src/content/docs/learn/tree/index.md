@@ -89,4 +89,4 @@ sidebar:
 - [ABC221 F 公式解説](https://atcoder.jp/contests/abc221/editorial/2723)
 - [ABC221 F 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-chapter-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-chapter-tree`

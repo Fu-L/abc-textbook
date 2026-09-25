@@ -65,7 +65,6 @@ Floyd–Warshallは中継点を{0,…,k−1}まで許す距離D_kを持ち、D_{
 - [ABC286 E「Souvenir」](https://atcoder.jp/contests/abc286/tasks/abc286_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。）。
 - [ABC325 E「Our clients, please wait a moment」](https://atcoder.jp/contests/abc325/tasks/abc325_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。）。
 - [ABC342 E「Last Train」](https://atcoder.jp/contests/abc342/tasks/abc342_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。）。
-- [ABC363 E「Sinking Land」](https://atcoder.jp/contests/abc363/tasks/abc363_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。）。
 - [ABC369 E「Sightseeing Tour」](https://atcoder.jp/contests/abc369/tasks/abc369_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。）。既習技能: [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/)（制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。）。
 - [ABC395 E「Flip Edge」](https://atcoder.jp/contests/abc395/tasks/abc395_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。）。
 - [ABC416 E「Development」](https://atcoder.jp/contests/abc416/tasks/abc416_e) — 主題: [最短路モデル](/learn/graph/weighted-shortest-path/)（許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。）。
@@ -113,4 +112,4 @@ Floyd–Warshallは中継点を{0,…,k−1}まで許す距離D_kを持ち、D_{
 - [ABC232 G 公式解説](https://atcoder.jp/contests/abc232/editorial/3141)
 - [ABC232 G 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-weighted-shortest-path`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-weighted-shortest-path`

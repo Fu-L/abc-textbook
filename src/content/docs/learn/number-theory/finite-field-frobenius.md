@@ -51,4 +51,4 @@ ABC251 Exでは大きい7冪から各幅を高々6回適用する。同じ幅q�
 - [ABC251 H 公式解説](https://atcoder.jp/contests/abc251/editorial/3954)
 - [ABC251 H 公式問題文](https://atcoder.jp/contests/abc251/tasks/abc251_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-finite-field-frobenius`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-finite-field-frobenius`

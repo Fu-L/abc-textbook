@@ -44,6 +44,7 @@
     "abc344-g",
     "abc346-g",
     "abc360-f",
+    "abc363-e",
     "abc368-e",
     "abc449-e",
     "abc449-f",
@@ -51,6 +52,7 @@
   ],
   "directProblemIds": [
     "abc320-e",
+    "abc363-e",
     "abc368-e",
     "abc449-e",
     "abc453-e",

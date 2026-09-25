@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f",
-    "acceptedAt": "2026-09-25T16:10:16.727Z"
+    "digest": "92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb",
+    "acceptedAt": "2026-09-25T18:35:55.894Z"
   },
   "taskIds": [
     "T047",
@@ -63,11 +63,11 @@
   },
   "digests": {
     "tags": "af15b18d2a3b5ac2690e2fe1b1847c00e4de0956bbde2778573c9d83fe84cee7",
-    "learningOutcomes": "70bda2e54bf7d0a7fa9204b3994e7f28746b5d96b3e284fd944c9fd6ef580cba",
-    "learningUnits": "a33f936b86a8229951ce6ce785676d6d7984bb5914d4520d83f4fb502f082e63",
-    "learningDocuments": "59a53f82352a06e7a740fe51b6f94932aeb859babb3b2514ce2256d8961389de",
-    "learningPrerequisitesDigest": "e89180868818d6ca949988245ddd40152d59654b968fe167bfb2fac28c934a5d",
-    "problemPlacementPolicyDigest": "adf108642e395a8ec623267c624c2f05a2ba37cf52de4b7d6a9860c0d18a9463"
+    "learningOutcomes": "7e76428051dab3e411fb2db6dff38898c7fc20f31852e2327aba573ad07a90ad",
+    "learningUnits": "f11500fe5c1d57f3d370403ee525e01d64cd2487f0123476dde71c910386aba2",
+    "learningDocuments": "281127bd177da3dce27917440278fb4b616041417737ad84ce7397c2fcd04856",
+    "learningPrerequisitesDigest": "fca72c5dafa35071af8a3d1aaf544c968daa4a3edfdd69c00bed18c1a5d87f58",
+    "problemPlacementPolicyDigest": "92ae54c0cb07e12c785f3ade3128a229901cac7ef47d13e38526d47814eb0eb7"
   },
-  "materializationDigest": "f2f8c5d701f4b49fc7b0ebee4ba067eee96822c8f1c6ebe325438d636afc4134"
+  "materializationDigest": "2695c184277f98482494e66029eb3f01eee0b05f56b969e94527be212a01958a"
 }

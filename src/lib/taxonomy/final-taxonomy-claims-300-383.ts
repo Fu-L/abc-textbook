@@ -1280,18 +1280,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['prerequisiteCandidates', 1, 'problem_specific'],
   ]),
   'abc332-f': decision(
-    'outcome-solve-stochastic-recurrence',
+    'outcome-design-range-update-action',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-stochastic-expectation-dp'],
-      ['typicalTechniques', 1, 'supporting', 'tag-lazy-segment-action'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-stochastic-expectation-dp'],
+      ['typicalTechniques', 0, 'problem_specific'],
+      ['typicalTechniques', 1, 'primary', 'tag-lazy-segment-action'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-modular-arithmetic'],
-      ['prerequisiteCandidates', 1, 'supporting', 'tag-lazy-segment-action'],
+      ['prerequisiteCandidates', 1, 'same_tag', 'tag-lazy-segment-action'],
     ],
-    {
-      'tag-lazy-segment-action': ['outcome-design-range-update-action'],
-      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
-    },
+    { 'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'] },
   ),
   'abc332-g': decision(
     'outcome-reduce-selection-to-network-optimization',
@@ -1971,14 +1967,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['outcome-maintain-interactive-query-protocol'],
   ),
   'abc355-f': decision(
-    'outcome-construct-optimal-spanning-tree',
+    'outcome-maintain-connectivity-components',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-spanning-tree-optimization'],
-      ['typicalTechniques', 1, 'supporting', 'tag-dsu-connectivity'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-spanning-tree-optimization'],
-      ['prerequisiteCandidates', 1, 'supporting', 'tag-dsu-connectivity'],
+      ['typicalTechniques', 0, 'supporting', 'tag-spanning-tree-optimization'],
+      ['typicalTechniques', 1, 'primary', 'tag-dsu-connectivity'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-spanning-tree-optimization'],
+      ['prerequisiteCandidates', 1, 'same_tag', 'tag-dsu-connectivity'],
     ],
-    { 'tag-dsu-connectivity': ['outcome-maintain-connectivity-components'] },
+    { 'tag-spanning-tree-optimization': ['outcome-construct-optimal-spanning-tree'] },
   ),
   'abc355-g': decision('outcome-exploit-convexity', [
     ['typicalTechniques', 0, 'primary', 'tag-discrete-convex-marginal'],
@@ -2203,11 +2199,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-suffix-lcp-index'],
     ['prerequisiteCandidates', 1, 'same_tag', 'tag-suffix-lcp-index'],
   ]),
-  'abc363-e': decision('outcome-model-and-compute-shortest-path', [
-    ['typicalTechniques', 0, 'same_tag', 'tag-shortest-path'],
-    ['typicalTechniques', 1, 'primary', 'tag-shortest-path'],
+  'abc363-e': decision('outcome-linearize-events', [
+    ['typicalTechniques', 0, 'primary', 'tag-event-sweep'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-event-sweep'],
     ['prerequisiteCandidates', 0, 'baseline'],
-    ['prerequisiteCandidates', 1, 'same_tag', 'tag-shortest-path'],
+    ['prerequisiteCandidates', 1, 'same_tag', 'tag-event-sweep'],
   ]),
   'abc363-f': decision(
     'outcome-recover-valid-witness',

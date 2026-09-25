@@ -50,4 +50,4 @@ sidebar:
 - [ABC460 G 公式解説](https://atcoder.jp/contests/abc460/editorial/21012)
 - [ABC460 G 公式問題文](https://atcoder.jp/contests/abc460/tasks/abc460_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-static-top-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-static-top-tree`

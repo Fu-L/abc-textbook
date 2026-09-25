@@ -67,4 +67,4 @@ DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge�
 - [ABC355 G 公式解説](https://atcoder.jp/contests/abc355/editorial/10078)
 - [ABC355 G 公式問題文](https://atcoder.jp/contests/abc355/tasks/abc355_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-monge-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-monge-optimization`

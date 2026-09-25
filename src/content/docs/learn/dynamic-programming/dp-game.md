@@ -71,4 +71,4 @@ ABC354 Eはこの勝敗再帰を残存カード集合へ適用する複合例で
 - [ABC265 H 公式解説](https://atcoder.jp/contests/abc265/editorial/4577)
 - [ABC265 H 公式問題文](https://atcoder.jp/contests/abc265/tasks/abc265_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-dp-game`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-dp-game`

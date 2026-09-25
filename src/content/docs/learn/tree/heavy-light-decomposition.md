@@ -59,4 +59,4 @@ ancestor query・LCA・Euler順による部分木区間化で得た考え方と�
 - [ABC351 G 公式解説](https://atcoder.jp/contests/abc351/editorial/9868)
 - [ABC351 G 公式問題文](https://atcoder.jp/contests/abc351/tasks/abc351_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-heavy-light-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-heavy-light-decomposition`
