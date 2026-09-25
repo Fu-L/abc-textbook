@@ -817,10 +817,9 @@ describe('official advanced slot registry', () => {
 
   it('sorts LearningUnit records by ID without implying a learning order', () => {
     expect(
-      sortCatalogEntityArray('learningUnits', [
-        { id: 'unit-b' },
-        { id: 'unit-a' },
-      ]).map(({ id }) => id),
+      sortCatalogEntityArray('learningUnits', [{ id: 'unit-b' }, { id: 'unit-a' }]).map(
+        ({ id }) => id,
+      ),
     ).toEqual(['unit-a', 'unit-b']);
   });
 
