@@ -262,7 +262,8 @@
     "abc461-f",
     "abc462-f",
     "abc465-e",
-    "abc466-e"
+    "abc466-e",
+    "abc466-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
@@ -318,8 +319,7 @@
     "abc446-g",
     "abc457-g",
     "abc458-f",
-    "abc464-e",
-    "abc466-g"
+    "abc464-e"
   ],
   "examples": [],
   "exercises": [],

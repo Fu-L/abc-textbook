@@ -6966,11 +6966,11 @@ const RAW_CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc311-e',
-    primaryTagId: 'tag-dp-state-equivalence',
-    primaryOutcomeId: 'outcome-design-minimal-sufficient-state',
-    additionalPrimaryTagIds: ['tag-grid-table-dp'],
+    primaryTagId: 'tag-grid-table-dp',
+    primaryOutcomeId: 'outcome-design-grid-table-dp',
+    additionalPrimaryTagIds: ['tag-dp-state-equivalence'],
     rationale:
-      '各右下端で未来の数え上げに十分な情報を最大正方形の辺長一つに圧縮し、三近傍から更新するgrid table DPとして実装する。',
+      '最大正方形の辺長を各マスに持つ三近傍のgrid table DPが解法の中心であり、状態を辺長一つに圧縮する設計はその補助的な着眼点である。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -7753,7 +7753,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
       'abc411-f',
       'abc451-f',
       'abc454-g',
-      'abc462-g',
     ],
   },
   {
@@ -8311,11 +8310,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     problemIds: ['abc448-e'],
   },
   {
-    from: 'outcome-recover-valid-witness',
-    to: 'outcome-reconstruct-tree-from-distance-matrix',
-    problemIds: ['abc451-e'],
-  },
-  {
     from: 'outcome-condense-and-order-directed-graph',
     to: 'outcome-process-dag-in-topological-order',
     problemIds: ['abc324-f'],
@@ -8714,12 +8708,6 @@ const supportingOutcomeAdditionsByProblemId: Readonly<
   'abc448-e': [
     {
       outcomeId: 'outcome-compute-in-modular-arithmetic',
-      claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
-    },
-  ],
-  'abc451-e': [
-    {
-      outcomeId: 'outcome-recover-valid-witness',
       claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
     },
   ],

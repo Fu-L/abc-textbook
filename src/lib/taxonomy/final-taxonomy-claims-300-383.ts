@@ -522,7 +522,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     {},
   ),
   'abc311-e': decision(
-    'outcome-design-minimal-sufficient-state',
+    'outcome-design-grid-table-dp',
     [
       ['typicalTechniques', 0, 'primary', 'tag-dp-state-equivalence'],
       ['typicalTechniques', 1, 'primary', 'tag-grid-table-dp'],
@@ -530,7 +530,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
       ['prerequisiteCandidates', 1, 'same_tag', 'tag-dp-state-equivalence'],
     ],
     {},
-    ['outcome-design-grid-table-dp'],
+    ['outcome-design-minimal-sufficient-state'],
   ),
   'abc311-ex': decision(
     'outcome-bound-total-work',
@@ -1373,12 +1373,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     'outcome-maintain-connectivity-components',
     [
       ['typicalTechniques', 0, 'primary', 'tag-dsu-connectivity'],
-      ['typicalTechniques', 1, 'supporting', 'tag-dag-topological-processing'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-dsu-connectivity'],
+      ['typicalTechniques', 1, 'primary', 'tag-dag-topological-processing'],
+      [
+        'prerequisiteCandidates',
+        0,
+        'same_tag',
+        'tag-dsu-connectivity',
+        'tag-dag-topological-processing',
+      ],
     ],
-    {
-      'tag-dag-topological-processing': ['outcome-process-dag-in-topological-order'],
-    },
+    {},
+    ['outcome-process-dag-in-topological-order'],
   ),
   'abc335-f': decision('outcome-bound-total-work', [
     ['typicalTechniques', 0, 'primary', 'tag-amortized-heavy-light'],

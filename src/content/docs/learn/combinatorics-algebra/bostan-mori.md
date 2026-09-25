@@ -47,4 +47,4 @@ P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段�
 - [ABC300 H 公式解説](https://atcoder.jp/contests/abc300/editorial/6269)
 - [ABC300 H 公式問題文](https://atcoder.jp/contests/abc300/tasks/abc300_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-bostan-mori`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-bostan-mori`

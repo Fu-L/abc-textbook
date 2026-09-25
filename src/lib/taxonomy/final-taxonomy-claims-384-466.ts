@@ -118,25 +118,20 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc386-g': decision(
-    'outcome-reorder-counting-contributions',
+    'outcome-count-labeled-structures-by-components',
     [
       ['typicalTechniques', 0, 'primary', 'tag-contribution-reordering'],
-      ['typicalTechniques', 0, 'supporting', 'tag-spanning-tree-optimization'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
-      ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 1, 'primary', 'tag-labeled-component-decomposition'],
       ['typicalTechniques', 2, 'same_tag', 'tag-contribution-reordering'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-spanning-tree-optimization'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 1, 'supporting', 'tag-combinatorial-coefficients'],
-      ['prerequisiteCandidates', 1, 'supporting', 'tag-inclusion-exclusion'],
       ['prerequisiteCandidates', 1, 'same_tag', 'tag-labeled-component-decomposition'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
-      'tag-inclusion-exclusion': ['outcome-correct-overlap-by-inversion'],
-      'tag-spanning-tree-optimization': ['outcome-construct-optimal-spanning-tree'],
     },
-    ['outcome-count-labeled-structures-by-components'],
+    ['outcome-reorder-counting-contributions'],
   ),
   'abc387-e': decision(
     'outcome-recover-valid-witness',
@@ -2136,10 +2131,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-symmetry-invariant-normalization': ['outcome-normalize-equivalent-states'],
     },
   ),
-  'abc451-e': decision('outcome-recover-valid-witness', [
-    ['typicalTechniques', 0, 'primary', 'tag-constructive-witness'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-constructive-witness'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-constructive-witness'],
+  'abc451-e': decision('outcome-reconstruct-tree-from-distance-matrix', [
+    ['typicalTechniques', 0, 'primary', 'tag-additive-tree-metric-reconstruction'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-additive-tree-metric-reconstruction'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-additive-tree-metric-reconstruction'],
   ]),
   'abc451-f': decision(
     'outcome-color-and-classify-bipartite-components',
@@ -2497,13 +2492,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 1, 'supporting', 'tag-convolution-fps'],
-      ['typicalTechniques', 1, 'supporting', 'tag-amortized-heavy-light'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-inclusion-exclusion'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-amortized-heavy-light'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-convolution-fps'],
     ],
     {
-      'tag-amortized-heavy-light': ['outcome-bound-total-work'],
       'tag-convolution-fps': [
         'outcome-encode-counting-by-generating-function',
         'outcome-compute-convolution-or-correlation',
@@ -2627,16 +2619,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'problem_specific'],
   ]),
   'abc466-g': decision(
-    'outcome-maintain-potential-differences',
+    'outcome-design-carry-or-mixed-radix-dp',
     [
       ['typicalTechniques', 0, 'primary', 'tag-dsu-connectivity'],
-      ['typicalTechniques', 1, 'supporting', 'tag-carry-mixed-radix-dp'],
+      ['typicalTechniques', 1, 'primary', 'tag-carry-mixed-radix-dp'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-dsu-connectivity'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-carry-mixed-radix-dp'],
     ],
-    {
-      'tag-carry-mixed-radix-dp': ['outcome-design-carry-or-mixed-radix-dp'],
-    },
-    ['outcome-design-carry-or-mixed-radix-dp'],
+    {},
+    ['outcome-maintain-potential-differences'],
   ),
 } as const satisfies Readonly<Record<string, ExplicitTaxonomyClaimDecision>>;

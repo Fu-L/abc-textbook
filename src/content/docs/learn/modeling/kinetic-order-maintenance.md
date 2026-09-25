@@ -55,4 +55,4 @@ event・値順のオフライン走査で得た考え方と実装を再利用し
 - [ABC344 G 公式解説](https://atcoder.jp/contests/abc344/editorial/9491)
 - [ABC344 G 公式問題文](https://atcoder.jp/contests/abc344/tasks/abc344_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-kinetic-order-maintenance`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-kinetic-order-maintenance`

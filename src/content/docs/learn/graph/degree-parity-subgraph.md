@@ -47,4 +47,4 @@ Euler trail・circuitで得た考え方と実装を再利用し、指定次数pa
 - [ABC345 F 公式解説](https://atcoder.jp/contests/abc345/editorial/9558)
 - [ABC345 F 公式問題文](https://atcoder.jp/contests/abc345/tasks/abc345_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-degree-parity-subgraph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-degree-parity-subgraph`

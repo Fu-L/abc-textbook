@@ -14,8 +14,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc385-g': 'tag-convolution-fps',
   'abc386-e': 'tag-bounded-enumeration',
   'abc386-f': 'tag-edit-distance-dp',
-  // The MST total is first linearized into threshold component counts.
-  'abc386-g': 'tag-contribution-reordering',
+  // Connected labeled-graph counting provides the expensive per-threshold computation.
+  'abc386-g': 'tag-labeled-component-decomposition',
   'abc387-e': 'tag-constructive-witness',
   'abc387-f': 'tag-functional-graph-doubling',
   'abc387-g': 'tag-convolution-fps',
@@ -233,7 +233,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc450-f': 'tag-dp-state-equivalence',
   // Exchange symmetry supplies a scalar expectation recurrence.
   'abc450-g': 'tag-stochastic-expectation-dp',
-  'abc451-e': 'tag-constructive-witness',
+  'abc451-e': 'tag-additive-tree-metric-reconstruction',
   'abc451-f': 'tag-bipartite-structure',
   'abc451-g': 'tag-binary-trie',
   'abc452-e': 'tag-integer-boundary-blocks',
@@ -288,6 +288,6 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc465-g': 'tag-ordered-set-heap',
   'abc466-e': 'tag-interval-partition-dp',
   'abc466-f': 'tag-amortized-monotone-progress',
-  // Weighted DSU first extracts an independent system of interval constraints.
-  'abc466-g': 'tag-dsu-connectivity',
+  // The carry-vector DP counts assignments after weighted DSU extracts independent constraints.
+  'abc466-g': 'tag-carry-mixed-radix-dp',
 } as const satisfies Readonly<Record<string, string>>;

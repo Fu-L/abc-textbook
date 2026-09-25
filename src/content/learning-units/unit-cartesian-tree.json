@@ -31,16 +31,16 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/cartesian-tree.md",
   "problemIds": [
-    "abc275-ex",
     "abc420-f",
     "abc435-f"
   ],
   "directProblemIds": [
     "abc420-f",
-    "abc435-f",
+    "abc435-f"
+  ],
+  "relatedProblemIds": [
     "abc275-ex"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "learningRationale": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"

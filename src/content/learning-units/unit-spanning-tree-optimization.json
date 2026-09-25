@@ -35,6 +35,7 @@
   "problemIds": [
     "abc218-e",
     "abc235-e",
+    "abc250-ex",
     "abc270-f",
     "abc282-e",
     "abc352-e",
@@ -51,9 +52,7 @@
     "abc364-f"
   ],
   "relatedProblemIds": [
-    "abc250-ex",
-    "abc301-ex",
-    "abc386-g"
+    "abc301-ex"
   ],
   "examples": [],
   "exercises": [],

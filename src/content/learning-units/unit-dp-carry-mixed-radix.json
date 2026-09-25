@@ -29,14 +29,14 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md",
   "problemIds": [
-    "abc231-e"
-  ],
-  "directProblemIds": [
-    "abc231-e"
-  ],
-  "relatedProblemIds": [
+    "abc231-e",
     "abc466-g"
   ],
+  "directProblemIds": [
+    "abc231-e",
+    "abc466-g"
+  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "learningRationale": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"

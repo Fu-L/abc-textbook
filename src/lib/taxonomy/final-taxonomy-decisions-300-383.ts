@@ -50,7 +50,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 = {
   'abc310-ex': 'tag-greedy-exchange-order',
   'abc310-f': 'tag-subset-bitmask-transform',
   'abc310-g': 'tag-functional-graph-doubling',
-  'abc311-e': 'tag-dp-state-equivalence',
+  'abc311-e': 'tag-grid-table-dp',
   'abc311-ex': 'tag-amortized-heavy-light',
   'abc311-f': 'tag-dp-state-equivalence',
   'abc311-g': 'tag-event-sweep',

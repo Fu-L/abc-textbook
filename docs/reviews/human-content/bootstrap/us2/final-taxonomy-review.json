@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+  "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
   "inventoryDigest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
   "reviewPolicy": {
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
+      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T13:31:42.076Z",
+      "completedAt": "2026-09-25T14:51:19.521Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
+      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T13:31:49.746Z",
+      "completedAt": "2026-09-25T14:51:27.078Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
+      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T13:31:50.311Z",
+      "completedAt": "2026-09-25T14:51:27.612Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
+      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T13:31:50.530Z",
+      "completedAt": "2026-09-25T14:51:27.824Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
+      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T13:31:57.317Z",
+      "completedAt": "2026-09-25T14:51:34.528Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "1d117d42e745e084e6bd51b039153429d654ef74980bebf1f3bc1adbe2c29229",
+  "reviewerExecutedCheckSetDigest": "68075e8c7d998fce83c9d3f84a7012e5464d6f2d2b8fda4dd4dcad704b6fd0e4",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -329,10 +329,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "依頼者の明示指示で、manifestが許すsolo_maintainer self-reviewを実施。Inventory 868問の採用解法・根拠からsemantic primary/supportingを再確認し、32問の分類修正を確認した。全868問・3,724 dispositionの網羅性監査と各レビュー対象checkが通過した。",
+      "reviewBasis": "全868問のInventoryを基準に解法と分類を意味面で再確認し、今回修正した11問では不可欠な処理をprimary/coprimaryへ置き、supportingは実際に解法を成立させる補助に限定した。残るplacementとpreview integration、claim coverageも照合した。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-25T13:32:02.811Z"
+      "reviewedAt": "2026-09-25T14:51:39.834Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -580,12 +580,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "依頼者の明示指示で、manifestが許すsolo_maintainer self-reviewを実施。Inventory 868問の採用解法・根拠からsemantic primary/supportingを再確認し、32問の分類修正を確認した。全868問・3,724 dispositionの網羅性監査と各レビュー対象checkが通過した。",
+    "rationale": "全868問のInventoryを基準に解法と分類を意味面で再確認し、今回修正した11問では不可欠な処理をprimary/coprimaryへ置き、supportingは実際に解法を成立させる補助に限定した。残るplacementとpreview integration、claim coverageも照合した。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-25T13:32:02.811Z"
+    "confirmedAt": "2026-09-25T14:51:39.834Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-25T13:32:02.811Z",
-  "evidenceDigest": "5e3fe82e29f35b736bc1a0bc36ba5fee09318e75fd73b71eb250c50027ff7052"
+  "generatedAt": "2026-09-25T14:51:39.834Z",
+  "evidenceDigest": "e8f45de39c9d2292f486f648b546372f228a6067af49b5ed63fcbf1c7519926f"
 }

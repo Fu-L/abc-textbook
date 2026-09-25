@@ -35,7 +35,6 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/directed-condensation.md",
   "problemIds": [
-    "abc214-h",
     "abc245-f",
     "abc277-ex",
     "abc277-f",
@@ -47,6 +46,7 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc214-h",
     "abc224-e",
     "abc306-ex",
     "abc324-f",

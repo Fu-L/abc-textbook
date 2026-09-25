@@ -29,14 +29,14 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/potential-dsu.md",
   "problemIds": [
-    "abc328-f",
-    "abc466-g"
+    "abc328-f"
   ],
   "directProblemIds": [
-    "abc328-f",
+    "abc328-f"
+  ],
+  "relatedProblemIds": [
     "abc466-g"
   ],
-  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "learningRationale": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"

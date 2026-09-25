@@ -141,6 +141,7 @@ export interface LoadedFinalTaxonomySourceContext {
   readonly previewTransaction: Readonly<Record<string, unknown>>;
   readonly provisionalMetadataComponent: FrozenPreviewMetadataComponent;
   readonly provisionalEvidence: FrozenProvisionalTaxonomyEvidence;
+  readonly provisionalIntegrationMap: TaxonomyIntegrationMap | null;
   readonly placementDecisionTable: z.infer<typeof ProblemPlacementDecisionTableSchema>;
   readonly records: readonly ProblemAnalysisRecord[];
   readonly knownSourceRevisionIds: readonly string[];
@@ -645,6 +646,7 @@ export const loadFinalTaxonomySourceContext = async (
     provisionalValue,
     layout.provisionalIntegrationPath,
   );
+  const provisionalIntegrationMapResult = TaxonomyIntegrationMapSchema.safeParse(provisionalValue);
   const placementDecisionTable = ProblemPlacementDecisionTableSchema.parse(
     placementDecisionTableValue,
   );
@@ -714,6 +716,9 @@ export const loadFinalTaxonomySourceContext = async (
     previewTransaction,
     provisionalMetadataComponent: parsedMetadataComponent.data,
     provisionalEvidence,
+    provisionalIntegrationMap: provisionalIntegrationMapResult.success
+      ? provisionalIntegrationMapResult.data
+      : null,
     placementDecisionTable,
     records,
     knownSourceRevisionIds,
@@ -1164,6 +1169,13 @@ const buildIntegrationMap = (
     provisionalEvidence: context.provisionalEvidence,
     entries,
   });
+  const provisionalIntegrationMap = context.provisionalIntegrationMap;
+  if (
+    provisionalIntegrationMap !== null &&
+    provisionalIntegrationMap.integrationSubjectDigest === canonicalDigest(subject)
+  ) {
+    return provisionalIntegrationMap;
+  }
   const status = reviewEvidenceId === null ? ('proposed' as const) : ('accepted' as const);
   const completeEntries = TaxonomyIntegrationMapSchema.shape.entries.parse(
     entries.map((entry) => ({ ...entry, reviewEvidenceId, status })),
@@ -3396,17 +3408,21 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   const expectedStatus = review === null ? ('proposed' as const) : ('accepted' as const);
   const expectedTimestamp = review?.evidence.generatedAt ?? context.workManifest.createdAt;
   const expectedHoldReasons = review === null ? ['CURRENT_SUBJECT_REVIEW_MISSING_OR_STALE'] : [];
+  const integrationEntries = build.integrationMap.entries.map(
+    ({ reviewEvidenceId: _reviewEvidenceId, status: _status, ...entry }) => entry,
+  );
+  const expectedIntegrationMap = buildIntegrationMap(
+    context,
+    integrationEntries,
+    review?.evidence.id ?? null,
+  );
   if (
     build.status !== expectedStatus ||
     build.generatedAt !== expectedTimestamp ||
     build.acceptedAt !== (review?.evidence.generatedAt ?? null) ||
     build.canonicalMaterializationAllowed !== (review !== null) ||
     !sameOrderedValues(build.holdReasons, expectedHoldReasons) ||
-    build.integrationMap.status !== expectedStatus ||
-    build.integrationMap.entries.some(
-      (entry) =>
-        entry.status !== expectedStatus || entry.reviewEvidenceId !== (review?.evidence.id ?? null),
-    ) ||
+    canonicalJson(build.integrationMap) !== canonicalJson(expectedIntegrationMap) ||
     build.correctionImpacts.some(
       ({ verificationStatus }) => verificationStatus !== (review === null ? 'pending' : 'reviewed'),
     )

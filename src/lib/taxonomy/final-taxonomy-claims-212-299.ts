@@ -166,15 +166,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     },
   ),
   'abc214-h': decision(
-    'outcome-condense-and-order-directed-graph',
+    'outcome-model-min-cost-flow',
     [
       d('t0', 'primary', 'tag-directed-condensation-toposort'),
-      d('t1', 'supporting', 'tag-flow-matching-cut'),
+      d('t1', 'primary', 'tag-flow-matching-cut'),
       d('p0', 'same_tag', 'tag-directed-condensation-toposort'),
-      d('p1', 'supporting', 'tag-flow-matching-cut'),
+      d('p1', 'same_tag', 'tag-flow-matching-cut'),
     ],
     { 'tag-flow-matching-cut': ['outcome-reduce-selection-to-network-optimization'] },
-    ['outcome-model-min-cost-flow'],
+    ['outcome-condense-and-order-directed-graph'],
   ),
   'abc215-e': decision(
     'outcome-design-minimal-sufficient-state',
@@ -1721,7 +1721,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     {},
   ),
   'abc250-ex': decision(
-    'outcome-model-and-compute-shortest-path',
+    'outcome-sweep-connectivity-by-kruskal-threshold',
     [
       d('t0', 'primary', 'tag-shortest-path'),
       d('t1', 'primary', 'tag-kruskal-threshold-sweep'),
@@ -1735,7 +1735,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       'tag-dsu-connectivity': ['outcome-maintain-connectivity-components'],
       'tag-event-sweep': ['outcome-linearize-events'],
     },
-    ['outcome-sweep-connectivity-by-kruskal-threshold'],
+    ['outcome-model-and-compute-shortest-path'],
   ),
   'abc250-f': decision(
     'outcome-maintain-monotone-window',
@@ -2361,11 +2361,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-build-finite-string-automaton',
     [
       d('t0', 'primary', 'tag-string-automata'),
-      d('t1', 'supporting', 'tag-shortest-path'),
+      d('t1', 'primary', 'tag-shortest-path'),
       d('p0', 'same_tag', 'tag-string-automata'),
-      d('p0', 'supporting', 'tag-shortest-path'),
     ],
     { 'tag-shortest-path': ['outcome-model-and-compute-shortest-path'] },
+    ['outcome-detect-improving-cycles'],
   ),
   'abc265-e': decision(
     'outcome-design-minimal-sufficient-state',
@@ -2830,7 +2830,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     { 'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'] },
   ),
   'abc275-ex': decision(
-    'outcome-build-cartesian-tree-decomposition',
+    'outcome-maintain-piecewise-linear-convex-function',
     [
       d('t0', 'primary', 'tag-cartesian-tree'),
       d('t1', 'primary', 'tag-slope-trick'),
@@ -2843,7 +2843,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       'tag-amortized-heavy-light': ['outcome-bound-total-work'],
       'tag-ordered-set-heap': ['outcome-maintain-dynamic-order-statistics'],
     },
-    ['outcome-maintain-piecewise-linear-convex-function'],
+    ['outcome-build-cartesian-tree-decomposition'],
   ),
   'abc275-f': decision(
     'outcome-design-resource-dp',
@@ -3386,14 +3386,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-solve-modular-constraints',
     [
       d('t0', 'primary', 'tag-modular-crt'),
-      d('t1', 'supporting', 'tag-functional-graph-doubling'),
+      d('t1', 'same_tag', 'tag-modular-crt'),
       d('t2', 'same_tag', 'tag-modular-crt'),
       d('p0', 'same_tag', 'tag-modular-crt'),
-      d('p1', 'supporting', 'tag-functional-graph-doubling'),
+      d('p1', 'same_tag', 'tag-modular-crt'),
       d('p2', 'supporting', 'tag-interactive-protocol'),
     ],
     {
-      'tag-functional-graph-doubling': ['outcome-decompose-functional-graph'],
       'tag-interactive-protocol': ['outcome-maintain-interactive-query-protocol'],
     },
     ['outcome-exploit-modular-periodicity'],

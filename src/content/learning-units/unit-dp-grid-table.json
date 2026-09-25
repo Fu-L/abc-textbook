@@ -31,17 +31,18 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
   "problemIds": [
+    "abc311-e",
     "abc415-e",
     "abc443-e"
   ],
   "directProblemIds": [
+    "abc311-e",
     "abc415-e",
     "abc443-e"
   ],
   "relatedProblemIds": [
     "abc221-h",
     "abc227-f",
-    "abc311-e",
     "abc347-f",
     "abc358-g",
     "abc464-e"

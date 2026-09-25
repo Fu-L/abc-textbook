@@ -38,7 +38,7 @@ sidebar:
 
 ## 問題一覧
 
-- [ABC451 E「Tree Distance」](https://atcoder.jp/contests/abc451/tasks/abc451_e) — 主題: [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)（加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。）。既習技能: [成立証明から構成解を復元する](/learn/modeling/constructive-witness/)（成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。）。
+- [ABC451 E「Tree Distance」](https://atcoder.jp/contests/abc451/tasks/abc451_e) — 主題: [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/)（加法的距離行列から正重み木の候補を復元し、全点対距離の再計算で存在を完全検証できる。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
@@ -47,4 +47,4 @@ sidebar:
 - [ABC451 E 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 - [ABC451 E 公式解説](https://atcoder.jp/contests/abc451/editorial/18053)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-additive-tree-metric-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-additive-tree-metric-reconstruction`

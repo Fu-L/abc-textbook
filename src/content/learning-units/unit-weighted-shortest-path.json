@@ -44,7 +44,6 @@
     "abc243-ex",
     "abc245-g",
     "abc246-e",
-    "abc250-ex",
     "abc257-f",
     "abc277-e",
     "abc286-e",
@@ -81,11 +80,11 @@
     "abc232-g",
     "abc245-g",
     "abc414-g",
-    "abc243-ex",
-    "abc250-ex"
+    "abc243-ex"
   ],
   "relatedProblemIds": [
     "abc218-f",
+    "abc250-ex",
     "abc252-e",
     "abc261-g",
     "abc264-g",

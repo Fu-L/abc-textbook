@@ -57,7 +57,6 @@
     "abc378-e",
     "abc379-e",
     "abc380-g",
-    "abc386-g",
     "abc390-f",
     "abc396-f",
     "abc407-f",
@@ -103,8 +102,7 @@
     "abc231-g",
     "abc268-g",
     "abc330-g",
-    "abc380-g",
-    "abc386-g"
+    "abc380-g"
   ],
   "relatedProblemIds": [
     "abc216-f",
@@ -128,6 +126,7 @@
     "abc353-e",
     "abc359-g",
     "abc361-e",
+    "abc386-g",
     "abc390-g",
     "abc401-f",
     "abc417-f",

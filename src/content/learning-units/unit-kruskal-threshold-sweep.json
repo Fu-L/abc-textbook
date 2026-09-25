@@ -32,14 +32,15 @@
   "docPath": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
   "problemIds": [
     "abc235-e",
+    "abc250-ex",
     "abc383-e"
   ],
   "directProblemIds": [
     "abc235-e",
-    "abc383-e"
+    "abc383-e",
+    "abc250-ex"
   ],
   "relatedProblemIds": [
-    "abc250-ex",
     "abc301-ex"
   ],
   "examples": [],

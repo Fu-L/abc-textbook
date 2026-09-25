@@ -40,6 +40,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/flow-matching.md",
   "problemIds": [
+    "abc214-h",
     "abc215-h",
     "abc218-h",
     "abc224-h",
@@ -72,7 +73,6 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc214-h",
     "abc227-h",
     "abc237-ex",
     "abc313-ex",

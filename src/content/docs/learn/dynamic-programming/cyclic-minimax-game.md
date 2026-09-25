@@ -54,4 +54,4 @@ ABC261 Exの非負重みではminimax距離順の確定を使う。ABC413 Fで�
 - [ABC413 F 公式解説](https://atcoder.jp/contests/abc413/editorial/13408)
 - [ABC413 F 公式問題文](https://atcoder.jp/contests/abc413/tasks/abc413_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-cyclic-minimax-game`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-cyclic-minimax-game`

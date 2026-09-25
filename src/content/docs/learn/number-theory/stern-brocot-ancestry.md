@@ -49,4 +49,4 @@ gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–
 - [ABC273 H 公式解説](https://atcoder.jp/contests/abc273/editorial/5032)
 - [ABC273 H 公式問題文](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-stern-brocot-ancestry`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-stern-brocot-ancestry`

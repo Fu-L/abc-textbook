@@ -17,8 +17,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc214-e': 'tag-greedy-exchange-order',
   'abc214-f': 'tag-sequence-subsequence-dp',
   'abc214-g': 'tag-inclusion-exclusion',
-  // SCC condensation is the irreversible reduction; flow optimizes the resulting DAG paths.
-  'abc214-h': 'tag-directed-condensation-toposort',
+  // Min-cost flow performs the joint path optimization after SCC condensation.
+  'abc214-h': 'tag-min-cost-flow',
 
   'abc215-e': 'tag-dp-state-equivalence',
   'abc215-f': 'tag-monotone-threshold-search',
@@ -208,8 +208,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc249-g': 'tag-linear-algebra-xor',
 
   'abc250-e': 'tag-symmetry-invariant-normalization',
-  // Multi-source distances turn path thresholds into weighted component merges.
-  'abc250-ex': 'tag-shortest-path',
+  // Threshold connectivity answers every query; multi-source distances define edge thresholds.
+  'abc250-ex': 'tag-kruskal-threshold-sweep',
   'abc250-f': 'tag-two-pointers-window',
   'abc250-g': 'tag-discrete-convex-marginal',
 
@@ -343,7 +343,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc274-g': 'tag-flow-matching-cut',
 
   'abc275-e': 'tag-stochastic-expectation-dp',
-  'abc275-ex': 'tag-cartesian-tree',
+  'abc275-ex': 'tag-slope-trick',
   'abc275-f': 'tag-knapsack-resource',
   'abc275-g': 'tag-convex-hull-halfplane',
 

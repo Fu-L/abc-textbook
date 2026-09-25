@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-25T13:32:02.811Z",
+  "generatedAt": "2026-09-25T14:51:39.834Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "d95a6dc126d588fdb7e66c7c73ff73b6b21f2f804b160c223b14d7ac2b2c9ffd",
+    "rulesDigest": "16922e86a80c8c8fe9a3cea5ad75e7b3e8d14153c5cb7b06a15e9768d3e86649",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -27748,7 +27748,6 @@
           "abc352-e",
           "abc355-f",
           "abc364-f",
-          "abc386-g",
           "tag-spanning-tree-optimization",
           "unit-spanning-tree-optimization"
         ]
@@ -27857,7 +27856,6 @@
           "abc343-e",
           "abc357-g",
           "abc377-f",
-          "abc386-g",
           "abc455-e",
           "abc456-g",
           "abc462-g",
@@ -28450,7 +28448,6 @@
           "abc256-e",
           "abc258-e",
           "abc284-g",
-          "abc286-f",
           "abc296-e",
           "abc357-e",
           "abc371-g",
@@ -30919,7 +30916,7 @@
       "evidenceRefs": [
         {
           "problemId": "abc264-g",
-          "claimPath": "/typicalTechniques/1",
+          "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -32877,7 +32874,6 @@
           "abc449-e",
           "abc449-f",
           "abc450-g",
-          "abc451-e",
           "abc451-f",
           "abc452-f",
           "abc453-e",
@@ -32892,7 +32888,6 @@
           "abc459-e",
           "abc459-g",
           "abc462-e",
-          "abc462-g",
           "abc463-f",
           "abc464-e",
           "abc464-f",
@@ -34696,7 +34691,6 @@
           "abc411-f",
           "abc451-f",
           "abc454-g",
-          "abc462-g",
           "tag-small-to-large",
           "unit-small-to-large"
         ]
@@ -34928,7 +34922,6 @@
           "abc284-g",
           "abc285-g",
           "abc286-e",
-          "abc286-f",
           "abc286-g",
           "abc287-ex",
           "abc289-e",
@@ -35001,7 +34994,6 @@
           "abc376-g",
           "abc377-e",
           "abc383-e",
-          "abc386-g",
           "abc387-f",
           "abc392-e",
           "abc393-g",
@@ -38228,7 +38220,6 @@
           "abc437-g",
           "abc443-f",
           "abc448-f",
-          "abc451-e",
           "abc453-f",
           "abc454-e",
           "tag-constructive-witness",
@@ -45533,16 +45524,16 @@
           "outcome-build-cartesian-tree-decomposition"
         ],
         "problemIds": [
-          "abc275-ex",
           "abc420-f",
           "abc435-f"
         ],
         "directProblemIds": [
           "abc420-f",
-          "abc435-f",
+          "abc435-f"
+        ],
+        "relatedProblemIds": [
           "abc275-ex"
         ],
-        "relatedProblemIds": [],
         "learningRationale": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
       },
       "sourceRevisionIds": [
@@ -46259,6 +46250,7 @@
           "abc367-g",
           "abc378-g",
           "abc385-g",
+          "abc386-g",
           "abc387-g",
           "abc390-g",
           "abc392-g",
@@ -46312,7 +46304,6 @@
           "abc343-e",
           "abc377-f",
           "abc381-g",
-          "abc386-g",
           "abc389-g",
           "abc405-g",
           "abc429-f",
@@ -46787,7 +46778,8 @@
           "abc461-f",
           "abc462-f",
           "abc465-e",
-          "abc466-e"
+          "abc466-e",
+          "abc466-g"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -46843,8 +46835,7 @@
           "abc446-g",
           "abc457-g",
           "abc458-f",
-          "abc464-e",
-          "abc466-g"
+          "abc464-e"
         ],
         "learningRationale": "状態と遷移の設計を共通言語にし、集合・列・確率・ゲーム・遷移高速化へ進む土台を作る。"
       },
@@ -47061,6 +47052,7 @@
           "abc251-g",
           "abc257-ex",
           "abc258-f",
+          "abc275-ex",
           "abc275-g",
           "abc286-ex",
           "abc289-g",
@@ -47110,7 +47102,6 @@
           "abc263-g",
           "abc266-ex",
           "abc274-f",
-          "abc275-ex",
           "abc280-g",
           "abc283-f",
           "abc315-f",
@@ -47636,8 +47627,7 @@
           "abc456-e",
           "abc461-g",
           "abc463-e",
-          "abc464-g",
-          "abc466-g"
+          "abc464-g"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -47654,7 +47644,6 @@
           "abc264-e",
           "abc264-g",
           "abc271-e",
-          "abc286-f",
           "abc297-e",
           "abc301-e",
           "abc302-ex",
@@ -47679,7 +47668,6 @@
           "abc370-f",
           "abc375-f",
           "abc376-g",
-          "abc386-g",
           "abc393-g",
           "abc394-g",
           "abc395-g",
@@ -47695,7 +47683,8 @@
           "abc440-g",
           "abc444-g",
           "abc447-e",
-          "abc454-e"
+          "abc454-e",
+          "abc466-g"
         ],
         "learningRationale": "対象を頂点と辺へ写して到達可能性を扱えるようにし、連結性・最短路・木・フローへ進む土台を作る。"
       },
@@ -48209,7 +48198,6 @@
           "abc382-g",
           "abc385-e",
           "abc386-e",
-          "abc386-g",
           "abc387-e",
           "abc388-e",
           "abc388-g",
@@ -48389,6 +48377,7 @@
           "abc384-e",
           "abc384-g",
           "abc385-g",
+          "abc386-g",
           "abc389-e",
           "abc390-e",
           "abc390-g",
@@ -48437,13 +48426,11 @@
           "abc447-g",
           "abc448-g",
           "abc450-g",
-          "abc451-e",
           "abc451-f",
           "abc454-f",
           "abc455-f",
           "abc459-e",
           "abc459-g",
-          "abc462-g",
           "abc464-g",
           "abc465-g",
           "abc466-e"
@@ -49144,7 +49131,6 @@
           "abc268-e",
           "abc273-e",
           "abc274-ex",
-          "abc275-ex",
           "abc276-f",
           "abc278-e",
           "abc281-e",
@@ -49252,6 +49238,7 @@
           "abc266-ex",
           "abc268-ex",
           "abc273-ex",
+          "abc275-ex",
           "abc276-ex",
           "abc280-ex",
           "abc282-ex",
@@ -50259,8 +50246,7 @@
           "abc396-e",
           "abc401-e",
           "abc420-e",
-          "abc434-e",
-          "abc466-g"
+          "abc434-e"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -50292,7 +50278,8 @@
           "abc413-g",
           "abc440-g",
           "abc447-e",
-          "abc451-f"
+          "abc451-f",
+          "abc466-g"
         ],
         "learningRationale": "連結成分を探索できるようになった後、成分縮約、差分辺のpotential累積、辺追加に対する付加情報つきDSU管理を学ぶ。"
       },
@@ -50456,8 +50443,7 @@
           "abc406-g",
           "abc432-f",
           "abc437-g",
-          "abc443-f",
-          "abc451-e"
+          "abc443-f"
         ],
         "learningRationale": "存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。"
       },
@@ -50719,7 +50705,6 @@
           "abc378-e",
           "abc379-e",
           "abc380-g",
-          "abc386-g",
           "abc390-f",
           "abc396-f",
           "abc407-f",
@@ -50765,8 +50750,7 @@
           "abc231-g",
           "abc268-g",
           "abc330-g",
-          "abc380-g",
-          "abc386-g"
+          "abc380-g"
         ],
         "relatedProblemIds": [
           "abc216-f",
@@ -50790,6 +50774,7 @@
           "abc353-e",
           "abc359-g",
           "abc361-e",
+          "abc386-g",
           "abc390-g",
           "abc401-f",
           "abc417-f",
@@ -52768,8 +52753,7 @@
           "abc427-g",
           "abc430-g",
           "abc435-e",
-          "abc451-f",
-          "abc462-g"
+          "abc451-f"
         ],
         "learningRationale": "各操作ではなく操作列全体の変化回数を数え、軽重分類・部分問題サイズ半減・一度限りの移動や削除で総計算量を抑える。"
       },
@@ -54075,7 +54059,6 @@
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
-          "abc214-h",
           "abc245-f",
           "abc277-ex",
           "abc277-f",
@@ -54087,6 +54070,7 @@
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
+          "abc214-h",
           "abc224-e",
           "abc306-ex",
           "abc324-f",
@@ -54831,6 +54815,7 @@
           "abc217-h",
           "abc224-g",
           "abc250-g",
+          "abc275-ex",
           "abc305-ex",
           "abc314-ex",
           "abc348-g",
@@ -54850,7 +54835,6 @@
           "abc229-g",
           "abc240-f",
           "abc263-g",
-          "abc275-ex",
           "abc330-f",
           "abc458-g",
           "abc459-g",
@@ -55594,14 +55578,14 @@
           "outcome-design-carry-or-mixed-radix-dp"
         ],
         "problemIds": [
-          "abc231-e"
-        ],
-        "directProblemIds": [
-          "abc231-e"
-        ],
-        "relatedProblemIds": [
+          "abc231-e",
           "abc466-g"
         ],
+        "directProblemIds": [
+          "abc231-e",
+          "abc466-g"
+        ],
+        "relatedProblemIds": [],
         "learningRationale": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"
       },
       "sourceRevisionIds": [
@@ -56565,17 +56549,18 @@
           "outcome-design-grid-table-dp"
         ],
         "problemIds": [
+          "abc311-e",
           "abc415-e",
           "abc443-e"
         ],
         "directProblemIds": [
+          "abc311-e",
           "abc415-e",
           "abc443-e"
         ],
         "relatedProblemIds": [
           "abc221-h",
           "abc227-f",
-          "abc311-e",
           "abc347-f",
           "abc358-g",
           "abc464-e"
@@ -58419,7 +58404,6 @@
           "abc296-ex",
           "abc307-e",
           "abc310-e",
-          "abc311-e",
           "abc311-f",
           "abc313-ex",
           "abc344-f",
@@ -58446,7 +58430,6 @@
           "abc283-e",
           "abc307-e",
           "abc310-e",
-          "abc311-e",
           "abc345-e",
           "abc375-e",
           "abc229-f",
@@ -58475,6 +58458,7 @@
           "abc282-g",
           "abc309-e",
           "abc309-g",
+          "abc311-e",
           "abc322-e",
           "abc350-e",
           "abc374-f",
@@ -62734,6 +62718,17 @@
           ]
         },
         {
+          "problemId": "abc264-g",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
+            "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
+          ]
+        },
+        {
           "problemId": "abc301-f",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
@@ -63087,6 +63082,7 @@
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
+          "abc214-h",
           "abc215-h",
           "abc218-h",
           "abc224-h",
@@ -63119,7 +63115,6 @@
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
-          "abc214-h",
           "abc227-h",
           "abc237-ex",
           "abc313-ex",
@@ -64676,7 +64671,6 @@
         "relatedProblemIds": [
           "abc247-ex",
           "abc258-e",
-          "abc286-f",
           "abc370-f",
           "abc417-g",
           "abc444-g"
@@ -64941,7 +64935,6 @@
         "relatedProblemIds": [
           "abc247-ex",
           "abc258-e",
-          "abc286-f",
           "abc444-g"
         ],
         "learningRationale": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
@@ -68934,7 +68927,6 @@
           "abc335-g",
           "abc343-e",
           "abc377-f",
-          "abc386-g",
           "abc465-f"
         ],
         "learningRationale": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
@@ -69851,14 +69843,15 @@
         ],
         "problemIds": [
           "abc235-e",
+          "abc250-ex",
           "abc383-e"
         ],
         "directProblemIds": [
           "abc235-e",
-          "abc383-e"
+          "abc383-e",
+          "abc250-ex"
         ],
         "relatedProblemIds": [
-          "abc250-ex",
           "abc301-ex"
         ],
         "learningRationale": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
@@ -70153,18 +70146,19 @@
           "abc213-g",
           "abc318-ex",
           "abc321-g",
-          "abc327-g"
+          "abc327-g",
+          "abc386-g"
         ],
         "directProblemIds": [
           "abc213-g",
           "abc321-g",
           "abc327-g",
+          "abc386-g",
           "abc318-ex"
         ],
         "relatedProblemIds": [
           "abc236-ex",
-          "abc253-ex",
-          "abc386-g"
+          "abc253-ex"
         ],
         "learningRationale": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
       },
@@ -73555,6 +73549,7 @@
           "outcome-model-min-cost-flow"
         ],
         "problemIds": [
+          "abc214-h",
           "abc224-h",
           "abc231-h",
           "abc247-g",
@@ -73565,11 +73560,11 @@
           "abc247-g",
           "abc407-g",
           "abc421-g",
+          "abc214-h",
           "abc224-h",
           "abc231-h"
         ],
         "relatedProblemIds": [
-          "abc214-h",
           "abc393-g"
         ],
         "learningRationale": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
@@ -80126,14 +80121,14 @@
           "outcome-maintain-potential-differences"
         ],
         "problemIds": [
-          "abc328-f",
-          "abc466-g"
+          "abc328-f"
         ],
         "directProblemIds": [
-          "abc328-f",
+          "abc328-f"
+        ],
+        "relatedProblemIds": [
           "abc466-g"
         ],
-        "relatedProblemIds": [],
         "learningRationale": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -84689,13 +84684,10 @@
         "ownedLearningOutcomeIds": [
           "outcome-condense-and-order-directed-graph"
         ],
-        "problemIds": [
-          "abc214-h"
-        ],
-        "directProblemIds": [
-          "abc214-h"
-        ],
+        "problemIds": [],
+        "directProblemIds": [],
         "relatedProblemIds": [
+          "abc214-h",
           "abc306-g",
           "abc374-g"
         ],
@@ -86124,7 +86116,6 @@
           "abc243-ex",
           "abc245-g",
           "abc246-e",
-          "abc250-ex",
           "abc252-e",
           "abc257-f",
           "abc277-e",
@@ -86146,6 +86137,7 @@
         "directProblemIds": [],
         "relatedProblemIds": [
           "abc218-f",
+          "abc250-ex",
           "abc261-g",
           "abc264-g",
           "abc271-e",
@@ -86785,15 +86777,16 @@
         "problemIds": [
           "abc217-h",
           "abc250-g",
+          "abc275-ex",
           "abc406-g"
         ],
         "directProblemIds": [
           "abc250-g",
           "abc406-g",
-          "abc217-h"
+          "abc217-h",
+          "abc275-ex"
         ],
         "relatedProblemIds": [
-          "abc275-ex",
           "abc458-g"
         ],
         "learningRationale": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
@@ -87133,8 +87126,7 @@
           "abc273-ex",
           "abc275-ex",
           "abc369-g",
-          "abc451-f",
-          "abc462-g"
+          "abc451-f"
         ],
         "learningRationale": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
@@ -87341,6 +87333,7 @@
         "problemIds": [
           "abc218-e",
           "abc235-e",
+          "abc250-ex",
           "abc270-f",
           "abc282-e",
           "abc352-e",
@@ -87357,9 +87350,7 @@
           "abc364-f"
         ],
         "relatedProblemIds": [
-          "abc250-ex",
-          "abc301-ex",
-          "abc386-g"
+          "abc301-ex"
         ],
         "learningRationale": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
       },
@@ -88811,6 +88802,17 @@
         {
           "problemId": "abc264-g",
           "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
+            "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
+          ]
+        },
+        {
+          "problemId": "abc264-g",
+          "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -93729,7 +93731,6 @@
           "abc243-ex",
           "abc245-g",
           "abc246-e",
-          "abc250-ex",
           "abc257-f",
           "abc277-e",
           "abc286-e",
@@ -93766,11 +93767,11 @@
           "abc232-g",
           "abc245-g",
           "abc414-g",
-          "abc243-ex",
-          "abc250-ex"
+          "abc243-ex"
         ],
         "relatedProblemIds": [
           "abc218-f",
+          "abc250-ex",
           "abc252-e",
           "abc261-g",
           "abc264-g",
@@ -98347,7 +98348,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「縮約 DAG の各頂点を入出力に分割し、最初の一単位だけ報酬を得る容量辺と再訪用の辺を置いて K 単位の最小費用流へ帰着する。」、解法への接続「SCC 縮約で移動を DAG の経路へ変え、頂点報酬を容量付き node-splitting 辺で共有し、トポロジカル prefix による再重み付け後の最小費用流として K 経路を同時最適化する。」、学習成果「複数の DAG 経路が共有する一回限りの頂点報酬を、SCC 縮約と最小費用流で同時に最適化できる。」を照合し、tag-scc-condensation / outcome-condense-and-order-directed-graph をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「縮約 DAG の各頂点を入出力に分割し、最初の一単位だけ報酬を得る容量辺と再訪用の辺を置いて K 単位の最小費用流へ帰着する。」、解法への接続「SCC 縮約で移動を DAG の経路へ変え、頂点報酬を容量付き node-splitting 辺で共有し、トポロジカル prefix による再重み付け後の最小費用流として K 経路を同時最適化する。」、学習成果「複数の DAG 経路が共有する一回限りの頂点報酬を、SCC 縮約と最小費用流で同時に最適化できる。」を照合し、tag-min-cost-flow / outcome-model-min-cost-flow をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -98356,9 +98357,9 @@
         "tag-scc-condensation"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-condense-and-order-directed-graph",
+      "primaryOutcomeId": "outcome-model-min-cost-flow",
       "additionalPrimaryOutcomeIds": [
-        "outcome-model-min-cost-flow"
+        "outcome-condense-and-order-directed-graph"
       ],
       "supportingOutcomeIds": [],
       "adHocElements": [
@@ -131175,7 +131176,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「多始点Dijkstraと辺の閾値順DSU」、解法への接続「K個の家を同時に始点としてDijkstraを行い、各辺の変換重みd[a]+c+d[b]を求めて昇順に並べる。質問もt順に処理し、重み≤tの辺をDSUへ追加して指定された家x,yの連結を判定する。」、学習成果「各閾値tについて、距離t以下の移動を繰り返して家xから家yへ到達できるかを答えられる。」を照合し、tag-shortest-path / outcome-model-and-compute-shortest-path をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「多始点Dijkstraと辺の閾値順DSU」、解法への接続「K個の家を同時に始点としてDijkstraを行い、各辺の変換重みd[a]+c+d[b]を求めて昇順に並べる。質問もt順に処理し、重み≤tの辺をDSUへ追加して指定された家x,yの連結を判定する。」、学習成果「各閾値tについて、距離t以下の移動を繰り返して家xから家yへ到達できるかを答えられる。」を照合し、tag-kruskal-threshold-sweep / outcome-sweep-connectivity-by-kruskal-threshold をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -131187,9 +131188,9 @@
         "tag-dsu-components",
         "tag-event-sweep"
       ],
-      "primaryOutcomeId": "outcome-model-and-compute-shortest-path",
+      "primaryOutcomeId": "outcome-sweep-connectivity-by-kruskal-threshold",
       "additionalPrimaryOutcomeIds": [
-        "outcome-sweep-connectivity-by-kruskal-threshold"
+        "outcome-model-and-compute-shortest-path"
       ],
       "supportingOutcomeIds": [
         "outcome-linearize-events",
@@ -144938,21 +144939,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「末尾2文字を頂点、次文字追加を重み付き辺とするグラフを作り、初期状態 $$ からの最大walkと到達可能な正閉路をBellman-Ford型緩和で調べる。」、解法への接続「bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。」、学習成果「短いpattern出現の線形scoreを持つ任意長文字列の最大値と無限性を、suffix状態グラフで判定できる。」を照合し、tag-finite-pattern-automaton / outcome-build-finite-string-automaton をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-detect-improving-cycles; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-detect-improving-cycles を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「末尾2文字を頂点、次文字追加を重み付き辺とするグラフを作り、初期状態 $$ からの最大walkと到達可能な正閉路をBellman-Ford型緩和で調べる。」、解法への接続「bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。」、学習成果「短いpattern出現の線形scoreを持つ任意長文字列の最大値と無限性を、suffix状態グラフで判定できる。」を照合し、tag-finite-pattern-automaton / outcome-build-finite-string-automaton をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-finite-pattern-automaton"
-      ],
-      "supportingTagIds": [
+        "tag-finite-pattern-automaton",
         "tag-shortest-path"
       ],
+      "supportingTagIds": [],
       "primaryOutcomeId": "outcome-build-finite-string-automaton",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
+      "additionalPrimaryOutcomeIds": [
         "outcome-detect-improving-cycles"
       ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "長さ3以下の全英小文字pattern数は26+26^2+26^3で入力上限と一致し、未指定patternは重み0のtableとして直接持てる。（再利用可能な見方: 短い全pattern空間が小さいときは、trieを作らず固定長lookup tableへ不足値0で展開できる。）"
       ],
@@ -144987,11 +144987,11 @@
               "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -145010,24 +145010,6 @@
             "tag-finite-pattern-automaton"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc264-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
-              "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-shortest-path"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -154616,7 +154598,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「B の Cartesian tree 上で、区間全体が既に j 回攻撃済みのときの最小追加費用 F_i(j) を子から合成し、離散凸な折れ線の変化点だけを small-to-large で管理する。」、解法への接続「単調 stack等で tie規約付き max Cartesian treeを構築する。postorderで子の折れ線event集合を大きい方へ併合し、j≥A_i かつ子の限界節約<B_iとなる j_0 までeventを消費する。prefix slopeをB_iへ置換するbreakpointを挿入し、rootのF(0)を答える。」、学習成果「最大値課金の区間攻撃最適化をCartesian tree上の離散凸関数mergeへ変換し、巨大な体力軸をbreakpointだけで扱える。」を照合し、tag-cartesian-tree / outcome-build-cartesian-tree-decomposition をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-ordered-set-multiset; 補助Outcome=outcome-maintain-ordered-set-statistics; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-ordered-set-multiset / outcome-maintain-ordered-set-statistics を補助技能として使う。; 補助Tag=tag-small-to-large; 補助Outcome=outcome-merge-small-into-large; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-small-to-large / outcome-merge-small-into-large を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「B の Cartesian tree 上で、区間全体が既に j 回攻撃済みのときの最小追加費用 F_i(j) を子から合成し、離散凸な折れ線の変化点だけを small-to-large で管理する。」、解法への接続「単調 stack等で tie規約付き max Cartesian treeを構築する。postorderで子の折れ線event集合を大きい方へ併合し、j≥A_i かつ子の限界節約<B_iとなる j_0 までeventを消費する。prefix slopeをB_iへ置換するbreakpointを挿入し、rootのF(0)を答える。」、学習成果「最大値課金の区間攻撃最適化をCartesian tree上の離散凸関数mergeへ変換し、巨大な体力軸をbreakpointだけで扱える。」を照合し、tag-slope-trick / outcome-maintain-piecewise-linear-convex-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-ordered-set-multiset; 補助Outcome=outcome-maintain-ordered-set-statistics; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-ordered-set-multiset / outcome-maintain-ordered-set-statistics を補助技能として使う。; 補助Tag=tag-small-to-large; 補助Outcome=outcome-merge-small-into-large; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-small-to-large / outcome-merge-small-into-large を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -154628,9 +154610,9 @@
         "tag-ordered-set-multiset",
         "tag-small-to-large"
       ],
-      "primaryOutcomeId": "outcome-build-cartesian-tree-decomposition",
+      "primaryOutcomeId": "outcome-maintain-piecewise-linear-convex-function",
       "additionalPrimaryOutcomeIds": [
-        "outcome-maintain-piecewise-linear-convex-function"
+        "outcome-build-cartesian-tree-decomposition"
       ],
       "supportingOutcomeIds": [
         "outcome-maintain-ordered-set-statistics",
@@ -167098,7 +167080,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「108頂点を指定した9個の互いに素なcycleへ分け、各回転量を中国剰余定理で統合する。」、解法への接続「長さ[4,9,5,7,11,13,17,19,23]の各連続blockをcycleにしたAを出力してflushする。Bを受け取り、各block先頭の移動量からN mod cを復元する。得た9合同式を中国剰余定理で統合し、[0,1338557220)の解を出力して直ちに終了する。」、学習成果「長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。」を照合し、tag-modular-congruence-crt / outcome-solve-modular-constraints をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-functional-graph-decomposition; 補助Outcome=outcome-decompose-functional-graph; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-functional-graph-decomposition / outcome-decompose-functional-graph を補助技能として使う。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「108頂点を指定した9個の互いに素なcycleへ分け、各回転量を中国剰余定理で統合する。」、解法への接続「長さ[4,9,5,7,11,13,17,19,23]の各連続blockをcycleにしたAを出力してflushする。Bを受け取り、各block先頭の移動量からN mod cを復元する。得た9合同式を中国剰余定理で統合し、[0,1338557220)の解を出力して直ちに終了する。」、学習成果「長さ108のpermutationへの1回の反復応答から、1≤N≤10^9を合同式の一意解として復元できる。」を照合し、tag-modular-congruence-crt / outcome-solve-modular-constraints をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -167107,7 +167089,6 @@
         "tag-modular-periodicity"
       ],
       "supportingTagIds": [
-        "tag-functional-graph-decomposition",
         "tag-interactive-protocol"
       ],
       "primaryOutcomeId": "outcome-solve-modular-constraints",
@@ -167115,7 +167096,6 @@
         "outcome-exploit-modular-periodicity"
       ],
       "supportingOutcomeIds": [
-        "outcome-decompose-functional-graph",
         "outcome-maintain-interactive-query-protocol"
       ],
       "adHocElements": [
@@ -167157,24 +167137,6 @@
             "tag-modular-periodicity"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc286-f",
-            "claimPath": "/typicalTechniques/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260",
-              "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-functional-graph-decomposition"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -167229,24 +167191,6 @@
             "tag-modular-periodicity"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc286-f",
-            "claimPath": "/prerequisiteCandidates/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260",
-              "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-functional-graph-decomposition"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -189150,7 +189094,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: 各右下端で未来の数え上げに十分な情報を最大正方形の辺長一つに圧縮し、三近傍から更新するgrid table DPとして実装する。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 最大正方形の辺長を各マスに持つ三近傍のgrid table DPが解法の中心であり、状態を辺長一つに圧縮する設計はその補助的な着眼点である。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -189159,9 +189103,9 @@
         "tag-grid-table-dp"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-design-minimal-sufficient-state",
+      "primaryOutcomeId": "outcome-design-grid-table-dp",
       "additionalPrimaryOutcomeIds": [
-        "outcome-design-grid-table-dp"
+        "outcome-design-minimal-sufficient-state"
       ],
       "supportingOutcomeIds": [],
       "adHocElements": [
@@ -210325,21 +210269,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「同値連結成分をDSUで縮約し、値が増えるDAG上で最長path DPを行う」、解法への接続「A_u=A_vの全辺をDSUでunionする。各元辺の異なる代表元間に小さいAから大きいAへの有向辺を作る。頂点1の成分dp=1、他を到達不能として、成分をA昇順に処理しdp[next]=max(dp[next],dp[cur]+1)を行い、頂点Nの成分値を出力する。」、学習成果「頂点1からNへのsimple pathのうち、A列が非減少なpathのdistinct値数最大を求められる。」を照合し、tag-dsu-components / outcome-maintain-connectivity-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dag-topological-processing; 補助Outcome=outcome-process-dag-in-topological-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dag-topological-processing / outcome-process-dag-in-topological-order を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「同値連結成分をDSUで縮約し、値が増えるDAG上で最長path DPを行う」、解法への接続「A_u=A_vの全辺をDSUでunionする。各元辺の異なる代表元間に小さいAから大きいAへの有向辺を作る。頂点1の成分dp=1、他を到達不能として、成分をA昇順に処理しdp[next]=max(dp[next],dp[cur]+1)を行い、頂点Nの成分値を出力する。」、学習成果「頂点1からNへのsimple pathのうち、A列が非減少なpathのdistinct値数最大を求められる。」を照合し、tag-dsu-components / outcome-maintain-connectivity-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-dag-topological-processing",
         "tag-dsu-components"
       ],
-      "supportingTagIds": [
-        "tag-dag-topological-processing"
-      ],
+      "supportingTagIds": [],
       "primaryOutcomeId": "outcome-maintain-connectivity-components",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
+      "additionalPrimaryOutcomeIds": [
         "outcome-process-dag-in-topological-order"
       ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "scoreは訪問頂点数ではなくdistinctなAの数なので、同じAの連結領域を何頂点通っても一段として数える。（再利用可能な見方: 非減少label pathでは、等値移動を0-cost componentへ縮約して厳密増加DAGへ変える。）"
       ],
@@ -210374,11 +210317,11 @@
               "source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-dag-topological-processing"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -210394,6 +210337,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
+            "tag-dag-topological-processing",
             "tag-dsu-components"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
@@ -245282,7 +245226,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「MST重みをthreshold成分数へ変換し、連結graphの重み付き数え上げDPを各kで行う」、解法への接続「binomialと冪を前計算する。k=1..Mごとにf[1..N]を連結成分DPで求め、size sの成分を選ぶC(N,s)、外部とのedgeをk以上にする冪、残り内部edgeの自由度を掛けてΣ_G c(G_k)へ加える。threshold和とshift補正をmodで合成する。」、学習成果「全完全graph重み付けのMST総和を、threshold分解・主客転倒・連結graph DPで多項式時間に数えられる。」を照合し、tag-contribution-reordering / outcome-reorder-counting-contributions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-spanning-tree-optimization; 補助Outcome=outcome-construct-optimal-spanning-tree; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-spanning-tree-optimization / outcome-construct-optimal-spanning-tree を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「MST重みをthreshold成分数へ変換し、連結graphの重み付き数え上げDPを各kで行う」、解法への接続「binomialと冪を前計算する。k=1..Mごとにf[1..N]を連結成分DPで求め、size sの成分を選ぶC(N,s)、外部とのedgeをk以上にする冪、残り内部edgeの自由度を掛けてΣ_G c(G_k)へ加える。threshold和とshift補正をmodで合成する。」、学習成果「全完全graph重み付けのMST総和を、threshold分解・主客転倒・連結graph DPで多項式時間に数えられる。」を照合し、tag-labeled-component-decomposition / outcome-count-labeled-structures-by-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -245291,17 +245235,13 @@
         "tag-labeled-component-decomposition"
       ],
       "supportingTagIds": [
-        "tag-combinatorial-coefficients",
-        "tag-inclusion-exclusion",
-        "tag-spanning-tree-optimization"
+        "tag-combinatorial-coefficients"
       ],
-      "primaryOutcomeId": "outcome-reorder-counting-contributions",
+      "primaryOutcomeId": "outcome-count-labeled-structures-by-components",
       "additionalPrimaryOutcomeIds": [
-        "outcome-count-labeled-structures-by-components"
+        "outcome-reorder-counting-contributions"
       ],
       "supportingOutcomeIds": [
-        "outcome-construct-optimal-spanning-tree",
-        "outcome-correct-overlap-by-inversion",
         "outcome-formulate-combinatorial-coefficients"
       ],
       "adHocElements": [
@@ -245325,24 +245265,6 @@
             "tag-contribution-reordering"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc386-g",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c",
-              "source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-spanning-tree-optimization"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -245376,8 +245298,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-combinatorial-coefficients",
-            "tag-inclusion-exclusion"
+            "tag-combinatorial-coefficients"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -245411,11 +245332,11 @@
               "source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
-            "tag-spanning-tree-optimization"
+            "tag-contribution-reordering"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -245449,8 +245370,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-combinatorial-coefficients",
-            "tag-inclusion-exclusion"
+            "tag-combinatorial-coefficients"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -291099,21 +291019,17 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各 i≠1 について祖先条件を満たす j の中から A_{i,j} 最小を親候補にして重み A_{i,j} の辺を張り、完成候補木の全点対距離を再計算して入力行列と照合する。」、解法への接続「対称化した A を使い、各 i の祖先候補を O(N) 走査して最短の j を選ぶ。候補なしなら No。辺を構築後、各始点から tree DFS で距離を求め、全 A_{i,j} と一致した場合だけ Yes と辺集合を出力する。」、学習成果「全点対距離行列から正重み木の唯一候補を二乗時間で復元し、存在を完全検証できる。」を照合し、tag-additive-tree-metric-reconstruction / outcome-reconstruct-tree-from-distance-matrix をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-constructive-witness; 補助Outcome=outcome-recover-valid-witness; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-constructive-witness / outcome-recover-valid-witness を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各 i≠1 について祖先条件を満たす j の中から A_{i,j} 最小を親候補にして重み A_{i,j} の辺を張り、完成候補木の全点対距離を再計算して入力行列と照合する。」、解法への接続「対称化した A を使い、各 i の祖先候補を O(N) 走査して最短の j を選ぶ。候補なしなら No。辺を構築後、各始点から tree DFS で距離を求め、全 A_{i,j} と一致した場合だけ Yes と辺集合を出力する。」、学習成果「全点対距離行列から正重み木の唯一候補を二乗時間で復元し、存在を完全検証できる。」を照合し、tag-additive-tree-metric-reconstruction / outcome-reconstruct-tree-from-distance-matrix をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-additive-tree-metric-reconstruction"
       ],
-      "supportingTagIds": [
-        "tag-constructive-witness"
-      ],
+      "supportingTagIds": [],
       "primaryOutcomeId": "outcome-reconstruct-tree-from-distance-matrix",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-recover-valid-witness"
-      ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "存在するなら一意に決まる構造では、必要条件で候補を強制構成し、最後に直接検証する方が判定条件を簡潔にできる。（再利用可能な見方: 木距離の equality は path 上包含を表し、root を選ぶことで親子関係へ順序化できる。）"
       ],
@@ -291157,24 +291073,6 @@
         {
           "claimRef": {
             "problemId": "abc451-e",
-            "claimPath": "/typicalTechniques/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
-              "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-constructive-witness"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc451-e",
             "claimPath": "/prerequisiteCandidates/0",
             "evidenceIds": [
               "evidence-official-analysis"
@@ -291189,24 +291087,6 @@
             "tag-additive-tree-metric-reconstruction"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc451-e",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
-              "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-constructive-witness"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -298852,7 +298732,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各値kの出現数 X_k,Y_kから多項式 f_k(x)=Σ_j(-1)^j C(X_k,j)C(Y_k,j)j!x^j を作り、全f_kをNTTで積み、係数c_iに(N-i)!を掛けて総和する。」、解法への接続「C,Gの値frequency X,Yとfactorialを前計算する。各kでj=0..min(X_k,Y_k)の係数を作り、size順にNTT convolutionしてfを得る。ans=invFact[N]×Σ_i f_i×fact[N-i]をmodulus上で計算する。」、学習成果「値class付きpermutationの全位置不一致確率を、包除多項式とNTTで準線形に計算できる。」を照合し、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。; 補助Tag=tag-small-to-large; 補助Outcome=outcome-merge-small-into-large; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-small-to-large / outcome-merge-small-into-large を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各値kの出現数 X_k,Y_kから多項式 f_k(x)=Σ_j(-1)^j C(X_k,j)C(Y_k,j)j!x^j を作り、全f_kをNTTで積み、係数c_iに(N-i)!を掛けて総和する。」、解法への接続「C,Gの値frequency X,Yとfactorialを前計算する。各kでj=0..min(X_k,Y_k)の係数を作り、size順にNTT convolutionしてfを得る。ans=invFact[N]×Σ_i f_i×fact[N-i]をmodulus上で計算する。」、学習成果「値class付きpermutationの全位置不一致確率を、包除多項式とNTTで準線形に計算できる。」を照合し、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -298861,15 +298741,13 @@
       ],
       "supportingTagIds": [
         "tag-convolution",
-        "tag-generating-functions",
-        "tag-small-to-large"
+        "tag-generating-functions"
       ],
       "primaryOutcomeId": "outcome-correct-overlap-by-inversion",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-convolution-or-correlation",
-        "outcome-encode-counting-by-generating-function",
-        "outcome-merge-small-into-large"
+        "outcome-encode-counting-by-generating-function"
       ],
       "adHocElements": [
         "permutation包除を位置subsetの2^Nで回さず、同値classごとの選択個数へorbit圧縮する。（再利用可能な見方: 独立class間の総選択数だけを追う式は、生成関数の積としてそのまま実装できる。）"
@@ -298915,24 +298793,6 @@
         {
           "claimRef": {
             "problemId": "abc462-g",
-            "claimPath": "/typicalTechniques/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857",
-              "source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-small-to-large"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc462-g",
             "claimPath": "/prerequisiteCandidates/0",
             "evidenceIds": [
               "evidence-official-analysis"
@@ -298947,24 +298807,6 @@
             "tag-inclusion-exclusion"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc462-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857",
-              "source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-small-to-large"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -301523,7 +301365,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「weighted DSUでprefix変数間の差制約を統合・矛盾検出し、独立な必要十分区間式へ整理する。その後、各A_jのbit選択と各式のcarry vectorだけを状態にして下位bitから進むcarry DPで解数を数える。」、解法への接続「各Sから区間長を引き非負問題へ変換する。weighted DSUでB_{L-1},B_Rを差Sでunionし矛盾を検出、成分内隣接prefixから独立区間式を抽出する。carry vector DPをbit0..29で回し、各bitのN-bit maskからnext carryを更新する。」、学習成果「少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。」を照合し、tag-potential-dsu / outcome-maintain-potential-differences をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「weighted DSUでprefix変数間の差制約を統合・矛盾検出し、独立な必要十分区間式へ整理する。その後、各A_jのbit選択と各式のcarry vectorだけを状態にして下位bitから進むcarry DPで解数を数える。」、解法への接続「各Sから区間長を引き非負問題へ変換する。weighted DSUでB_{L-1},B_Rを差Sでunionし矛盾を検出、成分内隣接prefixから独立区間式を抽出する。carry vector DPをbit0..29で回し、各bitのN-bit maskからnext carryを更新する。」、学習成果「少数変数の区間和制約解数を、weighted DSUの独立化とbitwise carry vector DPで有限・0・Infinityまで判定できる。」を照合し、tag-carry-mixed-radix-dp / outcome-design-carry-or-mixed-radix-dp をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -301532,9 +301374,9 @@
         "tag-potential-dsu"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-maintain-potential-differences",
+      "primaryOutcomeId": "outcome-design-carry-or-mixed-radix-dp",
       "additionalPrimaryOutcomeIds": [
-        "outcome-design-carry-or-mixed-radix-dp"
+        "outcome-maintain-potential-differences"
       ],
       "supportingOutcomeIds": [],
       "adHocElements": [
@@ -381568,8 +381410,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "5e3fe82e29f35b736bc1a0bc36ba5fee09318e75fd73b71eb250c50027ff7052",
-      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
+      "digest": "e8f45de39c9d2292f486f648b546372f228a6067af49b5ed63fcbf1c7519926f",
+      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
       "authorIds": [
         "person-maintainer"
       ],
@@ -381580,15 +381422,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
-  "taxonomyDigest": "78fd67ac8cee06af2dae819ad6e2a634da31d10c8e05060bff81bb394a080657",
+  "taxonomySubjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+  "taxonomyDigest": "305051785ca1e536577bbd1b6b15eda4503b72cef6abcdbbf8e20ed8577bf1ab",
   "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
   "learningUnitDagDigest": "659d56f968c7e4cbcd16a9bbc3a99b9aa987a1cf35562c5b6c500d523d12107c",
-  "placementDigest": "04d53f52da8d719eff569794a8bcf525523b58d882920acc539c5183df314cd1",
+  "placementDigest": "71ff1988f8b33394966f17ae63781c87c2d1b687682073f0d94fe7e6ca1c2256",
   "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "status": "accepted",
-  "acceptedAt": "2026-09-25T13:32:02.811Z",
+  "acceptedAt": "2026-09-25T14:51:39.834Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a"
+  "buildDigest": "c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85"
 }

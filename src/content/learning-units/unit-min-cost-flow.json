@@ -31,6 +31,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/min-cost-flow.md",
   "problemIds": [
+    "abc214-h",
     "abc224-h",
     "abc231-h",
     "abc247-g",
@@ -41,11 +42,11 @@
     "abc247-g",
     "abc407-g",
     "abc421-g",
+    "abc214-h",
     "abc224-h",
     "abc231-h"
   ],
   "relatedProblemIds": [
-    "abc214-h",
     "abc393-g"
   ],
   "examples": [],

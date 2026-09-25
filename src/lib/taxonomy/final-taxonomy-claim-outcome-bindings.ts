@@ -48,6 +48,21 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/0': [sameTag('outcome-condense-and-order-directed-graph')],
     '/prerequisiteCandidates/1': [sameTag('outcome-model-min-cost-flow')],
   },
+  'abc264-g': {
+    '/typicalTechniques/0': [primary('outcome-build-finite-string-automaton')],
+    '/typicalTechniques/1': [primary('outcome-detect-improving-cycles')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-build-finite-string-automaton')],
+  },
+  'abc335-e': {
+    '/typicalTechniques/0': [primary('outcome-maintain-connectivity-components')],
+    '/typicalTechniques/1': [primary('outcome-process-dag-in-topological-order')],
+    '/prerequisiteCandidates/0': [
+      sameTag(
+        'outcome-maintain-connectivity-components',
+        'outcome-process-dag-in-topological-order',
+      ),
+    ],
+  },
   'abc218-f': {
     '/typicalTechniques/0': [
       primary(
@@ -203,16 +218,10 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   },
   'abc286-f': {
     '/typicalTechniques/0': [primary('outcome-solve-modular-constraints')],
-    '/typicalTechniques/1': [
-      primary('outcome-exploit-modular-periodicity'),
-      supporting('outcome-decompose-functional-graph'),
-    ],
+    '/typicalTechniques/1': [primary('outcome-exploit-modular-periodicity')],
     '/typicalTechniques/2': [sameTag('outcome-solve-modular-constraints')],
     '/prerequisiteCandidates/0': [sameTag('outcome-solve-modular-constraints')],
-    '/prerequisiteCandidates/1': [
-      sameTag('outcome-exploit-modular-periodicity'),
-      supporting('outcome-decompose-functional-graph'),
-    ],
+    '/prerequisiteCandidates/1': [sameTag('outcome-exploit-modular-periodicity')],
   },
   'abc289-ex': {
     '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
@@ -469,25 +478,16 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     ],
   },
   'abc386-g': {
-    '/typicalTechniques/0': [
-      primary('outcome-reorder-counting-contributions'),
-      supporting('outcome-construct-optimal-spanning-tree'),
-    ],
+    '/typicalTechniques/0': [primary('outcome-reorder-counting-contributions')],
     '/typicalTechniques/1': [
       primary('outcome-count-labeled-structures-by-components'),
-      supporting(
-        'outcome-formulate-combinatorial-coefficients',
-        'outcome-correct-overlap-by-inversion',
-      ),
+      supporting('outcome-formulate-combinatorial-coefficients'),
     ],
     '/typicalTechniques/2': [sameTag('outcome-reorder-counting-contributions')],
-    '/prerequisiteCandidates/0': [supporting('outcome-construct-optimal-spanning-tree')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-reorder-counting-contributions')],
     '/prerequisiteCandidates/1': [
       sameTag('outcome-count-labeled-structures-by-components'),
-      supporting(
-        'outcome-formulate-combinatorial-coefficients',
-        'outcome-correct-overlap-by-inversion',
-      ),
+      supporting('outcome-formulate-combinatorial-coefficients'),
     ],
   },
   'abc387-g': {

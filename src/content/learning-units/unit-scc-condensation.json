@@ -30,13 +30,10 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/scc-condensation.md",
-  "problemIds": [
-    "abc214-h"
-  ],
-  "directProblemIds": [
-    "abc214-h"
-  ],
+  "problemIds": [],
+  "directProblemIds": [],
   "relatedProblemIds": [
+    "abc214-h",
     "abc306-g",
     "abc374-g"
   ],

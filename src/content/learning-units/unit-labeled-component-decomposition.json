@@ -34,18 +34,19 @@
     "abc213-g",
     "abc318-ex",
     "abc321-g",
-    "abc327-g"
+    "abc327-g",
+    "abc386-g"
   ],
   "directProblemIds": [
     "abc213-g",
     "abc321-g",
     "abc327-g",
+    "abc386-g",
     "abc318-ex"
   ],
   "relatedProblemIds": [
     "abc236-ex",
-    "abc253-ex",
-    "abc386-g"
+    "abc253-ex"
   ],
   "examples": [],
   "exercises": [],

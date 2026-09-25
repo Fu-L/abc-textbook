@@ -995,7 +995,7 @@ describe('final taxonomy policy', () => {
       'abc248-f': ['outcome-design-frontier-profile-dp', 'unit-frontier-profile-dp'],
       'abc236-f': ['outcome-optimize-weighted-matroid-basis', 'unit-matroid-greedy'],
       'abc227-h': ['outcome-construct-euler-trail-or-circuit', 'unit-euler-trail-circuit'],
-      'abc275-ex': ['outcome-build-cartesian-tree-decomposition', 'unit-cartesian-tree'],
+      'abc275-ex': ['outcome-maintain-piecewise-linear-convex-function', 'unit-slope-trick'],
       'abc237-ex': [
         'outcome-optimize-poset-antichain-by-dilworth',
         'unit-poset-dilworth-antichain',
@@ -1004,7 +1004,10 @@ describe('final taxonomy policy', () => {
         'outcome-accelerate-iteration-by-characteristic-p-frobenius',
         'unit-finite-field-frobenius',
       ],
-      'abc250-ex': ['outcome-model-and-compute-shortest-path', 'unit-weighted-shortest-path'],
+      'abc250-ex': [
+        'outcome-sweep-connectivity-by-kruskal-threshold',
+        'unit-kruskal-threshold-sweep',
+      ],
       'abc261-e': ['outcome-compose-finite-functions', 'unit-finite-function-composition'],
       'abc270-g': ['outcome-find-orbit-hit-by-bsgs', 'unit-baby-step-giant-step'],
       'abc282-f': ['outcome-answer-idempotent-range-query', 'unit-idempotent-overlap-range-query'],
@@ -1202,7 +1205,6 @@ describe('final taxonomy policy', () => {
       'abc424-f': ['outcome-detect-crossing-by-cyclic-order'],
       'abc429-f': ['outcome-exponentiate-transition-over-semiring'],
       'abc448-e': ['outcome-compute-in-modular-arithmetic'],
-      'abc451-e': ['outcome-recover-valid-witness'],
       'abc454-e': ['outcome-color-and-classify-bipartite-components'],
       'abc457-g': ['outcome-design-order-preserving-dp'],
     };
