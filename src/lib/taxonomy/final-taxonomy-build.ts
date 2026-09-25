@@ -1705,13 +1705,14 @@ export const primaryOutcomeOwnerUnitId = (decision: {
   const ownerUnitIds =
     FINAL_TAXONOMY_OUTCOMES.find(({ id }) => id === decision.primaryOutcomeId)
       ?.learningUnitCandidateIds ?? [];
-  if (ownerUnitIds.length !== 1) {
+  const [ownerUnitId] = ownerUnitIds;
+  if (ownerUnitIds.length !== 1 || ownerUnitId === undefined) {
     throw new FinalTaxonomyBuildError(
       'PRIMARY_OUTCOME_OWNER_UNIT_INVALID',
       `${decision.problemId}/${decision.primaryOutcomeId}/${ownerUnitIds.join(',')}`,
     );
   }
-  return ownerUnitIds[0]!;
+  return ownerUnitId;
 };
 
 const primaryHomeUnitIdForDecision = primaryOutcomeOwnerUnitId;

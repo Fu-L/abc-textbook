@@ -2476,8 +2476,11 @@ export const FinalTaxonomyBuildSchema = strictObject({
         message: `Placement ${placement.id} requires exactly one primary Outcome owner Unit.`,
       });
     }
+    const primaryOwnerUnitId = primaryOwnerUnitIds[0];
     const homeUnit =
-      primaryOwnerUnitIds.length === 1 ? unitById.get(primaryOwnerUnitIds[0]!) : undefined;
+      primaryOwnerUnitIds.length === 1 && primaryOwnerUnitId !== undefined
+        ? unitById.get(primaryOwnerUnitId)
+        : undefined;
     if (
       homeUnit === undefined ||
       !homeUnit.directProblemIds.includes(placement.problemId) ||
@@ -2975,9 +2978,7 @@ export const CanonicalProblemPlacementPolicySchema = strictObject({
         assessmentDescription = `${assessment.learningUnitId}'s ${assessment.surface} surface`;
         if (assessment.surface === 'prerequisite_graph') {
           hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
-            (locator) =>
-              locator.ownerType === 'learning_prerequisites' &&
-              locator.path === 'src/content/policies/learning-prerequisites.json',
+            (locator) => locator.ownerType === 'learning_prerequisites',
           );
         } else if (assessment.surface === 'derived_index') {
           hasCanonicalMapping = previewImpact.derivedIndexPaths.every((path) =>
