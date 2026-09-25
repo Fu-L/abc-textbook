@@ -1,7 +1,7 @@
 {
   "id": "unit-tree-metric",
   "kind": "section",
-  "title": "木距離を基準点・直径・中心から捉える",
+  "title": "基準点からの木距離・剰余類・直径・中心",
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -17,15 +17,19 @@
     "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1"
   ],
   "tagIds": [
+    "tag-tree-distance-residue",
     "tag-tree-metric-diameter"
   ],
   "ownedTagIds": [
+    "tag-tree-distance-residue",
     "tag-tree-metric-diameter"
   ],
   "learningOutcomeIds": [
+    "outcome-classify-tree-by-distance-residue",
     "outcome-use-tree-diameter-extrema"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-classify-tree-by-distance-residue",
     "outcome-use-tree-diameter-extrema"
   ],
   "contentPhase": "canonical_skeleton",
@@ -53,5 +57,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。"
+  "learningRationale": "木を探索して基準点から距離labelを作る方法を土台に、距離剰余類による構造分類と、直径端点・中心が距離構造を代表する性質を区別して学ぶ。"
 }

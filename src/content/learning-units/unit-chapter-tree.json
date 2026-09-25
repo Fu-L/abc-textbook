@@ -27,6 +27,7 @@
     "tag-static-top-tree",
     "tag-tree-ancestor-lca",
     "tag-tree-balanced-separator",
+    "tag-tree-distance-residue",
     "tag-tree-euler-flattening",
     "tag-tree-metric-diameter",
     "tag-tree-model-structure",
@@ -45,6 +46,7 @@
     "outcome-build-component-merge-tree",
     "outcome-build-laminar-interval-containment-tree",
     "outcome-build-virtual-tree",
+    "outcome-classify-tree-by-distance-residue",
     "outcome-compose-dynamic-tree-clusters",
     "outcome-count-implicit-binary-tree-layers",
     "outcome-find-weighted-balanced-separator",
@@ -112,7 +114,6 @@
   "relatedProblemIds": [
     "abc220-e",
     "abc246-g",
-    "abc275-ex",
     "abc293-ex",
     "abc369-g",
     "abc387-f",

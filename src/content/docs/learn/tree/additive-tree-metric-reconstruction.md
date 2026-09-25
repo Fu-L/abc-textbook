@@ -26,7 +26,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)。
+直接の前提単元: [基準点からの木距離・剰余類・直径・中心](/learn/tree/tree-metric/)。
 
 このUnitを直接前提とする単元: なし。
 
@@ -47,4 +47,4 @@ sidebar:
 - [ABC451 E 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 - [ABC451 E 公式解説](https://atcoder.jp/contests/abc451/editorial/18053)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-additive-tree-metric-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-additive-tree-metric-reconstruction`

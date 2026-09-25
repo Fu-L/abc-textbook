@@ -47,4 +47,4 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 - [ABC456 F 公式解説](https://atcoder.jp/contests/abc456/editorial/19850)
 - [ABC456 F 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-swag`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-swag`

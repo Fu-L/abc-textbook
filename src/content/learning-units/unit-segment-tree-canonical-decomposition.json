@@ -30,11 +30,14 @@
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
-  "problemIds": [],
-  "directProblemIds": [],
+  "problemIds": [
+    "abc342-g"
+  ],
+  "directProblemIds": [
+    "abc342-g"
+  ],
   "relatedProblemIds": [
     "abc244-ex",
-    "abc342-g",
     "abc363-g",
     "abc414-g"
   ],

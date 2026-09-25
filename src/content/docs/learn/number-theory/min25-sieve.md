@@ -47,4 +47,4 @@ floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗�
 - [ABC370 G 公式解説](https://atcoder.jp/contests/abc370/editorial/10869)
 - [ABC370 G 公式問題文](https://atcoder.jp/contests/abc370/tasks/abc370_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-min25-sieve`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-min25-sieve`

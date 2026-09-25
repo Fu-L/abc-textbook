@@ -17,15 +17,19 @@
     "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
   ],
   "tagIds": [
+    "tag-edit-distance-dp",
     "tag-sequence-subsequence-dp"
   ],
   "ownedTagIds": [
+    "tag-edit-distance-dp",
     "tag-sequence-subsequence-dp"
   ],
   "learningOutcomeIds": [
+    "outcome-compute-edit-distance",
     "outcome-design-order-preserving-dp"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-compute-edit-distance",
     "outcome-design-order-preserving-dp"
   ],
   "contentPhase": "canonical_skeleton",

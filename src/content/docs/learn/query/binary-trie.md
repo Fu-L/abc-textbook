@@ -58,14 +58,15 @@ sidebar:
 以下はこのUnitのOutcomeを追加で学ぶ技能または既習技能として参照する、別のUnitを主題とする問題です。
 
 - [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h) — 主題: [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/)（探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。）。既習技能: [bit列をTrieで索引化する](/learn/query/binary-trie/)（整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。）。
+- [ABC254 Ex「Multiply or Divide by 2」](https://atcoder.jp/contests/abc254/tasks/abc254_h) — 主題: [交換論から選択順を導く](/learn/modeling/greedy-exchange/)（局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。）。既習技能: [bit列をTrieで索引化する](/learn/query/binary-trie/)（整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。）。
 
 ## 根拠
 
 - [ABC252 H 公式解説](https://atcoder.jp/contests/abc252/editorial/3981)
 - [ABC252 H 公式問題文](https://atcoder.jp/contests/abc252/tasks/abc252_h)
+- [ABC254 H 公式解説](https://atcoder.jp/contests/abc254/editorial/4053)
+- [ABC254 H 公式問題文](https://atcoder.jp/contests/abc254/tasks/abc254_h)
 - [ABC425 G 公式解説](https://atcoder.jp/contests/abc425/editorial/14087)
 - [ABC425 G 公式問題文](https://atcoder.jp/contests/abc425/tasks/abc425_g)
-- [ABC451 G 公式解説](https://atcoder.jp/contests/abc451/editorial/18047)
-- [ABC451 G 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-binary-trie`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-binary-trie`

@@ -24,11 +24,15 @@
   ],
   "learningOutcomeIds": [
     "outcome-evaluate-compressed-integer-blocks",
-    "outcome-partition-integer-parameter-ranges"
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-piecewise-linear-integer-ranges"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-evaluate-compressed-integer-blocks",
-    "outcome-partition-integer-parameter-ranges"
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-piecewise-linear-integer-ranges"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
@@ -59,7 +63,7 @@
   "relatedProblemIds": [
     "abc216-e",
     "abc243-g",
-    "abc315-g",
+    "abc303-f",
     "abc361-f",
     "abc370-g",
     "abc444-f"

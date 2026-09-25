@@ -1,7 +1,7 @@
 {
   "id": "tag-interactive-protocol",
   "name": "対話protocolとquery設計",
-  "definition": "judgeとの問い合わせ・応答列をprotocolどおり実行し、回数上限内で必要な情報を識別する。",
+  "definition": "judgeとの問い合わせ応答または交互手番をprotocolどおり実行し、query制約を守るか合法な応答手を返す。",
   "parentId": "tag-model-reduction",
   "prerequisiteTagIds": [],
   "semanticSignature": {
@@ -43,8 +43,10 @@
     "outcome-maintain-interactive-query-protocol"
   ],
   "representativeProblemIds": [
+    "abc282-f",
     "abc305-f",
-    "abc355-e"
+    "abc355-e",
+    "abc398-e"
   ],
   "aliases": [
     "interactive problem",

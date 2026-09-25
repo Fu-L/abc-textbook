@@ -35,7 +35,6 @@
     "abc305-e",
     "abc308-f",
     "abc331-e",
-    "abc342-g",
     "abc384-e",
     "abc391-f",
     "abc409-f",
@@ -49,8 +48,7 @@
     "abc440-e",
     "abc308-f",
     "abc391-f",
-    "abc409-f",
-    "abc342-g"
+    "abc409-f"
   ],
   "relatedProblemIds": [
     "abc214-e",
@@ -65,7 +63,6 @@
     "abc320-e",
     "abc359-f",
     "abc373-f",
-    "abc376-e",
     "abc376-g",
     "abc407-e",
     "abc433-e"

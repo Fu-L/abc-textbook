@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32",
-    "acceptedAt": "2026-09-25T10:16:38.197Z"
+    "digest": "5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a",
+    "acceptedAt": "2026-09-25T13:32:02.811Z"
   },
   "taskIds": [
     "T047",
@@ -41,12 +41,12 @@
     "T050"
   ],
   "counts": {
-    "tags": 204,
-    "learningOutcomes": 224,
+    "tags": 206,
+    "learningOutcomes": 228,
     "learningUnits": 229,
     "learningDocuments": 229,
-    "directlyOwnedTags": 204,
-    "directlyOwnedLearningOutcomes": 224,
+    "directlyOwnedTags": 206,
+    "directlyOwnedLearningOutcomes": 228,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "29111995e214b0cd30791e31f4c9e4b16aaf1101160a2164fae1263826a27b9e",
-    "learningOutcomes": "96126d0da88d8a2a723c1be13981eb4ae946130da17ab1db3071694f8ebc52b6",
-    "learningUnits": "14d846de81b5a213f9d0b363cb2e5991bc6005bd8cf0d09d4aaa48d55b795888",
-    "learningDocuments": "6497b71afdd2facdd81d8318a54c6549d4e9c45a9802d15489c7cae8f358df0b",
-    "learningPrerequisitesDigest": "07ed6fd28f55471ec3b3815d93db52b7b953a91fd707c07a2369923dbf40efbe",
-    "problemPlacementPolicyDigest": "86493f1c25088a813bf80874e6f2216d673faf875298e317f7ed008bfcf2f88e"
+    "tags": "af15b18d2a3b5ac2690e2fe1b1847c00e4de0956bbde2778573c9d83fe84cee7",
+    "learningOutcomes": "19effae314967a2a32f39b00c9df836fb0c8c7d5cda969b61569b1f73fc9547b",
+    "learningUnits": "016e3eab4f2188ec44730ae95b574ce85ae7977d23242a0d1c667bf564f7122a",
+    "learningDocuments": "d3dc11a137456ea2dd9377ed5329a3476e492d12683ec417768b5a91415aa9ae",
+    "learningPrerequisitesDigest": "fa40a7ea3511665bd0e6c4ded7721bea79c6840b90ec792f8b12d02c5bb11c6e",
+    "problemPlacementPolicyDigest": "178c93589c2cad4391d980d9dbc3a13215462c761ebca2efe4ac20ea4219b617"
   },
-  "materializationDigest": "fd182cae4238a44e4bc382ef0f776c408b1dd831d587a82e4b1756e4695ee0d7"
+  "materializationDigest": "b4b46e0266d12a102f86241335b647b3fa4f1bde09f169cd5dfeeb7ee20bf397"
 }

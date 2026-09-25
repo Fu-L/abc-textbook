@@ -1,6 +1,6 @@
 {
   "id": "outcome-maintain-interactive-query-protocol",
-  "statement": "問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。",
+  "statement": "judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
     "abc269-e",

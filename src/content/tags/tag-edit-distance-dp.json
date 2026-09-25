@@ -1,0 +1,49 @@
+{
+  "id": "tag-edit-distance-dp",
+  "name": "編集距離・sequence alignment DP",
+  "definition": "二つの列prefixを状態にし、一致・挿入・削除・置換の局所遷移から最小編集費用を求める。閾値がある場合は長さ差の下界で対角帯へ状態を絞る。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二つのprefix",
+      "二つの列",
+      "削除",
+      "挿入",
+      "置換"
+    ],
+    "triggerPatterns": [
+      "二列を対応付ける",
+      "文字を挿入・削除・置換",
+      "編集回数"
+    ],
+    "invariantPatterns": [
+      "edit cost",
+      "prefix pair",
+      "対角線からの距離"
+    ],
+    "goalPatterns": [
+      "変換cost",
+      "最小編集回数",
+      "閾値以内の判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compute-edit-distance"
+  ],
+  "representativeProblemIds": [
+    "abc386-f"
+  ],
+  "aliases": [
+    "Levenshtein distance",
+    "sequence alignment",
+    "編集距離DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

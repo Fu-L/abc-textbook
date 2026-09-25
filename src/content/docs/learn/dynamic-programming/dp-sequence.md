@@ -14,6 +14,10 @@ sidebar:
 
 ## 概要
 
+### 編集距離・sequence alignment DP
+
+二つの列prefixを状態にし、一致・挿入・削除・置換の局所遷移から最小編集費用を求める。閾値がある場合は長さ差の下界で対角帯へ状態を絞る。
+
 ### 列・subsequence DP
 
 列のprefixや最後に選んだ要素を状態にし、順序を保つ選択を組み立てる。
@@ -24,6 +28,7 @@ sidebar:
 
 ### 習得する技能
 
+- 二つの列prefixを状態にし、一致・挿入・削除・置換の編集費用を最小化できる。閾値Kの判定では長さ差の下界から|i-j|≤Kの対角帯だけを計算できる。
 - 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。
 
 ## 前提と範囲
@@ -49,7 +54,7 @@ DPの最小十分状態で得た考え方と実装を再利用し、列・subseq
 - [ABC238 F「Two Exams」](https://atcoder.jp/contests/abc238/tasks/abc238_f) — 主題: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)（列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。）。
 - [ABC299 F「Square Subsequence」](https://atcoder.jp/contests/abc299/tasks/abc299_f) — 主題: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)（列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。）。
 - [ABC315 F「Shortcuts」](https://atcoder.jp/contests/abc315/tasks/abc315_f) — 主題: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)（列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。）。既習技能: [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/)（幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。）。
-- [ABC386 F「Operate K」](https://atcoder.jp/contests/abc386/tasks/abc386_f) — 主題: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)（列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。）。既習技能: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)（採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。）。
+- [ABC386 F「Operate K」](https://atcoder.jp/contests/abc386/tasks/abc386_f) — 主題: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)（二つの列prefixを状態にし、一致・挿入・削除・置換の編集費用を最小化できる。閾値Kの判定では長さ差の下界から|i-j|≤Kの対角帯だけを計算できる。）。既習技能: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)（採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
@@ -72,4 +77,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、列・subseq
 - [ABC238 F 公式解説](https://atcoder.jp/contests/abc238/editorial/3354)
 - [ABC238 F 公式問題文](https://atcoder.jp/contests/abc238/tasks/abc238_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-dp-sequence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-dp-sequence`

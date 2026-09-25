@@ -51,6 +51,7 @@
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc255-ex",
+    "abc267-e",
     "abc273-ex",
     "abc275-ex",
     "abc295-g",
@@ -58,6 +59,7 @@
     "abc307-f",
     "abc312-ex",
     "abc319-g",
+    "abc329-e",
     "abc345-g",
     "abc369-g",
     "abc417-g",
@@ -71,5 +73,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。"
+  "learningRationale": "各操作ではなく操作列全体の変化回数を数え、軽重分類・部分問題サイズ半減・一度限りの移動や削除で総計算量を抑える。"
 }

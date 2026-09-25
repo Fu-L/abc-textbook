@@ -1,7 +1,7 @@
 {
   "id": "unit-monoid-segment-tree",
   "kind": "section",
-  "title": "結合的要約と列・区間の合成",
+  "title": "Segment Treeの要約・区間分解・合成",
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -47,6 +47,7 @@
     "abc292-ex",
     "abc331-f",
     "abc339-g",
+    "abc342-g",
     "abc343-f",
     "abc365-f",
     "abc403-g",
@@ -77,7 +78,6 @@
     "abc309-f",
     "abc322-f",
     "abc339-e",
-    "abc342-g",
     "abc353-g",
     "abc354-f",
     "abc356-f",
@@ -93,5 +93,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。"
+  "learningRationale": "区間をcanonical nodeへ置く操作と結合則を持つ要約を区別し、Segment Treeのrange object配置・point path取得、Sparse Table、SWAG、有限関数合成が使う分解方法を比較する。"
 }

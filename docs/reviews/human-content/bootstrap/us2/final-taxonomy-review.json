@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "9deb32916dbc5297a2a690f5da99609a11e84de9102075beecd892987d2266d0",
+  "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "9327ce432901cdcee6db5c614c0d9d02a16a2fef4b1b18bc2e2b4ffacb8a78c8",
+  "inventoryDigest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "9deb32916dbc5297a2a690f5da99609a11e84de9102075beecd892987d2266d0",
+      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fffe37f4312d84251a512e41db7f52b472226414243bb1c5e5dbaa8245b3f976",
+      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T10:16:17.871Z",
+      "completedAt": "2026-09-25T13:31:42.076Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "9deb32916dbc5297a2a690f5da99609a11e84de9102075beecd892987d2266d0",
+      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fffe37f4312d84251a512e41db7f52b472226414243bb1c5e5dbaa8245b3f976",
+      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T10:16:25.340Z",
+      "completedAt": "2026-09-25T13:31:49.746Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "9deb32916dbc5297a2a690f5da99609a11e84de9102075beecd892987d2266d0",
+      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fffe37f4312d84251a512e41db7f52b472226414243bb1c5e5dbaa8245b3f976",
+      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T10:16:25.894Z",
+      "completedAt": "2026-09-25T13:31:50.311Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "9deb32916dbc5297a2a690f5da99609a11e84de9102075beecd892987d2266d0",
+      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fffe37f4312d84251a512e41db7f52b472226414243bb1c5e5dbaa8245b3f976",
+      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T10:16:26.115Z",
+      "completedAt": "2026-09-25T13:31:50.530Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "9deb32916dbc5297a2a690f5da99609a11e84de9102075beecd892987d2266d0",
+      "subjectDigest": "b042f1bd49fafefe81c394481b1ebe8567b7aa4d0ed6a3acb4fa634e7d6d735b",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "fffe37f4312d84251a512e41db7f52b472226414243bb1c5e5dbaa8245b3f976",
+      "resultDigest": "dd61349daf6c8d619246984569bdac0cc9cec6a9ea7bbf37a32538a123236066",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T10:16:32.870Z",
+      "completedAt": "2026-09-25T13:31:57.317Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "cce40c680fa72bfe18281251c7df1e963a885b737fa5696103468b47bc53bc0b",
+  "reviewerExecutedCheckSetDigest": "1d117d42e745e084e6bd51b039153429d654ef74980bebf1f3bc1adbe2c29229",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -134,6 +134,7 @@
         "outcome-characterize-integer-solvability",
         "outcome-characterize-palindrome-intervals",
         "outcome-classify-game-states",
+        "outcome-classify-tree-by-distance-residue",
         "outcome-close-eventual-dp-tail",
         "outcome-color-and-classify-bipartite-components",
         "outcome-compare-algebraic-objects-by-random-fingerprint",
@@ -147,6 +148,7 @@
         "outcome-compute-binomial-by-lucas",
         "outcome-compute-convolution-or-correlation",
         "outcome-compute-directed-walk-period",
+        "outcome-compute-edit-distance",
         "outcome-compute-in-finite-field-extension",
         "outcome-compute-in-modular-arithmetic",
         "outcome-compute-online-relaxed-convolution",
@@ -263,6 +265,7 @@
         "outcome-optimize-tree-order-by-cluster-contraction",
         "outcome-optimize-univariate-convex-function",
         "outcome-optimize-weighted-matroid-basis",
+        "outcome-partition-at-critical-integer-boundaries",
         "outcome-partition-integer-parameter-ranges",
         "outcome-pass-resource-dp-through-heavy-recursion",
         "outcome-peel-directed-graph-toward-cycles",
@@ -314,6 +317,7 @@
         "outcome-subtract-exception-transitions",
         "outcome-sum-affine-floors-by-euclid",
         "outcome-sum-multiplicative-function-by-min25-sieve",
+        "outcome-sum-piecewise-linear-integer-ranges",
         "outcome-sweep-connectivity-by-kruskal-threshold",
         "outcome-test-linear-matroid-intersection-rank",
         "outcome-transform-to-combinatorics-algebra",
@@ -325,10 +329,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "Fu-LのPR #63追加レビュー（issuecomment-5829273673）と修正・push指示に基づき、Inventoryと採用解法を再照合した。DP親子、ABC226 E、主客転倒、ABC254 Ex、組合せ章順を修正した。Codexによる実装・検証であり、人間による独立再査読ではない。",
+      "reviewBasis": "依頼者の明示指示で、manifestが許すsolo_maintainer self-reviewを実施。Inventory 868問の採用解法・根拠からsemantic primary/supportingを再確認し、32問の分類修正を確認した。全868問・3,724 dispositionの網羅性監査と各レビュー対象checkが通過した。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-25T10:16:38.197Z"
+      "reviewedAt": "2026-09-25T13:32:02.811Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -378,6 +382,7 @@
       "outcome-characterize-integer-solvability",
       "outcome-characterize-palindrome-intervals",
       "outcome-classify-game-states",
+      "outcome-classify-tree-by-distance-residue",
       "outcome-close-eventual-dp-tail",
       "outcome-color-and-classify-bipartite-components",
       "outcome-compare-algebraic-objects-by-random-fingerprint",
@@ -391,6 +396,7 @@
       "outcome-compute-binomial-by-lucas",
       "outcome-compute-convolution-or-correlation",
       "outcome-compute-directed-walk-period",
+      "outcome-compute-edit-distance",
       "outcome-compute-in-finite-field-extension",
       "outcome-compute-in-modular-arithmetic",
       "outcome-compute-online-relaxed-convolution",
@@ -507,6 +513,7 @@
       "outcome-optimize-tree-order-by-cluster-contraction",
       "outcome-optimize-univariate-convex-function",
       "outcome-optimize-weighted-matroid-basis",
+      "outcome-partition-at-critical-integer-boundaries",
       "outcome-partition-integer-parameter-ranges",
       "outcome-pass-resource-dp-through-heavy-recursion",
       "outcome-peel-directed-graph-toward-cycles",
@@ -558,6 +565,7 @@
       "outcome-subtract-exception-transitions",
       "outcome-sum-affine-floors-by-euclid",
       "outcome-sum-multiplicative-function-by-min25-sieve",
+      "outcome-sum-piecewise-linear-integer-ranges",
       "outcome-sweep-connectivity-by-kruskal-threshold",
       "outcome-test-linear-matroid-intersection-rank",
       "outcome-transform-to-combinatorics-algebra",
@@ -572,12 +580,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "Fu-LのPR #63追加レビュー（issuecomment-5829273673）と修正・push指示に基づき、Inventoryと採用解法を再照合した。DP親子、ABC226 E、主客転倒、ABC254 Ex、組合せ章順を修正した。Codexによる実装・検証であり、人間による独立再査読ではない。",
+    "rationale": "依頼者の明示指示で、manifestが許すsolo_maintainer self-reviewを実施。Inventory 868問の採用解法・根拠からsemantic primary/supportingを再確認し、32問の分類修正を確認した。全868問・3,724 dispositionの網羅性監査と各レビュー対象checkが通過した。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-25T10:16:38.197Z"
+    "confirmedAt": "2026-09-25T13:32:02.811Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-25T10:16:38.197Z",
-  "evidenceDigest": "daa180bcdbe85b9ed71eb9beaa8060d785a04ae049ef1c69c0a03821c53ff17f"
+  "generatedAt": "2026-09-25T13:32:02.811Z",
+  "evidenceDigest": "5e3fe82e29f35b736bc1a0bc36ba5fee09318e75fd73b71eb250c50027ff7052"
 }

@@ -1,6 +1,6 @@
 {
   "id": "outcome-linearize-static-range-information",
-  "statement": "各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。",
+  "statement": "prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
     "abc216-g",
@@ -26,7 +26,6 @@
     "abc404-g",
     "abc407-f",
     "abc410-f",
-    "abc419-e",
     "abc420-f",
     "abc421-g",
     "abc423-e",

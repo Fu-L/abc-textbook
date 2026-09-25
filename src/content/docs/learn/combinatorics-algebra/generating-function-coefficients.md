@@ -63,4 +63,4 @@ ABC279 ExではEulerの五角数定理 ∏_{i≥1}(1−x^i)=1+Σ_{t≥1}(−1)^t
 - [ABC279 H 公式解説](https://atcoder.jp/contests/abc279/editorial/5290)
 - [ABC279 H 公式問題文](https://atcoder.jp/contests/abc279/tasks/abc279_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-generating-function-coefficients`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-generating-function-coefficients`

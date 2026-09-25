@@ -11,10 +11,10 @@
   "sourceRevisionIds": [
     "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
     "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9",
-    "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
-    "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
     "source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41",
-    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea"
+    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea",
+    "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+    "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
   ],
   "tagIds": [
     "tag-dsu-components",
@@ -50,7 +50,6 @@
   "directProblemIds": [],
   "relatedProblemIds": [
     "abc218-e",
-    "abc226-e",
     "abc229-e",
     "abc233-f",
     "abc235-e",

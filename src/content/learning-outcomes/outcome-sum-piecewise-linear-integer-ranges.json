@@ -1,0 +1,10 @@
+{
+  "id": "outcome-sum-piecewise-linear-integer-ranges",
+  "statement": "整数区間上の一次関数包絡を交点の前後で分け、各affine blockの値を等差数列和で合計できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc303-f",
+    "tag-integer-boundary-blocks",
+    "unit-integer-boundary-blocks"
+  ]
+}

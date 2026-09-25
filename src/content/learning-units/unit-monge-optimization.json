@@ -12,9 +12,7 @@
     "source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a",
     "source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4",
     "source-abc355-editorial-10078-5ef38cac7852bb0fe41f3cf428929d6aa1b53cebe533491730d18a30734e01ea",
-    "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c",
-    "source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251",
-    "source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444"
+    "source-abc355-g-problem-9558ba88acfc361df2782cb5c4dd1e6df013708bc57cba8d0b5fac6d3f42522c"
   ],
   "tagIds": [
     "tag-monge-optimization"
@@ -31,12 +29,10 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/geometry-optimization/monge-optimization.md",
   "problemIds": [
-    "abc348-g",
-    "abc383-g"
+    "abc348-g"
   ],
   "directProblemIds": [
-    "abc348-g",
-    "abc383-g"
+    "abc348-g"
   ],
   "relatedProblemIds": [
     "abc355-g"

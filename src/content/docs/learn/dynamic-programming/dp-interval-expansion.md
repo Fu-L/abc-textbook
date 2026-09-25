@@ -54,4 +54,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、区間拡張
 - [ABC273 F 公式解説](https://atcoder.jp/contests/abc273/editorial/5034)
 - [ABC273 F 公式問題文](https://atcoder.jp/contests/abc273/tasks/abc273_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-dp-interval-expansion`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-dp-interval-expansion`

@@ -40,7 +40,9 @@
   ],
   "representativeProblemIds": [
     "abc228-e",
-    "abc215-g"
+    "abc215-g",
+    "abc262-e",
+    "abc377-e"
   ],
   "aliases": [
     "modular arithmetic",

@@ -45,7 +45,9 @@
   ],
   "representativeProblemIds": [
     "abc281-e",
-    "abc306-e"
+    "abc306-e",
+    "abc342-g",
+    "abc376-e"
   ],
   "aliases": [
     "multiset",

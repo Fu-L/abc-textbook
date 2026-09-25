@@ -13,8 +13,8 @@
     "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
     "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
     "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e",
-    "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f",
-    "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"
+    "source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866",
+    "source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"
   ],
   "tagIds": [
     "tag-rerooting"
@@ -41,7 +41,6 @@
     "abc223-g"
   ],
   "relatedProblemIds": [
-    "abc311-ex",
     "abc460-g"
   ],
   "examples": [],

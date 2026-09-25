@@ -38,7 +38,7 @@ sidebar:
 
 ## 問題一覧
 
-- [ABC337 E「Bad Juice」](https://atcoder.jp/contests/abc337/tasks/abc337_e) — 主題: [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/)（応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。）。既習技能: [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/)（問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。）。
+- [ABC337 E「Bad Juice」](https://atcoder.jp/contests/abc337/tasks/abc337_e) — 主題: [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/)（応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。）。既習技能: [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/)（judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
@@ -47,4 +47,4 @@ sidebar:
 - [ABC337 E 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_e)
 - [ABC337 E 公式解説](https://atcoder.jp/contests/abc337/editorial/9140)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-information-theoretic-query-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-information-theoretic-query-design`

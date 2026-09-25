@@ -38,7 +38,8 @@
   "representativeProblemIds": [
     "abc216-e",
     "abc359-f",
-    "abc389-e"
+    "abc389-e",
+    "abc383-g"
   ],
   "aliases": [
     "marginal-cost greedy",

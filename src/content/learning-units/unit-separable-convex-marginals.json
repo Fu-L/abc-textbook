@@ -35,6 +35,7 @@
     "abc359-f",
     "abc369-g",
     "abc373-f",
+    "abc383-g",
     "abc389-e"
   ],
   "directProblemIds": [
@@ -42,7 +43,8 @@
     "abc389-e",
     "abc359-f",
     "abc373-f",
-    "abc369-g"
+    "abc369-g",
+    "abc383-g"
   ],
   "relatedProblemIds": [],
   "examples": [],

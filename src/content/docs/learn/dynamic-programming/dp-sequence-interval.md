@@ -1,12 +1,12 @@
 ---
-title: "列・区間・分割のDP"
-description: "「列・区間・分割のDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
+title: "列・編集距離・区間合成DP"
+description: "「列・編集距離・区間合成DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 60
 ---
 
-# 列・区間・分割のDP
+# 列・編集距離・区間合成DP
 
 導入対象の目安: **緑色（800–1199）**。prefix・最後の要素・区間という状態の違いを見渡す入口。
 
@@ -18,7 +18,7 @@ sidebar:
 
 LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとして独立に読む。問題名や配列という入力形式ではなく、「何を固定すると残りが同じ問題になるか」で節を選ぶ。
 
-状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。
+状態設計を土台に、列の選択、二列の編集距離整列、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。
 
 ## 前提と範囲
 
@@ -72,4 +72,4 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [ABC219 H 公式解説](https://atcoder.jp/contests/abc219/editorial/2601)
 - [ABC219 H 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-dp-sequence-interval`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-dp-sequence-interval`

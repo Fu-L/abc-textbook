@@ -1,7 +1,7 @@
 {
   "id": "tag-segment-tree-canonical-decomposition",
   "name": "Segment Treeのcanonical区間分解",
-  "definition": "区間をO(log N)個のcanonical nodeへ分解し、range object・生存時間・range edgeを少数のnodeへ配置する。",
+  "definition": "区間をO(log N)個のcanonical nodeへ分解してrange object・生存時間・range edgeを配置し、point queryでは対応するroot-to-leaf pathから該当objectを集める。",
   "parentId": "tag-query-sufficient-aggregate",
   "prerequisiteTagIds": [
     "tag-range-monoid-aggregation"

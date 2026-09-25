@@ -1,0 +1,10 @@
+{
+  "id": "outcome-partition-at-critical-integer-boundaries",
+  "statement": "成立判定が変わり得る整数境界を全て列挙し、隣り合う境界の間で判定が一定であることを示して、代表点判定と区間長で整数解の個数を求められる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc318-f",
+    "tag-integer-boundary-blocks",
+    "unit-integer-boundary-blocks"
+  ]
+}

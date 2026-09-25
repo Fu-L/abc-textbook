@@ -40,7 +40,7 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 
 ## 問題一覧
 
-- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f) — 主題: [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/)（冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/)（問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。）。
+- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f) — 主題: [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/)（冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/)（judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
@@ -57,4 +57,4 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 - [ABC282 H 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_h)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-idempotent-overlap-range-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `5856cce249dc16a05c694fe4136c7592920790e2786135edf898cc4b20161c4a` / LearningUnit `unit-idempotent-overlap-range-query`

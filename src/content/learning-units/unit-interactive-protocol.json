@@ -44,5 +44,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。"
+  "learningRationale": "問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。"
 }

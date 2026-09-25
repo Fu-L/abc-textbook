@@ -1,7 +1,7 @@
 {
   "id": "unit-dp-sequence-interval",
   "kind": "section",
-  "title": "列・区間・分割のDP",
+  "title": "列・編集距離・区間合成DP",
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -19,6 +19,7 @@
   "tagIds": [
     "tag-dp-interval-expansion",
     "tag-dp-prefix-partition",
+    "tag-edit-distance-dp",
     "tag-interval-partition-dp",
     "tag-lis-state",
     "tag-sequence-subsequence-dp",
@@ -27,6 +28,7 @@
   "ownedTagIds": [],
   "learningOutcomeIds": [
     "outcome-aggregate-subsequence-transitions-by-value",
+    "outcome-compute-edit-distance",
     "outcome-design-interval-expansion-dp",
     "outcome-design-interval-split-dp",
     "outcome-design-lis-frontier",
@@ -87,5 +89,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。"
+  "learningRationale": "状態設計を土台に、列の選択、二列の編集距離整列、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。"
 }

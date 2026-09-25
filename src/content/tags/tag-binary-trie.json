@@ -38,7 +38,8 @@
   ],
   "representativeProblemIds": [
     "abc425-g",
-    "abc252-ex"
+    "abc252-ex",
+    "abc254-ex"
   ],
   "aliases": [
     "01-Trie",
