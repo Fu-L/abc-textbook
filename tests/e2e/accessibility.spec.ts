@@ -12,6 +12,7 @@ test('exposes landmarks, headings, table headers, names, text states, and keyboa
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
   await expect(page.getByRole('rowheader').first()).toBeVisible();
   await expect(page.getByText('収録済み').first()).toBeVisible();
+  await expect(page.getByRole('button', { name: '検索' })).toBeEnabled();
 
   await page.keyboard.press('Tab');
   await expect(page.locator(':focus-visible')).toBeVisible();
@@ -28,5 +29,6 @@ test('keeps core content and navigation available without JavaScript', async ({
   await page.goto('./');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.getByRole('link', { name: /コンテスト/u }).first()).toBeVisible();
+  await expect(page.getByRole('button', { name: '検索' })).toBeDisabled();
   await context.close();
 });
