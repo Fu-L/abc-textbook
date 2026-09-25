@@ -1,7 +1,7 @@
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   canonicalDigest,
@@ -236,7 +236,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.placements.every(({ kind }) => kind === 'full')).toBe(true);
   }, 30_000);
 
-  it('derives the home solely from the primary Outcome when cross-reference roles vary', async () => {
+  it('derives the home solely from the primary Outcome when cross-reference roles change', async () => {
     const { build } = await loadBuild();
     const placement = build.placements.find(({ problemId }) => problemId === 'abc301-e');
     if (placement === undefined) throw new Error('Expected ABC301 E placement.');
@@ -244,15 +244,77 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     const variants = [
       {
         ...placement,
-        supportingOutcomeIds: [...placement.supportingOutcomeIds].reverse(),
+        supportingOutcomeIds: ['outcome-prove-and-search-threshold'],
       },
       {
         ...placement,
-        additionalPrimaryOutcomeIds: [...placement.additionalPrimaryOutcomeIds].reverse(),
+        additionalPrimaryOutcomeIds: ['outcome-prove-and-search-threshold'],
       },
     ];
     expect(variants.map(primaryOutcomeOwnerUnitId)).toEqual([home, home]);
     expect(primaryOutcomeOwnerUnitId(placement)).toBe(home);
+  }, 30_000);
+
+  it('keeps placements stable when the Unit DAG gains an independent prerequisite', async () => {
+    const { context, build } = await loadBuild();
+    const extraEdge = {
+      nodeId: 'unit-dp-subset-state',
+      prerequisiteId: 'unit-dp-grid-table',
+    };
+    expect(build.learningUnitPrerequisites).not.toContainEqual(extraEdge);
+    vi.resetModules();
+    vi.doMock('../../src/lib/taxonomy/final-taxonomy-policy.js', async (importOriginal) => {
+      const actual = await importOriginal<{
+        FINAL_LEARNING_UNIT_PREREQUISITES: readonly {
+          nodeId: string;
+          prerequisiteId: string;
+        }[];
+      }>();
+      return {
+        ...actual,
+        FINAL_LEARNING_UNIT_PREREQUISITES: [...actual.FINAL_LEARNING_UNIT_PREREQUISITES, extraEdge],
+      };
+    });
+    try {
+      const { buildFinalTaxonomyFromPolicy: buildWithExtraEdge } =
+        await import('../../src/lib/taxonomy/final-taxonomy-build.js');
+      const changed = buildWithExtraEdge(context);
+      expect(changed.learningUnitPrerequisites).toContainEqual(extraEdge);
+      expect(changed.learningUnitDagDigest).not.toBe(build.learningUnitDagDigest);
+      expect(changed.placementDigest).toBe(build.placementDigest);
+      expect(changed.placements).toEqual(build.placements);
+    } finally {
+      vi.doUnmock('../../src/lib/taxonomy/final-taxonomy-policy.js');
+      vi.resetModules();
+    }
+  }, 30_000);
+
+  it('keeps the placement digest stable when Unit DAG edges are enumerated in reverse', async () => {
+    const { context, build } = await loadBuild();
+    vi.resetModules();
+    vi.doMock('../../src/lib/taxonomy/final-taxonomy-policy.js', async (importOriginal) => {
+      const actual = await importOriginal<{
+        FINAL_LEARNING_UNIT_PREREQUISITES: readonly {
+          nodeId: string;
+          prerequisiteId: string;
+        }[];
+      }>();
+      return {
+        ...actual,
+        FINAL_LEARNING_UNIT_PREREQUISITES: [...actual.FINAL_LEARNING_UNIT_PREREQUISITES].reverse(),
+      };
+    });
+    try {
+      const { buildFinalTaxonomyFromPolicy: buildWithReversedEdges } =
+        await import('../../src/lib/taxonomy/final-taxonomy-build.js');
+      const changed = buildWithReversedEdges(context);
+      expect(changed.learningUnitPrerequisites).toEqual(build.learningUnitPrerequisites);
+      expect(changed.learningUnitDagDigest).toBe(build.learningUnitDagDigest);
+      expect(changed.placementDigest).toBe(build.placementDigest);
+    } finally {
+      vi.doUnmock('../../src/lib/taxonomy/final-taxonomy-policy.js');
+      vi.resetModules();
+    }
   }, 30_000);
 
   it('rejects a placement decision table changed after the accepted build input was bound', async () => {

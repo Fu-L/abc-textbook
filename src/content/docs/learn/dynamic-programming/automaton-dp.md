@@ -26,7 +26,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)、[有限状態automatonの構成](/learn/string/finite-pattern-automaton/)。
+直接の前提単元: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)、[有限状態automatonの構成](/learn/string/finite-pattern-automaton/)（後の章）。
 
 このUnitを直接前提とする単元: なし。
 

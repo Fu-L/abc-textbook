@@ -1,7 +1,7 @@
 import { isCurriculumUnit } from '../../src/lib/taxonomy/curriculum-unit.js';
 import { readFile } from 'node:fs/promises';
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
@@ -74,6 +74,23 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         throw new Error(`Missing prerequisite edge: ${nodeId}/${prerequisiteId}`);
       expect(dependent.document).toContain(`[${prerequisite.value.title}](/learn/`);
       expect(prerequisite.document).toContain(`[${dependent.value.title}](/learn/`);
+      const isLater = textbookIndex(prerequisiteId) > textbookIndex(nodeId);
+      const nodeChapter = TEXTBOOK_CHAPTERS.find(
+        ({ id, unitIds }) => id === nodeId || (unitIds as readonly string[]).includes(nodeId),
+      )?.id;
+      const prerequisiteChapter = TEXTBOOK_CHAPTERS.find(
+        ({ id, unitIds }) =>
+          id === prerequisiteId || (unitIds as readonly string[]).includes(prerequisiteId),
+      )?.id;
+      const expectedLabel = isLater
+        ? `（${nodeChapter === prerequisiteChapter ? '後の節' : '後の章'}）`
+        : '';
+      const prerequisiteLine = dependent.document
+        .split('\n')
+        .find((line) => line.startsWith('直接の前提単元:'));
+      expect(prerequisiteLine, `${nodeId} -> ${prerequisiteId}`).toContain(
+        `[${prerequisite.value.title}](/learn/${prerequisite.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/)${expectedLabel}`,
+      );
     }
 
     for (const chapter of TEXTBOOK_CHAPTERS) {
@@ -127,6 +144,59 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
     expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
     expect(byId.get('unit-chapter-modeling')?.document).toContain('編集上の案内');
+  }, 30_000);
+
+  it('keeps placement data independent of a changed textbook display order', async () => {
+    const input = await loadMaterializationInput();
+    const original = buildCanonicalTaxonomyMaterialization(input);
+    vi.resetModules();
+    vi.doMock('../../src/lib/taxonomy/textbook-order.js', async (importOriginal) => {
+      const actual = await importOriginal<{ textbookIndex: typeof textbookIndex }>();
+      const first = 'unit-dp-grid-table';
+      const second = 'unit-dp-sequence-interval';
+      return {
+        ...actual,
+        textbookIndex: (id: string) =>
+          actual.textbookIndex(id === first ? second : id === second ? first : id),
+      };
+    });
+    try {
+      const { buildCanonicalTaxonomyMaterialization: buildWithChangedOrder } =
+        await import('../../src/lib/taxonomy/canonical-taxonomy-materialization.js');
+      const changed = buildWithChangedOrder(input);
+      expect(changed.problemPlacementPolicy.placementDigest).toBe(
+        original.problemPlacementPolicy.placementDigest,
+      );
+      expect(changed.learningUnits.map(({ value }) => [value.id, value.directProblemIds])).toEqual(
+        original.learningUnits.map(({ value }) => [value.id, value.directProblemIds]),
+      );
+      expect(
+        changed.learningUnits.find(({ value }) => value.id === 'unit-dp-grid-table')?.document,
+      ).not.toBe(
+        original.learningUnits.find(({ value }) => value.id === 'unit-dp-grid-table')?.document,
+      );
+    } finally {
+      vi.doUnmock('../../src/lib/taxonomy/textbook-order.js');
+      vi.resetModules();
+    }
+  }, 30_000);
+
+  it('describes the primary skill as the lesson and supporting skills as prerequisites', async () => {
+    const result = buildCanonicalTaxonomyMaterialization(await loadMaterializationInput());
+    const byId = new Map(result.learningUnits.map(({ value, document }) => [value.id, document]));
+    for (const [unitId, problemLabel, requiredSentence, forbiddenPhrase] of [
+      ['unit-dp-subset-state', 'ABC301 E', 'BFSで重要地点間の距離を前計算し', '部分集合DPを既習'],
+      ['unit-dp-subset-state', 'ABC338 F', '訪問順を部分集合DPで学ぶ', '部分集合DPを既習'],
+      ['unit-lowlink-critical-structure', 'ABC375 G', 'lowlinkによる橋判定を学び', 'lowlinkを既習'],
+      ['unit-max-flow-min-cut', 'ABC437 G', '容量へ写す最大流のモデルを学ぶ', '最大流を既習'],
+    ] as const) {
+      const line = byId
+        .get(unitId)
+        ?.split('\n')
+        .find((entry) => entry.startsWith(`- [${problemLabel}「`));
+      expect(line, `${unitId}/${problemLabel}`).toContain(requiredSentence);
+      expect(line).not.toContain(forbiddenPhrase);
+    }
   }, 30_000);
 
   it('fixes unique presentation and descendant coverage without prescribed teaching blocks', async () => {

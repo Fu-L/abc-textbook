@@ -26,7 +26,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [gcd不変量・差分構造](/learn/number-theory/gcd-structure/)、[SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/)。
+直接の前提単元: [gcd不変量・差分構造](/learn/number-theory/gcd-structure/)（後の章）、[SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/)。
 
 このUnitを直接前提とする単元: なし。
 

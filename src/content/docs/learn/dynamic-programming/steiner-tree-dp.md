@@ -26,7 +26,7 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)、[最短路モデル](/learn/graph/weighted-shortest-path/)。
+直接の前提単元: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)、[最短路モデル](/learn/graph/weighted-shortest-path/)（後の章）。
 
 このUnitを直接前提とする単元: なし。
 

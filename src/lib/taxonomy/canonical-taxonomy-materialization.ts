@@ -542,12 +542,17 @@ export const buildCanonicalTaxonomyMaterialization = (
     prerequisitesByUnitId.get(nodeId)?.push(prerequisiteId);
     dependentsByUnitId.get(prerequisiteId)?.push(nodeId);
   }
-  const unitLinksForIds = (unitIds: readonly string[]): string[] =>
+  const unitLinksForIds = (unitIds: readonly string[], prerequisiteOf?: string): string[] =>
     [...unitIds].sort(compareCodeUnits).map((id) => {
       const candidate = unitCandidateById.get(id);
       if (candidate === undefined)
         throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_UNKNOWN', id);
-      return unitLink(candidate.entity);
+      const link = unitLink(candidate.entity);
+      if (prerequisiteOf === undefined || textbookIndex(id) < textbookIndex(prerequisiteOf)) {
+        return link;
+      }
+      const sameChapter = rootChapterId(id, unitById) === rootChapterId(prerequisiteOf, unitById);
+      return `${link}（${sameChapter ? '後の節' : '後の章'}）`;
     });
   const learningUnits: CanonicalLearningUnitOutput[] = unitCandidates
     .map((candidate) => {
@@ -600,7 +605,7 @@ export const buildCanonicalTaxonomyMaterialization = (
         }
         return tag;
       });
-      const prerequisiteTitles = unitLinksForIds(prerequisitesByUnitId.get(unit.id) ?? []);
+      const prerequisiteTitles = unitLinksForIds(prerequisitesByUnitId.get(unit.id) ?? [], unit.id);
       const dependentTitles = unitLinksForIds(dependentsByUnitId.get(unit.id) ?? []);
       const materializedSources = materializedUnit.sourceRevisionIds.map((sourceId) => {
         const source = sourceById.get(sourceId);

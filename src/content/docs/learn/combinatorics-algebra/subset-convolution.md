@@ -26,7 +26,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)、[subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/)。
+直接の前提単元: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)（後の節）、[subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/)。
 
 このUnitを直接前提とする単元: なし。
 

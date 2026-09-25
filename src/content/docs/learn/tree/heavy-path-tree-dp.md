@@ -28,7 +28,7 @@ ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)、[根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
+直接の前提単元: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)（後の章）、[根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
 
 このUnitを直接前提とする単元: なし。
 
