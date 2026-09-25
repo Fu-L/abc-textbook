@@ -42,8 +42,12 @@ Gの4問。semantic primaryの復元は全corpusへ適用する。Inventoryそ�
 
 対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5828237089
 
-Fu-Lが230 Unit・150 edgeを確認したうえで指定した訂正を反映する。subset convolutionはrank別subset zeta変換後に部分集合を二重ループで組み合わせられるため、一般の多項式畳み込み・NTT/FFTを前提にしない。Tagの前提から`tag-convolution`を外し、そこから導出されるOutcome・Unitの依存も外す。subset zeta・Möbius変換と部分集合状態の前提は保持し、類似関係はtyped relationとして保持する。
+Fu-Lが230 Unit・150 edgeを確認したうえで指定した訂正を反映する。subset convolutionはrank別subset
+zeta変換後に部分集合を二重ループで組み合わせられるため、一般の多項式畳み込み・NTT/FFTを前提にしない。Tagの前提から`tag-convolution`を外し、そこから導出されるOutcome・Unitの依存も外す。subset
+zeta・Möbius変換と部分集合状態の前提は保持し、類似関係はtyped relationとして保持する。
 
-owned Tag/Outcomeを持たないsection wrapperへの不要な辺として、`unit-convex-geometry <- unit-geometry-primitives`、`unit-dp-digit-string <- unit-dp-state-design`、`unit-dp-sequence-interval <- unit-dp-state-design`、`unit-tree-aggregation <- unit-dp-state-design`を削除する。各技能を所有する子Unit側の依存は維持する。
+owned Tag/Outcomeを持たないsection
+wrapperへの不要な辺として、`unit-convex-geometry <- unit-geometry-primitives`、`unit-dp-digit-string <- unit-dp-state-design`、`unit-dp-sequence-interval <- unit-dp-state-design`、`unit-tree-aggregation <- unit-dp-state-design`を削除する。各技能を所有する子Unit側の依存は維持する。
 
-この記録はFu-Lの具体的な修正・push指示とlinked commentに基づくCodexの編集・照合記録であり、人間による独立再査読を主張しない。
+この記録はFu-Lの具体的な修正・push指示とlinked
+commentに基づくCodexの編集・照合記録であり、人間による独立再査読を主張しない。

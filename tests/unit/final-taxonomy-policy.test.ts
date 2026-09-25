@@ -77,12 +77,10 @@ describe('final taxonomy policy', () => {
     expect(tagById.get('tag-subset-convolution')?.relatedTags).toContainEqual(
       expect.objectContaining({ tagId: 'tag-convolution', type: 'analogy' }),
     );
-    expect(
-      outcomeById.get('outcome-compute-subset-convolution')?.prerequisiteOutcomeIds,
-    ).toEqual(['outcome-apply-subset-zeta-mobius-transform']);
-    expect(prerequisiteIdsForUnit('unit-subset-convolution')).toEqual([
-      'unit-subset-transforms',
+    expect(outcomeById.get('outcome-compute-subset-convolution')?.prerequisiteOutcomeIds).toEqual([
+      'outcome-apply-subset-zeta-mobius-transform',
     ]);
+    expect(prerequisiteIdsForUnit('unit-subset-convolution')).toEqual(['unit-subset-transforms']);
     expect(prerequisiteIdsForUnit('unit-convex-geometry')).toEqual([]);
     expect(prerequisiteIdsForUnit('unit-dp-digit-string')).toEqual([]);
     expect(prerequisiteIdsForUnit('unit-dp-sequence-interval')).toEqual([]);
