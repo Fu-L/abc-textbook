@@ -1,5 +1,5 @@
 export const PROBLEM_READING_ORDER_REASON =
-  'Unit内の問題をやさしい順に個別編集。出題スロット・配点・difficultyとInventoryの解法概要を照合し、発想・考察・実装の難しさを総合判断した。数値の機械的ソートや学習経路の指定は行わない。';
+  '前提を満たすUnitへ提示したうえで、基本模型から複合問題へ個別編集する。算法名や数値難度だけで並べず、各問の既習技能と新たな式変形・不変量を照合する。';
 
 /** Complete editorial orders, based on the stored metrics and Inventory.
  * The arrays are the decisions themselves, not exceptions to a numeric sort.
@@ -7,6 +7,7 @@ export const PROBLEM_READING_ORDER_REASON =
  */
 export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string[]>> = {
   'unit-dp-state-design': [
+    'abc265-e',
     'abc244-e',
     'abc251-e',
     'abc310-e',
@@ -107,13 +108,13 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc412-e',
     'abc384-f',
     'abc322-g',
+    'abc227-g',
   ],
   'unit-combinatorial-coefficients': [
     'abc425-e',
     'abc405-e',
     'abc358-e',
     'abc458-e',
-    'abc265-e',
     'abc234-f',
     'abc433-f',
     'abc431-f',
@@ -123,7 +124,6 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc226-f',
     'abc243-f',
     'abc295-e',
-    'abc227-g',
     'abc215-g',
     'abc276-g',
     'abc290-f',
@@ -346,6 +346,7 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
   'unit-dp-game': ['abc368-f', 'abc380-f', 'abc297-g', 'abc255-g', 'abc398-g'],
   'unit-dp-game-value': ['abc349-e', 'abc303-g'],
   'unit-inclusion-exclusion': [
+    'abc246-f',
     'abc455-e',
     'abc465-f',
     'abc343-e',
@@ -385,7 +386,6 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc215-e',
     'abc278-f',
     'abc274-e',
-    'abc246-f',
     'abc381-f',
     'abc425-f',
     'abc232-f',
@@ -533,14 +533,14 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc424-g',
     'abc374-g',
     'abc317-g',
-    'abc437-g',
     'abc313-ex',
   ],
   'unit-digit-dp': ['abc406-e', 'abc465-e', 'abc336-e', 'abc235-f', 'abc317-f', 'abc288-ex'],
   'unit-max-flow-min-cut': [
-    'abc239-g',
-    'abc318-g',
     'abc241-g',
+    'abc318-g',
+    'abc239-g',
+    'abc437-g',
     'abc259-g',
     'abc326-g',
     'abc225-g',
@@ -578,9 +578,11 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc442-f',
     'abc212-e',
     'abc370-e',
+    'abc372-f',
+    'abc457-f',
+    'abc435-g',
     'abc408-f',
     'abc224-e',
-    'abc372-f',
     'abc353-g',
     'abc358-g',
     'abc387-f',
@@ -594,14 +596,12 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc243-g',
     'abc412-f',
     'abc342-f',
-    'abc457-f',
     'abc319-g',
     'abc265-f',
     'abc279-g',
     'abc282-g',
     'abc235-g',
     'abc338-g',
-    'abc435-g',
     'abc221-h',
   ],
   'unit-randomized-algorithms': ['abc422-e', 'abc272-g'],

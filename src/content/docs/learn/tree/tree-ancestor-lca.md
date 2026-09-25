@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第63単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) ／ 次: [graph core・leaf peeling](/learn/graph/graph-core/)
+
 ## 概要
 
 ### ancestor query・LCA
 
 根付き木の祖先関係を時刻またはbinary liftingで索引化し、LCAと木上距離を答える。
+
+### 習得する技能
+
+- binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。
 
 ## 前提と範囲
 
@@ -32,20 +42,20 @@ doubling・binary liftingで得た考え方と実装を再利用し、ancestor q
 
 ## 問題一覧
 
-1. [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g)
-2. [ABC267 F「Exactly K Steps」](https://atcoder.jp/contests/abc267/tasks/abc267_f)
-3. [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f)
-4. [ABC298 Ex「Sum of Min of Length」](https://atcoder.jp/contests/abc298/tasks/abc298_h)
-5. [ABC329 G「Delivery on Tree」](https://atcoder.jp/contests/abc329/tasks/abc329_g)
+1. [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g) — 主題: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/)。既習技能: 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
+2. [ABC267 F「Exactly K Steps」](https://atcoder.jp/contests/abc267/tasks/abc267_f) — 主題: [木距離を基準点・直径・中心から捉える](/learn/tree/tree-metric/)。既習技能: binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。
+3. [ABC438 F「Sum of Mex」](https://atcoder.jp/contests/abc438/tasks/abc438_f) — 主題: [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/)。既習技能: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。 / binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。
+4. [ABC298 Ex「Sum of Min of Length」](https://atcoder.jp/contests/abc298/tasks/abc298_h) — 主題: [ancestor query・LCA](/learn/tree/tree-ancestor-lca/)。既習技能: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。
+5. [ABC329 G「Delivery on Tree」](https://atcoder.jp/contests/abc329/tasks/abc329_g) — 主題: [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。既習技能: binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC405 F「Chord Crossing」](https://atcoder.jp/contests/abc405/tasks/abc405_f)
-- [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f)
+- [ABC405 F「Chord Crossing」](https://atcoder.jp/contests/abc405/tasks/abc405_f) — 主題: [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/)。既習技能: binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。 / 円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。
+- [ABC460 F「Farthest Pair Query」](https://atcoder.jp/contests/abc460/tasks/abc460_f) — 主題: [区間monoid要約](/learn/query/range-monoid-aggregation/)。既習技能: binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。 / 一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。
 
 ## 根拠
 
@@ -56,4 +66,4 @@ doubling・binary liftingで得た考え方と実装を再利用し、ancestor q
 - [ABC298 H 公式解説](https://atcoder.jp/contests/abc298/editorial/6218)
 - [ABC298 H 公式問題文](https://atcoder.jp/contests/abc298/tasks/abc298_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-tree-ancestor-lca`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-tree-ancestor-lca`

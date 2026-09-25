@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第67単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [potential・weighted DSU](/learn/graph/potential-dsu/) ／ 次: [有限状態automatonの構成](/learn/string/finite-pattern-automaton/)
+
 ## 概要
 
 ### 列・文字列のrolling fingerprint
@@ -27,6 +33,10 @@ sidebar:
 回文なら順方向と逆方向のhashは等しい。例えばabaは常に一致するが、異なる列でも衝突し得る。固定された長さLの異なる二列と一様な非零基数に対し、差の非零多項式の次数は高々L-1なので、衝突確率は高々(L-1)/(p-1)。多数比較ではその総数も含めて評価する。
 
 ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と回文queryを扱える。ここで導出した要約と結合式を、[区間monoid要約の節](/learn/query/range-monoid-aggregation/)で学んだデータ構造へ適用する。
+
+### 習得する技能
+
+- 順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -44,14 +54,14 @@ ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC274 Ex「XOR Sum of Arrays」](https://atcoder.jp/contests/abc274/tasks/abc274_h)
-- [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f)
+- [ABC274 Ex「XOR Sum of Arrays」](https://atcoder.jp/contests/abc274/tasks/abc274_h) — 主題: [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/)。
+- [ABC331 F「Palindrome Query」](https://atcoder.jp/contests/abc331/tasks/abc331_f) — 主題: [区間monoid要約](/learn/query/range-monoid-aggregation/)。既習技能: 順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 根拠
 
@@ -60,4 +70,4 @@ ABC331 Fではこの要約を順序を保つ区間集約に載せると更新と
 - [ABC331 F 公式解説](https://atcoder.jp/contests/abc331/editorial/7820)
 - [ABC331 F 公式問題文](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-sequence-fingerprint`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-sequence-fingerprint`

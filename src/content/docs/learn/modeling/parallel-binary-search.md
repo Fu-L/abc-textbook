@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第117単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) ／ 次: [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/)
+
 ## 概要
 
 ### parallel binary search・多数境界の判定共有
 
 多数queryの未知境界をmidごとにbucketし、更新を一方向に進める判定器を各roundで共有する。
+
+### 習得する技能
+
+- 各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g)
-2. [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h)
+1. [ABC394 G「Dense Buildings」](https://atcoder.jp/contests/abc394/tasks/abc394_g) — 主題: [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/)。既習技能: 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。 / 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。 / 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
+2. [ABC233 Ex「Manhattan Christmas Tree」](https://atcoder.jp/contests/abc233/tasks/abc233_h) — 主題: [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/)。既習技能: 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。 / 各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。 / 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。 / 幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC394 G 公式解説](https://atcoder.jp/contests/abc394/editorial/12282)
 - [ABC394 G 公式問題文](https://atcoder.jp/contests/abc394/tasks/abc394_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-parallel-binary-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-parallel-binary-search`

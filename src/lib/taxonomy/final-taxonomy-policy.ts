@@ -33,7 +33,7 @@ export const FINAL_TAXONOMY_PLACEMENT_PRINCIPLES = Object.freeze({
   supporting:
     '主解法とは別の観察可能な技能を実際に発動するときだけsupportingとし、用語が説明に現れるだけではUnitを付与しない。',
   homeAndReadiness:
-    'presentationUnitIdは想定解法の再構成・実装に必須な全Outcome（supportingを含む）を履修済みにする最遅Unitとする。原則としてそのUnitの技能をprimaryへ昇格するが、理由を明記したsemantic primaryの例外を許す。例外でも掲載位置と必須技能集合は変えない。用語だけ・別解だけの技能は後ろ倒し要因にしない。',
+    'presentationUnitIdは想定解法の再構成・実装に必須な全Outcome（supportingを含む）を履修済みにする最遅Unitとする。primaryは採用解法の核心として固定し、掲載順から変更しない。primaryは新たに学ぶ技能、supportingは既習必須技能を表す。問題は掲載Unitの技能説明後に提示する。用語だけ・別解だけの技能は後ろ倒し要因にしない。',
   prerequisite:
     'curriculum prerequisiteは論理的な最小依存ではなく、先に学ぶことで後続Unitの説明・実装・考察が自然になり、重複を避けて段階的に到達できるときの教材上のprecedence constraintとする。その技能自体の習得に必要な前提だけを課し、特定Problemのreadinessを修正するためにTag・Outcome全体の前提を強めない。問題固有の複合前提はrequired Outcome集合で表し、単なる併用・類似・対比はtyped relationへ分離する。',
   relatedTags:
@@ -216,15 +216,8 @@ export interface ReadinessPrimaryOverride {
   readonly decisionAuthorId: string;
 }
 
-/** Reviewed exceptions preserve semantic roles, never move the presentation home earlier. */
-export const READINESS_PRIMARY_OVERRIDES: Readonly<Record<string, ReadinessPrimaryOverride>> = {
-  'abc354-e': {
-    primaryOutcomeId: 'outcome-classify-game-states',
-    rationale:
-      '合法手の先に必敗局面があるか、という勝敗再帰が主題である。残存集合は状態表現として必須だが、ゲームの主技法を置き換えない。掲載はゲームと部分集合状態の両方を履修済みにする最遅Unitとする。',
-    decisionAuthorId: 'person-maintainer',
-  },
-};
+/** Legacy metadata only; every problem now preserves its semantic primary. */
+export const READINESS_PRIMARY_OVERRIDES: Readonly<Record<string, ReadinessPrimaryOverride>> = {};
 
 export interface FinalPrimaryDecision {
   readonly problemId: string;
@@ -850,7 +843,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-tree-balanced-separators',
-    '重心を分離点として木を再帰分解する',
+    '木の均衡分離点から重心分解へ進む',
     'unit-chapter-graph',
     [],
     3,
@@ -1345,7 +1338,7 @@ const UNIT_ORDER_REASONS: Readonly<Record<string, string>> = {
   'unit-laminar-interval-containment-tree':
     '非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。',
   'unit-tree-balanced-separators':
-    '部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。',
+    '部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。',
   'unit-flow-matching':
     '頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。',
   'unit-euler-degree':
@@ -1820,7 +1813,10 @@ const TAG_SEEDS: readonly TagSeed[] = [
     definition:
       '制約や生成パラメータから候補総数を界すか、鳩ノ巣原理で成功前の失敗回数を界して探索する。',
     parentId: 'tag-model-reduction',
-    outcomeIds: ['outcome-enumerate-bounded-candidates-or-cases'],
+    outcomeIds: [
+      'outcome-enumerate-bounded-candidates-or-cases',
+      'outcome-enumerate-subsets-by-mask',
+    ],
     unitIds: ['unit-bounded-enumeration'],
     recall: [
       '生成全探索',
@@ -2177,7 +2173,14 @@ const TAG_SEEDS: readonly TagSeed[] = [
     name: 'DP遷移の集約・高速化',
     definition: '同じ形の遷移をprefix、単調構造、剰余類などでまとめる。',
     parentId: 'tag-dp-state-transition',
-    outcomeIds: ['outcome-factor-and-accelerate-transitions'],
+    outcomeIds: [
+      'outcome-factor-and-accelerate-transitions',
+      'outcome-subtract-exception-transitions',
+      'outcome-normalize-common-dp-action',
+      'outcome-compress-dp-sufficient-aggregates',
+      'outcome-slide-transition-recurrence',
+      'outcome-close-eventual-dp-tail',
+    ],
     unitIds: ['unit-dp-transition-optimization'],
     recall: [
       'dp高速化',
@@ -2254,7 +2257,12 @@ const TAG_SEEDS: readonly TagSeed[] = [
     name: '最短路モデル',
     definition: '重み付きグラフに帰着し、距離の確定条件に応じた最短路法を選ぶ。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-model-and-compute-shortest-path'],
+    outcomeIds: [
+      'outcome-model-and-compute-shortest-path',
+      'outcome-relax-in-dependency-order',
+      'outcome-detect-improving-cycles',
+      'outcome-compute-all-pairs-distance',
+    ],
     unitIds: ['unit-shortest-path-certificates'],
     recall: [
       'dijkstra',
@@ -2556,11 +2564,14 @@ const TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-tree-balanced-separator',
-    name: '重心separatorによる木の再帰分解',
+    name: '木の均衡分離点と重心分解',
     definition:
-      '各成分のサイズを半分以下にする重心をseparatorとし、除去後の成分を再帰的に分解する。',
+      '非負重みの各成分を半分以下にする一点を選ぶ。頂点数を重みとし各成分で繰り返すと、対数深さの重心分解を得る。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-build-balanced-separator-decomposition'],
+    outcomeIds: [
+      'outcome-find-weighted-balanced-separator',
+      'outcome-build-balanced-separator-decomposition',
+    ],
     unitIds: ['unit-tree-balanced-separators'],
     recall: ['centroid decomposition', '\\bcentroid\\b', '重心', 'tree separator', '重心分解木'],
     object: ['木', '連結成分', '部分木サイズ', '重心'],
@@ -5000,10 +5011,13 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-polynomial-multipoint-evaluation',
     name: '多項式の多点評価・補間',
     definition:
-      'product treeとremainder treeを構築し、一つの多項式を多数の点へ準線形時間で評価・補間する。',
+      '一般点ではproduct tree・remainder tree、等比点ではchirp-z変換を使い、評価点の構造に応じて多項式を一括評価する。',
     parentId: 'tag-combinatorics-algebra-structure',
     prerequisiteTagIds: ['tag-convolution', 'tag-recursive-divide-and-conquer'],
-    outcomeIds: ['outcome-evaluate-polynomial-at-many-points'],
+    outcomeIds: [
+      'outcome-evaluate-polynomial-at-many-points',
+      'outcome-evaluate-at-geometric-points',
+    ],
     unitIds: ['unit-polynomial-multipoint-evaluation'],
     recall: ['multipoint evaluation', 'product tree', 'remainder tree', '多点評価'],
     object: ['polynomial', 'evaluation points', '積木'],
@@ -6143,6 +6157,31 @@ export const NON_PRIMARY_TAG_IDS = FINAL_TAXONOMY_TAGS.filter((tag) => !tag.prim
 );
 
 const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
+  'outcome-evaluate-polynomial-at-many-points':
+    '任意の評価点からproduct treeを構築し、剰余をremainder treeで下ろす不変量とO(M(n) log n)の計算量を説明できる。',
+  'outcome-subtract-exception-transitions':
+    '全遷移の総和から禁止辺・禁止keyの集計値を引き、例外の総数で計算量を評価できる。',
+  'outcome-normalize-common-dp-action':
+    '全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。',
+  'outcome-compress-dp-sufficient-aggregates':
+    '遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。',
+  'outcome-slide-transition-recurrence':
+    '隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。',
+  'outcome-close-eventual-dp-tail':
+    '余分な歩行を訪問済みの最良状態での反復へ移す交換論を示し、有限prefix DPと閉形式のtailへ分離できる。',
+  'outcome-relax-in-dependency-order':
+    'DAGや使用可能な辺列の順に緩和し、処理済みprefixが表す経路集合を不変量として説明できる。',
+  'outcome-detect-improving-cycles':
+    '辺数を制限した反復緩和から負閉路・正閉路の検出を導き、始点到達性と終点への影響を区別できる。',
+  'outcome-compute-all-pairs-distance':
+    '許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。',
+  'outcome-find-weighted-balanced-separator':
+    '非負頂点重みの総和に対し、除去後の各成分を半分以下にする一点を線形時間で選び、通常の頂点数重心と葉数重心を区別できる。',
+  'outcome-evaluate-at-geometric-points':
+    '評価点ar^kの等比構造を使い、r≠0のとき二項指数の恒等式からchirp-z評価を一回の畳み込みへ変形できる。',
+  'outcome-enumerate-subsets-by-mask':
+    '集合のbitmask表現から全部分集合と共通要素を列挙し、集合間のDP遷移を必要としない計数に利用できる。',
+
   'outcome-invert-generating-function-equation':
     'F=xΦ(F)からLagrange反転 [x^n]F=[t^(n−1)]Φ(t)^n/nを導き、形式的条件と法上の除算可能性を確認して係数問題へ変換できる。',
   'outcome-derive-coefficient-recurrence-by-differentiation':
@@ -6246,7 +6285,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-evaluate-adversarial-game-value':
     '有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。',
   'outcome-factor-and-accelerate-transitions':
-    '高価なDP遷移の共通項を因数分解・集約し、等価性と計算量を示せる。',
+    '素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。',
   'outcome-accelerate-fixed-linear-transition':
     '固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。',
   'outcome-select-state-graph-search':
@@ -6254,7 +6293,7 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-compute-transitive-closure':
     '各始点探索または中継許可集合の段階不変条件を保つWarshall更新で推移閉包を求め、必要なら初回到達段階も記録できる。',
   'outcome-model-and-compute-shortest-path':
-    '移動を重み付き辺に対応させ、緩和と距離確定条件を説明できる。',
+    '非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。',
   'outcome-build-shortest-path-certificate':
     '距離等式を満たす親辺を選び、最短路の木または経路を復元できる。',
   'outcome-localize-change-impact-by-witness':
@@ -6448,6 +6487,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
 const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
+  'outcome-solve-difference-constraints': ['outcome-detect-improving-cycles'],
+  'outcome-build-balanced-separator-decomposition': ['outcome-find-weighted-balanced-separator'],
   'outcome-optimize-stochastic-actions': ['outcome-solve-stochastic-recurrence'],
   'outcome-maintain-modular-product-under-factor-updates': [
     'outcome-compute-in-modular-arithmetic',
@@ -6479,7 +6520,11 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
     'outcome-augment-components-with-metadata',
     'outcome-prove-greedy-order',
   ],
-  'outcome-design-frontier-profile-dp': ['outcome-design-minimal-sufficient-state'],
+  'outcome-design-frontier-profile-dp': [
+    'outcome-design-minimal-sufficient-state',
+    'outcome-design-grid-table-dp',
+    'outcome-enumerate-subset-state-space',
+  ],
 };
 
 const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
@@ -6523,8 +6568,10 @@ export const FINAL_TAXONOMY_OUTCOMES: readonly ObservableOutcomePolicy[] =
                 (candidateTag) => candidateTag.id === prerequisiteTagId,
               )?.learningOutcomeIds.filter(
                 (id) =>
-                  outcomeId !== 'outcome-count-euler-circuits-by-best' ||
-                  id !== 'outcome-count-nonintersecting-paths-by-lgv',
+                  (outcomeId !== 'outcome-count-euler-circuits-by-best' ||
+                    id !== 'outcome-count-nonintersecting-paths-by-lgv') &&
+                  (prerequisiteTagId !== 'tag-shortest-path' ||
+                    id === 'outcome-model-and-compute-shortest-path'),
               ) ?? [],
           ),
         ]),
@@ -6545,6 +6592,11 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-enumerate-subsets-by-mask',
+  'outcome-evaluate-polynomial-at-many-points',
+  'outcome-close-eventual-dp-tail',
+  'outcome-evaluate-at-geometric-points',
+  'outcome-find-weighted-balanced-separator',
   'outcome-decompose-expectation-by-additive-potential',
   'outcome-aggregate-value-prefix-by-buckets',
   'outcome-invert-generating-function-equation',
@@ -7071,7 +7123,7 @@ export const FINAL_LEARNING_UNIT_ORDER_POLICY = {
   policyVersion: '1.0.0' as const,
   precedenceConstraintField: 'additionalPrerequisiteUnitIds',
   semantics:
-    '教材上の前提を先行させ、直接つながる概念は導入Unitの優先順位で続けて読む。それ以外はstage・難度・代表順位で選ぶ。概念の近接は学習順の推奨であり、新たな前提条件ではない。',
+    '教材上の前提を必ず先行させ、履修可能なUnitの中では概念の連続性・stage・難度を優先する。親子関係は意味的な目次、標準履修順は前提DAGに従う経路として分離する。',
   conceptReadingChains: CONCEPT_READING_CHAINS,
   tieBreakRanks: ['stageRank', 'difficultyRank', 'representativeRank', 'id'] as const,
   orderedUnitIds: FINAL_LEARNING_UNIT_CANDIDATES.filter(
@@ -7081,16 +7133,14 @@ export const FINAL_LEARNING_UNIT_ORDER_POLICY = {
   ).map((unit) => unit.id),
 };
 
-const learningUnitOrderIndex = new Map(
-  FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds.map((unitId, index) => [unitId, index]),
-);
-
-const latestLearningUnitId = (unitIds: readonly string[]): string => {
+const latestLearningUnitId = (
+  unitIds: readonly string[],
+  orderIndex: ReadonlyMap<string, number>,
+): string => {
   const latest = [...unitIds]
     .sort(
       (left, right) =>
-        (learningUnitOrderIndex.get(left) ?? -1) - (learningUnitOrderIndex.get(right) ?? -1) ||
-        compareIds(left, right),
+        (orderIndex.get(left) ?? -1) - (orderIndex.get(right) ?? -1) || compareIds(left, right),
     )
     .at(-1);
   if (latest === undefined) throw new Error('FINAL_TAXONOMY_PRESENTATION_UNIT_MISSING');
@@ -8135,7 +8185,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
       'abc320-g',
       'abc374-g',
       'abc401-g',
-      'abc437-g',
       'abc445-g',
       'abc461-g',
     ],
@@ -8145,6 +8194,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     to: 'outcome-model-max-flow-min-cut',
     problemIds: [
       'abc241-g',
+      'abc437-g',
       'abc225-g',
       'abc227-h',
       'abc239-g',
@@ -8333,7 +8383,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-evaluate-and-compose-polynomials',
     to: 'outcome-evaluate-polynomial-at-many-points',
-    problemIds: ['abc272-ex', 'abc323-g', 'abc381-g'],
+    problemIds: ['abc272-ex', 'abc323-g'],
   },
   {
     from: 'outcome-evaluate-and-compose-polynomials',
@@ -8718,7 +8768,72 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
 ];
 
 const outcomeRefinementByKey = new Map<string, string>();
-for (const group of OUTCOME_REFINEMENT_GROUPS) {
+for (const group of [
+  ...OUTCOME_REFINEMENT_GROUPS,
+  {
+    from: 'outcome-factor-and-accelerate-transitions',
+    to: 'outcome-subtract-exception-transitions',
+    problemIds: ['abc212-e', 'abc370-e', 'abc319-g'],
+  },
+  {
+    from: 'outcome-factor-and-accelerate-transitions',
+    to: 'outcome-normalize-common-dp-action',
+    problemIds: ['abc372-f', 'abc457-f', 'abc435-g'],
+  },
+  {
+    from: 'outcome-factor-and-accelerate-transitions',
+    to: 'outcome-compress-dp-sufficient-aggregates',
+    problemIds: ['abc224-e', 'abc243-g', 'abc288-f', 'abc338-g'],
+  },
+  {
+    from: 'outcome-factor-and-accelerate-transitions',
+    to: 'outcome-slide-transition-recurrence',
+    problemIds: ['abc235-g', 'abc333-f'],
+  },
+  {
+    from: 'outcome-factor-and-accelerate-transitions',
+    to: 'outcome-close-eventual-dp-tail',
+    problemIds: ['abc358-g'],
+  },
+  {
+    from: 'outcome-model-and-compute-shortest-path',
+    to: 'outcome-relax-in-dependency-order',
+    problemIds: ['abc271-e', 'abc291-f', 'abc429-f'],
+  },
+  {
+    from: 'outcome-model-and-compute-shortest-path',
+    to: 'outcome-detect-improving-cycles',
+    problemIds: ['abc264-g', 'abc393-g'],
+  },
+  {
+    from: 'outcome-model-and-compute-shortest-path',
+    to: 'outcome-compute-all-pairs-distance',
+    problemIds: [
+      'abc243-e',
+      'abc261-g',
+      'abc286-e',
+      'abc338-f',
+      'abc369-e',
+      'abc375-f',
+      'abc416-e',
+    ],
+  },
+  {
+    from: 'outcome-build-balanced-separator-decomposition',
+    to: 'outcome-find-weighted-balanced-separator',
+    problemIds: ['abc453-f'],
+  },
+  {
+    from: 'outcome-enumerate-subset-state-space',
+    to: 'outcome-enumerate-subsets-by-mask',
+    problemIds: ['abc246-f'],
+  },
+  {
+    from: 'outcome-evaluate-and-compose-polynomials',
+    to: 'outcome-evaluate-at-geometric-points',
+    problemIds: ['abc381-g'],
+  },
+]) {
   for (const problemId of group.problemIds) {
     const key = `${problemId}\u0000${group.from}`;
     const previous = outcomeRefinementByKey.get(key);
@@ -9393,78 +9508,12 @@ if (
   throw new Error('FINAL_TAXONOMY_RAW_ASSIGNMENT_CLAIM_COVERAGE_MISMATCH');
 }
 
-/** Primary describes the new technique at the first point the adopted solution is readable.
- * Keep earlier main techniques as co-primary, preserving their claim-level evidence.
- */
-export const alignPrimaryWithReadiness = (
-  decision: CuratedProblemClaimDecision,
-  primaryOverride?: ReadinessPrimaryOverride,
-): CuratedProblemClaimDecision => {
-  if (primaryOverride !== undefined) {
-    if (
-      primaryOverride.primaryOutcomeId !== decision.primaryOutcomeId ||
-      primaryOverride.rationale.trim().length === 0 ||
-      primaryOverride.decisionAuthorId.trim().length === 0
-    ) {
-      throw new Error('INVALID_READINESS_PRIMARY_OVERRIDE');
-    }
-    return decision;
-  }
-  const formerPrimary = [decision.primaryOutcomeId, ...decision.additionalPrimaryOutcomeIds];
-  const allOutcomes = sortedUnique([
-    ...formerPrimary,
-    ...Object.values(decision.supportingOutcomeIdsByTag).flat(),
-  ]);
-  const home = latestLearningUnitId(
-    allOutcomes.flatMap((id) => outcomeById.get(id)?.learningUnitCandidateIds ?? []),
-  );
-  const homeOutcomes = allOutcomes.filter((id) =>
-    outcomeById.get(id)?.learningUnitCandidateIds.includes(home),
-  );
-  const primaryOutcomeId = homeOutcomes.includes(decision.primaryOutcomeId)
-    ? decision.primaryOutcomeId
-    : homeOutcomes[0];
-  if (primaryOutcomeId === undefined) throw new Error('PRIMARY_READINESS_OUTCOME_MISSING');
-  const promotedTags = new Set(primaryTagIdsForOutcomeIds(homeOutcomes));
-  // All required Outcomes of a promoted Tag share the same primary role.
-  const promotedOutcomes = allOutcomes.filter((id) =>
-    outcomeById.get(id)?.scopeTagIds.some((tag) => promotedTags.has(tag)),
-  );
-  const primaryOutcomes = sortedUnique([...formerPrimary, ...promotedOutcomes]);
-  const dispositions = decision.dispositions
-    .map((disposition) => {
-      if (disposition.kind !== 'supporting') return [disposition];
-      const promoted = disposition.tagIds.filter((id) => promotedTags.has(id));
-      const remaining = disposition.tagIds.filter((id) => !promotedTags.has(id));
-      return [
-        ...(promoted.length === 0
-          ? []
-          : [{ ...disposition, kind: 'primary' as const, tagIds: promoted }]),
-        ...(remaining.length === 0 ? [] : [{ ...disposition, tagIds: remaining }]),
-      ];
-    })
-    .flat();
-  const uniqueDispositions = new Map(dispositions.map((d) => [JSON.stringify(d), d]));
-  return {
-    ...decision,
-    primaryOutcomeId,
-    additionalPrimaryOutcomeIds: primaryOutcomes.filter((id) => id !== primaryOutcomeId),
-    dispositions: [...uniqueDispositions.values()],
-    supportingOutcomeIdsByTag: Object.fromEntries(
-      Object.entries(decision.supportingOutcomeIdsByTag).filter(([tag]) => !promotedTags.has(tag)),
-    ),
-  };
-};
-
 export const FINAL_TAXONOMY_CLAIM_DECISIONS: Readonly<Record<string, CuratedProblemClaimDecision>> =
   Object.freeze(
     Object.fromEntries(
       Object.entries(RAW_FINAL_TAXONOMY_CLAIM_DECISIONS).map(([problemId, decision]) => [
         problemId,
-        alignPrimaryWithReadiness(
-          normalizeClaimDecision(problemId, decision),
-          READINESS_PRIMARY_OVERRIDES[problemId],
-        ),
+        normalizeClaimDecision(problemId, decision),
       ]),
     ),
   );
@@ -9769,6 +9818,7 @@ const adHocElementsFor = (record: ProblemAnalysisInput): readonly AdHocElementPr
 
 export const buildFullCorpusPrimaryDecisionTable = (
   records: readonly ProblemAnalysisInput[],
+  presentationOrder: readonly string[] = FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds,
 ): FullCorpusPrimaryDecisionTable => {
   const policyDiagnostics = validateFinalTaxonomyPolicy();
   if (policyDiagnostics.length > 0) {
@@ -9954,7 +10004,10 @@ export const buildFullCorpusPrimaryDecisionTable = (
         supportingOutcomeIds,
         supportingTagDecisions,
         learningUnitCandidateIds,
-        presentationUnitId: latestLearningUnitId(learningUnitCandidateIds),
+        presentationUnitId: latestLearningUnitId(
+          learningUnitCandidateIds,
+          new Map(presentationOrder.map((id, index) => [id, index])),
+        ),
         ...(readinessOverride === undefined
           ? {}
           : {

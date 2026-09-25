@@ -2,7 +2,9 @@
   "id": "outcome-design-frontier-profile-dp",
   "statement": "未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。",
   "prerequisiteOutcomeIds": [
-    "outcome-design-minimal-sufficient-state"
+    "outcome-design-grid-table-dp",
+    "outcome-design-minimal-sufficient-state",
+    "outcome-enumerate-subset-state-space"
   ],
   "scopeIds": [
     "abc248-f",

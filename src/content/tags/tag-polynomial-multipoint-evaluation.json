@@ -1,7 +1,7 @@
 {
   "id": "tag-polynomial-multipoint-evaluation",
   "name": "多項式の多点評価・補間",
-  "definition": "product treeとremainder treeを構築し、一つの多項式を多数の点へ準線形時間で評価・補間する。",
+  "definition": "一般点ではproduct tree・remainder tree、等比点ではchirp-z変換を使い、評価点の構造に応じて多項式を一括評価する。",
   "parentId": "tag-combinatorics-algebra-structure",
   "prerequisiteTagIds": [
     "tag-formal-power-series",
@@ -41,6 +41,7 @@
     }
   ],
   "learningOutcomeIds": [
+    "outcome-evaluate-at-geometric-points",
     "outcome-evaluate-polynomial-at-many-points"
   ],
   "representativeProblemIds": [
@@ -48,10 +49,12 @@
     "abc381-g"
   ],
   "aliases": [
+    "chirp-z変換",
     "multipoint evaluation",
     "product tree",
     "remainder tree",
-    "多点評価"
+    "多点評価",
+    "等比点評価"
   ],
   "formerNames": [],
   "lifecycle": "active",

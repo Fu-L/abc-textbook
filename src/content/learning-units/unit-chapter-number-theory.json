@@ -71,6 +71,7 @@
   "problemIds": [
     "abc212-g",
     "abc222-g",
+    "abc227-g",
     "abc228-e",
     "abc230-e",
     "abc251-ex",
@@ -118,7 +119,6 @@
     "abc222-h",
     "abc226-e",
     "abc226-f",
-    "abc227-g",
     "abc230-g",
     "abc234-f",
     "abc235-g",

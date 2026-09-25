@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第53単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [bitsetで集合演算をword並列化する](/learn/query/bitset-word-parallel/) ／ 次: [推移閉包](/learn/graph/transitive-closure/)
+
 ## 概要
 
 ### binary Trieによるbit列索引
@@ -28,6 +34,10 @@ sidebar:
 
 境界: 空の子へは進まず、重複は部分木個数に重ねて数える。ABC425 Gではこの同じ分岐をxの区間全体へ共有する。
 
+### 習得する技能
+
+- 整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
@@ -42,16 +52,16 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g)
-2. [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h)
+1. [ABC425 G「Sum of Min of XOR」](https://atcoder.jp/contests/abc425/tasks/abc425_g) — 主題: [bit列をTrieで索引化する](/learn/query/binary-trie/)。既習技能: pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
+2. [ABC252 Ex「K-th beautiful Necklace」](https://atcoder.jp/contests/abc252/tasks/abc252_h) — 主題: [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/)。既習技能: 整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC451 G「Minimum XOR Walk」](https://atcoder.jp/contests/abc451/tasks/abc451_g)
+- [ABC451 G「Minimum XOR Walk」](https://atcoder.jp/contests/abc451/tasks/abc451_g) — 主題: [bit列をTrieで索引化する](/learn/query/binary-trie/)。既習技能: 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 根拠
 
@@ -62,4 +72,4 @@ sidebar:
 - [ABC451 G 公式解説](https://atcoder.jp/contests/abc451/editorial/18047)
 - [ABC451 G 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-binary-trie`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-binary-trie`

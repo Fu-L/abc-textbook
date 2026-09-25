@@ -810,17 +810,6 @@
         },
         {
           "problemId": "abc215-e",
-          "claimPath": "/prerequisiteCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
-            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
-          ]
-        },
-        {
-          "problemId": "abc215-e",
           "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -855,17 +844,6 @@
         {
           "problemId": "abc215-e",
           "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
-            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
-          ]
-        },
-        {
-          "problemId": "abc215-e",
-          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -2512,17 +2490,6 @@
         {
           "problemId": "abc215-e",
           "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
-            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
-          ]
-        },
-        {
-          "problemId": "abc215-e",
-          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -4529,17 +4496,6 @@
         },
         {
           "problemId": "abc215-e",
-          "claimPath": "/prerequisiteCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
-            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
-          ]
-        },
-        {
-          "problemId": "abc215-e",
           "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -4574,17 +4530,6 @@
         {
           "problemId": "abc215-e",
           "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
-            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
-          ]
-        },
-        {
-          "problemId": "abc215-e",
-          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -6508,6 +6453,6 @@
   ],
   "status": "accepted",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "5cde32fa97ef83b484b48646cc1b85de16f579b1953fc2805b1717d0eef6fbf3",
-  "integrationDigest": "2e561e00ae3dcf1e8232cdb68533b04e330623c81180fa1f77ff9d5e74ae8345"
+  "integrationSubjectDigest": "d3c21f21130ca0a3b8f28dab67f724e9729840f50ca9f0948edf9c2b62eadf79",
+  "integrationDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23"
 }

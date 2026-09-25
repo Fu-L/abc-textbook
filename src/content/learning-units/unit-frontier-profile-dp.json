@@ -6,7 +6,9 @@
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "additionalPrerequisiteUnitIds": [
-    "unit-dp-state-design"
+    "unit-dp-grid-table",
+    "unit-dp-state-design",
+    "unit-dp-subset-state"
   ],
   "excludedTopics": [
     "frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"

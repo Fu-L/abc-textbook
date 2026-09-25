@@ -7,8 +7,6 @@ import { describe, expect, it } from 'vitest';
 
 import {
   EXPLICIT_CURATED_PRIMARY_TAG_ASSIGNMENTS,
-  alignPrimaryWithReadiness,
-  FINAL_TAXONOMY_CLAIM_DECISIONS,
   FINAL_LEARNING_UNIT_CANDIDATES,
   FINAL_LEARNING_UNIT_ORDER_POLICY,
   FINAL_TAXONOMY_OUTCOMES,
@@ -104,7 +102,7 @@ describe('final taxonomy policy', () => {
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
     expect(FINAL_TAXONOMY_TAGS).toHaveLength(205);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(214);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(225);
     expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(230);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
@@ -800,9 +798,9 @@ describe('final taxonomy policy', () => {
       'tag-contribution-reordering',
       'tag-dynamic-modular-product',
     ]);
-    expect(abc411e?.primaryOutcomeId).toBe('outcome-maintain-modular-product-under-factor-updates');
+    expect(abc411e?.primaryOutcomeId).toBe('outcome-reorder-counting-contributions');
     expect(abc411e?.additionalPrimaryOutcomeIds).toEqual([
-      'outcome-reorder-counting-contributions',
+      'outcome-maintain-modular-product-under-factor-updates',
     ]);
     expect(abc411e?.presentationUnitId).toBe('unit-dynamic-modular-product');
     expect(abc411e?.supportingTagIds).toContain('tag-modular-arithmetic');
@@ -1360,6 +1358,59 @@ describe('final taxonomy policy', () => {
     ]);
   });
 
+  it('preserves semantic roles under reordering and registers adopted-solution prerequisites', async () => {
+    const records = await loadedRecords;
+    const normal = buildFullCorpusPrimaryDecisionTable(records);
+    const reversed = buildFullCorpusPrimaryDecisionTable(
+      records,
+      [...FINAL_LEARNING_UNIT_ORDER_POLICY.orderedUnitIds].reverse(),
+    );
+    const roles = (table: typeof normal) =>
+      table.decisions.map((decision) => ({ ...decision, presentationUnitId: null }));
+    expect(roles(reversed)).toEqual(roles(normal));
+    expect(
+      reversed.decisions.some(
+        (d, i) => d.presentationUnitId !== normal.decisions[i]?.presentationUnitId,
+      ),
+    ).toBe(true);
+    const byId = new Map(normal.decisions.map((d) => [d.problemId, d]));
+    // Independently read from the adopted Inventory solution, not inferred from current assignments.
+    const adoptedSkills = {
+      'abc246-f': ['outcome-correct-overlap-by-inversion', 'outcome-enumerate-subsets-by-mask'],
+      'abc301-e': [
+        'outcome-enumerate-subset-state-space',
+        'outcome-model-and-compute-shortest-path',
+      ],
+      'abc338-f': ['outcome-enumerate-subset-state-space', 'outcome-compute-all-pairs-distance'],
+      'abc375-g': [
+        'outcome-identify-bridges-and-articulations',
+        'outcome-model-and-compute-shortest-path',
+      ],
+      'abc437-g': [
+        'outcome-model-max-flow-min-cut',
+        'outcome-recover-valid-witness',
+        'outcome-color-and-classify-bipartite-components',
+      ],
+      'abc453-f': ['outcome-find-weighted-balanced-separator'],
+      'abc381-g': [
+        'outcome-compute-in-finite-field-extension',
+        'outcome-evaluate-at-geometric-points',
+      ],
+    };
+    for (const [id, skills] of Object.entries(adoptedSkills)) {
+      const d = byId.get(id);
+      if (d === undefined) throw new Error(`Missing decision: ${id}`);
+      expect(
+        [d.primaryOutcomeId, ...d.additionalPrimaryOutcomeIds, ...d.supportingOutcomeIds],
+        id,
+      ).toEqual(expect.arrayContaining(skills));
+    }
+    expect(byId.get('abc246-f')?.primaryOutcomeId).toBe('outcome-correct-overlap-by-inversion');
+    expect(byId.get('abc265-e')?.primaryOutcomeId).toBe('outcome-design-minimal-sufficient-state');
+    expect(byId.get('abc227-g')?.primaryOutcomeId).toBe('outcome-decompose-by-prime-or-divisor');
+    expect(byId.get('abc437-g')?.primaryOutcomeId).toBe('outcome-model-max-flow-min-cut');
+  });
+
   it('reviews every Unit stage and separates intrinsic prerequisites from problem readiness', async () => {
     expect(CURRICULUM_STAGES.flatMap((stage) => [...stage.unitIds]).sort()).toEqual(
       FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => unit.id).sort(),
@@ -1376,13 +1427,6 @@ describe('final taxonomy policy', () => {
     expect(game?.primaryOutcomeId).toBe('outcome-classify-game-states');
     expect(game?.supportingOutcomeIds).toContain('outcome-enumerate-subset-state-space');
     expect(game?.presentationUnitId).toBe('unit-dp-subset-state');
-    expect(game?.primaryOverride?.rationale).toBeTruthy();
-    // Without the explicit semantic exception, the same required skills use the default rule.
-    const semanticDecision = FINAL_TAXONOMY_CLAIM_DECISIONS['abc354-e'];
-    if (semanticDecision === undefined) throw new Error('Missing ABC354 E decision');
-    const defaultDecision = alignPrimaryWithReadiness(semanticDecision);
-    expect(defaultDecision.primaryOutcomeId).toBe('outcome-enumerate-subset-state-space');
-    expect(defaultDecision.additionalPrimaryOutcomeIds).toContain('outcome-classify-game-states');
     for (const id of ['abc297-g', 'abc255-g', 'abc368-f']) {
       const decision = table.decisions.find((decision) => decision.problemId === id);
       expect(decision?.learningUnitCandidateIds, id).not.toContain('unit-dp-subset-state');

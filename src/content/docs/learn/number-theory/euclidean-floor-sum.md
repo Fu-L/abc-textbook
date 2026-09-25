@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第118単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) ／ 次: [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/)
+
 ## 概要
 
 ### 格子点転置によるfloor_sum
@@ -28,6 +34,10 @@ sidebar:
 
 ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−floor(v/2^{k+1})。この二つのFを計算し、bitごとの寄与を足す。
 
+### 習得する技能
+
+- Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
@@ -42,18 +52,18 @@ ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−fl
 
 ## 問題一覧
 
-1. [ABC443 G「Another Mod of Linear Problem」](https://atcoder.jp/contests/abc443/tasks/abc443_g)
-2. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g)
-3. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h)
-4. [ABC402 G「Sum of Prod of Mod of Linear」](https://atcoder.jp/contests/abc402/tasks/abc402_g)
+1. [ABC443 G「Another Mod of Linear Problem」](https://atcoder.jp/contests/abc443/tasks/abc443_g) — 主題: [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/)。
+2. [ABC313 G「Redistribution of Piles」](https://atcoder.jp/contests/abc313/tasks/abc313_g) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)。既習技能: Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。
+3. [ABC283 Ex「Popcount Sum」](https://atcoder.jp/contests/abc283/tasks/abc283_h) — 主題: [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/)。既習技能: 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+4. [ABC402 G「Sum of Prod of Mod of Linear」](https://atcoder.jp/contests/abc402/tasks/abc402_g) — 主題: [格子点転置によるfloor_sum](/learn/number-theory/euclidean-floor-sum/)。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g)
+- [ABC372 G「Ax + By < C」](https://atcoder.jp/contests/abc372/tasks/abc372_g) — 主題: [Convex Hull Trick・直線包絡](/learn/geometry-optimization/line-envelope/)。既習技能: Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。
 
 ## 根拠
 
@@ -64,4 +74,4 @@ ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−fl
 - [ABC372 G 公式解説](https://atcoder.jp/contests/abc372/editorial/10973)
 - [ABC372 G 公式問題文](https://atcoder.jp/contests/abc372/tasks/abc372_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-euclidean-floor-sum`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-euclidean-floor-sum`

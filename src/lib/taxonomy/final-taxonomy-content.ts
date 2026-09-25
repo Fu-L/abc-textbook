@@ -256,7 +256,13 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
     'Pólyaの数え上げ',
   ],
   'tag-tree-aggregation-reroot': ['木DP', '全方位木DP', 'tree DP', 'rerooting DP'],
-  'tag-tree-balanced-separator': ['重心分解', 'centroid decomposition', 'tree separator'],
+  'tag-tree-balanced-separator': [
+    '均衡分離点',
+    '重み付き重心',
+    '重心分解',
+    'centroid decomposition',
+    'tree separator',
+  ],
   'tag-tree-metric-diameter': [
     '木距離',
     '木の直径',
@@ -447,6 +453,8 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-generating-functions': ['生成関数', '母関数', 'generating function'],
   'tag-formal-power-series': ['形式的べき級数', 'FPS', 'formal power series', 'Newton iteration'],
   'tag-polynomial-multipoint-evaluation': [
+    'chirp-z変換',
+    '等比点評価',
     '多点評価',
     'multipoint evaluation',
     'product tree',

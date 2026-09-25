@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第153単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/) ／ 次: [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/)
+
 ## 概要
 
 ### 非決定性automatonのsubset construction
 
 同時に存在し得るNFA状態集合を一つのDFA状態とし、文字ごとの集合遷移と受理条件を構成する。
+
+### 習得する技能
+
+- 同時に存在し得るNFA状態集合を一つのDFA状態とし、文字ごとの集合遷移と受理条件を構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -32,13 +42,13 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
+1. [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g) — 主題: [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
 - [ABC228 G 公式解説](https://atcoder.jp/contests/abc228/editorial/2942)
 - [ABC228 G 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-automaton-subset-construction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-automaton-subset-construction`

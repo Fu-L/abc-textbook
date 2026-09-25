@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9",
-    "acceptedAt": "2026-09-14T08:43:04.226Z"
+    "digest": "651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7",
+    "acceptedAt": "2026-09-24T14:15:36.959Z"
   },
   "taskIds": [
     "T047",
@@ -40,14 +40,14 @@
     "T049",
     "T050"
   ],
-  "problemReadingOrderReason": "Unit内の問題をやさしい順に個別編集。出題スロット・配点・difficultyとInventoryの解法概要を照合し、発想・考察・実装の難しさを総合判断した。数値の機械的ソートや学習経路の指定は行わない。",
+  "problemReadingOrderReason": "前提を満たすUnitへ提示したうえで、基本模型から複合問題へ個別編集する。算法名や数値難度だけで並べず、各問の既習技能と新たな式変形・不変量を照合する。",
   "counts": {
     "tags": 205,
-    "learningOutcomes": 214,
+    "learningOutcomes": 225,
     "learningUnits": 230,
     "learningDocuments": 230,
     "directlyOwnedTags": 205,
-    "directlyOwnedLearningOutcomes": 214,
+    "directlyOwnedLearningOutcomes": 225,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -63,12 +63,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "6bc71578392f208f8800a1e54d9006c53745c545731e0ce6a2dea1d77c9bf586",
-    "learningOutcomes": "a76471d2127429aa647df21f7c2b6cc878d5f299500fb1138bd4d8d5df3ddd27",
-    "learningUnits": "3ae0c711291c8e9be68f3372a9089cf267f13e38fd39196a44136af4d51f0cce",
-    "learningDocuments": "5b6d26564e16a6edcacc49d3cd83f185bd49b9ac541b3d51d1fb92b2eba7e869",
-    "learningOrderDigest": "f09bc94807b80879bfc3ea2a75d67d88d8430384583427e2061f79f9ba43d780",
-    "problemPlacementPolicyDigest": "4f273397ef26d8fdd6f405803888bd3e760008f0ab8b7992d27a4d157863c662"
+    "tags": "3ddf77128c4e312f726bd4b5f7defaf2c7b69d62707087c77ee278fa45860eb9",
+    "learningOutcomes": "d299566283670a955ae5c380c5dc9ee7efa58b5e5701b1ddb3fe851a1f5d0e49",
+    "learningUnits": "6af7f36455c2b47120740e48b2bfcd4e25afc3e9ac4f7cb03cbfd8c56eb3d720",
+    "learningDocuments": "115fe195a45a8aebb4bccb3fa9e8ac8c1fdea6e49d586af5f2cab598cc4b8168",
+    "learningOrderDigest": "48249d1af0199dbe8bce51b3372c32b1cb924890bf4d28a5371ee12219422f59",
+    "problemPlacementPolicyDigest": "85e22d6c33526ac27f42869d8a80a3cb71cfe5ad5deafd51ef413cd98ba8f29f"
   },
-  "materializationDigest": "6d4849ddc9a876ed86a3859e3592f24b340956cf887a535949795ae3b61310a8"
+  "materializationDigest": "08580fb302af69ab0c03314e45c139c4272d1793eb16a505459fd191f5ea809d"
 }

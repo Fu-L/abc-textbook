@@ -41,7 +41,12 @@
     }
   ],
   "learningOutcomeIds": [
-    "outcome-factor-and-accelerate-transitions"
+    "outcome-close-eventual-dp-tail",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-normalize-common-dp-action",
+    "outcome-slide-transition-recurrence",
+    "outcome-subtract-exception-transitions"
   ],
   "representativeProblemIds": [
     "abc212-e",

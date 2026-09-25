@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第127単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [2-SAT・含意グラフ](/learn/graph/two-sat/) ／ 次: [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/)
+
 ## 概要
 
 ### DSU merge tree・Kruskal reconstruction tree
 
 成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。
+
+### 習得する技能
+
+- 成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ DSUによる連結成分管理・縮約で得た考え方と実装を再利用�
 
 ## 問題一覧
 
-1. [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f)
-2. [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h)
+1. [ABC314 F「A Certain Game」](https://atcoder.jp/contests/abc314/tasks/abc314_f) — 主題: [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/)。既習技能: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。 / 成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。 / 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+2. [ABC235 Ex「Painting Weighted Graph」](https://atcoder.jp/contests/abc235/tasks/abc235_h) — 主題: [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/)。既習技能: 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ DSUによる連結成分管理・縮約で得た考え方と実装を再利用�
 - [ABC314 F 公式解説](https://atcoder.jp/contests/abc314/editorial/6953)
 - [ABC314 F 公式問題文](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dsu-merge-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-dsu-merge-tree`

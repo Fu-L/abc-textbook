@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第62単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [有限関数・作用の合成](/learn/query/finite-function-composition/) ／ 次: [ancestor query・LCA](/learn/tree/tree-ancestor-lca/)
+
 ## 概要
 
 ### Euler順による部分木区間化
 
 DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。
+
+### 習得する技能
+
+- Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。
 
 ## 前提と範囲
 
@@ -32,17 +42,17 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 
 ## 問題一覧
 
-1. [ABC240 E「Ranges on Tree」](https://atcoder.jp/contests/abc240/tasks/abc240_e)
-2. [ABC406 F「Compare Tree Weights」](https://atcoder.jp/contests/abc406/tasks/abc406_f)
-3. [ABC337 G「Tree Inversion」](https://atcoder.jp/contests/abc337/tasks/abc337_g)
+1. [ABC240 E「Ranges on Tree」](https://atcoder.jp/contests/abc240/tasks/abc240_e) — 主題: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/)。既習技能: 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
+2. [ABC406 F「Compare Tree Weights」](https://atcoder.jp/contests/abc406/tasks/abc406_f) — 主題: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/)。既習技能: 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
+3. [ABC337 G「Tree Inversion」](https://atcoder.jp/contests/abc337/tasks/abc337_g) — 主題: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/)。既習技能: 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。 / 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g)
+- [ABC294 G「Distance Queries on a Tree」](https://atcoder.jp/contests/abc294/tasks/abc294_g) — 主題: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/)。既習技能: 処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。
 
 ## 根拠
 
@@ -53,4 +63,4 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 - [ABC337 G 公式解説](https://atcoder.jp/contests/abc337/editorial/9128)
 - [ABC337 G 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-tree-euler-flattening`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-tree-euler-flattening`

@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第188単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) ／ 次: [拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/)
+
 ## 概要
 
 ### Static Top Treeによる動的木DP
 
 境界頂点つきtree clusterをrake・compressで二分合成し、局所更新後の木DP値を根まで再計算する。
+
+### 習得する技能
+
+- 境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC351 G「Hash on Tree」](https://atcoder.jp/contests/abc351/tasks/abc351_g)
-2. [ABC460 G「Vertex Flip Query」](https://atcoder.jp/contests/abc460/tasks/abc460_g)
+1. [ABC351 G「Hash on Tree」](https://atcoder.jp/contests/abc351/tasks/abc351_g) — 主題: [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/)。既習技能: heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる。
+2. [ABC460 G「Vertex Flip Query」](https://atcoder.jp/contests/abc460/tasks/abc460_g) — 主題: [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/)。既習技能: 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC460 G 公式解説](https://atcoder.jp/contests/abc460/editorial/21012)
 - [ABC460 G 公式問題文](https://atcoder.jp/contests/abc460/tasks/abc460_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-static-top-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-static-top-tree`

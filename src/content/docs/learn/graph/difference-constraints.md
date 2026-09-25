@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第76単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) ／ 次: [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/)
+
 ## 概要
 
 ### difference constraints・不等式系の最短路化
 
 差の上界 x_v-x_u≤c を有向辺 u→v の重みcへ写し、Bellman–Ford等の緩和と負閉路から可解性・極値・具体解を求める。
+
+### 習得する技能
+
+- 差の不等式をconstraint graphへ変換し、緩和と負閉路判定により可解性・極値・具体解を求められる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC404 G「Specified Range Sums」](https://atcoder.jp/contests/abc404/tasks/abc404_g)
-2. [ABC216 G「01Sequence」](https://atcoder.jp/contests/abc216/tasks/abc216_g)
+1. [ABC404 G「Specified Range Sums」](https://atcoder.jp/contests/abc404/tasks/abc404_g) — 主題: [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/)。既習技能: 各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。
+2. [ABC216 G「01Sequence」](https://atcoder.jp/contests/abc216/tasks/abc216_g) — 主題: [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/)。既習技能: 各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC404 G 公式解説](https://atcoder.jp/contests/abc404/editorial/12867)
 - [ABC404 G 公式問題文](https://atcoder.jp/contests/abc404/tasks/abc404_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-difference-constraints`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-difference-constraints`

@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第47単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/) ／ 次: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)
+
 ## 概要
 
 ### 回文半径・Manacher
 
 各中心の最大回文半径を左右対称性と既知区間の再利用で線形に求める。
+
+### 習得する技能
+
+- 各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC398 F「ABCBA」](https://atcoder.jp/contests/abc398/tasks/abc398_f)
-2. [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g)
+1. [ABC398 F「ABCBA」](https://atcoder.jp/contests/abc398/tasks/abc398_f) — 主題: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)。
+2. [ABC349 G「Palindrome Construction」](https://atcoder.jp/contests/abc349/tasks/abc349_g) — 主題: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/)。既習技能: 静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。 / 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC398 F 公式解説](https://atcoder.jp/contests/abc398/editorial/12501)
 - [ABC398 F 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-palindrome-radius`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-palindrome-radius`

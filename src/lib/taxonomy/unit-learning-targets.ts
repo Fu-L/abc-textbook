@@ -499,7 +499,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-tree-balanced-separators': [
     '黄色',
-    '重心で各成分を半分以下にし、分離点を通る寄与と再帰側の寄与を分ける。',
+    '重み付きの一点分離と、頂点数を半減させる再帰分解を区別し、分離点を通る寄与を集計する。',
   ],
   'unit-dsu-merge-tree': ['青色', 'DSUの併合履歴を木に保存し、時刻や閾値のqueryを祖先関係へ写す。'],
   'unit-tree-precedence-contraction': [
@@ -725,7 +725,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-polynomial-multipoint-evaluation': [
     '橙色',
-    '積木と剰余木を使い、多点評価・補間の正当性と準線形計算量を理解する。',
+    '一般点の積木・剰余木と等比点のchirp-zを比較し、評価点の構造から変形と計算量を選ぶ。',
   ],
   'unit-bostan-mori': ['橙色', '有理母関数の係数を偶奇で分け、指数を半減する変形を繰り返す。'],
   'unit-fps-composition-power-projection': [

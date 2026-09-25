@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第194単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [Min_25・Lucy DP型の総和篩](/learn/number-theory/min25-sieve/) ／ 次: [Robinson–Schensted対応・Young tableau](/learn/combinatorics-algebra/rsk-young-tableaux/)
+
 ## 概要
 
 ### FPS合成・power projection
 
 多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。
+
+### 習得する技能
+
+- 多項式/FPSのcompositionとその転置であるpower projectionを、block分割・transposition・rational functionへ還元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC387 G「Prime Circuit」](https://atcoder.jp/contests/abc387/tasks/abc387_g)
-2. [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g)
+1. [ABC387 G「Prime Circuit」](https://atcoder.jp/contests/abc387/tasks/abc387_g) — 主題: [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/)。
+2. [ABC439 G「Sugoroku 6」](https://atcoder.jp/contests/abc439/tasks/abc439_g) — 主題: [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/)。既習技能: pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC439 G 公式解説](https://atcoder.jp/contests/abc439/editorial/14995)
 - [ABC439 G 公式問題文](https://atcoder.jp/contests/abc439/tasks/abc439_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-fps-composition-power-projection`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-fps-composition-power-projection`

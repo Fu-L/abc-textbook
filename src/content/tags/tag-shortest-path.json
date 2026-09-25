@@ -53,7 +53,10 @@
     }
   ],
   "learningOutcomeIds": [
-    "outcome-model-and-compute-shortest-path"
+    "outcome-compute-all-pairs-distance",
+    "outcome-detect-improving-cycles",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-relax-in-dependency-order"
   ],
   "representativeProblemIds": [
     "abc213-e",

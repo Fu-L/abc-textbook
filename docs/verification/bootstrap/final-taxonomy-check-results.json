@@ -1,40 +1,40 @@
 {
   "schemaVersion": "1.0.0",
   "taskId": "T159",
-  "taxonomySubjectDigest": "76b22c339eff79193b47a82df220db95448480be2cfddd2ba7cffbd04d8cf396",
+  "taxonomySubjectDigest": "7815fbcd4e36fb63f51b74d9f6157a527a46a09676be8dfcc4c86b9d517b572e",
   "reviewerId": "person-maintainer",
   "results": [
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "completedAt": "2026-09-14T08:42:43.272Z",
+      "completedAt": "2026-09-24T14:15:16.751Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "cb26f3a8a0e9acf971c1d2c49fe90105a1e3eea6e2f19e78ad7d4e1fc54c7aa7",
+      "stdoutDigest": "50b94ae9591abfb3832941b43b9edfb2d5d0e2566d492311eec15e468e322e49",
       "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "completedAt": "2026-09-14T08:42:50.660Z",
+      "completedAt": "2026-09-24T14:15:23.889Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "b6d90da4923fa74ed15ab28a946f8a0e8303aeb07261efd5eee0f27f7d1b0bcd",
+      "stdoutDigest": "0c6f9390ad970211c1567dc1d557a9aa612f6dbb71d27ee88e463e5257408bbf",
       "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "completedAt": "2026-09-14T08:42:51.200Z",
+      "completedAt": "2026-09-24T14:15:24.335Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "d2e9e7e6fca41822de970ae9616da5380929e5d280c3a2465acb36b8ca38a253",
+      "stdoutDigest": "5705079fb4f524736c7fe4a825d952626bd356a539c4f62604943d62ccb5bebd",
       "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "completedAt": "2026-09-14T08:42:51.421Z",
+      "completedAt": "2026-09-24T14:15:24.545Z",
       "exitCode": 0,
       "passed": true,
       "stdoutDigest": "60ea1640c5667856da1032ef675c5ba967f56135c286491a4b0a7f09fb25f9c2",
@@ -43,10 +43,10 @@
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "completedAt": "2026-09-14T08:42:58.802Z",
+      "completedAt": "2026-09-24T14:15:31.610Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "8a299f54552efeea7c27e1cdc4bda8e3c68610525340e58dd9dd06531da0c5e4",
+      "stdoutDigest": "25f6b417b301f6558015db7ee5004bd5e134b17d1f4163a606672074819fca0b",
       "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
     }
   ]

@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第133単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) ／ 次: [SWAG・two-stack queue aggregation](/learn/query/swag/)
+
 ## 概要
 
 ### Aho–Corasick
 
 複数patternのTrieへfailure linkとoutput情報を加え、最長接尾辞状態を文字ごとに更新する。
+
+### 習得する技能
+
+- 複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
-2. [ABC458 F「Critical Misread」](https://atcoder.jp/contests/abc458/tasks/abc458_f)
+1. [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f) — 主題: [Aho–Corasick](/learn/string/aho-corasick/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+2. [ABC458 F「Critical Misread」](https://atcoder.jp/contests/abc458/tasks/abc458_f) — 主題: [Aho–Corasick](/learn/string/aho-corasick/)。既習技能: 固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC458 F 公式解説](https://atcoder.jp/contests/abc458/editorial/20159)
 - [ABC458 F 公式問題文](https://atcoder.jp/contests/abc458/tasks/abc458_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-aho-corasick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-aho-corasick`

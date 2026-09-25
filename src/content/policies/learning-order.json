@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9",
-    "acceptedAt": "2026-09-14T08:43:04.226Z"
+    "digest": "651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7",
+    "acceptedAt": "2026-09-24T14:15:36.959Z"
   },
   "tagPrerequisites": [
     {
@@ -657,6 +657,10 @@
       "prerequisiteId": "outcome-characterize-integer-solvability"
     },
     {
+      "nodeId": "outcome-build-balanced-separator-decomposition",
+      "prerequisiteId": "outcome-find-weighted-balanced-separator"
+    },
+    {
       "nodeId": "outcome-build-cartesian-tree-decomposition",
       "prerequisiteId": "outcome-prune-dominated-candidates-once"
     },
@@ -705,6 +709,10 @@
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
     },
     {
+      "nodeId": "outcome-close-eventual-dp-tail",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
       "nodeId": "outcome-compare-algebraic-objects-by-random-fingerprint",
       "prerequisiteId": "outcome-design-and-bound-randomized-algorithm"
     },
@@ -715,6 +723,14 @@
     {
       "nodeId": "outcome-compose-series-and-project-powers",
       "prerequisiteId": "outcome-apply-formal-power-series-operations"
+    },
+    {
+      "nodeId": "outcome-compress-dp-sufficient-aggregates",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-compute-all-pairs-distance",
+      "prerequisiteId": "outcome-select-state-graph-search"
     },
     {
       "nodeId": "outcome-compute-directed-walk-period",
@@ -814,7 +830,15 @@
     },
     {
       "nodeId": "outcome-design-frontier-profile-dp",
+      "prerequisiteId": "outcome-design-grid-table-dp"
+    },
+    {
+      "nodeId": "outcome-design-frontier-profile-dp",
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-design-frontier-profile-dp",
+      "prerequisiteId": "outcome-enumerate-subset-state-space"
     },
     {
       "nodeId": "outcome-design-grid-table-dp",
@@ -851,6 +875,10 @@
     {
       "nodeId": "outcome-detect-crossing-by-cyclic-order",
       "prerequisiteId": "outcome-reduce-geometry-to-algebraic-predicates"
+    },
+    {
+      "nodeId": "outcome-detect-improving-cycles",
+      "prerequisiteId": "outcome-select-state-graph-search"
     },
     {
       "nodeId": "outcome-determinize-automaton-by-subsets",
@@ -891,6 +919,14 @@
     {
       "nodeId": "outcome-evaluate-adversarial-game-value",
       "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
+      "nodeId": "outcome-evaluate-at-geometric-points",
+      "prerequisiteId": "outcome-apply-formal-power-series-operations"
+    },
+    {
+      "nodeId": "outcome-evaluate-at-geometric-points",
+      "prerequisiteId": "outcome-divide-search-space-recursively"
     },
     {
       "nodeId": "outcome-evaluate-polynomial-at-many-points",
@@ -1013,6 +1049,10 @@
       "prerequisiteId": "outcome-model-max-flow-min-cut"
     },
     {
+      "nodeId": "outcome-normalize-common-dp-action",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
       "nodeId": "outcome-normalize-string-to-primitive-period",
       "prerequisiteId": "outcome-build-prefix-match-state"
     },
@@ -1022,7 +1062,27 @@
     },
     {
       "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-close-eventual-dp-tail"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-compress-dp-sufficient-aggregates"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
       "prerequisiteId": "outcome-factor-and-accelerate-transitions"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-normalize-common-dp-action"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-slide-transition-recurrence"
+    },
+    {
+      "nodeId": "outcome-optimize-monge-transitions",
+      "prerequisiteId": "outcome-subtract-exception-transitions"
     },
     {
       "nodeId": "outcome-optimize-path-matching-by-contraction",
@@ -1101,6 +1161,10 @@
       "prerequisiteId": "outcome-use-tree-diameter-extrema"
     },
     {
+      "nodeId": "outcome-relax-in-dependency-order",
+      "prerequisiteId": "outcome-select-state-graph-search"
+    },
+    {
       "nodeId": "outcome-remove-boundaries-by-reflection",
       "prerequisiteId": "outcome-compute-binomial-by-lucas"
     },
@@ -1149,12 +1213,20 @@
       "prerequisiteId": "outcome-formulate-combinatorial-coefficients"
     },
     {
+      "nodeId": "outcome-slide-transition-recurrence",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
+    },
+    {
       "nodeId": "outcome-solve-bipartite-matching",
       "prerequisiteId": "outcome-color-and-classify-bipartite-components"
     },
     {
       "nodeId": "outcome-solve-cyclic-minimax-game",
       "prerequisiteId": "outcome-evaluate-adversarial-game-value"
+    },
+    {
+      "nodeId": "outcome-solve-difference-constraints",
+      "prerequisiteId": "outcome-detect-improving-cycles"
     },
     {
       "nodeId": "outcome-solve-difference-constraints",
@@ -1207,6 +1279,10 @@
     {
       "nodeId": "outcome-stabilize-unbounded-knapsack-by-best-density",
       "prerequisiteId": "outcome-design-resource-dp"
+    },
+    {
+      "nodeId": "outcome-subtract-exception-transitions",
+      "prerequisiteId": "outcome-design-minimal-sufficient-state"
     },
     {
       "nodeId": "outcome-sum-multiplicative-function-by-min25-sieve",
@@ -1468,7 +1544,15 @@
     },
     {
       "nodeId": "unit-frontier-profile-dp",
+      "prerequisiteId": "unit-dp-grid-table"
+    },
+    {
+      "nodeId": "unit-frontier-profile-dp",
       "prerequisiteId": "unit-dp-state-design"
+    },
+    {
+      "nodeId": "unit-frontier-profile-dp",
+      "prerequisiteId": "unit-dp-subset-state"
     },
     {
       "nodeId": "unit-functional-graph-decomposition",
@@ -2532,7 +2616,7 @@
     {
       "unitId": "unit-tree-balanced-separators",
       "globalIndex": 99,
-      "reason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
+      "reason": "部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。"
     },
     {
       "unitId": "unit-cartesian-tree",
@@ -3016,7 +3100,7 @@
     }
   ],
   "tagDagDigest": "dfe87d8e728cbc39f5c2f8c48d48b640354617a5acccb40a4b1831e11c87a21e",
-  "learningOutcomeDagDigest": "80dd1f6874f5b37cffc55d3db5be783a432685b2ef325b04fcc63fa33ac047e9",
-  "learningUnitDagDigest": "f6a96773c045380632e784e5906e32616587c620734bc314a0dc5a3d0470ddca",
+  "learningOutcomeDagDigest": "1d68021d6f470d1e0ec8ffb940e85b439e93ed583b559e8642ed1a6690d95329",
+  "learningUnitDagDigest": "a6f4fcba42c9b2913776f8201d08cc389fdd87029773caf8dea8555c4985113f",
   "orderDigest": "dad14139c7ab38102d76d636f6739f166805ac34829282ebbcd95078284763ed"
 }

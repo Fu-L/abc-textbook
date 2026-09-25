@@ -47,7 +47,8 @@
     }
   ],
   "learningOutcomeIds": [
-    "outcome-enumerate-bounded-candidates-or-cases"
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask"
   ],
   "representativeProblemIds": [
     "abc234-e",

@@ -32,6 +32,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/number-theory/prime-divisor.md",
   "problemIds": [
+    "abc227-g",
     "abc259-e",
     "abc322-g",
     "abc384-f",
@@ -49,12 +50,12 @@
     "abc420-g",
     "abc412-e",
     "abc384-f",
-    "abc322-g"
+    "abc322-g",
+    "abc227-g"
   ],
   "relatedProblemIds": [
     "abc212-g",
     "abc222-g",
-    "abc227-g",
     "abc230-g",
     "abc238-g",
     "abc245-ex",

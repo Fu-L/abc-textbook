@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第161単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [Segment Tree Beats](/learn/query/segment-tree-beats/) ／ 次: [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/)
+
 ## 概要
 
 ### 削除・縮約recurrence
 
 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。
+
+### 習得する技能
+
+- 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -34,17 +44,17 @@ sidebar:
 
 この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC294 Ex「K-Coloring」](https://atcoder.jp/contests/abc294/tasks/abc294_h)
+- [ABC294 Ex「K-Coloring」](https://atcoder.jp/contests/abc294/tasks/abc294_h) — 主題: [subset convolution](/learn/combinatorics-algebra/subset-convolution/)。既習技能: 辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 根拠
 
 - [ABC294 H 公式解説](https://atcoder.jp/contests/abc294/editorial/5999)
 - [ABC294 H 公式問題文](https://atcoder.jp/contests/abc294/tasks/abc294_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-deletion-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-deletion-contraction`

@@ -55,23 +55,32 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     const orderedIds = TEXTBOOK_CHAPTERS.flatMap((chapter) => [chapter.id, ...chapter.unitIds]);
     expect([...orderedIds].sort()).toEqual([...byId.keys()].sort());
     expect(Object.keys(UNIT_LEARNING_TARGETS).sort()).toEqual([...byId.keys()].sort());
-    const subtreeIds = (id: string): string[] => [
-      id,
-      ...result.learningUnits
-        .filter(({ value }) => value.parentId === id)
-        .flatMap(({ value }) => subtreeIds(value.id)),
-    ];
     for (const id of orderedIds) {
-      const subtree = subtreeIds(id);
-      expect(
-        orderedIds.slice(textbookIndex(id), textbookIndex(id) + subtree.length).sort(),
-        `Contiguous parent and descendants: ${id}`,
-      ).toEqual(subtree.sort());
       const target = unitLearningTarget(id);
       expect(byId.get(id)?.document).toContain(`**${target.color}（${target.rating}）**`);
       expect(target.reason.length).toBeGreaterThan(0);
       expect(byId.get(id)?.document).toContain(target.reason);
     }
+
+    const route = result.learningOrder.standardOrder;
+    expect(byId.get('unit-chapter-modeling')?.document).toContain('## 標準履修順');
+    for (const [index, id] of route.entries()) {
+      const document = byId.get(id)?.document ?? '';
+      expect(document).toContain(`第${String(index + 1)}単元`);
+      const next = byId.get(route[index + 1] ?? '');
+      if (next !== undefined) expect(document).toContain(`次: [${next.value.title}]`);
+    }
+    for (const prerequisite of ['unit-dp-grid-table', 'unit-dp-subset-state']) {
+      expect(route.indexOf(prerequisite)).toBeLessThan(route.indexOf('unit-frontier-profile-dp'));
+    }
+    expect(byId.get('unit-max-flow-min-cut')?.value.directProblemIds?.slice(0, 4)).toEqual([
+      'abc241-g',
+      'abc318-g',
+      'abc239-g',
+      'abc437-g',
+    ]);
+    expect(byId.get('unit-dp-transition-optimization')?.document).toContain('全体から例外を引く');
+    expect(byId.get('unit-polynomial-multipoint-evaluation')?.document).toContain('chirp-z');
 
     for (const chapter of TEXTBOOK_CHAPTERS) {
       const chapterDocument = byId.get(chapter.id)?.document ?? '';
@@ -98,11 +107,10 @@ describe('T047–T050 canonical taxonomy materialization', () => {
           if (prerequisite === undefined)
             throw new Error(`Missing prerequisite: ${prerequisiteId}`);
           expect(document).toContain(`[${prerequisite.title}](/learn/`);
-          if (textbookIndex(prerequisiteId) > textbookIndex(id)) {
-            const suffix = new Set<string>(chapter.unitIds).has(prerequisiteId)
-              ? '（後の節）'
-              : '（後の章）';
-            expect(document).toContain(`${prerequisiteId.replace(/^unit-/u, '')}/)${suffix}`);
+          if (input.build.standardOrder.includes(id)) {
+            expect(input.build.standardOrder.indexOf(prerequisiteId)).toBeLessThan(
+              input.build.standardOrder.indexOf(id),
+            );
           }
         }
         const accepted = input.build.finalCandidates.find(
@@ -127,8 +135,12 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(textbookIndex('unit-bipartite-structure')).toBeLessThan(
       textbookIndex('unit-shortest-path-certificates'),
     );
-    expect(byId.get('unit-automaton-dp')?.document).toContain('（後の章）');
-    expect(byId.get('unit-subset-convolution')?.document).toContain('（後の節）');
+    expect(route.indexOf('unit-finite-pattern-automaton')).toBeLessThan(
+      route.indexOf('unit-automaton-dp'),
+    );
+    expect(route.indexOf('unit-subset-transforms')).toBeLessThan(
+      route.indexOf('unit-subset-convolution'),
+    );
     expect(byId.get('unit-chapter-combinatorics-algebra')?.document).toContain(
       '    - [subset convolution]',
     );
@@ -180,7 +192,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     for (const placement of input.build.placements)
       expect(occurrences.get(placement.problemId)).toEqual([placement.presentationUnitId]);
     expect(occurrences.size).toBe(868);
-    expect(result.learningOutcomes).toHaveLength(214);
+    expect(result.learningOutcomes).toHaveLength(225);
   }, 30_000);
 
   it('materializes every accepted candidate and placement without re-synthesizing taxonomy', async () => {

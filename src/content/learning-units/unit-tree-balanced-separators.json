@@ -1,7 +1,7 @@
 {
   "id": "unit-tree-balanced-separators",
   "kind": "section",
-  "title": "重心を分離点として木を再帰分解する",
+  "title": "木の均衡分離点から重心分解へ進む",
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -24,10 +24,12 @@
     "tag-tree-balanced-separator"
   ],
   "learningOutcomeIds": [
-    "outcome-build-balanced-separator-decomposition"
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-find-weighted-balanced-separator"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-build-balanced-separator-decomposition"
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-find-weighted-balanced-separator"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/tree/tree-balanced-separators.md",
@@ -48,5 +50,5 @@
   "difficultyRank": 3,
   "representativeRank": 8,
   "globalIndex": 99,
-  "orderReason": "部分木サイズから重心を選び、除去後の各成分が半分以下になることを使って再帰の深さを抑える。"
+  "orderReason": "部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。"
 }

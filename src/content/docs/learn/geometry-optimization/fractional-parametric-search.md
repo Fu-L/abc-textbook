@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第135単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [SWAG・two-stack queue aggregation](/learn/query/swag/) ／ 次: [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/)
+
 ## 概要
 
 ### fractional programming・比率parametric search
@@ -23,6 +29,10 @@ sidebar:
 ABC236 Eの平均値側は各要素をA_i−xに置き換え、選択制約のDPでスコア最大値を求める。中央値側はA_i≥xを+1、それ以外を−1とする個数比較であり、比率の線形化とは区別する。
 
 ABC324 Fでは各辺の利得−x·費用をDAG上で最大化する。ABC294 Fでは砂糖量−x·総重量を各溶液に割り当て、二つのスコアの和が非負となる組数を整列と二分探索で数える。同じ変換の後に、最適化と計数という異なる判定器を接続する。
+
+### 習得する技能
+
+- 比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。
 
 ## 前提と範囲
 
@@ -38,11 +48,11 @@ ABC324 Fでは各辺の利得−x·費用をDAG上で最大化する。ABC294 F�
 
 ## 問題一覧
 
-1. [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f)
-2. [ABC294 F「Sugar Water 2」](https://atcoder.jp/contests/abc294/tasks/abc294_f)
-3. [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e)
+1. [ABC324 F「Beautiful Path」](https://atcoder.jp/contests/abc324/tasks/abc324_f) — 主題: [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/)。既習技能: 依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。 / 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
+2. [ABC294 F「Sugar Water 2」](https://atcoder.jp/contests/abc294/tasks/abc294_f) — 主題: [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/)。
+3. [ABC236 E「Average and Median」](https://atcoder.jp/contests/abc236/tasks/abc236_e) — 主題: [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -53,4 +63,4 @@ ABC324 Fでは各辺の利得−x·費用をDAG上で最大化する。ABC294 F�
 - [ABC324 F 公式解説](https://atcoder.jp/contests/abc324/editorial/7405)
 - [ABC324 F 公式問題文](https://atcoder.jp/contests/abc324/tasks/abc324_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-fractional-parametric-search`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-fractional-parametric-search`

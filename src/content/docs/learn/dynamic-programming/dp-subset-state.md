@@ -3,7 +3,7 @@ title: "部分集合・bitmask状態DP"
 description: "「部分集合・bitmask状態DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 71
+  order: 70
 ---
 
 # 部分集合・bitmask状態DP
@@ -11,6 +11,12 @@ sidebar:
 習得対象の目安: **水色（1200–1599）**。使用集合をbitmaskで持ち、集合の増減と遷移順から指数時間DPを設計する。
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
+
+## 標準履修順
+
+第58単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) ／ 次: [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)
 
 ## 概要
 
@@ -23,6 +29,10 @@ ABC309 Gは全N個の値の使用集合を持たず、走査位置の近傍2X−
 ABC354 Eでは残存集合maskを状態とし、合法なpairを消すと要素数が2減る順序で勝敗を求める。集合状態とゲームの勝敗再帰を組み合わせる練習として扱う。
 
 bitmaskで状態を書けることと、部分集合DPで解けることは別である。選択済み集合が増えるなどの非循環な順序を証明してから更新順を決める。ABC244 Fはbitを反転して閉路を持つ状態グラフになる比較例であり、状態グラフ探索の節を参照する。
+
+### 習得する技能
+
+- bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
 ## 前提と範囲
 
@@ -38,44 +48,43 @@ DPの最小十分状態で得た考え方と実装を再利用し、部分集合
 
 ## 問題一覧
 
-1. [ABC354 E「Remove Pairs」](https://atcoder.jp/contests/abc354/tasks/abc354_e)
-2. [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
-3. [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e)
-4. [ABC278 F「Shiritori」](https://atcoder.jp/contests/abc278/tasks/abc278_f)
-5. [ABC274 E「Booster」](https://atcoder.jp/contests/abc274/tasks/abc274_e)
-6. [ABC246 F「typewriter」](https://atcoder.jp/contests/abc246/tasks/abc246_f)
-7. [ABC381 F「1122 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_f)
-8. [ABC425 F「Inserting Process」](https://atcoder.jp/contests/abc425/tasks/abc425_f)
-9. [ABC232 F「Simple Operations on Sequence」](https://atcoder.jp/contests/abc232/tasks/abc232_f)
-10. [ABC332 E「Lucky bag」](https://atcoder.jp/contests/abc332/tasks/abc332_e)
-11. [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
-12. [ABC352 F「Estimate Order」](https://atcoder.jp/contests/abc352/tasks/abc352_f)
-13. [ABC411 G「Count Cycles」](https://atcoder.jp/contests/abc411/tasks/abc411_g)
-14. [ABC343 G「Compress Strings」](https://atcoder.jp/contests/abc343/tasks/abc343_g)
-15. [ABC328 G「Cut and Reorder」](https://atcoder.jp/contests/abc328/tasks/abc328_g)
-16. [ABC396 G「Flip Row or Col」](https://atcoder.jp/contests/abc396/tasks/abc396_g)
-17. [ABC432 F「Candy Redistribution」](https://atcoder.jp/contests/abc432/tasks/abc432_f)
-18. [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f)
-19. [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f)
-20. [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h)
+1. [ABC354 E「Remove Pairs」](https://atcoder.jp/contests/abc354/tasks/abc354_e) — 主題: [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+2. [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+3. [ABC215 E「Chain Contestant」](https://atcoder.jp/contests/abc215/tasks/abc215_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+4. [ABC278 F「Shiritori」](https://atcoder.jp/contests/abc278/tasks/abc278_f) — 主題: [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+5. [ABC274 E「Booster」](https://atcoder.jp/contests/abc274/tasks/abc274_e) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。
+6. [ABC381 F「1122 Subsequence」](https://atcoder.jp/contests/abc381/tasks/abc381_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
+7. [ABC425 F「Inserting Process」](https://atcoder.jp/contests/abc425/tasks/abc425_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 対称操作で同値な状態の標準形と不変量を選べる。
+8. [ABC232 F「Simple Operations on Sequence」](https://atcoder.jp/contests/abc232/tasks/abc232_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。
+9. [ABC332 E「Lucky bag」](https://atcoder.jp/contests/abc332/tasks/abc332_e) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。
+10. [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。
+11. [ABC352 F「Estimate Order」](https://atcoder.jp/contests/abc352/tasks/abc352_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。
+12. [ABC411 G「Count Cycles」](https://atcoder.jp/contests/abc411/tasks/abc411_g) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 対称操作で同値な状態の標準形と不変量を選べる。
+13. [ABC343 G「Compress Strings」](https://atcoder.jp/contests/abc343/tasks/abc343_g) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 既知のZ-boxを再利用してZ arrayを線形時間で構成し、各位置から始まる接尾辞と文字列全体のprefixの最大一致長を、文字列連結によるprefix照合へ利用できる。
+14. [ABC328 G「Cut and Reorder」](https://atcoder.jp/contests/abc328/tasks/abc328_g) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 対称操作で同値な状態の標準形と不変量を選べる。
+15. [ABC396 G「Flip Row or Col」](https://atcoder.jp/contests/abc396/tasks/abc396_g) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。
+16. [ABC432 F「Candy Redistribution」](https://atcoder.jp/contests/abc432/tasks/abc432_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。 / 成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。
+17. [ABC319 F「Fighter Takahashi」](https://atcoder.jp/contests/abc319/tasks/abc319_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。 / 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。
+18. [ABC313 F「Flip Machines」](https://atcoder.jp/contests/abc313/tasks/abc313_f) — 主題: [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。 / 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+19. [ABC306 Ex「Balance Scale」](https://atcoder.jp/contests/abc306/tasks/abc306_h) — 主題: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。 / 依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g)
-- [ABC216 H「Random Robots」](https://atcoder.jp/contests/abc216/tasks/abc216_h)
-- [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g)
-- [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h)
-- [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h)
-- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e)
-- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g)
-- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g)
-- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f)
-- [ABC400 G「Patisserie ABC 3」](https://atcoder.jp/contests/abc400/tasks/abc400_g)
-- [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f)
+- [ABC213 G「Connectivity 2」](https://atcoder.jp/contests/abc213/tasks/abc213_g) — 主題: [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+- [ABC216 H「Random Robots」](https://atcoder.jp/contests/abc216/tasks/abc216_h) — 主題: [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
+- [ABC228 G「Digits on Grid」](https://atcoder.jp/contests/abc228/tasks/abc228_g) — 主題: [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+- [ABC295 Ex「E or m」](https://atcoder.jp/contests/abc295/tasks/abc295_h) — 主題: [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+- [ABC300 Ex「Fibonacci: Revisited」](https://atcoder.jp/contests/abc300/tasks/abc300_h) — 主題: [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/)。既習技能: 固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。 / 係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。 / bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+- [ABC301 E「Pac-Takahashi」](https://atcoder.jp/contests/abc301/tasks/abc301_e) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。 BFSと部分集合DPを既習として、移動の全履歴を重要地点間の距離へ圧縮する。dp[S][v]から未訪問の代表地点へ進み、最後に出口への距離を加えて時間制約を判定する。通過した菓子を全て状態に記録しなくても最適値を失わない理由も確かめる。
+- [ABC309 G「Ban Permutation」](https://atcoder.jp/contests/abc309/tasks/abc309_g) — 主題: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)。既習技能: 未処理領域へ影響する境界上の色・使用済みフラグ・接続partitionだけを残し、窓外の情報を忘れられることを証明して幅指数のprofile DPを設計できる。 / bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
+- [ABC321 G「Electric Circuit」](https://atcoder.jp/contests/abc321/tasks/abc321_g) — 主題: [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。 / 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+- [ABC338 F「Negative Traveling Salesman」](https://atcoder.jp/contests/abc338/tasks/abc338_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。 Floyd–Warshallと部分集合DPを既習として、最短路閉包上の訪問順DPへ変換する。maskは代表として訪問順へ追加した頂点集合であり、距離前計算の途中で通る頂点を禁止しない。任意のwalkから初訪問順を取り出す方向と、DP解をwalkへ展開する方向で同値性を示す。
+- [ABC400 G「Patisserie ABC 3」](https://atcoder.jp/contests/abc400/tasks/abc400_g) — 主題: [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+- [ABC419 F「All Included」](https://atcoder.jp/contests/abc419/tasks/abc419_f) — 主題: [Aho–Corasick](/learn/string/aho-corasick/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
 
 ## 根拠
 
@@ -86,4 +95,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、部分集合
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-subset-state`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-dp-subset-state`

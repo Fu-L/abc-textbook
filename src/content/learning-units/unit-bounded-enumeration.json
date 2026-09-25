@@ -24,10 +24,12 @@
     "tag-bounded-enumeration"
   ],
   "learningOutcomeIds": [
-    "outcome-enumerate-bounded-candidates-or-cases"
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-enumerate-bounded-candidates-or-cases"
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/modeling/bounded-enumeration.md",
@@ -69,6 +71,7 @@
     "abc234-ex",
     "abc240-ex",
     "abc240-f",
+    "abc246-f",
     "abc248-e",
     "abc257-f",
     "abc258-f",

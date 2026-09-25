@@ -1,0 +1,12 @@
+{
+  "id": "outcome-close-eventual-dp-tail",
+  "statement": "余分な歩行を訪問済みの最良状態での反復へ移す交換論を示し、有限prefix DPと閉形式のtailへ分離できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc358-g",
+    "tag-dp-transition-acceleration",
+    "unit-dp-transition-optimization"
+  ]
+}

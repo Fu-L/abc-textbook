@@ -12,15 +12,44 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第95単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/) ／ 次: [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)
+
 ## 概要
 
 ### DP遷移の集約・高速化
 
 同じ形の遷移をprefix、単調構造、剰余類などでまとめる。
 
-全状態へ同じ操作を行うとき、共通部分を外に持ち、例外だけを更新できないかを考える。ABC372 Fは添字の移動、ABC457 Fは全体倍率、ABC435 Gは色別状態の共通affine変換と疎な追加・削除という同じ方向の高速化である。
+最初に素朴な遷移式を確定し、何を共有できるかで読む節を選ぶ。和・最大値の区間集約、全体からの例外除去、共通作用の遅延は、必要な代数的性質も更新の不変量も異なる。以下の問題には式変形を併記し、前提を要する複合問題は標準履修順で後のUnitに提示する。
 
-ABC435 Gでは隣接する色集合の対称差だけを明示更新し、共通状態への変換を遅延させる。対称差の総サイズを入力の集合サイズ総和で界すれば線形時間になる。区間分解を行わないため、Segment Treeの区間作用を前提としない。
+### 遷移範囲をまとめる
+
+Σ_{j∈[L_i,R_i]}dp[j]やmin_{j∈[L_i,R_i]}dp[j]へ変形する。prefix差には加減算、区間最小には最小値を保持する構造が必要。ABC253 Eから二次元のABC282 Gや対角線のABC265 Fへ広げる。集合を区間へ変える証明と、区間問い合わせの実装を区別する。
+
+### 全体から例外を引く
+
+全体和Tを一度作り、禁止辺や同じkeyだけを引く。ABC212 E→ABC370 Eで明示的な禁止辺からkey別の集約へ進む。ABC319 GはBFSによる距離層の構成を先に学んでから、各層へこの引き算を適用する発展問題。minやmaxには一般に引き算がないので同じ変形は使えない。
+
+### 共通作用を外へ出す
+
+ABC372 F→ABC457 F→ABC435 Gの順で、添字shift、全体倍率、affine作用と疎な集合変更へ進む。全状態の実値を毎回書き換えず、表現と共通作用の合成を保持する。例外への同時更新と非可逆な倍率0の扱いを確かめる。
+
+### 少数の集計値・隣接状態の式・閉形式の後半
+
+属性別最大や少数の重み付き和が更新について閉じる場合は、その集計値を状態に持つ。隣接出力の遷移和が似ている場合は差分の式を導く。巨大歩数の後半を同じ操作へ正規化できる場合は、その証明を先に行って有限prefixだけDPする。これらを「累積和」と一括りにしない。
+
+### 習得する技能
+
+- 余分な歩行を訪問済みの最良状態での反復へ移す交換論を示し、有限prefix DPと閉形式のtailへ分離できる。
+- 遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。
+- 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。
+- 全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。
+- 隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。
+- 全遷移の総和から禁止辺・禁止keyの集計値を引き、例外の総数で計算量を評価できる。
 
 ## 前提と範囲
 
@@ -36,43 +65,43 @@ ABC435 Gでは隣接する色集合の対称差だけを明示更新し、共通
 
 ## 問題一覧
 
-1. [ABC253 E「Distance Sequence」](https://atcoder.jp/contests/abc253/tasks/abc253_e)
-2. [ABC442 F「Diagonal Separation 2」](https://atcoder.jp/contests/abc442/tasks/abc442_f)
-3. [ABC212 E「Safety Journey」](https://atcoder.jp/contests/abc212/tasks/abc212_e)
-4. [ABC370 E「Avoid K Partition」](https://atcoder.jp/contests/abc370/tasks/abc370_e)
-5. [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f)
-6. [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e)
-7. [ABC372 F「Teleporting Takahashi 2」](https://atcoder.jp/contests/abc372/tasks/abc372_f)
-8. [ABC353 G「Merchant Takahashi」](https://atcoder.jp/contests/abc353/tasks/abc353_g)
-9. [ABC358 G「AtCoder Tour」](https://atcoder.jp/contests/abc358/tasks/abc358_g)
-10. [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f)
-11. [ABC334 F「Christmas Present 2」](https://atcoder.jp/contests/abc334/tasks/abc334_f)
-12. [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
-13. [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f)
-14. [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f)
-15. [ABC249 E「RLE」](https://atcoder.jp/contests/abc249/tasks/abc249_e)
-16. [ABC311 F「Yet Another Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_f)
-17. [ABC446 G「221 Subsequence」](https://atcoder.jp/contests/abc446/tasks/abc446_g)
-18. [ABC243 G「Sqrt」](https://atcoder.jp/contests/abc243/tasks/abc243_g)
-19. [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
-20. [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
-21. [ABC457 F「Second Gap」](https://atcoder.jp/contests/abc457/tasks/abc457_f)
-22. [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g)
-23. [ABC265 F「Manhattan Cafe」](https://atcoder.jp/contests/abc265/tasks/abc265_f)
-24. [ABC279 G「At Most 2 Colors」](https://atcoder.jp/contests/abc279/tasks/abc279_g)
-25. [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g)
-26. [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g)
-27. [ABC338 G「evall」](https://atcoder.jp/contests/abc338/tasks/abc338_g)
-28. [ABC435 G「Domino Arrangement」](https://atcoder.jp/contests/abc435/tasks/abc435_g)
-29. [ABC221 H「Count Multiset」](https://atcoder.jp/contests/abc221/tasks/abc221_h)
+1. [ABC253 E「Distance Sequence」](https://atcoder.jp/contests/abc253/tasks/abc253_e) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 素朴にはnew[j]=Σ_{|i−j|≥K}old[i]でO(M²)。Pをoldのprefix和としてP[j−K]+P[M]−P[j+K−1]へ分けO(M)。K=0では二範囲が重なるので全体和を一度だけ使う。
+2. [ABC442 F「Diagonal Separation 2」](https://atcoder.jp/contests/abc442/tasks/abc442_f) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 行の境界jを状態にし、new[j]=cost(row,j)+min_{k≥j}old[k]。全k走査をsuffix minimum一回で共有し、各行O(N)にする。
+3. [ABC212 E「Safety Journey」](https://atcoder.jp/contests/abc212/tasks/abc212_e) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 new[v]=Σ_{u:移動可}old[u]を、T−old[v]−Σ_{u:禁止辺uv}old[u]へ変形する。密な許可辺を列挙せず、一日O(N+M)で禁止辺だけを差し引く。
+4. [ABC370 E「Avoid K Partition」](https://atcoder.jp/contests/abc370/tasks/abc370_e) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 dp[i]=Σ_{j<i,B_j≠B_i−K}dp[j]をall−bucket[B_i−K]へ変形する。dp[i]を求めてからallとbucketを更新し、空区間を遷移へ混ぜない。期待O(N)のkey別集約。
+5. [ABC372 F「Teleporting Takahashi 2」](https://atcoder.jp/contests/abc372/tasks/abc372_f) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 new[v]=old[v−1]+Σ_{追加辺u→v}old[u]。環状の基本遷移を添字offset一つへ移し、M本の追加辺だけを更新してO(N+KM)。同時更新なので例外の遷移元は上書き前に退避する。
+6. [ABC457 F「Second Gap」](https://atcoder.jp/contests/abc457/tasks/abc457_f) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。 順位別挿入の全遷移を、new[j]=a_i old[j]+b_{i,j}（bは少数点のみ非零）へ分ける。共通倍率を外出しして二点を補正する。倍率0は逆元を使えないので全消去として扱い、現在世代の例外から再開する。
+7. [ABC435 G「Domino Arrangement」](https://atcoder.jp/contests/abc435/tasks/abc435_g) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 素朴な色別更新T_k(c)=S_{k−4}−T_{k−2}(c)を、parity別mapの共通affine作用として保持する。集合C_kとの対称差だけを追加・削除し、総仕事量を入力の集合サイズ総和で界す。値和も作用で更新する。
+8. [ABC408 F「Athletic」](https://atcoder.jp/contests/abc408/tasks/abc408_f) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。 / 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。 dp[p_h]=1+max_{|j−p_h|≤R,H_j≤h−D}dp[j]。高さ順にeligibleな点だけを有効化し、残る位置条件を区間最大にする。二条件の全点走査がsortとO(N log N)の更新・取得になる。
+9. [ABC224 E「Integers on Grid」](https://atcoder.jp/contests/abc224/tasks/abc224_e) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: 値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。 / 依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。 dp_i=1+max_{a_j>a_i,同じ行または列}dp_j型の遷移を行別・列別最大へ圧縮する。遷移先がなければ0。同値のbatchでは全取得を済ませてから更新し、狭義不等号を保つ。sort後の集約はO(N)。
+10. [ABC353 G「Merchant Takahashi」](https://atcoder.jp/contests/abc353/tasks/abc353_g) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: 要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。 max_j(dp[j]−C|j−t|)+pを、j≤tのmax(dp[j]+Cj)−Ct+pとj≥tのmax(dp[j]−Cj)+Ct+pへ分ける。二本の区間最大で各イベントO(log N)。
+11. [ABC358 G「AtCoder Tour」](https://atcoder.jp/contests/abc358/tasks/abc358_g) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。 K歩DPを直接展開するとKに比例する。walkの余分な周回を訪問済み最大報酬の頂点での滞在へ移せるので、t≤HWだけDPし、dp[t][v]+(K−t)A_vを最大化する。巨大時間を短いprefixと線形tailへ分ける証明が核心。
+12. [ABC387 F「Count Arrays」](https://atcoder.jp/contests/abc387/tasks/abc387_f) — 主題: [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/)。既習技能: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。 / 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 cycle縮約後の木でdp[v][j]=∏_{子u}Σ_{k≤j}dp[u][k]。子ごとにprefix和を作れば、親の値ごとに子の全値を走査する二乗因子が消える。functional graph縮約と木DPを先に履修する。
+13. [ABC334 F「Christmas Present 2」](https://atcoder.jp/contests/abc334/tasks/abc334_f) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: 候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。 配達の直接経路をbaselineにし、補充境界iの追加費用をd_iとする。dp[i]=d_i+min_{i−K≤j<i}dp[j]。窓から出た候補と支配される候補をdequeから除き、O(NK)をO(N)へ落とす。
+14. [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。 一周後の再訪を等比級数で消去し、new[0]だけ重み付き和で計算する。隣接出力の式を比較するとnew[j+1]=p(new[j]+old[j])となり、一行O(m²)からO(m)へ落ちる。
+15. [ABC288 F「Integer Division」](https://atcoder.jp/contests/abc288/tasks/abc288_f) — 主題: [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/)。既習技能: 遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。 最後の切れ目jを列挙するdp[i]=Σ_{j<i}dp[j] value(j+1..i)にvalue=10·旧value+d_iを代入する。dp[0]=1,dp[1]=d_1を初期値とし、i≥2ではdp[i]=10dp[i−1]+d_iΣ_{j<i}dp[j]となる。前答えと累積和だけでO(N)。
+16. [ABC214 F「Substrings」](https://atcoder.jp/contests/abc214/tasks/abc214_f) — 主題: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 同じ文字の直前出現と隣接禁止から、末尾追加が重複しない直前状態の区間[L_i,R_i]を導く。その後dp[i]=Σ_{j=L_i}^{R_i}dp[j]をprefix差へ変形する。境界の正当化が計数の核心。
+17. [ABC249 E「RLE」](https://atcoder.jp/contests/abc249/tasks/abc249_e) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 ラン長lを全列挙する遷移を、桁数dごとの10^{d−1}≤l<10^dへまとめる。同じ圧縮長増分d+1を持つ遷移元の区間和をprefix差で得て、各状態の線形走査をO(log N)区間へ減らす。
+18. [ABC311 F「Yet Another Grid Task」](https://atcoder.jp/contests/abc311/tasks/abc311_f) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 強制黒の閉包を作ってから対角線上の境界jを状態にする。new[j]=Σ_{k≥j}old[k]をsuffix和一走査で求め、盤外・強制黒と矛盾する境界を除く。境界圧縮と遷移集約を分けて説明する。
+19. [ABC446 G「221 Subsequence」](https://atcoder.jp/contests/abc446/tasks/abc446_g) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 各値列の辞書順最小添字列だけを数える正準化から、直前位置の開区間L_p<j<R_pを導く。dp[p]=Σ dp[j]をrange sumとpoint addへ写し、O(N²)をO(N log N)へ減らす。
+20. [ABC243 G「Sqrt」](https://atcoder.jp/contests/abc243/tasks/abc243_g) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。 二段先iを固定して中間状態数を数えるとΣ_{i≤r}(s+1−i²)dp[i]になる（s=⌊√X⌋,r=⌊√s⌋）。P0=Σdp、P2=Σi²dpを持てば(s+1)P0[r]−P2[r]で答えられる。
+21. [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 / 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。 総数順の最適方策を証明し、自己loopを移項する。dp_i=(1+Σ_{j>i}A_j dp_j/S)/(1−Σ_{j<i}A_j/S)。prefix Aと降順の重み付きsuffix和で、一状態の全色走査を定数時間へ落とす。
+22. [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 dealerの配布先とplayerの継続先は連続するD状態。r[i]=max(q[i],Σ_{j=1}^D r[i+j]/D)の和をsliding更新し、確率分布も差分配布で集約する。最適停止の式を確立してからO(ND)をO(N+D)へ減らす。
+23. [ABC319 G「Counting Shortest Paths」](https://atcoder.jp/contests/abc319/tasks/abc319_g) — 主題: [状態グラフのモデリングと探索](/learn/graph/state-graph-search/)。既習技能: 要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。 / 比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。 / 全遷移の総和から禁止辺・禁止keyの集計値を引き、例外の総数で計算量を評価できる。 補グラフBFSで距離層を先に確定する。dp[v]=Σ_{u∈前層,uv許可}dp[u]を前層総和−禁止隣接点のdp和へ変形する。BFSの未訪問集合走査と経路数の補集合集約は別工程として計算量を証明する。
+24. [ABC265 F「Manhattan Cafe」](https://atcoder.jp/contests/abc265/tasks/abc265_f) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 一座標を全整数へ動かす遷移核を、二つの絶対値の折れ目で三領域へ分ける。各領域では距離pairが一定方向に動くので、二次元DPの対角線prefix和で同方向の全遷移をまとめる。
+25. [ABC279 G「At Most 2 Colors」](https://atcoder.jp/contests/abc279/tasks/abc279_g) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 最後に異なる色を置いた位置pごとのdpを、既に制約窓を出たsingとactive区間に分ける。dp[i−1]=sing(C−1)+Σ_{p=i−K+1}^{i−2}dp[p]の区間和をprefix差へ変える。
+26. [ABC282 G「Similar Permutation」](https://atcoder.jp/contests/abc282/tasks/abc282_g) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。 / 各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。 次の二つのrankの大小関係で遷移元が四つの長方形へ分かれる。new[j][k][l]の全rank対走査を、旧layerの二次元prefix和から定数個の長方形和へ変える。
+27. [ABC235 G「Gardens」](https://atcoder.jp/contests/abc235/tasks/abc235_g) — 主題: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。 / 隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。 F_A(i)=Σ_{k≤A}C(i,k)を毎回足し直さず、Pascalの式からF_A(i+1)=2F_A(i)−C(i,A)とする。三色分を同時更新して包除の各項を定数時間で計算する。
+28. [ABC338 G「evall」](https://atcoder.jp/contests/abc338/tasks/abc338_g) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。 各開始位置の式評価状態(pre,mul,term)を個別更新する代わりに、cnt,Σpre,Σmul,Σtermを保持する。桁追加ではΣtermを10倍してd·Σmulを足す。+と*も集計値に閉じる更新を導き、全substring走査をO(N)へ圧縮する。
+29. [ABC221 H「Count Multiset」](https://atcoder.jp/contests/abc221/tasks/abc221_h) — 主題: [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/)。既習技能: グリッドまたは多次元表の依存方向と境界状態を定め、計算済みの局所近傍からDAG順に全状態を更新できる。 f[x][y]=f[x][y−x]+Σ_{直前M行k}f[k][y−x]。列ごとに行方向のsliding sumを保持してM項走査を消す。入る行を足し、出る行を引く順序を固定する。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g)
+- [ABC436 G「Linear Inequation」](https://atcoder.jp/contests/abc436/tasks/abc436_g) — 主題: [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 位取りで巨大添字の係数抽出を繰り返す。各段の全組合せを多項式分布との畳み込みへまとめ、その後同じ商へ移る剰余blockを区間集約する。畳み込みと区間集約の二つの高速化を区別する。
 
 ## 根拠
 
@@ -83,4 +112,4 @@ ABC435 Gでは隣接する色集合の対称差だけを明示更新し、共通
 - [ABC221 H 公式解説](https://atcoder.jp/contests/abc221/editorial/2719)
 - [ABC221 H 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-transition-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-dp-transition-optimization`

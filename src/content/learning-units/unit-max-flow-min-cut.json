@@ -43,12 +43,14 @@
     "abc326-g",
     "abc332-g",
     "abc347-g",
-    "abc397-g"
+    "abc397-g",
+    "abc437-g"
   ],
   "directProblemIds": [
-    "abc239-g",
-    "abc318-g",
     "abc241-g",
+    "abc318-g",
+    "abc239-g",
+    "abc437-g",
     "abc259-g",
     "abc326-g",
     "abc225-g",

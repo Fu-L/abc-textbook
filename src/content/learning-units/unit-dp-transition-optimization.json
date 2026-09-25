@@ -26,10 +26,20 @@
     "tag-dp-transition-acceleration"
   ],
   "learningOutcomeIds": [
-    "outcome-factor-and-accelerate-transitions"
+    "outcome-close-eventual-dp-tail",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-normalize-common-dp-action",
+    "outcome-slide-transition-recurrence",
+    "outcome-subtract-exception-transitions"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-factor-and-accelerate-transitions"
+    "outcome-close-eventual-dp-tail",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-normalize-common-dp-action",
+    "outcome-slide-transition-recurrence",
+    "outcome-subtract-exception-transitions"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-transition-optimization.md",
@@ -69,9 +79,11 @@
     "abc442-f",
     "abc212-e",
     "abc370-e",
+    "abc372-f",
+    "abc457-f",
+    "abc435-g",
     "abc408-f",
     "abc224-e",
-    "abc372-f",
     "abc353-g",
     "abc358-g",
     "abc387-f",
@@ -85,14 +97,12 @@
     "abc243-g",
     "abc412-f",
     "abc342-f",
-    "abc457-f",
     "abc319-g",
     "abc265-f",
     "abc279-g",
     "abc282-g",
     "abc235-g",
     "abc338-g",
-    "abc435-g",
     "abc221-h"
   ],
   "relatedProblemIds": [

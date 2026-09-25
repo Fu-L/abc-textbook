@@ -1,0 +1,15 @@
+{
+  "id": "outcome-compress-dp-sufficient-aggregates",
+  "statement": "遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc224-e",
+    "abc243-g",
+    "abc288-f",
+    "abc338-g",
+    "tag-dp-transition-acceleration",
+    "unit-dp-transition-optimization"
+  ]
+}

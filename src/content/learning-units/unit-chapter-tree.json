@@ -48,6 +48,7 @@
     "outcome-build-virtual-tree",
     "outcome-compose-dynamic-tree-clusters",
     "outcome-count-implicit-binary-tree-layers",
+    "outcome-find-weighted-balanced-separator",
     "outcome-flatten-tree-by-euler-order",
     "outcome-model-and-exploit-tree",
     "outcome-optimize-tree-order-by-cluster-contraction",

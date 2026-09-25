@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第48単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/) ／ 次: [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/)
+
 ## 概要
 
 ### 確率・期待値DP
@@ -50,6 +56,12 @@ ABC242 Exでは、異なる区間がk種類集まった段階に分ける。次�
 
 f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefixの右端rと選択数kを状態にする走査DPである。区間[L,R]を選ぶならL≤r+1を要求し、右端をmax(r,R)へ更新する。一度隙間を残すと後続の区間では埋められない。二つの独立区間の解を掛け合わせる区間DPではない。
 
+### 習得する技能
+
+- 意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。
+- 互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。
+- 状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
@@ -68,42 +80,42 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 
 ## 問題一覧
 
-1. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e)
-2. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e)
-3. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e)
-4. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e)
-5. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e)
-6. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e)
-7. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e)
-8. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e)
-9. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e)
-10. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e)
-11. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e)
-12. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e)
-13. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e)
-14. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f)
-15. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g)
-16. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g)
-17. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h)
-18. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h)
-19. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h)
+1. [ABC266 E「Throwing the Die」](https://atcoder.jp/contests/abc266/tasks/abc266_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。
+2. [ABC280 E「Critical Hit」](https://atcoder.jp/contests/abc280/tasks/abc280_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+3. [ABC275 E「Sugoroku 4」](https://atcoder.jp/contests/abc275/tasks/abc275_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+4. [ABC323 E「Playlist」](https://atcoder.jp/contests/abc323/tasks/abc323_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+5. [ABC298 E「Unfair Sugoroku」](https://atcoder.jp/contests/abc298/tasks/abc298_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+6. [ABC360 E「Random Swaps of Balls」](https://atcoder.jp/contests/abc360/tasks/abc360_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 対称操作で同値な状態の標準形と不変量を選べる。
+7. [ABC300 E「Dice Product 3」](https://atcoder.jp/contests/abc300/tasks/abc300_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。
+8. [ABC326 E「Revenge of "The Salary of AtCoder Inc."」](https://atcoder.jp/contests/abc326/tasks/abc326_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+9. [ABC350 E「Toward 0」](https://atcoder.jp/contests/abc350/tasks/abc350_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
+10. [ABC263 E「Sugoroku 3」](https://atcoder.jp/contests/abc263/tasks/abc263_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+11. [ABC382 E「Expansion Packs」](https://atcoder.jp/contests/abc382/tasks/abc382_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 資源軸の上限と更新順を選び、選択の重複を避けられる。
+12. [ABC314 E「Roulettes」](https://atcoder.jp/contests/abc314/tasks/abc314_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。
+13. [ABC421 E「Yacht」](https://atcoder.jp/contests/abc421/tasks/abc421_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 対称操作で同値な状態の標準形と不変量を選べる。
+14. [ABC404 F「Lost and Pound」](https://atcoder.jp/contests/abc404/tasks/abc404_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 対称操作で同値な状態の標準形と不変量を選べる。
+15. [ABC450 G「Random Subtraction」](https://atcoder.jp/contests/abc450/tasks/abc450_g) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 対称操作で同値な状態の標準形と不変量を選べる。
+16. [ABC277 G「Random Walk to Millionaire」](https://atcoder.jp/contests/abc277/tasks/abc277_g) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。
+17. [ABC239 Ex「Dice Product 2」](https://atcoder.jp/contests/abc239/tasks/abc239_h) — 主題: [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。
+18. [ABC226 H「Random Kth Max」](https://atcoder.jp/contests/abc226/tasks/abc226_h) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。
+19. [ABC242 Ex「Random Painting」](https://atcoder.jp/contests/abc242/tasks/abc242_h) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。 / 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h)
-- [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g)
-- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h)
-- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f)
-- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f)
-- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f)
-- [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f)
-- [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e)
-- [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g)
-- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f)
+- [ABC270 Ex「add 1」](https://atcoder.jp/contests/abc270/tasks/abc270_h) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。 / 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+- [ABC271 G「Access Counter」](https://atcoder.jp/contests/abc271/tasks/abc271_g) — 主題: [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。
+- [ABC299 Ex「Dice Sum Infinity」](https://atcoder.jp/contests/abc299/tasks/abc299_h) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 固定線形遷移を行列または漸化式にし、巨大回数後の値を求められる。 / 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
+- [ABC310 F「Make 10 Again」](https://atcoder.jp/contests/abc310/tasks/abc310_f) — 主題: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。
+- [ABC332 F「Random Update Query」](https://atcoder.jp/contests/abc332/tasks/abc332_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 更新作用の合成順と要約への適用を定義し、遅延評価で保てる。
+- [ABC333 F「Bomb Game 2」](https://atcoder.jp/contests/abc333/tasks/abc333_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。 一周後の再訪を等比級数で消去し、new[0]だけ重み付き和で計算する。隣接出力の式を比較するとnew[j+1]=p(new[j]+old[j])となり、一行O(m²)からO(m)へ落ちる。
+- [ABC342 F「Black Jack」](https://atcoder.jp/contests/abc342/tasks/abc342_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 dealerの配布先とplayerの継続先は連続するD状態。r[i]=max(q[i],Σ_{j=1}^D r[i+j]/D)の和をsliding更新し、確率分布も差分配布で集約する。最適停止の式を確立してからO(ND)をO(N+D)へ減らす。
+- [ABC402 E「Payment Required」](https://atcoder.jp/contests/abc402/tasks/abc402_e) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。
+- [ABC409 G「Accumulation of Wealth」](https://atcoder.jp/contests/abc409/tasks/abc409_g) — 主題: [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/)。既習技能: 選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。 / 状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。
+- [ABC412 F「Socks 4」](https://atcoder.jp/contests/abc412/tasks/abc412_f) — 主題: [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/)。既習技能: 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。 / 素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。 / 局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。 総数順の最適方策を証明し、自己loopを移項する。dp_i=(1+Σ_{j>i}A_j dp_j/S)/(1−Σ_{j<i}A_j/S)。prefix Aと降順の重み付きsuffix和で、一状態の全色走査を定数時間へ落とす。
 
 ## 根拠
 
@@ -114,4 +126,4 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-dp-stochastic`

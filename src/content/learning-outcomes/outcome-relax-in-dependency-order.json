@@ -1,0 +1,14 @@
+{
+  "id": "outcome-relax-in-dependency-order",
+  "statement": "DAGや使用可能な辺列の順に緩和し、処理済みprefixが表す経路集合を不変量として説明できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc271-e",
+    "abc291-f",
+    "abc429-f",
+    "tag-shortest-path",
+    "unit-weighted-shortest-path"
+  ]
+}

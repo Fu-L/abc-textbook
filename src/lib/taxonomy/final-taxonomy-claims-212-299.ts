@@ -731,12 +731,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-decompose-by-prime-or-divisor',
     [
       d('t0', 'primary', 'tag-prime-divisor-decomposition'),
-      d('t0', 'supporting', 'tag-combinatorial-coefficients'),
       d('t1', 'same_tag', 'tag-prime-divisor-decomposition'),
       d('p0', 'same_tag', 'tag-prime-divisor-decomposition'),
       d('p1', 'same_tag', 'tag-prime-divisor-decomposition'),
     ],
-    { 'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'] },
+    {},
   ),
   'abc227-h': decision(
     'outcome-characterize-walk-by-degrees',
@@ -2380,9 +2379,8 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       d('t0', 'primary', 'tag-dp-state-equivalence'),
       d('t1', 'same_tag', 'tag-dp-state-equivalence'),
       d('p0', 'same_tag', 'tag-dp-state-equivalence'),
-      d('p0', 'supporting', 'tag-combinatorial-coefficients'),
     ],
-    { 'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'] },
+    {},
   ),
   'abc265-ex': decision(
     'outcome-compute-convolution-or-correlation',

@@ -1,13 +1,12 @@
 {
   "id": "outcome-evaluate-polynomial-at-many-points",
-  "statement": "product treeとremainder treeを構築し、一つの多項式を多数の点へ準線形時間で評価・補間する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "statement": "任意の評価点からproduct treeを構築し、剰余をremainder treeで下ろす不変量とO(M(n) log n)の計算量を説明できる。",
   "prerequisiteOutcomeIds": [
     "outcome-apply-formal-power-series-operations",
     "outcome-divide-search-space-recursively"
   ],
   "scopeIds": [
     "abc272-ex",
-    "abc381-g",
     "tag-polynomial-multipoint-evaluation",
     "unit-polynomial-multipoint-evaluation"
   ]

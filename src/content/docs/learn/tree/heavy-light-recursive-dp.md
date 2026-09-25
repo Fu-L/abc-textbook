@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第159単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/) ／ 次: [Segment Tree Beats](/learn/query/segment-tree-beats/)
+
 ## 概要
 
 ### 資源DPを引数で渡すHLRecDP
@@ -21,6 +27,10 @@ sidebar:
 dfs(v,dp)の引数は外部で既に選んだ候補の資源別最適値であり、返値は部分木vの選択肢も反映した値と定義する。独立な二配列のmax-plus mergeを、選択・非選択のO(X)更新へ展開する。重い子を一回だけ通す評価順を先に導く。
 
 軽い子が半分以下というだけでO(NX log N)にはならない。各軽い子を二回呼ぶABC311 Exでは、サイズnの再帰量に重い子の一回分と軽い子の二回分が加わり、均等二分時は3T(n/2)となる。全heavy path根からの処理も含めO(N^(log₂3)X)を評価する。畳み込みを使う木DPとは別の証明である。
+
+### 習得する技能
+
+- 外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -36,13 +46,13 @@ dfs(v,dp)の引数は外部で既に選んだ候補の資源別最適値であ�
 
 ## 問題一覧
 
-1. [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h)
+1. [ABC311 Ex「Many Illumination Plans」](https://atcoder.jp/contests/abc311/tasks/abc311_h) — 主題: [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/)。既習技能: 資源軸の上限と更新順を選び、選択の重複を避けられる。 / 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
 - [ABC311 H 公式解説](https://atcoder.jp/contests/abc311/editorial/6814)
 - [ABC311 H 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-heavy-light-recursive-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-heavy-light-recursive-dp`

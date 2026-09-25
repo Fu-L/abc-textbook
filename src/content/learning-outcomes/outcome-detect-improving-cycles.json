@@ -1,0 +1,13 @@
+{
+  "id": "outcome-detect-improving-cycles",
+  "statement": "辺数を制限した反復緩和から負閉路・正閉路の検出を導き、始点到達性と終点への影響を区別できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc264-g",
+    "abc393-g",
+    "tag-shortest-path",
+    "unit-weighted-shortest-path"
+  ]
+}

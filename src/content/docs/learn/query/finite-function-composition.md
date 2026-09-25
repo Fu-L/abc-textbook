@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第61単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [doubling・binary lifting](/learn/graph/binary-lifting/) ／ 次: [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/)
+
 ## 概要
 
 ### 有限関数・作用の合成
 
 小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。
+
+### 習得する技能
+
+- 小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -32,13 +42,13 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC261 E「Many Operations」](https://atcoder.jp/contests/abc261/tasks/abc261_e)
+1. [ABC261 E「Many Operations」](https://atcoder.jp/contests/abc261/tasks/abc261_e) — 主題: [有限関数・作用の合成](/learn/query/finite-function-composition/)。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
 - [ABC261 E 公式問題文](https://atcoder.jp/contests/abc261/tasks/abc261_e)
 - [ABC261 E 公式解説](https://atcoder.jp/contests/abc261/editorial/4451)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-finite-function-composition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-finite-function-composition`

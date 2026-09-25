@@ -1,0 +1,10 @@
+{
+  "id": "outcome-find-weighted-balanced-separator",
+  "statement": "非負頂点重みの総和に対し、除去後の各成分を半分以下にする一点を線形時間で選び、通常の頂点数重心と葉数重心を区別できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc453-f",
+    "tag-tree-balanced-separator",
+    "unit-tree-balanced-separators"
+  ]
+}

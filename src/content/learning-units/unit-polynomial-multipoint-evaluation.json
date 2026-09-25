@@ -25,9 +25,11 @@
     "tag-polynomial-multipoint-evaluation"
   ],
   "learningOutcomeIds": [
+    "outcome-evaluate-at-geometric-points",
     "outcome-evaluate-polynomial-at-many-points"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-evaluate-at-geometric-points",
     "outcome-evaluate-polynomial-at-many-points"
   ],
   "contentPhase": "canonical_skeleton",

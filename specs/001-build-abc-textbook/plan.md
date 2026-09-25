@@ -236,7 +236,7 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 順序は次の二つを区別する。
 
 - 問題配置・前提検証用の内部順（`standardOrder`）は前提DAGをhard constraintとする。`learning-unit-order.ts`の概念連鎖のanchor優先度、stage/difficulty/representative rankと安定IDによる決定性を維持する。accepted buildの配置・Unit内問題順は、この順序を基準に保持する。
-- 読者向けの教科書掲載順は`textbook-order.ts`を正本とし、章ごとに親Unitと全子孫を連続して置く。章目次は階層を字下げし、Markdownの`sidebar.order`は`textbookIndex`から生成する。前提が後にある場合は「後の節」「後の章」のリンクで補い、前提順へ並べ直さない。グラフ章の二部構造は探索のまとまりの直後、最短路の前に置き、二部マッチングはflow/matchingのまとまりに置く。
+- 分野別目次は`textbook-order.ts`を正本とし、章目次の階層を字下げし、Markdownの`sidebar.order`は`textbookIndex`から生成する。通常の学習経路はaccepted buildの`standardOrder`を使い、読み方の全順序と各Unitの前後リンクを生成する。必須前提を満たすために親子Unitを離して履修してよい。問題の意味的なprimaryと前提充足による提示先を分離する。グラフ章の二部構造は探索のまとまりの直後、最短路の前に置き、二部マッチングはflow/matchingのまとまりに置く。
 
 全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。内部rankや掲載問題の完答難度を対象色に流用しない。掲載順・対象色の編集ではaccepted taxonomy、問題配置、Unit内問題順を変更せず、materializerで文書と証跡を再生成する。T160までdraftであることと、将来の公開projectionへの引継ぎは変えない。
 

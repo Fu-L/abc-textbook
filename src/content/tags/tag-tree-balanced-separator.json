@@ -1,7 +1,7 @@
 {
   "id": "tag-tree-balanced-separator",
-  "name": "重心separatorによる木の再帰分解",
-  "definition": "各成分のサイズを半分以下にする重心をseparatorとし、除去後の成分を再帰的に分解する。",
+  "name": "木の均衡分離点と重心分解",
+  "definition": "非負重みの各成分を半分以下にする一点を選ぶ。頂点数を重みとし各成分で繰り返すと、対数深さの重心分解を得る。",
   "parentId": "tag-tree-model-structure",
   "prerequisiteTagIds": [],
   "semanticSignature": {
@@ -35,7 +35,8 @@
   },
   "relatedTags": [],
   "learningOutcomeIds": [
-    "outcome-build-balanced-separator-decomposition"
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-find-weighted-balanced-separator"
   ],
   "representativeProblemIds": [
     "abc359-g",
@@ -44,6 +45,8 @@
   "aliases": [
     "centroid decomposition",
     "tree separator",
+    "均衡分離点",
+    "重み付き重心",
     "重心分解"
   ],
   "formerNames": [],

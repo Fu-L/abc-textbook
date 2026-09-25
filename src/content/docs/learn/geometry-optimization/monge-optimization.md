@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第173単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) ／ 次: [Prüfer code・次数制約付きlabel木](/learn/combinatorics-algebra/prufer-code/)
+
 ## 概要
 
 ### Monge・monotone minima最適化
@@ -30,6 +36,10 @@ ABC348 Gの分割統治で生じるmax-plus convolutionを考える。入力: x_
 
 ABC348 Gでは行最大位置の単調性から探索区間を制限する。ABC305 ExでのMonge性の役割は、分割個数別の最適費用の凸性を保証してAliensの復元を正当化すること。行最小値探索を行う教材とは区別し、Lagrangian relaxation側の接続例として読む。
 
+### 習得する技能
+
+- quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
@@ -44,11 +54,11 @@ DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge�
 
 ## 問題一覧
 
-1. [ABC348 G「Max (Sum - Max)」](https://atcoder.jp/contests/abc348/tasks/abc348_g)
-2. [ABC355 G「Baseball」](https://atcoder.jp/contests/abc355/tasks/abc355_g)
-3. [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g)
+1. [ABC348 G「Max (Sum - Max)」](https://atcoder.jp/contests/abc348/tasks/abc348_g) — 主題: [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/)。既習技能: pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
+2. [ABC355 G「Baseball」](https://atcoder.jp/contests/abc355/tasks/abc355_g) — 主題: [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/)。
+3. [ABC383 G「Bar Cover」](https://atcoder.jp/contests/abc383/tasks/abc383_g) — 主題: [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/)。既習技能: pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -59,4 +69,4 @@ DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge�
 - [ABC383 G 公式解説](https://atcoder.jp/contests/abc383/editorial/11500)
 - [ABC383 G 公式問題文](https://atcoder.jp/contests/abc383/tasks/abc383_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-monge-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-monge-optimization`

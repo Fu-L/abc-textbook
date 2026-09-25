@@ -98,9 +98,9 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 
 ## Phase 3: User Story 2 - 典型テクニックを体系的にたどる (Priority: P1)
 
-**Goal**: 全対象問題の技法棚卸しから重複のない典型体系・前提DAG・内部の標準学習順を作り、親子Unitが連続する分野別の教科書と典型別問題集をたどれるようにする。対象色と前提リンクから読む範囲を選べるようにする。
+**Goal**: 全対象問題の技法棚卸しから重複のない典型体系・前提DAG・内部の標準学習順を作り、分野別の目次と前提を満たす標準履修順の両方から教科書をたどれるようにする。対象色と前提リンクから読む範囲を選べるようにする。
 
-**掲載順の編集方針**: T050の文書生成では`src/lib/taxonomy/textbook-order.ts`と`unit-learning-targets.ts`を使う。accepted buildの`standardOrder`は問題配置・前提検証用として保持し、教科書掲載順とは分離する。親子subtreeの連続性、全Unitの対象色・理由、後の節・章への前提リンク、配置とUnit内問題順の不変性は`tests/contract/canonical-taxonomy-materialization.test.ts`で検証する。後続の本文執筆とT160もこの表示方針を引き継ぎ、内部rank順へ戻さない。canonical文書はT160までdraftのままとし、今回の掲載順編集では公開projectionを切り替えない。
+**掲載順の編集方針**: T050の文書生成では`src/lib/taxonomy/textbook-order.ts`と`unit-learning-targets.ts`を使う。accepted buildの`standardOrder`を通常の学習経路に使い、分野別目次とは分離する。全Unitの対象色・理由、標準履修順の前後リンク、frontier/profile DPの前提充足、生成問題順は`tests/contract/canonical-taxonomy-materialization.test.ts`で検証する。semantic primaryは順序から変更せず、問題の提示先は必須技能を習得する最遅Unitとする。後続の本文執筆とT160もこの表示方針を引き継ぐ。canonical文書はT160までdraftのままとし、今回の掲載順編集では公開projectionを切り替えない。
 
 **Independent Test**: 全 TechniqueInventoryItem を入力に taxonomy を再生成し、正式タグの成果・代表問題、二つの非循環DAG、決定的順序、全Problemの到達可能性を確認し、5つの現在地から教材だけで次の単位を80%以上正しく特定する。
 

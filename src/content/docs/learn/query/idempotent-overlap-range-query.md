@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第71単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [区間更新を要約へ作用させる](/learn/query/range-actions/) ／ 次: [rerooting・全方位木DP](/learn/tree/rerooting/)
+
 ## 概要
 
 ### 冪等演算のoverlap range query・Sparse Table
@@ -19,6 +25,10 @@ sidebar:
 冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。
 
 ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、その位置を含む部分区間を数えて左右へ再帰する。Sparse Tableに(値,位置)のminを保持すれば同値の規約も固定できる。Cartesian treeで同じ最小位置の分割を表す構成は別実装として比較する。
+
+### 習得する技能
+
+- 冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 前提と範囲
 
@@ -34,15 +44,15 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 
 ## 問題一覧
 
-1. [ABC282 Ex「Min + Sum」](https://atcoder.jp/contests/abc282/tasks/abc282_h)
+1. [ABC282 Ex「Min + Sum」](https://atcoder.jp/contests/abc282/tasks/abc282_h) — 主題: [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/)。既習技能: 冪等な演算なら重なりを許す二つの2冪区間で任意rangeを覆えることを使い、静的queryをO(1)で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 関連問題
 
 以下はこの技能を用い、解説本文を別の単元に配置する問題です。
 
-- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f)
+- [ABC282 F「Union of Two Sets」](https://atcoder.jp/contests/abc282/tasks/abc282_f) — 主題: [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/)。既習技能: 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。
 
 ## 根拠
 
@@ -51,4 +61,4 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 - [ABC282 H 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_h)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-idempotent-overlap-range-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-idempotent-overlap-range-query`

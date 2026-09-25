@@ -1,4 +1,5 @@
 import type { z } from 'zod';
+import { PROBLEM_LEARNING_NOTES } from './reviewed-problem-learning-notes.js';
 import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
 import {
   orderUnitProblemsByDifficulty,
@@ -250,6 +251,10 @@ const renderLearningUnitDocument = (input: {
   readonly childUnits: readonly ChildLearningUnitLink[];
   readonly prerequisiteTitles: readonly string[];
   readonly chapterLinks: readonly string[];
+  readonly readingLinks: readonly string[];
+  readonly readingIndex: number;
+  readonly outcomeStatements: readonly string[];
+  readonly problemRoles: ReadonlyMap<string, string>;
   readonly sources: readonly SourceRevision[];
   readonly problems: ReadonlyMap<string, Problem>;
   readonly sourceBuild: { readonly id: string; readonly digest: string };
@@ -263,7 +268,7 @@ const renderLearningUnitDocument = (input: {
       const problem = input.problems.get(id);
       if (problem === undefined)
         throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_PROBLEM_UNKNOWN', id);
-      return `[${problemLabel(problem)}](${problem.officialUrl})`;
+      return `[${problemLabel(problem)}](${problem.officialUrl}) — ${input.problemRoles.get(id) ?? ''}${PROBLEM_LEARNING_NOTES[id] === undefined ? '' : ` ${PROBLEM_LEARNING_NOTES[id]}`}`;
     });
   return [
     '---',
@@ -284,7 +289,7 @@ const renderLearningUnitDocument = (input: {
       ? [
           '## 本書の読み方',
           '',
-          '本書は、親Unitに続けてその子Unitをまとめ、同じ対象や原理の基本から発展までを連続して読める構成です。章の目次の字下げは親子関係を表します。各Unitの習得対象と追加前提を確認し、今必要な範囲を選んでください。',
+          '分野別の目次は概念の親子関係を表します。初めから学ぶときは下の標準履修順に沿い、各単元の「次」へ進んでください。この経路では必要な技能を先に学び、分野をまたぐ複合問題は全前提を履修した後に提示します。',
           '',
           '「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。',
           '',
@@ -302,7 +307,7 @@ const renderLearningUnitDocument = (input: {
           '',
           '章や案内節の「導入対象」は、その見取り図を理解する目安です。子Unitには独立した対象色を付けています。親を読んだ後、高い色の子をいったん飛ばして次のまとまりへ進んで構いません。赤色の専門Unitも、全てを習得することがその色になる条件という意味ではありません。',
           '',
-          '表示色は先取りを制限するものではありません。自分の色以下でも未習なら優先して補い、高い色でも必要になったUnitから読んでください。親子のまとまりを優先するため、前提が後の節や章にある場合はリンク先を案内します。未習の前提を補ってから戻るか、その子Unitを後回しにしてください。',
+          '既習の単元は飛ばして構いません。問題の主題と提示先は別です。関連問題のリンクは分野から探すためのもので、標準履修順では前提の説明が終わった単元で演習します。各問題には主題と既習技能を示します。',
           '',
           'ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現した後で、成立条件を一つ外すと何が壊れるか、他の章の表現へ写せるかを考えてください。たとえばDP遷移を区間要約・行列・多項式へ写す、割当てをmatching・flowへ写す、といった接続を自分で導けるようにすることが目標です。',
           '',
@@ -310,14 +315,31 @@ const renderLearningUnitDocument = (input: {
           '',
           ...input.chapterLinks.map((link, index) => `${String(index + 1)}. ${link}`),
           '',
+          '## 標準履修順',
+          '',
+          ...input.readingLinks.map((link, index) => `${String(index + 1)}. ${link}`),
+          '',
         ]
       : []),
+    ...(input.readingIndex < 0
+      ? []
+      : [
+          '## 標準履修順',
+          '',
+          `第${String(input.readingIndex + 1)}単元。技能の説明を学んでから問題一覧へ進んでください。`,
+          '',
+          `前: ${input.readingLinks[input.readingIndex - 1] ?? '開始'} ／ 次: ${input.readingLinks[input.readingIndex + 1] ?? '完了'}`,
+          '',
+        ]),
     '## 概要',
     '',
     ...(chapter === undefined ? [] : [chapter.introduction, '']),
     ...input.tags.flatMap((tag) => [`### ${tag.name}`, '', tag.definition, '']),
     ...(CANONICAL_UNIT_CONTENT[unit.id] ?? []).flatMap((paragraph) => [paragraph, '']),
     ...(input.tags.length === 0 ? [unit.orderReason, ''] : []),
+    ...(input.outcomeStatements.length === 0
+      ? []
+      : ['### 習得する技能', '', markdownList(input.outcomeStatements), '']),
     '## 前提と範囲',
     '',
     `共通前提: ${unit.baselineId} (${unit.baselineVersion})。`,
@@ -346,7 +368,7 @@ const renderLearningUnitDocument = (input: {
       ? problemLinks(unit.directProblemIds).map((link, i) => `${String(i + 1)}. ${link}`)
       : ['この単元に直接配置する問題はありません。下位単元または関連問題を参照してください。']),
     '',
-    '各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。',
+    '各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。',
     '',
     ...(unit.relatedProblemIds?.length
       ? [
@@ -489,6 +511,33 @@ export const buildCanonicalTaxonomyMaterialization = (
     const chapter = unitCandidateById.get(id);
     return chapter === undefined ? [] : [unitLink(chapter.entity)];
   });
+  const readingLinks = build.standardOrder.map((id) => {
+    const candidate = unitCandidateById.get(id);
+    if (candidate === undefined)
+      throw new CanonicalTaxonomyMaterializationError('CANONICAL_UNIT_UNKNOWN', id);
+    return unitLink(candidate.entity);
+  });
+  const outcomeStatement = (id: string): string => {
+    const outcome = outcomeById.get(id);
+    if (outcome === undefined)
+      throw new CanonicalTaxonomyMaterializationError('CANONICAL_OUTCOME_UNKNOWN', id);
+    return outcome.statement;
+  };
+  const problemRoles = new Map(
+    build.placements.map((placement) => {
+      const primaryStatement = outcomeStatement(placement.primaryOutcomeId);
+      const home = unitCandidates.find(({ entity }) =>
+        entity.ownedLearningOutcomeIds.includes(placement.primaryOutcomeId),
+      )?.entity;
+      const required = placement.supportingOutcomeIds
+        .map((id) => outcomeById.get(id)?.statement)
+        .filter(Boolean);
+      return [
+        placement.problemId,
+        `主題: ${home === undefined ? primaryStatement : unitLink(home)}。${required.length === 0 ? '' : `既習技能: ${required.join(' / ')}`}`,
+      ];
+    }),
+  );
   const learningUnits: CanonicalLearningUnitOutput[] = unitCandidates
     .map((candidate) => {
       const unit = candidate.entity;
@@ -543,13 +592,7 @@ export const buildCanonicalTaxonomyMaterialization = (
       const prerequisiteTitles = materializedUnit.additionalPrerequisiteUnitIds.map((id) => {
         const prerequisite = unitCandidateById.get(id);
         if (prerequisite === undefined) return id;
-        const forwardReference =
-          textbookIndex(id) > textbookIndex(unit.id)
-            ? rootChapterId(id, unitById) === rootChapterId(unit.id, unitById)
-              ? '（後の節）'
-              : '（後の章）'
-            : '';
-        return `${unitLink(prerequisite.entity)}${forwardReference}`;
+        return unitLink(prerequisite.entity);
       });
       const materializedSources = materializedUnit.sourceRevisionIds.map((sourceId) => {
         const source = sourceById.get(sourceId);
@@ -572,6 +615,10 @@ export const buildCanonicalTaxonomyMaterialization = (
           childUnits,
           prerequisiteTitles,
           chapterLinks,
+          readingLinks,
+          readingIndex: build.standardOrder.indexOf(unit.id),
+          outcomeStatements: unit.ownedLearningOutcomeIds.map(outcomeStatement),
+          problemRoles,
           sources: materializedSources,
           sourceBuild,
         }),

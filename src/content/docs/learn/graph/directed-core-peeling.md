@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第57単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) ／ 次: [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/)
+
 ## 概要
 
 ### 有向cycle検出・sink/source peeling
 
 三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。
+
+### 習得する技能
+
+- 三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる。
 
 ## 前提と範囲
 
@@ -32,10 +42,10 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC456 E「Endless Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_e)
-2. [ABC245 F「Endless Walk」](https://atcoder.jp/contests/abc245/tasks/abc245_f)
+1. [ABC456 E「Endless Holidays」](https://atcoder.jp/contests/abc456/tasks/abc456_e) — 主題: [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/)。
+2. [ABC245 F「Endless Walk」](https://atcoder.jp/contests/abc245/tasks/abc245_f) — 主題: [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/)。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
@@ -44,4 +54,4 @@ sidebar:
 - [ABC456 E 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_e)
 - [ABC456 E 公式解説](https://atcoder.jp/contests/abc456/editorial/19849)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-directed-core-peeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-directed-core-peeling`

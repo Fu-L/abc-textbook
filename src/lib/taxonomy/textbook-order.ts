@@ -1,7 +1,7 @@
 /**
  * 教科書の掲載順。同じ対象・原理を続けて読むための編集上の順序であり、
  * 問題の所属を決める既存の履修順（learning-order）とは独立に管理する。
- * 親とその子孫を深さ優先で連続配置する。前提が後にある場合は本文で案内する。
+ * これは分野別目次の順序。通常の学習は前提DAGに従う標準履修順と本文の前後リンクで進む。
  */
 export const TEXTBOOK_CHAPTERS = [
   {
@@ -77,10 +77,9 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-dynamic-programming',
     introduction:
-      '未来に必要な情報と依存関係を定め、同じ状態へ到達する履歴をまとめる。状態設計の発展として境界圧縮を置き、列・区間・集合、桁・automatonという状態の形を比較する。確率では何を平均し、ゲームでは誰が選ぶのかを明示する。最後に遷移の共通部分や線形性を取り出し、後の代数・凸最適化の章で使う式へつなぐ。automatonの構成は文字列章、Steiner tree DPの距離計算はグラフ章を参照する。',
+      '未来に必要な情報と依存関係を定め、同じ状態へ到達する履歴をまとめる。グリッド・列・区間・集合の基本状態を比較し、全履歴を持つと大きすぎる場合の発展として境界圧縮へ進む。さらに桁・automatonという状態の形を比較する。確率では何を平均し、ゲームでは誰が選ぶのかを明示する。最後に遷移の共通部分や線形性を取り出し、後の代数・凸最適化の章で使う式へつなぐ。標準履修順ではautomatonの構成やSteiner tree DPの距離計算を先に学び、複合問題へ進む。',
     unitIds: [
       'unit-dp-state-design',
-      'unit-frontier-profile-dp',
       'unit-dp-grid-table',
       'unit-dp-sequence-interval',
       'unit-dp-sequence',
@@ -92,6 +91,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-dp-subset-resource',
       'unit-eventual-unbounded-knapsack',
       'unit-dp-subset-state',
+      'unit-frontier-profile-dp',
       'unit-steiner-tree-dp',
       'unit-dp-digit-string',
       'unit-digit-dp',

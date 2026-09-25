@@ -12,11 +12,21 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第123単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [rollback・DFS入退場の状態復元](/learn/query/rollback/) ／ 次: [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/)
+
 ## 概要
 
 ### 情報量下界・query符号設計
 
 応答alphabetとquery回数から識別可能状態数の下界を出し、その下界に一致するcodeword割当と復号を構成する。
+
+### 習得する技能
+
+- 応答列の総数からquery数の下界を証明し、それに一致するcodeword割当と復号を構成できる。
 
 ## 前提と範囲
 
@@ -32,13 +42,13 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC337 E「Bad Juice」](https://atcoder.jp/contests/abc337/tasks/abc337_e)
+1. [ABC337 E「Bad Juice」](https://atcoder.jp/contests/abc337/tasks/abc337_e) — 主題: [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/)。既習技能: 問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
 - [ABC337 E 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_e)
 - [ABC337 E 公式解説](https://atcoder.jp/contests/abc337/editorial/9140)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-information-theoretic-query-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-information-theoretic-query-design`

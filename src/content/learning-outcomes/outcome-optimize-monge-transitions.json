@@ -2,7 +2,12 @@
   "id": "outcome-optimize-monge-transitions",
   "statement": "quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
   "prerequisiteOutcomeIds": [
-    "outcome-factor-and-accelerate-transitions"
+    "outcome-close-eventual-dp-tail",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-normalize-common-dp-action",
+    "outcome-slide-transition-recurrence",
+    "outcome-subtract-exception-transitions"
   ],
   "scopeIds": [
     "abc348-g",

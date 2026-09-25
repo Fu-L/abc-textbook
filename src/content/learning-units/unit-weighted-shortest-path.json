@@ -26,10 +26,16 @@
     "tag-shortest-path"
   ],
   "learningOutcomeIds": [
-    "outcome-model-and-compute-shortest-path"
+    "outcome-compute-all-pairs-distance",
+    "outcome-detect-improving-cycles",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-relax-in-dependency-order"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-model-and-compute-shortest-path"
+    "outcome-compute-all-pairs-distance",
+    "outcome-detect-improving-cycles",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-relax-in-dependency-order"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/weighted-shortest-path.md",

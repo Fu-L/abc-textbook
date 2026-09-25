@@ -12,6 +12,12 @@ sidebar:
 
 対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。
 
+## 標準履修順
+
+第162単元。技能の説明を学んでから問題一覧へ進んでください。
+
+前: [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/) ／ 次: [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/)
+
 ## 概要
 
 ### heavy path上の多項式木DP
@@ -20,11 +26,15 @@ heavy child上の漸化式をまとめ、light subtreeのsize総和を利用し�
 
 ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、畳み込みと分割統治で評価する。必要なのは通常の多項式積を高速化できる代数構造であり、一般のmax-plus convolutionをNTTへ置き換えることはできない。
 
+### 習得する技能
+
+- heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-追加前提: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)（後の章）、[根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
+追加前提: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)、[根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/)。
 
 畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。
 
@@ -34,13 +44,13 @@ ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、�
 
 ## 問題一覧
 
-1. [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h)
+1. [ABC269 Ex「Antichain」](https://atcoder.jp/contests/abc269/tasks/abc269_h) — 主題: [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/)。既習技能: 根付き木で子側の状態を合成し、部分木または木全体の値を求められる。 / pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。 / 組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。
 
-各問題の解説は問題ごとの本文として執筆します。この一覧は主配置と読む順序を固定したものです。
+各問題の解説は問題ごとの本文として執筆します。この一覧は前提習得後の提示先と読む順序を固定したものです。主題となる技能の所属単元は各項目に示します。
 
 ## 根拠
 
 - [ABC269 H 公式解説](https://atcoder.jp/contests/abc269/editorial/4838)
 - [ABC269 H 公式問題文](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `adb11948ece18b2894d071788efcc47cc9e20d0f71d3fcb7a87fdbfb7d2ca8d9` / LearningUnit `unit-heavy-path-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `651187394fa0abc2fd2158fba0f0994d472251361a107dc83825f9c08234ded7` / LearningUnit `unit-heavy-path-tree-dp`

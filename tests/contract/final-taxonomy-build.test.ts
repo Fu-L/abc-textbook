@@ -380,14 +380,6 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         assignedOwnerUnitIds,
       );
       expect(placement.presentationUnitId, placement.problemId).toBe(expectedPresentationUnitId);
-      if (placement.primaryOverride === undefined) {
-        expect(ownerUnitIdsForOutcome(placement.primaryOutcomeId), placement.problemId).toContain(
-          placement.presentationUnitId,
-        );
-      } else {
-        expect(placement.primaryOverride.primaryOutcomeId).toBe(placement.primaryOutcomeId);
-        expect(placement.primaryOverride.rationale).toBeTruthy();
-      }
     }
   }, 30_000);
 
