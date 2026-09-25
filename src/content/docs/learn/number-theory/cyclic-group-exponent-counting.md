@@ -3,7 +3,7 @@ title: "巡回群を指数化して数える"
 description: "「巡回群を指数化して数える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 172
+  order: 171
 ---
 
 # 巡回群を指数化して数える
@@ -50,4 +50,4 @@ sidebar:
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-cyclic-group-exponent-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-cyclic-group-exponent-counting`

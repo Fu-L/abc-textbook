@@ -3,7 +3,7 @@ title: "連分数・Stern–Brocotで有理近似する"
 description: "「連分数・Stern–Brocotで有理近似する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 175
+  order: 174
 ---
 
 # 連分数・Stern–Brocotで有理近似する
@@ -62,4 +62,4 @@ Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え
 - [ABC408 G 公式解説](https://atcoder.jp/contests/abc408/editorial/13160)
 - [ABC408 G 公式問題文](https://atcoder.jp/contests/abc408/tasks/abc408_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-rational-approximation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-rational-approximation`

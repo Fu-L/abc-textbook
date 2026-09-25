@@ -3,7 +3,7 @@ title: "2-SAT・含意グラフ"
 description: "「2-SAT・含意グラフ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 100
+  order: 99
 ---
 
 # 2-SAT・含意グラフ
@@ -47,4 +47,4 @@ SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利�
 - [ABC277 H 公式解説](https://atcoder.jp/contests/abc277/editorial/5207)
 - [ABC277 H 公式問題文](https://atcoder.jp/contests/abc277/tasks/abc277_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-two-sat`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-two-sat`

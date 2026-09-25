@@ -3,7 +3,7 @@ title: "凸性・傾き・限界費用・slope trick"
 description: "「凸性・傾き・限界費用・slope trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 222
+  order: 221
 ---
 
 # 凸性・傾き・限界費用・slope trick
@@ -65,4 +65,4 @@ sidebar:
 - [ABC224 G 公式解説](https://atcoder.jp/contests/abc224/editorial/2816)
 - [ABC224 G 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-discrete-convex`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-discrete-convex`

@@ -1,25 +1,32 @@
 {
   "id": "tag-graph-core-peeling",
-  "name": "graph core・leaf peeling",
-  "definition": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。",
+  "name": "単一サイクル成分とgraph core",
+  "definition": "連結成分の辺数と頂点数からcycle rankを判定し、必要なら葉を反復削除してcycle coreと削除順を得る。",
   "parentId": "tag-graph-model-structure",
   "prerequisiteTagIds": [],
   "semanticSignature": {
     "objectPatterns": [
       "core",
       "degree",
-      "graph"
+      "graph",
+      "辺数",
+      "連結成分",
+      "頂点数"
     ],
     "triggerPatterns": [
+      "E=V",
       "次数未満を除去",
-      "葉を反復削除"
+      "葉を反復削除",
+      "辺数と頂点数"
     ],
     "invariantPatterns": [
+      "cycle rank",
       "削除queue",
       "現在次数"
     ],
     "goalPatterns": [
       "cycle core",
+      "単一cycle",
       "残存頂点"
     ],
     "excludedPatterns": [],
@@ -37,6 +44,7 @@
     "outcome-peel-graph-core"
   ],
   "representativeProblemIds": [
+    "abc226-e",
     "abc266-f",
     "abc267-e"
   ],

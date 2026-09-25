@@ -3,7 +3,7 @@ title: "大容量unbounded knapsackのeventual linearity"
 description: "「大容量unbounded knapsackのeventual linearity」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 68
 ---
 
 # 大容量unbounded knapsackのeventual linearity
@@ -30,7 +30,7 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)。
+直接の前提単元: [資源・容量DP](/learn/dynamic-programming/dp-subset-resource/)。
 
 このUnitを直接前提とする単元: なし。
 
@@ -43,7 +43,7 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 ## 問題一覧
 
 - [ABC415 G「Get Many Cola」](https://atcoder.jp/contests/abc415/tasks/abc415_g) — 主題: [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/)（剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。）。既習技能: [交換論から選択順を導く](/learn/modeling/greedy-exchange/)（局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。）。
-- [ABC310 Ex「Negative Cost」](https://atcoder.jp/contests/abc310/tasks/abc310_h) — 主題: [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/)（剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。）。既習技能: [集合・資源軸のDP](/learn/dynamic-programming/dp-subset-resource/)（資源軸の上限と更新順を選び、選択の重複を避けられる。）。
+- [ABC310 Ex「Negative Cost」](https://atcoder.jp/contests/abc310/tasks/abc310_h) — 主題: [大容量unbounded knapsackのeventual linearity](/learn/dynamic-programming/eventual-unbounded-knapsack/)（剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。）。既習技能: [資源・容量DP](/learn/dynamic-programming/dp-subset-resource/)（資源軸の上限と更新順を選び、選択の重複を避けられる。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
@@ -54,4 +54,4 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 - [ABC415 G 公式解説](https://atcoder.jp/contests/abc415/editorial/13491)
 - [ABC415 G 公式問題文](https://atcoder.jp/contests/abc415/tasks/abc415_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-eventual-unbounded-knapsack`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-eventual-unbounded-knapsack`

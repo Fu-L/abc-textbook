@@ -47,4 +47,4 @@ sidebar:
 - [ABC309 H 公式解説](https://atcoder.jp/contests/abc309/editorial/6751)
 - [ABC309 H 公式問題文](https://atcoder.jp/contests/abc309/tasks/abc309_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-reflection-principle`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-reflection-principle`

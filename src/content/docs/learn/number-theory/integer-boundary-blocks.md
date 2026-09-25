@@ -3,7 +3,7 @@ title: "整数境界と同値区間を正確に分ける"
 description: "「整数境界と同値区間を正確に分ける」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 173
+  order: 172
 ---
 
 # 整数境界と同値区間を正確に分ける
@@ -76,4 +76,4 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 - [ABC239 H 公式解説](https://atcoder.jp/contests/abc239/editorial/3357)
 - [ABC239 H 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-integer-boundary-blocks`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-integer-boundary-blocks`

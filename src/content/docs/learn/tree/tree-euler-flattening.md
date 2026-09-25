@@ -3,7 +3,7 @@ title: "Euler順による部分木区間化"
 description: "「Euler順による部分木区間化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 134
+  order: 133
 ---
 
 # Euler順による部分木区間化
@@ -54,4 +54,4 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 - [ABC337 G 公式解説](https://atcoder.jp/contests/abc337/editorial/9128)
 - [ABC337 G 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-tree-euler-flattening`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-tree-euler-flattening`

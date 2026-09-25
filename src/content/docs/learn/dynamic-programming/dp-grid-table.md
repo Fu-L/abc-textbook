@@ -3,7 +3,7 @@ title: "グリッド・多次元表の局所DPを設計する"
 description: "「グリッド・多次元表の局所DPを設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 60
+  order: 59
 ---
 
 # グリッド・多次元表の局所DPを設計する
@@ -63,4 +63,4 @@ sidebar:
 - [ABC311 E 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_e)
 - [ABC311 E 公式解説](https://atcoder.jp/contests/abc311/editorial/6819)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-dp-grid-table`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-dp-grid-table`

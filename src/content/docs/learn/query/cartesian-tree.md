@@ -3,7 +3,7 @@ title: "大小関係をCartesian treeへ変換する"
 description: "「大小関係をCartesian treeへ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 35
+  order: 34
 ---
 
 # 大小関係をCartesian treeへ変換する
@@ -53,4 +53,4 @@ sidebar:
 - [ABC435 F 公式解説](https://atcoder.jp/contests/abc435/editorial/14734)
 - [ABC435 F 公式問題文](https://atcoder.jp/contests/abc435/tasks/abc435_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-cartesian-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-cartesian-tree`

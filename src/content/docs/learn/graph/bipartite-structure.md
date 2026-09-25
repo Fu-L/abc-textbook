@@ -3,7 +3,7 @@ title: "二部彩色と成分構造を扱う"
 description: "「二部彩色と成分構造を扱う」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 90
+  order: 89
 ---
 
 # 二部彩色と成分構造を扱う
@@ -62,4 +62,4 @@ sidebar:
 - [ABC398 E 公式解説](https://atcoder.jp/contests/abc398/editorial/12483)
 - [ABC398 G 公式問題文](https://atcoder.jp/contests/abc398/tasks/abc398_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-bipartite-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-bipartite-structure`

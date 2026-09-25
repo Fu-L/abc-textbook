@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887",
-    "acceptedAt": "2026-09-25T07:42:04.787Z"
+    "digest": "7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32",
+    "acceptedAt": "2026-09-25T10:16:38.197Z"
   },
   "taskIds": [
     "T047",
@@ -41,12 +41,12 @@
     "T050"
   ],
   "counts": {
-    "tags": 205,
-    "learningOutcomes": 225,
-    "learningUnits": 230,
-    "learningDocuments": 230,
-    "directlyOwnedTags": 205,
-    "directlyOwnedLearningOutcomes": 225,
+    "tags": 204,
+    "learningOutcomes": 224,
+    "learningUnits": 229,
+    "learningDocuments": 229,
+    "directlyOwnedTags": 204,
+    "directlyOwnedLearningOutcomes": 224,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "2afa5a1b788361a3c7f7ddabd0851de74d462baaae055e9a52f18c34087ab104",
-    "learningOutcomes": "ee4b94e139b1474fbf8f6cd41a415dd6894de13f61edfd1b5c27dfcbcd8ae554",
-    "learningUnits": "37f0706ddc882d0803634da17cea107ce35d39d2cbafa5b5696a2b3f86441168",
-    "learningDocuments": "3143186988be1ed4068ef5fba5ef8a5a91636b3f2b020a0576934680d1b9dbde",
-    "learningPrerequisitesDigest": "fdc02af2e0d484f2c7f3433cf77775ddff2573d53a0bc93c98c285e20b80ca0c",
-    "problemPlacementPolicyDigest": "c33fc4f39610e857b6b209b4e355cb99da13ed381fcb35002f28434d53433444"
+    "tags": "29111995e214b0cd30791e31f4c9e4b16aaf1101160a2164fae1263826a27b9e",
+    "learningOutcomes": "96126d0da88d8a2a723c1be13981eb4ae946130da17ab1db3071694f8ebc52b6",
+    "learningUnits": "14d846de81b5a213f9d0b363cb2e5991bc6005bd8cf0d09d4aaa48d55b795888",
+    "learningDocuments": "6497b71afdd2facdd81d8318a54c6549d4e9c45a9802d15489c7cae8f358df0b",
+    "learningPrerequisitesDigest": "07ed6fd28f55471ec3b3815d93db52b7b953a91fd707c07a2369923dbf40efbe",
+    "problemPlacementPolicyDigest": "86493f1c25088a813bf80874e6f2216d673faf875298e317f7ed008bfcf2f88e"
   },
-  "materializationDigest": "c0067655121137664911c25fab4c48cd11a91116f5f65cec5a85c17588246c48"
+  "materializationDigest": "fd182cae4238a44e4bc382ef0f776c408b1dd831d587a82e4b1756e4695ee0d7"
 }

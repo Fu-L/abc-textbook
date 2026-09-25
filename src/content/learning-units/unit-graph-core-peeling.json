@@ -1,7 +1,7 @@
 {
   "id": "unit-graph-core-peeling",
   "kind": "section",
-  "title": "次数構造からgraph coreまたは小さなkernelへ縮約する",
+  "title": "閉路数・次数構造からgraph coreとkernelを調べる",
   "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -9,12 +9,12 @@
     "DFS時刻とlowlink値による橋・関節点の判定。"
   ],
   "sourceRevisionIds": [
+    "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
+    "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
     "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c",
     "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26",
     "source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a",
-    "source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153",
-    "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+    "source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"
   ],
   "tagIds": [
     "tag-graph-core-peeling",
@@ -29,6 +29,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/graph-core-peeling.md",
   "problemIds": [
+    "abc226-e",
     "abc266-f",
     "abc419-g"
   ],
@@ -38,5 +39,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
+  "learningRationale": "連結成分のcycle rankを辺数と頂点数から読み、必要なら低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
 }

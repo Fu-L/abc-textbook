@@ -3,7 +3,7 @@ title: "重み付き二部完全matching"
 description: "「重み付き二部完全matching」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 124
+  order: 123
 ---
 
 # 重み付き二部完全matching
@@ -47,4 +47,4 @@ assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または
 - [ABC373 G 公式解説](https://atcoder.jp/contests/abc373/editorial/11045)
 - [ABC373 G 公式問題文](https://atcoder.jp/contests/abc373/tasks/abc373_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-weighted-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-weighted-bipartite-matching`

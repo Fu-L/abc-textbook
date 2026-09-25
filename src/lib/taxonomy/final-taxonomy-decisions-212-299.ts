@@ -82,7 +82,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc225-g': 'tag-flow-matching-cut',
   'abc225-h': 'tag-convolution-fps',
 
-  'abc226-e': 'tag-contribution-reordering',
+  'abc226-e': 'tag-graph-core-peeling',
   'abc226-f': 'tag-combinatorial-coefficients',
   'abc226-g': 'tag-greedy-exchange-order',
   'abc226-h': 'tag-stochastic-expectation-dp',
@@ -229,7 +229,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc253-g': 'tag-integer-boundary-blocks',
 
   'abc254-e': 'tag-bounded-enumeration',
-  'abc254-ex': 'tag-binary-trie',
+  'abc254-ex': 'tag-greedy-exchange-order',
   'abc254-f': 'tag-gcd-diophantine',
   'abc254-g': 'tag-functional-graph-doubling',
 

@@ -17,7 +17,6 @@
   "tagIds": [
     "tag-amortized-monotone-progress",
     "tag-backtracking-search",
-    "tag-binary-tree-ancestor-matching",
     "tag-bitwise-greedy-feasibility",
     "tag-bounded-enumeration",
     "tag-constructive-witness",
@@ -62,7 +61,6 @@
     "outcome-maintain-interactive-query-protocol",
     "outcome-maintain-monotone-window",
     "outcome-maintain-order-through-crossing-events",
-    "outcome-match-binary-tree-ancestors",
     "outcome-merge-small-into-large",
     "outcome-normalize-equivalent-states",
     "outcome-optimize-mask-by-bitwise-feasibility",
@@ -93,7 +91,6 @@
     "abc224-f",
     "abc225-e",
     "abc225-f",
-    "abc226-e",
     "abc226-g",
     "abc227-f",
     "abc229-e",

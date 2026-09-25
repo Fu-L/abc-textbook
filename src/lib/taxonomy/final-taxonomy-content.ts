@@ -11,7 +11,6 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-cyclic-minimax-game': ['retrograde analysis', 'AND OR game', 'minimax distance'],
   'tag-heavy-light-recursive-dp': ['HLRecDP', 'heavy light recursive DP'],
   'tag-stern-brocot-ancestry': ['Stern Brocot ancestor', 'mediant', '連分数経路'],
-  'tag-binary-tree-ancestor-matching': ['binary ancestor matching', '二進操作の木'],
   'tag-bitwise-minimax-partition': ['XOR minimax', 'bitwise partition'],
   'tag-amortized-heavy-light': [
     '償却解析',

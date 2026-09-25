@@ -3,7 +3,7 @@ title: "heavy path上の多項式木DP"
 description: "「heavy path上の多項式木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 141
+  order: 140
 ---
 
 # heavy path上の多項式木DP
@@ -49,4 +49,4 @@ ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、�
 - [ABC269 H 公式解説](https://atcoder.jp/contests/abc269/editorial/4838)
 - [ABC269 H 公式問題文](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-heavy-path-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-heavy-path-tree-dp`

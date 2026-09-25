@@ -6,7 +6,7 @@
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [
-    "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および独立な局所寄与へ分解できない集計。"
+    "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
   ],
   "sourceRevisionIds": [
     "source-abc215-editorial-2497-df0b13e3c660893741c643f23ebc88af2f75e8b02edfe3ba29c83fd76b909b27",
@@ -34,7 +34,6 @@
     "abc215-g",
     "abc220-e",
     "abc224-f",
-    "abc226-e",
     "abc231-g",
     "abc233-e",
     "abc247-e",
@@ -71,7 +70,6 @@
   ],
   "directProblemIds": [
     "abc220-e",
-    "abc226-e",
     "abc233-e",
     "abc247-e",
     "abc255-e",
@@ -144,5 +142,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。"
+  "learningRationale": "数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。"
 }

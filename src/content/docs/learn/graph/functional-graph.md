@@ -3,7 +3,7 @@ title: "一意な後続・サイクル・ダブリング"
 description: "「一意な後続・サイクル・ダブリング」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 101
+  order: 100
 ---
 
 # 一意な後続・サイクル・ダブリング
@@ -59,4 +59,4 @@ sidebar:
 - [ABC247 H 公式解説](https://atcoder.jp/contests/abc247/editorial/3737)
 - [ABC247 H 公式問題文](https://atcoder.jp/contests/abc247/tasks/abc247_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-functional-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-functional-graph`

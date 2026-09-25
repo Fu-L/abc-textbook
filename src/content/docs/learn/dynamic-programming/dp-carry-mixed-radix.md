@@ -3,7 +3,7 @@ title: "繰り上がり・借り・混合基数を状態にするDP"
 description: "「繰り上がり・借り・混合基数を状態にするDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 76
+  order: 75
 ---
 
 # 繰り上がり・借り・混合基数を状態にするDP
@@ -55,4 +55,4 @@ sidebar:
 - [ABC466 G 公式解説](https://atcoder.jp/contests/abc466/editorial/22603)
 - [ABC466 G 公式問題文](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-dp-carry-mixed-radix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-dp-carry-mixed-radix`

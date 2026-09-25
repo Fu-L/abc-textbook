@@ -3,7 +3,7 @@ title: "多項式の多点評価・補間"
 description: "「多項式の多点評価・補間」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 206
+  order: 205
 ---
 
 # 多項式の多点評価・補間
@@ -66,4 +66,4 @@ ABC381 Gでは、拡大体で数列を表す→等比的な因子積を倍化構
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-polynomial-multipoint-evaluation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-polynomial-multipoint-evaluation`

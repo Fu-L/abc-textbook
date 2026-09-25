@@ -3,7 +3,7 @@ title: "lowlinkで橋・関節点を特定する"
 description: "「lowlinkで橋・関節点を特定する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 109
+  order: 108
 ---
 
 # lowlinkで橋・関節点を特定する
@@ -53,4 +53,4 @@ DFS木を作れることを前提に、到達時刻とlowlink値から橋・関�
 - [ABC375 G 公式解説](https://atcoder.jp/contests/abc375/editorial/11133)
 - [ABC375 G 公式問題文](https://atcoder.jp/contests/abc375/tasks/abc375_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-lowlink-critical-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-lowlink-critical-structure`

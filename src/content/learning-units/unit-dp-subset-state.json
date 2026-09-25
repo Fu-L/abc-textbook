@@ -1,8 +1,8 @@
 {
   "id": "unit-dp-subset-state",
-  "kind": "subsection",
+  "kind": "section",
   "title": "部分集合・bitmask状態DP",
-  "parentId": "unit-dp-subset-resource",
+  "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

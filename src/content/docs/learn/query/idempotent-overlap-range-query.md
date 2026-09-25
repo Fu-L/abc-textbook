@@ -3,7 +3,7 @@ title: "冪等演算のoverlap range query・Sparse Table"
 description: "「冪等演算のoverlap range query・Sparse Table」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 41
+  order: 40
 ---
 
 # 冪等演算のoverlap range query・Sparse Table
@@ -57,4 +57,4 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 - [ABC282 H 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_h)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-idempotent-overlap-range-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-idempotent-overlap-range-query`

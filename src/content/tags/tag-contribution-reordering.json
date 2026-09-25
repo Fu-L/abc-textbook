@@ -1,25 +1,32 @@
 {
   "id": "tag-contribution-reordering",
   "name": "寄与の数え上げと順序交換",
-  "definition": "答えを要素・組・連結成分ごとの独立な局所寄与へ分解し、和または積の集計順序を交換する。",
+  "definition": "数える対象を要素・組・値・区間ごとに一意に固定し、その対象を含む選択の個数や指示変数の期待値を先に集計する。",
   "parentId": "tag-model-reduction",
   "prerequisiteTagIds": [],
   "semanticSignature": {
     "objectPatterns": [
+      "値",
+      "区間",
       "合計",
       "対",
+      "指示変数",
       "組",
       "要素"
     ],
     "triggerPatterns": [
       "二重和",
       "寄与",
-      "数え上げ順序"
+      "対象を固定",
+      "数え上げ順序",
+      "期待値の線形性"
     ],
     "invariantPatterns": [
+      "一意",
       "何回数え",
       "係数",
-      "独立"
+      "含まれる回数",
+      "重複"
     ],
     "goalPatterns": [
       "場合の数",

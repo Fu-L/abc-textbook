@@ -1,32 +1,30 @@
 {
   "id": "unit-dp-subset-resource",
   "kind": "section",
-  "title": "集合・資源軸のDP",
+  "title": "資源・容量DP",
   "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [
-    "入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。"
+    "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
   ],
   "sourceRevisionIds": [
-    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
-    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
-    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
-    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
     "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
-    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"
+    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+    "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+    "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c",
+    "source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84",
+    "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"
   ],
   "tagIds": [
     "tag-eventual-unbounded-knapsack",
-    "tag-knapsack-resource",
-    "tag-subset-bitmask-dp"
+    "tag-knapsack-resource"
   ],
   "ownedTagIds": [
     "tag-knapsack-resource"
   ],
   "learningOutcomeIds": [
     "outcome-design-resource-dp",
-    "outcome-enumerate-subset-state-space",
     "outcome-stabilize-unbounded-knapsack-by-best-density"
   ],
   "ownedLearningOutcomeIds": [
@@ -37,38 +35,23 @@
   "problemIds": [
     "abc216-f",
     "abc222-e",
-    "abc232-f",
     "abc269-g",
-    "abc274-e",
     "abc275-f",
     "abc288-e",
-    "abc301-e",
     "abc307-g",
     "abc310-ex",
-    "abc310-f",
-    "abc319-f",
     "abc320-f",
     "abc321-f",
     "abc322-e",
     "abc325-f",
-    "abc328-g",
-    "abc332-e",
-    "abc338-f",
     "abc341-f",
-    "abc343-g",
-    "abc352-f",
     "abc364-e",
-    "abc381-f",
     "abc383-f",
     "abc390-e",
-    "abc396-g",
     "abc410-e",
-    "abc411-g",
     "abc415-g",
     "abc419-e",
     "abc424-g",
-    "abc425-f",
-    "abc432-f",
     "abc441-f",
     "abc461-f"
   ],
@@ -94,34 +77,19 @@
     "abc424-g"
   ],
   "relatedProblemIds": [
-    "abc213-g",
-    "abc215-e",
-    "abc216-h",
-    "abc228-g",
-    "abc278-f",
     "abc287-f",
     "abc290-ex",
-    "abc295-ex",
-    "abc300-ex",
-    "abc306-ex",
-    "abc309-g",
     "abc311-ex",
-    "abc313-f",
-    "abc321-g",
     "abc332-g",
-    "abc354-e",
     "abc366-f",
     "abc373-f",
     "abc375-e",
     "abc382-e",
-    "abc400-g",
-    "abc402-e",
     "abc416-f",
-    "abc419-f",
     "abc426-g",
     "abc428-g"
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。"
+  "learningRationale": "最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。"
 }

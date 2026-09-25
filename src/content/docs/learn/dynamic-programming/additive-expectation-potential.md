@@ -3,7 +3,7 @@ title: "期待値の頻度圧縮と加法的ポテンシャル"
 description: "「期待値の頻度圧縮と加法的ポテンシャル」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 78
+  order: 77
 ---
 
 # 期待値の頻度圧縮と加法的ポテンシャル
@@ -53,4 +53,4 @@ ABC249 Exではg(j)=1/N+Σ_k P[j][k]g(k)を0≤j<Nについて課す。自己ル
 - [ABC249 H 公式解説](https://atcoder.jp/contests/abc249/editorial/3842)
 - [ABC249 H 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-additive-expectation-potential`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-additive-expectation-potential`

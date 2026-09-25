@@ -65,6 +65,7 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc227-e',
     'abc226-g',
     'abc416-g',
+    'abc254-ex',
   ],
   'unit-bounded-enumeration': [
     'abc234-e',
@@ -168,7 +169,6 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc276-e',
     'abc328-e',
     'abc447-e',
-    'abc226-e',
     'abc434-e',
     'abc238-e',
     'abc335-e',
@@ -425,7 +425,7 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
   'unit-finite-function-composition': ['abc261-e'],
   'unit-tree-euler-flattening': ['abc240-e', 'abc406-f', 'abc337-g'],
   'unit-tree-ancestor-lca': ['abc294-g', 'abc267-f', 'abc438-f', 'abc298-ex', 'abc329-g'],
-  'unit-graph-core': ['abc267-e', 'abc266-f'],
+  'unit-graph-core': ['abc226-e', 'abc266-f', 'abc267-e'],
   'unit-linear-system-rank': ['abc366-g', 'abc276-ex'],
   'unit-potential-dsu': ['abc328-f', 'abc466-g'],
   'unit-range-monoid-aggregation': [
@@ -682,7 +682,6 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
   'unit-fractional-parametric-search': ['abc324-f', 'abc294-f', 'abc236-e'],
   'unit-half-plane-constraints': ['abc251-g'],
   'unit-baby-step-giant-step': ['abc270-g'],
-  'unit-binary-tree-ancestor-matching': ['abc254-ex'],
   'unit-bitwise-minimax-partition': ['abc281-f'],
   'unit-cyclic-minimax-game': ['abc413-f', 'abc261-ex'],
   'unit-flow-lower-bounds': ['abc285-g'],

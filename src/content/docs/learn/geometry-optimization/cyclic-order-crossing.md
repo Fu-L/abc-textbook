@@ -3,7 +3,7 @@ title: "円環順序・chord交差"
 description: "「円環順序・chord交差」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 217
+  order: 216
 ---
 
 # 円環順序・chord交差
@@ -59,4 +59,4 @@ sidebar:
 - [ABC405 F 公式解説](https://atcoder.jp/contests/abc405/editorial/13009)
 - [ABC405 F 公式問題文](https://atcoder.jp/contests/abc405/tasks/abc405_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-cyclic-order-crossing`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-cyclic-order-crossing`

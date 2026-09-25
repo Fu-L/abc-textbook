@@ -292,7 +292,7 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     '値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。',
   ],
   'unit-contribution-reordering': [
-    'active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および独立な局所寄与へ分解できない集計。',
+    'active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。',
   ],
   'unit-coordinate-compression': [
     '値・時刻順にactive集合を増減するevent sweep、および固定配列・行列を入力順のまま読むだけのscan。',
@@ -321,7 +321,7 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-dp-grid-table': [
     '一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。',
   ],
-  'unit-dp-subset-resource': ['入力順や区間端点だけを状態にし、集合・容量軸を持たないDP。'],
+  'unit-dp-subset-resource': ['使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。'],
   'unit-dp-sequence-interval': ['bitmask集合や容量だけを状態にし、列順・区間分割を持たないDP。'],
   'unit-dp-digit-string': [
     '整除鎖・加算式のcarryだけを下位桁から渡すDP、および接頭辞状態を使わない一般の表DP。',
@@ -588,7 +588,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     'unit-chapter-dynamic-programming',
     ['unit-dp-state-design'],
   ),
-  section('unit-dp-subset-resource', '集合・資源軸のDP', 'unit-chapter-dynamic-programming', [
+  section('unit-dp-subset-resource', '資源・容量DP', 'unit-chapter-dynamic-programming', [
     'unit-dp-state-design',
   ]),
   section(
@@ -686,7 +686,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-graph-core-peeling',
-    '次数構造からgraph coreまたは小さなkernelへ縮約する',
+    '閉路数・次数構造からgraph coreとkernelを調べる',
     'unit-chapter-graph',
     [],
   ),
@@ -897,7 +897,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-reverse-offline':
     '削除・上書き・未来依存を含む更新列を逆向きに読み、追加だけ・first-writeだけなどの単調な処理へ変換して元の時刻へ答えを戻す。',
   'unit-contribution-reordering':
-    '答えを要素・組・成分ごとの局所寄与へ一意に分け、各対象が何回数えられるかを証明して二重和・積・期待値の集計順を交換する。',
+    '数える対象を一意に固定し、その対象を含む選択や組の個数へ集計順を交換する。要素・組・区間・値のどれを固定すると重複が消えるかを比較する。',
   'unit-coordinate-compression':
     '保持すべき疎な座標をsort-uniqueして順序・等値性を添字へ写す。距離・時間差・区間長も使う場合は元座標と間隔を併せて保存する。',
   'unit-normalization':
@@ -922,7 +922,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-dp-grid-table':
     '状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。',
   'unit-dp-subset-resource':
-    '最小十分状態を設計できるようになった後、集合bitmaskや容量を軸にした遷移と更新順へ進む。',
+    '最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。',
   'unit-eventual-unbounded-knapsack':
     '通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。',
   'unit-dp-sequence-interval':
@@ -998,7 +998,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-lowlink-critical-structure':
     'DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。',
   'unit-graph-core-peeling':
-    '連結性を探索できることを前提に、低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。',
+    '連結成分のcycle rankを辺数と頂点数から読み、必要なら低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。',
   'unit-prefix-aggregate':
     '一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。',
   'unit-monoid-segment-tree':
@@ -1398,7 +1398,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-contribution-reordering',
     name: '寄与の数え上げと順序交換',
     definition:
-      '答えを要素・組・連結成分ごとの独立な局所寄与へ分解し、和または積の集計順序を交換する。',
+      '数える対象を要素・組・値・区間ごとに一意に固定し、その対象を含む選択の個数や指示変数の期待値を先に集計する。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-reorder-counting-contributions'],
     unitIds: ['unit-contribution-reordering'],
@@ -1412,9 +1412,9 @@ const TAG_SEEDS: readonly TagSeed[] = [
       '期待値の線形性',
       '寄与分解',
     ],
-    object: ['合計', '組', '対', '要素'],
-    trigger: ['寄与', '数え上げ順序', '二重和'],
-    invariant: ['独立', '何回数え', '係数'],
+    object: ['合計', '組', '対', '要素', '値', '区間', '指示変数'],
+    trigger: ['寄与', '数え上げ順序', '二重和', '対象を固定', '期待値の線形性'],
+    invariant: ['一意', '重複', '何回数え', '含まれる回数', '係数'],
     goal: ['総和', '場合の数', '期待値'],
     priority: 67,
   },
@@ -3436,22 +3436,6 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     priority: 90,
   },
   {
-    id: 'tag-binary-tree-ancestor-matching',
-    name: '二進操作の木へのモデル化と祖先マッチング',
-    definition:
-      '二進末尾の削除を親への辺に写し、深い頂点で需要と供給を相殺して余剰だけを祖先へ渡す。両側の移動可能な辺を区別し、深い一致を優先する交換論法で移動数の最小性を示す。',
-    parentId: 'tag-model-reduction',
-    prerequisiteTagIds: ['tag-greedy-exchange-order'],
-    outcomeIds: ['outcome-match-binary-tree-ancestors'],
-    unitIds: ['unit-binary-tree-ancestor-matching'],
-    recall: ['binary ancestor matching', '二進操作の木'],
-    object: ['二進表記の多重集合'],
-    trigger: ['末尾削除'],
-    invariant: ['最深の一致を優先'],
-    goal: ['最小移動回数'],
-    priority: 90,
-  },
-  {
     id: 'tag-bitwise-minimax-partition',
     name: '上位bitの支配関係によるXOR minimax',
     definition:
@@ -4127,16 +4111,17 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
   },
   {
     id: 'tag-graph-core-peeling',
-    name: 'graph core・leaf peeling',
-    definition: '次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。',
+    name: '単一サイクル成分とgraph core',
+    definition:
+      '連結成分の辺数と頂点数からcycle rankを判定し、必要なら葉を反復削除してcycle coreと削除順を得る。',
     parentId: 'tag-graph-model-structure',
     outcomeIds: ['outcome-peel-graph-core'],
     unitIds: ['unit-graph-core'],
-    recall: ['leaf peeling', 'leaf stripping', 'k.?core', '葉刈り'],
-    object: ['graph', 'degree', 'core'],
-    trigger: ['葉を反復削除', '次数未満を除去'],
-    invariant: ['現在次数', '削除queue'],
-    goal: ['cycle core', '残存頂点'],
+    recall: ['unicyclic', 'E=V', 'leaf peeling', 'leaf stripping', 'k.?core', '葉刈り'],
+    object: ['graph', 'degree', 'core', '連結成分', '辺数', '頂点数'],
+    trigger: ['辺数と頂点数', 'E=V', '葉を反復削除', '次数未満を除去'],
+    invariant: ['cycle rank', '現在次数', '削除queue'],
+    goal: ['単一cycle', 'cycle core', '残存頂点'],
     priority: 69,
   },
   {
@@ -5645,7 +5630,6 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-cyclic-minimax-game': ['abc261-ex', 'abc413-f'],
   'tag-heavy-light-recursive-dp': ['abc311-ex'],
   'tag-stern-brocot-ancestry': ['abc273-ex'],
-  'tag-binary-tree-ancestor-matching': ['abc254-ex'],
   'tag-bitwise-minimax-partition': ['abc281-f'],
   'tag-tree-model-structure': ['abc220-f', 'abc239-e'],
   'tag-number-theory-structure': ['abc222-g', 'abc254-f'],
@@ -5689,7 +5673,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-degree-parity-subgraph': ['abc345-f'],
   'tag-euler-circuit-counting': ['abc336-g'],
   'tag-cycle-space-basis': ['abc419-g'],
-  'tag-graph-core-peeling': ['abc266-f', 'abc267-e'],
+  'tag-graph-core-peeling': ['abc226-e', 'abc266-f', 'abc267-e'],
   'tag-near-tree-kernelization': ['abc419-g'],
   'tag-range-monoid-aggregation': ['abc223-f', 'abc343-f'],
   'tag-segment-tree-canonical-decomposition': ['abc342-g', 'abc414-g'],
@@ -5890,7 +5874,9 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-reverse-update-time':
     '時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。',
   'outcome-reorder-counting-contributions':
-    '答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。',
+    '数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。',
+  'outcome-peel-graph-core':
+    '連結成分のE−V+1から独立な閉路数を判定し、E=Vなら唯一のcycleを持つことを示せる。必要なら次数1以下の頂点を反復削除し、残るcoreと削除順を求められる。',
   'outcome-normalize-equivalent-states': '対称操作で同値な状態の標準形と不変量を選べる。',
   'outcome-count-orbits-by-fixed-points':
     '群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。',
@@ -6256,7 +6242,6 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-accelerate-tree-dp-by-heavy-path',
   'outcome-pass-resource-dp-through-heavy-recursion',
   'outcome-traverse-stern-brocot-ancestors',
-  'outcome-match-binary-tree-ancestors',
   'outcome-minimize-maximum-xor-by-bit-partition',
   'outcome-precompute-directional-grid-effects',
   'outcome-build-laminar-interval-containment-tree',
@@ -6310,7 +6295,6 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-heavy-path-tree-dp',
   'unit-heavy-light-recursive-dp',
   'unit-stern-brocot-ancestry',
-  'unit-binary-tree-ancestor-matching',
   'unit-bitwise-minimax-partition',
   'unit-additive-tree-metric-reconstruction',
   'unit-directional-grid-effect-scan',
@@ -6364,7 +6348,6 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-heavy-path-tree-dp',
   'tag-heavy-light-recursive-dp',
   'tag-stern-brocot-ancestry',
-  'tag-binary-tree-ancestor-matching',
   'tag-bitwise-minimax-partition',
   'tag-additive-tree-metric-reconstruction',
   'tag-directional-grid-effect-scan',
@@ -6500,7 +6483,6 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-small-to-large': 'unit-decomposition-amortization',
   'unit-threshold-heavy-light': 'unit-decomposition-amortization',
   'unit-heavy-path-tree-dp': 'unit-tree-aggregation',
-  'unit-dp-subset-state': 'unit-dp-subset-resource',
   'unit-eventual-unbounded-knapsack': 'unit-dp-subset-resource',
   'unit-state-graph-search': 'unit-graph-search',
   'unit-directional-grid-effect-scan': 'unit-graph-search',
@@ -7652,11 +7634,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     from: 'outcome-approximate-rational-by-euclid',
     to: 'outcome-traverse-stern-brocot-ancestors',
     problemIds: ['abc273-ex'],
-  },
-  {
-    from: 'outcome-query-bitwise-order-with-trie',
-    to: 'outcome-match-binary-tree-ancestors',
-    problemIds: ['abc254-ex'],
   },
   {
     from: 'outcome-query-bitwise-order-with-trie',

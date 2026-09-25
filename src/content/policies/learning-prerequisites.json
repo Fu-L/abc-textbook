@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887",
-    "acceptedAt": "2026-09-25T07:42:04.787Z"
+    "digest": "7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32",
+    "acceptedAt": "2026-09-25T10:16:38.197Z"
   },
   "tagPrerequisites": [
     {
@@ -37,10 +37,6 @@
     {
       "nodeId": "tag-baby-step-giant-step",
       "prerequisiteId": "tag-modular-arithmetic"
-    },
-    {
-      "nodeId": "tag-binary-tree-ancestor-matching",
-      "prerequisiteId": "tag-greedy-exchange-order"
     },
     {
       "nodeId": "tag-bipartite-matching-hall",
@@ -1021,10 +1017,6 @@
       "prerequisiteId": "outcome-linearize-static-range-information"
     },
     {
-      "nodeId": "outcome-match-binary-tree-ancestors",
-      "prerequisiteId": "outcome-prove-greedy-order"
-    },
-    {
       "nodeId": "outcome-model-and-compute-shortest-path",
       "prerequisiteId": "outcome-select-state-graph-search"
     },
@@ -1341,10 +1333,6 @@
     {
       "nodeId": "unit-baby-step-giant-step",
       "prerequisiteId": "unit-modular-arithmetic"
-    },
-    {
-      "nodeId": "unit-binary-tree-ancestor-matching",
-      "prerequisiteId": "unit-greedy-exchange"
     },
     {
       "nodeId": "unit-bipartite-matching",
@@ -1891,7 +1879,7 @@
       "prerequisiteId": "unit-state-graph-search"
     }
   ],
-  "tagDagDigest": "0b9159291aa5cfc106028158afad6854699ef89a7afeb030f4a7eb0af8b9c271",
-  "learningOutcomeDagDigest": "8f580cf2959a679b6b3ab1fb0770c9b2a5983cdfe2b4e6e46a21a30f4ee75c2a",
-  "learningUnitDagDigest": "455c764eaddfc0b46e8bee3115074de9d22906e525f358cb7f17b5c67196154c"
+  "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
+  "learningOutcomeDagDigest": "b8cd6ee2e592609a2042e56081d03081e9e72d265c962e4b65adb11e006b10c4",
+  "learningUnitDagDigest": "659d56f968c7e4cbcd16a9bbc3a99b9aa987a1cf35562c5b6c500d523d12107c"
 }

@@ -661,11 +661,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     { 'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'] },
   ),
   'abc226-e': decision(
-    'outcome-reorder-counting-contributions',
+    'outcome-peel-graph-core',
     [
-      d('t0', 'primary', 'tag-contribution-reordering'),
-      d('t1', 'same_tag', 'tag-contribution-reordering'),
-      d('p0', 'same_tag', 'tag-contribution-reordering'),
+      d('t0', 'primary', 'tag-graph-core-peeling'),
+      d('t1', 'same_tag', 'tag-graph-core-peeling'),
+      d('p0', 'same_tag', 'tag-graph-core-peeling'),
       d('p1', 'supporting', 'tag-dsu-connectivity', 'tag-modular-arithmetic'),
     ],
     {
@@ -1905,14 +1905,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     {},
   ),
   'abc254-ex': decision(
-    'outcome-query-bitwise-order-with-trie',
+    'outcome-prove-greedy-order',
     [
-      d('t0', 'primary', 'tag-binary-trie'),
-      d('t1', 'supporting', 'tag-greedy-exchange-order'),
-      d('p0', 'same_tag', 'tag-binary-trie'),
-      d('p1', 'same_tag', 'tag-binary-trie'),
+      d('t0', 'same_tag', 'tag-greedy-exchange-order'),
+      d('t1', 'primary', 'tag-greedy-exchange-order'),
+      d('p0', 'problem_specific'),
+      d('p1', 'same_tag', 'tag-greedy-exchange-order'),
     ],
-    { 'tag-greedy-exchange-order': ['outcome-prove-greedy-order'] },
+    {},
   ),
   'abc254-f': decision(
     'outcome-reduce-integer-structure-by-gcd',

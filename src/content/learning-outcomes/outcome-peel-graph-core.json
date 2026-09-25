@@ -1,8 +1,9 @@
 {
   "id": "outcome-peel-graph-core",
-  "statement": "次数条件を満たさない頂点をqueueで反復削除し、cycle core・k-coreと削除順を得る。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "statement": "連結成分のE−V+1から独立な閉路数を判定し、E=Vなら唯一のcycleを持つことを示せる。必要なら次数1以下の頂点を反復削除し、残るcoreと削除順を求められる。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
+    "abc226-e",
     "abc266-f",
     "abc267-e",
     "tag-graph-core-peeling",

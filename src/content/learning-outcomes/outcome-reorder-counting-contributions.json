@@ -1,6 +1,6 @@
 {
   "id": "outcome-reorder-counting-contributions",
-  "statement": "答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。",
+  "statement": "数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
     "abc215-g",
@@ -12,7 +12,6 @@
     "abc221-f",
     "abc222-e",
     "abc224-f",
-    "abc226-e",
     "abc231-g",
     "abc233-e",
     "abc238-ex",

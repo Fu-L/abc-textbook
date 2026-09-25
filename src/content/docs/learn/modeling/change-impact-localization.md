@@ -3,7 +3,7 @@ title: "基準witnessから変更影響を局所化する"
 description: "「基準witnessから変更影響を局所化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 13
+  order: 12
 ---
 
 # 基準witnessから変更影響を局所化する
@@ -59,4 +59,4 @@ sidebar:
 - [ABC279 E 公式問題文](https://atcoder.jp/contests/abc279/tasks/abc279_e)
 - [ABC279 E 公式解説](https://atcoder.jp/contests/abc279/editorial/5289)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-change-impact-localization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-change-impact-localization`

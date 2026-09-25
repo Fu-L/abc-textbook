@@ -34,7 +34,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-contribution-reordering': [
     '緑色',
-    '答えを要素ごとの寄与に分け、二重ループの数え方を変える視点を持つ。',
+    '要素・組・値・区間のどれを固定すれば一意に数えられるかを見抜き、総和の順を交換する。',
   ],
   'unit-bounded-enumeration': [
     '緑色',
@@ -63,10 +63,6 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   'unit-bitwise-greedy-feasibility': [
     '水色',
     '上位bitの優先性と単調な可否判定を組み合わせてmaskを決める。',
-  ],
-  'unit-binary-tree-ancestor-matching': [
-    '青色',
-    '二進操作を祖先への移動に写し、深い一致から確定する交換論法を導く。',
   ],
   'unit-constructive-witness': [
     '水色',
@@ -399,8 +395,14 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
     '青色',
     '非木辺と基本cycleを対応させ、偶数次数の辺集合をF₂上の基底で表す。',
   ],
-  'unit-graph-core-peeling': ['水色', '次数条件で頂点を取り除き、残る核を取り出す入口。'],
-  'unit-graph-core': ['水色', 'queueで次数の変化を伝播し、葉除去やk-coreの削除順を扱う。'],
+  'unit-graph-core-peeling': [
+    '水色',
+    '辺数と頂点数から閉路数を読み、次数条件で残る核を取り出す入口。',
+  ],
+  'unit-graph-core': [
+    '水色',
+    '成分のE−V+1から閉路数を読み、必要なら葉を剥がして残るcoreを調べる。',
+  ],
   'unit-near-tree-kernelization': [
     '黄色',
     '葉と次数2のchainを答えを保って縮約し、余分な辺数で残るサイズを界する。',

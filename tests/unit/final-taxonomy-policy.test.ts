@@ -107,7 +107,8 @@ describe('final taxonomy policy', () => {
       'abc311-ex': 'outcome-pass-resource-dp-through-heavy-recursion',
       'abc273-ex': 'outcome-traverse-stern-brocot-ancestors',
       'abc280-f': 'outcome-propagate-static-graph-potentials',
-      'abc254-ex': 'outcome-match-binary-tree-ancestors',
+      'abc254-ex': 'outcome-prove-greedy-order',
+      'abc226-e': 'outcome-peel-graph-core',
       'abc281-f': 'outcome-minimize-maximum-xor-by-bit-partition',
       'abc218-h': 'outcome-optimize-path-matching-by-contraction',
       'abc310-ex': 'outcome-stabilize-unbounded-knapsack-by-best-density',
@@ -127,9 +128,9 @@ describe('final taxonomy policy', () => {
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(205);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(225);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(230);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(204);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(224);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(229);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',

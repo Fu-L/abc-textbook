@@ -3,7 +3,7 @@ title: "near-tree graphのkernel化"
 description: "「near-tree graphのkernel化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 115
+  order: 114
 ---
 
 # near-tree graphのkernel化
@@ -26,11 +26,11 @@ terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/)、[graph core・leaf peeling](/learn/graph/graph-core/)。
+直接の前提単元: [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/)、[単一サイクル成分とgraph core](/learn/graph/graph-core/)。
 
 このUnitを直接前提とする単元: なし。
 
-cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。
+cycle space・fundamental cycle basis・単一サイクル成分とgraph coreで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。
 
 ### このUnitでは扱わないもの
 
@@ -47,4 +47,4 @@ cycle space・fundamental cycle basis・graph core・leaf peelingで得た考え
 - [ABC419 G 公式解説](https://atcoder.jp/contests/abc419/editorial/13636)
 - [ABC419 G 公式問題文](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-near-tree-kernelization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-near-tree-kernelization`

@@ -3,7 +3,7 @@ title: "ordered interval partition・ODT"
 description: "「ordered interval partition・ODT」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 33
+  order: 32
 ---
 
 # ordered interval partition・ODT
@@ -61,4 +61,4 @@ ordered set・multisetの動的順序管理で得た考え方と実装を再利�
 - [ABC256 H 公式解説](https://atcoder.jp/contests/abc256/editorial/4113)
 - [ABC256 H 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-ordered-interval-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-ordered-interval-partition`

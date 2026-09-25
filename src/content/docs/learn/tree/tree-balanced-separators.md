@@ -3,7 +3,7 @@ title: "木の均衡分離点から重心分解へ進む"
 description: "「木の均衡分離点から重心分解へ進む」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 142
+  order: 141
 ---
 
 # 木の均衡分離点から重心分解へ進む
@@ -47,7 +47,7 @@ sidebar:
 
 ## 問題一覧
 
-- [ABC359 G「Sum of Tree Distance」](https://atcoder.jp/contests/abc359/tasks/abc359_g) — 主題: [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/)（各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。）。既習技能: [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/)（答えを独立な局所寄与の和または積に分解し、重複を避けて集計順を交換できる。）。
+- [ABC359 G「Sum of Tree Distance」](https://atcoder.jp/contests/abc359/tasks/abc359_g) — 主題: [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/)（各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。）。既習技能: [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/)（数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。）。
 - [ABC291 Ex「Balanced Tree」](https://atcoder.jp/contests/abc291/tasks/abc291_h) — 主題: [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/)（各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
@@ -67,4 +67,4 @@ sidebar:
 - [ABC453 F 公式解説](https://atcoder.jp/contests/abc453/editorial/18542)
 - [ABC453 F 公式問題文](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-tree-balanced-separators`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32` / LearningUnit `unit-tree-balanced-separators`

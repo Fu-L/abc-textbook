@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887",
-    "acceptedAt": "2026-09-25T07:42:04.787Z"
+    "digest": "7fd0d20393e1ee2f28bfe43444ff43159e5d8f980ff2ec7298a591ed3f297b32",
+    "acceptedAt": "2026-09-25T10:16:38.197Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -13162,18 +13162,18 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「DFSで各連結成分の頂点数と辺数を数え、全成分が単一サイクルを持つV'=E'なら成分ごとの2方向を掛け合わせる。」、解法への接続「未訪問頂点からDFSを行って成分のV'と次数和/2のE'を求め、不一致が一つでもあれば0、全て一致するなら2^(連結成分数)を998244353で返す。」、学習成果「局所的な出次数条件を成分の辺頂点数と単一サイクル構造へ変換し、向き付け数を積で求められる。」を照合し、tag-contribution-reordering / outcome-reorder-counting-contributions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「DFSで各連結成分の頂点数と辺数を数え、全成分が単一サイクルを持つV'=E'なら成分ごとの2方向を掛け合わせる。」、解法への接続「未訪問頂点からDFSを行って成分のV'と次数和/2のE'を求め、不一致が一つでもあれば0、全て一致するなら2^(連結成分数)を998244353で返す。」、学習成果「局所的な出次数条件を成分の辺頂点数と単一サイクル構造へ変換し、向き付け数を積で求められる。」を照合し、tag-graph-core-peeling / outcome-peel-graph-core をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-contribution-reordering"
+        "tag-graph-core-peeling"
       ],
       "supportingTagIds": [
         "tag-dsu-components",
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-reorder-counting-contributions",
+      "primaryOutcomeId": "outcome-peel-graph-core",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
@@ -13197,7 +13197,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-graph-core-peeling"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -13215,7 +13215,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-graph-core-peeling"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -13233,7 +13233,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-graph-core-peeling"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -39390,21 +39390,17 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「二進trieを葉から処理する貪欲マッチング」、解法への接続「A_i,B_iの二進表記を同じtrieへ挿入し、深い節点からA個数とB個数を相殺する。残ったAは親へ移し、残ったBは末尾辺が0なら親へ移し、1なら不可能として-1にする。全移動数を合計する。」、学習成果「二つの多重集合を一致させられるなら最小操作回数を、できないなら-1を求められる。」を照合し、tag-binary-tree-ancestor-matching / outcome-match-binary-tree-ancestors をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「二進trieを葉から処理する貪欲マッチング」、解法への接続「A_i,B_iの二進表記を同じtrieへ挿入し、深い節点からA個数とB個数を相殺する。残ったAは親へ移し、残ったBは末尾辺が0なら親へ移し、1なら不可能として-1にする。全移動数を合計する。」、学習成果「二つの多重集合を一致させられるなら最小操作回数を、できないなら-1を求められる。」を照合し、tag-greedy-exchange-order / outcome-prove-greedy-order をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-binary-tree-ancestor-matching"
-      ],
-      "supportingTagIds": [
         "tag-greedy-exchange-order"
       ],
-      "primaryOutcomeId": "outcome-match-binary-tree-ancestors",
+      "supportingTagIds": [],
+      "primaryOutcomeId": "outcome-prove-greedy-order",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-prove-greedy-order"
-      ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "二倍と切り捨て半分という操作を片側ずつ正方向で追う代わりに、一方を逆向きにすると、両者がtrieの根方向へ動くマッチングになる。（再利用可能な見方: 異なる向きの変換を共通中間状態で合わせる問題では、一方の操作を逆転して同じ半順序上の祖先移動へ揃える。）"
       ],
@@ -39421,11 +39417,11 @@
               "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"
             ]
           },
-          "kind": "primary",
+          "kind": "same_tag",
           "tagIds": [
-            "tag-binary-tree-ancestor-matching"
+            "tag-greedy-exchange-order"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -39439,11 +39435,11 @@
               "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-greedy-exchange-order"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -39457,11 +39453,9 @@
               "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"
             ]
           },
-          "kind": "same_tag",
-          "tagIds": [
-            "tag-binary-tree-ancestor-matching"
-          ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -39477,7 +39471,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-binary-tree-ancestor-matching"
+            "tag-greedy-exchange-order"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -285557,7 +285551,7 @@
       "impactSubjectDigest": "40b36906779261a3768787e7e6a1f741f39f56b58bfeadedebb593a3444339fb"
     }
   ],
-  "placementDigest": "81bc6c11e5c9f0557a0977bc07029f5ccf57ce66bcf3d2f68f295fbc480c1982",
+  "placementDigest": "aed4879c625e3bedd8c274376b8074e22fd0a04fd3756271d0b755ac2e0520da",
   "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "previewTaxonomyChangeDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877"
 }
