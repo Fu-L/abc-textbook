@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85",
-    "acceptedAt": "2026-09-25T14:51:39.834Z"
+    "digest": "bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f",
+    "acceptedAt": "2026-09-25T16:10:16.727Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -14812,7 +14812,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。」、解法への接続「12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。」、学習成果「訪問回数付きwalk構成を辺多重度の次数条件へ変換し、spanning tree列挙・最大流・Euler閉路構築を接続して解ける。」を照合し、tag-euler-trail-circuit / outcome-construct-euler-trail-or-circuit をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。」、解法への接続「12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。」、学習成果「訪問回数付きwalk構成を辺多重度の次数条件へ変換し、spanning tree列挙・最大流・Euler閉路構築を接続して解ける。」を照合し、tag-max-flow-min-cut / outcome-model-max-flow-min-cut をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -14823,9 +14823,9 @@
       "supportingTagIds": [
         "tag-bounded-enumeration"
       ],
-      "primaryOutcomeId": "outcome-construct-euler-trail-or-circuit",
+      "primaryOutcomeId": "outcome-model-max-flow-min-cut",
       "additionalPrimaryOutcomeIds": [
-        "outcome-model-max-flow-min-cut"
+        "outcome-construct-euler-trail-or-circuit"
       ],
       "supportingOutcomeIds": [
         "outcome-enumerate-bounded-candidates-or-cases"
@@ -18356,17 +18356,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「積を A と X の選択部分集合で展開し、A の基本対称式と、相異なる箱の選択回数積の共通期待値を次数別に掛け合わせる。」、解法への接続「ランダムな選択回数を含む積を多重線形展開し、定数 A の基本対称式と multinomial 分布の相異なる座標に対する階乗モーメントを次数ごとに合成する。」、学習成果「相関する multinomial 選択回数の積期待値を、対称式と階乗モーメントへ分解して計算できる。」を照合し、tag-contribution-reordering / outcome-reorder-counting-contributions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「積を A と X の選択部分集合で展開し、A の基本対称式と、相異なる箱の選択回数積の共通期待値を次数別に掛け合わせる。」、解法への接続「ランダムな選択回数を含む積を多重線形展開し、定数 A の基本対称式と multinomial 分布の相異なる座標に対する階乗モーメントを次数ごとに合成する。」、学習成果「相関する multinomial 選択回数の積期待値を、対称式と階乗モーメントへ分解して計算できる。」を照合し、tag-contribution-reordering / outcome-reorder-counting-contributions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-contribution-reordering"
       ],
-      "supportingTagIds": [],
+      "supportingTagIds": [
+        "tag-generating-functions"
+      ],
       "primaryOutcomeId": "outcome-reorder-counting-contributions",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [],
+      "supportingOutcomeIds": [
+        "outcome-encode-counting-by-generating-function"
+      ],
       "adHocElements": [
         "X_i 自体は互いに独立でないが、各操作で選ばれる箱の対称性と時刻の独立性により、相異なる箱集合の積期待値は集合サイズだけに依存する。（再利用可能な見方: 交換可能な確率変数では独立性を求める前に、必要なモーメントが添字集合の大きさだけで決まる対称性を探す。）"
       ],
@@ -18401,11 +18405,11 @@
               "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-generating-functions"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -18424,6 +18428,24 @@
             "tag-contribution-reordering"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc231-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+              "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-generating-functions"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -82795,17 +82817,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全点間距離後に最大黒集合を構成して検証」、解法への接続「全始点BFSでdistを前計算し、全条件のdist(p_i,v)<d_iを満たすvを白、残りを黒にする。黒が存在し各iで距離d_iの黒があればYesを出す。」、学習成果「距離条件を満たす白黒配置を構成または不存在判定できる。」を照合し、tag-constructive-witness / outcome-recover-valid-witness をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全点間距離後に最大黒集合を構成して検証」、解法への接続「全始点BFSでdistを前計算し、全条件のdist(p_i,v)<d_iを満たすvを白、残りを黒にする。黒が存在し各iで距離d_iの黒があればYesを出す。」、学習成果「距離条件を満たす白黒配置を構成または不存在判定できる。」を照合し、tag-constructive-witness / outcome-recover-valid-witness をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-model-and-compute-shortest-path; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-model-and-compute-shortest-path を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-constructive-witness"
       ],
-      "supportingTagIds": [],
+      "supportingTagIds": [
+        "tag-shortest-path"
+      ],
       "primaryOutcomeId": "outcome-recover-valid-witness",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [],
+      "supportingOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
       "adHocElements": [
         "黒候補を減らす利点がない単調な存在条件なので、最大候補集合一つだけ試せばよい。（再利用可能な見方: 禁止集合を除いた全採用が存在制約のcanonical witnessになる。）"
       ],
@@ -82840,9 +82866,11 @@
               "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"
             ]
           },
-          "kind": "baseline",
-          "tagIds": [],
-          "rationale": "対象学習者が開始時点で備える共通前提に含まれることを確認した。 共通前提カテゴリ: tree-unweighted-grid-dfs-bfs。"
+          "kind": "supporting",
+          "tagIds": [
+            "tag-shortest-path"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -82856,9 +82884,11 @@
               "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"
             ]
           },
-          "kind": "baseline",
-          "tagIds": [],
-          "rationale": "対象学習者が開始時点で備える共通前提に含まれることを確認した。 共通前提カテゴリ: tree-unweighted-grid-dfs-bfs。"
+          "kind": "supporting",
+          "tagIds": [
+            "tag-shortest-path"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -119499,22 +119529,22 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「C1を固定しC2,C3の6座標を[-7,7]で全探索する」、解法への接続「C1=(0,0,0)としa2,b2,c2,a3,b3,c3を-7…7でloopする。各axisのoverlap長max(0,min(right)-max(left))を掛けて三pair交差とtriple交差を求め、v3,v2,v1を式で計算する。一致した座標をYesと出し、なければNo。」、学習成果「指定V1,V2,V3を実現する三cube配置の存在を判定し、存在すれば座標を一組構成できる。」を照合し、tag-geometry-orientation-transform / outcome-reduce-geometry-to-algebraic-predicates をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「C1を固定しC2,C3の6座標を[-7,7]で全探索する」、解法への接続「C1=(0,0,0)としa2,b2,c2,a3,b3,c3を-7…7でloopする。各axisのoverlap長max(0,min(right)-max(left))を掛けて三pair交差とtriple交差を求め、v3,v2,v1を式で計算する。一致した座標をYesと出し、なければNo。」、学習成果「指定V1,V2,V3を実現する三cube配置の存在を判定し、存在すれば座標を一組構成できる。」を照合し、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-geometry-orientation-transform; 補助Outcome=outcome-reduce-geometry-to-algebraic-predicates; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-geometry-orientation-transform / outcome-reduce-geometry-to-algebraic-predicates を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-geometry-orientation-transform"
+        "tag-bounded-enumeration"
       ],
       "supportingTagIds": [
-        "tag-bounded-enumeration",
+        "tag-geometry-orientation-transform",
         "tag-inclusion-exclusion"
       ],
-      "primaryOutcomeId": "outcome-reduce-geometry-to-algebraic-predicates",
+      "primaryOutcomeId": "outcome-enumerate-bounded-candidates-or-cases",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-correct-overlap-by-inversion",
-        "outcome-enumerate-bounded-candidates-or-cases"
+        "outcome-reduce-geometry-to-algebraic-predicates"
       ],
       "adHocElements": [
         "side lengthが7の軸平行cube同士のintersectionも軸平行直方体なので、3D体積は各axisのinterval overlap長の積へ完全分離する。（再利用可能な見方: 直積形状の交差量は各次元の一次元overlapを独立計算して掛ける。）"
@@ -119534,7 +119564,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-geometry-orientation-transform"
+            "tag-bounded-enumeration"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -119552,7 +119582,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-bounded-enumeration"
+            "tag-geometry-orientation-transform"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -119586,11 +119616,11 @@
               "source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
             "tag-geometry-orientation-transform"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -132091,21 +132121,17 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全辺重みの2倍から重み付き木の直径を引く。」、解法への接続「辺重み総和Sを求める。任意頂点から最遠点uを探索し、uからの最遠距離Dをもう一度の木走査で求める。答えとして2S−Dを出力する。」、学習成果「全頂点訪問walkを全辺往復から直径分だけ節約する構造として捉え、最小距離を求められる。」を照合し、tag-tree-metric-diameter / outcome-use-tree-diameter-extrema をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全辺重みの2倍から重み付き木の直径を引く。」、解法への接続「辺重み総和Sを求める。任意頂点から最遠点uを探索し、uからの最遠距離Dをもう一度の木走査で求める。答えとして2S−Dを出力する。」、学習成果「全頂点訪問walkを全辺往復から直径分だけ節約する構造として捉え、最小距離を求められる。」を照合し、tag-tree-metric-diameter / outcome-use-tree-diameter-extrema をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-tree-metric-diameter"
       ],
-      "supportingTagIds": [
-        "tag-contribution-reordering"
-      ],
+      "supportingTagIds": [],
       "primaryOutcomeId": "outcome-use-tree-diameter-extrema",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-reorder-counting-contributions"
-      ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "Hamilton pathという名前でも頂点の再訪が許されるため、問題は順列ではなくDFS巡回から一本の戻り道を省く形になる。（再利用可能な見方: 訪問問題では再訪可否を確認し、木なら各辺を何回横断すべきかへ分解する。）"
       ],
@@ -132122,11 +132148,11 @@
               "source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-tree-metric-diameter"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -140101,22 +140127,23 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「位置 i の P-cycle 長 L_i を使い、既確定の x≡r (mod m) の範囲で A_{P_i^x} の最小値を選び、CRT 型に法を lcm(m,L_i) へ更新する。」、解法への接続「P を cycle 分解し、先頭から未確定位置を処理する。現在の操作回数合同類が各 cycle 上で到達する位置を走査して最小の A を選び、同じ制約で確定する cycle 要素をまとめて答えへ反映する。」、学習成果「共通の反復回数で動く複数 cycle に対し、辞書順条件を合同類として段階的に固定できる。」を照合し、tag-functional-graph-decomposition / outcome-decompose-functional-graph をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。; 補助Tag=tag-modular-congruence-crt; 補助Outcome=outcome-solve-modular-constraints; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-congruence-crt / outcome-solve-modular-constraints を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「位置 i の P-cycle 長 L_i を使い、既確定の x≡r (mod m) の範囲で A_{P_i^x} の最小値を選び、CRT 型に法を lcm(m,L_i) へ更新する。」、解法への接続「P を cycle 分解し、先頭から未確定位置を処理する。現在の操作回数合同類が各 cycle 上で到達する位置を走査して最小の A を選び、同じ制約で確定する cycle 要素をまとめて答えへ反映する。」、学習成果「共通の反復回数で動く複数 cycle に対し、辞書順条件を合同類として段階的に固定できる。」を照合し、tag-greedy-exchange-order / outcome-prove-greedy-order をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-functional-graph-decomposition; 補助Outcome=outcome-decompose-functional-graph; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-functional-graph-decomposition / outcome-decompose-functional-graph を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-functional-graph-decomposition"
-      ],
-      "supportingTagIds": [
         "tag-greedy-exchange-order",
         "tag-modular-congruence-crt"
       ],
-      "primaryOutcomeId": "outcome-decompose-functional-graph",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-prove-greedy-order",
+      "supportingTagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "primaryOutcomeId": "outcome-prove-greedy-order",
+      "additionalPrimaryOutcomeIds": [
         "outcome-solve-modular-constraints"
+      ],
+      "supportingOutcomeIds": [
+        "outcome-decompose-functional-graph"
       ],
       "adHocElements": [
         "辞書順では先頭の最小値を決めた瞬間、操作回数の自由度が合同式として残る。（再利用可能な見方: 巨大な lcm を数値で持たず、各 cycle 上で残る到達集合を表現できないか考える。）"
@@ -140134,11 +140161,11 @@
               "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-functional-graph-decomposition"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -140152,12 +140179,12 @@
               "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-greedy-exchange-order",
             "tag-modular-congruence-crt"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -140173,7 +140200,8 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-functional-graph-decomposition"
+            "tag-greedy-exchange-order",
+            "tag-modular-congruence-crt"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -140191,8 +140219,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-greedy-exchange-order",
-            "tag-modular-congruence-crt"
+            "tag-functional-graph-decomposition"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -285093,7 +285120,7 @@
       "impactSubjectDigest": "40b36906779261a3768787e7e6a1f741f39f56b58bfeadedebb593a3444339fb"
     }
   ],
-  "placementDigest": "71ff1988f8b33394966f17ae63781c87c2d1b687682073f0d94fe7e6ca1c2256",
+  "placementDigest": "a2adb0da95af3f4e6b06581558337ad624b8f6a43998754771f808f9052563e9",
   "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "previewTaxonomyChangeDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877"
 }

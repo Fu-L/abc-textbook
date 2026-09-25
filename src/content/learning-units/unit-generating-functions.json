@@ -13,8 +13,8 @@
     "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
     "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
     "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
-    "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+    "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+    "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
   ],
   "tagIds": [
     "tag-generating-functions"
@@ -66,6 +66,7 @@
   ],
   "relatedProblemIds": [
     "abc214-g",
+    "abc231-g",
     "abc235-ex",
     "abc269-ex",
     "abc272-ex",

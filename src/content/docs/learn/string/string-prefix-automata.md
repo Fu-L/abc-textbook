@@ -55,4 +55,4 @@ sidebar:
 - [ABC312 H 公式解説](https://atcoder.jp/contests/abc312/editorial/6837)
 - [ABC312 H 公式問題文](https://atcoder.jp/contests/abc312/tasks/abc312_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-string-prefix-automata`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-string-prefix-automata`

@@ -36,7 +36,6 @@
     "abc284-g",
     "abc296-e",
     "abc357-e",
-    "abc371-g",
     "abc377-e",
     "abc387-f",
     "abc399-e",
@@ -51,12 +50,12 @@
     "abc399-e",
     "abc436-e",
     "abc387-f",
-    "abc284-g",
-    "abc371-g"
+    "abc284-g"
   ],
   "relatedProblemIds": [
     "abc247-ex",
     "abc258-e",
+    "abc371-g",
     "abc444-g"
   ],
   "examples": [],

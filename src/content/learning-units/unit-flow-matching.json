@@ -45,6 +45,7 @@
     "abc218-h",
     "abc224-h",
     "abc225-g",
+    "abc227-h",
     "abc231-h",
     "abc239-g",
     "abc241-g",
@@ -73,7 +74,6 @@
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc227-h",
     "abc237-ex",
     "abc313-ex",
     "abc318-f",

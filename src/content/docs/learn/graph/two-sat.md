@@ -47,4 +47,4 @@ SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利�
 - [ABC277 H 公式解説](https://atcoder.jp/contests/abc277/editorial/5207)
 - [ABC277 H 公式問題文](https://atcoder.jp/contests/abc277/tasks/abc277_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-two-sat`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-two-sat`

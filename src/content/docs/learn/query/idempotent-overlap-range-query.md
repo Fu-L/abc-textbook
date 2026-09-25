@@ -57,4 +57,4 @@ ABC282 Exでは各再帰区間の最小値とその位置をRMQで取得し、�
 - [ABC282 H 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_h)
 - [ABC282 F 公式問題文](https://atcoder.jp/contests/abc282/tasks/abc282_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-idempotent-overlap-range-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-idempotent-overlap-range-query`

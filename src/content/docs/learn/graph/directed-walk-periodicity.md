@@ -47,4 +47,4 @@ gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得�
 - [ABC306 G 公式解説](https://atcoder.jp/contests/abc306/editorial/6602)
 - [ABC306 G 公式問題文](https://atcoder.jp/contests/abc306/tasks/abc306_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-directed-walk-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-directed-walk-periodicity`

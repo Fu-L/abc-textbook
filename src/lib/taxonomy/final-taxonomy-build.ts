@@ -1170,9 +1170,14 @@ const buildIntegrationMap = (
     entries,
   });
   const provisionalIntegrationMap = context.provisionalIntegrationMap;
+  const expectedStatus = reviewEvidenceId === null ? 'proposed' : 'accepted';
   if (
     provisionalIntegrationMap !== null &&
-    provisionalIntegrationMap.integrationSubjectDigest === canonicalDigest(subject)
+    provisionalIntegrationMap.integrationSubjectDigest === canonicalDigest(subject) &&
+    provisionalIntegrationMap.status === expectedStatus &&
+    provisionalIntegrationMap.entries.every(
+      (entry) => entry.status === expectedStatus && entry.reviewEvidenceId === reviewEvidenceId,
+    )
   ) {
     return provisionalIntegrationMap;
   }
@@ -3408,9 +3413,12 @@ export const validateFinalTaxonomyBuildAgainstContext = (
   const expectedStatus = review === null ? ('proposed' as const) : ('accepted' as const);
   const expectedTimestamp = review?.evidence.generatedAt ?? context.workManifest.createdAt;
   const expectedHoldReasons = review === null ? ['CURRENT_SUBJECT_REVIEW_MISSING_OR_STALE'] : [];
-  const integrationEntries = build.integrationMap.entries.map(
-    ({ reviewEvidenceId: _reviewEvidenceId, status: _status, ...entry }) => entry,
-  );
+  const integrationEntries = build.integrationMap.entries.map((integrationEntry) => {
+    const { reviewEvidenceId, status, ...entry } = integrationEntry;
+    void reviewEvidenceId;
+    void status;
+    return entry;
+  });
   const expectedIntegrationMap = buildIntegrationMap(
     context,
     integrationEntries,

@@ -994,7 +994,7 @@ describe('final taxonomy policy', () => {
       ],
       'abc248-f': ['outcome-design-frontier-profile-dp', 'unit-frontier-profile-dp'],
       'abc236-f': ['outcome-optimize-weighted-matroid-basis', 'unit-matroid-greedy'],
-      'abc227-h': ['outcome-construct-euler-trail-or-circuit', 'unit-euler-trail-circuit'],
+      'abc227-h': ['outcome-model-max-flow-min-cut', 'unit-max-flow-min-cut'],
       'abc275-ex': ['outcome-maintain-piecewise-linear-convex-function', 'unit-slope-trick'],
       'abc237-ex': [
         'outcome-optimize-poset-antichain-by-dilworth',

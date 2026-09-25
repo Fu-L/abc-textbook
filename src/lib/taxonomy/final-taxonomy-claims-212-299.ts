@@ -736,7 +736,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     {},
   ),
   'abc227-h': decision(
-    'outcome-characterize-walk-by-degrees',
+    'outcome-model-max-flow-min-cut',
     [
       d('t0', 'primary', 'tag-euler-degree-parity'),
       d('t1', 'primary', 'tag-max-flow-min-cut'),
@@ -748,7 +748,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     {
       'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
     },
-    ['outcome-model-max-flow-min-cut'],
+    ['outcome-construct-euler-trail-or-circuit'],
   ),
   'abc228-e': decision(
     'outcome-exploit-modular-periodicity',
@@ -906,10 +906,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-reorder-counting-contributions',
     [
       d('t0', 'primary', 'tag-contribution-reordering'),
-      d('t1', 'same_tag', 'tag-contribution-reordering'),
+      d('t1', 'supporting', 'tag-generating-functions'),
       d('p0', 'same_tag', 'tag-contribution-reordering'),
+      d('p0', 'supporting', 'tag-generating-functions'),
     ],
-    {},
+    { 'tag-generating-functions': ['outcome-encode-counting-by-generating-function'] },
   ),
   'abc231-h': decision(
     'outcome-reduce-selection-to-network-optimization',
@@ -3915,8 +3916,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   ),
   'abc299-e': decision(
     'outcome-recover-valid-witness',
-    [d('t0', 'primary', 'tag-constructive-witness'), d('t1', 'baseline'), d('p0', 'baseline')],
-    {},
+    [
+      d('t0', 'primary', 'tag-constructive-witness'),
+      d('t1', 'supporting', 'tag-shortest-path'),
+      d('p0', 'supporting', 'tag-shortest-path'),
+    ],
+    { 'tag-shortest-path': ['outcome-model-and-compute-shortest-path'] },
   ),
   'abc299-ex': decision(
     'outcome-solve-stochastic-recurrence',

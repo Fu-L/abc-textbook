@@ -32,6 +32,7 @@
   "docPath": "src/content/docs/learn/graph/max-flow-min-cut.md",
   "problemIds": [
     "abc225-g",
+    "abc227-h",
     "abc239-g",
     "abc241-g",
     "abc259-g",
@@ -54,10 +55,10 @@
     "abc332-g",
     "abc347-g",
     "abc397-g",
-    "abc437-g"
+    "abc437-g",
+    "abc227-h"
   ],
   "relatedProblemIds": [
-    "abc227-h",
     "abc285-g",
     "abc354-g",
     "abc413-g"

@@ -211,8 +211,6 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
   c('abc294-f', '/prerequisiteCandidates/0', 'sorting', 'binary-search'),
   c('abc295-f', '/typicalTechniques/0', 'one-dimensional-prefix-sum'),
   c('abc298-f', '/prerequisiteCandidates/0', 'map-set-handling', 'sorting'),
-  c('abc299-e', '/typicalTechniques/1', 'tree-unweighted-grid-dfs-bfs'),
-  c('abc299-e', '/prerequisiteCandidates/0', 'tree-unweighted-grid-dfs-bfs'),
   c('abc300-f', '/prerequisiteCandidates/0', 'one-dimensional-prefix-sum', 'binary-search'),
   c('abc302-e', '/typicalTechniques/0', 'map-set-handling'),
   c('abc303-e', '/prerequisiteCandidates/0', 'tree-unweighted-grid-dfs-bfs', 'modular-arithmetic'),

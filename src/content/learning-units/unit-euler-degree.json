@@ -29,12 +29,12 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/euler-degree.md",
   "problemIds": [
-    "abc227-h",
     "abc286-g",
     "abc345-f"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
+    "abc227-h",
     "abc336-g"
   ],
   "examples": [],

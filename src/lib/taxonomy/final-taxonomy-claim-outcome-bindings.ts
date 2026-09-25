@@ -86,6 +86,16 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/0': [sameTag('outcome-construct-euler-trail-or-circuit')],
     '/prerequisiteCandidates/1': [sameTag('outcome-model-max-flow-min-cut')],
   },
+  'abc371-g': {
+    '/typicalTechniques/0': [supporting('outcome-decompose-functional-graph')],
+    '/typicalTechniques/1': [
+      primary('outcome-prove-greedy-order', 'outcome-solve-modular-constraints'),
+    ],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-prove-greedy-order', 'outcome-solve-modular-constraints'),
+      supporting('outcome-decompose-functional-graph'),
+    ],
+  },
   'abc275-ex': {
     '/typicalTechniques/0': [primary('outcome-build-cartesian-tree-decomposition')],
     '/typicalTechniques/1': [primary('outcome-maintain-piecewise-linear-convex-function')],

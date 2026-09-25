@@ -90,8 +90,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc227-e': 'tag-dp-state-equivalence',
   'abc227-f': 'tag-bounded-enumeration',
   'abc227-g': 'tag-prime-divisor-decomposition',
-  // The degree-multiplicity model and Euler tour are fixed before flow fills residual degrees.
-  'abc227-h': 'tag-euler-degree-parity',
+  // Maximum flow decides residual-degree feasibility; Euler construction recovers the walk.
+  'abc227-h': 'tag-max-flow-min-cut',
 
   'abc228-e': 'tag-modular-crt',
   'abc228-f': 'tag-monotone-stack-queue',

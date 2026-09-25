@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85",
-    "acceptedAt": "2026-09-25T14:51:39.834Z"
+    "digest": "bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f",
+    "acceptedAt": "2026-09-25T16:10:16.727Z"
   },
   "tagPrerequisites": [
     {

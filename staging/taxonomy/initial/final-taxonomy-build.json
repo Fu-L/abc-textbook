@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-25T14:51:39.834Z",
+  "generatedAt": "2026-09-25T16:10:16.727Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "16922e86a80c8c8fe9a3cea5ad75e7b3e8d14153c5cb7b06a15e9768d3e86649",
+    "rulesDigest": "1aa1b82d2564ca44b53312b920dfdfb6264322a5e5f5745c2dc1b07016a18d0e",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -31098,6 +31098,7 @@
         "scopeIds": [
           "abc214-g",
           "abc225-h",
+          "abc231-g",
           "abc235-ex",
           "abc241-ex",
           "abc247-ex",
@@ -32748,7 +32749,6 @@
           "abc360-e",
           "abc360-f",
           "abc360-g",
-          "abc361-e",
           "abc361-g",
           "abc362-f",
           "abc363-f",
@@ -34792,6 +34792,7 @@
           "abc257-f",
           "abc277-e",
           "abc297-e",
+          "abc299-e",
           "abc301-e",
           "abc305-e",
           "abc307-f",
@@ -34931,6 +34932,7 @@
           "abc295-g",
           "abc296-e",
           "abc297-e",
+          "abc299-e",
           "abc301-e",
           "abc301-ex",
           "abc302-ex",
@@ -38597,7 +38599,6 @@
           "abc352-g",
           "abc353-e",
           "abc359-g",
-          "abc361-e",
           "abc362-f",
           "abc365-e",
           "abc371-e",
@@ -39667,8 +39668,8 @@
         "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760",
         "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260",
         "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb",
-        "source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47",
-        "source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"
+        "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+        "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
       ],
       "evidenceRefs": [
         {
@@ -39694,14 +39695,14 @@
           ]
         },
         {
-          "problemId": "abc423-g",
+          "problemId": "abc371-g",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc423-editorial-13874-875ebf449f21f3c74deeab5317db8177a527b8f48f050154fcad87b18a370a47",
-            "source-abc423-g-problem-1bd1bfb0cb52eb6574e68d6c4a6f8bf155dfeb8723a67ef574f19396aa64544a"
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
           ]
         }
       ],
@@ -40280,6 +40281,7 @@
           "abc226-f",
           "abc230-g",
           "abc230-h",
+          "abc231-g",
           "abc234-f",
           "abc235-ex",
           "abc235-g",
@@ -45331,6 +45333,7 @@
           "abc312-e",
           "abc313-f",
           "abc328-e",
+          "abc343-e",
           "abc347-f",
           "abc386-e",
           "abc442-g"
@@ -45342,6 +45345,7 @@
           "abc272-e",
           "abc312-e",
           "abc328-e",
+          "abc343-e",
           "abc386-e",
           "abc227-f",
           "abc260-f",
@@ -45369,7 +45373,6 @@
           "abc302-g",
           "abc323-f",
           "abc331-e",
-          "abc343-e",
           "abc353-f",
           "abc369-e",
           "abc387-e",
@@ -46284,6 +46287,7 @@
           "abc215-h",
           "abc217-f",
           "abc220-h",
+          "abc231-g",
           "abc235-ex",
           "abc238-ex",
           "abc242-ex",
@@ -47064,7 +47068,6 @@
           "abc324-f",
           "abc338-e",
           "abc341-g",
-          "abc343-e",
           "abc348-g",
           "abc351-e",
           "abc353-f",
@@ -47107,6 +47110,7 @@
           "abc315-f",
           "abc323-f",
           "abc330-f",
+          "abc343-e",
           "abc405-f",
           "abc410-g",
           "abc422-e",
@@ -47586,7 +47590,6 @@
           "abc364-f",
           "abc367-e",
           "abc369-e",
-          "abc371-g",
           "abc372-e",
           "abc373-g",
           "abc374-g",
@@ -47645,6 +47648,7 @@
           "abc264-g",
           "abc271-e",
           "abc297-e",
+          "abc299-e",
           "abc301-e",
           "abc302-ex",
           "abc305-e",
@@ -47666,6 +47670,7 @@
           "abc363-g",
           "abc364-g",
           "abc370-f",
+          "abc371-g",
           "abc375-f",
           "abc376-g",
           "abc393-g",
@@ -48169,6 +48174,7 @@
           "abc337-e",
           "abc337-f",
           "abc339-f",
+          "abc343-e",
           "abc344-g",
           "abc346-e",
           "abc346-g",
@@ -48187,6 +48193,7 @@
           "abc368-g",
           "abc370-f",
           "abc371-e",
+          "abc371-g",
           "abc373-e",
           "abc374-e",
           "abc375-f",
@@ -48341,7 +48348,6 @@
           "abc331-g",
           "abc332-g",
           "abc337-g",
-          "abc343-e",
           "abc345-f",
           "abc345-g",
           "abc346-f",
@@ -48360,14 +48366,12 @@
           "abc359-g",
           "abc360-e",
           "abc360-g",
-          "abc361-e",
           "abc361-g",
           "abc366-e",
           "abc366-g",
           "abc369-e",
           "abc369-f",
           "abc369-g",
-          "abc371-g",
           "abc373-f",
           "abc374-f",
           "abc376-g",
@@ -50773,7 +50777,6 @@
           "abc352-g",
           "abc353-e",
           "abc359-g",
-          "abc361-e",
           "abc386-g",
           "abc390-g",
           "abc401-f",
@@ -61184,12 +61187,12 @@
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
-          "abc227-h",
           "abc286-g",
           "abc345-f"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
+          "abc227-h",
           "abc336-g"
         ],
         "learningRationale": "グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。"
@@ -61459,14 +61462,13 @@
           "outcome-construct-euler-trail-or-circuit"
         ],
         "problemIds": [
-          "abc227-h",
           "abc286-g"
         ],
         "directProblemIds": [
-          "abc286-g",
-          "abc227-h"
+          "abc286-g"
         ],
         "relatedProblemIds": [
+          "abc227-h",
           "abc336-g"
         ],
         "learningRationale": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
@@ -63087,6 +63089,7 @@
           "abc218-h",
           "abc224-h",
           "abc225-g",
+          "abc227-h",
           "abc231-h",
           "abc239-g",
           "abc241-g",
@@ -63115,7 +63118,6 @@
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
-          "abc227-h",
           "abc237-ex",
           "abc313-ex",
           "abc318-f",
@@ -64660,7 +64662,6 @@
           "abc310-g",
           "abc357-e",
           "abc367-e",
-          "abc371-g",
           "abc377-e",
           "abc387-f",
           "abc399-e",
@@ -64672,6 +64673,7 @@
           "abc247-ex",
           "abc258-e",
           "abc370-f",
+          "abc371-g",
           "abc417-g",
           "abc444-g"
         ],
@@ -64914,7 +64916,6 @@
           "abc284-g",
           "abc296-e",
           "abc357-e",
-          "abc371-g",
           "abc377-e",
           "abc387-f",
           "abc399-e",
@@ -64929,12 +64930,12 @@
           "abc399-e",
           "abc436-e",
           "abc387-f",
-          "abc284-g",
-          "abc371-g"
+          "abc284-g"
         ],
         "relatedProblemIds": [
           "abc247-ex",
           "abc258-e",
+          "abc371-g",
           "abc444-g"
         ],
         "learningRationale": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、関数グラフのcycle・tree分解の発動条件・正当化・境界を重複なく学ぶ。"
@@ -66031,8 +66032,8 @@
           "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
           "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
           "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
-          "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-          "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+          "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+          "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
         ],
         "tagIds": [
           "tag-generating-functions"
@@ -66082,6 +66083,7 @@
         ],
         "relatedProblemIds": [
           "abc214-g",
+          "abc231-g",
           "abc235-ex",
           "abc269-ex",
           "abc272-ex",
@@ -66107,8 +66109,8 @@
         "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
         "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
         "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
-        "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-        "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+        "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+        "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
       ],
       "evidenceRefs": [
         {
@@ -66200,102 +66202,25 @@
           ]
         },
         {
-          "problemId": "abc235-ex",
-          "claimPath": "/outcomeCandidates/0",
+          "problemId": "abc231-g",
+          "claimPath": "/prerequisiteCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+            "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+            "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
           ]
         },
         {
-          "problemId": "abc235-ex",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/reasoningPath/candidateApproaches/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/reasoningPath/keyInsights/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
+          "problemId": "abc231-g",
           "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+            "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+            "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
           ]
         }
       ],
@@ -66344,7 +66269,6 @@
           "abc296-g",
           "abc301-g",
           "abc338-e",
-          "abc343-e",
           "abc351-e",
           "abc353-f",
           "abc366-e",
@@ -66357,7 +66281,6 @@
         "directProblemIds": [
           "abc223-e",
           "abc248-e",
-          "abc343-e",
           "abc351-e",
           "abc366-e",
           "abc426-e",
@@ -66387,6 +66310,7 @@
           "abc314-ex",
           "abc315-f",
           "abc323-f",
+          "abc343-e",
           "abc405-f",
           "abc410-g",
           "abc422-e",
@@ -67691,6 +67615,7 @@
           "abc299-g",
           "abc312-f",
           "abc366-f",
+          "abc371-g",
           "abc376-e",
           "abc385-e",
           "abc388-e",
@@ -67727,6 +67652,7 @@
           "abc226-g",
           "abc290-g",
           "abc299-g",
+          "abc371-g",
           "abc254-ex",
           "abc290-ex"
         ],
@@ -67748,7 +67674,6 @@
           "abc322-g",
           "abc333-e",
           "abc359-f",
-          "abc371-g",
           "abc373-f",
           "abc374-e",
           "abc376-g",
@@ -72884,6 +72809,7 @@
         ],
         "problemIds": [
           "abc225-g",
+          "abc227-h",
           "abc239-g",
           "abc241-g",
           "abc259-g",
@@ -72906,10 +72832,10 @@
           "abc332-g",
           "abc347-g",
           "abc397-g",
-          "abc437-g"
+          "abc437-g",
+          "abc227-h"
         ],
         "relatedProblemIds": [
-          "abc227-h",
           "abc285-g",
           "abc354-g",
           "abc413-g"
@@ -74806,7 +74732,62 @@
         },
         {
           "problemId": "abc371-g",
-          "claimPath": "/prerequisiteCandidates/0",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+          ]
+        },
+        {
+          "problemId": "abc371-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+          ]
+        },
+        {
+          "problemId": "abc371-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+          ]
+        },
+        {
+          "problemId": "abc371-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+          ]
+        },
+        {
+          "problemId": "abc371-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+          ]
+        },
+        {
+          "problemId": "abc371-g",
+          "claimPath": "/reasoningPath/observations/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -86142,6 +86123,7 @@
           "abc264-g",
           "abc271-e",
           "abc297-e",
+          "abc299-e",
           "abc301-e",
           "abc305-e",
           "abc338-f",
@@ -93777,6 +93759,7 @@
           "abc264-g",
           "abc271-e",
           "abc297-e",
+          "abc299-e",
           "abc301-e",
           "abc305-e",
           "abc308-ex",
@@ -110424,7 +110407,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。」、解法への接続「12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。」、学習成果「訪問回数付きwalk構成を辺多重度の次数条件へ変換し、spanning tree列挙・最大流・Euler閉路構築を接続して解ける。」を照合し、tag-euler-trail-circuit / outcome-construct-euler-trail-or-circuit をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「連結性を保証するspanning treeを列挙し、その辺へ1の下限制約を置いた次数充足問題を二部グラフの最大流で解く。」、解法への接続「12辺の部分集合から9頂点を結ぶtreeを選び、各tree辺を1回使う分だけ端点の要求次数2A_vを減らす。残余要求を最大流で全て満たせたら辺多重度を復元し、(1,1)からHierholzer法でEuler閉路を構築して各辺をL/R/U/Dへ変換する。」、学習成果「訪問回数付きwalk構成を辺多重度の次数条件へ変換し、spanning tree列挙・最大流・Euler閉路構築を接続して解ける。」を照合し、tag-max-flow-min-cut / outcome-model-max-flow-min-cut をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -110435,9 +110418,9 @@
       "supportingTagIds": [
         "tag-bounded-enumeration"
       ],
-      "primaryOutcomeId": "outcome-construct-euler-trail-or-circuit",
+      "primaryOutcomeId": "outcome-model-max-flow-min-cut",
       "additionalPrimaryOutcomeIds": [
-        "outcome-model-max-flow-min-cut"
+        "outcome-construct-euler-trail-or-circuit"
       ],
       "supportingOutcomeIds": [
         "outcome-enumerate-bounded-candidates-or-cases"
@@ -113968,17 +113951,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「積を A と X の選択部分集合で展開し、A の基本対称式と、相異なる箱の選択回数積の共通期待値を次数別に掛け合わせる。」、解法への接続「ランダムな選択回数を含む積を多重線形展開し、定数 A の基本対称式と multinomial 分布の相異なる座標に対する階乗モーメントを次数ごとに合成する。」、学習成果「相関する multinomial 選択回数の積期待値を、対称式と階乗モーメントへ分解して計算できる。」を照合し、tag-contribution-reordering / outcome-reorder-counting-contributions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「積を A と X の選択部分集合で展開し、A の基本対称式と、相異なる箱の選択回数積の共通期待値を次数別に掛け合わせる。」、解法への接続「ランダムな選択回数を含む積を多重線形展開し、定数 A の基本対称式と multinomial 分布の相異なる座標に対する階乗モーメントを次数ごとに合成する。」、学習成果「相関する multinomial 選択回数の積期待値を、対称式と階乗モーメントへ分解して計算できる。」を照合し、tag-contribution-reordering / outcome-reorder-counting-contributions をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-contribution-reordering"
       ],
-      "supportingTagIds": [],
+      "supportingTagIds": [
+        "tag-generating-functions"
+      ],
       "primaryOutcomeId": "outcome-reorder-counting-contributions",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [],
+      "supportingOutcomeIds": [
+        "outcome-encode-counting-by-generating-function"
+      ],
       "adHocElements": [
         "X_i 自体は互いに独立でないが、各操作で選ばれる箱の対称性と時刻の独立性により、相異なる箱集合の積期待値は集合サイズだけに依存する。（再利用可能な見方: 交換可能な確率変数では独立性を求める前に、必要なモーメントが添字集合の大きさだけで決まる対称性を探す。）"
       ],
@@ -114013,11 +114000,11 @@
               "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-generating-functions"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -114036,6 +114023,24 @@
             "tag-contribution-reordering"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc231-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+              "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-generating-functions"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -178407,17 +178412,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全点間距離後に最大黒集合を構成して検証」、解法への接続「全始点BFSでdistを前計算し、全条件のdist(p_i,v)<d_iを満たすvを白、残りを黒にする。黒が存在し各iで距離d_iの黒があればYesを出す。」、学習成果「距離条件を満たす白黒配置を構成または不存在判定できる。」を照合し、tag-constructive-witness / outcome-recover-valid-witness をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全点間距離後に最大黒集合を構成して検証」、解法への接続「全始点BFSでdistを前計算し、全条件のdist(p_i,v)<d_iを満たすvを白、残りを黒にする。黒が存在し各iで距離d_iの黒があればYesを出す。」、学習成果「距離条件を満たす白黒配置を構成または不存在判定できる。」を照合し、tag-constructive-witness / outcome-recover-valid-witness をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-model-and-compute-shortest-path; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-model-and-compute-shortest-path を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-constructive-witness"
       ],
-      "supportingTagIds": [],
+      "supportingTagIds": [
+        "tag-shortest-path"
+      ],
       "primaryOutcomeId": "outcome-recover-valid-witness",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [],
+      "supportingOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
       "adHocElements": [
         "黒候補を減らす利点がない単調な存在条件なので、最大候補集合一つだけ試せばよい。（再利用可能な見方: 禁止集合を除いた全採用が存在制約のcanonical witnessになる。）"
       ],
@@ -178452,9 +178461,11 @@
               "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"
             ]
           },
-          "kind": "baseline",
-          "tagIds": [],
-          "rationale": "対象学習者が開始時点で備える共通前提に含まれることを確認した。 共通前提カテゴリ: tree-unweighted-grid-dfs-bfs。"
+          "kind": "supporting",
+          "tagIds": [
+            "tag-shortest-path"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -178468,9 +178479,11 @@
               "source-abc299-editorial-6249-59f19c37efef7a16afe92952d4945c5c877864bfc8ee65f98ccb11763c3056a3"
             ]
           },
-          "kind": "baseline",
-          "tagIds": [],
-          "rationale": "対象学習者が開始時点で備える共通前提に含まれることを確認した。 共通前提カテゴリ: tree-unweighted-grid-dfs-bfs。"
+          "kind": "supporting",
+          "tagIds": [
+            "tag-shortest-path"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -215111,22 +215124,22 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「C1を固定しC2,C3の6座標を[-7,7]で全探索する」、解法への接続「C1=(0,0,0)としa2,b2,c2,a3,b3,c3を-7…7でloopする。各axisのoverlap長max(0,min(right)-max(left))を掛けて三pair交差とtriple交差を求め、v3,v2,v1を式で計算する。一致した座標をYesと出し、なければNo。」、学習成果「指定V1,V2,V3を実現する三cube配置の存在を判定し、存在すれば座標を一組構成できる。」を照合し、tag-geometry-orientation-transform / outcome-reduce-geometry-to-algebraic-predicates をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「C1を固定しC2,C3の6座標を[-7,7]で全探索する」、解法への接続「C1=(0,0,0)としa2,b2,c2,a3,b3,c3を-7…7でloopする。各axisのoverlap長max(0,min(right)-max(left))を掛けて三pair交差とtriple交差を求め、v3,v2,v1を式で計算する。一致した座標をYesと出し、なければNo。」、学習成果「指定V1,V2,V3を実現する三cube配置の存在を判定し、存在すれば座標を一組構成できる。」を照合し、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-geometry-orientation-transform; 補助Outcome=outcome-reduce-geometry-to-algebraic-predicates; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-geometry-orientation-transform / outcome-reduce-geometry-to-algebraic-predicates を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-geometry-orientation-transform"
+        "tag-bounded-enumeration"
       ],
       "supportingTagIds": [
-        "tag-bounded-enumeration",
+        "tag-geometry-orientation-transform",
         "tag-inclusion-exclusion"
       ],
-      "primaryOutcomeId": "outcome-reduce-geometry-to-algebraic-predicates",
+      "primaryOutcomeId": "outcome-enumerate-bounded-candidates-or-cases",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-correct-overlap-by-inversion",
-        "outcome-enumerate-bounded-candidates-or-cases"
+        "outcome-reduce-geometry-to-algebraic-predicates"
       ],
       "adHocElements": [
         "side lengthが7の軸平行cube同士のintersectionも軸平行直方体なので、3D体積は各axisのinterval overlap長の積へ完全分離する。（再利用可能な見方: 直積形状の交差量は各次元の一次元overlapを独立計算して掛ける。）"
@@ -215146,7 +215159,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-geometry-orientation-transform"
+            "tag-bounded-enumeration"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -215164,7 +215177,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-bounded-enumeration"
+            "tag-geometry-orientation-transform"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -215198,11 +215211,11 @@
               "source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
             "tag-geometry-orientation-transform"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -227703,21 +227716,17 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全辺重みの2倍から重み付き木の直径を引く。」、解法への接続「辺重み総和Sを求める。任意頂点から最遠点uを探索し、uからの最遠距離Dをもう一度の木走査で求める。答えとして2S−Dを出力する。」、学習成果「全頂点訪問walkを全辺往復から直径分だけ節約する構造として捉え、最小距離を求められる。」を照合し、tag-tree-metric-diameter / outcome-use-tree-diameter-extrema をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全辺重みの2倍から重み付き木の直径を引く。」、解法への接続「辺重み総和Sを求める。任意頂点から最遠点uを探索し、uからの最遠距離Dをもう一度の木走査で求める。答えとして2S−Dを出力する。」、学習成果「全頂点訪問walkを全辺往復から直径分だけ節約する構造として捉え、最小距離を求められる。」を照合し、tag-tree-metric-diameter / outcome-use-tree-diameter-extrema をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-tree-metric-diameter"
       ],
-      "supportingTagIds": [
-        "tag-contribution-reordering"
-      ],
+      "supportingTagIds": [],
       "primaryOutcomeId": "outcome-use-tree-diameter-extrema",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-reorder-counting-contributions"
-      ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "Hamilton pathという名前でも頂点の再訪が許されるため、問題は順列ではなくDFS巡回から一本の戻り道を省く形になる。（再利用可能な見方: 訪問問題では再訪可否を確認し、木なら各辺を何回横断すべきかへ分解する。）"
       ],
@@ -227734,11 +227743,11 @@
               "source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
-            "tag-contribution-reordering"
+            "tag-tree-metric-diameter"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -235713,22 +235722,23 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「位置 i の P-cycle 長 L_i を使い、既確定の x≡r (mod m) の範囲で A_{P_i^x} の最小値を選び、CRT 型に法を lcm(m,L_i) へ更新する。」、解法への接続「P を cycle 分解し、先頭から未確定位置を処理する。現在の操作回数合同類が各 cycle 上で到達する位置を走査して最小の A を選び、同じ制約で確定する cycle 要素をまとめて答えへ反映する。」、学習成果「共通の反復回数で動く複数 cycle に対し、辞書順条件を合同類として段階的に固定できる。」を照合し、tag-functional-graph-decomposition / outcome-decompose-functional-graph をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。; 補助Tag=tag-modular-congruence-crt; 補助Outcome=outcome-solve-modular-constraints; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-congruence-crt / outcome-solve-modular-constraints を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「位置 i の P-cycle 長 L_i を使い、既確定の x≡r (mod m) の範囲で A_{P_i^x} の最小値を選び、CRT 型に法を lcm(m,L_i) へ更新する。」、解法への接続「P を cycle 分解し、先頭から未確定位置を処理する。現在の操作回数合同類が各 cycle 上で到達する位置を走査して最小の A を選び、同じ制約で確定する cycle 要素をまとめて答えへ反映する。」、学習成果「共通の反復回数で動く複数 cycle に対し、辞書順条件を合同類として段階的に固定できる。」を照合し、tag-greedy-exchange-order / outcome-prove-greedy-order をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-functional-graph-decomposition; 補助Outcome=outcome-decompose-functional-graph; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-functional-graph-decomposition / outcome-decompose-functional-graph を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-functional-graph-decomposition"
-      ],
-      "supportingTagIds": [
         "tag-greedy-exchange-order",
         "tag-modular-congruence-crt"
       ],
-      "primaryOutcomeId": "outcome-decompose-functional-graph",
-      "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-prove-greedy-order",
+      "supportingTagIds": [
+        "tag-functional-graph-decomposition"
+      ],
+      "primaryOutcomeId": "outcome-prove-greedy-order",
+      "additionalPrimaryOutcomeIds": [
         "outcome-solve-modular-constraints"
+      ],
+      "supportingOutcomeIds": [
+        "outcome-decompose-functional-graph"
       ],
       "adHocElements": [
         "辞書順では先頭の最小値を決めた瞬間、操作回数の自由度が合同式として残る。（再利用可能な見方: 巨大な lcm を数値で持たず、各 cycle 上で残る到達集合を表現できないか考える。）"
@@ -235746,11 +235756,11 @@
               "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-functional-graph-decomposition"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -235764,12 +235774,12 @@
               "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-greedy-exchange-order",
             "tag-modular-congruence-crt"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -235785,7 +235795,8 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-functional-graph-decomposition"
+            "tag-greedy-exchange-order",
+            "tag-modular-congruence-crt"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -235803,8 +235814,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-greedy-exchange-order",
-            "tag-modular-congruence-crt"
+            "tag-functional-graph-decomposition"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -381410,8 +381420,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "e8f45de39c9d2292f486f648b546372f228a6067af49b5ed63fcbf1c7519926f",
-      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+      "digest": "f2b261c623e866e383490ca303fe3a93e6728e99427596d8adedef80c658de72",
+      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
       "authorIds": [
         "person-maintainer"
       ],
@@ -381422,15 +381432,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
-  "taxonomyDigest": "305051785ca1e536577bbd1b6b15eda4503b72cef6abcdbbf8e20ed8577bf1ab",
+  "taxonomySubjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
+  "taxonomyDigest": "ef3146950d89d809cd7162c70a295ccf45b2c48617b4b7122394eb8d0d6d586c",
   "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
   "learningUnitDagDigest": "659d56f968c7e4cbcd16a9bbc3a99b9aa987a1cf35562c5b6c500d523d12107c",
-  "placementDigest": "71ff1988f8b33394966f17ae63781c87c2d1b687682073f0d94fe7e6ca1c2256",
+  "placementDigest": "a2adb0da95af3f4e6b06581558337ad624b8f6a43998754771f808f9052563e9",
   "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "status": "accepted",
-  "acceptedAt": "2026-09-25T14:51:39.834Z",
+  "acceptedAt": "2026-09-25T16:10:16.727Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85"
+  "buildDigest": "bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f"
 }

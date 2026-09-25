@@ -59,4 +59,4 @@ DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝
 - [ABC466 G 公式解説](https://atcoder.jp/contests/abc466/editorial/22603)
 - [ABC466 G 公式問題文](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-potential-dsu`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-potential-dsu`

@@ -1599,15 +1599,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     },
   ),
   'abc343-e': decision(
-    'outcome-reduce-geometry-to-algebraic-predicates',
+    'outcome-enumerate-bounded-candidates-or-cases',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-geometry-orientation-transform'],
-      ['typicalTechniques', 0, 'supporting', 'tag-bounded-enumeration'],
+      ['typicalTechniques', 0, 'primary', 'tag-bounded-enumeration'],
+      ['typicalTechniques', 0, 'supporting', 'tag-geometry-orientation-transform'],
       ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-geometry-orientation-transform'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-geometry-orientation-transform'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-inclusion-exclusion'],
     ],
     {
+      'tag-geometry-orientation-transform': ['outcome-reduce-geometry-to-algebraic-predicates'],
       'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
       'tag-inclusion-exclusion': ['outcome-correct-overlap-by-inversion'],
     },
@@ -2149,12 +2150,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
   'abc361-e': decision(
     'outcome-use-tree-diameter-extrema',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-contribution-reordering'],
+      ['typicalTechniques', 0, 'same_tag', 'tag-tree-metric-diameter'],
       ['typicalTechniques', 1, 'primary', 'tag-tree-metric-diameter'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-tree-metric-diameter'],
       ['prerequisiteCandidates', 1, 'baseline'],
     ],
-    { 'tag-contribution-reordering': ['outcome-reorder-counting-contributions'] },
+    {},
   ),
   'abc361-f': decision(
     'outcome-correct-overlap-by-inversion',
@@ -2470,17 +2471,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-lazy-segment-action'],
   ]),
   'abc371-g': decision(
-    'outcome-decompose-functional-graph',
+    'outcome-prove-greedy-order',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-functional-graph-doubling'],
-      ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order', 'tag-modular-crt'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-functional-graph-doubling'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-greedy-exchange-order', 'tag-modular-crt'],
+      ['typicalTechniques', 0, 'supporting', 'tag-functional-graph-doubling'],
+      ['typicalTechniques', 1, 'primary', 'tag-greedy-exchange-order', 'tag-modular-crt'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-greedy-exchange-order', 'tag-modular-crt'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-functional-graph-doubling'],
     ],
     {
-      'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
-      'tag-modular-crt': ['outcome-solve-modular-constraints'],
+      'tag-functional-graph-doubling': ['outcome-decompose-functional-graph'],
     },
+    ['outcome-solve-modular-constraints'],
   ),
   'abc372-e': decision('outcome-augment-components-with-metadata', [
     ['typicalTechniques', 0, 'primary', 'tag-dsu-connectivity'],

@@ -31,14 +31,13 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/euler-trail-circuit.md",
   "problemIds": [
-    "abc227-h",
     "abc286-g"
   ],
   "directProblemIds": [
-    "abc286-g",
-    "abc227-h"
+    "abc286-g"
   ],
   "relatedProblemIds": [
+    "abc227-h",
     "abc336-g"
   ],
   "examples": [],

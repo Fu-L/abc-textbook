@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+  "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
   "inventoryDigest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
   "reviewPolicy": {
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
+      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T14:51:19.521Z",
+      "completedAt": "2026-09-25T16:09:56.234Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
+      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T14:51:27.078Z",
+      "completedAt": "2026-09-25T16:10:03.704Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
+      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T14:51:27.612Z",
+      "completedAt": "2026-09-25T16:10:04.149Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
+      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T14:51:27.824Z",
+      "completedAt": "2026-09-25T16:10:04.368Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "fe21a8e0ffa435f4ab44d6b98e041d2647f4f3e3c0a739e504ff4de44b4771c2",
+      "subjectDigest": "92db1af68177702eeb485a7af35917eff67934f88e0ed3595ddd3944f0e96af9",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "6604ba4551ae2fd4d5fb81d659af20cac33b9f89fb4ee85606febcb61ff547e1",
+      "resultDigest": "fb2891fadd314d7e5c2fe1a71ca0a0e913a6d34043a2340da33d283caa3f27df",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T14:51:34.528Z",
+      "completedAt": "2026-09-25T16:10:11.228Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "68075e8c7d998fce83c9d3f84a7012e5464d6f2d2b8fda4dd4dcad704b6fd0e4",
+  "reviewerExecutedCheckSetDigest": "9d356634be5dfcd52cd2961005b356eca194a46a88a364cfcdad88742e979a31",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -329,10 +329,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "全868問のInventoryを基準に解法と分類を意味面で再確認し、今回修正した11問では不可欠な処理をprimary/coprimaryへ置き、supportingは実際に解法を成立させる補助に限定した。残るplacementとpreview integration、claim coverageも照合した。",
+      "reviewBasis": "Fu-Lの明示指示に基づくsemantic audit。Inventoryを真として全868問を再照合し、解法工程から6件のprimary・coprimary・supportingを修正した。修正後の規定レビュー検査に合格。Codexによる実施であり、第三者による独立レビューを表すものではない。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-25T14:51:39.834Z"
+      "reviewedAt": "2026-09-25T16:10:16.727Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -580,12 +580,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "全868問のInventoryを基準に解法と分類を意味面で再確認し、今回修正した11問では不可欠な処理をprimary/coprimaryへ置き、supportingは実際に解法を成立させる補助に限定した。残るplacementとpreview integration、claim coverageも照合した。",
+    "rationale": "Fu-Lの明示指示に基づくsemantic audit。Inventoryを真として全868問を再照合し、解法工程から6件のprimary・coprimary・supportingを修正した。修正後の規定レビュー検査に合格。Codexによる実施であり、第三者による独立レビューを表すものではない。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-25T14:51:39.834Z"
+    "confirmedAt": "2026-09-25T16:10:16.727Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-25T14:51:39.834Z",
-  "evidenceDigest": "e8f45de39c9d2292f486f648b546372f228a6067af49b5ed63fcbf1c7519926f"
+  "generatedAt": "2026-09-25T16:10:16.727Z",
+  "evidenceDigest": "f2b261c623e866e383490ca303fe3a93e6728e99427596d8adedef80c658de72"
 }

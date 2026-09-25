@@ -108,4 +108,4 @@ ABC372 F→ABC457 F→ABC435 Gの順で、添字shift、全体倍率、affine作
 - [ABC221 H 公式解説](https://atcoder.jp/contests/abc221/editorial/2719)
 - [ABC221 H 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `c6f65fe967897b3b327c1c837df5c30f493b2f2f75185478863272b445d1ff85` / LearningUnit `unit-dp-transition-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `bc3fd38aa082c37e76f0829dcc0cff7e6d53e5b699f0b15c0b0432ab980d791f` / LearningUnit `unit-dp-transition-optimization`
