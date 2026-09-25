@@ -593,7 +593,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ]),
   section(
     'unit-dp-sequence-interval',
-    '列・区間・分割のDP',
+    '列・編集距離・区間合成DP',
     'unit-chapter-dynamic-programming',
     [],
   ),
@@ -655,7 +655,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     [],
   ),
   section('unit-functional-graph', '一意な後続・サイクル・ダブリング', 'unit-chapter-graph', []),
-  section('unit-tree-metric', '木距離を基準点・直径・中心から捉える', 'unit-chapter-graph', []),
+  section('unit-tree-metric', '基準点からの木距離・剰余類・直径・中心', 'unit-chapter-graph', []),
   section('unit-tree-aggregation', '木DP・集約・rerooting', 'unit-chapter-graph', []),
   section(
     'unit-implicit-binary-tree',
@@ -696,7 +696,12 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     'unit-chapter-query',
     [],
   ),
-  section('unit-monoid-segment-tree', '結合的要約と列・区間の合成', 'unit-chapter-query', []),
+  section(
+    'unit-monoid-segment-tree',
+    'Segment Treeの要約・区間分解・合成',
+    'unit-chapter-query',
+    [],
+  ),
   section(
     'unit-weighted-prefix-fenwick',
     '反転数・重み付き接頭辞統計をFenwick Treeで保つ',
@@ -908,13 +913,13 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-divide-enumeration':
     '探索空間を独立な二集合または再帰部分へ分けるか、部分結果をbalancedな積木・remainder tree・CDQで合成し、重複なく扱える入力規模を広げる。',
   'unit-decomposition-amortization':
-    '各操作ではなく操作列全体の変化回数を数え、軽重分類や一度限りの移動で総計算量を抑える。',
+    '各操作ではなく操作列全体の変化回数を数え、軽重分類・部分問題サイズ半減・一度限りの移動や削除で総計算量を抑える。',
   'unit-change-impact-localization':
     '変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。',
   'unit-randomized-algorithms':
     '乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。',
   'unit-interactive-protocol':
-    '問い合わせ形式・回数上限・応答依存性・flushを明示し、通常のアルゴリズムをjudgeとの対話列として安全に実行する。',
+    '問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。',
   'unit-constructive-witness':
     '存在条件の証明に対応する親・選択・局所操作を記録し、実際の構成へ戻す。',
   'unit-dp-state-design':
@@ -926,7 +931,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-eventual-unbounded-knapsack':
     '通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。',
   'unit-dp-sequence-interval':
-    '状態設計を土台に、列の選択、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。',
+    '状態設計を土台に、列の選択、二列の編集距離整列、LISの支配関係、prefix分割、独立な区間の合成、訪問済み区間の拡張を別の依存構造として比較する。',
   'unit-dp-digit-string':
     '状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。',
   'unit-digit-dp':
@@ -976,7 +981,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-functional-graph':
     '状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。',
   'unit-tree-metric':
-    '木を探索して基準点からの距離を求められることを前提に、一意経路から得る距離labelと、直径端点・中心が距離構造を代表する性質を学ぶ。',
+    '木を探索して基準点から距離labelを作る方法を土台に、距離剰余類による構造分類と、直径端点・中心が距離構造を代表する性質を区別して学ぶ。',
   'unit-tree-aggregation':
     '探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。',
   'unit-implicit-binary-tree':
@@ -1002,7 +1007,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-prefix-aggregate':
     '一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。',
   'unit-monoid-segment-tree':
-    '結合則を持つ要約という共通像から、Segment Tree・Sparse Table・SWAG・有限関数合成が使う分解方法の違いを比較する。',
+    '区間をcanonical nodeへ置く操作と結合則を持つ要約を区別し、Segment Treeのrange object配置・point path取得、Sparse Table、SWAG、有限関数合成が使う分解方法を比較する。',
   'unit-weighted-prefix-fenwick':
     '静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。',
   'unit-range-actions':
@@ -1586,7 +1591,7 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-interactive-protocol',
     name: '対話protocolとquery設計',
     definition:
-      'judgeとの問い合わせ・応答列をprotocolどおり実行し、回数上限内で必要な情報を識別する。',
+      'judgeとの問い合わせ応答または交互手番をprotocolどおり実行し、query制約を守るか合法な応答手を返す。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-maintain-interactive-query-protocol'],
     unitIds: ['unit-interactive-protocol'],
@@ -1687,6 +1692,21 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['順序を保', '最長', '末尾'],
     goal: ['長さ', '個数', '最適'],
     priority: 66,
+  },
+  {
+    id: 'tag-edit-distance-dp',
+    name: '編集距離・sequence alignment DP',
+    definition:
+      '二つの列prefixを状態にし、一致・挿入・削除・置換の局所遷移から最小編集費用を求める。閾値がある場合は長さ差の下界で対角帯へ状態を絞る。',
+    parentId: 'tag-dp-state-transition',
+    outcomeIds: ['outcome-compute-edit-distance'],
+    unitIds: ['unit-dp-sequence'],
+    recall: ['edit distance', 'Levenshtein', 'sequence alignment', '編集距離', '文字列変換DP'],
+    object: ['二つの列', '二つのprefix', '挿入', '削除', '置換'],
+    trigger: ['編集回数', '文字を挿入・削除・置換', '二列を対応付ける'],
+    invariant: ['prefix pair', '対角線からの距離', 'edit cost'],
+    goal: ['最小編集回数', '変換cost', '閾値以内の判定'],
+    priority: 86,
   },
   {
     id: 'tag-interval-partition-dp',
@@ -2108,6 +2128,21 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['一意経路', '基準点からの距離label', '直径端点', '二端点', '中点'],
     goal: ['頂点分類', '距離条件', '最遠点', '最大距離', '中心', '直径'],
     priority: 82,
+  },
+  {
+    id: 'tag-tree-distance-residue',
+    name: '木距離の剰余類による構造分類',
+    definition:
+      '木の一つの基準点から各頂点への距離を求め、距離の剰余類と局所構造から頂点の役割や周期的な部品構造を分類する。',
+    parentId: 'tag-tree-model-structure',
+    outcomeIds: ['outcome-classify-tree-by-distance-residue'],
+    unitIds: ['unit-tree-metric'],
+    recall: ['tree distance residue', '距離mod.?[kK]', '木距離の剰余', '距離剰余類'],
+    object: ['木', '基準点', '距離', '剰余類'],
+    trigger: ['距離をmodで分類', '中心からの距離剰余', '層ごとの木構造'],
+    invariant: ['木の一意経路', '基準点からの距離label', '距離剰余'],
+    goal: ['頂点の役割', '中心分類', '周期構造の復元'],
+    priority: 78,
   },
   {
     id: 'tag-implicit-binary-tree-arithmetic',
@@ -2874,6 +2909,8 @@ const TAG_SEEDS: readonly TagSeed[] = [
     outcomeIds: [
       'outcome-partition-integer-parameter-ranges',
       'outcome-evaluate-compressed-integer-blocks',
+      'outcome-partition-at-critical-integer-boundaries',
+      'outcome-sum-piecewise-linear-integer-ranges',
     ],
     unitIds: ['unit-integer-boundary-blocks'],
     recall: [
@@ -3591,14 +3628,22 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
   {
     id: 'tag-amortized-monotone-progress',
     name: '単調進行による償却解析',
-    definition: '要素の一方向移動・一度だけの削除・potential減少から操作列全体の仕事量を抑える。',
+    definition:
+      '要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。',
     parentId: 'tag-model-reduction',
     outcomeIds: ['outcome-bound-monotone-total-work'],
     unitIds: ['unit-amortized-monotone-progress'],
     recall: ['amortized analysis', 'potential method', '償却解析', '調和級数'],
     object: ['操作列', '要素', '候補'],
-    trigger: ['一度だけ', '単調に減る', '移動回数'],
-    invariant: ['potential', '総削除回数'],
+    trigger: [
+      '一度だけ',
+      '単調に減る',
+      '移動回数',
+      'light edge',
+      'size halving',
+      '部分問題サイズ半減',
+    ],
+    invariant: ['potential', '総削除回数', '軽辺遷移ごとのサイズ半減'],
     goal: ['総計算量', '償却上界'],
     priority: 66,
   },
@@ -4158,7 +4203,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-segment-tree-canonical-decomposition',
     name: 'Segment Treeのcanonical区間分解',
     definition:
-      '区間をO(log N)個のcanonical nodeへ分解し、range object・生存時間・range edgeを少数のnodeへ配置する。',
+      '区間をO(log N)個のcanonical nodeへ分解してrange object・生存時間・range edgeを配置し、point queryでは対応するroot-to-leaf pathから該当objectを集める。',
     parentId: 'tag-query-sufficient-aggregate',
     outcomeIds: ['outcome-decompose-ranges-into-segment-tree-nodes'],
     unitIds: ['unit-segment-tree-canonical-decomposition'],
@@ -5640,7 +5685,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-meet-in-the-middle': ['abc271-f', 'abc300-g'],
   'tag-baby-step-giant-step': ['abc270-g'],
   'tag-recursive-divide-and-conquer': ['abc282-ex', 'abc304-g'],
-  'tag-amortized-monotone-progress': ['abc217-e', 'abc256-ex'],
+  'tag-amortized-monotone-progress': ['abc217-e', 'abc256-ex', 'abc267-e', 'abc329-e', 'abc417-g'],
   'tag-small-to-large': ['abc324-g', 'abc329-f'],
   'tag-threshold-heavy-light': ['abc219-g', 'abc335-f'],
   'tag-heavy-path-tree-dp': ['abc269-ex'],
@@ -5663,7 +5708,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-tree-euler-flattening': ['abc240-e', 'abc294-g', 'abc406-f'],
   'tag-heavy-light-decomposition': ['abc351-g'],
   'tag-virtual-tree': ['abc340-g'],
-  'tag-max-flow-min-cut': ['abc241-g', 'abc225-g', 'abc239-g'],
+  'tag-max-flow-min-cut': ['abc241-g', 'abc225-g', 'abc239-g', 'abc227-h'],
   'tag-flow-feasibility-lower-bounds': ['abc285-g'],
   'tag-bipartite-matching-hall': ['abc274-g', 'abc401-g'],
   'tag-min-cost-flow': ['abc214-h', 'abc407-g'],
@@ -5673,7 +5718,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-degree-parity-subgraph': ['abc345-f'],
   'tag-euler-circuit-counting': ['abc336-g'],
   'tag-cycle-space-basis': ['abc419-g'],
-  'tag-graph-core-peeling': ['abc226-e', 'abc266-f', 'abc267-e'],
+  'tag-graph-core-peeling': ['abc226-e', 'abc266-f'],
   'tag-near-tree-kernelization': ['abc419-g'],
   'tag-range-monoid-aggregation': ['abc223-f', 'abc343-f'],
   'tag-segment-tree-canonical-decomposition': ['abc342-g', 'abc414-g'],
@@ -5682,7 +5727,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-swag': ['abc456-f'],
   'tag-finite-function-composition': ['abc261-e'],
   'tag-priority-queue-best-first': ['abc297-e', 'abc391-f'],
-  'tag-ordered-set-multiset': ['abc281-e', 'abc306-e'],
+  'tag-ordered-set-multiset': ['abc281-e', 'abc306-e', 'abc342-g', 'abc376-e'],
   'tag-ordered-interval-partition': ['abc255-ex', 'abc380-e'],
   'tag-persistence': ['abc273-e', 'abc453-g'],
   'tag-rollback': ['abc302-ex', 'abc363-g'],
@@ -5723,11 +5768,11 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-convex-boundary-hull': ['abc257-ex', 'abc341-g'],
   'tag-half-plane-constraints': ['abc251-g'],
   'tag-basic-convex-optimization': ['abc224-g', 'abc314-ex'],
-  'tag-slope-trick': ['abc217-h', 'abc406-g'],
+  'tag-slope-trick': ['abc217-h', 'abc406-g', 'abc275-ex'],
   'tag-lagrangian-relaxation': ['abc305-ex', 'abc400-g'],
-  'tag-monge-optimization': ['abc348-g', 'abc383-g'],
+  'tag-monge-optimization': ['abc348-g', 'abc355-g'],
   'tag-isotonic-regression-pav': ['abc459-f'],
-  'tag-separable-convex-marginals': ['abc216-e', 'abc359-f', 'abc389-e'],
+  'tag-separable-convex-marginals': ['abc216-e', 'abc359-f', 'abc389-e', 'abc383-g'],
   'tag-dag-topological-processing': ['abc304-ex', 'abc315-e'],
   'tag-directed-core-peeling': ['abc245-f', 'abc456-e'],
   'tag-monotone-path-contraction': ['abc295-g'],
@@ -5891,11 +5936,13 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-divide-search-space-recursively':
     'pivot・上位bit・短い側で部分問題へ再帰分割するか、部分結果をbalancedな積木・remainder tree・CDQで重複なく合成できる。',
   'outcome-bound-total-work':
-    '軽重・倍化・単調な一度限りの移動や削除から、操作列全体の仕事量の上界を説明できる。',
+    '軽重・大小・倍化による分解と、それに伴う一方向移動・一度限りの更新から、操作列全体の仕事量の上界を説明できる。',
+  'outcome-bound-monotone-total-work':
+    '要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。',
   'outcome-design-and-bound-randomized-algorithm':
     '乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。',
   'outcome-maintain-interactive-query-protocol':
-    '問い合わせ・応答・終了宣言のprotocolを守り、応答依存の探索をquery上限内で実行できる。',
+    'judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。',
   'outcome-design-minimal-sufficient-state':
     '採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。',
   'outcome-design-grid-table-dp':
@@ -5904,6 +5951,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     'bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。',
   'outcome-design-resource-dp': '資源軸の上限と更新順を選び、選択の重複を避けられる。',
   'outcome-design-order-preserving-dp': '列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。',
+  'outcome-compute-edit-distance':
+    '二つの列prefixを状態にし、一致・挿入・削除・置換の編集費用を最小化できる。閾値Kの判定では長さ差の下界から|i-j|≤Kの対角帯だけを計算できる。',
   'outcome-design-interval-split-dp':
     '区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。',
   'outcome-design-carry-or-mixed-radix-dp':
@@ -5954,6 +6003,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '一意な遷移の2の冪回先を前計算し、巨大回数後の状態または区間到達を求められる。',
   'outcome-use-tree-diameter-extrema':
     '一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。',
+  'outcome-classify-tree-by-distance-residue':
+    '木の一つの基準点から全頂点への距離を求め、距離の剰余類と局所構造から各頂点の役割や周期的な部品構造を分類できる。',
   'outcome-count-implicit-binary-tree-layers':
     '同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。',
   'outcome-aggregate-rooted-tree':
@@ -5985,13 +6036,13 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':
-    '各軸を昇順に累積して多次元prefix和を作り、D次元直方体を2^D隅の包除で取得できる。一次元の区間差と一括加算の端点差分にも接続できる。',
+    'prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。',
   'outcome-maintain-weighted-prefix-statistics':
     '処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。',
   'outcome-design-associative-range-summary':
     '要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。',
   'outcome-decompose-ranges-into-segment-tree-nodes':
-    '区間をO(log N)個のcanonical nodeへ分解し、range objectの登録、時間生存区間への配置、またはrange-edge graphの少数辺表現を構築できる。',
+    '区間をO(log N)個のcanonical nodeへ分解してrange object・時間生存区間・range edgeを配置し、point queryではroot-to-leaf path上のobjectを集められる。',
   'outcome-design-range-update-action':
     '更新作用の合成順と要約への適用を定義し、遅延評価で保てる。',
   'outcome-share-or-revert-versions':
@@ -6050,6 +6101,10 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。',
   'outcome-partition-integer-parameter-ranges':
     'floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。',
+  'outcome-partition-at-critical-integer-boundaries':
+    '成立判定が変わり得る整数境界を全て列挙し、隣り合う境界の間で判定が一定であることを示して、代表点判定と区間長で整数解の個数を求められる。',
+  'outcome-sum-piecewise-linear-integer-ranges':
+    '整数区間上の一次関数包絡を交点の前後で分け、各affine blockの値を等差数列和で合計できる。',
   'outcome-evaluate-compressed-integer-blocks':
     '圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。',
   'outcome-count-through-cyclic-exponents':
@@ -6288,6 +6343,10 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-translate-sequences-by-rsk',
   'outcome-optimize-tree-order-by-cluster-contraction',
   'outcome-shift-polynomial-by-factorial-convolution',
+  'outcome-compute-edit-distance',
+  'outcome-classify-tree-by-distance-residue',
+  'outcome-partition-at-critical-integer-boundaries',
+  'outcome-sum-piecewise-linear-integer-ranges',
 ];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-expectation-potential',
@@ -6394,6 +6453,8 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-tree-precedence-contraction',
   'tag-virtual-tree',
   'tag-weighted-bipartite-matching',
+  'tag-edit-distance-dp',
+  'tag-tree-distance-residue',
 ];
 
 const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));

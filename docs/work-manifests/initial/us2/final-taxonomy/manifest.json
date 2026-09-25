@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "769f62db28ae4df03415d86b6716da85c0562c89152f5241b04722ede9fbdc57",
-  "digest": "9327ce432901cdcee6db5c614c0d9d02a16a2fef4b1b18bc2e2b4ffacb8a78c8",
+  "scopeDigest": "2e7df729cc6cb480414a7e744819e31b2b63991af255f36bff159b4b0f308f8e",
+  "digest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -52,6 +52,7 @@
     "outcome-characterize-integer-solvability",
     "outcome-characterize-palindrome-intervals",
     "outcome-classify-game-states",
+    "outcome-classify-tree-by-distance-residue",
     "outcome-close-eventual-dp-tail",
     "outcome-color-and-classify-bipartite-components",
     "outcome-compare-algebraic-objects-by-random-fingerprint",
@@ -65,6 +66,7 @@
     "outcome-compute-binomial-by-lucas",
     "outcome-compute-convolution-or-correlation",
     "outcome-compute-directed-walk-period",
+    "outcome-compute-edit-distance",
     "outcome-compute-in-finite-field-extension",
     "outcome-compute-in-modular-arithmetic",
     "outcome-compute-online-relaxed-convolution",
@@ -181,6 +183,7 @@
     "outcome-optimize-tree-order-by-cluster-contraction",
     "outcome-optimize-univariate-convex-function",
     "outcome-optimize-weighted-matroid-basis",
+    "outcome-partition-at-critical-integer-boundaries",
     "outcome-partition-integer-parameter-ranges",
     "outcome-pass-resource-dp-through-heavy-recursion",
     "outcome-peel-directed-graph-toward-cycles",
@@ -232,6 +235,7 @@
     "outcome-subtract-exception-transitions",
     "outcome-sum-affine-floors-by-euclid",
     "outcome-sum-multiplicative-function-by-min25-sieve",
+    "outcome-sum-piecewise-linear-integer-ranges",
     "outcome-sweep-connectivity-by-kruskal-threshold",
     "outcome-test-linear-matroid-intersection-rank",
     "outcome-transform-to-combinatorics-algebra",
@@ -248,9 +252,7 @@
   },
   "reviewPolicy": {
     "requiredMode": "self",
-    "riskReasons": [
-      "major_classification_change"
-    ],
+    "riskReasons": ["major_classification_change"],
     "highRiskSelfReviewReason": "solo_maintainer"
   },
   "reviewUnits": [
@@ -314,6 +316,7 @@
         "outcome-characterize-integer-solvability",
         "outcome-characterize-palindrome-intervals",
         "outcome-classify-game-states",
+        "outcome-classify-tree-by-distance-residue",
         "outcome-close-eventual-dp-tail",
         "outcome-color-and-classify-bipartite-components",
         "outcome-compare-algebraic-objects-by-random-fingerprint",
@@ -327,6 +330,7 @@
         "outcome-compute-binomial-by-lucas",
         "outcome-compute-convolution-or-correlation",
         "outcome-compute-directed-walk-period",
+        "outcome-compute-edit-distance",
         "outcome-compute-in-finite-field-extension",
         "outcome-compute-in-modular-arithmetic",
         "outcome-compute-online-relaxed-convolution",
@@ -443,6 +447,7 @@
         "outcome-optimize-tree-order-by-cluster-contraction",
         "outcome-optimize-univariate-convex-function",
         "outcome-optimize-weighted-matroid-basis",
+        "outcome-partition-at-critical-integer-boundaries",
         "outcome-partition-integer-parameter-ranges",
         "outcome-pass-resource-dp-through-heavy-recursion",
         "outcome-peel-directed-graph-toward-cycles",
@@ -494,6 +499,7 @@
         "outcome-subtract-exception-transitions",
         "outcome-sum-affine-floors-by-euclid",
         "outcome-sum-multiplicative-function-by-min25-sieve",
+        "outcome-sum-piecewise-linear-integer-ranges",
         "outcome-sweep-connectivity-by-kruskal-threshold",
         "outcome-test-linear-matroid-intersection-rank",
         "outcome-transform-to-combinatorics-algebra",
@@ -516,9 +522,7 @@
         "check-schema-parity",
         "check-taxonomy-integration"
       ],
-      "evidenceRoles": [
-        "final_taxonomy_review"
-      ],
+      "evidenceRoles": ["final_taxonomy_review"],
       "maintenanceBenefit": "A single digest-bound taxonomy acceptance unit keeps every full-corpus placement, preview decision, correction impact, and downstream T047-T050 materialization synchronized.",
       "owner": "person-maintainer",
       "status": "planned"
@@ -527,5 +531,5 @@
   "maintenanceBenefit": "A single digest-bound taxonomy acceptance unit keeps every full-corpus placement, preview decision, correction impact, and downstream T047-T050 materialization synchronized.",
   "state": "planned",
   "createdAt": "2026-08-08T09:00:00+09:00",
-  "updatedAt": "2026-08-08T09:00:00+09:00"
+  "updatedAt": "2026-09-25T12:52:51.604Z"
 }

@@ -128,8 +128,8 @@ describe('final taxonomy policy', () => {
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(204);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(224);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(206);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(228);
     expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(229);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
@@ -300,7 +300,7 @@ describe('final taxonomy policy', () => {
     expect(unitById.get('unit-shortest-path-certificates')?.title).toBe(
       '重み付き最短路・経路復元・差分制約',
     );
-    expect(unitById.get('unit-tree-metric')?.title).toBe('木距離を基準点・直径・中心から捉える');
+    expect(unitById.get('unit-tree-metric')?.title).toBe('基準点からの木距離・剰余類・直径・中心');
     expect(unitById.get('unit-tree-decomposition')?.title).toContain('包含木');
     expect(tagById.get('tag-two-sat')?.prerequisiteTagIds).toEqual(['tag-scc-condensation']);
     expect(
@@ -994,6 +994,8 @@ describe('final taxonomy policy', () => {
       ],
       'abc248-f': ['outcome-design-frontier-profile-dp', 'unit-frontier-profile-dp'],
       'abc236-f': ['outcome-optimize-weighted-matroid-basis', 'unit-matroid-greedy'],
+      'abc227-h': ['outcome-construct-euler-trail-or-circuit', 'unit-euler-trail-circuit'],
+      'abc275-ex': ['outcome-build-cartesian-tree-decomposition', 'unit-cartesian-tree'],
       'abc237-ex': [
         'outcome-optimize-poset-antichain-by-dilworth',
         'unit-poset-dilworth-antichain',
@@ -1012,7 +1014,11 @@ describe('final taxonomy policy', () => {
       'abc295-ex': ['outcome-apply-subset-zeta-mobius-transform', 'unit-subset-transforms'],
       'abc296-ex': ['outcome-design-frontier-profile-dp', 'unit-frontier-profile-dp'],
       'abc300-ex': ['outcome-extract-rational-series-coefficient', 'unit-bostan-mori'],
-      'abc303-e': ['outcome-use-tree-diameter-extrema', 'unit-tree-metric'],
+      'abc303-e': ['outcome-classify-tree-by-distance-residue', 'unit-tree-metric'],
+      'abc318-f': [
+        'outcome-partition-at-critical-integer-boundaries',
+        'unit-integer-boundary-blocks',
+      ],
       'abc303-ex': ['outcome-encode-labeled-trees-by-prufer-code', 'unit-prufer-code'],
       'abc306-g': ['outcome-compute-directed-walk-period', 'unit-directed-walk-periodicity'],
       'abc309-ex': ['outcome-remove-boundaries-by-reflection', 'unit-reflection-principle'],
@@ -1043,6 +1049,10 @@ describe('final taxonomy policy', () => {
       ],
       'abc338-e': ['outcome-detect-crossing-by-cyclic-order', 'unit-cyclic-order-crossing'],
       'abc339-g': ['outcome-build-static-sorted-range-index', 'unit-static-sorted-range-index'],
+      'abc342-g': [
+        'outcome-decompose-ranges-into-segment-tree-nodes',
+        'unit-segment-tree-canonical-decomposition',
+      ],
       'abc344-g': [
         'outcome-maintain-order-through-crossing-events',
         'unit-kinetic-order-maintenance',
@@ -1058,6 +1068,7 @@ describe('final taxonomy policy', () => {
         'unit-tree-precedence-contraction',
       ],
       'abc378-g': ['outcome-translate-sequences-by-rsk', 'unit-rsk-young-tableaux'],
+      'abc383-g': ['outcome-allocate-by-convex-marginal-costs', 'unit-separable-convex-marginals'],
       'abc379-g': ['outcome-design-frontier-profile-dp', 'unit-frontier-profile-dp'],
       'abc383-e': [
         'outcome-sweep-connectivity-by-kruskal-threshold',
@@ -1086,6 +1097,7 @@ describe('final taxonomy policy', () => {
         'outcome-solve-min-weight-general-perfect-matching',
         'unit-min-weight-general-perfect-matching',
       ],
+      'abc386-f': ['outcome-compute-edit-distance', 'unit-dp-sequence'],
       'abc415-g': [
         'outcome-stabilize-unbounded-knapsack-by-best-density',
         'unit-eventual-unbounded-knapsack',
@@ -1142,7 +1154,10 @@ describe('final taxonomy policy', () => {
       'abc236-f': ['outcome-maintain-xor-linear-basis'],
       'abc251-ex': ['outcome-maintain-ordered-interval-partition'],
       'abc263-ex': ['outcome-detect-crossing-by-cyclic-order'],
-      'abc267-e': ['outcome-peel-graph-core'],
+      'abc267-e': ['outcome-bound-monotone-total-work'],
+      'abc303-f': ['outcome-sum-piecewise-linear-integer-ranges'],
+      'abc329-e': ['outcome-bound-monotone-total-work'],
+      'abc377-e': ['outcome-compute-in-modular-arithmetic'],
       'abc270-g': ['outcome-compute-in-modular-arithmetic'],
       'abc284-e': ['outcome-enumerate-bounded-candidates-or-cases'],
       'abc285-g': ['outcome-model-max-flow-min-cut'],
@@ -1164,7 +1179,6 @@ describe('final taxonomy policy', () => {
         'outcome-process-dag-in-topological-order',
         'outcome-prove-and-search-threshold',
       ],
-      'abc328-g': ['outcome-normalize-equivalent-states'],
       'abc336-g': ['outcome-count-combinatorial-objects-by-determinant'],
       'abc354-g': ['outcome-model-max-flow-min-cut'],
       'abc359-f': ['outcome-prove-greedy-order', 'outcome-enumerate-frontier-best-first'],
@@ -1236,6 +1250,27 @@ describe('final taxonomy policy', () => {
       byProblemId.get('abc466-g')?.primaryOutcomeId,
       ...(byProblemId.get('abc466-g')?.additionalPrimaryOutcomeIds ?? []),
     ]).toContain('outcome-design-carry-or-mixed-radix-dp');
+    expect([
+      byProblemId.get('abc227-h')?.primaryOutcomeId,
+      ...(byProblemId.get('abc227-h')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toEqual(
+      expect.arrayContaining([
+        'outcome-construct-euler-trail-or-circuit',
+        'outcome-model-max-flow-min-cut',
+      ]),
+    );
+    expect([
+      byProblemId.get('abc275-ex')?.primaryOutcomeId,
+      ...(byProblemId.get('abc275-ex')?.additionalPrimaryOutcomeIds ?? []),
+    ]).toEqual(
+      expect.arrayContaining([
+        'outcome-build-cartesian-tree-decomposition',
+        'outcome-maintain-piecewise-linear-convex-function',
+      ]),
+    );
+    expect(byProblemId.get('abc398-e')?.supportingOutcomeIds).toContain(
+      'outcome-maintain-interactive-query-protocol',
+    );
     expect(
       byProblemId
         .get('abc303-e')
@@ -1274,6 +1309,36 @@ describe('final taxonomy policy', () => {
       'abc301-ex': {
         '/typicalTechniques/0': ['tag-kruskal-threshold-sweep'],
         '/typicalTechniques/1': ['tag-lowlink-critical-structure'],
+      },
+      'abc227-h': {
+        '/typicalTechniques/0': ['tag-euler-trail-circuit'],
+        '/typicalTechniques/1': ['tag-max-flow-min-cut'],
+      },
+      'abc236-f': {
+        '/typicalTechniques/1': ['tag-matroid-greedy'],
+      },
+      'abc275-ex': {
+        '/typicalTechniques/0': ['tag-cartesian-tree'],
+        '/typicalTechniques/1': ['tag-slope-trick'],
+      },
+      'abc303-e': {
+        '/typicalTechniques/0': ['tag-tree-distance-residue'],
+      },
+      'abc318-f': {
+        '/typicalTechniques/0': ['tag-integer-boundary-blocks'],
+      },
+      'abc342-g': {
+        '/typicalTechniques/0': ['tag-segment-tree-canonical-decomposition'],
+      },
+      'abc383-g': {
+        '/typicalTechniques/1': ['tag-separable-convex-marginals'],
+      },
+      'abc386-f': {
+        '/typicalTechniques/0': ['tag-edit-distance-dp'],
+      },
+      'abc398-e': {
+        '/typicalTechniques/0': ['tag-game-grundy-dp'],
+        '/typicalTechniques/1': ['tag-bipartite-structure'],
       },
       'abc311-e': {
         '/typicalTechniques/0': ['tag-dp-state-equivalence'],
@@ -1324,6 +1389,45 @@ describe('final taxonomy policy', () => {
       'tag-carry-mixed-radix-dp',
       'tag-potential-dsu',
     ]);
+    expect(tagIdsAt('abc398-e', '/prerequisiteCandidates/0', 'supporting')).toEqual([
+      'tag-interactive-protocol',
+    ]);
+    expect(tagIdsAt('abc267-e', '/typicalTechniques/1', 'supporting')).toEqual([
+      'tag-amortized-monotone-progress',
+    ]);
+    expect(tagIdsAt('abc303-f', '/typicalTechniques/0', 'supporting')).toEqual([
+      'tag-integer-boundary-blocks',
+    ]);
+    expect(tagIdsAt('abc329-e', '/typicalTechniques/1', 'supporting')).toEqual([
+      'tag-amortized-monotone-progress',
+    ]);
+    expect(tagIdsAt('abc377-e', '/typicalTechniques/0', 'supporting')).toEqual([
+      'tag-modular-arithmetic',
+    ]);
+    expect(tagIdsAt('abc311-g', '/prerequisiteCandidates/0', 'supporting')).toEqual([
+      'tag-prefix-difference',
+    ]);
+    expect(tagIdsAt('abc282-f', '/prerequisiteCandidates/1', 'supporting')).toEqual([
+      'tag-interactive-protocol',
+    ]);
+    expect(tagIdsAt('abc254-ex', '/typicalTechniques/0', 'supporting')).toEqual([
+      'tag-binary-trie',
+    ]);
+    expect(tagIdsAt('abc262-e', '/prerequisiteCandidates/0', 'supporting')).toEqual([
+      'tag-modular-arithmetic',
+    ]);
+    expect(tagIdsAt('abc376-e', '/prerequisiteCandidates/0', 'supporting')).toEqual([
+      'tag-ordered-set-multiset',
+    ]);
+    expect(tagIdsAt('abc275-ex', '/typicalTechniques/2', 'supporting')).toEqual([
+      'tag-ordered-set-multiset',
+      'tag-small-to-large',
+    ]);
+    expect(tagIdsAt('abc226-e', '/prerequisiteCandidates/1', 'supporting')).toEqual([
+      'tag-modular-arithmetic',
+    ]);
+    expect(tagIdsAt('abc310-g', '/prerequisiteCandidates/1', 'supporting')).toEqual([]);
+    expect(tagIdsAt('abc419-e', '/typicalTechniques/0', 'supporting')).toEqual([]);
 
     const multiPrimaryDecisions = table.decisions.filter(
       (decision) => decision.additionalPrimaryOutcomeIds.length > 0,

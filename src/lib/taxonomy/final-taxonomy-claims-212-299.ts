@@ -309,14 +309,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   'abc218-e': decision(
     'outcome-construct-optimal-spanning-tree',
     [
-      d('t0', 'supporting', 'tag-contribution-reordering'),
+      d('t0', 'problem_specific'),
       d('t1', 'primary', 'tag-spanning-tree-optimization'),
       d('t1', 'supporting', 'tag-dsu-connectivity'),
       d('p0', 'same_tag', 'tag-spanning-tree-optimization'),
       d('p0', 'supporting', 'tag-dsu-connectivity'),
     ],
     {
-      'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
       'tag-dsu-connectivity': ['outcome-maintain-connectivity-components'],
     },
   ),
@@ -666,10 +665,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       d('t0', 'primary', 'tag-graph-core-peeling'),
       d('t1', 'same_tag', 'tag-graph-core-peeling'),
       d('p0', 'same_tag', 'tag-graph-core-peeling'),
-      d('p1', 'supporting', 'tag-dsu-connectivity', 'tag-modular-arithmetic'),
+      d('p1', 'supporting', 'tag-modular-arithmetic'),
     ],
     {
-      'tag-dsu-connectivity': ['outcome-maintain-connectivity-components'],
       'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
@@ -741,18 +739,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-characterize-walk-by-degrees',
     [
       d('t0', 'primary', 'tag-euler-degree-parity'),
-      d('t0', 'supporting', 'tag-constructive-witness'),
-      d('t1', 'supporting', 'tag-flow-matching-cut'),
+      d('t1', 'primary', 'tag-max-flow-min-cut'),
       d('t2', 'supporting', 'tag-bounded-enumeration'),
       d('p0', 'same_tag', 'tag-euler-degree-parity'),
-      d('p1', 'supporting', 'tag-flow-matching-cut'),
+      d('p1', 'same_tag', 'tag-max-flow-min-cut'),
       d('p2', 'supporting', 'tag-bounded-enumeration'),
     ],
     {
-      'tag-constructive-witness': ['outcome-recover-valid-witness'],
       'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
-      'tag-flow-matching-cut': ['outcome-reduce-selection-to-network-optimization'],
     },
+    ['outcome-model-max-flow-min-cut'],
   ),
   'abc228-e': decision(
     'outcome-exploit-modular-periodicity',
@@ -1115,11 +1111,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   'abc236-f': decision(
     'outcome-transform-to-linear-system-or-rank',
     [
-      d('t0', 'primary', 'tag-linear-algebra-xor'),
-      d('t1', 'supporting', 'tag-greedy-exchange-order'),
-      d('p0', 'same_tag', 'tag-linear-algebra-xor'),
+      d('t0', 'supporting', 'tag-linear-algebra-xor'),
+      d('t1', 'primary', 'tag-matroid-greedy'),
+      d('p0', 'supporting', 'tag-linear-algebra-xor'),
     ],
-    { 'tag-greedy-exchange-order': ['outcome-prove-greedy-order'] },
+    { 'tag-linear-algebra-xor': ['outcome-maintain-xor-linear-basis'] },
   ),
   'abc236-g': decision(
     'outcome-accelerate-fixed-linear-transition',
@@ -1295,14 +1291,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     [
       d('t0', 'primary', 'tag-integer-boundary-blocks'),
       d('t1', 'supporting', 'tag-discrete-convex-marginal'),
-      d('t1', 'supporting', 'tag-bounded-enumeration'),
       d('p0', 'same_tag', 'tag-integer-boundary-blocks'),
       d('p0', 'supporting', 'tag-discrete-convex-marginal'),
     ],
-    {
-      'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
-      'tag-discrete-convex-marginal': ['outcome-exploit-convexity'],
-    },
+    { 'tag-discrete-convex-marginal': ['outcome-exploit-convexity'] },
   ),
   'abc240-g': decision(
     'outcome-formulate-combinatorial-coefficients',
@@ -1908,11 +1900,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-prove-greedy-order',
     [
       d('t0', 'same_tag', 'tag-greedy-exchange-order'),
+      d('t0', 'supporting', 'tag-binary-trie'),
       d('t1', 'primary', 'tag-greedy-exchange-order'),
       d('p0', 'problem_specific'),
       d('p1', 'same_tag', 'tag-greedy-exchange-order'),
     ],
-    {},
+    { 'tag-binary-trie': ['outcome-query-bitwise-order-with-trie'] },
   ),
   'abc254-f': decision(
     'outcome-reduce-integer-structure-by-gcd',
@@ -2245,8 +2238,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       d('t0', 'same_tag', 'tag-combinatorial-coefficients'),
       d('t1', 'primary', 'tag-combinatorial-coefficients'),
       d('p0', 'same_tag', 'tag-combinatorial-coefficients'),
+      d('p0', 'supporting', 'tag-modular-arithmetic'),
     ],
-    {},
+    { 'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'] },
   ),
   'abc262-ex': decision(
     'outcome-design-interval-split-dp',
@@ -2469,10 +2463,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-prove-and-search-threshold',
     [
       d('t0', 'primary', 'tag-monotone-threshold-search'),
-      d('t1', 'supporting', 'tag-graph-core-peeling'),
+      d('t1', 'supporting', 'tag-amortized-monotone-progress'),
       d('p0', 'same_tag', 'tag-monotone-threshold-search'),
     ],
-    { 'tag-graph-core-peeling': ['outcome-peel-graph-core'] },
+    { 'tag-amortized-monotone-progress': ['outcome-bound-monotone-total-work'] },
   ),
   'abc267-ex': decision(
     'outcome-encode-counting-by-generating-function',
@@ -2553,13 +2547,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   'abc269-e': decision(
     'outcome-prove-and-search-threshold',
     [
-      d('t0', 'supporting', 'tag-contribution-reordering'),
+      d('t0', 'problem_specific'),
       d('t1', 'primary', 'tag-monotone-threshold-search'),
       d('p0', 'same_tag', 'tag-monotone-threshold-search'),
       d('p0', 'supporting', 'tag-interactive-protocol'),
     ],
     {
-      'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
       'tag-interactive-protocol': ['outcome-maintain-interactive-query-protocol'],
     },
   ),
@@ -2840,19 +2833,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-build-cartesian-tree-decomposition',
     [
       d('t0', 'primary', 'tag-cartesian-tree'),
-      d('t1', 'supporting', 'tag-discrete-convex-marginal'),
+      d('t1', 'primary', 'tag-slope-trick'),
       d('t2', 'supporting', 'tag-amortized-heavy-light', 'tag-ordered-set-heap'),
-      d('t2', 'supporting', 'tag-tree-aggregation-reroot'),
       d('p0', 'same_tag', 'tag-cartesian-tree'),
-      d('p1', 'supporting', 'tag-discrete-convex-marginal'),
+      d('p1', 'same_tag', 'tag-slope-trick'),
       d('p2', 'supporting', 'tag-amortized-heavy-light', 'tag-ordered-set-heap'),
     ],
     {
       'tag-amortized-heavy-light': ['outcome-bound-total-work'],
-      'tag-discrete-convex-marginal': ['outcome-exploit-convexity'],
       'tag-ordered-set-heap': ['outcome-maintain-dynamic-order-statistics'],
-      'tag-tree-aggregation-reroot': ['outcome-aggregate-rooted-tree'],
     },
+    ['outcome-maintain-piecewise-linear-convex-function'],
   ),
   'abc275-f': decision(
     'outcome-design-resource-dp',
@@ -3157,13 +3148,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     'outcome-query-bitwise-order-with-trie',
     [
       d('t0', 'primary', 'tag-binary-trie'),
-      d('t0', 'supporting', 'tag-divide-enumerate'),
       d('t1', 'same_tag', 'tag-binary-trie'),
       d('p0', 'same_tag', 'tag-binary-trie'),
       d('p1', 'same_tag', 'tag-binary-trie'),
       d('p2', 'same_tag', 'tag-binary-trie'),
     ],
-    { 'tag-divide-enumerate': ['outcome-divide-search-space-recursively'] },
+    {},
   ),
   'abc281-g': decision(
     'outcome-design-minimal-sufficient-state',
@@ -3705,10 +3695,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     [
       d('t0', 'primary', 'tag-integer-boundary-blocks'),
       d('t1', 'primary', 'tag-integer-boundary-blocks'),
-      d('t1', 'supporting', 'tag-bounded-enumeration'),
       d('p0', 'same_tag', 'tag-integer-boundary-blocks'),
     ],
-    { 'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'] },
+    {},
   ),
   'abc293-g': decision(
     'outcome-schedule-range-query-updates',
@@ -3779,9 +3768,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     [
       d('t0', 'baseline'),
       d('t1', 'primary', 'tag-contribution-reordering'),
-      d('p0', 'supporting', 'tag-monotone-threshold-search'),
+      d('p0', 'problem_specific'),
     ],
-    { 'tag-monotone-threshold-search': ['outcome-prove-and-search-threshold'] },
+    {},
   ),
   'abc295-g': decision(
     'outcome-condense-and-order-directed-graph',
@@ -3905,13 +3894,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   'abc298-f': decision(
     'outcome-prove-greedy-order',
     [
-      d('t0', 'supporting', 'tag-contribution-reordering'),
+      d('t0', 'problem_specific'),
       d('t1', 'primary', 'tag-greedy-exchange-order'),
       d('p0', 'baseline'),
     ],
-    {
-      'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
-    },
+    {},
   ),
   'abc298-g': decision(
     'outcome-design-interval-split-dp',

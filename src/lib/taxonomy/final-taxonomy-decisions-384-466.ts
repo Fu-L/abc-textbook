@@ -13,7 +13,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc385-f': 'tag-geometry-orientation-transform',
   'abc385-g': 'tag-convolution-fps',
   'abc386-e': 'tag-bounded-enumeration',
-  'abc386-f': 'tag-sequence-subsequence-dp',
+  'abc386-f': 'tag-edit-distance-dp',
   // The MST total is first linearized into threshold component counts.
   'abc386-g': 'tag-contribution-reordering',
   'abc387-e': 'tag-constructive-witness',

@@ -65,6 +65,18 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/0': [sameTag('outcome-compute-in-modular-arithmetic')],
     '/prerequisiteCandidates/1': [sameTag('outcome-exploit-modular-periodicity')],
   },
+  'abc227-h': {
+    '/typicalTechniques/0': [primary('outcome-construct-euler-trail-or-circuit')],
+    '/typicalTechniques/1': [primary('outcome-model-max-flow-min-cut')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-construct-euler-trail-or-circuit')],
+    '/prerequisiteCandidates/1': [sameTag('outcome-model-max-flow-min-cut')],
+  },
+  'abc275-ex': {
+    '/typicalTechniques/0': [primary('outcome-build-cartesian-tree-decomposition')],
+    '/typicalTechniques/1': [primary('outcome-maintain-piecewise-linear-convex-function')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-build-cartesian-tree-decomposition')],
+    '/prerequisiteCandidates/1': [sameTag('outcome-maintain-piecewise-linear-convex-function')],
+  },
   'abc228-g': {
     '/typicalTechniques/1': [primary('outcome-determinize-automaton-by-subsets')],
     '/typicalTechniques/2': [

@@ -107,11 +107,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-bounded-enumeration'],
   ]),
   'abc386-f': decision(
-    'outcome-design-order-preserving-dp',
+    'outcome-compute-edit-distance',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-sequence-subsequence-dp'],
+      ['typicalTechniques', 0, 'primary', 'tag-edit-distance-dp'],
       ['typicalTechniques', 1, 'supporting', 'tag-dp-state-equivalence'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-sequence-subsequence-dp'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-edit-distance-dp'],
     ],
     {
       'tag-dp-state-equivalence': ['outcome-design-minimal-sufficient-state'],
@@ -943,16 +943,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 0, 'same_tag', 'tag-flow-matching-cut'],
       ['typicalTechniques', 1, 'primary', 'tag-flow-matching-cut'],
       ['typicalTechniques', 2, 'same_tag', 'tag-flow-matching-cut'],
-      ['typicalTechniques', 2, 'supporting', 'tag-linear-algebra-xor'],
-      ['typicalTechniques', 2, 'supporting', 'tag-randomized-algorithm'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-flow-matching-cut'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-linear-algebra-xor'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-randomized-algorithm'],
     ],
-    {
-      'tag-linear-algebra-xor': ['outcome-transform-to-linear-system-or-rank'],
-      'tag-randomized-algorithm': ['outcome-design-and-bound-randomized-algorithm'],
-    },
+    {},
   ),
   'abc413-e': decision('outcome-divide-search-space-recursively', [
     ['typicalTechniques', 0, 'primary', 'tag-divide-enumerate'],
@@ -1114,14 +1107,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-reorder-counting-contributions',
     [
       ['typicalTechniques', 0, 'primary', 'tag-contribution-reordering'],
-      ['typicalTechniques', 0, 'supporting', 'tag-bounded-enumeration'],
       ['typicalTechniques', 1, 'supporting', 'tag-gcd-diophantine'],
       ['typicalTechniques', 2, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-gcd-diophantine'],
     ],
     {
-      'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
       'tag-gcd-diophantine': ['outcome-reduce-integer-structure-by-gcd'],
     },
   ),
@@ -1157,15 +1148,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
   'abc419-e': decision(
     'outcome-design-resource-dp',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-prefix-difference'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'same_tag', 'tag-knapsack-resource'],
       ['typicalTechniques', 2, 'primary', 'tag-knapsack-resource'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-knapsack-resource'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-prefix-difference'],
     ],
-    {
-      'tag-prefix-difference': ['outcome-linearize-static-range-information'],
-    },
+    {},
   ),
   'abc419-f': decision(
     'outcome-build-multi-pattern-automaton',
@@ -1734,12 +1722,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-decompose-functional-graph',
     [
       ['typicalTechniques', 0, 'primary', 'tag-functional-graph-doubling'],
-      ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order'],
+      ['typicalTechniques', 1, 'problem_specific'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-functional-graph-doubling'],
     ],
-    {
-      'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
-    },
+    {},
   ),
   'abc436-f': decision(
     'outcome-reorder-counting-contributions',
@@ -2436,13 +2422,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'same_tag', 'tag-modular-crt'],
       ['typicalTechniques', 1, 'primary', 'tag-modular-crt'],
-      ['typicalTechniques', 1, 'supporting', 'tag-gcd-diophantine'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-modular-crt'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-gcd-diophantine'],
     ],
-    {
-      'tag-gcd-diophantine': ['outcome-characterize-integer-solvability'],
-    },
+    {},
   ),
   'abc460-f': decision(
     'outcome-design-associative-range-summary',
