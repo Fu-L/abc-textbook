@@ -7,11 +7,11 @@ export const PROBLEM_READING_ORDER_REASON =
  */
 export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string[]>> = {
   'unit-dp-state-design': [
-    'abc265-e',
     'abc244-e',
     'abc251-e',
     'abc310-e',
     'abc232-e',
+    'abc265-e',
     'abc247-f',
     'abc283-e',
     'abc264-f',
@@ -537,13 +537,13 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
   ],
   'unit-digit-dp': ['abc406-e', 'abc465-e', 'abc336-e', 'abc235-f', 'abc317-f', 'abc288-ex'],
   'unit-max-flow-min-cut': [
-    'abc241-g',
     'abc318-g',
     'abc239-g',
-    'abc437-g',
+    'abc241-g',
     'abc259-g',
     'abc326-g',
     'abc225-g',
+    'abc437-g',
     'abc332-g',
     'abc347-g',
     'abc397-g',

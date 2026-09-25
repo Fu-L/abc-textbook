@@ -65,10 +65,10 @@
   "digests": {
     "tags": "3ddf77128c4e312f726bd4b5f7defaf2c7b69d62707087c77ee278fa45860eb9",
     "learningOutcomes": "d299566283670a955ae5c380c5dc9ee7efa58b5e5701b1ddb3fe851a1f5d0e49",
-    "learningUnits": "6af7f36455c2b47120740e48b2bfcd4e25afc3e9ac4f7cb03cbfd8c56eb3d720",
-    "learningDocuments": "115fe195a45a8aebb4bccb3fa9e8ac8c1fdea6e49d586af5f2cab598cc4b8168",
+    "learningUnits": "ef5f1e6cd02e139503698e321985c3ad4dca94438e9e0522b69028031b96e719",
+    "learningDocuments": "f6eb2f113f06d484d80a4e2806da6d6368174fddc45b0741f39e6bbec0485438",
     "learningOrderDigest": "48249d1af0199dbe8bce51b3372c32b1cb924890bf4d28a5371ee12219422f59",
     "problemPlacementPolicyDigest": "85e22d6c33526ac27f42869d8a80a3cb71cfe5ad5deafd51ef413cd98ba8f29f"
   },
-  "materializationDigest": "08580fb302af69ab0c03314e45c139c4272d1793eb16a505459fd191f5ea809d"
+  "materializationDigest": "59587336c5a967ada6f4184da486a7fb892535e7c60ba079f5e22f663114b2c4"
 }

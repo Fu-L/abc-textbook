@@ -24,6 +24,12 @@ sidebar:
 
 将来の選択肢と答えが同じprefixを同一状態に縮約する。
 
+DPの状態は、同じ状態へまとめた履歴から先の選択肢と遷移後の答えが一致するように作る。ABC244 Eでは現在の頂点に経路長の偶奇1 bitを加え、到達先だけでは足りない情報を状態へ含める。
+
+ABC251 Eでは最初の品物を選ぶかどうかを固定して円環を列DPにし、最後に先頭との条件を確認する。ABC310 Eでは右端を固定した部分文字列をNAND値ごとの個数へまとめ、次の文字で更新する。ABC232 Eでは盤面の座標を持たず、目的地と同じ行・列かどうかの4状態に集約する。
+
+これらの基本的な履歴圧縮の後、ABC265 Eでは時刻と二種類の移動回数から三つ目の回数と座標を復元し、障害物を判定する。必要な情報を小さい状態に保ちながら位置を復元する例として扱う。続くABC247 Fでは入力グラフを2-正則成分へ分解して各cycleのDPを組み合わせ、単一区間の状態設計から構造を利用した複合問題へ進む。
+
 ### 習得する技能
 
 - 採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。
@@ -46,11 +52,11 @@ sidebar:
 
 ## 問題一覧
 
-1. [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。 障害物があると移動回数の多項係数だけでは途中の可否を判定できない。時刻tと二種類の移動回数i,jを状態にし、残る回数t−i−jから位置を復元して、三つの次状態の障害物判定を行う。状態の十分性を学ぶ。
-2. [ABC244 E「King Bombee」](https://atcoder.jp/contests/abc244/tasks/abc244_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
-3. [ABC251 E「Takahashi and Animals」](https://atcoder.jp/contests/abc251/tasks/abc251_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
-4. [ABC310 E「NAND repeatedly」](https://atcoder.jp/contests/abc310/tasks/abc310_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
-5. [ABC232 E「Rook Path」](https://atcoder.jp/contests/abc232/tasks/abc232_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+1. [ABC244 E「King Bombee」](https://atcoder.jp/contests/abc244/tasks/abc244_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+2. [ABC251 E「Takahashi and Animals」](https://atcoder.jp/contests/abc251/tasks/abc251_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+3. [ABC310 E「NAND repeatedly」](https://atcoder.jp/contests/abc310/tasks/abc310_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+4. [ABC232 E「Rook Path」](https://atcoder.jp/contests/abc232/tasks/abc232_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+5. [ABC265 E「Warp」](https://atcoder.jp/contests/abc265/tasks/abc265_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。 障害物があると移動回数の多項係数だけでは途中の可否を判定できない。時刻tと二種類の移動回数i,jを状態にし、残る回数t−i−jから位置を復元して三つの次状態の障害物を判定する。基本的な履歴圧縮を見た後、少ない状態から位置も復元する例として扱う。
 6. [ABC247 F「Cards」](https://atcoder.jp/contests/abc247/tasks/abc247_f) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 7. [ABC283 E「Don't Isolate Elements」](https://atcoder.jp/contests/abc283/tasks/abc283_e) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
 8. [ABC264 F「Monochromatic Path」](https://atcoder.jp/contests/abc264/tasks/abc264_f) — 主題: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
