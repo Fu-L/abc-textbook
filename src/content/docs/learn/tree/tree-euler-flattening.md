@@ -54,4 +54,4 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 - [ABC337 G 公式解説](https://atcoder.jp/contests/abc337/editorial/9128)
 - [ABC337 G 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-tree-euler-flattening`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-tree-euler-flattening`

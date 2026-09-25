@@ -53,4 +53,4 @@ ABC249 Exではg(j)=1/N+Σ_k P[j][k]g(k)を0≤j<Nについて課す。自己ル
 - [ABC249 H 公式解説](https://atcoder.jp/contests/abc249/editorial/3842)
 - [ABC249 H 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-additive-expectation-potential`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-additive-expectation-potential`

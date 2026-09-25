@@ -28,7 +28,7 @@ sidebar:
 
 直接の前提単元: なし。
 
-このUnitを直接前提とする単元: [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/)、[凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/)、[円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/)、[半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/)。
+このUnitを直接前提とする単元: [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/)、[円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/)、[半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/)。
 
 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
 
@@ -94,4 +94,4 @@ sidebar:
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-geometry-primitives`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-geometry-primitives`

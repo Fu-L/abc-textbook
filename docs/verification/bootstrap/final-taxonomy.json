@@ -2,18 +2,18 @@
   "schemaVersion": "1.0.0",
   "evidenceId": "bootstrap-final-taxonomy",
   "taskId": "T159",
-  "generatedAt": "2026-09-25T04:48:07.395Z",
+  "generatedAt": "2026-09-25T07:42:04.787Z",
   "status": "passed",
   "buildPath": "staging/taxonomy/initial/final-taxonomy-build.json",
   "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
   "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
   "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-  "taxonomySubjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
-  "buildDigest": "2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779",
+  "taxonomySubjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
+  "buildDigest": "fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887",
   "integrationMapDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23",
-  "taxonomyDigest": "455306e0d91be32b5e94e3c7a96de8bdc27d198594cb00d74200ca6912d6fd91",
-  "tagDagDigest": "dfe87d8e728cbc39f5c2f8c48d48b640354617a5acccb40a4b1831e11c87a21e",
-  "learningUnitDagDigest": "a6f4fcba42c9b2913776f8201d08cc389fdd87029773caf8dea8555c4985113f",
+  "taxonomyDigest": "e747d438b4d863358f7ddfd15d64c413a2543b21eac5bbdc92e3744ba2917b86",
+  "tagDagDigest": "0b9159291aa5cfc106028158afad6854699ef89a7afeb030f4a7eb0af8b9c271",
+  "learningUnitDagDigest": "455c764eaddfc0b46e8bee3115074de9d22906e525f358cb7f17b5c67196154c",
   "placementDigest": "81bc6c11e5c9f0557a0977bc07029f5ccf57ce66bcf3d2f68f295fbc480c1982",
   "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "problemCount": 868,
@@ -29,8 +29,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "6c38d0f766fcb27f7774a9ea1574de723ad5ed1819918dac6efc78c8e9bb7279",
-      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+      "digest": "72fb91800b3d4861130f76777ee0b8d7bc93ef9399a07e4f26dcbf5c172c8e6d",
+      "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
       "authorIds": [
         "person-maintainer"
       ],
@@ -44,5 +44,5 @@
   "canonicalMaterializationAllowed": true,
   "holdReasons": [],
   "diagnosticCodes": [],
-  "evidenceDigest": "e4e1d3927f146155a79b81888904ba7aa318526860fd046d011b16d4ef119374"
+  "evidenceDigest": "eda76fe0fbc8127ce5e466cd23d44b1956945658f03d329968d5ee72fd2d0c5a"
 }

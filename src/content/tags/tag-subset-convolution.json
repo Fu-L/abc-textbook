@@ -4,7 +4,6 @@
   "definition": "互いに素な部分集合分割に沿う畳み込みをrank別zeta変換などで高速に計算する。",
   "parentId": "tag-combinatorics-algebra-structure",
   "prerequisiteTagIds": [
-    "tag-convolution",
     "tag-subset-zeta-mobius-transform"
   ],
   "semanticSignature": {

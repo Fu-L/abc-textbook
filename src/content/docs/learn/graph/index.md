@@ -161,4 +161,4 @@ sidebar:
 - [ABC214 H 公式解説](https://atcoder.jp/contests/abc214/editorial/2441)
 - [ABC214 H 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-chapter-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-chapter-graph`

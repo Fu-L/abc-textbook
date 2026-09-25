@@ -20,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/)。
+直接の前提単元: なし。
 
 このUnitを直接前提とする単元: なし。
 
@@ -66,4 +66,4 @@ sidebar:
 - [ABC239 E 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_e)
 - [ABC239 E 公式解説](https://atcoder.jp/contests/abc239/editorial/3385)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-tree-aggregation`

@@ -47,4 +47,4 @@ Z[i]での素因数分解と共役を用い、整数の二平方和表現をprim
 - [ABC444 G 公式解説](https://atcoder.jp/contests/abc444/editorial/15201)
 - [ABC444 G 公式問題文](https://atcoder.jp/contests/abc444/tasks/abc444_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-gaussian-integers-two-squares`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-gaussian-integers-two-squares`

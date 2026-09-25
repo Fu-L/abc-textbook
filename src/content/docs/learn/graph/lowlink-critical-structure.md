@@ -53,4 +53,4 @@ DFS木を作れることを前提に、到達時刻とlowlink値から橋・関�
 - [ABC375 G 公式解説](https://atcoder.jp/contests/abc375/editorial/11133)
 - [ABC375 G 公式問題文](https://atcoder.jp/contests/abc375/tasks/abc375_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-lowlink-critical-structure`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-lowlink-critical-structure`

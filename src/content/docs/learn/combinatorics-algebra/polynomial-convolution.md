@@ -38,7 +38,7 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 
 直接の前提単元: なし。
 
-このUnitを直接前提とする単元: [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)、[heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/)、[factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/)、[Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/)、[subset convolution](/learn/combinatorics-algebra/subset-convolution/)。
+このUnitを直接前提とする単元: [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)、[heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/)、[factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/)、[Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/)。
 
 係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。
 
@@ -96,4 +96,4 @@ ABC265 Exは通常の畳み込みだけの導入には用いない。Conwayの�
 - [ABC235 H 公式解説](https://atcoder.jp/contests/abc235/editorial/3250)
 - [ABC235 H 公式問題文](https://atcoder.jp/contests/abc235/tasks/abc235_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-polynomial-convolution`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-polynomial-convolution`

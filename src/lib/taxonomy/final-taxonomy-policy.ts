@@ -591,14 +591,17 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   section('unit-dp-subset-resource', '集合・資源軸のDP', 'unit-chapter-dynamic-programming', [
     'unit-dp-state-design',
   ]),
-  section('unit-dp-sequence-interval', '列・区間・分割のDP', 'unit-chapter-dynamic-programming', [
-    'unit-dp-state-design',
-  ]),
+  section(
+    'unit-dp-sequence-interval',
+    '列・区間・分割のDP',
+    'unit-chapter-dynamic-programming',
+    [],
+  ),
   section(
     'unit-dp-digit-string',
     '接頭辞から更新する有限状態DP',
     'unit-chapter-dynamic-programming',
-    ['unit-dp-state-design'],
+    [],
   ),
   section(
     'unit-dp-carry-mixed-radix',
@@ -653,9 +656,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section('unit-functional-graph', '一意な後続・サイクル・ダブリング', 'unit-chapter-graph', []),
   section('unit-tree-metric', '木距離を基準点・直径・中心から捉える', 'unit-chapter-graph', []),
-  section('unit-tree-aggregation', '木DP・集約・rerooting', 'unit-chapter-graph', [
-    'unit-dp-state-design',
-  ]),
+  section('unit-tree-aggregation', '木DP・集約・rerooting', 'unit-chapter-graph', []),
   section(
     'unit-implicit-binary-tree',
     '対称性・深さ・label区間で巨大な完全二分木を数える',
@@ -864,9 +865,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     ['unit-modular-arithmetic'],
   ),
   section('unit-geometry-primitives', '幾何の基本判定と座標変換', 'unit-chapter-math-geometry', []),
-  section('unit-convex-geometry', '凸境界・半平面制約を扱う', 'unit-chapter-math-geometry', [
-    'unit-geometry-primitives',
-  ]),
+  section('unit-convex-geometry', '凸境界・半平面制約を扱う', 'unit-chapter-math-geometry', []),
   section(
     'unit-discrete-convex',
     '凸性・傾き・限界費用・slope trick',
@@ -3309,7 +3308,7 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
   'tag-cyclic-exponent-counting': ['tag-multiplicative-order'],
   'tag-group-action-orbit-counting': ['tag-state-normalization'],
   'tag-subset-zeta-mobius-transform': ['tag-inclusion-exclusion', 'tag-subset-bitmask-dp'],
-  'tag-subset-convolution': ['tag-convolution', 'tag-subset-zeta-mobius-transform'],
+  'tag-subset-convolution': ['tag-subset-zeta-mobius-transform'],
   'tag-determinant-counting': ['tag-linear-system-rank'],
   'tag-generating-functions': ['tag-combinatorial-coefficients'],
   'tag-formal-power-series': ['tag-generating-functions'],

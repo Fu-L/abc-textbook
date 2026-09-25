@@ -35,5 +35,5 @@
   "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
-  "learningRationale": "畳み込み・相互相関・subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "subset zeta・Möbius変換で得た考え方と実装を再利用し、subset convolutionの発動条件・正当化・境界を重複なく学ぶ。"
 }

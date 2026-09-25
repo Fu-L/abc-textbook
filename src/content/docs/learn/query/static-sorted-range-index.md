@@ -47,4 +47,4 @@ Segment Treeのcanonical区間分解で得た考え方と実装を再利用し�
 - [ABC339 G 公式解説](https://atcoder.jp/contests/abc339/editorial/9207)
 - [ABC339 G 公式問題文](https://atcoder.jp/contests/abc339/tasks/abc339_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-static-sorted-range-index`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-static-sorted-range-index`

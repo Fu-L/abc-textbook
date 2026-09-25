@@ -62,4 +62,4 @@ doubling・binary liftingで得た考え方と実装を再利用し、ancestor q
 - [ABC298 H 公式解説](https://atcoder.jp/contests/abc298/editorial/6218)
 - [ABC298 H 公式問題文](https://atcoder.jp/contests/abc298/tasks/abc298_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-tree-ancestor-lca`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-tree-ancestor-lca`

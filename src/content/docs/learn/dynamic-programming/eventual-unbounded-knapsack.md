@@ -54,4 +54,4 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 - [ABC415 G 公式解説](https://atcoder.jp/contests/abc415/editorial/13491)
 - [ABC415 G 公式問題文](https://atcoder.jp/contests/abc415/tasks/abc415_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-eventual-unbounded-knapsack`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-eventual-unbounded-knapsack`

@@ -20,7 +20,7 @@ sidebar:
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/)。
+直接の前提単元: なし。
 
 このUnitを直接前提とする単元: なし。
 
@@ -54,4 +54,4 @@ sidebar:
 - [ABC257 H 公式解説](https://atcoder.jp/contests/abc257/editorial/4168)
 - [ABC257 H 公式問題文](https://atcoder.jp/contests/abc257/tasks/abc257_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-convex-geometry`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-convex-geometry`

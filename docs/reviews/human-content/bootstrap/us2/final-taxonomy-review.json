@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+  "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
   "inventoryDigest": "6dadad74ef572ba194488f7d2d99f9d80198a262a756590c14382318782d89a3",
   "reviewPolicy": {
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+      "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "930e1f5c1cb5cd9613641ebee54e7ea217f2d57013440371193c4ea86f371a87",
+      "resultDigest": "6b969e5d4b9dcb9b8401ce9ff467eec248a033193f38a0b45bdb341456c40155",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T04:47:47.354Z",
+      "completedAt": "2026-09-25T07:41:44.501Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+      "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "930e1f5c1cb5cd9613641ebee54e7ea217f2d57013440371193c4ea86f371a87",
+      "resultDigest": "6b969e5d4b9dcb9b8401ce9ff467eec248a033193f38a0b45bdb341456c40155",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T04:47:54.639Z",
+      "completedAt": "2026-09-25T07:41:51.822Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+      "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "930e1f5c1cb5cd9613641ebee54e7ea217f2d57013440371193c4ea86f371a87",
+      "resultDigest": "6b969e5d4b9dcb9b8401ce9ff467eec248a033193f38a0b45bdb341456c40155",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T04:47:55.169Z",
+      "completedAt": "2026-09-25T07:41:52.353Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+      "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "930e1f5c1cb5cd9613641ebee54e7ea217f2d57013440371193c4ea86f371a87",
+      "resultDigest": "6b969e5d4b9dcb9b8401ce9ff467eec248a033193f38a0b45bdb341456c40155",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T04:47:55.384Z",
+      "completedAt": "2026-09-25T07:41:52.575Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "fe26e693a3decec0f65153c2e182ebefd030b35add287f06f71fcfcb57630ac1",
+      "subjectDigest": "01e1f0ddd567fdc29d1698c335933a19b58f4936be3c338c71a5019b2fec21a4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "930e1f5c1cb5cd9613641ebee54e7ea217f2d57013440371193c4ea86f371a87",
+      "resultDigest": "6b969e5d4b9dcb9b8401ce9ff467eec248a033193f38a0b45bdb341456c40155",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T04:48:02.043Z",
+      "completedAt": "2026-09-25T07:41:59.412Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "0ef6d858ed43e87b2f640913ee9719e232fe2ab38725698e62206945305c99f6",
+  "reviewerExecutedCheckSetDigest": "0095dfb747aaa2b22cec546a4792ca83509044f747f253c1bac93c2e40cb3855",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -326,10 +326,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# PR #63 canonical home and prerequisite review\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5826029636\n\nFu-Lの修正・push指示に基づくCodexの実装・照合記録。reviewerが確定済みのsemantic primary/additional-primary/supporting分類は変更せず、全Inventoryのplacementを新しいhome規則から再導出した。これは独立した人間による再査読ではなく、manifestで許可されたsolo-maintainer self-reviewである。\n\n- Problemのhomeはprimary Outcomeの唯一のowner Unitから導出する。各Outcomeのowner数、direct Problemの完全partition、semantic subtree coverage、related cross-reference集合とcoverageの非交差はcontract testで検証する。\n- additional-primaryは追加で学ぶ技能、supportingは既習技能としてProblem一覧に役割表示する。両者はhomeを変えず、Problem固有supportingからUnit prerequisite edgeを生成しない。\n- Tag、Outcome、Unitの直接前提DAGをsemantic hierarchyとsidebar/目次順から分離する。canonical schema・生成JSONに全体順、order digest、presentation unit、global indexを残さない。\n- ABC301 Eは部分集合DPのdirect、最短路のrelated。ABC375 Gはlowlinkのdirect、最短路のrelatedになることをproposalとmaterialized-document contractで固定する。\n- 生成Unit文書は全体の「第N単元」や前後履修リンクを持たず、直接前提と直接の依存先を表示する。問題のUnit内reading orderの全面レビューはFu-Lの指示により次ターンへ分離し、今回のreview scopeに含めない。\n\n必須のT159 source, schema, integration checkを実行し、対象digestに結び付ける。",
+      "reviewBasis": "# PR #63 改訂レビューへの対応\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#pullrequestreview-5305359772\n\nFu-Lの修正・push指示に基づくCodexの編集・照合記録。Inventoryを正として扱った。人間による独立再査読を表すものではなく、既存のsolo-maintainer運用で生成物を同期する。\n\n意味上の主題はclaimのprimary、既習必須技能はsupportingで保持する。履修順からprimaryを昇格させる処理を廃止した。presentationUnitは両者の所有Unitを全て履修した時点とし、各Unitの技能説明後に問題を提示する。問題ごとの接続の学習内容を本文へ出し、既知技能の併記で終わらせない。分類の順序不変性と、Inventoryから別途読み取った必要技能の登録を検査する。\n\n分野別の目次は概念の階層を保持し、通常経路は既存の前提DAGに従う標準履修順とする。本書の読み方に全順序、各教学Unitに前後リンクを生成する。単に後の章を案内して問題へ進ませる構成を改めた。frontier/profile\nDPにはグリッドの局所依存と部分集合状態のOutcomeを前提登録し、意味上の親である状態設計から独立して後に読む。\n\nABC246\nFは包除をprimary、bitmask列挙を既習技能とした。部分集合の列挙Outcomeは有限候補列挙のUnitが所有し、部分集合DPの状態遷移Outcomeとは分離する。ABC265\nEの採用DPとABC227\nGの区間篩に組合せ係数計算の習得は不要なので、誤ったsupporting割当も取り除いた。主題はそれぞれ状態設計、素因数指数集計に戻る。\n\nABC437\nGを最大流に移し、頂点・色組の回数容量と、静的割当から実行可能な操作順を得る帰納証明を別の学習ポイントとして記した。ABC453\nFには葉数重みの一点分離Outcomeを割り当て、通常の頂点数重心を再帰利用するOutcomeから分離した。同じUnitで基本概念から再帰利用へ比較して読む。\n\n多点評価Unitでは一般点のproduct/remainder\ntreeと等比点のchirp-zを別Outcomeとした。chirp-zの二項指数による変形、非零比の条件、零比の別処理、計算量を説明した。ABC381\nGでは拡大体による一般項、因子積の倍化、等比点でのblock評価の接続を記した。\n\n最短路は非負重みの距離確定、依存順の緩和、改善閉路の検出、中継点集合のDPという四つのOutcomeにした。全てのprimary/supporting用途をInventoryで照合し、BFS・0-1\nBFS・Dijkstra、辺列順、負閉路、Floyd–Warshallを対応するOutcomeへ割り当てた。ABC301 EとABC338\nFのprimaryは部分集合DPのまま、最短路の履修後に複合問題として提示する。ABC375\nGは最短路部分グラフの橋という組合せを明記した。\n\nDP高速化の旧29問と関連用途を全件照合した。区間集約、全体からの例外除去、共通作用に加え、少数の集計値、隣接出力の漸化式、有限prefixと閉形式tailを区別した。問題ごとに素朴な式から高速化後の式と計算量の根拠を記した。ABC212\nE→ABC370 E→ABC319 G、ABC372 F→ABC457 F→ABC435\nGは前提充足を確認した学習列とする。単なる名称別の子Unit増設は行わない。\n\n最大流は残余グラフと単純な容量付き割当の模型を本文で先に導入する。最初の演習をABC241\nGとし、有利な勝数固定の証明を要求することも明示した。ABC318 Gの頂点素経路、ABC239\nGの頂点cutと復元、その後の容量付き構成やclosureへ進む。本文と生成問題順を一致させた。\n\n新設Unitはなく、Outcomeを11個追加した。提示先の変更はABC227 G・ABC246 F・ABC265 E・ABC437\nGの4問。semantic primaryの復元は全corpusへ適用する。Inventoryそのものは変更していない。\n\n## PR #63 subset convolution・section wrapper前提の修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5828237089\n\nFu-Lが230 Unit・150 edgeを確認したうえで指定した訂正を反映する。subset convolutionはrank別subset zeta変換後に部分集合を二重ループで組み合わせられるため、一般の多項式畳み込み・NTT/FFTを前提にしない。Tagの前提から`tag-convolution`を外し、そこから導出されるOutcome・Unitの依存も外す。subset zeta・Möbius変換と部分集合状態の前提は保持し、類似関係はtyped relationとして保持する。\n\nowned Tag/Outcomeを持たないsection wrapperへの不要な辺として、`unit-convex-geometry <- unit-geometry-primitives`、`unit-dp-digit-string <- unit-dp-state-design`、`unit-dp-sequence-interval <- unit-dp-state-design`、`unit-tree-aggregation <- unit-dp-state-design`を削除する。各技能を所有する子Unit側の依存は維持する。\n\nこの記録はFu-Lの具体的な修正・push指示とlinked commentに基づくCodexの編集・照合記録であり、人間による独立再査読を主張しない。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-25T04:48:07.395Z"
+      "reviewedAt": "2026-09-25T07:42:04.787Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -574,12 +574,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# PR #63 canonical home and prerequisite review\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5826029636\n\nFu-Lの修正・push指示に基づくCodexの実装・照合記録。reviewerが確定済みのsemantic primary/additional-primary/supporting分類は変更せず、全Inventoryのplacementを新しいhome規則から再導出した。これは独立した人間による再査読ではなく、manifestで許可されたsolo-maintainer self-reviewである。\n\n- Problemのhomeはprimary Outcomeの唯一のowner Unitから導出する。各Outcomeのowner数、direct Problemの完全partition、semantic subtree coverage、related cross-reference集合とcoverageの非交差はcontract testで検証する。\n- additional-primaryは追加で学ぶ技能、supportingは既習技能としてProblem一覧に役割表示する。両者はhomeを変えず、Problem固有supportingからUnit prerequisite edgeを生成しない。\n- Tag、Outcome、Unitの直接前提DAGをsemantic hierarchyとsidebar/目次順から分離する。canonical schema・生成JSONに全体順、order digest、presentation unit、global indexを残さない。\n- ABC301 Eは部分集合DPのdirect、最短路のrelated。ABC375 Gはlowlinkのdirect、最短路のrelatedになることをproposalとmaterialized-document contractで固定する。\n- 生成Unit文書は全体の「第N単元」や前後履修リンクを持たず、直接前提と直接の依存先を表示する。問題のUnit内reading orderの全面レビューはFu-Lの指示により次ターンへ分離し、今回のreview scopeに含めない。\n\n必須のT159 source, schema, integration checkを実行し、対象digestに結び付ける。",
+    "rationale": "# PR #63 改訂レビューへの対応\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#pullrequestreview-5305359772\n\nFu-Lの修正・push指示に基づくCodexの編集・照合記録。Inventoryを正として扱った。人間による独立再査読を表すものではなく、既存のsolo-maintainer運用で生成物を同期する。\n\n意味上の主題はclaimのprimary、既習必須技能はsupportingで保持する。履修順からprimaryを昇格させる処理を廃止した。presentationUnitは両者の所有Unitを全て履修した時点とし、各Unitの技能説明後に問題を提示する。問題ごとの接続の学習内容を本文へ出し、既知技能の併記で終わらせない。分類の順序不変性と、Inventoryから別途読み取った必要技能の登録を検査する。\n\n分野別の目次は概念の階層を保持し、通常経路は既存の前提DAGに従う標準履修順とする。本書の読み方に全順序、各教学Unitに前後リンクを生成する。単に後の章を案内して問題へ進ませる構成を改めた。frontier/profile\nDPにはグリッドの局所依存と部分集合状態のOutcomeを前提登録し、意味上の親である状態設計から独立して後に読む。\n\nABC246\nFは包除をprimary、bitmask列挙を既習技能とした。部分集合の列挙Outcomeは有限候補列挙のUnitが所有し、部分集合DPの状態遷移Outcomeとは分離する。ABC265\nEの採用DPとABC227\nGの区間篩に組合せ係数計算の習得は不要なので、誤ったsupporting割当も取り除いた。主題はそれぞれ状態設計、素因数指数集計に戻る。\n\nABC437\nGを最大流に移し、頂点・色組の回数容量と、静的割当から実行可能な操作順を得る帰納証明を別の学習ポイントとして記した。ABC453\nFには葉数重みの一点分離Outcomeを割り当て、通常の頂点数重心を再帰利用するOutcomeから分離した。同じUnitで基本概念から再帰利用へ比較して読む。\n\n多点評価Unitでは一般点のproduct/remainder\ntreeと等比点のchirp-zを別Outcomeとした。chirp-zの二項指数による変形、非零比の条件、零比の別処理、計算量を説明した。ABC381\nGでは拡大体による一般項、因子積の倍化、等比点でのblock評価の接続を記した。\n\n最短路は非負重みの距離確定、依存順の緩和、改善閉路の検出、中継点集合のDPという四つのOutcomeにした。全てのprimary/supporting用途をInventoryで照合し、BFS・0-1\nBFS・Dijkstra、辺列順、負閉路、Floyd–Warshallを対応するOutcomeへ割り当てた。ABC301 EとABC338\nFのprimaryは部分集合DPのまま、最短路の履修後に複合問題として提示する。ABC375\nGは最短路部分グラフの橋という組合せを明記した。\n\nDP高速化の旧29問と関連用途を全件照合した。区間集約、全体からの例外除去、共通作用に加え、少数の集計値、隣接出力の漸化式、有限prefixと閉形式tailを区別した。問題ごとに素朴な式から高速化後の式と計算量の根拠を記した。ABC212\nE→ABC370 E→ABC319 G、ABC372 F→ABC457 F→ABC435\nGは前提充足を確認した学習列とする。単なる名称別の子Unit増設は行わない。\n\n最大流は残余グラフと単純な容量付き割当の模型を本文で先に導入する。最初の演習をABC241\nGとし、有利な勝数固定の証明を要求することも明示した。ABC318 Gの頂点素経路、ABC239\nGの頂点cutと復元、その後の容量付き構成やclosureへ進む。本文と生成問題順を一致させた。\n\n新設Unitはなく、Outcomeを11個追加した。提示先の変更はABC227 G・ABC246 F・ABC265 E・ABC437\nGの4問。semantic primaryの復元は全corpusへ適用する。Inventoryそのものは変更していない。\n\n## PR #63 subset convolution・section wrapper前提の修正\n\n対象: https://github.com/Fu-L/abc-textbook/pull/63#issuecomment-5828237089\n\nFu-Lが230 Unit・150 edgeを確認したうえで指定した訂正を反映する。subset convolutionはrank別subset zeta変換後に部分集合を二重ループで組み合わせられるため、一般の多項式畳み込み・NTT/FFTを前提にしない。Tagの前提から`tag-convolution`を外し、そこから導出されるOutcome・Unitの依存も外す。subset zeta・Möbius変換と部分集合状態の前提は保持し、類似関係はtyped relationとして保持する。\n\nowned Tag/Outcomeを持たないsection wrapperへの不要な辺として、`unit-convex-geometry <- unit-geometry-primitives`、`unit-dp-digit-string <- unit-dp-state-design`、`unit-dp-sequence-interval <- unit-dp-state-design`、`unit-tree-aggregation <- unit-dp-state-design`を削除する。各技能を所有する子Unit側の依存は維持する。\n\nこの記録はFu-Lの具体的な修正・push指示とlinked commentに基づくCodexの編集・照合記録であり、人間による独立再査読を主張しない。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-25T04:48:07.395Z"
+    "confirmedAt": "2026-09-25T07:42:04.787Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-25T04:48:07.395Z",
-  "evidenceDigest": "6c38d0f766fcb27f7774a9ea1574de723ad5ed1819918dac6efc78c8e9bb7279"
+  "generatedAt": "2026-09-25T07:42:04.787Z",
+  "evidenceDigest": "72fb91800b3d4861130f76777ee0b8d7bc93ef9399a07e4f26dcbf5c172c8e6d"
 }

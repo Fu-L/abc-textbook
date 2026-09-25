@@ -47,4 +47,4 @@ sidebar:
 - [ABC313 E 公式問題文](https://atcoder.jp/contests/abc313/tasks/abc313_e)
 - [ABC313 E 公式解説](https://atcoder.jp/contests/abc313/editorial/6911)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `2e4490fc41ab38d6e8475da24b59bae4ad3f39622cdd3bbd7b071e451f2c1779` / LearningUnit `unit-run-length-dynamics`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fb4add6bc302b195502d39f75b81dbe179acb127bdfa4bae7bfe7471110b5887` / LearningUnit `unit-run-length-dynamics`

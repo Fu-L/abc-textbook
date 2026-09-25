@@ -67,6 +67,28 @@ const loadedDecisionTable = loadedRecords.then((records) =>
 );
 
 describe('final taxonomy policy', () => {
+  it('keeps subset convolution independent of general convolution and section wrapper edges', () => {
+    const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
+    const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
+
+    expect(tagById.get('tag-subset-convolution')?.prerequisiteTagIds).toEqual([
+      'tag-subset-zeta-mobius-transform',
+    ]);
+    expect(tagById.get('tag-subset-convolution')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-convolution', type: 'analogy' }),
+    );
+    expect(
+      outcomeById.get('outcome-compute-subset-convolution')?.prerequisiteOutcomeIds,
+    ).toEqual(['outcome-apply-subset-zeta-mobius-transform']);
+    expect(prerequisiteIdsForUnit('unit-subset-convolution')).toEqual([
+      'unit-subset-transforms',
+    ]);
+    expect(prerequisiteIdsForUnit('unit-convex-geometry')).toEqual([]);
+    expect(prerequisiteIdsForUnit('unit-dp-digit-string')).toEqual([]);
+    expect(prerequisiteIdsForUnit('unit-dp-sequence-interval')).toEqual([]);
+    expect(prerequisiteIdsForUnit('unit-tree-aggregation')).toEqual([]);
+  });
+
   it('classifies reviewed examples by the adopted proof and transition mechanism', async () => {
     const table = await loadedDecisionTable;
     const expected = {
