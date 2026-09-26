@@ -129,7 +129,7 @@ describe('final taxonomy policy', () => {
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
     expect(FINAL_TAXONOMY_TAGS).toHaveLength(206);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(228);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(229);
     expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(229);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',

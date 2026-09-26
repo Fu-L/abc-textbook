@@ -50,4 +50,4 @@ DSUによる連結成分管理・縮約で得た考え方と実装を再利用�
 - [ABC314 F 公式解説](https://atcoder.jp/contests/abc314/editorial/6953)
 - [ABC314 F 公式問題文](https://atcoder.jp/contests/abc314/tasks/abc314_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-dsu-merge-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-dsu-merge-tree`

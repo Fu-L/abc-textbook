@@ -2301,11 +2301,18 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['typicalTechniques', 1, 'primary', 'tag-directed-condensation-toposort'],
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-directed-condensation-toposort'],
   ]),
-  'abc456-f': decision('outcome-design-associative-range-summary', [
-    ['typicalTechniques', 0, 'same_tag', 'tag-monoid-segment-tree'],
-    ['typicalTechniques', 1, 'primary', 'tag-monoid-segment-tree'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-monoid-segment-tree'],
-  ]),
+  'abc456-f': decision(
+    'outcome-maintain-queue-aggregate-with-swag',
+    [
+      ['typicalTechniques', 0, 'supporting', 'tag-semiring-matrix-exponentiation'],
+      ['typicalTechniques', 1, 'primary', 'tag-swag'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-swag'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-semiring-matrix-exponentiation'],
+    ],
+    {
+      'tag-semiring-matrix-exponentiation': ['outcome-exponentiate-transition-over-semiring'],
+    },
+  ),
   'abc456-g': decision(
     'outcome-correct-overlap-by-inversion',
     [
@@ -2381,16 +2388,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
   'abc459-e': decision(
     'outcome-aggregate-rooted-tree',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-contribution-reordering'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'primary', 'tag-tree-aggregation-reroot'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-tree-aggregation-reroot'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-contribution-reordering'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
-      'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
     },
   ),
   'abc459-f': decision('outcome-prune-dominated-candidates-once', [
@@ -2579,13 +2584,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-linearize-static-range-information',
     [
       ['typicalTechniques', 0, 'primary', 'tag-prefix-difference'],
-      ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
+      ['typicalTechniques', 1, 'same_tag', 'tag-prefix-difference'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-prefix-difference'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-inclusion-exclusion'],
     ],
-    {
-      'tag-inclusion-exclusion': ['outcome-correct-overlap-by-inversion'],
-    },
+    {},
   ),
   'abc465-g': decision(
     'outcome-maintain-dynamic-order-statistics',

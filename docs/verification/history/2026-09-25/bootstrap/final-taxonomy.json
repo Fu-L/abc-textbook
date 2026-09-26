@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "bootstrap-final-taxonomy",
+  "taskId": "T159",
+  "generatedAt": "2026-09-25T18:35:55.894Z",
+  "status": "passed",
+  "buildPath": "staging/taxonomy/initial/final-taxonomy-build.json",
+  "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
+  "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
+  "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
+  "taxonomySubjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+  "buildDigest": "92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb",
+  "integrationMapDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23",
+  "taxonomyDigest": "ae19e65188fa3829c69660cc53864ed310b0b5cde459e5505485391f138e68ef",
+  "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
+  "learningUnitDagDigest": "659d56f968c7e4cbcd16a9bbc3a99b9aa987a1cf35562c5b6c500d523d12107c",
+  "placementDigest": "b5958406856e5dd529027617ed0e447f28b20a215a2c59ebe9e80999a4decb23",
+  "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
+  "problemCount": 868,
+  "sourceRevisionCount": 1738,
+  "knownCorpusSourceRevisionCount": 2246,
+  "candidateCounts": {
+    "tags": 206,
+    "outcomes": 228,
+    "units": 229
+  },
+  "correctionImpactCount": 12,
+  "reviewEvidenceRefs": [
+    {
+      "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
+      "digest": "333c852ced32847310205a65b1f75260ff9533dfb0419d69203770c51372ad13",
+      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+      "authorIds": ["person-maintainer"],
+      "reviewerIds": ["person-maintainer"],
+      "reviewMode": "self",
+      "aggregatePassed": true
+    }
+  ],
+  "canonicalMaterializationAllowed": true,
+  "holdReasons": [],
+  "diagnosticCodes": [],
+  "evidenceDigest": "9886c65952bdfc3d7dd8a4346f337e8154453c71616294f355cf9351b899f802"
+}

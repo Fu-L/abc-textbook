@@ -252,7 +252,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   // Equality of randomized prefix fingerprints is the decisive query primitive.
   'abc455-g': 'tag-string-hash-equality',
   'abc456-e': 'tag-directed-condensation-toposort',
-  'abc456-f': 'tag-monoid-segment-tree',
+  'abc456-f': 'tag-swag',
   'abc456-g': 'tag-inclusion-exclusion',
   // Endpoint-extreme intervals dominate every other possible two-cover witness.
   'abc457-e': 'tag-greedy-exchange-order',

@@ -229,7 +229,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 = {
   'abc368-e': 'tag-event-sweep',
   'abc368-f': 'tag-game-grundy-dp',
   'abc368-g': 'tag-amortized-heavy-light',
-  'abc369-e': 'tag-shortest-path',
+  'abc369-e': 'tag-bounded-enumeration',
   'abc369-f': 'tag-sequence-subsequence-dp',
   'abc369-g': 'tag-discrete-convex-marginal',
   'abc370-e': 'tag-dp-transition-acceleration',

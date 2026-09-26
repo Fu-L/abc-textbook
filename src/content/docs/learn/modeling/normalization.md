@@ -20,6 +20,7 @@ sidebar:
 
 ### 習得する技能
 
+- 鏡映対称な文字列を自由な前半で一意に表し、辞書順上限以下の個数を前半prefixの基数値と、等号境界の完成文字列一候補との比較で求められる。
 - 対称操作で同値な状態の標準形と不変量を選べる。
 
 ## 前提と範囲
@@ -38,7 +39,7 @@ sidebar:
 
 ## 問題一覧
 
-- [ABC242 E「(∀x∀)」](https://atcoder.jp/contests/abc242/tasks/abc242_e) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)（対称操作で同値な状態の標準形と不変量を選べる。）。
+- [ABC242 E「(∀x∀)」](https://atcoder.jp/contests/abc242/tasks/abc242_e) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)（鏡映対称な文字列を自由な前半で一意に表し、辞書順上限以下の個数を前半prefixの基数値と、等号境界の完成文字列一候補との比較で求められる。）。
 - [ABC250 E「Prefix Equality」](https://atcoder.jp/contests/abc250/tasks/abc250_e) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)（対称操作で同値な状態の標準形と不変量を選べる。）。
 - [ABC462 E「Alternating Costs」](https://atcoder.jp/contests/abc462/tasks/abc462_e) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)（対称操作で同値な状態の標準形と不変量を選べる。）。既習技能: [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/)（差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。
 - [ABC219 F「Cleaning Robot」](https://atcoder.jp/contests/abc219/tasks/abc219_f) — 主題: [同値な状態を正規化する](/learn/modeling/normalization/)（対称操作で同値な状態の標準形と不変量を選べる。）。
@@ -79,4 +80,4 @@ sidebar:
 - [ABC232 H 公式解説](https://atcoder.jp/contests/abc232/editorial/3140)
 - [ABC232 H 公式問題文](https://atcoder.jp/contests/abc232/tasks/abc232_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-normalization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-normalization`

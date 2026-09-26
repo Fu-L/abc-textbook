@@ -29,6 +29,7 @@
   },
   "relatedTags": [],
   "learningOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
     "outcome-normalize-equivalent-states"
   ],
   "representativeProblemIds": [

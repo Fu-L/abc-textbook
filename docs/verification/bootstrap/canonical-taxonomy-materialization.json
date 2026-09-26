@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb",
-    "acceptedAt": "2026-09-25T18:35:55.894Z"
+    "digest": "33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da",
+    "acceptedAt": "2026-09-26T04:23:05.098Z"
   },
   "taskIds": [
     "T047",
@@ -42,11 +42,11 @@
   ],
   "counts": {
     "tags": 206,
-    "learningOutcomes": 228,
+    "learningOutcomes": 229,
     "learningUnits": 229,
     "learningDocuments": 229,
     "directlyOwnedTags": 206,
-    "directlyOwnedLearningOutcomes": 228,
+    "directlyOwnedLearningOutcomes": 229,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "af15b18d2a3b5ac2690e2fe1b1847c00e4de0956bbde2778573c9d83fe84cee7",
-    "learningOutcomes": "7e76428051dab3e411fb2db6dff38898c7fc20f31852e2327aba573ad07a90ad",
-    "learningUnits": "f11500fe5c1d57f3d370403ee525e01d64cd2487f0123476dde71c910386aba2",
-    "learningDocuments": "281127bd177da3dce27917440278fb4b616041417737ad84ce7397c2fcd04856",
-    "learningPrerequisitesDigest": "fca72c5dafa35071af8a3d1aaf544c968daa4a3edfdd69c00bed18c1a5d87f58",
-    "problemPlacementPolicyDigest": "92ae54c0cb07e12c785f3ade3128a229901cac7ef47d13e38526d47814eb0eb7"
+    "tags": "d345495beaae68a2809efa73019ae5d10a2c95f6800ed79602822fcde382b06f",
+    "learningOutcomes": "79df52dbd49a2a2e363da494a2d382c55189b4b2894191ba001c623bda79fffb",
+    "learningUnits": "a87d9899ffa049036b751689d1752f14d19ba508f4492f5bbfc28a251554d6fb",
+    "learningDocuments": "192e46f16db94865f73a0f61fd6f689c21a3228982563b7863c2d8f20769b220",
+    "learningPrerequisitesDigest": "f1eae6fe3ebf5abbd5e531d7731acef0233d7e507d2242034d7c4adf4bb4a696",
+    "problemPlacementPolicyDigest": "402cbe63d3756a9883d6affdfc8b135452d45e064d51083dc1de14c5282b48cc"
   },
-  "materializationDigest": "2695c184277f98482494e66029eb3f01eee0b05f56b969e94527be212a01958a"
+  "materializationDigest": "5d6ec0de1f4c6383994ec9bd78990519b23b0c31c952900392fb3d860925c88f"
 }

@@ -47,4 +47,4 @@ sidebar:
 - [ABC270 G 公式解説](https://atcoder.jp/contests/abc270/editorial/4847)
 - [ABC270 G 公式問題文](https://atcoder.jp/contests/abc270/tasks/abc270_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb` / LearningUnit `unit-baby-step-giant-step`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-baby-step-giant-step`

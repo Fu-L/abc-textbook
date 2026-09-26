@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "2e7df729cc6cb480414a7e744819e31b2b63991af255f36bff159b4b0f308f8e",
-  "digest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
+  "scopeDigest": "1ee98deaab39623dbe879a946ed22da474023e20f9351012a9ff3b7fc949b399",
+  "digest": "cafb2947c2312ebb50c9f5b6d2a8a03ced61ec2cc44b146ba8f4efbc1791995a",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -85,6 +85,7 @@
     "outcome-count-nonintersecting-paths-by-lgv",
     "outcome-count-orbits-by-fixed-points",
     "outcome-count-prefix-constrained-objects",
+    "outcome-count-symmetric-strings-under-lex-bound",
     "outcome-count-through-cyclic-exponents",
     "outcome-decompose-by-prime-or-divisor",
     "outcome-decompose-expectation-by-additive-potential",
@@ -349,6 +350,7 @@
         "outcome-count-nonintersecting-paths-by-lgv",
         "outcome-count-orbits-by-fixed-points",
         "outcome-count-prefix-constrained-objects",
+        "outcome-count-symmetric-strings-under-lex-bound",
         "outcome-count-through-cyclic-exponents",
         "outcome-decompose-by-prime-or-divisor",
         "outcome-decompose-expectation-by-additive-potential",
@@ -531,5 +533,5 @@
   "maintenanceBenefit": "A single digest-bound taxonomy acceptance unit keeps every full-corpus placement, preview decision, correction impact, and downstream T047-T050 materialization synchronized.",
   "state": "planned",
   "createdAt": "2026-08-08T09:00:00+09:00",
-  "updatedAt": "2026-09-25T12:52:51.604Z"
+  "updatedAt": "2026-09-26T04:15:32.617Z"
 }

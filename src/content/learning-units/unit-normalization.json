@@ -23,9 +23,11 @@
     "tag-state-normalization"
   ],
   "learningOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
     "outcome-normalize-equivalent-states"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
     "outcome-normalize-equivalent-states"
   ],
   "contentPhase": "canonical_skeleton",

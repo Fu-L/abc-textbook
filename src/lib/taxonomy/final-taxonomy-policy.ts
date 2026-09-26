@@ -3553,7 +3553,10 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     name: '状態・配置の正規化',
     definition: '対称操作で同値な状態を一意な標準形へ写し、重複した探索・数え上げを除く。',
     parentId: 'tag-model-reduction',
-    outcomeIds: ['outcome-normalize-equivalent-states'],
+    outcomeIds: [
+      'outcome-normalize-equivalent-states',
+      'outcome-count-symmetric-strings-under-lex-bound',
+    ],
     unitIds: ['unit-normalization'],
     recall: ['canonicalization', 'state normalization', '標準形'],
     object: ['状態', '配置', '列'],
@@ -5959,6 +5962,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。',
   'outcome-count-prefix-constrained-objects':
     '数値上限とのtight・先頭ゼロ・剰余・digit maskなどを接頭辞ごとに更新し、条件を満たす数の個数または値の総和を求められる。',
+  'outcome-count-symmetric-strings-under-lex-bound':
+    '鏡映対称な文字列を自由な前半で一意に表し、辞書順上限以下の個数を前半prefixの基数値と、等号境界の完成文字列一候補との比較で求められる。',
   'outcome-solve-stochastic-recurrence':
     '状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。',
   'outcome-decompose-expectation-by-additive-potential':
@@ -6294,6 +6299,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-expand-euler-product-sparsely',
   'outcome-compute-binomial-by-lucas',
   'outcome-count-nonintersecting-paths-by-lgv',
+  'outcome-count-symmetric-strings-under-lex-bound',
   'outcome-accelerate-tree-dp-by-heavy-path',
   'outcome-pass-resource-dp-through-heavy-recursion',
   'outcome-traverse-stern-brocot-ancestors',

@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+  "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "a76987870b8ac93681c02c1045db994e1b86073fefb0125e0cb46fcab80d4e0a",
+  "inventoryDigest": "cafb2947c2312ebb50c9f5b6d2a8a03ced61ec2cc44b146ba8f4efbc1791995a",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
+      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T18:35:34.721Z",
+      "completedAt": "2026-09-26T04:22:43.600Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
+      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T18:35:42.494Z",
+      "completedAt": "2026-09-26T04:22:51.521Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
+      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T18:35:43.050Z",
+      "completedAt": "2026-09-26T04:22:52.065Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
+      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T18:35:43.268Z",
+      "completedAt": "2026-09-26T04:22:52.289Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "c9a929d4fbb798e058986dcbb53487b23e3bd538c7dbe517d6190093d4455ff6",
+      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "c9225ee9fb81957a35f06ce804db06451eef755943c2ac009dc9fb92aeafc633",
+      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-25T18:35:50.290Z",
+      "completedAt": "2026-09-26T04:22:59.415Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "81e916d4307abae4b5131a1da59edb3eb2f5c5badbc3a9344583b5a4c32dcedd",
+  "reviewerExecutedCheckSetDigest": "f402ed1a6f65f4ecdcbef602cef1eb919324fdd627e85597ae3108f8eb7cd077",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -167,6 +167,7 @@
         "outcome-count-nonintersecting-paths-by-lgv",
         "outcome-count-orbits-by-fixed-points",
         "outcome-count-prefix-constrained-objects",
+        "outcome-count-symmetric-strings-under-lex-bound",
         "outcome-count-through-cyclic-exponents",
         "outcome-decompose-by-prime-or-divisor",
         "outcome-decompose-expectation-by-additive-potential",
@@ -329,10 +330,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "Maintainer-directed semantic audit of all 868 Inventory records. Corrected ABC332-F to affine lazy range actions, ABC355-F to component maintenance with Kruskal MST reasoning as supporting knowledge, and ABC363-E to time-bucket activation flood fill. Checked the revised placements against each Inventory algorithm connection; generated 868 placements and found no taxonomy diagnostics.",
+      "reviewBasis": "Maintainer-directed Codex semantic review of the 868-problem taxonomy against the accepted Inventory. Rechecked the five reported classifications against their adopted algorithms; ABC242-E uses mirrored half-prefix compression and a single lexicographic boundary comparison, not digit DP. Confirmed the primary/supporting assignments and review scope against the generated proposal.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-25T18:35:55.894Z"
+      "reviewedAt": "2026-09-26T04:23:05.098Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -415,6 +416,7 @@
       "outcome-count-nonintersecting-paths-by-lgv",
       "outcome-count-orbits-by-fixed-points",
       "outcome-count-prefix-constrained-objects",
+      "outcome-count-symmetric-strings-under-lex-bound",
       "outcome-count-through-cyclic-exponents",
       "outcome-decompose-by-prime-or-divisor",
       "outcome-decompose-expectation-by-additive-potential",
@@ -580,12 +582,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "Maintainer-directed semantic audit of all 868 Inventory records. Corrected ABC332-F to affine lazy range actions, ABC355-F to component maintenance with Kruskal MST reasoning as supporting knowledge, and ABC363-E to time-bucket activation flood fill. Checked the revised placements against each Inventory algorithm connection; generated 868 placements and found no taxonomy diagnostics.",
+    "rationale": "Maintainer-directed Codex semantic review of the 868-problem taxonomy against the accepted Inventory. Rechecked the five reported classifications against their adopted algorithms; ABC242-E uses mirrored half-prefix compression and a single lexicographic boundary comparison, not digit DP. Confirmed the primary/supporting assignments and review scope against the generated proposal.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-25T18:35:55.894Z"
+    "confirmedAt": "2026-09-26T04:23:05.098Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-25T18:35:55.894Z",
-  "evidenceDigest": "333c852ced32847310205a65b1f75260ff9533dfb0419d69203770c51372ad13"
+  "generatedAt": "2026-09-26T04:23:05.098Z",
+  "evidenceDigest": "d12253ad95e0cace2e29aa9c414a9f65723a00f1853815e5938630f25ab5f7d9"
 }

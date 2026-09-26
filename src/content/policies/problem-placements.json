@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "92099379c10b1293bc646a527638868dd1efe0702c16fd1e83cad6f8052521cb",
-    "acceptedAt": "2026-09-25T18:35:55.894Z"
+    "digest": "33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da",
+    "acceptedAt": "2026-09-26T04:23:05.098Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -27505,7 +27505,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「S の前半を A=0,…,Z=25 の26進数として数え、同じ前半から作った境界回文が S 以下なら1を加える。」、解法への接続「h 文字を左から読み ans=26·ans+(S_i-'A') と更新する。S の前半を左右へ鏡映して palindrome P を作り、P≤S なら ans に1を足して法998244353で出力する。」、学習成果「回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。」を照合し、tag-state-normalization / outcome-normalize-equivalent-states をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「S の前半を A=0,…,Z=25 の26進数として数え、同じ前半から作った境界回文が S 以下なら1を加える。」、解法への接続「h 文字を左から読み ans=26·ans+(S_i-'A') と更新する。S の前半を左右へ鏡映して palindrome P を作り、P≤S なら ans に1を足して法998244353で出力する。」、学習成果「回文の自由度を前半へ圧縮し、辞書順上限を26進 prefix count と境界一候補へ分解できる。」を照合し、tag-state-normalization / outcome-count-symmetric-strings-under-lex-bound をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -27513,7 +27513,7 @@
         "tag-state-normalization"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-normalize-equivalent-states",
+      "primaryOutcomeId": "outcome-count-symmetric-strings-under-lex-bound",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "adHocElements": [
@@ -138127,20 +138127,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全点対最短距離を前計算し、各queryで必須橋の順列と向きを列挙して接続距離を評価する。」、解法への接続「Floyd-Warshallでdist[u][v]を全pairについて求める。各queryのK橋indexをpermutationし、各bit maskで端点方向を決め、島1から各橋入口、橋出口から次入口、最後の出口から島Nまでのdistと橋重みを足す。全候補最小を出力する。」、学習成果「graph全体の自由移動を距離表へ畳み、各queryを少数必須橋の順序・方向探索として解ける。」を照合し、tag-shortest-path / outcome-compute-all-pairs-distance をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「全点対最短距離を前計算し、各queryで必須橋の順列と向きを列挙して接続距離を評価する。」、解法への接続「Floyd-Warshallでdist[u][v]を全pairについて求める。各queryのK橋indexをpermutationし、各bit maskで端点方向を決め、島1から各橋入口、橋出口から次入口、最後の出口から島Nまでのdistと橋重みを足す。全候補最小を出力する。」、学習成果「graph全体の自由移動を距離表へ畳み、各queryを少数必須橋の順序・方向探索として解ける。」を照合し、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-compute-all-pairs-distance; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-compute-all-pairs-distance を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-shortest-path"
-      ],
-      "supportingTagIds": [
         "tag-bounded-enumeration"
       ],
-      "primaryOutcomeId": "outcome-compute-all-pairs-distance",
+      "supportingTagIds": [
+        "tag-shortest-path"
+      ],
+      "primaryOutcomeId": "outcome-enumerate-bounded-candidates-or-cases",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-enumerate-bounded-candidates-or-cases"
+        "outcome-compute-all-pairs-distance"
       ],
       "adHocElements": [
         "元graphの辺数は大きいがN=400なので、query前にmetric closureを作ることでqueryをK個の橋だけの問題にできる。（再利用可能な見方: static graph上の多数routing queryでは、端点候補が小さくなる前にmetric closureを検討する。）"
@@ -138158,11 +138158,11 @@
               "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -138176,11 +138176,11 @@
               "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-bounded-enumeration"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -138194,11 +138194,11 @@
               "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
             "tag-shortest-path"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -138212,11 +138212,11 @@
               "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
             "tag-bounded-enumeration"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -198943,17 +198943,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各A_iを写像 f_a(x,y)=(y,min(x,y)+a) または2×2 min-plus行列として表し、長さKのsliding productをSWAGで維持して全開始位置を評価する。」、解法への接続「各日の min-plus matrix [[INF,0],[A_i,A_i]] を作る。SWAGで順序付き長さK積をslideし、初期vector (0,A_{l-1}) へ作用させた休日終了stateの最小を答えへ反映する。端点ケースを番兵INFで処理する。」、学習成果「全連続windowの休日計画DPを、2×2 min-plus積とSWAGで線形時間に評価できる。」を照合し、tag-swag / outcome-maintain-queue-aggregate-with-swag をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各A_iを写像 f_a(x,y)=(y,min(x,y)+a) または2×2 min-plus行列として表し、長さKのsliding productをSWAGで維持して全開始位置を評価する。」、解法への接続「各日の min-plus matrix [[INF,0],[A_i,A_i]] を作る。SWAGで順序付き長さK積をslideし、初期vector (0,A_{l-1}) へ作用させた休日終了stateの最小を答えへ反映する。端点ケースを番兵INFで処理する。」、学習成果「全連続windowの休日計画DPを、2×2 min-plus積とSWAGで線形時間に評価できる。」を照合し、tag-swag / outcome-maintain-queue-aggregate-with-swag をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-semiring-matrix-exponentiation; 補助Outcome=outcome-exponentiate-transition-over-semiring; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-semiring-matrix-exponentiation / outcome-exponentiate-transition-over-semiring を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-swag"
       ],
-      "supportingTagIds": [],
+      "supportingTagIds": [
+        "tag-semiring-matrix-exponentiation"
+      ],
       "primaryOutcomeId": "outcome-maintain-queue-aggregate-with-swag",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [],
+      "supportingOutcomeIds": [
+        "outcome-exponentiate-transition-over-semiring"
+      ],
       "adHocElements": [
         "windowごとのDPは状態数が小さければ、入力要素を遷移operatorに変えてsliding product問題へ移せる。（再利用可能な見方: min-plus写像も結合則があれば通常のmonoid queueと同じdata structureで扱える。）"
       ],
@@ -198970,11 +198974,11 @@
               "source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
-            "tag-swag"
+            "tag-semiring-matrix-exponentiation"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -199011,6 +199015,24 @@
             "tag-swag"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc456-f",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4",
+              "source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-semiring-matrix-exponentiation"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -200719,7 +200741,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各subtreeの飴総数 S_i=ΣC_j と必要選択数 T_i=ΣD_j をDFSで求め、各iの選び方 C(S_i-T_i+D_i,D_i) を全頂点で掛ける。」、解法への接続「rooted treeをpostorder DFSし、S_i=C_i+ΣS_child、T_i=D_i+ΣT_childを計算する。各iでS_i≥T_iを確認し、falling productまたは階乗前計算でbinom(S_i-T_i+D_i,D_i)を求めてmod積へ掛ける。」、学習成果「subtreeから飴を選ぶ全方法数を、二つのsubtree総和と独立な二項係数積として線形に計算できる。」を照合し、tag-rooted-tree-aggregation / outcome-aggregate-rooted-tree をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「各subtreeの飴総数 S_i=ΣC_j と必要選択数 T_i=ΣD_j をDFSで求め、各iの選び方 C(S_i-T_i+D_i,D_i) を全頂点で掛ける。」、解法への接続「rooted treeをpostorder DFSし、S_i=C_i+ΣS_child、T_i=D_i+ΣT_childを計算する。各iでS_i≥T_iを確認し、falling productまたは階乗前計算でbinom(S_i-T_i+D_i,D_i)を求めてmod積へ掛ける。」、学習成果「subtreeから飴を選ぶ全方法数を、二つのsubtree総和と独立な二項係数積として線形に計算できる。」を照合し、tag-rooted-tree-aggregation / outcome-aggregate-rooted-tree をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -200727,14 +200749,12 @@
         "tag-rooted-tree-aggregation"
       ],
       "supportingTagIds": [
-        "tag-combinatorial-coefficients",
-        "tag-contribution-reordering"
+        "tag-combinatorial-coefficients"
       ],
       "primaryOutcomeId": "outcome-aggregate-rooted-tree",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-formulate-combinatorial-coefficients",
-        "outcome-reorder-counting-contributions"
+        "outcome-formulate-combinatorial-coefficients"
       ],
       "adHocElements": [
         "選択結果そのものが後続へ影響して見えても、必要数だけが影響するなら順序を固定して総数へ圧縮できる。（再利用可能な見方: tree上の組合せ積ではsubtree feasibilityと頂点ごとの自由選択数を分離する。）"
@@ -200752,11 +200772,9 @@
               "source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"
             ]
           },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-contribution-reordering"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -200827,24 +200845,6 @@
           "kind": "supporting",
           "tagIds": [
             "tag-combinatorial-coefficients"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc459-e",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc459-e-problem-2ce3291f70c35bf35627556054a7895416f364b01dc308ebe180bb1ed76f59a5",
-              "source-abc459-editorial-20979-e81283aaf0c48dc74a735d7a8400a7359b35f32fd57640a4263ccb09478c828f"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-contribution-reordering"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -204880,21 +204880,17 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k>y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。」、解法への接続「10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k>0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。」、学習成果「百万通りの六次元size box queryを、6D zeta前計算と64項包除で高速に回答できる。」を照合し、tag-prefix-difference / outcome-linearize-static-range-information をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「sizeをbase10六次元indexにして6方向のzeta transformを行い、各queryでx_k>y_kなら0、そうでなければ下端条件を64個のprefix boxへ包除する。」、解法への接続「10^6配列に各ID weightを加える。k=0..5で全indexを走査しdigit_k>0ならzeta[idx]+=zeta[idx-10^k]とする。queryはmask0..63で bound_k=(mask bit?x_k-1:y_k)、符号(-1)^{popcount}を付けzeta[bound]を合計する。」、学習成果「百万通りの六次元size box queryを、6D zeta前計算と64項包除で高速に回答できる。」を照合し、tag-prefix-difference / outcome-linearize-static-range-information をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
         "tag-prefix-difference"
       ],
-      "supportingTagIds": [
-        "tag-inclusion-exclusion"
-      ],
+      "supportingTagIds": [],
       "primaryOutcomeId": "outcome-linearize-static-range-information",
       "additionalPrimaryOutcomeIds": [],
-      "supportingOutcomeIds": [
-        "outcome-correct-overlap-by-inversion"
-      ],
+      "supportingOutcomeIds": [],
       "adHocElements": [
         "六桁decimal IDを一整数でなく各桁独立座標として見ると、固定10^6gridの多次元prefix sumになる。（再利用可能な見方: 次元6は2^6包除が小さいため、query数が多くても定数64項で処理できる。）"
       ],
@@ -204929,24 +204925,6 @@
               "source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"
             ]
           },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-inclusion-exclusion"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc465-f",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc465-editorial-22562-36c2843189624076ba172ca8a1b2407c7540468aee86c2eb28e660f3bb35e6b4",
-              "source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"
-            ]
-          },
           "kind": "same_tag",
           "tagIds": [
             "tag-prefix-difference"
@@ -204965,11 +204943,11 @@
               "source-abc465-f-problem-c9109dea2048fa5cc3b2fce223d2b8a41089a550bf80d96a71c5b1220b08bde1"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
-            "tag-inclusion-exclusion"
+            "tag-prefix-difference"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -285098,7 +285076,7 @@
       "impactSubjectDigest": "40b36906779261a3768787e7e6a1f741f39f56b58bfeadedebb593a3444339fb"
     }
   ],
-  "placementDigest": "b5958406856e5dd529027617ed0e447f28b20a215a2c59ebe9e80999a4decb23",
+  "placementDigest": "b73abf4ef78d018edf7fc04158a83f608c5ee45acec49843753f0cba0d5cd4bd",
   "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "previewTaxonomyChangeDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877"
 }

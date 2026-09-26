@@ -2386,14 +2386,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     },
   ),
   'abc369-e': decision(
-    'outcome-model-and-compute-shortest-path',
+    'outcome-enumerate-bounded-candidates-or-cases',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-shortest-path'],
-      ['typicalTechniques', 1, 'supporting', 'tag-bounded-enumeration'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-shortest-path'],
-      ['prerequisiteCandidates', 1, 'supporting', 'tag-bounded-enumeration'],
+      ['typicalTechniques', 0, 'supporting', 'tag-shortest-path'],
+      ['typicalTechniques', 1, 'primary', 'tag-bounded-enumeration'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-shortest-path'],
+      ['prerequisiteCandidates', 1, 'same_tag', 'tag-bounded-enumeration'],
     ],
-    { 'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'] },
+    { 'tag-shortest-path': ['outcome-compute-all-pairs-distance'] },
   ),
   'abc369-f': decision(
     'outcome-design-order-preserving-dp',

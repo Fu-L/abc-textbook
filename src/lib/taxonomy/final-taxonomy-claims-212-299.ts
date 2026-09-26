@@ -1345,7 +1345,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     {},
   ),
   'abc242-e': decision(
-    'outcome-normalize-equivalent-states',
+    'outcome-count-symmetric-strings-under-lex-bound',
     [
       d('t0', 'primary', 'tag-symmetry-invariant-normalization'),
       d('t1', 'same_tag', 'tag-symmetry-invariant-normalization'),
