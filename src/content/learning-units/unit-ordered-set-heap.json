@@ -17,6 +17,8 @@
     "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"
   ],
   "tagIds": [
+    "tag-dynamic-interval-union",
+    "tag-endpoint-run-partition",
     "tag-ordered-interval-partition",
     "tag-ordered-set-multiset",
     "tag-priority-queue-best-first"
@@ -24,6 +26,8 @@
   "ownedTagIds": [],
   "learningOutcomeIds": [
     "outcome-enumerate-frontier-best-first",
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
     "outcome-maintain-ordered-interval-partition",
     "outcome-maintain-ordered-set-statistics"
   ],
@@ -81,8 +85,9 @@
     "abc407-e",
     "abc407-f",
     "abc418-f",
-    "abc433-e",
-    "abc444-e"
+    "abc428-f",
+    "abc444-e",
+    "abc449-f"
   ],
   "examples": [],
   "exercises": [],

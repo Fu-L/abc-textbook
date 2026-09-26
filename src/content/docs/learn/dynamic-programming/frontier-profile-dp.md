@@ -65,4 +65,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、frontier/pro
 - [ABC309 G 公式解説](https://atcoder.jp/contests/abc309/editorial/6745)
 - [ABC309 G 公式問題文](https://atcoder.jp/contests/abc309/tasks/abc309_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-frontier-profile-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-frontier-profile-dp`

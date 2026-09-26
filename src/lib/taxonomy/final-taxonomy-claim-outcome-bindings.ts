@@ -616,8 +616,8 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   'abc409-g': {
     '/typicalTechniques/2': [
       primary(
-        'outcome-encode-counting-by-generating-function',
         'outcome-compute-convolution-or-correlation',
+        'outcome-encode-counting-by-generating-function',
       ),
     ],
     '/prerequisiteCandidates/0': [

@@ -5,11 +5,13 @@
     "outcome-design-minimal-sufficient-state"
   ],
   "scopeIds": [
+    "abc228-h",
     "abc230-f",
     "abc234-g",
     "abc262-ex",
     "abc285-e",
     "abc288-f",
+    "abc305-ex",
     "abc374-f",
     "abc466-e",
     "tag-dp-prefix-partition",

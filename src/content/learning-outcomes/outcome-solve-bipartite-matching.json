@@ -2,12 +2,12 @@
   "id": "outcome-solve-bipartite-matching",
   "statement": "左右の一対一割当をaugmenting pathまたは単位容量flowで解き、Hall条件・Kőnigの定理・path coverへ接続する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
   "prerequisiteOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
     "outcome-color-and-classify-bipartite-components"
   ],
   "scopeIds": [
     "abc237-ex",
     "abc274-g",
-    "abc313-ex",
     "abc317-g",
     "abc320-g",
     "abc374-g",

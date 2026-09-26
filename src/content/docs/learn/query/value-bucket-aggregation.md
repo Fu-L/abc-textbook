@@ -57,4 +57,4 @@ ABC405 Gはこの更新と取得の非対称性をMoに組み込む。各値の�
 - [ABC405 G 公式解説](https://atcoder.jp/contests/abc405/editorial/12997)
 - [ABC405 G 公式問題文](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-value-bucket-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-value-bucket-aggregation`

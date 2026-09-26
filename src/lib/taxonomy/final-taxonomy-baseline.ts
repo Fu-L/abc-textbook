@@ -269,6 +269,8 @@ const BASELINE_CLAIM_CLASSIFICATIONS = [
   c('abc385-e', '/prerequisiteCandidates/0', 'integer-string-array-handling', 'sorting'),
   c('abc387-e', '/typicalTechniques/1', 'modular-arithmetic'),
   c('abc387-e', '/prerequisiteCandidates/1', 'integer-string-array-handling'),
+  c('abc402-f', '/typicalTechniques/1', 'binary-search'),
+  c('abc428-f', '/typicalTechniques/2', 'binary-search'),
   c('abc430-f', '/typicalTechniques/0', 'integer-string-array-handling'),
   c(
     'abc433-f',

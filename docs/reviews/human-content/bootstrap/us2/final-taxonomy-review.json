@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+  "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "0c9c668f1f36c3b154cfc271325e73a11da26cfebb958563855926094ea9ad75",
+  "inventoryDigest": "6cbb7f5ea4a3798b7257f7ac02b331dad5cb77a1380e68a2269c8e87c4529e69",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
+      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T09:22:25.856Z",
+      "completedAt": "2026-09-26T13:38:34.785Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
+      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T09:22:33.630Z",
+      "completedAt": "2026-09-26T13:38:42.831Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
+      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T09:22:34.184Z",
+      "completedAt": "2026-09-26T13:38:43.388Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
+      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T09:22:34.396Z",
+      "completedAt": "2026-09-26T13:38:43.607Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
+      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T09:22:41.292Z",
+      "completedAt": "2026-09-26T13:38:50.797Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "e17d2e88942122b3fafb90f6316e7dccf326c9e4fa64e42fc4a087323e997e24",
+  "reviewerExecutedCheckSetDigest": "b872a39be2c3c22579dd195cad4f474af6bdf4eae6ad61cbfc831389299cc294",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -103,6 +103,7 @@
         "outcome-accelerate-iteration-by-characteristic-p-frobenius",
         "outcome-accelerate-set-operations-with-bitsets",
         "outcome-accelerate-tree-dp-by-heavy-path",
+        "outcome-account-for-color-swap-in-connected-bipartite-counting",
         "outcome-add-conway-number-games",
         "outcome-aggregate-rooted-tree",
         "outcome-aggregate-subsequence-transitions-by-value",
@@ -112,6 +113,7 @@
         "outcome-answer-tree-ancestor-queries",
         "outcome-apply-formal-power-series-operations",
         "outcome-apply-heavy-light-decomposition",
+        "outcome-apply-stirling-transform",
         "outcome-apply-subset-zeta-mobius-transform",
         "outcome-approximate-rational-by-euclid",
         "outcome-augment-components-with-metadata",
@@ -162,6 +164,7 @@
         "outcome-correct-overlap-by-inversion",
         "outcome-count-combinatorial-objects-by-determinant",
         "outcome-count-euler-circuits-by-best",
+        "outcome-count-finite-field-subspaces-by-rank",
         "outcome-count-implicit-binary-tree-layers",
         "outcome-count-labeled-structures-by-components",
         "outcome-count-nonintersecting-paths-by-lgv",
@@ -233,6 +236,8 @@
         "outcome-linearize-static-range-information",
         "outcome-localize-change-impact-by-witness",
         "outcome-maintain-connectivity-components",
+        "outcome-maintain-dynamic-interval-union-length",
+        "outcome-maintain-endpoint-run-partition",
         "outcome-maintain-interactive-query-protocol",
         "outcome-maintain-local-sequence-links",
         "outcome-maintain-modular-product-under-factor-updates",
@@ -336,10 +341,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# T159 final taxonomy semantic repair self-review\n\nThe accepted Inventory is treated as true. I reviewed the recorded observations, adopted and\nrejected approaches, key insights, algorithm connections, typical techniques, and prerequisite\nclaims for every affected problem. The full placement scope remains 868 problems; the semantic audit\nidentified 15 problems requiring correction. Third-party review is skipped as requested. The T159\nmanifest permits self-review for the solo maintainer, and the user explicitly authorized this route.\n\n## Primary, home, and supporting decisions\n\n- **ABC225 H, ABC247 Ex, ABC267 Ex:** The generating-function model determines what each coefficient\n  means, so it remains the home skill. NTT convolution is co-primary because the product computation\n  is a separate reusable operation that determines whether the stated input size is feasible.\n  Product-tree divide and conquer is supporting where it is independently used. ABC247 Ex's\n  permutation-cycle observation remains problem-specific; functional-graph decomposition is removed\n  because the adopted solution does not decompose a functional graph into cycles and in-trees.\n- **ABC269 Ex, ABC272 Ex, ABC381 G, ABC260 Ex, ABC297 Ex, ABC318 Ex, ABC387 G, ABC439 G:** Existing\n  primary outcomes remain the right descriptions of the tree DP, multipoint evaluation, field\n  extension, generating-function/FPS model, labeled-component formula, composition, or power\n  projection. Convolution is supporting at the claims where NTT polynomial products implement\n  heavy-path products, product/remainder trees, chirp-z, binomial transforms, FPS inverse/exp/Newton\n  steps, or rational-function merges. The added binding does not promote implementation\n  multiplication over the mathematical model.\n- **ABC304 Ex:** Earliest-deadline-first selection, justified by exchange, controls whether an\n  admissible ordering exists. Reverse DAG deadline propagation and topological processing support\n  that choice. The heap is an implementation detail here: the retired generic heap tag has no\n  canonical supporting outcome, while the remaining best-first tag describes a different skill.\n- **ABC304 G:** For a fixed threshold, the central oracle computes maximum XOR-qualified matching\n  size by bit recursion over same-set and cross-set pair counts. This specialized recurrence is the\n  primary skill. Monotone binary search is only the outer optimization and is supporting. The new\n  Tag/Outcome is distinct from minimizing maximum XOR under a common mask and from bitwise greedy\n  feasibility.\n- **ABC308 F:** The exchange argument proves the maximum-discount matching greedy. Price-order\n  activation is a meaningful event sweep and supports the greedy. The max heap is an implementation\n  detail: best-first enumeration describes a different learner outcome, so it is not assigned as a\n  supporting skill.\n- **ABC458 G:** The linear-time feasibility oracle depends on preserving a concave piecewise-linear\n  DP through slope-trick breakpoint updates. The concavity can be sign-reversed to use the convex\n  slope-trick representation. That technique determines the problem's core reusable skill and home;\n  monotone search over the number of people is supporting.\n\nThe decisions above were recorded against Inventory claim paths, not assigned by keyword matching.\nThe T159 review scope includes the newly added XOR-threshold matching Outcome and still covers all\n868 placements.",
+      "reviewBasis": "I traced every audited placement back to its reviewed Inventory record and compared the adopted approach, algorithmConnection, keyInsights, prerequisiteCandidates, and implementationConcerns. I accepted findings where the claimed skill follows from the official-source-backed method, removed unsupported techniques, separated primary outcomes from independently reusable supporting outcomes, and kept implementation choices such as data-structure backends unstated when Inventory does not require them. I also checked that each added or revised Outcome has a unique owning Tag and fits its learning unit. This review uses the manifest's self-review route because the solo maintainer is the recorded owner; no third-party review is claimed.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-26T09:22:46.808Z"
+      "reviewedAt": "2026-09-26T13:38:56.577Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -358,6 +363,7 @@
       "outcome-accelerate-iteration-by-characteristic-p-frobenius",
       "outcome-accelerate-set-operations-with-bitsets",
       "outcome-accelerate-tree-dp-by-heavy-path",
+      "outcome-account-for-color-swap-in-connected-bipartite-counting",
       "outcome-add-conway-number-games",
       "outcome-aggregate-rooted-tree",
       "outcome-aggregate-subsequence-transitions-by-value",
@@ -367,6 +373,7 @@
       "outcome-answer-tree-ancestor-queries",
       "outcome-apply-formal-power-series-operations",
       "outcome-apply-heavy-light-decomposition",
+      "outcome-apply-stirling-transform",
       "outcome-apply-subset-zeta-mobius-transform",
       "outcome-approximate-rational-by-euclid",
       "outcome-augment-components-with-metadata",
@@ -417,6 +424,7 @@
       "outcome-correct-overlap-by-inversion",
       "outcome-count-combinatorial-objects-by-determinant",
       "outcome-count-euler-circuits-by-best",
+      "outcome-count-finite-field-subspaces-by-rank",
       "outcome-count-implicit-binary-tree-layers",
       "outcome-count-labeled-structures-by-components",
       "outcome-count-nonintersecting-paths-by-lgv",
@@ -488,6 +496,8 @@
       "outcome-linearize-static-range-information",
       "outcome-localize-change-impact-by-witness",
       "outcome-maintain-connectivity-components",
+      "outcome-maintain-dynamic-interval-union-length",
+      "outcome-maintain-endpoint-run-partition",
       "outcome-maintain-interactive-query-protocol",
       "outcome-maintain-local-sequence-links",
       "outcome-maintain-modular-product-under-factor-updates",
@@ -594,12 +604,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# T159 final taxonomy semantic repair self-review\n\nThe accepted Inventory is treated as true. I reviewed the recorded observations, adopted and\nrejected approaches, key insights, algorithm connections, typical techniques, and prerequisite\nclaims for every affected problem. The full placement scope remains 868 problems; the semantic audit\nidentified 15 problems requiring correction. Third-party review is skipped as requested. The T159\nmanifest permits self-review for the solo maintainer, and the user explicitly authorized this route.\n\n## Primary, home, and supporting decisions\n\n- **ABC225 H, ABC247 Ex, ABC267 Ex:** The generating-function model determines what each coefficient\n  means, so it remains the home skill. NTT convolution is co-primary because the product computation\n  is a separate reusable operation that determines whether the stated input size is feasible.\n  Product-tree divide and conquer is supporting where it is independently used. ABC247 Ex's\n  permutation-cycle observation remains problem-specific; functional-graph decomposition is removed\n  because the adopted solution does not decompose a functional graph into cycles and in-trees.\n- **ABC269 Ex, ABC272 Ex, ABC381 G, ABC260 Ex, ABC297 Ex, ABC318 Ex, ABC387 G, ABC439 G:** Existing\n  primary outcomes remain the right descriptions of the tree DP, multipoint evaluation, field\n  extension, generating-function/FPS model, labeled-component formula, composition, or power\n  projection. Convolution is supporting at the claims where NTT polynomial products implement\n  heavy-path products, product/remainder trees, chirp-z, binomial transforms, FPS inverse/exp/Newton\n  steps, or rational-function merges. The added binding does not promote implementation\n  multiplication over the mathematical model.\n- **ABC304 Ex:** Earliest-deadline-first selection, justified by exchange, controls whether an\n  admissible ordering exists. Reverse DAG deadline propagation and topological processing support\n  that choice. The heap is an implementation detail here: the retired generic heap tag has no\n  canonical supporting outcome, while the remaining best-first tag describes a different skill.\n- **ABC304 G:** For a fixed threshold, the central oracle computes maximum XOR-qualified matching\n  size by bit recursion over same-set and cross-set pair counts. This specialized recurrence is the\n  primary skill. Monotone binary search is only the outer optimization and is supporting. The new\n  Tag/Outcome is distinct from minimizing maximum XOR under a common mask and from bitwise greedy\n  feasibility.\n- **ABC308 F:** The exchange argument proves the maximum-discount matching greedy. Price-order\n  activation is a meaningful event sweep and supports the greedy. The max heap is an implementation\n  detail: best-first enumeration describes a different learner outcome, so it is not assigned as a\n  supporting skill.\n- **ABC458 G:** The linear-time feasibility oracle depends on preserving a concave piecewise-linear\n  DP through slope-trick breakpoint updates. The concavity can be sign-reversed to use the convex\n  slope-trick representation. That technique determines the problem's core reusable skill and home;\n  monotone search over the number of people is supporting.\n\nThe decisions above were recorded against Inventory claim paths, not assigned by keyword matching.\nThe T159 review scope includes the newly added XOR-threshold matching Outcome and still covers all\n868 placements.",
+    "rationale": "I traced every audited placement back to its reviewed Inventory record and compared the adopted approach, algorithmConnection, keyInsights, prerequisiteCandidates, and implementationConcerns. I accepted findings where the claimed skill follows from the official-source-backed method, removed unsupported techniques, separated primary outcomes from independently reusable supporting outcomes, and kept implementation choices such as data-structure backends unstated when Inventory does not require them. I also checked that each added or revised Outcome has a unique owning Tag and fits its learning unit. This review uses the manifest's self-review route because the solo maintainer is the recorded owner; no third-party review is claimed.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-26T09:22:46.808Z"
+    "confirmedAt": "2026-09-26T13:38:56.577Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-26T09:22:46.808Z",
-  "evidenceDigest": "d5534393afb864a82c51c19291863e89a3c49f13bec2b844365496b18a8d769a"
+  "generatedAt": "2026-09-26T13:38:56.577Z",
+  "evidenceDigest": "bbb7e8d34b7785dc2383ad313d9cb73eeec1867762211d9b5085c1291b0066b1"
 }

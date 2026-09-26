@@ -1,0 +1,10 @@
+{
+  "id": "outcome-maintain-endpoint-run-partition",
+  "statement": "dequeなどの端点操作でrun分割を更新し、左右の境界からの削除・追加と各要素の償却回数を説明できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc428-f",
+    "tag-endpoint-run-partition",
+    "unit-ordered-interval-partition"
+  ]
+}

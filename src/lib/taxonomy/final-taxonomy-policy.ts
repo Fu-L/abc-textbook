@@ -990,7 +990,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-parallel-binary-search':
     '単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。',
   'unit-bipartite-structure':
-    '無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。',
+    '無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。',
   'unit-spanning-tree-optimization':
     '貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。',
   'unit-directed-condensation':
@@ -1087,7 +1087,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-multiplicative-order-periods':
     '合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。',
   'unit-combinatorial-coefficients':
-    '選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。',
+    '選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。',
   'unit-inclusion-exclusion':
     '単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。',
   'unit-polynomial-convolution':
@@ -2056,7 +2056,10 @@ const TAG_SEEDS: readonly TagSeed[] = [
     definition:
       '無向グラフを二色に塗れる条件を探索で検証し、各連結成分の二部サイズ・反転対称性を集約する。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-color-and-classify-bipartite-components'],
+    outcomeIds: [
+      'outcome-color-and-classify-bipartite-components',
+      'outcome-account-for-color-swap-in-connected-bipartite-counting',
+    ],
     unitIds: ['unit-bipartite-structure'],
     recall: ['bipartite graph', '二部グラフ', '二部彩色', '2.?coloring', 'odd cycle'],
     object: ['無向グラフ', '連結成分', '二つの部', '頂点色'],
@@ -3430,6 +3433,74 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['完全blockと端数', '値別頻度の集約'],
     goal: ['頻度和と積', '更新queryの計算量配分'],
     priority: 75,
+  },
+  {
+    id: 'tag-finite-field-subspace-counting',
+    name: '有限体部分空間のrank別計数',
+    definition:
+      '有限体上の部分空間をrankごとに分類し、Gaussian binomial係数などでspan条件を数え上げる。連立方程式を解く技能とは区別する。',
+    parentId: 'tag-combinatorial-coefficients',
+    outcomeIds: ['outcome-count-finite-field-subspaces-by-rank'],
+    unitIds: ['unit-combinatorial-coefficients'],
+    recall: ['Gaussian binomial', 'q-binomial', 'finite-field subspace', '有限体部分空間'],
+    object: ['有限体上の部分空間', 'rank', 'span'],
+    trigger: ['生成ベクトルが張る部分空間を数える', 'rankごとの部分空間数'],
+    invariant: ['部分空間の次元', 'Gaussian binomial係数'],
+    goal: ['rank別部分空間計数', 'span条件の計数'],
+    representativeProblemIds: ['abc278-ex'],
+    primaryEligible: true,
+    priority: 77,
+  },
+  {
+    id: 'tag-stirling-transform',
+    name: 'Stirling変換と階乗基底変換',
+    definition:
+      '冪基底と下降階乗基底の係数をStirling数で相互変換し、rank別の計数列を目的の基底へ移す。',
+    parentId: 'tag-combinatorial-coefficients',
+    outcomeIds: ['outcome-apply-stirling-transform'],
+    unitIds: ['unit-combinatorial-coefficients'],
+    recall: ['Stirling transform', 'Stirling numbers', 'Stirling数', '階乗基底'],
+    object: ['冪基底', '下降階乗基底', 'Stirling数'],
+    trigger: ['冪和を下降階乗和へ変換', 'rank別係数を変換'],
+    invariant: ['基底変換の係数', '第二種Stirling数'],
+    goal: ['Stirling変換', '逆変換'],
+    representativeProblemIds: ['abc278-ex'],
+    primaryEligible: true,
+    priority: 74,
+  },
+  {
+    id: 'tag-endpoint-run-partition',
+    name: '端点更新型のrun分割管理',
+    definition:
+      '順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-maintain-endpoint-run-partition'],
+    unitIds: ['unit-ordered-interval-partition'],
+    recall: ['deque run partition', 'endpoint run', '端点更新', 'run分割'],
+    object: ['順序付きrun', 'deque', '区間境界'],
+    trigger: ['両端からrunを削る', '端点側で区間を分割・追加'],
+    invariant: ['run順序', '境界の復元', '各要素の一度限りの除去'],
+    goal: ['端点操作によるrun分割管理', '操作列の償却評価'],
+    representativeProblemIds: ['abc428-f'],
+    primaryEligible: true,
+    priority: 78,
+  },
+  {
+    id: 'tag-dynamic-interval-union',
+    name: '動的な区間和集合長',
+    definition:
+      '区間の追加・削除に応じて被覆の重複を保ち、現在の和集合の長さを更新する。Inventoryで特定されていない実装backendを前提にしない。',
+    parentId: 'tag-query-sufficient-aggregate',
+    outcomeIds: ['outcome-maintain-dynamic-interval-union-length'],
+    unitIds: ['unit-ordered-interval-partition'],
+    recall: ['dynamic interval union', 'covered length', '区間和集合長', '被覆長'],
+    object: ['active interval', '被覆区間', '和集合の長さ'],
+    trigger: ['区間を追加・削除しながら被覆長を集計'],
+    invariant: ['重複被覆数', 'active intervalの境界', '被覆長'],
+    goal: ['動的な区間和集合長', '長方形和集合面積のsweep'],
+    representativeProblemIds: ['abc449-f'],
+    primaryEligible: true,
+    priority: 76,
   },
   {
     id: 'tag-additive-expectation-potential',
@@ -5904,6 +5975,16 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。',
   'outcome-compress-dp-sufficient-aggregates':
     '遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。',
+  'outcome-count-finite-field-subspaces-by-rank':
+    '生成ベクトルのspan条件をrank別の部分空間数へ変換し、有限体上のGaussian binomial係数で各rankの寄与を数えられる。',
+  'outcome-apply-stirling-transform':
+    '冪基底と下降階乗基底の係数をStirling数で変換し、目的のrank別計数列を構成できる。',
+  'outcome-account-for-color-swap-in-connected-bipartite-counting':
+    '連結二部グラフの二つの彩色が部の交換だけで対応することを使い、彩色付きの計数から同じグラフの重複を補正できる。',
+  'outcome-maintain-endpoint-run-partition':
+    'dequeなどの端点操作でrun分割を更新し、左右の境界からの削除・追加と各要素の償却回数を説明できる。',
+  'outcome-maintain-dynamic-interval-union-length':
+    '区間の追加・削除に応じて重複被覆を管理し、active区間の和集合長を更新できる。具体的なbackendは採用解法が指定する場合に限って固定する。',
   'outcome-slide-transition-recurrence':
     '隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。',
   'outcome-close-eventual-dp-tail':
@@ -6323,6 +6404,11 @@ const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-count-through-cyclic-exponents': ['unit-cyclic-group-exponent-counting'],
   'outcome-find-period-by-multiplicative-order': ['unit-multiplicative-order-periods'],
   'outcome-compute-convolution-or-correlation': ['unit-polynomial-convolution'],
+  'outcome-count-finite-field-subspaces-by-rank': ['unit-combinatorial-coefficients'],
+  'outcome-apply-stirling-transform': ['unit-combinatorial-coefficients'],
+  'outcome-account-for-color-swap-in-connected-bipartite-counting': ['unit-bipartite-structure'],
+  'outcome-maintain-endpoint-run-partition': ['unit-ordered-interval-partition'],
+  'outcome-maintain-dynamic-interval-union-length': ['unit-ordered-interval-partition'],
   'outcome-encode-counting-by-generating-function': ['unit-generating-functions'],
   'outcome-apply-formal-power-series-operations': ['unit-formal-power-series'],
   'outcome-solve-xor-threshold-matching': ['unit-xor-threshold-matching'],
@@ -6374,9 +6460,13 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-evaluate-polynomial-at-many-points',
   'outcome-close-eventual-dp-tail',
   'outcome-evaluate-at-geometric-points',
-  'outcome-find-weighted-balanced-separator',
   'outcome-decompose-expectation-by-additive-potential',
   'outcome-aggregate-value-prefix-by-buckets',
+  'outcome-count-finite-field-subspaces-by-rank',
+  'outcome-apply-stirling-transform',
+  'outcome-account-for-color-swap-in-connected-bipartite-counting',
+  'outcome-maintain-endpoint-run-partition',
+  'outcome-maintain-dynamic-interval-union-length',
   'outcome-invert-generating-function-equation',
   'outcome-expand-euler-product-sparsely',
   'outcome-compute-binomial-by-lucas',
@@ -6495,6 +6585,10 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
 export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-additive-expectation-potential',
   'tag-value-bucket-aggregation',
+  'tag-finite-field-subspace-counting',
+  'tag-stirling-transform',
+  'tag-endpoint-run-partition',
+  'tag-dynamic-interval-union',
   'tag-heavy-path-tree-dp',
   'tag-heavy-light-recursive-dp',
   'tag-stern-brocot-ancestry',
@@ -7847,7 +7941,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
       'abc275-ex',
       'abc324-g',
       'abc329-f',
-      'abc369-g',
       'abc411-f',
       'abc451-f',
       'abc454-g',
@@ -7932,7 +8025,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
       'abc332-g',
       'abc347-g',
       'abc397-g',
-      'abc413-g',
     ],
   },
   {
@@ -8103,7 +8195,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-transform-to-linear-system-or-rank',
     to: 'outcome-solve-linear-system-and-rank',
-    problemIds: ['abc276-ex', 'abc278-ex', 'abc323-g', 'abc366-g', 'abc412-g'],
+    problemIds: ['abc276-ex', 'abc323-g', 'abc366-g', 'abc412-g'],
   },
   {
     from: 'outcome-evaluate-and-compose-polynomials',
@@ -8234,11 +8326,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
     from: 'outcome-maintain-connectivity-components',
     to: 'outcome-optimize-mask-by-bitwise-feasibility',
     problemIds: ['abc408-e'],
-  },
-  {
-    from: 'outcome-maintain-connectivity-components',
-    to: 'outcome-dualize-planar-cut-to-path',
-    problemIds: ['abc413-g'],
   },
   {
     from: 'outcome-maintain-connectivity-components',
@@ -8528,15 +8615,7 @@ for (const group of [
   {
     from: 'outcome-model-and-compute-shortest-path',
     to: 'outcome-compute-all-pairs-distance',
-    problemIds: [
-      'abc243-e',
-      'abc261-g',
-      'abc286-e',
-      'abc338-f',
-      'abc369-e',
-      'abc375-f',
-      'abc416-e',
-    ],
+    problemIds: ['abc243-e', 'abc286-e', 'abc338-f', 'abc369-e', 'abc375-f', 'abc416-e'],
   },
   {
     from: 'outcome-build-balanced-separator-decomposition',

@@ -17,17 +17,25 @@
     "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"
   ],
   "tagIds": [
-    "tag-combinatorial-coefficients"
+    "tag-combinatorial-coefficients",
+    "tag-finite-field-subspace-counting",
+    "tag-stirling-transform"
   ],
   "ownedTagIds": [
-    "tag-combinatorial-coefficients"
+    "tag-combinatorial-coefficients",
+    "tag-finite-field-subspace-counting",
+    "tag-stirling-transform"
   ],
   "learningOutcomeIds": [
+    "outcome-apply-stirling-transform",
     "outcome-compute-binomial-by-lucas",
+    "outcome-count-finite-field-subspaces-by-rank",
     "outcome-formulate-combinatorial-coefficients"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-apply-stirling-transform",
     "outcome-compute-binomial-by-lucas",
+    "outcome-count-finite-field-subspaces-by-rank",
     "outcome-formulate-combinatorial-coefficients"
   ],
   "contentPhase": "canonical_skeleton",
@@ -41,6 +49,7 @@
     "abc266-g",
     "abc267-g",
     "abc276-g",
+    "abc278-ex",
     "abc290-f",
     "abc358-e",
     "abc399-f",
@@ -68,7 +77,8 @@
     "abc266-g",
     "abc267-g",
     "abc276-g",
-    "abc463-g"
+    "abc463-g",
+    "abc278-ex"
   ],
   "relatedProblemIds": [
     "abc214-g",
@@ -88,7 +98,6 @@
     "abc260-ex",
     "abc272-ex",
     "abc273-g",
-    "abc278-ex",
     "abc279-ex",
     "abc281-g",
     "abc284-ex",
@@ -105,6 +114,7 @@
     "abc327-g",
     "abc336-g",
     "abc345-g",
+    "abc352-g",
     "abc357-g",
     "abc386-g",
     "abc389-g",
@@ -117,9 +127,10 @@
     "abc453-e",
     "abc456-g",
     "abc459-e",
-    "abc463-f"
+    "abc463-f",
+    "abc464-f"
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "選び方の重複を二項係数で整理し、対称操作で同一視する対象は固定点平均でorbitを数える。"
+  "learningRationale": "選び方を通常・Gaussian二項係数で整理し、必要ならStirling変換でrank別計数を基底変換する。"
 }

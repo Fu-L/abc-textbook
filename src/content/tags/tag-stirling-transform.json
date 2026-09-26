@@ -1,0 +1,44 @@
+{
+  "id": "tag-stirling-transform",
+  "name": "Stirling変換と階乗基底変換",
+  "definition": "冪基底と下降階乗基底の係数をStirling数で相互変換し、rank別の計数列を目的の基底へ移す。",
+  "parentId": "tag-combinatorial-coefficients",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Stirling数",
+      "下降階乗基底",
+      "冪基底"
+    ],
+    "triggerPatterns": [
+      "rank別係数を変換",
+      "冪和を下降階乗和へ変換"
+    ],
+    "invariantPatterns": [
+      "基底変換の係数",
+      "第二種Stirling数"
+    ],
+    "goalPatterns": [
+      "Stirling変換",
+      "逆変換"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-apply-stirling-transform"
+  ],
+  "representativeProblemIds": [
+    "abc278-ex"
+  ],
+  "aliases": [
+    "Stirling numbers",
+    "Stirling変換",
+    "階乗基底変換"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,44 @@
+{
+  "id": "tag-finite-field-subspace-counting",
+  "name": "有限体部分空間のrank別計数",
+  "definition": "有限体上の部分空間をrankごとに分類し、Gaussian binomial係数などでspan条件を数え上げる。連立方程式を解く技能とは区別する。",
+  "parentId": "tag-combinatorial-coefficients",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "rank",
+      "span",
+      "有限体上の部分空間"
+    ],
+    "triggerPatterns": [
+      "rankごとの部分空間数",
+      "生成ベクトルが張る部分空間を数える"
+    ],
+    "invariantPatterns": [
+      "Gaussian binomial係数",
+      "部分空間の次元"
+    ],
+    "goalPatterns": [
+      "rank別部分空間計数",
+      "span条件の計数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-count-finite-field-subspaces-by-rank"
+  ],
+  "representativeProblemIds": [
+    "abc278-ex"
+  ],
+  "aliases": [
+    "Gaussian binomial",
+    "rank別部分空間数",
+    "有限体部分空間"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8",
-    "acceptedAt": "2026-09-26T09:22:46.808Z"
+    "digest": "1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a",
+    "acceptedAt": "2026-09-26T13:38:56.577Z"
   },
   "taskIds": [
     "T047",
@@ -41,12 +41,12 @@
     "T050"
   ],
   "counts": {
-    "tags": 208,
-    "learningOutcomes": 235,
+    "tags": 212,
+    "learningOutcomes": 240,
     "learningUnits": 231,
     "learningDocuments": 231,
-    "directlyOwnedTags": 208,
-    "directlyOwnedLearningOutcomes": 235,
+    "directlyOwnedTags": 212,
+    "directlyOwnedLearningOutcomes": 240,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "72e41f22a44d4f6252816edcb6986ba17bd0d70a20d1dfed3e23e2c273981acf",
-    "learningOutcomes": "732371007ffba52b349879576c2a4cea8bb6c82494480fe25f83efc2b6af826b",
-    "learningUnits": "b389c519b45d4ad1da244813898acebff6e9381b7af9bcbd83e91557b5f03ff7",
-    "learningDocuments": "bac966f393aaa2591e0e68be077660a80766d751308e02594337fbadf9138b0a",
-    "learningPrerequisitesDigest": "ee682bda20b81e54f12661a32ed01c634873d23a3aac943e5405ee156dbb2de3",
-    "problemPlacementPolicyDigest": "8aa4ec630ac0acc6098bf8540c59b274c42fdb72c8661534952bf42c073be06c"
+    "tags": "139b2bcfbb29a4710515ed48cc5f7df3da1a64805a821a37b155db4e652c741f",
+    "learningOutcomes": "0abbdf88a89c56de04a9d1dfcc1baa9a5ef209d43c77903cb7c05707736e9bac",
+    "learningUnits": "d56b83027d5c229c8bfd5e9c589817cb6079a198523edfa1313a63023ed07c1c",
+    "learningDocuments": "f7877ff21f81588914f04e569793ccaf4d93d7826cff8052fcbddb961c58a630",
+    "learningPrerequisitesDigest": "0c82222519c4f84e469e519a70831b0068d6eec1a08b744ec9c6abcf7f619d3a",
+    "problemPlacementPolicyDigest": "fb659ae5a83baa80b2b88b99924be1e2a09b62aa8e11aba0f2a30073e3fb1466"
   },
-  "materializationDigest": "1fa1def68225857d20245fb923716f69b0993f7eacf974e7672b33ec4ca64c00"
+  "materializationDigest": "80379a58965542fdb1cd276478dfb0206c130ea0b2fe48a5ef587d2c135af63b"
 }

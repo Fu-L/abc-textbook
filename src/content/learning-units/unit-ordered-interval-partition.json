@@ -1,12 +1,12 @@
 {
   "id": "unit-ordered-interval-partition",
   "kind": "subsection",
-  "title": "ordered interval partition・ODT",
+  "title": "端点更新型のrun分割管理",
   "parentId": "unit-ordered-set-heap",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [
-    "ordered interval partition・ODTの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+    "端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
   ],
   "sourceRevisionIds": [
     "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
@@ -17,15 +17,23 @@
     "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
   ],
   "tagIds": [
+    "tag-dynamic-interval-union",
+    "tag-endpoint-run-partition",
     "tag-ordered-interval-partition"
   ],
   "ownedTagIds": [
+    "tag-dynamic-interval-union",
+    "tag-endpoint-run-partition",
     "tag-ordered-interval-partition"
   ],
   "learningOutcomeIds": [
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
     "outcome-maintain-ordered-interval-partition"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
     "outcome-maintain-ordered-interval-partition"
   ],
   "contentPhase": "canonical_skeleton",
@@ -44,9 +52,11 @@
   ],
   "relatedProblemIds": [
     "abc251-ex",
-    "abc256-ex"
+    "abc256-ex",
+    "abc428-f",
+    "abc449-f"
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "ordered set・multisetの動的順序管理で得た考え方と実装を再利用し、ordered interval partition・ODTの発動条件・正当化・境界を重複なく学ぶ。"
+  "learningRationale": "順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

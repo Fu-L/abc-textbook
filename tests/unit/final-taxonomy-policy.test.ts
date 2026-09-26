@@ -132,6 +132,70 @@ describe('final taxonomy policy', () => {
     const expected: Readonly<
       Record<string, readonly [string, readonly string[], readonly string[], readonly string[]]>
     > = {
+      'abc224-f': [
+        'outcome-compress-dp-sufficient-aggregates',
+        ['tag-dp-transition-acceleration'],
+        [],
+        ['tag-contribution-reordering'],
+      ],
+      'abc271-e': ['outcome-relax-in-dependency-order', ['tag-shortest-path'], [], []],
+      'abc278-ex': [
+        'outcome-count-finite-field-subspaces-by-rank',
+        ['tag-finite-field-subspace-counting'],
+        [],
+        ['tag-combinatorial-coefficients', 'tag-convolution', 'tag-stirling-transform'],
+      ],
+      'abc280-e': [
+        'outcome-reorder-counting-contributions',
+        ['tag-contribution-reordering'],
+        [],
+        ['tag-modular-arithmetic', 'tag-stochastic-expectation-dp'],
+      ],
+      'abc327-g': [
+        'outcome-count-labeled-structures-by-components',
+        ['tag-labeled-component-decomposition'],
+        [],
+        [
+          'tag-bipartite-structure',
+          'tag-combinatorial-coefficients',
+          'tag-inclusion-exclusion',
+          'tag-modular-arithmetic',
+        ],
+      ],
+      'abc369-g': [
+        'outcome-allocate-by-convex-marginal-costs',
+        ['tag-separable-convex-marginals'],
+        [],
+        ['tag-rooted-tree-aggregation'],
+      ],
+      'abc409-g': [
+        'outcome-compute-convolution-or-correlation',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-encode-counting-by-generating-function'],
+        [
+          'tag-combinatorial-coefficients',
+          'tag-modular-arithmetic',
+          'tag-stochastic-expectation-dp',
+        ],
+      ],
+      'abc413-g': [
+        'outcome-dualize-planar-cut-to-path',
+        ['tag-planar-duality'],
+        [],
+        ['tag-dsu-components'],
+      ],
+      'abc428-f': [
+        'outcome-bound-monotone-total-work',
+        ['tag-amortized-monotone-progress'],
+        [],
+        ['tag-endpoint-run-partition'],
+      ],
+      'abc449-f': [
+        'outcome-linearize-events',
+        ['tag-event-sweep'],
+        [],
+        ['tag-dynamic-interval-union'],
+      ],
       'abc225-h': [
         'outcome-encode-counting-by-generating-function',
         ['tag-convolution', 'tag-generating-functions'],
@@ -230,7 +294,7 @@ describe('final taxonomy policy', () => {
           'outcome-apply-formal-power-series-operations',
           'outcome-encode-counting-by-generating-function',
         ],
-        ['tag-convolution', 'tag-recursive-divide-and-conquer'],
+        ['tag-convolution', 'tag-modular-arithmetic', 'tag-recursive-divide-and-conquer'],
       ],
       'abc304-ex': [
         'outcome-prove-greedy-order',
@@ -272,7 +336,12 @@ describe('final taxonomy policy', () => {
         'outcome-encode-counting-by-generating-function',
         ['tag-convolution', 'tag-generating-functions'],
         ['outcome-compute-convolution-or-correlation'],
-        ['tag-contribution-reordering', 'tag-recursive-divide-and-conquer'],
+        [
+          'tag-combinatorial-coefficients',
+          'tag-contribution-reordering',
+          'tag-modular-arithmetic',
+          'tag-recursive-divide-and-conquer',
+        ],
       ],
       'abc355-f': [
         'outcome-derive-mst-weight-from-threshold-components',
@@ -346,8 +415,8 @@ describe('final taxonomy policy', () => {
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(208);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(235);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(212);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(240);
     expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(231);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
@@ -1443,7 +1512,10 @@ describe('final taxonomy policy', () => {
         'outcome-detect-crossing-by-cyclic-order',
       ],
       'abc408-e': ['outcome-maintain-connectivity-components'],
-      'abc413-g': ['outcome-maintain-connectivity-components', 'outcome-model-max-flow-min-cut'],
+      'abc413-g': [
+        'outcome-dualize-planar-cut-to-path',
+        'outcome-maintain-connectivity-components',
+      ],
       'abc415-g': ['outcome-prove-greedy-order'],
       'abc424-f': ['outcome-detect-crossing-by-cyclic-order'],
       'abc429-f': ['outcome-exponentiate-transition-over-semiring'],
@@ -1695,7 +1767,9 @@ describe('final taxonomy policy', () => {
     expect(tagIdsAt('abc226-e', '/prerequisiteCandidates/1', 'supporting')).toEqual([
       'tag-modular-arithmetic',
     ]);
-    expect(tagIdsAt('abc310-g', '/prerequisiteCandidates/1', 'supporting')).toEqual([]);
+    expect(tagIdsAt('abc310-g', '/prerequisiteCandidates/1', 'supporting')).toEqual([
+      'tag-modular-arithmetic',
+    ]);
     expect(tagIdsAt('abc419-e', '/typicalTechniques/0', 'supporting')).toEqual([]);
 
     const multiPrimaryDecisions = table.decisions.filter(

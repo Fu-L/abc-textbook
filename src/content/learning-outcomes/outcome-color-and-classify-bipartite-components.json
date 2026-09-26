@@ -3,7 +3,6 @@
   "statement": "各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。",
   "prerequisiteOutcomeIds": [],
   "scopeIds": [
-    "abc327-g",
     "abc398-e",
     "abc398-g",
     "abc437-g",

@@ -23,9 +23,11 @@
     "tag-bipartite-structure"
   ],
   "learningOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
     "outcome-color-and-classify-bipartite-components"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
     "outcome-color-and-classify-bipartite-components"
   ],
   "contentPhase": "canonical_skeleton",
@@ -46,5 +48,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "無向グラフを探索できることを前提に、辺をまたぐたび色を反転し、矛盾検出と成分ごとの二部サイズ集約を行う。"
+  "learningRationale": "無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。"
 }

@@ -104,7 +104,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 = {
   'abc326-g': 'tag-flow-matching-cut',
   'abc327-e': 'tag-sequence-subsequence-dp',
   'abc327-f': 'tag-event-sweep',
-  'abc327-g': 'tag-combinatorial-coefficients',
+  'abc327-g': 'tag-labeled-component-decomposition',
   'abc328-e': 'tag-bounded-enumeration',
   'abc328-f': 'tag-dsu-connectivity',
   'abc328-g': 'tag-subset-bitmask-transform',

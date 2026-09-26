@@ -1,0 +1,10 @@
+{
+  "id": "outcome-count-finite-field-subspaces-by-rank",
+  "statement": "生成ベクトルのspan条件をrank別の部分空間数へ変換し、有限体上のGaussian binomial係数で各rankの寄与を数えられる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc278-ex",
+    "tag-finite-field-subspace-counting",
+    "unit-combinatorial-coefficients"
+  ]
+}

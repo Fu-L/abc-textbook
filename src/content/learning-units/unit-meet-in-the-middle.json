@@ -52,9 +52,7 @@
     "abc220-h",
     "abc252-ex"
   ],
-  "relatedProblemIds": [
-    "abc423-g"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "learningRationale": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"

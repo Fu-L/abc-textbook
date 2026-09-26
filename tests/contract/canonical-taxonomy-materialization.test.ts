@@ -247,7 +247,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(placement).not.toHaveProperty('presentationUnitId');
     }
     expect(occurrences.size).toBe(868);
-    expect(result.learningOutcomes).toHaveLength(235);
+    expect(result.learningOutcomes).toHaveLength(240);
   }, 30_000);
 
   it('materializes every accepted candidate and placement without re-synthesizing taxonomy', async () => {

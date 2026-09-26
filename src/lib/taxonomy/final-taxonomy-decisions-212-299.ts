@@ -73,7 +73,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc223-h': 'tag-linear-algebra-xor',
 
   'abc224-e': 'tag-dp-transition-acceleration',
-  'abc224-f': 'tag-contribution-reordering',
+  'abc224-f': 'tag-dp-transition-acceleration',
   'abc224-g': 'tag-discrete-convex-marginal',
   'abc224-h': 'tag-flow-matching-cut',
 
@@ -318,7 +318,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc270-f': 'tag-spanning-tree-optimization',
   'abc270-g': 'tag-divide-enumerate',
 
-  'abc271-e': 'tag-sequence-subsequence-dp',
+  'abc271-e': 'tag-shortest-path',
   'abc271-ex': 'tag-gcd-diophantine',
   'abc271-f': 'tag-divide-enumerate',
   'abc271-g': 'tag-linear-recurrence-matrix',
@@ -358,7 +358,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc277-g': 'tag-stochastic-expectation-dp',
 
   'abc278-e': 'tag-prefix-difference',
-  'abc278-ex': 'tag-linear-algebra-xor',
+  'abc278-ex': 'tag-finite-field-subspace-counting',
   'abc278-f': 'tag-game-grundy-dp',
   'abc278-g': 'tag-game-grundy-dp',
 
@@ -368,7 +368,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc279-f': 'tag-dsu-connectivity',
   'abc279-g': 'tag-dp-state-equivalence',
 
-  'abc280-e': 'tag-stochastic-expectation-dp',
+  'abc280-e': 'tag-contribution-reordering',
   'abc280-ex': 'tag-suffix-lcp-index',
   'abc280-f': 'tag-dsu-connectivity',
   'abc280-g': 'tag-inclusion-exclusion',

@@ -104,8 +104,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc412-g': 'tag-flow-matching-cut',
   'abc413-e': 'tag-divide-enumerate',
   'abc413-f': 'tag-game-value-dp',
-  // Planar duality reduces the sparse obstacle boundary to DSU connectivity.
-  'abc413-g': 'tag-dsu-connectivity',
+  // Planar duality turns the obstacle question into sparse dual connectivity.
+  'abc413-g': 'tag-planar-duality',
   'abc414-e': 'tag-integer-boundary-blocks',
   'abc414-f': 'tag-reachability-bfs',
   // The segment-tree graph is an edge compressor for an ordinary shortest path.

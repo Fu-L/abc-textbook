@@ -154,7 +154,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-ordered-interval-partition': [
     '青色',
-    'ordered setに区間を載せ、split・mergeと消去区間数の償却評価を組み合わせる。',
+    'run分割やactive区間の和集合を管理し、endpoint更新・重複被覆・消去回数の償却を説明する。',
   ],
   'unit-monotone-stack-queue': [
     '水色',
@@ -426,7 +426,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-bipartite-structure': [
     '緑色',
-    '探索で二色塗りと矛盾を判定し、成分ごとの反転対称性を数える。',
+    '二部性と部の反転対称性を扱い、連結二部グラフの彩色重複も補正する。',
   ],
   'unit-flow-matching': [
     '青色',
@@ -655,7 +655,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-combinatorial-coefficients': [
     '水色',
-    '選択・順列・分配を二項係数で表し、法上の階乗と逆元で計算する。',
+    '通常・Gaussian二項係数、Stirling変換、法上の階乗を使い、rank別計数を基底変換する。',
   ],
   'unit-reflection-principle': [
     '青色',

@@ -54,4 +54,4 @@ multiset・素因数指数vector・巨大整数式をランダムな体元やXOR
 - [ABC367 F 公式解説](https://atcoder.jp/contests/abc367/editorial/10692)
 - [ABC367 F 公式問題文](https://atcoder.jp/contests/abc367/tasks/abc367_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-randomized-algebraic-fingerprint`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-randomized-algebraic-fingerprint`

@@ -11,8 +11,8 @@
   "sourceRevisionIds": [
     "source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c",
     "source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43",
-    "source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b",
-    "source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7",
+    "source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6",
+    "source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516",
     "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
     "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
   ],
@@ -32,15 +32,14 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-system-rank.md",
   "problemIds": [
     "abc276-ex",
-    "abc278-ex",
     "abc366-g"
   ],
   "directProblemIds": [
     "abc366-g",
-    "abc276-ex",
-    "abc278-ex"
+    "abc276-ex"
   ],
   "relatedProblemIds": [
+    "abc299-ex",
     "abc323-g",
     "abc399-g"
   ],

@@ -1,0 +1,10 @@
+{
+  "id": "outcome-maintain-dynamic-interval-union-length",
+  "statement": "区間の追加・削除に応じて重複被覆を管理し、active区間の和集合長を更新できる。具体的なbackendは採用解法が指定する場合に限って固定する。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc449-f",
+    "tag-dynamic-interval-union",
+    "unit-ordered-interval-partition"
+  ]
+}

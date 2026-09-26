@@ -5264,6 +5264,17 @@
         },
         {
           "problemId": "abc256-f",
+          "claimPath": "/implementationConcerns/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+            "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+          ]
+        },
+        {
+          "problemId": "abc256-f",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -6244,6 +6255,6 @@
   ],
   "status": "accepted",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "fcfbd2cdbae40ab972ca7303140c44ba70f359adececb50d84a5ebc47c26c89b",
-  "integrationDigest": "99d4a0d14936a1cf445dcb42c1b14dc52d27d5594647e70b770ce79bf7049cf4"
+  "integrationSubjectDigest": "f2546968068865a58e86713bf9190a124dac3d1e8cfd3f8cf82a4728ff03af37",
+  "integrationDigest": "d4e0f40fc95501309d577d5b103a6f38789a3232f99198356eae6c35538f62c3"
 }

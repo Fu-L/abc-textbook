@@ -37,7 +37,6 @@
   "problemIds": [
     "abc214-f",
     "abc238-f",
-    "abc271-e",
     "abc299-f",
     "abc315-f",
     "abc327-e",
@@ -45,7 +44,6 @@
     "abc386-f"
   ],
   "directProblemIds": [
-    "abc271-e",
     "abc327-e",
     "abc362-e",
     "abc214-f",

@@ -45,7 +45,6 @@
     "abc270-ex",
     "abc275-e",
     "abc277-g",
-    "abc280-e",
     "abc298-e",
     "abc299-ex",
     "abc300-e",
@@ -67,7 +66,6 @@
     "abc263-e",
     "abc266-e",
     "abc275-e",
-    "abc280-e",
     "abc298-e",
     "abc300-e",
     "abc314-e",
@@ -92,6 +90,7 @@
   "relatedProblemIds": [
     "abc239-ex",
     "abc271-g",
+    "abc280-e",
     "abc310-f",
     "abc409-g"
   ],

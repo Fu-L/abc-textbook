@@ -55,6 +55,7 @@
     "tag-graph-model-structure"
   ],
   "learningOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
     "outcome-augment-components-with-metadata",
     "outcome-build-shortest-path-certificate",
     "outcome-characterize-bipartite-feasibility-by-hall",
@@ -141,6 +142,7 @@
     "abc263-g",
     "abc266-f",
     "abc270-f",
+    "abc271-e",
     "abc274-g",
     "abc276-e",
     "abc277-e",
@@ -245,7 +247,6 @@
     "abc261-g",
     "abc264-e",
     "abc264-g",
-    "abc271-e",
     "abc297-e",
     "abc299-e",
     "abc301-e",
