@@ -40,14 +40,12 @@
     "abc291-g",
     "abc307-ex",
     "abc315-ex",
-    "abc352-g",
-    "abc422-g",
+    "abc392-g",
     "abc432-g"
   ],
   "directProblemIds": [
     "abc291-g",
-    "abc352-g",
-    "abc422-g",
+    "abc392-g",
     "abc432-g",
     "abc265-ex",
     "abc307-ex"
@@ -66,11 +64,12 @@
     "abc323-g",
     "abc331-g",
     "abc345-g",
+    "abc352-g",
     "abc357-g",
     "abc385-g",
     "abc390-g",
-    "abc392-g",
     "abc409-g",
+    "abc422-g",
     "abc436-g",
     "abc462-g"
   ],

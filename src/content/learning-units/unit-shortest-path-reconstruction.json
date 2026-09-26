@@ -31,15 +31,14 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
   "problemIds": [
-    "abc252-e",
-    "abc308-ex"
+    "abc252-e"
   ],
   "directProblemIds": [
-    "abc252-e",
-    "abc308-ex"
+    "abc252-e"
   ],
   "relatedProblemIds": [
     "abc218-f",
+    "abc308-ex",
     "abc355-e"
   ],
   "examples": [],

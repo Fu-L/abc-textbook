@@ -39,7 +39,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 = {
   'abc307-f': 'tag-shortest-path',
   'abc307-g': 'tag-knapsack-resource',
   'abc308-e': 'tag-contribution-reordering',
-  'abc308-ex': 'tag-shortest-path-certificate',
+  'abc308-ex': 'tag-shortest-path',
   'abc308-f': 'tag-ordered-set-heap',
   'abc308-g': 'tag-ordered-set-heap',
   'abc309-e': 'tag-tree-aggregation-reroot',
@@ -187,7 +187,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_300_383 = {
   'abc354-f': 'tag-sequence-subsequence-dp',
   'abc354-g': 'tag-flow-matching-cut',
   'abc355-e': 'tag-constructive-witness',
-  'abc355-f': 'tag-dsu-connectivity',
+  'abc355-f': 'tag-spanning-tree-optimization',
   // Aliens DP's Lagrange penalty is the first reusable abstraction; Monge accelerates the inner DP.
   'abc355-g': 'tag-discrete-convex-marginal',
   'abc356-e': 'tag-integer-boundary-blocks',

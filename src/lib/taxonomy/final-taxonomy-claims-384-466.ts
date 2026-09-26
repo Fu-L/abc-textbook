@@ -321,7 +321,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc392-g': decision(
-    'outcome-encode-counting-by-generating-function',
+    'outcome-compute-convolution-or-correlation',
     [
       ['typicalTechniques', 0, 'primary', 'tag-convolution-fps'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
@@ -331,7 +331,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
     },
-    ['outcome-compute-convolution-or-correlation'],
+    ['outcome-encode-counting-by-generating-function'],
   ),
   'abc393-e': decision('outcome-decompose-by-prime-or-divisor', [
     ['typicalTechniques', 0, 'primary', 'tag-prime-divisor-decomposition'],
@@ -460,9 +460,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc398-e': decision(
-    'outcome-classify-game-states',
+    'outcome-color-and-classify-bipartite-components',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-game-grundy-dp'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-interactive-protocol'],
@@ -470,24 +470,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     {
       'tag-interactive-protocol': ['outcome-maintain-interactive-query-protocol'],
     },
-    ['outcome-color-and-classify-bipartite-components'],
   ),
   'abc398-f': decision('outcome-characterize-palindrome-intervals', [
     ['typicalTechniques', 0, 'primary', 'tag-palindrome-radius'],
     ['typicalTechniques', 1, 'same_tag', 'tag-palindrome-radius'],
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-palindrome-radius'],
   ]),
-  'abc398-g': decision(
-    'outcome-classify-game-states',
-    [
-      ['typicalTechniques', 0, 'primary', 'tag-game-grundy-dp'],
-      ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-game-grundy-dp'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
-    ],
-    {},
-    ['outcome-color-and-classify-bipartite-components'],
-  ),
+  'abc398-g': decision('outcome-color-and-classify-bipartite-components', [
+    ['typicalTechniques', 0, 'problem_specific'],
+    ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
+  ]),
   'abc399-e': decision('outcome-decompose-functional-graph', [
     ['typicalTechniques', 0, 'primary', 'tag-functional-graph-doubling'],
     ['typicalTechniques', 1, 'same_tag', 'tag-functional-graph-doubling'],
@@ -1268,7 +1261,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc422-g': decision(
-    'outcome-compute-convolution-or-correlation',
+    'outcome-encode-counting-by-generating-function',
     [
       ['typicalTechniques', 0, 'same_tag', 'tag-convolution-fps'],
       ['typicalTechniques', 0, 'supporting', 'tag-combinatorial-coefficients'],
@@ -1282,7 +1275,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
       'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
-    ['outcome-encode-counting-by-generating-function'],
+    ['outcome-compute-convolution-or-correlation'],
   ),
   'abc423-e': decision(
     'outcome-reorder-counting-contributions',
@@ -2152,15 +2145,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc451-g': decision(
-    'outcome-query-bitwise-order-with-trie',
+    'outcome-maintain-xor-linear-basis',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-linear-algebra-xor'],
-      ['typicalTechniques', 1, 'primary', 'tag-binary-trie'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-binary-trie'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-linear-algebra-xor'],
+      ['typicalTechniques', 0, 'primary', 'tag-xor-linear-basis'],
+      ['typicalTechniques', 1, 'supporting', 'tag-binary-trie'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-xor-linear-basis'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-binary-trie'],
     ],
     {
-      'tag-linear-algebra-xor': ['outcome-transform-to-linear-system-or-rank'],
+      'tag-binary-trie': ['outcome-query-bitwise-order-with-trie'],
     },
   ),
   'abc452-e': decision(

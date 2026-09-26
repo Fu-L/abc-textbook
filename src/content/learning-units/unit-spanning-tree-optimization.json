@@ -25,10 +25,12 @@
   ],
   "learningOutcomeIds": [
     "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components",
     "outcome-sweep-connectivity-by-kruskal-threshold"
   ],
   "ownedLearningOutcomeIds": [
-    "outcome-construct-optimal-spanning-tree"
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components"
   ],
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/graph/spanning-tree-optimization.md",
@@ -39,6 +41,7 @@
     "abc270-f",
     "abc282-e",
     "abc352-e",
+    "abc355-f",
     "abc364-f",
     "abc383-e"
   ],
@@ -47,11 +50,11 @@
     "abc282-e",
     "abc352-e",
     "abc270-f",
+    "abc355-f",
     "abc364-f"
   ],
   "relatedProblemIds": [
-    "abc301-ex",
-    "abc355-f"
+    "abc301-ex"
   ],
   "examples": [],
   "exercises": [],

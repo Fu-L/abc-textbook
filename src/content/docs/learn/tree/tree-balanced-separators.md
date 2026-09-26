@@ -67,4 +67,4 @@ sidebar:
 - [ABC453 F 公式解説](https://atcoder.jp/contests/abc453/editorial/18542)
 - [ABC453 F 公式問題文](https://atcoder.jp/contests/abc453/tasks/abc453_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-tree-balanced-separators`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-tree-balanced-separators`

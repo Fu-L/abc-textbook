@@ -50,4 +50,4 @@ sidebar:
 - [ABC466 G 公式解説](https://atcoder.jp/contests/abc466/editorial/22603)
 - [ABC466 G 公式問題文](https://atcoder.jp/contests/abc466/tasks/abc466_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-dp-carry-mixed-radix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-dp-carry-mixed-radix`

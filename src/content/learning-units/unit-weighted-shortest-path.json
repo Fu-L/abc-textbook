@@ -25,12 +25,14 @@
   "learningOutcomeIds": [
     "outcome-compute-all-pairs-distance",
     "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
     "outcome-model-and-compute-shortest-path",
     "outcome-relax-in-dependency-order"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-compute-all-pairs-distance",
     "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
     "outcome-model-and-compute-shortest-path",
     "outcome-relax-in-dependency-order"
   ],
@@ -49,6 +51,7 @@
     "abc286-e",
     "abc291-f",
     "abc307-f",
+    "abc308-ex",
     "abc325-e",
     "abc342-e",
     "abc395-e",
@@ -76,7 +79,8 @@
     "abc232-g",
     "abc245-g",
     "abc414-g",
-    "abc243-ex"
+    "abc243-ex",
+    "abc308-ex"
   ],
   "relatedProblemIds": [
     "abc218-f",
@@ -89,7 +93,6 @@
     "abc299-e",
     "abc301-e",
     "abc305-e",
-    "abc308-ex",
     "abc338-f",
     "abc364-g",
     "abc369-e",

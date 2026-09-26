@@ -2130,73 +2130,7 @@
             },
             {
               "problemId": "abc308-ex",
-              "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/algorithmConnection",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/candidateApproaches/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/keyInsights/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/keyInsights/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/observations/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/observations/1",
+              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -4125,84 +4059,7 @@
             },
             {
               "problemId": "abc308-ex",
-              "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
               "claimPath": "/prerequisiteCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/algorithmConnection",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/candidateApproaches/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/keyInsights/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/keyInsights/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/observations/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/observations/1",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -6333,73 +6190,7 @@
             },
             {
               "problemId": "abc308-ex",
-              "claimPath": "/outcomeCandidates/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/algorithmConnection",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/candidateApproaches/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/keyInsights/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/keyInsights/1",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/observations/0",
-              "evidenceIds": [
-                "evidence-official-analysis"
-              ],
-              "sourceRevisionIds": [
-                "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-              ]
-            },
-            {
-              "problemId": "abc308-ex",
-              "claimPath": "/reasoningPath/observations/1",
+              "claimPath": "/prerequisiteCandidates/0",
               "evidenceIds": [
                 "evidence-official-analysis"
               ],
@@ -6453,6 +6244,6 @@
   ],
   "status": "accepted",
   "canonicalMaterializationAllowed": false,
-  "integrationSubjectDigest": "d3c21f21130ca0a3b8f28dab67f724e9729840f50ca9f0948edf9c2b62eadf79",
-  "integrationDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23"
+  "integrationSubjectDigest": "fcfbd2cdbae40ab972ca7303140c44ba70f359adececb50d84a5ebc47c26c89b",
+  "integrationDigest": "99d4a0d14936a1cf445dcb42c1b14dc52d27d5594647e70b770ce79bf7049cf4"
 }

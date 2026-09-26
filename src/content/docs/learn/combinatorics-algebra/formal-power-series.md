@@ -68,4 +68,4 @@ sidebar:
 - [ABC289 H 公式解説](https://atcoder.jp/contests/abc289/editorial/5712)
 - [ABC289 H 公式問題文](https://atcoder.jp/contests/abc289/tasks/abc289_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-formal-power-series`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-formal-power-series`

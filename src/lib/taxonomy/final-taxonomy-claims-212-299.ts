@@ -1445,16 +1445,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
     {},
   ),
   'abc244-ex': decision(
-    'outcome-optimize-by-line-envelope',
+    'outcome-restrict-geometric-candidates-to-boundary',
     [
-      d('t0', 'primary', 'tag-convex-hull-trick'),
-      d('t0', 'supporting', 'tag-convex-hull-halfplane'),
+      d('t0', 'primary', 'tag-convex-hull-halfplane'),
       d('t1', 'supporting', 'tag-monoid-segment-tree'),
-      d('p0', 'supporting', 'tag-convex-hull-halfplane'),
+      d('p0', 'same_tag', 'tag-convex-hull-halfplane'),
       d('p0', 'supporting', 'tag-monoid-segment-tree'),
     ],
     {
-      'tag-convex-hull-halfplane': ['outcome-restrict-geometric-candidates-to-boundary'],
       'tag-monoid-segment-tree': ['outcome-decompose-ranges-into-segment-tree-nodes'],
     },
   ),

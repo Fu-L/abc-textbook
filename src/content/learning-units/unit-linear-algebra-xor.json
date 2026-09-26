@@ -39,7 +39,8 @@
     "abc283-g",
     "abc288-g",
     "abc366-g",
-    "abc367-g"
+    "abc367-g",
+    "abc451-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
@@ -47,8 +48,7 @@
     "abc236-f",
     "abc265-ex",
     "abc323-g",
-    "abc399-g",
-    "abc451-g"
+    "abc399-g"
   ],
   "examples": [],
   "exercises": [],

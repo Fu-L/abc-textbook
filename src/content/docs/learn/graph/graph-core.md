@@ -56,4 +56,4 @@ ABC226 Eでは各成分についてE=Vを確認する。木部分の辺の向き
 - [ABC266 F 公式解説](https://atcoder.jp/contests/abc266/editorial/4698)
 - [ABC266 F 公式問題文](https://atcoder.jp/contests/abc266/tasks/abc266_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-graph-core`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-graph-core`

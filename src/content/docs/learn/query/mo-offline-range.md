@@ -66,4 +66,4 @@ Moはquery順の再配置、値bucketは座標軸のblock分割、heavy/lightは
 - [ABC384 G 公式解説](https://atcoder.jp/contests/abc384/editorial/11548)
 - [ABC384 G 公式問題文](https://atcoder.jp/contests/abc384/tasks/abc384_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-mo-offline-range`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-mo-offline-range`

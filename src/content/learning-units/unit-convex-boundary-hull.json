@@ -31,6 +31,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
   "problemIds": [
+    "abc244-ex",
     "abc257-ex",
     "abc275-g",
     "abc286-ex",
@@ -41,12 +42,11 @@
     "abc275-g",
     "abc341-g",
     "abc356-g",
+    "abc244-ex",
     "abc257-ex",
     "abc286-ex"
   ],
-  "relatedProblemIds": [
-    "abc244-ex"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "learningRationale": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"

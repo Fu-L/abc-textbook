@@ -51,4 +51,4 @@ dfs(v,dp)の引数は外部で既に選んだ候補の資源別最適値であ�
 - [ABC311 H 公式解説](https://atcoder.jp/contests/abc311/editorial/6814)
 - [ABC311 H 公式問題文](https://atcoder.jp/contests/abc311/tasks/abc311_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-heavy-light-recursive-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-heavy-light-recursive-dp`

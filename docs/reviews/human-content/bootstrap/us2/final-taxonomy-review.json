@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+  "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "cafb2947c2312ebb50c9f5b6d2a8a03ced61ec2cc44b146ba8f4efbc1791995a",
+  "inventoryDigest": "6d1f16daa98c18fe78199e20fe6937263f0dc952f4cf6415c5660b0d24a9e21d",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
+      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T04:22:43.600Z",
+      "completedAt": "2026-09-26T05:42:14.678Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
+      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T04:22:51.521Z",
+      "completedAt": "2026-09-26T05:42:22.247Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
+      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T04:22:52.065Z",
+      "completedAt": "2026-09-26T05:42:22.685Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
+      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T04:22:52.289Z",
+      "completedAt": "2026-09-26T05:42:22.922Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "d3b1e1abecfa22cca210237200c94a9fc52a4a2c510b2c10ad985b7677490846",
+      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T04:22:59.415Z",
+      "completedAt": "2026-09-26T05:42:29.925Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "f402ed1a6f65f4ecdcbef602cef1eb919324fdd627e85597ae3108f8eb7cd077",
+  "reviewerExecutedCheckSetDigest": "5a468de57e2c8441823e43b930d7293d9fd037614ea42504193ea98983c14b32",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -174,6 +174,7 @@
         "outcome-decompose-functional-graph",
         "outcome-decompose-ranges-into-segment-tree-nodes",
         "outcome-derive-coefficient-recurrence-by-differentiation",
+        "outcome-derive-mst-weight-from-threshold-components",
         "outcome-derive-updateable-aggregate",
         "outcome-design-and-bound-randomized-algorithm",
         "outcome-design-associative-range-summary",
@@ -217,6 +218,7 @@
         "outcome-factor-separable-linear-transform",
         "outcome-find-orbit-hit-by-bsgs",
         "outcome-find-period-by-multiplicative-order",
+        "outcome-find-rooted-cycle-by-shortest-path-branches",
         "outcome-find-weighted-balanced-separator",
         "outcome-flatten-tree-by-euler-order",
         "outcome-formulate-combinatorial-coefficients",
@@ -330,10 +332,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "Maintainer-directed Codex semantic review of the 868-problem taxonomy against the accepted Inventory. Rechecked the five reported classifications against their adopted algorithms; ABC242-E uses mirrored half-prefix compression and a single lexicographic boundary comparison, not digit DP. Confirmed the primary/supporting assignments and review scope against the generated proposal.",
+      "reviewBasis": "# Final taxonomy semantic correction review basis\n\nSubject digest: `2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c`\n\nThe review compares all 868 adopted Inventory solutions with the primary, home, and supporting\nroles. The detailed per-problem audit is in `docs/reviews/semantic-placement-audit-2026-09-26.md`.\nThe accepted build before this revision is preserved under\n`docs/verification/history/2026-09-26/semantic-placement-before/`.\n\nExactly ten placements change: ABC244 Ex, ABC308 Ex, ABC352 G, ABC355 F, ABC392 G, ABC398 E, ABC398\nG, ABC422 G, ABC451 G, and ABC457 G. The proposal adds two atomic Outcomes for shortest-path-tree\nbranch crossings and the threshold-component MST weight formula. It retains 206 Tags, 229 Units, and\n868 placements; Outcomes increase from 229 to 231.\n\nIndependent checks passed before human acceptance: TypeScript/Astro check, ESLint, Prettier, schema\nparity, the unit suite, focused taxonomy contract/review/integration tests, and an in-memory\ncanonical materialization with zero diagnostics. The repository's five formal FinalTaxonomyReview\nchecks remain the acceptance gate.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-26T04:23:05.098Z"
+      "reviewedAt": "2026-09-26T05:42:35.477Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -423,6 +425,7 @@
       "outcome-decompose-functional-graph",
       "outcome-decompose-ranges-into-segment-tree-nodes",
       "outcome-derive-coefficient-recurrence-by-differentiation",
+      "outcome-derive-mst-weight-from-threshold-components",
       "outcome-derive-updateable-aggregate",
       "outcome-design-and-bound-randomized-algorithm",
       "outcome-design-associative-range-summary",
@@ -466,6 +469,7 @@
       "outcome-factor-separable-linear-transform",
       "outcome-find-orbit-hit-by-bsgs",
       "outcome-find-period-by-multiplicative-order",
+      "outcome-find-rooted-cycle-by-shortest-path-branches",
       "outcome-find-weighted-balanced-separator",
       "outcome-flatten-tree-by-euler-order",
       "outcome-formulate-combinatorial-coefficients",
@@ -582,12 +586,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "Maintainer-directed Codex semantic review of the 868-problem taxonomy against the accepted Inventory. Rechecked the five reported classifications against their adopted algorithms; ABC242-E uses mirrored half-prefix compression and a single lexicographic boundary comparison, not digit DP. Confirmed the primary/supporting assignments and review scope against the generated proposal.",
+    "rationale": "# Final taxonomy semantic correction review basis\n\nSubject digest: `2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c`\n\nThe review compares all 868 adopted Inventory solutions with the primary, home, and supporting\nroles. The detailed per-problem audit is in `docs/reviews/semantic-placement-audit-2026-09-26.md`.\nThe accepted build before this revision is preserved under\n`docs/verification/history/2026-09-26/semantic-placement-before/`.\n\nExactly ten placements change: ABC244 Ex, ABC308 Ex, ABC352 G, ABC355 F, ABC392 G, ABC398 E, ABC398\nG, ABC422 G, ABC451 G, and ABC457 G. The proposal adds two atomic Outcomes for shortest-path-tree\nbranch crossings and the threshold-component MST weight formula. It retains 206 Tags, 229 Units, and\n868 placements; Outcomes increase from 229 to 231.\n\nIndependent checks passed before human acceptance: TypeScript/Astro check, ESLint, Prettier, schema\nparity, the unit suite, focused taxonomy contract/review/integration tests, and an in-memory\ncanonical materialization with zero diagnostics. The repository's five formal FinalTaxonomyReview\nchecks remain the acceptance gate.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-26T04:23:05.098Z"
+    "confirmedAt": "2026-09-26T05:42:35.477Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-26T04:23:05.098Z",
-  "evidenceDigest": "d12253ad95e0cace2e29aa9c414a9f65723a00f1853815e5938630f25ab5f7d9"
+  "generatedAt": "2026-09-26T05:42:35.477Z",
+  "evidenceDigest": "b62823a47fb550ee0b141c558934a32ed4fa31164d7e94dbf25cde32dcb7a5bf"
 }

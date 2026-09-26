@@ -39,7 +39,8 @@
   ],
   "representativeProblemIds": [
     "abc223-h",
-    "abc249-g"
+    "abc249-g",
+    "abc451-g"
   ],
   "aliases": [
     "XOR basis",

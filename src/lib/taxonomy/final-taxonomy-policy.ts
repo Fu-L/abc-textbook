@@ -1925,13 +1925,15 @@ const TAG_SEEDS: readonly TagSeed[] = [
   {
     id: 'tag-shortest-path',
     name: '最短路モデル',
-    definition: '重み付きグラフに帰着し、距離の確定条件に応じた最短路法を選ぶ。',
+    definition:
+      '重み付きグラフの距離を計算し、距離の確定条件や最短路木の枝構造から経路・閉路の最適化を行う。',
     parentId: 'tag-graph-model-structure',
     outcomeIds: [
       'outcome-model-and-compute-shortest-path',
       'outcome-relax-in-dependency-order',
       'outcome-detect-improving-cycles',
       'outcome-compute-all-pairs-distance',
+      'outcome-find-rooted-cycle-by-shortest-path-branches',
     ],
     unitIds: ['unit-shortest-path-certificates'],
     recall: [
@@ -2033,10 +2035,13 @@ const TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-spanning-tree-optimization',
     name: '最小・最大全域木とcut・cycle性質',
     definition:
-      '辺重み順の成分併合を交換論で正当化し、最小または最大全域木を構成して辺の採否を判定する。',
+      '辺重み順の成分併合をcut・cycle性質で正当化し、全域木の構成と閾値別成分数による最適重みを導く。',
     parentId: 'tag-graph-model-structure',
     prerequisiteTagIds: ['tag-dsu-connectivity', 'tag-greedy-exchange-order'],
-    outcomeIds: ['outcome-construct-optimal-spanning-tree'],
+    outcomeIds: [
+      'outcome-construct-optimal-spanning-tree',
+      'outcome-derive-mst-weight-from-threshold-components',
+    ],
     unitIds: ['unit-spanning-tree-optimization'],
     recall: [
       'kruskal',
@@ -5762,13 +5767,13 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-bostan-mori': ['abc300-ex'],
   'tag-relaxed-convolution': ['abc213-h', 'abc315-ex', 'abc230-h'],
   'tag-linear-system-rank': ['abc276-ex', 'abc366-g'],
-  'tag-xor-linear-basis': ['abc223-h', 'abc249-g'],
+  'tag-xor-linear-basis': ['abc223-h', 'abc249-g', 'abc451-g'],
   'tag-separable-linear-transform': ['abc220-h', 'abc288-g', 'abc367-g'],
   'tag-matroid-greedy': ['abc236-f'],
   'tag-linear-matroid-intersection': ['abc399-g'],
   'tag-rsk-young-tableaux': ['abc378-g'],
   'tag-deletion-contraction': ['abc294-ex'],
-  'tag-convex-boundary-hull': ['abc257-ex', 'abc341-g'],
+  'tag-convex-boundary-hull': ['abc244-ex', 'abc257-ex', 'abc341-g'],
   'tag-half-plane-constraints': ['abc251-g'],
   'tag-basic-convex-optimization': ['abc224-g', 'abc314-ex'],
   'tag-slope-trick': ['abc217-h', 'abc406-g', 'abc275-ex'],
@@ -5986,6 +5991,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。',
   'outcome-build-shortest-path-certificate':
     '距離等式を満たす親辺を選び、最短路の木または経路を復元できる。',
+  'outcome-find-rooted-cycle-by-shortest-path-branches':
+    '根からの最短路木で第一枝の異なる頂点を結ぶ辺を列挙し、二本の木上経路と合わせて根を通る最小閉路を求められる。',
   'outcome-localize-change-impact-by-witness':
     '基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる。',
   'outcome-maintain-connectivity-components':
@@ -5998,6 +6005,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。',
   'outcome-construct-optimal-spanning-tree':
     'cut・cycle性質で辺の安全性を証明し、Kruskal法または同値な選択で最小・最大全域木を構成できる。',
+  'outcome-derive-mst-weight-from-threshold-components':
+    '重み閾値以下のグラフの成分数からMST重みを層別和として導き、辺追加時に各閾値の連結性を更新して最適重みを維持できる。',
   'outcome-condense-and-order-directed-graph':
     '有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる。',
   'outcome-encode-threshold-constraints-as-two-sat':
@@ -6191,6 +6200,10 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
   ],
   'outcome-build-shortest-path-certificate': ['outcome-model-and-compute-shortest-path'],
   'outcome-construct-optimal-spanning-tree': ['outcome-prove-greedy-order'],
+  'outcome-derive-mst-weight-from-threshold-components': [
+    'outcome-construct-optimal-spanning-tree',
+    'outcome-maintain-connectivity-components',
+  ],
   'outcome-compose-dynamic-tree-clusters': ['outcome-aggregate-rooted-tree'],
   'outcome-build-cartesian-tree-decomposition': ['outcome-prune-dominated-candidates-once'],
   'outcome-design-range-update-action': ['outcome-design-associative-range-summary'],
@@ -6288,6 +6301,8 @@ export const NON_PRIMARY_OUTCOME_IDS = FINAL_TAXONOMY_OUTCOMES.filter((outcome) 
  * reports it once another exercise appears.
  */
 export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
+  'outcome-derive-mst-weight-from-threshold-components',
+  'outcome-find-rooted-cycle-by-shortest-path-branches',
   'outcome-enumerate-subsets-by-mask',
   'outcome-evaluate-polynomial-at-many-points',
   'outcome-close-eventual-dp-tail',
@@ -7272,10 +7287,10 @@ const RAW_CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc308-ex',
-    primaryTagId: 'tag-shortest-path-certificate',
-    primaryOutcomeId: 'outcome-build-shortest-path-certificate',
+    primaryTagId: 'tag-shortest-path',
+    primaryOutcomeId: 'outcome-find-rooted-cycle-by-shortest-path-branches',
     rationale:
-      '根ごとのshortest-path treeをcertificateとし、異branch辺と二本のtree pathからminimum rooted cycleを復元する。',
+      '根ごとの最短距離を計算し、最短路木の異branch辺からminimum rooted cycleを導く。木の復元は補助技能として扱う。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -7332,20 +7347,18 @@ const RAW_CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc398-e',
-    primaryTagId: 'tag-game-grundy-dp',
-    primaryOutcomeId: 'outcome-classify-game-states',
-    additionalPrimaryTagIds: ['tag-bipartite-structure'],
+    primaryTagId: 'tag-bipartite-structure',
+    primaryOutcomeId: 'outcome-color-and-classify-bipartite-components',
     rationale:
-      '合法手数のparityによるgame分類が主であり、connected bipartite graphの一意彩色から合法なcross-part辺を確定する技能も主解法を担う。',
+      'connected bipartite graphの一意彩色から合法なcross-part辺を確定し、固定された残辺数の偶奇で勝敗を決める。後続局面のGrundy DPは行わない。',
     decisionAuthorId: 'person-maintainer',
   },
   {
     problemId: 'abc398-g',
-    primaryTagId: 'tag-game-grundy-dp',
-    primaryOutcomeId: 'outcome-classify-game-states',
-    additionalPrimaryTagIds: ['tag-bipartite-structure'],
+    primaryTagId: 'tag-bipartite-structure',
+    primaryOutcomeId: 'outcome-color-and-classify-bipartite-components',
     rationale:
-      '残手数parityによるgame分類が主であり、彩色反転自由度を含むbipartite componentの型分類も独立した典型技能である。',
+      '彩色反転自由度を含むbipartite componentの型を分類し、残手数の偶奇不変量から勝敗を決める。後続局面のGrundy DPは行わない。',
     decisionAuthorId: 'person-maintainer',
   },
   {
@@ -8719,7 +8732,7 @@ const supportingOutcomeAdditionsByProblemId: Readonly<
   ],
   'abc457-g': [
     {
-      outcomeId: 'outcome-design-order-preserving-dp',
+      outcomeId: 'outcome-design-lis-frontier',
       claimPaths: ['/typicalTechniques/1', '/prerequisiteCandidates/0'],
     },
   ],

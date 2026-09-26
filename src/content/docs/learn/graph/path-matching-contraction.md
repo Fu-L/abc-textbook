@@ -54,4 +54,4 @@ path matchingの交互構造を使い、最小edgeの採用後も残りの全car
 - [ABC464 G 公式解説](https://atcoder.jp/contests/abc464/editorial/22263)
 - [ABC464 G 公式問題文](https://atcoder.jp/contests/abc464/tasks/abc464_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-path-matching-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-path-matching-contraction`

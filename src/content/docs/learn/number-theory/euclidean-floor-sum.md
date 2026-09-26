@@ -70,4 +70,4 @@ ABC283 Exでは対象列v=b+Miのbit kの指示値がfloor((v+2^k)/2^{k+1})−fl
 - [ABC372 G 公式解説](https://atcoder.jp/contests/abc372/editorial/10973)
 - [ABC372 G 公式問題文](https://atcoder.jp/contests/abc372/tasks/abc372_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da` / LearningUnit `unit-euclidean-floor-sum`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-euclidean-floor-sum`

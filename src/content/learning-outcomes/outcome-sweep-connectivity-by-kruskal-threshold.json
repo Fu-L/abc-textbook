@@ -4,6 +4,7 @@
   "prerequisiteOutcomeIds": [
     "outcome-augment-components-with-metadata",
     "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components",
     "outcome-maintain-connectivity-components"
   ],
   "scopeIds": [

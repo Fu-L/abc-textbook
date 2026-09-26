@@ -26,6 +26,7 @@
     "outcome-build-shortest-path-certificate",
     "outcome-compute-all-pairs-distance",
     "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
     "outcome-model-and-compute-shortest-path",
     "outcome-relax-in-dependency-order",
     "outcome-solve-difference-constraints"

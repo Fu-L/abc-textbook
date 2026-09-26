@@ -1,0 +1,12 @@
+{
+  "id": "outcome-find-rooted-cycle-by-shortest-path-branches",
+  "statement": "根からの最短路木で第一枝の異なる頂点を結ぶ辺を列挙し、二本の木上経路と合わせて根を通る最小閉路を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc308-ex",
+    "tag-shortest-path",
+    "unit-weighted-shortest-path"
+  ]
+}

@@ -39,6 +39,7 @@
     "outcome-restrict-geometric-candidates-to-boundary"
   ],
   "representativeProblemIds": [
+    "abc244-ex",
     "abc257-ex",
     "abc341-g"
   ],

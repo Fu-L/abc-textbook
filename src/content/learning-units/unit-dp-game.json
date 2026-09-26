@@ -37,20 +37,16 @@
     "abc297-g",
     "abc354-e",
     "abc368-f",
-    "abc380-f",
-    "abc398-e",
-    "abc398-g"
+    "abc380-f"
   ],
   "directProblemIds": [
     "abc354-e",
-    "abc398-e",
     "abc278-f",
     "abc368-f",
     "abc380-f",
     "abc255-g",
     "abc278-g",
-    "abc297-g",
-    "abc398-g"
+    "abc297-g"
   ],
   "relatedProblemIds": [
     "abc212-h",

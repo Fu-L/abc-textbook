@@ -407,15 +407,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
   ]),
   'abc308-ex': decision(
-    'outcome-build-shortest-path-certificate',
+    'outcome-find-rooted-cycle-by-shortest-path-branches',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-shortest-path-certificate'],
-      ['typicalTechniques', 0, 'supporting', 'tag-shortest-path'],
+      ['typicalTechniques', 0, 'primary', 'tag-shortest-path'],
+      ['typicalTechniques', 0, 'supporting', 'tag-shortest-path-certificate'],
       ['typicalTechniques', 1, 'problem_specific'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-shortest-path-certificate'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-shortest-path'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-shortest-path'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-shortest-path-certificate'],
     ],
-    { 'tag-shortest-path': ['outcome-model-and-compute-shortest-path'] },
+    { 'tag-shortest-path-certificate': ['outcome-build-shortest-path-certificate'] },
   ),
   'abc308-f': decision(
     'outcome-maintain-dynamic-order-statistics',
@@ -1865,7 +1865,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     { 'tag-dsu-connectivity': ['outcome-maintain-potential-differences'] },
   ),
   'abc352-g': decision(
-    'outcome-compute-convolution-or-correlation',
+    'outcome-encode-counting-by-generating-function',
     [
       ['typicalTechniques', 0, 'supporting', 'tag-contribution-reordering'],
       ['typicalTechniques', 1, 'primary', 'tag-convolution-fps'],
@@ -1878,7 +1878,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
       'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
       'tag-divide-enumerate': ['outcome-divide-search-space-recursively'],
     },
-    ['outcome-encode-counting-by-generating-function'],
+    ['outcome-compute-convolution-or-correlation'],
   ),
   'abc353-e': decision(
     'outcome-index-shared-prefixes-with-trie',
@@ -1967,14 +1967,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['outcome-maintain-interactive-query-protocol'],
   ),
   'abc355-f': decision(
-    'outcome-maintain-connectivity-components',
+    'outcome-derive-mst-weight-from-threshold-components',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-spanning-tree-optimization'],
-      ['typicalTechniques', 1, 'primary', 'tag-dsu-connectivity'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-spanning-tree-optimization'],
-      ['prerequisiteCandidates', 1, 'same_tag', 'tag-dsu-connectivity'],
+      ['typicalTechniques', 0, 'primary', 'tag-spanning-tree-optimization'],
+      ['typicalTechniques', 1, 'supporting', 'tag-dsu-connectivity'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-spanning-tree-optimization'],
+      ['prerequisiteCandidates', 1, 'supporting', 'tag-dsu-connectivity'],
     ],
-    { 'tag-spanning-tree-optimization': ['outcome-construct-optimal-spanning-tree'] },
+    { 'tag-dsu-connectivity': ['outcome-maintain-connectivity-components'] },
   ),
   'abc355-g': decision('outcome-exploit-convexity', [
     ['typicalTechniques', 0, 'primary', 'tag-discrete-convex-marginal'],

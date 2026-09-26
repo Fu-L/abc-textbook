@@ -1,7 +1,7 @@
 {
   "id": "tag-spanning-tree-optimization",
   "name": "最小・最大全域木とcut・cycle性質",
-  "definition": "辺重み順の成分併合を交換論で正当化し、最小または最大全域木を構成して辺の採否を判定する。",
+  "definition": "辺重み順の成分併合をcut・cycle性質で正当化し、全域木の構成と閾値別成分数による最適重みを導く。",
   "parentId": "tag-graph-model-structure",
   "prerequisiteTagIds": [
     "tag-greedy-exchange-order"
@@ -41,12 +41,14 @@
     }
   ],
   "learningOutcomeIds": [
-    "outcome-construct-optimal-spanning-tree"
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components"
   ],
   "representativeProblemIds": [
     "abc218-e",
     "abc282-e",
-    "abc352-e"
+    "abc352-e",
+    "abc355-f"
   ],
   "aliases": [
     "Kruskal法",

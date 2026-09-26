@@ -1,7 +1,7 @@
 {
   "id": "tag-shortest-path",
   "name": "最短路モデル",
-  "definition": "重み付きグラフに帰着し、距離の確定条件に応じた最短路法を選ぶ。",
+  "definition": "重み付きグラフの距離を計算し、距離の確定条件や最短路木の枝構造から経路・閉路の最適化を行う。",
   "parentId": "tag-graph-model-structure",
   "prerequisiteTagIds": [
     "tag-state-graph-search"
@@ -55,6 +55,7 @@
   "learningOutcomeIds": [
     "outcome-compute-all-pairs-distance",
     "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
     "outcome-model-and-compute-shortest-path",
     "outcome-relax-in-dependency-order"
   ],

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-26T04:23:05.098Z",
+  "generatedAt": "2026-09-26T05:42:35.477Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "acd52b69e897a2dfdd4836416dcef77b58486cea1a900c035234429ad9f94c79",
+    "rulesDigest": "89db2f7ad13a81f93f53cde5027db46c3120c2e22491d17b1adf664b184b1b45",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -45,7 +45,7 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "cafb2947c2312ebb50c9f5b6d2a8a03ced61ec2cc44b146ba8f4efbc1791995a"
+    "workManifestDigest": "6d1f16daa98c18fe78199e20fe6937263f0dc952f4cf6415c5660b0d24a9e21d"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
@@ -2179,73 +2179,7 @@
               },
               {
                 "problemId": "abc308-ex",
-                "claimPath": "/outcomeCandidates/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/algorithmConnection",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/candidateApproaches/1",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/keyInsights/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/keyInsights/1",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/observations/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/observations/1",
+                "claimPath": "/prerequisiteCandidates/0",
                 "evidenceIds": [
                   "evidence-official-analysis"
                 ],
@@ -4174,84 +4108,7 @@
               },
               {
                 "problemId": "abc308-ex",
-                "claimPath": "/outcomeCandidates/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
                 "claimPath": "/prerequisiteCandidates/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/algorithmConnection",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/candidateApproaches/1",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/keyInsights/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/keyInsights/1",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/observations/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/observations/1",
                 "evidenceIds": [
                   "evidence-official-analysis"
                 ],
@@ -6382,73 +6239,7 @@
               },
               {
                 "problemId": "abc308-ex",
-                "claimPath": "/outcomeCandidates/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/algorithmConnection",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/candidateApproaches/1",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/keyInsights/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/keyInsights/1",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/observations/0",
-                "evidenceIds": [
-                  "evidence-official-analysis"
-                ],
-                "sourceRevisionIds": [
-                  "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-                  "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-                ]
-              },
-              {
-                "problemId": "abc308-ex",
-                "claimPath": "/reasoningPath/observations/1",
+                "claimPath": "/prerequisiteCandidates/0",
                 "evidenceIds": [
                   "evidence-official-analysis"
                 ],
@@ -6502,10 +6293,10 @@
     ],
     "status": "accepted",
     "canonicalMaterializationAllowed": false,
-    "integrationSubjectDigest": "d3c21f21130ca0a3b8f28dab67f724e9729840f50ca9f0948edf9c2b62eadf79",
-    "integrationDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23"
+    "integrationSubjectDigest": "fcfbd2cdbae40ab972ca7303140c44ba70f359adececb50d84a5ebc47c26c89b",
+    "integrationDigest": "99d4a0d14936a1cf445dcb42c1b14dc52d27d5594647e70b770ce79bf7049cf4"
   },
-  "integrationMapDigest": "f17ec94eb526fdf1dc9dd75b7fcb9089c4fb1eeab4ad1ff9cda9738103b8cb23",
+  "integrationMapDigest": "99d4a0d14936a1cf445dcb42c1b14dc52d27d5594647e70b770ce79bf7049cf4",
   "finalCandidates": [
     {
       "kind": "tag",
@@ -8743,6 +8534,7 @@
           "outcome-restrict-geometric-candidates-to-boundary"
         ],
         "representativeProblemIds": [
+          "abc244-ex",
           "abc257-ex",
           "abc341-g"
         ],
@@ -8756,12 +8548,25 @@
         "replacementTagIds": []
       },
       "sourceRevisionIds": [
+        "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+        "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
         "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
         "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
         "source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0",
         "source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"
       ],
       "evidenceRefs": [
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
         {
           "problemId": "abc257-ex",
           "claimPath": "/typicalTechniques/1",
@@ -16076,7 +15881,8 @@
         "representativeProblemIds": [
           "abc439-e",
           "abc393-f",
-          "abc369-f"
+          "abc369-f",
+          "abc457-g"
         ],
         "aliases": [
           "LIS",
@@ -16093,7 +15899,9 @@
         "source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d",
         "source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06",
         "source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e",
-        "source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"
+        "source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e",
+        "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
+        "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"
       ],
       "evidenceRefs": [
         {
@@ -16127,6 +15935,17 @@
           "sourceRevisionIds": [
             "source-abc439-e-problem-4779296ea5b700e723a4285e3be52c7d0203add2ac5b08989183e25701c8245e",
             "source-abc439-editorial-14994-4af3df3a312c2cec75552b4b1787ee40c8dfff30a1e19b01670a207732fd272e"
+          ]
+        },
+        {
+          "problemId": "abc457-g",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
+            "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"
           ]
         }
       ],
@@ -21281,7 +21100,7 @@
       "entity": {
         "id": "tag-shortest-path",
         "name": "最短路モデル",
-        "definition": "重み付きグラフに帰着し、距離の確定条件に応じた最短路法を選ぶ。",
+        "definition": "重み付きグラフの距離を計算し、距離の確定条件や最短路木の枝構造から経路・閉路の最適化を行う。",
         "parentId": "tag-graph-model-structure",
         "prerequisiteTagIds": [
           "tag-state-graph-search"
@@ -21335,6 +21154,7 @@
         "learningOutcomeIds": [
           "outcome-compute-all-pairs-distance",
           "outcome-detect-improving-cycles",
+          "outcome-find-rooted-cycle-by-shortest-path-branches",
           "outcome-model-and-compute-shortest-path",
           "outcome-relax-in-dependency-order"
         ],
@@ -21685,7 +21505,7 @@
       "entity": {
         "id": "tag-spanning-tree-optimization",
         "name": "最小・最大全域木とcut・cycle性質",
-        "definition": "辺重み順の成分併合を交換論で正当化し、最小または最大全域木を構成して辺の採否を判定する。",
+        "definition": "辺重み順の成分併合をcut・cycle性質で正当化し、全域木の構成と閾値別成分数による最適重みを導く。",
         "parentId": "tag-graph-model-structure",
         "prerequisiteTagIds": [
           "tag-greedy-exchange-order"
@@ -21725,12 +21545,14 @@
           }
         ],
         "learningOutcomeIds": [
-          "outcome-construct-optimal-spanning-tree"
+          "outcome-construct-optimal-spanning-tree",
+          "outcome-derive-mst-weight-from-threshold-components"
         ],
         "representativeProblemIds": [
           "abc218-e",
           "abc282-e",
-          "abc352-e"
+          "abc352-e",
+          "abc355-f"
         ],
         "aliases": [
           "Kruskal法",
@@ -21749,7 +21571,9 @@
         "source-abc282-e-problem-914b9b4d38269c619530f4c66c8620d8dc5b0b66aa42bc2e0c18cb4c9bf6629e",
         "source-abc282-editorial-5398-d6e68174ec62656ceec64ff790551f0920345c205c50c7bdd3863cb13e6c9ed4",
         "source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224",
-        "source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"
+        "source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630",
+        "source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536",
+        "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
       ],
       "evidenceRefs": [
         {
@@ -21783,6 +21607,17 @@
           "sourceRevisionIds": [
             "source-abc352-e-problem-63943885010ffcd58b64e6a5cbc8fba4ab2fee9afa4bf3221604b5ff1f7fe224",
             "source-abc352-editorial-9920-a69cbec2e0e236e4ccd2a0125cc276621b0f9657d4e46f481f41da5f25d73630"
+          ]
+        },
+        {
+          "problemId": "abc355-f",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536",
+            "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
           ]
         }
       ],
@@ -24509,7 +24344,8 @@
         ],
         "representativeProblemIds": [
           "abc223-h",
-          "abc249-g"
+          "abc249-g",
+          "abc451-g"
         ],
         "aliases": [
           "XOR basis",
@@ -24524,7 +24360,9 @@
         "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
         "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e",
         "source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32",
-        "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"
+        "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719",
+        "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+        "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
       ],
       "evidenceRefs": [
         {
@@ -24547,6 +24385,17 @@
           "sourceRevisionIds": [
             "source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32",
             "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"
+          ]
+        },
+        {
+          "problemId": "abc451-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
           ]
         }
       ],
@@ -26108,7 +25957,7 @@
         },
         {
           "problemId": "abc308-ex",
-          "claimPath": "/outcomeCandidates/0",
+          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -26468,8 +26317,6 @@
           "abc354-e",
           "abc368-f",
           "abc380-f",
-          "abc398-e",
-          "abc398-g",
           "abc433-g",
           "tag-game-grundy-dp",
           "unit-dp-game"
@@ -27747,7 +27594,6 @@
           "abc270-f",
           "abc282-e",
           "abc352-e",
-          "abc355-f",
           "abc364-f",
           "tag-spanning-tree-optimization",
           "unit-spanning-tree-optimization"
@@ -28641,6 +28487,41 @@
           "sourceRevisionIds": [
             "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
             "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
+        "id": "outcome-derive-mst-weight-from-threshold-components",
+        "statement": "重み閾値以下のグラフの成分数からMST重みを層別和として導き、辺追加時に各閾値の連結性を更新して最適重みを維持できる。",
+        "prerequisiteOutcomeIds": [
+          "outcome-construct-optimal-spanning-tree",
+          "outcome-maintain-connectivity-components",
+          "outcome-prove-greedy-order"
+        ],
+        "scopeIds": [
+          "abc355-f",
+          "tag-spanning-tree-optimization",
+          "unit-spanning-tree-optimization"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536",
+        "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc355-f",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536",
+            "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
           ]
         }
       ],
@@ -29724,6 +29605,7 @@
           "abc369-f",
           "abc393-f",
           "abc439-e",
+          "abc457-g",
           "tag-lis-state",
           "unit-dp-lis"
         ]
@@ -29897,7 +29779,6 @@
           "abc327-e",
           "abc345-e",
           "abc362-e",
-          "abc457-g",
           "tag-sequence-subsequence-dp",
           "unit-dp-sequence"
         ]
@@ -30397,8 +30278,6 @@
           "abc393-f",
           "abc395-g",
           "abc396-g",
-          "abc398-e",
-          "abc398-g",
           "abc400-f",
           "abc400-g",
           "abc402-e",
@@ -32268,6 +32147,39 @@
           "sourceRevisionIds": [
             "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
             "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
+        "id": "outcome-find-rooted-cycle-by-shortest-path-branches",
+        "statement": "根からの最短路木で第一枝の異なる頂点を結ぶ辺を列挙し、二本の木上経路と合わせて根を通る最小閉路を求められる。",
+        "prerequisiteOutcomeIds": [
+          "outcome-select-state-graph-search"
+        ],
+        "scopeIds": [
+          "abc308-ex",
+          "tag-shortest-path",
+          "unit-weighted-shortest-path"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
+        "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc308-ex",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
+            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
           ]
         }
       ],
@@ -34829,7 +34741,6 @@
           "abc301-e",
           "abc305-e",
           "abc307-f",
-          "abc308-ex",
           "abc325-e",
           "abc342-e",
           "abc364-g",
@@ -36758,7 +36669,6 @@
         "prerequisiteOutcomeIds": [],
         "scopeIds": [
           "abc228-h",
-          "abc244-ex",
           "abc289-g",
           "abc372-g",
           "abc448-g",
@@ -36769,10 +36679,10 @@
       "sourceRevisionIds": [
         "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
         "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
-        "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-        "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
         "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
-        "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+        "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63",
+        "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+        "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
       ],
       "evidenceRefs": [
         {
@@ -36787,17 +36697,6 @@
           ]
         },
         {
-          "problemId": "abc244-ex",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
           "problemId": "abc289-g",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
@@ -36806,6 +36705,17 @@
           "sourceRevisionIds": [
             "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
             "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
           ]
         }
       ],
@@ -38081,10 +37991,10 @@
       "sourceRevisionIds": [
         "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
         "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+        "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+        "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
         "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
-        "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707",
-        "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
-        "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+        "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
       ],
       "evidenceRefs": [
         {
@@ -38099,6 +38009,17 @@
           ]
         },
         {
+          "problemId": "abc254-ex",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+            "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"
+          ]
+        },
+        {
           "problemId": "abc425-g",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
@@ -38107,17 +38028,6 @@
           "sourceRevisionIds": [
             "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
             "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
-          ]
-        },
-        {
-          "problemId": "abc451-g",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
-            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
           ]
         }
       ],
@@ -38849,14 +38759,25 @@
         ]
       },
       "sourceRevisionIds": [
+        "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+        "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
         "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
         "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
         "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731",
-        "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b",
-        "source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e",
-        "source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"
+        "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"
       ],
       "evidenceRefs": [
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
         {
           "problemId": "abc257-ex",
           "claimPath": "/outcomeCandidates/0",
@@ -38877,17 +38798,6 @@
           "sourceRevisionIds": [
             "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731",
             "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"
-          ]
-        },
-        {
-          "problemId": "abc286-ex",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e",
-            "source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"
           ]
         }
       ],
@@ -40195,6 +40105,7 @@
         "prerequisiteOutcomeIds": [
           "outcome-augment-components-with-metadata",
           "outcome-construct-optimal-spanning-tree",
+          "outcome-derive-mst-weight-from-threshold-components",
           "outcome-maintain-connectivity-components"
         ],
         "scopeIds": [
@@ -44003,16 +43914,15 @@
           "outcome-query-bitwise-order-with-trie"
         ],
         "problemIds": [
-          "abc425-g",
-          "abc451-g"
+          "abc425-g"
         ],
         "directProblemIds": [
-          "abc425-g",
-          "abc451-g"
+          "abc425-g"
         ],
         "relatedProblemIds": [
           "abc252-ex",
-          "abc254-ex"
+          "abc254-ex",
+          "abc451-g"
         ],
         "learningRationale": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
       },
@@ -44444,15 +44354,17 @@
           "outcome-color-and-classify-bipartite-components"
         ],
         "problemIds": [
+          "abc398-e",
+          "abc398-g",
           "abc451-f"
         ],
         "directProblemIds": [
-          "abc451-f"
+          "abc398-e",
+          "abc451-f",
+          "abc398-g"
         ],
         "relatedProblemIds": [
           "abc327-g",
-          "abc398-e",
-          "abc398-g",
           "abc437-g",
           "abc445-g",
           "abc454-e"
@@ -44569,17 +44481,6 @@
         },
         {
           "problemId": "abc398-e",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
-            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
-          ]
-        },
-        {
-          "problemId": "abc398-e",
           "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -44658,17 +44559,6 @@
         {
           "problemId": "abc398-g",
           "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
-            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
-          ]
-        },
-        {
-          "problemId": "abc398-g",
-          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -46302,6 +46192,7 @@
           "abc445-f",
           "abc448-e",
           "abc449-g",
+          "abc451-g",
           "abc455-e",
           "abc456-g",
           "abc457-g",
@@ -46340,7 +46231,6 @@
           "abc389-g",
           "abc405-g",
           "abc429-f",
-          "abc451-g",
           "abc453-e",
           "abc456-f",
           "abc459-e",
@@ -46776,8 +46666,6 @@
           "abc393-f",
           "abc395-g",
           "abc396-g",
-          "abc398-e",
-          "abc398-g",
           "abc400-f",
           "abc402-e",
           "abc403-f",
@@ -47498,9 +47386,11 @@
           "outcome-construct-optimal-spanning-tree",
           "outcome-contract-monotone-paths-with-jump-pointers",
           "outcome-decompose-functional-graph",
+          "outcome-derive-mst-weight-from-threshold-components",
           "outcome-detect-improving-cycles",
           "outcome-dualize-planar-cut-to-path",
           "outcome-encode-threshold-constraints-as-two-sat",
+          "outcome-find-rooted-cycle-by-shortest-path-branches",
           "outcome-identify-bridges-and-articulations",
           "outcome-jump-deterministic-transition",
           "outcome-kernelize-near-tree-graph",
@@ -47628,6 +47518,8 @@
           "abc395-e",
           "abc396-e",
           "abc397-g",
+          "abc398-e",
+          "abc398-g",
           "abc399-e",
           "abc401-e",
           "abc401-g",
@@ -47703,8 +47595,6 @@
           "abc393-g",
           "abc394-g",
           "abc395-g",
-          "abc398-e",
-          "abc398-g",
           "abc408-e",
           "abc409-f",
           "abc413-f",
@@ -49231,7 +49121,6 @@
           "abc441-e",
           "abc441-g",
           "abc447-g",
-          "abc451-g",
           "abc453-g",
           "abc454-f",
           "abc455-f",
@@ -49338,6 +49227,7 @@
           "abc444-e",
           "abc449-e",
           "abc450-f",
+          "abc451-g",
           "abc452-e",
           "abc452-f",
           "abc455-e",
@@ -50273,7 +50163,6 @@
           "abc304-e",
           "abc328-f",
           "abc335-e",
-          "abc355-f",
           "abc372-e",
           "abc392-e",
           "abc396-e",
@@ -50301,6 +50190,7 @@
           "abc349-g",
           "abc352-e",
           "abc352-f",
+          "abc355-f",
           "abc364-f",
           "abc376-g",
           "abc383-e",
@@ -50993,6 +50883,7 @@
           "outcome-restrict-geometric-candidates-to-boundary"
         ],
         "problemIds": [
+          "abc244-ex",
           "abc257-ex",
           "abc275-g",
           "abc286-ex",
@@ -51003,12 +50894,11 @@
           "abc275-g",
           "abc341-g",
           "abc356-g",
+          "abc244-ex",
           "abc257-ex",
           "abc286-ex"
         ],
-        "relatedProblemIds": [
-          "abc244-ex"
-        ],
+        "relatedProblemIds": [],
         "learningRationale": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -51022,7 +50912,62 @@
       "evidenceRefs": [
         {
           "problemId": "abc244-ex",
-          "claimPath": "/prerequisiteCandidates/0",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/observations/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -51241,6 +51186,7 @@
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
+          "abc244-ex",
           "abc251-g",
           "abc257-ex",
           "abc275-g",
@@ -51249,9 +51195,7 @@
           "abc356-g"
         ],
         "directProblemIds": [],
-        "relatedProblemIds": [
-          "abc244-ex"
-        ],
+        "relatedProblemIds": [],
         "learningRationale": "向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。"
       },
       "sourceRevisionIds": [
@@ -51265,7 +51209,62 @@
       "evidenceRefs": [
         {
           "problemId": "abc244-ex",
-          "claimPath": "/prerequisiteCandidates/0",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc244-ex",
+          "claimPath": "/reasoningPath/observations/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -56191,20 +56190,16 @@
           "abc297-g",
           "abc354-e",
           "abc368-f",
-          "abc380-f",
-          "abc398-e",
-          "abc398-g"
+          "abc380-f"
         ],
         "directProblemIds": [
           "abc354-e",
-          "abc398-e",
           "abc278-f",
           "abc368-f",
           "abc380-f",
           "abc255-g",
           "abc278-g",
-          "abc297-g",
-          "abc398-g"
+          "abc297-g"
         ],
         "relatedProblemIds": [
           "abc212-h",
@@ -57272,7 +57267,8 @@
           "abc393-f"
         ],
         "relatedProblemIds": [
-          "abc237-f"
+          "abc237-f",
+          "abc457-g"
         ],
         "learningRationale": "列・subsequence DPで得た考え方と実装を再利用し、LIS・末尾の支配関係の発動条件・正当化・境界を重複なく学ぶ。"
       },
@@ -57798,8 +57794,7 @@
           "abc225-f",
           "abc242-ex",
           "abc246-ex",
-          "abc345-e",
-          "abc457-g"
+          "abc345-e"
         ],
         "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
@@ -60194,7 +60189,6 @@
           "abc279-f",
           "abc304-e",
           "abc335-e",
-          "abc355-f",
           "abc372-e",
           "abc392-e",
           "abc401-e",
@@ -60211,8 +60205,7 @@
           "abc401-e",
           "abc420-e",
           "abc434-e",
-          "abc279-f",
-          "abc355-f"
+          "abc279-f"
         ],
         "relatedProblemIds": [
           "abc218-e",
@@ -60232,6 +60225,7 @@
           "abc328-e",
           "abc349-g",
           "abc352-e",
+          "abc355-f",
           "abc364-f",
           "abc376-g",
           "abc383-e",
@@ -66085,19 +66079,21 @@
           "abc297-ex",
           "abc317-ex",
           "abc345-g",
+          "abc352-g",
           "abc385-g",
           "abc390-g",
-          "abc392-g",
           "abc409-g",
+          "abc422-g",
           "abc436-g",
           "abc449-g"
         ],
         "directProblemIds": [
           "abc345-g",
+          "abc352-g",
           "abc385-g",
           "abc390-g",
-          "abc392-g",
           "abc409-g",
+          "abc422-g",
           "abc436-g",
           "abc449-g",
           "abc225-h",
@@ -66121,11 +66117,10 @@
           "abc315-ex",
           "abc318-ex",
           "abc331-g",
-          "abc352-g",
           "abc367-g",
           "abc387-g",
           "abc389-g",
-          "abc422-g",
+          "abc392-g",
           "abc432-g",
           "abc439-g",
           "abc462-g"
@@ -70740,10 +70735,10 @@
         "sourceRevisionIds": [
           "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
           "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
-          "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-          "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
           "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
-          "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+          "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63",
+          "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+          "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
         ],
         "tagIds": [
           "tag-convex-hull-trick"
@@ -70759,7 +70754,6 @@
         ],
         "problemIds": [
           "abc228-h",
-          "abc244-ex",
           "abc289-g",
           "abc372-g",
           "abc448-g"
@@ -70768,8 +70762,7 @@
           "abc289-g",
           "abc372-g",
           "abc448-g",
-          "abc228-h",
-          "abc244-ex"
+          "abc228-h"
         ],
         "relatedProblemIds": [],
         "learningRationale": "一次関数の候補を傾き・交点順に管理し、各query点で最小または最大となる直線を選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
@@ -70777,10 +70770,10 @@
       "sourceRevisionIds": [
         "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
         "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
-        "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-        "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
         "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
-        "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+        "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63",
+        "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+        "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
       ],
       "evidenceRefs": [
         {
@@ -70869,83 +70862,6 @@
           "sourceRevisionIds": [
             "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
             "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/reasoningPath/candidateApproaches/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-          ]
-        },
-        {
-          "problemId": "abc244-ex",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
           ]
         },
         {
@@ -71057,6 +70973,83 @@
             "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
             "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
           ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
+        },
+        {
+          "problemId": "abc372-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+            "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+          ]
         }
       ],
       "materializationTask": "T050"
@@ -71102,7 +71095,8 @@
           "abc283-g",
           "abc288-g",
           "abc366-g",
-          "abc367-g"
+          "abc367-g",
+          "abc451-g"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -71110,8 +71104,7 @@
           "abc236-f",
           "abc265-ex",
           "abc323-g",
-          "abc399-g",
-          "abc451-g"
+          "abc399-g"
         ],
         "learningRationale": "制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。"
       },
@@ -79305,14 +79298,12 @@
           "abc291-g",
           "abc307-ex",
           "abc315-ex",
-          "abc352-g",
-          "abc422-g",
+          "abc392-g",
           "abc432-g"
         ],
         "directProblemIds": [
           "abc291-g",
-          "abc352-g",
-          "abc422-g",
+          "abc392-g",
           "abc432-g",
           "abc265-ex",
           "abc307-ex"
@@ -79331,11 +79322,12 @@
           "abc323-g",
           "abc331-g",
           "abc345-g",
+          "abc352-g",
           "abc357-g",
           "abc385-g",
           "abc390-g",
-          "abc392-g",
           "abc409-g",
+          "abc422-g",
           "abc436-g",
           "abc462-g"
         ],
@@ -86114,6 +86106,7 @@
           "outcome-build-shortest-path-certificate",
           "outcome-compute-all-pairs-distance",
           "outcome-detect-improving-cycles",
+          "outcome-find-rooted-cycle-by-shortest-path-branches",
           "outcome-model-and-compute-shortest-path",
           "outcome-relax-in-dependency-order",
           "outcome-solve-difference-constraints"
@@ -86487,15 +86480,14 @@
           "outcome-build-shortest-path-certificate"
         ],
         "problemIds": [
-          "abc252-e",
-          "abc308-ex"
+          "abc252-e"
         ],
         "directProblemIds": [
-          "abc252-e",
-          "abc308-ex"
+          "abc252-e"
         ],
         "relatedProblemIds": [
           "abc218-f",
+          "abc308-ex",
           "abc355-e"
         ],
         "learningRationale": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
@@ -86665,73 +86657,7 @@
         },
         {
           "problemId": "abc308-ex",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-          ]
-        },
-        {
-          "problemId": "abc308-ex",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-          ]
-        },
-        {
-          "problemId": "abc308-ex",
-          "claimPath": "/reasoningPath/candidateApproaches/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-          ]
-        },
-        {
-          "problemId": "abc308-ex",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-          ]
-        },
-        {
-          "problemId": "abc308-ex",
-          "claimPath": "/reasoningPath/keyInsights/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-          ]
-        },
-        {
-          "problemId": "abc308-ex",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
-            "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
-          ]
-        },
-        {
-          "problemId": "abc308-ex",
-          "claimPath": "/reasoningPath/observations/1",
+          "claimPath": "/prerequisiteCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -87337,10 +87263,12 @@
         ],
         "learningOutcomeIds": [
           "outcome-construct-optimal-spanning-tree",
+          "outcome-derive-mst-weight-from-threshold-components",
           "outcome-sweep-connectivity-by-kruskal-threshold"
         ],
         "ownedLearningOutcomeIds": [
-          "outcome-construct-optimal-spanning-tree"
+          "outcome-construct-optimal-spanning-tree",
+          "outcome-derive-mst-weight-from-threshold-components"
         ],
         "problemIds": [
           "abc218-e",
@@ -87349,6 +87277,7 @@
           "abc270-f",
           "abc282-e",
           "abc352-e",
+          "abc355-f",
           "abc364-f",
           "abc383-e"
         ],
@@ -87357,11 +87286,11 @@
           "abc282-e",
           "abc352-e",
           "abc270-f",
+          "abc355-f",
           "abc364-f"
         ],
         "relatedProblemIds": [
-          "abc301-ex",
-          "abc355-f"
+          "abc301-ex"
         ],
         "learningRationale": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
       },
@@ -93725,12 +93654,14 @@
         "learningOutcomeIds": [
           "outcome-compute-all-pairs-distance",
           "outcome-detect-improving-cycles",
+          "outcome-find-rooted-cycle-by-shortest-path-branches",
           "outcome-model-and-compute-shortest-path",
           "outcome-relax-in-dependency-order"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-compute-all-pairs-distance",
           "outcome-detect-improving-cycles",
+          "outcome-find-rooted-cycle-by-shortest-path-branches",
           "outcome-model-and-compute-shortest-path",
           "outcome-relax-in-dependency-order"
         ],
@@ -93747,6 +93678,7 @@
           "abc286-e",
           "abc291-f",
           "abc307-f",
+          "abc308-ex",
           "abc325-e",
           "abc342-e",
           "abc395-e",
@@ -93774,7 +93706,8 @@
           "abc232-g",
           "abc245-g",
           "abc414-g",
-          "abc243-ex"
+          "abc243-ex",
+          "abc308-ex"
         ],
         "relatedProblemIds": [
           "abc218-f",
@@ -93787,7 +93720,6 @@
           "abc299-e",
           "abc301-e",
           "abc305-e",
-          "abc308-ex",
           "abc338-f",
           "abc364-g",
           "abc369-e",
@@ -94033,16 +93965,17 @@
         "problemIds": [
           "abc223-h",
           "abc249-g",
-          "abc283-g"
+          "abc283-g",
+          "abc451-g"
         ],
         "directProblemIds": [
           "abc249-g",
           "abc283-g",
+          "abc451-g",
           "abc223-h"
         ],
         "relatedProblemIds": [
-          "abc236-f",
-          "abc451-g"
+          "abc236-f"
         ],
         "learningRationale": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
@@ -95545,6 +95478,10 @@
     {
       "nodeId": "unit-slope-trick",
       "prerequisiteId": "unit-basic-convex-optimization"
+    },
+    {
+      "nodeId": "unit-spanning-tree-optimization",
+      "prerequisiteId": "unit-dsu-components"
     },
     {
       "nodeId": "unit-spanning-tree-optimization",
@@ -125106,22 +125043,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「index segment tree の各 node 区間に点の convex hull を前計算し、prefix [1,i] を覆う node 群の hull で最大内積を二分・三分探索する。」、解法への接続「全 Q 点を葉へ置く segment tree を作り、各 node の点を sort して上下 convex hull を構築する。時刻 i では range [1,i] を分解し、各 hull 上で A x+B y の最大頂点を unimodal search して全 node の最大を出力する。」、学習成果「追加点集合への線形最大化を prefix range に読み替え、segment-tree node ごとの convex hull で処理できる。」を照合し、tag-convex-hull-trick / outcome-optimize-by-line-envelope をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convex-boundary-hull; 補助Outcome=outcome-restrict-geometric-candidates-to-boundary; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convex-boundary-hull / outcome-restrict-geometric-candidates-to-boundary を補助技能として使う。; 補助Tag=tag-segment-tree-canonical-decomposition; 補助Outcome=outcome-decompose-ranges-into-segment-tree-nodes; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-segment-tree-canonical-decomposition / outcome-decompose-ranges-into-segment-tree-nodes を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「index segment tree の各 node 区間に点の convex hull を前計算し、prefix [1,i] を覆う node 群の hull で最大内積を二分・三分探索する。」、解法への接続「全 Q 点を葉へ置く segment tree を作り、各 node の点を sort して上下 convex hull を構築する。時刻 i では range [1,i] を分解し、各 hull 上で A x+B y の最大頂点を unimodal search して全 node の最大を出力する。」、学習成果「追加点集合への線形最大化を prefix range に読み替え、segment-tree node ごとの convex hull で処理できる。」を照合し、tag-convex-boundary-hull / outcome-restrict-geometric-candidates-to-boundary をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-segment-tree-canonical-decomposition; 補助Outcome=outcome-decompose-ranges-into-segment-tree-nodes; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-segment-tree-canonical-decomposition / outcome-decompose-ranges-into-segment-tree-nodes を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-convex-hull-trick"
+        "tag-convex-boundary-hull"
       ],
       "supportingTagIds": [
-        "tag-convex-boundary-hull",
         "tag-segment-tree-canonical-decomposition"
       ],
-      "primaryOutcomeId": "outcome-optimize-by-line-envelope",
+      "primaryOutcomeId": "outcome-restrict-geometric-candidates-to-boundary",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-decompose-ranges-into-segment-tree-nodes",
-        "outcome-restrict-geometric-candidates-to-boundary"
+        "outcome-decompose-ranges-into-segment-tree-nodes"
       ],
       "adHocElements": [
         "逐次追加 query を、点の入力 index に対する prefix range query と読み替えると、dynamic geometry が static hull の集合へ変わる。（再利用可能な見方: 追加-only の online 風問題では、全入力が既知なら time/index 軸の区間 query 化を試す。）"
@@ -125141,27 +125076,9 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-convex-hull-trick"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc244-ex",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-              "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
             "tag-convex-boundary-hull"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -125193,11 +125110,11 @@
               "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
             "tag-convex-boundary-hull"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -186406,20 +186323,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: 根ごとのshortest-path treeをcertificateとし、異branch辺と二本のtree pathからminimum rooted cycleを復元する。; 補助Tag=tag-shortest-path; 補助Outcome=outcome-model-and-compute-shortest-path; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path / outcome-model-and-compute-shortest-path を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 根ごとの最短距離を計算し、最短路木の異branch辺からminimum rooted cycleを導く。木の復元は補助技能として扱う。; 補助Tag=tag-shortest-path-certificate; 補助Outcome=outcome-build-shortest-path-certificate; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-shortest-path-certificate / outcome-build-shortest-path-certificate を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-shortest-path-certificate"
-      ],
-      "supportingTagIds": [
         "tag-shortest-path"
       ],
-      "primaryOutcomeId": "outcome-build-shortest-path-certificate",
+      "supportingTagIds": [
+        "tag-shortest-path-certificate"
+      ],
+      "primaryOutcomeId": "outcome-find-rooted-cycle-by-shortest-path-branches",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-model-and-compute-shortest-path"
+        "outcome-build-shortest-path-certificate"
       ],
       "adHocElements": [
         "tail endpoint dがcycleの別vertexでも、そこまでのcycle arcを消せばcostを増やさず真のQへ縮められるためdがcycle外という条件をd≠b,cへ緩和できる。（再利用可能な見方: subgraph形状制約は余分なcycle/path edgesを削除するnormalizationで局所条件へ弱められることがある。）"
@@ -186439,7 +186356,7 @@
           },
           "kind": "primary",
           "tagIds": [
-            "tag-shortest-path-certificate"
+            "tag-shortest-path"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
@@ -186457,7 +186374,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-shortest-path"
+            "tag-shortest-path-certificate"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -186491,7 +186408,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-shortest-path-certificate"
+            "tag-shortest-path"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -186509,7 +186426,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-shortest-path"
+            "tag-shortest-path-certificate"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -221344,7 +221261,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「線形多項式 (1+A_i x) を product tree と NTT で総積し、各係数を組合せ数で割って tail probability を合計する。」、解法への接続「S=ΣA_i を計算し、各色の polynomial 1+A_i x を次数 N で product tree により NTT multiplication する。得た f_0..f_N と C(S,i) の逐次更新または factorial 式から P_{i+1}=f_i/C(S,i) を作り、i=0..N を合計する。」、学習成果「停止時刻期待値を色相異なる選択数の多項式係数へ変え、全係数を高速積で求められる。」を照合し、tag-convolution / outcome-compute-convolution-or-correlation をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「線形多項式 (1+A_i x) を product tree と NTT で総積し、各係数を組合せ数で割って tail probability を合計する。」、解法への接続「S=ΣA_i を計算し、各色の polynomial 1+A_i x を次数 N で product tree により NTT multiplication する。得た f_0..f_N と C(S,i) の逐次更新または factorial 式から P_{i+1}=f_i/C(S,i) を作り、i=0..N を合計する。」、学習成果「停止時刻期待値を色相異なる選択数の多項式係数へ変え、全係数を高速積で求められる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-contribution-reordering; 補助Outcome=outcome-reorder-counting-contributions; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-contribution-reordering / outcome-reorder-counting-contributions を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -221356,9 +221273,9 @@
         "tag-contribution-reordering",
         "tag-recursive-divide-and-conquer"
       ],
-      "primaryOutcomeId": "outcome-compute-convolution-or-correlation",
+      "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
       "additionalPrimaryOutcomeIds": [
-        "outcome-encode-counting-by-generating-function"
+        "outcome-compute-convolution-or-correlation"
       ],
       "supportingOutcomeIds": [
         "outcome-divide-search-space-recursively",
@@ -223444,20 +223361,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。」、解法への接続「10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans-- し、更新後 ans を出力する。」、学習成果「一般の動的 MST を10層の追加専用連結性へ変換し、O(10(N+Q)α(N)) で各重み和を更新できる。」を照合し、tag-dsu-components / outcome-maintain-connectivity-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-spanning-tree-optimization; 補助Outcome=outcome-construct-optimal-spanning-tree; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-spanning-tree-optimization / outcome-construct-optimal-spanning-tree を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。」、解法への接続「10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans-- し、更新後 ans を出力する。」、学習成果「一般の動的 MST を10層の追加専用連結性へ変換し、O(10(N+Q)α(N)) で各重み和を更新できる。」を照合し、tag-spanning-tree-optimization / outcome-derive-mst-weight-from-threshold-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-dsu-components"
-      ],
-      "supportingTagIds": [
         "tag-spanning-tree-optimization"
       ],
-      "primaryOutcomeId": "outcome-maintain-connectivity-components",
+      "supportingTagIds": [
+        "tag-dsu-components"
+      ],
+      "primaryOutcomeId": "outcome-derive-mst-weight-from-threshold-components",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-construct-optimal-spanning-tree"
+        "outcome-maintain-connectivity-components"
       ],
       "adHocElements": [
         "動的 MST の一般データ構造ではなく、重み上限10を使って MST重みそのものを connectivity layers の面積として表す。（再利用可能な見方: 重み値域が小さいとき、weighted quantity を threshold indicator の総和へ主客転倒する。）"
@@ -223475,11 +223392,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-spanning-tree-optimization"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -223493,11 +223410,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-dsu-components"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -223511,11 +223428,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "supporting",
+          "kind": "same_tag",
           "tagIds": [
             "tag-spanning-tree-optimization"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -223529,11 +223446,11 @@
               "source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930"
             ]
           },
-          "kind": "same_tag",
+          "kind": "supporting",
           "tagIds": [
             "tag-dsu-components"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -249652,7 +249569,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「集合indicatorを自己convolutionし、各Bの2B係数から自己pairを引いて2で割る」、解法への接続「maxSまでの0/1係数配列fを作り、convolution(f,f)を求める。各B∈Sについて(conv[2B]-1)/2を整数で答えへ足す。」、学習成果「集合内の三項等差数をindicator自己convolution一回で数えられる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「集合indicatorを自己convolutionし、各Bの2B係数から自己pairを引いて2で割る」、解法への接続「maxSまでの0/1係数配列fを作り、convolution(f,f)を求める。各B∈Sについて(conv[2B]-1)/2を整数で答えへ足す。」、学習成果「集合内の三項等差数をindicator自己convolution一回で数えられる。」を照合し、tag-convolution / outcome-compute-convolution-or-correlation をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -249663,9 +249580,9 @@
       "supportingTagIds": [
         "tag-combinatorial-coefficients"
       ],
-      "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
+      "primaryOutcomeId": "outcome-compute-convolution-or-correlation",
       "additionalPrimaryOutcomeIds": [
-        "outcome-compute-convolution-or-correlation"
+        "outcome-encode-counting-by-generating-function"
       ],
       "supportingOutcomeIds": [
         "outcome-formulate-combinatorial-coefficients"
@@ -253335,21 +253252,18 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: 合法手数のparityによるgame分類が主であり、connected bipartite graphの一意彩色から合法なcross-part辺を確定する技能も主解法を担う。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: connected bipartite graphの一意彩色から合法なcross-part辺を確定し、固定された残辺数の偶奇で勝敗を決める。後続局面のGrundy DPは行わない。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-structure",
-        "tag-game-grundy-dp"
+        "tag-bipartite-structure"
       ],
       "supportingTagIds": [
         "tag-interactive-protocol"
       ],
-      "primaryOutcomeId": "outcome-classify-game-states",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-color-and-classify-bipartite-components"
-      ],
+      "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-maintain-interactive-query-protocol"
       ],
@@ -253369,11 +253283,9 @@
               "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-game-grundy-dp"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -253780,19 +253692,16 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: 残手数parityによるgame分類が主であり、彩色反転自由度を含むbipartite componentの型分類も独立した典型技能である。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 彩色反転自由度を含むbipartite componentの型を分類し、残手数の偶奇不変量から勝敗を決める。後続局面のGrundy DPは行わない。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-structure",
-        "tag-game-grundy-dp"
+        "tag-bipartite-structure"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-classify-game-states",
-      "additionalPrimaryOutcomeIds": [
-        "outcome-color-and-classify-bipartite-components"
-      ],
+      "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
+      "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [],
       "adHocElements": [
         "disconnectedでは二部分彩色がcomponentごとに反転可能なので、単純な全体part積でなく、merge後parityを操作できるeo/isolated componentがgameの戦略自由度になる。（再利用可能な見方: component merge gameでは、各componentのorientation自由度と、mergeで変わるsize parity classを抽象stateにする。）"
@@ -253810,11 +253719,9 @@
               "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-game-grundy-dp"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -253848,8 +253755,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-bipartite-structure",
-            "tag-game-grundy-dp"
+            "tag-bipartite-structure"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         }
@@ -271649,7 +271555,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「三つのsparse OGF/EGFをNTT convolutionする」、解法への接続「次数NまでのF_A,F_B,F_Cでmultiple位置を1、G_A,G_B,G_Cでmultiple位置をinverseFactorialにする。各三積を二回のNTTで畳み込み、Problem1はcoeff N、Problem2はcoeff N×N!を出す。」、学習成果「indistinguishable/labeledの両ball分配数をmodで求められる。」を照合し、tag-convolution / outcome-compute-convolution-or-correlation をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「三つのsparse OGF/EGFをNTT convolutionする」、解法への接続「次数NまでのF_A,F_B,F_Cでmultiple位置を1、G_A,G_B,G_Cでmultiple位置をinverseFactorialにする。各三積を二回のNTTで畳み込み、Problem1はcoeff N、Problem2はcoeff N×N!を出す。」、学習成果「indistinguishable/labeledの両ball分配数をmodで求められる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -271661,9 +271567,9 @@
         "tag-combinatorial-coefficients",
         "tag-modular-arithmetic"
       ],
-      "primaryOutcomeId": "outcome-compute-convolution-or-correlation",
+      "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
       "additionalPrimaryOutcomeIds": [
-        "outcome-encode-counting-by-generating-function"
+        "outcome-compute-convolution-or-correlation"
       ],
       "supportingOutcomeIds": [
         "outcome-compute-in-modular-arithmetic",
@@ -291491,20 +291397,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「W'_e の xor 基底を簡約して各 A_v の coset 最小代表 B_v=f(A_v) を求め、B_i⊕B_j≤K となる pair を binary trie で数える。」、解法への接続「DFSで A_v を計算し、全辺の W'_e を30 bit xor basisへ挿入・reduced canonical formにする。各 A_v を貪欲に小さくして B_v を得る。値を順に binary trieへ追加し、xorがK以下となる既存値数を上位bitから数える。」、学習成果「全頂点 pair の最小 xor walk 条件を、cycle span の正規代表と binary trie により O((N+M)log W) で数えられる。」を照合し、tag-binary-trie / outcome-query-bitwise-order-with-trie をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-xor-linear-basis; 補助Outcome=outcome-maintain-xor-linear-basis; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-xor-linear-basis / outcome-maintain-xor-linear-basis を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「W'_e の xor 基底を簡約して各 A_v の coset 最小代表 B_v=f(A_v) を求め、B_i⊕B_j≤K となる pair を binary trie で数える。」、解法への接続「DFSで A_v を計算し、全辺の W'_e を30 bit xor basisへ挿入・reduced canonical formにする。各 A_v を貪欲に小さくして B_v を得る。値を順に binary trieへ追加し、xorがK以下となる既存値数を上位bitから数える。」、学習成果「全頂点 pair の最小 xor walk 条件を、cycle span の正規代表と binary trie により O((N+M)log W) で数えられる。」を照合し、tag-xor-linear-basis / outcome-maintain-xor-linear-basis をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-binary-trie; 補助Outcome=outcome-query-bitwise-order-with-trie; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-binary-trie / outcome-query-bitwise-order-with-trie を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-binary-trie"
-      ],
-      "supportingTagIds": [
         "tag-xor-linear-basis"
       ],
-      "primaryOutcomeId": "outcome-query-bitwise-order-with-trie",
+      "supportingTagIds": [
+        "tag-binary-trie"
+      ],
+      "primaryOutcomeId": "outcome-maintain-xor-linear-basis",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-maintain-xor-linear-basis"
+        "outcome-query-bitwise-order-with-trie"
       ],
       "adHocElements": [
         "graph の xor walk は tree potential で端点依存部分と cycle span に分離できる。（再利用可能な見方: pair ごとの coset 最小化が各値の canonical 化へ分離できるかは、正規化写像の xor 線形性を証明して判断する。）"
@@ -291522,11 +291428,11 @@
               "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-xor-linear-basis"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -291540,11 +291446,11 @@
               "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-binary-trie"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -291560,7 +291466,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-binary-trie"
+            "tag-xor-linear-basis"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -291578,7 +291484,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-xor-linear-basis"
+            "tag-binary-trie"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -295457,7 +295363,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「appleを (u,v) 辞書順にsortし、v列の最長狭義減少部分列長を求めて必要robot最小数とする。」、解法への接続「各appleを(u_i,v_i)へ変換しpair昇順sortする。vを順に見て、狭義減少LIS相当として -v の狭義LISまたはlower_bound規約を使うpatience sortingを行い、その長さを出力する。」、学習成果「速度1のrobotによる全apple回収最小台数を、時空半順序の最大antichain=LDSとして O(N log N) で求められる。」を照合し、tag-poset-dilworth-antichain / outcome-optimize-poset-antichain-by-dilworth をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-geometry-orientation-transform; 補助Outcome=outcome-reduce-geometry-to-algebraic-predicates; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-geometry-orientation-transform / outcome-reduce-geometry-to-algebraic-predicates を補助技能として使う。; 補助Tag=tag-sequence-subsequence-dp; 補助Outcome=outcome-design-order-preserving-dp; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-sequence-subsequence-dp / outcome-design-order-preserving-dp を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「appleを (u,v) 辞書順にsortし、v列の最長狭義減少部分列長を求めて必要robot最小数とする。」、解法への接続「各appleを(u_i,v_i)へ変換しpair昇順sortする。vを順に見て、狭義減少LIS相当として -v の狭義LISまたはlower_bound規約を使うpatience sortingを行い、その長さを出力する。」、学習成果「速度1のrobotによる全apple回収最小台数を、時空半順序の最大antichain=LDSとして O(N log N) で求められる。」を照合し、tag-poset-dilworth-antichain / outcome-optimize-poset-antichain-by-dilworth をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-geometry-orientation-transform; 補助Outcome=outcome-reduce-geometry-to-algebraic-predicates; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-geometry-orientation-transform / outcome-reduce-geometry-to-algebraic-predicates を補助技能として使う。; 補助Tag=tag-lis-state; 補助Outcome=outcome-design-lis-frontier; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-lis-state / outcome-design-lis-frontier を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -295466,12 +295372,12 @@
       ],
       "supportingTagIds": [
         "tag-geometry-orientation-transform",
-        "tag-sequence-subsequence-dp"
+        "tag-lis-state"
       ],
       "primaryOutcomeId": "outcome-optimize-poset-antichain-by-dilworth",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-design-order-preserving-dp",
+        "outcome-design-lis-frontier",
         "outcome-reduce-geometry-to-algebraic-predicates"
       ],
       "adHocElements": [
@@ -295528,7 +295434,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-sequence-subsequence-dp"
+            "tag-lis-state"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -295564,7 +295470,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-sequence-subsequence-dp"
+            "tag-lis-state"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -381402,8 +381308,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "d12253ad95e0cace2e29aa9c414a9f65723a00f1853815e5938630f25ab5f7d9",
-      "subjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
+      "digest": "b62823a47fb550ee0b141c558934a32ed4fa31164d7e94dbf25cde32dcb7a5bf",
+      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
       "authorIds": [
         "person-maintainer"
       ],
@@ -381414,15 +381320,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "3ea5bbd3c7d9167b4ed15ca4e59f7527994ba3b8021f3febf634e25bbfd03bbb",
-  "taxonomyDigest": "2dafb0cadf6b1c2b343930022df8296f05e3549e48c7578f7fc9014975dc404b",
+  "taxonomySubjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+  "taxonomyDigest": "a17283bbe57bfb22b45ca43286529b2a97a596a077ffe58ead5caac06deecd82",
   "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
-  "learningUnitDagDigest": "659d56f968c7e4cbcd16a9bbc3a99b9aa987a1cf35562c5b6c500d523d12107c",
-  "placementDigest": "b73abf4ef78d018edf7fc04158a83f608c5ee45acec49843753f0cba0d5cd4bd",
+  "learningUnitDagDigest": "266e0428c30669e4a8ad31470d917d67187d35468b5074fb9b35585c5eb760bf",
+  "placementDigest": "b14ba4be99bd184bdf04e7ec48471f5a575b056d056488bb394947abe582c752",
   "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "status": "accepted",
-  "acceptedAt": "2026-09-26T04:23:05.098Z",
+  "acceptedAt": "2026-09-26T05:42:35.477Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "33e4c8113deec1ccee9b61a9379e197530cbd5a6fb918e3b477bf71e2a2003da"
+  "buildDigest": "0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff"
 }

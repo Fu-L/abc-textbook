@@ -11,10 +11,10 @@
   "sourceRevisionIds": [
     "source-abc228-editorial-2946-865e83f94136ff412ee8bfb8814c501a550a1d8879454f663e30f654df862021",
     "source-abc228-h-problem-f30374b56089c51f620508be1ec28412848e3a5b76afcd94350e1872fedd5777",
-    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
-    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
     "source-abc289-editorial-5700-410d2e4623c79e1995161a9ccb1d275c45990e767b73a0e1696d943ab2f890c6",
-    "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63"
+    "source-abc289-g-problem-b7ee1bbc7276eb9ccede098cfc6c5a5282530091237383e3761cac876e290d63",
+    "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+    "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
   ],
   "tagIds": [
     "tag-convex-hull-trick"
@@ -32,7 +32,6 @@
   "docPath": "src/content/docs/learn/geometry-optimization/line-envelope.md",
   "problemIds": [
     "abc228-h",
-    "abc244-ex",
     "abc289-g",
     "abc372-g",
     "abc448-g"
@@ -41,8 +40,7 @@
     "abc289-g",
     "abc372-g",
     "abc448-g",
-    "abc228-h",
-    "abc244-ex"
+    "abc228-h"
   ],
   "relatedProblemIds": [],
   "examples": [],

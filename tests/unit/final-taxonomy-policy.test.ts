@@ -126,10 +126,89 @@ describe('final taxonomy policy', () => {
     }
   });
 
+  it('keeps the ten semantic audit corrections in their intended roles', async () => {
+    const table = await loadedDecisionTable;
+    const byProblemId = new Map(table.decisions.map((decision) => [decision.problemId, decision]));
+    const expected: Readonly<
+      Record<string, readonly [string, readonly string[], readonly string[], readonly string[]]>
+    > = {
+      'abc244-ex': [
+        'outcome-restrict-geometric-candidates-to-boundary',
+        ['tag-convex-boundary-hull'],
+        [],
+        ['tag-segment-tree-canonical-decomposition'],
+      ],
+      'abc308-ex': [
+        'outcome-find-rooted-cycle-by-shortest-path-branches',
+        ['tag-shortest-path'],
+        [],
+        ['tag-shortest-path-certificate'],
+      ],
+      'abc352-g': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-compute-convolution-or-correlation'],
+        ['tag-contribution-reordering', 'tag-recursive-divide-and-conquer'],
+      ],
+      'abc355-f': [
+        'outcome-derive-mst-weight-from-threshold-components',
+        ['tag-spanning-tree-optimization'],
+        [],
+        ['tag-dsu-components'],
+      ],
+      'abc392-g': [
+        'outcome-compute-convolution-or-correlation',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-encode-counting-by-generating-function'],
+        ['tag-combinatorial-coefficients'],
+      ],
+      'abc398-e': [
+        'outcome-color-and-classify-bipartite-components',
+        ['tag-bipartite-structure'],
+        [],
+        ['tag-interactive-protocol'],
+      ],
+      'abc398-g': [
+        'outcome-color-and-classify-bipartite-components',
+        ['tag-bipartite-structure'],
+        [],
+        [],
+      ],
+      'abc422-g': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-compute-convolution-or-correlation'],
+        ['tag-combinatorial-coefficients', 'tag-modular-arithmetic'],
+      ],
+      'abc451-g': [
+        'outcome-maintain-xor-linear-basis',
+        ['tag-xor-linear-basis'],
+        [],
+        ['tag-binary-trie'],
+      ],
+      'abc457-g': [
+        'outcome-optimize-poset-antichain-by-dilworth',
+        ['tag-poset-dilworth-antichain'],
+        [],
+        ['tag-geometry-orientation-transform', 'tag-lis-state'],
+      ],
+    };
+    for (const [
+      problemId,
+      [home, primaryTags, additionalOutcomes, supportingTags],
+    ] of Object.entries(expected)) {
+      const decision = byProblemId.get(problemId);
+      expect(decision?.primaryOutcomeId, problemId).toBe(home);
+      expect(decision?.primaryTagIds, problemId).toEqual(primaryTags);
+      expect(decision?.additionalPrimaryOutcomeIds, problemId).toEqual(additionalOutcomes);
+      expect(decision?.supportingTagIds, problemId).toEqual(supportingTags);
+    }
+  });
+
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
     expect(FINAL_TAXONOMY_TAGS).toHaveLength(206);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(229);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(231);
     expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(229);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
@@ -294,6 +373,7 @@ describe('final taxonomy policy', () => {
       outcomeById.get('outcome-construct-optimal-spanning-tree')?.prerequisiteOutcomeIds,
     ).toEqual(['outcome-prove-greedy-order']);
     expect(prerequisiteIdsForUnit('unit-spanning-tree-optimization')).toEqual([
+      'unit-dsu-components',
       'unit-greedy-exchange',
     ]);
     expect(unitById.get('unit-graph-search')?.title).toBe('状態グラフ探索・到達関係');
@@ -1206,7 +1286,7 @@ describe('final taxonomy policy', () => {
       'abc429-f': ['outcome-exponentiate-transition-over-semiring'],
       'abc448-e': ['outcome-compute-in-modular-arithmetic'],
       'abc454-e': ['outcome-color-and-classify-bipartite-components'],
-      'abc457-g': ['outcome-design-order-preserving-dp'],
+      'abc457-g': ['outcome-design-lis-frontier'],
     };
     for (const [problemId, supportingOutcomeIds] of Object.entries(expectedSupporting)) {
       expect(
@@ -1339,7 +1419,6 @@ describe('final taxonomy policy', () => {
         '/typicalTechniques/0': ['tag-edit-distance-dp'],
       },
       'abc398-e': {
-        '/typicalTechniques/0': ['tag-game-grundy-dp'],
         '/typicalTechniques/1': ['tag-bipartite-structure'],
       },
       'abc311-e': {

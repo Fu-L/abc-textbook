@@ -31,16 +31,15 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/query/binary-trie.md",
   "problemIds": [
-    "abc425-g",
-    "abc451-g"
+    "abc425-g"
   ],
   "directProblemIds": [
-    "abc425-g",
-    "abc451-g"
+    "abc425-g"
   ],
   "relatedProblemIds": [
     "abc252-ex",
-    "abc254-ex"
+    "abc254-ex",
+    "abc451-g"
   ],
   "examples": [],
   "exercises": [],

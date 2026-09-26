@@ -546,21 +546,6 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting('outcome-formulate-combinatorial-coefficients'),
     ],
   },
-  'abc398-e': {
-    '/typicalTechniques/0': [primary('outcome-classify-game-states')],
-    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
-    '/prerequisiteCandidates/0': [
-      sameTag('outcome-color-and-classify-bipartite-components'),
-      supporting('outcome-maintain-interactive-query-protocol'),
-    ],
-  },
-  'abc398-g': {
-    '/typicalTechniques/0': [primary('outcome-classify-game-states')],
-    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
-    '/prerequisiteCandidates/0': [
-      sameTag('outcome-classify-game-states', 'outcome-color-and-classify-bipartite-components'),
-    ],
-  },
   'abc409-g': {
     '/typicalTechniques/2': [
       primary(

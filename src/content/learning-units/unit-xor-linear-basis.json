@@ -33,16 +33,17 @@
   "problemIds": [
     "abc223-h",
     "abc249-g",
-    "abc283-g"
+    "abc283-g",
+    "abc451-g"
   ],
   "directProblemIds": [
     "abc249-g",
     "abc283-g",
+    "abc451-g",
     "abc223-h"
   ],
   "relatedProblemIds": [
-    "abc236-f",
-    "abc451-g"
+    "abc236-f"
   ],
   "examples": [],
   "exercises": [],

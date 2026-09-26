@@ -29,6 +29,7 @@
   "contentPhase": "canonical_skeleton",
   "docPath": "src/content/docs/learn/geometry-optimization/convex-geometry.md",
   "problemIds": [
+    "abc244-ex",
     "abc251-g",
     "abc257-ex",
     "abc275-g",
@@ -37,9 +38,7 @@
     "abc356-g"
   ],
   "directProblemIds": [],
-  "relatedProblemIds": [
-    "abc244-ex"
-  ],
+  "relatedProblemIds": [],
   "examples": [],
   "exercises": [],
   "learningRationale": "向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。"

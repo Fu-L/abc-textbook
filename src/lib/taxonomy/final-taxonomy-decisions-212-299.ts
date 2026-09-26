@@ -178,7 +178,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc243-g': 'tag-dp-transition-acceleration',
 
   'abc244-e': 'tag-dp-state-equivalence',
-  'abc244-ex': 'tag-convex-hull-trick',
+  'abc244-ex': 'tag-convex-hull-halfplane',
   'abc244-f': 'tag-subset-bitmask-transform',
   'abc244-g': 'tag-constructive-witness',
 
