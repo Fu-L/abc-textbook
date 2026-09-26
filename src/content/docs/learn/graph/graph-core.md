@@ -3,7 +3,7 @@ title: "単一サイクル成分とgraph core"
 description: "「単一サイクル成分とgraph core」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 113
+  order: 114
 ---
 
 # 単一サイクル成分とgraph core
@@ -56,4 +56,4 @@ ABC226 Eでは各成分についてE=Vを確認する。木部分の辺の向き
 - [ABC266 F 公式解説](https://atcoder.jp/contests/abc266/editorial/4698)
 - [ABC266 F 公式問題文](https://atcoder.jp/contests/abc266/tasks/abc266_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-graph-core`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-graph-core`

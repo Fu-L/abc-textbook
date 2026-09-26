@@ -119,4 +119,4 @@ ABC254 Exでは整数を二進表記の節点と見なし、末尾を一桁削�
 - [ABC225 E 公式解説](https://atcoder.jp/contests/abc225/editorial/2853)
 - [ABC225 F 公式問題文](https://atcoder.jp/contests/abc225/tasks/abc225_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-greedy-exchange`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-greedy-exchange`

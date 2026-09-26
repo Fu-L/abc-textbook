@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff",
-    "acceptedAt": "2026-09-26T05:42:35.477Z"
+    "digest": "f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe",
+    "acceptedAt": "2026-09-26T07:23:23.224Z"
   },
   "tagPrerequisites": [
     {
@@ -990,6 +990,10 @@
     },
     {
       "nodeId": "outcome-kernelize-near-tree-graph",
+      "prerequisiteId": "outcome-map-graph-cycle-xor-to-span"
+    },
+    {
+      "nodeId": "outcome-kernelize-near-tree-graph",
       "prerequisiteId": "outcome-peel-graph-core"
     },
     {
@@ -1035,6 +1039,14 @@
     {
       "nodeId": "outcome-maintain-weighted-prefix-statistics",
       "prerequisiteId": "outcome-linearize-static-range-information"
+    },
+    {
+      "nodeId": "outcome-map-graph-cycle-xor-to-span",
+      "prerequisiteId": "outcome-use-cycle-space-basis"
+    },
+    {
+      "nodeId": "outcome-minimize-xor-coset-representative",
+      "prerequisiteId": "outcome-maintain-xor-linear-basis"
     },
     {
       "nodeId": "outcome-model-and-compute-shortest-path",
@@ -1908,6 +1920,6 @@
     }
   ],
   "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
-  "learningOutcomeDagDigest": "ffeb54d5d8b5d2c5f023d88282ec3b9cd7792cf552e4f788fae41a131252da90",
+  "learningOutcomeDagDigest": "358cba8e4e53f2672279efda7f9bf737acab8a7cab97a63cfbbaa838dbe6e30d",
   "learningUnitDagDigest": "266e0428c30669e4a8ad31470d917d67187d35468b5074fb9b35585c5eb760bf"
 }

@@ -3,7 +3,7 @@ title: "Heavy-Light Decomposition"
 description: "「Heavy-Light Decomposition」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 135
+  order: 136
 ---
 
 # Heavy-Light Decomposition
@@ -59,4 +59,4 @@ ancestor query・LCA・Euler順による部分木区間化で得た考え方と�
 - [ABC351 G 公式解説](https://atcoder.jp/contests/abc351/editorial/9868)
 - [ABC351 G 公式問題文](https://atcoder.jp/contests/abc351/tasks/abc351_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-heavy-light-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-heavy-light-decomposition`

@@ -3,7 +3,7 @@ title: "固定線形遷移を巨大回数進める"
 description: "「固定線形遷移を巨大回数進める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 83
+  order: 84
 ---
 
 # 固定線形遷移を巨大回数進める
@@ -66,4 +66,4 @@ sidebar:
 - [ABC258 H 公式解説](https://atcoder.jp/contests/abc258/editorial/4214)
 - [ABC258 H 公式問題文](https://atcoder.jp/contests/abc258/tasks/abc258_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-linear-recurrence`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-linear-recurrence`

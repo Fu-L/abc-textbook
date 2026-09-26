@@ -25,6 +25,7 @@
   "learningOutcomeIds": [
     "outcome-factor-separable-linear-transform",
     "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative",
     "outcome-solve-linear-system-and-rank"
   ],
   "ownedLearningOutcomeIds": [],

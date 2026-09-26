@@ -47,10 +47,12 @@
     }
   ],
   "learningOutcomeIds": [
+    "outcome-map-graph-cycle-xor-to-span",
     "outcome-use-cycle-space-basis"
   ],
   "representativeProblemIds": [
-    "abc419-g"
+    "abc419-g",
+    "abc451-g"
   ],
   "aliases": [
     "cycle space",

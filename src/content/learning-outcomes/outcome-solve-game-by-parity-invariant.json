@@ -1,0 +1,11 @@
+{
+  "id": "outcome-solve-game-by-parity-invariant",
+  "statement": "合法手が独立な固定候補の消費に限られる場合や、成分分類から残手数の偶奇を求められる場合に、勝敗を決める偶奇量と応答戦略を証明し、局面ごとのDPなしで勝者を判定できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc398-e",
+    "abc398-g",
+    "tag-game-parity-invariant",
+    "unit-game-parity-invariant"
+  ]
+}

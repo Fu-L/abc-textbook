@@ -3,7 +3,7 @@ title: "部分集合・bitmask状態DP"
 description: "「部分集合・bitmask状態DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 70
 ---
 
 # 部分集合・bitmask状態DP
@@ -91,4 +91,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、部分集合
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-dp-subset-state`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-dp-subset-state`

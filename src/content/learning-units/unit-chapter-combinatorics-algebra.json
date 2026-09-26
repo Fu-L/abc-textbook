@@ -78,6 +78,7 @@
     "outcome-invert-divisor-lattice-by-mobius",
     "outcome-invert-generating-function-equation",
     "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative",
     "outcome-optimize-poset-antichain-by-dilworth",
     "outcome-optimize-weighted-matroid-basis",
     "outcome-recur-by-edge-deletion-contraction",

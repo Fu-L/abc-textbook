@@ -3,7 +3,7 @@ title: "Matroidの独立性・greedy・線形交差"
 description: "「Matroidの独立性・greedy・線形交差」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 211
+  order: 212
 ---
 
 # Matroidの独立性・greedy・線形交差
@@ -46,4 +46,4 @@ sidebar:
 - [ABC399 G 公式解説](https://atcoder.jp/contests/abc399/editorial/12546)
 - [ABC399 G 公式問題文](https://atcoder.jp/contests/abc399/tasks/abc399_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-matroid-theory`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-matroid-theory`

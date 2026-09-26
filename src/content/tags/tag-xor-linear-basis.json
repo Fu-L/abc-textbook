@@ -35,7 +35,8 @@
     }
   ],
   "learningOutcomeIds": [
-    "outcome-maintain-xor-linear-basis"
+    "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative"
   ],
   "representativeProblemIds": [
     "abc223-h",

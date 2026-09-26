@@ -60,4 +60,4 @@ sidebar:
 - [ABC249 F 公式解説](https://atcoder.jp/contests/abc249/editorial/3789)
 - [ABC249 F 公式問題文](https://atcoder.jp/contests/abc249/tasks/abc249_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-reverse-offline`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-reverse-offline`

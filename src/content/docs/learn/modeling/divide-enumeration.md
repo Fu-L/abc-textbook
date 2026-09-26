@@ -75,4 +75,4 @@ sidebar:
 - [ABC230 H 公式解説](https://atcoder.jp/contests/abc230/editorial/3003)
 - [ABC230 H 公式問題文](https://atcoder.jp/contests/abc230/tasks/abc230_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-divide-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-divide-enumeration`

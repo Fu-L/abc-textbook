@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+  "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "6d1f16daa98c18fe78199e20fe6937263f0dc952f4cf6415c5660b0d24a9e21d",
+  "inventoryDigest": "3c5430a7a6b0b2f2c52e05c2080bd4fe987653507312e3103fba6531b32d0b1b",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
+      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T05:42:14.678Z",
+      "completedAt": "2026-09-26T07:23:01.668Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
+      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T05:42:22.247Z",
+      "completedAt": "2026-09-26T07:23:09.472Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
+      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T05:42:22.685Z",
+      "completedAt": "2026-09-26T07:23:09.915Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
+      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T05:42:22.922Z",
+      "completedAt": "2026-09-26T07:23:10.138Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "0ad7b4f13d09bd1230f5614a0ce398859501aaa68e0184cfe7bd5b6d369350f4",
+      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T05:42:29.925Z",
+      "completedAt": "2026-09-26T07:23:17.448Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "5a468de57e2c8441823e43b930d7293d9fd037614ea42504193ea98983c14b32",
+  "reviewerExecutedCheckSetDigest": "c2ce88e5a744357b8466037ae4357aa72d5ce4d74ca5f115564235e9375f4ac4",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -246,8 +246,10 @@
         "outcome-maintain-sparse-domain-segment-tree",
         "outcome-maintain-weighted-prefix-statistics",
         "outcome-maintain-xor-linear-basis",
+        "outcome-map-graph-cycle-xor-to-span",
         "outcome-merge-small-into-large",
         "outcome-minimize-maximum-xor-by-bit-partition",
+        "outcome-minimize-xor-coset-representative",
         "outcome-model-and-compute-shortest-path",
         "outcome-model-and-exploit-graph",
         "outcome-model-and-exploit-tree",
@@ -308,6 +310,7 @@
         "outcome-solve-cyclic-minimax-game",
         "outcome-solve-difference-constraints",
         "outcome-solve-flow-with-lower-bounds",
+        "outcome-solve-game-by-parity-invariant",
         "outcome-solve-isotonic-regression-by-pav",
         "outcome-solve-linear-system-and-rank",
         "outcome-solve-min-weight-general-perfect-matching",
@@ -332,10 +335,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# Final taxonomy semantic correction review basis\n\nSubject digest: `2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c`\n\nThe review compares all 868 adopted Inventory solutions with the primary, home, and supporting\nroles. The detailed per-problem audit is in `docs/reviews/semantic-placement-audit-2026-09-26.md`.\nThe accepted build before this revision is preserved under\n`docs/verification/history/2026-09-26/semantic-placement-before/`.\n\nExactly ten placements change: ABC244 Ex, ABC308 Ex, ABC352 G, ABC355 F, ABC392 G, ABC398 E, ABC398\nG, ABC422 G, ABC451 G, and ABC457 G. The proposal adds two atomic Outcomes for shortest-path-tree\nbranch crossings and the threshold-component MST weight formula. It retains 206 Tags, 229 Units, and\n868 placements; Outcomes increase from 229 to 231.\n\nIndependent checks passed before human acceptance: TypeScript/Astro check, ESLint, Prettier, schema\nparity, the unit suite, focused taxonomy contract/review/integration tests, and an in-memory\ncanonical materialization with zero diagnostics. The repository's five formal FinalTaxonomyReview\nchecks remain the acceptance gate.",
+      "reviewBasis": "# T159 final taxonomy self-review\n\nReview basis for the full-corpus taxonomy proposal generated on 2026-09-26. The accepted Inventory is treated as true, as directed. The requested third-party review is skipped; the work manifest permits self-review for the solo maintainer, and the user explicitly authorized that route.\n\nThe three semantic refinements were checked against their reviewed Inventory reasoning and the official problem/editorial source revisions referenced there:\n\n- **ABC398 E:** The tree's connected bipartition fixes the legal cross-part edge pool. Each move consumes one fixed candidate, so the winner follows from the remaining count's parity. The parity-game skill owns the problem; bipartite coloring is co-primary because it determines the candidate pool, and interactive I/O remains supporting.\n- **ABC398 G:** Bipartite components can flip orientation when merged. Their part-size parity classes reduce the game to a parity invariant and a finite case classification. The parity-game skill owns the problem; component coloring is co-primary. This is not a Grundy or minimax DP.\n- **ABC451 G:** Root-to-vertex XOR potentials map weighted fundamental cycles to an XOR span. A reduced XOR basis gives each affine coset its minimum representative, and linearity separates pairwise minimization. XOR-basis coset normalization owns the problem; cycle-space mapping and binary-trie pair counting are supporting skills used by the solution.\n\nThe new parity-game tag and learning unit keep this reusable strategy separate from game DP. The two ABC398 claims bind to the exact game and bipartite outcomes. ABC451 G binds the new cycle-space mapping and coset-normalization outcomes while retaining the trie outcome. The full-corpus proposal still covers 868 problem placements, and the review manifest includes all newly introduced learning outcomes.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-26T05:42:35.477Z"
+      "reviewedAt": "2026-09-26T07:23:23.224Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -497,8 +500,10 @@
       "outcome-maintain-sparse-domain-segment-tree",
       "outcome-maintain-weighted-prefix-statistics",
       "outcome-maintain-xor-linear-basis",
+      "outcome-map-graph-cycle-xor-to-span",
       "outcome-merge-small-into-large",
       "outcome-minimize-maximum-xor-by-bit-partition",
+      "outcome-minimize-xor-coset-representative",
       "outcome-model-and-compute-shortest-path",
       "outcome-model-and-exploit-graph",
       "outcome-model-and-exploit-tree",
@@ -559,6 +564,7 @@
       "outcome-solve-cyclic-minimax-game",
       "outcome-solve-difference-constraints",
       "outcome-solve-flow-with-lower-bounds",
+      "outcome-solve-game-by-parity-invariant",
       "outcome-solve-isotonic-regression-by-pav",
       "outcome-solve-linear-system-and-rank",
       "outcome-solve-min-weight-general-perfect-matching",
@@ -586,12 +592,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# Final taxonomy semantic correction review basis\n\nSubject digest: `2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c`\n\nThe review compares all 868 adopted Inventory solutions with the primary, home, and supporting\nroles. The detailed per-problem audit is in `docs/reviews/semantic-placement-audit-2026-09-26.md`.\nThe accepted build before this revision is preserved under\n`docs/verification/history/2026-09-26/semantic-placement-before/`.\n\nExactly ten placements change: ABC244 Ex, ABC308 Ex, ABC352 G, ABC355 F, ABC392 G, ABC398 E, ABC398\nG, ABC422 G, ABC451 G, and ABC457 G. The proposal adds two atomic Outcomes for shortest-path-tree\nbranch crossings and the threshold-component MST weight formula. It retains 206 Tags, 229 Units, and\n868 placements; Outcomes increase from 229 to 231.\n\nIndependent checks passed before human acceptance: TypeScript/Astro check, ESLint, Prettier, schema\nparity, the unit suite, focused taxonomy contract/review/integration tests, and an in-memory\ncanonical materialization with zero diagnostics. The repository's five formal FinalTaxonomyReview\nchecks remain the acceptance gate.",
+    "rationale": "# T159 final taxonomy self-review\n\nReview basis for the full-corpus taxonomy proposal generated on 2026-09-26. The accepted Inventory is treated as true, as directed. The requested third-party review is skipped; the work manifest permits self-review for the solo maintainer, and the user explicitly authorized that route.\n\nThe three semantic refinements were checked against their reviewed Inventory reasoning and the official problem/editorial source revisions referenced there:\n\n- **ABC398 E:** The tree's connected bipartition fixes the legal cross-part edge pool. Each move consumes one fixed candidate, so the winner follows from the remaining count's parity. The parity-game skill owns the problem; bipartite coloring is co-primary because it determines the candidate pool, and interactive I/O remains supporting.\n- **ABC398 G:** Bipartite components can flip orientation when merged. Their part-size parity classes reduce the game to a parity invariant and a finite case classification. The parity-game skill owns the problem; component coloring is co-primary. This is not a Grundy or minimax DP.\n- **ABC451 G:** Root-to-vertex XOR potentials map weighted fundamental cycles to an XOR span. A reduced XOR basis gives each affine coset its minimum representative, and linearity separates pairwise minimization. XOR-basis coset normalization owns the problem; cycle-space mapping and binary-trie pair counting are supporting skills used by the solution.\n\nThe new parity-game tag and learning unit keep this reusable strategy separate from game DP. The two ABC398 claims bind to the exact game and bipartite outcomes. ABC451 G binds the new cycle-space mapping and coset-normalization outcomes while retaining the trie outcome. The full-corpus proposal still covers 868 problem placements, and the review manifest includes all newly introduced learning outcomes.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-26T05:42:35.477Z"
+    "confirmedAt": "2026-09-26T07:23:23.224Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-26T05:42:35.477Z",
-  "evidenceDigest": "b62823a47fb550ee0b141c558934a32ed4fa31164d7e94dbf25cde32dcb7a5bf"
+  "generatedAt": "2026-09-26T07:23:23.224Z",
+  "evidenceDigest": "dda839763c111f5b921c90aac3582150d43f914bf2b95b7f855bdd28a74a4e9c"
 }

@@ -3,7 +3,7 @@ title: "拡大有限体の表現と四則演算を構成する"
 description: "「拡大有限体の表現と四則演算を構成する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 178
+  order: 179
 ---
 
 # 拡大有限体の表現と四則演算を構成する
@@ -55,4 +55,4 @@ sidebar:
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-finite-field-extension`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-finite-field-extension`

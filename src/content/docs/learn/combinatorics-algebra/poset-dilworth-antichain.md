@@ -3,7 +3,7 @@ title: "半順序・Dilworth・最大反鎖"
 description: "「半順序・Dilworth・最大反鎖」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 190
+  order: 191
 ---
 
 # 半順序・Dilworth・最大反鎖
@@ -53,4 +53,4 @@ sidebar:
 - [ABC457 G 公式解説](https://atcoder.jp/contests/abc457/editorial/20073)
 - [ABC457 G 公式問題文](https://atcoder.jp/contests/abc457/tasks/abc457_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-poset-dilworth-antichain`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-poset-dilworth-antichain`

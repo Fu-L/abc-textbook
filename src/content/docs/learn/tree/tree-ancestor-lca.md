@@ -3,7 +3,7 @@ title: "ancestor query・LCA"
 description: "「ancestor query・LCA」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 134
+  order: 135
 ---
 
 # ancestor query・LCA
@@ -62,4 +62,4 @@ doubling・binary liftingで得た考え方と実装を再利用し、ancestor q
 - [ABC298 H 公式解説](https://atcoder.jp/contests/abc298/editorial/6218)
 - [ABC298 H 公式問題文](https://atcoder.jp/contests/abc298/tasks/abc298_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-tree-ancestor-lca`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-tree-ancestor-lca`

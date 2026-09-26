@@ -39,6 +39,11 @@
   },
   "relatedTags": [
     {
+      "tagId": "tag-game-parity-invariant",
+      "type": "contrast",
+      "rationale": "後続局面を再帰計算してmexや勝敗を求める方法と、合法手数・終端量の偶奇から局面探索なしに勝敗を決める方法を区別する。"
+    },
+    {
       "tagId": "tag-game-value-dp",
       "type": "contrast",
       "rationale": "impartial gameのGrundy数と、双方の目的が異なる局面のminimax値を同じゲームDPへ混同しない。"

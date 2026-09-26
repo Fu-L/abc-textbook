@@ -345,8 +345,9 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc226-h',
     'abc242-ex',
   ],
-  'unit-dp-game': ['abc368-f', 'abc380-f', 'abc297-g', 'abc255-g', 'abc398-g'],
+  'unit-dp-game': ['abc368-f', 'abc380-f', 'abc297-g', 'abc255-g'],
   'unit-dp-game-value': ['abc349-e', 'abc303-g'],
+  'unit-game-parity-invariant': ['abc398-e', 'abc398-g'],
   'unit-inclusion-exclusion': [
     'abc246-f',
     'abc455-e',

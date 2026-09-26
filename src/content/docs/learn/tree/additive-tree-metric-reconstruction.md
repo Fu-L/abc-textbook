@@ -3,7 +3,7 @@ title: "加法的tree metric復元"
 description: "「加法的tree metric復元」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 129
+  order: 130
 ---
 
 # 加法的tree metric復元
@@ -47,4 +47,4 @@ sidebar:
 - [ABC451 E 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_e)
 - [ABC451 E 公式解説](https://atcoder.jp/contests/abc451/editorial/18053)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-additive-tree-metric-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-additive-tree-metric-reconstruction`

@@ -3,7 +3,7 @@ title: "乗法的位数から最小周期を求める"
 description: "「乗法的位数から最小周期を求める」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 169
+  order: 170
 ---
 
 # 乗法的位数から最小周期を求める
@@ -55,4 +55,4 @@ sidebar:
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-multiplicative-order-periods`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-multiplicative-order-periods`

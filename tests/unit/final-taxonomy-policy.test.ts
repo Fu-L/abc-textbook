@@ -126,7 +126,7 @@ describe('final taxonomy policy', () => {
     }
   });
 
-  it('keeps the ten semantic audit corrections in their intended roles', async () => {
+  it('keeps curated semantic audit corrections in their intended roles', async () => {
     const table = await loadedDecisionTable;
     const byProblemId = new Map(table.decisions.map((decision) => [decision.problemId, decision]));
     const expected: Readonly<
@@ -163,15 +163,15 @@ describe('final taxonomy policy', () => {
         ['tag-combinatorial-coefficients'],
       ],
       'abc398-e': [
-        'outcome-color-and-classify-bipartite-components',
-        ['tag-bipartite-structure'],
-        [],
+        'outcome-solve-game-by-parity-invariant',
+        ['tag-bipartite-structure', 'tag-game-parity-invariant'],
+        ['outcome-color-and-classify-bipartite-components'],
         ['tag-interactive-protocol'],
       ],
       'abc398-g': [
-        'outcome-color-and-classify-bipartite-components',
-        ['tag-bipartite-structure'],
-        [],
+        'outcome-solve-game-by-parity-invariant',
+        ['tag-bipartite-structure', 'tag-game-parity-invariant'],
+        ['outcome-color-and-classify-bipartite-components'],
         [],
       ],
       'abc422-g': [
@@ -181,10 +181,10 @@ describe('final taxonomy policy', () => {
         ['tag-combinatorial-coefficients', 'tag-modular-arithmetic'],
       ],
       'abc451-g': [
-        'outcome-maintain-xor-linear-basis',
+        'outcome-minimize-xor-coset-representative',
         ['tag-xor-linear-basis'],
         [],
-        ['tag-binary-trie'],
+        ['tag-binary-trie', 'tag-cycle-space-basis'],
       ],
       'abc457-g': [
         'outcome-optimize-poset-antichain-by-dilworth',
@@ -203,13 +203,28 @@ describe('final taxonomy policy', () => {
       expect(decision?.additionalPrimaryOutcomeIds, problemId).toEqual(additionalOutcomes);
       expect(decision?.supportingTagIds, problemId).toEqual(supportingTags);
     }
+    expect(byProblemId.get('abc451-g')?.supportingOutcomeIds).toEqual([
+      'outcome-map-graph-cycle-xor-to-span',
+      'outcome-query-bitwise-order-with-trie',
+    ]);
+    expect(ownerUnitIdForOutcome('outcome-solve-game-by-parity-invariant')).toBe(
+      'unit-game-parity-invariant',
+    );
+    expect(
+      FINAL_TAXONOMY_OUTCOMES.find(({ id }) => id === 'outcome-minimize-xor-coset-representative')
+        ?.prerequisiteOutcomeIds,
+    ).toContain('outcome-maintain-xor-linear-basis');
+    expect(
+      FINAL_TAXONOMY_OUTCOMES.find(({ id }) => id === 'outcome-map-graph-cycle-xor-to-span')
+        ?.prerequisiteOutcomeIds,
+    ).toContain('outcome-use-cycle-space-basis');
   });
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(206);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(231);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(229);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(207);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(234);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(230);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -252,6 +267,7 @@ describe('final taxonomy policy', () => {
         'tag-linear-matroid-intersection',
         'tag-min-weight-general-perfect-matching',
         'tag-cycle-space-basis',
+        'tag-game-parity-invariant',
         'tag-graph-potential-propagation',
         'tag-difference-constraints',
         'tag-kruskal-threshold-sweep',
@@ -301,6 +317,17 @@ describe('final taxonomy policy', () => {
       'minimum-weight perfect matching',
     );
     expect(tagById.get('tag-cycle-space-basis')?.aliases).toContain('cycle space');
+    expect(tagById.get('tag-cycle-space-basis')?.representativeProblemIds).toEqual([
+      'abc419-g',
+      'abc451-g',
+    ]);
+    expect(tagById.get('tag-game-parity-invariant')?.relatedTags).toContainEqual(
+      expect.objectContaining({ tagId: 'tag-game-grundy-dp', type: 'contrast' }),
+    );
+    expect(tagById.get('tag-game-parity-invariant')?.parentId).toBe('tag-model-reduction');
+    expect(outcomeById.has('outcome-map-graph-cycle-xor-to-span')).toBe(true);
+    expect(outcomeById.has('outcome-minimize-xor-coset-representative')).toBe(true);
+    expect(unitById.get('unit-game-parity-invariant')?.parentId).toBe('unit-chapter-modeling');
 
     const learnerTermOwners = new Map<string, string[]>();
     for (const tag of FINAL_TAXONOMY_TAGS) {

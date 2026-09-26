@@ -3,7 +3,7 @@ title: "組合せを生成関数へ符号化する"
 description: "「組合せを生成関数へ符号化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 199
+  order: 200
 ---
 
 # 組合せを生成関数へ符号化する
@@ -91,4 +91,4 @@ sidebar:
 - [ABC231 G 公式解説](https://atcoder.jp/contests/abc231/editorial/3051)
 - [ABC231 G 公式問題文](https://atcoder.jp/contests/abc231/tasks/abc231_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-generating-functions`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-generating-functions`

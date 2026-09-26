@@ -108,4 +108,4 @@ sidebar:
 - [ABC224 E 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_e)
 - [ABC224 E 公式解説](https://atcoder.jp/contests/abc224/editorial/2814)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-event-sweep`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-event-sweep`

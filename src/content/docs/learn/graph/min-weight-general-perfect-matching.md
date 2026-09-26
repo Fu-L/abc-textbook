@@ -3,7 +3,7 @@ title: "一般グラフの最小重み完全matching"
 description: "「一般グラフの最小重み完全matching」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 124
+  order: 125
 ---
 
 # 一般グラフの最小重み完全matching
@@ -47,4 +47,4 @@ sidebar:
 - [ABC412 G 公式解説](https://atcoder.jp/contests/abc412/editorial/13380)
 - [ABC412 G 公式問題文](https://atcoder.jp/contests/abc412/tasks/abc412_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-min-weight-general-perfect-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-min-weight-general-perfect-matching`

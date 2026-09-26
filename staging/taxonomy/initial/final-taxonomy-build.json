@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-26T05:42:35.477Z",
+  "generatedAt": "2026-09-26T07:23:23.224Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "89db2f7ad13a81f93f53cde5027db46c3120c2e22491d17b1adf664b184b1b45",
+    "rulesDigest": "f8821e0a2d3af24fbf23fd6b55484eb2a104050db7e8b9713373b35f2cacdbf4",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -45,7 +45,7 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "6d1f16daa98c18fe78199e20fe6937263f0dc952f4cf6415c5660b0d24a9e21d"
+    "workManifestDigest": "3c5430a7a6b0b2f2c52e05c2080bd4fe987653507312e3103fba6531b32d0b1b"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
@@ -9057,10 +9057,12 @@
           }
         ],
         "learningOutcomeIds": [
+          "outcome-map-graph-cycle-xor-to-span",
           "outcome-use-cycle-space-basis"
         ],
         "representativeProblemIds": [
-          "abc419-g"
+          "abc419-g",
+          "abc451-g"
         ],
         "aliases": [
           "cycle space",
@@ -9074,7 +9076,9 @@
       },
       "sourceRevisionIds": [
         "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf",
+        "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+        "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
       ],
       "evidenceRefs": [
         {
@@ -9086,6 +9090,17 @@
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
             "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc451-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
           ]
         }
       ],
@@ -12566,6 +12581,11 @@
         },
         "relatedTags": [
           {
+            "tagId": "tag-game-parity-invariant",
+            "type": "contrast",
+            "rationale": "後続局面を再帰計算してmexや勝敗を求める方法と、合法手数・終端量の偶奇から局面探索なしに勝敗を決める方法を区別する。"
+          },
+          {
             "tagId": "tag-game-value-dp",
             "type": "contrast",
             "rationale": "impartial gameのGrundy数と、双方の目的が異なる局面のminimax値を同じゲームDPへ混同しない。"
@@ -12629,6 +12649,98 @@
           "sourceRevisionIds": [
             "source-abc380-editorial-11351-466103312076f33bd3c483117d2d043c7a11a8b8b73e450614696190c6e1dfbe",
             "source-abc380-f-problem-7fb17205b066a873aa585d6cd8a1d97e733edec3a7c8f796f2f9e4f7007d48be"
+          ]
+        }
+      ],
+      "materializationTask": "T047"
+    },
+    {
+      "kind": "tag",
+      "entity": {
+        "id": "tag-game-parity-invariant",
+        "name": "偶奇不変量によるゲーム戦略",
+        "definition": "後続局面をDPで列挙せず、合法手の独立な消費や終端状態の偶奇不変量を証明して、先手・後手の勝敗を決める。",
+        "parentId": "tag-model-reduction",
+        "prerequisiteTagIds": [],
+        "semanticSignature": {
+          "objectPatterns": [
+            "二人ゲーム",
+            "先手",
+            "合法手",
+            "後手",
+            "残り手数"
+          ],
+          "triggerPatterns": [
+            "一手ごとに候補を消費",
+            "不変量から勝敗",
+            "候補数の偶奇",
+            "終端量の偶奇"
+          ],
+          "invariantPatterns": [
+            "合法手集合が変わらない",
+            "手数の偶奇",
+            "終端状態の偶奇"
+          ],
+          "goalPatterns": [
+            "先手勝ち",
+            "勝敗",
+            "勝者",
+            "後手勝ち"
+          ],
+          "excludedPatterns": [],
+          "minimumDimensions": 2,
+          "requireObjectForStrictRecall": false
+        },
+        "relatedTags": [
+          {
+            "tagId": "tag-game-grundy-dp",
+            "type": "contrast",
+            "rationale": "後続局面を再帰計算してmexや勝敗を求める方法と、合法手数・終端量の偶奇から局面探索なしに勝敗を決める方法を区別する。"
+          }
+        ],
+        "learningOutcomeIds": [
+          "outcome-solve-game-by-parity-invariant"
+        ],
+        "representativeProblemIds": [
+          "abc398-e",
+          "abc398-g"
+        ],
+        "aliases": [
+          "parity invariant game",
+          "ゲームの偶奇戦略",
+          "手数parity"
+        ],
+        "formerNames": [],
+        "lifecycle": "active",
+        "replacementTagIds": []
+      },
+      "sourceRevisionIds": [
+        "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+        "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+        "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+        "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
           ]
         }
       ],
@@ -24340,7 +24452,8 @@
           }
         ],
         "learningOutcomeIds": [
-          "outcome-maintain-xor-linear-basis"
+          "outcome-maintain-xor-linear-basis",
+          "outcome-minimize-xor-coset-representative"
         ],
         "representativeProblemIds": [
           "abc223-h",
@@ -32748,6 +32861,7 @@
           "abc396-f",
           "abc397-g",
           "abc398-e",
+          "abc398-g",
           "abc399-g",
           "abc401-e",
           "abc401-f",
@@ -33479,6 +33593,7 @@
         "id": "outcome-kernelize-near-tree-graph",
         "statement": "terminal外の葉除去とdegree-2 chain縮約で、cycle rankや余分な辺数だけに依存する小kernelへ答えを保って縮約する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [
+          "outcome-map-graph-cycle-xor-to-span",
           "outcome-peel-graph-core",
           "outcome-use-cycle-space-basis"
         ],
@@ -34571,7 +34686,6 @@
           "abc236-f",
           "abc249-g",
           "abc283-g",
-          "abc451-g",
           "tag-xor-linear-basis",
           "unit-xor-linear-basis"
         ]
@@ -34616,6 +34730,39 @@
           "sourceRevisionIds": [
             "source-abc283-editorial-5430-affe38163eed0a16411c251e484bd226d779be9a3b4ce68d334786d4c72afff4",
             "source-abc283-g-problem-421a25e6e43a500d4c47305bf939cbea7c8edaba3eb10f08b58cb3abb5994a0d"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
+        "id": "outcome-map-graph-cycle-xor-to-span",
+        "statement": "spanning treeのroot-to-vertex XOR potentialで辺ラベルをfundamental cycleのXORへ変換し、cycle spaceの線形像が非木辺ごとのcycle XORのspanと一致することを示して、walkへ挿入できるXOR値をbasisで表せる。",
+        "prerequisiteOutcomeIds": [
+          "outcome-use-cycle-space-basis"
+        ],
+        "scopeIds": [
+          "abc451-g",
+          "tag-cycle-space-basis",
+          "unit-cycle-space-basis"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+        "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc451-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
           ]
         }
       ],
@@ -34711,6 +34858,39 @@
           "sourceRevisionIds": [
             "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
             "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
+        "id": "outcome-minimize-xor-coset-representative",
+        "statement": "XOR部分空間の基底をpivot bitごとにreduced formへ整え、高位bitから基底を加減してaffine cosetの最小整数代表を一意に得る。正規化写像の線形性を示し、二値のXOR最小化を各値の正規化へ分離できる。",
+        "prerequisiteOutcomeIds": [
+          "outcome-maintain-xor-linear-basis"
+        ],
+        "scopeIds": [
+          "abc451-g",
+          "tag-xor-linear-basis",
+          "unit-xor-linear-basis"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+        "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc451-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
           ]
         }
       ],
@@ -34984,6 +35164,7 @@
           "abc446-f",
           "abc447-e",
           "abc451-f",
+          "abc451-g",
           "abc454-e",
           "abc456-e",
           "abc461-g",
@@ -39450,6 +39631,51 @@
           "sourceRevisionIds": [
             "source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af",
             "source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
+        "id": "outcome-solve-game-by-parity-invariant",
+        "statement": "合法手が独立な固定候補の消費に限られる場合や、成分分類から残手数の偶奇を求められる場合に、勝敗を決める偶奇量と応答戦略を証明し、局面ごとのDPなしで勝者を判定できる。",
+        "prerequisiteOutcomeIds": [],
+        "scopeIds": [
+          "abc398-e",
+          "abc398-g",
+          "tag-game-parity-invariant",
+          "unit-game-parity-invariant"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+        "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+        "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+        "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
           ]
         }
       ],
@@ -44354,17 +44580,15 @@
           "outcome-color-and-classify-bipartite-components"
         ],
         "problemIds": [
-          "abc398-e",
-          "abc398-g",
           "abc451-f"
         ],
         "directProblemIds": [
-          "abc398-e",
-          "abc451-f",
-          "abc398-g"
+          "abc451-f"
         ],
         "relatedProblemIds": [
           "abc327-g",
+          "abc398-e",
+          "abc398-g",
           "abc437-g",
           "abc445-g",
           "abc454-e"
@@ -44481,6 +44705,17 @@
         },
         {
           "problemId": "abc398-e",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
           "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
@@ -44559,6 +44794,17 @@
         {
           "problemId": "abc398-g",
           "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -46083,6 +46329,7 @@
           "outcome-invert-divisor-lattice-by-mobius",
           "outcome-invert-generating-function-equation",
           "outcome-maintain-xor-linear-basis",
+          "outcome-minimize-xor-coset-representative",
           "outcome-optimize-poset-antichain-by-dilworth",
           "outcome-optimize-weighted-matroid-basis",
           "outcome-recur-by-edge-deletion-contraction",
@@ -47396,6 +47643,7 @@
           "outcome-kernelize-near-tree-graph",
           "outcome-maintain-connectivity-components",
           "outcome-maintain-potential-differences",
+          "outcome-map-graph-cycle-xor-to-span",
           "outcome-model-and-compute-shortest-path",
           "outcome-model-and-exploit-graph",
           "outcome-model-max-flow-min-cut",
@@ -47518,8 +47766,6 @@
           "abc395-e",
           "abc396-e",
           "abc397-g",
-          "abc398-e",
-          "abc398-g",
           "abc399-e",
           "abc401-e",
           "abc401-g",
@@ -47595,6 +47841,8 @@
           "abc393-g",
           "abc394-g",
           "abc395-g",
+          "abc398-e",
+          "abc398-g",
           "abc408-e",
           "abc409-f",
           "abc413-f",
@@ -47605,6 +47853,7 @@
           "abc440-g",
           "abc444-g",
           "abc447-e",
+          "abc451-g",
           "abc454-e",
           "abc466-g"
         ],
@@ -47924,6 +48173,7 @@
           "tag-contribution-reordering",
           "tag-coordinate-compression",
           "tag-event-sweep",
+          "tag-game-parity-invariant",
           "tag-greedy-exchange-order",
           "tag-information-theoretic-query-design",
           "tag-interactive-protocol",
@@ -47972,6 +48222,7 @@
           "outcome-reorder-counting-contributions",
           "outcome-reverse-update-time",
           "outcome-share-threshold-checks-by-parallel-binary-search",
+          "outcome-solve-game-by-parity-invariant",
           "outcome-split-enumeration-space"
         ],
         "ownedLearningOutcomeIds": [
@@ -48133,6 +48384,8 @@
           "abc394-g",
           "abc395-f",
           "abc396-f",
+          "abc398-e",
+          "abc398-g",
           "abc402-f",
           "abc403-e",
           "abc404-e",
@@ -48308,7 +48561,6 @@
           "abc393-f",
           "abc396-e",
           "abc397-g",
-          "abc398-e",
           "abc399-g",
           "abc401-e",
           "abc401-f",
@@ -51755,7 +52007,9 @@
         ],
         "sourceRevisionIds": [
           "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-          "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf",
+          "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+          "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
         ],
         "tagIds": [
           "tag-cycle-space-basis"
@@ -51764,21 +52018,26 @@
           "tag-cycle-space-basis"
         ],
         "learningOutcomeIds": [
+          "outcome-map-graph-cycle-xor-to-span",
           "outcome-use-cycle-space-basis"
         ],
         "ownedLearningOutcomeIds": [
+          "outcome-map-graph-cycle-xor-to-span",
           "outcome-use-cycle-space-basis"
         ],
         "problemIds": [],
         "directProblemIds": [],
         "relatedProblemIds": [
-          "abc419-g"
+          "abc419-g",
+          "abc451-g"
         ],
-        "learningRationale": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
+        "learningRationale": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導く。さらに辺labelによる線形写像を通してcycle XORのspanを作り、path族の上界やwalk XORの自由度へ接続する。"
       },
       "sourceRevisionIds": [
         "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf",
+        "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+        "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
       ],
       "evidenceRefs": [
         {
@@ -51900,6 +52159,28 @@
           "sourceRevisionIds": [
             "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
             "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          ]
+        },
+        {
+          "problemId": "abc451-g",
+          "claimPath": "/prerequisiteCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+          ]
+        },
+        {
+          "problemId": "abc451-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+            "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
           ]
         }
       ],
@@ -65153,6 +65434,255 @@
     {
       "kind": "unit",
       "entity": {
+        "id": "unit-game-parity-invariant",
+        "kind": "section",
+        "title": "偶奇不変量からゲームの勝敗を決める",
+        "parentId": "unit-chapter-modeling",
+        "baselineId": "prereq-abc-advanced-v1",
+        "baselineVersion": "1.0.0",
+        "excludedTopics": [
+          "後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。"
+        ],
+        "sourceRevisionIds": [
+          "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+          "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+          "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+          "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+        ],
+        "tagIds": [
+          "tag-game-parity-invariant"
+        ],
+        "ownedTagIds": [
+          "tag-game-parity-invariant"
+        ],
+        "learningOutcomeIds": [
+          "outcome-solve-game-by-parity-invariant"
+        ],
+        "ownedLearningOutcomeIds": [
+          "outcome-solve-game-by-parity-invariant"
+        ],
+        "problemIds": [
+          "abc398-e",
+          "abc398-g"
+        ],
+        "directProblemIds": [
+          "abc398-e",
+          "abc398-g"
+        ],
+        "relatedProblemIds": [],
+        "learningRationale": "局面ごとの再帰計算が必要かを先に問い、各手が固定候補を一つ消費する場合や終端量の偶奇が不変量で決まる場合に、全局面を追わない勝敗戦略を証明する。"
+      },
+      "sourceRevisionIds": [
+        "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+        "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+        "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+        "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-e",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+            "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/reasoningPath/observations/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        },
+        {
+          "problemId": "abc398-g",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+            "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+          ]
+        }
+      ],
+      "materializationTask": "T050"
+    },
+    {
+      "kind": "unit",
+      "entity": {
         "id": "unit-gaussian-integers-two-squares",
         "kind": "section",
         "title": "Gaussian整数・二平方和",
@@ -71083,6 +71613,7 @@
         "learningOutcomeIds": [
           "outcome-factor-separable-linear-transform",
           "outcome-maintain-xor-linear-basis",
+          "outcome-minimize-xor-coset-representative",
           "outcome-solve-linear-system-and-rank"
         ],
         "ownedLearningOutcomeIds": [],
@@ -93957,10 +94488,12 @@
           "tag-xor-linear-basis"
         ],
         "learningOutcomeIds": [
-          "outcome-maintain-xor-linear-basis"
+          "outcome-maintain-xor-linear-basis",
+          "outcome-minimize-xor-coset-representative"
         ],
         "ownedLearningOutcomeIds": [
-          "outcome-maintain-xor-linear-basis"
+          "outcome-maintain-xor-linear-basis",
+          "outcome-minimize-xor-coset-representative"
         ],
         "problemIds": [
           "abc223-h",
@@ -93977,7 +94510,7 @@
         "relatedProblemIds": [
           "abc236-f"
         ],
-        "learningRationale": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+        "learningRationale": "整数をF_2 vectorとして最高bit pivotで消去し、独立性・最大XOR・表現可能性を管理する。基底をreduced formへ整えてaffine cosetの最小代表を求める方法も扱う。"
       },
       "sourceRevisionIds": [
         "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
@@ -253252,18 +253785,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: connected bipartite graphの一意彩色から合法なcross-part辺を確定し、固定された残辺数の偶奇で勝敗を決める。後続局面のGrundy DPは行わない。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 固定された合法edge候補を交互に一つずつ消費するゲームを手数parityで解く技能をhomeとする。connected bipartite treeの一意彩色も合法候補数の決定に必須なco-primaryであり、対話protocolは実行上のsupportingである。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-structure"
+        "tag-bipartite-structure",
+        "tag-game-parity-invariant"
       ],
       "supportingTagIds": [
         "tag-interactive-protocol"
       ],
-      "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-solve-game-by-parity-invariant",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components"
+      ],
       "supportingOutcomeIds": [
         "outcome-maintain-interactive-query-protocol"
       ],
@@ -253283,9 +253819,11 @@
               "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
             ]
           },
-          "kind": "problem_specific",
-          "tagIds": [],
-          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
+          "kind": "primary",
+          "tagIds": [
+            "tag-game-parity-invariant"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -253692,16 +254230,19 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: 彩色反転自由度を含むbipartite componentの型を分類し、残手数の偶奇不変量から勝敗を決める。後続局面のGrundy DPは行わない。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 成分parityから勝敗を決めるゲーム偶奇不変量をhomeとし、その場合分けに必要なbipartite component coloringもco-primaryとする。後続局面のGrundy DPは行わない。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-structure"
+        "tag-bipartite-structure",
+        "tag-game-parity-invariant"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-solve-game-by-parity-invariant",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components"
+      ],
       "supportingOutcomeIds": [],
       "adHocElements": [
         "disconnectedでは二部分彩色がcomponentごとに反転可能なので、単純な全体part積でなく、merge後parityを操作できるeo/isolated componentがgameの戦略自由度になる。（再利用可能な見方: component merge gameでは、各componentのorientation自由度と、mergeで変わるsize parity classを抽象stateにする。）"
@@ -253719,9 +254260,11 @@
               "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
             ]
           },
-          "kind": "problem_specific",
-          "tagIds": [],
-          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
+          "kind": "primary",
+          "tagIds": [
+            "tag-game-parity-invariant"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -253740,6 +254283,24 @@
             "tag-bipartite-structure"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc398-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+              "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+            ]
+          },
+          "kind": "same_tag",
+          "tagIds": [
+            "tag-game-parity-invariant"
+          ],
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -291397,7 +291958,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「W'_e の xor 基底を簡約して各 A_v の coset 最小代表 B_v=f(A_v) を求め、B_i⊕B_j≤K となる pair を binary trie で数える。」、解法への接続「DFSで A_v を計算し、全辺の W'_e を30 bit xor basisへ挿入・reduced canonical formにする。各 A_v を貪欲に小さくして B_v を得る。値を順に binary trieへ追加し、xorがK以下となる既存値数を上位bitから数える。」、学習成果「全頂点 pair の最小 xor walk 条件を、cycle span の正規代表と binary trie により O((N+M)log W) で数えられる。」を照合し、tag-xor-linear-basis / outcome-maintain-xor-linear-basis をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-binary-trie; 補助Outcome=outcome-query-bitwise-order-with-trie; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-binary-trie / outcome-query-bitwise-order-with-trie を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: walk XORをcycle spaceの線形像へ写したあと、XOR basisで各端点値のcoset最小代表を求める変換がpairwise最小化の分離を成立させるため、XOR basisをhomeにする。cycle-space mappingとbinary trie pair countingは各々明示されたsupporting技能である。; 補助Tag=tag-binary-trie; 補助Outcome=outcome-query-bitwise-order-with-trie; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-binary-trie / outcome-query-bitwise-order-with-trie を補助技能として使う。; 補助Tag=tag-cycle-space-basis; 補助Outcome=outcome-map-graph-cycle-xor-to-span; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-cycle-space-basis / outcome-map-graph-cycle-xor-to-span を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -291405,11 +291966,13 @@
         "tag-xor-linear-basis"
       ],
       "supportingTagIds": [
-        "tag-binary-trie"
+        "tag-binary-trie",
+        "tag-cycle-space-basis"
       ],
-      "primaryOutcomeId": "outcome-maintain-xor-linear-basis",
+      "primaryOutcomeId": "outcome-minimize-xor-coset-representative",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-map-graph-cycle-xor-to-span",
         "outcome-query-bitwise-order-with-trie"
       ],
       "adHocElements": [
@@ -291433,6 +291996,24 @@
             "tag-xor-linear-basis"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc451-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+              "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-cycle-space-basis"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -291469,6 +292050,24 @@
             "tag-xor-linear-basis"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc451-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+              "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-cycle-space-basis"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -381308,8 +381907,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "b62823a47fb550ee0b141c558934a32ed4fa31164d7e94dbf25cde32dcb7a5bf",
-      "subjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
+      "digest": "dda839763c111f5b921c90aac3582150d43f914bf2b95b7f855bdd28a74a4e9c",
+      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
       "authorIds": [
         "person-maintainer"
       ],
@@ -381320,15 +381919,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "2f4466686f472a57c0cd74f6bdeb142d916ec67d51353e146cf6ccaea6d1e20c",
-  "taxonomyDigest": "a17283bbe57bfb22b45ca43286529b2a97a596a077ffe58ead5caac06deecd82",
+  "taxonomySubjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+  "taxonomyDigest": "337a9c2c152a837c073df7c612fae225c588ac8c4ecd81d06f6f5987b99e6fa8",
   "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
   "learningUnitDagDigest": "266e0428c30669e4a8ad31470d917d67187d35468b5074fb9b35585c5eb760bf",
-  "placementDigest": "b14ba4be99bd184bdf04e7ec48471f5a575b056d056488bb394947abe582c752",
+  "placementDigest": "33569a5926a1fd8c8d038eabe551f9e71c59ee6c0ef4c4466426ab07f3be0cd8",
   "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "status": "accepted",
-  "acceptedAt": "2026-09-26T05:42:35.477Z",
+  "acceptedAt": "2026-09-26T07:23:23.224Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff"
+  "buildDigest": "f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe"
 }

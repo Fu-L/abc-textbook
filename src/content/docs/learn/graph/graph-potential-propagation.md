@@ -3,7 +3,7 @@ title: "静的graph等式制約のpotential伝播"
 description: "「静的graph等式制約のpotential伝播」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 105
+  order: 106
 ---
 
 # 静的graph等式制約のpotential伝播
@@ -58,4 +58,4 @@ sidebar:
 - [ABC396 E 公式問題文](https://atcoder.jp/contests/abc396/tasks/abc396_e)
 - [ABC396 E 公式解説](https://atcoder.jp/contests/abc396/editorial/12390)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-graph-potential-propagation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-graph-potential-propagation`

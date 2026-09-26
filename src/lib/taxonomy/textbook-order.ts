@@ -6,7 +6,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-modeling',
     introduction:
-      '問題を既知の算法へ写すための共通言語を学ぶ。状態の同一視と寄与の分解から始め、探索空間の分割、交換論による貪欲法、単調性による探索へ進む。後半では処理順と総仕事量を設計し、乱択・対話によって使える情報そのものを考える。以後の各章でも、何を保存する変換なのか、候補を捨ててよい理由は何かをこの章へ戻って確認する。',
+      '問題を既知の算法へ写すための共通言語を学ぶ。状態の同一視と寄与の分解から始め、探索空間の分割、交換論による貪欲法、単調性による探索へ進む。後半では処理順と総仕事量を設計し、乱択・対話・局面列挙を省くゲーム戦略によって使える情報そのものを考える。以後の各章でも、何を保存する変換なのか、候補を捨ててよい理由は何かをこの章へ戻って確認する。',
     unitIds: [
       'unit-normalization',
       'unit-coordinate-compression',
@@ -33,6 +33,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-randomized-algorithms',
       'unit-randomized-algebraic-fingerprint',
       'unit-interactive-protocol',
+      'unit-game-parity-invariant',
       'unit-information-theoretic-query-design',
     ],
   },

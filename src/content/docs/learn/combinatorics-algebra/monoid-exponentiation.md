@@ -3,7 +3,7 @@ title: "monoid exponentiation・連結演算doubling"
 description: "「monoid exponentiation・連結演算doubling」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 193
+  order: 194
 ---
 
 # monoid exponentiation・連結演算doubling
@@ -47,4 +47,4 @@ sidebar:
 - [ABC448 E 公式問題文](https://atcoder.jp/contests/abc448/tasks/abc448_e)
 - [ABC448 E 公式解説](https://atcoder.jp/contests/abc448/editorial/16749)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-monoid-exponentiation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-monoid-exponentiation`

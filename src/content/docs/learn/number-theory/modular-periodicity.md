@@ -3,7 +3,7 @@ title: "剰余周期と指数法則を利用する"
 description: "「剰余周期と指数法則を利用する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 168
+  order: 169
 ---
 
 # 剰余周期と指数法則を利用する
@@ -59,4 +59,4 @@ sidebar:
 - [ABC319 E 公式問題文](https://atcoder.jp/contests/abc319/tasks/abc319_e)
 - [ABC319 E 公式解説](https://atcoder.jp/contests/abc319/editorial/7100)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-modular-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-modular-periodicity`

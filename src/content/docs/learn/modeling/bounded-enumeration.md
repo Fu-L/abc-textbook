@@ -99,4 +99,4 @@ ABC260 Fでは小さい側の端点対(u,v)に、その二点と隣接する中�
 - [ABC223 E 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_e)
 - [ABC223 E 公式解説](https://atcoder.jp/contests/abc223/editorial/2781)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-bounded-enumeration`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-bounded-enumeration`

@@ -460,9 +460,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc398-e': decision(
-    'outcome-color-and-classify-bipartite-components',
+    'outcome-solve-game-by-parity-invariant',
     [
-      ['typicalTechniques', 0, 'problem_specific'],
+      ['typicalTechniques', 0, 'primary', 'tag-game-parity-invariant'],
       ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-interactive-protocol'],
@@ -470,17 +470,23 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     {
       'tag-interactive-protocol': ['outcome-maintain-interactive-query-protocol'],
     },
+    ['outcome-color-and-classify-bipartite-components'],
   ),
   'abc398-f': decision('outcome-characterize-palindrome-intervals', [
     ['typicalTechniques', 0, 'primary', 'tag-palindrome-radius'],
     ['typicalTechniques', 1, 'same_tag', 'tag-palindrome-radius'],
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-palindrome-radius'],
   ]),
-  'abc398-g': decision('outcome-color-and-classify-bipartite-components', [
-    ['typicalTechniques', 0, 'problem_specific'],
-    ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
-  ]),
+  'abc398-g': decision(
+    'outcome-solve-game-by-parity-invariant',
+    [
+      ['typicalTechniques', 0, 'primary', 'tag-game-parity-invariant'],
+      ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
+    ],
+    {},
+    ['outcome-color-and-classify-bipartite-components'],
+  ),
   'abc399-e': decision('outcome-decompose-functional-graph', [
     ['typicalTechniques', 0, 'primary', 'tag-functional-graph-doubling'],
     ['typicalTechniques', 1, 'same_tag', 'tag-functional-graph-doubling'],
@@ -2145,15 +2151,18 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc451-g': decision(
-    'outcome-maintain-xor-linear-basis',
+    'outcome-minimize-xor-coset-representative',
     [
       ['typicalTechniques', 0, 'primary', 'tag-xor-linear-basis'],
+      ['typicalTechniques', 0, 'supporting', 'tag-cycle-space-basis'],
       ['typicalTechniques', 1, 'supporting', 'tag-binary-trie'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-xor-linear-basis'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-cycle-space-basis'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-binary-trie'],
     ],
     {
       'tag-binary-trie': ['outcome-query-bitwise-order-with-trie'],
+      'tag-cycle-space-basis': ['outcome-map-graph-cycle-xor-to-span'],
     },
   ),
   'abc452-e': decision(

@@ -3,7 +3,7 @@ title: "関数グラフのcycle・tree分解"
 description: "「関数グラフのcycle・tree分解」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 101
+  order: 102
 ---
 
 # 関数グラフのcycle・tree分解
@@ -68,4 +68,4 @@ sidebar:
 - [ABC256 E 公式問題文](https://atcoder.jp/contests/abc256/tasks/abc256_e)
 - [ABC256 E 公式解説](https://atcoder.jp/contests/abc256/editorial/4135)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-functional-graph-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-functional-graph-decomposition`

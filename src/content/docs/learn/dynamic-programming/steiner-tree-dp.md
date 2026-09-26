@@ -3,7 +3,7 @@ title: "Steiner tree subset DP"
 description: "「Steiner tree subset DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 71
+  order: 72
 ---
 
 # Steiner tree subset DP
@@ -50,4 +50,4 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 - [ABC395 G 公式解説](https://atcoder.jp/contests/abc395/editorial/12307)
 - [ABC395 G 公式問題文](https://atcoder.jp/contests/abc395/tasks/abc395_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-steiner-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-steiner-tree-dp`

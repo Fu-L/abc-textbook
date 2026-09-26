@@ -3,7 +3,7 @@ title: "循環局面の後退解析とminimax距離"
 description: "「循環局面の後退解析とminimax距離」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 80
+  order: 81
 ---
 
 # 循環局面の後退解析とminimax距離
@@ -54,4 +54,4 @@ ABC261 Exの非負重みではminimax距離順の確定を使う。ABC413 Fで�
 - [ABC413 F 公式解説](https://atcoder.jp/contests/abc413/editorial/13408)
 - [ABC413 F 公式問題文](https://atcoder.jp/contests/abc413/tasks/abc413_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-cyclic-minimax-game`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-cyclic-minimax-game`

@@ -3,7 +3,7 @@ title: "DP遷移を因数分解・集約して加速する"
 description: "「DP遷移を因数分解・集約して加速する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 82
+  order: 83
 ---
 
 # DP遷移を因数分解・集約して加速する
@@ -108,4 +108,4 @@ ABC372 F→ABC457 F→ABC435 Gの順で、添字shift、全体倍率、affine作
 - [ABC221 H 公式解説](https://atcoder.jp/contests/abc221/editorial/2719)
 - [ABC221 H 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-dp-transition-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-dp-transition-optimization`

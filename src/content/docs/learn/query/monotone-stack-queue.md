@@ -3,7 +3,7 @@ title: "支配関係から不要な候補を単調stack・queueで削る"
 description: "「支配関係から不要な候補を単調stack・queueで削る」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 33
+  order: 34
 ---
 
 # 支配関係から不要な候補を単調stack・queueで削る
@@ -66,4 +66,4 @@ sidebar:
 - [ABC234 G 公式解説](https://atcoder.jp/contests/abc234/editorial/3227)
 - [ABC234 G 公式問題文](https://atcoder.jp/contests/abc234/tasks/abc234_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-monotone-stack-queue`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-monotone-stack-queue`

@@ -23,6 +23,7 @@
     "tag-contribution-reordering",
     "tag-coordinate-compression",
     "tag-event-sweep",
+    "tag-game-parity-invariant",
     "tag-greedy-exchange-order",
     "tag-information-theoretic-query-design",
     "tag-interactive-protocol",
@@ -71,6 +72,7 @@
     "outcome-reorder-counting-contributions",
     "outcome-reverse-update-time",
     "outcome-share-threshold-checks-by-parallel-binary-search",
+    "outcome-solve-game-by-parity-invariant",
     "outcome-split-enumeration-space"
   ],
   "ownedLearningOutcomeIds": [
@@ -234,6 +236,8 @@
     "abc394-g",
     "abc395-f",
     "abc396-f",
+    "abc398-e",
+    "abc398-g",
     "abc402-f",
     "abc403-e",
     "abc404-e",
@@ -409,7 +413,6 @@
     "abc393-f",
     "abc396-e",
     "abc397-g",
-    "abc398-e",
     "abc399-g",
     "abc401-e",
     "abc401-f",

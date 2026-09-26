@@ -3,7 +3,7 @@ title: "上位bitの支配関係によるXOR minimax"
 description: "「上位bitの支配関係によるXOR minimax」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 54
+  order: 55
 ---
 
 # 上位bitの支配関係によるXOR minimax
@@ -47,4 +47,4 @@ sidebar:
 - [ABC281 F 公式解説](https://atcoder.jp/contests/abc281/editorial/5367)
 - [ABC281 F 公式問題文](https://atcoder.jp/contests/abc281/tasks/abc281_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-bitwise-minimax-partition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-bitwise-minimax-partition`

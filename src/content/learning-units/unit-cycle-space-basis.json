@@ -10,7 +10,9 @@
   ],
   "sourceRevisionIds": [
     "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf",
+    "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+    "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
   ],
   "tagIds": [
     "tag-cycle-space-basis"
@@ -19,9 +21,11 @@
     "tag-cycle-space-basis"
   ],
   "learningOutcomeIds": [
+    "outcome-map-graph-cycle-xor-to-span",
     "outcome-use-cycle-space-basis"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-map-graph-cycle-xor-to-span",
     "outcome-use-cycle-space-basis"
   ],
   "contentPhase": "canonical_skeleton",
@@ -29,9 +33,10 @@
   "problemIds": [],
   "directProblemIds": [],
   "relatedProblemIds": [
-    "abc419-g"
+    "abc419-g",
+    "abc451-g"
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。"
+  "learningRationale": "無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導く。さらに辺labelによる線形写像を通してcycle XORのspanを作り、path族の上界やwalk XORの自由度へ接続する。"
 }

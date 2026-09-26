@@ -710,4 +710,20 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       sameTag('outcome-maintain-potential-differences', 'outcome-design-carry-or-mixed-radix-dp'),
     ],
   },
+  'abc398-e': {
+    '/typicalTechniques/0': [primary('outcome-solve-game-by-parity-invariant')],
+    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-color-and-classify-bipartite-components'),
+      supporting('outcome-maintain-interactive-query-protocol'),
+    ],
+  },
+  'abc398-g': {
+    '/typicalTechniques/0': [primary('outcome-solve-game-by-parity-invariant')],
+    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-solve-game-by-parity-invariant'),
+      sameTag('outcome-color-and-classify-bipartite-components'),
+    ],
+  },
 };

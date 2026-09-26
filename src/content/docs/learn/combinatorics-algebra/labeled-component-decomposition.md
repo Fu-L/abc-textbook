@@ -3,7 +3,7 @@ title: "label付き連結成分分解・exponential formula"
 description: "「label付き連結成分分解・exponential formula」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 200
+  order: 201
 ---
 
 # label付き連結成分分解・exponential formula
@@ -62,4 +62,4 @@ rootを含む連結成分または成分集合を一意に切り出し、全構�
 - [ABC253 H 公式解説](https://atcoder.jp/contests/abc253/editorial/4023)
 - [ABC253 H 公式問題文](https://atcoder.jp/contests/abc253/tasks/abc253_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-labeled-component-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-labeled-component-decomposition`

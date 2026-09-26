@@ -3,7 +3,7 @@ title: "情報量下界・query符号設計"
 description: "「情報量下界・query符号設計」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 26
+  order: 27
 ---
 
 # 情報量下界・query符号設計
@@ -47,4 +47,4 @@ sidebar:
 - [ABC337 E 公式問題文](https://atcoder.jp/contests/abc337/tasks/abc337_e)
 - [ABC337 E 公式解説](https://atcoder.jp/contests/abc337/editorial/9140)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-information-theoretic-query-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-information-theoretic-query-design`

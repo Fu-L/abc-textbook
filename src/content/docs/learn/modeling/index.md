@@ -50,7 +50,7 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 
 ## 概要
 
-問題を既知の算法へ写すための共通言語を学ぶ。状態の同一視と寄与の分解から始め、探索空間の分割、交換論による貪欲法、単調性による探索へ進む。後半では処理順と総仕事量を設計し、乱択・対話によって使える情報そのものを考える。以後の各章でも、何を保存する変換なのか、候補を捨ててよい理由は何かをこの章へ戻って確認する。
+問題を既知の算法へ写すための共通言語を学ぶ。状態の同一視と寄与の分解から始め、探索空間の分割、交換論による貪欲法、単調性による探索へ進む。後半では処理順と総仕事量を設計し、乱択・対話・局面列挙を省くゲーム戦略によって使える情報そのものを考える。以後の各章でも、何を保存する変換なのか、候補を捨ててよい理由は何かをこの章へ戻って確認する。
 
 ### モデル変換
 
@@ -109,6 +109,7 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 青色
   - [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色
 - [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 緑色
+- [偶奇不変量からゲームの勝敗を決める](/learn/modeling/game-parity-invariant/) — 青色
 - [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 水色
 
 ## 問題一覧
@@ -249,7 +250,6 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [ABC393 F「Prefix LIS Query」](https://atcoder.jp/contests/abc393/tasks/abc393_f) — 主題: [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/)（同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [event順にactive集合を更新する](/learn/modeling/event-sweep/)（値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。）。 問い合わせのoffline処理を前提に、LISの末尾最小値を右端Rまでだけ更新したtailsとして使い、値X以下で終わる最長長さを二分探索する。位置の制約を走査時刻、値の制約をtailsの境界へ分担させる。
 - [ABC396 E「Min of Restricted Sum」](https://atcoder.jp/contests/abc396/tasks/abc396_e) — 主題: [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/)（辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。）。既習技能: [成立証明から構成解を復元する](/learn/modeling/constructive-witness/)（成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。）。
 - [ABC397 G「Maximize Distance」](https://atcoder.jp/contests/abc397/tasks/abc397_g) — 主題: [最大流・最小カット](/learn/graph/max-flow-min-cut/)（選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [単調境界を証明して探索する](/learn/modeling/monotone-search/)（判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。）。
-- [ABC398 E「Tree Game」](https://atcoder.jp/contests/abc398/tasks/abc398_e) — 主題: [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/)（各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。）。既習技能: [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/)（judgeとの問い合わせ応答または交互手番のprotocolを守り、許された形式で応答依存の探索・合法手の提示・終了処理を実行できる。query上限がある場合はその回数も満たす。）。
 - [ABC399 G「Colorful Spanning Tree」](https://atcoder.jp/contests/abc399/tasks/abc399_g) — 主題: [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/)（二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる。）。既習技能: [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)（乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。） / [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/)（制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。
 - [ABC401 E「Reachable Set」](https://atcoder.jp/contests/abc401/tasks/abc401_e) — 主題: [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/)（成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。）。既習技能: [event順にactive集合を更新する](/learn/modeling/event-sweep/)（値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。）。
 - [ABC401 F「Add One Edge 3」](https://atcoder.jp/contests/abc401/tasks/abc401_f) — 主題: [基準点からの木距離・剰余類・直径・中心](/learn/tree/tree-metric/)（一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。）。既習技能: [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/)（数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。）。
@@ -307,4 +307,4 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [ABC215 F 公式解説](https://atcoder.jp/contests/abc215/editorial/2492)
 - [ABC215 F 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-chapter-modeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-chapter-modeling`

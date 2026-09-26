@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff",
-    "acceptedAt": "2026-09-26T05:42:35.477Z"
+    "digest": "f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe",
+    "acceptedAt": "2026-09-26T07:23:23.224Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -157694,18 +157694,21 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: connected bipartite graphの一意彩色から合法なcross-part辺を確定し、固定された残辺数の偶奇で勝敗を決める。後続局面のGrundy DPは行わない。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 固定された合法edge候補を交互に一つずつ消費するゲームを手数parityで解く技能をhomeとする。connected bipartite treeの一意彩色も合法候補数の決定に必須なco-primaryであり、対話protocolは実行上のsupportingである。; 補助Tag=tag-interactive-protocol; 補助Outcome=outcome-maintain-interactive-query-protocol; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-interactive-protocol / outcome-maintain-interactive-query-protocol を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-structure"
+        "tag-bipartite-structure",
+        "tag-game-parity-invariant"
       ],
       "supportingTagIds": [
         "tag-interactive-protocol"
       ],
-      "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-solve-game-by-parity-invariant",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components"
+      ],
       "supportingOutcomeIds": [
         "outcome-maintain-interactive-query-protocol"
       ],
@@ -157725,9 +157728,11 @@
               "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb"
             ]
           },
-          "kind": "problem_specific",
-          "tagIds": [],
-          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
+          "kind": "primary",
+          "tagIds": [
+            "tag-game-parity-invariant"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -158134,16 +158139,19 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=curated_semantic_override; 選択理由: 彩色反転自由度を含むbipartite componentの型を分類し、残手数の偶奇不変量から勝敗を決める。後続局面のGrundy DPは行わない。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: 成分parityから勝敗を決めるゲーム偶奇不変量をhomeとし、その場合分けに必要なbipartite component coloringもco-primaryとする。後続局面のGrundy DPは行わない。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bipartite-structure"
+        "tag-bipartite-structure",
+        "tag-game-parity-invariant"
       ],
       "supportingTagIds": [],
-      "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-solve-game-by-parity-invariant",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-color-and-classify-bipartite-components"
+      ],
       "supportingOutcomeIds": [],
       "adHocElements": [
         "disconnectedでは二部分彩色がcomponentごとに反転可能なので、単純な全体part積でなく、merge後parityを操作できるeo/isolated componentがgameの戦略自由度になる。（再利用可能な見方: component merge gameでは、各componentのorientation自由度と、mergeで変わるsize parity classを抽象stateにする。）"
@@ -158161,9 +158169,11 @@
               "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
             ]
           },
-          "kind": "problem_specific",
-          "tagIds": [],
-          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
+          "kind": "primary",
+          "tagIds": [
+            "tag-game-parity-invariant"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -158182,6 +158192,24 @@
             "tag-bipartite-structure"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc398-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+              "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+            ]
+          },
+          "kind": "same_tag",
+          "tagIds": [
+            "tag-game-parity-invariant"
+          ],
+          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
         {
           "claimRef": {
@@ -195839,7 +195867,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「W'_e の xor 基底を簡約して各 A_v の coset 最小代表 B_v=f(A_v) を求め、B_i⊕B_j≤K となる pair を binary trie で数える。」、解法への接続「DFSで A_v を計算し、全辺の W'_e を30 bit xor basisへ挿入・reduced canonical formにする。各 A_v を貪欲に小さくして B_v を得る。値を順に binary trieへ追加し、xorがK以下となる既存値数を上位bitから数える。」、学習成果「全頂点 pair の最小 xor walk 条件を、cycle span の正規代表と binary trie により O((N+M)log W) で数えられる。」を照合し、tag-xor-linear-basis / outcome-maintain-xor-linear-basis をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-binary-trie; 補助Outcome=outcome-query-bitwise-order-with-trie; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-binary-trie / outcome-query-bitwise-order-with-trie を補助技能として使う。",
+      "rationale": "決定種別=curated_semantic_override; 選択理由: walk XORをcycle spaceの線形像へ写したあと、XOR basisで各端点値のcoset最小代表を求める変換がpairwise最小化の分離を成立させるため、XOR basisをhomeにする。cycle-space mappingとbinary trie pair countingは各々明示されたsupporting技能である。; 補助Tag=tag-binary-trie; 補助Outcome=outcome-query-bitwise-order-with-trie; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-binary-trie / outcome-query-bitwise-order-with-trie を補助技能として使う。; 補助Tag=tag-cycle-space-basis; 補助Outcome=outcome-map-graph-cycle-xor-to-span; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-cycle-space-basis / outcome-map-graph-cycle-xor-to-span を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -195847,11 +195875,13 @@
         "tag-xor-linear-basis"
       ],
       "supportingTagIds": [
-        "tag-binary-trie"
+        "tag-binary-trie",
+        "tag-cycle-space-basis"
       ],
-      "primaryOutcomeId": "outcome-maintain-xor-linear-basis",
+      "primaryOutcomeId": "outcome-minimize-xor-coset-representative",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-map-graph-cycle-xor-to-span",
         "outcome-query-bitwise-order-with-trie"
       ],
       "adHocElements": [
@@ -195875,6 +195905,24 @@
             "tag-xor-linear-basis"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc451-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+              "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-cycle-space-basis"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -195911,6 +195959,24 @@
             "tag-xor-linear-basis"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc451-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc451-editorial-18047-62bc417f992179f3df75def0b0c1f308181d42c6211616762d86cf48a3f0ae9f",
+              "source-abc451-g-problem-5dd2c13ea56b4998c7775e3e4437ad346e68834e1e7cacfa8f4d632c67287a23"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-cycle-space-basis"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -285045,7 +285111,7 @@
       "impactSubjectDigest": "40b36906779261a3768787e7e6a1f741f39f56b58bfeadedebb593a3444339fb"
     }
   ],
-  "placementDigest": "b14ba4be99bd184bdf04e7ec48471f5a575b056d056488bb394947abe582c752",
+  "placementDigest": "33569a5926a1fd8c8d038eabe551f9e71c59ee6c0ef4c4466426ab07f3be0cd8",
   "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "previewTaxonomyChangeDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877"
 }

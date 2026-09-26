@@ -3,7 +3,7 @@ title: "Moの順序で区間問い合わせの差分を更新する"
 description: "「Moの順序で区間問い合わせの差分を更新する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 48
+  order: 49
 ---
 
 # Moの順序で区間問い合わせの差分を更新する
@@ -66,4 +66,4 @@ Moはquery順の再配置、値bucketは座標軸のblock分割、heavy/lightは
 - [ABC384 G 公式解説](https://atcoder.jp/contests/abc384/editorial/11548)
 - [ABC384 G 公式問題文](https://atcoder.jp/contests/abc384/tasks/abc384_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-mo-offline-range`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-mo-offline-range`

@@ -3,7 +3,7 @@ title: "Stern–Brocot木の経路と祖先"
 description: "「Stern–Brocot木の経路と祖先」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 175
+  order: 176
 ---
 
 # Stern–Brocot木の経路と祖先
@@ -49,4 +49,4 @@ gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–
 - [ABC273 H 公式解説](https://atcoder.jp/contests/abc273/editorial/5032)
 - [ABC273 H 公式問題文](https://atcoder.jp/contests/abc273/tasks/abc273_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-stern-brocot-ancestry`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-stern-brocot-ancestry`

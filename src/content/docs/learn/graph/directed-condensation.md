@@ -3,7 +3,7 @@ title: "SCCで閉路・DAG順・2-SATを処理する"
 description: "「SCCで閉路・DAG順・2-SATを処理する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 94
+  order: 95
 ---
 
 # SCCで閉路・DAG順・2-SATを処理する
@@ -63,4 +63,4 @@ sidebar:
 - [ABC245 F 公式解説](https://atcoder.jp/contests/abc245/editorial/3652)
 - [ABC245 F 公式問題文](https://atcoder.jp/contests/abc245/tasks/abc245_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-directed-condensation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-directed-condensation`

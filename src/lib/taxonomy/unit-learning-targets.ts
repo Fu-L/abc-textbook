@@ -118,6 +118,10 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
     '緑色',
     '入出力手順・flush・問い合わせ上限を守り、単純な識別手順を実装する。',
   ],
+  'unit-game-parity-invariant': [
+    '青色',
+    '局面ごとの勝敗再帰が不要な条件を見つけ、手数・終端量の偶奇から成立する戦略を証明する。',
+  ],
   'unit-information-theoretic-query-design': [
     '水色',
     '応答で区別できる状態数を数え、bit符号化と復号を設計する。',
@@ -393,7 +397,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-cycle-space-basis': [
     '青色',
-    '非木辺と基本cycleを対応させ、偶数次数の辺集合をF₂上の基底で表す。',
+    '非木辺と基本cycleを対応させ、偶数次数の辺集合をF₂上の基底で表し、辺ラベルによるcycle空間の線形像をXOR spanへ移す。',
   ],
   'unit-graph-core-peeling': [
     '水色',
@@ -691,7 +695,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   'unit-linear-system-rank': ['青色', '体上の消去法を実装し、rankから可解性と自由度を判断する。'],
   'unit-xor-linear-basis': [
     '青色',
-    'bit列をF₂ベクトルと見なし、pivotによる消去で独立性と表現可能性を管理する。',
+    'bit列をF₂ベクトルと見なし、pivot消去で独立性・表現可能性を管理し、affine cosetの最小代表を正規化する。',
   ],
   'unit-separable-linear-transform': [
     '黄色',

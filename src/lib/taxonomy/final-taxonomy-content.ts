@@ -100,6 +100,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-functional-graph-doubling': ['写像のダブリング', 'functional graph', 'binary lifting'],
   'tag-game-grundy-dp': ['ゲームDP', '組合せゲーム', 'combinatorial game DP', 'Nim'],
   'tag-game-value-dp': ['minimax', 'ミニマックス', '得点差ゲームDP'],
+  'tag-game-parity-invariant': ['ゲームの偶奇戦略', 'parity invariant game', '手数parity'],
   'tag-grid-table-dp': ['グリッドDP', '二次元DP', 'grid DP', 'table DP'],
   'tag-gcd-diophantine': [
     '最大公約数',
@@ -651,6 +652,7 @@ export const FINAL_TAG_FORMER_NAMES: Readonly<Record<string, readonly string[]>>
   'tag-functional-graph-doubling': [],
   'tag-game-grundy-dp': [],
   'tag-game-value-dp': [],
+  'tag-game-parity-invariant': [],
   'tag-grid-table-dp': [],
   'tag-gcd-diophantine': [],
   'tag-geometry-orientation-transform': [],
@@ -754,6 +756,8 @@ export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, reado
   'tag-functional-graph-doubling': ['abc296-e', 'abc212-f', 'abc310-g'],
   'tag-game-grundy-dp': ['abc354-e', 'abc380-f', 'abc297-g'],
   'tag-game-value-dp': ['abc349-e', 'abc303-g', 'abc218-g'],
+  'tag-game-parity-invariant': ['abc398-e', 'abc398-g'],
+  'tag-cycle-space-basis': ['abc419-g', 'abc451-g'],
   'tag-grid-table-dp': ['abc227-f', 'abc311-e'],
   'tag-gcd-diophantine': ['abc254-f', 'abc340-f', 'abc315-g', 'abc388-f', 'abc306-g'],
   'tag-geometry-orientation-transform': ['abc223-e', 'abc351-e', 'abc220-g'],
@@ -909,6 +913,13 @@ export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[]
     type: 'contrast',
     rationale:
       'impartial gameのGrundy数と、双方の目的が異なる局面のminimax値を同じゲームDPへ混同しない。',
+  },
+  {
+    sourceTagId: 'tag-game-parity-invariant',
+    targetTagId: 'tag-game-grundy-dp',
+    type: 'contrast',
+    rationale:
+      '後続局面を再帰計算してmexや勝敗を求める方法と、合法手数・終端量の偶奇から局面探索なしに勝敗を決める方法を区別する。',
   },
   {
     sourceTagId: 'tag-persistence',

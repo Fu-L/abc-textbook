@@ -332,6 +332,9 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
   'unit-dp-stochastic': ['二人零和ゲームの勝敗・Grundy数。'],
   'unit-dp-game': ['有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。'],
   'unit-dp-game-value': ['勝敗だけを分類する通常の後退解析・Grundy数。'],
+  'unit-game-parity-invariant': [
+    '後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。',
+  ],
   'unit-dp-transition-optimization': ['固定線形遷移の巨大回累乗。'],
   'unit-linear-recurrence': ['一般のDP遷移の区間集約・単調最適化。'],
   'unit-graph-search': [
@@ -573,6 +576,12 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   section(
     'unit-interactive-protocol',
     '対話protocolを守って情報を取得する',
+    'unit-chapter-modeling',
+    [],
+  ),
+  section(
+    'unit-game-parity-invariant',
+    '偶奇不変量からゲームの勝敗を決める',
     'unit-chapter-modeling',
     [],
   ),
@@ -948,6 +957,8 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
     '状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。',
   'unit-dp-game-value':
     '状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。',
+  'unit-game-parity-invariant':
+    '局面ごとの再帰計算が必要かを先に問い、各手が固定候補を一つ消費する場合や終端量の偶奇が不変量で決まる場合に、全局面を追わない勝敗戦略を証明する。',
   'unit-dp-transition-optimization':
     '正しい状態と遷移を作った後、共通項の因数分解や集約で同じDPを高速化する。',
   'unit-linear-recurrence':
@@ -999,7 +1010,9 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-euler-degree':
     'グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。',
   'unit-cycle-space-basis':
-    '無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導き、path族への単射へ接続する。',
+    '無向graphを探索してspanning forestを構築できることを土台に、偶数次数辺集合をF_2上のcycle spaceとして捉え、fundamental cycle basisとdim C(G)=M-N+C（Cは連結成分数）を導く。さらに辺labelによる線形写像を通してcycle XORのspanを作り、path族の上界やwalk XORの自由度へ接続する。',
+  'unit-xor-linear-basis':
+    '整数をF_2 vectorとして最高bit pivotで消去し、独立性・最大XOR・表現可能性を管理する。基底をreduced formへ整えてaffine cosetの最小代表を求める方法も扱う。',
   'unit-lowlink-critical-structure':
     'DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。',
   'unit-graph-core-peeling':
@@ -1837,6 +1850,21 @@ const TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['局面値', '得点差', '手番ごとの目的'],
     goal: ['最終得点', '勝敗', '最適手数', 'ゲームの値'],
     priority: 86,
+  },
+  {
+    id: 'tag-game-parity-invariant',
+    name: '偶奇不変量によるゲーム戦略',
+    definition:
+      '後続局面をDPで列挙せず、合法手の独立な消費や終端状態の偶奇不変量を証明して、先手・後手の勝敗を決める。',
+    parentId: 'tag-model-reduction',
+    outcomeIds: ['outcome-solve-game-by-parity-invariant'],
+    unitIds: ['unit-game-parity-invariant'],
+    recall: ['parity game', 'ゲームの偶奇', '手数の偶奇', '偶奇不変量', '手数parity'],
+    object: ['二人ゲーム', '先手', '後手', '合法手', '残り手数'],
+    trigger: ['一手ごとに候補を消費', '候補数の偶奇', '終端量の偶奇', '不変量から勝敗'],
+    invariant: ['手数の偶奇', '合法手集合が変わらない', '終端状態の偶奇'],
+    goal: ['勝者', '勝敗', '先手勝ち', '後手勝ち'],
+    priority: 84,
   },
   {
     id: 'tag-dp-transition-acceleration',
@@ -4143,7 +4171,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     definition:
       '無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle space C(G)として扱い、連結成分数C、spanning forest F、各non-tree edge eが作る唯一のcycleからfundamental cycle basisとdim C(G)=M-N+Cを導く。連結graphではC=1なのでM-N+1となる。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-use-cycle-space-basis'],
+    outcomeIds: ['outcome-use-cycle-space-basis', 'outcome-map-graph-cycle-xor-to-span'],
     unitIds: ['unit-cycle-space-basis'],
     recall: ['cycle space', 'cycle basis', 'fundamental cycle', 'サイクル空間', 'サイクル基底'],
     object: ['無向graph', '連結成分', '辺集合', 'spanning forest', 'non-tree edge', 's-t path'],
@@ -4803,7 +4831,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     definition:
       '整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。',
     parentId: 'tag-combinatorics-algebra-structure',
-    outcomeIds: ['outcome-maintain-xor-linear-basis'],
+    outcomeIds: ['outcome-maintain-xor-linear-basis', 'outcome-minimize-xor-coset-representative'],
     unitIds: ['unit-xor-linear-basis'],
     recall: ['XOR basis', 'linear basis', '線形基底'],
     object: ['bit vector', 'pivot bit', 'basis'],
@@ -5725,7 +5753,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-euler-trail-circuit': ['abc227-h', 'abc286-g'],
   'tag-degree-parity-subgraph': ['abc345-f'],
   'tag-euler-circuit-counting': ['abc336-g'],
-  'tag-cycle-space-basis': ['abc419-g'],
+  'tag-cycle-space-basis': ['abc419-g', 'abc451-g'],
   'tag-graph-core-peeling': ['abc226-e', 'abc266-f'],
   'tag-near-tree-kernelization': ['abc419-g'],
   'tag-range-monoid-aggregation': ['abc223-f', 'abc343-f'],
@@ -5977,6 +6005,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '値軸をblockへ分け、点更新で要約を差分修正し、完全blockと端数からprefixの和・積を取得できる。更新回数とquery回数に応じてblock幅を選べる。',
   'outcome-classify-game-states':
     '後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。',
+  'outcome-solve-game-by-parity-invariant':
+    '合法手が独立な固定候補の消費に限られる場合や、成分分類から残手数の偶奇を求められる場合に、勝敗を決める偶奇量と応答戦略を証明し、局面ごとのDPなしで勝者を判定できる。',
   'outcome-evaluate-adversarial-game-value':
     '有限DAGの局面で手番ごとの最大化・最小化と終端値を定義し、得点差や利得を後続状態から評価できる。循環時の無限継続と独立な数ゲームの加算は別の技能として扱う。',
   'outcome-factor-and-accelerate-transitions':
@@ -6047,6 +6077,10 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     'DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。',
   'outcome-use-cycle-space-basis':
     '無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forestと各non-tree edgeが作るfundamental cycleからbasisを構成して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらに同一連結成分内のs,tに対して固定したs-t path P_0を取ると、任意のs-t path PについてPhi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pからこの写像が単射であることを示せる。したがってcycle-space dimensionを用いて、s-t path族の大きさを2^(dim C(G))以下に抑えられる。',
+  'outcome-map-graph-cycle-xor-to-span':
+    'spanning treeのroot-to-vertex XOR potentialで辺ラベルをfundamental cycleのXORへ変換し、cycle spaceの線形像が非木辺ごとのcycle XORのspanと一致することを示して、walkへ挿入できるXOR値をbasisで表せる。',
+  'outcome-minimize-xor-coset-representative':
+    'XOR部分空間の基底をpivot bitごとにreduced formへ整え、高位bitから基底を加減してaffine cosetの最小整数代表を一意に得る。正規化写像の線形性を示し、二値のXOR最小化を各値の正規化へ分離できる。',
   'outcome-reduce-graph-by-peeling-or-kernelization':
     '削除可能な葉・低次数頂点を反復除去してcycle coreと各頂点の所属を特定するか、terminal以外の葉除去とdegree-2 chain縮約によってcycle rankに依存する小kernelを構成できる。',
   'outcome-linearize-static-range-information':
@@ -6192,6 +6226,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
 const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
 
 const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
+  'outcome-map-graph-cycle-xor-to-span': ['outcome-use-cycle-space-basis'],
+  'outcome-minimize-xor-coset-representative': ['outcome-maintain-xor-linear-basis'],
   'outcome-solve-difference-constraints': ['outcome-detect-improving-cycles'],
   'outcome-build-balanced-separator-decomposition': ['outcome-find-weighted-balanced-separator'],
   'outcome-optimize-stochastic-actions': ['outcome-solve-stochastic-recurrence'],
@@ -6237,6 +6273,9 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
 };
 
 const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
+  'outcome-solve-game-by-parity-invariant': ['unit-game-parity-invariant'],
+  'outcome-map-graph-cycle-xor-to-span': ['unit-cycle-space-basis'],
+  'outcome-minimize-xor-coset-representative': ['unit-xor-linear-basis'],
   'outcome-linearize-events': ['unit-event-sweep'],
   'outcome-reverse-update-time': ['unit-reverse-offline'],
   'outcome-reorder-counting-contributions': ['unit-contribution-reordering'],
@@ -6368,6 +6407,8 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-classify-tree-by-distance-residue',
   'outcome-partition-at-critical-integer-boundaries',
   'outcome-sum-piecewise-linear-integer-ranges',
+  'outcome-map-graph-cycle-xor-to-span',
+  'outcome-minimize-xor-coset-representative',
 ];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-expectation-potential',
@@ -6379,7 +6420,6 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-tree-metric-reconstruction',
   'unit-directional-grid-effect-scan',
   'unit-laminar-interval-containment-tree',
-  'unit-cycle-space-basis',
   'unit-baby-step-giant-step',
   'unit-automaton-subset-construction',
   'unit-bitwise-greedy-feasibility',
@@ -6432,7 +6472,6 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-additive-tree-metric-reconstruction',
   'tag-directional-grid-effect-scan',
   'tag-laminar-interval-containment-tree',
-  'tag-cycle-space-basis',
   'tag-baby-step-giant-step',
   'tag-automaton-subset-construction',
   'tag-bitwise-greedy-feasibility',
@@ -7347,18 +7386,26 @@ const RAW_CURATED_PRIMARY_OVERRIDES: readonly CuratedPrimaryOverride[] = [
   },
   {
     problemId: 'abc398-e',
-    primaryTagId: 'tag-bipartite-structure',
-    primaryOutcomeId: 'outcome-color-and-classify-bipartite-components',
+    primaryTagId: 'tag-game-parity-invariant',
+    primaryOutcomeId: 'outcome-solve-game-by-parity-invariant',
     rationale:
-      'connected bipartite graphの一意彩色から合法なcross-part辺を確定し、固定された残辺数の偶奇で勝敗を決める。後続局面のGrundy DPは行わない。',
+      '固定された合法edge候補を交互に一つずつ消費するゲームを手数parityで解く技能をhomeとする。connected bipartite treeの一意彩色も合法候補数の決定に必須なco-primaryであり、対話protocolは実行上のsupportingである。',
     decisionAuthorId: 'person-maintainer',
   },
   {
     problemId: 'abc398-g',
-    primaryTagId: 'tag-bipartite-structure',
-    primaryOutcomeId: 'outcome-color-and-classify-bipartite-components',
+    primaryTagId: 'tag-game-parity-invariant',
+    primaryOutcomeId: 'outcome-solve-game-by-parity-invariant',
     rationale:
-      '彩色反転自由度を含むbipartite componentの型を分類し、残手数の偶奇不変量から勝敗を決める。後続局面のGrundy DPは行わない。',
+      '成分parityから勝敗を決めるゲーム偶奇不変量をhomeとし、その場合分けに必要なbipartite component coloringもco-primaryとする。後続局面のGrundy DPは行わない。',
+    decisionAuthorId: 'person-maintainer',
+  },
+  {
+    problemId: 'abc451-g',
+    primaryTagId: 'tag-xor-linear-basis',
+    primaryOutcomeId: 'outcome-minimize-xor-coset-representative',
+    rationale:
+      'walk XORをcycle spaceの線形像へ写したあと、XOR basisで各端点値のcoset最小代表を求める変換がpairwise最小化の分離を成立させるため、XOR basisをhomeにする。cycle-space mappingとbinary trie pair countingは各々明示されたsupporting技能である。',
     decisionAuthorId: 'person-maintainer',
   },
   {

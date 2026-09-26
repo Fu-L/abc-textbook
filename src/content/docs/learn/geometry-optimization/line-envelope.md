@@ -3,7 +3,7 @@ title: "Convex Hull Trick・直線包絡"
 description: "「Convex Hull Trick・直線包絡」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 220
+  order: 221
 ---
 
 # Convex Hull Trick・直線包絡
@@ -54,4 +54,4 @@ sidebar:
 - [ABC372 G 公式解説](https://atcoder.jp/contests/abc372/editorial/10973)
 - [ABC372 G 公式問題文](https://atcoder.jp/contests/abc372/tasks/abc372_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-line-envelope`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-line-envelope`

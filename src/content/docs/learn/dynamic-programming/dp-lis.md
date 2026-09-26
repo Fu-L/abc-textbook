@@ -3,7 +3,7 @@ title: "LIS・末尾の支配関係"
 description: "「LIS・末尾の支配関係」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 62
+  order: 63
 ---
 
 # LIS・末尾の支配関係
@@ -66,4 +66,4 @@ ABC237 Fは、LISの長さを求める算法そのものを数え上げDPの遷�
 - [ABC393 F 公式解説](https://atcoder.jp/contests/abc393/editorial/12252)
 - [ABC393 F 公式問題文](https://atcoder.jp/contests/abc393/tasks/abc393_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-dp-lis`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-dp-lis`

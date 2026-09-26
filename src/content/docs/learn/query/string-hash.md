@@ -3,7 +3,7 @@ title: "Rolling fingerprintで列の同値性を比較する"
 description: "「Rolling fingerprintで列の同値性を比較する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 55
+  order: 56
 ---
 
 # Rolling fingerprintで列の同値性を比較する
@@ -51,4 +51,4 @@ sidebar:
 - [ABC331 F 公式解説](https://atcoder.jp/contests/abc331/editorial/7820)
 - [ABC331 F 公式問題文](https://atcoder.jp/contests/abc331/tasks/abc331_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-string-hash`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-string-hash`

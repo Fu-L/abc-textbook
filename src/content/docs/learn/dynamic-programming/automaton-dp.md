@@ -3,7 +3,7 @@ title: "automaton上のDP・行列遷移"
 description: "「automaton上のDP・行列遷移」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 74
+  order: 75
 ---
 
 # automaton上のDP・行列遷移
@@ -63,4 +63,4 @@ sidebar:
 - [ABC305 G 公式解説](https://atcoder.jp/contests/abc305/editorial/6540)
 - [ABC305 G 公式問題文](https://atcoder.jp/contests/abc305/tasks/abc305_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `0692598e2b508b9bccbb426948385d8984441e84e8e74454a1951e10156ee9ff` / LearningUnit `unit-automaton-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-automaton-dp`

@@ -1,0 +1,43 @@
+{
+  "id": "unit-game-parity-invariant",
+  "kind": "section",
+  "title": "偶奇不変量からゲームの勝敗を決める",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "後続状態の勝敗を再帰計算するGrundy DP、局面値を評価するminimax、およびグラフの二部彩色そのもの。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+    "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+    "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+    "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+  ],
+  "tagIds": [
+    "tag-game-parity-invariant"
+  ],
+  "ownedTagIds": [
+    "tag-game-parity-invariant"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-game-by-parity-invariant"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-game-by-parity-invariant"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/game-parity-invariant.md",
+  "problemIds": [
+    "abc398-e",
+    "abc398-g"
+  ],
+  "directProblemIds": [
+    "abc398-e",
+    "abc398-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "局面ごとの再帰計算が必要かを先に問い、各手が固定候補を一つ消費する場合や終端量の偶奇が不変量で決まる場合に、全局面を追わない勝敗戦略を証明する。"
+}
