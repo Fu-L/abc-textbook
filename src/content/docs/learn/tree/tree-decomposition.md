@@ -3,7 +3,7 @@ title: "包含木の構築とancestor・path分解"
 description: "「包含木の構築とancestor・path分解」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 132
+  order: 133
 ---
 
 # 包含木の構築とancestor・path分解
@@ -61,4 +61,4 @@ sidebar:
 - [ABC294 G 公式解説](https://atcoder.jp/contests/abc294/editorial/5997)
 - [ABC294 G 公式問題文](https://atcoder.jp/contests/abc294/tasks/abc294_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-tree-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-tree-decomposition`

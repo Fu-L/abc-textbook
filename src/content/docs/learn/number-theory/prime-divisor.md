@@ -3,7 +3,7 @@ title: "素因数分解と約数構造"
 description: "「素因数分解と約数構造」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 162
+  order: 163
 ---
 
 # 素因数分解と約数構造
@@ -81,4 +81,4 @@ ABC227 Gでは巨大二項係数を実際に作らず、短い分子区間の各
 - [ABC227 G 公式解説](https://atcoder.jp/contests/abc227/editorial/2909)
 - [ABC227 G 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-prime-divisor`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-prime-divisor`

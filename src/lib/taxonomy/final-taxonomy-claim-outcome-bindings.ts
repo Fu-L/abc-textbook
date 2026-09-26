@@ -32,6 +32,22 @@ const sameTag = (...outcomeIds: readonly string[]): FinalClaimOutcomeBinding => 
 export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   Record<string, Readonly<Record<string, readonly FinalClaimOutcomeBinding[]>>>
 > = {
+  'abc225-h': {
+    '/typicalTechniques/0': [sameTag('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/1': [
+      primary(
+        'outcome-encode-counting-by-generating-function',
+        'outcome-compute-convolution-or-correlation',
+      ),
+    ],
+    '/prerequisiteCandidates/0': [supporting('outcome-formulate-combinatorial-coefficients')],
+    '/prerequisiteCandidates/1': [
+      sameTag(
+        'outcome-encode-counting-by-generating-function',
+        'outcome-compute-convolution-or-correlation',
+      ),
+    ],
+  },
   'abc222-h': {
     '/typicalTechniques/0': [sameTag('outcome-invert-generating-function-equation')],
     '/typicalTechniques/1': [primary('outcome-invert-generating-function-equation')],
@@ -136,6 +152,29 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting('outcome-compute-convolution-or-correlation'),
     ],
   },
+  'abc247-ex': {
+    '/typicalTechniques/1': [primary('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/2': [
+      primary('outcome-compute-convolution-or-correlation'),
+      supporting('outcome-divide-search-space-recursively'),
+    ],
+    '/prerequisiteCandidates/1': [sameTag('outcome-encode-counting-by-generating-function')],
+    '/prerequisiteCandidates/2': [sameTag('outcome-compute-convolution-or-correlation')],
+  },
+  'abc267-ex': {
+    '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/1': [
+      primary('outcome-compute-convolution-or-correlation'),
+      supporting('outcome-divide-search-space-recursively'),
+    ],
+    '/prerequisiteCandidates/0': [
+      sameTag(
+        'outcome-encode-counting-by-generating-function',
+        'outcome-compute-convolution-or-correlation',
+      ),
+      supporting('outcome-divide-search-space-recursively'),
+    ],
+  },
   'abc250-ex': {
     '/typicalTechniques/0': [primary('outcome-model-and-compute-shortest-path')],
     '/typicalTechniques/1': [
@@ -153,6 +192,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting(
         'outcome-correct-overlap-by-inversion',
         'outcome-formulate-combinatorial-coefficients',
+        'outcome-compute-convolution-or-correlation',
       ),
     ],
     '/typicalTechniques/1': [
@@ -164,6 +204,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting(
         'outcome-divide-search-space-recursively',
         'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
       ),
     ],
     '/prerequisiteCandidates/0': [
@@ -171,13 +212,20 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-encode-counting-by-generating-function',
         'outcome-apply-formal-power-series-operations',
       ),
-      supporting('outcome-correct-overlap-by-inversion', 'outcome-compute-in-modular-arithmetic'),
+      supporting(
+        'outcome-correct-overlap-by-inversion',
+        'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
   },
   'abc272-ex': {
     '/typicalTechniques/0': [
       primary('outcome-evaluate-polynomial-at-many-points'),
-      supporting('outcome-divide-search-space-recursively'),
+      supporting(
+        'outcome-divide-search-space-recursively',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
     '/typicalTechniques/1': [
       primary('outcome-encode-counting-by-generating-function'),
@@ -192,6 +240,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-encode-counting-by-generating-function',
       ),
       supporting('outcome-correct-overlap-by-inversion', 'outcome-divide-search-space-recursively'),
+      supporting('outcome-compute-convolution-or-correlation'),
     ],
   },
   'abc274-ex': {
@@ -264,14 +313,21 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/typicalTechniques/1': [sameTag('outcome-encode-counting-by-generating-function')],
     '/typicalTechniques/2': [
       primary('outcome-apply-formal-power-series-operations'),
-      supporting('outcome-compute-in-modular-arithmetic'),
+      supporting(
+        'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
     '/prerequisiteCandidates/0': [
       sameTag(
         'outcome-encode-counting-by-generating-function',
         'outcome-apply-formal-power-series-operations',
       ),
-      supporting('outcome-correct-overlap-by-inversion', 'outcome-compute-in-modular-arithmetic'),
+      supporting(
+        'outcome-correct-overlap-by-inversion',
+        'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
   },
   'abc301-ex': {
@@ -364,12 +420,18 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       primary('outcome-count-labeled-structures-by-components'),
       supporting('outcome-encode-counting-by-generating-function'),
     ],
-    '/typicalTechniques/1': [primary('outcome-apply-formal-power-series-operations')],
+    '/typicalTechniques/1': [
+      primary('outcome-apply-formal-power-series-operations'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
     '/prerequisiteCandidates/0': [
       sameTag('outcome-count-labeled-structures-by-components'),
       supporting('outcome-encode-counting-by-generating-function'),
     ],
-    '/prerequisiteCandidates/1': [sameTag('outcome-apply-formal-power-series-operations')],
+    '/prerequisiteCandidates/1': [
+      sameTag('outcome-apply-formal-power-series-operations'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
   },
   'abc331-g': {
     '/typicalTechniques/0': [primary('outcome-correct-overlap-by-inversion')],
@@ -502,10 +564,14 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   },
   'abc387-g': {
     '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
-    '/typicalTechniques/1': [primary('outcome-compose-series-and-project-powers')],
+    '/typicalTechniques/1': [
+      primary('outcome-compose-series-and-project-powers'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
     '/typicalTechniques/2': [
       primary('outcome-apply-formal-power-series-operations'),
       sameTag('outcome-compose-series-and-project-powers'),
+      supporting('outcome-compute-convolution-or-correlation'),
     ],
     '/prerequisiteCandidates/0': [sameTag('outcome-encode-counting-by-generating-function')],
     '/prerequisiteCandidates/1': [
@@ -513,6 +579,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-compose-series-and-project-powers',
         'outcome-apply-formal-power-series-operations',
       ),
+      supporting('outcome-compute-convolution-or-correlation'),
     ],
   },
   'abc390-g': {
@@ -665,11 +732,17 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     ],
   },
   'abc439-g': {
-    '/typicalTechniques/0': [primary('outcome-compose-series-and-project-powers')],
+    '/typicalTechniques/0': [
+      primary('outcome-compose-series-and-project-powers'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
     '/typicalTechniques/1': [primary('outcome-encode-counting-by-generating-function')],
     '/typicalTechniques/2': [
       primary('outcome-apply-formal-power-series-operations'),
-      supporting('outcome-divide-search-space-recursively'),
+      supporting(
+        'outcome-divide-search-space-recursively',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
     '/prerequisiteCandidates/0': [
       sameTag(
@@ -677,7 +750,10 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-apply-formal-power-series-operations',
         'outcome-encode-counting-by-generating-function',
       ),
-      supporting('outcome-divide-search-space-recursively'),
+      supporting(
+        'outcome-divide-search-space-recursively',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
   },
   'abc449-g': {

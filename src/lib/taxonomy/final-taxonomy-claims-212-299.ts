@@ -658,6 +658,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       d('p1', 'same_tag', 'tag-convolution-fps'),
     ],
     { 'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'] },
+    ['outcome-compute-convolution-or-correlation'],
   ),
   'abc226-e': decision(
     'outcome-peel-graph-core',
@@ -1583,18 +1584,18 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   'abc247-ex': decision(
     'outcome-encode-counting-by-generating-function',
     [
-      d('t0', 'supporting', 'tag-functional-graph-doubling'),
+      d('t0', 'problem_specific'),
       d('t1', 'primary', 'tag-convolution-fps'),
       d('t2', 'same_tag', 'tag-convolution-fps'),
       d('t2', 'supporting', 'tag-divide-enumerate'),
-      d('p0', 'supporting', 'tag-functional-graph-doubling'),
+      d('p0', 'problem_specific'),
       d('p1', 'same_tag', 'tag-convolution-fps'),
       d('p2', 'same_tag', 'tag-convolution-fps'),
     ],
     {
       'tag-divide-enumerate': ['outcome-divide-search-space-recursively'],
-      'tag-functional-graph-doubling': ['outcome-decompose-functional-graph'],
     },
+    ['outcome-compute-convolution-or-correlation'],
   ),
   'abc247-f': decision(
     'outcome-design-minimal-sufficient-state',
@@ -2477,6 +2478,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       d('p0', 'supporting', 'tag-divide-enumerate'),
     ],
     { 'tag-divide-enumerate': ['outcome-divide-search-space-recursively'] },
+    ['outcome-compute-convolution-or-correlation'],
   ),
   'abc267-f': decision(
     'outcome-use-tree-diameter-extrema',
@@ -2562,8 +2564,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       d('t0', 'supporting', 'tag-tree-aggregation-reroot'),
       d('t1', 'primary', 'tag-amortized-heavy-light'),
       d('t2', 'supporting', 'tag-convolution-fps'),
+      d('t2', 'supporting', 'tag-convolution'),
       d('t2', 'supporting', 'tag-divide-enumerate'),
       d('p0', 'supporting', 'tag-convolution-fps'),
+      d('p0', 'supporting', 'tag-convolution'),
       d('p0', 'supporting', 'tag-tree-aggregation-reroot'),
       d('p0', 'same_tag', 'tag-amortized-heavy-light'),
     ],
@@ -2571,6 +2575,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
       'tag-convolution-fps': ['outcome-encode-counting-by-generating-function'],
       'tag-divide-enumerate': ['outcome-divide-search-space-recursively'],
       'tag-tree-aggregation-reroot': ['outcome-aggregate-rooted-tree'],
+      'tag-convolution': ['outcome-compute-convolution-or-correlation'],
     },
   ),
   'abc269-f': decision(

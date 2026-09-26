@@ -132,6 +132,130 @@ describe('final taxonomy policy', () => {
     const expected: Readonly<
       Record<string, readonly [string, readonly string[], readonly string[], readonly string[]]>
     > = {
+      'abc225-h': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-compute-convolution-or-correlation'],
+        ['tag-combinatorial-coefficients'],
+      ],
+      'abc247-ex': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-compute-convolution-or-correlation'],
+        ['tag-recursive-divide-and-conquer'],
+      ],
+      'abc267-ex': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-convolution', 'tag-generating-functions'],
+        ['outcome-compute-convolution-or-correlation'],
+        ['tag-recursive-divide-and-conquer'],
+      ],
+      'abc269-ex': [
+        'outcome-accelerate-tree-dp-by-heavy-path',
+        ['tag-heavy-path-tree-dp'],
+        [],
+        [
+          'tag-convolution',
+          'tag-generating-functions',
+          'tag-recursive-divide-and-conquer',
+          'tag-rooted-tree-aggregation',
+        ],
+      ],
+      'abc272-ex': [
+        'outcome-evaluate-polynomial-at-many-points',
+        ['tag-generating-functions', 'tag-polynomial-multipoint-evaluation'],
+        ['outcome-encode-counting-by-generating-function'],
+        [
+          'tag-combinatorial-coefficients',
+          'tag-convolution',
+          'tag-inclusion-exclusion',
+          'tag-recursive-divide-and-conquer',
+        ],
+      ],
+      'abc381-g': [
+        'outcome-compute-in-finite-field-extension',
+        ['tag-finite-field-extension'],
+        [],
+        [
+          'tag-convolution',
+          'tag-polynomial-multipoint-evaluation',
+          'tag-recursive-divide-and-conquer',
+        ],
+      ],
+      'abc260-ex': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-formal-power-series', 'tag-generating-functions'],
+        ['outcome-apply-formal-power-series-operations'],
+        [
+          'tag-combinatorial-coefficients',
+          'tag-convolution',
+          'tag-inclusion-exclusion',
+          'tag-modular-arithmetic',
+          'tag-recursive-divide-and-conquer',
+        ],
+      ],
+      'abc297-ex': [
+        'outcome-encode-counting-by-generating-function',
+        ['tag-formal-power-series', 'tag-generating-functions'],
+        ['outcome-apply-formal-power-series-operations'],
+        ['tag-convolution', 'tag-inclusion-exclusion', 'tag-modular-arithmetic'],
+      ],
+      'abc318-ex': [
+        'outcome-count-labeled-structures-by-components',
+        ['tag-formal-power-series', 'tag-labeled-component-decomposition'],
+        ['outcome-apply-formal-power-series-operations'],
+        ['tag-convolution', 'tag-generating-functions'],
+      ],
+      'abc387-g': [
+        'outcome-compose-series-and-project-powers',
+        [
+          'tag-formal-power-series',
+          'tag-fps-composition-power-projection',
+          'tag-generating-functions',
+        ],
+        [
+          'outcome-apply-formal-power-series-operations',
+          'outcome-encode-counting-by-generating-function',
+        ],
+        ['tag-convolution'],
+      ],
+      'abc439-g': [
+        'outcome-compose-series-and-project-powers',
+        [
+          'tag-formal-power-series',
+          'tag-fps-composition-power-projection',
+          'tag-generating-functions',
+        ],
+        [
+          'outcome-apply-formal-power-series-operations',
+          'outcome-encode-counting-by-generating-function',
+        ],
+        ['tag-convolution', 'tag-recursive-divide-and-conquer'],
+      ],
+      'abc304-ex': [
+        'outcome-prove-greedy-order',
+        ['tag-greedy-exchange-order'],
+        [],
+        ['tag-dag-topological-processing'],
+      ],
+      'abc304-g': [
+        'outcome-solve-xor-threshold-matching',
+        ['tag-xor-threshold-matching'],
+        [],
+        ['tag-monotone-threshold-search', 'tag-recursive-divide-and-conquer'],
+      ],
+      'abc308-f': [
+        'outcome-prove-greedy-order',
+        ['tag-greedy-exchange-order'],
+        [],
+        ['tag-event-sweep'],
+      ],
+      'abc458-g': [
+        'outcome-maintain-piecewise-linear-convex-function',
+        ['tag-slope-trick'],
+        [],
+        ['tag-monotone-threshold-search'],
+      ],
       'abc244-ex': [
         'outcome-restrict-geometric-candidates-to-boundary',
         ['tag-convex-boundary-hull'],
@@ -222,9 +346,9 @@ describe('final taxonomy policy', () => {
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(207);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(234);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(230);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(208);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(235);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(231);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -241,6 +365,17 @@ describe('final taxonomy policy', () => {
     const tagById = new Map(FINAL_TAXONOMY_TAGS.map((tag) => [tag.id, tag]));
     const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
     const unitById = new Map(FINAL_LEARNING_UNIT_CANDIDATES.map((unit) => [unit.id, unit]));
+
+    expect(tagById.get('tag-xor-threshold-matching')).toMatchObject({
+      representativeProblemIds: ['abc304-g'],
+      learningOutcomeIds: ['outcome-solve-xor-threshold-matching'],
+    });
+    expect(outcomeById.get('outcome-solve-xor-threshold-matching')?.scopeTagIds).toEqual([
+      'tag-xor-threshold-matching',
+    ]);
+    expect(unitById.get('unit-xor-threshold-matching')?.ownedLearningOutcomeIds).toEqual([
+      'outcome-solve-xor-threshold-matching',
+    ]);
 
     expect([...tagById.keys()]).toEqual(
       expect.arrayContaining([
@@ -276,6 +411,7 @@ describe('final taxonomy policy', () => {
         'tag-suffix-automaton',
         'tag-segment-tree-beats',
         'tag-dynamic-modular-product',
+        'tag-xor-threshold-matching',
       ]),
     );
     for (const retiredTagId of [
@@ -1415,6 +1551,29 @@ describe('final taxonomy policy', () => {
     const expectedPrimaryByPath: Readonly<
       Record<string, Readonly<Record<string, readonly string[]>>>
     > = {
+      'abc225-h': {
+        '/typicalTechniques/1': ['tag-convolution', 'tag-generating-functions'],
+      },
+      'abc247-ex': {
+        '/typicalTechniques/1': ['tag-generating-functions'],
+        '/typicalTechniques/2': ['tag-convolution'],
+      },
+      'abc267-ex': {
+        '/typicalTechniques/0': ['tag-generating-functions'],
+        '/typicalTechniques/1': ['tag-convolution'],
+      },
+      'abc304-ex': {
+        '/typicalTechniques/1': ['tag-greedy-exchange-order'],
+      },
+      'abc304-g': {
+        '/typicalTechniques/0': ['tag-xor-threshold-matching'],
+      },
+      'abc308-f': {
+        '/typicalTechniques/1': ['tag-greedy-exchange-order'],
+      },
+      'abc458-g': {
+        '/typicalTechniques/1': ['tag-slope-trick'],
+      },
       'abc301-ex': {
         '/typicalTechniques/0': ['tag-kruskal-threshold-sweep'],
         '/typicalTechniques/1': ['tag-lowlink-critical-structure'],
@@ -1492,7 +1651,9 @@ describe('final taxonomy policy', () => {
     expect(tagIdsAt('abc318-ex', '/typicalTechniques/0', 'supporting')).toEqual([
       'tag-generating-functions',
     ]);
-    expect(tagIdsAt('abc318-ex', '/typicalTechniques/1', 'supporting')).toEqual([]);
+    expect(tagIdsAt('abc318-ex', '/typicalTechniques/1', 'supporting')).toEqual([
+      'tag-convolution',
+    ]);
     expect(tagIdsAt('abc466-g', '/prerequisiteCandidates/0', 'same_tag')).toEqual([
       'tag-carry-mixed-radix-dp',
       'tag-potential-dsu',

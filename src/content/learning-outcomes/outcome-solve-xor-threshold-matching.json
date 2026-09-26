@@ -1,0 +1,12 @@
+{
+  "id": "outcome-solve-xor-threshold-matching",
+  "statement": "整数集合を上位bitで分け、XORが固定閾値以上となる最大pair数を、同一集合内と二集合間の再帰関数へ分解して正しく合成できる。閾値bitごとのcross pairの確定条件と最大性を証明できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-divide-search-space-recursively"
+  ],
+  "scopeIds": [
+    "abc304-g",
+    "tag-xor-threshold-matching",
+    "unit-xor-threshold-matching"
+  ]
+}

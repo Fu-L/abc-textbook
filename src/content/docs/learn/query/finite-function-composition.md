@@ -3,7 +3,7 @@ title: "有限関数・作用の合成"
 description: "「有限関数・作用の合成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 40
+  order: 41
 ---
 
 # 有限関数・作用の合成
@@ -47,4 +47,4 @@ sidebar:
 - [ABC261 E 公式問題文](https://atcoder.jp/contests/abc261/tasks/abc261_e)
 - [ABC261 E 公式解説](https://atcoder.jp/contests/abc261/editorial/4451)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-finite-function-composition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-finite-function-composition`

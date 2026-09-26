@@ -3,7 +3,7 @@ title: "基準点からの木距離・剰余類・直径・中心"
 description: "「基準点からの木距離・剰余類・直径・中心」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 129
+  order: 130
 ---
 
 # 基準点からの木距離・剰余類・直径・中心
@@ -68,4 +68,4 @@ sidebar:
 - [ABC267 F 公式解説](https://atcoder.jp/contests/abc267/editorial/4714)
 - [ABC267 F 公式問題文](https://atcoder.jp/contests/abc267/tasks/abc267_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-tree-metric`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-tree-metric`

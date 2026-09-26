@@ -3,7 +3,7 @@ title: "Baby-Step Giant-Step・可逆作用の反復到達探索"
 description: "「Baby-Step Giant-Step・可逆作用の反復到達探索」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 171
+  order: 172
 ---
 
 # Baby-Step Giant-Step・可逆作用の反復到達探索
@@ -47,4 +47,4 @@ sidebar:
 - [ABC270 G 公式解説](https://atcoder.jp/contests/abc270/editorial/4847)
 - [ABC270 G 公式問題文](https://atcoder.jp/contests/abc270/tasks/abc270_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-baby-step-giant-step`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-baby-step-giant-step`

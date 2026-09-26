@@ -3,7 +3,7 @@ title: "非決定性automatonのsubset construction"
 description: "「非決定性automatonのsubset construction」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 157
+  order: 158
 ---
 
 # 非決定性automatonのsubset construction
@@ -47,4 +47,4 @@ sidebar:
 - [ABC228 G 公式解説](https://atcoder.jp/contests/abc228/editorial/2942)
 - [ABC228 G 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-automaton-subset-construction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-automaton-subset-construction`

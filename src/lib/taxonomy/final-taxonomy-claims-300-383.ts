@@ -218,15 +218,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-dsu-connectivity'],
   ]),
   'abc304-ex': decision(
-    'outcome-condense-and-order-directed-graph',
+    'outcome-prove-greedy-order',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-directed-condensation-toposort'],
-      ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order', 'tag-ordered-set-heap'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-directed-condensation-toposort'],
+      ['typicalTechniques', 0, 'supporting', 'tag-dag-topological-processing'],
+      ['typicalTechniques', 1, 'primary', 'tag-greedy-exchange-order'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-greedy-exchange-order'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-dag-topological-processing'],
     ],
     {
-      'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
-      'tag-ordered-set-heap': ['outcome-maintain-dynamic-order-statistics'],
+      'tag-dag-topological-processing': ['outcome-process-dag-in-topological-order'],
     },
   ),
   'abc304-f': decision(
@@ -248,14 +248,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     },
   ),
   'abc304-g': decision(
-    'outcome-prove-and-search-threshold',
+    'outcome-solve-xor-threshold-matching',
     [
+      ['typicalTechniques', 0, 'primary', 'tag-xor-threshold-matching'],
       ['typicalTechniques', 0, 'supporting', 'tag-divide-enumerate'],
-      ['typicalTechniques', 1, 'primary', 'tag-monotone-threshold-search'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-monotone-threshold-search'],
+      ['typicalTechniques', 1, 'supporting', 'tag-monotone-threshold-search'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-xor-threshold-matching'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-monotone-threshold-search'],
     ],
     {
       'tag-divide-enumerate': ['outcome-divide-search-space-recursively'],
+      'tag-monotone-threshold-search': ['outcome-prove-and-search-threshold'],
     },
   ),
   'abc305-e': decision(
@@ -418,16 +421,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     { 'tag-shortest-path-certificate': ['outcome-build-shortest-path-certificate'] },
   ),
   'abc308-f': decision(
-    'outcome-maintain-dynamic-order-statistics',
+    'outcome-prove-greedy-order',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-ordered-set-heap'],
       ['typicalTechniques', 0, 'supporting', 'tag-event-sweep'],
-      ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-ordered-set-heap'],
+      ['typicalTechniques', 1, 'primary', 'tag-greedy-exchange-order'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-greedy-exchange-order'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-event-sweep'],
     ],
     {
       'tag-event-sweep': ['outcome-linearize-events'],
-      'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
     },
   ),
   'abc308-g': decision('outcome-maintain-dynamic-order-statistics', [
@@ -2720,13 +2722,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
       ['typicalTechniques', 0, 'primary', 'tag-finite-field-extension'],
       ['typicalTechniques', 1, 'supporting', 'tag-convolution-fps'],
       ['typicalTechniques', 1, 'supporting', 'tag-divide-enumerate'],
+      ['typicalTechniques', 1, 'supporting', 'tag-convolution'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-finite-field-extension'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-convolution-fps'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-divide-enumerate'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-convolution'],
     ],
     {
       'tag-convolution-fps': ['outcome-evaluate-and-compose-polynomials'],
       'tag-divide-enumerate': ['outcome-divide-search-space-recursively'],
+      'tag-convolution': ['outcome-compute-convolution-or-correlation'],
     },
   ),
   'abc382-e': decision(

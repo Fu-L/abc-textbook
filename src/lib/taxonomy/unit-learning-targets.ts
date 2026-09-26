@@ -48,6 +48,10 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
     '水色',
     '探索空間を独立に分ける場合と、再帰的な小問題へ分ける場合を区別する入口。',
   ],
+  'unit-xor-threshold-matching': [
+    '赤色',
+    'XOR閾値ごとにpair可能数を最大化するbit分割再帰を組み立て、同一部分集合内と二集合間のmatching数を合成する根拠を証明する。',
+  ],
   'unit-recursive-divide-and-conquer': [
     '水色',
     '分割・再帰・併合の役割を分け、重複のない合成と計算量を説明する。',

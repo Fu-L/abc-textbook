@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+  "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "3c5430a7a6b0b2f2c52e05c2080bd4fe987653507312e3103fba6531b32d0b1b",
+  "inventoryDigest": "0c9c668f1f36c3b154cfc271325e73a11da26cfebb958563855926094ea9ad75",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
+      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T07:23:01.668Z",
+      "completedAt": "2026-09-26T09:22:25.856Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
+      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T07:23:09.472Z",
+      "completedAt": "2026-09-26T09:22:33.630Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
+      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T07:23:09.915Z",
+      "completedAt": "2026-09-26T09:22:34.184Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
+      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T07:23:10.138Z",
+      "completedAt": "2026-09-26T09:22:34.396Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "a633ab98be12b89b00bc13ec6ece64d9ead65b0d9abe7eac244d4a8e8591709d",
+      "resultDigest": "adcbb19de380c65f5b63615df5252d1e241088ee280b9a8f0b487123448fb1ab",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T07:23:17.448Z",
+      "completedAt": "2026-09-26T09:22:41.292Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "c2ce88e5a744357b8466037ae4357aa72d5ce4d74ca5f115564235e9375f4ac4",
+  "reviewerExecutedCheckSetDigest": "e17d2e88942122b3fafb90f6316e7dccf326c9e4fa64e42fc4a087323e997e24",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -318,6 +318,7 @@
         "outcome-solve-steiner-tree-by-subset-dp",
         "outcome-solve-stochastic-recurrence",
         "outcome-solve-weighted-bipartite-matching",
+        "outcome-solve-xor-threshold-matching",
         "outcome-split-enumeration-space",
         "outcome-stabilize-unbounded-knapsack-by-best-density",
         "outcome-subtract-exception-transitions",
@@ -335,10 +336,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "# T159 final taxonomy self-review\n\nReview basis for the full-corpus taxonomy proposal generated on 2026-09-26. The accepted Inventory is treated as true, as directed. The requested third-party review is skipped; the work manifest permits self-review for the solo maintainer, and the user explicitly authorized that route.\n\nThe three semantic refinements were checked against their reviewed Inventory reasoning and the official problem/editorial source revisions referenced there:\n\n- **ABC398 E:** The tree's connected bipartition fixes the legal cross-part edge pool. Each move consumes one fixed candidate, so the winner follows from the remaining count's parity. The parity-game skill owns the problem; bipartite coloring is co-primary because it determines the candidate pool, and interactive I/O remains supporting.\n- **ABC398 G:** Bipartite components can flip orientation when merged. Their part-size parity classes reduce the game to a parity invariant and a finite case classification. The parity-game skill owns the problem; component coloring is co-primary. This is not a Grundy or minimax DP.\n- **ABC451 G:** Root-to-vertex XOR potentials map weighted fundamental cycles to an XOR span. A reduced XOR basis gives each affine coset its minimum representative, and linearity separates pairwise minimization. XOR-basis coset normalization owns the problem; cycle-space mapping and binary-trie pair counting are supporting skills used by the solution.\n\nThe new parity-game tag and learning unit keep this reusable strategy separate from game DP. The two ABC398 claims bind to the exact game and bipartite outcomes. ABC451 G binds the new cycle-space mapping and coset-normalization outcomes while retaining the trie outcome. The full-corpus proposal still covers 868 problem placements, and the review manifest includes all newly introduced learning outcomes.",
+      "reviewBasis": "# T159 final taxonomy semantic repair self-review\n\nThe accepted Inventory is treated as true. I reviewed the recorded observations, adopted and\nrejected approaches, key insights, algorithm connections, typical techniques, and prerequisite\nclaims for every affected problem. The full placement scope remains 868 problems; the semantic audit\nidentified 15 problems requiring correction. Third-party review is skipped as requested. The T159\nmanifest permits self-review for the solo maintainer, and the user explicitly authorized this route.\n\n## Primary, home, and supporting decisions\n\n- **ABC225 H, ABC247 Ex, ABC267 Ex:** The generating-function model determines what each coefficient\n  means, so it remains the home skill. NTT convolution is co-primary because the product computation\n  is a separate reusable operation that determines whether the stated input size is feasible.\n  Product-tree divide and conquer is supporting where it is independently used. ABC247 Ex's\n  permutation-cycle observation remains problem-specific; functional-graph decomposition is removed\n  because the adopted solution does not decompose a functional graph into cycles and in-trees.\n- **ABC269 Ex, ABC272 Ex, ABC381 G, ABC260 Ex, ABC297 Ex, ABC318 Ex, ABC387 G, ABC439 G:** Existing\n  primary outcomes remain the right descriptions of the tree DP, multipoint evaluation, field\n  extension, generating-function/FPS model, labeled-component formula, composition, or power\n  projection. Convolution is supporting at the claims where NTT polynomial products implement\n  heavy-path products, product/remainder trees, chirp-z, binomial transforms, FPS inverse/exp/Newton\n  steps, or rational-function merges. The added binding does not promote implementation\n  multiplication over the mathematical model.\n- **ABC304 Ex:** Earliest-deadline-first selection, justified by exchange, controls whether an\n  admissible ordering exists. Reverse DAG deadline propagation and topological processing support\n  that choice. The heap is an implementation detail here: the retired generic heap tag has no\n  canonical supporting outcome, while the remaining best-first tag describes a different skill.\n- **ABC304 G:** For a fixed threshold, the central oracle computes maximum XOR-qualified matching\n  size by bit recursion over same-set and cross-set pair counts. This specialized recurrence is the\n  primary skill. Monotone binary search is only the outer optimization and is supporting. The new\n  Tag/Outcome is distinct from minimizing maximum XOR under a common mask and from bitwise greedy\n  feasibility.\n- **ABC308 F:** The exchange argument proves the maximum-discount matching greedy. Price-order\n  activation is a meaningful event sweep and supports the greedy. The max heap is an implementation\n  detail: best-first enumeration describes a different learner outcome, so it is not assigned as a\n  supporting skill.\n- **ABC458 G:** The linear-time feasibility oracle depends on preserving a concave piecewise-linear\n  DP through slope-trick breakpoint updates. The concavity can be sign-reversed to use the convex\n  slope-trick representation. That technique determines the problem's core reusable skill and home;\n  monotone search over the number of people is supporting.\n\nThe decisions above were recorded against Inventory claim paths, not assigned by keyword matching.\nThe T159 review scope includes the newly added XOR-threshold matching Outcome and still covers all\n868 placements.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-26T07:23:23.224Z"
+      "reviewedAt": "2026-09-26T09:22:46.808Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -572,6 +573,7 @@
       "outcome-solve-steiner-tree-by-subset-dp",
       "outcome-solve-stochastic-recurrence",
       "outcome-solve-weighted-bipartite-matching",
+      "outcome-solve-xor-threshold-matching",
       "outcome-split-enumeration-space",
       "outcome-stabilize-unbounded-knapsack-by-best-density",
       "outcome-subtract-exception-transitions",
@@ -592,12 +594,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "# T159 final taxonomy self-review\n\nReview basis for the full-corpus taxonomy proposal generated on 2026-09-26. The accepted Inventory is treated as true, as directed. The requested third-party review is skipped; the work manifest permits self-review for the solo maintainer, and the user explicitly authorized that route.\n\nThe three semantic refinements were checked against their reviewed Inventory reasoning and the official problem/editorial source revisions referenced there:\n\n- **ABC398 E:** The tree's connected bipartition fixes the legal cross-part edge pool. Each move consumes one fixed candidate, so the winner follows from the remaining count's parity. The parity-game skill owns the problem; bipartite coloring is co-primary because it determines the candidate pool, and interactive I/O remains supporting.\n- **ABC398 G:** Bipartite components can flip orientation when merged. Their part-size parity classes reduce the game to a parity invariant and a finite case classification. The parity-game skill owns the problem; component coloring is co-primary. This is not a Grundy or minimax DP.\n- **ABC451 G:** Root-to-vertex XOR potentials map weighted fundamental cycles to an XOR span. A reduced XOR basis gives each affine coset its minimum representative, and linearity separates pairwise minimization. XOR-basis coset normalization owns the problem; cycle-space mapping and binary-trie pair counting are supporting skills used by the solution.\n\nThe new parity-game tag and learning unit keep this reusable strategy separate from game DP. The two ABC398 claims bind to the exact game and bipartite outcomes. ABC451 G binds the new cycle-space mapping and coset-normalization outcomes while retaining the trie outcome. The full-corpus proposal still covers 868 problem placements, and the review manifest includes all newly introduced learning outcomes.",
+    "rationale": "# T159 final taxonomy semantic repair self-review\n\nThe accepted Inventory is treated as true. I reviewed the recorded observations, adopted and\nrejected approaches, key insights, algorithm connections, typical techniques, and prerequisite\nclaims for every affected problem. The full placement scope remains 868 problems; the semantic audit\nidentified 15 problems requiring correction. Third-party review is skipped as requested. The T159\nmanifest permits self-review for the solo maintainer, and the user explicitly authorized this route.\n\n## Primary, home, and supporting decisions\n\n- **ABC225 H, ABC247 Ex, ABC267 Ex:** The generating-function model determines what each coefficient\n  means, so it remains the home skill. NTT convolution is co-primary because the product computation\n  is a separate reusable operation that determines whether the stated input size is feasible.\n  Product-tree divide and conquer is supporting where it is independently used. ABC247 Ex's\n  permutation-cycle observation remains problem-specific; functional-graph decomposition is removed\n  because the adopted solution does not decompose a functional graph into cycles and in-trees.\n- **ABC269 Ex, ABC272 Ex, ABC381 G, ABC260 Ex, ABC297 Ex, ABC318 Ex, ABC387 G, ABC439 G:** Existing\n  primary outcomes remain the right descriptions of the tree DP, multipoint evaluation, field\n  extension, generating-function/FPS model, labeled-component formula, composition, or power\n  projection. Convolution is supporting at the claims where NTT polynomial products implement\n  heavy-path products, product/remainder trees, chirp-z, binomial transforms, FPS inverse/exp/Newton\n  steps, or rational-function merges. The added binding does not promote implementation\n  multiplication over the mathematical model.\n- **ABC304 Ex:** Earliest-deadline-first selection, justified by exchange, controls whether an\n  admissible ordering exists. Reverse DAG deadline propagation and topological processing support\n  that choice. The heap is an implementation detail here: the retired generic heap tag has no\n  canonical supporting outcome, while the remaining best-first tag describes a different skill.\n- **ABC304 G:** For a fixed threshold, the central oracle computes maximum XOR-qualified matching\n  size by bit recursion over same-set and cross-set pair counts. This specialized recurrence is the\n  primary skill. Monotone binary search is only the outer optimization and is supporting. The new\n  Tag/Outcome is distinct from minimizing maximum XOR under a common mask and from bitwise greedy\n  feasibility.\n- **ABC308 F:** The exchange argument proves the maximum-discount matching greedy. Price-order\n  activation is a meaningful event sweep and supports the greedy. The max heap is an implementation\n  detail: best-first enumeration describes a different learner outcome, so it is not assigned as a\n  supporting skill.\n- **ABC458 G:** The linear-time feasibility oracle depends on preserving a concave piecewise-linear\n  DP through slope-trick breakpoint updates. The concavity can be sign-reversed to use the convex\n  slope-trick representation. That technique determines the problem's core reusable skill and home;\n  monotone search over the number of people is supporting.\n\nThe decisions above were recorded against Inventory claim paths, not assigned by keyword matching.\nThe T159 review scope includes the newly added XOR-threshold matching Outcome and still covers all\n868 placements.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-26T07:23:23.224Z"
+    "confirmedAt": "2026-09-26T09:22:46.808Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-26T07:23:23.224Z",
-  "evidenceDigest": "dda839763c111f5b921c90aac3582150d43f914bf2b95b7f855bdd28a74a4e9c"
+  "generatedAt": "2026-09-26T09:22:46.808Z",
+  "evidenceDigest": "d5534393afb864a82c51c19291863e89a3c49f13bec2b844365496b18a8d769a"
 }

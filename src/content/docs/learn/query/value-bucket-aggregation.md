@@ -3,7 +3,7 @@ title: "値軸のbucket分割と区間集約"
 description: "「値軸のbucket分割と区間集約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 48
+  order: 49
 ---
 
 # 値軸のbucket分割と区間集約
@@ -57,4 +57,4 @@ ABC405 Gはこの更新と取得の非対称性をMoに組み込む。各値の�
 - [ABC405 G 公式解説](https://atcoder.jp/contests/abc405/editorial/12997)
 - [ABC405 G 公式問題文](https://atcoder.jp/contests/abc405/tasks/abc405_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-value-bucket-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-value-bucket-aggregation`

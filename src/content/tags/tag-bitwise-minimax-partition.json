@@ -21,7 +21,13 @@
     "minimumDimensions": 2,
     "requireObjectForStrictRecall": false
   },
-  "relatedTags": [],
+  "relatedTags": [
+    {
+      "tagId": "tag-xor-threshold-matching",
+      "type": "contrast",
+      "rationale": "XOR閾値を満たすpairの最大matching数をbit再帰で求める判定器と、共通maskを選んで全pairの最大XORを最小化する再帰を区別する。"
+    }
+  ],
   "learningOutcomeIds": [
     "outcome-minimize-maximum-xor-by-bit-partition"
   ],

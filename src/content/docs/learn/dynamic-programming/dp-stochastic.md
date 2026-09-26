@@ -3,7 +3,7 @@ title: "確率過程・期待値DP"
 description: "「確率過程・期待値DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 77
+  order: 78
 ---
 
 # 確率過程・期待値DP
@@ -121,4 +121,4 @@ f(k)の計数は、区間を左端順に処理し、隙間なく覆ったprefix�
 - [ABC242 H 公式解説](https://atcoder.jp/contests/abc242/editorial/3523)
 - [ABC242 H 公式問題文](https://atcoder.jp/contests/abc242/tasks/abc242_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-dp-stochastic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-dp-stochastic`

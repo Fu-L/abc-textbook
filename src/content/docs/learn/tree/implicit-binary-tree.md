@@ -3,7 +3,7 @@ title: "対称性・深さ・label区間で巨大な完全二分木を数える"
 description: "「対称性・深さ・label区間で巨大な完全二分木を数える」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 131
+  order: 132
 ---
 
 # 対称性・深さ・label区間で巨大な完全二分木を数える
@@ -58,4 +58,4 @@ sidebar:
 - [ABC424 E 公式問題文](https://atcoder.jp/contests/abc424/tasks/abc424_e)
 - [ABC424 E 公式解説](https://atcoder.jp/contests/abc424/editorial/13858)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-implicit-binary-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-implicit-binary-tree`

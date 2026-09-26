@@ -40,7 +40,8 @@
     "tag-state-normalization",
     "tag-threshold-heavy-light",
     "tag-two-pointers-window",
-    "tag-witness-impact-localization"
+    "tag-witness-impact-localization",
+    "tag-xor-threshold-matching"
   ],
   "ownedTagIds": [
     "tag-model-reduction"
@@ -73,6 +74,7 @@
     "outcome-reverse-update-time",
     "outcome-share-threshold-checks-by-parallel-binary-search",
     "outcome-solve-game-by-parity-invariant",
+    "outcome-solve-xor-threshold-matching",
     "outcome-split-enumeration-space"
   ],
   "ownedLearningOutcomeIds": [
@@ -167,9 +169,11 @@
     "abc302-e",
     "abc302-g",
     "abc303-f",
+    "abc304-ex",
     "abc304-g",
     "abc306-f",
     "abc308-e",
+    "abc308-f",
     "abc309-f",
     "abc311-g",
     "abc312-e",
@@ -276,7 +280,6 @@
     "abc454-g",
     "abc455-g",
     "abc457-e",
-    "abc458-g",
     "abc462-e",
     "abc463-f",
     "abc464-e",
@@ -351,12 +354,10 @@
     "abc301-ex",
     "abc301-f",
     "abc301-g",
-    "abc304-ex",
     "abc305-ex",
     "abc305-f",
     "abc307-e",
     "abc307-f",
-    "abc308-f",
     "abc312-ex",
     "abc314-f",
     "abc314-g",
@@ -456,6 +457,7 @@
     "abc451-f",
     "abc454-f",
     "abc455-f",
+    "abc458-g",
     "abc459-g",
     "abc464-g",
     "abc465-g",

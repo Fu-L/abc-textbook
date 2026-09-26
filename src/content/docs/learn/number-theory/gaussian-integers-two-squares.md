@@ -3,7 +3,7 @@ title: "Gaussian整数・二平方和"
 description: "「Gaussian整数・二平方和」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 178
+  order: 179
 ---
 
 # Gaussian整数・二平方和
@@ -47,4 +47,4 @@ Z[i]での素因数分解と共役を用い、整数の二平方和表現をprim
 - [ABC444 G 公式解説](https://atcoder.jp/contests/abc444/editorial/15201)
 - [ABC444 G 公式問題文](https://atcoder.jp/contests/abc444/tasks/abc444_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-gaussian-integers-two-squares`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-gaussian-integers-two-squares`

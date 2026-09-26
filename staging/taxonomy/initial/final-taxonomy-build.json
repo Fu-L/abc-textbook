@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-26T07:23:23.224Z",
+  "generatedAt": "2026-09-26T09:22:46.808Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "f8821e0a2d3af24fbf23fd6b55484eb2a104050db7e8b9713373b35f2cacdbf4",
+    "rulesDigest": "816391b727c4b6ae33814148e03cdc1c4a2f80f28383b16c3947410d26bc37c2",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -45,7 +45,7 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "3c5430a7a6b0b2f2c52e05c2080bd4fe987653507312e3103fba6531b32d0b1b"
+    "workManifestDigest": "0c9c668f1f36c3b154cfc271325e73a11da26cfebb958563855926094ea9ad75"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
@@ -7692,7 +7692,13 @@
           "minimumDimensions": 2,
           "requireObjectForStrictRecall": false
         },
-        "relatedTags": [],
+        "relatedTags": [
+          {
+            "tagId": "tag-xor-threshold-matching",
+            "type": "contrast",
+            "rationale": "XOR閾値を満たすpairの最大matching数をbit再帰で求める判定器と、共通maskを選んで全pairの最大XORを最小化する再帰を区別する。"
+          }
+        ],
         "learningOutcomeIds": [
           "outcome-minimize-maximum-xor-by-bit-partition"
         ],
@@ -17528,6 +17534,11 @@
             "tagId": "tag-two-pointers-window",
             "type": "contrast",
             "rationale": "どちらも単調性を使うが、値域の真偽境界を探す方法と連続区間の端を一方向へ進める方法を区別する。"
+          },
+          {
+            "tagId": "tag-xor-threshold-matching",
+            "type": "often_combined",
+            "rationale": "固定XOR閾値での最大matching数をbit再帰で判定し、その成立数が閾値に対して単調な場合に外側の二分探索と組み合わせる。"
           }
         ],
         "learningOutcomeIds": [
@@ -24517,6 +24528,89 @@
     {
       "kind": "tag",
       "entity": {
+        "id": "tag-xor-threshold-matching",
+        "name": "XOR閾値matchingのbit分割再帰",
+        "definition": "固定閾値xに対し、XORがx以上となる最大pair数を求める。最上位bitで集合を分け、閾値bitが0なら確定できるcross pairを最大化し、1ならcross pairだけを残し、同一集合内と二集合間の再帰値を合成する。",
+        "parentId": "tag-model-reduction",
+        "prerequisiteTagIds": [
+          "tag-recursive-divide-and-conquer"
+        ],
+        "semanticSignature": {
+          "objectPatterns": [
+            "XOR閾値",
+            "pair",
+            "整数集合",
+            "最大matching数"
+          ],
+          "triggerPatterns": [
+            "XORが閾値以上",
+            "medianの可否",
+            "pair可能数の最大化"
+          ],
+          "invariantPatterns": [
+            "下位bitへ残すpair",
+            "最上位の異なるbit",
+            "確定cross pair"
+          ],
+          "goalPatterns": [
+            "matching feasibility",
+            "閾値を満たす最大pair数"
+          ],
+          "excludedPatterns": [
+            "XOR minimax",
+            "上位bitからmaskを固定するfeasibility greedy"
+          ],
+          "minimumDimensions": 2,
+          "requireObjectForStrictRecall": false
+        },
+        "relatedTags": [
+          {
+            "tagId": "tag-bitwise-minimax-partition",
+            "type": "contrast",
+            "rationale": "XOR閾値を満たすpairの最大matching数をbit再帰で求める判定器と、共通maskを選んで全pairの最大XORを最小化する再帰を区別する。"
+          },
+          {
+            "tagId": "tag-monotone-threshold-search",
+            "type": "often_combined",
+            "rationale": "固定XOR閾値での最大matching数をbit再帰で判定し、その成立数が閾値に対して単調な場合に外側の二分探索と組み合わせる。"
+          }
+        ],
+        "learningOutcomeIds": [
+          "outcome-solve-xor-threshold-matching"
+        ],
+        "representativeProblemIds": [
+          "abc304-g"
+        ],
+        "aliases": [
+          "XOR threshold matching",
+          "XOR閾値matching"
+        ],
+        "formerNames": [],
+        "lifecycle": "active",
+        "replacementTagIds": []
+      },
+      "sourceRevisionIds": [
+        "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+        "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        }
+      ],
+      "materializationTask": "T047"
+    },
+    {
+      "kind": "tag",
+      "entity": {
         "id": "tag-z-algorithm-prefix-matching",
         "name": "Z algorithmによるprefix matching",
         "definition": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。",
@@ -27083,43 +27177,76 @@
         "statement": "係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。",
         "prerequisiteOutcomeIds": [],
         "scopeIds": [
+          "abc225-h",
           "abc235-ex",
+          "abc247-ex",
           "abc249-ex",
+          "abc260-ex",
           "abc265-ex",
+          "abc267-ex",
+          "abc269-ex",
+          "abc272-ex",
           "abc278-ex",
           "abc281-ex",
           "abc289-ex",
           "abc291-g",
+          "abc297-ex",
           "abc300-ex",
           "abc303-ex",
           "abc307-ex",
           "abc309-ex",
           "abc315-ex",
           "abc317-ex",
+          "abc318-ex",
           "abc331-g",
           "abc345-g",
           "abc352-g",
+          "abc381-g",
           "abc385-g",
+          "abc387-g",
           "abc390-g",
           "abc392-g",
           "abc409-g",
           "abc422-g",
           "abc432-g",
           "abc436-g",
+          "abc439-g",
           "abc462-g",
           "tag-convolution",
           "unit-polynomial-convolution"
         ]
       },
       "sourceRevisionIds": [
+        "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+        "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
+        "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+        "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb",
         "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
-        "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5",
-        "source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286",
-        "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0",
-        "source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a",
-        "source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"
+        "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
       ],
       "evidenceRefs": [
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc247-ex",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+          ]
+        },
         {
           "problemId": "abc265-ex",
           "claimPath": "/outcomeCandidates/0",
@@ -27129,28 +27256,6 @@
           "sourceRevisionIds": [
             "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
             "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
-          ]
-        },
-        {
-          "problemId": "abc289-ex",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc289-editorial-5712-16adf05d46e205117be88e47766d3b0603ff75d7e4073d06a70446a1489b3286",
-            "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"
-          ]
-        },
-        {
-          "problemId": "abc291-g",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc291-editorial-5853-63fe1b5a3336818969994232dcd22bb622706f26a5e0a23b93e8b9467f59499a",
-            "source-abc291-g-problem-b70a3c77e64434ca33b8131b0663954ac871d89241f2e3e45f1b62d9f0604162"
           ]
         }
       ],
@@ -28435,7 +28540,6 @@
         ],
         "scopeIds": [
           "abc241-e",
-          "abc247-ex",
           "abc256-e",
           "abc258-e",
           "abc284-g",
@@ -28717,13 +28821,11 @@
           "abc300-f",
           "abc302-ex",
           "abc303-g",
-          "abc304-ex",
           "abc305-e",
           "abc306-e",
           "abc306-f",
           "abc307-f",
           "abc307-g",
-          "abc308-f",
           "abc308-g",
           "abc309-f",
           "abc311-g",
@@ -31422,10 +31524,8 @@
           "abc250-g",
           "abc252-f",
           "abc297-e",
-          "abc304-ex",
           "abc305-e",
           "abc307-f",
-          "abc308-f",
           "abc319-f",
           "abc320-e",
           "abc331-e",
@@ -31447,8 +31547,8 @@
         "source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886",
         "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
         "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880",
-        "source-abc308-editorial-6706-55d3ddad700f31c3b0a39ef7482a7f89e8a64d0bce740d6b153ec0f6afb6bdc7",
-        "source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a"
+        "source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab",
+        "source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"
       ],
       "evidenceRefs": [
         {
@@ -31474,14 +31574,14 @@
           ]
         },
         {
-          "problemId": "abc308-f",
+          "problemId": "abc331-e",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc308-editorial-6706-55d3ddad700f31c3b0a39ef7482a7f89e8a64d0bce740d6b153ec0f6afb6bdc7",
-            "source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a"
+            "source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab",
+            "source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"
           ]
         }
       ],
@@ -35018,7 +35118,6 @@
           "abc245-f",
           "abc245-g",
           "abc246-e",
-          "abc247-ex",
           "abc247-g",
           "abc250-ex",
           "abc252-e",
@@ -37678,8 +37777,8 @@
         "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b",
         "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
         "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9",
-        "source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244",
-        "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"
+        "source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed",
+        "source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"
       ],
       "evidenceRefs": [
         {
@@ -37705,14 +37804,14 @@
           ]
         },
         {
-          "problemId": "abc304-ex",
+          "problemId": "abc315-e",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244",
-            "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"
+            "source-abc315-e-problem-746510fe523d6206c9704c9bc4663caf3f35c2e5369ba36984004381f97f11ed",
+            "source-abc315-editorial-6989-65329880be8ffdf3bbd6f96ad076c13c71c69b7fb34114edd01acb4deec7de6f"
           ]
         }
       ],
@@ -40019,6 +40118,39 @@
           "sourceRevisionIds": [
             "source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804",
             "source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
+        "id": "outcome-solve-xor-threshold-matching",
+        "statement": "整数集合を上位bitで分け、XORが固定閾値以上となる最大pair数を、同一集合内と二集合間の再帰関数へ分解して正しく合成できる。閾値bitごとのcross pairの確定条件と最大性を証明できる。",
+        "prerequisiteOutcomeIds": [
+          "outcome-divide-search-space-recursively"
+        ],
+        "scopeIds": [
+          "abc304-g",
+          "tag-xor-threshold-matching",
+          "unit-xor-threshold-matching"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+        "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
           ]
         }
       ],
@@ -47252,6 +47384,7 @@
           "abc437-f",
           "abc442-e",
           "abc448-g",
+          "abc458-g",
           "abc459-f"
         ],
         "directProblemIds": [],
@@ -47279,7 +47412,6 @@
           "abc422-e",
           "abc424-f",
           "abc457-g",
-          "abc458-g",
           "abc459-g",
           "abc462-e"
         ],
@@ -47726,7 +47858,6 @@
           "abc301-ex",
           "abc302-f",
           "abc304-e",
-          "abc304-ex",
           "abc305-f",
           "abc306-g",
           "abc307-f",
@@ -47804,7 +47935,6 @@
           "abc233-f",
           "abc237-ex",
           "abc239-f",
-          "abc247-ex",
           "abc257-g",
           "abc258-e",
           "abc261-g",
@@ -47815,6 +47945,7 @@
           "abc299-e",
           "abc301-e",
           "abc302-ex",
+          "abc304-ex",
           "abc305-e",
           "abc306-ex",
           "abc311-g",
@@ -48190,7 +48321,8 @@
           "tag-state-normalization",
           "tag-threshold-heavy-light",
           "tag-two-pointers-window",
-          "tag-witness-impact-localization"
+          "tag-witness-impact-localization",
+          "tag-xor-threshold-matching"
         ],
         "ownedTagIds": [
           "tag-model-reduction"
@@ -48223,6 +48355,7 @@
           "outcome-reverse-update-time",
           "outcome-share-threshold-checks-by-parallel-binary-search",
           "outcome-solve-game-by-parity-invariant",
+          "outcome-solve-xor-threshold-matching",
           "outcome-split-enumeration-space"
         ],
         "ownedLearningOutcomeIds": [
@@ -48315,9 +48448,11 @@
           "abc302-e",
           "abc302-g",
           "abc303-f",
+          "abc304-ex",
           "abc304-g",
           "abc306-f",
           "abc308-e",
+          "abc308-f",
           "abc309-f",
           "abc311-g",
           "abc312-e",
@@ -48424,7 +48559,6 @@
           "abc454-g",
           "abc455-g",
           "abc457-e",
-          "abc458-g",
           "abc462-e",
           "abc463-f",
           "abc464-e",
@@ -48499,12 +48633,10 @@
           "abc301-ex",
           "abc301-f",
           "abc301-g",
-          "abc304-ex",
           "abc305-ex",
           "abc305-f",
           "abc307-e",
           "abc307-f",
-          "abc308-f",
           "abc312-ex",
           "abc314-f",
           "abc314-g",
@@ -48604,6 +48736,7 @@
           "abc451-f",
           "abc454-f",
           "abc455-f",
+          "abc458-g",
           "abc459-g",
           "abc464-g",
           "abc465-g",
@@ -49318,7 +49451,6 @@
           "abc302-ex",
           "abc305-e",
           "abc306-e",
-          "abc308-f",
           "abc308-g",
           "abc314-g",
           "abc322-f",
@@ -49425,7 +49557,6 @@
           "abc299-g",
           "abc300-f",
           "abc303-g",
-          "abc304-ex",
           "abc306-f",
           "abc307-f",
           "abc307-g",
@@ -52798,17 +52929,16 @@
         "problemIds": [
           "abc277-f",
           "abc291-e",
-          "abc304-ex",
           "abc315-e"
         ],
         "directProblemIds": [
           "abc291-e",
           "abc315-e",
-          "abc277-f",
-          "abc304-ex"
+          "abc277-f"
         ],
         "relatedProblemIds": [
           "abc224-e",
+          "abc304-ex",
           "abc306-ex",
           "abc324-f",
           "abc335-e",
@@ -54373,7 +54503,6 @@
           "abc277-ex",
           "abc277-f",
           "abc291-e",
-          "abc304-ex",
           "abc306-g",
           "abc315-e",
           "abc456-e"
@@ -54382,6 +54511,7 @@
         "relatedProblemIds": [
           "abc214-h",
           "abc224-e",
+          "abc304-ex",
           "abc306-ex",
           "abc324-f",
           "abc335-e",
@@ -55138,6 +55268,7 @@
           "abc393-g",
           "abc400-g",
           "abc406-g",
+          "abc458-g",
           "abc459-f"
         ],
         "directProblemIds": [],
@@ -55146,7 +55277,6 @@
           "abc240-f",
           "abc263-g",
           "abc330-f",
-          "abc458-g",
           "abc459-g",
           "abc462-e"
         ],
@@ -55439,11 +55569,13 @@
         ],
         "tagIds": [
           "tag-meet-in-the-middle",
-          "tag-recursive-divide-and-conquer"
+          "tag-recursive-divide-and-conquer",
+          "tag-xor-threshold-matching"
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
           "outcome-divide-search-space-recursively",
+          "outcome-solve-xor-threshold-matching",
           "outcome-split-enumeration-space"
         ],
         "ownedLearningOutcomeIds": [],
@@ -55453,6 +55585,7 @@
           "abc271-f",
           "abc282-ex",
           "abc300-g",
+          "abc304-g",
           "abc326-f",
           "abc336-f",
           "abc402-f",
@@ -55472,7 +55605,6 @@
           "abc272-ex",
           "abc273-ex",
           "abc281-ex",
-          "abc304-g",
           "abc317-ex",
           "abc331-g",
           "abc345-g",
@@ -64942,8 +65074,8 @@
           "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b",
           "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
           "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
-          "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-          "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+          "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+          "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
         ],
         "tagIds": [
           "tag-binary-lifting",
@@ -64973,7 +65105,6 @@
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
-          "abc247-ex",
           "abc258-e",
           "abc370-f",
           "abc371-g",
@@ -64987,8 +65118,8 @@
         "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b",
         "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
         "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
-        "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-        "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+        "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+        "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
       ],
       "evidenceRefs": [
         {
@@ -65157,25 +65288,80 @@
           ]
         },
         {
-          "problemId": "abc247-ex",
-          "claimPath": "/prerequisiteCandidates/0",
+          "problemId": "abc254-g",
+          "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
           ]
         },
         {
-          "problemId": "abc247-ex",
-          "claimPath": "/typicalTechniques/0",
+          "problemId": "abc254-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+          ]
+        },
+        {
+          "problemId": "abc254-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+          ]
+        },
+        {
+          "problemId": "abc254-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+          ]
+        },
+        {
+          "problemId": "abc254-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+          ]
+        },
+        {
+          "problemId": "abc254-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+          ]
+        },
+        {
+          "problemId": "abc254-g",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+            "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
           ]
         }
       ],
@@ -65196,10 +65382,10 @@
         "sourceRevisionIds": [
           "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
           "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
-          "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-          "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb",
           "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
-          "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"
+          "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893",
+          "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+          "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
         ],
         "tagIds": [
           "tag-functional-graph-decomposition"
@@ -65236,7 +65422,6 @@
           "abc284-g"
         ],
         "relatedProblemIds": [
-          "abc247-ex",
           "abc258-e",
           "abc371-g",
           "abc444-g"
@@ -65246,10 +65431,10 @@
       "sourceRevisionIds": [
         "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
         "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
-        "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-        "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb",
         "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
-        "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"
+        "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893",
+        "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+        "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
       ],
       "evidenceRefs": [
         {
@@ -65330,28 +65515,6 @@
           ]
         },
         {
-          "problemId": "abc247-ex",
-          "claimPath": "/prerequisiteCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
-          ]
-        },
-        {
-          "problemId": "abc247-ex",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
-          ]
-        },
-        {
           "problemId": "abc256-e",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
@@ -65426,6 +65589,28 @@
           "sourceRevisionIds": [
             "source-abc256-e-problem-0d8df9007490c402dd5a18303e2a7b03fd211edc2b4ae22d6213283fb2f6c648",
             "source-abc256-editorial-4135-a9756d99270d5a1ed1223af97a234dfbf5999a1b15c21d899f2f27a470d84893"
+          ]
+        },
+        {
+          "problemId": "abc258-e",
+          "claimPath": "/prerequisiteCandidates/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+            "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
+          ]
+        },
+        {
+          "problemId": "abc258-e",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+            "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
           ]
         }
       ],
@@ -68166,6 +68351,8 @@
           "abc290-g",
           "abc298-f",
           "abc299-g",
+          "abc304-ex",
+          "abc308-f",
           "abc312-f",
           "abc366-f",
           "abc371-g",
@@ -68199,6 +68386,7 @@
           "abc262-f",
           "abc268-f",
           "abc298-f",
+          "abc308-f",
           "abc312-f",
           "abc366-f",
           "abc434-f",
@@ -68207,7 +68395,8 @@
           "abc299-g",
           "abc371-g",
           "abc254-ex",
-          "abc290-ex"
+          "abc290-ex",
+          "abc304-ex"
         ],
         "relatedProblemIds": [
           "abc227-e",
@@ -68217,9 +68406,7 @@
           "abc268-ex",
           "abc271-ex",
           "abc274-g",
-          "abc304-ex",
           "abc305-ex",
-          "abc308-f",
           "abc314-g",
           "abc318-f",
           "abc319-f",
@@ -76593,7 +76780,6 @@
           "abc293-ex",
           "abc300-f",
           "abc303-f",
-          "abc304-g",
           "abc330-f",
           "abc373-e",
           "abc374-e",
@@ -76601,8 +76787,7 @@
           "abc388-g",
           "abc395-f",
           "abc424-e",
-          "abc444-f",
-          "abc458-g"
+          "abc444-f"
         ],
         "directProblemIds": [
           "abc267-e",
@@ -76621,14 +76806,13 @@
           "abc444-f",
           "abc229-g",
           "abc246-g",
-          "abc304-g",
           "abc388-g",
-          "abc458-g",
           "abc263-ex",
           "abc293-ex"
         ],
         "relatedProblemIds": [
           "abc216-e",
+          "abc304-g",
           "abc320-g",
           "abc324-f",
           "abc346-f",
@@ -76640,7 +76824,8 @@
           "abc401-g",
           "abc402-f",
           "abc427-g",
-          "abc428-f"
+          "abc428-f",
+          "abc458-g"
         ],
         "learningRationale": "判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。"
       },
@@ -78261,7 +78446,6 @@
           "abc297-e",
           "abc305-e",
           "abc306-e",
-          "abc308-f",
           "abc308-g",
           "abc314-g",
           "abc330-e",
@@ -78291,7 +78475,6 @@
           "abc268-ex",
           "abc273-ex",
           "abc275-ex",
-          "abc304-ex",
           "abc307-f",
           "abc319-f",
           "abc319-g",
@@ -79802,10 +79985,10 @@
         "sourceRevisionIds": [
           "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
           "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
+          "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+          "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
           "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-          "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
-          "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-          "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+          "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
         ],
         "tagIds": [
           "tag-convolution",
@@ -79840,26 +80023,37 @@
           "abc307-ex"
         ],
         "relatedProblemIds": [
+          "abc225-h",
           "abc230-h",
           "abc235-ex",
+          "abc247-ex",
           "abc249-ex",
+          "abc260-ex",
+          "abc267-ex",
+          "abc269-ex",
+          "abc272-ex",
           "abc278-ex",
           "abc281-ex",
           "abc289-ex",
+          "abc297-ex",
           "abc300-ex",
           "abc303-ex",
           "abc309-ex",
           "abc317-ex",
+          "abc318-ex",
           "abc323-g",
           "abc331-g",
           "abc345-g",
           "abc352-g",
           "abc357-g",
+          "abc381-g",
           "abc385-g",
+          "abc387-g",
           "abc390-g",
           "abc409-g",
           "abc422-g",
           "abc436-g",
+          "abc439-g",
           "abc462-g"
         ],
         "learningRationale": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
@@ -79867,10 +80061,10 @@
       "sourceRevisionIds": [
         "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
         "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
+        "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+        "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
         "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-        "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
-        "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-        "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+        "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
       ],
       "evidenceRefs": [
         {
@@ -79959,6 +80153,83 @@
           "sourceRevisionIds": [
             "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
             "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
+          ]
+        },
+        {
+          "problemId": "abc225-h",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+            "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd"
           ]
         },
         {
@@ -80058,17 +80329,6 @@
           "sourceRevisionIds": [
             "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
             "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
-          ]
-        },
-        {
-          "problemId": "abc235-ex",
-          "claimPath": "/prerequisiteCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
-            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
           ]
         }
       ],
@@ -81253,7 +81513,6 @@
         "problemIds": [
           "abc297-e",
           "abc305-e",
-          "abc308-f",
           "abc331-e",
           "abc384-e",
           "abc391-f",
@@ -81266,7 +81525,6 @@
           "abc331-e",
           "abc384-e",
           "abc440-e",
-          "abc308-f",
           "abc391-f",
           "abc409-f"
         ],
@@ -81277,7 +81535,6 @@
           "abc249-f",
           "abc250-g",
           "abc252-f",
-          "abc304-ex",
           "abc307-f",
           "abc319-f",
           "abc320-e",
@@ -87247,17 +87504,17 @@
           "abc217-h",
           "abc250-g",
           "abc275-ex",
-          "abc406-g"
+          "abc406-g",
+          "abc458-g"
         ],
         "directProblemIds": [
           "abc250-g",
           "abc406-g",
+          "abc458-g",
           "abc217-h",
           "abc275-ex"
         ],
-        "relatedProblemIds": [
-          "abc458-g"
-        ],
+        "relatedProblemIds": [],
         "learningRationale": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
       },
       "sourceRevisionIds": [
@@ -94703,6 +94960,118 @@
     {
       "kind": "unit",
       "entity": {
+        "id": "unit-xor-threshold-matching",
+        "kind": "subsection",
+        "title": "XOR閾値matchingのbit分割再帰",
+        "parentId": "unit-divide-enumeration",
+        "baselineId": "prereq-abc-advanced-v1",
+        "baselineVersion": "1.0.0",
+        "excludedTopics": [
+          "一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。",
+          "二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。"
+        ],
+        "sourceRevisionIds": [
+          "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+          "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+        ],
+        "tagIds": [
+          "tag-xor-threshold-matching"
+        ],
+        "ownedTagIds": [
+          "tag-xor-threshold-matching"
+        ],
+        "learningOutcomeIds": [
+          "outcome-solve-xor-threshold-matching"
+        ],
+        "ownedLearningOutcomeIds": [
+          "outcome-solve-xor-threshold-matching"
+        ],
+        "problemIds": [
+          "abc304-g"
+        ],
+        "directProblemIds": [
+          "abc304-g"
+        ],
+        "relatedProblemIds": [],
+        "learningRationale": "固定したXOR閾値でpair可能数を最大化する問題を、bitごとの同一集合内matchingと二集合間matchingへ分ける。閾値bitによる確定pairと下位bitへ残すpairを区別し、再帰式が最大数を保つ理由を証明する。"
+      },
+      "sourceRevisionIds": [
+        "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+        "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        },
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        },
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        },
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        },
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        },
+        {
+          "problemId": "abc304-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+            "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+          ]
+        }
+      ],
+      "materializationTask": "T050"
+    },
+    {
+      "kind": "unit",
+      "entity": {
         "id": "unit-z-algorithm",
         "kind": "subsection",
         "title": "Z algorithmによるprefix matching",
@@ -95517,6 +95886,10 @@
     {
       "nodeId": "tag-weighted-bipartite-matching",
       "prerequisiteId": "tag-bipartite-matching-hall"
+    },
+    {
+      "nodeId": "tag-xor-threshold-matching",
+      "prerequisiteId": "tag-recursive-divide-and-conquer"
     }
   ],
   "learningUnitPrerequisites": [
@@ -96099,6 +96472,10 @@
     {
       "nodeId": "unit-weighted-shortest-path",
       "prerequisiteId": "unit-state-graph-search"
+    },
+    {
+      "nodeId": "unit-xor-threshold-matching",
+      "prerequisiteId": "unit-recursive-divide-and-conquer"
     }
   ],
   "placements": [
@@ -109022,13 +109399,16 @@
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-convolution",
         "tag-generating-functions"
       ],
       "supportingTagIds": [
         "tag-combinatorial-coefficients"
       ],
       "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
-      "additionalPrimaryOutcomeIds": [],
+      "additionalPrimaryOutcomeIds": [
+        "outcome-compute-convolution-or-correlation"
+      ],
       "supportingOutcomeIds": [
         "outcome-formulate-combinatorial-coefficients"
       ],
@@ -109068,6 +109448,7 @@
           },
           "kind": "primary",
           "tagIds": [
+            "tag-convolution",
             "tag-generating-functions"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
@@ -109104,6 +109485,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
+            "tag-convolution",
             "tag-generating-functions"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
@@ -128551,45 +128933,28 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「色条件を満たす permutation を cycle 数別に数える DP を生成多項式へ変換し、一次式群を高速 convolution で積にする。最後に K swap で到達可能な cycle 数の係数を足す。」、解法への接続「色ごとに出現順 j=0,…,m-1 の一次多項式 (z+j) を用意し、divide-and-conquer/priority merge と NTT で全積を求める。係数 [z^c] のうち N-c≤K かつ parity が一致するものを 998244353 で合計する。」、学習成果「色を保つ permutation の cycle 数分布を多項式積で求め、swap 回数の下限・偶奇条件に合う最終配置だけを数えられる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-functional-graph-decomposition; 補助Outcome=outcome-decompose-functional-graph; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-functional-graph-decomposition / outcome-decompose-functional-graph を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「色条件を満たす permutation を cycle 数別に数える DP を生成多項式へ変換し、一次式群を高速 convolution で積にする。最後に K swap で到達可能な cycle 数の係数を足す。」、解法への接続「色ごとに出現順 j=0,…,m-1 の一次多項式 (z+j) を用意し、divide-and-conquer/priority merge と NTT で全積を求める。係数 [z^c] のうち N-c≤K かつ parity が一致するものを 998244353 で合計する。」、学習成果「色を保つ permutation の cycle 数分布を多項式積で求め、swap 回数の下限・偶奇条件に合う最終配置だけを数えられる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-convolution",
         "tag-generating-functions"
       ],
       "supportingTagIds": [
-        "tag-functional-graph-decomposition",
         "tag-recursive-divide-and-conquer"
       ],
       "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
-      "additionalPrimaryOutcomeIds": [],
+      "additionalPrimaryOutcomeIds": [
+        "outcome-compute-convolution-or-correlation"
+      ],
       "supportingOutcomeIds": [
-        "outcome-decompose-functional-graph",
         "outcome-divide-search-space-recursively"
       ],
       "adHocElements": [
         "色制約付き permutation の cycle 分布は、各色で何人目かという値 j を係数に持つ一次式 (z+j) の積になる。（再利用可能な見方: Stirling 数型の挿入 DP が現れたら、cycle/成分数を多項式の次数にして積構造を探す。）"
       ],
       "claimDispositions": [
-        {
-          "claimRef": {
-            "problemId": "abc247-ex",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-              "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-functional-graph-decomposition"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
         {
           "claimRef": {
             "problemId": "abc247-ex",
@@ -128620,11 +128985,11 @@
               "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
             ]
           },
-          "kind": "same_tag",
+          "kind": "primary",
           "tagIds": [
-            "tag-generating-functions"
+            "tag-convolution"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -128641,24 +129006,6 @@
           "kind": "supporting",
           "tagIds": [
             "tag-recursive-divide-and-conquer"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc247-ex",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
-              "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-functional-graph-decomposition"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -128694,9 +129041,41 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-generating-functions"
+            "tag-convolution"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc247-ex",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+              "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+            ]
+          },
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc247-ex",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+              "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+            ]
+          },
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -141211,7 +141590,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「指定した同色隣接を満たす数 q を色ごとのブロック EGF の積で求め、二項反転で正確な分布 a を復元した後、Σ_t a_t/(1−tx) を FPS 展開する。」、解法への接続「同色 run の組合せを exponential generating function で合成し、binomial inversion で分布を復元し、power moments を rational generating function の級数展開へ接続する。」、学習成果「隣接色変化数の分布から高次数までの全冪和を、包除・母関数・高速多項式演算で生成できる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「指定した同色隣接を満たす数 q を色ごとのブロック EGF の積で求め、二項反転で正確な分布 a を復元した後、Σ_t a_t/(1−tx) を FPS 展開する。」、解法への接続「同色 run の組合せを exponential generating function で合成し、binomial inversion で分布を復元し、power moments を rational generating function の級数展開へ接続する。」、学習成果「隣接色変化数の分布から高次数までの全冪和を、包除・母関数・高速多項式演算で生成できる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -141221,6 +141600,7 @@
       ],
       "supportingTagIds": [
         "tag-combinatorial-coefficients",
+        "tag-convolution",
         "tag-inclusion-exclusion",
         "tag-modular-arithmetic",
         "tag-recursive-divide-and-conquer"
@@ -141230,6 +141610,7 @@
         "outcome-apply-formal-power-series-operations"
       ],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-compute-in-modular-arithmetic",
         "outcome-correct-overlap-by-inversion",
         "outcome-divide-search-space-recursively",
@@ -141272,6 +141653,7 @@
           "kind": "supporting",
           "tagIds": [
             "tag-combinatorial-coefficients",
+            "tag-convolution",
             "tag-inclusion-exclusion"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
@@ -141344,6 +141726,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-modular-arithmetic",
             "tag-recursive-divide-and-conquer"
           ],
@@ -141382,6 +141765,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-inclusion-exclusion",
             "tag-modular-arithmetic"
           ],
@@ -147564,13 +147948,16 @@
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
+        "tag-convolution",
         "tag-generating-functions"
       ],
       "supportingTagIds": [
         "tag-recursive-divide-and-conquer"
       ],
       "primaryOutcomeId": "outcome-encode-counting-by-generating-function",
-      "additionalPrimaryOutcomeIds": [],
+      "additionalPrimaryOutcomeIds": [
+        "outcome-compute-convolution-or-correlation"
+      ],
       "supportingOutcomeIds": [
         "outcome-divide-search-space-recursively"
       ],
@@ -147608,11 +147995,11 @@
               "source-abc267-ex-problem-53fd370d715324cae8e3d5c9f315e45b9ce92b1b7e6b80ad84576f6b26bafb74"
             ]
           },
-          "kind": "same_tag",
+          "kind": "primary",
           "tagIds": [
-            "tag-generating-functions"
+            "tag-convolution"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -147646,6 +148033,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
+            "tag-convolution",
             "tag-generating-functions"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
@@ -149416,7 +149804,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「最大subtreeのchildをheavyとし、各heavy pathではlight-child積g_iを使う一次元漸化式をdivide-and-conquer polynomial productsで評価する。」、解法への接続「antichainのtree generating-function DPをheavy pathsへ分解し、path recurrenceをNTT付きdivide and conquer、light subtreesをsize-aware mergingで合成する。」、学習成果「全サイズKのtree antichain数をheavy-path polynomial DPで一括計算できる。」を照合し、tag-heavy-path-tree-dp / outcome-accelerate-tree-dp-by-heavy-path をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。; 補助Tag=tag-rooted-tree-aggregation; 補助Outcome=outcome-aggregate-rooted-tree; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-rooted-tree-aggregation / outcome-aggregate-rooted-tree を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「最大subtreeのchildをheavyとし、各heavy pathではlight-child積g_iを使う一次元漸化式をdivide-and-conquer polynomial productsで評価する。」、解法への接続「antichainのtree generating-function DPをheavy pathsへ分解し、path recurrenceをNTT付きdivide and conquer、light subtreesをsize-aware mergingで合成する。」、学習成果「全サイズKのtree antichain数をheavy-path polynomial DPで一括計算できる。」を照合し、tag-heavy-path-tree-dp / outcome-accelerate-tree-dp-by-heavy-path をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。; 補助Tag=tag-rooted-tree-aggregation; 補助Outcome=outcome-aggregate-rooted-tree; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-rooted-tree-aggregation / outcome-aggregate-rooted-tree を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -149424,6 +149812,7 @@
         "tag-heavy-path-tree-dp"
       ],
       "supportingTagIds": [
+        "tag-convolution",
         "tag-generating-functions",
         "tag-recursive-divide-and-conquer",
         "tag-rooted-tree-aggregation"
@@ -149432,6 +149821,7 @@
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-aggregate-rooted-tree",
+        "outcome-compute-convolution-or-correlation",
         "outcome-divide-search-space-recursively",
         "outcome-encode-counting-by-generating-function"
       ],
@@ -149525,6 +149915,24 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc269-ex",
+            "claimPath": "/typicalTechniques/2",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
+              "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
             "tag-recursive-divide-and-conquer"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
@@ -149544,6 +149952,24 @@
           "kind": "supporting",
           "tagIds": [
             "tag-generating-functions"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc269-ex",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
+              "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -152262,7 +152688,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「DP generating functionへe^xを掛けてderivative termを対角化し、積polynomial h(x)=∏(x+C_i)を整数点0,…,Nでmultipoint evaluationする。」、解法への接続「permutation counting DPをexponential generating functionsでdiagonalizeし、product polynomialのmultipoint evaluationとbinomial inversionへ変換する。」、学習成果「random permutation後のface-up coin数の期待値を高速多項式演算で求められる。」を照合し、tag-polynomial-multipoint-evaluation / outcome-evaluate-polynomial-at-many-points をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「DP generating functionへe^xを掛けてderivative termを対角化し、積polynomial h(x)=∏(x+C_i)を整数点0,…,Nでmultipoint evaluationする。」、解法への接続「permutation counting DPをexponential generating functionsでdiagonalizeし、product polynomialのmultipoint evaluationとbinomial inversionへ変換する。」、学習成果「random permutation後のface-up coin数の期待値を高速多項式演算で求められる。」を照合し、tag-polynomial-multipoint-evaluation / outcome-evaluate-polynomial-at-many-points をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -152272,6 +152698,7 @@
       ],
       "supportingTagIds": [
         "tag-combinatorial-coefficients",
+        "tag-convolution",
         "tag-inclusion-exclusion",
         "tag-recursive-divide-and-conquer"
       ],
@@ -152280,6 +152707,7 @@
         "outcome-encode-counting-by-generating-function"
       ],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-correct-overlap-by-inversion",
         "outcome-divide-search-space-recursively",
         "outcome-formulate-combinatorial-coefficients"
@@ -152320,6 +152748,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-recursive-divide-and-conquer"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
@@ -152396,6 +152825,24 @@
           "tagIds": [
             "tag-inclusion-exclusion",
             "tag-recursive-divide-and-conquer"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc272-ex",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477",
+              "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -177381,7 +177828,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「二変数母関数をy微分し形式冪級数計算」、解法への接続「次数NまでG=Σ x^i/(1+x^i)とH=Σx^i/(1+x^i)^2を約数寄与で構成し、H/(1-G)^2のx^N係数をNTTとFPS逆元で求める。」、学習成果「総和Nの隣接相異なる正整数列について長さ総和を求められる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「二変数母関数をy微分し形式冪級数計算」、解法への接続「次数NまでG=Σ x^i/(1+x^i)とH=Σx^i/(1+x^i)^2を約数寄与で構成し、H/(1-G)^2のx^N係数をNTTとFPS逆元で求める。」、学習成果「総和Nの隣接相異なる正整数列について長さ総和を求められる。」を照合し、tag-generating-functions / outcome-encode-counting-by-generating-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-inclusion-exclusion; 補助Outcome=outcome-correct-overlap-by-inversion; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-inclusion-exclusion / outcome-correct-overlap-by-inversion を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -177390,6 +177837,7 @@
         "tag-generating-functions"
       ],
       "supportingTagIds": [
+        "tag-convolution",
         "tag-inclusion-exclusion",
         "tag-modular-arithmetic"
       ],
@@ -177398,6 +177846,7 @@
         "outcome-apply-formal-power-series-operations"
       ],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-compute-in-modular-arithmetic",
         "outcome-correct-overlap-by-inversion"
       ],
@@ -177491,6 +177940,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-modular-arithmetic"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
@@ -177528,6 +177978,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-inclusion-exclusion",
             "tag-modular-arithmetic"
           ],
@@ -183200,22 +183651,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「Rを辺に沿って逆伝播し、配置可能頂点から最小Rを貪欲に選ぶ」、解法への接続「まずtopological sortし、cycleならNoとする。逆順に各辺のR上界を伝播し、L_v≤R_vを確認する。position iを1から進め、全predecessor配置済みかつL_v≤iの頂点をmin-heapへ入れ、R最小を取り出してP_v=iとする。候補なしまたはi>R_vならNo、全配置できればYesとPを出力する。」、学習成果「辺の向きと全区間L_i≤P_i≤R_iを同時に満たす順列Pの存在を判定し、存在すれば一つ構成できる。」を照合し、tag-dag-topological-processing / outcome-process-dag-in-topological-order をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。; 補助Tag=tag-priority-queue-best-first; 補助Outcome=outcome-enumerate-frontier-best-first; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-priority-queue-best-first / outcome-enumerate-frontier-best-first を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「Rを辺に沿って逆伝播し、配置可能頂点から最小Rを貪欲に選ぶ」、解法への接続「まずtopological sortし、cycleならNoとする。逆順に各辺のR上界を伝播し、L_v≤R_vを確認する。position iを1から進め、全predecessor配置済みかつL_v≤iの頂点をmin-heapへ入れ、R最小を取り出してP_v=iとする。候補なしまたはi>R_vならNo、全配置できればYesとPを出力する。」、学習成果「辺の向きと全区間L_i≤P_i≤R_iを同時に満たす順列Pの存在を判定し、存在すれば一つ構成できる。」を照合し、tag-greedy-exchange-order / outcome-prove-greedy-order をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dag-topological-processing; 補助Outcome=outcome-process-dag-in-topological-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dag-topological-processing / outcome-process-dag-in-topological-order を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-dag-topological-processing"
+        "tag-greedy-exchange-order"
       ],
       "supportingTagIds": [
-        "tag-greedy-exchange-order",
-        "tag-priority-queue-best-first"
+        "tag-dag-topological-processing"
       ],
-      "primaryOutcomeId": "outcome-process-dag-in-topological-order",
+      "primaryOutcomeId": "outcome-prove-greedy-order",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-enumerate-frontier-best-first",
-        "outcome-prove-greedy-order"
+        "outcome-process-dag-in-topological-order"
       ],
       "adHocElements": [
         "Rを先に伝播して辺ごとに厳密増加させることで、未配置の頂点を前へ交換したときにもsuccessor側のdeadline余裕を証明でき、単純なEDFが成立する。（再利用可能な見方: 複数種類の順序制約がある構成問題では、上界を依存辺に沿って閉包してからdeadline貪欲へ渡すと証明しやすい。）"
@@ -183233,11 +183682,11 @@
               "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-dag-topological-processing"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -183251,12 +183700,11 @@
               "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
-            "tag-greedy-exchange-order",
-            "tag-priority-queue-best-first"
+            "tag-greedy-exchange-order"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -183272,9 +183720,27 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-dag-topological-processing"
+            "tag-greedy-exchange-order"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc304-ex",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc304-editorial-6500-329ed419aaa87d2073ba6e9f3aa951ed2b89c2ab042b9ebbe37b752da919c244",
+              "source-abc304-ex-problem-88a1b5dcec9cca88a888a187d670ad04f5cc1f9733774bff9af0e3dd3127f935"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-dag-topological-processing"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -183590,25 +184056,45 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「bitごとの分割再帰でxor≥xとなる最大matching数を求める」、解法への接続「f_d(C,x)をC内、g_d(C,D,x)をCとD間でxor≥xとなる最大pair数として、各列をbit dの0群・1群へ分割する。d=-1ではそれぞれfloor(|C|/2)、min(|C|,|D|)とし、x_dに応じて確定するcross pair数と下位bitのf/gを公式の漸化式で合成する。f_29(A,x)がfloor((N+1)/2)以上かを判定してxを二分探索する。」、学習成果「2N要素を自由に並べ替えてN組のxorを作るとき、そのxor列のmedianとして得られる最大値を求められる。」を照合し、tag-monotone-threshold-search / outcome-prove-and-search-threshold をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「bitごとの分割再帰でxor≥xとなる最大matching数を求める」、解法への接続「f_d(C,x)をC内、g_d(C,D,x)をCとD間でxor≥xとなる最大pair数として、各列をbit dの0群・1群へ分割する。d=-1ではそれぞれfloor(|C|/2)、min(|C|,|D|)とし、x_dに応じて確定するcross pair数と下位bitのf/gを公式の漸化式で合成する。f_29(A,x)がfloor((N+1)/2)以上かを判定してxを二分探索する。」、学習成果「2N要素を自由に並べ替えてN組のxorを作るとき、そのxor列のmedianとして得られる最大値を求められる。」を照合し、tag-xor-threshold-matching / outcome-solve-xor-threshold-matching をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-monotone-threshold-search; 補助Outcome=outcome-prove-and-search-threshold; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-monotone-threshold-search / outcome-prove-and-search-threshold を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-monotone-threshold-search"
+        "tag-xor-threshold-matching"
       ],
       "supportingTagIds": [
+        "tag-monotone-threshold-search",
         "tag-recursive-divide-and-conquer"
       ],
-      "primaryOutcomeId": "outcome-prove-and-search-threshold",
+      "primaryOutcomeId": "outcome-solve-xor-threshold-matching",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-divide-search-space-recursively"
+        "outcome-divide-search-space-recursively",
+        "outcome-prove-and-search-threshold"
       ],
       "adHocElements": [
         "長さNのxor列のmedianは昇順でfloor(N/2)+1番目なので、全N pairを閾値以上にする必要はなく、ceil(N/2)=floor((N+1)/2)組だけ作れればよい。（再利用可能な見方: 順列自由なmedian最大化は、閾値以上の要素を必要個数だけ作る最大matching判定へ変えると扱いやすい。）"
       ],
       "claimDispositions": [
+        {
+          "claimRef": {
+            "problemId": "abc304-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+              "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+            ]
+          },
+          "kind": "primary",
+          "tagIds": [
+            "tag-xor-threshold-matching"
+          ],
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
         {
           "claimRef": {
             "problemId": "abc304-g",
@@ -183639,11 +184125,11 @@
               "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-monotone-threshold-search"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -183659,9 +184145,27 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-monotone-threshold-search"
+            "tag-xor-threshold-matching"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc304-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+              "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-monotone-threshold-search"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -187104,45 +187608,25 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「itemsをprice順、couponsをL順にsortし、各itemまでにeligibleになったDをmax-heapへ入れて最大discountを一つ使う。」、解法への接続「nested threshold eligibilityを持つmaximum-discount matchingをsorted sweepとmax-priority greedyで解く。」、学習成果「一商品一coupon制約下のminimum total paymentをgreedy matchingで求められる。」を照合し、tag-priority-queue-best-first / outcome-enumerate-frontier-best-first をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「itemsをprice順、couponsをL順にsortし、各itemまでにeligibleになったDをmax-heapへ入れて最大discountを一つ使う。」、解法への接続「nested threshold eligibilityを持つmaximum-discount matchingをsorted sweepとmax-priority greedyで解く。」、学習成果「一商品一coupon制約下のminimum total paymentをgreedy matchingで求められる。」を照合し、tag-greedy-exchange-order / outcome-prove-greedy-order をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-event-sweep; 補助Outcome=outcome-linearize-events; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-event-sweep / outcome-linearize-events を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-priority-queue-best-first"
-      ],
-      "supportingTagIds": [
-        "tag-event-sweep",
         "tag-greedy-exchange-order"
       ],
-      "primaryOutcomeId": "outcome-enumerate-frontier-best-first",
+      "supportingTagIds": [
+        "tag-event-sweep"
+      ],
+      "primaryOutcomeId": "outcome-prove-greedy-order",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-linearize-events",
-        "outcome-prove-greedy-order"
+        "outcome-linearize-events"
       ],
       "adHocElements": [
         "D_i≤L_iによりdiscount後価格はnonnegativeだが、greedyの正当性自体はtotal discount最大化とnested eligibilityに依存する。（再利用可能な見方: 支払最小化は固定baseからbenefitsを引く形へ変え、benefit matchingとして考える。）"
       ],
       "claimDispositions": [
-        {
-          "claimRef": {
-            "problemId": "abc308-f",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc308-editorial-6706-55d3ddad700f31c3b0a39ef7482a7f89e8a64d0bce740d6b153ec0f6afb6bdc7",
-              "source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a"
-            ]
-          },
-          "kind": "primary",
-          "tagIds": [
-            "tag-priority-queue-best-first"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
         {
           "claimRef": {
             "problemId": "abc308-f",
@@ -187173,11 +187657,11 @@
               "source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-greedy-exchange-order"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -187193,9 +187677,27 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-priority-queue-best-first"
+            "tag-greedy-exchange-order"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc308-f",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc308-editorial-6706-55d3ddad700f31c3b0a39ef7482a7f89e8a64d0bce740d6b153ec0f6afb6bdc7",
+              "source-abc308-f-problem-1aa0efcfc13890447bf2c87ac81e1acace336befecdcabcb51d676ba83dd987a"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-event-sweep"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -195731,7 +196233,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「cycle type ごとの組合せ係数を EGF に整理し、f(x)=Σx^i/i² の FPS exp の x^N 係数から各正誤caseを包除する。」、解法への接続「mod 上で f_i=1/i² (1≤i≤N) を作り、FPS E=exp(f) mod x^{N+1} を Newton 法で求める。AliceのみAC/BobのみAC/両者AC の重複を対称性と1-cycleのみのケースで整理し、公式式 N!²(1−2[x^N]E)+N! を計算する。」、学習成果「二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。」を照合し、tag-labeled-component-decomposition / outcome-count-labeled-structures-by-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「cycle type ごとの組合せ係数を EGF に整理し、f(x)=Σx^i/i² の FPS exp の x^N 係数から各正誤caseを包除する。」、解法への接続「mod 上で f_i=1/i² (1≤i≤N) を作り、FPS E=exp(f) mod x^{N+1} を Newton 法で求める。AliceのみAC/BobのみAC/両者AC の重複を対称性と1-cycleのみのケースで整理し、公式式 N!²(1−2[x^N]E)+N! を計算する。」、学習成果「二解法の正誤を cycle component の EGF へ変換し、(N!)² 個の入力を一つの FPS exp 係数から数えられる。」を照合し、tag-labeled-component-decomposition / outcome-count-labeled-structures-by-components をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-generating-functions; 補助Outcome=outcome-encode-counting-by-generating-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-generating-functions / outcome-encode-counting-by-generating-function を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -195740,6 +196242,7 @@
         "tag-labeled-component-decomposition"
       ],
       "supportingTagIds": [
+        "tag-convolution",
         "tag-generating-functions"
       ],
       "primaryOutcomeId": "outcome-count-labeled-structures-by-components",
@@ -195747,6 +196250,7 @@
         "outcome-apply-formal-power-series-operations"
       ],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-encode-counting-by-generating-function"
       ],
       "adHocElements": [
@@ -195810,6 +196314,24 @@
         {
           "claimRef": {
             "problemId": "abc318-ex",
+            "claimPath": "/typicalTechniques/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
+              "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc318-ex",
             "claimPath": "/prerequisiteCandidates/0",
             "evidenceIds": [
               "evidence-official-analysis"
@@ -195860,6 +196382,24 @@
             "tag-formal-power-series"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc318-ex",
+            "claimPath": "/prerequisiteCandidates/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
+              "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -242255,7 +242795,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「F_p(√5) 上で一般項を c1A^n+c2B^n とし、周期で N を縮約した後、積を √N×√N に分けて多項式構築と chirp-z 多点評価で求める。」、解法への接続「拡大体要素を pair で実装して一般項係数と周期を求める。周期商の積を高速冪し、残りを平方分割する。F_M(X) を doubling と NTT で構築し、chirp-z transform で等比点評価して全値を掛ける。」、学習成果「巨大 N の Fibonacci型項積を、有限体拡大と平方分割・等比多点評価で高速に計算できる。」を照合し、tag-finite-field-extension / outcome-compute-in-finite-field-extension をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-polynomial-multipoint-evaluation; 補助Outcome=outcome-evaluate-at-geometric-points; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-polynomial-multipoint-evaluation / outcome-evaluate-at-geometric-points を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「F_p(√5) 上で一般項を c1A^n+c2B^n とし、周期で N を縮約した後、積を √N×√N に分けて多項式構築と chirp-z 多点評価で求める。」、解法への接続「拡大体要素を pair で実装して一般項係数と周期を求める。周期商の積を高速冪し、残りを平方分割する。F_M(X) を doubling と NTT で構築し、chirp-z transform で等比点評価して全値を掛ける。」、学習成果「巨大 N の Fibonacci型項積を、有限体拡大と平方分割・等比多点評価で高速に計算できる。」を照合し、tag-finite-field-extension / outcome-compute-in-finite-field-extension をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-polynomial-multipoint-evaluation; 補助Outcome=outcome-evaluate-at-geometric-points; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-polynomial-multipoint-evaluation / outcome-evaluate-at-geometric-points を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -242263,12 +242803,14 @@
         "tag-finite-field-extension"
       ],
       "supportingTagIds": [
+        "tag-convolution",
         "tag-polynomial-multipoint-evaluation",
         "tag-recursive-divide-and-conquer"
       ],
       "primaryOutcomeId": "outcome-compute-in-finite-field-extension",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-divide-search-space-recursively",
         "outcome-evaluate-at-geometric-points"
       ],
@@ -242333,6 +242875,24 @@
         {
           "claimRef": {
             "problemId": "abc381-g",
+            "claimPath": "/typicalTechniques/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544",
+              "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc381-g",
             "claimPath": "/prerequisiteCandidates/0",
             "evidenceIds": [
               "evidence-official-analysis"
@@ -242381,6 +242941,24 @@
           "kind": "supporting",
           "tagIds": [
             "tag-recursive-divide-and-conquer"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc381-g",
+            "claimPath": "/prerequisiteCandidates/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544",
+              "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -246537,7 +247115,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「cactusのrooted EGF方程式を立て、Kinoshita–Li形式的冪級数合成を用いたNewton法または逆関数で解く」、解法への接続「prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compositionをKinoshita–Li法で評価してFPS Newton iterationする（またはH=exp Gからx/H(x)のcompositional inverseを求める）。最後にrooted EGF係数をfactorialで戻す。」、学習成果「prime circuit条件をvertex-disjoint cactusへ特徴付け、最新の高速FPS compositionでN=2.5×10^5まで数えられる。」を照合し、tag-fps-composition-power-projection / outcome-compose-series-and-project-powers をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「cactusのrooted EGF方程式を立て、Kinoshita–Li形式的冪級数合成を用いたNewton法または逆関数で解く」、解法への接続「prime indicatorからGをN次まで構成する。F=G(x exp F)に対し、compositionをKinoshita–Li法で評価してFPS Newton iterationする（またはH=exp Gからx/H(x)のcompositional inverseを求める）。最後にrooted EGF係数をfactorialで戻す。」、学習成果「prime circuit条件をvertex-disjoint cactusへ特徴付け、最新の高速FPS compositionでN=2.5×10^5まで数えられる。」を照合し、tag-fps-composition-power-projection / outcome-compose-series-and-project-powers をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -246546,13 +247124,17 @@
         "tag-fps-composition-power-projection",
         "tag-generating-functions"
       ],
-      "supportingTagIds": [],
+      "supportingTagIds": [
+        "tag-convolution"
+      ],
       "primaryOutcomeId": "outcome-compose-series-and-project-powers",
       "additionalPrimaryOutcomeIds": [
         "outcome-apply-formal-power-series-operations",
         "outcome-encode-counting-by-generating-function"
       ],
-      "supportingOutcomeIds": [],
+      "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation"
+      ],
       "adHocElements": [
         "circuitを単純cycleだけと同一視せず、二cycleが共有頂点を持つと合成closed trailが偶数になることまで使うと、数えられるvertex-disjoint cactusへ強く特徴付けられる。（再利用可能な見方: graphの全trail条件は、複数cycleを組み合わせた新しいtrailが作る禁止構造を調べ、block構造へ翻訳する。）"
       ],
@@ -246596,6 +247178,24 @@
         {
           "claimRef": {
             "problemId": "abc387-g",
+            "claimPath": "/typicalTechniques/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0",
+              "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc387-g",
             "claimPath": "/typicalTechniques/2",
             "evidenceIds": [
               "evidence-official-analysis"
@@ -246628,6 +247228,24 @@
             "tag-fps-composition-power-projection"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc387-g",
+            "claimPath": "/typicalTechniques/2",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0",
+              "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -246665,6 +247283,24 @@
             "tag-fps-composition-power-projection"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc387-g",
+            "claimPath": "/prerequisiteCandidates/1",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0",
+              "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -284275,7 +284911,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「power projection で f_0…f_{N-1} を列挙し、各手番 i の勝率を有理関数の分数マージで一括係数化する。」、解法への接続「D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。各 k の (w_k,r_k) から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。」、学習成果「多数人のすごろく勝率を、時刻方向の power projection と人方向の有理関数係数化で高速に一括計算できる。」を照合し、tag-fps-composition-power-projection / outcome-compose-series-and-project-powers をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「power projection で f_0…f_{N-1} を列挙し、各手番 i の勝率を有理関数の分数マージで一括係数化する。」、解法への接続「D と G=1+…+x^{N-1} に power projection を適用して f_n=[x^{N-1}]D^nG を得て g を差分化する。各 k の (w_k,r_k) から分数 w_k/(1-r_kx) を作り、積木状に分子分母をマージする。総分母の FPS inverse と分子を掛け、係数0…L-2を人1…L-1の答えにし、人Lは Σg_k f_k^{L-1} を直接求める。」、学習成果「多数人のすごろく勝率を、時刻方向の power projection と人方向の有理関数係数化で高速に一括計算できる。」を照合し、tag-fps-composition-power-projection / outcome-compose-series-and-project-powers をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-recursive-divide-and-conquer; 補助Outcome=outcome-divide-search-space-recursively; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-recursive-divide-and-conquer / outcome-divide-search-space-recursively を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -284285,6 +284921,7 @@
         "tag-generating-functions"
       ],
       "supportingTagIds": [
+        "tag-convolution",
         "tag-recursive-divide-and-conquer"
       ],
       "primaryOutcomeId": "outcome-compose-series-and-project-powers",
@@ -284293,6 +284930,7 @@
         "outcome-encode-counting-by-generating-function"
       ],
       "supportingOutcomeIds": [
+        "outcome-compute-convolution-or-correlation",
         "outcome-divide-search-space-recursively"
       ],
       "adHocElements": [
@@ -284316,6 +284954,24 @@
             "tag-fps-composition-power-projection"
           ],
           "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+        },
+        {
+          "claimRef": {
+            "problemId": "abc439-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-official-analysis"
+            ],
+            "sourceRevisionIds": [
+              "source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c",
+              "source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"
+            ]
+          },
+          "kind": "supporting",
+          "tagIds": [
+            "tag-convolution"
+          ],
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -284367,6 +285023,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-recursive-divide-and-conquer"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
@@ -284405,6 +285062,7 @@
           },
           "kind": "supporting",
           "tagIds": [
+            "tag-convolution",
             "tag-recursive-divide-and-conquer"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
@@ -296646,20 +297304,20 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「mの実現可能性を二分探索し、dp[x]=各日終了時にx人残る最大medalを、一次関数加算・負区間切捨て・傾きC_iでの左側closureとしてslope trickの折れ線dequeで更新する。」、解法への接続「feasible(m)をdp[0][m]=0の一点折れ線で初期化する。各日、global切片・傾きへA_i,-B_iを加え、左右端を値0との交点までtrimし、C_iに基づき左側の傾きstackをpop/extendする。最後にx=0がdomain内ならtrueとし、mを整数二分探索する。」、学習成果「最大脱出人数を、単調二分探索とconcave折れ線DPの線形判定で制約内に求められる。」を照合し、tag-monotone-threshold-search / outcome-prove-and-search-threshold をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-slope-trick; 補助Outcome=outcome-maintain-piecewise-linear-convex-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-slope-trick / outcome-maintain-piecewise-linear-convex-function を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「mの実現可能性を二分探索し、dp[x]=各日終了時にx人残る最大medalを、一次関数加算・負区間切捨て・傾きC_iでの左側closureとしてslope trickの折れ線dequeで更新する。」、解法への接続「feasible(m)をdp[0][m]=0の一点折れ線で初期化する。各日、global切片・傾きへA_i,-B_iを加え、左右端を値0との交点までtrimし、C_iに基づき左側の傾きstackをpop/extendする。最後にx=0がdomain内ならtrueとし、mを整数二分探索する。」、学習成果「最大脱出人数を、単調二分探索とconcave折れ線DPの線形判定で制約内に求められる。」を照合し、tag-slope-trick / outcome-maintain-piecewise-linear-convex-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-monotone-threshold-search; 補助Outcome=outcome-prove-and-search-threshold; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-monotone-threshold-search / outcome-prove-and-search-threshold を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-monotone-threshold-search"
-      ],
-      "supportingTagIds": [
         "tag-slope-trick"
       ],
-      "primaryOutcomeId": "outcome-prove-and-search-threshold",
+      "supportingTagIds": [
+        "tag-monotone-threshold-search"
+      ],
+      "primaryOutcomeId": "outcome-maintain-piecewise-linear-convex-function",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-maintain-piecewise-linear-convex-function"
+        "outcome-prove-and-search-threshold"
       ],
       "adHocElements": [
         "人数dimensionのDPを配列として走査せず、関数形のconcavityとbreakpoint列そのものをstateにできる。（再利用可能な見方: 遷移式を値更新ではなくグラフへの一次関数加算・切断・傾き制約として幾何的に読むとslope trickが見える。）"
@@ -296677,11 +297335,11 @@
               "source-abc458-g-problem-daae3589eb6dc548e2acfaefe7b95b81cff1f2ffe69465dc271f2fccdfe38cae"
             ]
           },
-          "kind": "primary",
+          "kind": "supporting",
           "tagIds": [
             "tag-monotone-threshold-search"
           ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
+          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -296695,11 +297353,11 @@
               "source-abc458-g-problem-daae3589eb6dc548e2acfaefe7b95b81cff1f2ffe69465dc271f2fccdfe38cae"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
             "tag-slope-trick"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -296715,7 +297373,7 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-monotone-threshold-search"
+            "tag-slope-trick"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
         },
@@ -296733,7 +297391,7 @@
           },
           "kind": "supporting",
           "tagIds": [
-            "tag-slope-trick"
+            "tag-monotone-threshold-search"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -381907,8 +382565,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "dda839763c111f5b921c90aac3582150d43f914bf2b95b7f855bdd28a74a4e9c",
-      "subjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
+      "digest": "d5534393afb864a82c51c19291863e89a3c49f13bec2b844365496b18a8d769a",
+      "subjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
       "authorIds": [
         "person-maintainer"
       ],
@@ -381919,15 +382577,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "c05777120cd5d7341dace04d376737589680f700771b37a5385d39be12a7b96e",
-  "taxonomyDigest": "337a9c2c152a837c073df7c612fae225c588ac8c4ecd81d06f6f5987b99e6fa8",
-  "tagDagDigest": "881a2a7f2286ec6181218b6bdb53ce0fd29b5cda4956f767b2e84a86603c7404",
-  "learningUnitDagDigest": "266e0428c30669e4a8ad31470d917d67187d35468b5074fb9b35585c5eb760bf",
-  "placementDigest": "33569a5926a1fd8c8d038eabe551f9e71c59ee6c0ef4c4466426ab07f3be0cd8",
+  "taxonomySubjectDigest": "5ac5d9fabc56cfd51ca57ec3bf083b39cfe9bd69125d3643b139fd339517322e",
+  "taxonomyDigest": "b70002e97c0e1d27045d4f250a57910f0f7ecde3938734b9091d31c7556b78b7",
+  "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
+  "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30",
+  "placementDigest": "373c8c547cb49fb2520f587b1d29578e57b94bc142ed2cfd01f6158ea481fc9e",
   "correctionImpactDigest": "b2fcd8ee83013e31a4fd0f3c850812197bae27efc2e9130a37cd41c98931b877",
   "status": "accepted",
-  "acceptedAt": "2026-09-26T07:23:23.224Z",
+  "acceptedAt": "2026-09-26T09:22:46.808Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe"
+  "buildDigest": "a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8"
 }

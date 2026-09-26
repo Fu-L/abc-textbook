@@ -3,7 +3,7 @@ title: "反転数・重み付き接頭辞統計をFenwick Treeで保つ"
 description: "「反転数・重み付き接頭辞統計をFenwick Treeで保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 37
+  order: 38
 ---
 
 # 反転数・重み付き接頭辞統計をFenwick Treeで保つ
@@ -87,4 +87,4 @@ ABC296 Fでは、二列のmultisetが一致し、値がすべて異なる場合�
 - [ABC233 H 公式解説](https://atcoder.jp/contests/abc233/editorial/3168)
 - [ABC233 H 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-weighted-prefix-fenwick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-weighted-prefix-fenwick`

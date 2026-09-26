@@ -3,7 +3,7 @@ title: "凸包・支持方向・境界候補"
 description: "「凸包・支持方向・境界候補」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 219
+  order: 220
 ---
 
 # 凸包・支持方向・境界候補
@@ -56,4 +56,4 @@ sidebar:
 - [ABC275 G 公式解説](https://atcoder.jp/contests/abc275/editorial/5111)
 - [ABC275 G 公式問題文](https://atcoder.jp/contests/abc275/tasks/abc275_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-convex-boundary-hull`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-convex-boundary-hull`

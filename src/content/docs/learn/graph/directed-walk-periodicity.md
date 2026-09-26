@@ -3,7 +3,7 @@ title: "有向walkの周期・cycle差分gcd"
 description: "「有向walkの周期・cycle差分gcd」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 99
+  order: 100
 ---
 
 # 有向walkの周期・cycle差分gcd
@@ -47,4 +47,4 @@ gcd不変量・差分構造・SCC・縮約DAG・トポロジカル順序で得�
 - [ABC306 G 公式解説](https://atcoder.jp/contests/abc306/editorial/6602)
 - [ABC306 G 公式問題文](https://atcoder.jp/contests/abc306/tasks/abc306_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-directed-walk-periodicity`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-directed-walk-periodicity`

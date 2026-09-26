@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T159-final-taxonomy",
   "taskId": "T159",
-  "scopeDigest": "990b20a798a828e50fb1a9de556f4c01f77b31b690cb126fd69953bc550d5cad",
-  "digest": "3c5430a7a6b0b2f2c52e05c2080bd4fe987653507312e3103fba6531b32d0b1b",
+  "scopeDigest": "a4bef34dfa3f6dc14a2d9071a5d38f31b9f0c11b4abb8b203afeacece404ac43",
+  "digest": "0c9c668f1f36c3b154cfc271325e73a11da26cfebb958563855926094ea9ad75",
   "changeKind": "mixed",
   "requiredRequirementIds": [
     "FR-007",
@@ -236,6 +236,7 @@
     "outcome-solve-steiner-tree-by-subset-dp",
     "outcome-solve-stochastic-recurrence",
     "outcome-solve-weighted-bipartite-matching",
+    "outcome-solve-xor-threshold-matching",
     "outcome-split-enumeration-space",
     "outcome-stabilize-unbounded-knapsack-by-best-density",
     "outcome-subtract-exception-transitions",
@@ -506,6 +507,7 @@
         "outcome-solve-steiner-tree-by-subset-dp",
         "outcome-solve-stochastic-recurrence",
         "outcome-solve-weighted-bipartite-matching",
+        "outcome-solve-xor-threshold-matching",
         "outcome-split-enumeration-space",
         "outcome-stabilize-unbounded-knapsack-by-best-density",
         "outcome-subtract-exception-transitions",
@@ -543,5 +545,5 @@
   "maintenanceBenefit": "A single digest-bound taxonomy acceptance unit keeps every full-corpus placement, preview decision, correction impact, and downstream T047-T050 materialization synchronized.",
   "state": "planned",
   "createdAt": "2026-08-08T09:00:00+09:00",
-  "updatedAt": "2026-09-26T07:09:46.642Z"
+  "updatedAt": "2026-09-26T08:52:13.142Z"
 }

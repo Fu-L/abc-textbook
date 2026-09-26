@@ -3,7 +3,7 @@ title: "木DP・集約・rerooting"
 description: "「木DP・集約・rerooting」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 138
+  order: 139
 ---
 
 # 木DP・集約・rerooting
@@ -64,4 +64,4 @@ sidebar:
 - [ABC239 E 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_e)
 - [ABC239 E 公式解説](https://atcoder.jp/contests/abc239/editorial/3385)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-tree-aggregation`

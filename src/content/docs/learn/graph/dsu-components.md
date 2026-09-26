@@ -3,7 +3,7 @@ title: "DSUによる連結成分管理・縮約"
 description: "「DSUによる連結成分管理・縮約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 105
+  order: 106
 ---
 
 # DSUによる連結成分管理・縮約
@@ -94,4 +94,4 @@ sidebar:
 - [ABC233 F 公式解説](https://atcoder.jp/contests/abc233/editorial/3164)
 - [ABC233 F 公式問題文](https://atcoder.jp/contests/abc233/tasks/abc233_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-dsu-components`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-dsu-components`

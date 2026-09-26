@@ -3,7 +3,7 @@ title: "大容量unbounded knapsackのeventual linearity"
 description: "「大容量unbounded knapsackのeventual linearity」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 70
 ---
 
 # 大容量unbounded knapsackのeventual linearity
@@ -54,4 +54,4 @@ ABC415 Gの容量固定で価値を最大化する形式に対し、ABC310 Exは
 - [ABC415 G 公式解説](https://atcoder.jp/contests/abc415/editorial/13491)
 - [ABC415 G 公式問題文](https://atcoder.jp/contests/abc415/tasks/abc415_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-eventual-unbounded-knapsack`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-eventual-unbounded-knapsack`

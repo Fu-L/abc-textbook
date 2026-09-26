@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe",
-    "acceptedAt": "2026-09-26T07:23:23.224Z"
+    "digest": "a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8",
+    "acceptedAt": "2026-09-26T09:22:46.808Z"
   },
   "taskIds": [
     "T047",
@@ -41,12 +41,12 @@
     "T050"
   ],
   "counts": {
-    "tags": 207,
-    "learningOutcomes": 234,
-    "learningUnits": 230,
-    "learningDocuments": 230,
-    "directlyOwnedTags": 207,
-    "directlyOwnedLearningOutcomes": 234,
+    "tags": 208,
+    "learningOutcomes": 235,
+    "learningUnits": 231,
+    "learningDocuments": 231,
+    "directlyOwnedTags": 208,
+    "directlyOwnedLearningOutcomes": 235,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "552772987206f1d7a5c20b1bd908d80019c009d2828f14ad6a35d8f4e18183f4",
-    "learningOutcomes": "08feba0ade72e692844b04702308466c3af7b6d5fc6c0eb733be142330b67bc2",
-    "learningUnits": "0143c732ce5c703db3d003311b952229e3d2150d28cd69b71b78024250420059",
-    "learningDocuments": "ade298d8a52e5dcc4a776c60ea06009a718cb26b8decaf083845eec1f2330e97",
-    "learningPrerequisitesDigest": "32b898701eac1768acc60bd348bc64a5f87dd12b28e96e7d684ed758eb1d1614",
-    "problemPlacementPolicyDigest": "78ef07931cd7405cba8fc7836133a29c0aed81a4962841a572384b09b4158aeb"
+    "tags": "72e41f22a44d4f6252816edcb6986ba17bd0d70a20d1dfed3e23e2c273981acf",
+    "learningOutcomes": "732371007ffba52b349879576c2a4cea8bb6c82494480fe25f83efc2b6af826b",
+    "learningUnits": "b389c519b45d4ad1da244813898acebff6e9381b7af9bcbd83e91557b5f03ff7",
+    "learningDocuments": "bac966f393aaa2591e0e68be077660a80766d751308e02594337fbadf9138b0a",
+    "learningPrerequisitesDigest": "ee682bda20b81e54f12661a32ed01c634873d23a3aac943e5405ee156dbb2de3",
+    "problemPlacementPolicyDigest": "8aa4ec630ac0acc6098bf8540c59b274c42fdb72c8661534952bf42c073be06c"
   },
-  "materializationDigest": "e08abe00f94c2c0135ff8ffed86305d34e943207c739e1bacc537b8eecd5f1bf"
+  "materializationDigest": "1fa1def68225857d20245fb923716f69b0993f7eacf974e7672b33ec4ca64c00"
 }

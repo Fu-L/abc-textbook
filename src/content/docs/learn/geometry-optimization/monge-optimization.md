@@ -3,7 +3,7 @@ title: "Monge・monotone minima最適化"
 description: "「Monge・monotone minima最適化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 228
+  order: 229
 ---
 
 # Monge・monotone minima最適化
@@ -67,4 +67,4 @@ DP遷移の集約・高速化で得た考え方と実装を再利用し、Monge�
 - [ABC355 G 公式解説](https://atcoder.jp/contests/abc355/editorial/10078)
 - [ABC355 G 公式問題文](https://atcoder.jp/contests/abc355/tasks/abc355_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-monge-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-monge-optimization`

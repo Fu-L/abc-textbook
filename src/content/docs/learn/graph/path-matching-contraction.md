@@ -3,7 +3,7 @@ title: "path matchingのheap縮約greedy"
 description: "「path matchingのheap縮約greedy」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 126
+  order: 127
 ---
 
 # path matchingのheap縮約greedy
@@ -54,4 +54,4 @@ path matchingの交互構造を使い、最小edgeの採用後も残りの全car
 - [ABC464 G 公式解説](https://atcoder.jp/contests/abc464/editorial/22263)
 - [ABC464 G 公式問題文](https://atcoder.jp/contests/abc464/tasks/abc464_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-path-matching-contraction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-path-matching-contraction`

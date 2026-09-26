@@ -42,7 +42,6 @@
     "abc293-ex",
     "abc300-f",
     "abc303-f",
-    "abc304-g",
     "abc330-f",
     "abc373-e",
     "abc374-e",
@@ -50,8 +49,7 @@
     "abc388-g",
     "abc395-f",
     "abc424-e",
-    "abc444-f",
-    "abc458-g"
+    "abc444-f"
   ],
   "directProblemIds": [
     "abc267-e",
@@ -70,14 +68,13 @@
     "abc444-f",
     "abc229-g",
     "abc246-g",
-    "abc304-g",
     "abc388-g",
-    "abc458-g",
     "abc263-ex",
     "abc293-ex"
   ],
   "relatedProblemIds": [
     "abc216-e",
+    "abc304-g",
     "abc320-g",
     "abc324-f",
     "abc346-f",
@@ -89,7 +86,8 @@
     "abc401-g",
     "abc402-f",
     "abc427-g",
-    "abc428-f"
+    "abc428-f",
+    "abc458-g"
   ],
   "examples": [],
   "exercises": [],

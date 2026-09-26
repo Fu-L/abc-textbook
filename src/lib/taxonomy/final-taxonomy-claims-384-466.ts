@@ -2376,15 +2376,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc458-g': decision(
-    'outcome-prove-and-search-threshold',
+    'outcome-maintain-piecewise-linear-convex-function',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-monotone-threshold-search'],
-      ['typicalTechniques', 1, 'supporting', 'tag-discrete-convex-marginal'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-monotone-threshold-search'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-discrete-convex-marginal'],
+      ['typicalTechniques', 0, 'supporting', 'tag-monotone-threshold-search'],
+      ['typicalTechniques', 1, 'primary', 'tag-slope-trick'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-slope-trick'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-monotone-threshold-search'],
     ],
     {
-      'tag-discrete-convex-marginal': ['outcome-exploit-convexity'],
+      'tag-monotone-threshold-search': ['outcome-prove-and-search-threshold'],
     },
   ),
   'abc459-e': decision(

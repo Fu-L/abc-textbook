@@ -3,7 +3,7 @@ title: "SWAG・two-stack queue aggregation"
 description: "「SWAG・two-stack queue aggregation」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 42
+  order: 43
 ---
 
 # SWAG・two-stack queue aggregation
@@ -47,4 +47,4 @@ queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってp
 - [ABC456 F 公式解説](https://atcoder.jp/contests/abc456/editorial/19850)
 - [ABC456 F 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-swag`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-swag`

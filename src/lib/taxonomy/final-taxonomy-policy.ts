@@ -281,6 +281,10 @@ interface LearningUnitSeed {
 }
 
 const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
+  'unit-xor-threshold-matching': [
+    '二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。',
+    '一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。',
+  ],
   'unit-monotone-search': [
     '連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。',
   ],
@@ -890,6 +894,8 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
 ];
 
 const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
+  'unit-xor-threshold-matching':
+    '固定したXOR閾値でpair可能数を最大化する問題を、bitごとの同一集合内matchingと二集合間matchingへ分ける。閾値bitによる確定pairと下位bitへ残すpairを区別し、再帰式が最大数を保つ理由を証明する。',
   'unit-chapter-modeling':
     '問題文の操作を再利用可能な対象・不変量へ言い換え、探索・貪欲・分割手法を選ぶ共通の視点を最初に作る。',
   'unit-chapter-dynamic-programming':
@@ -3522,6 +3528,23 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     priority: 90,
   },
   {
+    id: 'tag-xor-threshold-matching',
+    name: 'XOR閾値matchingのbit分割再帰',
+    definition:
+      '固定閾値xに対し、XORがx以上となる最大pair数を求める。最上位bitで集合を分け、閾値bitが0なら確定できるcross pairを最大化し、1ならcross pairだけを残し、同一集合内と二集合間の再帰値を合成する。',
+    parentId: 'tag-model-reduction',
+    prerequisiteTagIds: ['tag-recursive-divide-and-conquer'],
+    outcomeIds: ['outcome-solve-xor-threshold-matching'],
+    unitIds: ['unit-xor-threshold-matching'],
+    recall: ['XOR threshold matching', 'XOR閾値matching', 'xor >= x の最大pair数'],
+    object: ['整数集合', 'pair', 'XOR閾値', '最大matching数'],
+    trigger: ['XORが閾値以上', 'medianの可否', 'pair可能数の最大化'],
+    invariant: ['最上位の異なるbit', '確定cross pair', '下位bitへ残すpair'],
+    goal: ['閾値を満たす最大pair数', 'matching feasibility'],
+    exclude: ['XOR minimax', '上位bitからmaskを固定するfeasibility greedy'],
+    priority: 93,
+  },
+  {
     id: 'tag-tree-model-structure',
     name: '木モデルと構造',
     definition: '木固有の根・部分木・path・separator構造へ問題を写し、利用する性質を選ぶ。',
@@ -5712,6 +5735,7 @@ const REFINED_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly s
   'tag-heavy-light-recursive-dp': ['abc311-ex'],
   'tag-stern-brocot-ancestry': ['abc273-ex'],
   'tag-bitwise-minimax-partition': ['abc281-f'],
+  'tag-xor-threshold-matching': ['abc304-g'],
   'tag-tree-model-structure': ['abc220-f', 'abc239-e'],
   'tag-number-theory-structure': ['abc222-g', 'abc254-f'],
   'tag-combinatorics-algebra-structure': ['abc230-h', 'abc276-ex'],
@@ -5946,6 +5970,8 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
   'outcome-transform-to-math-structure': '条件を整数・代数・数え上げ・幾何の構造へ変換できる。',
   'outcome-prove-and-search-threshold':
     '判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。',
+  'outcome-solve-xor-threshold-matching':
+    '整数集合を上位bitで分け、XORが固定閾値以上となる最大pair数を、同一集合内と二集合間の再帰関数へ分解して正しく合成できる。閾値bitごとのcross pairの確定条件と最大性を証明できる。',
   'outcome-maintain-monotone-window':
     '一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。',
   'outcome-linearize-events':
@@ -6260,6 +6286,7 @@ const OUTCOME_PREREQUISITE_IDS: Readonly<Record<string, readonly string[]>> = {
     'outcome-reduce-integer-structure-by-gcd',
   ],
   'outcome-optimize-ratio-by-parametric-search': ['outcome-prove-and-search-threshold'],
+  'outcome-solve-xor-threshold-matching': ['outcome-divide-search-space-recursively'],
   'outcome-maintain-order-through-crossing-events': ['outcome-linearize-events'],
   'outcome-optimize-tree-order-by-cluster-contraction': [
     'outcome-augment-components-with-metadata',
@@ -6298,6 +6325,7 @@ const OUTCOME_LEARNING_UNIT_IDS: Readonly<Record<string, readonly string[]>> = {
   'outcome-compute-convolution-or-correlation': ['unit-polynomial-convolution'],
   'outcome-encode-counting-by-generating-function': ['unit-generating-functions'],
   'outcome-apply-formal-power-series-operations': ['unit-formal-power-series'],
+  'outcome-solve-xor-threshold-matching': ['unit-xor-threshold-matching'],
 };
 
 export const FINAL_TAXONOMY_OUTCOMES: readonly ObservableOutcomePolicy[] =
@@ -6409,6 +6437,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-sum-piecewise-linear-integer-ranges',
   'outcome-map-graph-cycle-xor-to-span',
   'outcome-minimize-xor-coset-representative',
+  'outcome-solve-xor-threshold-matching',
 ];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-expectation-potential',
@@ -6461,6 +6490,7 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-tree-precedence-contraction',
   'unit-virtual-tree',
   'unit-weighted-bipartite-matching',
+  'unit-xor-threshold-matching',
 ];
 export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-additive-expectation-potential',
@@ -6469,6 +6499,7 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-heavy-light-recursive-dp',
   'tag-stern-brocot-ancestry',
   'tag-bitwise-minimax-partition',
+  'tag-xor-threshold-matching',
   'tag-additive-tree-metric-reconstruction',
   'tag-directional-grid-effect-scan',
   'tag-laminar-interval-containment-tree',
@@ -6592,6 +6623,7 @@ const LEGACY_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
 };
 
 const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
+  'unit-xor-threshold-matching': 'unit-divide-enumeration',
   'unit-dp-sequence': 'unit-dp-sequence-interval',
   'unit-dp-prefix-partition': 'unit-dp-sequence-interval',
   'unit-dp-interval-composition': 'unit-dp-sequence-interval',
@@ -7939,10 +7971,8 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
       'abc250-g',
       'abc252-f',
       'abc297-e',
-      'abc304-ex',
       'abc305-e',
       'abc307-f',
-      'abc308-f',
       'abc319-f',
       'abc320-e',
       'abc331-e',
@@ -8009,7 +8039,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-exploit-convexity',
     to: 'outcome-maintain-piecewise-linear-convex-function',
-    problemIds: ['abc217-h', 'abc250-g', 'abc275-ex', 'abc406-g', 'abc458-g'],
+    problemIds: ['abc217-h', 'abc250-g', 'abc275-ex', 'abc406-g'],
   },
   {
     from: 'outcome-exploit-convexity',
@@ -8118,7 +8148,7 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-condense-and-order-directed-graph',
     to: 'outcome-process-dag-in-topological-order',
-    problemIds: ['abc277-f', 'abc291-e', 'abc304-ex', 'abc315-e'],
+    problemIds: ['abc277-f', 'abc291-e', 'abc315-e'],
   },
   {
     from: 'outcome-condense-and-order-directed-graph',

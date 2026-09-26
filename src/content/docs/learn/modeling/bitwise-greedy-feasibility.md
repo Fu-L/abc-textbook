@@ -3,7 +3,7 @@ title: "bitwise greedyによるmask最適化"
 description: "「bitwise greedyによるmask最適化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 10
+  order: 11
 ---
 
 # bitwise greedyによるmask最適化
@@ -47,4 +47,4 @@ sidebar:
 - [ABC408 E 公式問題文](https://atcoder.jp/contests/abc408/tasks/abc408_e)
 - [ABC408 E 公式解説](https://atcoder.jp/contests/abc408/editorial/13159)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-bitwise-greedy-feasibility`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-bitwise-greedy-feasibility`

@@ -40,6 +40,11 @@
       "tagId": "tag-two-pointers-window",
       "type": "contrast",
       "rationale": "どちらも単調性を使うが、値域の真偽境界を探す方法と連続区間の端を一方向へ進める方法を区別する。"
+    },
+    {
+      "tagId": "tag-xor-threshold-matching",
+      "type": "often_combined",
+      "rationale": "固定XOR閾値での最大matching数をbit再帰で判定し、その成立数が閾値に対して単調な場合に外側の二分探索と組み合わせる。"
     }
   ],
   "learningOutcomeIds": [

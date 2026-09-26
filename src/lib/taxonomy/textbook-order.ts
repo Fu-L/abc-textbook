@@ -15,6 +15,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-backtracking-search',
       'unit-divide-enumeration',
       'unit-recursive-divide-and-conquer',
+      'unit-xor-threshold-matching',
       'unit-meet-in-the-middle',
       'unit-greedy-exchange',
       'unit-bitwise-greedy-feasibility',

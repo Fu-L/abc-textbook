@@ -33,17 +33,16 @@
   "problemIds": [
     "abc277-f",
     "abc291-e",
-    "abc304-ex",
     "abc315-e"
   ],
   "directProblemIds": [
     "abc291-e",
     "abc315-e",
-    "abc277-f",
-    "abc304-ex"
+    "abc277-f"
   ],
   "relatedProblemIds": [
     "abc224-e",
+    "abc304-ex",
     "abc306-ex",
     "abc324-f",
     "abc335-e",

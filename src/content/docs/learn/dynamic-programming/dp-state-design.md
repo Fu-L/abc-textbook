@@ -3,7 +3,7 @@ title: "最小十分状態からDPを設計する"
 description: "「最小十分状態からDPを設計する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 59
+  order: 60
 ---
 
 # 最小十分状態からDPを設計する
@@ -112,4 +112,4 @@ ABC251 Eでは最初の品物を選ぶかどうかを固定して円環を列DP�
 - [ABC227 E 公式問題文](https://atcoder.jp/contests/abc227/tasks/abc227_e)
 - [ABC227 E 公式解説](https://atcoder.jp/contests/abc227/editorial/2908)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-dp-state-design`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-dp-state-design`

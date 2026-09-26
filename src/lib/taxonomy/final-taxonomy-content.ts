@@ -12,6 +12,7 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
   'tag-heavy-light-recursive-dp': ['HLRecDP', 'heavy light recursive DP'],
   'tag-stern-brocot-ancestry': ['Stern Brocot ancestor', 'mediant', '連分数経路'],
   'tag-bitwise-minimax-partition': ['XOR minimax', 'bitwise partition'],
+  'tag-xor-threshold-matching': ['XOR閾値matching', 'XOR threshold matching'],
   'tag-amortized-heavy-light': [
     '償却解析',
     '平方根分割',
@@ -713,6 +714,7 @@ export const FINAL_TAG_FORMER_NAMES: Readonly<Record<string, readonly string[]>>
 };
 
 export const FINAL_TAG_REPRESENTATIVE_PROBLEM_IDS: Readonly<Record<string, readonly string[]>> = {
+  'tag-xor-threshold-matching': ['abc304-g'],
   'tag-dp-prefix-partition': ['abc285-e', 'abc288-f'],
   'tag-dp-interval-expansion': ['abc273-f', 'abc219-h'],
   'tag-lis-state': ['abc439-e', 'abc393-f', 'abc369-f', 'abc457-g'],
@@ -838,6 +840,20 @@ export interface FinalTagRelationSeed {
 
 /** Peer relations are materialized in both directions for direct use from either Tag page. */
 export const FINAL_TAG_SYMMETRIC_RELATION_SEEDS: readonly FinalTagRelationSeed[] = [
+  {
+    sourceTagId: 'tag-xor-threshold-matching',
+    targetTagId: 'tag-bitwise-minimax-partition',
+    type: 'contrast',
+    rationale:
+      'XOR閾値を満たすpairの最大matching数をbit再帰で求める判定器と、共通maskを選んで全pairの最大XORを最小化する再帰を区別する。',
+  },
+  {
+    sourceTagId: 'tag-xor-threshold-matching',
+    targetTagId: 'tag-monotone-threshold-search',
+    type: 'often_combined',
+    rationale:
+      '固定XOR閾値での最大matching数をbit再帰で判定し、その成立数が閾値に対して単調な場合に外側の二分探索と組み合わせる。',
+  },
   {
     sourceTagId: 'tag-mo-offline-range',
     targetTagId: 'tag-value-bucket-aggregation',

@@ -3,7 +3,7 @@ title: "一次元凸・単峰最適化"
 description: "「一次元凸・単峰最適化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 223
+  order: 224
 ---
 
 # 一次元凸・単峰最適化
@@ -63,4 +63,4 @@ sidebar:
 - [ABC240 F 公式解説](https://atcoder.jp/contests/abc240/editorial/3422)
 - [ABC240 F 公式問題文](https://atcoder.jp/contests/abc240/tasks/abc240_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-basic-convex-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-basic-convex-optimization`

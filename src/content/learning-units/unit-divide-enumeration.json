@@ -18,11 +18,13 @@
   ],
   "tagIds": [
     "tag-meet-in-the-middle",
-    "tag-recursive-divide-and-conquer"
+    "tag-recursive-divide-and-conquer",
+    "tag-xor-threshold-matching"
   ],
   "ownedTagIds": [],
   "learningOutcomeIds": [
     "outcome-divide-search-space-recursively",
+    "outcome-solve-xor-threshold-matching",
     "outcome-split-enumeration-space"
   ],
   "ownedLearningOutcomeIds": [],
@@ -34,6 +36,7 @@
     "abc271-f",
     "abc282-ex",
     "abc300-g",
+    "abc304-g",
     "abc326-f",
     "abc336-f",
     "abc402-f",
@@ -53,7 +56,6 @@
     "abc272-ex",
     "abc273-ex",
     "abc281-ex",
-    "abc304-g",
     "abc317-ex",
     "abc331-g",
     "abc345-g",

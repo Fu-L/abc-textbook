@@ -3,7 +3,7 @@ title: "二部matching・Hall・Kőnig"
 description: "「二部matching・Hall・Kőnig」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 120
+  order: 121
 ---
 
 # 二部matching・Hall・Kőnig
@@ -75,4 +75,4 @@ ABC215 Hでは品種集合Sの在庫総数をf(S)、許可品種がすべてSに
 - [ABC274 G 公式解説](https://atcoder.jp/contests/abc274/editorial/5024)
 - [ABC274 G 公式問題文](https://atcoder.jp/contests/abc274/tasks/abc274_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f0eec02dfa63f231848b86a0ef7f12f402ae50d89fbdbe50631d1be7cf3483fe` / LearningUnit `unit-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `a83767c84a9cb372c1228a1849ba7ad25ea0b926c3443a52e846b4230fa86ee8` / LearningUnit `unit-bipartite-matching`

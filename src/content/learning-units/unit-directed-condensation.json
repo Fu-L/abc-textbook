@@ -39,7 +39,6 @@
     "abc277-ex",
     "abc277-f",
     "abc291-e",
-    "abc304-ex",
     "abc306-g",
     "abc315-e",
     "abc456-e"
@@ -48,6 +47,7 @@
   "relatedProblemIds": [
     "abc214-h",
     "abc224-e",
+    "abc304-ex",
     "abc306-ex",
     "abc324-f",
     "abc335-e",
