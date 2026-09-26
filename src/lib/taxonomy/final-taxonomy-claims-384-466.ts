@@ -2423,18 +2423,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-monotone-stack-queue'],
   ]),
   'abc459-g': decision(
-    'outcome-characterize-integer-solvability',
+    'outcome-optimize-two-variable-convex-lattice-function',
     [
       ['typicalTechniques', 0, 'primary', 'tag-gcd-diophantine'],
-      ['typicalTechniques', 1, 'supporting', 'tag-discrete-convex-marginal'],
+      ['typicalTechniques', 1, 'primary', 'tag-two-variable-convex-lattice-optimization'],
       ['typicalTechniques', 1, 'supporting', 'tag-bounded-enumeration'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-gcd-diophantine'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-discrete-convex-marginal'],
     ],
     {
       'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
-      'tag-discrete-convex-marginal': ['outcome-exploit-convexity'],
     },
+    ['outcome-characterize-integer-solvability'],
   ),
   'abc460-e': decision(
     'outcome-solve-modular-constraints',
@@ -2592,16 +2591,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
   'abc464-g': decision(
     'outcome-maintain-dynamic-order-statistics',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-prefix-difference'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'primary', 'tag-ordered-set-heap'],
       ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-ordered-set-heap'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-greedy-exchange-order'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-prefix-difference'],
     ],
     {
       'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
-      'tag-prefix-difference': ['outcome-linearize-static-range-information'],
     },
   ),
   'abc465-e': decision('outcome-count-prefix-constrained-objects', [

@@ -1,0 +1,10 @@
+{
+  "id": "outcome-optimize-two-variable-convex-lattice-function",
+  "statement": "二変数の凸区分線形目的について折れ目直線の交点で連続最小候補を求め、定数距離内に整数最適点があることを証明して有限個の近傍格子点だけを評価できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc459-g",
+    "tag-two-variable-convex-lattice-optimization",
+    "unit-two-variable-convex-lattice-optimization"
+  ]
+}

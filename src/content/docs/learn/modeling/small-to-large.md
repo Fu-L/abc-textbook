@@ -66,4 +66,4 @@ ABC324 Gの分割は、分割前の各要素が一方だけに属し、小さい
 - [ABC324 G 公式解説](https://atcoder.jp/contests/abc324/editorial/7399)
 - [ABC324 G 公式問題文](https://atcoder.jp/contests/abc324/tasks/abc324_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-small-to-large`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-small-to-large`

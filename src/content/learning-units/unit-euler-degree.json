@@ -22,6 +22,7 @@
   ],
   "ownedTagIds": [],
   "learningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
     "outcome-construct-degree-parity-subgraph",
     "outcome-construct-euler-trail-or-circuit"
   ],

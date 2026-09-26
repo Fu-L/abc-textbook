@@ -505,6 +505,11 @@ export const FINAL_TAG_LEARNER_ALIASES: Readonly<Record<string, readonly string[
     'convex polygon containment',
   ],
   'tag-basic-convex-optimization': ['一次元凸最適化', 'ternary search', 'unimodal optimization'],
+  'tag-two-variable-convex-lattice-optimization': [
+    '二変数凸格子最適化',
+    '二変数区分線形凸最適化',
+    'two-variable convex lattice optimization',
+  ],
   'tag-slope-trick': ['Slope Trick', 'スロープトリック', 'piecewise-linear convex DP'],
   'tag-lagrangian-relaxation': ['ラグランジュ緩和', 'Aliens trick', 'Aliens DP'],
   'tag-monge-optimization': ['Monge最適化', 'SMAWK', 'monotone minima'],

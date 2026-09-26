@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a",
-    "acceptedAt": "2026-09-26T13:38:56.577Z"
+    "digest": "fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a",
+    "acceptedAt": "2026-09-26T17:58:52.033Z"
   },
   "decisionTable": {
     "path": "src/content/policies/problem-placement.json",
@@ -72146,7 +72146,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「非S edgeの連結成分をDSUで縮約し、S edgeで作るG'の奇数次数頂点数が0または2か判定する。」、解法への接続「Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。」、学習成果「指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。」を照合し、tag-euler-trail-circuit / outcome-construct-euler-trail-or-circuit をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「非S edgeの連結成分をDSUで縮約し、S edgeで作るG'の奇数次数頂点数が0または2か判定する。」、解法への接続「Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。」、学習成果「指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。」を照合し、tag-euler-trail-circuit / outcome-check-euler-trail-existence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -72156,7 +72156,7 @@
       "supportingTagIds": [
         "tag-dsu-components"
       ],
-      "primaryOutcomeId": "outcome-construct-euler-trail-or-circuit",
+      "primaryOutcomeId": "outcome-check-euler-trail-existence",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-maintain-connectivity-components"
@@ -80044,7 +80044,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「frontier mask DPとsubset zeta型遷移」、解法への接続「各行でdp[mask]を入力0/1/?制約に合わせて変換し、部分集合和を一回のzeta sweepで計算しつつ各prefix全1ケースを次maskへ加える。」、学習成果「条件を満たす0/1/?格子の完成方法数を求められる。」を照合し、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「frontier mask DPとsubset zeta型遷移」、解法への接続「各行でdp[mask]を入力0/1/?制約に合わせて変換し、部分集合和を一回のzeta sweepで計算しつつ各prefix全1ケースを次maskへ加える。」、学習成果「条件を満たす0/1/?格子の完成方法数を求められる。」を照合し、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-frontier-profile-dp; 補助Outcome=outcome-design-frontier-profile-dp; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-frontier-profile-dp / outcome-design-frontier-profile-dp を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -80052,12 +80052,12 @@
         "tag-subset-zeta-mobius-transform"
       ],
       "supportingTagIds": [
-        "tag-subset-bitmask-dp"
+        "tag-frontier-profile-dp"
       ],
       "primaryOutcomeId": "outcome-apply-subset-zeta-mobius-transform",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-enumerate-subset-state-space"
+        "outcome-design-frontier-profile-dp"
       ],
       "adHocElements": [
         "遷移をprefixの最初の0で一意分類することで、複数回の部分集合和を一回のzeta変換へ畳める。（再利用可能な見方: frontier遷移は重複しない境界イベントで分類する。）"
@@ -80075,27 +80075,9 @@
               "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-subset-zeta-mobius-transform"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc295-ex",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
-              "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
-            ]
-          },
           "kind": "supporting",
           "tagIds": [
-            "tag-subset-bitmask-dp"
+            "tag-frontier-profile-dp"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -80111,11 +80093,11 @@
               "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
             ]
           },
-          "kind": "same_tag",
+          "kind": "primary",
           "tagIds": [
             "tag-subset-zeta-mobius-transform"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -84223,7 +84205,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「submask和へ拡張したBostan–Mori」、解法への接続「K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛けて分母を偶次数へ圧縮し、N bitが0なら分子偶部、1なら偶部＋奇部を選び、最後の定数係数比を出す。」、学習成果「m AND N=mを満たす全mのK-bonacci項総和を求められる。」を照合し、tag-bostan-mori / outcome-extract-rational-series-coefficient をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-linear-recurrence-matrix; 補助Outcome=outcome-accelerate-fixed-linear-transition; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-linear-recurrence-matrix / outcome-accelerate-fixed-linear-transition を補助技能として使う。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「submask和へ拡張したBostan–Mori」、解法への接続「K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛けて分母を偶次数へ圧縮し、N bitが0なら分子偶部、1なら偶部＋奇部を選び、最後の定数係数比を出す。」、学習成果「m AND N=mを満たす全mのK-bonacci項総和を求められる。」を照合し、tag-bostan-mori / outcome-extract-rational-series-coefficient をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-linear-recurrence-matrix; 補助Outcome=outcome-accelerate-fixed-linear-transition; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-linear-recurrence-matrix / outcome-accelerate-fixed-linear-transition を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -84232,15 +84214,13 @@
       ],
       "supportingTagIds": [
         "tag-convolution",
-        "tag-linear-recurrence-matrix",
-        "tag-subset-bitmask-dp"
+        "tag-linear-recurrence-matrix"
       ],
       "primaryOutcomeId": "outcome-extract-rational-series-coefficient",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-accelerate-fixed-linear-transition",
-        "outcome-compute-convolution-or-correlation",
-        "outcome-enumerate-subset-state-space"
+        "outcome-compute-convolution-or-correlation"
       ],
       "adHocElements": [
         "単一係数を選ぶBostan–Moriの分岐を線形結合に替えるだけで、全submask係数和を同じ有理式更新で扱える。（再利用可能な見方: 係数index集合がbitごとの正則言語ならdigit抽出作用素を母関数へ作用させる。）"
@@ -84279,24 +84259,6 @@
           "kind": "supporting",
           "tagIds": [
             "tag-convolution"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc300-ex",
-            "claimPath": "/typicalTechniques/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f",
-              "source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-subset-bitmask-dp"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -116240,7 +116202,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「8頂点多重有向graphのEuler trailをBEST定理と有向行列木定理で数える」、解法への接続「各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。」、学習成果「指定された全16種類の長さ4 substring出現回数を持つbinary列の個数をmod 998244353で求められる。」を照合し、tag-euler-circuit-counting / outcome-count-euler-circuits-by-best をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-determinant-counting; 補助Outcome=outcome-count-combinatorial-objects-by-determinant; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-determinant-counting / outcome-count-combinatorial-objects-by-determinant を補助技能として使う。; 補助Tag=tag-euler-trail-circuit; 補助Outcome=outcome-construct-euler-trail-or-circuit; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-euler-trail-circuit / outcome-construct-euler-trail-or-circuit を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「8頂点多重有向graphのEuler trailをBEST定理と有向行列木定理で数える」、解法への接続「各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。」、学習成果「指定された全16種類の長さ4 substring出現回数を持つbinary列の個数をmod 998244353で求められる。」を照合し、tag-euler-circuit-counting / outcome-count-euler-circuits-by-best をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-determinant-counting; 補助Outcome=outcome-count-combinatorial-objects-by-determinant; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-determinant-counting / outcome-count-combinatorial-objects-by-determinant を補助技能として使う。; 補助Tag=tag-euler-trail-circuit; 補助Outcome=outcome-check-euler-trail-existence; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-euler-trail-circuit / outcome-check-euler-trail-existence を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -116256,8 +116218,8 @@
       "primaryOutcomeId": "outcome-count-euler-circuits-by-best",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-check-euler-trail-existence",
         "outcome-compute-in-modular-arithmetic",
-        "outcome-construct-euler-trail-or-circuit",
         "outcome-count-combinatorial-objects-by-determinant",
         "outcome-formulate-combinatorial-coefficients"
       ],
@@ -202218,22 +202180,23 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「四通りのparityを列挙し、extended Euclidで全整数解をparameter n,mで表す。得られる凸piecewise-linear関数の実数最小候補交点を求め、その周囲定数格子点を評価する。」、解法への接続「gcdでscaleを除き到達可否を確認する。c1,c2∈{0,1}ごとに二座標方程式をextgcdでparameter化し、目的f(n,m)を作る。折れ目直線pair全ての交点を有理数で求め、floor座標±2を評価して最小値を返す。」、学習成果「巨大座標への一般化knight最短移動を、gcd・parity・凸関数の定数候補探索で対数時間に解ける。」を照合し、tag-bezout-diophantine / outcome-characterize-integer-solvability をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-basic-convex-optimization; 補助Outcome=outcome-optimize-univariate-convex-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-basic-convex-optimization / outcome-optimize-univariate-convex-function を補助技能として使う。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「四通りのparityを列挙し、extended Euclidで全整数解をparameter n,mで表す。得られる凸piecewise-linear関数の実数最小候補交点を求め、その周囲定数格子点を評価する。」、解法への接続「gcdでscaleを除き到達可否を確認する。c1,c2∈{0,1}ごとに二座標方程式をextgcdでparameter化し、目的f(n,m)を作る。折れ目直線pair全ての交点を有理数で求め、floor座標±2を評価して最小値を返す。」、学習成果「巨大座標への一般化knight最短移動を、gcd・parity・凸関数の定数候補探索で対数時間に解ける。」を照合し、tag-two-variable-convex-lattice-optimization / outcome-optimize-two-variable-convex-lattice-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bezout-diophantine"
+        "tag-bezout-diophantine",
+        "tag-two-variable-convex-lattice-optimization"
       ],
       "supportingTagIds": [
-        "tag-basic-convex-optimization",
         "tag-bounded-enumeration"
       ],
-      "primaryOutcomeId": "outcome-characterize-integer-solvability",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-optimize-two-variable-convex-lattice-function",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
       "supportingOutcomeIds": [
-        "outcome-enumerate-bounded-candidates-or-cases",
-        "outcome-optimize-univariate-convex-function"
+        "outcome-enumerate-bounded-candidates-or-cases"
       ],
       "adHocElements": [
         "巨大格子最短路も、move符号回数のparityと一次方程式へ変えると二変数凸最適化になる。（再利用可能な見方: 整数凸最適化では全範囲を探さず、実数optimumの構造と近傍保証を証明して局所探索する。）"
@@ -202269,11 +202232,11 @@
               "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
-            "tag-basic-convex-optimization"
+            "tag-two-variable-convex-lattice-optimization"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -202307,27 +202270,10 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-bezout-diophantine"
+            "tag-bezout-diophantine",
+            "tag-two-variable-convex-lattice-optimization"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc459-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
-              "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-basic-convex-optimization"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -205596,7 +205542,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「0位置列の隣接距離Dを作り、隣接edgeを共有しないmatchingから所定個数を選ぶ最小重み問題を、最小edge貪欲と連結list更新 D_{l}+D_{r}-D_i で順に解く。」、解法への接続「固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。」、学習成果「RS遷移増加の最小flip回数を、境界01列の0 matchingとheap contractionで O(N log N) に求められる。」を照合し、tag-path-matching-contraction / outcome-optimize-path-matching-by-contraction をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。; 補助Tag=tag-prefix-difference; 補助Outcome=outcome-linearize-static-range-information; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-prefix-difference / outcome-linearize-static-range-information を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「0位置列の隣接距離Dを作り、隣接edgeを共有しないmatchingから所定個数を選ぶ最小重み問題を、最小edge貪欲と連結list更新 D_{l}+D_{r}-D_i で順に解く。」、解法への接続「固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。」、学習成果「RS遷移増加の最小flip回数を、境界01列の0 matchingとheap contractionで O(N log N) に求められる。」を照合し、tag-path-matching-contraction / outcome-optimize-path-matching-by-contraction をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -205604,13 +205550,11 @@
         "tag-path-matching-contraction"
       ],
       "supportingTagIds": [
-        "tag-greedy-exchange-order",
-        "tag-prefix-difference"
+        "tag-greedy-exchange-order"
       ],
       "primaryOutcomeId": "outcome-optimize-path-matching-by-contraction",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-linearize-static-range-information",
         "outcome-prove-greedy-order"
       ],
       "adHocElements": [
@@ -205629,11 +205573,9 @@
               "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
             ]
           },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-prefix-difference"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -205704,24 +205646,6 @@
           "kind": "supporting",
           "tagIds": [
             "tag-greedy-exchange-order"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc464-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
-              "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-prefix-difference"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -286679,7 +286603,7 @@
       "impactSubjectDigest": "40b36906779261a3768787e7e6a1f741f39f56b58bfeadedebb593a3444339fb"
     }
   ],
-  "placementDigest": "a4e0a06ab3aef3ed93096cd71b9b7caa25794a8c5e6a329c0e36c0388cb7984d",
+  "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
   "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
   "previewTaxonomyChangeDigest": "3d9f3d374c2532f7a38478ec40f93d431071c520909d0ad3a021022d99d1d56a"
 }

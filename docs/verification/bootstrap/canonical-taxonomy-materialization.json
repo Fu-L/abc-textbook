@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a",
-    "acceptedAt": "2026-09-26T13:38:56.577Z"
+    "digest": "fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a",
+    "acceptedAt": "2026-09-26T17:58:52.033Z"
   },
   "taskIds": [
     "T047",
@@ -41,12 +41,12 @@
     "T050"
   ],
   "counts": {
-    "tags": 212,
-    "learningOutcomes": 240,
-    "learningUnits": 231,
-    "learningDocuments": 231,
-    "directlyOwnedTags": 212,
-    "directlyOwnedLearningOutcomes": 240,
+    "tags": 213,
+    "learningOutcomes": 242,
+    "learningUnits": 232,
+    "learningDocuments": 232,
+    "directlyOwnedTags": 213,
+    "directlyOwnedLearningOutcomes": 242,
     "directlyPlacedProblems": 868,
     "placements": 868,
     "correctionImpacts": 12
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "139b2bcfbb29a4710515ed48cc5f7df3da1a64805a821a37b155db4e652c741f",
-    "learningOutcomes": "0abbdf88a89c56de04a9d1dfcc1baa9a5ef209d43c77903cb7c05707736e9bac",
-    "learningUnits": "d56b83027d5c229c8bfd5e9c589817cb6079a198523edfa1313a63023ed07c1c",
-    "learningDocuments": "f7877ff21f81588914f04e569793ccaf4d93d7826cff8052fcbddb961c58a630",
-    "learningPrerequisitesDigest": "0c82222519c4f84e469e519a70831b0068d6eec1a08b744ec9c6abcf7f619d3a",
-    "problemPlacementPolicyDigest": "fb659ae5a83baa80b2b88b99924be1e2a09b62aa8e11aba0f2a30073e3fb1466"
+    "tags": "d6b2820077125301a6806b876a53b5f2f5270b5ae7e04b8e4dee5d2116787a45",
+    "learningOutcomes": "f4f75993b64f6f33e11918d4ec3c52b6cc9365dfa2c960d21ab949306bd72ae7",
+    "learningUnits": "20cfb096ec2d7233f8f4cf5171c3d1d9837cdfa86624d4028dcf136343ce1b88",
+    "learningDocuments": "8d164571edc87e5e676d5b90c0e59e7d0ea1283e5385f6ba065c3da0dc0a5540",
+    "learningPrerequisitesDigest": "178b143d023e1fbe6dee3f4eb8cfa4de22030466321755e826b406516caeed90",
+    "problemPlacementPolicyDigest": "725ff3db19e3d99f68bed5ce0a81f9ef58af416da481fb4cf51d85ee519475f4"
   },
-  "materializationDigest": "80379a58965542fdb1cd276478dfb0206c130ea0b2fe48a5ef587d2c135af63b"
+  "materializationDigest": "0565a40c1247927ca4d642637074022a34abe31637cf3fd569359068dfecc4e7"
 }

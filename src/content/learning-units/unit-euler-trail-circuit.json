@@ -23,9 +23,11 @@
     "tag-euler-trail-circuit"
   ],
   "learningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
     "outcome-construct-euler-trail-or-circuit"
   ],
   "ownedLearningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
     "outcome-construct-euler-trail-or-circuit"
   ],
   "contentPhase": "canonical_skeleton",
@@ -42,5 +44,5 @@
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+  "learningRationale": "全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
 }

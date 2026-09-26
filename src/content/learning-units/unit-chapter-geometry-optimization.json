@@ -27,7 +27,8 @@
     "tag-lagrangian-relaxation",
     "tag-monge-optimization",
     "tag-separable-convex-marginals",
-    "tag-slope-trick"
+    "tag-slope-trick",
+    "tag-two-variable-convex-lattice-optimization"
   ],
   "ownedTagIds": [
     "tag-geometry-optimization-structure"
@@ -40,6 +41,7 @@
     "outcome-optimize-by-line-envelope",
     "outcome-optimize-monge-transitions",
     "outcome-optimize-ratio-by-parametric-search",
+    "outcome-optimize-two-variable-convex-lattice-function",
     "outcome-optimize-univariate-convex-function",
     "outcome-reduce-geometry-to-algebraic-predicates",
     "outcome-represent-convex-intersection-by-halfplanes",
@@ -101,7 +103,8 @@
     "abc442-e",
     "abc448-g",
     "abc458-g",
-    "abc459-f"
+    "abc459-f",
+    "abc459-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [
@@ -129,7 +132,6 @@
     "abc422-e",
     "abc424-f",
     "abc457-g",
-    "abc459-g",
     "abc462-e"
   ],
   "examples": [],

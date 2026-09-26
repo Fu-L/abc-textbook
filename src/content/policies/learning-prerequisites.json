@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a",
-    "acceptedAt": "2026-09-26T13:38:56.577Z"
+    "digest": "fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a",
+    "acceptedAt": "2026-09-26T17:58:52.033Z"
   },
   "tagPrerequisites": [
     {
@@ -758,6 +758,10 @@
     },
     {
       "nodeId": "outcome-construct-degree-parity-subgraph",
+      "prerequisiteId": "outcome-check-euler-trail-existence"
+    },
+    {
+      "nodeId": "outcome-construct-degree-parity-subgraph",
       "prerequisiteId": "outcome-construct-euler-trail-or-circuit"
     },
     {
@@ -767,6 +771,10 @@
     {
       "nodeId": "outcome-count-combinatorial-objects-by-determinant",
       "prerequisiteId": "outcome-solve-linear-system-and-rank"
+    },
+    {
+      "nodeId": "outcome-count-euler-circuits-by-best",
+      "prerequisiteId": "outcome-check-euler-trail-existence"
     },
     {
       "nodeId": "outcome-count-euler-circuits-by-best",
@@ -1940,6 +1948,6 @@
     }
   ],
   "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
-  "learningOutcomeDagDigest": "f33f96a1efb2eacd26c22658d3e52d638bd0086eb4e04de82965b00e8440f48b",
+  "learningOutcomeDagDigest": "1ffe80681b3f8869b99cf88d9551c61d4f9a008163480cec0da4a2efd141077a",
   "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30"
 }

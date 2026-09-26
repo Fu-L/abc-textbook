@@ -3801,11 +3801,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_212_299 = {
   'abc295-ex': decision(
     'outcome-enumerate-subset-state-space',
     [
-      d('t0', 'primary', 'tag-subset-bitmask-transform'),
-      d('t1', 'same_tag', 'tag-subset-bitmask-transform'),
+      d('t0', 'supporting', 'tag-frontier-profile-dp'),
+      d('t1', 'primary', 'tag-subset-bitmask-transform'),
       d('p0', 'same_tag', 'tag-subset-bitmask-transform'),
     ],
-    {},
+    { 'tag-frontier-profile-dp': ['outcome-design-frontier-profile-dp'] },
   ),
   'abc295-f': decision(
     'outcome-reorder-counting-contributions',

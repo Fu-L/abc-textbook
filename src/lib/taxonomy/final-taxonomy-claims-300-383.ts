@@ -61,14 +61,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_300_383 = {
     'outcome-encode-counting-by-generating-function',
     [
       ['typicalTechniques', 0, 'primary', 'tag-convolution-fps'],
-      ['typicalTechniques', 1, 'supporting', 'tag-subset-bitmask-transform'],
       ['typicalTechniques', 1, 'same_tag', 'tag-convolution-fps'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-linear-recurrence-matrix'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-convolution-fps'],
     ],
     {
       'tag-linear-recurrence-matrix': ['outcome-accelerate-fixed-linear-transition'],
-      'tag-subset-bitmask-transform': ['outcome-enumerate-subset-state-space'],
     },
     ['outcome-compute-convolution-or-correlation'],
   ),

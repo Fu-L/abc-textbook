@@ -1,0 +1,39 @@
+{
+  "id": "unit-two-variable-convex-lattice-optimization",
+  "kind": "section",
+  "title": "二変数の凸区分線形整数最適化",
+  "parentId": "unit-chapter-geometry-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一変数の傾き単調性やternary searchだけで解く凸最適化、および連続最小点から整数近傍への保証を持たない一般の格子探索。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+    "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+  ],
+  "tagIds": [
+    "tag-two-variable-convex-lattice-optimization"
+  ],
+  "ownedTagIds": [
+    "tag-two-variable-convex-lattice-optimization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-two-variable-convex-lattice-function"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-two-variable-convex-lattice-function"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
+  "problemIds": [
+    "abc459-g"
+  ],
+  "directProblemIds": [
+    "abc459-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "整数解を二つの自由parameterで表し、折れ目直線の交点から連続最小候補を作る。定数半径の格子点に整数最適解があることを証明して、大域探索を有限近傍の評価へ縮約する。"
+}

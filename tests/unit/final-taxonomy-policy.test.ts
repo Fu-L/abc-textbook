@@ -415,9 +415,9 @@ describe('final taxonomy policy', () => {
 
   it('defines the nine-chapter dictionary with atomic retrieval Tags and observable Outcomes', () => {
     expect(validateFinalTaxonomyPolicy()).toEqual([]);
-    expect(FINAL_TAXONOMY_TAGS).toHaveLength(212);
-    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(240);
-    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(231);
+    expect(FINAL_TAXONOMY_TAGS).toHaveLength(213);
+    expect(FINAL_TAXONOMY_OUTCOMES).toHaveLength(242);
+    expect(FINAL_LEARNING_UNIT_CANDIDATES).toHaveLength(232);
     expect(NON_PRIMARY_TAG_IDS).toEqual([
       'tag-model-reduction',
       'tag-dp-state-transition',
@@ -1477,7 +1477,7 @@ describe('final taxonomy policy', () => {
       'abc284-e': ['outcome-enumerate-bounded-candidates-or-cases'],
       'abc285-g': ['outcome-model-max-flow-min-cut'],
       'abc294-ex': ['outcome-recur-by-edge-deletion-contraction'],
-      'abc295-ex': ['outcome-enumerate-subset-state-space'],
+      'abc295-ex': ['outcome-design-frontier-profile-dp'],
       'abc300-ex': ['outcome-compute-convolution-or-correlation'],
       'abc303-ex': [
         'outcome-compute-convolution-or-correlation',

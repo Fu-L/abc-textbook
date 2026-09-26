@@ -280,6 +280,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-line-envelope',
       'unit-discrete-convex',
       'unit-basic-convex-optimization',
+      'unit-two-variable-convex-lattice-optimization',
       'unit-separable-convex-marginals',
       'unit-isotonic-regression',
       'unit-slope-trick',

@@ -78,4 +78,4 @@ floorや整数根の値が変わる境界を正確に求め、同値な整数範
 - [ABC239 H 公式解説](https://atcoder.jp/contests/abc239/editorial/3357)
 - [ABC239 H 公式問題文](https://atcoder.jp/contests/abc239/tasks/abc239_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-integer-boundary-blocks`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-integer-boundary-blocks`

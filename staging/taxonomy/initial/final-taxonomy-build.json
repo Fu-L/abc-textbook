@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-26T13:38:56.577Z",
+  "generatedAt": "2026-09-26T17:58:52.033Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "8b7445b8069ccaf01cc2983534bf4b4bda2406dc2b8a1828232247f6a8f60256",
+    "rulesDigest": "ed2f24927c8fd3c91569a3206442d31f6832edfeb06d019bb89717186f3f0d8d",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -45,7 +45,7 @@
     "writingPolicyDigest": "0f93019c063fe7806f341c962258066aa7f58e4bc85d5dc3ddd870754706e2e4",
     "sourceNormalizationVersion": "1.0.0",
     "workManifestPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-    "workManifestDigest": "6cbb7f5ea4a3798b7257f7ac02b331dad5cb77a1380e68a2269c8e87c4529e69"
+    "workManifestDigest": "88a604253a349c655879900a0d73f60575943acac638b1d20ea0fe42d55cba0a"
   },
   "integrationMap": {
     "schemaVersion": "2.0.0",
@@ -11425,7 +11425,7 @@
       "entity": {
         "id": "tag-euler-trail-circuit",
         "name": "Euler trail・circuit",
-        "definition": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。",
+        "definition": "全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。",
         "parentId": "tag-graph-model-structure",
         "prerequisiteTagIds": [],
         "semanticSignature": {
@@ -11439,12 +11439,12 @@
             "全辺を一度"
           ],
           "invariantPatterns": [
-            "入出次数差",
+            "奇数次数または入出次数差",
             "未使用辺",
-            "連結性"
+            "辺を持つ頂点の連結性"
           ],
           "goalPatterns": [
-            "trail判定",
+            "trail・circuitの存在判定",
             "walk構成"
           ],
           "excludedPatterns": [],
@@ -11453,6 +11453,7 @@
         },
         "relatedTags": [],
         "learningOutcomeIds": [
+          "outcome-check-euler-trail-existence",
           "outcome-construct-euler-trail-or-circuit"
         ],
         "representativeProblemIds": [
@@ -23007,7 +23008,7 @@
       "evidenceRefs": [
         {
           "problemId": "abc295-ex",
-          "claimPath": "/typicalTechniques/0",
+          "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -24311,6 +24312,76 @@
           "sourceRevisionIds": [
             "source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66",
             "source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"
+          ]
+        }
+      ],
+      "materializationTask": "T047"
+    },
+    {
+      "kind": "tag",
+      "entity": {
+        "id": "tag-two-variable-convex-lattice-optimization",
+        "name": "二変数の凸区分線形格子最適化",
+        "definition": "二つの整数parameter上の凸区分線形目的について、折れ目直線の交点から連続最小候補を作り、定数半径内に整数最適解があることを証明して有限格子点へ縮約する。",
+        "parentId": "tag-geometry-optimization-structure",
+        "prerequisiteTagIds": [],
+        "semanticSignature": {
+          "objectPatterns": [
+            "二つの整数parameter",
+            "凸区分線形目的関数",
+            "格子点"
+          ],
+          "triggerPatterns": [
+            "二変数の整数最適化",
+            "有限本の折れ目直線",
+            "連続最小点近傍の格子候補"
+          ],
+          "invariantPatterns": [
+            "凸性",
+            "折れ目直線の交点",
+            "整数最適点までの定数距離"
+          ],
+          "goalPatterns": [
+            "大域最適解",
+            "整数最小値",
+            "有限近傍の全探索"
+          ],
+          "excludedPatterns": [
+            "一変数の傾き単調性だけで最小点を探す目的関数"
+          ],
+          "minimumDimensions": 2,
+          "requireObjectForStrictRecall": false
+        },
+        "relatedTags": [],
+        "learningOutcomeIds": [
+          "outcome-optimize-two-variable-convex-lattice-function"
+        ],
+        "representativeProblemIds": [
+          "abc459-g"
+        ],
+        "aliases": [
+          "two-variable convex lattice optimization",
+          "二変数凸格子最適化",
+          "二変数区分線形凸最適化"
+        ],
+        "formerNames": [],
+        "lifecycle": "active",
+        "replacementTagIds": []
+      },
+      "sourceRevisionIds": [
+        "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+        "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
           ]
         }
       ],
@@ -26861,6 +26932,51 @@
     {
       "kind": "outcome",
       "entity": {
+        "id": "outcome-check-euler-trail-existence",
+        "statement": "無向graphでは辺を持つ部分の連結性と奇数次数頂点数が0または2であることを調べ、有向graphでは辺を持つ部分の弱連結性と入次数・出次数の差（trailなら始点+1、終点−1、他0、circuitなら全頂点0）を調べ、全辺を一度ずつ使うtrail・circuitの存在を判定できる。",
+        "prerequisiteOutcomeIds": [],
+        "scopeIds": [
+          "abc286-g",
+          "abc336-g",
+          "tag-euler-trail-circuit",
+          "unit-euler-trail-circuit"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
+        "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa",
+        "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+        "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc286-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
+            "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"
+          ]
+        },
+        {
+          "problemId": "abc336-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+            "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
         "id": "outcome-classify-game-states",
         "statement": "後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。",
         "prerequisiteOutcomeIds": [
@@ -28089,6 +28205,7 @@
         "id": "outcome-construct-degree-parity-subgraph",
         "statement": "選択辺集合の奇数次数頂点を指定し、spanning forestの葉から必要辺を確定してT-join型の構成を行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [
+          "outcome-check-euler-trail-existence",
           "outcome-construct-euler-trail-or-circuit"
         ],
         "scopeIds": [
@@ -28120,23 +28237,17 @@
       "kind": "outcome",
       "entity": {
         "id": "outcome-construct-euler-trail-or-circuit",
-        "statement": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "statement": "全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [],
         "scopeIds": [
           "abc227-h",
-          "abc286-g",
-          "abc336-g",
           "tag-euler-trail-circuit",
           "unit-euler-trail-circuit"
         ]
       },
       "sourceRevisionIds": [
         "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
-        "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
-        "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
-        "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa",
-        "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
-        "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+        "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"
       ],
       "evidenceRefs": [
         {
@@ -28148,28 +28259,6 @@
           "sourceRevisionIds": [
             "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
             "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681"
-          ]
-        },
-        {
-          "problemId": "abc286-g",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
-            "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa"
-          ]
-        },
-        {
-          "problemId": "abc336-g",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
-            "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
           ]
         }
       ],
@@ -28416,6 +28505,7 @@
         "id": "outcome-count-euler-circuits-by-best",
         "statement": "有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [
+          "outcome-check-euler-trail-existence",
           "outcome-construct-euler-trail-or-circuit",
           "outcome-count-combinatorial-objects-by-determinant"
         ],
@@ -29349,7 +29439,6 @@
           "abc460-f",
           "abc461-e",
           "abc463-g",
-          "abc464-g",
           "abc465-f",
           "abc465-g",
           "tag-query-sufficient-aggregate",
@@ -29979,6 +30068,7 @@
         ],
         "scopeIds": [
           "abc248-f",
+          "abc295-ex",
           "abc296-ex",
           "abc309-g",
           "abc379-g",
@@ -32023,8 +32113,6 @@
           "abc232-f",
           "abc274-e",
           "abc278-f",
-          "abc295-ex",
-          "abc300-ex",
           "abc301-e",
           "abc306-ex",
           "abc309-g",
@@ -34304,7 +34392,6 @@
           "abc452-e",
           "abc454-f",
           "abc455-e",
-          "abc464-g",
           "abc465-f",
           "abc465-g",
           "tag-prefix-difference",
@@ -37860,6 +37947,37 @@
     {
       "kind": "outcome",
       "entity": {
+        "id": "outcome-optimize-two-variable-convex-lattice-function",
+        "statement": "二変数の凸区分線形目的について折れ目直線の交点で連続最小候補を求め、定数距離内に整数最適点があることを証明して有限個の近傍格子点だけを評価できる。",
+        "prerequisiteOutcomeIds": [],
+        "scopeIds": [
+          "abc459-g",
+          "tag-two-variable-convex-lattice-optimization",
+          "unit-two-variable-convex-lattice-optimization"
+        ]
+      },
+      "sourceRevisionIds": [
+        "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+        "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        }
+      ],
+      "materializationTask": "T048"
+    },
+    {
+      "kind": "outcome",
+      "entity": {
         "id": "outcome-optimize-univariate-convex-function",
         "statement": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [],
@@ -37870,7 +37988,6 @@
           "abc263-g",
           "abc314-ex",
           "abc330-f",
-          "abc459-g",
           "abc462-e",
           "tag-basic-convex-optimization",
           "unit-basic-convex-optimization"
@@ -44332,7 +44449,6 @@
           "abc240-f",
           "abc263-g",
           "abc330-f",
-          "abc459-g",
           "abc462-e"
         ],
         "learningRationale": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
@@ -47871,7 +47987,8 @@
           "tag-lagrangian-relaxation",
           "tag-monge-optimization",
           "tag-separable-convex-marginals",
-          "tag-slope-trick"
+          "tag-slope-trick",
+          "tag-two-variable-convex-lattice-optimization"
         ],
         "ownedTagIds": [
           "tag-geometry-optimization-structure"
@@ -47884,6 +48001,7 @@
           "outcome-optimize-by-line-envelope",
           "outcome-optimize-monge-transitions",
           "outcome-optimize-ratio-by-parametric-search",
+          "outcome-optimize-two-variable-convex-lattice-function",
           "outcome-optimize-univariate-convex-function",
           "outcome-reduce-geometry-to-algebraic-predicates",
           "outcome-represent-convex-intersection-by-halfplanes",
@@ -47943,7 +48061,8 @@
           "abc442-e",
           "abc448-g",
           "abc458-g",
-          "abc459-f"
+          "abc459-f",
+          "abc459-g"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -47971,7 +48090,6 @@
           "abc422-e",
           "abc424-f",
           "abc457-g",
-          "abc459-g",
           "abc462-e"
         ],
         "learningRationale": "orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進み、候補を構造的に削減する。"
@@ -48315,6 +48433,7 @@
           "outcome-augment-components-with-metadata",
           "outcome-build-shortest-path-certificate",
           "outcome-characterize-bipartite-feasibility-by-hall",
+          "outcome-check-euler-trail-existence",
           "outcome-color-and-classify-bipartite-components",
           "outcome-compute-all-pairs-distance",
           "outcome-compute-directed-walk-period",
@@ -49675,7 +49794,6 @@
           "abc444-g",
           "abc445-e",
           "abc452-e",
-          "abc459-g",
           "abc460-e"
         ],
         "directProblemIds": [],
@@ -49781,6 +49899,7 @@
           "abc450-g",
           "abc455-f",
           "abc456-g",
+          "abc459-g",
           "abc461-f",
           "abc462-g",
           "abc463-f",
@@ -50192,8 +50311,7 @@
           "abc452-e",
           "abc452-f",
           "abc455-e",
-          "abc463-g",
-          "abc464-g"
+          "abc463-g"
         ],
         "learningRationale": "問い合わせに必要な要約と更新規則を見抜く視点を先に学び、目的に合うデータ構造の選択へつなげる。"
       },
@@ -55869,7 +55987,6 @@
           "abc240-f",
           "abc263-g",
           "abc330-f",
-          "abc459-g",
           "abc462-e"
         ],
         "learningRationale": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
@@ -59329,6 +59446,7 @@
         "relatedProblemIds": [
           "abc236-e",
           "abc282-g",
+          "abc295-ex",
           "abc309-e",
           "abc309-g",
           "abc311-e",
@@ -60316,8 +60434,6 @@
           "abc216-h",
           "abc228-g",
           "abc278-f",
-          "abc295-ex",
-          "abc300-ex",
           "abc306-ex",
           "abc309-g",
           "abc313-f",
@@ -62052,6 +62168,7 @@
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
+          "outcome-check-euler-trail-existence",
           "outcome-construct-degree-parity-subgraph",
           "outcome-construct-euler-trail-or-circuit"
         ],
@@ -62326,9 +62443,11 @@
           "tag-euler-trail-circuit"
         ],
         "learningOutcomeIds": [
+          "outcome-check-euler-trail-existence",
           "outcome-construct-euler-trail-or-circuit"
         ],
         "ownedLearningOutcomeIds": [
+          "outcome-check-euler-trail-existence",
           "outcome-construct-euler-trail-or-circuit"
         ],
         "problemIds": [
@@ -62341,7 +62460,7 @@
           "abc227-h",
           "abc336-g"
         ],
-        "learningRationale": "全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+        "learningRationale": "全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
@@ -65284,10 +65403,10 @@
         "sourceRevisionIds": [
           "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
           "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
+          "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
+          "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
           "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
-          "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475",
-          "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
-          "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
+          "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
         ],
         "tagIds": [
           "tag-frontier-profile-dp"
@@ -65312,6 +65431,7 @@
           "abc296-ex"
         ],
         "relatedProblemIds": [
+          "abc295-ex",
           "abc309-g"
         ],
         "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
@@ -65319,10 +65439,10 @@
       "sourceRevisionIds": [
         "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
         "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
+        "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
+        "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
         "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
-        "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475",
-        "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
-        "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
+        "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
       ],
       "evidenceRefs": [
         {
@@ -65414,6 +65534,17 @@
           ]
         },
         {
+          "problemId": "abc295-ex",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
+            "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
+          ]
+        },
+        {
           "problemId": "abc296-ex",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
@@ -65477,17 +65608,6 @@
           "sourceRevisionIds": [
             "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
             "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
-          ]
-        },
-        {
-          "problemId": "abc309-g",
-          "claimPath": "/typicalTechniques/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
-            "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
           ]
         }
       ],
@@ -66458,16 +66578,16 @@
         "problemIds": [
           "abc271-ex",
           "abc315-g",
-          "abc340-f",
-          "abc459-g"
+          "abc340-f"
         ],
         "directProblemIds": [
           "abc340-f",
           "abc315-g",
-          "abc459-g",
           "abc271-ex"
         ],
-        "relatedProblemIds": [],
+        "relatedProblemIds": [
+          "abc459-g"
+        ],
         "learningRationale": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"
       },
       "sourceRevisionIds": [
@@ -81608,7 +81728,6 @@
           "abc427-e",
           "abc452-e",
           "abc455-e",
-          "abc464-g",
           "abc465-g"
         ],
         "learningRationale": "一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。"
@@ -90878,7 +90997,7 @@
         },
         {
           "problemId": "abc295-ex",
-          "claimPath": "/typicalTechniques/0",
+          "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
@@ -94297,6 +94416,139 @@
           "sourceRevisionIds": [
             "source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66",
             "source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"
+          ]
+        }
+      ],
+      "materializationTask": "T050"
+    },
+    {
+      "kind": "unit",
+      "entity": {
+        "id": "unit-two-variable-convex-lattice-optimization",
+        "kind": "section",
+        "title": "二変数の凸区分線形整数最適化",
+        "parentId": "unit-chapter-geometry-optimization",
+        "baselineId": "prereq-abc-advanced-v1",
+        "baselineVersion": "1.0.0",
+        "excludedTopics": [
+          "一変数の傾き単調性やternary searchだけで解く凸最適化、および連続最小点から整数近傍への保証を持たない一般の格子探索。"
+        ],
+        "sourceRevisionIds": [
+          "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+          "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+        ],
+        "tagIds": [
+          "tag-two-variable-convex-lattice-optimization"
+        ],
+        "ownedTagIds": [
+          "tag-two-variable-convex-lattice-optimization"
+        ],
+        "learningOutcomeIds": [
+          "outcome-optimize-two-variable-convex-lattice-function"
+        ],
+        "ownedLearningOutcomeIds": [
+          "outcome-optimize-two-variable-convex-lattice-function"
+        ],
+        "problemIds": [
+          "abc459-g"
+        ],
+        "directProblemIds": [
+          "abc459-g"
+        ],
+        "relatedProblemIds": [],
+        "learningRationale": "整数解を二つの自由parameterで表し、折れ目直線の交点から連続最小候補を作る。定数半径の格子点に整数最適解があることを証明して、大域探索を有限近傍の評価へ縮約する。"
+      },
+      "sourceRevisionIds": [
+        "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+        "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+      ],
+      "evidenceRefs": [
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        },
+        {
+          "problemId": "abc459-g",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
           ]
         }
       ],
@@ -169011,7 +169263,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「非S edgeの連結成分をDSUで縮約し、S edgeで作るG'の奇数次数頂点数が0または2か判定する。」、解法への接続「Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。」、学習成果「指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。」を照合し、tag-euler-trail-circuit / outcome-construct-euler-trail-or-circuit をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「非S edgeの連結成分をDSUで縮約し、S edgeで作るG'の奇数次数頂点数が0または2か判定する。」、解法への接続「Sに属するedgeをmarkし、それ以外の全edgeでDSUをmergeする。各S edge(u,v)についてroot(u),root(v)のdegreeを1ずつ増やす。同じrootなら結果的に2増える。奇数degreeのroot数を数え、0または2ならYes、それ以外ならNoを出力する。」、学習成果「指定edgeを各1回、他edgeを任意回使うwalkの存在を、縮約graphのEuler trail条件で線形に判定できる。」を照合し、tag-euler-trail-circuit / outcome-check-euler-trail-existence をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-dsu-components; 補助Outcome=outcome-maintain-connectivity-components; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-dsu-components / outcome-maintain-connectivity-components を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -169021,7 +169273,7 @@
       "supportingTagIds": [
         "tag-dsu-components"
       ],
-      "primaryOutcomeId": "outcome-construct-euler-trail-or-circuit",
+      "primaryOutcomeId": "outcome-check-euler-trail-existence",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-maintain-connectivity-components"
@@ -176909,7 +177161,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「frontier mask DPとsubset zeta型遷移」、解法への接続「各行でdp[mask]を入力0/1/?制約に合わせて変換し、部分集合和を一回のzeta sweepで計算しつつ各prefix全1ケースを次maskへ加える。」、学習成果「条件を満たす0/1/?格子の完成方法数を求められる。」を照合し、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「frontier mask DPとsubset zeta型遷移」、解法への接続「各行でdp[mask]を入力0/1/?制約に合わせて変換し、部分集合和を一回のzeta sweepで計算しつつ各prefix全1ケースを次maskへ加える。」、学習成果「条件を満たす0/1/?格子の完成方法数を求められる。」を照合し、tag-subset-zeta-mobius-transform / outcome-apply-subset-zeta-mobius-transform をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-frontier-profile-dp; 補助Outcome=outcome-design-frontier-profile-dp; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-frontier-profile-dp / outcome-design-frontier-profile-dp を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -176917,12 +177169,12 @@
         "tag-subset-zeta-mobius-transform"
       ],
       "supportingTagIds": [
-        "tag-subset-bitmask-dp"
+        "tag-frontier-profile-dp"
       ],
       "primaryOutcomeId": "outcome-apply-subset-zeta-mobius-transform",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-enumerate-subset-state-space"
+        "outcome-design-frontier-profile-dp"
       ],
       "adHocElements": [
         "遷移をprefixの最初の0で一意分類することで、複数回の部分集合和を一回のzeta変換へ畳める。（再利用可能な見方: frontier遷移は重複しない境界イベントで分類する。）"
@@ -176940,27 +177192,9 @@
               "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
             ]
           },
-          "kind": "primary",
-          "tagIds": [
-            "tag-subset-zeta-mobius-transform"
-          ],
-          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc295-ex",
-            "claimPath": "/typicalTechniques/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
-              "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
-            ]
-          },
           "kind": "supporting",
           "tagIds": [
-            "tag-subset-bitmask-dp"
+            "tag-frontier-profile-dp"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -176976,11 +177210,11 @@
               "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
             ]
           },
-          "kind": "same_tag",
+          "kind": "primary",
           "tagIds": [
             "tag-subset-zeta-mobius-transform"
           ],
-          "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -181088,7 +181322,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「submask和へ拡張したBostan–Mori」、解法への接続「K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛けて分母を偶次数へ圧縮し、N bitが0なら分子偶部、1なら偶部＋奇部を選び、最後の定数係数比を出す。」、学習成果「m AND N=mを満たす全mのK-bonacci項総和を求められる。」を照合し、tag-bostan-mori / outcome-extract-rational-series-coefficient をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-linear-recurrence-matrix; 補助Outcome=outcome-accelerate-fixed-linear-transition; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-linear-recurrence-matrix / outcome-accelerate-fixed-linear-transition を補助技能として使う。; 補助Tag=tag-subset-bitmask-dp; 補助Outcome=outcome-enumerate-subset-state-space; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-subset-bitmask-dp / outcome-enumerate-subset-state-space を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「submask和へ拡張したBostan–Mori」、解法への接続「K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛けて分母を偶次数へ圧縮し、N bitが0なら分子偶部、1なら偶部＋奇部を選び、最後の定数係数比を出す。」、学習成果「m AND N=mを満たす全mのK-bonacci項総和を求められる。」を照合し、tag-bostan-mori / outcome-extract-rational-series-coefficient をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-convolution; 補助Outcome=outcome-compute-convolution-or-correlation; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-convolution / outcome-compute-convolution-or-correlation を補助技能として使う。; 補助Tag=tag-linear-recurrence-matrix; 補助Outcome=outcome-accelerate-fixed-linear-transition; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-linear-recurrence-matrix / outcome-accelerate-fixed-linear-transition を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -181097,15 +181331,13 @@
       ],
       "supportingTagIds": [
         "tag-convolution",
-        "tag-linear-recurrence-matrix",
-        "tag-subset-bitmask-dp"
+        "tag-linear-recurrence-matrix"
       ],
       "primaryOutcomeId": "outcome-extract-rational-series-coefficient",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
         "outcome-accelerate-fixed-linear-transition",
-        "outcome-compute-convolution-or-correlation",
-        "outcome-enumerate-subset-state-space"
+        "outcome-compute-convolution-or-correlation"
       ],
       "adHocElements": [
         "単一係数を選ぶBostan–Moriの分岐を線形結合に替えるだけで、全submask係数和を同じ有理式更新で扱える。（再利用可能な見方: 係数index集合がbitごとの正則言語ならdigit抽出作用素を母関数へ作用させる。）"
@@ -181144,24 +181376,6 @@
           "kind": "supporting",
           "tagIds": [
             "tag-convolution"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc300-ex",
-            "claimPath": "/typicalTechniques/1",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f",
-              "source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-subset-bitmask-dp"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         },
@@ -213105,7 +213319,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「8頂点多重有向graphのEuler trailをBEST定理と有向行列木定理で数える」、解法への接続「各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。」、学習成果「指定された全16種類の長さ4 substring出現回数を持つbinary列の個数をmod 998244353で求められる。」を照合し、tag-euler-circuit-counting / outcome-count-euler-circuits-by-best をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-determinant-counting; 補助Outcome=outcome-count-combinatorial-objects-by-determinant; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-determinant-counting / outcome-count-combinatorial-objects-by-determinant を補助技能として使う。; 補助Tag=tag-euler-trail-circuit; 補助Outcome=outcome-construct-euler-trail-or-circuit; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-euler-trail-circuit / outcome-construct-euler-trail-or-circuit を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「8頂点多重有向graphのEuler trailをBEST定理と有向行列木定理で数える」、解法への接続「各始点s・終点tのdegree条件を調べ、辺を持つ頂点とs,tだけをVとする。元の辺と区別する補助辺e*:t→sをs=tでも一個加え、V上の連結性と入出次数一致を確認する。e*を最初の辺に固定した閉路からe*を切ると、sからtへの線形なtrailと一対一対応する。自己ループを除いたV上の有向Laplacianから根tの行・列を除き、その余因子の行列式を求める。一頂点なら空行列式は1。これに補助辺・自己ループを含む次数の∏(outdeg(v)-1)!を掛け、元の16種類のX_e!だけで割り、始終点について合計する。X0000=1だけなら答えは1であり、未使用の7頂点を行列へ残してはいけない。」、学習成果「指定された全16種類の長さ4 substring出現回数を持つbinary列の個数をmod 998244353で求められる。」を照合し、tag-euler-circuit-counting / outcome-count-euler-circuits-by-best をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-combinatorial-coefficients; 補助Outcome=outcome-formulate-combinatorial-coefficients; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-combinatorial-coefficients / outcome-formulate-combinatorial-coefficients を補助技能として使う。; 補助Tag=tag-determinant-counting; 補助Outcome=outcome-count-combinatorial-objects-by-determinant; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-determinant-counting / outcome-count-combinatorial-objects-by-determinant を補助技能として使う。; 補助Tag=tag-euler-trail-circuit; 補助Outcome=outcome-check-euler-trail-existence; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-euler-trail-circuit / outcome-check-euler-trail-existence を補助技能として使う。; 補助Tag=tag-modular-arithmetic; 補助Outcome=outcome-compute-in-modular-arithmetic; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-modular-arithmetic / outcome-compute-in-modular-arithmetic を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -213121,8 +213335,8 @@
       "primaryOutcomeId": "outcome-count-euler-circuits-by-best",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
+        "outcome-check-euler-trail-existence",
         "outcome-compute-in-modular-arithmetic",
-        "outcome-construct-euler-trail-or-circuit",
         "outcome-count-combinatorial-objects-by-determinant",
         "outcome-formulate-combinatorial-coefficients"
       ],
@@ -299083,22 +299297,23 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「四通りのparityを列挙し、extended Euclidで全整数解をparameter n,mで表す。得られる凸piecewise-linear関数の実数最小候補交点を求め、その周囲定数格子点を評価する。」、解法への接続「gcdでscaleを除き到達可否を確認する。c1,c2∈{0,1}ごとに二座標方程式をextgcdでparameter化し、目的f(n,m)を作る。折れ目直線pair全ての交点を有理数で求め、floor座標±2を評価して最小値を返す。」、学習成果「巨大座標への一般化knight最短移動を、gcd・parity・凸関数の定数候補探索で対数時間に解ける。」を照合し、tag-bezout-diophantine / outcome-characterize-integer-solvability をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-basic-convex-optimization; 補助Outcome=outcome-optimize-univariate-convex-function; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-basic-convex-optimization / outcome-optimize-univariate-convex-function を補助技能として使う。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「四通りのparityを列挙し、extended Euclidで全整数解をparameter n,mで表す。得られる凸piecewise-linear関数の実数最小候補交点を求め、その周囲定数格子点を評価する。」、解法への接続「gcdでscaleを除き到達可否を確認する。c1,c2∈{0,1}ごとに二座標方程式をextgcdでparameter化し、目的f(n,m)を作る。折れ目直線pair全ての交点を有理数で求め、floor座標±2を評価して最小値を返す。」、学習成果「巨大座標への一般化knight最短移動を、gcd・parity・凸関数の定数候補探索で対数時間に解ける。」を照合し、tag-two-variable-convex-lattice-optimization / outcome-optimize-two-variable-convex-lattice-function をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-bounded-enumeration; 補助Outcome=outcome-enumerate-bounded-candidates-or-cases; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-bounded-enumeration / outcome-enumerate-bounded-candidates-or-cases を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
       "primaryTagIds": [
-        "tag-bezout-diophantine"
+        "tag-bezout-diophantine",
+        "tag-two-variable-convex-lattice-optimization"
       ],
       "supportingTagIds": [
-        "tag-basic-convex-optimization",
         "tag-bounded-enumeration"
       ],
-      "primaryOutcomeId": "outcome-characterize-integer-solvability",
-      "additionalPrimaryOutcomeIds": [],
+      "primaryOutcomeId": "outcome-optimize-two-variable-convex-lattice-function",
+      "additionalPrimaryOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
       "supportingOutcomeIds": [
-        "outcome-enumerate-bounded-candidates-or-cases",
-        "outcome-optimize-univariate-convex-function"
+        "outcome-enumerate-bounded-candidates-or-cases"
       ],
       "adHocElements": [
         "巨大格子最短路も、move符号回数のparityと一次方程式へ変えると二変数凸最適化になる。（再利用可能な見方: 整数凸最適化では全範囲を探さず、実数optimumの構造と近傍保証を証明して局所探索する。）"
@@ -299134,11 +299349,11 @@
               "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
             ]
           },
-          "kind": "supporting",
+          "kind": "primary",
           "tagIds": [
-            "tag-basic-convex-optimization"
+            "tag-two-variable-convex-lattice-optimization"
           ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "rationale": "reviewed Inventoryの対象・操作・不変量・目的を照合し、主たる正式Tagへ明示的に結び付けた。"
         },
         {
           "claimRef": {
@@ -299172,27 +299387,10 @@
           },
           "kind": "same_tag",
           "tagIds": [
-            "tag-bezout-diophantine"
+            "tag-bezout-diophantine",
+            "tag-two-variable-convex-lattice-optimization"
           ],
           "rationale": "主たるTagの同じ学習成果に包含される補足的なclaimとして明示した。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc459-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
-              "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-basic-convex-optimization"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
       ],
       "analysisEvidenceRefs": [
@@ -302461,7 +302659,7 @@
         "implementation": "実装上の注意と問題固有の洞察をadHocElementsへ残し、共通分類によって脱落させない。"
       },
       "additionalElement": null,
-      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「0位置列の隣接距離Dを作り、隣接edgeを共有しないmatchingから所定個数を選ぶ最小重み問題を、最小edge貪欲と連結list更新 D_{l}+D_{r}-D_i で順に解く。」、解法への接続「固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。」、学習成果「RS遷移増加の最小flip回数を、境界01列の0 matchingとheap contractionで O(N log N) に求められる。」を照合し、tag-path-matching-contraction / outcome-optimize-path-matching-by-contraction をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。; 補助Tag=tag-prefix-difference; 補助Outcome=outcome-linearize-static-range-information; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-prefix-difference / outcome-linearize-static-range-information を補助技能として使う。",
+      "rationale": "決定種別=explicit_inventory_assignment; 選択理由: Inventoryの採用方針「0位置列の隣接距離Dを作り、隣接edgeを共有しないmatchingから所定個数を選ぶ最小重み問題を、最小edge貪欲と連結list更新 D_{l}+D_{r}-D_i で順に解く。」、解法への接続「固定端込み差分を作り0位置間距離Dを列挙する。各D_iをmin-heapへ入れ、alive linked listを持つ。最小iを選んで累積costを記録し、隣接edgeを削除して新edge D_left+D_right-D_iを挿入する。必要な1増加数/2回分のprefix costを答える。」、学習成果「RS遷移増加の最小flip回数を、境界01列の0 matchingとheap contractionで O(N log N) に求められる。」を照合し、tag-path-matching-contraction / outcome-optimize-path-matching-by-contraction をFinalTaxonomyBuildのreview対象となるprimary候補として明示した。; 補助Tag=tag-greedy-exchange-order; 補助Outcome=outcome-prove-greedy-order; 選択理由: reviewed Inventoryの明示claim dispositionに基づき、tag-greedy-exchange-order / outcome-prove-greedy-order を補助技能として使う。",
       "evidenceIds": [
         "evidence-official-analysis"
       ],
@@ -302469,13 +302667,11 @@
         "tag-path-matching-contraction"
       ],
       "supportingTagIds": [
-        "tag-greedy-exchange-order",
-        "tag-prefix-difference"
+        "tag-greedy-exchange-order"
       ],
       "primaryOutcomeId": "outcome-optimize-path-matching-by-contraction",
       "additionalPrimaryOutcomeIds": [],
       "supportingOutcomeIds": [
-        "outcome-linearize-static-range-information",
         "outcome-prove-greedy-order"
       ],
       "adHocElements": [
@@ -302494,11 +302690,9 @@
               "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
             ]
           },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-prefix-difference"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
+          "kind": "problem_specific",
+          "tagIds": [],
+          "rationale": "全Inventoryとの照合後も独立した正式Tagへ一般化せず、このProblem固有の要素として明示した。"
         },
         {
           "claimRef": {
@@ -302569,24 +302763,6 @@
           "kind": "supporting",
           "tagIds": [
             "tag-greedy-exchange-order"
-          ],
-          "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
-        },
-        {
-          "claimRef": {
-            "problemId": "abc464-g",
-            "claimPath": "/prerequisiteCandidates/0",
-            "evidenceIds": [
-              "evidence-official-analysis"
-            ],
-            "sourceRevisionIds": [
-              "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
-              "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
-            ]
-          },
-          "kind": "supporting",
-          "tagIds": [
-            "tag-prefix-difference"
           ],
           "rationale": "主解法とは別に実際に用いる再利用可能な技能として、補助Tagと先行Unitへ明示的に結び付けた。"
         }
@@ -384249,8 +384425,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "bbb7e8d34b7785dc2383ad313d9cb73eeec1867762211d9b5085c1291b0066b1",
-      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+      "digest": "ce5e52b3f868cae4cc30406bbd3e6b8e2f08102d90298c3bb85e54b86fe3fae9",
+      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
       "authorIds": [
         "person-maintainer"
       ],
@@ -384261,15 +384437,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
-  "taxonomyDigest": "892d3087cff2e244b7dbfe0c49b51934574382405a4abebdc31214b6986f0eb3",
+  "taxonomySubjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+  "taxonomyDigest": "4ee0d6d4e060b141c6d0fc54dbb43014cb40a11d18196342be6590528f5b6a06",
   "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
   "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30",
-  "placementDigest": "a4e0a06ab3aef3ed93096cd71b9b7caa25794a8c5e6a329c0e36c0388cb7984d",
+  "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
   "correctionImpactDigest": "3d9f3d374c2532f7a38478ec40f93d431071c520909d0ad3a021022d99d1d56a",
   "status": "accepted",
-  "acceptedAt": "2026-09-26T13:38:56.577Z",
+  "acceptedAt": "2026-09-26T17:58:52.033Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a"
+  "buildDigest": "fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a"
 }

@@ -47,4 +47,4 @@ assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または
 - [ABC373 G 公式解説](https://atcoder.jp/contests/abc373/editorial/11045)
 - [ABC373 G 公式問題文](https://atcoder.jp/contests/abc373/tasks/abc373_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-weighted-bipartite-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-weighted-bipartite-matching`

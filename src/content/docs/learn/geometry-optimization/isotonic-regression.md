@@ -3,7 +3,7 @@ title: "isotonic regression・PAV"
 description: "「isotonic regression・PAV」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 226
+  order: 227
 ---
 
 # isotonic regression・PAV
@@ -47,4 +47,4 @@ sidebar:
 - [ABC459 F 公式解説](https://atcoder.jp/contests/abc459/editorial/20507)
 - [ABC459 F 公式問題文](https://atcoder.jp/contests/abc459/tasks/abc459_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-isotonic-regression`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-isotonic-regression`

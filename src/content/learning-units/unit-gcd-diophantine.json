@@ -33,16 +33,16 @@
   "problemIds": [
     "abc271-ex",
     "abc315-g",
-    "abc340-f",
-    "abc459-g"
+    "abc340-f"
   ],
   "directProblemIds": [
     "abc340-f",
     "abc315-g",
-    "abc459-g",
     "abc271-ex"
   ],
-  "relatedProblemIds": [],
+  "relatedProblemIds": [
+    "abc459-g"
+  ],
   "examples": [],
   "exercises": [],
   "learningRationale": "最大公約数とBézout等式で整除性・一次不定方程式の可解条件を扱い、合同算術へ進む基礎を作る。"

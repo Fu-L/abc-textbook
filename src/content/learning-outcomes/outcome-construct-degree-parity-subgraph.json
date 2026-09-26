@@ -2,6 +2,7 @@
   "id": "outcome-construct-degree-parity-subgraph",
   "statement": "選択辺集合の奇数次数頂点を指定し、spanning forestの葉から必要辺を確定してT-join型の構成を行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
   "prerequisiteOutcomeIds": [
+    "outcome-check-euler-trail-existence",
     "outcome-construct-euler-trail-or-circuit"
   ],
   "scopeIds": [

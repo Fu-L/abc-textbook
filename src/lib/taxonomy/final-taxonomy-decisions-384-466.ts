@@ -264,7 +264,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc458-g': 'tag-monotone-threshold-search',
   'abc459-e': 'tag-tree-aggregation-reroot',
   'abc459-f': 'tag-monotone-stack-queue',
-  'abc459-g': 'tag-gcd-diophantine',
+  'abc459-g': 'tag-two-variable-convex-lattice-optimization',
   'abc460-e': 'tag-modular-crt',
   'abc460-f': 'tag-monoid-segment-tree',
   'abc460-g': 'tag-static-top-tree',

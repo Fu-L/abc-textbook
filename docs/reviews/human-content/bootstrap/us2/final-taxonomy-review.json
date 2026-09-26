@@ -4,9 +4,9 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+  "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
-  "inventoryDigest": "6cbb7f5ea4a3798b7257f7ac02b331dad5cb77a1380e68a2269c8e87c4529e69",
+  "inventoryDigest": "88a604253a349c655879900a0d73f60575943acac638b1d20ea0fe42d55cba0a",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": [
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
+      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T13:38:34.785Z",
+      "completedAt": "2026-09-26T17:58:29.534Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
+      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T13:38:42.831Z",
+      "completedAt": "2026-09-26T17:58:37.803Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
+      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T13:38:43.388Z",
+      "completedAt": "2026-09-26T17:58:38.268Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
+      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T13:38:43.607Z",
+      "completedAt": "2026-09-26T17:58:38.488Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "77a2bdcfabcecc3ac52b31892f61a9bdac5ccc454dfc47ec7c179052ec974ae4",
+      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "9f12cf7d66d55a817fbb60ea81d2bc0657268d1be872f8e275ec05f68db8851b",
+      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T13:38:50.797Z",
+      "completedAt": "2026-09-26T17:58:45.951Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "b872a39be2c3c22579dd195cad4f474af6bdf4eae6ad61cbfc831389299cc294",
+  "reviewerExecutedCheckSetDigest": "cd362cd7af35940028b0055b68a2512945b3baebf38d9e962ee5674bf2f37971",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -135,6 +135,7 @@
         "outcome-characterize-bipartite-feasibility-by-hall",
         "outcome-characterize-integer-solvability",
         "outcome-characterize-palindrome-intervals",
+        "outcome-check-euler-trail-existence",
         "outcome-classify-game-states",
         "outcome-classify-tree-by-distance-residue",
         "outcome-close-eventual-dp-tail",
@@ -273,6 +274,7 @@
         "outcome-optimize-ratio-by-parametric-search",
         "outcome-optimize-stochastic-actions",
         "outcome-optimize-tree-order-by-cluster-contraction",
+        "outcome-optimize-two-variable-convex-lattice-function",
         "outcome-optimize-univariate-convex-function",
         "outcome-optimize-weighted-matroid-basis",
         "outcome-partition-at-critical-integer-boundaries",
@@ -341,10 +343,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "I traced every audited placement back to its reviewed Inventory record and compared the adopted approach, algorithmConnection, keyInsights, prerequisiteCandidates, and implementationConcerns. I accepted findings where the claimed skill follows from the official-source-backed method, removed unsupported techniques, separated primary outcomes from independently reusable supporting outcomes, and kept implementation choices such as data-structure backends unstated when Inventory does not require them. I also checked that each added or revised Outcome has a unique owning Tag and fits its learning unit. This review uses the manifest's self-review route because the solo maintainer is the recorded owner; no third-party review is claimed.",
+      "reviewBasis": "Self-review under the fixed manifest's requiredMode=self and highRiskSelfReviewReason=solo_maintainer. Traced all six findings in semantic-placement-full-review-2026-09-27.md to their technique-inventory records and confirmed the stated transformations and invariants. Corrected Euler existence versus construction outcomes for ABC286-G and ABC336-G, with the shared existence Outcome covering undirected odd-degree and directed in/out-degree conditions; added ABC295-Ex frontier-profile support; removed ABC300-Ex subset-state support; added ABC459-G two-variable convex lattice optimization while retaining integer-solvability as a co-primary; and removed ABC464-G prefix-difference support. Preserved Inventory evidence and ran the manifest-declared policy, output, human-review, schema, and integration checks.",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-26T13:38:56.577Z"
+      "reviewedAt": "2026-09-26T17:58:52.033Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -395,6 +397,7 @@
       "outcome-characterize-bipartite-feasibility-by-hall",
       "outcome-characterize-integer-solvability",
       "outcome-characterize-palindrome-intervals",
+      "outcome-check-euler-trail-existence",
       "outcome-classify-game-states",
       "outcome-classify-tree-by-distance-residue",
       "outcome-close-eventual-dp-tail",
@@ -533,6 +536,7 @@
       "outcome-optimize-ratio-by-parametric-search",
       "outcome-optimize-stochastic-actions",
       "outcome-optimize-tree-order-by-cluster-contraction",
+      "outcome-optimize-two-variable-convex-lattice-function",
       "outcome-optimize-univariate-convex-function",
       "outcome-optimize-weighted-matroid-basis",
       "outcome-partition-at-critical-integer-boundaries",
@@ -604,12 +608,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "I traced every audited placement back to its reviewed Inventory record and compared the adopted approach, algorithmConnection, keyInsights, prerequisiteCandidates, and implementationConcerns. I accepted findings where the claimed skill follows from the official-source-backed method, removed unsupported techniques, separated primary outcomes from independently reusable supporting outcomes, and kept implementation choices such as data-structure backends unstated when Inventory does not require them. I also checked that each added or revised Outcome has a unique owning Tag and fits its learning unit. This review uses the manifest's self-review route because the solo maintainer is the recorded owner; no third-party review is claimed.",
+    "rationale": "Self-review under the fixed manifest's requiredMode=self and highRiskSelfReviewReason=solo_maintainer. Traced all six findings in semantic-placement-full-review-2026-09-27.md to their technique-inventory records and confirmed the stated transformations and invariants. Corrected Euler existence versus construction outcomes for ABC286-G and ABC336-G, with the shared existence Outcome covering undirected odd-degree and directed in/out-degree conditions; added ABC295-Ex frontier-profile support; removed ABC300-Ex subset-state support; added ABC459-G two-variable convex lattice optimization while retaining integer-solvability as a co-primary; and removed ABC464-G prefix-difference support. Preserved Inventory evidence and ran the manifest-declared policy, output, human-review, schema, and integration checks.",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-26T13:38:56.577Z"
+    "confirmedAt": "2026-09-26T17:58:52.033Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-26T13:38:56.577Z",
-  "evidenceDigest": "bbb7e8d34b7785dc2383ad313d9cb73eeec1867762211d9b5085c1291b0066b1"
+  "generatedAt": "2026-09-26T17:58:52.033Z",
+  "evidenceDigest": "ce5e52b3f868cae4cc30406bbd3e6b8e2f08102d90298c3bb85e54b86fe3fae9"
 }

@@ -469,6 +469,9 @@ const UNIT_EXCLUDED_TOPICS: Readonly<Record<string, readonly string[]>> = {
     '直線群の最小値・最大値queryはConvex Hull Trick・直線包絡で扱う。凸性を使わない一般のevent sweepや座標圧縮も対象外とする。',
   ],
   'unit-discrete-convex': ['真偽値の単調境界探索と、交換論だけで決まる貪欲順。'],
+  'unit-two-variable-convex-lattice-optimization': [
+    '一変数の傾き単調性やternary searchだけで解く凸最適化、および連続最小点から整数近傍への保証を持たない一般の格子探索。',
+  ],
   'unit-constructive-witness': ['存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。'],
 };
 
@@ -890,6 +893,12 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     'unit-chapter-math-geometry',
     [],
   ),
+  section(
+    'unit-two-variable-convex-lattice-optimization',
+    '二変数の凸区分線形整数最適化',
+    'unit-chapter-geometry-optimization',
+    [],
+  ),
   section('unit-constructive-witness', '成立証明から構成解を復元する', 'unit-chapter-modeling', []),
 ];
 
@@ -1118,6 +1127,8 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
     '向きと交差を判定できた後、点集合を凸包へ絞る方法と、半平面の共通部分として実行可能領域を表す方法を学ぶ。直線群の最小値・最大値queryは直線包絡の単元で扱う。',
   'unit-discrete-convex':
     '目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。',
+  'unit-two-variable-convex-lattice-optimization':
+    '整数解を二つの自由parameterで表し、折れ目直線の交点から連続最小候補を作る。定数半径の格子点に整数最適解があることを証明して、大域探索を有限近傍の評価へ縮約する。',
   'unit-separable-convex-marginals':
     '離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。',
 };
@@ -4217,15 +4228,15 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-euler-trail-circuit',
     name: 'Euler trail・circuit',
     definition:
-      '全辺を一度ずつ使うwalkの連結性と入出次数条件を判定し、Hierholzer法でtrail/circuitを構成する。',
+      '全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。',
     parentId: 'tag-graph-model-structure',
-    outcomeIds: ['outcome-construct-euler-trail-or-circuit'],
+    outcomeIds: ['outcome-check-euler-trail-existence', 'outcome-construct-euler-trail-or-circuit'],
     unitIds: ['unit-euler-trail-circuit'],
     recall: ['Euler trail', 'Euler circuit', 'Hierholzer', 'オイラー路', '一筆書き'],
     object: ['辺', 'walk', '次数'],
     trigger: ['全辺を一度', '一筆書き'],
-    invariant: ['連結性', '入出次数差', '未使用辺'],
-    goal: ['trail判定', 'walk構成'],
+    invariant: ['辺を持つ頂点の連結性', '奇数次数または入出次数差', '未使用辺'],
+    goal: ['trail・circuitの存在判定', 'walk構成'],
     priority: 76,
   },
   {
@@ -5060,6 +5071,23 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     invariant: ['単調な傾き', '局所=大域最適'],
     goal: ['最小点', '最大点'],
     priority: 61,
+  },
+  {
+    id: 'tag-two-variable-convex-lattice-optimization',
+    name: '二変数の凸区分線形格子最適化',
+    definition:
+      '二つの整数parameter上の凸区分線形目的について、折れ目直線の交点から連続最小候補を作り、定数半径内に整数最適解があることを証明して有限格子点へ縮約する。',
+    parentId: 'tag-geometry-optimization-structure',
+    outcomeIds: ['outcome-optimize-two-variable-convex-lattice-function'],
+    unitIds: ['unit-two-variable-convex-lattice-optimization'],
+    recall: ['two-variable convex lattice optimization', '二変数凸最適化', '区分線形凸整数最適化'],
+    object: ['二つの整数parameter', '凸区分線形目的関数', '格子点'],
+    trigger: ['二変数の整数最適化', '有限本の折れ目直線', '連続最小点近傍の格子候補'],
+    invariant: ['凸性', '折れ目直線の交点', '整数最適点までの定数距離'],
+    goal: ['整数最小値', '有限近傍の全探索', '大域最適解'],
+    exclude: ['一変数の傾き単調性だけで最小点を探す目的関数'],
+    representativeProblemIds: ['abc459-g'],
+    priority: 94,
   },
   {
     id: 'tag-slope-trick',
@@ -6180,6 +6208,10 @@ const OUTCOME_STATEMENTS: Readonly<Record<string, string>> = {
     '二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。',
   'outcome-characterize-walk-by-degrees':
     '全辺ウォークの成立条件または選択辺集合の次数parity条件を定式化し、連結性・奇数次数・葉からの処理で判定または構成できる。',
+  'outcome-check-euler-trail-existence':
+    '無向graphでは辺を持つ部分の連結性と奇数次数頂点数が0または2であることを調べ、有向graphでは辺を持つ部分の弱連結性と入次数・出次数の差（trailなら始点+1、終点−1、他0、circuitなら全頂点0）を調べ、全辺を一度ずつ使うtrail・circuitの存在を判定できる。',
+  'outcome-optimize-two-variable-convex-lattice-function':
+    '二変数の凸区分線形目的について折れ目直線の交点で連続最小候補を求め、定数距離内に整数最適点があることを証明して有限個の近傍格子点だけを評価できる。',
   'outcome-identify-bridges-and-articulations':
     'DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。',
   'outcome-use-cycle-space-basis':
@@ -6487,6 +6519,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-compose-finite-functions',
   'outcome-compute-subset-convolution',
   'outcome-construct-degree-parity-subgraph',
+  'outcome-construct-euler-trail-or-circuit',
   'outcome-contract-monotone-paths-with-jump-pointers',
   'outcome-count-euler-circuits-by-best',
   'outcome-accelerate-iteration-by-characteristic-p-frobenius',
@@ -6528,6 +6561,7 @@ export const SINGLE_PROBLEM_OUTCOME_IDS: readonly string[] = [
   'outcome-map-graph-cycle-xor-to-span',
   'outcome-minimize-xor-coset-representative',
   'outcome-solve-xor-threshold-matching',
+  'outcome-optimize-two-variable-convex-lattice-function',
 ];
 export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-additive-expectation-potential',
@@ -6581,6 +6615,7 @@ export const SINGLE_PROBLEM_UNIT_IDS: readonly string[] = [
   'unit-virtual-tree',
   'unit-weighted-bipartite-matching',
   'unit-xor-threshold-matching',
+  'unit-two-variable-convex-lattice-optimization',
 ];
 export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-additive-expectation-potential',
@@ -6640,6 +6675,7 @@ export const SINGLE_PROBLEM_TAG_IDS: readonly string[] = [
   'tag-weighted-bipartite-matching',
   'tag-edit-distance-dp',
   'tag-tree-distance-residue',
+  'tag-two-variable-convex-lattice-optimization',
 ];
 
 const outcomeById = new Map(FINAL_TAXONOMY_OUTCOMES.map((outcome) => [outcome.id, outcome]));
@@ -8030,7 +8066,12 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
   {
     from: 'outcome-characterize-walk-by-degrees',
     to: 'outcome-construct-euler-trail-or-circuit',
-    problemIds: ['abc227-h', 'abc286-g', 'abc336-g'],
+    problemIds: ['abc227-h'],
+  },
+  {
+    from: 'outcome-characterize-walk-by-degrees',
+    to: 'outcome-check-euler-trail-existence',
+    problemIds: ['abc286-g', 'abc336-g'],
   },
   {
     from: 'outcome-characterize-walk-by-degrees',
@@ -8163,7 +8204,6 @@ const OUTCOME_REFINEMENT_GROUPS: readonly OutcomeRefinementGroup[] = [
       'abc263-g',
       'abc314-ex',
       'abc330-f',
-      'abc459-g',
       'abc462-e',
     ],
   },
@@ -8722,9 +8762,6 @@ const supportingOutcomeAdditionsByProblemId: Readonly<
       outcomeId: 'outcome-augment-components-with-metadata',
       claimPaths: ['/typicalTechniques/0', '/prerequisiteCandidates/0'],
     },
-  ],
-  'abc295-ex': [
-    { outcomeId: 'outcome-enumerate-subset-state-space', claimPaths: ['/typicalTechniques/0'] },
   ],
   'abc296-ex': [
     {

@@ -795,6 +795,10 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
     '青色',
     '単峰性や差分の単調性を証明し、三分探索・整数境界で最適点を求める。',
   ],
+  'unit-two-variable-convex-lattice-optimization': [
+    '橙色',
+    '折れ目直線の交点から連続最小候補を作り、整数最適点が入る有限近傍を証明する。',
+  ],
   'unit-separable-convex-marginals': [
     '青色',
     '単調な限界費用の列を導き、heapや閾値計数で必要個数を選ぶ。',

@@ -59,4 +59,4 @@ DAGのtopological processingで得た考え方と実装を再利用し、SCC・�
 - [ABC374 G 公式解説](https://atcoder.jp/contests/abc374/editorial/11099)
 - [ABC374 G 公式問題文](https://atcoder.jp/contests/abc374/tasks/abc374_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-scc-condensation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-scc-condensation`

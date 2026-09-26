@@ -102,6 +102,19 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/0': [sameTag('outcome-construct-euler-trail-or-circuit')],
     '/prerequisiteCandidates/1': [sameTag('outcome-model-max-flow-min-cut')],
   },
+  'abc459-g': {
+    '/typicalTechniques/0': [primary('outcome-characterize-integer-solvability')],
+    '/typicalTechniques/1': [
+      primary('outcome-optimize-two-variable-convex-lattice-function'),
+      supporting('outcome-enumerate-bounded-candidates-or-cases'),
+    ],
+    '/prerequisiteCandidates/0': [
+      sameTag(
+        'outcome-characterize-integer-solvability',
+        'outcome-optimize-two-variable-convex-lattice-function',
+      ),
+    ],
+  },
   'abc371-g': {
     '/typicalTechniques/0': [supporting('outcome-decompose-functional-graph')],
     '/typicalTechniques/1': [

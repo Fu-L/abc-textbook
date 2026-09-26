@@ -3,7 +3,7 @@ title: "Lagrangian relaxation・Aliens trick"
 description: "「Lagrangian relaxation・Aliens trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 228
+  order: 229
 ---
 
 # Lagrangian relaxation・Aliens trick
@@ -58,4 +58,4 @@ sidebar:
 - [ABC393 G 公式解説](https://atcoder.jp/contests/abc393/editorial/12192)
 - [ABC393 G 公式問題文](https://atcoder.jp/contests/abc393/tasks/abc393_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `1d03846ca5c5afa48c210e3527c3d0a048880fc11e6612e8ba16e5387f6de90a` / LearningUnit `unit-lagrangian-relaxation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-lagrangian-relaxation`

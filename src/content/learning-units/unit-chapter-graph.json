@@ -59,6 +59,7 @@
     "outcome-augment-components-with-metadata",
     "outcome-build-shortest-path-certificate",
     "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-check-euler-trail-existence",
     "outcome-color-and-classify-bipartite-components",
     "outcome-compute-all-pairs-distance",
     "outcome-compute-directed-walk-period",
