@@ -10,7 +10,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-modeling',
     introduction:
-      'まず全列挙と可逆な探索から正しい基準解を作り、正規化・座標圧縮・寄与分解で扱う対象を減らす。分割統治と半分全列挙で探索空間を分け、単調探索・尺取り・交換論で候補を捨てる理由を学ぶ。構成とゲームの不変量を経て、逆順処理・event走査・償却解析を組み合わせ、多数の判定や局所変更を処理する。対話と情報量、乱択と誤り評価を学んだ後、kineticな順序更新とXOR閾値matchingを複合的な発展として扱う。',
+      'まず全列挙と可逆な探索から正しい基準解を作り、正規化・座標圧縮・寄与分解で扱う対象を減らす。分割統治と半分全列挙で探索空間を分け、単調探索・尺取り・交換論で候補を捨てる理由を学ぶ。構成解の復元に続けて、逆順処理・event走査・償却解析・parallel binary search・変更影響の局所化まで汎用的な設計手法を学ぶ。その後にゲーム固有の偶奇不変量へ進み、対話と情報量、乱択と誤り評価を学んだ後、kineticな順序更新とXOR閾値matchingを複合的な発展として扱う。',
     unitIds: [
       'unit-bounded-enumeration',
       'unit-backtracking-search',
@@ -25,7 +25,6 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-greedy-exchange',
       'unit-bitwise-greedy-feasibility',
       'unit-constructive-witness',
-      'unit-game-parity-invariant',
       'unit-reverse-offline',
       'unit-event-sweep',
       'unit-decomposition-amortization',
@@ -34,6 +33,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-threshold-heavy-light',
       'unit-parallel-binary-search',
       'unit-change-impact-localization',
+      'unit-game-parity-invariant',
       'unit-interactive-protocol',
       'unit-information-theoretic-query-design',
       'unit-randomized-algorithms',

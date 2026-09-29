@@ -1,7 +1,7 @@
 # PR #63 のUnit読書順フォローアップ
 
 PR
-#63の初回レビューでは、データ構造・DP・グラフ・組合せ/代数の4章を再編した。追加レビューでは、グラフ章のflow節を基礎と発展に分け、木・文字列・幾何/最適化の3章にも標準典型を先に学ぶ順序を適用する。これで読書順を編集し直す章は計7章となり、モデリングと数論の2章は変更しない。
+#63の初回レビューでは、データ構造・DP・グラフ・組合せ/代数の4章を再編した。追加レビューでは、グラフ章のflow節を基礎と発展に分け、木・文字列・幾何/最適化の3章にも標準典型を先に学ぶ順序を適用した。さらに後続レビューでモデリング章のゲーム不変量を汎用設計手法の後ろへ移したため、読書順を編集した章は計8章となり、数論章は変更しない。
 
 判断の基準はDifficulty順ではなく、ABCで身につける再利用頻度の高い標準手法を先に揃え、特殊な構造や専門的な発展へ進むこと。Unit内の問題順は今回の対象外とし、problem
 placementと意味上の`parentId`も変更しない。
@@ -52,6 +52,11 @@ Unitは相対順を保ち、各配列全体を契約テストで固定する。
 
 この追加変更でも、`parentId`と前提DAGのdigestは維持する。変更対象外のUnit順・problem
 placement・Unit内の問題順は変更しない。
+
+## 追加レビュー: モデリング章
+
+`constructive-witness`の後に`reverse-offline`、`event-sweep`、償却解析、heavy/light、parallel binary
+search、`change-impact-localization`を続け、再利用頻度の高い設計toolkitを先に揃える。その後に独立性の高い`game-parity-invariant`を置き、`interactive-protocol`以降の順序は維持する。モデリング章の全Unit順を契約テストで固定し、この1Unitの移動以外に相対順の変更がないことを確認する。意味上の親と直接前提は変更しない。
 
 木では一般木のDP・部分木・祖先・pathの道具を先に揃えてからimplicit complete binary
 treeへ進む。文字列ではsuffix array/LCPをrun-lengthやrecursive compressed

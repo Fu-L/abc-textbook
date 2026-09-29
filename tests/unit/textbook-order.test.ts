@@ -28,6 +28,39 @@ const expectAdjacentSequence = (chapterId: string, before: string, after: string
 };
 
 describe('textbook Unit reading order', () => {
+  it('completes the reusable design toolkit before game-specific parity strategy', () => {
+    expect(chapterUnitIds('unit-chapter-modeling')).toEqual([
+      'unit-bounded-enumeration',
+      'unit-backtracking-search',
+      'unit-normalization',
+      'unit-coordinate-compression',
+      'unit-contribution-reordering',
+      'unit-divide-enumeration',
+      'unit-recursive-divide-and-conquer',
+      'unit-meet-in-the-middle',
+      'unit-monotone-search',
+      'unit-two-pointers-window',
+      'unit-greedy-exchange',
+      'unit-bitwise-greedy-feasibility',
+      'unit-constructive-witness',
+      'unit-reverse-offline',
+      'unit-event-sweep',
+      'unit-decomposition-amortization',
+      'unit-amortized-monotone-progress',
+      'unit-small-to-large',
+      'unit-threshold-heavy-light',
+      'unit-parallel-binary-search',
+      'unit-change-impact-localization',
+      'unit-game-parity-invariant',
+      'unit-interactive-protocol',
+      'unit-information-theoretic-query-design',
+      'unit-randomized-algorithms',
+      'unit-randomized-algebraic-fingerprint',
+      'unit-kinetic-order-maintenance',
+      'unit-xor-threshold-matching',
+    ]);
+  });
+
   it('introduces range actions immediately after the range monoid summary', () => {
     expectReadingSequence('unit-chapter-query', [
       'unit-prefix-aggregate',

@@ -50,7 +50,7 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 
 ## 概要
 
-まず全列挙と可逆な探索から正しい基準解を作り、正規化・座標圧縮・寄与分解で扱う対象を減らす。分割統治と半分全列挙で探索空間を分け、単調探索・尺取り・交換論で候補を捨てる理由を学ぶ。構成とゲームの不変量を経て、逆順処理・event走査・償却解析を組み合わせ、多数の判定や局所変更を処理する。対話と情報量、乱択と誤り評価を学んだ後、kineticな順序更新とXOR閾値matchingを複合的な発展として扱う。
+まず全列挙と可逆な探索から正しい基準解を作り、正規化・座標圧縮・寄与分解で扱う対象を減らす。分割統治と半分全列挙で探索空間を分け、単調探索・尺取り・交換論で候補を捨てる理由を学ぶ。構成解の復元に続けて、逆順処理・event走査・償却解析・parallel binary search・変更影響の局所化まで汎用的な設計手法を学ぶ。その後にゲーム固有の偶奇不変量へ進み、対話と情報量、乱択と誤り評価を学んだ後、kineticな順序更新とXOR閾値matchingを複合的な発展として扱う。
 
 ### モデル変換
 
@@ -99,7 +99,6 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [交換論から選択順を導く](/learn/modeling/greedy-exchange/) — 水色
 - [bitwise greedyによるmask最適化](/learn/modeling/bitwise-greedy-feasibility/) — 水色
 - [成立証明から構成解を復元する](/learn/modeling/constructive-witness/) — 水色
-- [偶奇不変量からゲームの勝敗を決める](/learn/modeling/game-parity-invariant/) — 青色
 - [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 水色
 - [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 水色
 - [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 水色（導入）
@@ -108,6 +107,7 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色。概念上の親: [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/)
 - [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 青色
 - [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 青色
+- [偶奇不変量からゲームの勝敗を決める](/learn/modeling/game-parity-invariant/) — 青色
 - [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 緑色
 - [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 水色
 - [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 青色

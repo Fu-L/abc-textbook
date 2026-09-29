@@ -3,7 +3,7 @@ title: "small-to-large・DSU on Tree"
 description: "「small-to-large・DSU on Tree」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 19
+  order: 18
 ---
 
 # small-to-large・DSU on Tree

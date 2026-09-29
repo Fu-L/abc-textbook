@@ -3,7 +3,7 @@ title: "基準witnessから変更影響を局所化する"
 description: "「基準witnessから変更影響を局所化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 22
+  order: 21
 ---
 
 # 基準witnessから変更影響を局所化する

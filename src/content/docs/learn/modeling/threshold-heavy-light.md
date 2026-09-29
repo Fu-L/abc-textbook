@@ -3,7 +3,7 @@ title: "平方根・閾値による軽重分類"
 description: "「平方根・閾値による軽重分類」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 20
+  order: 19
 ---
 
 # 平方根・閾値による軽重分類

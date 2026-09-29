@@ -3,7 +3,7 @@ title: "event順にactive集合を更新する"
 description: "「event順にactive集合を更新する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 16
+  order: 15
 ---
 
 # event順にactive集合を更新する

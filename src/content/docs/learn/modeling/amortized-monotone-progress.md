@@ -3,7 +3,7 @@ title: "単調進行による償却解析"
 description: "「単調進行による償却解析」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 18
+  order: 17
 ---
 
 # 単調進行による償却解析
