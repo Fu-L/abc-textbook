@@ -3,7 +3,7 @@ title: "候補数を界して全列挙・有限case分解する"
 description: "「候補数を界して全列挙・有限case分解する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 4
+  order: 1
 ---
 
 # 候補数を界して全列挙・有限case分解する

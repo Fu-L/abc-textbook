@@ -3,7 +3,7 @@ title: "meet-in-the-middle・半分全列挙"
 description: "「meet-in-the-middle・半分全列挙」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 9
+  order: 8
 ---
 
 # meet-in-the-middle・半分全列挙

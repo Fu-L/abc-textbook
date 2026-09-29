@@ -3,7 +3,7 @@ title: "kinetic sorting・交差event順序更新"
 description: "「kinetic sorting・交差event順序更新」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 17
+  order: 27
 ---
 
 # kinetic sorting・交差event順序更新

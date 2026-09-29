@@ -3,7 +3,7 @@ title: "包含木の構築とancestor・path分解"
 description: "「包含木の構築とancestor・path分解」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 133
+  order: 135
 ---
 
 # 包含木の構築とancestor・path分解
@@ -30,9 +30,9 @@ sidebar:
 
 ## 下位単元
 
-- [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
 - [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
 - [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
+- [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
 - [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
 - [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
 

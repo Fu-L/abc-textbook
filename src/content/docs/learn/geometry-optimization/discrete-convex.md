@@ -3,7 +3,7 @@ title: "凸性・傾き・限界費用・slope trick"
 description: "「凸性・傾き・限界費用・slope trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 223
+  order: 222
 ---
 
 # 凸性・傾き・限界費用・slope trick
@@ -32,8 +32,8 @@ sidebar:
 
 - [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 青色
 - [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 青色
-- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色
 - [slope trick](/learn/geometry-optimization/slope-trick/) — 黄色
+- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色
 - [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 橙色
 - [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 橙色
 

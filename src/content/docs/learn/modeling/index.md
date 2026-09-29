@@ -14,7 +14,7 @@ sidebar:
 
 ## 本書の読み方
 
-分野別の目次は概念の親子関係を表し、目次の並びは編集上の案内です。必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。
+各章の「章の構成」は、前提知識・難易度・関連する手法の比較を考えて編成した読書順です。概念の親子関係は各Unitの「下位単元」で確認できます。目次の並びは編集上の案内であり、必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。
 
 「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。
 
@@ -50,7 +50,7 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 
 ## 概要
 
-問題を既知の算法へ写すための共通言語を学ぶ。状態の同一視と寄与の分解から始め、探索空間の分割、交換論による貪欲法、単調性による探索へ進む。後半では処理順と総仕事量を設計し、乱択・対話・局面列挙を省くゲーム戦略によって使える情報そのものを考える。以後の各章でも、何を保存する変換なのか、候補を捨ててよい理由は何かをこの章へ戻って確認する。
+まず全列挙と可逆な探索から正しい基準解を作り、正規化・座標圧縮・寄与分解で扱う対象を減らす。分割統治と半分全列挙で探索空間を分け、単調探索・尺取り・交換論で候補を捨てる理由を学ぶ。構成とゲームの不変量を経て、逆順処理・event走査・償却解析を組み合わせ、多数の判定や局所変更を処理する。対話と情報量、乱択と誤り評価を学んだ後、kineticな順序更新とXOR閾値matchingを複合的な発展として扱う。
 
 ### モデル変換
 
@@ -84,34 +84,36 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 
 ## 章の構成
 
+以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+
+- [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/) — 緑色
+- [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/) — 緑色
 - [同値な状態を正規化する](/learn/modeling/normalization/) — 水色
 - [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/) — 緑色
 - [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/) — 緑色
-- [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/) — 緑色
-- [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/) — 緑色
 - [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/) — 水色（導入）
-  - [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色
-  - [XOR閾値matchingのbit分割再帰](/learn/modeling/xor-threshold-matching/) — 赤色
-  - [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色
+- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色
+- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色
+- [単調境界を証明して探索する](/learn/modeling/monotone-search/) — 緑色
+- [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/) — 緑色
 - [交換論から選択順を導く](/learn/modeling/greedy-exchange/) — 水色
 - [bitwise greedyによるmask最適化](/learn/modeling/bitwise-greedy-feasibility/) — 水色
 - [成立証明から構成解を復元する](/learn/modeling/constructive-witness/) — 水色
-- [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 青色
-- [単調境界を証明して探索する](/learn/modeling/monotone-search/) — 緑色
-- [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/) — 緑色
-- [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 水色
-  - [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 橙色
-- [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 水色
-- [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 青色
-- [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 水色（導入）
-  - [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 水色
-  - [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 青色
-  - [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色
-- [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 青色
-  - [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色
-- [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 緑色
 - [偶奇不変量からゲームの勝敗を決める](/learn/modeling/game-parity-invariant/) — 青色
+- [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 水色
+- [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 水色
+- [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 水色（導入）
+- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 水色
+- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 青色
+- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色
+- [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 青色
+- [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 青色
+- [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 緑色
 - [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 水色
+- [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 青色
+- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色
+- [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 橙色
+- [XOR閾値matchingのbit分割再帰](/learn/modeling/xor-threshold-matching/) — 赤色
 
 ## 問題一覧
 

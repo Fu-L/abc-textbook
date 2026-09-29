@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-位置関係と凸性から、調べる候補を絞る。まず座標・向き・円環順序の判定を揃え、凸包と半平面の共通部分を扱う。直線包絡を境に、幾何的な境界から関数の最適化へ視点を移す。凸最適化のまとまりで限界費用、傾き、順序制約、罰則係数、Monge性を比較し、比率目的の判定問題への変換へ進む。DP・データ構造・flowで得た表現を組み合わせる章として読む。
+座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。関数の凸性と単峰性を学び、限界値の選択と比率目的の判定化を比較する。続いて直線包絡とslope trickで最適値や関数を保持し、順序制約のPAV、個数制約を罰則へ移すAliens trick、遷移行列のMonge性へ進む。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。
 
 ### 幾何・凸最適化への変換
 
@@ -40,21 +40,23 @@ orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進
 
 ## 章の構成
 
+以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+
 - [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/) — 水色
-  - [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 青色
+- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 青色
 - [凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/) — 青色（導入）
-  - [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 青色
-  - [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 黄色
-- [Convex Hull Trick・直線包絡](/learn/geometry-optimization/line-envelope/) — 黄色
+- [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 青色
+- [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 黄色
 - [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/) — 青色（導入）
-  - [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 青色
-- [二変数の凸区分線形整数最適化](/learn/geometry-optimization/two-variable-convex-lattice-optimization/) — 橙色
-  - [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 青色
-  - [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色
-  - [slope trick](/learn/geometry-optimization/slope-trick/) — 黄色
-  - [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 橙色
-  - [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 橙色
+- [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 青色
+- [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 青色
 - [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/) — 青色
+- [Convex Hull Trick・直線包絡](/learn/geometry-optimization/line-envelope/) — 黄色
+- [slope trick](/learn/geometry-optimization/slope-trick/) — 黄色
+- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色
+- [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 橙色
+- [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 橙色
+- [二変数の凸区分線形整数最適化](/learn/geometry-optimization/two-variable-convex-lattice-optimization/) — 橙色
 
 ## 問題一覧
 

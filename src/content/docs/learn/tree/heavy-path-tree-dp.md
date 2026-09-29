@@ -3,7 +3,7 @@ title: "heavy path上の多項式木DP"
 description: "「heavy path上の多項式木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 142
+  order: 145
 ---
 
 # heavy path上の多項式木DP

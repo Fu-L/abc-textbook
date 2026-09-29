@@ -3,7 +3,7 @@ title: "鏡像法・reflection principle"
 description: "「鏡像法・reflection principle」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 186
+  order: 185
 ---
 
 # 鏡像法・reflection principle

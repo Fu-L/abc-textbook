@@ -3,7 +3,7 @@ title: "ancestor query・LCA"
 description: "「ancestor query・LCA」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 136
+  order: 137
 ---
 
 # ancestor query・LCA

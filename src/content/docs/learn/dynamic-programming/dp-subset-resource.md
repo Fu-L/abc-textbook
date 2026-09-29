@@ -3,7 +3,7 @@ title: "資源・容量DP"
 description: "「資源・容量DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 69
+  order: 64
 ---
 
 # 資源・容量DP

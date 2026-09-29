@@ -3,7 +3,7 @@ title: "rake・compressで動的木DPを保つ"
 description: "「rake・compressで動的木DPを保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 147
+  order: 146
 ---
 
 # rake・compressで動的木DPを保つ

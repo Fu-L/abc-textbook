@@ -3,7 +3,7 @@ title: "値軸のbucket分割と区間集約"
 description: "「値軸のbucket分割と区間集約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 49
+  order: 48
 ---
 
 # 値軸のbucket分割と区間集約

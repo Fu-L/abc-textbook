@@ -3,7 +3,7 @@ title: "要素索引と連結リストで局所linkを更新する"
 description: "「要素索引と連結リストで局所linkを更新する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 30
+  order: 31
 ---
 
 # 要素索引と連結リストで局所linkを更新する

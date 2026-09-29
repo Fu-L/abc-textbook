@@ -3,7 +3,7 @@ title: "Suffix Automatonで部分文字列集合を表す"
 description: "「Suffix Automatonで部分文字列集合を表す」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 159
+  order: 161
 ---
 
 # Suffix Automatonで部分文字列集合を表す

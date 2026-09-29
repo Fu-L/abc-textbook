@@ -3,7 +3,7 @@ title: "frontier/profile DP・境界状態圧縮"
 description: "「frontier/profile DP・境界状態圧縮」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 72
+  order: 81
 ---
 
 # frontier/profile DP・境界状態圧縮

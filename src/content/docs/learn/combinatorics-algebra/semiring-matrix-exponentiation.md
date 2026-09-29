@@ -3,7 +3,7 @@ title: "半環行列・min-plus/max-min遷移"
 description: "「半環行列・min-plus/max-min遷移」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 200
+  order: 190
 ---
 
 # 半環行列・min-plus/max-min遷移

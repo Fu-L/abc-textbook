@@ -3,7 +3,7 @@ title: "monoid exponentiation・連結演算doubling"
 description: "「monoid exponentiation・連結演算doubling」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 195
+  order: 189
 ---
 
 # monoid exponentiation・連結演算doubling

@@ -3,7 +3,7 @@ title: "標数pのFrobenius恒等式による反復高速化"
 description: "「標数pのFrobenius恒等式による反復高速化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 181
+  order: 179
 ---
 
 # 標数pのFrobenius恒等式による反復高速化

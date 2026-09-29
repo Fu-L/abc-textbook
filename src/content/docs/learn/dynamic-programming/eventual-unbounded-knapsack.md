@@ -3,7 +3,7 @@ title: "大容量unbounded knapsackのeventual linearity"
 description: "「大容量unbounded knapsackのeventual linearity」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 70
+  order: 83
 ---
 
 # 大容量unbounded knapsackのeventual linearity

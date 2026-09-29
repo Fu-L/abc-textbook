@@ -3,7 +3,7 @@ title: "Aho–Corasick"
 description: "「Aho–Corasick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 157
+  order: 159
 ---
 
 # Aho–Corasick

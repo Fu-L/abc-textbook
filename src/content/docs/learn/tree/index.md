@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-木の一意な経路と部分木への分解を使う。距離・直径から始め、Euler順とLCAで位置関係を表し、path分解と必要頂点だけの圧縮へ進む。次に木DPのまとまりで部分木集約・全方位DP・多項式合成を比較し、重心分解、併合履歴、縮約による最適化へ広げる。軽い子の処理回数、path上の合成、rake・compressがそれぞれ何を高速化するかを区別する。多項式木DPに進むときは代数章の畳み込みを参照する。
+一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化してから、包含関係や併合履歴を木にする方法を学ぶ。HLD・virtual tree・重心分解では、それぞれpath、必要頂点、均衡分離点を使った計算量削減を比較する。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。
 
 ### 木モデルと構造
 
@@ -40,24 +40,26 @@ sidebar:
 
 ## 章の構成
 
+以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+
 - [基準点からの木距離・剰余類・直径・中心](/learn/tree/tree-metric/) — 水色
-- [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/) — 橙色
 - [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/) — 水色
-- [包含木の構築とancestor・path分解](/learn/tree/tree-decomposition/) — 水色（導入）
-  - [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
-  - [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
-  - [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
-  - [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
-  - [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
 - [木DP・集約・rerooting](/learn/tree/tree-aggregation/) — 水色（導入）
-  - [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色
-  - [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色
-  - [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/) — 橙色
-- [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/) — 黄色
+- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色
+- [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色
+- [包含木の構築とancestor・path分解](/learn/tree/tree-decomposition/) — 水色（導入）
+- [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
+- [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
+- [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
 - [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/) — 青色
+- [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
+- [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
+- [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/) — 黄色
+- [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/) — 橙色
 - [01 on Tree・親先行順序のcluster縮約](/learn/tree/tree-precedence-contraction/) — 橙色
-- [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/) — 赤色
+- [heavy path上の多項式木DP](/learn/tree/heavy-path-tree-dp/) — 橙色
 - [rake・compressで動的木DPを保つ](/learn/tree/static-top-tree/) — 橙色
+- [資源DPを引数で渡すHLRecDP](/learn/tree/heavy-light-recursive-dp/) — 赤色
 
 ## 問題一覧
 

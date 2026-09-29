@@ -31,8 +31,8 @@ sidebar:
 ## 下位単元
 
 - [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色
-- [XOR閾値matchingのbit分割再帰](/learn/modeling/xor-threshold-matching/) — 赤色
 - [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色
+- [XOR閾値matchingのbit分割再帰](/learn/modeling/xor-threshold-matching/) — 赤色
 
 ## 問題一覧
 

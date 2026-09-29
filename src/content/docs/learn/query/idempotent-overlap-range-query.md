@@ -3,7 +3,7 @@ title: "冪等演算のoverlap range query・Sparse Table"
 description: "「冪等演算のoverlap range query・Sparse Table」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 42
+  order: 41
 ---
 
 # 冪等演算のoverlap range query・Sparse Table

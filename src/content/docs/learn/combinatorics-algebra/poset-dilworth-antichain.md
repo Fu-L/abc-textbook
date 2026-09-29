@@ -3,7 +3,7 @@ title: "半順序・Dilworth・最大反鎖"
 description: "「半順序・Dilworth・最大反鎖」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 192
+  order: 199
 ---
 
 # 半順序・Dilworth・最大反鎖

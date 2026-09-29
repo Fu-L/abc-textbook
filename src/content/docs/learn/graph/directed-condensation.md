@@ -3,7 +3,7 @@ title: "SCCで閉路・DAG順・2-SATを処理する"
 description: "「SCCで閉路・DAG順・2-SATを処理する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 96
+  order: 100
 ---
 
 # SCCで閉路・DAG順・2-SATを処理する
@@ -31,10 +31,10 @@ sidebar:
 ## 下位単元
 
 - [DAGのtopological processing](/learn/graph/dag-topological-processing/) — 緑色
-- [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 水色
 - [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) — 水色
-- [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 黄色
+- [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 水色
 - [2-SAT・含意グラフ](/learn/graph/two-sat/) — 青色
+- [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 黄色
 
 ## 問題一覧
 

@@ -3,7 +3,7 @@ title: "上位bitの支配関係によるXOR minimax"
 description: "「上位bitの支配関係によるXOR minimax」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 56
+  order: 52
 ---
 
 # 上位bitの支配関係によるXOR minimax

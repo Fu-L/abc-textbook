@@ -3,7 +3,7 @@ title: "XOR閾値matchingのbit分割再帰"
 description: "「XOR閾値matchingのbit分割再帰」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 8
+  order: 28
 ---
 
 # XOR閾値matchingのbit分割再帰

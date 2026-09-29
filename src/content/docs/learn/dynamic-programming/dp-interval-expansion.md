@@ -3,7 +3,7 @@ title: "区間拡張DP"
 description: "「区間拡張DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 68
+  order: 67
 ---
 
 # 区間拡張DP

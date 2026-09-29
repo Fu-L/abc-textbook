@@ -3,7 +3,7 @@ title: "有向walkの周期・cycle差分gcd"
 description: "「有向walkの周期・cycle差分gcd」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 100
+  order: 119
 ---
 
 # 有向walkの周期・cycle差分gcd

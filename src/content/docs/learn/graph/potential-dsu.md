@@ -3,7 +3,7 @@ title: "potential・weighted DSU"
 description: "「potential・weighted DSU」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 108
+  order: 98
 ---
 
 # potential・weighted DSU

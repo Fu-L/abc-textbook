@@ -3,7 +3,7 @@ title: "平面graph双対・cut/path対応"
 description: "「平面graph双対・cut/path対応」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 128
+  order: 126
 ---
 
 # 平面graph双対・cut/path対応

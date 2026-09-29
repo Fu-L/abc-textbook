@@ -3,7 +3,7 @@ title: "Segment Tree Beats"
 description: "「Segment Tree Beats」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 48
+  order: 58
 ---
 
 # Segment Tree Beats

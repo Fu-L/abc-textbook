@@ -3,7 +3,7 @@ title: "LIS・末尾の支配関係"
 description: "「LIS・末尾の支配関係」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 64
+  order: 74
 ---
 
 # LIS・末尾の支配関係

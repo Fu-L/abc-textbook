@@ -95,6 +95,10 @@ describe('T047–T050 canonical taxonomy materialization', () => {
 
     for (const chapter of TEXTBOOK_CHAPTERS) {
       const chapterDocument = byId.get(chapter.id)?.document ?? '';
+      const contents = chapterDocument.split('## 章の構成\n')[1]?.split('\n## ')[0] ?? '';
+      // Reading order may separate a semantic parent from its advanced lessons.
+      // Such lessons must not become Markdown children of the preceding lesson.
+      expect(contents).not.toMatch(/^ +-/mu);
       let previousLinkPosition = -1;
       for (const id of chapter.unitIds) {
         const output = byId.get(id);
@@ -136,9 +140,18 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(textbookIndex('unit-bipartite-structure')).toBeLessThan(
       textbookIndex('unit-shortest-path-certificates'),
     );
-    expect(byId.get('unit-chapter-combinatorics-algebra')?.document).toContain(
-      '    - [subset convolution]',
-    );
+    expect(byId.get('unit-subset-transforms')?.document).toContain('- [subset convolution]');
+    for (const { nodeId, prerequisiteId } of result.learningPrerequisites
+      .learningUnitPrerequisites) {
+      const chapter = TEXTBOOK_CHAPTERS.find(({ unitIds }) =>
+        (unitIds as readonly string[]).includes(nodeId),
+      );
+      if ((chapter?.unitIds as readonly string[] | undefined)?.includes(prerequisiteId)) {
+        expect(textbookIndex(prerequisiteId), `${prerequisiteId} before ${nodeId}`).toBeLessThan(
+          textbookIndex(nodeId),
+        );
+      }
+    }
     expect(unitLearningTarget('unit-dp-state-design').color).toBe('緑色');
     expect(unitLearningTarget('unit-frontier-profile-dp').color).toBe('黄色');
     expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');

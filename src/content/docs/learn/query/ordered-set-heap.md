@@ -3,7 +3,7 @@ title: "heap・ordered setで全候補の極値を保つ"
 description: "「heap・ordered setで全候補の極値を保つ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 31
+  order: 32
 ---
 
 # heap・ordered setで全候補の極値を保つ

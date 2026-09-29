@@ -3,7 +3,7 @@ title: "分離可能線形変換・Walsh–Hadamard変換"
 description: "「分離可能線形変換・Walsh–Hadamard変換」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 199
+  order: 194
 ---
 
 # 分離可能線形変換・Walsh–Hadamard変換

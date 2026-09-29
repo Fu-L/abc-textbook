@@ -3,7 +3,7 @@ title: "循環局面の後退解析とminimax距離"
 description: "「循環局面の後退解析とminimax距離」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 82
+  order: 80
 ---
 
 # 循環局面の後退解析とminimax距離

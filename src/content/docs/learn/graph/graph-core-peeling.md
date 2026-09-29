@@ -3,7 +3,7 @@ title: "閉路数・次数構造からgraph coreとkernelを調べる"
 description: "「閉路数・次数構造からgraph coreとkernelを調べる」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 114
+  order: 111
 ---
 
 # 閉路数・次数構造からgraph coreとkernelを調べる

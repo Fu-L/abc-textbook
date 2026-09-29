@@ -3,7 +3,7 @@ title: "virtual tree・auxiliary tree"
 description: "「virtual tree・auxiliary tree」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 138
+  order: 141
 ---
 
 # virtual tree・auxiliary tree

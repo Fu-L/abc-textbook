@@ -3,7 +3,7 @@ title: "交換論から選択順を導く"
 description: "「交換論から選択順を導く」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 10
+  order: 11
 ---
 
 # 交換論から選択順を導く

@@ -35,8 +35,8 @@ sidebar:
 - [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色
 - [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色
 - [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色
-- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 赤色
 - [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 橙色
+- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 赤色
 
 ## 問題一覧
 

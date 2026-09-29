@@ -3,7 +3,7 @@ title: "Prüfer code・次数制約付きlabel木"
 description: "「Prüfer code・次数制約付きlabel木」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 190
+  order: 195
 ---
 
 # Prüfer code・次数制約付きlabel木

@@ -3,7 +3,7 @@ title: "Rolling fingerprintで列の同値性を比較する"
 description: "「Rolling fingerprintで列の同値性を比較する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 57
+  order: 53
 ---
 
 # Rolling fingerprintで列の同値性を比較する

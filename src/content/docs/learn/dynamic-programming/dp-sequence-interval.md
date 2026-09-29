@@ -35,11 +35,11 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 ## 下位単元
 
 - [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 緑色
-- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
-- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
 - [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色
 - [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色
 - [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色
+- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
+- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
 
 ## 問題一覧
 

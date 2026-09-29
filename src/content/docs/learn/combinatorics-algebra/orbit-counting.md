@@ -3,7 +3,7 @@ title: "群作用・軌道数え上げ"
 description: "「群作用・軌道数え上げ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 191
+  order: 196
 ---
 
 # 群作用・軌道数え上げ

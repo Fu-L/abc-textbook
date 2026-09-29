@@ -3,7 +3,7 @@ title: "01 on Tree・親先行順序のcluster縮約"
 description: "「01 on Tree・親先行順序のcluster縮約」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 145
+  order: 144
 ---
 
 # 01 on Tree・親先行順序のcluster縮約

@@ -3,7 +3,7 @@ title: "Kruskal順の閾値DSU sweep"
 description: "「Kruskal順の閾値DSU sweep」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 112
+  order: 109
 ---
 
 # Kruskal順の閾値DSU sweep
