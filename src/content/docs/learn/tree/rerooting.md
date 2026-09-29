@@ -3,7 +3,7 @@ title: "rerooting・全方位木DP"
 description: "「rerooting・全方位木DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 134
+  order: 133
 ---
 
 # rerooting・全方位木DP

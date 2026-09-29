@@ -114,7 +114,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-graph',
     introduction:
-      '探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木を通して、標準的なgraph toolkitを揃える。橋の判定に続けてmatchingとflowへの標準的な帰着を学ぶ。その後、graph core・cycle space・Eulerの次数条件を基礎に、単調path縮約やnear-tree kernel化などARC上位〜AGC/CF Div.1/UCUP寄りの構造論へ進む。終盤では有向walkの周期、平面双対、path限定の縮約、一般重み付きmatchingを扱う。',
+      '探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。',
     unitIds: [
       'unit-graph-search',
       'unit-state-graph-search',
@@ -140,21 +140,21 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-spanning-tree-optimization',
       'unit-kruskal-threshold-sweep',
       'unit-lowlink-critical-structure',
-      'unit-flow-matching',
-      'unit-bipartite-matching',
-      'unit-max-flow-min-cut',
-      'unit-flow-lower-bounds',
-      'unit-min-cost-flow',
-      'unit-weighted-bipartite-matching',
-      'unit-graph-core-peeling',
-      'unit-graph-core',
-      'unit-cycle-space-basis',
       'unit-euler-degree',
       'unit-euler-trail-circuit',
       'unit-degree-parity-subgraph',
+      'unit-flow-matching',
+      'unit-bipartite-matching',
+      'unit-max-flow-min-cut',
+      'unit-graph-core-peeling',
+      'unit-graph-core',
+      'unit-cycle-space-basis',
       'unit-monotone-path-contraction',
       'unit-near-tree-kernelization',
       'unit-directed-walk-periodicity',
+      'unit-flow-lower-bounds',
+      'unit-min-cost-flow',
+      'unit-weighted-bipartite-matching',
       'unit-planar-duality',
       'unit-path-matching-contraction',
       'unit-min-weight-general-perfect-matching',
@@ -163,10 +163,9 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-tree',
     introduction:
-      '一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化し、HLDとvirtual treeでpathと必要頂点へ圧縮する。包含関係や併合履歴を木にする方法を学んだ後、重心分解で均衡分離点による計算量削減を扱う。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。',
+      '一意な経路と距離・直径を確認し、根付き木DP・rerootingで部分木と全方位集約を学ぶ。Euler順・LCA・HLD・virtual treeで部分木・祖先・pathを扱う一般的なtoolkitを揃えた後、暗黙の完全二分木を展開せずに数える。続いて包含関係や併合履歴を木にする方法、重心分解、距離からの木の復元、親先行順序の縮約へ進む。後半は多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPを扱う。多項式木DPでは代数章の畳み込みを先に学ぶ。',
     unitIds: [
       'unit-tree-metric',
-      'unit-implicit-binary-tree',
       'unit-tree-aggregation',
       'unit-rooted-tree-aggregation',
       'unit-rerooting',
@@ -175,6 +174,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-tree-ancestor-lca',
       'unit-heavy-light-decomposition',
       'unit-virtual-tree',
+      'unit-implicit-binary-tree',
       'unit-laminar-interval-containment-tree',
       'unit-dsu-merge-tree',
       'unit-tree-balanced-separators',
@@ -188,16 +188,16 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-string',
     introduction:
-      'Trieによる接頭辞共有とZ algorithmによる一致区間の再利用から、周期・回文を調べる。runの局所変化と再帰的な圧縮文字列で、明示展開せずに列を扱う考え方を学ぶ。次に接尾辞順序とLCPによる索引へ進み、有限状態への同値化、Aho–Corasick、非決定性のsubset constructionを扱う。最後にSuffix Automatonで全部分文字列を同値類へ圧縮し、接尾辞配列との表現の違いを比較する。rolling fingerprintはデータ構造章、automaton上の計数はDP章へ接続する。',
+      'Trieによる接頭辞共有とprefix matching・Z algorithmによる一致区間の再利用から、周期・回文を調べる。次にsuffix arrayとLCPによる標準的な接尾辞索引を学ぶ。その後、runの局所変化と再帰的な圧縮文字列で、明示展開せずに列を扱う。有限状態への同値化、Aho–Corasick、非決定性のsubset constructionを経て、Suffix Automatonで全部分文字列を同値類へ圧縮する。rolling fingerprintはデータ構造章、automaton上の計数はDP章へ接続する。',
     unitIds: [
       'unit-trie-prefix',
       'unit-string-prefix-automata',
       'unit-z-algorithm',
       'unit-string-periodicity',
       'unit-palindrome-radius',
+      'unit-suffix-lcp-index',
       'unit-run-length-dynamics',
       'unit-recursive-compressed-string',
-      'unit-suffix-lcp-index',
       'unit-string-automata',
       'unit-finite-pattern-automaton',
       'unit-aho-corasick',
@@ -274,7 +274,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-geometry-optimization',
     introduction:
-      '座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。直線包絡を幾何と関数の橋渡しとして学ぶ。凸性の節では一次元の最適化から限界値選択・slope trick・順序制約のPAVへ進む。その後、比率目的の判定化、個数制約を罰則へ移すAliens trick、遷移行列のMonge性を独立した節で扱う。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。',
+      '座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。直線包絡を幾何と関数の橋渡しとして学ぶ。凸性の節では一次元の最適化から限界値選択・slope trickへ進み、比率目的を単調判定へ変換するfractional programmingを学ぶ。その後、順序制約のPAV、個数制約を罰則へ移すAliens trick、遷移行列のMonge性を扱う。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。',
     unitIds: [
       'unit-geometry-primitives',
       'unit-cyclic-order-crossing',
@@ -286,8 +286,8 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-basic-convex-optimization',
       'unit-separable-convex-marginals',
       'unit-slope-trick',
-      'unit-isotonic-regression',
       'unit-fractional-parametric-search',
+      'unit-isotonic-regression',
       'unit-lagrangian-relaxation',
       'unit-monge-optimization',
       'unit-two-variable-convex-lattice-optimization',

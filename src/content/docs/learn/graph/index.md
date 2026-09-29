@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木を通して、標準的なgraph toolkitを揃える。橋の判定に続けてmatchingとflowへの標準的な帰着を学ぶ。その後、graph core・cycle space・Eulerの次数条件を基礎に、単調path縮約やnear-tree kernel化などARC上位〜AGC/CF Div.1/UCUP寄りの構造論へ進む。終盤では有向walkの周期、平面双対、path限定の縮約、一般重み付きmatchingを扱う。
+探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。
 
 ### グラフモデルと構造
 
@@ -66,21 +66,21 @@ sidebar:
 - [cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/) — 水色
 - [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 青色。概念上の親: [cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/)
 - [lowlinkで橋・関節点を特定する](/learn/graph/lowlink-critical-structure/) — 青色
-- [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/) — 青色（導入）
-- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
-- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
-- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
-- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
-- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
-- [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/) — 水色（導入）
-- [単一サイクル成分とgraph core](/learn/graph/graph-core/) — 水色。概念上の親: [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/)
-- [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/) — 青色
 - [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/) — 水色（導入）
 - [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 水色。概念上の親: [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/)
 - [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 青色。概念上の親: [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/)
+- [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/) — 青色（導入）
+- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
+- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
+- [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/) — 水色（導入）
+- [単一サイクル成分とgraph core](/learn/graph/graph-core/) — 水色。概念上の親: [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/)
+- [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/) — 青色
 - [単調path contraction・DSU jump](/learn/graph/monotone-path-contraction/) — 青色
 - [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 黄色
 - [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 黄色
+- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
+- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
+- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
 - [平面graph双対・cut/path対応](/learn/graph/planar-duality/) — 黄色
 - [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 橙色
 - [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 赤色

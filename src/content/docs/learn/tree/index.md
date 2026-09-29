@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化し、HLDとvirtual treeでpathと必要頂点へ圧縮する。包含関係や併合履歴を木にする方法を学んだ後、重心分解で均衡分離点による計算量削減を扱う。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。
+一意な経路と距離・直径を確認し、根付き木DP・rerootingで部分木と全方位集約を学ぶ。Euler順・LCA・HLD・virtual treeで部分木・祖先・pathを扱う一般的なtoolkitを揃えた後、暗黙の完全二分木を展開せずに数える。続いて包含関係や併合履歴を木にする方法、重心分解、距離からの木の復元、親先行順序の縮約へ進む。後半は多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPを扱う。多項式木DPでは代数章の畳み込みを先に学ぶ。
 
 ### 木モデルと構造
 
@@ -43,7 +43,6 @@ sidebar:
 項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [基準点からの木距離・剰余類・直径・中心](/learn/tree/tree-metric/) — 水色
-- [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/) — 水色
 - [木DP・集約・rerooting](/learn/tree/tree-aggregation/) — 水色（導入）
 - [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色。概念上の親: [木DP・集約・rerooting](/learn/tree/tree-aggregation/)
 - [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色。概念上の親: [木DP・集約・rerooting](/learn/tree/tree-aggregation/)
@@ -52,6 +51,7 @@ sidebar:
 - [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
 - [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
 - [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
+- [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/) — 水色
 - [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
 - [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/) — 青色
 - [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/) — 黄色

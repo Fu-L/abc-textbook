@@ -3,7 +3,7 @@ title: "木のancestor・部分木・pathを索引化する"
 description: "「木のancestor・部分木・pathを索引化する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 135
+  order: 134
 ---
 
 # 木のancestor・部分木・pathを索引化する

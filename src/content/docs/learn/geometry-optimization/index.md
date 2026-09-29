@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。直線包絡を幾何と関数の橋渡しとして学ぶ。凸性の節では一次元の最適化から限界値選択・slope trick・順序制約のPAVへ進む。その後、比率目的の判定化、個数制約を罰則へ移すAliens trick、遷移行列のMonge性を独立した節で扱う。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。
+座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。直線包絡を幾何と関数の橋渡しとして学ぶ。凸性の節では一次元の最適化から限界値選択・slope trickへ進み、比率目的を単調判定へ変換するfractional programmingを学ぶ。その後、順序制約のPAV、個数制約を罰則へ移すAliens trick、遷移行列のMonge性を扱う。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。
 
 ### 幾何・凸最適化への変換
 
@@ -52,8 +52,8 @@ orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進
 - [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 青色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
 - [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 青色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
 - [slope trick](/learn/geometry-optimization/slope-trick/) — 黄色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
-- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
 - [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/) — 青色
+- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
 - [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 橙色
 - [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 橙色
 - [二変数の凸区分線形整数最適化](/learn/geometry-optimization/two-variable-convex-lattice-optimization/) — 橙色
