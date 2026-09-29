@@ -1,7 +1,7 @@
 /**
- * 教科書の掲載順。同じ対象・原理を続けて読むための編集上の順序であり、
- * 意味階層の部分木を連続させた読書順。必須の前提DAGとは区別する。
- * 親節と小節を一まとまりにし、独立した応用は節として配置する。
+ * 教科書の読書順。意味階層とは独立した編集上の順序であり、必須の前提DAGとも区別する。
+ * 親子関係は同じ対象・手法の具体化や特殊化を表す。読書順は標準手法の習得と
+ * 隣接する考え方の比較を優先し、意味階層の部分木を分割してもよい。
  * 各配列は前提・抽象化の負担・隣接単元との比較を考えて手で編成する。
  * 色・難易度・技能数などのスコアによる自動ソートには置き換えない。
  * textbookIndexは決めた読書順を描画へ渡す位置であり、順序を評価するスコアではない。
@@ -45,15 +45,15 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-query',
     introduction:
-      '累積和・差分と局所link更新から始め、heap・ordered set・run管理・単調stackで動的な候補を保つ。接頭辞統計をFenwick Treeへ拡張し、結合的な区間要約から関数合成・静的問い合わせ・窓集約・遅延作用へ進む。区間分解を索引や疎な座標に応用し、Cartesian treeでは区間極値を木へ読み替える。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。',
+      '累積和・差分と局所link更新から始め、heap・ordered setと単調stackで候補を保つ。単調stackからCartesian treeを構築し、Fenwick TreeとSegment Treeの標準的な区間集約・更新を一巡してから、run分割による動的区間管理を扱う。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。',
     unitIds: [
       'unit-prefix-aggregate',
       'unit-linked-list-index',
       'unit-ordered-set-heap',
       'unit-priority-queue-best-first',
       'unit-ordered-set-multiset',
-      'unit-ordered-interval-partition',
       'unit-monotone-stack-queue',
+      'unit-cartesian-tree',
       'unit-weighted-prefix-fenwick',
       'unit-monoid-segment-tree',
       'unit-range-monoid-aggregation',
@@ -64,7 +64,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-static-sorted-range-index',
       'unit-dynamic-segment-tree',
       'unit-range-actions',
-      'unit-cartesian-tree',
+      'unit-ordered-interval-partition',
       'unit-value-bucket-aggregation',
       'unit-mo-offline-range',
       'unit-bitset-word-parallel',
@@ -81,7 +81,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-dynamic-programming',
     introduction:
-      '最小十分状態を定め、グリッド・容量・列・prefix分割・区間・部分集合という基本的な依存構造を比較する。列DPの小節ではLISの支配関係と値域集約を比較する。次に桁上限・automaton・carryによる有限状態化を学び、遷移集約を共通原理として整理して固定線形遷移の累乗へ進む。確率とゲームでは遷移の評価方法を変え、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。automatonは文字列章、Steiner木は最短路の単元を先に参照する。',
+      '最小十分状態を定め、グリッド・容量・列・prefix分割・区間・部分集合という基本的な依存構造を比較する。桁上限・automaton・carryによる有限状態化まで一巡した後、確率とゲームで遷移の評価方法を変える。基本的なDP類型を学んでから遷移最適化と固定線形遷移の累乗へ進み、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。列DPのLISと値域集約を比較し、automatonは文字列章、Steiner木は最短路の単元を先に参照する。',
     unitIds: [
       'unit-dp-state-design',
       'unit-dp-grid-table',
@@ -98,11 +98,11 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-digit-dp',
       'unit-automaton-dp',
       'unit-dp-carry-mixed-radix',
-      'unit-dp-transition-optimization',
-      'unit-linear-recurrence',
       'unit-dp-stochastic',
       'unit-dp-game',
       'unit-dp-game-value',
+      'unit-dp-transition-optimization',
+      'unit-linear-recurrence',
       'unit-cyclic-minimax-game',
       'unit-frontier-profile-dp',
       'unit-steiner-tree-dp',
@@ -114,7 +114,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-graph',
     introduction:
-      '状態グラフの到達性・二部彩色・連結成分を土台に、等式制約のpotential伝播とweighted DSUを比較する。続いて最短路と経路復元、不等式の差分制約へ進む。有向構造はDAGとpeeling、SCCと2-SAT、一意な後続とdoublingの順に学ぶ。無向構造は全域木・橋・core・cycle space・次数parityを揃えた後、縮約や少数閉路への圧縮へ進む。後半は二部matchingから最大流、下限制約、費用へ進み、平面双対とpath特有の縮約を経て一般重み付きmatchingを扱う。',
+      '探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木を通して、標準的なgraph toolkitを揃える。橋の判定に続けてmatchingとflowへの標準的な帰着を学ぶ。その後、graph core・cycle space・Eulerの次数条件を基礎に、単調path縮約やnear-tree kernel化などARC上位〜AGC/CF Div.1/UCUP寄りの構造論へ進む。終盤では有向walkの周期、平面双対、path限定の縮約、一般重み付きmatchingを扱う。',
     unitIds: [
       'unit-graph-search',
       'unit-state-graph-search',
@@ -140,6 +140,12 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-spanning-tree-optimization',
       'unit-kruskal-threshold-sweep',
       'unit-lowlink-critical-structure',
+      'unit-flow-matching',
+      'unit-bipartite-matching',
+      'unit-max-flow-min-cut',
+      'unit-flow-lower-bounds',
+      'unit-min-cost-flow',
+      'unit-weighted-bipartite-matching',
       'unit-graph-core-peeling',
       'unit-graph-core',
       'unit-cycle-space-basis',
@@ -149,12 +155,6 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-monotone-path-contraction',
       'unit-near-tree-kernelization',
       'unit-directed-walk-periodicity',
-      'unit-flow-matching',
-      'unit-bipartite-matching',
-      'unit-max-flow-min-cut',
-      'unit-flow-lower-bounds',
-      'unit-min-cost-flow',
-      'unit-weighted-bipartite-matching',
       'unit-planar-duality',
       'unit-path-matching-contraction',
       'unit-min-weight-general-perfect-matching',
@@ -235,7 +235,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-combinatorics-algebra',
     introduction:
-      '組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式による計数を比較する。半順序の構造定理を学んだ後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展では高度な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を扱う。最後にmatroidの独立性と交換公理を共通言語にしてgreedyと線形交差を比較する。',
+      '組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式・半順序で計数と構造定理を比較する。matroidの独立性と交換公理を中盤で学び、greedyによる最適化へ接続する。その後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展的な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を経て、rankと乱択を要する線形matroid交差を扱う。',
     unitIds: [
       'unit-combinatorial-coefficients',
       'unit-reflection-principle',
@@ -253,6 +253,8 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-deletion-contraction',
       'unit-determinant-counting',
       'unit-poset-dilworth-antichain',
+      'unit-matroid-theory',
+      'unit-matroid-greedy',
       'unit-generating-functions',
       'unit-labeled-component-decomposition',
       'unit-polynomial-convolution',
@@ -266,8 +268,6 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-euler-circuit-counting',
       'unit-rsk-young-tableaux',
       'unit-fps-composition-power-projection',
-      'unit-matroid-theory',
-      'unit-matroid-greedy',
       'unit-linear-matroid-intersection',
     ],
   },

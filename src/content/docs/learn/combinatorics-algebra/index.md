@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式による計数を比較する。半順序の構造定理を学んだ後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展では高度な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を扱う。最後にmatroidの独立性と交換公理を共通言語にしてgreedyと線形交差を比較する。
+組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式・半順序で計数と構造定理を比較する。matroidの独立性と交換公理を中盤で学び、greedyによる最適化へ接続する。その後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展的な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を経て、rankと乱択を要する線形matroid交差を扱う。
 
 ### 組合せ・多項式・線形代数への変換
 
@@ -40,30 +40,32 @@ sidebar:
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/) — 水色
 - [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/) — 青色
 - [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/) — 水色
-  - [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 青色
-  - [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 青色
+- [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 青色。概念上の親: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
+- [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 青色。概念上の親: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
 - [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/) — 水色
 - [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/) — 青色
 - [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/) — 青色（導入）
-  - [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) — 青色
-  - [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) — 青色
-  - [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/) — 黄色
+- [線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/) — 青色。概念上の親: [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
+- [XOR線形基底](/learn/combinatorics-algebra/xor-linear-basis/) — 青色。概念上の親: [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
+- [分離可能線形変換・Walsh–Hadamard変換](/learn/combinatorics-algebra/separable-linear-transform/) — 黄色。概念上の親: [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)
 - [Prüfer code・次数制約付きlabel木](/learn/combinatorics-algebra/prufer-code/) — 黄色
 - [群作用・軌道数え上げ](/learn/combinatorics-algebra/orbit-counting/) — 黄色
 - [削除・縮約recurrence](/learn/combinatorics-algebra/deletion-contraction/) — 黄色
 - [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/) — 黄色
 - [半順序・Dilworth・最大反鎖](/learn/combinatorics-algebra/poset-dilworth-antichain/) — 黄色
+- [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/) — 黄色（導入）
+- [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/) — 黄色。概念上の親: [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/)
 - [組合せを生成関数へ符号化する](/learn/combinatorics-algebra/generating-functions/) — 黄色
 - [label付き連結成分分解・exponential formula](/learn/combinatorics-algebra/labeled-component-decomposition/) — 黄色
 - [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/) — 黄色
-  - [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/) — 橙色
+- [factorial convolutionによる多項式Taylor shift](/learn/combinatorics-algebra/polynomial-taylor-shift/) — 橙色。概念上の親: [NTT・FFTで畳み込みと相互相関を求める](/learn/combinatorics-algebra/polynomial-convolution/)
 - [FPS基本演算と多項式の多点評価を行う](/learn/combinatorics-algebra/formal-power-series/) — 橙色
-  - [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/) — 橙色
+- [多項式の多点評価・補間](/learn/combinatorics-algebra/polynomial-multipoint-evaluation/) — 橙色。概念上の親: [FPS基本演算と多項式の多点評価を行う](/learn/combinatorics-algebra/formal-power-series/)
 - [Bostan–Mori・有理生成関数の係数抽出](/learn/combinatorics-algebra/bostan-mori/) — 橙色
 - [母関数方程式・高度な係数抽出](/learn/combinatorics-algebra/generating-function-coefficients/) — 橙色
 - [Relaxed・online convolution](/learn/combinatorics-algebra/relaxed-convolution/) — 橙色
@@ -71,9 +73,7 @@ sidebar:
 - [BEST定理によるEuler circuit数え上げ](/learn/combinatorics-algebra/euler-circuit-counting/) — 橙色
 - [Robinson–Schensted対応・Young tableau](/learn/combinatorics-algebra/rsk-young-tableaux/) — 赤色
 - [FPS合成・power projection](/learn/combinatorics-algebra/fps-composition-power-projection/) — 赤色
-- [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/) — 黄色（導入）
-  - [matroid greedy](/learn/combinatorics-algebra/matroid-greedy/) — 黄色
-  - [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/) — 赤色
+- [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/) — 赤色。概念上の親: [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/)
 
 ## 問題一覧
 

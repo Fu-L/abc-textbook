@@ -40,14 +40,14 @@ sidebar:
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [素因数分解と約数構造](/learn/number-theory/prime-divisor/) — 緑色
 - [gcd不変量・差分構造](/learn/number-theory/gcd-structure/) — 水色
 - [gcdと整数解の成立条件](/learn/number-theory/gcd-diophantine/) — 水色
 - [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/) — 緑色（導入）
-  - [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 緑色
-  - [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 水色
+- [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/) — 緑色。概念上の親: [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)
+- [可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/) — 水色。概念上の親: [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)
 - [一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/) — 青色
 - [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/) — 水色
 - [剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/) — 青色

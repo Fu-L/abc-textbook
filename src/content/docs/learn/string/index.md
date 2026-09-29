@@ -40,20 +40,20 @@ Trieによる接頭辞共有とZ algorithmによる一致区間の再利用か�
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [Trieで共有接頭辞を索引化する](/learn/string/trie-prefix/) — 水色
 - [接頭辞との一致長を再利用する](/learn/string/string-prefix-automata/) — 水色（導入）
-  - [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 水色
+- [Z algorithmによるprefix matching](/learn/string/z-algorithm/) — 水色。概念上の親: [接頭辞との一致長を再利用する](/learn/string/string-prefix-automata/)
 - [文字列周期・primitive word](/learn/string/string-periodicity/) — 青色
 - [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/) — 青色
 - [run-length状態の動的遷移](/learn/string/run-length-dynamics/) — 青色
 - [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/) — 青色
 - [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/) — 青色
 - [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/) — 青色（導入）
-  - [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 青色
-  - [Aho–Corasick](/learn/string/aho-corasick/) — 黄色
-  - [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 黄色
+- [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 青色。概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
+- [Aho–Corasick](/learn/string/aho-corasick/) — 黄色。概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
+- [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 黄色。概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
 - [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/) — 橙色
 
 ## 問題一覧

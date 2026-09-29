@@ -3,7 +3,7 @@ title: "label付き連結成分分解・exponential formula"
 description: "「label付き連結成分分解・exponential formula」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 201
+  order: 203
 ---
 
 # label付き連結成分分解・exponential formula

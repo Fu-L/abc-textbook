@@ -97,6 +97,7 @@ interface ChildLearningUnitLink {
   readonly documentPath: string;
   readonly depth: number;
   readonly isGuide: boolean;
+  readonly parentUnitLink?: string;
   readonly learningOutcomeIds: readonly string[];
   readonly ownedLearningOutcomeIds: readonly string[];
   readonly excludedTopics: readonly string[];
@@ -285,7 +286,7 @@ const renderLearningUnitDocument = (input: {
       ? [
           '## 本書の読み方',
           '',
-          '各章の「章の構成」は、前提知識・難易度・関連する手法の比較を考えて編成した読書順です。概念の親子関係は目次の字下げと各Unitの「下位単元」で確認できます。目次の並びは編集上の案内であり、必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。',
+          '各章の「章の構成」は、学習成果と前提を考えて編成した読書順です。意味上の親子関係は各Unitの「下位単元」と章目次の「概念上の親」で確認できます。読書順と親子関係は独立しており、目次の隣接は前提を意味しません。必須の学習前提は別の有向非巡回グラフで管理し、各Unitの「直接の前提単元」に示します。',
           '',
           '「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。',
           '',
@@ -343,12 +344,12 @@ const renderLearningUnitDocument = (input: {
           ...(chapter === undefined
             ? []
             : [
-                '節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。',
+                '項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。',
                 '',
               ]),
           ...input.childUnits.map(
             (child) =>
-              `${'  '.repeat(child.depth)}- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/) — ${unitLearningTarget(child.id).color}${child.isGuide ? '（導入）' : ''}`,
+              `${'  '.repeat(child.depth)}- [${child.title}](/learn/${child.documentPath.replace(/^src\/content\/docs\/learn\//u, '').replace(/(?:\/index)?\.md$/u, '')}/) — ${unitLearningTarget(child.id).color}${child.isGuide ? '（導入）' : ''}${child.parentUnitLink === undefined ? '' : `。概念上の親: ${child.parentUnitLink}`}`,
           ),
           '',
         ]),
@@ -577,12 +578,26 @@ export const buildCanonicalTaxonomyMaterialization = (
             depth += 1;
             parentId = unitById.get(parentId)?.parentId ?? null;
           }
+          const parentUnitLink =
+            unit.kind === 'chapter' && entity.parentId !== null && entity.parentId !== unit.id
+              ? (() => {
+                  const parent = unitCandidateById.get(entity.parentId)?.entity;
+                  if (parent === undefined) {
+                    throw new CanonicalTaxonomyMaterializationError(
+                      'CANONICAL_UNIT_PARENT_UNKNOWN',
+                      entity.parentId,
+                    );
+                  }
+                  return unitLink(parent);
+                })()
+              : undefined;
           return {
             id: entity.id,
             title: entity.title,
             documentPath: learningUnitDocumentPath(entity, unitById),
-            depth,
+            depth: unit.kind === 'chapter' ? 0 : depth,
             isGuide: !isCurriculumUnit(entity),
+            ...(parentUnitLink === undefined ? {} : { parentUnitLink }),
             learningOutcomeIds: entity.learningOutcomeIds,
             ownedLearningOutcomeIds: entity.ownedLearningOutcomeIds,
             excludedTopics: entity.excludedTopics,
@@ -591,17 +606,13 @@ export const buildCanonicalTaxonomyMaterialization = (
         })
         .sort((left, right) => textbookIndex(left.id) - textbookIndex(right.id));
       if (unit.kind === 'chapter') {
-        const ancestors = [unit.id];
         for (const child of childUnits) {
-          const parentId = unitById.get(child.id)?.parentId;
-          if (ancestors[child.depth] !== parentId) {
+          if (rootChapterId(child.id, unitById) !== unit.id) {
             throw new CanonicalTaxonomyMaterializationError(
-              'CANONICAL_TEXTBOOK_HIERARCHY_ORDER_INVALID',
-              `${child.id}: expected parent ${String(parentId)}`,
+              'CANONICAL_TEXTBOOK_UNIT_CHAPTER_MISMATCH',
+              `${child.id}: expected chapter ${unit.id}`,
             );
           }
-          ancestors.length = child.depth + 1;
-          ancestors.push(child.id);
         }
       }
       const sourceRevisionIds = unit.sourceRevisionIds;

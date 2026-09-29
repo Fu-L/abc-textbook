@@ -3,7 +3,7 @@ title: "DP遷移を因数分解・集約して加速する"
 description: "「DP遷移を因数分解・集約して加速する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 75
+  order: 78
 ---
 
 # DP遷移を因数分解・集約して加速する

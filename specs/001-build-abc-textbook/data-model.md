@@ -302,11 +302,11 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 
 `parentId`は意味的なUnit階層とnavigationだけを表し、前提辺にはしない。3つの前提DAGは`src/content/policies/learning-prerequisites.json`に独立してmaterializeし、各辺は`nodeId`と直接の`prerequisiteId`で表す。DAGから全体順、隣接リンク、順位、rankを生成・保存しない。単なる併用、同分野、類似実装だけでは前提辺を追加せず、`relatedTags`へ理由付きで記録する。
 
-教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べ、各親と全子孫を連続させる。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。後にある前提も明示的にリンクし、掲載順から前提DAGや問題配置を再計算しない。
+教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べる。掲載順は意味階層と独立し、親と子孫を連続させる必要はない。章目次はこの順序を平坦な読書案内として表示し、章直下でないUnitには概念上の親をリンクする。親Unitのページは`parentId`に基づく下位単元を表示する。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。後にある前提も明示的にリンクし、掲載順から前提DAGや問題配置を再計算しない。
 
 各Problemのhome Unitは`primaryOutcomeId`の唯一の所有Unitである。追加primary Outcomeは新しく学ぶ技能を、supporting Outcomeはすでに必要な技能を示し、home Unitを決めない。個別Problemのsupportingを理由にLearningUnit DAGへ辺を追加してはならない。Unitの`relatedProblemIds`はhome Unitのsubtree外から追加primaryまたはsupporting Outcomeを参照するProblemだけを含む。
 
-教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べ、各親と全子孫を連続させる。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。Unit内Problemの読む順はこの変更の範囲外とする。
+教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べる。掲載順は意味階層と独立し、親と子孫を連続させる必要はない。章目次はこの順序を平坦な読書案内として表示し、章直下でないUnitには概念上の親をリンクする。親Unitのページは`parentId`に基づく下位単元を表示する。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。Unit内Problemの読む順はこの変更の範囲外とする。
 
 T050のcanonical skeletonは配置・順序と簡潔な概説を固定し、公開mappingが未受理の間は`draft: true`にする。`contentPhase=full_authoring`へ引き継いだ後は本文を上書きせず、所属・coverage・前提・出典・文書骨格の整合を確認する。T160が公開projectionを切り替える。
 

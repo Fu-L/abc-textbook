@@ -3,7 +3,7 @@ title: "factorial convolutionによる多項式Taylor shift"
 description: "「factorial convolutionによる多項式Taylor shift」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 203
+  order: 205
 ---
 
 # factorial convolutionによる多項式Taylor shift

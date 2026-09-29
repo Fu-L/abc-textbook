@@ -40,18 +40,18 @@ sidebar:
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [基準点からの木距離・剰余類・直径・中心](/learn/tree/tree-metric/) — 水色
 - [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/) — 水色
 - [木DP・集約・rerooting](/learn/tree/tree-aggregation/) — 水色（導入）
-  - [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色
-  - [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色
+- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色。概念上の親: [木DP・集約・rerooting](/learn/tree/tree-aggregation/)
+- [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色。概念上の親: [木DP・集約・rerooting](/learn/tree/tree-aggregation/)
 - [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/) — 水色（導入）
-  - [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
-  - [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
-  - [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
-  - [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
+- [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
+- [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
+- [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
+- [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色。概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)
 - [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
 - [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/) — 青色
 - [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/) — 黄色

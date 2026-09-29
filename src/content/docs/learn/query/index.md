@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-累積和・差分と局所link更新から始め、heap・ordered set・run管理・単調stackで動的な候補を保つ。接頭辞統計をFenwick Treeへ拡張し、結合的な区間要約から関数合成・静的問い合わせ・窓集約・遅延作用へ進む。区間分解を索引や疎な座標に応用し、Cartesian treeでは区間極値を木へ読み替える。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。
+累積和・差分と局所link更新から始め、heap・ordered setと単調stackで候補を保つ。単調stackからCartesian treeを構築し、Fenwick TreeとSegment Treeの標準的な区間集約・更新を一巡してから、run分割による動的区間管理を扱う。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。
 
 ### 更新可能な最小十分要約
 
@@ -40,36 +40,36 @@ sidebar:
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [一次元・二次元累積和と差分で区間情報を線形化する](/learn/query/prefix-aggregate/) — 茶色
 - [要素索引と連結リストで局所linkを更新する](/learn/query/linked-list-index/) — 茶色
 - [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/) — 緑色（導入）
-  - [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 緑色
-  - [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 緑色
-- [端点更新型のrun分割管理](/learn/query/ordered-interval-partition/) — 青色
+- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 緑色。概念上の親: [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/)
+- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 緑色。概念上の親: [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/)
 - [支配関係から不要な候補を単調stack・queueで削る](/learn/query/monotone-stack-queue/) — 水色
+- [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/) — 青色
 - [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/) — 水色
 - [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/) — 水色（導入）
-  - [区間monoid要約](/learn/query/range-monoid-aggregation/) — 水色
-  - [有限関数・作用の合成](/learn/query/finite-function-composition/) — 水色
-  - [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色
-  - [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色
-  - [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色
-    - [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色
-  - [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色
+- [区間monoid要約](/learn/query/range-monoid-aggregation/) — 水色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
+- [有限関数・作用の合成](/learn/query/finite-function-composition/) — 水色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
+- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
+- [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
+- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
+- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色。概念上の親: [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/)
+- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
 - [区間更新を要約へ作用させる](/learn/query/range-actions/) — 青色
-- [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/) — 青色
+- [端点更新型のrun分割管理](/learn/query/ordered-interval-partition/) — 青色
 - [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/) — 水色
 - [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/) — 青色
 - [bitsetで集合演算をword並列化する](/learn/query/bitset-word-parallel/) — 水色
 - [bit列をTrieで索引化する](/learn/query/binary-trie/) — 水色
 - [上位bitの支配関係によるXOR minimax](/learn/query/bitwise-minimax-partition/) — 青色
 - [Rolling fingerprintで列の同値性を比較する](/learn/query/string-hash/) — 水色（導入）
-  - [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 水色
+- [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 水色。概念上の親: [Rolling fingerprintで列の同値性を比較する](/learn/query/string-hash/)
 - [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/) — 青色（導入）
-  - [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 青色
-  - [永続data structure・structural sharing](/learn/query/persistence/) — 黄色
+- [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 青色。概念上の親: [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/)
+- [永続data structure・structural sharing](/learn/query/persistence/) — 黄色。概念上の親: [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/)
 - [Segment Tree Beats](/learn/query/segment-tree-beats/) — 橙色
 
 ## 問題一覧

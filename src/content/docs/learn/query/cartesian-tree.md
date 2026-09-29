@@ -3,7 +3,7 @@ title: "大小関係をCartesian treeへ変換する"
 description: "「大小関係をCartesian treeへ変換する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 47
+  order: 36
 ---
 
 # 大小関係をCartesian treeへ変換する

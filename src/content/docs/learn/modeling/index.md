@@ -14,7 +14,7 @@ sidebar:
 
 ## 本書の読み方
 
-各章の「章の構成」は、前提知識・難易度・関連する手法の比較を考えて編成した読書順です。概念の親子関係は目次の字下げと各Unitの「下位単元」で確認できます。目次の並びは編集上の案内であり、必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。
+各章の「章の構成」は、学習成果と前提を考えて編成した読書順です。意味上の親子関係は各Unitの「下位単元」と章目次の「概念上の親」で確認できます。読書順と親子関係は独立しており、目次の隣接は前提を意味しません。必須の学習前提は別の有向非巡回グラフで管理し、各Unitの「直接の前提単元」に示します。
 
 「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。
 
@@ -84,7 +84,7 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [候補数を界して全列挙・有限case分解する](/learn/modeling/bounded-enumeration/) — 緑色
 - [backtracking・可逆な探索状態](/learn/modeling/backtracking-search/) — 緑色
@@ -92,8 +92,8 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [疎なkeyの順序を保ってdense indexへ圧縮する](/learn/modeling/coordinate-compression/) — 緑色
 - [局所寄与へ分解して集計順を交換する](/learn/modeling/contribution-reordering/) — 緑色
 - [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/) — 水色（導入）
-  - [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色
-  - [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色
+- [再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/) — 水色。概念上の親: [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/)
+- [meet-in-the-middle・半分全列挙](/learn/modeling/meet-in-the-middle/) — 水色。概念上の親: [探索空間を分けて照合・再帰分割する](/learn/modeling/divide-enumeration/)
 - [単調境界を証明して探索する](/learn/modeling/monotone-search/) — 緑色
 - [尺取り法・sliding windowで連続区間を走査する](/learn/modeling/two-pointers-window/) — 緑色
 - [交換論から選択順を導く](/learn/modeling/greedy-exchange/) — 水色
@@ -103,15 +103,15 @@ ARC・AGC・CF Div. 1・UCUPなどの難問へ進む際には、解法を再現�
 - [時間を逆向きにして未来依存を消す](/learn/modeling/reverse-offline/) — 水色
 - [event順にactive集合を更新する](/learn/modeling/event-sweep/) — 水色
 - [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/) — 水色（導入）
-  - [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 水色
-  - [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 青色
-  - [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色
+- [単調進行による償却解析](/learn/modeling/amortized-monotone-progress/) — 水色。概念上の親: [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/)
+- [small-to-large・DSU on Tree](/learn/modeling/small-to-large/) — 青色。概念上の親: [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/)
+- [平方根・閾値による軽重分類](/learn/modeling/threshold-heavy-light/) — 青色。概念上の親: [軽重分類と償却解析で総仕事量を抑える](/learn/modeling/decomposition-amortization/)
 - [parallel binary search・多数境界の判定共有](/learn/modeling/parallel-binary-search/) — 青色
 - [基準witnessから変更影響を局所化する](/learn/modeling/change-impact-localization/) — 青色
 - [対話protocolを守って情報を取得する](/learn/modeling/interactive-protocol/) — 緑色
 - [情報量下界・query符号設計](/learn/modeling/information-theoretic-query-design/) — 水色
 - [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/) — 青色
-  - [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色
+- [乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/) — 黄色。概念上の親: [乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)
 - [kinetic sorting・交差event順序更新](/learn/modeling/kinetic-order-maintenance/) — 橙色
 - [XOR閾値matchingのbit分割再帰](/learn/modeling/xor-threshold-matching/) — 赤色
 

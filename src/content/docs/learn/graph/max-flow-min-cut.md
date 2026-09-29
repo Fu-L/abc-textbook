@@ -3,7 +3,7 @@ title: "最大流・最小カット"
 description: "「最大流・最小カット」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 122
+  order: 113
 ---
 
 # 最大流・最小カット

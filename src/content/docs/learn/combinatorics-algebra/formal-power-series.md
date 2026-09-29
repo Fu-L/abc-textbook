@@ -3,7 +3,7 @@ title: "FPS基本演算と多項式の多点評価を行う"
 description: "「FPS基本演算と多項式の多点評価を行う」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 204
+  order: 206
 ---
 
 # FPS基本演算と多項式の多点評価を行う

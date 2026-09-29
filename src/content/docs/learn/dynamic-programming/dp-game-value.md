@@ -3,7 +3,7 @@ title: "minimax・得点差・局面値を評価するゲームDP"
 description: "「minimax・得点差・局面値を評価するゲームDP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 79
+  order: 77
 ---
 
 # minimax・得点差・局面値を評価するゲームDP

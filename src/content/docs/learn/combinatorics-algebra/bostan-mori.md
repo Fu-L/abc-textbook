@@ -3,7 +3,7 @@ title: "Bostan–Mori・有理生成関数の係数抽出"
 description: "「Bostan–Mori・有理生成関数の係数抽出」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 206
+  order: 208
 ---
 
 # Bostan–Mori・有理生成関数の係数抽出

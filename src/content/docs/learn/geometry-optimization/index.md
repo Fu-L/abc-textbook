@@ -40,19 +40,19 @@ orientationなどの幾何predicateから凸境界・傾き・dual penaltyへ進
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/) — 水色
-  - [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 青色
+- [円環順序・chord交差](/learn/geometry-optimization/cyclic-order-crossing/) — 青色。概念上の親: [幾何の基本判定と座標変換](/learn/geometry-optimization/geometry-primitives/)
 - [凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/) — 青色（導入）
-  - [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 青色
-  - [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 黄色
+- [凸包・支持方向・境界候補](/learn/geometry-optimization/convex-boundary-hull/) — 青色。概念上の親: [凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/)
+- [半平面制約・凸領域の共通部分](/learn/geometry-optimization/half-plane-constraints/) — 黄色。概念上の親: [凸境界・半平面制約を扱う](/learn/geometry-optimization/convex-geometry/)
 - [Convex Hull Trick・直線包絡](/learn/geometry-optimization/line-envelope/) — 黄色
 - [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/) — 青色（導入）
-  - [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 青色
-  - [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 青色
-  - [slope trick](/learn/geometry-optimization/slope-trick/) — 黄色
-  - [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色
+- [一次元凸・単峰最適化](/learn/geometry-optimization/basic-convex-optimization/) — 青色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
+- [分離凸・凹の単調限界値選択](/learn/geometry-optimization/separable-convex-marginals/) — 青色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
+- [slope trick](/learn/geometry-optimization/slope-trick/) — 黄色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
+- [isotonic regression・PAV](/learn/geometry-optimization/isotonic-regression/) — 橙色。概念上の親: [凸性・傾き・限界費用・slope trick](/learn/geometry-optimization/discrete-convex/)
 - [fractional programming・比率parametric search](/learn/geometry-optimization/fractional-parametric-search/) — 青色
 - [Lagrangian relaxation・Aliens trick](/learn/geometry-optimization/lagrangian-relaxation/) — 橙色
 - [Monge・monotone minima最適化](/learn/geometry-optimization/monge-optimization/) — 橙色

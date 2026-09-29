@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-最小十分状態を定め、グリッド・容量・列・prefix分割・区間・部分集合という基本的な依存構造を比較する。列DPの小節ではLISの支配関係と値域集約を比較する。次に桁上限・automaton・carryによる有限状態化を学び、遷移集約を共通原理として整理して固定線形遷移の累乗へ進む。確率とゲームでは遷移の評価方法を変え、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。automatonは文字列章、Steiner木は最短路の単元を先に参照する。
+最小十分状態を定め、グリッド・容量・列・prefix分割・区間・部分集合という基本的な依存構造を比較する。桁上限・automaton・carryによる有限状態化まで一巡した後、確率とゲームで遷移の評価方法を変える。基本的なDP類型を学んでから遷移最適化と固定線形遷移の累乗へ進み、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。列DPのLISと値域集約を比較し、automatonは文字列章、Steiner木は最短路の単元を先に参照する。
 
 ### DP状態と遷移
 
@@ -40,28 +40,28 @@ sidebar:
 
 ## 章の構成
 
-節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
+項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/) — 緑色
 - [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/) — 緑色
 - [資源・容量DP](/learn/dynamic-programming/dp-subset-resource/) — 緑色
 - [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/) — 緑色（導入）
-  - [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 緑色
-    - [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
-    - [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
-  - [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色
-  - [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色
-  - [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色
+- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 緑色。概念上の親: [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/)
+- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色。概念上の親: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)
+- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色。概念上の親: [列・subsequence DP](/learn/dynamic-programming/dp-sequence/)
+- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色。概念上の親: [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/)
+- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色。概念上の親: [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/)
+- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色。概念上の親: [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/)
 - [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/) — 水色
 - [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/) — 水色（導入）
-  - [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 水色
-  - [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 青色
+- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 水色。概念上の親: [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/)
+- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 青色。概念上の親: [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/)
 - [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/) — 青色
-- [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/) — 青色
-- [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/) — 青色
 - [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/) — 水色
 - [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/) — 水色
 - [minimax・得点差・局面値を評価するゲームDP](/learn/dynamic-programming/dp-game-value/) — 水色
+- [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/) — 青色
+- [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/) — 青色
 - [循環局面の後退解析とminimax距離](/learn/dynamic-programming/cyclic-minimax-game/) — 黄色
 - [frontier/profile DP・境界状態圧縮](/learn/dynamic-programming/frontier-profile-dp/) — 黄色
 - [Steiner tree subset DP](/learn/dynamic-programming/steiner-tree-dp/) — 橙色

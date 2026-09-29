@@ -96,15 +96,21 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     for (const chapter of TEXTBOOK_CHAPTERS) {
       const chapterDocument = byId.get(chapter.id)?.document ?? '';
       const contents = chapterDocument.split('## 章の構成\n')[1]?.split('\n## ')[0] ?? '';
-      const ancestors: string[] = [chapter.id];
       const contentsLines = contents.split('\n').filter((line) => /^ *- \[/.test(line));
       expect(contentsLines).toHaveLength(chapter.unitIds.length);
       for (const [index, id] of chapter.unitIds.entries()) {
         const line = contentsLines[index] ?? '';
         const depth = (/^ */.exec(line)?.[0].length ?? 0) / 2;
-        expect(byId.get(id)?.value.parentId, id).toBe(ancestors[depth]);
-        ancestors.length = depth + 1;
-        ancestors.push(id);
+        const unit = byId.get(id)?.value;
+        if (unit === undefined) throw new Error(`Missing Unit: ${id}`);
+        expect(depth, id).toBe(0);
+        if (unit.parentId !== chapter.id) {
+          const parent = byId.get(unit.parentId)?.value;
+          if (parent === undefined) throw new Error(`Missing parent: ${unit.parentId}`);
+          expect(line, id).toContain(`概念上の親: [${parent.title}]`);
+        } else {
+          expect(line, id).not.toContain('概念上の親:');
+        }
       }
       let previousLinkPosition = -1;
       for (const id of chapter.unitIds) {
@@ -201,7 +207,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     }
   }, 30_000);
 
-  it('rejects a reading order that makes a child appear under an unrelated section', async () => {
+  it('keeps semantic parent links when the reading order separates a child from its parent', async () => {
     const input = await loadMaterializationInput();
     vi.resetModules();
     vi.doMock('../../src/lib/taxonomy/textbook-order.js', async (importOriginal) => {
@@ -215,11 +221,17 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       };
     });
     try {
-      const { buildCanonicalTaxonomyMaterialization: buildWithBrokenOrder } =
+      const { buildCanonicalTaxonomyMaterialization: buildWithInterleavedOrder } =
         await import('../../src/lib/taxonomy/canonical-taxonomy-materialization.js');
-      expect(() => buildWithBrokenOrder(input)).toThrow(
-        /CANONICAL_TEXTBOOK_HIERARCHY_ORDER_INVALID/u,
-      );
+      const result = buildWithInterleavedOrder(input);
+      const byId = new Map(result.learningUnits.map(({ value, document }) => [value.id, document]));
+      const chapterOutline = byId.get('unit-chapter-query')?.split('## 章の構成\n')[1] ?? '';
+      const priorityQueueLine = chapterOutline
+        .split('\n')
+        .find((line) => line.includes('[priority queue・best-first列挙]'));
+      expect(priorityQueueLine).toContain('概念上の親: [heap・ordered setで全候補の極値を保つ]');
+      expect(priorityQueueLine).toMatch(/^- /u);
+      expect(byId.get('unit-ordered-set-heap')).toContain('- [priority queue・best-first列挙]');
     } finally {
       vi.doUnmock('../../src/lib/taxonomy/textbook-order.js');
       vi.resetModules();
