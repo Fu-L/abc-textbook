@@ -32,8 +32,8 @@ sidebar:
 ## 下位単元
 
 - [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 緑色
-- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色
 - [推移閉包](/learn/graph/transitive-closure/) — 水色
+- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色
 
 ## 問題一覧
 

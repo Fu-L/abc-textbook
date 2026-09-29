@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。
+探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。max-flow/min-cutまでで標準toolkitを固め、その後に方向別grid scanを問題パターン寄りの応用として置く。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。
 
 ### グラフモデルと構造
 
@@ -44,7 +44,6 @@ sidebar:
 
 - [状態グラフ探索・到達関係](/learn/graph/graph-search/) — 緑色（導入）
 - [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 緑色。概念上の親: [状態グラフ探索・到達関係](/learn/graph/graph-search/)
-- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色。概念上の親: [状態グラフ探索・到達関係](/learn/graph/graph-search/)
 - [推移閉包](/learn/graph/transitive-closure/) — 水色。概念上の親: [状態グラフ探索・到達関係](/learn/graph/graph-search/)
 - [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/) — 緑色
 - [連結成分を管理し縮約する](/learn/graph/connectivity/) — 緑色（導入）
@@ -72,6 +71,7 @@ sidebar:
 - [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/) — 青色（導入）
 - [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
 - [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色。概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)
+- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色。概念上の親: [状態グラフ探索・到達関係](/learn/graph/graph-search/)
 - [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/) — 水色（導入）
 - [単一サイクル成分とgraph core](/learn/graph/graph-core/) — 水色。概念上の親: [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/)
 - [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/) — 青色

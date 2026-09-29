@@ -3,7 +3,7 @@ title: "二部彩色と成分構造を扱う"
 description: "「二部彩色と成分構造を扱う」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 91
+  order: 90
 ---
 
 # 二部彩色と成分構造を扱う

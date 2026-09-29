@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-累積和・差分と局所link更新から始め、heap・ordered setと単調stackで候補を保つ。単調stackからCartesian treeを構築し、Fenwick TreeとSegment Treeの標準的な区間集約・更新を一巡してから、run分割による動的区間管理を扱う。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。
+累積和・差分と局所link更新から始め、heap・ordered setと単調stackで候補を保つ。単調stackからCartesian treeを構築し、Fenwick TreeとSegment Treeの区間集約を学ぶ。monoid要約の直後にLazy Segment Treeの区間作用を置き、その後に関数合成・Sparse Table・SWAG・canonical decomposition・Merge Sort Tree・implicit Segment Treeを比較してから、run分割による動的区間管理を扱う。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。
 
 ### 更新可能な最小十分要約
 
@@ -52,13 +52,13 @@ sidebar:
 - [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/) — 水色
 - [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/) — 水色（導入）
 - [区間monoid要約](/learn/query/range-monoid-aggregation/) — 水色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
+- [区間更新を要約へ作用させる](/learn/query/range-actions/) — 青色
 - [有限関数・作用の合成](/learn/query/finite-function-composition/) — 水色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
 - [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
 - [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
 - [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
 - [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色。概念上の親: [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/)
 - [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色。概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)
-- [区間更新を要約へ作用させる](/learn/query/range-actions/) — 青色
 - [端点更新型のrun分割管理](/learn/query/ordered-interval-partition/) — 青色
 - [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/) — 水色
 - [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/) — 青色

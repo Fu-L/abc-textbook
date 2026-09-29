@@ -45,7 +45,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-query',
     introduction:
-      '累積和・差分と局所link更新から始め、heap・ordered setと単調stackで候補を保つ。単調stackからCartesian treeを構築し、Fenwick TreeとSegment Treeの標準的な区間集約・更新を一巡してから、run分割による動的区間管理を扱う。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。',
+      '累積和・差分と局所link更新から始め、heap・ordered setと単調stackで候補を保つ。単調stackからCartesian treeを構築し、Fenwick TreeとSegment Treeの区間集約を学ぶ。monoid要約の直後にLazy Segment Treeの区間作用を置き、その後に関数合成・Sparse Table・SWAG・canonical decomposition・Merge Sort Tree・implicit Segment Treeを比較してから、run分割による動的区間管理を扱う。bucketとMo、bit列とfingerprintを用途別に比較した後、過去の版と条件付き更新へ進む。最後のSegment Tree Beatsでは遅延作用と償却解析を組み合わせる。',
     unitIds: [
       'unit-prefix-aggregate',
       'unit-linked-list-index',
@@ -57,13 +57,13 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-weighted-prefix-fenwick',
       'unit-monoid-segment-tree',
       'unit-range-monoid-aggregation',
+      'unit-range-actions',
       'unit-finite-function-composition',
       'unit-idempotent-overlap-range-query',
       'unit-swag',
       'unit-segment-tree-canonical-decomposition',
       'unit-static-sorted-range-index',
       'unit-dynamic-segment-tree',
-      'unit-range-actions',
       'unit-ordered-interval-partition',
       'unit-value-bucket-aggregation',
       'unit-mo-offline-range',
@@ -114,11 +114,10 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-graph',
     introduction:
-      '探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。',
+      '探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。max-flow/min-cutまでで標準toolkitを固め、その後に方向別grid scanを問題パターン寄りの応用として置く。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。',
     unitIds: [
       'unit-graph-search',
       'unit-state-graph-search',
-      'unit-directional-grid-effect-scan',
       'unit-transitive-closure',
       'unit-bipartite-structure',
       'unit-connectivity',
@@ -146,6 +145,7 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-flow-matching',
       'unit-bipartite-matching',
       'unit-max-flow-min-cut',
+      'unit-directional-grid-effect-scan',
       'unit-graph-core-peeling',
       'unit-graph-core',
       'unit-cycle-space-basis',

@@ -3,7 +3,7 @@ title: "動的・implicit Segment Tree"
 description: "「動的・implicit Segment Tree」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 45
+  order: 46
 ---
 
 # 動的・implicit Segment Tree

@@ -3,7 +3,7 @@ title: "静的sorted range index・Merge Sort Tree"
 description: "「静的sorted range index・Merge Sort Tree」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 44
+  order: 45
 ---
 
 # 静的sorted range index・Merge Sort Tree

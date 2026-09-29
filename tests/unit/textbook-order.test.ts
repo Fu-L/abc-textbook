@@ -20,12 +20,57 @@ const expectReadingSequence = (chapterId: string, sequence: readonly string[]): 
   }
 };
 
+const expectAdjacentSequence = (chapterId: string, before: string, after: string): void => {
+  const unitIds = chapterUnitIds(chapterId);
+  expect(unitIds.indexOf(after), `${before} directly precedes ${after}`).toBe(
+    unitIds.indexOf(before) + 1,
+  );
+};
+
 describe('textbook Unit reading order', () => {
+  it('introduces range actions immediately after the range monoid summary', () => {
+    expectReadingSequence('unit-chapter-query', [
+      'unit-prefix-aggregate',
+      'unit-linked-list-index',
+      'unit-ordered-set-heap',
+      'unit-priority-queue-best-first',
+      'unit-ordered-set-multiset',
+      'unit-monotone-stack-queue',
+      'unit-cartesian-tree',
+      'unit-weighted-prefix-fenwick',
+      'unit-monoid-segment-tree',
+      'unit-range-monoid-aggregation',
+      'unit-range-actions',
+      'unit-finite-function-composition',
+      'unit-idempotent-overlap-range-query',
+      'unit-swag',
+      'unit-segment-tree-canonical-decomposition',
+      'unit-static-sorted-range-index',
+      'unit-dynamic-segment-tree',
+      'unit-ordered-interval-partition',
+      'unit-value-bucket-aggregation',
+      'unit-mo-offline-range',
+      'unit-bitset-word-parallel',
+      'unit-binary-trie',
+      'unit-bitwise-minimax-partition',
+      'unit-string-hash',
+      'unit-sequence-fingerprint',
+      'unit-persistence-rollback',
+      'unit-rollback',
+      'unit-persistence',
+      'unit-segment-tree-beats',
+    ]);
+    expectAdjacentSequence(
+      'unit-chapter-query',
+      'unit-range-monoid-aggregation',
+      'unit-range-actions',
+    );
+  });
+
   it('teaches graph fundamentals and Euler structure before standard flow, with advanced flow later', () => {
     expectReadingSequence('unit-chapter-graph', [
       'unit-graph-search',
       'unit-state-graph-search',
-      'unit-directional-grid-effect-scan',
       'unit-transitive-closure',
       'unit-bipartite-structure',
       'unit-connectivity',
@@ -53,6 +98,7 @@ describe('textbook Unit reading order', () => {
       'unit-flow-matching',
       'unit-bipartite-matching',
       'unit-max-flow-min-cut',
+      'unit-directional-grid-effect-scan',
       'unit-graph-core-peeling',
       'unit-graph-core',
       'unit-cycle-space-basis',
@@ -66,6 +112,16 @@ describe('textbook Unit reading order', () => {
       'unit-path-matching-contraction',
       'unit-min-weight-general-perfect-matching',
     ]);
+    expectAdjacentSequence(
+      'unit-chapter-graph',
+      'unit-max-flow-min-cut',
+      'unit-directional-grid-effect-scan',
+    );
+    expectAdjacentSequence(
+      'unit-chapter-graph',
+      'unit-directional-grid-effect-scan',
+      'unit-graph-core-peeling',
+    );
   });
 
   it('establishes the general tree toolkit before implicit complete binary trees', () => {

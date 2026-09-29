@@ -3,7 +3,7 @@ title: "有限関数・作用の合成"
 description: "「有限関数・作用の合成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 40
+  order: 41
 ---
 
 # 有限関数・作用の合成

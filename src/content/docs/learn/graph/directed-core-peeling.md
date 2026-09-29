@@ -3,7 +3,7 @@ title: "有向cycle検出・sink/source peeling"
 description: "「有向cycle検出・sink/source peeling」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 102
+  order: 101
 ---
 
 # 有向cycle検出・sink/source peeling

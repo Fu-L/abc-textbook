@@ -3,7 +3,7 @@ title: "difference constraints・不等式系の最短路化"
 description: "「difference constraints・不等式系の最短路化」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 99
+  order: 98
 ---
 
 # difference constraints・不等式系の最短路化

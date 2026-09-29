@@ -3,7 +3,7 @@ title: "最短路モデル"
 description: "「最短路モデル」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 97
+  order: 96
 ---
 
 # 最短路モデル

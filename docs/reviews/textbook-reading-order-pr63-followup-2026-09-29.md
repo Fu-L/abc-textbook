@@ -9,18 +9,19 @@ placementと意味上の`parentId`も変更しない。
 ## 最終読書順
 
 - **データ構造**: 累積和・差分 → 連結リスト → heap・ordered set → 単調stack・queue → Cartesian tree
-  → Fenwick Tree → Segment Treeのmonoid集約・関数合成・静的query・SWAG・区間分解・Merge Sort
-  Tree・動的Segment Tree → 遅延作用 → run分割管理 → bucket・Mo → bitset・trie・bitwise minimax →
-  rolling fingerprint → rollback・永続化 → Segment Tree Beats。
+  → Fenwick Tree → Segment Treeのmonoid集約 → 区間作用（Lazy Segment
+  Tree） → 関数合成・静的query・SWAG・区間分解・Merge Sort Tree・動的Segment Tree → run分割管理 →
+  bucket・Mo → bitset・trie・bitwise minimax → rolling fingerprint → rollback・永続化 → Segment Tree
+  Beats。
 - **DP**: 最小十分状態 →
   grid・容量 → 列/区間（sequence・LIS・値域・prefix分割・区間合成・区間拡張） → subset →
   digit/string prefix → carry/mixed radix → 確率 → game → 遷移最適化 → 線形漸化式 → cyclic minimax →
   frontier/profile・Steiner tree・巨大容量knapsack・期待値potential・Conway number games。
 - **グラフ**: graph search → 二部構造 → connectivity/DSU/potential → shortest path → DAG/SCC/2-SAT →
   functional graph/doubling → spanning tree/MST → lowlink → Euler/parity → flow/matching導入 →
-  bipartite matching → max-flow/min-cut → graph core → cycle space → 単調path縮約・near-tree
-  kernelization・有向walk周期 → lower-bound flow・min-cost flow・weighted bipartite matching →
-  planar duality → path matching contraction → 一般重み付き完全matching。
+  bipartite matching → max-flow/min-cut → 方向別grid scan → graph core → cycle space
+  → 単調path縮約・near-tree kernelization・有向walk周期 → lower-bound flow・min-cost flow・weighted
+  bipartite matching → planar duality → path matching contraction → 一般重み付き完全matching。
 - **木**: tree metric → tree aggregation・rooted tree DP・rerooting → Euler
   flattening・LCA・HLD・virtual tree → implicit complete binary tree → laminar containment tree・DSU
   merge tree → balanced separator → additive metric reconstruction → precedence
@@ -37,9 +38,20 @@ placementと意味上の`parentId`も変更しない。
   functions以降の発展 → linear matroid intersection。
 
 flow/matchingのUnitは意味上の親子関係を維持する。`flow-matching`の導入とbipartite
-matching・max-flow/min-cutを標準toolkitの段階に置き、graph core・cycle
+matching・max-flow/min-cutを標準toolkitの段階に置き、方向別grid scanを挟んでgraph core・cycle
 space・path構造を学んだ後にlower-bound flow・min-cost flow・weighted bipartite
 matchingへ戻る。子Unitが読書順上で連続する必要はない。
+
+## 追加レビューの2点
+
+query章は`range-monoid-aggregation`の直後へ`range-actions`を移し、関数合成・Sparse
+Table・SWAG・canonical decomposition・Merge Sort Tree・dynamic Segment
+Treeの前に遅延作用を学ぶ。graph章は`directional-grid-effect-scan`をgraph
+search群の外へ出し、max-flow/min-cutとgraph coreの間へ移す。その他のquery・graph
+Unitは相対順を保ち、各配列全体を契約テストで固定する。
+
+この追加変更でも、`parentId`と前提DAGのdigestは維持する。変更対象外のUnit順・problem
+placement・Unit内の問題順は変更しない。
 
 木では一般木のDP・部分木・祖先・pathの道具を先に揃えてからimplicit complete binary
 treeへ進む。文字列ではsuffix array/LCPをrun-lengthやrecursive compressed
