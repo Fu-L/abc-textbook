@@ -104,9 +104,11 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         const unit = byId.get(id)?.value;
         if (unit === undefined) throw new Error(`Missing Unit: ${id}`);
         expect(depth, id).toBe(0);
-        if (unit.parentId !== chapter.id) {
-          const parent = byId.get(unit.parentId)?.value;
-          if (parent === undefined) throw new Error(`Missing parent: ${unit.parentId}`);
+        const parentId = unit.parentId;
+        if (parentId === null) throw new Error(`Missing parent: ${id}`);
+        if (parentId !== chapter.id) {
+          const parent = byId.get(parentId)?.value;
+          if (parent === undefined) throw new Error(`Missing parent: ${parentId}`);
           expect(line, id).toContain(`概念上の親: [${parent.title}]`);
         } else {
           expect(line, id).not.toContain('概念上の親:');
@@ -168,8 +170,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(unitLearningTarget('unit-dp-state-design').color).toBe('緑色');
     expect(unitLearningTarget('unit-frontier-profile-dp').color).toBe('黄色');
     expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
-    expect(byId.get('unit-chapter-modeling')?.document).toContain('## 本書の読み方');
-    expect(byId.get('unit-chapter-modeling')?.document).toContain('編集上の案内');
+    expect(byId.get('unit-chapter-modeling')?.document).toContain('目次の隣接は前提を意味しません');
   }, 30_000);
 
   it('keeps placement data independent of a changed textbook display order', async () => {
