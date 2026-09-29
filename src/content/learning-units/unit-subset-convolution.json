@@ -1,8 +1,8 @@
 {
   "id": "unit-subset-convolution",
-  "kind": "subsection",
+  "kind": "section",
   "title": "subset convolution",
-  "parentId": "unit-subset-transforms",
+  "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

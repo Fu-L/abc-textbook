@@ -1,8 +1,8 @@
 {
   "id": "unit-ordered-interval-partition",
-  "kind": "subsection",
+  "kind": "section",
   "title": "端点更新型のrun分割管理",
-  "parentId": "unit-ordered-set-heap",
+  "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

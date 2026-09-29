@@ -47,4 +47,4 @@ sidebar:
 - [ABC261 E 公式問題文](https://atcoder.jp/contests/abc261/tasks/abc261_e)
 - [ABC261 E 公式解説](https://atcoder.jp/contests/abc261/editorial/4451)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-finite-function-composition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-finite-function-composition`

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-26T17:58:52.033Z",
+  "generatedAt": "2026-09-29T07:53:12.307Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "ed2f24927c8fd3c91569a3206442d31f6832edfeb06d019bb89717186f3f0d8d",
+    "rulesDigest": "091c879add14374ada033c4abafbcecbaadaf82e6f936c3cd03b2bf4ef9e6d15",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -42909,9 +42909,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-additive-expectation-potential",
-        "kind": "subsection",
+        "kind": "section",
         "title": "期待値の頻度圧縮と加法的ポテンシャル",
-        "parentId": "unit-dp-stochastic",
+        "parentId": "unit-chapter-dynamic-programming",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -46144,9 +46144,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-bostan-mori",
-        "kind": "subsection",
+        "kind": "section",
         "title": "Bostan–Mori・有理生成関数の係数抽出",
-        "parentId": "unit-formal-power-series",
+        "parentId": "unit-chapter-combinatorics-algebra",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -55195,13 +55195,11 @@
         "tagIds": [
           "tag-dag-topological-processing",
           "tag-directed-core-peeling",
-          "tag-directed-walk-periodicity",
           "tag-scc-condensation",
           "tag-two-sat"
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
-          "outcome-compute-directed-walk-period",
           "outcome-condense-and-order-directed-graph",
           "outcome-encode-threshold-constraints-as-two-sat",
           "outcome-peel-directed-graph-toward-cycles",
@@ -55213,7 +55211,6 @@
           "abc277-ex",
           "abc277-f",
           "abc291-e",
-          "abc306-g",
           "abc315-e",
           "abc456-e"
         ],
@@ -55223,6 +55220,7 @@
           "abc224-e",
           "abc304-ex",
           "abc306-ex",
+          "abc306-g",
           "abc324-f",
           "abc335-e",
           "abc341-f",
@@ -55660,9 +55658,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-directed-walk-periodicity",
-        "kind": "subsection",
+        "kind": "section",
         "title": "有向walkの周期・cycle差分gcd",
-        "parentId": "unit-directed-condensation",
+        "parentId": "unit-chapter-graph",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -55945,8 +55943,6 @@
         "tagIds": [
           "tag-basic-convex-optimization",
           "tag-isotonic-regression-pav",
-          "tag-lagrangian-relaxation",
-          "tag-monge-optimization",
           "tag-separable-convex-marginals",
           "tag-slope-trick"
         ],
@@ -55954,8 +55950,6 @@
         "learningOutcomeIds": [
           "outcome-allocate-by-convex-marginal-costs",
           "outcome-maintain-piecewise-linear-convex-function",
-          "outcome-optimize-by-lagrangian-relaxation",
-          "outcome-optimize-monge-transitions",
           "outcome-optimize-univariate-convex-function",
           "outcome-solve-isotonic-regression-by-pav"
         ],
@@ -55966,17 +55960,12 @@
           "abc224-g",
           "abc250-g",
           "abc275-ex",
-          "abc305-ex",
           "abc314-ex",
-          "abc348-g",
-          "abc355-g",
           "abc359-f",
           "abc369-g",
           "abc373-f",
           "abc383-g",
           "abc389-e",
-          "abc393-g",
-          "abc400-g",
           "abc406-g",
           "abc458-g",
           "abc459-f"
@@ -56278,13 +56267,11 @@
         ],
         "tagIds": [
           "tag-meet-in-the-middle",
-          "tag-recursive-divide-and-conquer",
-          "tag-xor-threshold-matching"
+          "tag-recursive-divide-and-conquer"
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
           "outcome-divide-search-space-recursively",
-          "outcome-solve-xor-threshold-matching",
           "outcome-split-enumeration-space"
         ],
         "ownedLearningOutcomeIds": [],
@@ -56294,7 +56281,6 @@
           "abc271-f",
           "abc282-ex",
           "abc300-g",
-          "abc304-g",
           "abc326-f",
           "abc336-f",
           "abc402-f",
@@ -56314,6 +56300,7 @@
           "abc272-ex",
           "abc273-ex",
           "abc281-ex",
+          "abc304-g",
           "abc317-ex",
           "abc331-g",
           "abc345-g",
@@ -58262,7 +58249,7 @@
         "id": "unit-dp-lis",
         "kind": "subsection",
         "title": "LIS・末尾の支配関係",
-        "parentId": "unit-dp-sequence-interval",
+        "parentId": "unit-dp-sequence",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -58719,19 +58706,23 @@
           "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
           "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
           "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1",
-          "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-          "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+          "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+          "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
         ],
         "tagIds": [
           "tag-edit-distance-dp",
-          "tag-sequence-subsequence-dp"
+          "tag-lis-state",
+          "tag-sequence-subsequence-dp",
+          "tag-value-range-dp"
         ],
         "ownedTagIds": [
           "tag-edit-distance-dp",
           "tag-sequence-subsequence-dp"
         ],
         "learningOutcomeIds": [
+          "outcome-aggregate-subsequence-transitions-by-value",
           "outcome-compute-edit-distance",
+          "outcome-design-lis-frontier",
           "outcome-design-order-preserving-dp"
         ],
         "ownedLearningOutcomeIds": [
@@ -58741,11 +58732,19 @@
         "problemIds": [
           "abc214-f",
           "abc238-f",
+          "abc240-ex",
           "abc299-f",
           "abc315-f",
           "abc327-e",
+          "abc339-e",
+          "abc354-f",
+          "abc360-g",
           "abc362-e",
-          "abc386-f"
+          "abc369-f",
+          "abc386-f",
+          "abc393-f",
+          "abc410-g",
+          "abc439-e"
         ],
         "directProblemIds": [
           "abc327-e",
@@ -58758,9 +58757,11 @@
         ],
         "relatedProblemIds": [
           "abc225-f",
+          "abc237-f",
           "abc242-ex",
           "abc246-ex",
-          "abc345-e"
+          "abc345-e",
+          "abc457-g"
         ],
         "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、列・subsequence DPの発動条件・正当化・境界を重複なく学ぶ。"
       },
@@ -58769,8 +58770,8 @@
         "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
         "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
         "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1",
-        "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-        "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+        "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+        "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
       ],
       "evidenceRefs": [
         {
@@ -58884,91 +58885,25 @@
           ]
         },
         {
-          "problemId": "abc238-f",
-          "claimPath": "/outcomeCandidates/0",
+          "problemId": "abc237-f",
+          "claimPath": "/prerequisiteCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+            "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+            "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
           ]
         },
         {
-          "problemId": "abc238-f",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
-          ]
-        },
-        {
-          "problemId": "abc238-f",
-          "claimPath": "/reasoningPath/candidateApproaches/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
-          ]
-        },
-        {
-          "problemId": "abc238-f",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
-          ]
-        },
-        {
-          "problemId": "abc238-f",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
-          ]
-        },
-        {
-          "problemId": "abc238-f",
-          "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
-          ]
-        },
-        {
-          "problemId": "abc238-f",
+          "problemId": "abc237-f",
           "claimPath": "/typicalTechniques/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
-          ]
-        },
-        {
-          "problemId": "abc238-f",
-          "claimPath": "/typicalTechniques/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
-            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+            "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+            "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
           ]
         }
       ],
@@ -59361,14 +59296,12 @@
           "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"
         ],
         "tagIds": [
-          "tag-dp-state-equivalence",
-          "tag-frontier-profile-dp"
+          "tag-dp-state-equivalence"
         ],
         "ownedTagIds": [
           "tag-dp-state-equivalence"
         ],
         "learningOutcomeIds": [
-          "outcome-design-frontier-profile-dp",
           "outcome-design-minimal-sufficient-state"
         ],
         "ownedLearningOutcomeIds": [
@@ -59383,7 +59316,6 @@
           "abc237-f",
           "abc244-e",
           "abc247-f",
-          "abc248-f",
           "abc251-e",
           "abc264-f",
           "abc265-e",
@@ -59391,7 +59323,6 @@
           "abc279-g",
           "abc281-g",
           "abc283-e",
-          "abc296-ex",
           "abc307-e",
           "abc310-e",
           "abc311-f",
@@ -59400,7 +59331,6 @@
           "abc345-e",
           "abc375-e",
           "abc376-f",
-          "abc379-g",
           "abc389-g",
           "abc391-g",
           "abc403-f",
@@ -59446,14 +59376,14 @@
         "relatedProblemIds": [
           "abc236-e",
           "abc282-g",
-          "abc295-ex",
+          "abc296-ex",
           "abc309-e",
-          "abc309-g",
           "abc311-e",
           "abc322-e",
           "abc350-e",
           "abc374-f",
           "abc378-g",
+          "abc379-g",
           "abc381-f",
           "abc386-f",
           "abc388-f",
@@ -59728,14 +59658,12 @@
           "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
         ],
         "tagIds": [
-          "tag-additive-expectation-potential",
           "tag-stochastic-expectation-dp"
         ],
         "ownedTagIds": [
           "tag-stochastic-expectation-dp"
         ],
         "learningOutcomeIds": [
-          "outcome-decompose-expectation-by-additive-potential",
           "outcome-optimize-stochastic-actions",
           "outcome-propagate-probability-distribution",
           "outcome-solve-stochastic-recurrence"
@@ -59748,7 +59676,6 @@
         "problemIds": [
           "abc226-h",
           "abc242-ex",
-          "abc249-ex",
           "abc263-e",
           "abc266-e",
           "abc270-ex",
@@ -59798,6 +59725,7 @@
         ],
         "relatedProblemIds": [
           "abc239-ex",
+          "abc249-ex",
           "abc271-g",
           "abc280-e",
           "abc310-f",
@@ -60025,15 +59953,13 @@
           "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"
         ],
         "tagIds": [
-          "tag-eventual-unbounded-knapsack",
           "tag-knapsack-resource"
         ],
         "ownedTagIds": [
           "tag-knapsack-resource"
         ],
         "learningOutcomeIds": [
-          "outcome-design-resource-dp",
-          "outcome-stabilize-unbounded-knapsack-by-best-density"
+          "outcome-design-resource-dp"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-design-resource-dp"
@@ -60045,7 +59971,6 @@
           "abc275-f",
           "abc288-e",
           "abc307-g",
-          "abc310-ex",
           "abc320-f",
           "abc321-f",
           "abc322-e",
@@ -60055,7 +59980,6 @@
           "abc383-f",
           "abc390-e",
           "abc410-e",
-          "abc415-g",
           "abc419-e",
           "abc424-g",
           "abc441-f",
@@ -60085,6 +60009,7 @@
         "relatedProblemIds": [
           "abc287-f",
           "abc290-ex",
+          "abc310-ex",
           "abc311-ex",
           "abc332-g",
           "abc366-f",
@@ -60818,7 +60743,7 @@
         "id": "unit-dp-value-range",
         "kind": "subsection",
         "title": "値域集約による部分列DP",
-        "parentId": "unit-dp-sequence-interval",
+        "parentId": "unit-dp-sequence",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -62715,15 +62640,13 @@
           "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
         ],
         "tagIds": [
-          "tag-event-sweep",
-          "tag-kinetic-order-maintenance"
+          "tag-event-sweep"
         ],
         "ownedTagIds": [
           "tag-event-sweep"
         ],
         "learningOutcomeIds": [
-          "outcome-linearize-events",
-          "outcome-maintain-order-through-crossing-events"
+          "outcome-linearize-events"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-linearize-events"
@@ -62737,7 +62660,6 @@
           "abc311-g",
           "abc320-e",
           "abc327-f",
-          "abc344-g",
           "abc346-g",
           "abc360-f",
           "abc363-e",
@@ -62773,7 +62695,6 @@
           "abc245-e",
           "abc250-ex",
           "abc254-g",
-          "abc257-ex",
           "abc263-ex",
           "abc268-ex",
           "abc280-g",
@@ -62784,6 +62705,7 @@
           "abc308-f",
           "abc332-g",
           "abc337-g",
+          "abc344-g",
           "abc351-f",
           "abc361-g",
           "abc393-f",
@@ -62872,9 +62794,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-eventual-unbounded-knapsack",
-        "kind": "subsection",
+        "kind": "section",
         "title": "大容量unbounded knapsackのeventual linearity",
-        "parentId": "unit-dp-subset-resource",
+        "parentId": "unit-chapter-dynamic-programming",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -64050,16 +63972,14 @@
           "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
           "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
           "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
-          "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-          "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+          "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+          "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
         ],
         "tagIds": [
           "tag-bipartite-matching-hall",
           "tag-flow-feasibility-lower-bounds",
           "tag-max-flow-min-cut",
           "tag-min-cost-flow",
-          "tag-min-weight-general-perfect-matching",
-          "tag-path-matching-contraction",
           "tag-weighted-bipartite-matching"
         ],
         "ownedTagIds": [],
@@ -64067,17 +63987,14 @@
           "outcome-characterize-bipartite-feasibility-by-hall",
           "outcome-model-max-flow-min-cut",
           "outcome-model-min-cost-flow",
-          "outcome-optimize-path-matching-by-contraction",
           "outcome-solve-bipartite-matching",
           "outcome-solve-flow-with-lower-bounds",
-          "outcome-solve-min-weight-general-perfect-matching",
           "outcome-solve-weighted-bipartite-matching"
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
           "abc214-h",
           "abc215-h",
-          "abc218-h",
           "abc224-h",
           "abc225-g",
           "abc227-h",
@@ -64100,12 +64017,10 @@
           "abc397-g",
           "abc401-g",
           "abc407-g",
-          "abc412-g",
           "abc421-g",
           "abc437-g",
           "abc445-g",
-          "abc461-g",
-          "abc464-g"
+          "abc461-g"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -64124,8 +64039,8 @@
         "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
         "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
         "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
-        "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-        "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+        "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+        "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
       ],
       "evidenceRefs": [
         {
@@ -64316,80 +64231,80 @@
           ]
         },
         {
-          "problemId": "abc218-h",
+          "problemId": "abc224-h",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
           ]
         },
         {
-          "problemId": "abc218-h",
+          "problemId": "abc224-h",
           "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
           ]
         },
         {
-          "problemId": "abc218-h",
+          "problemId": "abc224-h",
           "claimPath": "/reasoningPath/candidateApproaches/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
           ]
         },
         {
-          "problemId": "abc218-h",
+          "problemId": "abc224-h",
           "claimPath": "/reasoningPath/keyInsights/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
           ]
         },
         {
-          "problemId": "abc218-h",
+          "problemId": "abc224-h",
+          "claimPath": "/reasoningPath/keyInsights/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
+          ]
+        },
+        {
+          "problemId": "abc224-h",
           "claimPath": "/reasoningPath/observations/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
           ]
         },
         {
-          "problemId": "abc218-h",
-          "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
-          ]
-        },
-        {
-          "problemId": "abc218-h",
+          "problemId": "abc224-h",
           "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-            "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
           ]
         }
       ],
@@ -64400,7 +64315,7 @@
       "entity": {
         "id": "unit-formal-power-series",
         "kind": "section",
-        "title": "FPS演算・多点評価・合成を行う",
+        "title": "FPS基本演算と多項式の多点評価を行う",
         "parentId": "unit-chapter-combinatorics-algebra",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -64416,9 +64331,7 @@
           "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"
         ],
         "tagIds": [
-          "tag-bostan-mori",
           "tag-formal-power-series",
-          "tag-fps-composition-power-projection",
           "tag-polynomial-multipoint-evaluation"
         ],
         "ownedTagIds": [
@@ -64426,20 +64339,15 @@
         ],
         "learningOutcomeIds": [
           "outcome-apply-formal-power-series-operations",
-          "outcome-compose-series-and-project-powers",
           "outcome-evaluate-at-geometric-points",
-          "outcome-evaluate-polynomial-at-many-points",
-          "outcome-extract-rational-series-coefficient"
+          "outcome-evaluate-polynomial-at-many-points"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-apply-formal-power-series-operations"
         ],
         "problemIds": [
           "abc272-ex",
-          "abc289-ex",
-          "abc300-ex",
-          "abc387-g",
-          "abc439-g"
+          "abc289-ex"
         ],
         "directProblemIds": [
           "abc289-ex"
@@ -64450,9 +64358,11 @@
           "abc317-ex",
           "abc318-ex",
           "abc381-g",
+          "abc387-g",
+          "abc439-g",
           "abc449-g"
         ],
-        "learningRationale": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
+        "learningRationale": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc260-editorial-4434-864dffceff26d14b00bdc9dbe05af08146c10a71c91bc9ab5b65db1d57ee1a40",
@@ -64822,9 +64732,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-fps-composition-power-projection",
-        "kind": "subsection",
+        "kind": "section",
         "title": "FPS合成・power projection",
-        "parentId": "unit-formal-power-series",
+        "parentId": "unit-chapter-combinatorics-algebra",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -65392,9 +65302,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-frontier-profile-dp",
-        "kind": "subsection",
+        "kind": "section",
         "title": "frontier/profile DP・境界状態圧縮",
-        "parentId": "unit-dp-state-design",
+        "parentId": "unit-chapter-dynamic-programming",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -68021,7 +67931,7 @@
       "entity": {
         "id": "unit-graph-core-peeling",
         "kind": "section",
-        "title": "閉路数・次数構造からgraph coreとkernelを調べる",
+        "title": "閉路数・次数構造からgraph coreを調べる",
         "parentId": "unit-chapter-graph",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -68032,36 +67942,29 @@
           "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
           "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
           "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c",
-          "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26",
-          "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-          "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+          "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26"
         ],
         "tagIds": [
-          "tag-graph-core-peeling",
-          "tag-near-tree-kernelization"
+          "tag-graph-core-peeling"
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
-          "outcome-kernelize-near-tree-graph",
           "outcome-peel-graph-core"
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
           "abc226-e",
-          "abc266-f",
-          "abc419-g"
+          "abc266-f"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [],
-        "learningRationale": "連結成分のcycle rankを辺数と頂点数から読み、必要なら低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。"
+        "learningRationale": "連結成分のcycle rankを辺数と頂点数から読み、葉を反復削除してcycle coreを露出させる。cycle spaceと組み合わせたnear-tree kernel化は独立した節で学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
         "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
         "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c",
-        "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26",
-        "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-        "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+        "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26"
       ],
       "evidenceRefs": [
         {
@@ -68216,127 +68119,6 @@
           "sourceRevisionIds": [
             "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c",
             "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/outcomeCandidates/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/candidateApproaches/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/keyInsights/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/reasoningPath/observations/2",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
-          ]
-        },
-        {
-          "problemId": "abc419-g",
-          "claimPath": "/typicalTechniques/2",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
-            "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
           ]
         }
       ],
@@ -69566,9 +69348,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-heavy-path-tree-dp",
-        "kind": "subsection",
+        "kind": "section",
         "title": "heavy path上の多項式木DP",
-        "parentId": "unit-tree-aggregation",
+        "parentId": "unit-chapter-tree",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -70078,7 +69860,6 @@
         "tagIds": [
           "tag-divisor-mobius-inversion",
           "tag-inclusion-exclusion",
-          "tag-subset-convolution",
           "tag-subset-zeta-mobius-transform"
         ],
         "ownedTagIds": [
@@ -70086,7 +69867,6 @@
         ],
         "learningOutcomeIds": [
           "outcome-apply-subset-zeta-mobius-transform",
-          "outcome-compute-subset-convolution",
           "outcome-correct-overlap-by-inversion",
           "outcome-invert-divisor-lattice-by-mobius"
         ],
@@ -70102,7 +69882,6 @@
           "abc246-f",
           "abc280-g",
           "abc285-ex",
-          "abc294-ex",
           "abc295-ex",
           "abc297-f",
           "abc304-f",
@@ -70893,9 +70672,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-kinetic-order-maintenance",
-        "kind": "subsection",
+        "kind": "section",
         "title": "kinetic sorting・交差event順序更新",
-        "parentId": "unit-event-sweep",
+        "parentId": "unit-chapter-modeling",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -71529,9 +71308,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-lagrangian-relaxation",
-        "kind": "subsection",
+        "kind": "section",
         "title": "Lagrangian relaxation・Aliens trick",
-        "parentId": "unit-discrete-convex",
+        "parentId": "unit-chapter-geometry-optimization",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -71863,9 +71642,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-laminar-interval-containment-tree",
-        "kind": "subsection",
+        "kind": "section",
         "title": "laminar区間族の包含木構築",
-        "parentId": "unit-tree-decomposition",
+        "parentId": "unit-chapter-tree",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -74976,9 +74755,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-min-weight-general-perfect-matching",
-        "kind": "subsection",
+        "kind": "section",
         "title": "一般グラフの最小重み完全matching",
-        "parentId": "unit-flow-matching",
+        "parentId": "unit-chapter-graph",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -76578,9 +76357,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-monge-optimization",
-        "kind": "subsection",
+        "kind": "section",
         "title": "Monge・monotone minima最適化",
-        "parentId": "unit-discrete-convex",
+        "parentId": "unit-chapter-geometry-optimization",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -76917,7 +76696,7 @@
       "entity": {
         "id": "unit-monoid-segment-tree",
         "kind": "section",
-        "title": "Segment Treeの要約・区間分解・合成",
+        "title": "結合的な区間要約・区間分解・合成",
         "parentId": "unit-chapter-query",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -77994,9 +77773,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-near-tree-kernelization",
-        "kind": "subsection",
+        "kind": "section",
         "title": "near-tree graphのkernel化",
-        "parentId": "unit-graph-core-peeling",
+        "parentId": "unit-chapter-graph",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -78742,9 +78521,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-ordered-interval-partition",
-        "kind": "subsection",
+        "kind": "section",
         "title": "端点更新型のrun分割管理",
-        "parentId": "unit-ordered-set-heap",
+        "parentId": "unit-chapter-query",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -78952,23 +78731,16 @@
           "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"
         ],
         "tagIds": [
-          "tag-dynamic-interval-union",
-          "tag-endpoint-run-partition",
-          "tag-ordered-interval-partition",
           "tag-ordered-set-multiset",
           "tag-priority-queue-best-first"
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
           "outcome-enumerate-frontier-best-first",
-          "outcome-maintain-dynamic-interval-union-length",
-          "outcome-maintain-endpoint-run-partition",
-          "outcome-maintain-ordered-interval-partition",
           "outcome-maintain-ordered-set-statistics"
         ],
         "ownedLearningOutcomeIds": [],
         "problemIds": [
-          "abc255-ex",
           "abc281-e",
           "abc297-e",
           "abc305-e",
@@ -78978,14 +78750,11 @@
           "abc330-e",
           "abc331-e",
           "abc356-f",
-          "abc380-e",
           "abc384-e",
           "abc391-f",
           "abc409-f",
           "abc431-g",
-          "abc435-e",
-          "abc440-e",
-          "abc465-g"
+          "abc440-e"
         ],
         "directProblemIds": [],
         "relatedProblemIds": [
@@ -78996,9 +78765,7 @@
           "abc245-e",
           "abc249-f",
           "abc250-g",
-          "abc251-ex",
           "abc252-f",
-          "abc256-ex",
           "abc268-ex",
           "abc273-ex",
           "abc275-ex",
@@ -79018,9 +78785,7 @@
           "abc407-e",
           "abc407-f",
           "abc418-f",
-          "abc428-f",
-          "abc444-e",
-          "abc449-f"
+          "abc444-e"
         ],
         "learningRationale": "比較可能な候補全体から極値・順位・隣接を繰り返し取り出すため、動的な順序を保つ。"
       },
@@ -79653,9 +79418,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-path-matching-contraction",
-        "kind": "subsection",
+        "kind": "section",
         "title": "path matchingのheap縮約greedy",
-        "parentId": "unit-flow-matching",
+        "parentId": "unit-chapter-graph",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -80511,35 +80276,31 @@
           "組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"
         ],
         "sourceRevisionIds": [
-          "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-          "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
           "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
           "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
-          "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-          "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+          "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+          "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
+          "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+          "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
         ],
         "tagIds": [
           "tag-convolution",
-          "tag-polynomial-taylor-shift",
-          "tag-relaxed-convolution"
+          "tag-polynomial-taylor-shift"
         ],
         "ownedTagIds": [
           "tag-convolution"
         ],
         "learningOutcomeIds": [
           "outcome-compute-convolution-or-correlation",
-          "outcome-compute-online-relaxed-convolution",
           "outcome-shift-polynomial-by-factorial-convolution"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-compute-convolution-or-correlation"
         ],
         "problemIds": [
-          "abc213-h",
           "abc265-ex",
           "abc291-g",
           "abc307-ex",
-          "abc315-ex",
           "abc392-g",
           "abc409-g",
           "abc432-g"
@@ -80554,7 +80315,6 @@
         ],
         "relatedProblemIds": [
           "abc225-h",
-          "abc230-h",
           "abc235-ex",
           "abc247-ex",
           "abc260-ex",
@@ -80568,13 +80328,13 @@
           "abc300-ex",
           "abc303-ex",
           "abc309-ex",
+          "abc315-ex",
           "abc317-ex",
           "abc318-ex",
           "abc323-g",
           "abc331-g",
           "abc345-g",
           "abc352-g",
-          "abc357-g",
           "abc381-g",
           "abc385-g",
           "abc387-g",
@@ -80587,102 +80347,14 @@
         "learningRationale": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
       },
       "sourceRevisionIds": [
-        "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-        "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9",
         "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
         "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
-        "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-        "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+        "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+        "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
+        "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+        "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
       ],
       "evidenceRefs": [
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/reasoningPath/candidateApproaches/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/reasoningPath/keyInsights/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/reasoningPath/observations/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
-        {
-          "problemId": "abc213-h",
-          "claimPath": "/typicalTechniques/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc213-editorial-2396-e053a5ddeaefef50ed297507ded11318df1661b6a53445324bb2fecb67ec32f5",
-            "source-abc213-h-problem-67e04f8bc5b8dac499f12a37a5e320099eff645eaa33ba256db445080344aac9"
-          ]
-        },
         {
           "problemId": "abc225-h",
           "claimPath": "/outcomeCandidates/0",
@@ -80761,102 +80433,124 @@
           ]
         },
         {
-          "problemId": "abc230-h",
+          "problemId": "abc235-ex",
+          "claimPath": "/prerequisiteCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+            "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f"
+          ]
+        },
+        {
+          "problemId": "abc247-ex",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
+          "problemId": "abc247-ex",
           "claimPath": "/reasoningPath/algorithmConnection",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
-          "claimPath": "/reasoningPath/candidateApproaches/1",
+          "problemId": "abc247-ex",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
+          "problemId": "abc247-ex",
           "claimPath": "/reasoningPath/keyInsights/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
+          "problemId": "abc247-ex",
           "claimPath": "/reasoningPath/keyInsights/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
+          "problemId": "abc247-ex",
+          "claimPath": "/reasoningPath/keyInsights/2",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+          ]
+        },
+        {
+          "problemId": "abc247-ex",
           "claimPath": "/reasoningPath/observations/0",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
+          "problemId": "abc247-ex",
           "claimPath": "/reasoningPath/observations/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         },
         {
-          "problemId": "abc230-h",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
-          ]
-        },
-        {
-          "problemId": "abc230-h",
+          "problemId": "abc247-ex",
           "claimPath": "/typicalTechniques/1",
           "evidenceIds": [
             "evidence-official-analysis"
           ],
           "sourceRevisionIds": [
-            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
-            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+          ]
+        },
+        {
+          "problemId": "abc247-ex",
+          "claimPath": "/typicalTechniques/2",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+            "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
           ]
         }
       ],
@@ -82899,15 +82593,13 @@
           "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
         ],
         "tagIds": [
-          "tag-lazy-segment-action",
-          "tag-segment-tree-beats"
+          "tag-lazy-segment-action"
         ],
         "ownedTagIds": [
           "tag-lazy-segment-action"
         ],
         "learningOutcomeIds": [
-          "outcome-design-range-update-action",
-          "outcome-prune-range-actions-by-node-invariant"
+          "outcome-design-range-update-action"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-design-range-update-action"
@@ -82925,7 +82617,6 @@
           "abc397-f",
           "abc417-f",
           "abc426-f",
-          "abc430-g",
           "abc441-g",
           "abc455-f"
         ],
@@ -84177,9 +83868,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-relaxed-convolution",
-        "kind": "subsection",
+        "kind": "section",
         "title": "Relaxed・online convolution",
-        "parentId": "unit-polynomial-convolution",
+        "parentId": "unit-chapter-combinatorics-algebra",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -86180,9 +85871,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-segment-tree-beats",
-        "kind": "subsection",
+        "kind": "section",
         "title": "Segment Tree Beats",
-        "parentId": "unit-range-actions",
+        "parentId": "unit-chapter-query",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -86313,24 +86004,27 @@
         "sourceRevisionIds": [
           "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
           "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+          "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+          "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8",
           "source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa",
-          "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7",
-          "source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce",
-          "source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3"
+          "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"
         ],
         "tagIds": [
-          "tag-segment-tree-canonical-decomposition"
+          "tag-segment-tree-canonical-decomposition",
+          "tag-static-sorted-range-index"
         ],
         "ownedTagIds": [
           "tag-segment-tree-canonical-decomposition"
         ],
         "learningOutcomeIds": [
+          "outcome-build-static-sorted-range-index",
           "outcome-decompose-ranges-into-segment-tree-nodes"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-decompose-ranges-into-segment-tree-nodes"
         ],
         "problemIds": [
+          "abc339-g",
           "abc342-g"
         ],
         "directProblemIds": [
@@ -86346,10 +86040,10 @@
       "sourceRevisionIds": [
         "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
         "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+        "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+        "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8",
         "source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa",
-        "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7",
-        "source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce",
-        "source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3"
+        "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"
       ],
       "evidenceRefs": [
         {
@@ -86372,6 +86066,72 @@
           "sourceRevisionIds": [
             "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
             "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        },
+        {
+          "problemId": "abc339-g",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+          ]
+        },
+        {
+          "problemId": "abc339-g",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+          ]
+        },
+        {
+          "problemId": "abc339-g",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+          ]
+        },
+        {
+          "problemId": "abc339-g",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+          ]
+        },
+        {
+          "problemId": "abc339-g",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+          ]
+        },
+        {
+          "problemId": "abc339-g",
+          "claimPath": "/typicalTechniques/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+            "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
           ]
         },
         {
@@ -86438,28 +86198,6 @@
           "sourceRevisionIds": [
             "source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa",
             "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"
-          ]
-        },
-        {
-          "problemId": "abc363-g",
-          "claimPath": "/prerequisiteCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce",
-            "source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3"
-          ]
-        },
-        {
-          "problemId": "abc363-g",
-          "claimPath": "/typicalTechniques/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce",
-            "source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3"
           ]
         }
       ],
@@ -89141,7 +88879,7 @@
         "id": "unit-static-sorted-range-index",
         "kind": "subsection",
         "title": "静的sorted range index・Merge Sort Tree",
-        "parentId": "unit-monoid-segment-tree",
+        "parentId": "unit-segment-tree-canonical-decomposition",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -90686,9 +90424,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-subset-convolution",
-        "kind": "subsection",
+        "kind": "section",
         "title": "subset convolution",
-        "parentId": "unit-subset-transforms",
+        "parentId": "unit-chapter-combinatorics-algebra",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -90808,27 +90546,24 @@
         "sourceRevisionIds": [
           "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
           "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
-          "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-          "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521",
           "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
-          "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
+          "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
+          "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+          "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
         ],
         "tagIds": [
-          "tag-subset-convolution",
           "tag-subset-zeta-mobius-transform"
         ],
         "ownedTagIds": [
           "tag-subset-zeta-mobius-transform"
         ],
         "learningOutcomeIds": [
-          "outcome-apply-subset-zeta-mobius-transform",
-          "outcome-compute-subset-convolution"
+          "outcome-apply-subset-zeta-mobius-transform"
         ],
         "ownedLearningOutcomeIds": [
           "outcome-apply-subset-zeta-mobius-transform"
         ],
         "problemIds": [
-          "abc294-ex",
           "abc295-ex",
           "abc349-f",
           "abc423-f"
@@ -90846,10 +90581,10 @@
       "sourceRevisionIds": [
         "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
         "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
-        "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-        "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521",
         "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
-        "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
+        "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
+        "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+        "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
       ],
       "evidenceRefs": [
         {
@@ -90875,72 +90610,6 @@
           ]
         },
         {
-          "problemId": "abc294-ex",
-          "claimPath": "/outcomeCandidates/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-            "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
-          ]
-        },
-        {
-          "problemId": "abc294-ex",
-          "claimPath": "/reasoningPath/algorithmConnection",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-            "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
-          ]
-        },
-        {
-          "problemId": "abc294-ex",
-          "claimPath": "/reasoningPath/candidateApproaches/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-            "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
-          ]
-        },
-        {
-          "problemId": "abc294-ex",
-          "claimPath": "/reasoningPath/keyInsights/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-            "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
-          ]
-        },
-        {
-          "problemId": "abc294-ex",
-          "claimPath": "/reasoningPath/observations/0",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-            "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
-          ]
-        },
-        {
-          "problemId": "abc294-ex",
-          "claimPath": "/typicalTechniques/1",
-          "evidenceIds": [
-            "evidence-official-analysis"
-          ],
-          "sourceRevisionIds": [
-            "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
-            "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
-          ]
-        },
-        {
           "problemId": "abc295-ex",
           "claimPath": "/outcomeCandidates/0",
           "evidenceIds": [
@@ -91004,6 +90673,72 @@
           "sourceRevisionIds": [
             "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
             "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f"
+          ]
+        },
+        {
+          "problemId": "abc349-f",
+          "claimPath": "/outcomeCandidates/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+            "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+          ]
+        },
+        {
+          "problemId": "abc349-f",
+          "claimPath": "/reasoningPath/algorithmConnection",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+            "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+          ]
+        },
+        {
+          "problemId": "abc349-f",
+          "claimPath": "/reasoningPath/candidateApproaches/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+            "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+          ]
+        },
+        {
+          "problemId": "abc349-f",
+          "claimPath": "/reasoningPath/keyInsights/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+            "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+          ]
+        },
+        {
+          "problemId": "abc349-f",
+          "claimPath": "/reasoningPath/observations/0",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+            "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+          ]
+        },
+        {
+          "problemId": "abc349-f",
+          "claimPath": "/typicalTechniques/1",
+          "evidenceIds": [
+            "evidence-official-analysis"
+          ],
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+            "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
           ]
         }
       ],
@@ -92150,13 +91885,11 @@
           "source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"
         ],
         "tagIds": [
-          "tag-heavy-path-tree-dp",
           "tag-rerooting",
           "tag-rooted-tree-aggregation"
         ],
         "ownedTagIds": [],
         "learningOutcomeIds": [
-          "outcome-accelerate-tree-dp-by-heavy-path",
           "outcome-aggregate-rooted-tree",
           "outcome-reroot-tree-aggregation"
         ],
@@ -92169,7 +91902,6 @@
           "abc259-f",
           "abc263-f",
           "abc264-ex",
-          "abc269-ex",
           "abc287-f",
           "abc309-e",
           "abc312-g",
@@ -92187,6 +91919,7 @@
         "directProblemIds": [],
         "relatedProblemIds": [
           "abc246-g",
+          "abc269-ex",
           "abc293-ex",
           "abc298-ex",
           "abc314-f",
@@ -92897,7 +92630,7 @@
       "entity": {
         "id": "unit-tree-decomposition",
         "kind": "section",
-        "title": "包含木の構築とancestor・path分解",
+        "title": "木のancestor・部分木・pathを索引化する",
         "parentId": "unit-chapter-tree",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
@@ -92914,7 +92647,6 @@
         ],
         "tagIds": [
           "tag-heavy-light-decomposition",
-          "tag-laminar-interval-containment-tree",
           "tag-tree-ancestor-lca",
           "tag-tree-euler-flattening",
           "tag-virtual-tree"
@@ -92923,7 +92655,6 @@
         "learningOutcomeIds": [
           "outcome-answer-tree-ancestor-queries",
           "outcome-apply-heavy-light-decomposition",
-          "outcome-build-laminar-interval-containment-tree",
           "outcome-build-virtual-tree",
           "outcome-flatten-tree-by-euler-order"
         ],
@@ -92934,7 +92665,6 @@
           "abc298-ex",
           "abc337-g",
           "abc340-g",
-          "abc405-f",
           "abc406-f"
         ],
         "directProblemIds": [],
@@ -92942,10 +92672,11 @@
           "abc267-f",
           "abc329-g",
           "abc351-g",
+          "abc405-f",
           "abc438-f",
           "abc460-f"
         ],
-        "learningRationale": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
+        "learningRationale": "基本的な木DFSを土台に、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。包含関係を木に変換する方法は独立した節で学ぶ。"
       },
       "sourceRevisionIds": [
         "source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637",
@@ -95610,9 +95341,9 @@
       "kind": "unit",
       "entity": {
         "id": "unit-xor-threshold-matching",
-        "kind": "subsection",
+        "kind": "section",
         "title": "XOR閾値matchingのbit分割再帰",
-        "parentId": "unit-divide-enumeration",
+        "parentId": "unit-chapter-modeling",
         "baselineId": "prereq-abc-advanced-v1",
         "baselineVersion": "1.0.0",
         "excludedTopics": [
@@ -384425,8 +384156,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "ce5e52b3f868cae4cc30406bbd3e6b8e2f08102d90298c3bb85e54b86fe3fae9",
-      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+      "digest": "ca5be4d437cbfd2c7f56aef26e713f00b868cf233ce0b3c73aacf5b72e8b3135",
+      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
       "authorIds": [
         "person-maintainer"
       ],
@@ -384437,15 +384168,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
-  "taxonomyDigest": "4ee0d6d4e060b141c6d0fc54dbb43014cb40a11d18196342be6590528f5b6a06",
+  "taxonomySubjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
+  "taxonomyDigest": "79389dd3f933fa30f4a74b420d51b383b25bb844bfa29ed891e143321503286d",
   "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
   "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30",
   "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
   "correctionImpactDigest": "3d9f3d374c2532f7a38478ec40f93d431071c520909d0ad3a021022d99d1d56a",
   "status": "accepted",
-  "acceptedAt": "2026-09-26T17:58:52.033Z",
+  "acceptedAt": "2026-09-29T07:53:12.307Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a"
+  "buildDigest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5"
 }

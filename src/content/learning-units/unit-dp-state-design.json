@@ -17,14 +17,12 @@
     "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"
   ],
   "tagIds": [
-    "tag-dp-state-equivalence",
-    "tag-frontier-profile-dp"
+    "tag-dp-state-equivalence"
   ],
   "ownedTagIds": [
     "tag-dp-state-equivalence"
   ],
   "learningOutcomeIds": [
-    "outcome-design-frontier-profile-dp",
     "outcome-design-minimal-sufficient-state"
   ],
   "ownedLearningOutcomeIds": [
@@ -41,7 +39,6 @@
     "abc237-f",
     "abc244-e",
     "abc247-f",
-    "abc248-f",
     "abc251-e",
     "abc264-f",
     "abc265-e",
@@ -49,7 +46,6 @@
     "abc279-g",
     "abc281-g",
     "abc283-e",
-    "abc296-ex",
     "abc307-e",
     "abc310-e",
     "abc311-f",
@@ -58,7 +54,6 @@
     "abc345-e",
     "abc375-e",
     "abc376-f",
-    "abc379-g",
     "abc389-g",
     "abc391-g",
     "abc403-f",
@@ -104,14 +99,14 @@
   "relatedProblemIds": [
     "abc236-e",
     "abc282-g",
-    "abc295-ex",
+    "abc296-ex",
     "abc309-e",
-    "abc309-g",
     "abc311-e",
     "abc322-e",
     "abc350-e",
     "abc374-f",
     "abc378-g",
+    "abc379-g",
     "abc381-f",
     "abc386-f",
     "abc388-f",

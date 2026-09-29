@@ -35,8 +35,6 @@ sidebar:
 - [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色
 - [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色
 - [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色
-- [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 橙色
-- [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 赤色
 
 ## 問題一覧
 
@@ -62,7 +60,7 @@ sidebar:
 - [ABC214 H 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 - [ABC215 H 公式解説](https://atcoder.jp/contests/abc215/editorial/2505)
 - [ABC215 H 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_h)
-- [ABC218 H 公式解説](https://atcoder.jp/contests/abc218/editorial/2602)
-- [ABC218 H 公式問題文](https://atcoder.jp/contests/abc218/tasks/abc218_h)
+- [ABC224 H 公式解説](https://atcoder.jp/contests/abc224/editorial/2812)
+- [ABC224 H 公式問題文](https://atcoder.jp/contests/abc224/tasks/abc224_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-flow-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-flow-matching`

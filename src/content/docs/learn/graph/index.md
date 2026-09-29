@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-状態グラフの到達性・二部彩色・連結成分を土台に、最短路と経路復元へ進む。等式制約のpotential伝播とweighted DSUを比較してから、不等式の差分制約へ広げる。有向構造はDAGとpeeling、SCCと2-SAT、一意な後続とdoublingの順に学ぶ。無向構造は全域木・橋・core・cycle space・次数parityを揃えた後、縮約や少数閉路への圧縮へ進む。後半は二部matchingから最大流、下限制約、費用へ進み、平面双対とpath特有の縮約を経て一般重み付きmatchingを扱う。
+状態グラフの到達性・二部彩色・連結成分を土台に、等式制約のpotential伝播とweighted DSUを比較する。続いて最短路と経路復元、不等式の差分制約へ進む。有向構造はDAGとpeeling、SCCと2-SAT、一意な後続とdoublingの順に学ぶ。無向構造は全域木・橋・core・cycle space・次数parityを揃えた後、縮約や少数閉路への圧縮へ進む。後半は二部matchingから最大流、下限制約、費用へ進み、平面双対とpath特有の縮約を経て一般重み付きmatchingを扱う。
 
 ### グラフモデルと構造
 
@@ -40,47 +40,47 @@ sidebar:
 
 ## 章の構成
 
-以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
 
 - [状態グラフ探索・到達関係](/learn/graph/graph-search/) — 緑色（導入）
-- [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 緑色
-- [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色
-- [推移閉包](/learn/graph/transitive-closure/) — 水色
+  - [状態グラフのモデリングと探索](/learn/graph/state-graph-search/) — 緑色
+  - [方向別grid scanによる長距離効果の前計算](/learn/graph/directional-grid-effect-scan/) — 水色
+  - [推移閉包](/learn/graph/transitive-closure/) — 水色
 - [二部彩色と成分構造を扱う](/learn/graph/bipartite-structure/) — 緑色
 - [連結成分を管理し縮約する](/learn/graph/connectivity/) — 緑色（導入）
-- [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/) — 緑色
+  - [DSUによる連結成分管理・縮約](/learn/graph/dsu-components/) — 緑色
+  - [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/) — 水色
+  - [potential・weighted DSU](/learn/graph/potential-dsu/) — 青色
 - [重み付き最短路・経路復元・差分制約](/learn/graph/shortest-path-certificates/) — 緑色（導入）
-- [最短路モデル](/learn/graph/weighted-shortest-path/) — 緑色
-- [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 水色
-- [静的graph等式制約のpotential伝播](/learn/graph/graph-potential-propagation/) — 水色
-- [potential・weighted DSU](/learn/graph/potential-dsu/) — 青色
-- [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/) — 青色
+  - [最短路モデル](/learn/graph/weighted-shortest-path/) — 緑色
+  - [最短路を証明する木・経路の復元](/learn/graph/shortest-path-reconstruction/) — 水色
+  - [difference constraints・不等式系の最短路化](/learn/graph/difference-constraints/) — 青色
 - [SCCで閉路・DAG順・2-SATを処理する](/learn/graph/directed-condensation/) — 水色（導入）
-- [DAGのtopological processing](/learn/graph/dag-topological-processing/) — 緑色
-- [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) — 水色
-- [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 水色
-- [2-SAT・含意グラフ](/learn/graph/two-sat/) — 青色
+  - [DAGのtopological processing](/learn/graph/dag-topological-processing/) — 緑色
+  - [有向cycle検出・sink/source peeling](/learn/graph/directed-core-peeling/) — 水色
+  - [SCC・縮約DAG・トポロジカル順序](/learn/graph/scc-condensation/) — 水色
+  - [2-SAT・含意グラフ](/learn/graph/two-sat/) — 青色
 - [一意な後続・サイクル・ダブリング](/learn/graph/functional-graph/) — 水色（導入）
-- [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) — 水色
-- [doubling・binary lifting](/learn/graph/binary-lifting/) — 水色
+  - [関数グラフのcycle・tree分解](/learn/graph/functional-graph-decomposition/) — 水色
+  - [doubling・binary lifting](/learn/graph/binary-lifting/) — 水色
 - [cut・cycle性質から最適全域木を構成する](/learn/graph/spanning-tree-optimization/) — 水色
-- [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 青色
+  - [Kruskal順の閾値DSU sweep](/learn/graph/kruskal-threshold-sweep/) — 青色
 - [lowlinkで橋・関節点を特定する](/learn/graph/lowlink-critical-structure/) — 青色
-- [閉路数・次数構造からgraph coreとkernelを調べる](/learn/graph/graph-core-peeling/) — 水色（導入）
-- [単一サイクル成分とgraph core](/learn/graph/graph-core/) — 水色
+- [閉路数・次数構造からgraph coreを調べる](/learn/graph/graph-core-peeling/) — 水色（導入）
+  - [単一サイクル成分とgraph core](/learn/graph/graph-core/) — 水色
 - [cycle space・fundamental cycle basis](/learn/graph/cycle-space-basis/) — 青色
 - [次数parityからwalkや選択辺集合を判定・構成する](/learn/graph/euler-degree/) — 水色（導入）
-- [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 水色
-- [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 青色
+  - [Euler trail・circuit](/learn/graph/euler-trail-circuit/) — 水色
+  - [指定次数parityの部分グラフ構成](/learn/graph/degree-parity-subgraph/) — 青色
 - [単調path contraction・DSU jump](/learn/graph/monotone-path-contraction/) — 青色
 - [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 黄色
 - [有向walkの周期・cycle差分gcd](/learn/graph/directed-walk-periodicity/) — 黄色
 - [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/) — 青色（導入）
-- [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色
-- [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色
-- [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色
-- [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色
-- [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色
+  - [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/) — 青色
+  - [最大流・最小カット](/learn/graph/max-flow-min-cut/) — 青色
+  - [下限制約付きflowの実現可能性](/learn/graph/flow-lower-bounds/) — 黄色
+  - [最小費用流・circulation](/learn/graph/min-cost-flow/) — 黄色
+  - [重み付き二部完全matching](/learn/graph/weighted-bipartite-matching/) — 黄色
 - [平面graph双対・cut/path対応](/learn/graph/planar-duality/) — 黄色
 - [path matchingのheap縮約greedy](/learn/graph/path-matching-contraction/) — 橙色
 - [一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/) — 赤色
@@ -162,4 +162,4 @@ sidebar:
 - [ABC214 H 公式解説](https://atcoder.jp/contests/abc214/editorial/2441)
 - [ABC214 H 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-chapter-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-chapter-graph`

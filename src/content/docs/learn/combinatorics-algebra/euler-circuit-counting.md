@@ -3,7 +3,7 @@ title: "BEST定理によるEuler circuit数え上げ"
 description: "「BEST定理によるEuler circuit数え上げ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 212
+  order: 210
 ---
 
 # BEST定理によるEuler circuit数え上げ
@@ -47,4 +47,4 @@ sidebar:
 - [ABC336 G 公式解説](https://atcoder.jp/contests/abc336/editorial/9060)
 - [ABC336 G 公式問題文](https://atcoder.jp/contests/abc336/tasks/abc336_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-euler-circuit-counting`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-euler-circuit-counting`

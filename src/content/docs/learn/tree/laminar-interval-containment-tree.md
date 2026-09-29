@@ -3,7 +3,7 @@ title: "laminar区間族の包含木構築"
 description: "「laminar区間族の包含木構築」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 138
+  order: 140
 ---
 
 # laminar区間族の包含木構築
@@ -47,4 +47,4 @@ sidebar:
 - [ABC405 F 公式解説](https://atcoder.jp/contests/abc405/editorial/13009)
 - [ABC405 F 公式問題文](https://atcoder.jp/contests/abc405/tasks/abc405_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-laminar-interval-containment-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-laminar-interval-containment-tree`

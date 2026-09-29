@@ -1,8 +1,8 @@
 {
   "id": "unit-xor-threshold-matching",
-  "kind": "subsection",
+  "kind": "section",
   "title": "XOR閾値matchingのbit分割再帰",
-  "parentId": "unit-divide-enumeration",
+  "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

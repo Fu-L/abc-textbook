@@ -1,8 +1,8 @@
 {
   "id": "unit-heavy-path-tree-dp",
-  "kind": "subsection",
+  "kind": "section",
   "title": "heavy path上の多項式木DP",
-  "parentId": "unit-tree-aggregation",
+  "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

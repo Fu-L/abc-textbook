@@ -4,7 +4,7 @@
   "scopeType": "merge",
   "scopeId": "bootstrap-us2-final-taxonomy",
   "releaseVersion": null,
-  "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+  "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
   "inventoryPath": "docs/work-manifests/initial/us2/final-taxonomy/manifest.json",
   "inventoryDigest": "88a604253a349c655879900a0d73f60575943acac638b1d20ea0fe42d55cba0a",
   "reviewPolicy": {
@@ -19,62 +19,62 @@
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
+      "resultDigest": "cd1007053f6540613caf2ca3ac96d90dbdf53f1060d14963ae5fe3ef76da3339",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T17:58:29.534Z",
+      "completedAt": "2026-09-29T07:52:49.671Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
+      "resultDigest": "cd1007053f6540613caf2ca3ac96d90dbdf53f1060d14963ae5fe3ef76da3339",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T17:58:37.803Z",
+      "completedAt": "2026-09-29T07:52:57.998Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
+      "resultDigest": "cd1007053f6540613caf2ca3ac96d90dbdf53f1060d14963ae5fe3ef76da3339",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T17:58:38.268Z",
+      "completedAt": "2026-09-29T07:52:58.481Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
+      "resultDigest": "cd1007053f6540613caf2ca3ac96d90dbdf53f1060d14963ae5fe3ef76da3339",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T17:58:38.488Z",
+      "completedAt": "2026-09-29T07:52:58.763Z",
       "executedByReviewerId": "person-maintainer"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "subjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
       "resultPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
-      "resultDigest": "3c04093c3e73f01024194007ce28c90e0d4e660ef09ae88e1721c4b4b2e8fd23",
+      "resultDigest": "cd1007053f6540613caf2ca3ac96d90dbdf53f1060d14963ae5fe3ef76da3339",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-09-26T17:58:45.951Z",
+      "completedAt": "2026-09-29T07:53:06.216Z",
       "executedByReviewerId": "person-maintainer"
     }
   ],
   "applicableCheckCount": 5,
   "passedApplicableCheckCount": 5,
-  "reviewerExecutedCheckSetDigest": "cd362cd7af35940028b0055b68a2512945b3baebf38d9e962ee5674bf2f37971",
+  "reviewerExecutedCheckSetDigest": "72bdb4fff716d8ad2a39b4bdfd11e1ba87eef20703673fdb00e7ff0ed2720bf0",
   "authors": [
     {
       "personId": "person-maintainer",
@@ -343,10 +343,10 @@
         "outcome-use-tree-diameter-extrema"
       ],
       "reviewerId": "person-maintainer",
-      "reviewBasis": "Self-review under the fixed manifest's requiredMode=self and highRiskSelfReviewReason=solo_maintainer. Traced all six findings in semantic-placement-full-review-2026-09-27.md to their technique-inventory records and confirmed the stated transformations and invariants. Corrected Euler existence versus construction outcomes for ABC286-G and ABC336-G, with the shared existence Outcome covering undirected odd-degree and directed in/out-degree conditions; added ABC295-Ex frontier-profile support; removed ABC300-Ex subset-state support; added ABC459-G two-variable convex lattice optimization while retaining integer-solvability as a co-primary; and removed ABC464-G prefix-difference support. Preserved Inventory evidence and ran the manifest-declared policy, output, human-review, schema, and integration checks.",
+      "reviewBasis": "# 章・節・小節の再設計\n\nユーザーの「親子関係も見直して修正する」という指示に基づき、Codexが9章の階層・読書順・生成処理を修正した記録。既存のsolo-maintainer運用で変更を反映する。人間が修正後の全項目を独立に再査読したという記録ではない。\n\n## 判断基準\n\n親子関係は同じ対象・手法の具体化や特殊化を表す。別の技能を前提として組み合わせる応用を、前提単元の子にする必然性はない。節と小節を連続して読む構成とし、基礎と専門的な応用を一つの節へ過度に詰め込まない。難易度などのスコアによるソートは行わない。\n\n| 章           | 階層の判断                                                                                                                                                                                                                                                                                              |\n| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| モデリング   | 分割統治と半分全列挙は探索空間分割の小節として残す。XOR閾値matchingはmatching固有の最適性証明を必要とする応用、kinetic sortingは交差eventを動的に保つ応用として独立節にする。償却解析・軽重分類、乱択fingerprintはそれぞれ共通原理の下に残す。                                                          |\n| データ構造   | heapと順序集合の下から、dequeや連結リストでも扱うrun分割管理を独立させる。Merge Sort Treeはcanonical区間分解の具体化としてその子へ移す。Beatsは通常の遅延作用では閉じず、条件付き更新と償却保証を必要とする独立節とする。Sparse Table・SWAGを含む親の名称は「結合的な区間要約・区間分解・合成」とする。 |\n| DP           | LISと値域集約は「列DP」の子へ移し、prefix分割・区間DPとの違いを階層で表す。frontier DPは状態設計一般の小節ではなく、グリッド・bitmaskを組み合わせる独立節へ移す。巨大容量knapsackと期待値potentialも通常のDPを越えた状態削減の証明を必要とする独立節へ移す。容量DPを列・区間のまとまりより先に読む。    |\n| グラフ       | 到達性、連結性、最短路、SCC、関数グラフ、flowは共通のモデルごとに小節をまとめる。有向walkの周期、near-tree kernel化、path限定のmatching縮約、一般重み付きmatchingは独立節にする。特にkernel化はcoreだけでなくcycle spaceを先に学ぶ必要がある。                                                          |\n| 木           | rooted DPとrerootingを同じ節に残し、畳み込みを使うheavy-path木DPは独立節へ移す。包含木の構築は既存の木への祖先・path問い合わせとは異なるモデル変換なので独立節にする。Euler順・LCA・HLD・virtual treeは木の索引と分解のまとまりに残す。                                                                 |\n| 文字列       | 接頭辞一致とZ algorithm、有限状態化とAho–Corasick・subset constructionはそれぞれ具体化として維持する。Suffix Automatonはendpos同値類という別の索引表現なので独立節のままとする。圧縮文字列とrun更新を先に学ぶ順序も維持する。                                                                           |\n| 数論         | 法上の基本演算と動的積は同じ節に維持する。CRT・位数・BSGS・floor_sum・有理近似などは、道具を共有していても目的と保証が異なるため兄弟の節として維持する。既存の親子関係が妥当な箇所は変更しない。                                                                                                        |\n| 組合せ・代数 | 約数反転とsubset変換は包除・反転の下に残し、subset convolutionは変換を部品に使う独立の積演算として節にする。online convolution、Bostan–Mori、FPS合成も別の計算モデル・係数抽出・演算として独立させる。matroidのgreedyと線形交差は独立性と交換公理を共通言語にする小節としてまとめ、節全体を後半へ移す。 |\n| 幾何・最適化 | 凸包・半平面、一次元凸性・限界値・slope trick・PAVはそれぞれ共通対象の下に残す。Mongeは遷移行列の四点不等式と最適位置の単調性、Aliensは制約を罰則に変える手法なので、一次元凸最適化の小節から独立させる。                                                                                               |\n\n## 正本と表示\n\n`final-taxonomy-policy.ts`\nの親指定を修正し、節への昇格に合わせてkind・子孫のタグ/Outcome集約を通常の生成処理で更新する。`textbook-order.ts`\nは見直した部分木ごとに掲載順を明示する。旧版のtaxonomyとレビュー記録は履歴へ退避する。\n\n章目次には親子の深さに対応した字下げを戻す。親節から離れた子が別の節へ誤ってぶら下がる並びは、生成処理でエラーにする。各Unitの下位単元、章概要、前提リンク、生成証跡も同期する。\n\n前回の読書順レビューに記載した「章目次は平坦にする」という方針は撤回する。本記録が階層と順序についての最新の判断である。",
       "decision": "approved",
       "findings": [],
-      "reviewedAt": "2026-09-26T17:58:52.033Z"
+      "reviewedAt": "2026-09-29T07:53:12.307Z"
     }
   ],
   "inventoryItemCount": 1,
@@ -608,12 +608,12 @@
       "docs/verification/previews/initial-v1/taxonomy-integration.json",
       "staging/taxonomy/initial/final-taxonomy-build.json"
     ],
-    "rationale": "Self-review under the fixed manifest's requiredMode=self and highRiskSelfReviewReason=solo_maintainer. Traced all six findings in semantic-placement-full-review-2026-09-27.md to their technique-inventory records and confirmed the stated transformations and invariants. Corrected Euler existence versus construction outcomes for ABC286-G and ABC336-G, with the shared existence Outcome covering undirected odd-degree and directed in/out-degree conditions; added ABC295-Ex frontier-profile support; removed ABC300-Ex subset-state support; added ABC459-G two-variable convex lattice optimization while retaining integer-solvability as a co-primary; and removed ABC464-G prefix-difference support. Preserved Inventory evidence and ran the manifest-declared policy, output, human-review, schema, and integration checks.",
+    "rationale": "# 章・節・小節の再設計\n\nユーザーの「親子関係も見直して修正する」という指示に基づき、Codexが9章の階層・読書順・生成処理を修正した記録。既存のsolo-maintainer運用で変更を反映する。人間が修正後の全項目を独立に再査読したという記録ではない。\n\n## 判断基準\n\n親子関係は同じ対象・手法の具体化や特殊化を表す。別の技能を前提として組み合わせる応用を、前提単元の子にする必然性はない。節と小節を連続して読む構成とし、基礎と専門的な応用を一つの節へ過度に詰め込まない。難易度などのスコアによるソートは行わない。\n\n| 章           | 階層の判断                                                                                                                                                                                                                                                                                              |\n| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| モデリング   | 分割統治と半分全列挙は探索空間分割の小節として残す。XOR閾値matchingはmatching固有の最適性証明を必要とする応用、kinetic sortingは交差eventを動的に保つ応用として独立節にする。償却解析・軽重分類、乱択fingerprintはそれぞれ共通原理の下に残す。                                                          |\n| データ構造   | heapと順序集合の下から、dequeや連結リストでも扱うrun分割管理を独立させる。Merge Sort Treeはcanonical区間分解の具体化としてその子へ移す。Beatsは通常の遅延作用では閉じず、条件付き更新と償却保証を必要とする独立節とする。Sparse Table・SWAGを含む親の名称は「結合的な区間要約・区間分解・合成」とする。 |\n| DP           | LISと値域集約は「列DP」の子へ移し、prefix分割・区間DPとの違いを階層で表す。frontier DPは状態設計一般の小節ではなく、グリッド・bitmaskを組み合わせる独立節へ移す。巨大容量knapsackと期待値potentialも通常のDPを越えた状態削減の証明を必要とする独立節へ移す。容量DPを列・区間のまとまりより先に読む。    |\n| グラフ       | 到達性、連結性、最短路、SCC、関数グラフ、flowは共通のモデルごとに小節をまとめる。有向walkの周期、near-tree kernel化、path限定のmatching縮約、一般重み付きmatchingは独立節にする。特にkernel化はcoreだけでなくcycle spaceを先に学ぶ必要がある。                                                          |\n| 木           | rooted DPとrerootingを同じ節に残し、畳み込みを使うheavy-path木DPは独立節へ移す。包含木の構築は既存の木への祖先・path問い合わせとは異なるモデル変換なので独立節にする。Euler順・LCA・HLD・virtual treeは木の索引と分解のまとまりに残す。                                                                 |\n| 文字列       | 接頭辞一致とZ algorithm、有限状態化とAho–Corasick・subset constructionはそれぞれ具体化として維持する。Suffix Automatonはendpos同値類という別の索引表現なので独立節のままとする。圧縮文字列とrun更新を先に学ぶ順序も維持する。                                                                           |\n| 数論         | 法上の基本演算と動的積は同じ節に維持する。CRT・位数・BSGS・floor_sum・有理近似などは、道具を共有していても目的と保証が異なるため兄弟の節として維持する。既存の親子関係が妥当な箇所は変更しない。                                                                                                        |\n| 組合せ・代数 | 約数反転とsubset変換は包除・反転の下に残し、subset convolutionは変換を部品に使う独立の積演算として節にする。online convolution、Bostan–Mori、FPS合成も別の計算モデル・係数抽出・演算として独立させる。matroidのgreedyと線形交差は独立性と交換公理を共通言語にする小節としてまとめ、節全体を後半へ移す。 |\n| 幾何・最適化 | 凸包・半平面、一次元凸性・限界値・slope trick・PAVはそれぞれ共通対象の下に残す。Mongeは遷移行列の四点不等式と最適位置の単調性、Aliensは制約を罰則に変える手法なので、一次元凸最適化の小節から独立させる。                                                                                               |\n\n## 正本と表示\n\n`final-taxonomy-policy.ts`\nの親指定を修正し、節への昇格に合わせてkind・子孫のタグ/Outcome集約を通常の生成処理で更新する。`textbook-order.ts`\nは見直した部分木ごとに掲載順を明示する。旧版のtaxonomyとレビュー記録は履歴へ退避する。\n\n章目次には親子の深さに対応した字下げを戻す。親節から離れた子が別の節へ誤ってぶら下がる並びは、生成処理でエラーにする。各Unitの下位単元、章概要、前提リンク、生成証跡も同期する。\n\n前回の読書順レビューに記載した「章目次は平坦にする」という方針は撤回する。本記録が階層と順序についての最新の判断である。",
     "noOutcomeImpactRationale": null,
-    "confirmedAt": "2026-09-26T17:58:52.033Z"
+    "confirmedAt": "2026-09-29T07:53:12.307Z"
   },
   "outcomeCoverageConfirmed": true,
   "aggregatePassed": true,
-  "generatedAt": "2026-09-26T17:58:52.033Z",
-  "evidenceDigest": "ce5e52b3f868cae4cc30406bbd3e6b8e2f08102d90298c3bb85e54b86fe3fae9"
+  "generatedAt": "2026-09-29T07:53:12.307Z",
+  "evidenceDigest": "ca5be4d437cbfd2c7f56aef26e713f00b868cf233ce0b3c73aacf5b72e8b3135"
 }

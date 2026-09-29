@@ -17,15 +17,13 @@
     "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
   ],
   "tagIds": [
-    "tag-lazy-segment-action",
-    "tag-segment-tree-beats"
+    "tag-lazy-segment-action"
   ],
   "ownedTagIds": [
     "tag-lazy-segment-action"
   ],
   "learningOutcomeIds": [
-    "outcome-design-range-update-action",
-    "outcome-prune-range-actions-by-node-invariant"
+    "outcome-design-range-update-action"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-design-range-update-action"
@@ -45,7 +43,6 @@
     "abc397-f",
     "abc417-f",
     "abc426-f",
-    "abc430-g",
     "abc441-g",
     "abc455-f"
   ],

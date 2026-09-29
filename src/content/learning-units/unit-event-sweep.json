@@ -17,15 +17,13 @@
     "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
   ],
   "tagIds": [
-    "tag-event-sweep",
-    "tag-kinetic-order-maintenance"
+    "tag-event-sweep"
   ],
   "ownedTagIds": [
     "tag-event-sweep"
   ],
   "learningOutcomeIds": [
-    "outcome-linearize-events",
-    "outcome-maintain-order-through-crossing-events"
+    "outcome-linearize-events"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-linearize-events"
@@ -41,7 +39,6 @@
     "abc311-g",
     "abc320-e",
     "abc327-f",
-    "abc344-g",
     "abc346-g",
     "abc360-f",
     "abc363-e",
@@ -77,7 +74,6 @@
     "abc245-e",
     "abc250-ex",
     "abc254-g",
-    "abc257-ex",
     "abc263-ex",
     "abc268-ex",
     "abc280-g",
@@ -88,6 +84,7 @@
     "abc308-f",
     "abc332-g",
     "abc337-g",
+    "abc344-g",
     "abc351-f",
     "abc361-g",
     "abc393-f",

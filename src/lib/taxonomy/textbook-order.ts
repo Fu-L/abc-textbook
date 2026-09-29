@@ -1,6 +1,7 @@
 /**
  * 教科書の掲載順。同じ対象・原理を続けて読むための編集上の順序であり、
- * 意味階層と前提DAGから独立した、目次・sidebarだけの表示順として管理する。
+ * 意味階層の部分木を連続させた読書順。必須の前提DAGとは区別する。
+ * 親節と小節を一まとまりにし、独立した応用は節として配置する。
  * 各配列は前提・抽象化の負担・隣接単元との比較を考えて手で編成する。
  * 色・難易度・技能数などのスコアによる自動ソートには置き換えない。
  * textbookIndexは決めた読書順を描画へ渡す位置であり、順序を評価するスコアではない。
@@ -59,10 +60,10 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-finite-function-composition',
       'unit-idempotent-overlap-range-query',
       'unit-swag',
-      'unit-range-actions',
       'unit-segment-tree-canonical-decomposition',
       'unit-static-sorted-range-index',
       'unit-dynamic-segment-tree',
+      'unit-range-actions',
       'unit-cartesian-tree',
       'unit-value-bucket-aggregation',
       'unit-mo-offline-range',
@@ -80,24 +81,24 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-dynamic-programming',
     introduction:
-      '最小十分状態を定め、グリッド・列・容量・prefix分割・区間・部分集合という基本的な依存構造を比較する。次に桁上限とcarry、automatonによる有限状態化を学ぶ。遷移集約を共通原理として押さえ、LISの支配関係と値域集約を比較し、固定線形遷移の累乗へ進む。確率とゲームでは遷移の評価方法を変え、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。automatonは文字列章、Steiner木は最短路の単元を先に参照する。',
+      '最小十分状態を定め、グリッド・容量・列・prefix分割・区間・部分集合という基本的な依存構造を比較する。列DPの小節ではLISの支配関係と値域集約を比較する。次に桁上限・automaton・carryによる有限状態化を学び、遷移集約を共通原理として整理して固定線形遷移の累乗へ進む。確率とゲームでは遷移の評価方法を変え、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。automatonは文字列章、Steiner木は最短路の単元を先に参照する。',
     unitIds: [
       'unit-dp-state-design',
       'unit-dp-grid-table',
+      'unit-dp-subset-resource',
       'unit-dp-sequence-interval',
       'unit-dp-sequence',
-      'unit-dp-subset-resource',
+      'unit-dp-lis',
+      'unit-dp-value-range',
       'unit-dp-prefix-partition',
       'unit-dp-interval-composition',
       'unit-dp-interval-expansion',
       'unit-dp-subset-state',
       'unit-dp-digit-string',
       'unit-digit-dp',
-      'unit-dp-carry-mixed-radix',
       'unit-automaton-dp',
+      'unit-dp-carry-mixed-radix',
       'unit-dp-transition-optimization',
-      'unit-dp-lis',
-      'unit-dp-value-range',
       'unit-linear-recurrence',
       'unit-dp-stochastic',
       'unit-dp-game',
@@ -113,7 +114,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-graph',
     introduction:
-      '状態グラフの到達性・二部彩色・連結成分を土台に、最短路と経路復元へ進む。等式制約のpotential伝播とweighted DSUを比較してから、不等式の差分制約へ広げる。有向構造はDAGとpeeling、SCCと2-SAT、一意な後続とdoublingの順に学ぶ。無向構造は全域木・橋・core・cycle space・次数parityを揃えた後、縮約や少数閉路への圧縮へ進む。後半は二部matchingから最大流、下限制約、費用へ進み、平面双対とpath特有の縮約を経て一般重み付きmatchingを扱う。',
+      '状態グラフの到達性・二部彩色・連結成分を土台に、等式制約のpotential伝播とweighted DSUを比較する。続いて最短路と経路復元、不等式の差分制約へ進む。有向構造はDAGとpeeling、SCCと2-SAT、一意な後続とdoublingの順に学ぶ。無向構造は全域木・橋・core・cycle space・次数parityを揃えた後、縮約や少数閉路への圧縮へ進む。後半は二部matchingから最大流、下限制約、費用へ進み、平面双対とpath特有の縮約を経て一般重み付きmatchingを扱う。',
     unitIds: [
       'unit-graph-search',
       'unit-state-graph-search',
@@ -122,11 +123,11 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-bipartite-structure',
       'unit-connectivity',
       'unit-dsu-components',
+      'unit-graph-potential-propagation',
+      'unit-potential-dsu',
       'unit-shortest-path-certificates',
       'unit-weighted-shortest-path',
       'unit-shortest-path-reconstruction',
-      'unit-graph-potential-propagation',
-      'unit-potential-dsu',
       'unit-difference-constraints',
       'unit-directed-condensation',
       'unit-dag-topological-processing',
@@ -162,7 +163,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-tree',
     introduction:
-      '一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化してから、包含関係や併合履歴を木にする方法を学ぶ。HLD・virtual tree・重心分解では、それぞれpath、必要頂点、均衡分離点を使った計算量削減を比較する。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。',
+      '一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化し、HLDとvirtual treeでpathと必要頂点へ圧縮する。包含関係や併合履歴を木にする方法を学んだ後、重心分解で均衡分離点による計算量削減を扱う。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。',
     unitIds: [
       'unit-tree-metric',
       'unit-implicit-binary-tree',
@@ -172,10 +173,10 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-tree-decomposition',
       'unit-tree-euler-flattening',
       'unit-tree-ancestor-lca',
-      'unit-laminar-interval-containment-tree',
-      'unit-dsu-merge-tree',
       'unit-heavy-light-decomposition',
       'unit-virtual-tree',
+      'unit-laminar-interval-containment-tree',
+      'unit-dsu-merge-tree',
       'unit-tree-balanced-separators',
       'unit-additive-tree-metric-reconstruction',
       'unit-tree-precedence-contraction',
@@ -234,7 +235,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-combinatorics-algebra',
     introduction:
-      '組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式による計数を比較する。半順序とmatroidで構造定理と最適化を結び付けた後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展では高度な係数抽出、onlineとsubsetの畳み込み、BEST定理を扱い、RSK・FPS合成・線形matroid交差へ広げる。',
+      '組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式による計数を比較する。半順序の構造定理を学んだ後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展では高度な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を扱う。最後にmatroidの独立性と交換公理を共通言語にしてgreedyと線形交差を比較する。',
     unitIds: [
       'unit-combinatorial-coefficients',
       'unit-reflection-principle',
@@ -252,8 +253,6 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-deletion-contraction',
       'unit-determinant-counting',
       'unit-poset-dilworth-antichain',
-      'unit-matroid-theory',
-      'unit-matroid-greedy',
       'unit-generating-functions',
       'unit-labeled-component-decomposition',
       'unit-polynomial-convolution',
@@ -267,26 +266,28 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-euler-circuit-counting',
       'unit-rsk-young-tableaux',
       'unit-fps-composition-power-projection',
+      'unit-matroid-theory',
+      'unit-matroid-greedy',
       'unit-linear-matroid-intersection',
     ],
   },
   {
     id: 'unit-chapter-geometry-optimization',
     introduction:
-      '座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。関数の凸性と単峰性を学び、限界値の選択と比率目的の判定化を比較する。続いて直線包絡とslope trickで最適値や関数を保持し、順序制約のPAV、個数制約を罰則へ移すAliens trick、遷移行列のMonge性へ進む。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。',
+      '座標・向き・円環順序から凸包と半平面へ進み、幾何的な実行可能領域を表す。直線包絡を幾何と関数の橋渡しとして学ぶ。凸性の節では一次元の最適化から限界値選択・slope trick・順序制約のPAVへ進む。その後、比率目的の判定化、個数制約を罰則へ移すAliens trick、遷移行列のMonge性を独立した節で扱う。最後に二変数の凸区分線形整数最適化で、連続的な候補と整数格子の近傍保証を組み合わせる。DP・データ構造・数論の道具がどの条件で再利用できるかを確認する。',
     unitIds: [
       'unit-geometry-primitives',
       'unit-cyclic-order-crossing',
       'unit-convex-geometry',
       'unit-convex-boundary-hull',
       'unit-half-plane-constraints',
+      'unit-line-envelope',
       'unit-discrete-convex',
       'unit-basic-convex-optimization',
       'unit-separable-convex-marginals',
-      'unit-fractional-parametric-search',
-      'unit-line-envelope',
       'unit-slope-trick',
       'unit-isotonic-regression',
+      'unit-fractional-parametric-search',
       'unit-lagrangian-relaxation',
       'unit-monge-optimization',
       'unit-two-variable-convex-lattice-optimization',

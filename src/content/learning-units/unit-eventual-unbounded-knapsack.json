@@ -1,8 +1,8 @@
 {
   "id": "unit-eventual-unbounded-knapsack",
-  "kind": "subsection",
+  "kind": "section",
   "title": "大容量unbounded knapsackのeventual linearity",
-  "parentId": "unit-dp-subset-resource",
+  "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

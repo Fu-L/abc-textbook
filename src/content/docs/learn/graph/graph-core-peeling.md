@@ -1,12 +1,12 @@
 ---
-title: "閉路数・次数構造からgraph coreとkernelを調べる"
-description: "「閉路数・次数構造からgraph coreとkernelを調べる」で学ぶ概念と、基礎から応用へ進む問題一覧。"
+title: "閉路数・次数構造からgraph coreを調べる"
+description: "「閉路数・次数構造からgraph coreを調べる」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 111
 ---
 
-# 閉路数・次数構造からgraph coreとkernelを調べる
+# 閉路数・次数構造からgraph coreを調べる
 
 導入対象の目安: **水色（1200–1599）**。辺数と頂点数から閉路数を読み、次数条件で残る核を取り出す入口。
 
@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-連結成分のcycle rankを辺数と頂点数から読み、必要なら低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。
+連結成分のcycle rankを辺数と頂点数から読み、葉を反復削除してcycle coreを露出させる。cycle spaceと組み合わせたnear-tree kernel化は独立した節で学ぶ。
 
 ## 前提と範囲
 
@@ -31,7 +31,6 @@ sidebar:
 ## 下位単元
 
 - [単一サイクル成分とgraph core](/learn/graph/graph-core/) — 水色
-- [near-tree graphのkernel化](/learn/graph/near-tree-kernelization/) — 黄色
 
 ## 問題一覧
 
@@ -45,7 +44,5 @@ sidebar:
 - [ABC226 E 公式解説](https://atcoder.jp/contests/abc226/editorial/2889)
 - [ABC266 F 公式解説](https://atcoder.jp/contests/abc266/editorial/4698)
 - [ABC266 F 公式問題文](https://atcoder.jp/contests/abc266/tasks/abc266_f)
-- [ABC419 G 公式解説](https://atcoder.jp/contests/abc419/editorial/13636)
-- [ABC419 G 公式問題文](https://atcoder.jp/contests/abc419/tasks/abc419_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-graph-core-peeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-graph-core-peeling`

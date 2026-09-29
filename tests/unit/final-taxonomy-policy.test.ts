@@ -613,7 +613,10 @@ describe('final taxonomy policy', () => {
       '重み付き最短路・経路復元・差分制約',
     );
     expect(unitById.get('unit-tree-metric')?.title).toBe('基準点からの木距離・剰余類・直径・中心');
-    expect(unitById.get('unit-tree-decomposition')?.title).toContain('包含木');
+    expect(unitById.get('unit-tree-decomposition')?.title).toContain('索引化');
+    expect(unitById.get('unit-laminar-interval-containment-tree')?.parentId).toBe(
+      'unit-chapter-tree',
+    );
     expect(tagById.get('tag-two-sat')?.prerequisiteTagIds).toEqual(['tag-scc-condensation']);
     expect(
       outcomeById.get('outcome-encode-threshold-constraints-as-two-sat')?.prerequisiteOutcomeIds,
@@ -637,7 +640,8 @@ describe('final taxonomy policy', () => {
       outcomeById.get('outcome-accelerate-tree-dp-by-heavy-path')?.prerequisiteOutcomeIds,
     ).toContain('outcome-aggregate-rooted-tree');
     expect(unitById.get('unit-heavy-path-tree-dp')).toMatchObject({
-      parentId: 'unit-tree-aggregation',
+      parentId: 'unit-chapter-tree',
+      kind: 'section',
     });
     expect(prerequisiteIdsForUnit('unit-heavy-path-tree-dp')).toEqual([
       'unit-polynomial-convolution',
@@ -799,7 +803,7 @@ describe('final taxonomy policy', () => {
         parentId: 'unit-chapter-modeling',
       });
     }
-    expect(unitById.get('unit-kinetic-order-maintenance')?.parentId).toBe('unit-event-sweep');
+    expect(unitById.get('unit-kinetic-order-maintenance')?.parentId).toBe('unit-chapter-modeling');
 
     expect(FINAL_TAXONOMY_PLACEMENT_PRINCIPLES.homeAndReadiness).toContain(
       'primary Outcomeのowner Unit',

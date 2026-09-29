@@ -2,7 +2,7 @@
   "id": "unit-static-sorted-range-index",
   "kind": "subsection",
   "title": "静的sorted range index・Merge Sort Tree",
-  "parentId": "unit-monoid-segment-tree",
+  "parentId": "unit-segment-tree-canonical-decomposition",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

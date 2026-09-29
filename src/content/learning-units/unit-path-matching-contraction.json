@@ -1,8 +1,8 @@
 {
   "id": "unit-path-matching-contraction",
-  "kind": "subsection",
+  "kind": "section",
   "title": "path matchingのheap縮約greedy",
-  "parentId": "unit-flow-matching",
+  "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

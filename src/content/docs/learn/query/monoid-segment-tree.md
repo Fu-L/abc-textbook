@@ -1,12 +1,12 @@
 ---
-title: "Segment Treeの要約・区間分解・合成"
-description: "「Segment Treeの要約・区間分解・合成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
+title: "結合的な区間要約・区間分解・合成"
+description: "「結合的な区間要約・区間分解・合成」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
   order: 38
 ---
 
-# Segment Treeの要約・区間分解・合成
+# 結合的な区間要約・区間分解・合成
 
 導入対象の目安: **水色（1200–1599）**。結合則・単位元・順序を区間集約の共通言語として使う入口。
 
@@ -35,7 +35,6 @@ sidebar:
 - [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色
 - [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色
 - [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色
-- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色
 - [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色
 
 ## 問題一覧
@@ -84,4 +83,4 @@ sidebar:
 - [ABC244 H 公式解説](https://atcoder.jp/contests/abc244/editorial/3602)
 - [ABC244 H 公式問題文](https://atcoder.jp/contests/abc244/tasks/abc244_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-monoid-segment-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-monoid-segment-tree`

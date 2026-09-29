@@ -19,7 +19,6 @@
   "tagIds": [
     "tag-divisor-mobius-inversion",
     "tag-inclusion-exclusion",
-    "tag-subset-convolution",
     "tag-subset-zeta-mobius-transform"
   ],
   "ownedTagIds": [
@@ -27,7 +26,6 @@
   ],
   "learningOutcomeIds": [
     "outcome-apply-subset-zeta-mobius-transform",
-    "outcome-compute-subset-convolution",
     "outcome-correct-overlap-by-inversion",
     "outcome-invert-divisor-lattice-by-mobius"
   ],
@@ -45,7 +43,6 @@
     "abc246-f",
     "abc280-g",
     "abc285-ex",
-    "abc294-ex",
     "abc295-ex",
     "abc297-f",
     "abc304-f",

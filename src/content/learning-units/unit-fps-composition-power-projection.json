@@ -1,8 +1,8 @@
 {
   "id": "unit-fps-composition-power-projection",
-  "kind": "subsection",
+  "kind": "section",
   "title": "FPS合成・power projection",
-  "parentId": "unit-formal-power-series",
+  "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-最小十分状態を定め、グリッド・列・容量・prefix分割・区間・部分集合という基本的な依存構造を比較する。次に桁上限とcarry、automatonによる有限状態化を学ぶ。遷移集約を共通原理として押さえ、LISの支配関係と値域集約を比較し、固定線形遷移の累乗へ進む。確率とゲームでは遷移の評価方法を変え、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。automatonは文字列章、Steiner木は最短路の単元を先に参照する。
+最小十分状態を定め、グリッド・容量・列・prefix分割・区間・部分集合という基本的な依存構造を比較する。列DPの小節ではLISの支配関係と値域集約を比較する。次に桁上限・automaton・carryによる有限状態化を学び、遷移集約を共通原理として整理して固定線形遷移の累乗へ進む。確率とゲームでは遷移の評価方法を変え、循環局面の後退解析へ広げる。後半は境界圧縮、Steiner木、巨大容量、期待値の状態削減、数ゲームの和を発展として扱う。automatonは文字列章、Steiner木は最短路の単元を先に参照する。
 
 ### DP状態と遷移
 
@@ -40,24 +40,24 @@ sidebar:
 
 ## 章の構成
 
-以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
 
 - [最小十分状態からDPを設計する](/learn/dynamic-programming/dp-state-design/) — 緑色
 - [グリッド・多次元表の局所DPを設計する](/learn/dynamic-programming/dp-grid-table/) — 緑色
-- [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/) — 緑色（導入）
-- [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 緑色
 - [資源・容量DP](/learn/dynamic-programming/dp-subset-resource/) — 緑色
-- [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色
-- [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色
-- [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色
+- [列・編集距離・区間合成DP](/learn/dynamic-programming/dp-sequence-interval/) — 緑色（導入）
+  - [列・subsequence DP](/learn/dynamic-programming/dp-sequence/) — 緑色
+    - [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
+    - [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
+  - [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色
+  - [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色
+  - [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色
 - [部分集合・bitmask状態DP](/learn/dynamic-programming/dp-subset-state/) — 水色
 - [接頭辞から更新する有限状態DP](/learn/dynamic-programming/dp-digit-string/) — 水色（導入）
-- [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 水色
+  - [上限制約付き桁DP](/learn/dynamic-programming/digit-dp/) — 水色
+  - [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 青色
 - [繰り上がり・借り・混合基数を状態にするDP](/learn/dynamic-programming/dp-carry-mixed-radix/) — 青色
-- [automaton上のDP・行列遷移](/learn/dynamic-programming/automaton-dp/) — 青色
 - [DP遷移を因数分解・集約して加速する](/learn/dynamic-programming/dp-transition-optimization/) — 青色
-- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
-- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
 - [固定線形遷移を巨大回数進める](/learn/dynamic-programming/linear-recurrence/) — 青色
 - [確率過程・期待値DP](/learn/dynamic-programming/dp-stochastic/) — 水色
 - [ゲーム状態の勝敗とGrundy数](/learn/dynamic-programming/dp-game/) — 水色
@@ -144,4 +144,4 @@ sidebar:
 - [ABC213 G 公式解説](https://atcoder.jp/contests/abc213/editorial/2392)
 - [ABC213 G 公式問題文](https://atcoder.jp/contests/abc213/tasks/abc213_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-chapter-dynamic-programming`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-chapter-dynamic-programming`

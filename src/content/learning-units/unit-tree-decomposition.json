@@ -1,7 +1,7 @@
 {
   "id": "unit-tree-decomposition",
   "kind": "section",
-  "title": "包含木の構築とancestor・path分解",
+  "title": "木のancestor・部分木・pathを索引化する",
   "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -18,7 +18,6 @@
   ],
   "tagIds": [
     "tag-heavy-light-decomposition",
-    "tag-laminar-interval-containment-tree",
     "tag-tree-ancestor-lca",
     "tag-tree-euler-flattening",
     "tag-virtual-tree"
@@ -27,7 +26,6 @@
   "learningOutcomeIds": [
     "outcome-answer-tree-ancestor-queries",
     "outcome-apply-heavy-light-decomposition",
-    "outcome-build-laminar-interval-containment-tree",
     "outcome-build-virtual-tree",
     "outcome-flatten-tree-by-euler-order"
   ],
@@ -40,7 +38,6 @@
     "abc298-ex",
     "abc337-g",
     "abc340-g",
-    "abc405-f",
     "abc406-f"
   ],
   "directProblemIds": [],
@@ -48,10 +45,11 @@
     "abc267-f",
     "abc329-g",
     "abc351-g",
+    "abc405-f",
     "abc438-f",
     "abc460-f"
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。"
+  "learningRationale": "基本的な木DFSを土台に、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。包含関係を木に変換する方法は独立した節で学ぶ。"
 }

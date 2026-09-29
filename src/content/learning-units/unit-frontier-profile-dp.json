@@ -1,8 +1,8 @@
 {
   "id": "unit-frontier-profile-dp",
-  "kind": "subsection",
+  "kind": "section",
   "title": "frontier/profile DP・境界状態圧縮",
-  "parentId": "unit-dp-state-design",
+  "parentId": "unit-chapter-dynamic-programming",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

@@ -1,8 +1,8 @@
 {
   "id": "unit-directed-walk-periodicity",
-  "kind": "subsection",
+  "kind": "section",
   "title": "有向walkの周期・cycle差分gcd",
-  "parentId": "unit-directed-condensation",
+  "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

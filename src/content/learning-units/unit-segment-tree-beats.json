@@ -1,8 +1,8 @@
 {
   "id": "unit-segment-tree-beats",
-  "kind": "subsection",
+  "kind": "section",
   "title": "Segment Tree Beats",
-  "parentId": "unit-range-actions",
+  "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

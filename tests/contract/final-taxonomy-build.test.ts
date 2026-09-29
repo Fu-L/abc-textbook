@@ -151,7 +151,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       ],
     });
     expect(heavyPathUnit?.kind === 'unit' ? heavyPathUnit.entity.parentId : undefined).toBe(
-      'unit-tree-aggregation',
+      'unit-chapter-tree',
     );
     expect(build.learningUnitPrerequisites).toEqual(
       expect.arrayContaining([

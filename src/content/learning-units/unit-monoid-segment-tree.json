@@ -1,7 +1,7 @@
 {
   "id": "unit-monoid-segment-tree",
   "kind": "section",
-  "title": "Segment Treeの要約・区間分解・合成",
+  "title": "結合的な区間要約・区間分解・合成",
   "parentId": "unit-chapter-query",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",

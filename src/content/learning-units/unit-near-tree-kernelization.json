@@ -1,8 +1,8 @@
 {
   "id": "unit-near-tree-kernelization",
-  "kind": "subsection",
+  "kind": "section",
   "title": "near-tree graphのkernel化",
-  "parentId": "unit-graph-core-peeling",
+  "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

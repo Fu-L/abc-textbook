@@ -1,8 +1,8 @@
 {
   "id": "unit-lagrangian-relaxation",
-  "kind": "subsection",
+  "kind": "section",
   "title": "Lagrangian relaxation・Aliens trick",
-  "parentId": "unit-discrete-convex",
+  "parentId": "unit-chapter-geometry-optimization",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

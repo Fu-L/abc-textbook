@@ -3,7 +3,7 @@ title: "列・編集距離・区間合成DP"
 description: "「列・編集距離・区間合成DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 62
+  order: 63
 ---
 
 # 列・編集距離・区間合成DP
@@ -38,8 +38,6 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [prefix分割DP](/learn/dynamic-programming/dp-prefix-partition/) — 水色
 - [区間合成・領域分割DP](/learn/dynamic-programming/dp-interval-composition/) — 水色
 - [区間拡張DP](/learn/dynamic-programming/dp-interval-expansion/) — 青色
-- [LIS・末尾の支配関係](/learn/dynamic-programming/dp-lis/) — 水色
-- [値域集約による部分列DP](/learn/dynamic-programming/dp-value-range/) — 水色
 
 ## 問題一覧
 
@@ -72,4 +70,4 @@ LISは列DPのうち、末尾の支配関係で状態を圧縮する流れとし
 - [ABC219 H 公式解説](https://atcoder.jp/contests/abc219/editorial/2601)
 - [ABC219 H 公式問題文](https://atcoder.jp/contests/abc219/tasks/abc219_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-dp-sequence-interval`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-dp-sequence-interval`

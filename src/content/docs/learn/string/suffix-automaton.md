@@ -47,4 +47,4 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 - [ABC433 G 公式解説](https://atcoder.jp/contests/abc433/editorial/14604)
 - [ABC433 G 公式問題文](https://atcoder.jp/contests/abc433/tasks/abc433_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-suffix-automaton`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-suffix-automaton`

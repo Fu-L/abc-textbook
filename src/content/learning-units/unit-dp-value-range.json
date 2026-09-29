@@ -2,7 +2,7 @@
   "id": "unit-dp-value-range",
   "kind": "subsection",
   "title": "値域集約による部分列DP",
-  "parentId": "unit-dp-sequence-interval",
+  "parentId": "unit-dp-sequence",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

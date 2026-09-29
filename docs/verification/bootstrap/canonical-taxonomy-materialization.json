@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a",
-    "acceptedAt": "2026-09-26T17:58:52.033Z"
+    "digest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
+    "acceptedAt": "2026-09-29T07:53:12.307Z"
   },
   "taskIds": [
     "T047",
@@ -64,10 +64,10 @@
   "digests": {
     "tags": "d6b2820077125301a6806b876a53b5f2f5270b5ae7e04b8e4dee5d2116787a45",
     "learningOutcomes": "f4f75993b64f6f33e11918d4ec3c52b6cc9365dfa2c960d21ab949306bd72ae7",
-    "learningUnits": "20cfb096ec2d7233f8f4cf5171c3d1d9837cdfa86624d4028dcf136343ce1b88",
-    "learningDocuments": "4380e2e58be9865be4a42154b696366283f55d063a73edc37fccda495164ff0c",
-    "learningPrerequisitesDigest": "178b143d023e1fbe6dee3f4eb8cfa4de22030466321755e826b406516caeed90",
-    "problemPlacementPolicyDigest": "725ff3db19e3d99f68bed5ce0a81f9ef58af416da481fb4cf51d85ee519475f4"
+    "learningUnits": "805168e89cb28ead4ccd16d8109b837126b85b2d6fc8db8657c6b894f960f279",
+    "learningDocuments": "3da79c5da0504b541f28f6f271c9a5e4961f086075030cf19c0ec42be20171dd",
+    "learningPrerequisitesDigest": "f628565df2d845239e5b98a4a556c34678ab19cd15db87b59ed7dd23dd64be6d",
+    "problemPlacementPolicyDigest": "0c38b48b4bd88529ef443f52839888af6667502c63eb19245a64c85796a89787"
   },
-  "materializationDigest": "03d401e44d63feae338b8062b4582ec425b0c7743e135bc8cfbd345dd392e18a"
+  "materializationDigest": "5c48a208c87bbbe644dcf78606cc2300cbce544ebf98e55e34b29e52438f663c"
 }

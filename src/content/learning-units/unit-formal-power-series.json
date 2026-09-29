@@ -1,7 +1,7 @@
 {
   "id": "unit-formal-power-series",
   "kind": "section",
-  "title": "FPS演算・多点評価・合成を行う",
+  "title": "FPS基本演算と多項式の多点評価を行う",
   "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
@@ -17,9 +17,7 @@
     "source-abc289-ex-problem-0fef6cd4b8486f8ea098b05b0f58627f3ee02107d66c45dcfca9955eb8cdf0b0"
   ],
   "tagIds": [
-    "tag-bostan-mori",
     "tag-formal-power-series",
-    "tag-fps-composition-power-projection",
     "tag-polynomial-multipoint-evaluation"
   ],
   "ownedTagIds": [
@@ -27,10 +25,8 @@
   ],
   "learningOutcomeIds": [
     "outcome-apply-formal-power-series-operations",
-    "outcome-compose-series-and-project-powers",
     "outcome-evaluate-at-geometric-points",
-    "outcome-evaluate-polynomial-at-many-points",
-    "outcome-extract-rational-series-coefficient"
+    "outcome-evaluate-polynomial-at-many-points"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-apply-formal-power-series-operations"
@@ -39,10 +35,7 @@
   "docPath": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
   "problemIds": [
     "abc272-ex",
-    "abc289-ex",
-    "abc300-ex",
-    "abc387-g",
-    "abc439-g"
+    "abc289-ex"
   ],
   "directProblemIds": [
     "abc289-ex"
@@ -53,9 +46,11 @@
     "abc317-ex",
     "abc318-ex",
     "abc381-g",
+    "abc387-g",
+    "abc439-g",
     "abc449-g"
   ],
   "examples": [],
   "exercises": [],
-  "learningRationale": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。"
+  "learningRationale": "生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。"
 }

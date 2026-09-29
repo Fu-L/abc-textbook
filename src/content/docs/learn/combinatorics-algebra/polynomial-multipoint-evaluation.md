@@ -3,7 +3,7 @@ title: "多項式の多点評価・補間"
 description: "「多項式の多点評価・補間」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 207
+  order: 205
 ---
 
 # 多項式の多点評価・補間
@@ -37,7 +37,7 @@ ABC381 Gでは、拡大体で数列を表す→等比的な因子積を倍化構
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [FPS演算・多点評価・合成を行う](/learn/combinatorics-algebra/formal-power-series/)、[再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/)。
+直接の前提単元: [FPS基本演算と多項式の多点評価を行う](/learn/combinatorics-algebra/formal-power-series/)、[再帰分割・分割統治](/learn/modeling/recursive-divide-and-conquer/)。
 
 このUnitを直接前提とする単元: なし。
 
@@ -66,4 +66,4 @@ ABC381 Gでは、拡大体で数列を表す→等比的な因子積を倍化構
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-polynomial-multipoint-evaluation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-polynomial-multipoint-evaluation`

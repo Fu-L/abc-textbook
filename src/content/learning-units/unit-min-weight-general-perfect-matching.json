@@ -1,8 +1,8 @@
 {
   "id": "unit-min-weight-general-perfect-matching",
-  "kind": "subsection",
+  "kind": "section",
   "title": "一般グラフの最小重み完全matching",
-  "parentId": "unit-flow-matching",
+  "parentId": "unit-chapter-graph",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

@@ -49,4 +49,4 @@ ABC269 Exではheavy path上の多項式漸化式を積と合成へまとめ、�
 - [ABC269 H 公式解説](https://atcoder.jp/contests/abc269/editorial/4838)
 - [ABC269 H 公式問題文](https://atcoder.jp/contests/abc269/tasks/abc269_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-heavy-path-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-heavy-path-tree-dp`

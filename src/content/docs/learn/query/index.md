@@ -40,25 +40,25 @@ sidebar:
 
 ## 章の構成
 
-以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
 
 - [一次元・二次元累積和と差分で区間情報を線形化する](/learn/query/prefix-aggregate/) — 茶色
 - [要素索引と連結リストで局所linkを更新する](/learn/query/linked-list-index/) — 茶色
 - [heap・ordered setで全候補の極値を保つ](/learn/query/ordered-set-heap/) — 緑色（導入）
-- [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 緑色
-- [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 緑色
+  - [priority queue・best-first列挙](/learn/query/priority-queue-best-first/) — 緑色
+  - [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/) — 緑色
 - [端点更新型のrun分割管理](/learn/query/ordered-interval-partition/) — 青色
 - [支配関係から不要な候補を単調stack・queueで削る](/learn/query/monotone-stack-queue/) — 水色
 - [反転数・重み付き接頭辞統計をFenwick Treeで保つ](/learn/query/weighted-prefix-fenwick/) — 水色
-- [Segment Treeの要約・区間分解・合成](/learn/query/monoid-segment-tree/) — 水色（導入）
-- [区間monoid要約](/learn/query/range-monoid-aggregation/) — 水色
-- [有限関数・作用の合成](/learn/query/finite-function-composition/) — 水色
-- [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色
-- [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色
+- [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/) — 水色（導入）
+  - [区間monoid要約](/learn/query/range-monoid-aggregation/) — 水色
+  - [有限関数・作用の合成](/learn/query/finite-function-composition/) — 水色
+  - [冪等演算のoverlap range query・Sparse Table](/learn/query/idempotent-overlap-range-query/) — 水色
+  - [SWAG・two-stack queue aggregation](/learn/query/swag/) — 青色
+  - [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色
+    - [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色
+  - [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色
 - [区間更新を要約へ作用させる](/learn/query/range-actions/) — 青色
-- [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/) — 青色
-- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色
-- [動的・implicit Segment Tree](/learn/query/dynamic-segment-tree/) — 青色
 - [大小関係をCartesian treeへ変換する](/learn/query/cartesian-tree/) — 青色
 - [値軸のbucket分割と区間集約](/learn/query/value-bucket-aggregation/) — 水色
 - [Moの順序で区間問い合わせの差分を更新する](/learn/query/mo-offline-range/) — 青色
@@ -66,10 +66,10 @@ sidebar:
 - [bit列をTrieで索引化する](/learn/query/binary-trie/) — 水色
 - [上位bitの支配関係によるXOR minimax](/learn/query/bitwise-minimax-partition/) — 青色
 - [Rolling fingerprintで列の同値性を比較する](/learn/query/string-hash/) — 水色（導入）
-- [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 水色
+  - [列・文字列のrolling fingerprint](/learn/query/sequence-fingerprint/) — 水色
 - [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/) — 青色（導入）
-- [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 青色
-- [永続data structure・structural sharing](/learn/query/persistence/) — 黄色
+  - [rollback・DFS入退場の状態復元](/learn/query/rollback/) — 青色
+  - [永続data structure・structural sharing](/learn/query/persistence/) — 黄色
 - [Segment Tree Beats](/learn/query/segment-tree-beats/) — 橙色
 
 ## 問題一覧
@@ -192,4 +192,4 @@ sidebar:
 - [ABC216 G 公式解説](https://atcoder.jp/contests/abc216/editorial/2474)
 - [ABC216 G 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-chapter-query`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-chapter-query`

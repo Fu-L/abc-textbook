@@ -47,4 +47,4 @@ nodeの最大/次点/個数等からrange chmin/chmaxが一括適用できる条
 - [ABC430 G 公式解説](https://atcoder.jp/contests/abc430/editorial/14300)
 - [ABC430 G 公式問題文](https://atcoder.jp/contests/abc430/tasks/abc430_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-segment-tree-beats`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-segment-tree-beats`

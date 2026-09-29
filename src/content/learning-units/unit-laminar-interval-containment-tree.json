@@ -1,8 +1,8 @@
 {
   "id": "unit-laminar-interval-containment-tree",
-  "kind": "subsection",
+  "kind": "section",
   "title": "laminar区間族の包含木構築",
-  "parentId": "unit-tree-decomposition",
+  "parentId": "unit-chapter-tree",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

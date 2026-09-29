@@ -680,7 +680,12 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     [],
   ),
   section('unit-static-top-tree', 'rake・compressで動的木DPを保つ', 'unit-chapter-graph', []),
-  section('unit-tree-decomposition', '包含木の構築とancestor・path分解', 'unit-chapter-graph', []),
+  section(
+    'unit-tree-decomposition',
+    '木のancestor・部分木・pathを索引化する',
+    'unit-chapter-graph',
+    [],
+  ),
   section(
     'unit-tree-balanced-separators',
     '木の均衡分離点から重心分解へ進む',
@@ -702,7 +707,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-graph-core-peeling',
-    '閉路数・次数構造からgraph coreとkernelを調べる',
+    '閉路数・次数構造からgraph coreを調べる',
     'unit-chapter-graph',
     [],
   ),
@@ -712,12 +717,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
     'unit-chapter-query',
     [],
   ),
-  section(
-    'unit-monoid-segment-tree',
-    'Segment Treeの要約・区間分解・合成',
-    'unit-chapter-query',
-    [],
-  ),
+  section('unit-monoid-segment-tree', '結合的な区間要約・区間分解・合成', 'unit-chapter-query', []),
   section(
     'unit-weighted-prefix-fenwick',
     '反転数・重み付き接頭辞統計をFenwick Treeで保つ',
@@ -869,7 +869,7 @@ const LEGACY_LEARNING_UNIT_SEEDS: readonly LearningUnitSeed[] = [
   ),
   section(
     'unit-formal-power-series',
-    'FPS演算・多点評価・合成を行う',
+    'FPS基本演算と多項式の多点評価を行う',
     'unit-chapter-math-geometry',
     ['unit-generating-functions'],
   ),
@@ -1015,7 +1015,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-static-top-tree':
     '木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。',
   'unit-tree-decomposition':
-    '基本的な木DFSを土台に、laminar区間をstackで包含木へ変換し、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。',
+    '基本的な木DFSを土台に、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。包含関係を木に変換する方法は独立した節で学ぶ。',
   'unit-laminar-interval-containment-tree':
     '非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。',
   'unit-tree-balanced-separators':
@@ -1031,7 +1031,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-lowlink-critical-structure':
     'DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。',
   'unit-graph-core-peeling':
-    '連結成分のcycle rankを辺数と頂点数から読み、必要なら低次数頂点を反復削除してcycle coreや小さなkernelを露出させる。',
+    '連結成分のcycle rankを辺数と頂点数から読み、葉を反復削除してcycle coreを露出させる。cycle spaceと組み合わせたnear-tree kernel化は独立した節で学ぶ。',
   'unit-prefix-aggregate':
     '一次元累積和を土台に、包除で矩形和へ拡張し、静的区間量を接頭辞や端点の差へ変換する。',
   'unit-monoid-segment-tree':
@@ -1114,7 +1114,7 @@ const UNIT_LEARNING_RATIONALES: Readonly<Record<string, string>> = {
   'unit-linear-matroid-intersection':
     'matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。',
   'unit-formal-power-series':
-    '生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expと多点評価・合成を次数制限付きで実装する。',
+    '生成関数の係数解釈と高速畳み込みを再利用し、Newton法による逆数・log・expを次数制限付きで実装し、多点評価と補間へ進む。有理母関数の係数抽出と一般FPS合成は独立した節で学ぶ。',
   'unit-linear-algebra-xor':
     '制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。',
   'unit-matroid-theory':
@@ -6753,20 +6753,20 @@ const LEGACY_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
 };
 
 const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
-  'unit-xor-threshold-matching': 'unit-divide-enumeration',
+  'unit-xor-threshold-matching': 'unit-chapter-modeling',
   'unit-dp-sequence': 'unit-dp-sequence-interval',
   'unit-dp-prefix-partition': 'unit-dp-sequence-interval',
   'unit-dp-interval-composition': 'unit-dp-sequence-interval',
   'unit-dp-interval-expansion': 'unit-dp-sequence-interval',
-  'unit-dp-lis': 'unit-dp-sequence-interval',
-  'unit-dp-value-range': 'unit-dp-sequence-interval',
+  'unit-dp-lis': 'unit-dp-sequence',
+  'unit-dp-value-range': 'unit-dp-sequence',
   'unit-meet-in-the-middle': 'unit-divide-enumeration',
   'unit-recursive-divide-and-conquer': 'unit-divide-enumeration',
   'unit-amortized-monotone-progress': 'unit-decomposition-amortization',
   'unit-small-to-large': 'unit-decomposition-amortization',
   'unit-threshold-heavy-light': 'unit-decomposition-amortization',
-  'unit-heavy-path-tree-dp': 'unit-tree-aggregation',
-  'unit-eventual-unbounded-knapsack': 'unit-dp-subset-resource',
+  'unit-heavy-path-tree-dp': 'unit-chapter-tree',
+  'unit-eventual-unbounded-knapsack': 'unit-chapter-dynamic-programming',
   'unit-state-graph-search': 'unit-graph-search',
   'unit-directional-grid-effect-scan': 'unit-graph-search',
   'unit-transitive-closure': 'unit-graph-search',
@@ -6786,7 +6786,7 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-rooted-tree-aggregation': 'unit-tree-aggregation',
   'unit-rerooting': 'unit-tree-aggregation',
   'unit-tree-ancestor-lca': 'unit-tree-decomposition',
-  'unit-laminar-interval-containment-tree': 'unit-tree-decomposition',
+  'unit-laminar-interval-containment-tree': 'unit-chapter-tree',
   'unit-tree-euler-flattening': 'unit-tree-decomposition',
   'unit-heavy-light-decomposition': 'unit-tree-decomposition',
   'unit-virtual-tree': 'unit-tree-decomposition',
@@ -6795,23 +6795,23 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-bipartite-matching': 'unit-flow-matching',
   'unit-min-cost-flow': 'unit-flow-matching',
   'unit-weighted-bipartite-matching': 'unit-flow-matching',
-  'unit-min-weight-general-perfect-matching': 'unit-flow-matching',
-  'unit-path-matching-contraction': 'unit-flow-matching',
+  'unit-min-weight-general-perfect-matching': 'unit-chapter-graph',
+  'unit-path-matching-contraction': 'unit-chapter-graph',
   'unit-euler-trail-circuit': 'unit-euler-degree',
   'unit-degree-parity-subgraph': 'unit-euler-degree',
   'unit-graph-core': 'unit-graph-core-peeling',
-  'unit-near-tree-kernelization': 'unit-graph-core-peeling',
+  'unit-near-tree-kernelization': 'unit-chapter-graph',
   'unit-range-monoid-aggregation': 'unit-monoid-segment-tree',
   'unit-segment-tree-canonical-decomposition': 'unit-monoid-segment-tree',
-  'unit-static-sorted-range-index': 'unit-monoid-segment-tree',
+  'unit-static-sorted-range-index': 'unit-segment-tree-canonical-decomposition',
   'unit-idempotent-overlap-range-query': 'unit-monoid-segment-tree',
   'unit-swag': 'unit-monoid-segment-tree',
   'unit-finite-function-composition': 'unit-monoid-segment-tree',
   'unit-dynamic-segment-tree': 'unit-monoid-segment-tree',
-  'unit-segment-tree-beats': 'unit-range-actions',
+  'unit-segment-tree-beats': 'unit-chapter-query',
   'unit-priority-queue-best-first': 'unit-ordered-set-heap',
   'unit-ordered-set-multiset': 'unit-ordered-set-heap',
-  'unit-ordered-interval-partition': 'unit-ordered-set-heap',
+  'unit-ordered-interval-partition': 'unit-chapter-query',
   'unit-persistence': 'unit-persistence-rollback',
   'unit-rollback': 'unit-persistence-rollback',
   'unit-z-algorithm': 'unit-string-prefix-automata',
@@ -6825,12 +6825,12 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-gcd-structure': 'unit-chapter-number-theory',
   'unit-divisor-mobius-inversion': 'unit-inclusion-exclusion',
   'unit-subset-transforms': 'unit-inclusion-exclusion',
-  'unit-subset-convolution': 'unit-subset-transforms',
+  'unit-subset-convolution': 'unit-chapter-combinatorics-algebra',
   'unit-polynomial-multipoint-evaluation': 'unit-formal-power-series',
   'unit-polynomial-taylor-shift': 'unit-polynomial-convolution',
-  'unit-fps-composition-power-projection': 'unit-formal-power-series',
-  'unit-bostan-mori': 'unit-formal-power-series',
-  'unit-relaxed-convolution': 'unit-polynomial-convolution',
+  'unit-fps-composition-power-projection': 'unit-chapter-combinatorics-algebra',
+  'unit-bostan-mori': 'unit-chapter-combinatorics-algebra',
+  'unit-relaxed-convolution': 'unit-chapter-combinatorics-algebra',
   'unit-linear-system-rank': 'unit-linear-algebra-xor',
   'unit-xor-linear-basis': 'unit-linear-algebra-xor',
   'unit-separable-linear-transform': 'unit-linear-algebra-xor',
@@ -6840,14 +6840,14 @@ const REFINED_UNIT_PARENT_OVERRIDES: Readonly<Record<string, string>> = {
   'unit-half-plane-constraints': 'unit-convex-geometry',
   'unit-basic-convex-optimization': 'unit-discrete-convex',
   'unit-slope-trick': 'unit-discrete-convex',
-  'unit-lagrangian-relaxation': 'unit-discrete-convex',
-  'unit-monge-optimization': 'unit-discrete-convex',
+  'unit-lagrangian-relaxation': 'unit-chapter-geometry-optimization',
+  'unit-monge-optimization': 'unit-chapter-geometry-optimization',
   'unit-isotonic-regression': 'unit-discrete-convex',
   'unit-separable-convex-marginals': 'unit-discrete-convex',
-  'unit-directed-walk-periodicity': 'unit-directed-condensation',
-  'unit-frontier-profile-dp': 'unit-dp-state-design',
-  'unit-additive-expectation-potential': 'unit-dp-stochastic',
-  'unit-kinetic-order-maintenance': 'unit-event-sweep',
+  'unit-directed-walk-periodicity': 'unit-chapter-graph',
+  'unit-frontier-profile-dp': 'unit-chapter-dynamic-programming',
+  'unit-additive-expectation-potential': 'unit-chapter-dynamic-programming',
+  'unit-kinetic-order-maintenance': 'unit-chapter-modeling',
   'unit-cyclic-order-crossing': 'unit-geometry-primitives',
 };
 

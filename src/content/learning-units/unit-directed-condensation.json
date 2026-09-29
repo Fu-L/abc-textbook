@@ -19,13 +19,11 @@
   "tagIds": [
     "tag-dag-topological-processing",
     "tag-directed-core-peeling",
-    "tag-directed-walk-periodicity",
     "tag-scc-condensation",
     "tag-two-sat"
   ],
   "ownedTagIds": [],
   "learningOutcomeIds": [
-    "outcome-compute-directed-walk-period",
     "outcome-condense-and-order-directed-graph",
     "outcome-encode-threshold-constraints-as-two-sat",
     "outcome-peel-directed-graph-toward-cycles",
@@ -39,7 +37,6 @@
     "abc277-ex",
     "abc277-f",
     "abc291-e",
-    "abc306-g",
     "abc315-e",
     "abc456-e"
   ],
@@ -49,6 +46,7 @@
     "abc224-e",
     "abc304-ex",
     "abc306-ex",
+    "abc306-g",
     "abc324-f",
     "abc335-e",
     "abc341-f",

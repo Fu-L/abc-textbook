@@ -1,8 +1,8 @@
 {
   "id": "unit-kinetic-order-maintenance",
-  "kind": "subsection",
+  "kind": "section",
   "title": "kinetic sorting・交差event順序更新",
-  "parentId": "unit-event-sweep",
+  "parentId": "unit-chapter-modeling",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

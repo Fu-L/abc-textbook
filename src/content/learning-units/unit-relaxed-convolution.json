@@ -1,8 +1,8 @@
 {
   "id": "unit-relaxed-convolution",
-  "kind": "subsection",
+  "kind": "section",
   "title": "Relaxed・online convolution",
-  "parentId": "unit-polynomial-convolution",
+  "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

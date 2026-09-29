@@ -17,15 +17,13 @@
     "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"
   ],
   "tagIds": [
-    "tag-eventual-unbounded-knapsack",
     "tag-knapsack-resource"
   ],
   "ownedTagIds": [
     "tag-knapsack-resource"
   ],
   "learningOutcomeIds": [
-    "outcome-design-resource-dp",
-    "outcome-stabilize-unbounded-knapsack-by-best-density"
+    "outcome-design-resource-dp"
   ],
   "ownedLearningOutcomeIds": [
     "outcome-design-resource-dp"
@@ -39,7 +37,6 @@
     "abc275-f",
     "abc288-e",
     "abc307-g",
-    "abc310-ex",
     "abc320-f",
     "abc321-f",
     "abc322-e",
@@ -49,7 +46,6 @@
     "abc383-f",
     "abc390-e",
     "abc410-e",
-    "abc415-g",
     "abc419-e",
     "abc424-g",
     "abc441-f",
@@ -79,6 +75,7 @@
   "relatedProblemIds": [
     "abc287-f",
     "abc290-ex",
+    "abc310-ex",
     "abc311-ex",
     "abc332-g",
     "abc366-f",

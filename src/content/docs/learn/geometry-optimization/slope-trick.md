@@ -3,7 +3,7 @@ title: "slope trick"
 description: "「slope trick」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 227
+  order: 226
 ---
 
 # slope trick
@@ -55,4 +55,4 @@ sidebar:
 - [ABC275 H 公式解説](https://atcoder.jp/contests/abc275/editorial/5128)
 - [ABC275 H 公式問題文](https://atcoder.jp/contests/abc275/tasks/abc275_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-slope-trick`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-slope-trick`

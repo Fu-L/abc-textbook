@@ -3,7 +3,7 @@ title: "最短路を証明する木・経路の復元"
 description: "「最短路を証明する木・経路の復元」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 96
+  order: 98
 ---
 
 # 最短路を証明する木・経路の復元
@@ -59,4 +59,4 @@ sidebar:
 - [ABC308 H 公式解説](https://atcoder.jp/contests/abc308/editorial/6709)
 - [ABC308 H 公式問題文](https://atcoder.jp/contests/abc308/tasks/abc308_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-shortest-path-reconstruction`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-shortest-path-reconstruction`

@@ -13,16 +13,14 @@
     "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
     "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
     "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
-    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
-    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+    "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+    "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
   ],
   "tagIds": [
     "tag-bipartite-matching-hall",
     "tag-flow-feasibility-lower-bounds",
     "tag-max-flow-min-cut",
     "tag-min-cost-flow",
-    "tag-min-weight-general-perfect-matching",
-    "tag-path-matching-contraction",
     "tag-weighted-bipartite-matching"
   ],
   "ownedTagIds": [],
@@ -30,10 +28,8 @@
     "outcome-characterize-bipartite-feasibility-by-hall",
     "outcome-model-max-flow-min-cut",
     "outcome-model-min-cost-flow",
-    "outcome-optimize-path-matching-by-contraction",
     "outcome-solve-bipartite-matching",
     "outcome-solve-flow-with-lower-bounds",
-    "outcome-solve-min-weight-general-perfect-matching",
     "outcome-solve-weighted-bipartite-matching"
   ],
   "ownedLearningOutcomeIds": [],
@@ -42,7 +38,6 @@
   "problemIds": [
     "abc214-h",
     "abc215-h",
-    "abc218-h",
     "abc224-h",
     "abc225-g",
     "abc227-h",
@@ -65,12 +60,10 @@
     "abc397-g",
     "abc401-g",
     "abc407-g",
-    "abc412-g",
     "abc421-g",
     "abc437-g",
     "abc445-g",
-    "abc461-g",
-    "abc464-g"
+    "abc461-g"
   ],
   "directProblemIds": [],
   "relatedProblemIds": [

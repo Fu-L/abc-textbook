@@ -1,8 +1,8 @@
 {
   "id": "unit-bostan-mori",
-  "kind": "subsection",
+  "kind": "section",
   "title": "Bostan–Mori・有理生成関数の係数抽出",
-  "parentId": "unit-formal-power-series",
+  "parentId": "unit-chapter-combinatorics-algebra",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

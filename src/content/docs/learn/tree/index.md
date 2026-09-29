@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化してから、包含関係や併合履歴を木にする方法を学ぶ。HLD・virtual tree・重心分解では、それぞれpath、必要頂点、均衡分離点を使った計算量削減を比較する。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。
+一意な経路と距離・直径、完全二分木の対称性を確認し、根付き木DPから全方位DPへ進む。Euler順とLCAで部分木・祖先を索引化し、HLDとvirtual treeでpathと必要頂点へ圧縮する。包含関係や併合履歴を木にする方法を学んだ後、重心分解で均衡分離点による計算量削減を扱う。後半は距離からの木の復元、親先行順序の縮約、多項式木DP、rake・compressによる動的木DP、資源DPを渡すHLRecDPへ進む。多項式木DPでは代数章の畳み込みを先に学ぶ。
 
 ### 木モデルと構造
 
@@ -40,20 +40,20 @@ sidebar:
 
 ## 章の構成
 
-以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。
+節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。
 
 - [基準点からの木距離・剰余類・直径・中心](/learn/tree/tree-metric/) — 水色
 - [対称性・深さ・label区間で巨大な完全二分木を数える](/learn/tree/implicit-binary-tree/) — 水色
 - [木DP・集約・rerooting](/learn/tree/tree-aggregation/) — 水色（導入）
-- [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色
-- [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色
-- [包含木の構築とancestor・path分解](/learn/tree/tree-decomposition/) — 水色（導入）
-- [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
-- [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
+  - [根付き木DP・部分木集約](/learn/tree/rooted-tree-aggregation/) — 水色
+  - [rerooting・全方位木DP](/learn/tree/rerooting/) — 青色
+- [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/) — 水色（導入）
+  - [Euler順による部分木区間化](/learn/tree/tree-euler-flattening/) — 水色
+  - [ancestor query・LCA](/learn/tree/tree-ancestor-lca/) — 水色
+  - [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
+  - [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
 - [laminar区間族の包含木構築](/learn/tree/laminar-interval-containment-tree/) — 青色
 - [DSU merge tree・Kruskal reconstruction tree](/learn/tree/dsu-merge-tree/) — 青色
-- [Heavy-Light Decomposition](/learn/tree/heavy-light-decomposition/) — 青色
-- [virtual tree・auxiliary tree](/learn/tree/virtual-tree/) — 黄色
 - [木の均衡分離点から重心分解へ進む](/learn/tree/tree-balanced-separators/) — 黄色
 - [加法的tree metric復元](/learn/tree/additive-tree-metric-reconstruction/) — 橙色
 - [01 on Tree・親先行順序のcluster縮約](/learn/tree/tree-precedence-contraction/) — 橙色
@@ -92,4 +92,4 @@ sidebar:
 - [ABC221 F 公式解説](https://atcoder.jp/contests/abc221/editorial/2723)
 - [ABC221 F 公式問題文](https://atcoder.jp/contests/abc221/tasks/abc221_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-chapter-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-chapter-tree`

@@ -19,8 +19,6 @@
   "tagIds": [
     "tag-basic-convex-optimization",
     "tag-isotonic-regression-pav",
-    "tag-lagrangian-relaxation",
-    "tag-monge-optimization",
     "tag-separable-convex-marginals",
     "tag-slope-trick"
   ],
@@ -28,8 +26,6 @@
   "learningOutcomeIds": [
     "outcome-allocate-by-convex-marginal-costs",
     "outcome-maintain-piecewise-linear-convex-function",
-    "outcome-optimize-by-lagrangian-relaxation",
-    "outcome-optimize-monge-transitions",
     "outcome-optimize-univariate-convex-function",
     "outcome-solve-isotonic-regression-by-pav"
   ],
@@ -42,17 +38,12 @@
     "abc224-g",
     "abc250-g",
     "abc275-ex",
-    "abc305-ex",
     "abc314-ex",
-    "abc348-g",
-    "abc355-g",
     "abc359-f",
     "abc369-g",
     "abc373-f",
     "abc383-g",
     "abc389-e",
-    "abc393-g",
-    "abc400-g",
     "abc406-g",
     "abc458-g",
     "abc459-f"

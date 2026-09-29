@@ -36,10 +36,6 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 - subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
-## 下位単元
-
-- [subset convolution](/learn/combinatorics-algebra/subset-convolution/) — 橙色
-
 ## 問題一覧
 
 - [ABC349 F「Subsequence LCM」](https://atcoder.jp/contests/abc349/tasks/abc349_f) — 主題: [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/)（Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)（剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。） / [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
@@ -58,9 +54,9 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 - [ABC215 H 公式解説](https://atcoder.jp/contests/abc215/editorial/2505)
 - [ABC215 H 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_h)
-- [ABC294 H 公式解説](https://atcoder.jp/contests/abc294/editorial/5999)
-- [ABC294 H 公式問題文](https://atcoder.jp/contests/abc294/tasks/abc294_h)
 - [ABC295 H 公式解説](https://atcoder.jp/contests/abc295/editorial/6036)
 - [ABC295 H 公式問題文](https://atcoder.jp/contests/abc295/tasks/abc295_h)
+- [ABC349 F 公式解説](https://atcoder.jp/contests/abc349/editorial/9771)
+- [ABC349 F 公式問題文](https://atcoder.jp/contests/abc349/tasks/abc349_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-subset-transforms`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-subset-transforms`

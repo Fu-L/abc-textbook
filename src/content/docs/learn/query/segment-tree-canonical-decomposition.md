@@ -3,7 +3,7 @@ title: "Segment Treeのcanonical区間分解"
 description: "「Segment Treeのcanonical区間分解」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 44
+  order: 43
 ---
 
 # Segment Treeのcanonical区間分解
@@ -36,6 +36,10 @@ sidebar:
 
 - Segment Treeのcanonical区間分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
 
+## 下位単元
+
+- [静的sorted range index・Merge Sort Tree](/learn/query/static-sorted-range-index/) — 青色
+
 ## 問題一覧
 
 - [ABC342 G「Retroactive Range Chmax」](https://atcoder.jp/contests/abc342/tasks/abc342_g) — 主題: [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/)（区間をO(log N)個のcanonical nodeへ分解してrange object・時間生存区間・range edgeを配置し、point queryではroot-to-leaf path上のobjectを集められる。）。既習技能: [ordered set・multisetの動的順序管理](/learn/query/ordered-set-multiset/)（比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。
@@ -54,9 +58,9 @@ sidebar:
 
 - [ABC244 H 公式解説](https://atcoder.jp/contests/abc244/editorial/3602)
 - [ABC244 H 公式問題文](https://atcoder.jp/contests/abc244/tasks/abc244_h)
+- [ABC339 G 公式解説](https://atcoder.jp/contests/abc339/editorial/9207)
+- [ABC339 G 公式問題文](https://atcoder.jp/contests/abc339/tasks/abc339_g)
 - [ABC342 G 公式解説](https://atcoder.jp/contests/abc342/editorial/9373)
 - [ABC342 G 公式問題文](https://atcoder.jp/contests/abc342/tasks/abc342_g)
-- [ABC363 G 公式解説](https://atcoder.jp/contests/abc363/editorial/10451)
-- [ABC363 G 公式問題文](https://atcoder.jp/contests/abc363/tasks/abc363_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `fe591a16d9b08c0422f76dc5b6e297c591f361a20ee3548685e39ff3a0e3444a` / LearningUnit `unit-segment-tree-canonical-decomposition`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-segment-tree-canonical-decomposition`

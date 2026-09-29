@@ -2,7 +2,7 @@
   "id": "unit-dp-lis",
   "kind": "subsection",
   "title": "LIS・末尾の支配関係",
-  "parentId": "unit-dp-sequence-interval",
+  "parentId": "unit-dp-sequence",
   "baselineId": "prereq-abc-advanced-v1",
   "baselineVersion": "1.0.0",
   "excludedTopics": [

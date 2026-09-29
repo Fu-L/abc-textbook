@@ -96,9 +96,16 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     for (const chapter of TEXTBOOK_CHAPTERS) {
       const chapterDocument = byId.get(chapter.id)?.document ?? '';
       const contents = chapterDocument.split('## 章の構成\n')[1]?.split('\n## ')[0] ?? '';
-      // Reading order may separate a semantic parent from its advanced lessons.
-      // Such lessons must not become Markdown children of the preceding lesson.
-      expect(contents).not.toMatch(/^ +-/mu);
+      const ancestors: string[] = [chapter.id];
+      const contentsLines = contents.split('\n').filter((line) => /^ *- \[/.test(line));
+      expect(contentsLines).toHaveLength(chapter.unitIds.length);
+      for (const [index, id] of chapter.unitIds.entries()) {
+        const line = contentsLines[index] ?? '';
+        const depth = (/^ */.exec(line)?.[0].length ?? 0) / 2;
+        expect(byId.get(id)?.value.parentId, id).toBe(ancestors[depth]);
+        ancestors.length = depth + 1;
+        ancestors.push(id);
+      }
       let previousLinkPosition = -1;
       for (const id of chapter.unitIds) {
         const output = byId.get(id);
@@ -140,7 +147,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(textbookIndex('unit-bipartite-structure')).toBeLessThan(
       textbookIndex('unit-shortest-path-certificates'),
     );
-    expect(byId.get('unit-subset-transforms')?.document).toContain('- [subset convolution]');
+    expect(byId.get('unit-dp-sequence')?.document).toContain('- [LIS・末尾の支配関係]');
     for (const { nodeId, prerequisiteId } of result.learningPrerequisites
       .learningUnitPrerequisites) {
       const chapter = TEXTBOOK_CHAPTERS.find(({ unitIds }) =>
@@ -166,7 +173,7 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     vi.doMock('../../src/lib/taxonomy/textbook-order.js', async (importOriginal) => {
       const actual = await importOriginal<{ textbookIndex: typeof textbookIndex }>();
       const first = 'unit-dp-grid-table';
-      const second = 'unit-dp-sequence-interval';
+      const second = 'unit-dp-subset-resource';
       return {
         ...actual,
         textbookIndex: (id: string) =>
@@ -187,6 +194,31 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         changed.learningUnits.find(({ value }) => value.id === 'unit-dp-grid-table')?.document,
       ).not.toBe(
         original.learningUnits.find(({ value }) => value.id === 'unit-dp-grid-table')?.document,
+      );
+    } finally {
+      vi.doUnmock('../../src/lib/taxonomy/textbook-order.js');
+      vi.resetModules();
+    }
+  }, 30_000);
+
+  it('rejects a reading order that makes a child appear under an unrelated section', async () => {
+    const input = await loadMaterializationInput();
+    vi.resetModules();
+    vi.doMock('../../src/lib/taxonomy/textbook-order.js', async (importOriginal) => {
+      const actual = await importOriginal<{ textbookIndex: typeof textbookIndex }>();
+      return {
+        ...actual,
+        textbookIndex: (id: string) =>
+          id === 'unit-priority-queue-best-first'
+            ? actual.textbookIndex('unit-prefix-aggregate')
+            : actual.textbookIndex(id),
+      };
+    });
+    try {
+      const { buildCanonicalTaxonomyMaterialization: buildWithBrokenOrder } =
+        await import('../../src/lib/taxonomy/canonical-taxonomy-materialization.js');
+      expect(() => buildWithBrokenOrder(input)).toThrow(
+        /CANONICAL_TEXTBOOK_HIERARCHY_ORDER_INVALID/u,
       );
     } finally {
       vi.doUnmock('../../src/lib/taxonomy/textbook-order.js');

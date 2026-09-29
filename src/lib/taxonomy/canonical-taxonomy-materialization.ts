@@ -285,7 +285,7 @@ const renderLearningUnitDocument = (input: {
       ? [
           '## 本書の読み方',
           '',
-          '各章の「章の構成」は、前提知識・難易度・関連する手法の比較を考えて編成した読書順です。概念の親子関係は各Unitの「下位単元」で確認できます。目次の並びは編集上の案内であり、必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。',
+          '各章の「章の構成」は、前提知識・難易度・関連する手法の比較を考えて編成した読書順です。概念の親子関係は目次の字下げと各Unitの「下位単元」で確認できます。目次の並びは編集上の案内であり、必須の学習前提は別の有向非巡回グラフで管理します。各Unitの「直接の前提単元」はこのグラフの辺だけを示し、章の親子関係や目次の隣接は前提を意味しません。',
           '',
           '「習得対象の目安」は、その色付近の読者がUnitの中心概念を道具として身につける時期を示します。習得とは、標準形の発動条件・不変量・計算量を説明し、実装またはライブラリへの還元ができることです。掲載問題のDifficulty、全問正解に必要なレート、初見で発展解法を発見する難しさは評価に含めません。',
           '',
@@ -343,7 +343,7 @@ const renderLearningUnitDocument = (input: {
           ...(chapter === undefined
             ? []
             : [
-                '以下は推奨する読書順です。「導入」は関連手法の見取り図を示します。概念の親子関係は各Unitの「下位単元」を参照してください。',
+                '節と小節を学習順に並べています。字下げは概念の親子関係、「導入」は関連手法の見取り図を示します。発展的な小節は対象色を目安に後から戻って学べます。',
                 '',
               ]),
           ...input.childUnits.map(
@@ -581,9 +581,7 @@ export const buildCanonicalTaxonomyMaterialization = (
             id: entity.id,
             title: entity.title,
             documentPath: learningUnitDocumentPath(entity, unitById),
-            // A chapter is a reading sequence, not a hierarchy traversal. Indenting
-            // by semantic depth would attach a deferred lesson to an unrelated item.
-            depth: unit.kind === 'chapter' ? 0 : depth,
+            depth,
             isGuide: !isCurriculumUnit(entity),
             learningOutcomeIds: entity.learningOutcomeIds,
             ownedLearningOutcomeIds: entity.ownedLearningOutcomeIds,
@@ -592,6 +590,20 @@ export const buildCanonicalTaxonomyMaterialization = (
           };
         })
         .sort((left, right) => textbookIndex(left.id) - textbookIndex(right.id));
+      if (unit.kind === 'chapter') {
+        const ancestors = [unit.id];
+        for (const child of childUnits) {
+          const parentId = unitById.get(child.id)?.parentId;
+          if (ancestors[child.depth] !== parentId) {
+            throw new CanonicalTaxonomyMaterializationError(
+              'CANONICAL_TEXTBOOK_HIERARCHY_ORDER_INVALID',
+              `${child.id}: expected parent ${String(parentId)}`,
+            );
+          }
+          ancestors.length = child.depth + 1;
+          ancestors.push(child.id);
+        }
+      }
       const sourceRevisionIds = unit.sourceRevisionIds;
       const documentPath = learningUnitDocumentPath(unit, unitById);
       const materializedUnit = LearningUnitSchema.parse({
