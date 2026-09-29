@@ -114,11 +114,12 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-graph',
     introduction:
-      '探索・二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで、標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。max-flow/min-cutまでで標準toolkitを固め、その後に方向別grid scanを問題パターン寄りの応用として置く。次にgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。',
+      'graph search・状態グラフ・推移閉包の後に方向別grid scanを置き、探索と局所的な状態伝播を続けて学ぶ。二部構造・連結性・最短路・有向構造・関数グラフ・全域木・lowlinkで標準的なgraph toolkitを揃える。Euler trailの次数条件と偶奇部分グラフの後に、二部matching・max-flow/min-cutへの標準的な帰着を学ぶ。続いてgraph core・cycle spaceを扱い、単調path縮約・near-tree kernel化・有向walk周期へ進む。lower-bound flow・min-cost flow・weighted bipartite matchingは発展的なflowとして後半に置き、planar duality・path matching contraction・一般重み付きmatchingで締めくくる。',
     unitIds: [
       'unit-graph-search',
       'unit-state-graph-search',
       'unit-transitive-closure',
+      'unit-directional-grid-effect-scan',
       'unit-bipartite-structure',
       'unit-connectivity',
       'unit-dsu-components',
@@ -145,7 +146,6 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-flow-matching',
       'unit-bipartite-matching',
       'unit-max-flow-min-cut',
-      'unit-directional-grid-effect-scan',
       'unit-graph-core-peeling',
       'unit-graph-core',
       'unit-cycle-space-basis',
@@ -188,7 +188,7 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-string',
     introduction:
-      'Trieによる接頭辞共有とprefix matching・Z algorithmによる一致区間の再利用から、周期・回文を調べる。次にsuffix arrayとLCPによる標準的な接尾辞索引を学ぶ。その後、runの局所変化と再帰的な圧縮文字列で、明示展開せずに列を扱う。有限状態への同値化、Aho–Corasick、非決定性のsubset constructionを経て、Suffix Automatonで全部分文字列を同値類へ圧縮する。rolling fingerprintはデータ構造章、automaton上の計数はDP章へ接続する。',
+      'Trieによる接頭辞共有とprefix matching・Z algorithmによる一致区間の再利用から、周期・回文を調べ、suffix arrayとLCPによる標準的な接尾辞索引へ進む。次に有限状態への同値化、pattern automaton、Aho–Corasick、subset construction、Suffix Automatonを続けて学ぶ。その後、runの局所変化と再帰的な圧縮文字列で、明示展開せずに列を扱う。rolling fingerprintはデータ構造章、automaton上の計数はDP章へ接続する。',
     unitIds: [
       'unit-trie-prefix',
       'unit-string-prefix-automata',
@@ -196,13 +196,13 @@ export const TEXTBOOK_CHAPTERS = [
       'unit-string-periodicity',
       'unit-palindrome-radius',
       'unit-suffix-lcp-index',
-      'unit-run-length-dynamics',
-      'unit-recursive-compressed-string',
       'unit-string-automata',
       'unit-finite-pattern-automaton',
       'unit-aho-corasick',
       'unit-automaton-subset-construction',
       'unit-suffix-automaton',
+      'unit-run-length-dynamics',
+      'unit-recursive-compressed-string',
     ],
   },
   {
@@ -235,13 +235,13 @@ export const TEXTBOOK_CHAPTERS = [
   {
     id: 'unit-chapter-combinatorics-algebra',
     introduction:
-      '組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式・半順序で計数と構造定理を比較する。matroidの独立性と交換公理を中盤で学び、greedyによる最適化へ接続する。その後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展的な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を経て、rankと乱択を要する線形matroid交差を扱う。',
+      '組合せ係数を入口に、包除による重複補正、約数格子・部分集合上のMöbius反転を続け、反射原理は別系統の直接数え上げ典型として学ぶ。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式・半順序で計数と構造定理を比較する。matroidの独立性と交換公理を中盤で学び、greedyによる最適化へ接続する。その後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展的な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を経て、rankと乱択を要する線形matroid交差を扱う。',
     unitIds: [
       'unit-combinatorial-coefficients',
-      'unit-reflection-principle',
       'unit-inclusion-exclusion',
       'unit-divisor-mobius-inversion',
       'unit-subset-transforms',
+      'unit-reflection-principle',
       'unit-monoid-exponentiation',
       'unit-semiring-matrix-exponentiation',
       'unit-linear-algebra-xor',

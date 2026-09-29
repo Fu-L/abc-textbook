@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-組合せ係数と反射原理で直接数える方法を学び、包除から約数・部分集合上の反転へ進む。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式・半順序で計数と構造定理を比較する。matroidの独立性と交換公理を中盤で学び、greedyによる最適化へ接続する。その後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展的な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を経て、rankと乱択を要する線形matroid交差を扱う。
+組合せ係数を入口に、包除による重複補正、約数格子・部分集合上のMöbius反転を続け、反射原理は別系統の直接数え上げ典型として学ぶ。反復合成と半環行列、線形方程式・XOR基底・分離可能変換を揃え、Prüfer符号・群作用・削除縮約・行列式・半順序で計数と構造定理を比較する。matroidの独立性と交換公理を中盤で学び、greedyによる最適化へ接続する。その後、母関数の係数解釈から畳み込み・Taylor shift・FPS・多点評価・有理母関数へ進む。発展的な係数抽出、onlineとsubsetの畳み込み、BEST定理、RSK、FPS合成を経て、rankと乱択を要する線形matroid交差を扱う。
 
 ### 組合せ・多項式・線形代数への変換
 
@@ -43,10 +43,10 @@ sidebar:
 項目は各章の読書順に並べています。親子関係は順序と独立しているため、階層を字下げで表さず、子Unitには「概念上の親」を示します。導入項目は関連手法の見取り図で、発展的なUnitは対象色を目安に後から戻って学べます。
 
 - [組合せ係数と対称性で数える](/learn/combinatorics-algebra/combinatorial-coefficients/) — 水色
-- [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/) — 青色
 - [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/) — 水色
 - [約数格子のzeta・Möbius反転](/learn/combinatorics-algebra/divisor-mobius-inversion/) — 青色。概念上の親: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
 - [subset zeta・Möbius変換](/learn/combinatorics-algebra/subset-transforms/) — 青色。概念上の親: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)
+- [鏡像法・reflection principle](/learn/combinatorics-algebra/reflection-principle/) — 青色
 - [monoid exponentiation・連結演算doubling](/learn/combinatorics-algebra/monoid-exponentiation/) — 水色
 - [半環行列・min-plus/max-min遷移](/learn/combinatorics-algebra/semiring-matrix-exponentiation/) — 青色
 - [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/) — 青色（導入）

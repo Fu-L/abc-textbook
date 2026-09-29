@@ -8,16 +8,8 @@ const chapterUnitIds = (chapterId: string): readonly string[] => {
   return chapter.unitIds;
 };
 
-const expectReadingSequence = (chapterId: string, sequence: readonly string[]): void => {
-  const unitIds = chapterUnitIds(chapterId);
-  for (const id of sequence) expect(unitIds, `${id} belongs to ${chapterId}`).toContain(id);
-  for (const [index, current] of sequence.slice(1).entries()) {
-    const previous = sequence[index];
-    if (previous === undefined) throw new Error(`Missing previous Unit at ${String(index)}`);
-    expect(unitIds.indexOf(previous), `${previous} precedes ${current}`).toBeLessThan(
-      unitIds.indexOf(current),
-    );
-  }
+const expectChapterOrder = (chapterId: string, expectedUnitIds: readonly string[]): void => {
+  expect(chapterUnitIds(chapterId), `${chapterId} Unit order`).toEqual(expectedUnitIds);
 };
 
 const expectAdjacentSequence = (chapterId: string, before: string, after: string): void => {
@@ -62,7 +54,7 @@ describe('textbook Unit reading order', () => {
   });
 
   it('introduces range actions immediately after the range monoid summary', () => {
-    expectReadingSequence('unit-chapter-query', [
+    expectChapterOrder('unit-chapter-query', [
       'unit-prefix-aggregate',
       'unit-linked-list-index',
       'unit-ordered-set-heap',
@@ -100,11 +92,12 @@ describe('textbook Unit reading order', () => {
     );
   });
 
-  it('teaches graph fundamentals and Euler structure before standard flow, with advanced flow later', () => {
-    expectReadingSequence('unit-chapter-graph', [
+  it('keeps directional grid scans with graph search and advanced flow later', () => {
+    expectChapterOrder('unit-chapter-graph', [
       'unit-graph-search',
       'unit-state-graph-search',
       'unit-transitive-closure',
+      'unit-directional-grid-effect-scan',
       'unit-bipartite-structure',
       'unit-connectivity',
       'unit-dsu-components',
@@ -131,7 +124,6 @@ describe('textbook Unit reading order', () => {
       'unit-flow-matching',
       'unit-bipartite-matching',
       'unit-max-flow-min-cut',
-      'unit-directional-grid-effect-scan',
       'unit-graph-core-peeling',
       'unit-graph-core',
       'unit-cycle-space-basis',
@@ -147,18 +139,18 @@ describe('textbook Unit reading order', () => {
     ]);
     expectAdjacentSequence(
       'unit-chapter-graph',
-      'unit-max-flow-min-cut',
+      'unit-transitive-closure',
       'unit-directional-grid-effect-scan',
     );
     expectAdjacentSequence(
       'unit-chapter-graph',
       'unit-directional-grid-effect-scan',
-      'unit-graph-core-peeling',
+      'unit-bipartite-structure',
     );
   });
 
   it('establishes the general tree toolkit before implicit complete binary trees', () => {
-    expectReadingSequence('unit-chapter-tree', [
+    expectChapterOrder('unit-chapter-tree', [
       'unit-tree-metric',
       'unit-tree-aggregation',
       'unit-rooted-tree-aggregation',
@@ -180,26 +172,63 @@ describe('textbook Unit reading order', () => {
     ]);
   });
 
-  it('introduces suffix array and LCP before specialized compressed-string topics', () => {
-    expectReadingSequence('unit-chapter-string', [
+  it('completes automaton topics after suffix indexing and before compressed-string topics', () => {
+    expectChapterOrder('unit-chapter-string', [
       'unit-trie-prefix',
       'unit-string-prefix-automata',
       'unit-z-algorithm',
       'unit-string-periodicity',
       'unit-palindrome-radius',
       'unit-suffix-lcp-index',
-      'unit-run-length-dynamics',
-      'unit-recursive-compressed-string',
       'unit-string-automata',
       'unit-finite-pattern-automaton',
       'unit-aho-corasick',
       'unit-automaton-subset-construction',
       'unit-suffix-automaton',
+      'unit-run-length-dynamics',
+      'unit-recursive-compressed-string',
+    ]);
+  });
+
+  it('teaches general counting corrections before the reflection principle', () => {
+    expectChapterOrder('unit-chapter-combinatorics-algebra', [
+      'unit-combinatorial-coefficients',
+      'unit-inclusion-exclusion',
+      'unit-divisor-mobius-inversion',
+      'unit-subset-transforms',
+      'unit-reflection-principle',
+      'unit-monoid-exponentiation',
+      'unit-semiring-matrix-exponentiation',
+      'unit-linear-algebra-xor',
+      'unit-linear-system-rank',
+      'unit-xor-linear-basis',
+      'unit-separable-linear-transform',
+      'unit-prufer-code',
+      'unit-orbit-counting',
+      'unit-deletion-contraction',
+      'unit-determinant-counting',
+      'unit-poset-dilworth-antichain',
+      'unit-matroid-theory',
+      'unit-matroid-greedy',
+      'unit-generating-functions',
+      'unit-labeled-component-decomposition',
+      'unit-polynomial-convolution',
+      'unit-polynomial-taylor-shift',
+      'unit-formal-power-series',
+      'unit-polynomial-multipoint-evaluation',
+      'unit-bostan-mori',
+      'unit-generating-function-coefficients',
+      'unit-relaxed-convolution',
+      'unit-subset-convolution',
+      'unit-euler-circuit-counting',
+      'unit-rsk-young-tableaux',
+      'unit-fps-composition-power-projection',
+      'unit-linear-matroid-intersection',
     ]);
   });
 
   it('places fractional programming before the more specialized PAV topic', () => {
-    expectReadingSequence('unit-chapter-geometry-optimization', [
+    expectChapterOrder('unit-chapter-geometry-optimization', [
       'unit-geometry-primitives',
       'unit-cyclic-order-crossing',
       'unit-convex-geometry',

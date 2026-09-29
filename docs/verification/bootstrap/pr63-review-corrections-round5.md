@@ -22,7 +22,8 @@ rankは1になり、木部分の向きは強制、cycleの向きだけ二通り�
 ABC254
 Ex専用のTag・Outcome・Unitを削除し、交換論Unitの複合例へ置いた。二進操作を木の祖先移動へ写し、深い一致を先に確定する説明を残した。専用語を独立技能へ昇格させず、変換と貪欲選択の正当化を再利用点にした。
 
-組合せ・代数章は、二項係数・包除・反射原理、Möbius反転・部分集合変換・subset
-convolution、Prüfer・Burnside・Dilworth・RSK・削除縮約の順へ並べ直した。前提DAGは変えず、目次とsidebarの編集順だけを変更した。
+組合せ・代数章はround 5時点で、二項係数・包除・反射原理、Möbius反転・部分集合変換・subset
+convolution、Prüfer・Burnside・Dilworth・RSK・削除縮約の順へ並べ直した。後続レビュー (issuecomment-5893837694)で冒頭の5
+Unitを、組合せ係数・包除・約数反転・subset変換・反射原理の順に再調整した。それ以降の相対順と前提DAGは維持し、目次とsidebarだけを更新する。
 
 生成後の分類は204 Tag・224 Outcome・229 Unit、配置は868問。canonical教材・配置・目次を同期した。

@@ -3,7 +3,7 @@ title: "非決定性automatonのsubset construction"
 description: "「非決定性automatonのsubset construction」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 160
+  order: 158
 ---
 
 # 非決定性automatonのsubset construction

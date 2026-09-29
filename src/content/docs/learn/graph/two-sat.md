@@ -3,7 +3,7 @@ title: "2-SAT・含意グラフ"
 description: "「2-SAT・含意グラフ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 103
+  order: 104
 ---
 
 # 2-SAT・含意グラフ

@@ -13,7 +13,7 @@
 | DP           | LISと値域集約は「列DP」の子へ移し、prefix分割・区間DPとの違いを階層で表す。frontier DPは状態設計一般の小節ではなく、グリッド・bitmaskを組み合わせる独立節へ移す。巨大容量knapsackと期待値potentialも通常のDPを越えた状態削減の証明を必要とする独立節へ移す。容量DPを列・区間のまとまりより先に読む。    |
 | グラフ       | 到達性、連結性、最短路、SCC、関数グラフ、flowは共通のモデルごとに小節をまとめる。有向walkの周期、near-tree kernel化、path限定のmatching縮約、一般重み付きmatchingは独立節にする。特にkernel化はcoreだけでなくcycle spaceを先に学ぶ必要がある。                                                          |
 | 木           | rooted DPとrerootingを同じ節に残し、畳み込みを使うheavy-path木DPは独立節へ移す。包含木の構築は既存の木への祖先・path問い合わせとは異なるモデル変換なので独立節にする。Euler順・LCA・HLD・virtual treeは木の索引と分解のまとまりに残す。                                                                 |
-| 文字列       | 接頭辞一致とZ algorithm、有限状態化とAho–Corasick・subset constructionはそれぞれ具体化として維持する。Suffix Automatonはendpos同値類という別の索引表現なので独立節のままとする。圧縮文字列とrun更新を先に学ぶ順序も維持する。                                                                           |
+| 文字列       | 接頭辞一致とZ algorithm、有限状態化とAho–Corasick・subset constructionはそれぞれ具体化として維持する。Suffix Automatonはendpos同値類という別の索引表現なので独立節のままとする。run更新と圧縮文字列の意味上の独立性を保ち、読書順はsuffix index後のautomaton群を学んでから両Unitへ進む。                |
 | 数論         | 法上の基本演算と動的積は同じ節に維持する。CRT・位数・BSGS・floor_sum・有理近似などは、道具を共有していても目的と保証が異なるため兄弟の節として維持する。既存の親子関係が妥当な箇所は変更しない。                                                                                                        |
 | 組合せ・代数 | 約数反転とsubset変換は包除・反転の下に残し、subset convolutionは変換を部品に使う独立の積演算として節にする。online convolution、Bostan–Mori、FPS合成も別の計算モデル・係数抽出・演算として独立させる。matroidのgreedyと線形交差は独立性と交換公理を共通言語にする小節としてまとめ、節全体を後半へ移す。 |
 | 幾何・最適化 | 凸包・半平面、一次元凸性・限界値・slope trick・PAVはそれぞれ共通対象の下に残す。Mongeは遷移行列の四点不等式と最適位置の単調性、Aliensは制約を罰則に変える手法なので、一次元凸最適化の小節から独立させる。                                                                                               |

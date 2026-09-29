@@ -3,7 +3,7 @@ title: "約数格子のzeta・Möbius反転"
 description: "「約数格子のzeta・Möbius反転」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: true
 sidebar:
-  order: 187
+  order: 186
 ---
 
 # 約数格子のzeta・Möbius反転

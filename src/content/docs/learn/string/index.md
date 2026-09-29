@@ -14,7 +14,7 @@ sidebar:
 
 ## 概要
 
-Trieによる接頭辞共有とprefix matching・Z algorithmによる一致区間の再利用から、周期・回文を調べる。次にsuffix arrayとLCPによる標準的な接尾辞索引を学ぶ。その後、runの局所変化と再帰的な圧縮文字列で、明示展開せずに列を扱う。有限状態への同値化、Aho–Corasick、非決定性のsubset constructionを経て、Suffix Automatonで全部分文字列を同値類へ圧縮する。rolling fingerprintはデータ構造章、automaton上の計数はDP章へ接続する。
+Trieによる接頭辞共有とprefix matching・Z algorithmによる一致区間の再利用から、周期・回文を調べ、suffix arrayとLCPによる標準的な接尾辞索引へ進む。次に有限状態への同値化、pattern automaton、Aho–Corasick、subset construction、Suffix Automatonを続けて学ぶ。その後、runの局所変化と再帰的な圧縮文字列で、明示展開せずに列を扱う。rolling fingerprintはデータ構造章、automaton上の計数はDP章へ接続する。
 
 ### 文字列状態表現
 
@@ -48,13 +48,13 @@ Trieによる接頭辞共有とprefix matching・Z algorithmによる一致区�
 - [文字列周期・primitive word](/learn/string/string-periodicity/) — 青色
 - [回文半径と左右対称区間を特定する](/learn/string/palindrome-radius/) — 青色
 - [接尾辞の順序とLCPを索引化する](/learn/string/suffix-lcp-index/) — 青色
-- [run-length状態の動的遷移](/learn/string/run-length-dynamics/) — 青色
-- [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/) — 青色
 - [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/) — 青色（導入）
 - [有限状態automatonの構成](/learn/string/finite-pattern-automaton/) — 青色。概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
 - [Aho–Corasick](/learn/string/aho-corasick/) — 黄色。概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
 - [非決定性automatonのsubset construction](/learn/string/automaton-subset-construction/) — 黄色。概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)
 - [Suffix Automatonで部分文字列集合を表す](/learn/string/suffix-automaton/) — 橙色
+- [run-length状態の動的遷移](/learn/string/run-length-dynamics/) — 青色
+- [圧縮・反復・再帰文字列へ問い合わせる](/learn/string/recursive-compressed-string/) — 青色
 
 ## 問題一覧
 

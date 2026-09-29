@@ -149,8 +149,11 @@ describe('T047–T050 canonical taxonomy materialization', () => {
     expect(textbookIndex('unit-segment-tree-beats')).toBeLessThan(
       textbookIndex('unit-dp-state-design'),
     );
-    expect(textbookIndex('unit-bipartite-structure')).toBe(
+    expect(textbookIndex('unit-directional-grid-effect-scan')).toBe(
       textbookIndex('unit-transitive-closure') + 1,
+    );
+    expect(textbookIndex('unit-bipartite-structure')).toBe(
+      textbookIndex('unit-directional-grid-effect-scan') + 1,
     );
     expect(textbookIndex('unit-bipartite-structure')).toBeLessThan(
       textbookIndex('unit-shortest-path-certificates'),
