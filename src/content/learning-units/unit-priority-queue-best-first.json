@@ -40,13 +40,13 @@
     "abc440-e"
   ],
   "directProblemIds": [
-    "abc297-e",
-    "abc305-e",
-    "abc331-e",
     "abc384-e",
-    "abc440-e",
+    "abc331-e",
+    "abc305-e",
+    "abc297-e",
     "abc391-f",
-    "abc409-f"
+    "abc409-f",
+    "abc440-e"
   ],
   "relatedProblemIds": [
     "abc214-e",

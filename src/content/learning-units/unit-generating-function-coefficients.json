@@ -40,9 +40,9 @@
     "abc279-ex"
   ],
   "directProblemIds": [
+    "abc279-ex",
     "abc222-h",
-    "abc230-h",
-    "abc279-ex"
+    "abc230-h"
   ],
   "relatedProblemIds": [],
   "examples": [],

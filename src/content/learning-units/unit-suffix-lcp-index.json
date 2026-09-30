@@ -39,9 +39,9 @@
     "abc452-g"
   ],
   "directProblemIds": [
-    "abc213-f",
-    "abc272-f",
     "abc362-g",
+    "abc272-f",
+    "abc213-f",
     "abc452-g",
     "abc268-ex",
     "abc280-ex"

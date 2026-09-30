@@ -39,10 +39,10 @@
     "abc451-g"
   ],
   "directProblemIds": [
-    "abc249-g",
     "abc283-g",
     "abc451-g",
-    "abc223-h"
+    "abc223-h",
+    "abc249-g"
   ],
   "relatedProblemIds": [
     "abc236-f"

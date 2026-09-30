@@ -4,6 +4,7 @@ import { CANONICAL_UNIT_CONTENT } from './canonical-unit-content.js';
 import { TEXTBOOK_CHAPTERS, textbookIndex } from './textbook-order.js';
 import { isCurriculumUnit } from './curriculum-unit.js';
 import { unitLearningTarget } from './unit-learning-targets.js';
+import { orderUnitProblemsByDifficulty } from './problem-reading-order.js';
 
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
@@ -619,7 +620,7 @@ export const buildCanonicalTaxonomyMaterialization = (
       const documentPath = learningUnitDocumentPath(unit, unitById);
       const materializedUnit = LearningUnitSchema.parse({
         ...unit,
-        directProblemIds: unit.directProblemIds,
+        directProblemIds: orderUnitProblemsByDifficulty(unit.id, unit.directProblemIds),
         sourceRevisionIds,
         contentPhase: 'canonical_skeleton',
         docPath: documentPath,
@@ -948,7 +949,7 @@ export const validateCanonicalMaterialization = (
     const expectedProjection = Object.fromEntries(
       Object.entries({
         ...expected,
-        directProblemIds: expected.directProblemIds,
+        directProblemIds: orderUnitProblemsByDifficulty(expected.id, expected.directProblemIds),
       }).filter(([field]) => field !== 'sourceRevisionIds'),
     );
     if (canonicalJson(fixedProjection) !== canonicalJson(expectedProjection)) {

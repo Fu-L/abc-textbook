@@ -36,9 +36,9 @@
     "abc457-g"
   ],
   "directProblemIds": [
-    "abc354-g",
     "abc457-g",
-    "abc237-ex"
+    "abc237-ex",
+    "abc354-g"
   ],
   "relatedProblemIds": [],
   "examples": [],

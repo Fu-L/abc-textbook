@@ -50,15 +50,15 @@
   ],
   "directProblemIds": [
     "abc230-e",
-    "abc356-e",
     "abc414-e",
     "abc452-e",
+    "abc356-e",
     "abc240-f",
     "abc293-f",
     "abc318-f",
     "abc253-g",
-    "abc429-g",
-    "abc239-ex"
+    "abc239-ex",
+    "abc429-g"
   ],
   "relatedProblemIds": [
     "abc216-e",

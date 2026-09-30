@@ -36,9 +36,9 @@
     "abc348-f"
   ],
   "directProblemIds": [
+    "abc258-g",
     "abc348-f",
-    "abc221-g",
-    "abc258-g"
+    "abc221-g"
   ],
   "relatedProblemIds": [
     "abc276-ex",

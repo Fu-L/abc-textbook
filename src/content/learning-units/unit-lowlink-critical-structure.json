@@ -36,8 +36,8 @@
     "abc375-g"
   ],
   "directProblemIds": [
-    "abc334-g",
     "abc375-g",
+    "abc334-g",
     "abc301-ex"
   ],
   "relatedProblemIds": [],

@@ -40,15 +40,15 @@ ABC227 Gでは巨大二項係数を実際に作らず、短い分子区間の各
 
 ## 問題一覧
 
-- [ABC259 E「LCM on Whiteboard」](https://atcoder.jp/contests/abc259/tasks/abc259_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
-- [ABC393 E「GCD of Subset」](https://atcoder.jp/contests/abc393/tasks/abc393_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
 - [ABC400 E「Ringo's Favorite Numbers 3」](https://atcoder.jp/contests/abc400/tasks/abc400_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
-- [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
+- [ABC393 E「GCD of Subset」](https://atcoder.jp/contests/abc393/tasks/abc393_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
+- [ABC259 E「LCM on Whiteboard」](https://atcoder.jp/contests/abc259/tasks/abc259_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
 - [ABC445 E「Many LCMs」](https://atcoder.jp/contests/abc445/tasks/abc445_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。既習技能: [法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)（剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。）。
+- [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
+- [ABC412 E「LCM Sequence」](https://atcoder.jp/contests/abc412/tasks/abc412_e) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
 - [ABC384 F「Double Sum 2」](https://atcoder.jp/contests/abc384/tasks/abc384_f) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
 - [ABC227 G「Divisors of Binomial Coefficient」](https://atcoder.jp/contests/abc227/tasks/abc227_g) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。 C(N,K)自体は作らない。K=min(K,N−K)として分子の短い区間[N−K+1,N]を素数ごとの倍数走査で篩い、分母K!の指数を引く。小素数除去後に残る大素数も集計し、Σではなく∏(e_p+1)で約数数を得る。巨大な整数を短い区間の素因数指数へ写すことが主題。
 - [ABC322 G「Two Kinds of Base」](https://atcoder.jp/contests/abc322/tasks/abc322_g) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。既習技能: [交換論から選択順を導く](/learn/modeling/greedy-exchange/)（局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。）。
-- [ABC420 G「sqrt(n²+n+X)」](https://atcoder.jp/contests/abc420/tasks/abc420_g) — 主題: [素因数分解と約数構造](/learn/number-theory/prime-divisor/)（整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 

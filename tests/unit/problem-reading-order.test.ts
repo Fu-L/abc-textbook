@@ -6,20 +6,24 @@ import {
 
 describe('editorial problem difficulty order', () => {
   it('uses the full editorial order independently of incoming order', () => {
-    const expected = ['abc294-g', 'abc267-f', 'abc438-f', 'abc298-ex', 'abc329-g'];
+    const expected = ['abc351-f', 'abc221-e', 'abc276-f', 'abc461-e', 'abc256-f', 'abc287-g'];
     expect(
-      orderUnitProblemsByDifficulty('unit-tree-ancestor-lca', [...expected].reverse()),
+      orderUnitProblemsByDifficulty('unit-weighted-prefix-fenwick', [...expected].reverse()),
     ).toEqual(expected);
   });
 
   it('preserves content-based decisions across slots and close measured difficulties', () => {
-    // 294 G is a standard LCA/distance query; 438 F combines path constraints and counting.
+    // 216 G has nonnegative prefix constraints; 404 G also needs negative-cycle detection.
     // 351 G has fixed-root affine composition; 460 G also needs reversed cluster DP.
     expect(orderUnitProblemsByDifficulty('unit-static-top-tree', ['abc460-g', 'abc351-g'])).toEqual(
       ['abc351-g', 'abc460-g'],
     );
+    expect(UNIT_PROBLEM_READING_ORDER['unit-difference-constraints']).toEqual([
+      'abc216-g',
+      'abc404-g',
+    ]);
     expect(UNIT_PROBLEM_READING_ORDER['unit-dsu-components']?.[0]).toBe('abc420-e');
-    expect(UNIT_PROBLEM_READING_ORDER['unit-dsu-components']?.at(-1)).toBe('abc440-g');
+    expect(UNIT_PROBLEM_READING_ORDER['unit-dsu-components']?.at(-1)).toBe('abc279-f');
   });
 
   it('does not silently append, drop, duplicate, or mechanically sort unedited problems', () => {

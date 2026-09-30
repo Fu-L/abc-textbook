@@ -47,18 +47,18 @@
     "abc463-f"
   ],
   "directProblemIds": [
+    "abc462-e",
     "abc242-e",
     "abc250-e",
-    "abc462-e",
-    "abc219-f",
-    "abc296-f",
     "abc323-f",
-    "abc463-f",
+    "abc296-f",
     "abc302-g",
+    "abc446-g",
+    "abc463-f",
     "abc313-g",
-    "abc382-g",
+    "abc219-f",
     "abc427-g",
-    "abc446-g"
+    "abc382-g"
   ],
   "relatedProblemIds": [
     "abc218-h",

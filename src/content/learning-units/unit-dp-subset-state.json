@@ -50,19 +50,19 @@
   "directProblemIds": [
     "abc274-e",
     "abc301-e",
-    "abc332-e",
-    "abc232-f",
-    "abc310-f",
-    "abc319-f",
     "abc338-f",
-    "abc352-f",
     "abc381-f",
+    "abc232-f",
+    "abc332-e",
     "abc425-f",
-    "abc432-f",
-    "abc328-g",
+    "abc310-f",
+    "abc352-f",
     "abc343-g",
+    "abc411-g",
+    "abc328-g",
     "abc396-g",
-    "abc411-g"
+    "abc432-f",
+    "abc319-f"
   ],
   "relatedProblemIds": [
     "abc213-g",

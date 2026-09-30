@@ -41,12 +41,12 @@
     "abc432-g"
   ],
   "directProblemIds": [
-    "abc291-g",
     "abc392-g",
-    "abc409-g",
+    "abc291-g",
     "abc432-g",
-    "abc265-ex",
-    "abc307-ex"
+    "abc409-g",
+    "abc307-ex",
+    "abc265-ex"
   ],
   "relatedProblemIds": [
     "abc225-h",

@@ -42,8 +42,8 @@ Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え
 
 ## 問題一覧
 
-- [ABC333 G「Nearest Fraction」](https://atcoder.jp/contests/abc333/tasks/abc333_g) — 主題: [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)（Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。）。
 - [ABC408 G「A/B < p/q < C/D」](https://atcoder.jp/contests/abc408/tasks/abc408_g) — 主題: [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)（Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。）。
+- [ABC333 G「Nearest Fraction」](https://atcoder.jp/contests/abc333/tasks/abc333_g) — 主題: [連分数・Stern–Brocotで有理近似する](/learn/number-theory/rational-approximation/)（Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 

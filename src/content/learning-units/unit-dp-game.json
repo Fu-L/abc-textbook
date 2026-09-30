@@ -41,12 +41,12 @@
   ],
   "directProblemIds": [
     "abc354-e",
-    "abc278-f",
     "abc368-f",
+    "abc278-f",
     "abc380-f",
-    "abc255-g",
+    "abc297-g",
     "abc278-g",
-    "abc297-g"
+    "abc255-g"
   ],
   "relatedProblemIds": [
     "abc212-h",

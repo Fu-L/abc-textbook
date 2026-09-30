@@ -20,6 +20,7 @@ import {
 import { loadFinalTaxonomySourceContext } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
 import { TEXTBOOK_CHAPTERS, textbookIndex } from '../../src/lib/taxonomy/textbook-order.js';
+import { orderUnitProblemsByDifficulty } from '../../src/lib/taxonomy/problem-reading-order.js';
 import {
   UNIT_LEARNING_TARGETS,
   unitLearningTarget,
@@ -136,6 +137,9 @@ describe('T047–T050 canonical taxonomy materialization', () => {
         if (accepted === undefined) throw new Error(`Missing accepted Unit: ${id}`);
         expect([...(unit.directProblemIds ?? [])].sort()).toEqual(
           [...accepted.directProblemIds].sort(),
+        );
+        expect(unit.directProblemIds).toEqual(
+          orderUnitProblemsByDifficulty(id, accepted.directProblemIds),
         );
         if (accepted.directProblemIds.length > 0) {
           expect(document).toContain('\n- [');

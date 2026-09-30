@@ -41,14 +41,14 @@
     "abc452-f"
   ],
   "directProblemIds": [
-    "abc258-e",
-    "abc260-e",
     "abc294-e",
     "abc444-e",
+    "abc258-e",
+    "abc452-f",
+    "abc260-e",
     "abc250-f",
-    "abc337-f",
     "abc370-f",
-    "abc452-f"
+    "abc337-f"
   ],
   "relatedProblemIds": [
     "abc215-f",

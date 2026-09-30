@@ -39,11 +39,11 @@
     "abc466-e"
   ],
   "directProblemIds": [
-    "abc285-e",
     "abc466-e",
-    "abc230-f",
+    "abc285-e",
     "abc288-f",
     "abc374-f",
+    "abc230-f",
     "abc262-ex"
   ],
   "relatedProblemIds": [

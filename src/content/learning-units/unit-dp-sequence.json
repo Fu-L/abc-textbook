@@ -58,11 +58,11 @@
   "directProblemIds": [
     "abc327-e",
     "abc362-e",
+    "abc315-f",
+    "abc386-f",
     "abc214-f",
     "abc238-f",
-    "abc299-f",
-    "abc315-f",
-    "abc386-f"
+    "abc299-f"
   ],
   "relatedProblemIds": [
     "abc225-f",

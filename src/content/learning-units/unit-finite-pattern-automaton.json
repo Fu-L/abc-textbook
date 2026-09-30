@@ -37,9 +37,9 @@
     "abc418-g"
   ],
   "directProblemIds": [
-    "abc301-f",
-    "abc264-g",
     "abc305-g",
+    "abc264-g",
+    "abc301-f",
     "abc418-g"
   ],
   "relatedProblemIds": [],

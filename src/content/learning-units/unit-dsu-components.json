@@ -45,15 +45,15 @@
     "abc434-e"
   ],
   "directProblemIds": [
-    "abc238-e",
-    "abc276-e",
+    "abc420-e",
     "abc304-e",
-    "abc335-e",
     "abc372-e",
+    "abc276-e",
     "abc392-e",
     "abc401-e",
-    "abc420-e",
     "abc434-e",
+    "abc335-e",
+    "abc238-e",
     "abc279-f"
   ],
   "relatedProblemIds": [
