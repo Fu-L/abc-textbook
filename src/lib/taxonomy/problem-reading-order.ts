@@ -120,13 +120,14 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc370-f',
     'abc337-f',
   ],
-  // 最大桁数やheapでの候補選択より、循環合同・matching・DPを伴う交換論の発見を重く見る。
+  // 257 Eの桁数固定と算術判定は417 Eの使用済み頂点を避ける経路判定より軽い。
+  // 252 Fは逆向きのモデル化とHuffmanの証明を要するため、単純な選択群の後、433 Eの制約付き構成の前に置く。
   'unit-greedy-exchange': [
     'abc447-e',
     'abc376-e',
     'abc388-e',
-    'abc417-e',
     'abc257-e',
+    'abc417-e',
     'abc404-e',
     'abc308-f',
     'abc385-e',
@@ -135,8 +136,8 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc298-f',
     'abc312-f',
     'abc245-e',
-    'abc433-e',
     'abc252-f',
+    'abc433-e',
     'abc225-e',
     'abc214-e',
     'abc268-f',
@@ -260,12 +261,13 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc256-f',
     'abc287-g',
   ],
+  // 223 Fは括弧列の二成分要約を直接導ける。415 Fのrun境界の多項目管理、424 Fの弦から括弧列への変換を後に置く。
   'unit-range-monoid-aggregation': [
     'abc432-e',
     'abc343-f',
+    'abc223-f',
     'abc415-f',
     'abc424-f',
-    'abc223-f',
     'abc331-f',
     'abc285-f',
     'abc429-f',
@@ -344,7 +346,8 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc440-g',
     'abc313-ex',
   ],
-  'unit-dp-grid-table': ['abc415-e', 'abc311-e', 'abc443-e'],
+  // 311 Eの三近傍minと正方形数の対応より、415 Eの必要額の逆算、443 Eの壁破壊による到達更新が難しい。
+  'unit-dp-grid-table': ['abc311-e', 'abc415-e', 'abc443-e'],
   'unit-dp-subset-resource': [
     'abc410-e',
     'abc322-e',
@@ -452,13 +455,14 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc255-g',
   ],
   'unit-dp-game-value': ['abc349-e', 'abc303-g'],
+  // 224 Eは同値batchと行・列の最大値で足りる。408 Fは高さ差による解禁と位置区間のsegment tree照会も必要。
   'unit-dp-transition-optimization': [
     'abc253-e',
     'abc442-f',
     'abc212-e',
     'abc370-e',
-    'abc408-f',
     'abc224-e',
+    'abc408-f',
     'abc372-f',
     'abc358-g',
     'abc224-f',
@@ -544,10 +548,11 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
   'unit-dag-topological-processing': ['abc315-e', 'abc291-e', 'abc277-f'],
   'unit-directed-core-peeling': ['abc456-e', 'abc245-f'],
   'unit-two-sat': ['abc277-ex'],
+  // 296 Eはpeeling後の頂点数だけ。256 Eはさらに各cycleで最小費用だけ払う最適性の証明を要する。
   'unit-functional-graph-decomposition': [
     'abc436-e',
-    'abc256-e',
     'abc296-e',
+    'abc256-e',
     'abc241-e',
     'abc357-e',
     'abc377-e',
@@ -579,15 +584,16 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc317-g',
     'abc215-h',
   ],
-  // 頂点分割のpath判定・cut復元から、割当容量、目的関数のcut化、閾値変数や別DPとの複合へ。
+  // 頂点分割と割当容量、利益・含意のcut化から、閾値変数や別DPとの複合へ。
+  // 263 Gの採用案は例外pair数を固定する最大流に離散凹性と整数三分探索を重ねるため、326 G・225 Gより後に置く。
   'unit-max-flow-min-cut': [
     'abc318-g',
     'abc239-g',
     'abc241-g',
     'abc259-g',
-    'abc263-g',
     'abc326-g',
     'abc225-g',
+    'abc263-g',
     'abc332-g',
     'abc437-g',
     'abc347-g',
@@ -756,12 +762,13 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
   // 457 Gは二座標の鎖分解。237 Exは文字列の包含をmatchingへ、354 Gは重みを容量へ移す必要がある。
   'unit-poset-dilworth-antichain': ['abc457-g', 'abc237-ex', 'abc354-g'],
   'unit-matroid-greedy': ['abc236-f'],
+  // 352 G・267 Ex・385 Gは選択や挿入DPを局所因子の積へ写す。436 Gは商・余りの再帰と作用する係数列の縮約まで導く。
   'unit-generating-functions': [
     'abc422-g',
-    'abc436-g',
     'abc352-g',
     'abc267-ex',
     'abc385-g',
+    'abc436-g',
     'abc390-g',
     'abc449-g',
     'abc247-ex',
@@ -773,9 +780,10 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc345-g',
     'abc317-ex',
   ],
+  // 213 Gは内部辺の自由選択とanchor成分の抽出。321 Gはさらに端子数の釣合い、matching数、成分indicatorの期待値を導く。
   'unit-labeled-component-decomposition': [
-    'abc321-g',
     'abc213-g',
+    'abc321-g',
     'abc318-ex',
     'abc386-g',
     'abc327-g',
@@ -836,7 +844,8 @@ export const UNIT_PROBLEM_READING_ORDER: Readonly<Record<string, readonly string
     'abc369-g',
     'abc383-g',
   ],
-  'unit-slope-trick': ['abc250-g', 'abc458-g', 'abc217-h', 'abc406-g', 'abc275-ex'],
+  // 217 Hは片側hingeと移動幅の二heap更新。458 Gはさらに可行domainのtrim、整数交点、脱出遷移と人数探索を要する。
+  'unit-slope-trick': ['abc250-g', 'abc217-h', 'abc458-g', 'abc406-g', 'abc275-ex'],
   'unit-fractional-parametric-search': ['abc324-f', 'abc294-f', 'abc236-e'],
   'unit-isotonic-regression': ['abc459-f'],
   // 8-state DPによるpenalty判定から、Monge最適化、日数の凸包、循環流と有理数探索の複合へ。

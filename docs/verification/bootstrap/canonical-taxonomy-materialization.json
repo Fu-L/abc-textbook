@@ -64,10 +64,10 @@
   "digests": {
     "tags": "d6b2820077125301a6806b876a53b5f2f5270b5ae7e04b8e4dee5d2116787a45",
     "learningOutcomes": "f4f75993b64f6f33e11918d4ec3c52b6cc9365dfa2c960d21ab949306bd72ae7",
-    "learningUnits": "1ceefeaff8b5cbb652c01947dc5819e450868af8ac917befca28a352b5e87b71",
-    "learningDocuments": "4da123c0ecaa22cf4803eb5d2509b792862a6cb610ae94de0c7b34b4ce04d081",
+    "learningUnits": "6d05b37a2441ccc367a2d2b70f8828a070d959c3260e0fde35e4a0ebe6261603",
+    "learningDocuments": "9c3f444cf407a0181a0a3f43363cac4cbece6b1f634c696d4179621fd5459d01",
     "learningPrerequisitesDigest": "f628565df2d845239e5b98a4a556c34678ab19cd15db87b59ed7dd23dd64be6d",
     "problemPlacementPolicyDigest": "0c38b48b4bd88529ef443f52839888af6667502c63eb19245a64c85796a89787"
   },
-  "materializationDigest": "cc3d06e1b4b0aa32d1c26ad11b2e5ca44478c8aaa3af6d37e280666e7fe41f56"
+  "materializationDigest": "42e3bd925a8ae229bea5c64efd01c0bb5912eebb9eca936cdd145c789956d3aa"
 }
