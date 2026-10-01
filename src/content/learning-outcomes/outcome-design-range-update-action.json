@@ -1,0 +1,33 @@
+{
+  "id": "outcome-design-range-update-action",
+  "statement": "更新作用の合成順と要約への適用を定義し、遅延評価で保てる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "scopeIds": [
+    "abc237-g",
+    "abc248-ex",
+    "abc256-ex",
+    "abc262-ex",
+    "abc265-g",
+    "abc322-f",
+    "abc327-f",
+    "abc332-f",
+    "abc340-e",
+    "abc346-g",
+    "abc357-f",
+    "abc360-f",
+    "abc363-g",
+    "abc371-f",
+    "abc382-f",
+    "abc389-f",
+    "abc397-f",
+    "abc417-f",
+    "abc426-f",
+    "abc441-g",
+    "abc450-f",
+    "abc455-f",
+    "tag-lazy-segment-action",
+    "unit-range-actions"
+  ]
+}

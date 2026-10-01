@@ -1,0 +1,39 @@
+{
+  "id": "unit-static-sorted-range-index",
+  "kind": "subsection",
+  "title": "静的sorted range index・Merge Sort Tree",
+  "parentId": "unit-segment-tree-canonical-decomposition",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "静的sorted range index・Merge Sort Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+    "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8"
+  ],
+  "tagIds": [
+    "tag-static-sorted-range-index"
+  ],
+  "ownedTagIds": [
+    "tag-static-sorted-range-index"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-static-sorted-range-index"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-static-sorted-range-index"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/static-sorted-range-index.md",
+  "problemIds": [
+    "abc339-g"
+  ],
+  "directProblemIds": [
+    "abc339-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "Segment Treeのcanonical区間分解で得た考え方と実装を再利用し、静的sorted range index・Merge Sort Treeの発動条件・正当化・境界を重複なく学ぶ。"
+}

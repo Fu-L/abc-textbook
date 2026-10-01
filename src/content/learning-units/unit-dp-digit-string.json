@@ -1,0 +1,52 @@
+{
+  "id": "unit-dp-digit-string",
+  "kind": "section",
+  "title": "接頭辞から更新する有限状態DP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "整除鎖・加算式のcarryだけを下位桁から渡すDP、および接頭辞状態を使わない一般の表DP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf",
+    "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719",
+    "source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227",
+    "source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e",
+    "source-abc288-editorial-5663-0e59e0a47ff7c846b431cd85eb6f5669dc38c4243c36f811296d18c5514da0b9",
+    "source-abc288-ex-problem-6f21ea4475a77f8e377b32b767a6c52e5b5bb43155a45d4a23887fd82fa1664c"
+  ],
+  "tagIds": [
+    "tag-automaton-dp",
+    "tag-digit-dp"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-count-prefix-constrained-objects",
+    "outcome-run-dp-on-finite-automaton"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-digit-string.md",
+  "problemIds": [
+    "abc235-f",
+    "abc288-ex",
+    "abc317-f",
+    "abc336-e",
+    "abc406-e",
+    "abc465-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc228-g",
+    "abc301-f",
+    "abc305-g",
+    "abc391-g",
+    "abc418-g",
+    "abc419-f",
+    "abc458-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態設計を土台に、接頭辞から決まる有限統計を更新するという共通像を作り、数値上限の桁DPと有限automaton DPの境界を比較する。"
+}

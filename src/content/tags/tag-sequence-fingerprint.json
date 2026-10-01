@@ -1,0 +1,46 @@
+{
+  "id": "tag-sequence-fingerprint",
+  "name": "列・文字列のrolling fingerprint",
+  "definition": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix hash",
+      "列",
+      "部分文字列"
+    ],
+    "triggerPatterns": [
+      "LCP query",
+      "substring equality",
+      "連結hash"
+    ],
+    "invariantPatterns": [
+      "衝突確率",
+      "順序付き連結則"
+    ],
+    "goalPatterns": [
+      "LCP",
+      "列一致"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compare-sequences-by-rolling-fingerprint"
+  ],
+  "representativeProblemIds": [
+    "abc274-ex",
+    "abc331-f"
+  ],
+  "aliases": [
+    "polynomial hash",
+    "rolling hash",
+    "ローリングハッシュ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

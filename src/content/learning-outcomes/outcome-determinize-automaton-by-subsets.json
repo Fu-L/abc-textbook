@@ -1,0 +1,12 @@
+{
+  "id": "outcome-determinize-automaton-by-subsets",
+  "statement": "同時に存在し得るNFA状態集合を一つのDFA状態とし、文字ごとの集合遷移と受理条件を構成する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-build-finite-string-automaton"
+  ],
+  "scopeIds": [
+    "abc228-g",
+    "tag-automaton-subset-construction",
+    "unit-automaton-subset-construction"
+  ]
+}

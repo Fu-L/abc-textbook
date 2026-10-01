@@ -1,0 +1,62 @@
+{
+  "id": "unit-ordered-interval-partition",
+  "kind": "section",
+  "title": "端点更新型のrun分割管理",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
+    "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0",
+    "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+    "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4",
+    "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+    "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
+  ],
+  "tagIds": [
+    "tag-dynamic-interval-union",
+    "tag-endpoint-run-partition",
+    "tag-ordered-interval-partition"
+  ],
+  "ownedTagIds": [
+    "tag-dynamic-interval-union",
+    "tag-endpoint-run-partition",
+    "tag-ordered-interval-partition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
+    "outcome-maintain-ordered-interval-partition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
+    "outcome-maintain-ordered-interval-partition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/ordered-interval-partition.md",
+  "problemIds": [
+    "abc255-ex",
+    "abc380-e",
+    "abc435-e",
+    "abc465-g"
+  ],
+  "directProblemIds": [
+    "abc435-e",
+    "abc380-e",
+    "abc255-ex",
+    "abc465-g"
+  ],
+  "relatedProblemIds": [
+    "abc251-ex",
+    "abc256-ex",
+    "abc428-f",
+    "abc449-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

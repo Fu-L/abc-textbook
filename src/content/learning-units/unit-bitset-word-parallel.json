@@ -1,0 +1,52 @@
+{
+  "id": "unit-bitset-word-parallel",
+  "kind": "section",
+  "title": "bitsetで集合演算をword並列化する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "集合状態そのものを一つずつ遷移するbitmask DP、および単一整数のbit演算だけで完結する処理。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b",
+    "source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358",
+    "source-abc258-editorial-4234-240b1b29f114017fcb1f5f7d99967afd1205e4555fdf9ee798946f1e4416589a",
+    "source-abc258-g-problem-c594589a21884cf181b9544d824b13fbdaea2df8db597d58143f8efd69411998",
+    "source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c",
+    "source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43"
+  ],
+  "tagIds": [
+    "tag-bitset-word-parallel"
+  ],
+  "ownedTagIds": [
+    "tag-bitset-word-parallel"
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-set-operations-with-bitsets"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-accelerate-set-operations-with-bitsets"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/bitset-word-parallel.md",
+  "problemIds": [
+    "abc221-g",
+    "abc258-g",
+    "abc348-f"
+  ],
+  "directProblemIds": [
+    "abc258-g",
+    "abc348-f",
+    "abc221-g"
+  ],
+  "relatedProblemIds": [
+    "abc276-ex",
+    "abc287-ex",
+    "abc366-g",
+    "abc430-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "集合の交差・和・shiftを機械語word単位で同時処理し、要素ごとの走査をword幅だけ短縮する。"
+}

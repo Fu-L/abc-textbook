@@ -1,0 +1,51 @@
+{
+  "id": "tag-cartesian-tree",
+  "name": "Cartesian treeによる区間極値分解",
+  "definition": "配列順と値のheap順を同時に保つ木を構成し、区間極値を根とする再帰分割へ変換する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-monotone-stack-queue"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "区間最大",
+      "区間最小",
+      "木",
+      "配列"
+    ],
+    "triggerPatterns": [
+      "単調stackで親",
+      "大小関係を木",
+      "最小値の位置で分割"
+    ],
+    "invariantPatterns": [
+      "heap order",
+      "inorderが元の順序",
+      "部分木が連続区間"
+    ],
+    "goalPatterns": [
+      "区間を再帰分割",
+      "最近小さい要素",
+      "部分問題の合成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-cartesian-tree-decomposition"
+  ],
+  "representativeProblemIds": [
+    "abc275-ex",
+    "abc420-f"
+  ],
+  "aliases": [
+    "Cartesian tree",
+    "min Cartesian tree",
+    "デカルト木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

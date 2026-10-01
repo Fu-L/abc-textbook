@@ -1,0 +1,10 @@
+{
+  "id": "outcome-build-laminar-interval-containment-tree",
+  "statement": "laminar区間の開閉端点をstackで処理し、直接包含関係と各点の最小包含区間を木として構築して、包含差分を木上pathへ変換できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc405-f",
+    "tag-laminar-interval-containment-tree",
+    "unit-laminar-interval-containment-tree"
+  ]
+}

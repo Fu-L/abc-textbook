@@ -1,0 +1,66 @@
+{
+  "id": "tag-cycle-space-basis",
+  "name": "cycle space・fundamental cycle basis",
+  "definition": "無向graphで全頂点が偶数次数となる辺集合をF_2上のcycle space C(G)として扱い、連結成分数C、spanning forest F、各non-tree edge eが作る唯一のcycleからfundamental cycle basisとdim C(G)=M-N+Cを導く。連結graphではC=1なのでM-N+1となる。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "non-tree edge",
+      "s-t path",
+      "spanning forest",
+      "無向graph",
+      "辺集合",
+      "連結成分"
+    ],
+    "triggerPatterns": [
+      "M-N\\+Cが小さい",
+      "cycle族",
+      "simple path数を抑える",
+      "辺集合をXOR"
+    ],
+    "invariantPatterns": [
+      "P XOR P_0",
+      "dim C\\(G\\)=M-N\\+C",
+      "全頂点の次数が偶数",
+      "対称差に関して閉じる"
+    ],
+    "goalPatterns": [
+      "cycle basis構築",
+      "cycle空間の列挙",
+      "simple path数の上界"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-degree-parity-subgraph",
+      "type": "analogy",
+      "rationale": "cycle spaceはincidence境界が0の辺集合全体であり、奇数次数頂点集合Tを固定したT-joinの解集合は、解が存在すればcycle spaceのaffine cosetになる。特に同じTを実現する二つの辺集合のXORはcycle spaceに属する。"
+    },
+    {
+      "tagId": "tag-xor-linear-basis",
+      "type": "analogy",
+      "rationale": "辺集合の対称差と整数のbitwise XORはどちらもF_2上の線形結合・独立性・基底で整理できるが、cycle spaceは偶数次数制約とfundamental cycleに固有の構成を持つ。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-map-graph-cycle-xor-to-span",
+    "outcome-use-cycle-space-basis"
+  ],
+  "representativeProblemIds": [
+    "abc419-g",
+    "abc451-g"
+  ],
+  "aliases": [
+    "cycle space",
+    "fundamental cycle basis",
+    "サイクル基底",
+    "サイクル空間"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

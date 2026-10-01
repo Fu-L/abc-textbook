@@ -1,0 +1,43 @@
+{
+  "id": "unit-graph-core",
+  "kind": "subsection",
+  "title": "単一サイクル成分とgraph core",
+  "parentId": "unit-graph-core-peeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "単一サイクル成分とgraph coreの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc226-e-problem-3ca6433e5ec0f6996502c33674b13259def0590aeea6689d74a414ab33bbf677",
+    "source-abc226-editorial-2889-a9c5442114a34c37728bcec59eeeb20ea9188ddb5bd549a4dbcfec1bef7ea180",
+    "source-abc266-editorial-4698-46499cc8514943a5473d140e1c568a02ae8abf14da72fdb07742342c3d5c219c",
+    "source-abc266-f-problem-5992d9a9ee4e8b9a4ce33e0323027d0a7fde7d95662c312f5641ce75e3fada26"
+  ],
+  "tagIds": [
+    "tag-graph-core-peeling"
+  ],
+  "ownedTagIds": [
+    "tag-graph-core-peeling"
+  ],
+  "learningOutcomeIds": [
+    "outcome-peel-graph-core"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-peel-graph-core"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/graph-core.md",
+  "problemIds": [
+    "abc226-e",
+    "abc266-f"
+  ],
+  "directProblemIds": [
+    "abc226-e",
+    "abc266-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "連結成分の辺数と頂点数からcycle rankを判定し、必要なら葉を反復削除してcycle coreと削除順を得る。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

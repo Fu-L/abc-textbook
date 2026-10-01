@@ -1,0 +1,69 @@
+{
+  "id": "unit-priority-queue-best-first",
+  "kind": "subsection",
+  "title": "priority queue・best-first列挙",
+  "parentId": "unit-ordered-set-heap",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+    "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028",
+    "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+    "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70"
+  ],
+  "tagIds": [
+    "tag-priority-queue-best-first"
+  ],
+  "ownedTagIds": [
+    "tag-priority-queue-best-first"
+  ],
+  "learningOutcomeIds": [
+    "outcome-enumerate-frontier-best-first"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-enumerate-frontier-best-first"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/priority-queue-best-first.md",
+  "problemIds": [
+    "abc297-e",
+    "abc305-e",
+    "abc331-e",
+    "abc384-e",
+    "abc391-f",
+    "abc409-f",
+    "abc440-e"
+  ],
+  "directProblemIds": [
+    "abc384-e",
+    "abc331-e",
+    "abc305-e",
+    "abc297-e",
+    "abc391-f",
+    "abc409-f",
+    "abc440-e"
+  ],
+  "relatedProblemIds": [
+    "abc214-e",
+    "abc217-e",
+    "abc218-h",
+    "abc249-f",
+    "abc250-g",
+    "abc252-f",
+    "abc307-f",
+    "abc319-f",
+    "abc320-e",
+    "abc359-f",
+    "abc373-f",
+    "abc376-g",
+    "abc407-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

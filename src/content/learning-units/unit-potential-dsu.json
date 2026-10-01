@@ -1,0 +1,43 @@
+{
+  "id": "unit-potential-dsu",
+  "kind": "subsection",
+  "title": "potential・weighted DSU",
+  "parentId": "unit-connectivity",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28",
+    "source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58",
+    "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6",
+    "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
+  ],
+  "tagIds": [
+    "tag-potential-dsu"
+  ],
+  "ownedTagIds": [
+    "tag-potential-dsu"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-potential-differences"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-potential-differences"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/potential-dsu.md",
+  "problemIds": [
+    "abc328-f"
+  ],
+  "directProblemIds": [
+    "abc328-f"
+  ],
+  "relatedProblemIds": [
+    "abc466-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DSUによる連結成分管理・縮約・静的graph等式制約のpotential伝播で得た考え方と実装を再利用し、potential・weighted DSUの発動条件・正当化・境界を重複なく学ぶ。"
+}

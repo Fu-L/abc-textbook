@@ -1,0 +1,60 @@
+{
+  "id": "tag-interactive-protocol",
+  "name": "対話protocolとquery設計",
+  "definition": "judgeとの問い合わせ応答または交互手番をprotocolどおり実行し、query制約を守るか合法な応答手を返す。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "judge",
+      "query",
+      "問い合わせ回数",
+      "応答"
+    ],
+    "triggerPatterns": [
+      "flush",
+      "問い合わせを出力",
+      "対話",
+      "応答を読む"
+    ],
+    "invariantPatterns": [
+      "protocol",
+      "回数上限",
+      "応答に応じて",
+      "終了宣言"
+    ],
+    "goalPatterns": [
+      "query数を抑える",
+      "情報を特定",
+      "答えを宣言"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-information-theoretic-query-design",
+      "type": "often_combined",
+      "rationale": "query回数の情報量下界とcodeword構成を、実際の対話protocolへ落とすときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-interactive-query-protocol"
+  ],
+  "representativeProblemIds": [
+    "abc282-f",
+    "abc305-f",
+    "abc355-e",
+    "abc398-e"
+  ],
+  "aliases": [
+    "interactive problem",
+    "query protocol",
+    "インタラクティブ問題",
+    "対話型問題"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

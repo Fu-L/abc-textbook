@@ -1,0 +1,15 @@
+{
+  "id": "outcome-design-and-bound-randomized-algorithm",
+  "statement": "乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc272-g",
+    "abc339-f",
+    "abc367-f",
+    "abc399-g",
+    "abc422-e",
+    "abc455-g",
+    "tag-randomized-algorithm",
+    "unit-randomized-algorithms"
+  ]
+}

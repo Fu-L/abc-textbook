@@ -1,0 +1,54 @@
+{
+  "id": "tag-formal-power-series",
+  "name": "形式的べき級数の基本演算",
+  "definition": "定数項条件と次数打切りを確認し、Newton iterationでinverse・log・exp等を畳み込みへ還元する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-convolution",
+    "tag-generating-functions"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "constant term",
+      "formal series",
+      "truncation degree"
+    ],
+    "triggerPatterns": [
+      "inverse/log/exp",
+      "次数を倍増"
+    ],
+    "invariantPatterns": [
+      "Newton誤差次数",
+      "mod x\\^n"
+    ],
+    "goalPatterns": [
+      "FPS演算"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convolution",
+      "type": "implementation_substrate",
+      "rationale": "Newton iterationの各段で必要な積・逆数更新を高速多項式畳み込みで実装する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-formal-power-series-operations"
+  ],
+  "representativeProblemIds": [
+    "abc318-ex",
+    "abc387-g"
+  ],
+  "aliases": [
+    "FPS",
+    "Newton iteration",
+    "formal power series",
+    "形式的べき級数"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

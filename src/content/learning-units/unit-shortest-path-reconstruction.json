@@ -1,0 +1,47 @@
+{
+  "id": "unit-shortest-path-reconstruction",
+  "kind": "subsection",
+  "title": "最短路を証明する木・経路の復元",
+  "parentId": "unit-shortest-path-certificates",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "最短路を証明する木・経路の復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+    "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+    "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
+    "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
+  ],
+  "tagIds": [
+    "tag-shortest-path-certificate"
+  ],
+  "ownedTagIds": [
+    "tag-shortest-path-certificate"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-shortest-path-certificate"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-shortest-path-certificate"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
+  "problemIds": [
+    "abc252-e"
+  ],
+  "directProblemIds": [
+    "abc252-e"
+  ],
+  "relatedProblemIds": [
+    "abc218-f",
+    "abc308-ex",
+    "abc355-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "最短距離を計算できるようになった後、距離等式を満たす親辺を記録して最短路木・実現経路を復元する。"
+}

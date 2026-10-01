@@ -50,7 +50,7 @@
       }
     ],
     "algorithmConnection": {
-      "text": "素因数指数の Z/3Z ベクトルを 64 bit XOR 空間へランダム線形写像し、prefix fingerprint の等値比較として range product の完全三乗性を判定する。",
+      "text": "各素数pについて全prefixを通じた出現位相を管理し、出現ごとにa_p,b_p,a_p XOR b_pを周期的にXORする。累積指数の剰余0,1,2はそれぞれ0,a_p,a_p XOR b_pに符号化され、区間積の完全三乗性は両端prefixの状態の等値判定になる。これは状態のランダム符号化であり、Z/3ZからXOR群への準同型ではない。異なる固定prefix状態の差にはa_p,b_pの少なくとも一方が奇数回現れる素数pがあり、他の乱数を固定すると一様な64 bit値が残るので衝突確率は2^(-64)。乱数と独立なQ個のquery全体ではunion boundでQ/2^64以下となる。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },

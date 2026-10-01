@@ -1,0 +1,46 @@
+{
+  "id": "tag-euler-circuit-counting",
+  "name": "BEST定理によるEuler circuit数え上げ",
+  "definition": "有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-determinant-counting",
+    "tag-euler-trail-circuit"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "arborescence",
+      "出次数",
+      "有向Euler graph"
+    ],
+    "triggerPatterns": [
+      "Euler閉路の個数",
+      "de Bruijn"
+    ],
+    "invariantPatterns": [
+      "出辺順列",
+      "行列木"
+    ],
+    "goalPatterns": [
+      "Euler circuit数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-count-euler-circuits-by-best"
+  ],
+  "representativeProblemIds": [
+    "abc336-g"
+  ],
+  "aliases": [
+    "BEST theorem",
+    "BEST定理",
+    "Euler circuit counting"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,43 @@
+{
+  "id": "unit-dsu-merge-tree",
+  "kind": "section",
+  "title": "DSU merge tree・Kruskal reconstruction tree",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
+    "source-abc314-editorial-6953-8d9d67c157a5e69183696230ba93d5758a1bae268d9ba90467dd588d2fe445bc",
+    "source-abc314-f-problem-555f054e48f0e643e9d3821fa7a3fd0357becc1b01b7f97210133d00bf3e3618"
+  ],
+  "tagIds": [
+    "tag-dsu-merge-tree"
+  ],
+  "ownedTagIds": [
+    "tag-dsu-merge-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-component-merge-tree"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-component-merge-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/dsu-merge-tree.md",
+  "problemIds": [
+    "abc235-ex",
+    "abc314-f"
+  ],
+  "directProblemIds": [
+    "abc314-f",
+    "abc235-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DSUによる連結成分管理・縮約で得た考え方と実装を再利用し、DSU merge tree・Kruskal reconstruction treeの発動条件・正当化・境界を重複なく学ぶ。"
+}

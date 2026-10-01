@@ -186,7 +186,7 @@ const impact = (
     'example',
     'exercise',
     'answer',
-    'standard_order',
+    'prerequisite_graph',
     'derived_index',
   ] as const;
   const subject = {
@@ -224,7 +224,6 @@ const impact = (
         evidenceRefs,
       },
     ],
-    affectedLearningUnitOrderIds: ['unit-core'],
     derivedIndexPaths: ['docs/verification/bootstrap/final-taxonomy-index.json'],
     canonicalMaterializationTask: 'T049' as const,
     coverageStatus: 'complete' as const,
@@ -316,17 +315,16 @@ const finalCandidates = (): z.input<typeof FinalTaxonomyCandidateSchema>[] => [
       parentId: null,
       baselineId: 'prereq-abc-advanced-v1',
       baselineVersion: '1.0.0',
-      additionalPrerequisiteUnitIds: [],
       excludedTopics: [],
       sourceRevisionIds: [...sourceIds],
       tagIds: ['tag-algorithms', 'tag-core'],
+      ownedTagIds: ['tag-algorithms', 'tag-core'],
       learningOutcomeIds: ['outcome-core'],
+      ownedLearningOutcomeIds: ['outcome-core'],
       problemIds: [...problemIds],
-      stageRank: 0,
-      difficultyRank: 0,
-      representativeRank: 0,
-      globalIndex: 0,
-      orderReason: 'This is the first and only Unit in the fixture.',
+      directProblemIds: [...problemIds],
+      relatedProblemIds: [],
+      learningRationale: 'Learn the core technique and its standard use.',
     },
     sourceRevisionIds: [...sourceIds],
     evidenceRefs,
@@ -358,8 +356,6 @@ const placements = (): z.input<typeof FinalProblemPlacementProjectionSchema>[] =
     primaryOutcomeId: 'outcome-core',
     additionalPrimaryOutcomeIds: [],
     supportingOutcomeIds: [],
-    learningUnitIds: ['unit-core'],
-    presentationUnitId: 'unit-core',
     adHocElements: index === 0 ? ['Problem-specific boundary handling.'] : [],
     claimDispositions: [
       {
@@ -412,6 +408,11 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
       transactionId: `preview-snapshot:initial-v1:${integrationMap.previewSnapshotDigest}`,
       status: 'passed' as const,
     },
+    placementDecisionTable: {
+      path: 'src/content/policies/problem-placement.json',
+      version: '1.0.0',
+      digest: sha('f'),
+    },
     integrationMapPath: 'docs/verification/previews/initial-v1/taxonomy-integration.json',
   };
   const policy = {
@@ -437,7 +438,6 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements: placementValues,
     correctionImpacts: correctionImpacts.map((correctionImpact) =>
       Object.fromEntries(
@@ -473,7 +473,6 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements: placementValues,
     correctionImpacts,
     sourceRevisionIds: [...sourceIds],
@@ -482,7 +481,6 @@ const createBuild = (status: 'proposed' | 'accepted'): z.input<typeof FinalTaxon
     taxonomyDigest: canonicalDigest(candidates),
     tagDagDigest: canonicalDigest([]),
     learningUnitDagDigest: canonicalDigest([]),
-    orderDigest: canonicalDigest(['unit-core']),
     placementDigest: canonicalDigest(placementValues),
     correctionImpactDigest: canonicalDigest(correctionImpacts),
     status,
@@ -526,6 +524,29 @@ describe('strict T159 staging schemas', () => {
         entity: { ...tag?.entity, id: 'unit-wrong-namespace' },
       }).success,
     ).toBe(false);
+  });
+
+  it('rejects missing direct owners and navigation closure drift inside the build schema', () => {
+    const missingOwner = createBuild('proposed');
+    const unit = missingOwner.finalCandidates.find((candidate) => candidate.kind === 'unit');
+    if (unit?.kind !== 'unit') throw new Error('Unit fixture missing.');
+    unit.entity.ownedTagIds = ['tag-algorithms'];
+    unit.entity.ownedLearningOutcomeIds = [];
+
+    const parsed = FinalTaxonomyBuildSchema.safeParse(missingOwner);
+    expect(parsed.success).toBe(false);
+    if (!parsed.success) {
+      const messages = parsed.error.issues.map(({ message }) => message);
+      expect(messages).toContain(
+        'Final Tag tag-core must have exactly one direct Learning Unit owner.',
+      );
+      expect(messages).toContain(
+        'Final Outcome outcome-core must have one direct owner matching its Unit and Tag scopes.',
+      );
+      expect(messages).toContain(
+        'Final Learning Unit unit-core navigation must be the exact direct-owner and child closure.',
+      );
+    }
   });
 
   it('keeps recognition signatures and typed non-prerequisite Tag relations canonical', () => {

@@ -1,0 +1,53 @@
+{
+  "id": "unit-small-to-large",
+  "kind": "subsection",
+  "title": "small-to-large・DSU on Tree",
+  "parentId": "unit-decomposition-amortization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "small-to-large・DSU on Treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+    "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba",
+    "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
+    "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f",
+    "source-abc324-editorial-7399-ab02b564dea5abbc9ea0b59039ac96169d94dc9751a2bfc5aa105c089979319a",
+    "source-abc324-g-problem-a2a995abf08034c8681a217ff49c1a74625a353740871446c9b75fd426e15ea7"
+  ],
+  "tagIds": [
+    "tag-small-to-large"
+  ],
+  "ownedTagIds": [
+    "tag-small-to-large"
+  ],
+  "learningOutcomeIds": [
+    "outcome-merge-small-into-large"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-merge-small-into-large"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/small-to-large.md",
+  "problemIds": [
+    "abc324-g",
+    "abc329-f",
+    "abc411-f",
+    "abc454-g"
+  ],
+  "directProblemIds": [
+    "abc329-f",
+    "abc411-f",
+    "abc454-g",
+    "abc324-g"
+  ],
+  "relatedProblemIds": [
+    "abc273-ex",
+    "abc275-ex",
+    "abc451-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "小さいcontainerを大きいcontainerへ併合する。要素を保持する場合は所属サイズの倍増、重複を消すsetでは生存要素のサイズ増大と消滅要素への課金、分割では小さい側の半減を用いて総仕事量を証明する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "tag-ordered-interval-partition",
+  "name": "ordered interval partition・ODT",
+  "definition": "互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-ordered-set-multiset"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "run",
+      "互いに素な区間",
+      "境界"
+    ],
+    "triggerPatterns": [
+      "区間をsplit",
+      "同値runをmerge"
+    ],
+    "invariantPatterns": [
+      "最大run",
+      "隣接merge",
+      "非交差"
+    ],
+    "goalPatterns": [
+      "range代入",
+      "動的区間管理"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-ordered-set-multiset",
+      "type": "often_combined",
+      "rationale": "区間端点をordered setで管理し、split・mergeする区間族を動的に保つときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-ordered-interval-partition"
+  ],
+  "representativeProblemIds": [
+    "abc255-ex",
+    "abc380-e"
+  ],
+  "aliases": [
+    "ODT",
+    "ordered disjoint tree",
+    "区間set"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

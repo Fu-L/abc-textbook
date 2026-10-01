@@ -1,0 +1,72 @@
+{
+  "id": "unit-amortized-monotone-progress",
+  "kind": "subsection",
+  "title": "単調進行による償却解析",
+  "parentId": "unit-decomposition-amortization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+    "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
+    "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+    "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4",
+    "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+    "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
+  ],
+  "tagIds": [
+    "tag-amortized-monotone-progress"
+  ],
+  "ownedTagIds": [
+    "tag-amortized-monotone-progress"
+  ],
+  "learningOutcomeIds": [
+    "outcome-bound-monotone-total-work"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-bound-monotone-total-work"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
+  "problemIds": [
+    "abc217-e",
+    "abc256-ex",
+    "abc302-e",
+    "abc368-g",
+    "abc403-e",
+    "abc428-f",
+    "abc466-f"
+  ],
+  "directProblemIds": [
+    "abc217-e",
+    "abc302-e",
+    "abc403-e",
+    "abc368-g",
+    "abc466-f",
+    "abc428-f",
+    "abc256-ex"
+  ],
+  "relatedProblemIds": [
+    "abc255-ex",
+    "abc267-e",
+    "abc282-ex",
+    "abc295-g",
+    "abc305-f",
+    "abc307-f",
+    "abc312-ex",
+    "abc319-g",
+    "abc329-e",
+    "abc364-f",
+    "abc417-g",
+    "abc421-f",
+    "abc426-f",
+    "abc427-g",
+    "abc430-g",
+    "abc435-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

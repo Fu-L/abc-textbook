@@ -1,0 +1,47 @@
+{
+  "id": "tag-tree-ancestor-lca",
+  "name": "ancestor query・LCA",
+  "definition": "根付き木の祖先関係を時刻またはbinary liftingで索引化し、LCAと木上距離を答える。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-binary-lifting"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二頂点",
+      "根付き木",
+      "祖先"
+    ],
+    "triggerPatterns": [
+      "共通祖先",
+      "木上距離"
+    ],
+    "invariantPatterns": [
+      "深さ",
+      "祖先表"
+    ],
+    "goalPatterns": [
+      "LCA",
+      "ancestor判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries"
+  ],
+  "representativeProblemIds": [
+    "abc298-ex",
+    "abc405-f"
+  ],
+  "aliases": [
+    "LCA",
+    "ancestor query",
+    "最小共通祖先"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

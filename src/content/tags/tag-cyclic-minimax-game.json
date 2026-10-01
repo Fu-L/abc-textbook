@@ -1,0 +1,42 @@
+{
+  "id": "tag-cyclic-minimax-game",
+  "name": "循環局面の後退解析とminimax距離",
+  "definition": "終了局面から逆辺を辿り、終了側が一手選べば確定するOR局面と全手の確定を待つAND局面を区別する。未確定局面で無限継続を判定し、非負重みなら優先度付きキューで有限なminimax距離を確定する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-game-value-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "循環する局面グラフ"
+    ],
+    "triggerPatterns": [
+      "無限継続が可能"
+    ],
+    "invariantPatterns": [
+      "OR最小とAND全後続"
+    ],
+    "goalPatterns": [
+      "有限性と最適利得"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-solve-cyclic-minimax-game"
+  ],
+  "representativeProblemIds": [
+    "abc261-ex",
+    "abc413-f"
+  ],
+  "aliases": [
+    "AND OR game",
+    "minimax distance",
+    "retrograde analysis"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

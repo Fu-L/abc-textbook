@@ -1,0 +1,14 @@
+{
+  "id": "outcome-evaluate-compressed-integer-blocks",
+  "statement": "圧縮block内の一次・二次式や操作列の累積境界を閉形式にし、極値・順位・個数を求められる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc216-e",
+    "abc240-f",
+    "abc253-g",
+    "abc429-g",
+    "abc444-f",
+    "tag-integer-boundary-blocks",
+    "unit-integer-boundary-blocks"
+  ]
+}

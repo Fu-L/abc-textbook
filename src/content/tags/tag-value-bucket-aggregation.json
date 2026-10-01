@@ -1,0 +1,54 @@
+{
+  "id": "tag-value-bucket-aggregation",
+  "name": "値軸のbucket分割と区間集約",
+  "definition": "値軸を長さBのblockに分け、完全blockの要約と端数の走査を合成する。点更新とqueryの回数を別々に数え、O(1)更新とO(V/B+B)の値prefix取得を選ぶ。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "block要約",
+      "値prefix"
+    ],
+    "triggerPatterns": [
+      "queryより更新が多い",
+      "定数時間の点更新"
+    ],
+    "invariantPatterns": [
+      "値別頻度の集約",
+      "完全blockと端数"
+    ],
+    "goalPatterns": [
+      "更新queryの計算量配分",
+      "頻度和と積"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-mo-offline-range",
+      "type": "often_combined",
+      "rationale": "Moで区間位置を動かし、値軸のbucketで閾値以下の頻度和・積を取得する。ABC405 Gでは多数の端点更新をO(1)に保つことが両者を組み合わせる理由になる。"
+    },
+    {
+      "tagId": "tag-threshold-heavy-light",
+      "type": "contrast",
+      "rationale": "座標軸を連続blockに分けて完全blockと端数を合成する方法と、対象を頻度・次数の大小で分けて重い対象を前計算する方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-aggregate-value-prefix-by-buckets"
+  ],
+  "representativeProblemIds": [
+    "abc405-g"
+  ],
+  "aliases": [
+    "block集約",
+    "bucket decomposition",
+    "値軸平方根分割"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,47 @@
+{
+  "id": "tag-model-reduction",
+  "name": "モデル変換",
+  "definition": "問題固有の操作を再利用可能な構造・順序・境界の問題へ変換する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "制約",
+      "操作",
+      "状態"
+    ],
+    "triggerPatterns": [
+      "変換",
+      "帰着",
+      "言い換え"
+    ],
+    "invariantPatterns": [
+      "保たれ",
+      "同値"
+    ],
+    "goalPatterns": [
+      "モデル",
+      "抽象化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-identify-reusable-abstraction"
+  ],
+  "representativeProblemIds": [
+    "abc214-e",
+    "abc233-e",
+    "abc329-f"
+  ],
+  "aliases": [
+    "modeling",
+    "problem reduction",
+    "問題の言い換え"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

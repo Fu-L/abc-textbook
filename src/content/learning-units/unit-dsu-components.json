@@ -1,0 +1,92 @@
+{
+  "id": "unit-dsu-components",
+  "kind": "subsection",
+  "title": "DSUによる連結成分管理・縮約",
+  "parentId": "unit-connectivity",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
+    "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9",
+    "source-abc229-e-problem-d9c76ebb631eb668dd6772d319953cc51d2956bed4f77fa174b0c2f60fba8b41",
+    "source-abc229-editorial-2958-e1f5841b40bd2ddd793fc39890bd1e7c2cc99e815182f14d0fac099106701eea",
+    "source-abc233-editorial-3164-929b36922e791d43621c2895d6fb0018b82657f35a46d2555c0c9f429eef0ad5",
+    "source-abc233-f-problem-34e1002f3387344d9e8383bf05e55cf0ef1fe453623a96c8d17d16bca33ba2dd"
+  ],
+  "tagIds": [
+    "tag-dsu-components"
+  ],
+  "ownedTagIds": [
+    "tag-dsu-components"
+  ],
+  "learningOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/dsu-components.md",
+  "problemIds": [
+    "abc238-e",
+    "abc276-e",
+    "abc279-f",
+    "abc304-e",
+    "abc335-e",
+    "abc372-e",
+    "abc392-e",
+    "abc401-e",
+    "abc420-e",
+    "abc434-e"
+  ],
+  "directProblemIds": [
+    "abc420-e",
+    "abc304-e",
+    "abc372-e",
+    "abc276-e",
+    "abc392-e",
+    "abc401-e",
+    "abc434-e",
+    "abc335-e",
+    "abc238-e",
+    "abc279-f"
+  ],
+  "relatedProblemIds": [
+    "abc218-e",
+    "abc229-e",
+    "abc233-f",
+    "abc235-e",
+    "abc239-f",
+    "abc250-ex",
+    "abc264-e",
+    "abc270-f",
+    "abc286-g",
+    "abc295-g",
+    "abc301-ex",
+    "abc302-ex",
+    "abc311-g",
+    "abc314-f",
+    "abc328-e",
+    "abc349-g",
+    "abc352-e",
+    "abc355-f",
+    "abc364-f",
+    "abc376-g",
+    "abc383-e",
+    "abc394-g",
+    "abc408-e",
+    "abc409-f",
+    "abc413-g",
+    "abc440-g",
+    "abc447-e",
+    "abc451-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

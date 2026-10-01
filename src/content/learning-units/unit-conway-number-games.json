@@ -1,0 +1,43 @@
+{
+  "id": "unit-conway-number-games",
+  "kind": "section",
+  "title": "独立な数ゲームの和",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c",
+    "source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
+  ],
+  "tagIds": [
+    "tag-conway-number-games"
+  ],
+  "ownedTagIds": [
+    "tag-conway-number-games"
+  ],
+  "learningOutcomeIds": [
+    "outcome-add-conway-number-games"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-add-conway-number-games"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
+  "problemIds": [
+    "abc229-h"
+  ],
+  "directProblemIds": [
+    "abc229-h"
+  ],
+  "relatedProblemIds": [
+    "abc265-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "有限局面DAGのminimaxで得た考え方と実装を再利用し、独立な数ゲームの和の発動条件・正当化・境界を重複なく学ぶ。"
+}

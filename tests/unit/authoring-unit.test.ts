@@ -207,12 +207,12 @@ describe('Problem authoring unit', () => {
     expect(staleCodes).toContain('EXECUTABLE_EXAMPLE_EVIDENCE_MISMATCH');
   });
 
-  it('keeps each Learning Unit example and attainment check in one strict document', () => {
+  it('allows ordinary optional Unit examples with unique local keys', () => {
     const unit = catalogFixture().learningUnits[0];
     if (!unit) throw new Error('Fixture learning unit is missing.');
     expect(LearningUnitSchema.safeParse(unit).success).toBe(true);
-    expect(LearningUnitSchema.safeParse({ ...unit, examples: [] }).success).toBe(false);
-    expect(LearningUnitSchema.safeParse({ ...unit, exercises: [] }).success).toBe(false);
+    expect(LearningUnitSchema.safeParse({ ...unit, examples: [] }).success).toBe(true);
+    expect(LearningUnitSchema.safeParse({ ...unit, exercises: [] }).success).toBe(true);
 
     const example = unit.examples[0];
     const exercise = unit.exercises[0];
@@ -225,6 +225,26 @@ describe('Problem authoring unit', () => {
       LearningUnitSchema.safeParse({ ...unit, exercises: [exercise, structuredClone(exercise)] })
         .success,
     ).toBe(false);
+  });
+
+  it('separates canonical Unit ownership from descendant navigation coverage', () => {
+    const unit = catalogFixture().learningUnits[0];
+    if (!unit) throw new Error('Fixture learning unit is missing.');
+    const owned = {
+      ...unit,
+      ownedTagIds: [...unit.tagIds],
+      ownedLearningOutcomeIds: [...unit.learningOutcomeIds],
+      examples: [],
+      exercises: [],
+    };
+    expect(LearningUnitSchema.safeParse(owned).success).toBe(true);
+    expect(
+      LearningUnitSchema.safeParse({ ...owned, ownedLearningOutcomeIds: undefined }).success,
+    ).toBe(false);
+    expect(
+      LearningUnitSchema.safeParse({ ...owned, ownedTagIds: [], ownedLearningOutcomeIds: [] })
+        .success,
+    ).toBe(true);
   });
 
   it('validates Learning Unit outcome links and answer evidence before publication', () => {
@@ -250,7 +270,6 @@ describe('Problem authoring unit', () => {
       affectedContentLocators: [
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctnes' },
       ],
-      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
@@ -273,7 +292,6 @@ describe('Problem authoring unit', () => {
           path: 'exercises.unit-check.assessment',
         },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });
@@ -293,7 +311,6 @@ describe('Problem authoring unit', () => {
           path: 'examples.missing-example',
         },
       ],
-      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: [],
       verificationStatus: 'verified',
     });
@@ -309,7 +326,6 @@ describe('Problem authoring unit', () => {
       affectedContentLocators: [
         { ownerType: 'learning_unit', learningUnitId: 'unit-missing', path: 'content' },
       ],
-      affectedLearningUnitOrderIds: [],
       derivedIndexPaths: [],
       verificationStatus: 'verified',
     });
@@ -326,7 +342,6 @@ describe('Problem authoring unit', () => {
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
         { ownerType: 'problem', problemId: 'abc212-x45', path: 'sections.correctness' },
       ],
-      affectedLearningUnitOrderIds: ['unit-graphs', 'unit-graphs'],
       derivedIndexPaths: ['src/content/docs/index.md'],
       verificationStatus: 'verified',
     });

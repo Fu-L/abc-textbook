@@ -1,0 +1,39 @@
+{
+  "id": "unit-min25-sieve",
+  "kind": "section",
+  "title": "Min_25・Lucy DP型の総和篩",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1",
+    "source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f"
+  ],
+  "tagIds": [
+    "tag-min25-sieve"
+  ],
+  "ownedTagIds": [
+    "tag-min25-sieve"
+  ],
+  "learningOutcomeIds": [
+    "outcome-sum-multiplicative-function-by-min25-sieve"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-sum-multiplicative-function-by-min25-sieve"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/min25-sieve.md",
+  "problemIds": [
+    "abc370-g"
+  ],
+  "directProblemIds": [
+    "abc370-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "素因数・約数分解で得た考え方と実装を再利用し、Min_25・Lucy DP型の総和篩の発動条件・正当化・境界を重複なく学ぶ。"
+}

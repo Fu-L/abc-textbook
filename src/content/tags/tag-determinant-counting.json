@@ -1,0 +1,57 @@
+{
+  "id": "tag-determinant-counting",
+  "name": "行列式による数え上げ",
+  "definition": "非交差経路やspanning treeなどの組合せ対象を行列式に対応させ、LGV補題・行列木定理で数える。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-linear-system-rank"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "spanning tree",
+      "全域木",
+      "有向木",
+      "経路",
+      "行列"
+    ],
+    "triggerPatterns": [
+      "laplacian",
+      "木の個数",
+      "行列式展開",
+      "非交差"
+    ],
+    "invariantPatterns": [
+      "minor",
+      "余因子",
+      "符号付き置換",
+      "行列式"
+    ],
+    "goalPatterns": [
+      "全域木数",
+      "場合の数",
+      "経路族の個数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-nonintersecting-paths-by-lgv"
+  ],
+  "representativeProblemIds": [
+    "abc216-h",
+    "abc253-ex",
+    "abc323-g"
+  ],
+  "aliases": [
+    "LGV lemma",
+    "Matrix-Tree theorem",
+    "行列式による数え上げ",
+    "行列木定理"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

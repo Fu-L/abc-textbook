@@ -1,0 +1,46 @@
+{
+  "id": "unit-implicit-binary-tree",
+  "kind": "section",
+  "title": "対称性・深さ・label区間で巨大な完全二分木を数える",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f",
+    "source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7",
+    "source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615",
+    "source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305",
+    "source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6",
+    "source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"
+  ],
+  "tagIds": [
+    "tag-implicit-binary-tree-arithmetic"
+  ],
+  "ownedTagIds": [
+    "tag-implicit-binary-tree-arithmetic"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-implicit-binary-tree-layers"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-implicit-binary-tree-layers"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/implicit-binary-tree.md",
+  "problemIds": [
+    "abc321-e"
+  ],
+  "directProblemIds": [
+    "abc321-e"
+  ],
+  "relatedProblemIds": [
+    "abc220-e",
+    "abc424-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "指数個の頂点を持つ完全二分木を展開せず、深さごとの対称性と2冪で集約するか、heap番号の祖先移動と深さ別子孫label区間で数える。"
+}

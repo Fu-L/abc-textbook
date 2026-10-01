@@ -1,0 +1,18 @@
+{
+  "id": "outcome-characterize-bipartite-feasibility-by-hall",
+  "statement": "二部割当が可能であることを近傍集合の大きさに関するHall条件で特徴付け、必要ならmin-cut条件と対応させられる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
+    "outcome-color-and-classify-bipartite-components"
+  ],
+  "scopeIds": [
+    "abc215-h",
+    "abc313-ex",
+    "abc317-g",
+    "abc318-f",
+    "abc363-g",
+    "abc424-g",
+    "tag-bipartite-matching-hall",
+    "unit-bipartite-matching"
+  ]
+}

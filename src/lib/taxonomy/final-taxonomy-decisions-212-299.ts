@@ -17,8 +17,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc214-e': 'tag-greedy-exchange-order',
   'abc214-f': 'tag-sequence-subsequence-dp',
   'abc214-g': 'tag-inclusion-exclusion',
-  // SCC condensation is the irreversible reduction; flow optimizes the resulting DAG paths.
-  'abc214-h': 'tag-directed-condensation-toposort',
+  // Min-cost flow performs the joint path optimization after SCC condensation.
+  'abc214-h': 'tag-min-cost-flow',
 
   'abc215-e': 'tag-dp-state-equivalence',
   'abc215-f': 'tag-monotone-threshold-search',
@@ -37,7 +37,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   // Queue-to-heap migration is safe because each element crosses the boundary at most once.
   'abc217-e': 'tag-amortized-heavy-light',
   'abc217-f': 'tag-interval-partition-dp',
-  'abc217-g': 'tag-combinatorial-coefficients',
+  'abc217-g': 'tag-dp-state-equivalence',
   'abc217-h': 'tag-discrete-convex-marginal',
 
   'abc218-e': 'tag-spanning-tree-optimization',
@@ -73,7 +73,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc223-h': 'tag-linear-algebra-xor',
 
   'abc224-e': 'tag-dp-transition-acceleration',
-  'abc224-f': 'tag-contribution-reordering',
+  'abc224-f': 'tag-dp-transition-acceleration',
   'abc224-g': 'tag-discrete-convex-marginal',
   'abc224-h': 'tag-flow-matching-cut',
 
@@ -82,7 +82,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc225-g': 'tag-flow-matching-cut',
   'abc225-h': 'tag-convolution-fps',
 
-  'abc226-e': 'tag-contribution-reordering',
+  'abc226-e': 'tag-graph-core-peeling',
   'abc226-f': 'tag-combinatorial-coefficients',
   'abc226-g': 'tag-greedy-exchange-order',
   'abc226-h': 'tag-stochastic-expectation-dp',
@@ -90,8 +90,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc227-e': 'tag-dp-state-equivalence',
   'abc227-f': 'tag-bounded-enumeration',
   'abc227-g': 'tag-prime-divisor-decomposition',
-  // The degree-multiplicity model and Euler tour are fixed before flow fills residual degrees.
-  'abc227-h': 'tag-euler-degree-parity',
+  // Maximum flow decides residual-degree feasibility; Euler construction recovers the walk.
+  'abc227-h': 'tag-max-flow-min-cut',
 
   'abc228-e': 'tag-modular-crt',
   'abc228-f': 'tag-monotone-stack-queue',
@@ -178,7 +178,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc243-g': 'tag-dp-transition-acceleration',
 
   'abc244-e': 'tag-dp-state-equivalence',
-  'abc244-ex': 'tag-convex-hull-trick',
+  'abc244-ex': 'tag-convex-hull-halfplane',
   'abc244-f': 'tag-subset-bitmask-transform',
   'abc244-g': 'tag-constructive-witness',
 
@@ -208,8 +208,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc249-g': 'tag-linear-algebra-xor',
 
   'abc250-e': 'tag-symmetry-invariant-normalization',
-  // Multi-source distances turn path thresholds into weighted component merges.
-  'abc250-ex': 'tag-shortest-path',
+  // Threshold connectivity answers every query; multi-source distances define edge thresholds.
+  'abc250-ex': 'tag-kruskal-threshold-sweep',
   'abc250-f': 'tag-two-pointers-window',
   'abc250-g': 'tag-discrete-convex-marginal',
 
@@ -229,7 +229,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc253-g': 'tag-integer-boundary-blocks',
 
   'abc254-e': 'tag-bounded-enumeration',
-  'abc254-ex': 'tag-binary-trie',
+  'abc254-ex': 'tag-greedy-exchange-order',
   'abc254-f': 'tag-gcd-diophantine',
   'abc254-g': 'tag-functional-graph-doubling',
 
@@ -318,7 +318,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc270-f': 'tag-spanning-tree-optimization',
   'abc270-g': 'tag-divide-enumerate',
 
-  'abc271-e': 'tag-sequence-subsequence-dp',
+  'abc271-e': 'tag-shortest-path',
   'abc271-ex': 'tag-gcd-diophantine',
   'abc271-f': 'tag-divide-enumerate',
   'abc271-g': 'tag-linear-recurrence-matrix',
@@ -343,7 +343,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc274-g': 'tag-flow-matching-cut',
 
   'abc275-e': 'tag-stochastic-expectation-dp',
-  'abc275-ex': 'tag-cartesian-tree',
+  'abc275-ex': 'tag-slope-trick',
   'abc275-f': 'tag-knapsack-resource',
   'abc275-g': 'tag-convex-hull-halfplane',
 
@@ -358,7 +358,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc277-g': 'tag-stochastic-expectation-dp',
 
   'abc278-e': 'tag-prefix-difference',
-  'abc278-ex': 'tag-linear-algebra-xor',
+  'abc278-ex': 'tag-finite-field-subspace-counting',
   'abc278-f': 'tag-game-grundy-dp',
   'abc278-g': 'tag-game-grundy-dp',
 
@@ -368,7 +368,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_212_299 = Object.freeze({
   'abc279-f': 'tag-dsu-connectivity',
   'abc279-g': 'tag-dp-state-equivalence',
 
-  'abc280-e': 'tag-stochastic-expectation-dp',
+  'abc280-e': 'tag-contribution-reordering',
   'abc280-ex': 'tag-suffix-lcp-index',
   'abc280-f': 'tag-dsu-connectivity',
   'abc280-g': 'tag-inclusion-exclusion',

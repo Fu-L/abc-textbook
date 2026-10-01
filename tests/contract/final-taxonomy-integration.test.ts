@@ -16,6 +16,7 @@ const loaded = loadFinalTaxonomySourceContext().then((context) => ({
 const assignedEntityIds = (
   placement: Awaited<typeof loaded>['build']['placements'][number],
   kind: 'tag' | 'outcome' | 'unit',
+  ownerUnitIdsByOutcomeId: ReadonlyMap<string, string[]>,
 ): readonly string[] =>
   kind === 'tag'
     ? [...placement.primaryTagIds, ...placement.supportingTagIds]
@@ -25,12 +26,25 @@ const assignedEntityIds = (
           ...placement.additionalPrimaryOutcomeIds,
           ...placement.supportingOutcomeIds,
         ]
-      : placement.learningUnitIds;
+      : [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ].flatMap((outcomeId) => ownerUnitIdsByOutcomeId.get(outcomeId) ?? []);
 
 describe('T159 frozen preview integration and correction impact', () => {
   it('maps all 12 frozen entities without changing their evidence projection', async () => {
     const { context, build } = await loaded;
     const integration = build.integrationMap;
+    const ownerUnitIdsByOutcomeId = new Map<string, string[]>();
+    for (const candidate of build.finalCandidates) {
+      if (candidate.kind !== 'unit') continue;
+      for (const outcomeId of candidate.entity.ownedLearningOutcomeIds) {
+        const owners = ownerUnitIdsByOutcomeId.get(outcomeId) ?? [];
+        owners.push(candidate.entity.id);
+        ownerUnitIdsByOutcomeId.set(outcomeId, owners);
+      }
+    }
 
     expect(integration.entries).toHaveLength(FINAL_TAXONOMY_PREVIEW_ENTITY_COUNT);
     expect(integration.provisionalEvidence).toEqual(context.provisionalEvidence);
@@ -58,6 +72,15 @@ describe('T159 frozen preview integration and correction impact', () => {
     const placementByProblemId = new Map(
       build.placements.map((placement) => [placement.problemId, placement]),
     );
+    const ownerUnitIdsByOutcomeId = new Map<string, string[]>();
+    for (const candidate of build.finalCandidates) {
+      if (candidate.kind !== 'unit') continue;
+      for (const outcomeId of candidate.entity.ownedLearningOutcomeIds) {
+        const owners = ownerUnitIdsByOutcomeId.get(outcomeId) ?? [];
+        owners.push(candidate.entity.id);
+        ownerUnitIdsByOutcomeId.set(outcomeId, owners);
+      }
+    }
     for (const entry of build.integrationMap.entries) {
       if (entry.action !== 'split') continue;
       const flattenedProblemIds = entry.splitProblemAssignments.flatMap(
@@ -77,9 +100,9 @@ describe('T159 frozen preview integration and correction impact', () => {
         for (const problemId of assignment.representativeProblemIds) {
           const placement = placementByProblemId.get(problemId);
           if (placement === undefined) throw new Error(`Missing placement for ${problemId}.`);
-          expect(assignedEntityIds(placement, entry.previewEntityKind)).toContain(
-            assignment.finalEntityId,
-          );
+          expect(
+            assignedEntityIds(placement, entry.previewEntityKind, ownerUnitIdsByOutcomeId),
+          ).toContain(assignment.finalEntityId);
         }
       }
     }
@@ -136,13 +159,17 @@ describe('T159 frozen preview integration and correction impact', () => {
             assessment.learningUnitId === learningUnitId,
         );
         expect(assessments.map(({ surface }) => surface).sort()).toEqual(
-          ['answer', 'body', 'derived_index', 'example', 'exercise', 'standard_order'].sort(),
+          ['answer', 'body', 'derived_index', 'example', 'exercise', 'prerequisite_graph'].sort(),
         );
         expect(
           assessments.every(
             ({ evidenceRefs }) =>
               evidenceRefs.length > 0 &&
-              evidenceRefs.every(({ problemId }) => unit?.problemIds.includes(problemId)),
+              evidenceRefs.every(
+                ({ problemId }) =>
+                  unit !== undefined &&
+                  [...unit.problemIds, ...unit.relatedProblemIds].includes(problemId),
+              ),
           ),
         ).toBe(true);
       }
@@ -150,13 +177,30 @@ describe('T159 frozen preview integration and correction impact', () => {
         ({ ownerType }) => ownerType === 'derived_index',
       );
       expect(indexAssessments).toHaveLength(impact.derivedIndexPaths.length);
-      expect(
-        impact.surfaceAssessments.every(({ rationale }) => /T0(?:48|49|50)/u.test(rationale)),
-      ).toBe(true);
+      const taskPatternBySurface = {
+        'problem:body': /T066–T071.*T075/u,
+        'problem:example': /T066–T071.*T072.*T074–T075/u,
+        'problem:exercise': /T066–T071.*T075/u,
+        'problem:answer': /T066–T071.*T074–T075・T078/u,
+        'problem:placement': /T049/u,
+        'problem:derived_index': /T160.*T049/u,
+        'learning_unit_candidate:body': /T050/u,
+        'learning_unit_candidate:example': /T050/u,
+        'learning_unit_candidate:exercise': /T050/u,
+        'learning_unit_candidate:answer': /T050/u,
+        'learning_unit_candidate:prerequisite_graph': /T048.*DAG/u,
+        'learning_unit_candidate:derived_index': /T160/u,
+        'derived_index:index': /T160.*T049/u,
+      } as const;
+      for (const assessment of impact.surfaceAssessments) {
+        const key =
+          `${assessment.ownerType}:${assessment.surface}` as keyof typeof taskPatternBySurface;
+        expect(assessment.rationale, key).toMatch(taskPatternBySurface[key]);
+      }
     }
   }, 30_000);
 
-  it('rejects incomplete mapping/action coverage, target placement drift, and Unit DAG cycles', async () => {
+  it('rejects incomplete integration mapping and primary Outcome home drift', async () => {
     const { build } = await loaded;
 
     const missingEntry = structuredClone(build);
@@ -184,21 +228,17 @@ describe('T159 frozen preview integration and correction impact', () => {
       targetEntry?.affectedProblemIds.includes(problemId),
     );
     if (targetEntry && targetPlacement) {
-      targetPlacement.learningUnitIds = targetPlacement.learningUnitIds.filter(
-        (id) => id !== targetEntry.finalEntityIds[0],
+      const homeUnit = missingTarget.finalCandidates.find(
+        (candidate) =>
+          candidate.kind === 'unit' &&
+          candidate.entity.ownedLearningOutcomeIds.includes(targetPlacement.primaryOutcomeId),
       );
+      if (homeUnit?.kind === 'unit') {
+        homeUnit.entity.directProblemIds = homeUnit.entity.directProblemIds.filter(
+          (id) => id !== targetPlacement.problemId,
+        );
+      }
     }
     expect(FinalTaxonomyBuildSchema.safeParse(missingTarget).success).toBe(false);
-
-    const unitCycle = structuredClone(build);
-    const units = unitCycle.finalCandidates.filter((candidate) => candidate.kind === 'unit');
-    const firstUnit = units[0];
-    const secondUnit = units[1];
-    if (firstUnit === undefined || secondUnit === undefined) {
-      throw new Error('Expected at least two Unit candidates.');
-    }
-    firstUnit.entity.additionalPrerequisiteUnitIds = [secondUnit.entity.id];
-    secondUnit.entity.additionalPrerequisiteUnitIds = [firstUnit.entity.id];
-    expect(FinalTaxonomyBuildSchema.safeParse(unitCycle).success).toBe(false);
   }, 30_000);
 });

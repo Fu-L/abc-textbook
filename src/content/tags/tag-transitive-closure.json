@@ -1,0 +1,43 @@
+{
+  "id": "tag-transitive-closure",
+  "name": "推移閉包",
+  "definition": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "到達関係",
+      "有向graph"
+    ],
+    "triggerPatterns": [
+      "全頂点対",
+      "到達可能性"
+    ],
+    "invariantPatterns": [
+      "closure",
+      "中継許可集合"
+    ],
+    "goalPatterns": [
+      "到達行列"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compute-transitive-closure"
+  ],
+  "representativeProblemIds": [
+    "abc287-ex",
+    "abc292-e"
+  ],
+  "aliases": [
+    "Warshall法",
+    "transitive closure",
+    "推移閉包"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

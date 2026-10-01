@@ -1,0 +1,43 @@
+{
+  "id": "unit-orbit-counting",
+  "kind": "section",
+  "title": "群作用・軌道数え上げ",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "群作用・軌道数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc284-editorial-5481-9da01d2a70042d0bd7a43951bbdc27a4e2a956c0b0fe0efa9a7e4d96bfa4a14d",
+    "source-abc284-ex-problem-62d52e6971d664c1fb7b8660b662c70437b217e7e263ea460b197a5a07453028",
+    "source-abc428-editorial-14241-ca060bb313b0832f3141ca21dd859cb566100282997d6738967a1166139fb941",
+    "source-abc428-g-problem-4c9ee096b30b6e265ffac8108560bbf30f1b95277ec6655592c23b0115876ef3"
+  ],
+  "tagIds": [
+    "tag-group-action-orbit-counting"
+  ],
+  "ownedTagIds": [
+    "tag-group-action-orbit-counting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-orbits-by-fixed-points"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-orbits-by-fixed-points"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/orbit-counting.md",
+  "problemIds": [
+    "abc284-ex",
+    "abc428-g"
+  ],
+  "directProblemIds": [
+    "abc428-g",
+    "abc284-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態・配置の正規化で得た考え方と実装を再利用し、群作用・軌道数え上げの発動条件・正当化・境界を重複なく学ぶ。"
+}

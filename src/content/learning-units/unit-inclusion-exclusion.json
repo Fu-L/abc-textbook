@@ -1,0 +1,94 @@
+{
+  "id": "unit-inclusion-exclusion",
+  "kind": "section",
+  "title": "包除・Möbius反転で重複を補正する",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "選択順を二項係数だけで式化する数え上げ。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+    "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377"
+  ],
+  "tagIds": [
+    "tag-divisor-mobius-inversion",
+    "tag-inclusion-exclusion",
+    "tag-subset-zeta-mobius-transform"
+  ],
+  "ownedTagIds": [
+    "tag-inclusion-exclusion"
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-subset-zeta-mobius-transform",
+    "outcome-correct-overlap-by-inversion",
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-correct-overlap-by-inversion"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md",
+  "problemIds": [
+    "abc214-g",
+    "abc230-g",
+    "abc235-g",
+    "abc236-ex",
+    "abc242-f",
+    "abc246-f",
+    "abc280-g",
+    "abc285-ex",
+    "abc295-ex",
+    "abc297-f",
+    "abc304-f",
+    "abc306-ex",
+    "abc309-g",
+    "abc331-g",
+    "abc349-f",
+    "abc357-g",
+    "abc361-f",
+    "abc423-f",
+    "abc455-e",
+    "abc456-g",
+    "abc462-g"
+  ],
+  "directProblemIds": [
+    "abc455-e",
+    "abc246-f",
+    "abc297-f",
+    "abc462-g",
+    "abc242-f",
+    "abc235-g",
+    "abc309-g",
+    "abc456-g",
+    "abc331-g",
+    "abc280-g",
+    "abc214-g",
+    "abc236-ex",
+    "abc357-g",
+    "abc285-ex",
+    "abc306-ex"
+  ],
+  "relatedProblemIds": [
+    "abc212-g",
+    "abc215-h",
+    "abc260-ex",
+    "abc272-ex",
+    "abc284-ex",
+    "abc288-ex",
+    "abc297-ex",
+    "abc317-f",
+    "abc327-g",
+    "abc335-g",
+    "abc343-e",
+    "abc377-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。"
+}

@@ -1,0 +1,58 @@
+{
+  "id": "tag-aho-corasick",
+  "name": "Aho–Corasick",
+  "definition": "複数patternのTrieへfailure linkとoutput情報を加え、最長接尾辞状態を文字ごとに更新する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [
+    "tag-finite-pattern-automaton",
+    "tag-trie-prefix"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "failure link",
+      "output set",
+      "pattern trie"
+    ],
+    "triggerPatterns": [
+      "複数pattern",
+      "辞書中の接尾辞"
+    ],
+    "invariantPatterns": [
+      "failure tree",
+      "最長suffix state"
+    ],
+    "goalPatterns": [
+      "複数pattern一致状態"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-finite-pattern-automaton",
+      "type": "specialization",
+      "rationale": "複数patternの共有prefixとfailure linkを持つ有限automatonとして特殊化する。"
+    },
+    {
+      "tagId": "tag-trie-prefix",
+      "type": "implementation_substrate",
+      "rationale": "複数patternの共有prefixをTrieにまとめ、failure linkを加えてautomatonを構築する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-multi-pattern-automaton"
+  ],
+  "representativeProblemIds": [
+    "abc419-f",
+    "abc458-f"
+  ],
+  "aliases": [
+    "AC automaton",
+    "Aho–Corasick法",
+    "多パターン照合"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

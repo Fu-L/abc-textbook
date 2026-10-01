@@ -1,0 +1,47 @@
+{
+  "id": "unit-rollback",
+  "kind": "subsection",
+  "title": "rollback・DFS入退場の状態復元",
+  "parentId": "unit-persistence-rollback",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
+    "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8",
+    "source-abc302-editorial-6409-0980d612d8a3b798d479cf989dcde01464de3545aff24aa2d5d6528a3fe792d2",
+    "source-abc302-ex-problem-fe03a8a5ec8d36feacf56530e37fa3ad843cdeafb3615a1d48ba6eb56243ddb1",
+    "source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce",
+    "source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3"
+  ],
+  "tagIds": [
+    "tag-rollback"
+  ],
+  "ownedTagIds": [
+    "tag-rollback"
+  ],
+  "learningOutcomeIds": [
+    "outcome-rollback-reversible-updates"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-rollback-reversible-updates"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/rollback.md",
+  "problemIds": [
+    "abc218-g",
+    "abc302-ex",
+    "abc363-g"
+  ],
+  "directProblemIds": [
+    "abc218-g",
+    "abc302-ex",
+    "abc363-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

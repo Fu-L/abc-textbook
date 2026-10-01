@@ -1,0 +1,13 @@
+{
+  "id": "outcome-build-finite-string-automaton",
+  "statement": "未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc264-g",
+    "abc301-f",
+    "abc305-g",
+    "abc418-g",
+    "tag-finite-pattern-automaton",
+    "unit-finite-pattern-automaton"
+  ]
+}

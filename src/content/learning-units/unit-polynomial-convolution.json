@@ -1,0 +1,85 @@
+{
+  "id": "unit-polynomial-convolution",
+  "kind": "section",
+  "title": "NTT・FFTで畳み込みと相互相関を求める",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+    "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
+    "source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c",
+    "source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f",
+    "source-abc247-editorial-3737-53eb270fb9b824e0ab78b864fba70dde4286e8a5ffa0f81bcdd209193c4b9159",
+    "source-abc247-ex-problem-043b96a4aefb5f879242b1db968a6d522ef59ab4457b1353713d23a225ecdbcb"
+  ],
+  "tagIds": [
+    "tag-convolution",
+    "tag-polynomial-taylor-shift"
+  ],
+  "ownedTagIds": [
+    "tag-convolution"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-convolution-or-correlation",
+    "outcome-shift-polynomial-by-factorial-convolution"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compute-convolution-or-correlation"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
+  "problemIds": [
+    "abc265-ex",
+    "abc291-g",
+    "abc307-ex",
+    "abc392-g",
+    "abc409-g",
+    "abc432-g"
+  ],
+  "directProblemIds": [
+    "abc392-g",
+    "abc291-g",
+    "abc432-g",
+    "abc409-g",
+    "abc307-ex",
+    "abc265-ex"
+  ],
+  "relatedProblemIds": [
+    "abc225-h",
+    "abc235-ex",
+    "abc247-ex",
+    "abc260-ex",
+    "abc267-ex",
+    "abc269-ex",
+    "abc272-ex",
+    "abc278-ex",
+    "abc281-ex",
+    "abc289-ex",
+    "abc297-ex",
+    "abc300-ex",
+    "abc303-ex",
+    "abc309-ex",
+    "abc315-ex",
+    "abc317-ex",
+    "abc318-ex",
+    "abc323-g",
+    "abc331-g",
+    "abc345-g",
+    "abc352-g",
+    "abc381-g",
+    "abc385-g",
+    "abc387-g",
+    "abc390-g",
+    "abc422-g",
+    "abc436-g",
+    "abc439-g",
+    "abc462-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "係数積和を多項式積へ写し、NTT・FFTで畳み込みや反転した列との相互相関を高速に求める。"
+}

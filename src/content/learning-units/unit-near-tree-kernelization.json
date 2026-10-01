@@ -1,0 +1,39 @@
+{
+  "id": "unit-near-tree-kernelization",
+  "kind": "section",
+  "title": "near-tree graphのkernel化",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "near-tree graphのkernel化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+  ],
+  "tagIds": [
+    "tag-near-tree-kernelization"
+  ],
+  "ownedTagIds": [
+    "tag-near-tree-kernelization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-kernelize-near-tree-graph"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-kernelize-near-tree-graph"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/near-tree-kernelization.md",
+  "problemIds": [
+    "abc419-g"
+  ],
+  "directProblemIds": [
+    "abc419-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "cycle space・fundamental cycle basis・単一サイクル成分とgraph coreで得た考え方と実装を再利用し、near-tree graphのkernel化の発動条件・正当化・境界を重複なく学ぶ。"
+}

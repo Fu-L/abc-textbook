@@ -1,0 +1,42 @@
+{
+  "id": "outcome-design-resource-dp",
+  "statement": "資源軸の上限と更新順を選び、選択の重複を避けられる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc216-f",
+    "abc222-e",
+    "abc269-g",
+    "abc275-f",
+    "abc287-f",
+    "abc288-e",
+    "abc290-ex",
+    "abc307-g",
+    "abc310-ex",
+    "abc311-ex",
+    "abc320-f",
+    "abc321-f",
+    "abc322-e",
+    "abc325-f",
+    "abc332-g",
+    "abc341-f",
+    "abc364-e",
+    "abc366-f",
+    "abc373-f",
+    "abc375-e",
+    "abc382-e",
+    "abc383-f",
+    "abc390-e",
+    "abc410-e",
+    "abc416-f",
+    "abc419-e",
+    "abc424-g",
+    "abc426-g",
+    "abc428-g",
+    "abc441-f",
+    "abc461-f",
+    "tag-knapsack-resource",
+    "unit-dp-subset-resource"
+  ]
+}

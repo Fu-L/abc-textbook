@@ -1,0 +1,28 @@
+{
+  "id": "outcome-maintain-monotone-window",
+  "statement": "一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc215-f",
+    "abc250-f",
+    "abc258-e",
+    "abc260-e",
+    "abc281-e",
+    "abc290-e",
+    "abc294-e",
+    "abc300-g",
+    "abc314-g",
+    "abc337-f",
+    "abc365-g",
+    "abc366-e",
+    "abc370-f",
+    "abc380-g",
+    "abc388-g",
+    "abc431-f",
+    "abc444-e",
+    "abc452-f",
+    "abc455-g",
+    "tag-two-pointers-window",
+    "unit-two-pointers-window"
+  ]
+}

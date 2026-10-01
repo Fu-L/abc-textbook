@@ -1,0 +1,81 @@
+{
+  "id": "tag-event-sweep",
+  "name": "event・値順のオフライン走査",
+  "definition": "値・時刻・座標順にeventを並べ、同値eventの処理順を定めてactive集合や集約を増分更新する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "event",
+      "threshold",
+      "値",
+      "区間",
+      "時刻"
+    ],
+    "triggerPatterns": [
+      "activate",
+      "deactivate",
+      "sort",
+      "sweep",
+      "ソート"
+    ],
+    "invariantPatterns": [
+      "active",
+      "処理済み境界",
+      "同値eventの順序"
+    ],
+    "goalPatterns": [
+      "全体",
+      "区間",
+      "同時",
+      "面積"
+    ],
+    "excludedPatterns": [
+      "sort.?uniqueだけ",
+      "単純scanだけ",
+      "固定.*方向.*scanだけ",
+      "座標圧縮だけ"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-coordinate-compression",
+      "type": "contrast",
+      "rationale": "順序付きeventに沿ってactive状態を更新する走査と、順序・等値性だけを保って添字化する圧縮を区別する。"
+    },
+    {
+      "tagId": "tag-coordinate-compression",
+      "type": "often_combined",
+      "rationale": "疎なevent座標を圧縮してFenwick TreeやSegment Tree上でactive情報を更新する構成で頻繁に併用する。"
+    },
+    {
+      "tagId": "tag-directional-grid-effect-scan",
+      "type": "analogy",
+      "rationale": "順序に沿って進みながら少数のactive状態だけを更新する発想は共通する。一方、固定方向scanにはeventのsort・追加・削除がなく、event sweepそのものとは区別する。"
+    },
+    {
+      "tagId": "tag-ordered-set-multiset",
+      "type": "often_combined",
+      "rationale": "eventの追加・削除に応じてactive候補の最小値・近傍・順位を動的に保つ構成で併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-linearize-events"
+  ],
+  "representativeProblemIds": [
+    "abc320-e",
+    "abc231-f",
+    "abc346-g"
+  ],
+  "aliases": [
+    "event sweep",
+    "sweep line",
+    "イベント走査",
+    "走査線"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

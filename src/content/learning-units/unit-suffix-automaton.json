@@ -1,0 +1,39 @@
+{
+  "id": "unit-suffix-automaton",
+  "kind": "section",
+  "title": "Suffix Automatonで部分文字列集合を表す",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "接尾辞を辞書順に並べるSuffix Array、および複数patternの辞書照合だけを行うAho–Corasick。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc433-editorial-14604-dc4c7ff9c502d4e6f093918f8d3f4fe32c97ba0d442486658598234b34044eaf",
+    "source-abc433-g-problem-56991ad609c06493e3f50699aa57d6046d113f95a100f431f220b0430bef96a4"
+  ],
+  "tagIds": [
+    "tag-suffix-automaton"
+  ],
+  "ownedTagIds": [
+    "tag-suffix-automaton"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-suffix-automaton"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-suffix-automaton"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/suffix-automaton.md",
+  "problemIds": [
+    "abc433-g"
+  ],
+  "directProblemIds": [
+    "abc433-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "有限状態で文字列を読む視点を土台に、endpos同値類・suffix link・cloneで全部分文字列を線形状態数に圧縮する。"
+}

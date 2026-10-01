@@ -1,0 +1,21 @@
+{
+  "id": "outcome-solve-stochastic-recurrence",
+  "statement": "状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc239-ex",
+    "abc242-ex",
+    "abc249-ex",
+    "abc263-e",
+    "abc270-ex",
+    "abc299-ex",
+    "abc382-e",
+    "abc409-g",
+    "abc412-f",
+    "abc450-g",
+    "tag-stochastic-expectation-dp",
+    "unit-dp-stochastic"
+  ]
+}

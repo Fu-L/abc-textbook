@@ -1,0 +1,39 @@
+{
+  "id": "unit-additive-tree-metric-reconstruction",
+  "kind": "section",
+  "title": "加法的tree metric復元",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "加法的tree metric復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
+    "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"
+  ],
+  "tagIds": [
+    "tag-additive-tree-metric-reconstruction"
+  ],
+  "ownedTagIds": [
+    "tag-additive-tree-metric-reconstruction"
+  ],
+  "learningOutcomeIds": [
+    "outcome-reconstruct-tree-from-distance-matrix"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reconstruct-tree-from-distance-matrix"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/additive-tree-metric-reconstruction.md",
+  "problemIds": [
+    "abc451-e"
+  ],
+  "directProblemIds": [
+    "abc451-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "木距離・直径・中心・最遠点で得た考え方と実装を再利用し、加法的tree metric復元の発動条件・正当化・境界を重複なく学ぶ。"
+}

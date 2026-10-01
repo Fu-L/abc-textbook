@@ -1,0 +1,39 @@
+{
+  "id": "unit-bitwise-minimax-partition",
+  "kind": "section",
+  "title": "上位bitの支配関係によるXOR minimax",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "上位bitの支配関係によるXOR minimaxの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc281-editorial-5367-d15ed03399d4112df2618abe1eb9f8a67a098d943c9aaefe5184082aa86f1d07",
+    "source-abc281-f-problem-b42ed495ca4cdaa9fa2ece7e859c64c8d6340095fa82730a8ffc082dd107b1a7"
+  ],
+  "tagIds": [
+    "tag-bitwise-minimax-partition"
+  ],
+  "ownedTagIds": [
+    "tag-bitwise-minimax-partition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-minimize-maximum-xor-by-bit-partition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-minimize-maximum-xor-by-bit-partition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/bitwise-minimax-partition.md",
+  "problemIds": [
+    "abc281-f"
+  ],
+  "directProblemIds": [
+    "abc281-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

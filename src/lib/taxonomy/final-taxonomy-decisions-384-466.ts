@@ -13,9 +13,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc385-f': 'tag-geometry-orientation-transform',
   'abc385-g': 'tag-convolution-fps',
   'abc386-e': 'tag-bounded-enumeration',
-  'abc386-f': 'tag-sequence-subsequence-dp',
-  // The MST total is first linearized into threshold component counts.
-  'abc386-g': 'tag-contribution-reordering',
+  'abc386-f': 'tag-edit-distance-dp',
+  // Connected labeled-graph counting provides the expensive per-threshold computation.
+  'abc386-g': 'tag-labeled-component-decomposition',
   'abc387-e': 'tag-constructive-witness',
   'abc387-f': 'tag-functional-graph-doubling',
   'abc387-g': 'tag-convolution-fps',
@@ -53,9 +53,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc397-e': 'tag-tree-aggregation-reroot',
   'abc397-f': 'tag-lazy-segment-action',
   'abc397-g': 'tag-flow-matching-cut',
-  'abc398-e': 'tag-game-grundy-dp',
+  'abc398-e': 'tag-game-parity-invariant',
   'abc398-f': 'tag-palindrome-radius',
-  'abc398-g': 'tag-game-grundy-dp',
+  'abc398-g': 'tag-game-parity-invariant',
   'abc399-e': 'tag-functional-graph-doubling',
   'abc399-f': 'tag-combinatorial-coefficients',
   'abc399-g': 'tag-linear-algebra-xor',
@@ -104,8 +104,8 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc412-g': 'tag-flow-matching-cut',
   'abc413-e': 'tag-divide-enumerate',
   'abc413-f': 'tag-game-value-dp',
-  // Planar duality reduces the sparse obstacle boundary to DSU connectivity.
-  'abc413-g': 'tag-dsu-connectivity',
+  // Planar duality turns the obstacle question into sparse dual connectivity.
+  'abc413-g': 'tag-planar-duality',
   'abc414-e': 'tag-integer-boundary-blocks',
   'abc414-f': 'tag-reachability-bfs',
   // The segment-tree graph is an edge compressor for an ordinary shortest path.
@@ -233,9 +233,9 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc450-f': 'tag-dp-state-equivalence',
   // Exchange symmetry supplies a scalar expectation recurrence.
   'abc450-g': 'tag-stochastic-expectation-dp',
-  'abc451-e': 'tag-constructive-witness',
+  'abc451-e': 'tag-additive-tree-metric-reconstruction',
   'abc451-f': 'tag-bipartite-structure',
-  'abc451-g': 'tag-binary-trie',
+  'abc451-g': 'tag-xor-linear-basis',
   'abc452-e': 'tag-integer-boundary-blocks',
   'abc452-f': 'tag-two-pointers-window',
   // RLE is preparatory; distinctness is decided by suffix order and LCP.
@@ -252,7 +252,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   // Equality of randomized prefix fingerprints is the decisive query primitive.
   'abc455-g': 'tag-string-hash-equality',
   'abc456-e': 'tag-directed-condensation-toposort',
-  'abc456-f': 'tag-monoid-segment-tree',
+  'abc456-f': 'tag-swag',
   'abc456-g': 'tag-inclusion-exclusion',
   // Endpoint-extreme intervals dominate every other possible two-cover witness.
   'abc457-e': 'tag-greedy-exchange-order',
@@ -264,7 +264,7 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc458-g': 'tag-monotone-threshold-search',
   'abc459-e': 'tag-tree-aggregation-reroot',
   'abc459-f': 'tag-monotone-stack-queue',
-  'abc459-g': 'tag-gcd-diophantine',
+  'abc459-g': 'tag-two-variable-convex-lattice-optimization',
   'abc460-e': 'tag-modular-crt',
   'abc460-f': 'tag-monoid-segment-tree',
   'abc460-g': 'tag-static-top-tree',
@@ -284,10 +284,10 @@ export const CURATED_PRIMARY_TAG_ASSIGNMENTS_384_466 = {
   'abc464-f': 'tag-divide-enumerate',
   'abc464-g': 'tag-ordered-set-heap',
   'abc465-e': 'tag-digit-dp',
-  'abc465-f': 'tag-subset-bitmask-transform',
+  'abc465-f': 'tag-prefix-difference',
   'abc465-g': 'tag-ordered-set-heap',
   'abc466-e': 'tag-interval-partition-dp',
   'abc466-f': 'tag-amortized-monotone-progress',
-  // Weighted DSU first extracts an independent system of interval constraints.
-  'abc466-g': 'tag-dsu-connectivity',
+  // The carry-vector DP counts assignments after weighted DSU extracts independent constraints.
+  'abc466-g': 'tag-carry-mixed-radix-dp',
 } as const satisfies Readonly<Record<string, string>>;

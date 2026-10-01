@@ -1,0 +1,47 @@
+{
+  "id": "unit-automaton-dp",
+  "kind": "subsection",
+  "title": "automaton上のDP・行列遷移",
+  "parentId": "unit-dp-digit-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "automaton上のDP・行列遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf",
+    "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719",
+    "source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17",
+    "source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9",
+    "source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c",
+    "source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"
+  ],
+  "tagIds": [
+    "tag-automaton-dp"
+  ],
+  "ownedTagIds": [
+    "tag-automaton-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-run-dp-on-finite-automaton"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-run-dp-on-finite-automaton"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/automaton-dp.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc228-g",
+    "abc301-f",
+    "abc305-g",
+    "abc391-g",
+    "abc418-g",
+    "abc419-f",
+    "abc458-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "有限pattern automatonの完全遷移を構成できるようになった後、位置・長さとの直積状態で受理列を数え、桁上限がある場合だけ桁DPと組み合わせる。"
+}

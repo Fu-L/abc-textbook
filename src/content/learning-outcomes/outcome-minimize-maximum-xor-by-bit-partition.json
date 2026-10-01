@@ -1,0 +1,10 @@
+{
+  "id": "outcome-minimize-maximum-xor-by-bit-partition",
+  "statement": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc281-f",
+    "tag-bitwise-minimax-partition",
+    "unit-bitwise-minimax-partition"
+  ]
+}

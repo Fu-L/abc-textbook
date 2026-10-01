@@ -1,0 +1,53 @@
+{
+  "id": "tag-generating-functions",
+  "name": "生成関数による組合せ構造の符号化",
+  "definition": "和・積・sequence・set・cycleなどの組合せ構成を係数列の演算へ翻訳し、欲しい個数を係数として抽出する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-combinatorial-coefficients"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "OGF/EGF",
+      "係数列",
+      "組合せclass"
+    ],
+    "triggerPatterns": [
+      "独立な合成",
+      "連結成分へ分解"
+    ],
+    "invariantPatterns": [
+      "sizeに対する係数",
+      "全単射"
+    ],
+    "goalPatterns": [
+      "係数抽出",
+      "数え上げ式"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convolution",
+      "type": "often_combined",
+      "rationale": "組合せの合成を生成関数の積へ符号化し、その係数を畳み込みで計算する流れで併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "representativeProblemIds": [
+    "abc225-h",
+    "abc385-g"
+  ],
+  "aliases": [
+    "generating function",
+    "母関数",
+    "生成関数"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

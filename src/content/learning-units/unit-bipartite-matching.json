@@ -1,0 +1,65 @@
+{
+  "id": "unit-bipartite-matching",
+  "kind": "subsection",
+  "title": "二部matching・Hall・Kőnig",
+  "parentId": "unit-flow-matching",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
+    "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+    "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4",
+    "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
+    "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83"
+  ],
+  "tagIds": [
+    "tag-bipartite-matching-hall"
+  ],
+  "ownedTagIds": [
+    "tag-bipartite-matching-hall"
+  ],
+  "learningOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-solve-bipartite-matching"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-solve-bipartite-matching"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/bipartite-matching.md",
+  "problemIds": [
+    "abc215-h",
+    "abc274-g",
+    "abc317-g",
+    "abc320-g",
+    "abc374-g",
+    "abc401-g",
+    "abc445-g",
+    "abc461-g"
+  ],
+  "directProblemIds": [
+    "abc401-g",
+    "abc274-g",
+    "abc445-g",
+    "abc461-g",
+    "abc320-g",
+    "abc374-g",
+    "abc317-g",
+    "abc215-h"
+  ],
+  "relatedProblemIds": [
+    "abc237-ex",
+    "abc313-ex",
+    "abc318-f",
+    "abc363-g",
+    "abc424-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。"
+}

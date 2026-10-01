@@ -14,12 +14,21 @@ const validEnvironment = {
 };
 
 describe('verify:fast exit code contract', () => {
-  it('checks frozen preview learning content after taxonomy and before build', () => {
+  it('checks canonical materialization after final taxonomy and before learning content', () => {
     const ids = VERIFICATION_STEPS.map(({ id }) => id);
-    expect(ids.indexOf('authoring')).toBe(ids.indexOf('corpus') + 1);
+    expect(ids.indexOf('problem-metrics')).toBe(ids.indexOf('corpus') + 1);
+    expect(ids.indexOf('authoring')).toBe(ids.indexOf('problem-metrics') + 1);
     expect(ids.indexOf('final-taxonomy')).toBe(ids.indexOf('taxonomy') + 1);
-    expect(ids.indexOf('learning-content')).toBe(ids.indexOf('final-taxonomy') + 1);
+    expect(ids.indexOf('canonical-taxonomy')).toBe(ids.indexOf('final-taxonomy') + 1);
+    expect(ids.indexOf('learning-content')).toBe(ids.indexOf('canonical-taxonomy') + 1);
     expect(ids.indexOf('learning-content')).toBeLessThan(ids.indexOf('build'));
+  });
+
+  it('registers the committed AtCoder Problems snapshot verifier', () => {
+    expect(VERIFICATION_STEPS).toContainEqual({
+      id: 'problem-metrics',
+      script: 'corpus:verify-atcoder-problems-metrics',
+    });
   });
 
   it.each<VerificationStep['id']>(VERIFICATION_STEPS.map((step) => step.id))(

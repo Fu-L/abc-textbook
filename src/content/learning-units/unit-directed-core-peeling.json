@@ -1,0 +1,43 @@
+{
+  "id": "unit-directed-core-peeling",
+  "kind": "subsection",
+  "title": "有向cycle検出・sink/source peeling",
+  "parentId": "unit-directed-condensation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+    "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40",
+    "source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238",
+    "source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52"
+  ],
+  "tagIds": [
+    "tag-directed-core-peeling"
+  ],
+  "ownedTagIds": [
+    "tag-directed-core-peeling"
+  ],
+  "learningOutcomeIds": [
+    "outcome-peel-directed-graph-toward-cycles"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-peel-directed-graph-toward-cycles"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/directed-core-peeling.md",
+  "problemIds": [
+    "abc245-f",
+    "abc456-e"
+  ],
+  "directProblemIds": [
+    "abc456-e",
+    "abc245-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "unit-dag-topological-processing",
+  "kind": "subsection",
+  "title": "DAGのtopological processing",
+  "parentId": "unit-directed-condensation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "DAGのtopological processingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3",
+    "source-abc277-editorial-5205-50a17c7304820afec392f4f5d2e4d68029b5d5917bed293338b3f1944e58fa31",
+    "source-abc277-f-problem-31003897c55646800d102d379355637ceb915026df0d7f2addf5b78c1530286b",
+    "source-abc291-e-problem-b4aa6695652e76710d85f04edb8fe4142c9a223d035e21a448bd784511ebbdef",
+    "source-abc291-editorial-5839-75dbcb01785be767795015ac01a55f88d3edeac3073ff634fb07b2dd0451dce9"
+  ],
+  "tagIds": [
+    "tag-dag-topological-processing"
+  ],
+  "ownedTagIds": [
+    "tag-dag-topological-processing"
+  ],
+  "learningOutcomeIds": [
+    "outcome-process-dag-in-topological-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-process-dag-in-topological-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/dag-topological-processing.md",
+  "problemIds": [
+    "abc277-f",
+    "abc291-e",
+    "abc315-e"
+  ],
+  "directProblemIds": [
+    "abc315-e",
+    "abc291-e",
+    "abc277-f"
+  ],
+  "relatedProblemIds": [
+    "abc224-e",
+    "abc304-ex",
+    "abc306-ex",
+    "abc324-f",
+    "abc335-e",
+    "abc341-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態グラフのモデリングと探索で得た考え方と実装を再利用し、DAGのtopological processingの発動条件・正当化・境界を重複なく学ぶ。"
+}

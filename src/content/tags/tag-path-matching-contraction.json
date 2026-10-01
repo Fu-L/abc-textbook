@@ -1,0 +1,54 @@
+{
+  "id": "tag-path-matching-contraction",
+  "name": "path matchingのheap縮約greedy",
+  "definition": "pathの非隣接edgeからk本を選ぶ最小重みmatchingを、最小edgeの採用と近傍二辺の補正縮約 w_l+w_r-w_i により全cardinalityについて順に求める。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-greedy-exchange-order",
+    "tag-priority-queue-best-first"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "linked alive edges",
+      "nonadjacent selection",
+      "weighted path edges"
+    ],
+    "triggerPatterns": [
+      "pathから隣接しないk辺",
+      "全kの最小費用",
+      "最小辺を選んで近傍を縮約"
+    ],
+    "invariantPatterns": [
+      "selected prefix is optimal by cardinality",
+      "補正edge preserves every remaining optimum"
+    ],
+    "goalPatterns": [
+      "cardinality別最小matching費用"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-priority-queue-best-first",
+      "type": "implementation_substrate",
+      "rationale": "現在もっとも有利な局所matching候補をheapから取り出し、縮約後の候補を再挿入する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-path-matching-by-contraction"
+  ],
+  "representativeProblemIds": [
+    "abc464-g",
+    "abc218-h"
+  ],
+  "aliases": [
+    "minimum k-matching on a path",
+    "path matching contraction",
+    "path matching縮約"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

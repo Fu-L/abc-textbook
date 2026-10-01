@@ -1,0 +1,50 @@
+{
+  "id": "unit-tree-ancestor-lca",
+  "kind": "subsection",
+  "title": "ancestor query・LCA",
+  "parentId": "unit-tree-decomposition",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "ancestor query・LCAの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
+    "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+    "source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f",
+    "source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971",
+    "source-abc298-editorial-6218-40986b7f851ab2196d74d174440ce6ebd7f8d977070f487178d42b543e7d46cd",
+    "source-abc298-ex-problem-306d0f55300f97018ec9802314cff3e14f0ea70b3bf1c58098b6b91d4a31789f"
+  ],
+  "tagIds": [
+    "tag-tree-ancestor-lca"
+  ],
+  "ownedTagIds": [
+    "tag-tree-ancestor-lca"
+  ],
+  "learningOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-ancestor-lca.md",
+  "problemIds": [
+    "abc298-ex"
+  ],
+  "directProblemIds": [
+    "abc298-ex"
+  ],
+  "relatedProblemIds": [
+    "abc267-f",
+    "abc294-g",
+    "abc329-g",
+    "abc405-f",
+    "abc438-f",
+    "abc460-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "doubling・binary liftingで得た考え方と実装を再利用し、ancestor query・LCAの発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "outcome-build-virtual-tree",
+  "statement": "対象頂点と必要なLCAだけをEuler順・stackで結び、元の木上pathを保つvirtual treeを構成できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries",
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "scopeIds": [
+    "abc340-g",
+    "tag-virtual-tree",
+    "unit-virtual-tree"
+  ]
+}

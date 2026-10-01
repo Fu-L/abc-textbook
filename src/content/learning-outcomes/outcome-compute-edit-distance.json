@@ -1,0 +1,10 @@
+{
+  "id": "outcome-compute-edit-distance",
+  "statement": "二つの列prefixを状態にし、一致・挿入・削除・置換の編集費用を最小化できる。閾値Kの判定では長さ差の下界から|i-j|≤Kの対角帯だけを計算できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc386-f",
+    "tag-edit-distance-dp",
+    "unit-dp-sequence"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "unit-lowlink-critical-structure",
+  "kind": "section",
+  "title": "lowlinkで橋・関節点を特定する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c",
+    "source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3",
+    "source-abc334-editorial-8980-3d87c1f6debe165775648233d1b40aee0cb40e57553b8350c6bc13fe79b54577",
+    "source-abc334-g-problem-de26773c3b0150fd9a0fea4e8edc637749a971c31cb9054fee55eb6ea37d6238",
+    "source-abc375-editorial-11133-4b7e5cfe9584c4fb06ab138b27bf0a6a43fb3b3849ea866173f55f2402ca4a90",
+    "source-abc375-g-problem-f352f03c0343c2e161ca8dfcc1c174eab4577a928b1141d454e0ac8c4873ed5f"
+  ],
+  "tagIds": [
+    "tag-lowlink-critical-structure"
+  ],
+  "ownedTagIds": [
+    "tag-lowlink-critical-structure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-identify-bridges-and-articulations"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-identify-bridges-and-articulations"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/lowlink-critical-structure.md",
+  "problemIds": [
+    "abc301-ex",
+    "abc334-g",
+    "abc375-g"
+  ],
+  "directProblemIds": [
+    "abc375-g",
+    "abc334-g",
+    "abc301-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DFS木を作れることを前提に、到達時刻とlowlink値から橋・関節点を判定する。"
+}

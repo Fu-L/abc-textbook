@@ -1,0 +1,16 @@
+{
+  "id": "outcome-use-tree-diameter-extrema",
+  "statement": "一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc221-f",
+    "abc222-f",
+    "abc267-f",
+    "abc361-e",
+    "abc401-f",
+    "abc428-e",
+    "abc460-f",
+    "tag-tree-metric-diameter",
+    "unit-tree-metric"
+  ]
+}

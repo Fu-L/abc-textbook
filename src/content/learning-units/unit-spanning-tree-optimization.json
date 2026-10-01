@@ -1,0 +1,62 @@
+{
+  "id": "unit-spanning-tree-optimization",
+  "kind": "section",
+  "title": "cut・cycle性質から最適全域木を構成する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-e-problem-fd038c963e1dc403914d5a7ff3aa845fd04851544626b8e27bad0b6280c77a46",
+    "source-abc218-editorial-2580-1817637543e3fc0f4358d20bff06ac071ce817c5352536b89ebc8bcee9714df9",
+    "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+    "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b",
+    "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+    "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93"
+  ],
+  "tagIds": [
+    "tag-kruskal-threshold-sweep",
+    "tag-spanning-tree-optimization"
+  ],
+  "ownedTagIds": [
+    "tag-spanning-tree-optimization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components",
+    "outcome-sweep-connectivity-by-kruskal-threshold"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/spanning-tree-optimization.md",
+  "problemIds": [
+    "abc218-e",
+    "abc235-e",
+    "abc250-ex",
+    "abc270-f",
+    "abc282-e",
+    "abc352-e",
+    "abc355-f",
+    "abc364-f",
+    "abc383-e"
+  ],
+  "directProblemIds": [
+    "abc218-e",
+    "abc352-e",
+    "abc282-e",
+    "abc270-f",
+    "abc364-f",
+    "abc355-f"
+  ],
+  "relatedProblemIds": [
+    "abc301-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "貪欲の交換論を土台に、cut・cycle性質から最適全域木の辺の採否条件を導く。DSUはKruskal順の閾値sweepで初めて必須にする。"
+}

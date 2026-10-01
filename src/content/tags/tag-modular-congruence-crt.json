@@ -1,0 +1,49 @@
+{
+  "id": "tag-modular-congruence-crt",
+  "name": "一次合同・CRT",
+  "definition": "一次合同のgcd可解性を判定し、互いに素でない法も含めて複数の剰余類を一つへ統合する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-bezout-diophantine",
+    "tag-modular-arithmetic"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "剰余類",
+      "合同式",
+      "法"
+    ],
+    "triggerPatterns": [
+      "ax=b mod m",
+      "複数の法"
+    ],
+    "invariantPatterns": [
+      "gcd整合性",
+      "lcm法"
+    ],
+    "goalPatterns": [
+      "合同解構成",
+      "最小非負解"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-solve-modular-constraints"
+  ],
+  "representativeProblemIds": [
+    "abc245-ex",
+    "abc286-f"
+  ],
+  "aliases": [
+    "CRT",
+    "Chinese remainder theorem",
+    "一次合同式",
+    "中国剰余定理"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,14 @@
+{
+  "id": "outcome-count-orbits-by-fixed-points",
+  "statement": "群作用の固定点数を群要素のcycle typeごとに数え、BurnsideまたはPólyaの平均でorbit数を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
+    "outcome-normalize-equivalent-states"
+  ],
+  "scopeIds": [
+    "abc284-ex",
+    "abc428-g",
+    "tag-group-action-orbit-counting",
+    "unit-orbit-counting"
+  ]
+}

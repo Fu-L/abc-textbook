@@ -1,0 +1,81 @@
+{
+  "id": "unit-ordered-set-heap",
+  "kind": "section",
+  "title": "heap・ordered setで全候補の極値を保つ",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "支配関係で一度捨てた候補を戻さない単調stack・queue。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+    "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028",
+    "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+    "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
+    "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
+    "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8"
+  ],
+  "tagIds": [
+    "tag-ordered-set-multiset",
+    "tag-priority-queue-best-first"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-enumerate-frontier-best-first",
+    "outcome-maintain-ordered-set-statistics"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/ordered-set-heap.md",
+  "problemIds": [
+    "abc281-e",
+    "abc297-e",
+    "abc305-e",
+    "abc306-e",
+    "abc308-g",
+    "abc314-g",
+    "abc330-e",
+    "abc331-e",
+    "abc356-f",
+    "abc384-e",
+    "abc391-f",
+    "abc409-f",
+    "abc431-g",
+    "abc440-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc214-e",
+    "abc217-e",
+    "abc218-g",
+    "abc218-h",
+    "abc245-e",
+    "abc249-f",
+    "abc250-g",
+    "abc252-f",
+    "abc268-ex",
+    "abc273-ex",
+    "abc275-ex",
+    "abc307-f",
+    "abc319-f",
+    "abc319-g",
+    "abc320-e",
+    "abc324-g",
+    "abc342-g",
+    "abc359-f",
+    "abc364-f",
+    "abc368-g",
+    "abc373-f",
+    "abc376-e",
+    "abc376-g",
+    "abc406-g",
+    "abc407-e",
+    "abc407-f",
+    "abc418-f",
+    "abc444-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "比較可能な候補全体から極値・順位・隣接を繰り返し取り出すため、動的な順序を保つ。"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "unit-discrete-convex",
+  "kind": "section",
+  "title": "凸性・傾き・限界費用・slope trick",
+  "parentId": "unit-chapter-geometry-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "真偽値の単調境界探索と、交換論だけで決まる貪欲順。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef",
+    "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323",
+    "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+    "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72"
+  ],
+  "tagIds": [
+    "tag-basic-convex-optimization",
+    "tag-isotonic-regression-pav",
+    "tag-separable-convex-marginals",
+    "tag-slope-trick"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs",
+    "outcome-maintain-piecewise-linear-convex-function",
+    "outcome-optimize-univariate-convex-function",
+    "outcome-solve-isotonic-regression-by-pav"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/discrete-convex.md",
+  "problemIds": [
+    "abc216-e",
+    "abc217-h",
+    "abc224-g",
+    "abc250-g",
+    "abc275-ex",
+    "abc314-ex",
+    "abc359-f",
+    "abc369-g",
+    "abc373-f",
+    "abc383-g",
+    "abc389-e",
+    "abc406-g",
+    "abc458-g",
+    "abc459-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc229-g",
+    "abc240-f",
+    "abc263-g",
+    "abc330-f",
+    "abc462-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "目的関数の凸・凹性と傾き変化を捉え、breakpointや限界費用から最適点を求める。"
+}

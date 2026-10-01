@@ -1,0 +1,106 @@
+{
+  "id": "unit-event-sweep",
+  "kind": "section",
+  "title": "event順にactive集合を更新する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+    "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028",
+    "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
+    "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e",
+    "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3"
+  ],
+  "tagIds": [
+    "tag-event-sweep"
+  ],
+  "ownedTagIds": [
+    "tag-event-sweep"
+  ],
+  "learningOutcomeIds": [
+    "outcome-linearize-events"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-linearize-events"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/event-sweep.md",
+  "problemIds": [
+    "abc231-f",
+    "abc266-ex",
+    "abc274-f",
+    "abc283-f",
+    "abc309-f",
+    "abc311-g",
+    "abc320-e",
+    "abc327-f",
+    "abc346-g",
+    "abc360-f",
+    "abc363-e",
+    "abc368-e",
+    "abc449-e",
+    "abc449-f",
+    "abc453-e"
+  ],
+  "directProblemIds": [
+    "abc320-e",
+    "abc363-e",
+    "abc453-e",
+    "abc231-f",
+    "abc309-f",
+    "abc327-f",
+    "abc283-f",
+    "abc449-e",
+    "abc449-f",
+    "abc368-e",
+    "abc346-g",
+    "abc311-g",
+    "abc274-f",
+    "abc360-f",
+    "abc266-ex"
+  ],
+  "relatedProblemIds": [
+    "abc214-e",
+    "abc223-h",
+    "abc224-e",
+    "abc233-ex",
+    "abc235-e",
+    "abc240-ex",
+    "abc245-e",
+    "abc250-ex",
+    "abc254-g",
+    "abc263-ex",
+    "abc268-ex",
+    "abc280-g",
+    "abc287-ex",
+    "abc296-g",
+    "abc301-ex",
+    "abc306-f",
+    "abc308-f",
+    "abc332-g",
+    "abc337-g",
+    "abc344-g",
+    "abc351-f",
+    "abc361-g",
+    "abc393-f",
+    "abc394-g",
+    "abc401-e",
+    "abc407-f",
+    "abc408-f",
+    "abc410-g",
+    "abc411-e",
+    "abc431-g",
+    "abc433-e",
+    "abc436-f",
+    "abc438-g",
+    "abc447-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "値・時刻・座標順にeventを並べ、同値eventの処理順を決めてactive集合を増分更新する。逆向き処理や寄与分解とは不変量が異なるため独立に学ぶ。"
+}

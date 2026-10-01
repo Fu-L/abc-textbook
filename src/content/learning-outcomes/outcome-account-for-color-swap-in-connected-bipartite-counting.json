@@ -1,0 +1,10 @@
+{
+  "id": "outcome-account-for-color-swap-in-connected-bipartite-counting",
+  "statement": "連結二部グラフの二つの彩色が部の交換だけで対応することを使い、彩色付きの計数から同じグラフの重複を補正できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc327-g",
+    "tag-bipartite-structure",
+    "unit-bipartite-structure"
+  ]
+}

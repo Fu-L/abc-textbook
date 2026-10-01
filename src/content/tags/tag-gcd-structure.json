@@ -1,0 +1,46 @@
+{
+  "id": "tag-gcd-structure",
+  "name": "gcd不変量・差分構造",
+  "definition": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "共通因子",
+      "差分",
+      "整数列"
+    ],
+    "triggerPatterns": [
+      "全要素へ同じ加算",
+      "共通に割る",
+      "差が不変"
+    ],
+    "invariantPatterns": [
+      "gcd",
+      "差分"
+    ],
+    "goalPatterns": [
+      "range gcd",
+      "整数構造縮約"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-reduce-integer-structure-by-gcd"
+  ],
+  "representativeProblemIds": [
+    "abc254-f",
+    "abc438-g"
+  ],
+  "aliases": [
+    "gcd不変量",
+    "range gcd",
+    "差分gcd"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

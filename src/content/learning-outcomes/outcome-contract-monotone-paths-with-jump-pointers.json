@@ -1,0 +1,10 @@
+{
+  "id": "outcome-contract-monotone-paths-with-jump-pointers",
+  "statement": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc295-g",
+    "tag-monotone-path-contraction",
+    "unit-monotone-path-contraction"
+  ]
+}

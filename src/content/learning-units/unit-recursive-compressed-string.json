@@ -1,0 +1,49 @@
+{
+  "id": "unit-recursive-compressed-string",
+  "kind": "section",
+  "title": "圧縮・反復・再帰文字列へ問い合わせる",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "明示された文字列への接尾辞索引の構築。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01",
+    "source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a",
+    "source-abc350-editorial-9820-549515ed8d09eb95e0a434d4ec275e0301e82b6916862a383d68a0842b756fd5",
+    "source-abc350-f-problem-4739078c1c1a4520eff726101b57fa7e3fd82c645cc07c657b265f658b31d0d6",
+    "source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee",
+    "source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"
+  ],
+  "tagIds": [
+    "tag-recursive-compressed-string"
+  ],
+  "ownedTagIds": [
+    "tag-recursive-compressed-string"
+  ],
+  "learningOutcomeIds": [
+    "outcome-query-recursively-defined-string"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-query-recursively-defined-string"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/recursive-compressed-string.md",
+  "problemIds": [
+    "abc346-f",
+    "abc350-f",
+    "abc417-g",
+    "abc450-e"
+  ],
+  "directProblemIds": [
+    "abc450-e",
+    "abc350-f",
+    "abc346-f",
+    "abc417-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "明示展開できない文字列をblock長と再帰構造で表し、位置を構成要素へ降ろして照会する。"
+}

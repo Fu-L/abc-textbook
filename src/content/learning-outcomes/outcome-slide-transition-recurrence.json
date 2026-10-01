@@ -1,0 +1,13 @@
+{
+  "id": "outcome-slide-transition-recurrence",
+  "statement": "隣接する出力の遷移式を比較し、共通項の消去と出入りする項から定数時間更新を導ける。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc235-g",
+    "abc333-f",
+    "tag-dp-transition-acceleration",
+    "unit-dp-transition-optimization"
+  ]
+}

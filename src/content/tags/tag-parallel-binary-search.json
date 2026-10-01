@@ -1,0 +1,53 @@
+{
+  "id": "tag-parallel-binary-search",
+  "name": "parallel binary search・多数境界の判定共有",
+  "definition": "多数queryの未知境界をmidごとにbucketし、更新を一方向に進める判定器を各roundで共有する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [
+    "tag-monotone-threshold-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "many monotone queries",
+      "shared checker",
+      "threshold events"
+    ],
+    "triggerPatterns": [
+      "queryごとに最小時刻",
+      "判定器を共有"
+    ],
+    "invariantPatterns": [
+      "event pointer monotone",
+      "各queryのlo/hi"
+    ],
+    "goalPatterns": [
+      "全queryの境界"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-monotone-threshold-search",
+      "type": "extension",
+      "rationale": "単一queryの単調境界探索を、多数queryのmidをbucket化して判定器を共有するoffline round処理へ拡張する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-share-threshold-checks-by-parallel-binary-search"
+  ],
+  "representativeProblemIds": [
+    "abc233-ex",
+    "abc394-g"
+  ],
+  "aliases": [
+    "batched monotone search",
+    "parallel binary search",
+    "simultaneous binary search",
+    "並列二分探索"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

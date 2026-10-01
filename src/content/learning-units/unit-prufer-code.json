@@ -1,0 +1,39 @@
+{
+  "id": "unit-prufer-code",
+  "kind": "section",
+  "title": "Prüfer code・次数制約付きlabel木",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Prüfer code・次数制約付きlabel木の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc303-editorial-6425-145eaa525a03e51f289be86aa8bfc1fdac81daaab3e0b34cba01fe494b1a4506",
+    "source-abc303-ex-problem-267a3028ae4d2520204c715bf88d04e5e0021b870033e77b67444f1502079e89"
+  ],
+  "tagIds": [
+    "tag-prufer-code"
+  ],
+  "ownedTagIds": [
+    "tag-prufer-code"
+  ],
+  "learningOutcomeIds": [
+    "outcome-encode-labeled-trees-by-prufer-code"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-encode-labeled-trees-by-prufer-code"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/prufer-code.md",
+  "problemIds": [
+    "abc303-ex"
+  ],
+  "directProblemIds": [
+    "abc303-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "組合せ係数・数え上げで得た考え方と実装を再利用し、Prüfer code・次数制約付きlabel木の発動条件・正当化・境界を重複なく学ぶ。"
+}

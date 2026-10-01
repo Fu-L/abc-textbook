@@ -1,0 +1,37 @@
+{
+  "id": "outcome-model-and-compute-shortest-path",
+  "statement": "非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc213-e",
+    "abc218-f",
+    "abc232-g",
+    "abc237-e",
+    "abc243-ex",
+    "abc245-g",
+    "abc246-e",
+    "abc250-ex",
+    "abc252-e",
+    "abc257-f",
+    "abc261-g",
+    "abc277-e",
+    "abc297-e",
+    "abc299-e",
+    "abc301-e",
+    "abc305-e",
+    "abc307-f",
+    "abc325-e",
+    "abc342-e",
+    "abc364-g",
+    "abc375-g",
+    "abc395-e",
+    "abc395-g",
+    "abc414-g",
+    "abc431-e",
+    "abc463-e",
+    "tag-shortest-path",
+    "unit-weighted-shortest-path"
+  ]
+}

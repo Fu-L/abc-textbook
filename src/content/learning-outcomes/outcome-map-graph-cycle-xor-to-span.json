@@ -1,0 +1,12 @@
+{
+  "id": "outcome-map-graph-cycle-xor-to-span",
+  "statement": "spanning treeのroot-to-vertex XOR potentialで辺ラベルをfundamental cycleのXORへ変換し、cycle spaceの線形像が非木辺ごとのcycle XORのspanと一致することを示して、walkへ挿入できるXOR値をbasisで表せる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-use-cycle-space-basis"
+  ],
+  "scopeIds": [
+    "abc451-g",
+    "tag-cycle-space-basis",
+    "unit-cycle-space-basis"
+  ]
+}

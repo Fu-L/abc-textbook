@@ -1,0 +1,62 @@
+{
+  "id": "tag-xor-threshold-matching",
+  "name": "XOR閾値matchingのbit分割再帰",
+  "definition": "固定閾値xに対し、XORがx以上となる最大pair数を求める。最上位bitで集合を分け、閾値bitが0なら確定できるcross pairを最大化し、1ならcross pairだけを残し、同一集合内と二集合間の再帰値を合成する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [
+    "tag-recursive-divide-and-conquer"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "XOR閾値",
+      "pair",
+      "整数集合",
+      "最大matching数"
+    ],
+    "triggerPatterns": [
+      "XORが閾値以上",
+      "medianの可否",
+      "pair可能数の最大化"
+    ],
+    "invariantPatterns": [
+      "下位bitへ残すpair",
+      "最上位の異なるbit",
+      "確定cross pair"
+    ],
+    "goalPatterns": [
+      "matching feasibility",
+      "閾値を満たす最大pair数"
+    ],
+    "excludedPatterns": [
+      "XOR minimax",
+      "上位bitからmaskを固定するfeasibility greedy"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-bitwise-minimax-partition",
+      "type": "contrast",
+      "rationale": "XOR閾値を満たすpairの最大matching数をbit再帰で求める判定器と、共通maskを選んで全pairの最大XORを最小化する再帰を区別する。"
+    },
+    {
+      "tagId": "tag-monotone-threshold-search",
+      "type": "often_combined",
+      "rationale": "固定XOR閾値での最大matching数をbit再帰で判定し、その成立数が閾値に対して単調な場合に外側の二分探索と組み合わせる。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-xor-threshold-matching"
+  ],
+  "representativeProblemIds": [
+    "abc304-g"
+  ],
+  "aliases": [
+    "XOR threshold matching",
+    "XOR閾値matching"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

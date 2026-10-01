@@ -1,0 +1,54 @@
+{
+  "id": "tag-xor-linear-basis",
+  "name": "XOR線形基底",
+  "definition": "整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "basis",
+      "bit vector",
+      "pivot bit"
+    ],
+    "triggerPatterns": [
+      "XORで生成",
+      "独立なら追加"
+    ],
+    "invariantPatterns": [
+      "span",
+      "異なる最高bit"
+    ],
+    "goalPatterns": [
+      "rank",
+      "最大XOR",
+      "表現判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-cycle-space-basis",
+      "type": "analogy",
+      "rationale": "辺集合の対称差と整数のbitwise XORはどちらもF_2上の線形結合・独立性・基底で整理できるが、cycle spaceは偶数次数制約とfundamental cycleに固有の構成を持つ。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative"
+  ],
+  "representativeProblemIds": [
+    "abc223-h",
+    "abc249-g",
+    "abc451-g"
+  ],
+  "aliases": [
+    "XOR basis",
+    "XOR線形基底",
+    "linear basis over F2"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,44 @@
+{
+  "id": "tag-endpoint-run-partition",
+  "name": "端点更新型のrun分割管理",
+  "definition": "順序付きのrun分割をdequeや連結リストで保持し、両端からの削除・分割・追加を行う。左端順setを使うODTとは区別する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "deque",
+      "区間境界",
+      "順序付きrun"
+    ],
+    "triggerPatterns": [
+      "両端からrunを削る",
+      "端点側で区間を分割・追加"
+    ],
+    "invariantPatterns": [
+      "run順序",
+      "各要素の一度限りの除去",
+      "境界の復元"
+    ],
+    "goalPatterns": [
+      "操作列の償却評価",
+      "端点操作によるrun分割管理"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-endpoint-run-partition"
+  ],
+  "representativeProblemIds": [
+    "abc428-f"
+  ],
+  "aliases": [
+    "dequeによるrun管理",
+    "端点更新run分割"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,72 @@
+{
+  "id": "unit-ordered-set-multiset",
+  "kind": "subsection",
+  "title": "ordered set・multisetの動的順序管理",
+  "parentId": "unit-ordered-set-heap",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
+    "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8",
+    "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
+    "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b",
+    "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81",
+    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a"
+  ],
+  "tagIds": [
+    "tag-ordered-set-multiset"
+  ],
+  "ownedTagIds": [
+    "tag-ordered-set-multiset"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-ordered-set-statistics"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-ordered-set-statistics"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/ordered-set-multiset.md",
+  "problemIds": [
+    "abc281-e",
+    "abc306-e",
+    "abc308-g",
+    "abc314-g",
+    "abc330-e",
+    "abc356-f",
+    "abc431-g"
+  ],
+  "directProblemIds": [
+    "abc330-e",
+    "abc306-e",
+    "abc281-e",
+    "abc308-g",
+    "abc356-f",
+    "abc314-g",
+    "abc431-g"
+  ],
+  "relatedProblemIds": [
+    "abc218-g",
+    "abc245-e",
+    "abc268-ex",
+    "abc273-ex",
+    "abc275-ex",
+    "abc319-g",
+    "abc320-e",
+    "abc324-g",
+    "abc342-g",
+    "abc364-f",
+    "abc368-g",
+    "abc376-e",
+    "abc406-g",
+    "abc407-f",
+    "abc418-f",
+    "abc444-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-information-theoretic-query-design",
+  "kind": "section",
+  "title": "情報量下界・query符号設計",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "情報量下界・query符号設計の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc337-e-problem-c271f91dc94665b3ed37a649a8e7bf4c8ceee5841575043db1b115ac4ab50107",
+    "source-abc337-editorial-9140-08f8e16eb890f32d190513e81b876419b7854ca177a47d8c80c5b56ffb6c6261"
+  ],
+  "tagIds": [
+    "tag-information-theoretic-query-design"
+  ],
+  "ownedTagIds": [
+    "tag-information-theoretic-query-design"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-query-code-by-information-bound"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-query-code-by-information-bound"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/information-theoretic-query-design.md",
+  "problemIds": [
+    "abc337-e"
+  ],
+  "directProblemIds": [
+    "abc337-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "応答alphabetとquery回数から識別可能状態数の下界を出し、その下界に一致するcodeword割当と復号を構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

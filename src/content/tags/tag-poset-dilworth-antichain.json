@@ -1,0 +1,57 @@
+{
+  "id": "tag-poset-dilworth-antichain",
+  "name": "半順序・Dilworth・最大反鎖",
+  "definition": "比較可能性をposetとして明示し、antichain・chain cover・LDS・bipartite matching/min-cutの双対関係を選んで最適化する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-bipartite-matching-hall",
+    "tag-sequence-subsequence-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "antichain",
+      "chain",
+      "partially ordered set"
+    ],
+    "triggerPatterns": [
+      "先後制約",
+      "包含関係",
+      "比較不能集合"
+    ],
+    "invariantPatterns": [
+      "comparability DAG",
+      "max antichain=min chain cover"
+    ],
+    "goalPatterns": [
+      "最大反鎖",
+      "最小chain分割"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-bipartite-matching-hall",
+      "type": "reduction",
+      "rationale": "posetの比較可能性から二部graphを構成し、最小chain cover・最大antichainの最適化を最大二部matchingへ意味保存変換する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-poset-antichain-by-dilworth"
+  ],
+  "representativeProblemIds": [
+    "abc237-ex",
+    "abc354-g",
+    "abc457-g"
+  ],
+  "aliases": [
+    "Dilworth theorem",
+    "Dilworthの定理",
+    "minimum chain cover",
+    "最大反鎖"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

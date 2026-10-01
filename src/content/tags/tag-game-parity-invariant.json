@@ -1,0 +1,58 @@
+{
+  "id": "tag-game-parity-invariant",
+  "name": "偶奇不変量によるゲーム戦略",
+  "definition": "後続局面をDPで列挙せず、合法手の独立な消費や終端状態の偶奇不変量を証明して、先手・後手の勝敗を決める。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二人ゲーム",
+      "先手",
+      "合法手",
+      "後手",
+      "残り手数"
+    ],
+    "triggerPatterns": [
+      "一手ごとに候補を消費",
+      "不変量から勝敗",
+      "候補数の偶奇",
+      "終端量の偶奇"
+    ],
+    "invariantPatterns": [
+      "合法手集合が変わらない",
+      "手数の偶奇",
+      "終端状態の偶奇"
+    ],
+    "goalPatterns": [
+      "先手勝ち",
+      "勝敗",
+      "勝者",
+      "後手勝ち"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-game-grundy-dp",
+      "type": "contrast",
+      "rationale": "後続局面を再帰計算してmexや勝敗を求める方法と、合法手数・終端量の偶奇から局面探索なしに勝敗を決める方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-game-by-parity-invariant"
+  ],
+  "representativeProblemIds": [
+    "abc398-e",
+    "abc398-g"
+  ],
+  "aliases": [
+    "parity invariant game",
+    "ゲームの偶奇戦略",
+    "手数parity"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

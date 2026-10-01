@@ -1,0 +1,43 @@
+{
+  "id": "unit-fps-composition-power-projection",
+  "kind": "section",
+  "title": "FPS合成・power projection",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "FPS合成・power projectionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc387-editorial-11727-51ed3d58cafe5fc3398d59a1439db00f31146203b928f246491f4fa02c90d9f0",
+    "source-abc387-g-problem-eecc85664ab281a340433ab68292e3f5b529d75e82f592f22bdc8746d35a2043",
+    "source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c",
+    "source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"
+  ],
+  "tagIds": [
+    "tag-fps-composition-power-projection"
+  ],
+  "ownedTagIds": [
+    "tag-fps-composition-power-projection"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compose-series-and-project-powers"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compose-series-and-project-powers"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md",
+  "problemIds": [
+    "abc387-g",
+    "abc439-g"
+  ],
+  "directProblemIds": [
+    "abc387-g",
+    "abc439-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "形式的べき級数の基本演算で得た考え方と実装を再利用し、FPS合成・power projectionの発動条件・正当化・境界を重複なく学ぶ。"
+}

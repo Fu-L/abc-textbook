@@ -1,0 +1,43 @@
+{
+  "id": "unit-cyclic-minimax-game",
+  "kind": "section",
+  "title": "循環局面の後退解析とminimax距離",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "循環局面の後退解析とminimax距離の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc261-editorial-4449-283c82cd2f95a81da0d4a7511ccaffbfac7d49758651852afd673915bcf5f48d",
+    "source-abc261-ex-problem-9f5dba9306961f610913ad38f6a88ac74ad315e427d5a02594e2b2ac78c0e84d",
+    "source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42",
+    "source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"
+  ],
+  "tagIds": [
+    "tag-cyclic-minimax-game"
+  ],
+  "ownedTagIds": [
+    "tag-cyclic-minimax-game"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-cyclic-minimax-game"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-cyclic-minimax-game"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/cyclic-minimax-game.md",
+  "problemIds": [
+    "abc261-ex",
+    "abc413-f"
+  ],
+  "directProblemIds": [
+    "abc413-f",
+    "abc261-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "有限局面DAGのminimaxで得た考え方と実装を再利用し、循環局面の後退解析とminimax距離の発動条件・正当化・境界を重複なく学ぶ。"
+}

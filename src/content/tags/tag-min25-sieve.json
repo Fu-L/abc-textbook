@@ -1,0 +1,45 @@
+{
+  "id": "tag-min25-sieve",
+  "name": "Min_25・Lucy DP型の総和篩",
+  "definition": "floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "multiplicative function",
+      "prime powers",
+      "quotient blocks"
+    ],
+    "triggerPatterns": [
+      "Nが大きい",
+      "Nまでの乗法的関数和"
+    ],
+    "invariantPatterns": [
+      "floor quotient states",
+      "smallest prime factor"
+    ],
+    "goalPatterns": [
+      "prefix sum of multiplicative function"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-sum-multiplicative-function-by-min25-sieve"
+  ],
+  "representativeProblemIds": [
+    "abc370-g"
+  ],
+  "aliases": [
+    "Lucy DP",
+    "Min_25 sieve",
+    "multiplicative-function summatory sieve"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

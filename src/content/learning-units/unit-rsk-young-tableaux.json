@@ -1,0 +1,39 @@
+{
+  "id": "unit-rsk-young-tableaux",
+  "kind": "section",
+  "title": "Robinson–Schensted対応・Young tableau",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Robinson–Schensted対応・Young tableauの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db",
+    "source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"
+  ],
+  "tagIds": [
+    "tag-rsk-young-tableaux"
+  ],
+  "ownedTagIds": [
+    "tag-rsk-young-tableaux"
+  ],
+  "learningOutcomeIds": [
+    "outcome-translate-sequences-by-rsk"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-translate-sequences-by-rsk"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md",
+  "problemIds": [
+    "abc378-g"
+  ],
+  "directProblemIds": [
+    "abc378-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

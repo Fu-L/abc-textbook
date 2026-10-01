@@ -1,0 +1,65 @@
+{
+  "id": "unit-graph-search",
+  "kind": "section",
+  "title": "状態グラフ探索・到達関係",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "eventをsortしてactive集合を増減するsweep line。",
+    "非負重み付き距離の緩和・確定と最短路certificateの復元。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+    "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638",
+    "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+    "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6",
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"
+  ],
+  "tagIds": [
+    "tag-directional-grid-effect-scan",
+    "tag-state-graph-search",
+    "tag-transitive-closure"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-compute-transitive-closure",
+    "outcome-precompute-directional-grid-effects",
+    "outcome-select-state-graph-search"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/graph-search.md",
+  "problemIds": [
+    "abc241-f",
+    "abc244-f",
+    "abc287-ex",
+    "abc289-e",
+    "abc292-e",
+    "abc302-f",
+    "abc305-f",
+    "abc317-e",
+    "abc319-g",
+    "abc355-e",
+    "abc361-g",
+    "abc394-e",
+    "abc414-f",
+    "abc427-e",
+    "abc429-e",
+    "abc443-f",
+    "abc446-e",
+    "abc446-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc257-g",
+    "abc336-f",
+    "abc374-g",
+    "abc413-f",
+    "abc417-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "既知のDFS・BFS実装を土台に、長距離効果は探索前の方向別scanで静的な通行条件へ変換し、問題の状態を頂点、合法操作を辺として設計して到達関係を求める。"
+}

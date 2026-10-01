@@ -1,0 +1,12 @@
+{
+  "id": "outcome-expand-euler-product-sparsely",
+  "statement": "Eulerの五角数定理により∏(1−x^i)を符号付きの疎な係数列へ展開し、必要次数までのO(√N)項で係数抽出できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "scopeIds": [
+    "abc279-ex",
+    "tag-generating-function-coefficients",
+    "unit-generating-function-coefficients"
+  ]
+}

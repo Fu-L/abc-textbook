@@ -1,0 +1,53 @@
+{
+  "id": "unit-convex-boundary-hull",
+  "kind": "subsection",
+  "title": "凸包・支持方向・境界候補",
+  "parentId": "unit-convex-geometry",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+    "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+    "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
+    "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731",
+    "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"
+  ],
+  "tagIds": [
+    "tag-convex-boundary-hull"
+  ],
+  "ownedTagIds": [
+    "tag-convex-boundary-hull"
+  ],
+  "learningOutcomeIds": [
+    "outcome-restrict-geometric-candidates-to-boundary"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-restrict-geometric-candidates-to-boundary"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
+  "problemIds": [
+    "abc244-ex",
+    "abc257-ex",
+    "abc275-g",
+    "abc286-ex",
+    "abc341-g",
+    "abc356-g"
+  ],
+  "directProblemIds": [
+    "abc341-g",
+    "abc275-g",
+    "abc286-ex",
+    "abc244-ex",
+    "abc356-g",
+    "abc257-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、凸包・支持方向・境界候補の発動条件・正当化・境界を重複なく学ぶ。"
+}

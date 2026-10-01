@@ -1,0 +1,18 @@
+{
+  "id": "outcome-partition-integer-parameter-ranges",
+  "statement": "floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc230-e",
+    "abc239-ex",
+    "abc243-g",
+    "abc293-f",
+    "abc356-e",
+    "abc361-f",
+    "abc370-g",
+    "abc414-e",
+    "abc452-e",
+    "tag-integer-boundary-blocks",
+    "unit-integer-boundary-blocks"
+  ]
+}

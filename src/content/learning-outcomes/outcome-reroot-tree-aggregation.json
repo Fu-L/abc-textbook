@@ -1,0 +1,15 @@
+{
+  "id": "outcome-reroot-tree-aggregation",
+  "statement": "子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "scopeIds": [
+    "abc220-f",
+    "abc223-g",
+    "abc348-e",
+    "abc460-g",
+    "tag-rerooting",
+    "unit-rerooting"
+  ]
+}

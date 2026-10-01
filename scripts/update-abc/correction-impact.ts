@@ -6,7 +6,6 @@ export interface CorrectionLocator {
   readonly learningUnitId: string;
   readonly exampleKey: string;
   readonly exerciseKey: string;
-  readonly orderId: string;
   readonly indexPaths: readonly string[];
 }
 
@@ -54,7 +53,6 @@ export const enumerateCorrectionImpacts = (input: {
         path: `exercises.${locator.exerciseKey}.answer`,
       },
     ]),
-    affectedLearningUnitOrderIds: [...new Set(locators.map(({ orderId }) => orderId))],
     derivedIndexPaths: [...new Set(locators.flatMap(({ indexPaths }) => indexPaths))],
     verificationStatus: 'pending',
   });

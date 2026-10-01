@@ -54,7 +54,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "name": "self-loop期待値方程式",
+      "name": "自己ループを除いた到達確率方程式",
       "trigger": "遷移に同じ状態が含まれる。",
       "application": "自己項を左辺へ移してDAG状遷移にする。",
       "evidenceIds": ["evidence-official-analysis"]
@@ -69,7 +69,7 @@
   ],
   "prerequisiteCandidates": [
     {
-      "text": "期待確率の一歩解析とメモ化再帰。",
+      "text": "到達確率の一歩解析とメモ化再帰。待ち時間を数える期待回数の式との違いを説明できること。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

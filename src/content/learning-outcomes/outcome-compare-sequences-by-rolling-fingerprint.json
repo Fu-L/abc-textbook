@@ -1,0 +1,11 @@
+{
+  "id": "outcome-compare-sequences-by-rolling-fingerprint",
+  "statement": "順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc274-ex",
+    "abc331-f",
+    "tag-sequence-fingerprint",
+    "unit-sequence-fingerprint"
+  ]
+}

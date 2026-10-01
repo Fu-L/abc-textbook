@@ -1,0 +1,55 @@
+{
+  "id": "tag-stochastic-expectation-dp",
+  "name": "確率・期待値DP",
+  "definition": "確率遷移に対する期待値・分布・到達確率の再帰式を解く。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "ランダム",
+      "分布",
+      "期待値",
+      "確率"
+    ],
+    "triggerPatterns": [
+      "期待値の線形性",
+      "等確率",
+      "遷移確率"
+    ],
+    "invariantPatterns": [
+      "吸収",
+      "期待回数",
+      "確率分布"
+    ],
+    "goalPatterns": [
+      "分布",
+      "期待値",
+      "確率"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-stochastic-actions",
+    "outcome-propagate-probability-distribution",
+    "outcome-solve-stochastic-recurrence"
+  ],
+  "representativeProblemIds": [
+    "abc266-e",
+    "abc298-e",
+    "abc226-h"
+  ],
+  "aliases": [
+    "Markov DP",
+    "stochastic dynamic programming",
+    "期待値DP",
+    "確率DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

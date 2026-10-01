@@ -77,7 +77,6 @@ describe('US5 update validation', () => {
           learningUnitId: 'unit-abc500-e',
           exampleKey: 'worked-example',
           exerciseKey: 'practice',
-          orderId: 'order-preview',
           indexPaths: ['staging/previews/initial-v1/taxonomy/index.json'],
         },
       ],

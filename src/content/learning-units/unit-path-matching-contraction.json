@@ -1,0 +1,43 @@
+{
+  "id": "unit-path-matching-contraction",
+  "kind": "section",
+  "title": "path matchingのheap縮約greedy",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "path matchingのheap縮約greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
+    "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
+    "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
+  ],
+  "tagIds": [
+    "tag-path-matching-contraction"
+  ],
+  "ownedTagIds": [
+    "tag-path-matching-contraction"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-path-matching-by-contraction"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-path-matching-by-contraction"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/path-matching-contraction.md",
+  "problemIds": [
+    "abc218-h",
+    "abc464-g"
+  ],
+  "directProblemIds": [
+    "abc464-g",
+    "abc218-h"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "path matchingの交互構造を使い、最小edgeの採用後も残りの全cardinality最適値を保存する補正縮約を導いてheapと双方向linkで実装する。"
+}

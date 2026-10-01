@@ -1,0 +1,62 @@
+{
+  "id": "tag-integer-boundary-blocks",
+  "name": "整数境界・同値区間分割",
+  "definition": "floor値・整数根・表記桁数・圧縮block内の式が変わる整数境界を正確に分け、区間ごとに処理する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "floor",
+      "商",
+      "基数",
+      "整数根",
+      "桁数",
+      "累乗"
+    ],
+    "triggerPatterns": [
+      "オーバーフローしない",
+      "値が変わる境界",
+      "同じ商"
+    ],
+    "invariantPatterns": [
+      "区間内で一定",
+      "境界",
+      "整数誤差"
+    ],
+    "goalPatterns": [
+      "個数",
+      "列挙",
+      "最大の整数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-euclidean-floor-sum",
+      "type": "contrast",
+      "rationale": "商が一定の区間を列挙するO(√N)の分割と、床和の格子点領域を転置して法を減らすO(log m)の再帰を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-piecewise-linear-integer-ranges"
+  ],
+  "representativeProblemIds": [
+    "abc230-e",
+    "abc293-f",
+    "abc239-ex",
+    "abc318-f"
+  ],
+  "aliases": [
+    "floor quotient grouping",
+    "商が一定の区間",
+    "整数平方根"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,69 @@
+{
+  "id": "unit-two-pointers-window",
+  "kind": "section",
+  "title": "尺取り法・sliding windowで連続区間を走査する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "値域上の真偽境界を探す二分探索・パラメトリックサーチ。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+    "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537",
+    "source-abc250-editorial-3928-5023b9af8aa1da66ab00900f5b4489f1f6945435795598250a9021f4744f04b9",
+    "source-abc250-f-problem-f073c65fa9a08b3cce95e5d85aac92471a16dda3bec9211a0af9189e1ebec2b2",
+    "source-abc258-e-problem-0364fdbf688afacf3ea02f0bfc43da2acc99ce5dd8a122b17d767aff74275084",
+    "source-abc258-editorial-4215-8032ea71bad48ab39a21683e9c46e7343d183f364d135e122f077ea621e02973"
+  ],
+  "tagIds": [
+    "tag-two-pointers-window"
+  ],
+  "ownedTagIds": [
+    "tag-two-pointers-window"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-monotone-window"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-monotone-window"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/two-pointers-window.md",
+  "problemIds": [
+    "abc250-f",
+    "abc258-e",
+    "abc260-e",
+    "abc294-e",
+    "abc337-f",
+    "abc370-f",
+    "abc444-e",
+    "abc452-f"
+  ],
+  "directProblemIds": [
+    "abc294-e",
+    "abc444-e",
+    "abc258-e",
+    "abc452-f",
+    "abc260-e",
+    "abc250-f",
+    "abc370-f",
+    "abc337-f"
+  ],
+  "relatedProblemIds": [
+    "abc215-f",
+    "abc281-e",
+    "abc290-e",
+    "abc300-g",
+    "abc314-g",
+    "abc365-g",
+    "abc366-e",
+    "abc380-g",
+    "abc388-g",
+    "abc431-f",
+    "abc455-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "窓の不変条件と左右端の単調性を使い、各要素を高々定数回だけ処理して連続区間を列挙する。"
+}

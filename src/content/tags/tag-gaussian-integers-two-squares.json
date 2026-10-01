@@ -1,0 +1,45 @@
+{
+  "id": "tag-gaussian-integers-two-squares",
+  "name": "Gaussian整数・二平方和",
+  "definition": "Z[i]での素因数分解と共役を用い、整数の二平方和表現をprime exponentごとに構成・数え上げる。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "a\\+bi",
+      "norm",
+      "prime factorization"
+    ],
+    "triggerPatterns": [
+      "x\\^2\\+y\\^2=n",
+      "複素整数で因数分解"
+    ],
+    "invariantPatterns": [
+      "conjugate factors",
+      "multiplicative norm"
+    ],
+    "goalPatterns": [
+      "二平方和表現"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-represent-integers-as-two-squares"
+  ],
+  "representativeProblemIds": [
+    "abc444-g"
+  ],
+  "aliases": [
+    "Gaussian整数",
+    "sum of two squares",
+    "二平方和"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,46 @@
+{
+  "id": "tag-multiplicative-order",
+  "name": "乗法的位数・最小周期",
+  "definition": "合同反復の最小正周期をmultiplicative orderへ帰着し、群位数の約数を割り落として求める。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-modular-arithmetic",
+    "tag-prime-divisor-decomposition"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "冪列",
+      "可逆剰余",
+      "群位数"
+    ],
+    "triggerPatterns": [
+      "a\\^k=1の最小k",
+      "最小周期"
+    ],
+    "invariantPatterns": [
+      "order divides group order"
+    ],
+    "goalPatterns": [
+      "周期長"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "representativeProblemIds": [
+    "abc222-g",
+    "abc335-g"
+  ],
+  "aliases": [
+    "multiplicative order",
+    "repunits period",
+    "乗法的位数"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

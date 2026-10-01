@@ -1,0 +1,47 @@
+{
+  "id": "unit-graph-potential-propagation",
+  "kind": "subsection",
+  "title": "静的graph等式制約のpotential伝播",
+  "parentId": "unit-connectivity",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc280-editorial-5303-aea62deae9b25f1c4e4b148b805c4bf36522b9a2edc9a3e1d8ad4c9488e912b0",
+    "source-abc280-f-problem-47f71a8cdee8536d7a88cdb6ec9f45a36b4048b5445c952d60040e01ecc44ae9",
+    "source-abc352-editorial-9924-9f4a632245687078caf887539d0a943a3fdae14d244b269cc96b7f0c6dbb80a1",
+    "source-abc352-f-problem-35d14022d92c00f83a01507e4d6b5bc77077b50b3809064a4417b574c01caa21",
+    "source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be",
+    "source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"
+  ],
+  "tagIds": [
+    "tag-graph-potential-propagation"
+  ],
+  "ownedTagIds": [
+    "tag-graph-potential-propagation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-propagate-static-graph-potentials"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-propagate-static-graph-potentials"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/graph-potential-propagation.md",
+  "problemIds": [
+    "abc280-f",
+    "abc396-e"
+  ],
+  "directProblemIds": [
+    "abc396-e",
+    "abc280-f"
+  ],
+  "relatedProblemIds": [
+    "abc352-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "通常のDFS・BFSを土台に、辺等式からroot-relative potentialを静的に伝播し、cycle整合性と成分offsetの自由度を分離する。"
+}

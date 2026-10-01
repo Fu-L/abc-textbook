@@ -1,0 +1,20 @@
+{
+  "id": "outcome-process-dag-in-topological-order",
+  "statement": "依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc224-e",
+    "abc277-f",
+    "abc291-e",
+    "abc304-ex",
+    "abc306-ex",
+    "abc315-e",
+    "abc324-f",
+    "abc335-e",
+    "abc341-f",
+    "tag-dag-topological-processing",
+    "unit-dag-topological-processing"
+  ]
+}

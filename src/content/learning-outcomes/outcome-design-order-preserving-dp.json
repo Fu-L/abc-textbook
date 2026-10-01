@@ -1,0 +1,21 @@
+{
+  "id": "outcome-design-order-preserving-dp",
+  "statement": "列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc214-f",
+    "abc225-f",
+    "abc238-f",
+    "abc242-ex",
+    "abc246-ex",
+    "abc299-f",
+    "abc315-f",
+    "abc327-e",
+    "abc345-e",
+    "abc362-e",
+    "tag-sequence-subsequence-dp",
+    "unit-dp-sequence"
+  ]
+}

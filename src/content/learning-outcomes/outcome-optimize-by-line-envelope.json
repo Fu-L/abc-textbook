@@ -1,0 +1,13 @@
+{
+  "id": "outcome-optimize-by-line-envelope",
+  "statement": "一次関数候補の傾き・交点順を保ち、query点で包絡線上の最適な直線を選べる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc228-h",
+    "abc289-g",
+    "abc372-g",
+    "abc448-g",
+    "tag-convex-hull-trick",
+    "unit-line-envelope"
+  ]
+}

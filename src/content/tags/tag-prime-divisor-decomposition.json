@@ -1,0 +1,51 @@
+{
+  "id": "tag-prime-divisor-decomposition",
+  "name": "素因数・約数分解",
+  "definition": "整数の条件を素数ごとの指数や約数格子の条件に分解する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "倍数",
+      "約数",
+      "素因数",
+      "素数"
+    ],
+    "triggerPatterns": [
+      "割り切る",
+      "因数分解",
+      "約数を列挙"
+    ],
+    "invariantPatterns": [
+      "一意分解",
+      "指数",
+      "素因数ごと"
+    ],
+    "goalPatterns": [
+      "個数",
+      "和",
+      "成立判定"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "representativeProblemIds": [
+    "abc445-e",
+    "abc259-e",
+    "abc227-g"
+  ],
+  "aliases": [
+    "prime factorization",
+    "sieve",
+    "約数列挙",
+    "素因数分解"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

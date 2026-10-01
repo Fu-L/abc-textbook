@@ -1,0 +1,57 @@
+{
+  "id": "tag-threshold-heavy-light",
+  "name": "平方根・閾値による軽重分類",
+  "definition": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "query",
+      "次数",
+      "頻度"
+    ],
+    "triggerPatterns": [
+      "heavy",
+      "light",
+      "閾値"
+    ],
+    "invariantPatterns": [
+      "heavy個数",
+      "light総和"
+    ],
+    "goalPatterns": [
+      "更新高速化",
+      "計算量均衡"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-mo-offline-range",
+      "type": "contrast",
+      "rationale": "Moはquery順の再配置で区間端の総移動を抑える。heavy/lightは対象ごとの処理頻度・次数で二種類の算法を使い分ける。平方根という計算量だけでは同じ分類にしない。"
+    },
+    {
+      "tagId": "tag-value-bucket-aggregation",
+      "type": "contrast",
+      "rationale": "座標軸を連続blockに分けて完全blockと端数を合成する方法と、対象を頻度・次数の大小で分けて重い対象を前計算する方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-balance-heavy-light-threshold"
+  ],
+  "representativeProblemIds": [
+    "abc219-g",
+    "abc335-f"
+  ],
+  "aliases": [
+    "heavy light threshold",
+    "次数平方分割",
+    "頻度によるheavy/light"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

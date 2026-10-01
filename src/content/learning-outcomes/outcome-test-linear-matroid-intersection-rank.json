@@ -1,0 +1,14 @@
+{
+  "id": "outcome-test-linear-matroid-intersection-rank",
+  "statement": "二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-and-bound-randomized-algorithm",
+    "outcome-optimize-weighted-matroid-basis",
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "scopeIds": [
+    "abc399-g",
+    "tag-linear-matroid-intersection",
+    "unit-linear-matroid-intersection"
+  ]
+}

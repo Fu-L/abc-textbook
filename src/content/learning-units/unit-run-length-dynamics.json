@@ -1,0 +1,39 @@
+{
+  "id": "unit-run-length-dynamics",
+  "kind": "section",
+  "title": "run-length状態の動的遷移",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "run-length状態の動的遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc313-e-problem-3a03247007965db504c9b92bf17a4d2d3a2bd83c0fa99e737a74e209f8eb5bd0",
+    "source-abc313-editorial-6911-132005a653dc06fe5dd61179f748826fd3bb3655aea08bb83fab69235e2052d5"
+  ],
+  "tagIds": [
+    "tag-run-length-dynamics"
+  ],
+  "ownedTagIds": [
+    "tag-run-length-dynamics"
+  ],
+  "learningOutcomeIds": [
+    "outcome-evolve-run-length-encoded-state"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-evolve-run-length-encoded-state"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/run-length-dynamics.md",
+  "problemIds": [
+    "abc313-e"
+  ],
+  "directProblemIds": [
+    "abc313-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

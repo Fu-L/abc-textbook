@@ -1,0 +1,49 @@
+{
+  "id": "unit-randomized-algebraic-fingerprint",
+  "kind": "subsection",
+  "title": "乱択代数fingerprint",
+  "parentId": "unit-randomized-algorithms",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+    "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f",
+    "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2",
+    "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5",
+    "source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4",
+    "source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"
+  ],
+  "tagIds": [
+    "tag-randomized-algebraic-fingerprint"
+  ],
+  "ownedTagIds": [
+    "tag-randomized-algebraic-fingerprint"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compare-algebraic-objects-by-random-fingerprint"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compare-algebraic-objects-by-random-fingerprint"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md",
+  "problemIds": [
+    "abc238-g",
+    "abc339-f",
+    "abc367-f",
+    "abc455-g"
+  ],
+  "directProblemIds": [
+    "abc367-f",
+    "abc339-f",
+    "abc238-g",
+    "abc455-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "乱択・Monte Carloアルゴリズムで得た考え方と実装を再利用し、乱択代数fingerprintの発動条件・正当化・境界を重複なく学ぶ。"
+}

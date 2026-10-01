@@ -1,0 +1,19 @@
+{
+  "id": "outcome-model-min-cost-flow",
+  "statement": "流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-model-and-compute-shortest-path",
+    "outcome-model-max-flow-min-cut"
+  ],
+  "scopeIds": [
+    "abc214-h",
+    "abc224-h",
+    "abc231-h",
+    "abc247-g",
+    "abc393-g",
+    "abc407-g",
+    "abc421-g",
+    "tag-min-cost-flow",
+    "unit-min-cost-flow"
+  ]
+}

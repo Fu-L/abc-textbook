@@ -1,0 +1,50 @@
+{
+  "id": "unit-divisor-mobius-inversion",
+  "kind": "subsection",
+  "title": "約数格子のzeta・Möbius反転",
+  "parentId": "unit-inclusion-exclusion",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "約数格子のzeta・Möbius反転の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+    "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae",
+    "source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e",
+    "source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"
+  ],
+  "tagIds": [
+    "tag-divisor-mobius-inversion"
+  ],
+  "ownedTagIds": [
+    "tag-divisor-mobius-inversion"
+  ],
+  "learningOutcomeIds": [
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
+  "problemIds": [
+    "abc230-g",
+    "abc304-f",
+    "abc361-f"
+  ],
+  "directProblemIds": [
+    "abc304-f",
+    "abc361-f",
+    "abc230-g"
+  ],
+  "relatedProblemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "素因数・約数分解で得た考え方と実装を再利用し、約数格子のzeta・Möbius反転の発動条件・正当化・境界を重複なく学ぶ。"
+}

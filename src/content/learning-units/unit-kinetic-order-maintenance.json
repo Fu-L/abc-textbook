@@ -1,0 +1,43 @@
+{
+  "id": "unit-kinetic-order-maintenance",
+  "kind": "section",
+  "title": "kinetic sorting・交差event順序更新",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+    "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
+    "source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd",
+    "source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"
+  ],
+  "tagIds": [
+    "tag-kinetic-order-maintenance"
+  ],
+  "ownedTagIds": [
+    "tag-kinetic-order-maintenance"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-order-through-crossing-events"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-order-through-crossing-events"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/kinetic-order-maintenance.md",
+  "problemIds": [
+    "abc344-g"
+  ],
+  "directProblemIds": [
+    "abc344-g"
+  ],
+  "relatedProblemIds": [
+    "abc257-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "event・値順のオフライン走査で得た考え方と実装を再利用し、kinetic sorting・交差event順序更新の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "unit-aho-corasick",
+  "kind": "subsection",
+  "title": "Aho–Corasick",
+  "parentId": "unit-string-automata",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Aho–Corasickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc419-editorial-13623-83863d26c9a12a69f07be60afab51ff05603fa4e6f48038a54d1ac0e6c881f43",
+    "source-abc419-f-problem-6f4acd79816fc01bc857e64983555f3c7e040847741a7f21ee0fdbd1d0004ee9",
+    "source-abc458-editorial-20159-cd84e0dd7d040aa4baf7a31029f7f976734f461304118f5d9ee6f64a7b64bfca",
+    "source-abc458-f-problem-4cc44c1d7cc919609272d3502594318f2f3965b58e2e08c63cb2dcb24d0cbd27"
+  ],
+  "tagIds": [
+    "tag-aho-corasick"
+  ],
+  "ownedTagIds": [
+    "tag-aho-corasick"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-multi-pattern-automaton"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-multi-pattern-automaton"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/aho-corasick.md",
+  "problemIds": [
+    "abc419-f",
+    "abc458-f"
+  ],
+  "directProblemIds": [
+    "abc419-f",
+    "abc458-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "有限状態automatonの構成・Trieによる共有接頭辞の索引で得た考え方と実装を再利用し、Aho–Corasickの発動条件・正当化・境界を重複なく学ぶ。"
+}

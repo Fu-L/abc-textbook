@@ -1,0 +1,52 @@
+{
+  "id": "unit-bipartite-structure",
+  "kind": "section",
+  "title": "二部彩色と成分構造を扱う",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648",
+    "source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05",
+    "source-abc398-e-problem-fe97240f5c642513103592213538e2e35c8edadb0e176bd4fe400b8c224f63c0",
+    "source-abc398-editorial-12480-8003d1b46f2ff6c39f41ce5531a9f0c5e3fbac8643c13eb674fb68d9b50bea86",
+    "source-abc398-editorial-12483-05b2bc78571f1d99213f47a5eefb64db5b9b01dffc507af69644633b749c09bb",
+    "source-abc398-g-problem-c9d2f0a8e8b595fd43c0a9850a40dfb21e3ed14ea05848869b4786b802cf3e4d"
+  ],
+  "tagIds": [
+    "tag-bipartite-structure"
+  ],
+  "ownedTagIds": [
+    "tag-bipartite-structure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
+    "outcome-color-and-classify-bipartite-components"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
+    "outcome-color-and-classify-bipartite-components"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/bipartite-structure.md",
+  "problemIds": [
+    "abc451-f"
+  ],
+  "directProblemIds": [
+    "abc451-f"
+  ],
+  "relatedProblemIds": [
+    "abc327-g",
+    "abc398-e",
+    "abc398-g",
+    "abc437-g",
+    "abc445-g",
+    "abc454-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "無向グラフを探索できることを前提に二部性と部の交換対称性を扱い、連結二部グラフの彩色重複も補正する。"
+}

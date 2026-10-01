@@ -1,0 +1,61 @@
+{
+  "id": "tag-max-flow-min-cut",
+  "name": "最大流・最小カット",
+  "definition": "選択・排反・closure・頂点容量をcapacity networkへ写し、残余グラフとmax-flow min-cut定理から最適値とcut側を復元する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-state-graph-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "capacity network",
+      "cut",
+      "sink",
+      "source"
+    ],
+    "triggerPatterns": [
+      "closure",
+      "二値選択",
+      "容量",
+      "排反"
+    ],
+    "invariantPatterns": [
+      "cut capacity",
+      "flow conservation",
+      "residual graph"
+    ],
+    "goalPatterns": [
+      "cut復元",
+      "最大選択",
+      "最小除去"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-bipartite-matching-hall",
+      "type": "often_combined",
+      "rationale": "二部matchingをunit-capacity flowへ帰着し、Kőnig型双対をmin-cutから説明するときに併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-model-max-flow-min-cut"
+  ],
+  "representativeProblemIds": [
+    "abc241-g",
+    "abc225-g",
+    "abc239-g",
+    "abc227-h"
+  ],
+  "aliases": [
+    "max flow",
+    "min cut",
+    "最大流",
+    "最小カット"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

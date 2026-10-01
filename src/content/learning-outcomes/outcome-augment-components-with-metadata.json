@@ -1,0 +1,21 @@
+{
+  "id": "outcome-augment-components-with-metadata",
+  "statement": "成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc264-e",
+    "abc279-f",
+    "abc302-ex",
+    "abc314-f",
+    "abc372-e",
+    "abc383-e",
+    "abc392-e",
+    "abc401-e",
+    "abc420-e",
+    "abc434-e",
+    "abc440-g",
+    "abc451-f",
+    "tag-dsu-components",
+    "unit-dsu-components"
+  ]
+}

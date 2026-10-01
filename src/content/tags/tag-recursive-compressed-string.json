@@ -1,0 +1,57 @@
+{
+  "id": "tag-recursive-compressed-string",
+  "name": "再帰・圧縮・入れ子文字列の走査",
+  "definition": "明示展開できない反復・再帰文字列をblockで追跡するか、対応括弧で入れ子区間を飛び越えて作用を合成する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "block",
+      "concat",
+      "dag",
+      "反復",
+      "文字列",
+      "長さ"
+    ],
+    "triggerPatterns": [
+      "反転",
+      "実体化せず",
+      "展開できない",
+      "文字参照",
+      "連結",
+      "連続個数"
+    ],
+    "invariantPatterns": [
+      "block",
+      "included length",
+      "saturat",
+      "再帰定義",
+      "長さだけ"
+    ],
+    "goalPatterns": [
+      "k文字目",
+      "query",
+      "比較",
+      "等しい長さ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-query-recursively-defined-string"
+  ],
+  "representativeProblemIds": [
+    "abc450-e",
+    "abc346-f",
+    "abc417-g"
+  ],
+  "aliases": [
+    "compressed strings",
+    "圧縮文字列"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

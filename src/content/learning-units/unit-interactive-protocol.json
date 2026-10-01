@@ -1,0 +1,48 @@
+{
+  "id": "unit-interactive-protocol",
+  "kind": "section",
+  "title": "対話protocolを守って情報を取得する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "入力を最初からすべて読める通常問題、および問い合わせ上限やflushを持たない模擬入出力。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096",
+    "source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51",
+    "source-abc278-editorial-5237-ac31c97ad00111ee5b5cf4db267b3ca24195bd7a9483e542bc2bb6ba7d33497a",
+    "source-abc278-g-problem-07282b4beb8ce5efa2f662d474e296266315d4bfdd42145df14336f17f49edd6",
+    "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4",
+    "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"
+  ],
+  "tagIds": [
+    "tag-interactive-protocol"
+  ],
+  "ownedTagIds": [
+    "tag-interactive-protocol"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-interactive-query-protocol"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-interactive-query-protocol"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/interactive-protocol.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc269-e",
+    "abc278-g",
+    "abc282-f",
+    "abc286-f",
+    "abc305-f",
+    "abc337-e",
+    "abc355-e",
+    "abc398-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "問い合わせ形式・回数上限・応答依存性・交互手番・合法な応答・flushを明示し、アルゴリズムをjudgeとの対話列として安全に実行する。"
+}

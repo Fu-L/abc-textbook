@@ -1,0 +1,51 @@
+{
+  "id": "tag-laminar-interval-containment-tree",
+  "name": "laminar区間族の包含木構築",
+  "definition": "互いに素または包含関係にある区間を端点順に走査し、stackで直接包含する親を定めてdummy root付き包含木を作り、点を最小包含区間へ対応させる。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "containment parent",
+      "dummy root",
+      "laminar intervals",
+      "opening and closing endpoints"
+    ],
+    "triggerPatterns": [
+      "包含関係をqueryで再利用",
+      "区間同士が非交差",
+      "点を最小包含区間へ写す"
+    ],
+    "invariantPatterns": [
+      "open intervals form one ancestor stack",
+      "stack top is direct parent",
+      "subtree equals containment"
+    ],
+    "goalPatterns": [
+      "包含木構築",
+      "区間queryの木上path化"
+    ],
+    "excludedPatterns": [
+      "交差する一般区間のoverlap graph",
+      "値の大小から作るCartesian tree"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-laminar-interval-containment-tree"
+  ],
+  "representativeProblemIds": [
+    "abc405-f"
+  ],
+  "aliases": [
+    "interval containment tree",
+    "laminar family tree",
+    "laminar区間包含木",
+    "区間包含木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

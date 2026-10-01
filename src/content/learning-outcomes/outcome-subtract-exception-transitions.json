@@ -1,0 +1,14 @@
+{
+  "id": "outcome-subtract-exception-transitions",
+  "statement": "全遷移の総和から禁止辺・禁止keyの集計値を引き、例外の総数で計算量を評価できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc212-e",
+    "abc319-g",
+    "abc370-e",
+    "tag-dp-transition-acceleration",
+    "unit-dp-transition-optimization"
+  ]
+}

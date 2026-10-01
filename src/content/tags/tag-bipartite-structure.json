@@ -1,0 +1,54 @@
+{
+  "id": "tag-bipartite-structure",
+  "name": "二部グラフの彩色と成分構造",
+  "definition": "無向グラフを二色に塗れる条件を探索で検証し、各連結成分の二部サイズ・反転対称性を集約する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二つの部",
+      "無向グラフ",
+      "連結成分",
+      "頂点色"
+    ],
+    "triggerPatterns": [
+      "二色に塗る",
+      "奇閉路",
+      "部ごとの個数",
+      "隣接頂点を異なる色"
+    ],
+    "invariantPatterns": [
+      "奇閉路がない",
+      "成分ごとに色反転できる",
+      "辺の両端は異色"
+    ],
+    "goalPatterns": [
+      "二部サイズ",
+      "二部性判定",
+      "彩色の復元",
+      "成分型の分類"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
+    "outcome-color-and-classify-bipartite-components"
+  ],
+  "representativeProblemIds": [
+    "abc451-f",
+    "abc398-e",
+    "abc398-g"
+  ],
+  "aliases": [
+    "2-coloring",
+    "bipartite graph",
+    "二部グラフ",
+    "二部彩色"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

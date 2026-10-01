@@ -1,0 +1,13 @@
+{
+  "id": "outcome-evaluate-at-geometric-points",
+  "statement": "評価点ar^kの等比構造を使い、r≠0のとき二項指数の恒等式からchirp-z評価を一回の畳み込みへ変形できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-apply-formal-power-series-operations",
+    "outcome-divide-search-space-recursively"
+  ],
+  "scopeIds": [
+    "abc381-g",
+    "tag-polynomial-multipoint-evaluation",
+    "unit-polynomial-multipoint-evaluation"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-weighted-bipartite-matching",
+  "kind": "subsection",
+  "title": "重み付き二部完全matching",
+  "parentId": "unit-flow-matching",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "重み付き二部完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc373-editorial-11045-1fee3fff5238bfdbbb53355a4534e3eafa1b74fa4b22fa7b0f7df9ac05329804",
+    "source-abc373-g-problem-1966028055b8124ce63fad5b85b2978764ef41f87134a380c7e139d0e050153e"
+  ],
+  "tagIds": [
+    "tag-weighted-bipartite-matching"
+  ],
+  "ownedTagIds": [
+    "tag-weighted-bipartite-matching"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-weighted-bipartite-matching"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-weighted-bipartite-matching"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/weighted-bipartite-matching.md",
+  "problemIds": [
+    "abc373-g"
+  ],
+  "directProblemIds": [
+    "abc373-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "二部matching・Hall・Kőnigで得た考え方と実装を再利用し、重み付き二部完全matchingの発動条件・正当化・境界を重複なく学ぶ。"
+}

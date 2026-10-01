@@ -1,0 +1,53 @@
+{
+  "id": "unit-suffix-lcp-index",
+  "kind": "section",
+  "title": "接尾辞の順序とLCPを索引化する",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "rolling hashによる一致比較と回文半径。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+    "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82",
+    "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81",
+    "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
+    "source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860",
+    "source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8"
+  ],
+  "tagIds": [
+    "tag-suffix-lcp-index"
+  ],
+  "ownedTagIds": [
+    "tag-suffix-lcp-index"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-suffix-lcp-index"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-suffix-lcp-index"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/suffix-lcp-index.md",
+  "problemIds": [
+    "abc213-f",
+    "abc268-ex",
+    "abc272-f",
+    "abc280-ex",
+    "abc362-g",
+    "abc452-g"
+  ],
+  "directProblemIds": [
+    "abc362-g",
+    "abc272-f",
+    "abc213-f",
+    "abc452-g",
+    "abc268-ex",
+    "abc280-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "全接尾辞の辞書順と隣接LCPを索引化し、部分文字列の出現範囲・順位・個数へ答える。"
+}

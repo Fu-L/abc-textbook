@@ -1,0 +1,43 @@
+{
+  "id": "unit-palindrome-radius",
+  "kind": "section",
+  "title": "回文半径と左右対称区間を特定する",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一般の部分文字列hash比較と、接尾辞・LCPの索引。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030",
+    "source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474",
+    "source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f",
+    "source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb"
+  ],
+  "tagIds": [
+    "tag-palindrome-radius"
+  ],
+  "ownedTagIds": [
+    "tag-palindrome-radius"
+  ],
+  "learningOutcomeIds": [
+    "outcome-characterize-palindrome-intervals"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-characterize-palindrome-intervals"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/palindrome-radius.md",
+  "problemIds": [
+    "abc349-g",
+    "abc398-f"
+  ],
+  "directProblemIds": [
+    "abc398-f",
+    "abc349-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "各中心の左右一致を半径としてまとめ、回文区間の判定と列挙へ利用する。"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "unit-binary-trie",
+  "kind": "section",
+  "title": "bit列をTrieで索引化する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+    "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+    "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
+    "source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69",
+    "source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"
+  ],
+  "tagIds": [
+    "tag-binary-trie"
+  ],
+  "ownedTagIds": [
+    "tag-binary-trie"
+  ],
+  "learningOutcomeIds": [
+    "outcome-query-bitwise-order-with-trie"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-query-bitwise-order-with-trie"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/binary-trie.md",
+  "problemIds": [
+    "abc425-g"
+  ],
+  "directProblemIds": [
+    "abc425-g"
+  ],
+  "relatedProblemIds": [
+    "abc252-ex",
+    "abc254-ex",
+    "abc451-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "整数を上位bitから分岐する列として格納し、XOR・大小・最小距離の候補を貪欲に選ぶ。"
+}

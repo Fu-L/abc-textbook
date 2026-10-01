@@ -1,0 +1,54 @@
+{
+  "id": "tag-divisor-mobius-inversion",
+  "name": "約数格子のzeta・Möbius反転",
+  "definition": "約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Möbius関数",
+      "倍数和",
+      "約数格子"
+    ],
+    "triggerPatterns": [
+      "gcdがexactly",
+      "全倍数の和",
+      "最小周期"
+    ],
+    "invariantPatterns": [
+      "divisibility order",
+      "zeta inverse"
+    ],
+    "goalPatterns": [
+      "exact値復元",
+      "gcd別数え上げ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-subset-zeta-mobius-transform",
+      "type": "analogy",
+      "rationale": "subset包含順序と約数整除順序はいずれもposet上のzeta変換とMöbius反転として統一して捉えられる。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-invert-divisor-lattice-by-mobius"
+  ],
+  "representativeProblemIds": [
+    "abc230-g",
+    "abc361-f"
+  ],
+  "aliases": [
+    "divisor zeta transform",
+    "number-theoretic Möbius inversion",
+    "約数Möbius反転"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-finite-field-frobenius",
+  "kind": "section",
+  "title": "標数pのFrobenius恒等式による反復高速化",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "標数pのFrobenius恒等式による反復高速化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc251-editorial-3954-5502e77b9db90e8223bf51820c90da77bdb341a71963b77421a1a563a6336004",
+    "source-abc251-ex-problem-fecc529753f72db31753658d74853da733df6f9c45e94aa18801d577114ab7b0"
+  ],
+  "tagIds": [
+    "tag-finite-field-frobenius"
+  ],
+  "ownedTagIds": [
+    "tag-finite-field-frobenius"
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/finite-field-frobenius.md",
+  "problemIds": [
+    "abc251-ex"
+  ],
+  "directProblemIds": [
+    "abc251-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "法上の四則演算・高速累乗・逆元で得た考え方と実装を再利用し、標数pのFrobenius恒等式による反復高速化の発動条件・正当化・境界を重複なく学ぶ。"
+}

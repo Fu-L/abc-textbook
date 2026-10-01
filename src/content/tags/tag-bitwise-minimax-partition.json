@@ -1,0 +1,44 @@
+{
+  "id": "tag-bitwise-minimax-partition",
+  "name": "上位bitの支配関係によるXOR minimax",
+  "definition": "最大XORを最小にする共通maskを求めるとき、最上位bitで値を二群へ分ける。一群だけならそのbitを相殺し、両群なら最大値のそのbitは必ず1なので、どちらの群を最大側にするかを再帰的に比較する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "整数集合と共通mask"
+    ],
+    "triggerPatterns": [
+      "最大XORの最小化"
+    ],
+    "invariantPatterns": [
+      "上位bitが下位bit総和を支配"
+    ],
+    "goalPatterns": [
+      "minimax値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-xor-threshold-matching",
+      "type": "contrast",
+      "rationale": "XOR閾値を満たすpairの最大matching数をbit再帰で求める判定器と、共通maskを選んで全pairの最大XORを最小化する再帰を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-minimize-maximum-xor-by-bit-partition"
+  ],
+  "representativeProblemIds": [
+    "abc281-f"
+  ],
+  "aliases": [
+    "XOR minimax",
+    "bitwise partition"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

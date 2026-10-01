@@ -1,0 +1,51 @@
+{
+  "id": "unit-determinant-counting",
+  "kind": "section",
+  "title": "行列式による数え上げ",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "行列式による数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341",
+    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97",
+    "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a",
+    "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd",
+    "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
+    "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
+  ],
+  "tagIds": [
+    "tag-determinant-counting"
+  ],
+  "ownedTagIds": [
+    "tag-determinant-counting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-nonintersecting-paths-by-lgv"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-nonintersecting-paths-by-lgv"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/determinant-counting.md",
+  "problemIds": [
+    "abc216-h",
+    "abc253-ex",
+    "abc323-g"
+  ],
+  "directProblemIds": [
+    "abc253-ex",
+    "abc323-g",
+    "abc216-h"
+  ],
+  "relatedProblemIds": [
+    "abc336-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "線形方程式・rankで得た考え方と実装を再利用し、行列式による数え上げの発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "unit-dp-interval-expansion",
+  "kind": "subsection",
+  "title": "区間拡張DP",
+  "parentId": "unit-dp-sequence-interval",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "区間拡張DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc219-editorial-2601-00b5be124195f0f7917fc9abf4c538f015b7626bbb9c12275967bbad8fa47726",
+    "source-abc219-h-problem-19592080329639576fd11d1b48e971c8eddcdbe98445cc3f0effeb8ba5571c9e",
+    "source-abc273-editorial-5034-c6b24d04b150c9f609a42309732436031f54e838f8f84ae875a9562beb6779cf",
+    "source-abc273-f-problem-a23415db39faeea1d5f7cb1589561daf2369e39a6c5823b405080ae921d1cadc"
+  ],
+  "tagIds": [
+    "tag-dp-interval-expansion"
+  ],
+  "ownedTagIds": [
+    "tag-dp-interval-expansion"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-interval-expansion-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-interval-expansion-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-interval-expansion.md",
+  "problemIds": [
+    "abc219-h",
+    "abc273-f"
+  ],
+  "directProblemIds": [
+    "abc273-f",
+    "abc219-h"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、区間拡張DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

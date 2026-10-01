@@ -1,0 +1,16 @@
+{
+  "id": "outcome-compute-online-relaxed-convolution",
+  "statement": "係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-convolution-or-correlation"
+  ],
+  "scopeIds": [
+    "abc213-h",
+    "abc230-h",
+    "abc281-ex",
+    "abc315-ex",
+    "abc357-g",
+    "tag-relaxed-convolution",
+    "unit-relaxed-convolution"
+  ]
+}

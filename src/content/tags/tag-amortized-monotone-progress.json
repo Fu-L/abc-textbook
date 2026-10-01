@@ -1,0 +1,55 @@
+{
+  "id": "tag-amortized-monotone-progress",
+  "name": "単調進行による償却解析",
+  "definition": "要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "候補",
+      "操作列",
+      "要素"
+    ],
+    "triggerPatterns": [
+      "light edge",
+      "size halving",
+      "一度だけ",
+      "単調に減る",
+      "移動回数",
+      "部分問題サイズ半減"
+    ],
+    "invariantPatterns": [
+      "potential",
+      "総削除回数",
+      "軽辺遷移ごとのサイズ半減"
+    ],
+    "goalPatterns": [
+      "償却上界",
+      "総計算量"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-bound-monotone-total-work"
+  ],
+  "representativeProblemIds": [
+    "abc217-e",
+    "abc256-ex",
+    "abc267-e",
+    "abc329-e",
+    "abc417-g"
+  ],
+  "aliases": [
+    "amortized analysis",
+    "light-edge size halving",
+    "potential method",
+    "償却解析",
+    "軽辺サイズ半減"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

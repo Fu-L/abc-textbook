@@ -1,0 +1,22 @@
+{
+  "id": "outcome-design-interval-split-dp",
+  "statement": "区間や長方形の分割点を列挙し、独立な小領域の答えを合成して領域サイズ順に計算できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc217-f",
+    "abc233-g",
+    "abc238-ex",
+    "abc252-g",
+    "abc261-g",
+    "abc262-g",
+    "abc292-g",
+    "abc298-g",
+    "abc325-g",
+    "abc400-f",
+    "abc418-g",
+    "tag-interval-partition-dp",
+    "unit-dp-interval-composition"
+  ]
+}

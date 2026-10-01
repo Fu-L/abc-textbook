@@ -1,0 +1,43 @@
+{
+  "id": "unit-static-top-tree",
+  "kind": "section",
+  "title": "rake・compressで動的木DPを保つ",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e",
+    "source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9",
+    "source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a",
+    "source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"
+  ],
+  "tagIds": [
+    "tag-static-top-tree"
+  ],
+  "ownedTagIds": [
+    "tag-static-top-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compose-dynamic-tree-clusters"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compose-dynamic-tree-clusters"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/static-top-tree.md",
+  "problemIds": [
+    "abc351-g",
+    "abc460-g"
+  ],
+  "directProblemIds": [
+    "abc351-g",
+    "abc460-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "木DPの合成則を理解した後、境界頂点つきclusterをrake・compressし、局所変更を根まで再合成する。"
+}

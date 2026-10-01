@@ -1,0 +1,55 @@
+{
+  "id": "unit-tree-decomposition",
+  "kind": "section",
+  "title": "木のancestor・部分木・pathを索引化する",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "LCAという概念で対象を一意分類するだけで、ancestor query・Euler区間化・HLD・virtual treeを実装利用しない数え上げ、および重心による再帰分解。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637",
+    "source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8",
+    "source-abc267-editorial-4714-1a42795ebf05b4ab26ae976d6e4b5d3cc9e2bfa9f8465c9136826534404a3fba",
+    "source-abc267-f-problem-76fb2bc9fdf42512538d622b731b2dbcd57ef2398e2848449be7321573eebfd1",
+    "source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f",
+    "source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971"
+  ],
+  "tagIds": [
+    "tag-heavy-light-decomposition",
+    "tag-tree-ancestor-lca",
+    "tag-tree-euler-flattening",
+    "tag-virtual-tree"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries",
+    "outcome-apply-heavy-light-decomposition",
+    "outcome-build-virtual-tree",
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-decomposition.md",
+  "problemIds": [
+    "abc240-e",
+    "abc294-g",
+    "abc298-ex",
+    "abc337-g",
+    "abc340-g",
+    "abc406-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc267-f",
+    "abc329-g",
+    "abc351-g",
+    "abc405-f",
+    "abc438-f",
+    "abc460-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "基本的な木DFSを土台に、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。包含関係を木に変換する方法は独立した節で学ぶ。"
+}

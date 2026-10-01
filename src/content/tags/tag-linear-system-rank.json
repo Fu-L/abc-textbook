@@ -1,0 +1,47 @@
+{
+  "id": "tag-linear-system-rank",
+  "name": "線形方程式・rank",
+  "definition": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "linear equations",
+      "matrix",
+      "vector space"
+    ],
+    "triggerPatterns": [
+      "線形制約",
+      "解の個数"
+    ],
+    "invariantPatterns": [
+      "pivot",
+      "rank-nullity",
+      "row space"
+    ],
+    "goalPatterns": [
+      "rank",
+      "可解性",
+      "解空間"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "representativeProblemIds": [
+    "abc276-ex",
+    "abc366-g"
+  ],
+  "aliases": [
+    "Gaussian elimination",
+    "matrix rank",
+    "掃き出し法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

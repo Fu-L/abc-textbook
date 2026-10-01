@@ -1,0 +1,39 @@
+{
+  "id": "unit-swag",
+  "kind": "subsection",
+  "title": "SWAG・two-stack queue aggregation",
+  "parentId": "unit-monoid-segment-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "SWAG・two-stack queue aggregationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc456-editorial-19850-1d97b4b1e594c4b2729b05b473dd354815c21e3562ccaa7c3fea95fc01fdf3d4",
+    "source-abc456-f-problem-0dd36040c4e14d3a225cf51e1b030c92a632f97fb983cd85b9fa7dea6891eacb"
+  ],
+  "tagIds": [
+    "tag-swag"
+  ],
+  "ownedTagIds": [
+    "tag-swag"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-queue-aggregate-with-swag"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-queue-aggregate-with-swag"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/swag.md",
+  "problemIds": [
+    "abc456-f"
+  ],
+  "directProblemIds": [
+    "abc456-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "区間monoid要約で得た考え方と実装を再利用し、SWAG・two-stack queue aggregationの発動条件・正当化・境界を重複なく学ぶ。"
+}

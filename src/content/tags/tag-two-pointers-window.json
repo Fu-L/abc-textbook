@@ -1,0 +1,57 @@
+{
+  "id": "tag-two-pointers-window",
+  "name": "尺取り法・sliding window",
+  "definition": "一列の連続窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進める。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "両端",
+      "列",
+      "区間",
+      "連続"
+    ],
+    "triggerPatterns": [
+      "単調に進",
+      "右端",
+      "尺取り",
+      "左端"
+    ],
+    "invariantPatterns": [
+      "一度ずつ",
+      "突き合わせ",
+      "窓"
+    ],
+    "goalPatterns": [
+      "区間ごと",
+      "区間の長さ",
+      "区間数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-monotone-threshold-search",
+      "type": "contrast",
+      "rationale": "どちらも単調性を使うが、値域の真偽境界を探す方法と連続区間の端を一方向へ進める方法を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-monotone-window"
+  ],
+  "representativeProblemIds": [
+    "abc260-e",
+    "abc250-f",
+    "abc370-f"
+  ],
+  "aliases": [
+    "sliding window",
+    "two pointers",
+    "尺取り法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

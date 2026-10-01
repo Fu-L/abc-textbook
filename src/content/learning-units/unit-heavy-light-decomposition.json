@@ -1,0 +1,37 @@
+{
+  "id": "unit-heavy-light-decomposition",
+  "kind": "subsection",
+  "title": "Heavy-Light Decomposition",
+  "parentId": "unit-tree-decomposition",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Heavy-Light Decompositionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e",
+    "source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9"
+  ],
+  "tagIds": [
+    "tag-heavy-light-decomposition"
+  ],
+  "ownedTagIds": [
+    "tag-heavy-light-decomposition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-heavy-light-decomposition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-apply-heavy-light-decomposition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/heavy-light-decomposition.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc351-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、Heavy-Light Decompositionの発動条件・正当化・境界を重複なく学ぶ。"
+}

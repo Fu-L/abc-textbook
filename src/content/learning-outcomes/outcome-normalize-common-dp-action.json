@@ -1,0 +1,14 @@
+{
+  "id": "outcome-normalize-common-dp-action",
+  "statement": "全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc372-f",
+    "abc435-g",
+    "abc457-f",
+    "tag-dp-transition-acceleration",
+    "unit-dp-transition-optimization"
+  ]
+}

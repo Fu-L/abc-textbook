@@ -1,0 +1,43 @@
+{
+  "id": "unit-eventual-unbounded-knapsack",
+  "kind": "section",
+  "title": "大容量unbounded knapsackのeventual linearity",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b",
+    "source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba",
+    "source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007",
+    "source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006"
+  ],
+  "tagIds": [
+    "tag-eventual-unbounded-knapsack"
+  ],
+  "ownedTagIds": [
+    "tag-eventual-unbounded-knapsack"
+  ],
+  "learningOutcomeIds": [
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
+  "problemIds": [
+    "abc310-ex",
+    "abc415-g"
+  ],
+  "directProblemIds": [
+    "abc415-g",
+    "abc310-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "通常のunbounded knapsackを設計できるようになった後、最大密度itemへの交換で非基準部分を有限prefixへ閉じ込め、巨大capacityのlinear tailを証明する。"
+}

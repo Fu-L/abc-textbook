@@ -1,0 +1,12 @@
+{
+  "id": "outcome-sum-multiplicative-function-by-min25-sieve",
+  "statement": "floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "scopeIds": [
+    "abc370-g",
+    "tag-min25-sieve",
+    "unit-min25-sieve"
+  ]
+}

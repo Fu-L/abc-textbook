@@ -1,0 +1,59 @@
+{
+  "id": "tag-virtual-tree",
+  "name": "virtual tree・auxiliary tree",
+  "definition": "選択頂点と隣接LCAだけをEuler順にstack接続し、必要な祖先関係を保つ小木を構築する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-tree-ancestor-lca",
+    "tag-tree-euler-flattening"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Euler順",
+      "LCA",
+      "選択頂点"
+    ],
+    "triggerPatterns": [
+      "少数頂点だけ",
+      "色ごと",
+      "重要頂点"
+    ],
+    "invariantPatterns": [
+      "祖先関係",
+      "隣接LCA"
+    ],
+    "goalPatterns": [
+      "小さな誘導木",
+      "部分集合query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-tree-ancestor-lca",
+      "type": "implementation_substrate",
+      "rationale": "選択頂点集合を祖先関係を保つ小木へ閉じるため、隣接頂点間のLCAを挿入する。"
+    },
+    {
+      "tagId": "tag-tree-euler-flattening",
+      "type": "implementation_substrate",
+      "rationale": "祖先順を保ったstack構築のため、選択頂点をEuler in順に並べる。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-virtual-tree"
+  ],
+  "representativeProblemIds": [
+    "abc340-g"
+  ],
+  "aliases": [
+    "auxiliary tree",
+    "virtual tree",
+    "仮想木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,44 @@
+{
+  "id": "tag-rsk-young-tableaux",
+  "name": "Robinson–Schensted対応・Young tableau",
+  "definition": "順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Young shape",
+      "permutation",
+      "tableau"
+    ],
+    "triggerPatterns": [
+      "LISとLDSを同時制約",
+      "shapeで分類"
+    ],
+    "invariantPatterns": [
+      "Schensted theorem",
+      "row/column増加"
+    ],
+    "goalPatterns": [
+      "shape DP",
+      "順列数え上げ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-translate-sequences-by-rsk"
+  ],
+  "representativeProblemIds": [
+    "abc378-g"
+  ],
+  "aliases": [
+    "RSK correspondence",
+    "Robinson–Schensted対応",
+    "Young tableau"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,44 @@
+{
+  "id": "tag-finite-function-composition",
+  "name": "有限関数・作用の合成",
+  "definition": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "作用列",
+      "有限状態",
+      "関数表"
+    ],
+    "triggerPatterns": [
+      "bitごとに関数化",
+      "操作を順に適用"
+    ],
+    "invariantPatterns": [
+      "合成順",
+      "閉包"
+    ],
+    "goalPatterns": [
+      "prefix作用",
+      "区間作用"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-compose-finite-functions"
+  ],
+  "representativeProblemIds": [
+    "abc261-e"
+  ],
+  "aliases": [
+    "finite function composition",
+    "function monoid",
+    "有限写像の合成"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-two-sat",
+  "kind": "subsection",
+  "title": "2-SAT・含意グラフ",
+  "parentId": "unit-directed-condensation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "2-SAT・含意グラフの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66",
+    "source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245"
+  ],
+  "tagIds": [
+    "tag-two-sat"
+  ],
+  "ownedTagIds": [
+    "tag-two-sat"
+  ],
+  "learningOutcomeIds": [
+    "outcome-encode-threshold-constraints-as-two-sat"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-encode-threshold-constraints-as-two-sat"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/two-sat.md",
+  "problemIds": [
+    "abc277-ex"
+  ],
+  "directProblemIds": [
+    "abc277-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "SCC・縮約DAG・トポロジカル順序で得た考え方と実装を再利用し、2-SAT・含意グラフの発動条件・正当化・境界を重複なく学ぶ。"
+}

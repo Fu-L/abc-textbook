@@ -1,0 +1,39 @@
+{
+  "id": "unit-laminar-interval-containment-tree",
+  "kind": "section",
+  "title": "laminar区間族の包含木構築",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "laminar区間族の包含木構築の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b",
+    "source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"
+  ],
+  "tagIds": [
+    "tag-laminar-interval-containment-tree"
+  ],
+  "ownedTagIds": [
+    "tag-laminar-interval-containment-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-laminar-interval-containment-tree"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-laminar-interval-containment-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/laminar-interval-containment-tree.md",
+  "problemIds": [
+    "abc405-f"
+  ],
+  "directProblemIds": [
+    "abc405-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "非交差区間族を括弧列として走査し、stack topを直接包含親にして包含関係を木へ変換する。その後の包含差分queryをLCAや木上距離へ接続する。"
+}

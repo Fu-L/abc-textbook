@@ -1,0 +1,49 @@
+{
+  "id": "unit-tree-euler-flattening",
+  "kind": "subsection",
+  "title": "Euler順による部分木区間化",
+  "parentId": "unit-tree-decomposition",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637",
+    "source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8",
+    "source-abc294-editorial-5997-847c64675d80e9d32193370e0a6b21e728c34c9c50f83776ee22566d0a7df60f",
+    "source-abc294-g-problem-661d8ffe4b86fc3f1e1a04c47567707eab6336d64f74d84899b6fe898104e971",
+    "source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52",
+    "source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd"
+  ],
+  "tagIds": [
+    "tag-tree-euler-flattening"
+  ],
+  "ownedTagIds": [
+    "tag-tree-euler-flattening"
+  ],
+  "learningOutcomeIds": [
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-euler-flattening.md",
+  "problemIds": [
+    "abc240-e",
+    "abc294-g",
+    "abc337-g",
+    "abc406-f"
+  ],
+  "directProblemIds": [
+    "abc240-e",
+    "abc406-f",
+    "abc294-g",
+    "abc337-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・集約へ変換する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

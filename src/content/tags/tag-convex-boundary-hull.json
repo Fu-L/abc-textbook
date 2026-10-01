@@ -1,0 +1,54 @@
+{
+  "id": "tag-convex-boundary-hull",
+  "name": "凸包・支持方向・境界候補",
+  "definition": "内部点が線形/凸目的に不要なことを示し、orientation順で凸境界を構成して支持方向ごとの極値を得る。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-geometry-orientation-transform"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "凸境界",
+      "支持方向",
+      "点集合"
+    ],
+    "triggerPatterns": [
+      "内部候補を捨てる",
+      "線形評価の極値"
+    ],
+    "invariantPatterns": [
+      "convex turn",
+      "orientation"
+    ],
+    "goalPatterns": [
+      "境界列挙",
+      "極値候補"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-half-plane-constraints",
+      "type": "contrast",
+      "rationale": "目的関数の候補を凸境界へ絞る見方と、線形半平面の共通部分として可行領域を表す見方を区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-restrict-geometric-candidates-to-boundary"
+  ],
+  "representativeProblemIds": [
+    "abc244-ex",
+    "abc257-ex",
+    "abc341-g"
+  ],
+  "aliases": [
+    "convex hull",
+    "support function",
+    "凸包"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

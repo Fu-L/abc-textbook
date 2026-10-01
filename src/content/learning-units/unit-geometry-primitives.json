@@ -1,0 +1,96 @@
+{
+  "id": "unit-geometry-primitives",
+  "kind": "section",
+  "title": "幾何の基本判定と座標変換",
+  "parentId": "unit-chapter-geometry-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "凸包の境界候補列挙・半平面交差。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
+    "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed",
+    "source-abc221-editorial-2724-27ca513b198239b5e4b5c7edad52c41e424e13334a290016f47353746a65a39b",
+    "source-abc221-g-problem-2bbfc16d85e3411ab924e236cc0426d3f14ff9835c8d56e1cd4b54c9c746a358",
+    "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
+  ],
+  "tagIds": [
+    "tag-cyclic-order-crossing",
+    "tag-geometry-orientation-transform"
+  ],
+  "ownedTagIds": [
+    "tag-geometry-orientation-transform"
+  ],
+  "learningOutcomeIds": [
+    "outcome-detect-crossing-by-cyclic-order",
+    "outcome-reduce-geometry-to-algebraic-predicates"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reduce-geometry-to-algebraic-predicates"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
+  "problemIds": [
+    "abc220-g",
+    "abc223-e",
+    "abc234-ex",
+    "abc248-e",
+    "abc258-f",
+    "abc296-g",
+    "abc301-g",
+    "abc338-e",
+    "abc351-e",
+    "abc353-f",
+    "abc366-e",
+    "abc377-f",
+    "abc385-f",
+    "abc426-e",
+    "abc437-f",
+    "abc442-e"
+  ],
+  "directProblemIds": [
+    "abc248-e",
+    "abc437-f",
+    "abc442-e",
+    "abc223-e",
+    "abc366-e",
+    "abc426-e",
+    "abc351-e",
+    "abc385-f",
+    "abc377-f",
+    "abc353-f",
+    "abc296-g",
+    "abc258-f",
+    "abc220-g",
+    "abc234-ex",
+    "abc301-g"
+  ],
+  "relatedProblemIds": [
+    "abc221-g",
+    "abc225-e",
+    "abc233-ex",
+    "abc240-g",
+    "abc243-ex",
+    "abc250-f",
+    "abc263-ex",
+    "abc266-ex",
+    "abc274-f",
+    "abc280-g",
+    "abc283-f",
+    "abc314-ex",
+    "abc315-f",
+    "abc323-f",
+    "abc343-e",
+    "abc405-f",
+    "abc410-g",
+    "abc418-e",
+    "abc422-e",
+    "abc424-f",
+    "abc457-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。"
+}

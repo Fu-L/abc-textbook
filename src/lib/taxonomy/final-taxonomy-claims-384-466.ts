@@ -15,7 +15,7 @@ export interface ExplicitTaxonomyClaimDecision {
 }
 
 type ClaimTuple = readonly [
-  collection: 'typicalTechniques' | 'prerequisiteCandidates',
+  collection: 'typicalTechniques' | 'prerequisiteCandidates' | 'implementationConcerns',
   index: number,
   kind: ExplicitInventoryClaimDispositionKind,
   ...tagIds: readonly string[],
@@ -107,36 +107,31 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-bounded-enumeration'],
   ]),
   'abc386-f': decision(
-    'outcome-design-order-preserving-dp',
+    'outcome-compute-edit-distance',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-sequence-subsequence-dp'],
+      ['typicalTechniques', 0, 'primary', 'tag-edit-distance-dp'],
       ['typicalTechniques', 1, 'supporting', 'tag-dp-state-equivalence'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-sequence-subsequence-dp'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-edit-distance-dp'],
     ],
     {
       'tag-dp-state-equivalence': ['outcome-design-minimal-sufficient-state'],
     },
   ),
   'abc386-g': decision(
-    'outcome-reorder-counting-contributions',
+    'outcome-count-labeled-structures-by-components',
     [
       ['typicalTechniques', 0, 'primary', 'tag-contribution-reordering'],
-      ['typicalTechniques', 0, 'supporting', 'tag-spanning-tree-optimization'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
-      ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 1, 'primary', 'tag-labeled-component-decomposition'],
       ['typicalTechniques', 2, 'same_tag', 'tag-contribution-reordering'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-spanning-tree-optimization'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 1, 'supporting', 'tag-combinatorial-coefficients'],
-      ['prerequisiteCandidates', 1, 'supporting', 'tag-inclusion-exclusion'],
       ['prerequisiteCandidates', 1, 'same_tag', 'tag-labeled-component-decomposition'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
-      'tag-inclusion-exclusion': ['outcome-correct-overlap-by-inversion'],
-      'tag-spanning-tree-optimization': ['outcome-construct-optimal-spanning-tree'],
     },
-    ['outcome-count-labeled-structures-by-components'],
+    ['outcome-reorder-counting-contributions'],
   ),
   'abc387-e': decision(
     'outcome-recover-valid-witness',
@@ -326,7 +321,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc392-g': decision(
-    'outcome-encode-counting-by-generating-function',
+    'outcome-compute-convolution-or-correlation',
     [
       ['typicalTechniques', 0, 'primary', 'tag-convolution-fps'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
@@ -336,7 +331,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
     },
-    ['outcome-compute-convolution-or-correlation'],
+    ['outcome-encode-counting-by-generating-function'],
   ),
   'abc393-e': decision('outcome-decompose-by-prime-or-divisor', [
     ['typicalTechniques', 0, 'primary', 'tag-prime-divisor-decomposition'],
@@ -465,9 +460,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc398-e': decision(
-    'outcome-classify-game-states',
+    'outcome-solve-game-by-parity-invariant',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-game-grundy-dp'],
+      ['typicalTechniques', 0, 'primary', 'tag-game-parity-invariant'],
       ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-interactive-protocol'],
@@ -483,11 +478,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-palindrome-radius'],
   ]),
   'abc398-g': decision(
-    'outcome-classify-game-states',
+    'outcome-solve-game-by-parity-invariant',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-game-grundy-dp'],
+      ['typicalTechniques', 0, 'primary', 'tag-game-parity-invariant'],
       ['typicalTechniques', 1, 'primary', 'tag-bipartite-structure'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-game-grundy-dp'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-bipartite-structure'],
     ],
     {},
@@ -592,13 +586,10 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-split-enumeration-space',
     [
       ['typicalTechniques', 0, 'primary', 'tag-divide-enumerate'],
-      ['typicalTechniques', 1, 'supporting', 'tag-monotone-threshold-search'],
+      ['typicalTechniques', 1, 'baseline'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-divide-enumerate'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-monotone-threshold-search'],
     ],
-    {
-      'tag-monotone-threshold-search': ['outcome-prove-and-search-threshold'],
-    },
+    {},
   ),
   'abc402-g': decision('outcome-partition-integer-parameter-ranges', [
     ['typicalTechniques', 0, 'primary', 'tag-integer-boundary-blocks'],
@@ -697,17 +688,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-schedule-range-query-updates',
     [
       ['typicalTechniques', 0, 'primary', 'tag-mo-offline-range'],
-      ['typicalTechniques', 1, 'supporting', 'tag-amortized-heavy-light'],
-      ['typicalTechniques', 1, 'supporting', 'tag-modular-arithmetic'],
+      ['typicalTechniques', 1, 'supporting', 'tag-value-bucket-aggregation'],
+      ['implementationConcerns', 0, 'supporting', 'tag-dynamic-modular-product'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-mo-offline-range'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-amortized-heavy-light'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-value-bucket-aggregation'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
-      'tag-amortized-heavy-light': ['outcome-bound-total-work'],
+      'tag-value-bucket-aggregation': ['outcome-aggregate-value-prefix-by-buckets'],
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
-      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
+      'tag-dynamic-modular-product': ['outcome-maintain-modular-product-under-factor-updates'],
     },
   ),
   'abc406-e': decision('outcome-count-prefix-constrained-objects', [
@@ -833,7 +823,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc409-g': decision(
-    'outcome-encode-counting-by-generating-function',
+    'outcome-compute-convolution-or-correlation',
     [
       ['typicalTechniques', 0, 'supporting', 'tag-stochastic-expectation-dp'],
       ['typicalTechniques', 1, 'supporting', 'tag-stochastic-expectation-dp'],
@@ -841,12 +831,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-convolution-fps'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-stochastic-expectation-dp'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
       'tag-stochastic-expectation-dp': ['outcome-solve-stochastic-recurrence'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
-    ['outcome-compute-convolution-or-correlation'],
+    ['outcome-encode-counting-by-generating-function'],
   ),
   'abc410-e': decision('outcome-design-resource-dp', [
     ['typicalTechniques', 0, 'primary', 'tag-knapsack-resource'],
@@ -887,15 +879,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-contribution-reordering'],
       ['typicalTechniques', 1, 'supporting', 'tag-event-sweep'],
-      ['typicalTechniques', 2, 'primary', 'tag-modular-arithmetic'],
+      ['typicalTechniques', 2, 'primary', 'tag-dynamic-modular-product'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-event-sweep'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-modular-arithmetic'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-event-sweep': ['outcome-linearize-events'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
-    ['outcome-compute-in-modular-arithmetic'],
+    ['outcome-maintain-modular-product-under-factor-updates'],
   ),
   'abc411-f': decision('outcome-bound-total-work', [
     ['typicalTechniques', 0, 'primary', 'tag-amortized-heavy-light'],
@@ -910,9 +903,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 2, 'same_tag', 'tag-subset-bitmask-transform'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-subset-bitmask-transform'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-symmetry-invariant-normalization'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-symmetry-invariant-normalization': ['outcome-normalize-equivalent-states'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc412-e': decision('outcome-decompose-by-prime-or-divisor', [
@@ -943,16 +938,9 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 0, 'same_tag', 'tag-flow-matching-cut'],
       ['typicalTechniques', 1, 'primary', 'tag-flow-matching-cut'],
       ['typicalTechniques', 2, 'same_tag', 'tag-flow-matching-cut'],
-      ['typicalTechniques', 2, 'supporting', 'tag-linear-algebra-xor'],
-      ['typicalTechniques', 2, 'supporting', 'tag-randomized-algorithm'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-flow-matching-cut'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-linear-algebra-xor'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-randomized-algorithm'],
     ],
-    {
-      'tag-linear-algebra-xor': ['outcome-transform-to-linear-system-or-rank'],
-      'tag-randomized-algorithm': ['outcome-design-and-bound-randomized-algorithm'],
-    },
+    {},
   ),
   'abc413-e': decision('outcome-divide-search-space-recursively', [
     ['typicalTechniques', 0, 'primary', 'tag-divide-enumerate'],
@@ -975,17 +963,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc413-g': decision(
-    'outcome-maintain-connectivity-components',
+    'outcome-dualize-planar-cut-to-path',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-flow-matching-cut'],
-      ['typicalTechniques', 1, 'primary', 'tag-dsu-connectivity'],
-      ['typicalTechniques', 2, 'supporting', 'tag-flow-matching-cut'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-dsu-connectivity'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-flow-matching-cut'],
+      ['typicalTechniques', 0, 'primary', 'tag-planar-duality'],
+      ['typicalTechniques', 1, 'supporting', 'tag-dsu-connectivity'],
+      ['typicalTechniques', 2, 'same_tag', 'tag-planar-duality'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-planar-duality'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-dsu-connectivity'],
     ],
-    {
-      'tag-flow-matching-cut': ['outcome-reduce-selection-to-network-optimization'],
-    },
+    { 'tag-dsu-connectivity': ['outcome-maintain-connectivity-components'] },
   ),
   'abc414-e': decision('outcome-partition-integer-parameter-ranges', [
     ['typicalTechniques', 0, 'primary', 'tag-integer-boundary-blocks'],
@@ -1114,15 +1100,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-reorder-counting-contributions',
     [
       ['typicalTechniques', 0, 'primary', 'tag-contribution-reordering'],
-      ['typicalTechniques', 0, 'supporting', 'tag-bounded-enumeration'],
-      ['typicalTechniques', 1, 'supporting', 'tag-gcd-diophantine'],
+      ['typicalTechniques', 1, 'supporting', 'tag-geometry-orientation-transform'],
       ['typicalTechniques', 2, 'same_tag', 'tag-contribution-reordering'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-contribution-reordering'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-gcd-diophantine'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-geometry-orientation-transform'],
     ],
     {
-      'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
-      'tag-gcd-diophantine': ['outcome-reduce-integer-structure-by-gcd'],
+      'tag-geometry-orientation-transform': ['outcome-reduce-geometry-to-algebraic-predicates'],
     },
   ),
   'abc418-f': decision(
@@ -1157,15 +1141,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
   'abc419-e': decision(
     'outcome-design-resource-dp',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-prefix-difference'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'same_tag', 'tag-knapsack-resource'],
       ['typicalTechniques', 2, 'primary', 'tag-knapsack-resource'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-knapsack-resource'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-prefix-difference'],
     ],
-    {
-      'tag-prefix-difference': ['outcome-linearize-static-range-information'],
-    },
+    {},
   ),
   'abc419-f': decision(
     'outcome-build-multi-pattern-automaton',
@@ -1285,7 +1266,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc422-g': decision(
-    'outcome-compute-convolution-or-correlation',
+    'outcome-encode-counting-by-generating-function',
     [
       ['typicalTechniques', 0, 'same_tag', 'tag-convolution-fps'],
       ['typicalTechniques', 0, 'supporting', 'tag-combinatorial-coefficients'],
@@ -1299,7 +1280,7 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
       'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
-    ['outcome-encode-counting-by-generating-function'],
+    ['outcome-compute-convolution-or-correlation'],
   ),
   'abc423-e': decision(
     'outcome-reorder-counting-contributions',
@@ -1329,11 +1310,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-solve-modular-constraints',
     [
       ['typicalTechniques', 0, 'primary', 'tag-modular-crt'],
-      ['typicalTechniques', 1, 'supporting', 'tag-divide-enumerate'],
+      ['typicalTechniques', 1, 'supporting', 'tag-bounded-enumeration'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-modular-crt'],
     ],
     {
-      'tag-divide-enumerate': ['outcome-split-enumeration-space'],
+      'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
     },
   ),
   'abc424-e': decision(
@@ -1467,13 +1448,14 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-bound-total-work',
     [
       ['typicalTechniques', 0, 'primary', 'tag-amortized-heavy-light'],
+      ['typicalTechniques', 0, 'supporting', 'tag-endpoint-run-partition'],
       ['typicalTechniques', 1, 'same_tag', 'tag-amortized-heavy-light'],
-      ['typicalTechniques', 2, 'supporting', 'tag-monotone-threshold-search'],
+      ['typicalTechniques', 2, 'baseline'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-amortized-heavy-light'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-monotone-threshold-search'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-endpoint-run-partition'],
     ],
     {
-      'tag-monotone-threshold-search': ['outcome-prove-and-search-threshold'],
+      'tag-endpoint-run-partition': ['outcome-maintain-endpoint-run-partition'],
     },
   ),
   'abc428-g': decision(
@@ -1485,10 +1467,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-symmetry-invariant-normalization'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-knapsack-resource'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-prime-divisor-decomposition'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-knapsack-resource': ['outcome-design-resource-dp'],
       'tag-prime-divisor-decomposition': ['outcome-decompose-by-prime-or-divisor'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc429-e': decision('outcome-select-state-graph-search', [
@@ -1626,14 +1610,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     'outcome-prove-greedy-order',
     [
       ['typicalTechniques', 0, 'primary', 'tag-greedy-exchange-order'],
-      ['typicalTechniques', 1, 'supporting', 'tag-ordered-set-heap'],
       ['typicalTechniques', 1, 'supporting', 'tag-event-sweep'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-greedy-exchange-order'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-ordered-set-heap'],
     ],
     {
       'tag-event-sweep': ['outcome-linearize-events'],
-      'tag-ordered-set-heap': ['outcome-maintain-dynamic-order-statistics'],
     },
   ),
   'abc433-f': decision(
@@ -1724,22 +1705,20 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-tree-aggregation-reroot': ['outcome-aggregate-rooted-tree'],
     },
   ),
-  'abc435-g': decision('outcome-design-range-update-action', [
-    ['typicalTechniques', 0, 'primary', 'tag-lazy-segment-action'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-lazy-segment-action'],
-    ['typicalTechniques', 2, 'same_tag', 'tag-lazy-segment-action'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-lazy-segment-action'],
+  'abc435-g': decision('outcome-factor-and-accelerate-transitions', [
+    ['typicalTechniques', 0, 'primary', 'tag-dp-transition-acceleration'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-dp-transition-acceleration'],
+    ['typicalTechniques', 2, 'same_tag', 'tag-dp-transition-acceleration'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-dp-transition-acceleration'],
   ]),
   'abc436-e': decision(
     'outcome-decompose-functional-graph',
     [
       ['typicalTechniques', 0, 'primary', 'tag-functional-graph-doubling'],
-      ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order'],
+      ['typicalTechniques', 1, 'problem_specific'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-functional-graph-doubling'],
     ],
-    {
-      'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
-    },
+    {},
   ),
   'abc436-f': decision(
     'outcome-reorder-counting-contributions',
@@ -1869,8 +1848,12 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 2, 'supporting', 'tag-divide-enumerate'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-convolution-fps'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-divide-enumerate'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
-    { 'tag-divide-enumerate': ['outcome-divide-search-space-recursively'] },
+    {
+      'tag-divide-enumerate': ['outcome-divide-search-space-recursively'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
+    },
     [
       'outcome-encode-counting-by-generating-function',
       'outcome-apply-formal-power-series-operations',
@@ -2000,10 +1983,15 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-functional-graph-doubling': ['outcome-decompose-functional-graph'],
     },
   ),
-  'abc445-e': decision('outcome-decompose-by-prime-or-divisor', [
-    ['typicalTechniques', 0, 'primary', 'tag-prime-divisor-decomposition'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-prime-divisor-decomposition'],
-  ]),
+  'abc445-e': decision(
+    'outcome-decompose-by-prime-or-divisor',
+    [
+      ['typicalTechniques', 0, 'primary', 'tag-prime-divisor-decomposition'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-prime-divisor-decomposition'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
+    ],
+    { 'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'] },
+  ),
   'abc445-f': decision('outcome-accelerate-fixed-linear-transition', [
     ['typicalTechniques', 0, 'primary', 'tag-linear-recurrence-matrix'],
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-linear-recurrence-matrix'],
@@ -2106,11 +2094,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       'tag-fenwick-weighted-prefix': ['outcome-maintain-weighted-prefix-statistics'],
     },
   ),
-  'abc449-f': decision('outcome-linearize-events', [
-    ['typicalTechniques', 0, 'primary', 'tag-event-sweep'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-event-sweep'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-event-sweep'],
-  ]),
+  'abc449-f': decision(
+    'outcome-linearize-events',
+    [
+      ['typicalTechniques', 0, 'primary', 'tag-event-sweep'],
+      ['typicalTechniques', 0, 'supporting', 'tag-dynamic-interval-union'],
+      ['typicalTechniques', 1, 'same_tag', 'tag-event-sweep'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-event-sweep'],
+    ],
+    { 'tag-dynamic-interval-union': ['outcome-maintain-dynamic-interval-union-length'] },
+  ),
   'abc449-g': decision(
     'outcome-encode-counting-by-generating-function',
     [
@@ -2145,15 +2138,17 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 1, 'primary', 'tag-stochastic-expectation-dp'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-stochastic-expectation-dp'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-symmetry-invariant-normalization'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-symmetry-invariant-normalization': ['outcome-normalize-equivalent-states'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
-  'abc451-e': decision('outcome-recover-valid-witness', [
-    ['typicalTechniques', 0, 'primary', 'tag-constructive-witness'],
-    ['typicalTechniques', 1, 'same_tag', 'tag-constructive-witness'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-constructive-witness'],
+  'abc451-e': decision('outcome-reconstruct-tree-from-distance-matrix', [
+    ['typicalTechniques', 0, 'primary', 'tag-additive-tree-metric-reconstruction'],
+    ['typicalTechniques', 1, 'same_tag', 'tag-additive-tree-metric-reconstruction'],
+    ['prerequisiteCandidates', 0, 'same_tag', 'tag-additive-tree-metric-reconstruction'],
   ]),
   'abc451-f': decision(
     'outcome-color-and-classify-bipartite-components',
@@ -2171,15 +2166,18 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc451-g': decision(
-    'outcome-query-bitwise-order-with-trie',
+    'outcome-minimize-xor-coset-representative',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-linear-algebra-xor'],
-      ['typicalTechniques', 1, 'primary', 'tag-binary-trie'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-binary-trie'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-linear-algebra-xor'],
+      ['typicalTechniques', 0, 'primary', 'tag-xor-linear-basis'],
+      ['typicalTechniques', 0, 'supporting', 'tag-cycle-space-basis'],
+      ['typicalTechniques', 1, 'supporting', 'tag-binary-trie'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-xor-linear-basis'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-cycle-space-basis'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-binary-trie'],
     ],
     {
-      'tag-linear-algebra-xor': ['outcome-transform-to-linear-system-or-rank'],
+      'tag-binary-trie': ['outcome-query-bitwise-order-with-trie'],
+      'tag-cycle-space-basis': ['outcome-map-graph-cycle-xor-to-span'],
     },
   ),
   'abc452-e': decision(
@@ -2295,9 +2293,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 1, 'primary', 'tag-lazy-segment-action'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-lazy-segment-action'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-contribution-reordering'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc455-g': decision(
@@ -2320,21 +2320,30 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['typicalTechniques', 1, 'primary', 'tag-directed-condensation-toposort'],
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-directed-condensation-toposort'],
   ]),
-  'abc456-f': decision('outcome-design-associative-range-summary', [
-    ['typicalTechniques', 0, 'same_tag', 'tag-monoid-segment-tree'],
-    ['typicalTechniques', 1, 'primary', 'tag-monoid-segment-tree'],
-    ['prerequisiteCandidates', 0, 'same_tag', 'tag-monoid-segment-tree'],
-  ]),
+  'abc456-f': decision(
+    'outcome-maintain-queue-aggregate-with-swag',
+    [
+      ['typicalTechniques', 0, 'supporting', 'tag-semiring-matrix-exponentiation'],
+      ['typicalTechniques', 1, 'primary', 'tag-swag'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-swag'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-semiring-matrix-exponentiation'],
+    ],
+    {
+      'tag-semiring-matrix-exponentiation': ['outcome-exponentiate-transition-over-semiring'],
+    },
+  ),
   'abc456-g': decision(
     'outcome-correct-overlap-by-inversion',
     [
       ['typicalTechniques', 0, 'same_tag', 'tag-inclusion-exclusion'],
+      ['implementationConcerns', 0, 'supporting', 'tag-dynamic-modular-product'],
       ['typicalTechniques', 1, 'primary', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-inclusion-exclusion'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
+      'tag-dynamic-modular-product': ['outcome-maintain-modular-product-under-factor-updates'],
     },
   ),
   'abc457-e': decision('outcome-prove-greedy-order', [
@@ -2384,30 +2393,28 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     },
   ),
   'abc458-g': decision(
-    'outcome-prove-and-search-threshold',
+    'outcome-maintain-piecewise-linear-convex-function',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-monotone-threshold-search'],
-      ['typicalTechniques', 1, 'supporting', 'tag-discrete-convex-marginal'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-monotone-threshold-search'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-discrete-convex-marginal'],
+      ['typicalTechniques', 0, 'supporting', 'tag-monotone-threshold-search'],
+      ['typicalTechniques', 1, 'primary', 'tag-slope-trick'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-slope-trick'],
+      ['prerequisiteCandidates', 0, 'supporting', 'tag-monotone-threshold-search'],
     ],
     {
-      'tag-discrete-convex-marginal': ['outcome-exploit-convexity'],
+      'tag-monotone-threshold-search': ['outcome-prove-and-search-threshold'],
     },
   ),
   'abc459-e': decision(
     'outcome-aggregate-rooted-tree',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-contribution-reordering'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'primary', 'tag-tree-aggregation-reroot'],
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-tree-aggregation-reroot'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-contribution-reordering'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
-      'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
     },
   ),
   'abc459-f': decision('outcome-prune-dominated-candidates-once', [
@@ -2416,31 +2423,26 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-monotone-stack-queue'],
   ]),
   'abc459-g': decision(
-    'outcome-characterize-integer-solvability',
+    'outcome-optimize-two-variable-convex-lattice-function',
     [
       ['typicalTechniques', 0, 'primary', 'tag-gcd-diophantine'],
-      ['typicalTechniques', 1, 'supporting', 'tag-discrete-convex-marginal'],
+      ['typicalTechniques', 1, 'primary', 'tag-two-variable-convex-lattice-optimization'],
       ['typicalTechniques', 1, 'supporting', 'tag-bounded-enumeration'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-gcd-diophantine'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-discrete-convex-marginal'],
     ],
     {
       'tag-bounded-enumeration': ['outcome-enumerate-bounded-candidates-or-cases'],
-      'tag-discrete-convex-marginal': ['outcome-exploit-convexity'],
     },
+    ['outcome-characterize-integer-solvability'],
   ),
   'abc460-e': decision(
     'outcome-solve-modular-constraints',
     [
       ['typicalTechniques', 0, 'same_tag', 'tag-modular-crt'],
       ['typicalTechniques', 1, 'primary', 'tag-modular-crt'],
-      ['typicalTechniques', 1, 'supporting', 'tag-gcd-diophantine'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-modular-crt'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-gcd-diophantine'],
     ],
-    {
-      'tag-gcd-diophantine': ['outcome-characterize-integer-solvability'],
-    },
+    {},
   ),
   'abc460-f': decision(
     'outcome-design-associative-range-summary',
@@ -2513,17 +2515,16 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-inclusion-exclusion'],
       ['typicalTechniques', 1, 'supporting', 'tag-convolution-fps'],
-      ['typicalTechniques', 1, 'supporting', 'tag-amortized-heavy-light'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-inclusion-exclusion'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-amortized-heavy-light'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-convolution-fps'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
-      'tag-amortized-heavy-light': ['outcome-bound-total-work'],
       'tag-convolution-fps': [
         'outcome-encode-counting-by-generating-function',
         'outcome-compute-convolution-or-correlation',
       ],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc463-e': decision('outcome-model-and-compute-shortest-path', [
@@ -2538,9 +2539,11 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 1, 'supporting', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-symmetry-invariant-normalization'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-combinatorial-coefficients'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc463-g': decision(
@@ -2548,11 +2551,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     [
       ['typicalTechniques', 0, 'primary', 'tag-combinatorial-coefficients'],
       ['typicalTechniques', 1, 'supporting', 'tag-mo-offline-range'],
+      ['typicalTechniques', 0, 'supporting', 'tag-modular-arithmetic'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-combinatorial-coefficients'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-mo-offline-range'],
     ],
     {
       'tag-mo-offline-range': ['outcome-schedule-range-query-updates'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc464-e': decision(
@@ -2574,24 +2579,26 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
       ['typicalTechniques', 1, 'primary', 'tag-divide-enumerate'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-divide-enumerate'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-contribution-reordering'],
+      ['implementationConcerns', 0, 'supporting', 'tag-combinatorial-coefficients'],
+      ['implementationConcerns', 0, 'supporting', 'tag-modular-arithmetic'],
     ],
     {
       'tag-contribution-reordering': ['outcome-reorder-counting-contributions'],
+      'tag-combinatorial-coefficients': ['outcome-formulate-combinatorial-coefficients'],
+      'tag-modular-arithmetic': ['outcome-compute-in-modular-arithmetic'],
     },
   ),
   'abc464-g': decision(
     'outcome-maintain-dynamic-order-statistics',
     [
-      ['typicalTechniques', 0, 'supporting', 'tag-prefix-difference'],
+      ['typicalTechniques', 0, 'problem_specific'],
       ['typicalTechniques', 1, 'primary', 'tag-ordered-set-heap'],
       ['typicalTechniques', 1, 'supporting', 'tag-greedy-exchange-order'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-ordered-set-heap'],
       ['prerequisiteCandidates', 0, 'supporting', 'tag-greedy-exchange-order'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-prefix-difference'],
     ],
     {
       'tag-greedy-exchange-order': ['outcome-prove-greedy-order'],
-      'tag-prefix-difference': ['outcome-linearize-static-range-information'],
     },
   ),
   'abc465-e': decision('outcome-count-prefix-constrained-objects', [
@@ -2600,16 +2607,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'same_tag', 'tag-digit-dp'],
   ]),
   'abc465-f': decision(
-    'outcome-enumerate-subset-state-space',
+    'outcome-linearize-static-range-information',
     [
-      ['typicalTechniques', 0, 'primary', 'tag-subset-bitmask-transform'],
-      ['typicalTechniques', 1, 'supporting', 'tag-inclusion-exclusion'],
-      ['prerequisiteCandidates', 0, 'same_tag', 'tag-subset-bitmask-transform'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-inclusion-exclusion'],
+      ['typicalTechniques', 0, 'primary', 'tag-prefix-difference'],
+      ['typicalTechniques', 1, 'same_tag', 'tag-prefix-difference'],
+      ['prerequisiteCandidates', 0, 'same_tag', 'tag-prefix-difference'],
     ],
-    {
-      'tag-inclusion-exclusion': ['outcome-correct-overlap-by-inversion'],
-    },
+    {},
   ),
   'abc465-g': decision(
     'outcome-maintain-dynamic-order-statistics',
@@ -2643,16 +2647,13 @@ export const FINAL_TAXONOMY_CLAIM_DECISIONS_384_466 = {
     ['prerequisiteCandidates', 0, 'problem_specific'],
   ]),
   'abc466-g': decision(
-    'outcome-maintain-potential-differences',
+    'outcome-design-carry-or-mixed-radix-dp',
     [
       ['typicalTechniques', 0, 'primary', 'tag-dsu-connectivity'],
-      ['typicalTechniques', 1, 'supporting', 'tag-carry-mixed-radix-dp'],
+      ['typicalTechniques', 1, 'primary', 'tag-carry-mixed-radix-dp'],
       ['prerequisiteCandidates', 0, 'same_tag', 'tag-dsu-connectivity'],
-      ['prerequisiteCandidates', 0, 'supporting', 'tag-carry-mixed-radix-dp'],
     ],
-    {
-      'tag-carry-mixed-radix-dp': ['outcome-design-carry-or-mixed-radix-dp'],
-    },
-    ['outcome-design-carry-or-mixed-radix-dp'],
+    {},
+    ['outcome-maintain-potential-differences'],
   ),
 } as const satisfies Readonly<Record<string, ExplicitTaxonomyClaimDecision>>;

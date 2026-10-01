@@ -1,0 +1,45 @@
+{
+  "id": "unit-polynomial-multipoint-evaluation",
+  "kind": "subsection",
+  "title": "多項式の多点評価・補間",
+  "parentId": "unit-formal-power-series",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "多項式の多点評価・補間の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477",
+    "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba",
+    "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544",
+    "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"
+  ],
+  "tagIds": [
+    "tag-polynomial-multipoint-evaluation"
+  ],
+  "ownedTagIds": [
+    "tag-polynomial-multipoint-evaluation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-at-geometric-points",
+    "outcome-evaluate-polynomial-at-many-points"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-evaluate-at-geometric-points",
+    "outcome-evaluate-polynomial-at-many-points"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md",
+  "problemIds": [
+    "abc272-ex"
+  ],
+  "directProblemIds": [
+    "abc272-ex"
+  ],
+  "relatedProblemIds": [
+    "abc381-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "形式的べき級数の基本演算・再帰分割・分割統治で得た考え方と実装を再利用し、多項式の多点評価・補間の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "outcome-answer-tree-ancestor-queries",
+  "statement": "binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-jump-deterministic-transition"
+  ],
+  "scopeIds": [
+    "abc267-f",
+    "abc294-g",
+    "abc298-ex",
+    "abc329-g",
+    "abc405-f",
+    "abc438-f",
+    "abc460-f",
+    "tag-tree-ancestor-lca",
+    "unit-tree-ancestor-lca"
+  ]
+}

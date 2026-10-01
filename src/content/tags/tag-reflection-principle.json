@@ -1,0 +1,46 @@
+{
+  "id": "tag-reflection-principle",
+  "name": "鏡像法・reflection principle",
+  "definition": "境界を初めて破るpathを鏡像pathへ写す符号付き全単射により、壁付きwalkを無境界または巡回畳み込みへ変換する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-combinatorial-coefficients"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "absorbing boundary",
+      "lattice path",
+      "reflected path"
+    ],
+    "triggerPatterns": [
+      "境界条件を消す",
+      "壁を越えないwalk"
+    ],
+    "invariantPatterns": [
+      "first boundary crossing",
+      "符号付き全単射"
+    ],
+    "goalPatterns": [
+      "境界付き数え上げ",
+      "巡回化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-remove-boundaries-by-reflection"
+  ],
+  "representativeProblemIds": [
+    "abc309-ex"
+  ],
+  "aliases": [
+    "André reflection method",
+    "reflection principle",
+    "鏡像法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,14 @@
+{
+  "id": "outcome-derive-mst-weight-from-threshold-components",
+  "statement": "重み閾値以下のグラフの成分数からMST重みを層別和として導き、辺追加時に各閾値の連結性を更新して最適重みを維持できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-maintain-connectivity-components",
+    "outcome-prove-greedy-order"
+  ],
+  "scopeIds": [
+    "abc355-f",
+    "tag-spanning-tree-optimization",
+    "unit-spanning-tree-optimization"
+  ]
+}

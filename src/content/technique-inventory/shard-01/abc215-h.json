@@ -45,12 +45,12 @@
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "最小余裕 d を持つ品種集合から d＋1 個食べれば Hall 条件を初めて破れるため、最小摂取数は max(0,d＋1) である。",
+        "text": "実行可能性は全Sでf(S)≥g(S)と判定する。一方、破壊対象は注文が存在するg(S)>0の集合に限り、d=min_{g(S)>0}(f(S)−g(S))とする。実行可能ならその最小集合からd+1個食べられる（g(S)≥1よりd+1≤f(S)）。既に不可能ならX=0、そうでなければX=d+1である。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
     "algorithmConnection": {
-      "text": "注文充足を Hall の部分集合不等式へ移し、許可マスクの重みを subset zeta 変換して最小欠損を求め、最小集合族への包含を Möbius・superset zeta 変換で数える。",
+      "text": "許可マスク別注文数をsubset zeta変換して実際の注文数g(S)を求める。全SのHall条件で実行可能性を判定し、不可能なら(X,Y)=(0,1)。可能ならg(S)>0に限った最小余裕dと集合族F={S:g(S)>0かつf(S)−g(S)=d}を作る。X=d+1とし、C(f(S),X)のMöbius反転で台集合がちょうどSの個体選択数h(S)を求める。Fのsuperset zeta変換が正のSについてh(S)を一度ずつ加える。",
       "evidenceIds": ["evidence-official-analysis"]
     }
   },

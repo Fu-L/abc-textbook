@@ -1,0 +1,14 @@
+{
+  "id": "outcome-build-component-merge-tree",
+  "statement": "成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components"
+  ],
+  "scopeIds": [
+    "abc235-ex",
+    "abc314-f",
+    "tag-dsu-merge-tree",
+    "unit-dsu-merge-tree"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "outcome-compute-all-pairs-distance",
+  "statement": "許す中継点集合を状態とするDPからFloyd–Warshallを導き、距離行列の更新順・到達不能・負閉路を扱える。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc243-e",
+    "abc286-e",
+    "abc338-f",
+    "abc369-e",
+    "abc375-f",
+    "abc416-e",
+    "tag-shortest-path",
+    "unit-weighted-shortest-path"
+  ]
+}

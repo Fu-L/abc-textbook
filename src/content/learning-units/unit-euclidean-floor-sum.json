@@ -1,0 +1,50 @@
+{
+  "id": "unit-euclidean-floor-sum",
+  "kind": "section",
+  "title": "格子点転置によるfloor_sum",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00",
+    "source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3",
+    "source-abc313-editorial-6896-281370d7d5359959d272cc05c68b3bb1fad37f5755e913964f4e498c2f615c86",
+    "source-abc313-g-problem-e9a3b224b799f49226e9c1f76dee5dbf07703407a7352ad343585b355644a5d2",
+    "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
+    "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
+  ],
+  "tagIds": [
+    "tag-euclidean-floor-sum"
+  ],
+  "ownedTagIds": [
+    "tag-euclidean-floor-sum"
+  ],
+  "learningOutcomeIds": [
+    "outcome-sum-affine-floors-by-euclid"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-sum-affine-floors-by-euclid"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/euclidean-floor-sum.md",
+  "problemIds": [
+    "abc283-ex",
+    "abc402-g",
+    "abc443-g"
+  ],
+  "directProblemIds": [
+    "abc443-g",
+    "abc283-ex",
+    "abc402-g"
+  ],
+  "relatedProblemIds": [
+    "abc313-g",
+    "abc372-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "一次式の床和を格子点数とみなし、整数部分の取り出しと領域の転置でEuclid互除法型に再帰する。商一定区間の列挙とは異なり、傾きと法の交換が計算量を決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

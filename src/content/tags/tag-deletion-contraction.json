@@ -1,0 +1,43 @@
+{
+  "id": "tag-deletion-contraction",
+  "name": "削除・縮約recurrence",
+  "definition": "辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "graph edge",
+      "graph polynomial",
+      "minor"
+    ],
+    "triggerPatterns": [
+      "縮約して同一視",
+      "辺を使う/使わない"
+    ],
+    "invariantPatterns": [
+      "base cases",
+      "minor relation"
+    ],
+    "goalPatterns": [
+      "graph polynomial recurrence"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-recur-by-edge-deletion-contraction"
+  ],
+  "representativeProblemIds": [
+    "abc294-ex"
+  ],
+  "aliases": [
+    "Tutte recurrence",
+    "deletion-contraction",
+    "削除・縮約"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

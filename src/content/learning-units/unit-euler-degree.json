@@ -1,0 +1,44 @@
+{
+  "id": "unit-euler-degree",
+  "kind": "section",
+  "title": "次数parityからwalkや選択辺集合を判定・構成する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "容量付きフロー・マッチング・最小カットへの帰着。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+    "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
+    "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
+    "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa",
+    "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+    "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+  ],
+  "tagIds": [
+    "tag-degree-parity-subgraph",
+    "tag-euler-trail-circuit"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
+    "outcome-construct-degree-parity-subgraph",
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/euler-degree.md",
+  "problemIds": [
+    "abc286-g",
+    "abc345-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc227-h",
+    "abc336-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "グラフを探索できることを前提に、全辺walkの成立性や選択辺集合の端点条件を次数parityで特徴付け、葉から判定・構成する。"
+}

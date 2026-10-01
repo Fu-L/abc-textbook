@@ -1,0 +1,55 @@
+{
+  "id": "tag-flow-feasibility-lower-bounds",
+  "name": "下限制約付きflowの実現可能性",
+  "definition": "各辺のlower boundを先に流して頂点需要へ変換し、super source/sinkを加えたcirculationの飽和可能性を判定する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-max-flow-min-cut"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "上限",
+      "下限",
+      "有向辺",
+      "頂点需要"
+    ],
+    "triggerPatterns": [
+      "flow feasibility",
+      "各辺に最低量",
+      "需要を満たす"
+    ],
+    "invariantPatterns": [
+      "flow conservation",
+      "super source",
+      "需要balance"
+    ],
+    "goalPatterns": [
+      "実現可能性",
+      "整数flow構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-max-flow-min-cut",
+      "type": "reduction",
+      "rationale": "各辺の下限を先に差し引いて頂点需要へ移し、super source/sinkからの全需要辺を飽和できるかというmax-flow問題へ帰着する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-flow-with-lower-bounds"
+  ],
+  "representativeProblemIds": [
+    "abc285-g"
+  ],
+  "aliases": [
+    "circulation with demands",
+    "lower-bound flow",
+    "下限付きフロー"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

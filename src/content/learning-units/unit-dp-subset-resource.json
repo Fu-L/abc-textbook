@@ -1,0 +1,92 @@
+{
+  "id": "unit-dp-subset-resource",
+  "kind": "section",
+  "title": "資源・容量DP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+    "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+    "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+    "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c",
+    "source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84",
+    "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"
+  ],
+  "tagIds": [
+    "tag-knapsack-resource"
+  ],
+  "ownedTagIds": [
+    "tag-knapsack-resource"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-resource-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-resource-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-subset-resource.md",
+  "problemIds": [
+    "abc216-f",
+    "abc222-e",
+    "abc269-g",
+    "abc275-f",
+    "abc288-e",
+    "abc307-g",
+    "abc320-f",
+    "abc321-f",
+    "abc322-e",
+    "abc325-f",
+    "abc341-f",
+    "abc364-e",
+    "abc383-f",
+    "abc390-e",
+    "abc410-e",
+    "abc419-e",
+    "abc424-g",
+    "abc441-f",
+    "abc461-f"
+  ],
+  "directProblemIds": [
+    "abc410-e",
+    "abc322-e",
+    "abc390-e",
+    "abc419-e",
+    "abc441-f",
+    "abc364-e",
+    "abc222-e",
+    "abc216-f",
+    "abc341-f",
+    "abc275-f",
+    "abc321-f",
+    "abc383-f",
+    "abc325-f",
+    "abc461-f",
+    "abc288-e",
+    "abc320-f",
+    "abc307-g",
+    "abc269-g",
+    "abc424-g"
+  ],
+  "relatedProblemIds": [
+    "abc287-f",
+    "abc290-ex",
+    "abc310-ex",
+    "abc311-ex",
+    "abc332-g",
+    "abc366-f",
+    "abc373-f",
+    "abc375-e",
+    "abc382-e",
+    "abc416-f",
+    "abc426-g",
+    "abc428-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "最小十分状態を設計できるようになった後、選択数・容量・費用などの資源軸で遷移を表し、0/1選択と無制限選択の更新方向を区別する。"
+}

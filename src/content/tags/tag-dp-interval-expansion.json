@@ -1,0 +1,47 @@
+{
+  "id": "tag-dp-interval-expansion",
+  "name": "区間拡張DP",
+  "definition": "訪問済み範囲と現在いる端を状態にし、未訪問の左右の隣点へ拡張する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "左右の端",
+      "数直線",
+      "訪問済み区間"
+    ],
+    "triggerPatterns": [
+      "未訪問の隣点",
+      "移動と時間損失",
+      "鍵と壁"
+    ],
+    "invariantPatterns": [
+      "区間長の増加",
+      "訪問済み範囲の連続性"
+    ],
+    "goalPatterns": [
+      "最大回収価値",
+      "最短移動"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-interval-expansion-dp"
+  ],
+  "representativeProblemIds": [
+    "abc273-f",
+    "abc219-h"
+  ],
+  "aliases": [
+    "区間拡張DP",
+    "訪問済み区間DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

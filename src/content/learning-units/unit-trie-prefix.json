@@ -1,0 +1,53 @@
+{
+  "id": "unit-trie-prefix",
+  "kind": "section",
+  "title": "Trieで共有接頭辞を索引化する",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc240-editorial-3428-ef01cef0080e4c8a7281ace14281c1b0615ced2ef79c22d5f38fe8e9a89f432c",
+    "source-abc240-ex-problem-24c400f71ce5abbff2214e4997fd861d4734377f3a0faa275f8e09bacbbebb89",
+    "source-abc268-editorial-4782-eba6ee35ec70b7e21f9935aec2f4f08bb56a01d390bc24e8952ee7c85cae2c51",
+    "source-abc268-g-problem-1ce0d2d72d4e4fd15ee56036a2337b2e2dec2d261f9331527aaf393478ca62a1",
+    "source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331",
+    "source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"
+  ],
+  "tagIds": [
+    "tag-trie-prefix"
+  ],
+  "ownedTagIds": [
+    "tag-trie-prefix"
+  ],
+  "learningOutcomeIds": [
+    "outcome-index-shared-prefixes-with-trie"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-index-shared-prefixes-with-trie"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/trie-prefix.md",
+  "problemIds": [
+    "abc287-e",
+    "abc353-e",
+    "abc377-g",
+    "abc437-e"
+  ],
+  "directProblemIds": [
+    "abc287-e",
+    "abc353-e",
+    "abc437-e",
+    "abc377-g"
+  ],
+  "relatedProblemIds": [
+    "abc240-ex",
+    "abc268-g",
+    "abc403-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "文字ごとの遷移を配列やmapで持ち、複数文字列の共有接頭辞を木として索引化する。"
+}

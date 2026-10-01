@@ -1,0 +1,51 @@
+{
+  "id": "tag-finite-field-frobenius",
+  "name": "標数pのFrobenius恒等式による反復高速化",
+  "definition": "標数pで中間の二項係数が消える恒等式 (1+x)^(p^t)=1+x^(p^t) をシフト演算へ適用し、隣接和反復をpの冪回ずつ飛ばす。圧縮列では各段のrun数の増加も評価する。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-modular-arithmetic"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "シフト演算",
+      "ラン長圧縮",
+      "多項式"
+    ],
+    "triggerPatterns": [
+      "pの冪ジャンプ",
+      "隣接和反復"
+    ],
+    "invariantPatterns": [
+      "run数上界",
+      "二項係数消滅"
+    ],
+    "goalPatterns": [
+      "反復区間圧縮"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-modular-arithmetic",
+      "type": "extension",
+      "rationale": "法pの演算から多項式・シフト演算へ進み、標数pの二項係数消滅によって隣接和反復を飛ばす。拡大体の元の軌道を求める手法ではない。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius"
+  ],
+  "representativeProblemIds": [
+    "abc251-ex"
+  ],
+  "aliases": [
+    "Freshman dream",
+    "Frobenius恒等式",
+    "標数pの二項係数消滅"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

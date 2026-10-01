@@ -1,0 +1,47 @@
+{
+  "id": "tag-dsu-merge-tree",
+  "name": "DSU merge tree・Kruskal reconstruction tree",
+  "definition": "成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-dsu-components"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "components",
+      "merge event",
+      "reconstruction tree"
+    ],
+    "triggerPatterns": [
+      "併合履歴をquery",
+      "閾値順に併合"
+    ],
+    "invariantPatterns": [
+      "ancestor means component inclusion",
+      "merge timestamp"
+    ],
+    "goalPatterns": [
+      "threshold connectivity",
+      "履歴木DP"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-component-merge-tree"
+  ],
+  "representativeProblemIds": [
+    "abc235-ex",
+    "abc314-f"
+  ],
+  "aliases": [
+    "DSU merge tree",
+    "Kruskal reconstruction tree",
+    "統合木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

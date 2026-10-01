@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T159",
+  "taxonomySubjectDigest": "2de0a1a86daec201b0f5518ff5a0031d5ba0d2bea3faea5671ba00671b164f03",
+  "reviewerId": "person-maintainer",
+  "results": [
+    {
+      "checkId": "check-corpus-final-taxonomy",
+      "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
+      "completedAt": "2026-09-26T17:58:29.534Z",
+      "exitCode": 0,
+      "passed": true,
+      "stdoutDigest": "e0673075c1ec98cec4eed869ef7e90f837a48a2b78d46934f680e7e776c5bdeb",
+      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+    },
+    {
+      "checkId": "check-current-final-taxonomy-output",
+      "command": "npm run corpus:final-taxonomy",
+      "completedAt": "2026-09-26T17:58:37.803Z",
+      "exitCode": 0,
+      "passed": true,
+      "stdoutDigest": "d81ff85812dc2674a40dee74c8b21adedfdf98470c4b4dbfd82a5aeb4dc9cdf6",
+      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+    },
+    {
+      "checkId": "check-human-content-review",
+      "command": "npx vitest run tests/unit/human-content-review.test.ts",
+      "completedAt": "2026-09-26T17:58:38.268Z",
+      "exitCode": 0,
+      "passed": true,
+      "stdoutDigest": "1cdcb0552f6e7643ec9de452df4d902b175235778e559bae48b7560133a1d9d0",
+      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+    },
+    {
+      "checkId": "check-schema-parity",
+      "command": "npm run schema:check",
+      "completedAt": "2026-09-26T17:58:38.488Z",
+      "exitCode": 0,
+      "passed": true,
+      "stdoutDigest": "60ea1640c5667856da1032ef675c5ba967f56135c286491a4b0a7f09fb25f9c2",
+      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+    },
+    {
+      "checkId": "check-taxonomy-integration",
+      "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
+      "completedAt": "2026-09-26T17:58:45.951Z",
+      "exitCode": 0,
+      "passed": true,
+      "stdoutDigest": "e30f865204c3eb3380e01a13545a505b503e7ef87989627e6dddcf66e3c1348d",
+      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-min-weight-general-perfect-matching",
+  "kind": "section",
+  "title": "一般グラフの最小重み完全matching",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc412-editorial-13380-95067bcd0eb01040baed106ba4d8b2253ceb159ad95bf3b8f1405a4e9b351afb",
+    "source-abc412-g-problem-27d73284f299279f9fbbd7a98644b63d7f80d28e6cef49591ca3785e5ab4b6c2"
+  ],
+  "tagIds": [
+    "tag-min-weight-general-perfect-matching"
+  ],
+  "ownedTagIds": [
+    "tag-min-weight-general-perfect-matching"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-min-weight-general-perfect-matching"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-min-weight-general-perfect-matching"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
+  "problemIds": [
+    "abc412-g"
+  ],
+  "directProblemIds": [
+    "abc412-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "二部matchingでは表せないpairing模型を作った後、奇cycleを扱うweighted blossomまたは重み付きTutte多項式で最小重みまで求める。"
+}

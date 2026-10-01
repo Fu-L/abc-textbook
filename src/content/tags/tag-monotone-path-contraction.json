@@ -1,0 +1,44 @@
+{
+  "id": "tag-monotone-path-contraction",
+  "name": "単調path contraction・DSU jump",
+  "definition": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "contracted vertices",
+      "next pointer",
+      "path"
+    ],
+    "triggerPatterns": [
+      "処理済み区間を飛ばす",
+      "単調にmerge"
+    ],
+    "invariantPatterns": [
+      "代表は次未処理",
+      "各頂点を一度だけ削除"
+    ],
+    "goalPatterns": [
+      "path更新高速化",
+      "単調縮約"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-contract-monotone-paths-with-jump-pointers"
+  ],
+  "representativeProblemIds": [
+    "abc295-g"
+  ],
+  "aliases": [
+    "DSU jump",
+    "next-unprocessed pointer",
+    "単調path圧縮"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

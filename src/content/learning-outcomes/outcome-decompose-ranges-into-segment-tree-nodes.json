@@ -1,0 +1,15 @@
+{
+  "id": "outcome-decompose-ranges-into-segment-tree-nodes",
+  "statement": "区間をO(log N)個のcanonical nodeへ分解してrange object・時間生存区間・range edgeを配置し、point queryではroot-to-leaf path上のobjectを集められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary"
+  ],
+  "scopeIds": [
+    "abc244-ex",
+    "abc342-g",
+    "abc363-g",
+    "abc414-g",
+    "tag-segment-tree-canonical-decomposition",
+    "unit-segment-tree-canonical-decomposition"
+  ]
+}

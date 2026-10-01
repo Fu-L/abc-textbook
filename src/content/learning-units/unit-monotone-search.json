@@ -1,0 +1,93 @@
+{
+  "id": "unit-monotone-search",
+  "kind": "section",
+  "title": "単調境界を証明して探索する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+    "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537",
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+    "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"
+  ],
+  "tagIds": [
+    "tag-monotone-threshold-search"
+  ],
+  "ownedTagIds": [
+    "tag-monotone-threshold-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/monotone-search.md",
+  "problemIds": [
+    "abc215-f",
+    "abc229-g",
+    "abc246-g",
+    "abc263-ex",
+    "abc267-e",
+    "abc269-e",
+    "abc270-e",
+    "abc292-f",
+    "abc293-ex",
+    "abc300-f",
+    "abc303-f",
+    "abc330-f",
+    "abc373-e",
+    "abc374-e",
+    "abc381-e",
+    "abc388-g",
+    "abc395-f",
+    "abc424-e",
+    "abc444-f"
+  ],
+  "directProblemIds": [
+    "abc269-e",
+    "abc270-e",
+    "abc267-e",
+    "abc381-e",
+    "abc395-f",
+    "abc292-f",
+    "abc424-e",
+    "abc374-e",
+    "abc373-e",
+    "abc330-f",
+    "abc300-f",
+    "abc215-f",
+    "abc388-g",
+    "abc229-g",
+    "abc246-g",
+    "abc303-f",
+    "abc444-f",
+    "abc293-ex",
+    "abc263-ex"
+  ],
+  "relatedProblemIds": [
+    "abc216-e",
+    "abc304-g",
+    "abc320-g",
+    "abc324-f",
+    "abc346-f",
+    "abc370-f",
+    "abc388-e",
+    "abc389-e",
+    "abc394-g",
+    "abc397-g",
+    "abc401-g",
+    "abc427-g",
+    "abc458-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "判定結果が一方向に変わることを証明し、巨大な値域から成功・失敗の境界を二分探索で求める。"
+}

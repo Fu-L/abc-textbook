@@ -1,0 +1,48 @@
+{
+  "id": "unit-euler-trail-circuit",
+  "kind": "subsection",
+  "title": "Euler trail・circuit",
+  "parentId": "unit-euler-degree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Euler trail・circuitの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc227-editorial-2915-374933d9212fac4dda1de99b9ef56b841a9eb84e2165f73f5774c963b6d66b5a",
+    "source-abc227-h-problem-ea5d90f87cdd2219658f9d0d0538e53f567e1e070756ee47adeebf544d70b681",
+    "source-abc286-editorial-5573-b7c203ecb9cdf01e0770ecb5d48490fe62f055dac999dba673135990db17cf3a",
+    "source-abc286-g-problem-20f362fc2f2fc85d35edc9a615a3837593c4cf68426cabb9bf748ebbf19a75fa",
+    "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+    "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+  ],
+  "tagIds": [
+    "tag-euler-trail-circuit"
+  ],
+  "ownedTagIds": [
+    "tag-euler-trail-circuit"
+  ],
+  "learningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/euler-trail-circuit.md",
+  "problemIds": [
+    "abc286-g"
+  ],
+  "directProblemIds": [
+    "abc286-g"
+  ],
+  "relatedProblemIds": [
+    "abc227-h",
+    "abc336-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "全辺を一度ずつ使うEuler trail・circuitについて、無向graphの奇数次数条件または有向graphの入出次数条件と辺を持つ部分の連結性から存在を判定し、具体的な辺列が必要ならHierholzer法で構成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

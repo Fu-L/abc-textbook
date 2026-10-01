@@ -1,0 +1,50 @@
+{
+  "id": "unit-separable-linear-transform",
+  "kind": "subsection",
+  "title": "分離可能線形変換・Walsh–Hadamard変換",
+  "parentId": "unit-linear-algebra-xor",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "分離可能線形変換・Walsh–Hadamard変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
+  ],
+  "tagIds": [
+    "tag-separable-linear-transform"
+  ],
+  "ownedTagIds": [
+    "tag-separable-linear-transform"
+  ],
+  "learningOutcomeIds": [
+    "outcome-factor-separable-linear-transform"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-factor-separable-linear-transform"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
+  "problemIds": [
+    "abc212-h",
+    "abc288-g",
+    "abc367-g"
+  ],
+  "directProblemIds": [
+    "abc288-g",
+    "abc212-h",
+    "abc367-g"
+  ],
+  "relatedProblemIds": [
+    "abc220-h",
+    "abc265-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "Kronecker積型の多次元変換を各軸の小変換へ分離し、XOR convolution等をpointwise積へ移す。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "tag-recursive-divide-and-conquer",
+  "name": "再帰分割・分割統治",
+  "definition": "pivot・bit・時刻区間・積木で部分問題へ再帰分割し、部分結果を重複なく合成する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "pivot",
+      "再帰木",
+      "区間"
+    ],
+    "triggerPatterns": [
+      "pivot",
+      "中央",
+      "左右へ分割"
+    ],
+    "invariantPatterns": [
+      "一意な部分問題",
+      "因果順"
+    ],
+    "goalPatterns": [
+      "再帰合成",
+      "重複削減"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-divide-search-space-recursively"
+  ],
+  "representativeProblemIds": [
+    "abc282-ex",
+    "abc304-g"
+  ],
+  "aliases": [
+    "CDQ分割統治",
+    "divide and conquer",
+    "分割統治"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

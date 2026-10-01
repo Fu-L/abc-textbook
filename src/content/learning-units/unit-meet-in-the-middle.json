@@ -1,0 +1,59 @@
+{
+  "id": "unit-meet-in-the-middle",
+  "kind": "subsection",
+  "title": "meet-in-the-middle・半分全列挙",
+  "parentId": "unit-divide-enumeration",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc",
+    "source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed",
+    "source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1",
+    "source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"
+  ],
+  "tagIds": [
+    "tag-meet-in-the-middle"
+  ],
+  "ownedTagIds": [
+    "tag-meet-in-the-middle"
+  ],
+  "learningOutcomeIds": [
+    "outcome-split-enumeration-space"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-split-enumeration-space"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/meet-in-the-middle.md",
+  "problemIds": [
+    "abc220-h",
+    "abc252-ex",
+    "abc271-f",
+    "abc300-g",
+    "abc326-f",
+    "abc336-f",
+    "abc402-f",
+    "abc427-f",
+    "abc464-f"
+  ],
+  "directProblemIds": [
+    "abc271-f",
+    "abc427-f",
+    "abc402-f",
+    "abc326-f",
+    "abc336-f",
+    "abc464-f",
+    "abc300-g",
+    "abc252-ex",
+    "abc220-h"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "探索対象を独立に列挙できる二集合へ分け、値・mask・境界を照合して指数を半減する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

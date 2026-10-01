@@ -1,0 +1,58 @@
+{
+  "id": "unit-functional-graph",
+  "kind": "section",
+  "title": "一意な後続・サイクル・ダブリング",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "各頂点から複数の後続を選べる一般のグラフ探索・強連結成分への縮約。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+    "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b",
+    "source-abc241-e-problem-aa1078a5980728f8a202a2ab0dd7b8cb2f9dbbf4fda2dc2352a746e378172be4",
+    "source-abc241-editorial-3472-223ab10f3662d986ab9f48d7c727f682d9bbc31b921499899f8366059700fd74",
+    "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+    "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190"
+  ],
+  "tagIds": [
+    "tag-binary-lifting",
+    "tag-functional-graph-decomposition"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-decompose-functional-graph",
+    "outcome-jump-deterministic-transition"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/functional-graph.md",
+  "problemIds": [
+    "abc212-f",
+    "abc241-e",
+    "abc254-g",
+    "abc256-e",
+    "abc284-g",
+    "abc296-e",
+    "abc310-g",
+    "abc357-e",
+    "abc367-e",
+    "abc377-e",
+    "abc387-f",
+    "abc399-e",
+    "abc436-e",
+    "abc438-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc258-e",
+    "abc370-f",
+    "abc371-g",
+    "abc417-g",
+    "abc444-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態グラフを理解した後、後続が一意という制約からcycleと流入木への分解やダブリングを導く。"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "unit-cyclic-group-exponent-counting",
+  "kind": "section",
+  "title": "巡回群を指数化して数える",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "乗法的位数から最小周期だけを求める問題。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+    "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+  ],
+  "tagIds": [
+    "tag-cyclic-exponent-counting"
+  ],
+  "ownedTagIds": [
+    "tag-cyclic-exponent-counting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-through-cyclic-exponents"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-through-cyclic-exponents"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+  "problemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
+  "directProblemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "乗法的位数とその約数分類を先に学び、巡回群の元を指数へ写して位数別に重複なく数える。個別問題で必要な約数Möbius反転はsupporting readinessとして接続する。"
+}

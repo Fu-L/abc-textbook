@@ -1,0 +1,39 @@
+{
+  "id": "unit-reflection-principle",
+  "kind": "section",
+  "title": "鏡像法・reflection principle",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "鏡像法・reflection principleの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d",
+    "source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7"
+  ],
+  "tagIds": [
+    "tag-reflection-principle"
+  ],
+  "ownedTagIds": [
+    "tag-reflection-principle"
+  ],
+  "learningOutcomeIds": [
+    "outcome-remove-boundaries-by-reflection"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-remove-boundaries-by-reflection"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/reflection-principle.md",
+  "problemIds": [
+    "abc309-ex"
+  ],
+  "directProblemIds": [
+    "abc309-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "組合せ係数・数え上げで得た考え方と実装を再利用し、鏡像法・reflection principleの発動条件・正当化・境界を重複なく学ぶ。"
+}

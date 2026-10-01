@@ -1,0 +1,43 @@
+{
+  "id": "unit-finite-field-extension",
+  "kind": "section",
+  "title": "拡大有限体の表現と四則演算を構成する",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "素数法上の通常の四則演算だけで閉じる計算、および環上で逆元の存在を仮定できない演算。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838",
+    "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f",
+    "source-abc381-editorial-11378-fc0e9ce2494227f3061ddd831eb689f14c7134c7ca9f86103e1e55228518d544",
+    "source-abc381-g-problem-89af6156b09a9d47f79b2b5056c8a024009805911ae0079dd0845252b1b0ab46"
+  ],
+  "tagIds": [
+    "tag-finite-field-extension"
+  ],
+  "ownedTagIds": [
+    "tag-finite-field-extension"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-in-finite-field-extension"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compute-in-finite-field-extension"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/finite-field-extension.md",
+  "problemIds": [
+    "abc381-g"
+  ],
+  "directProblemIds": [
+    "abc381-g"
+  ],
+  "relatedProblemIds": [
+    "abc274-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "素体上の演算を土台に、既約関係で元を標準化し、加減乗除が閉じる拡大体として扱う。"
+}

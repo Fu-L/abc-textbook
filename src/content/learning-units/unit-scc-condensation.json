@@ -1,0 +1,43 @@
+{
+  "id": "unit-scc-condensation",
+  "kind": "subsection",
+  "title": "SCC・縮約DAG・トポロジカル順序",
+  "parentId": "unit-directed-condensation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "SCC・縮約DAG・トポロジカル順序の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+    "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+    "source-abc306-editorial-6602-e768422ef0d55286e016962cb115a4ef11b1585228994a242d209b188e497483",
+    "source-abc306-g-problem-c3624248a58217293cd4adf62a012b97c82400af1e9990662c5bd977d01e0bcd",
+    "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990",
+    "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"
+  ],
+  "tagIds": [
+    "tag-scc-condensation"
+  ],
+  "ownedTagIds": [
+    "tag-scc-condensation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-condense-and-order-directed-graph"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-condense-and-order-directed-graph"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/scc-condensation.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc214-h",
+    "abc306-g",
+    "abc374-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DAGのtopological processingで得た考え方と実装を再利用し、SCC・縮約DAG・トポロジカル順序の発動条件・正当化・境界を重複なく学ぶ。"
+}

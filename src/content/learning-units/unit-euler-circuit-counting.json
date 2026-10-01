@@ -1,0 +1,39 @@
+{
+  "id": "unit-euler-circuit-counting",
+  "kind": "section",
+  "title": "BEST定理によるEuler circuit数え上げ",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "BEST定理によるEuler circuit数え上げの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc336-editorial-9060-e22600744a8d6453f620934ad27de12eafcaf2689d5edf2f68c5410a5b709f51",
+    "source-abc336-g-problem-9a54fbb0f49670a04b25f56425ed06eeff1244ece4d56f6af87da32441e5c4cb"
+  ],
+  "tagIds": [
+    "tag-euler-circuit-counting"
+  ],
+  "ownedTagIds": [
+    "tag-euler-circuit-counting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-euler-circuits-by-best"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-euler-circuits-by-best"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/euler-circuit-counting.md",
+  "problemIds": [
+    "abc336-g"
+  ],
+  "directProblemIds": [
+    "abc336-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "行列式による数え上げ・Euler trail・circuitで得た考え方と実装を再利用し、BEST定理によるEuler circuit数え上げの発動条件・正当化・境界を重複なく学ぶ。"
+}

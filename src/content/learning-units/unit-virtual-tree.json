@@ -1,0 +1,39 @@
+{
+  "id": "unit-virtual-tree",
+  "kind": "subsection",
+  "title": "virtual tree・auxiliary tree",
+  "parentId": "unit-tree-decomposition",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "virtual tree・auxiliary treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc340-editorial-9249-f5e2a5be1cd8f51c782110c8e5dcec99b713d85318ee4151297c7fa061066d86",
+    "source-abc340-g-problem-e70db04af46e85658e7ad8818675e163c7295eebabf06a60954d3a6c85519bf8"
+  ],
+  "tagIds": [
+    "tag-virtual-tree"
+  ],
+  "ownedTagIds": [
+    "tag-virtual-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-virtual-tree"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-virtual-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/virtual-tree.md",
+  "problemIds": [
+    "abc340-g"
+  ],
+  "directProblemIds": [
+    "abc340-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "ancestor query・LCA・Euler順による部分木区間化で得た考え方と実装を再利用し、virtual tree・auxiliary treeの発動条件・正当化・境界を重複なく学ぶ。"
+}

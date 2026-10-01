@@ -1,0 +1,85 @@
+{
+  "id": "unit-dp-subset-state",
+  "kind": "section",
+  "title": "部分集合・bitmask状態DP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+    "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+    "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+    "source-abc216-editorial-2561-01aa8429e2e958692d07c0f82f6cf01e69852b5340bfbccaa77d3502ca587341",
+    "source-abc216-h-problem-8fb8270303b0eec2b42f490983ebe92997e275421471c13816b43fe79ece6a97"
+  ],
+  "tagIds": [
+    "tag-subset-bitmask-dp"
+  ],
+  "ownedTagIds": [
+    "tag-subset-bitmask-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-enumerate-subset-state-space"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-enumerate-subset-state-space"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-subset-state.md",
+  "problemIds": [
+    "abc232-f",
+    "abc274-e",
+    "abc301-e",
+    "abc310-f",
+    "abc319-f",
+    "abc328-g",
+    "abc332-e",
+    "abc338-f",
+    "abc343-g",
+    "abc352-f",
+    "abc381-f",
+    "abc396-g",
+    "abc411-g",
+    "abc425-f",
+    "abc432-f"
+  ],
+  "directProblemIds": [
+    "abc274-e",
+    "abc301-e",
+    "abc338-f",
+    "abc381-f",
+    "abc232-f",
+    "abc332-e",
+    "abc425-f",
+    "abc310-f",
+    "abc352-f",
+    "abc343-g",
+    "abc411-g",
+    "abc328-g",
+    "abc396-g",
+    "abc432-f",
+    "abc319-f"
+  ],
+  "relatedProblemIds": [
+    "abc213-g",
+    "abc215-e",
+    "abc216-h",
+    "abc228-g",
+    "abc278-f",
+    "abc306-ex",
+    "abc309-g",
+    "abc313-f",
+    "abc321-g",
+    "abc354-e",
+    "abc400-g",
+    "abc402-e",
+    "abc419-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、部分集合・bitmask状態DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

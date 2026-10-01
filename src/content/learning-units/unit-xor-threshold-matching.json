@@ -1,0 +1,40 @@
+{
+  "id": "unit-xor-threshold-matching",
+  "kind": "section",
+  "title": "XOR閾値matchingのbit分割再帰",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一般二部matching・一般グラフmatchingを汎用アルゴリズムで解く問題。",
+    "二集合間の最大XORだけを求める最小化問題、および上位bitを順に固定するbitwise greedy feasibility。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
+    "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
+  ],
+  "tagIds": [
+    "tag-xor-threshold-matching"
+  ],
+  "ownedTagIds": [
+    "tag-xor-threshold-matching"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-xor-threshold-matching"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-xor-threshold-matching"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/xor-threshold-matching.md",
+  "problemIds": [
+    "abc304-g"
+  ],
+  "directProblemIds": [
+    "abc304-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "固定したXOR閾値でpair可能数を最大化する問題を、bitごとの同一集合内matchingと二集合間matchingへ分ける。閾値bitによる確定pairと下位bitへ残すpairを区別し、再帰式が最大数を保つ理由を証明する。"
+}

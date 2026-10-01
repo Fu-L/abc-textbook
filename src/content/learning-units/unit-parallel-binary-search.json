@@ -1,0 +1,43 @@
+{
+  "id": "unit-parallel-binary-search",
+  "kind": "section",
+  "title": "parallel binary search・多数境界の判定共有",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
+    "source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598",
+    "source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"
+  ],
+  "tagIds": [
+    "tag-parallel-binary-search"
+  ],
+  "ownedTagIds": [
+    "tag-parallel-binary-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-share-threshold-checks-by-parallel-binary-search"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-share-threshold-checks-by-parallel-binary-search"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/parallel-binary-search.md",
+  "problemIds": [
+    "abc233-ex",
+    "abc394-g"
+  ],
+  "directProblemIds": [
+    "abc394-g",
+    "abc233-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "単一queryの単調境界を二分探索できるようになった後、多数queryのmidをroundごとに束ね、一方向更新できる判定器を共有する。"
+}

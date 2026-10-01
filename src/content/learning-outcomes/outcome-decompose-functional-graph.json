@@ -1,0 +1,23 @@
+{
+  "id": "outcome-decompose-functional-graph",
+  "statement": "後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "scopeIds": [
+    "abc241-e",
+    "abc256-e",
+    "abc258-e",
+    "abc284-g",
+    "abc296-e",
+    "abc357-e",
+    "abc371-g",
+    "abc377-e",
+    "abc387-f",
+    "abc399-e",
+    "abc436-e",
+    "abc444-g",
+    "tag-functional-graph-decomposition",
+    "unit-functional-graph-decomposition"
+  ]
+}

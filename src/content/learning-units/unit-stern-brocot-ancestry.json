@@ -1,0 +1,39 @@
+{
+  "id": "unit-stern-brocot-ancestry",
+  "kind": "section",
+  "title": "Stern–Brocot木の経路と祖先",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
+    "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
+  ],
+  "tagIds": [
+    "tag-stern-brocot-ancestry"
+  ],
+  "ownedTagIds": [
+    "tag-stern-brocot-ancestry"
+  ],
+  "learningOutcomeIds": [
+    "outcome-traverse-stern-brocot-ancestors"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-traverse-stern-brocot-ancestors"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/stern-brocot-ancestry.md",
+  "problemIds": [
+    "abc273-ex"
+  ],
+  "directProblemIds": [
+    "abc273-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "gcd不変量・差分構造で得た考え方と実装を再利用し、Stern–Brocot木の経路と祖先の発動条件・正当化・境界を重複なく学ぶ。"
+}

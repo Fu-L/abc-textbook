@@ -1,0 +1,39 @@
+{
+  "id": "unit-monotone-path-contraction",
+  "kind": "section",
+  "title": "単調path contraction・DSU jump",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "単調path contraction・DSU jumpの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc295-editorial-6052-e8a82887ceedd6e246d7ee23d6abb37b105a7c8de6a510a6a1a6cd79cf4fb735",
+    "source-abc295-g-problem-1e1a3e055f7aad2cd56a4f89ed9743a56d6ccc6b472446f9aa7eb01f150272ba"
+  ],
+  "tagIds": [
+    "tag-monotone-path-contraction"
+  ],
+  "ownedTagIds": [
+    "tag-monotone-path-contraction"
+  ],
+  "learningOutcomeIds": [
+    "outcome-contract-monotone-paths-with-jump-pointers"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-contract-monotone-paths-with-jump-pointers"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/monotone-path-contraction.md",
+  "problemIds": [
+    "abc295-g"
+  ],
+  "directProblemIds": [
+    "abc295-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "一度確定したpath区間を次未処理pointerまたはDSU parentで飛ばし、各頂点を高々一度だけ縮約する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

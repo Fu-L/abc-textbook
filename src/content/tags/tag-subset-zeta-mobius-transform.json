@@ -1,0 +1,60 @@
+{
+  "id": "tag-subset-zeta-mobius-transform",
+  "name": "subset zeta・Möbius変換",
+  "definition": "Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-inclusion-exclusion",
+    "tag-subset-bitmask-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "Boolean lattice",
+      "mask頻度",
+      "subset function"
+    ],
+    "triggerPatterns": [
+      "exact mask",
+      "全submask和",
+      "全superset和"
+    ],
+    "invariantPatterns": [
+      "zetaとinverse",
+      "包含順序"
+    ],
+    "goalPatterns": [
+      "exact値復元",
+      "subset aggregate"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-divisor-mobius-inversion",
+      "type": "analogy",
+      "rationale": "subset包含順序と約数整除順序はいずれもposet上のzeta変換とMöbius反転として統一して捉えられる。"
+    },
+    {
+      "tagId": "tag-inclusion-exclusion",
+      "type": "often_combined",
+      "rationale": "条件集合全体の包除をsubset lattice上で一括計算するときにzeta・Möbius変換を併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-subset-zeta-mobius-transform"
+  ],
+  "representativeProblemIds": [
+    "abc295-ex",
+    "abc349-f"
+  ],
+  "aliases": [
+    "subset Möbius transform",
+    "subset zeta transform",
+    "高速ゼータ変換"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

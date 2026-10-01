@@ -1,0 +1,109 @@
+{
+  "id": "unit-weighted-shortest-path",
+  "kind": "subsection",
+  "title": "最短路モデル",
+  "parentId": "unit-shortest-path-certificates",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf",
+    "source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0",
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98",
+    "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"
+  ],
+  "tagIds": [
+    "tag-shortest-path"
+  ],
+  "ownedTagIds": [
+    "tag-shortest-path"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-all-pairs-distance",
+    "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-relax-in-dependency-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compute-all-pairs-distance",
+    "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-relax-in-dependency-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/weighted-shortest-path.md",
+  "problemIds": [
+    "abc213-e",
+    "abc232-g",
+    "abc237-e",
+    "abc243-e",
+    "abc243-ex",
+    "abc245-g",
+    "abc246-e",
+    "abc257-f",
+    "abc271-e",
+    "abc277-e",
+    "abc286-e",
+    "abc291-f",
+    "abc307-f",
+    "abc308-ex",
+    "abc325-e",
+    "abc342-e",
+    "abc395-e",
+    "abc414-g",
+    "abc416-e",
+    "abc431-e",
+    "abc463-e"
+  ],
+  "directProblemIds": [
+    "abc395-e",
+    "abc325-e",
+    "abc286-e",
+    "abc463-e",
+    "abc277-e",
+    "abc237-e",
+    "abc271-e",
+    "abc213-e",
+    "abc431-e",
+    "abc246-e",
+    "abc291-f",
+    "abc416-e",
+    "abc342-e",
+    "abc243-e",
+    "abc257-f",
+    "abc307-f",
+    "abc245-g",
+    "abc232-g",
+    "abc308-ex",
+    "abc414-g",
+    "abc243-ex"
+  ],
+  "relatedProblemIds": [
+    "abc218-f",
+    "abc250-ex",
+    "abc252-e",
+    "abc261-g",
+    "abc264-g",
+    "abc297-e",
+    "abc299-e",
+    "abc301-e",
+    "abc305-e",
+    "abc338-f",
+    "abc364-g",
+    "abc369-e",
+    "abc375-f",
+    "abc375-g",
+    "abc393-g",
+    "abc395-g",
+    "abc429-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。"
+}

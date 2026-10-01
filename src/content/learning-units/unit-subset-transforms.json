@@ -1,0 +1,49 @@
+{
+  "id": "unit-subset-transforms",
+  "kind": "subsection",
+  "title": "subset zeta・Möbius変換",
+  "parentId": "unit-inclusion-exclusion",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
+    "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
+    "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
+    "source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1",
+    "source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8"
+  ],
+  "tagIds": [
+    "tag-subset-zeta-mobius-transform"
+  ],
+  "ownedTagIds": [
+    "tag-subset-zeta-mobius-transform"
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-subset-zeta-mobius-transform"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-apply-subset-zeta-mobius-transform"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/subset-transforms.md",
+  "problemIds": [
+    "abc295-ex",
+    "abc349-f",
+    "abc423-f"
+  ],
+  "directProblemIds": [
+    "abc423-f",
+    "abc349-f",
+    "abc295-ex"
+  ],
+  "relatedProblemIds": [
+    "abc215-h"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "集合上の包除原理・部分集合・bitmask状態DPで得た考え方と実装を再利用し、subset zeta・Möbius変換の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,68 @@
+{
+  "id": "tag-carry-mixed-radix-dp",
+  "name": "繰り上がり・混合基数DP",
+  "definition": "整除鎖の丸め、支払いと釣銭、複数項の加算を下位桁から処理し、次の桁へ渡すcarry・borrowだけを状態に保つ。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "borrow",
+      "carry",
+      "整除鎖",
+      "桁",
+      "混合基数",
+      "額面"
+    ],
+    "triggerPatterns": [
+      "下位桁から",
+      "切り上げ",
+      "切り下げ",
+      "繰り上がり",
+      "釣銭"
+    ],
+    "invariantPatterns": [
+      "整除関係",
+      "有限carry vector",
+      "次桁へのcarry",
+      "端数"
+    ],
+    "goalPatterns": [
+      "加算制約",
+      "可解性",
+      "最小枚数",
+      "解数"
+    ],
+    "excludedPatterns": [
+      "tight",
+      "文字列automaton",
+      "未満フラグ"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-digit-dp",
+      "type": "contrast",
+      "rationale": "上限との接頭辞一致を保つ桁DPと、下位桁から繰り上がりだけを渡す混合基数DPを区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-carry-or-mixed-radix-dp"
+  ],
+  "representativeProblemIds": [
+    "abc231-e",
+    "abc466-g"
+  ],
+  "aliases": [
+    "carry DP",
+    "mixed-radix DP",
+    "混合基数DP",
+    "繰り上がりDP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

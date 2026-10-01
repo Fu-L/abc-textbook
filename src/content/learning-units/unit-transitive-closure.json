@@ -1,0 +1,47 @@
+{
+  "id": "unit-transitive-closure",
+  "kind": "subsection",
+  "title": "推移閉包",
+  "parentId": "unit-graph-search",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "推移閉包の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc287-editorial-5635-87e762447ee5c71e40ec9615ff2d1e5e1f5364b1fdc004b0565ed82bbbd24090",
+    "source-abc287-ex-problem-088a9f5f7b92ce562b44a495e34373f0201ba7422b503c4bf3b34a28058b29fc",
+    "source-abc292-e-problem-edcb478dbb9ec49e093c3079b675dad0fae05bf62cac02c422f56c03055ffa66",
+    "source-abc292-editorial-5874-1a03583c8be421b7ea294c349cd239be44ea432b717e4d32a9d1ac6dd5a83f3c",
+    "source-abc374-editorial-11099-08ffa618d6266b4f574965ba7db128d0fd6d4897a29e321b44770b9f29b48990",
+    "source-abc374-g-problem-ef990b1fe81062fb5fa496062ddb53c9751bba11b379a7113f4381ffff2dda7b"
+  ],
+  "tagIds": [
+    "tag-transitive-closure"
+  ],
+  "ownedTagIds": [
+    "tag-transitive-closure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-transitive-closure"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compute-transitive-closure"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/transitive-closure.md",
+  "problemIds": [
+    "abc287-ex",
+    "abc292-e"
+  ],
+  "directProblemIds": [
+    "abc292-e",
+    "abc287-ex"
+  ],
+  "relatedProblemIds": [
+    "abc374-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "各始点探索またはWarshallの段階不変条件により全頂点対の到達関係を計算する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

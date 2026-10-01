@@ -1,0 +1,78 @@
+{
+  "id": "unit-weighted-prefix-fenwick",
+  "kind": "section",
+  "title": "反転数・重み付き接頭辞統計をFenwick Treeで保つ",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一般のモノイドによるSegment Treeの区間要約。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37",
+    "source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138",
+    "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
+    "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2",
+    "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+    "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"
+  ],
+  "tagIds": [
+    "tag-fenwick-weighted-prefix"
+  ],
+  "ownedTagIds": [
+    "tag-fenwick-weighted-prefix"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-weighted-prefix-statistics"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-weighted-prefix-statistics"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
+  "problemIds": [
+    "abc221-e",
+    "abc256-f",
+    "abc276-f",
+    "abc287-g",
+    "abc351-f",
+    "abc461-e"
+  ],
+  "directProblemIds": [
+    "abc351-f",
+    "abc221-e",
+    "abc276-f",
+    "abc461-e",
+    "abc256-f",
+    "abc287-g"
+  ],
+  "relatedProblemIds": [
+    "abc231-f",
+    "abc233-ex",
+    "abc253-f",
+    "abc261-f",
+    "abc263-ex",
+    "abc294-g",
+    "abc296-f",
+    "abc306-f",
+    "abc337-g",
+    "abc341-e",
+    "abc368-g",
+    "abc378-e",
+    "abc380-g",
+    "abc384-g",
+    "abc392-f",
+    "abc396-f",
+    "abc406-f",
+    "abc431-g",
+    "abc436-f",
+    "abc438-g",
+    "abc439-f",
+    "abc441-e",
+    "abc449-e",
+    "abc452-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "静的な接頭辞差分を理解した後、点更新を伴う頻度・反転数・重み付き接頭辞統計をFenwick Treeで保つ。"
+}

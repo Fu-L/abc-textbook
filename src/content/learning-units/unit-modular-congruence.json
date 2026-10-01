@@ -1,0 +1,51 @@
+{
+  "id": "unit-modular-congruence",
+  "kind": "section",
+  "title": "一次合同・CRTで解の類を統合する",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d",
+    "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760",
+    "source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260",
+    "source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb",
+    "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+    "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+  ],
+  "tagIds": [
+    "tag-modular-congruence-crt"
+  ],
+  "ownedTagIds": [
+    "tag-modular-congruence-crt"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-modular-constraints"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-modular-constraints"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/modular-congruence.md",
+  "problemIds": [
+    "abc245-ex",
+    "abc286-f",
+    "abc423-g",
+    "abc460-e"
+  ],
+  "directProblemIds": [
+    "abc460-e",
+    "abc286-f",
+    "abc423-g",
+    "abc245-ex"
+  ],
+  "relatedProblemIds": [
+    "abc371-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "法上の演算とBézout等式を使えることを前提に、一次合同の可解性を判定して複数条件をCRTで統合する。"
+}

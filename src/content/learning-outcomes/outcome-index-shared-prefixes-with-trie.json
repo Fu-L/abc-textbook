@@ -1,0 +1,16 @@
+{
+  "id": "outcome-index-shared-prefixes-with-trie",
+  "statement": "文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc240-ex",
+    "abc268-g",
+    "abc287-e",
+    "abc353-e",
+    "abc377-g",
+    "abc403-e",
+    "abc437-e",
+    "tag-trie-prefix",
+    "unit-trie-prefix"
+  ]
+}

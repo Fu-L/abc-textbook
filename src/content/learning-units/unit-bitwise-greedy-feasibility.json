@@ -1,0 +1,39 @@
+{
+  "id": "unit-bitwise-greedy-feasibility",
+  "kind": "section",
+  "title": "bitwise greedyによるmask最適化",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4",
+    "source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"
+  ],
+  "tagIds": [
+    "tag-bitwise-greedy-feasibility"
+  ],
+  "ownedTagIds": [
+    "tag-bitwise-greedy-feasibility"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-mask-by-bitwise-feasibility"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-mask-by-bitwise-feasibility"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/bitwise-greedy-feasibility.md",
+  "problemIds": [
+    "abc408-e"
+  ],
+  "directProblemIds": [
+    "abc408-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "上位bitから候補maskを仮定し、残り問題のfeasibility oracleでそのbitを保持/除去できるか決める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

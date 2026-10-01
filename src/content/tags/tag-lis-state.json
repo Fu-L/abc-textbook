@@ -1,0 +1,50 @@
+{
+  "id": "tag-lis-state",
+  "name": "LIS・末尾の支配関係",
+  "definition": "同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-sequence-subsequence-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二次元順序",
+      "末尾",
+      "部分列"
+    ],
+    "triggerPatterns": [
+      "末尾の大小で支配",
+      "順序を保って延長"
+    ],
+    "invariantPatterns": [
+      "末尾の支配関係",
+      "長さ別最小末尾"
+    ],
+    "goalPatterns": [
+      "復元",
+      "最適解への所属",
+      "最長部分列"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-lis-frontier"
+  ],
+  "representativeProblemIds": [
+    "abc439-e",
+    "abc393-f",
+    "abc369-f",
+    "abc457-g"
+  ],
+  "aliases": [
+    "LIS",
+    "最長増加部分列",
+    "長さ別最小末尾"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

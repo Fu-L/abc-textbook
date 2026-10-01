@@ -1,0 +1,51 @@
+{
+  "id": "tag-greedy-exchange-order",
+  "name": "貪欲法と交換論",
+  "definition": "局所選択の交換または候補の支配関係から、調べる順序・残す候補・定数個のcaseを確定する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "ソート",
+      "割り当て",
+      "選択",
+      "順序"
+    ],
+    "triggerPatterns": [
+      "交換",
+      "大きい順",
+      "小さい順",
+      "局所"
+    ],
+    "invariantPatterns": [
+      "先に選",
+      "悪化しない",
+      "最適解"
+    ],
+    "goalPatterns": [
+      "最大",
+      "最小",
+      "構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-prove-greedy-order"
+  ],
+  "representativeProblemIds": [
+    "abc214-e",
+    "abc268-f",
+    "abc290-ex"
+  ],
+  "aliases": [
+    "greedy algorithm",
+    "交換法",
+    "貪欲法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

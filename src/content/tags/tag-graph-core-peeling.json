@@ -1,0 +1,58 @@
+{
+  "id": "tag-graph-core-peeling",
+  "name": "単一サイクル成分とgraph core",
+  "definition": "連結成分の辺数と頂点数からcycle rankを判定し、必要なら葉を反復削除してcycle coreと削除順を得る。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "core",
+      "degree",
+      "graph",
+      "辺数",
+      "連結成分",
+      "頂点数"
+    ],
+    "triggerPatterns": [
+      "E=V",
+      "次数未満を除去",
+      "葉を反復削除",
+      "辺数と頂点数"
+    ],
+    "invariantPatterns": [
+      "cycle rank",
+      "削除queue",
+      "現在次数"
+    ],
+    "goalPatterns": [
+      "cycle core",
+      "単一cycle",
+      "残存頂点"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-directed-core-peeling",
+      "type": "analogy",
+      "rationale": "局所次数条件を満たさない頂点をqueueで除き、残存核の不変条件を読む発想が共通する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-peel-graph-core"
+  ],
+  "representativeProblemIds": [
+    "abc226-e",
+    "abc266-f"
+  ],
+  "aliases": [
+    "2-core",
+    "graph peeling",
+    "葉刈り"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

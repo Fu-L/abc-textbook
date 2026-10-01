@@ -7,11 +7,11 @@
 
 | Route | Source | Contract |
 |---|---|---|
-| `/` | generated | 対象範囲、標準学習経路、コンテスト索引、要復習一覧、release 情報への入口 |
-| `/learn/` | LearningUnit graph | 全体学習順、前提、順序理由、chapter/section/subsection 階層 |
-| `/learn/<unit-slug>/` | LearningUnit + docs | 学習成果、前提、説明、例、問題、到達確認、前後ナビ |
+| `/` | generated | 対象範囲、分野別の教科書目次、コンテスト索引、要復習一覧、release 情報への入口 |
+| `/learn/` | LearningUnit graph + textbook editorial data | 分野別の編集上の掲載順、概念上の親リンク、対象色。意味階層は別に保持する |
+| `/learn/<unit-slug>/` | LearningUnit + docs | 分類、直接前提Unitと直接の依存先、対象色・レーティング帯・理由、概説、Unit内問題一覧と解説への導線 |
 | `/problems/` | catalog + IndexedDB | 全問題一覧と静的属性・学習状態の複合絞り込み |
-| `/problems/<problemId>/` | Problem + Explanation | 問題情報、公式参照、解説、タグ、学習単位、類題、学習記録 |
+| `/problems/<problemId>/` | Problem + ProblemAuthoringUnit | 問題情報、公式参照、解説、タグ、学習単位、類題、学習記録 |
 | `/tags/` | TechniqueTag | 深さ可変のタグ木、前提関係、同義語・旧名称検索 |
 | `/tags/<tag-slug>/` | TechniqueTag + ProblemPlacement | 定義、学習成果、親・子・前提、代表・基本・発展問題 |
 | `/contests/` | Contest + AdvancedSlotRegistry | ABC を行、D より後に確認された問題記号の和集合を列とする表と代替一覧 |
@@ -22,6 +22,8 @@
 | `/data/catalog.json` | generated endpoint | [catalog.schema.json](./catalog.schema.json) 準拠の公開カタログ |
 
 HTML route は末尾 slash を正規形とし、GitHub Pages の project base path でも同じ相対関係を保つ。
+
+分野別の章目次は編集上の掲載順を平坦な読書案内として表示する。全Unitをちょうど一度含み、所属章を意味階層と一致させるが、親子subtreeの連続性は要求しない。章直下でないUnitには概念上の親をリンクし、親Unitのページでは`parentId`に基づく下位単元を表示する。3つの前提DAGは別のcanonical policyに保持し、直接の前提・依存Unitリンクとして表示する。後に掲載する前提は「後の節/後の章」と明示し、DAGから全体履修順、前後リンク、順位は生成しない。各Problemのhome Unitはprimary Outcomeの唯一のownerであり、problem listでは主題・追加で学ぶ技能・既習技能を区別する。Unit内問題順は受理済みの配列を維持する。全Unitの対象色は色名と数値帯と理由を文字で示し、章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とする。全問題を解く難易度や公式の履修基準ではないことを読み方に示す。このcanonical表示契約を公開routeへ反映するのはT160であり、それまではcanonical文書をdraftのまま保持する。T160では受理済みfull_authoring本文の公開状態とmaterialization検証の契約を合わせて切り替える。
 
 ## 2. Common page contract
 

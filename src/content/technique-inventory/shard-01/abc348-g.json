@@ -37,7 +37,7 @@
     ],
     "keyInsights": [
       {
-        "text": "左区間のAを降順にしたprefix sum x_jは差分が非増加なのでconcaveである。cross answer z_i=max_{j+k=i}(x_j+y_k)の行列はMonge/total monotoneとなり、最適jがiに対して単調に動くためdivide-and-conquer optimizationで求められる。",
+        "text": "左Aの降順prefix和xは差分が非増加である。行を合計個数i、列を右選択数kとしてM[i,k]=x[i-k]+y[k]を作ると、列差M[i,k+1]−M[i,k]=y[k+1]−y[k]−(x[i-k]−x[i-k-1])はiについて非減少。したがって同点を左優先した行最大位置kは非減少であり、分割統治で探索範囲を絞れる。単調なのは右選択数kで、左選択数j=i-kではない。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],

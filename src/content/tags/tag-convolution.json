@@ -1,0 +1,57 @@
+{
+  "id": "tag-convolution",
+  "name": "畳み込み・相互相関",
+  "definition": "係数積和または反転列とのcorrelationを多項式積へ写し、必要な次数範囲をNTT/FFTで計算する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "係数列",
+      "多項式",
+      "積和"
+    ],
+    "triggerPatterns": [
+      "i\\+j=k",
+      "shiftごとの一致数"
+    ],
+    "invariantPatterns": [
+      "係数積",
+      "次数範囲"
+    ],
+    "goalPatterns": [
+      "係数列",
+      "相互相関"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-generating-functions",
+      "type": "often_combined",
+      "rationale": "組合せの合成を生成関数の積へ符号化し、その係数を畳み込みで計算する流れで併用する。"
+    },
+    {
+      "tagId": "tag-subset-convolution",
+      "type": "analogy",
+      "rationale": "分解ごとの積を足す二項演算としては共通するが、通常の添字加算 i+j=k とdisjoint subset分割は異なる合成則であり、互いを特殊化とはみなさない。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-convolution-or-correlation"
+  ],
+  "representativeProblemIds": [
+    "abc307-ex",
+    "abc392-g"
+  ],
+  "aliases": [
+    "FFT",
+    "NTT",
+    "convolution",
+    "畳み込み"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,18 @@
+{
+  "id": "outcome-count-labeled-structures-by-components",
+  "statement": "最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。",
+  "prerequisiteOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "scopeIds": [
+    "abc213-g",
+    "abc236-ex",
+    "abc253-ex",
+    "abc318-ex",
+    "abc321-g",
+    "abc327-g",
+    "abc386-g",
+    "tag-labeled-component-decomposition",
+    "unit-labeled-component-decomposition"
+  ]
+}

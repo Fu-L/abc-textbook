@@ -1,0 +1,39 @@
+{
+  "id": "unit-half-plane-constraints",
+  "kind": "subsection",
+  "title": "半平面制約・凸領域の共通部分",
+  "parentId": "unit-convex-geometry",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "半平面制約・凸領域の共通部分の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc251-editorial-3961-2a9bef4a1862573769c0974a139227410cfe23c0b17110582e5c2dd0790c3413",
+    "source-abc251-g-problem-ed1514ba44cff749adc79cbdfd6994026e15dfd7a7cc482f7ea929e03c45625c"
+  ],
+  "tagIds": [
+    "tag-half-plane-constraints"
+  ],
+  "ownedTagIds": [
+    "tag-half-plane-constraints"
+  ],
+  "learningOutcomeIds": [
+    "outcome-represent-convex-intersection-by-halfplanes"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-represent-convex-intersection-by-halfplanes"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/half-plane-constraints.md",
+  "problemIds": [
+    "abc251-g"
+  ],
+  "directProblemIds": [
+    "abc251-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、半平面制約・凸領域の共通部分の発動条件・正当化・境界を重複なく学ぶ。"
+}

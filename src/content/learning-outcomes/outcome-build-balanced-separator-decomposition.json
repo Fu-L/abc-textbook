@@ -1,0 +1,13 @@
+{
+  "id": "outcome-build-balanced-separator-decomposition",
+  "statement": "各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-find-weighted-balanced-separator"
+  ],
+  "scopeIds": [
+    "abc291-ex",
+    "abc359-g",
+    "tag-tree-balanced-separator",
+    "unit-tree-balanced-separators"
+  ]
+}

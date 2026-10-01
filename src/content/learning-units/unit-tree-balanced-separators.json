@@ -1,0 +1,50 @@
+{
+  "id": "unit-tree-balanced-separators",
+  "kind": "section",
+  "title": "木の均衡分離点から重心分解へ進む",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "LCA・HLDによる固定木上パスの区間分解。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc291-editorial-5840-f81899847d6c0912676ee91faaba0803527dfcec357072d21460af24e7909b0c",
+    "source-abc291-ex-problem-0f5a2a3d492a1dc4e0890bcd3980e0243acdf9436eed5817e512836de4613d9d",
+    "source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6",
+    "source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc",
+    "source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe",
+    "source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400"
+  ],
+  "tagIds": [
+    "tag-tree-balanced-separator"
+  ],
+  "ownedTagIds": [
+    "tag-tree-balanced-separator"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-find-weighted-balanced-separator"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-find-weighted-balanced-separator"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-balanced-separators.md",
+  "problemIds": [
+    "abc291-ex",
+    "abc359-g"
+  ],
+  "directProblemIds": [
+    "abc291-ex",
+    "abc359-g"
+  ],
+  "relatedProblemIds": [
+    "abc362-f",
+    "abc453-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "部分木重みから一点の均衡分離点を選ぶ基本を学び、頂点数重みで再帰利用すると各成分が半減して深さを抑えられることを示す。"
+}

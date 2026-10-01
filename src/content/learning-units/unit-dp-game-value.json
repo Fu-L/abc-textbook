@@ -1,0 +1,47 @@
+{
+  "id": "unit-dp-game-value",
+  "kind": "section",
+  "title": "minimax・得点差・局面値を評価するゲームDP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "勝敗だけを分類する通常の後退解析・Grundy数。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2607-43364299e8c54da3ef94a47ec6ac5138474c324ae1a077ee7172a2a34595f6a1",
+    "source-abc218-g-problem-8f708577ee7df47490e76bafede091444db5db977d8d6b6ab0b8fbaa02f5bdc8",
+    "source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1",
+    "source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f",
+    "source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14",
+    "source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"
+  ],
+  "tagIds": [
+    "tag-game-value-dp"
+  ],
+  "ownedTagIds": [
+    "tag-game-value-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-adversarial-game-value"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-evaluate-adversarial-game-value"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
+  "problemIds": [
+    "abc303-g",
+    "abc349-e"
+  ],
+  "directProblemIds": [
+    "abc349-e",
+    "abc303-g"
+  ],
+  "relatedProblemIds": [
+    "abc218-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態遷移を設計できることを前提に、双方の最適行動を最大化・最小化として評価する。"
+}

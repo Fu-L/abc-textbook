@@ -1,0 +1,57 @@
+{
+  "id": "unit-linear-recurrence",
+  "kind": "section",
+  "title": "固定線形遷移を巨大回数進める",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一般のDP遷移の区間集約・単調最適化。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc245-editorial-3636-3f7a38d575cf227f01f23d0f20e8976c613f17c7fbb521aa36ae3a4a18f09b8d",
+    "source-abc245-ex-problem-3b517c29c8eee1451d6726f6e61a6348e7c9e901738ea33597eb869a62aac760",
+    "source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a",
+    "source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c",
+    "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5",
+    "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"
+  ],
+  "tagIds": [
+    "tag-linear-recurrence-matrix"
+  ],
+  "ownedTagIds": [
+    "tag-linear-recurrence-matrix"
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-fixed-linear-transition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-accelerate-fixed-linear-transition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/linear-recurrence.md",
+  "problemIds": [
+    "abc256-g",
+    "abc258-ex",
+    "abc271-g",
+    "abc293-e"
+  ],
+  "directProblemIds": [
+    "abc293-e",
+    "abc256-g",
+    "abc271-g",
+    "abc258-ex"
+  ],
+  "relatedProblemIds": [
+    "abc245-ex",
+    "abc270-ex",
+    "abc299-ex",
+    "abc300-ex",
+    "abc305-g",
+    "abc429-g",
+    "abc458-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "一回分の状態遷移を表せることを前提に、固定線形変換を累乗して巨大回数後へ進める。"
+}

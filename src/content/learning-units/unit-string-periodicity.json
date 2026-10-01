@@ -1,0 +1,39 @@
+{
+  "id": "unit-string-periodicity",
+  "kind": "section",
+  "title": "文字列周期・primitive word",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "文字列周期・primitive wordの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
+    "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
+  ],
+  "tagIds": [
+    "tag-string-periodicity"
+  ],
+  "ownedTagIds": [
+    "tag-string-periodicity"
+  ],
+  "learningOutcomeIds": [
+    "outcome-normalize-string-to-primitive-period"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-normalize-string-to-primitive-period"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/string-periodicity.md",
+  "problemIds": [
+    "abc312-ex"
+  ],
+  "directProblemIds": [
+    "abc312-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "Z algorithmによるprefix matchingで得た考え方と実装を再利用し、文字列周期・primitive wordの発動条件・正当化・境界を重複なく学ぶ。"
+}

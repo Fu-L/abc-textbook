@@ -1,0 +1,47 @@
+{
+  "id": "unit-fractional-parametric-search",
+  "kind": "section",
+  "title": "fractional programming・比率parametric search",
+  "parentId": "unit-chapter-geometry-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc236-e-problem-5f69c8c6899723655022d7f0e5013316d5a62150df71e9d374df34f169744e32",
+    "source-abc236-editorial-3279-5fdbcfbd9d3e46d2ea40d72e73cf40ff8bd6a8395405fd27400b039a6ca44e62",
+    "source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416",
+    "source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613",
+    "source-abc324-editorial-7405-5317d02fe307ce10102a7967c7f3daf33d3d92a95198f8b7d90c973e18e2e531",
+    "source-abc324-f-problem-a176553a647da6e3d14065cf470eec98dd1f7f0cfc7f9e784e56d782ecb04ce2"
+  ],
+  "tagIds": [
+    "tag-fractional-parametric-search"
+  ],
+  "ownedTagIds": [
+    "tag-fractional-parametric-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-ratio-by-parametric-search"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-ratio-by-parametric-search"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/fractional-parametric-search.md",
+  "problemIds": [
+    "abc236-e",
+    "abc294-f",
+    "abc324-f"
+  ],
+  "directProblemIds": [
+    "abc324-f",
+    "abc294-f",
+    "abc236-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "単調境界探索で得た考え方と実装を再利用し、fractional programming・比率parametric searchの発動条件・正当化・境界を重複なく学ぶ。"
+}

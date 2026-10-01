@@ -1,0 +1,10 @@
+{
+  "id": "outcome-evolve-run-length-encoded-state",
+  "statement": "同値な連続要素をrunへ圧縮し、局所操作で変わるrunのsplit/mergeと長さだけを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc313-e",
+    "tag-run-length-dynamics",
+    "unit-run-length-dynamics"
+  ]
+}

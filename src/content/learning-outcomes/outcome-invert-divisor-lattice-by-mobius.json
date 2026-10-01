@@ -1,0 +1,16 @@
+{
+  "id": "outcome-invert-divisor-lattice-by-mobius",
+  "statement": "約数/倍数方向の累積値とexact gcd・period値をnumber-theoretic Möbius関数または格子反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "scopeIds": [
+    "abc212-g",
+    "abc230-g",
+    "abc304-f",
+    "abc335-g",
+    "abc361-f",
+    "tag-divisor-mobius-inversion",
+    "unit-divisor-mobius-inversion"
+  ]
+}

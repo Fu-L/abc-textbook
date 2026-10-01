@@ -1,0 +1,50 @@
+{
+  "id": "unit-segment-tree-canonical-decomposition",
+  "kind": "subsection",
+  "title": "Segment Treeのcanonical区間分解",
+  "parentId": "unit-monoid-segment-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Segment Treeのcanonical区間分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+    "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+    "source-abc339-editorial-9207-0ecaf2c06ab209d970c1f20435b591c08ed6278629b7462fd474856dd172a0ad",
+    "source-abc339-g-problem-f8be0e50c6270bea26aaed254c37ce3ae3b2dfeab5bf2b112789253cbfe2fac8",
+    "source-abc342-editorial-9373-764095d523625c3183a5d63be514e88bebed61dcbf54caf6a44d2858ff2554fa",
+    "source-abc342-g-problem-6d1d89d0ef3e51dcb1469dc44e3f72736049b1cb797cde428a8aa509495ef2a7"
+  ],
+  "tagIds": [
+    "tag-segment-tree-canonical-decomposition",
+    "tag-static-sorted-range-index"
+  ],
+  "ownedTagIds": [
+    "tag-segment-tree-canonical-decomposition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-static-sorted-range-index",
+    "outcome-decompose-ranges-into-segment-tree-nodes"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-decompose-ranges-into-segment-tree-nodes"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
+  "problemIds": [
+    "abc339-g",
+    "abc342-g"
+  ],
+  "directProblemIds": [
+    "abc342-g"
+  ],
+  "relatedProblemIds": [
+    "abc244-ex",
+    "abc363-g",
+    "abc414-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "区間monoid要約で得た考え方と実装を再利用し、Segment Treeのcanonical区間分解の発動条件・正当化・境界を重複なく学ぶ。"
+}

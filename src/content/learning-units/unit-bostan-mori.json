@@ -1,0 +1,39 @@
+{
+  "id": "unit-bostan-mori",
+  "kind": "section",
+  "title": "Bostan–Mori・有理生成関数の係数抽出",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Bostan–Mori・有理生成関数の係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f",
+    "source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f"
+  ],
+  "tagIds": [
+    "tag-bostan-mori"
+  ],
+  "ownedTagIds": [
+    "tag-bostan-mori"
+  ],
+  "learningOutcomeIds": [
+    "outcome-extract-rational-series-coefficient"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-extract-rational-series-coefficient"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/bostan-mori.md",
+  "problemIds": [
+    "abc300-ex"
+  ],
+  "directProblemIds": [
+    "abc300-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、Bostan–Mori・有理生成関数の係数抽出の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "outcome-optimize-stochastic-actions",
+  "statement": "意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state",
+    "outcome-solve-stochastic-recurrence"
+  ],
+  "scopeIds": [
+    "abc266-e",
+    "abc314-e",
+    "abc342-f",
+    "abc350-e",
+    "abc402-e",
+    "abc404-f",
+    "abc421-e",
+    "tag-stochastic-expectation-dp",
+    "unit-dp-stochastic"
+  ]
+}

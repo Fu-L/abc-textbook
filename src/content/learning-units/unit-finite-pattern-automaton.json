@@ -1,0 +1,49 @@
+{
+  "id": "unit-finite-pattern-automaton",
+  "kind": "subsection",
+  "title": "有限状態automatonの構成",
+  "parentId": "unit-string-automata",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
+    "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+    "source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17",
+    "source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9",
+    "source-abc305-editorial-6540-74ea55ef6854c06051d1da5f206ffb783baa289b24f8530c7f7f02f128fa814c",
+    "source-abc305-g-problem-19df3c0c00aafaff917749d3a11ee12bf3bfe0ef5929b0a1c26268c9caea49a5"
+  ],
+  "tagIds": [
+    "tag-finite-pattern-automaton"
+  ],
+  "ownedTagIds": [
+    "tag-finite-pattern-automaton"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-finite-string-automaton"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-finite-string-automaton"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/finite-pattern-automaton.md",
+  "problemIds": [
+    "abc264-g",
+    "abc301-f",
+    "abc305-g",
+    "abc418-g"
+  ],
+  "directProblemIds": [
+    "abc305-g",
+    "abc264-g",
+    "abc301-f",
+    "abc418-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "文字を一つ加えた後の未来の挙動が等しい履歴を有限状態へ同値化し、pattern suffix・部分列進行・圧縮DP rowなどから全文字の完全遷移表を構築する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

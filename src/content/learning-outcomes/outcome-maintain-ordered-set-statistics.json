@@ -1,0 +1,32 @@
+{
+  "id": "outcome-maintain-ordered-set-statistics",
+  "statement": "比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc218-g",
+    "abc245-e",
+    "abc268-ex",
+    "abc273-ex",
+    "abc275-ex",
+    "abc281-e",
+    "abc306-e",
+    "abc308-g",
+    "abc314-g",
+    "abc319-g",
+    "abc320-e",
+    "abc324-g",
+    "abc330-e",
+    "abc342-g",
+    "abc356-f",
+    "abc364-f",
+    "abc368-g",
+    "abc376-e",
+    "abc406-g",
+    "abc407-f",
+    "abc418-f",
+    "abc431-g",
+    "abc444-e",
+    "tag-ordered-set-multiset",
+    "unit-ordered-set-multiset"
+  ]
+}

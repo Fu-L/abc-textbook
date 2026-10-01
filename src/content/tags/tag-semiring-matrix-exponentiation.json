@@ -1,0 +1,54 @@
+{
+  "id": "tag-semiring-matrix-exponentiation",
+  "name": "半環行列・min-plus/max-min遷移",
+  "definition": "遷移の結合と候補選択を半環の積・和として行列化し、結合則を使って固定長walkを二分累乗または区間積で処理する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-linear-recurrence-matrix"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "fixed-length walk",
+      "semiring",
+      "transition matrix"
+    ],
+    "triggerPatterns": [
+      "min-plus/max-min composition",
+      "ちょうどK回の遷移"
+    ],
+    "invariantPatterns": [
+      "associative matrix product",
+      "semiring identity"
+    ],
+    "goalPatterns": [
+      "固定長path最適化",
+      "巨大回数遷移"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-monoid-exponentiation",
+      "type": "analogy",
+      "rationale": "閉じた結合的合成を二分累乗する共通原理を、行列半環と一般monoidの二つの表現から比較する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-exponentiate-transition-over-semiring"
+  ],
+  "representativeProblemIds": [
+    "abc236-g",
+    "abc429-f",
+    "abc445-f"
+  ],
+  "aliases": [
+    "max-min matrix exponentiation",
+    "min-plus matrix exponentiation",
+    "半環行列累乗"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

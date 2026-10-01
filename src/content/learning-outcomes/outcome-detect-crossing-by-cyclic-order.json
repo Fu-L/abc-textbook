@@ -1,0 +1,15 @@
+{
+  "id": "outcome-detect-crossing-by-cyclic-order",
+  "statement": "円周をcutして端点を線形化し、交互配置またはlaminar括弧構造からchord交差を判定・数え上げできる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-reduce-geometry-to-algebraic-predicates"
+  ],
+  "scopeIds": [
+    "abc263-ex",
+    "abc338-e",
+    "abc405-f",
+    "abc424-f",
+    "tag-cyclic-order-crossing",
+    "unit-cyclic-order-crossing"
+  ]
+}

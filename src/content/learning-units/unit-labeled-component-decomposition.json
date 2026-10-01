@@ -1,0 +1,54 @@
+{
+  "id": "unit-labeled-component-decomposition",
+  "kind": "section",
+  "title": "label付き連結成分分解・exponential formula",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+    "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+    "source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c",
+    "source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53",
+    "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a",
+    "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd"
+  ],
+  "tagIds": [
+    "tag-labeled-component-decomposition"
+  ],
+  "ownedTagIds": [
+    "tag-labeled-component-decomposition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-labeled-structures-by-components"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-labeled-structures-by-components"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
+  "problemIds": [
+    "abc213-g",
+    "abc318-ex",
+    "abc321-g",
+    "abc327-g",
+    "abc386-g"
+  ],
+  "directProblemIds": [
+    "abc213-g",
+    "abc321-g",
+    "abc318-ex",
+    "abc386-g",
+    "abc327-g"
+  ],
+  "relatedProblemIds": [
+    "abc236-ex",
+    "abc253-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "生成関数による組合せ構造の符号化で得た考え方と実装を再利用し、label付き連結成分分解・exponential formulaの発動条件・正当化・境界を重複なく学ぶ。"
+}

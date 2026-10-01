@@ -1,0 +1,51 @@
+{
+  "id": "unit-slope-trick",
+  "kind": "subsection",
+  "title": "slope trick",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef",
+    "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323",
+    "source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b",
+    "source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907",
+    "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
+    "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"
+  ],
+  "tagIds": [
+    "tag-slope-trick"
+  ],
+  "ownedTagIds": [
+    "tag-slope-trick"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-piecewise-linear-convex-function"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-piecewise-linear-convex-function"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/slope-trick.md",
+  "problemIds": [
+    "abc217-h",
+    "abc250-g",
+    "abc275-ex",
+    "abc406-g",
+    "abc458-g"
+  ],
+  "directProblemIds": [
+    "abc250-g",
+    "abc217-h",
+    "abc458-g",
+    "abc406-g",
+    "abc275-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "一次元凸・単峰最適化で得た考え方と実装を再利用し、slope trickの発動条件・正当化・境界を重複なく学ぶ。"
+}

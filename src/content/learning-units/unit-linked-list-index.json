@@ -1,0 +1,47 @@
+{
+  "id": "unit-linked-list-index",
+  "kind": "section",
+  "title": "要素索引と連結リストで局所linkを更新する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "全候補の大小順や区間集約を保つ平衡木・heap。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
+    "source-abc344-e-problem-9750c819834eb24232bb9607c3292c04156a042d874f5469dbc4016bada17b13",
+    "source-abc344-editorial-9487-09db599fbdc3f6335c1e46f22db6d3a1a778659c300cb03a623af9d914d338de",
+    "source-abc421-editorial-13787-433e8d0a684c462cc1e7cceabc14552e13947bbf5910cabd3c98196fd12e0564",
+    "source-abc421-f-problem-0ab28e8057b1b056ea75492696f2deba87c12925e65a0fb80b14697fe8aea8b9"
+  ],
+  "tagIds": [
+    "tag-linked-list-index"
+  ],
+  "ownedTagIds": [
+    "tag-linked-list-index"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-local-sequence-links"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-local-sequence-links"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/linked-list-index.md",
+  "problemIds": [
+    "abc344-e",
+    "abc421-f"
+  ],
+  "directProblemIds": [
+    "abc344-e",
+    "abc421-f"
+  ],
+  "relatedProblemIds": [
+    "abc218-h"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "配列やmapの索引を使い、順序全体を走査せず前後linkだけを更新して列を保つ。"
+}

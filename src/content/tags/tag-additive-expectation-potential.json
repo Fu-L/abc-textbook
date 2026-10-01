@@ -1,0 +1,45 @@
+{
+  "id": "tag-additive-expectation-potential",
+  "name": "期待値の頻度圧縮と加法的ポテンシャル",
+  "definition": "種類名に関する対称性を使い、高次元の期待残り費用を頻度別関数の和へ分離する。一種類の一段方程式を自己ループも含めて解き、終端で定数を較正する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-stochastic-expectation-dp"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "一変数関数の和",
+      "種類別個数"
+    ],
+    "triggerPatterns": [
+      "周辺遷移が個数だけで決まる",
+      "種類名に対する対称性"
+    ],
+    "invariantPatterns": [
+      "一段方程式",
+      "期待ドリフト",
+      "終端ポテンシャル"
+    ],
+    "goalPatterns": [
+      "吸収時間の期待値",
+      "高次元状態の分離"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-decompose-expectation-by-additive-potential"
+  ],
+  "representativeProblemIds": [
+    "abc249-ex"
+  ],
+  "aliases": [
+    "加法的ポテンシャル",
+    "頻度別期待値方程式"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -32,11 +32,52 @@ const sameTag = (...outcomeIds: readonly string[]): FinalClaimOutcomeBinding => 
 export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   Record<string, Readonly<Record<string, readonly FinalClaimOutcomeBinding[]>>>
 > = {
+  'abc225-h': {
+    '/typicalTechniques/0': [sameTag('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/1': [
+      primary(
+        'outcome-encode-counting-by-generating-function',
+        'outcome-compute-convolution-or-correlation',
+      ),
+    ],
+    '/prerequisiteCandidates/0': [supporting('outcome-formulate-combinatorial-coefficients')],
+    '/prerequisiteCandidates/1': [
+      sameTag(
+        'outcome-encode-counting-by-generating-function',
+        'outcome-compute-convolution-or-correlation',
+      ),
+    ],
+  },
+  'abc222-h': {
+    '/typicalTechniques/0': [sameTag('outcome-invert-generating-function-equation')],
+    '/typicalTechniques/1': [primary('outcome-invert-generating-function-equation')],
+    '/typicalTechniques/2': [primary('outcome-derive-coefficient-recurrence-by-differentiation')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-invert-generating-function-equation')],
+    '/prerequisiteCandidates/1': [
+      sameTag('outcome-derive-coefficient-recurrence-by-differentiation'),
+      supporting('outcome-compute-in-modular-arithmetic'),
+    ],
+  },
   'abc214-h': {
     '/typicalTechniques/0': [primary('outcome-condense-and-order-directed-graph')],
     '/typicalTechniques/1': [primary('outcome-model-min-cost-flow')],
     '/prerequisiteCandidates/0': [sameTag('outcome-condense-and-order-directed-graph')],
     '/prerequisiteCandidates/1': [sameTag('outcome-model-min-cost-flow')],
+  },
+  'abc264-g': {
+    '/typicalTechniques/0': [primary('outcome-build-finite-string-automaton')],
+    '/typicalTechniques/1': [primary('outcome-detect-improving-cycles')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-build-finite-string-automaton')],
+  },
+  'abc335-e': {
+    '/typicalTechniques/0': [primary('outcome-maintain-connectivity-components')],
+    '/typicalTechniques/1': [primary('outcome-process-dag-in-topological-order')],
+    '/prerequisiteCandidates/0': [
+      sameTag(
+        'outcome-maintain-connectivity-components',
+        'outcome-process-dag-in-topological-order',
+      ),
+    ],
   },
   'abc218-f': {
     '/typicalTechniques/0': [
@@ -55,6 +96,41 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/0': [sameTag('outcome-compute-in-modular-arithmetic')],
     '/prerequisiteCandidates/1': [sameTag('outcome-exploit-modular-periodicity')],
   },
+  'abc227-h': {
+    '/typicalTechniques/0': [primary('outcome-construct-euler-trail-or-circuit')],
+    '/typicalTechniques/1': [primary('outcome-model-max-flow-min-cut')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-construct-euler-trail-or-circuit')],
+    '/prerequisiteCandidates/1': [sameTag('outcome-model-max-flow-min-cut')],
+  },
+  'abc459-g': {
+    '/typicalTechniques/0': [primary('outcome-characterize-integer-solvability')],
+    '/typicalTechniques/1': [
+      primary('outcome-optimize-two-variable-convex-lattice-function'),
+      supporting('outcome-enumerate-bounded-candidates-or-cases'),
+    ],
+    '/prerequisiteCandidates/0': [
+      sameTag(
+        'outcome-characterize-integer-solvability',
+        'outcome-optimize-two-variable-convex-lattice-function',
+      ),
+    ],
+  },
+  'abc371-g': {
+    '/typicalTechniques/0': [supporting('outcome-decompose-functional-graph')],
+    '/typicalTechniques/1': [
+      primary('outcome-prove-greedy-order', 'outcome-solve-modular-constraints'),
+    ],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-prove-greedy-order', 'outcome-solve-modular-constraints'),
+      supporting('outcome-decompose-functional-graph'),
+    ],
+  },
+  'abc275-ex': {
+    '/typicalTechniques/0': [primary('outcome-build-cartesian-tree-decomposition')],
+    '/typicalTechniques/1': [primary('outcome-maintain-piecewise-linear-convex-function')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-build-cartesian-tree-decomposition')],
+    '/prerequisiteCandidates/1': [sameTag('outcome-maintain-piecewise-linear-convex-function')],
+  },
   'abc228-g': {
     '/typicalTechniques/1': [primary('outcome-determinize-automaton-by-subsets')],
     '/typicalTechniques/2': [
@@ -65,12 +141,14 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/1': [sameTag('outcome-determinize-automaton-by-subsets')],
   },
   'abc230-h': {
-    '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/0': [primary('outcome-derive-coefficient-recurrence-by-differentiation')],
     '/typicalTechniques/1': [
       primary('outcome-compute-online-relaxed-convolution'),
       supporting('outcome-divide-search-space-recursively'),
     ],
-    '/prerequisiteCandidates/0': [sameTag('outcome-encode-counting-by-generating-function')],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-derive-coefficient-recurrence-by-differentiation'),
+    ],
     '/prerequisiteCandidates/1': [
       sameTag('outcome-compute-online-relaxed-convolution'),
       supporting('outcome-divide-search-space-recursively'),
@@ -85,6 +163,29 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-encode-counting-by-generating-function',
       ),
       supporting('outcome-compute-convolution-or-correlation'),
+    ],
+  },
+  'abc247-ex': {
+    '/typicalTechniques/1': [primary('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/2': [
+      primary('outcome-compute-convolution-or-correlation'),
+      supporting('outcome-divide-search-space-recursively'),
+    ],
+    '/prerequisiteCandidates/1': [sameTag('outcome-encode-counting-by-generating-function')],
+    '/prerequisiteCandidates/2': [sameTag('outcome-compute-convolution-or-correlation')],
+  },
+  'abc267-ex': {
+    '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
+    '/typicalTechniques/1': [
+      primary('outcome-compute-convolution-or-correlation'),
+      supporting('outcome-divide-search-space-recursively'),
+    ],
+    '/prerequisiteCandidates/0': [
+      sameTag(
+        'outcome-encode-counting-by-generating-function',
+        'outcome-compute-convolution-or-correlation',
+      ),
+      supporting('outcome-divide-search-space-recursively'),
     ],
   },
   'abc250-ex': {
@@ -104,6 +205,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting(
         'outcome-correct-overlap-by-inversion',
         'outcome-formulate-combinatorial-coefficients',
+        'outcome-compute-convolution-or-correlation',
       ),
     ],
     '/typicalTechniques/1': [
@@ -115,6 +217,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting(
         'outcome-divide-search-space-recursively',
         'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
       ),
     ],
     '/prerequisiteCandidates/0': [
@@ -122,13 +225,20 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-encode-counting-by-generating-function',
         'outcome-apply-formal-power-series-operations',
       ),
-      supporting('outcome-correct-overlap-by-inversion', 'outcome-compute-in-modular-arithmetic'),
+      supporting(
+        'outcome-correct-overlap-by-inversion',
+        'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
   },
   'abc272-ex': {
     '/typicalTechniques/0': [
       primary('outcome-evaluate-polynomial-at-many-points'),
-      supporting('outcome-divide-search-space-recursively'),
+      supporting(
+        'outcome-divide-search-space-recursively',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
     '/typicalTechniques/1': [
       primary('outcome-encode-counting-by-generating-function'),
@@ -143,6 +253,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-encode-counting-by-generating-function',
       ),
       supporting('outcome-correct-overlap-by-inversion', 'outcome-divide-search-space-recursively'),
+      supporting('outcome-compute-convolution-or-correlation'),
     ],
   },
   'abc274-ex': {
@@ -179,16 +290,10 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   },
   'abc286-f': {
     '/typicalTechniques/0': [primary('outcome-solve-modular-constraints')],
-    '/typicalTechniques/1': [
-      primary('outcome-exploit-modular-periodicity'),
-      supporting('outcome-decompose-functional-graph'),
-    ],
+    '/typicalTechniques/1': [primary('outcome-exploit-modular-periodicity')],
     '/typicalTechniques/2': [sameTag('outcome-solve-modular-constraints')],
     '/prerequisiteCandidates/0': [sameTag('outcome-solve-modular-constraints')],
-    '/prerequisiteCandidates/1': [
-      sameTag('outcome-exploit-modular-periodicity'),
-      supporting('outcome-decompose-functional-graph'),
-    ],
+    '/prerequisiteCandidates/1': [sameTag('outcome-exploit-modular-periodicity')],
   },
   'abc289-ex': {
     '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
@@ -221,14 +326,21 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/typicalTechniques/1': [sameTag('outcome-encode-counting-by-generating-function')],
     '/typicalTechniques/2': [
       primary('outcome-apply-formal-power-series-operations'),
-      supporting('outcome-compute-in-modular-arithmetic'),
+      supporting(
+        'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
     '/prerequisiteCandidates/0': [
       sameTag(
         'outcome-encode-counting-by-generating-function',
         'outcome-apply-formal-power-series-operations',
       ),
-      supporting('outcome-correct-overlap-by-inversion', 'outcome-compute-in-modular-arithmetic'),
+      supporting(
+        'outcome-correct-overlap-by-inversion',
+        'outcome-compute-in-modular-arithmetic',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
   },
   'abc301-ex': {
@@ -249,15 +361,6 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/prerequisiteCandidates/0': [
       sameTag('outcome-build-finite-string-automaton', 'outcome-run-dp-on-finite-automaton'),
       supporting('outcome-compute-in-modular-arithmetic'),
-    ],
-  },
-  'abc305-ex': {
-    '/typicalTechniques/1': [
-      primary('outcome-optimize-by-lagrangian-relaxation', 'outcome-optimize-monge-transitions'),
-      supporting('outcome-design-interval-split-dp'),
-    ],
-    '/prerequisiteCandidates/0': [
-      sameTag('outcome-optimize-by-lagrangian-relaxation', 'outcome-optimize-monge-transitions'),
     ],
   },
   'abc305-f': {
@@ -330,12 +433,18 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       primary('outcome-count-labeled-structures-by-components'),
       supporting('outcome-encode-counting-by-generating-function'),
     ],
-    '/typicalTechniques/1': [primary('outcome-apply-formal-power-series-operations')],
+    '/typicalTechniques/1': [
+      primary('outcome-apply-formal-power-series-operations'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
     '/prerequisiteCandidates/0': [
       sameTag('outcome-count-labeled-structures-by-components'),
       supporting('outcome-encode-counting-by-generating-function'),
     ],
-    '/prerequisiteCandidates/1': [sameTag('outcome-apply-formal-power-series-operations')],
+    '/prerequisiteCandidates/1': [
+      sameTag('outcome-apply-formal-power-series-operations'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
   },
   'abc331-g': {
     '/typicalTechniques/0': [primary('outcome-correct-overlap-by-inversion')],
@@ -454,33 +563,28 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     ],
   },
   'abc386-g': {
-    '/typicalTechniques/0': [
-      primary('outcome-reorder-counting-contributions'),
-      supporting('outcome-construct-optimal-spanning-tree'),
-    ],
+    '/typicalTechniques/0': [primary('outcome-reorder-counting-contributions')],
     '/typicalTechniques/1': [
       primary('outcome-count-labeled-structures-by-components'),
-      supporting(
-        'outcome-formulate-combinatorial-coefficients',
-        'outcome-correct-overlap-by-inversion',
-      ),
+      supporting('outcome-formulate-combinatorial-coefficients'),
     ],
     '/typicalTechniques/2': [sameTag('outcome-reorder-counting-contributions')],
-    '/prerequisiteCandidates/0': [supporting('outcome-construct-optimal-spanning-tree')],
+    '/prerequisiteCandidates/0': [sameTag('outcome-reorder-counting-contributions')],
     '/prerequisiteCandidates/1': [
       sameTag('outcome-count-labeled-structures-by-components'),
-      supporting(
-        'outcome-formulate-combinatorial-coefficients',
-        'outcome-correct-overlap-by-inversion',
-      ),
+      supporting('outcome-formulate-combinatorial-coefficients'),
     ],
   },
   'abc387-g': {
     '/typicalTechniques/0': [primary('outcome-encode-counting-by-generating-function')],
-    '/typicalTechniques/1': [primary('outcome-compose-series-and-project-powers')],
+    '/typicalTechniques/1': [
+      primary('outcome-compose-series-and-project-powers'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
     '/typicalTechniques/2': [
       primary('outcome-apply-formal-power-series-operations'),
       sameTag('outcome-compose-series-and-project-powers'),
+      supporting('outcome-compute-convolution-or-correlation'),
     ],
     '/prerequisiteCandidates/0': [sameTag('outcome-encode-counting-by-generating-function')],
     '/prerequisiteCandidates/1': [
@@ -488,6 +592,7 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-compose-series-and-project-powers',
         'outcome-apply-formal-power-series-operations',
       ),
+      supporting('outcome-compute-convolution-or-correlation'),
     ],
   },
   'abc390-g': {
@@ -521,26 +626,11 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
       supporting('outcome-formulate-combinatorial-coefficients'),
     ],
   },
-  'abc398-e': {
-    '/typicalTechniques/0': [primary('outcome-classify-game-states')],
-    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
-    '/prerequisiteCandidates/0': [
-      sameTag('outcome-color-and-classify-bipartite-components'),
-      supporting('outcome-maintain-interactive-query-protocol'),
-    ],
-  },
-  'abc398-g': {
-    '/typicalTechniques/0': [primary('outcome-classify-game-states')],
-    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
-    '/prerequisiteCandidates/0': [
-      sameTag('outcome-classify-game-states', 'outcome-color-and-classify-bipartite-components'),
-    ],
-  },
   'abc409-g': {
     '/typicalTechniques/2': [
       primary(
-        'outcome-encode-counting-by-generating-function',
         'outcome-compute-convolution-or-correlation',
+        'outcome-encode-counting-by-generating-function',
       ),
     ],
     '/prerequisiteCandidates/0': [
@@ -556,10 +646,10 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
   },
   'abc411-e': {
     '/typicalTechniques/0': [primary('outcome-reorder-counting-contributions')],
-    '/typicalTechniques/2': [primary('outcome-compute-in-modular-arithmetic')],
+    '/typicalTechniques/2': [primary('outcome-maintain-modular-product-under-factor-updates')],
     '/prerequisiteCandidates/0': [
-      sameTag('outcome-reorder-counting-contributions', 'outcome-compute-in-modular-arithmetic'),
-      supporting('outcome-linearize-events'),
+      sameTag('outcome-reorder-counting-contributions'),
+      supporting('outcome-compute-in-modular-arithmetic', 'outcome-linearize-events'),
     ],
   },
   'abc418-g': {
@@ -655,11 +745,17 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     ],
   },
   'abc439-g': {
-    '/typicalTechniques/0': [primary('outcome-compose-series-and-project-powers')],
+    '/typicalTechniques/0': [
+      primary('outcome-compose-series-and-project-powers'),
+      supporting('outcome-compute-convolution-or-correlation'),
+    ],
     '/typicalTechniques/1': [primary('outcome-encode-counting-by-generating-function')],
     '/typicalTechniques/2': [
       primary('outcome-apply-formal-power-series-operations'),
-      supporting('outcome-divide-search-space-recursively'),
+      supporting(
+        'outcome-divide-search-space-recursively',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
     '/prerequisiteCandidates/0': [
       sameTag(
@@ -667,7 +763,10 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
         'outcome-apply-formal-power-series-operations',
         'outcome-encode-counting-by-generating-function',
       ),
-      supporting('outcome-divide-search-space-recursively'),
+      supporting(
+        'outcome-divide-search-space-recursively',
+        'outcome-compute-convolution-or-correlation',
+      ),
     ],
   },
   'abc449-g': {
@@ -698,6 +797,22 @@ export const FINAL_MULTI_PRIMARY_CLAIM_OUTCOME_BINDINGS: Readonly<
     '/typicalTechniques/1': [primary('outcome-design-carry-or-mixed-radix-dp')],
     '/prerequisiteCandidates/0': [
       sameTag('outcome-maintain-potential-differences', 'outcome-design-carry-or-mixed-radix-dp'),
+    ],
+  },
+  'abc398-e': {
+    '/typicalTechniques/0': [primary('outcome-solve-game-by-parity-invariant')],
+    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-color-and-classify-bipartite-components'),
+      supporting('outcome-maintain-interactive-query-protocol'),
+    ],
+  },
+  'abc398-g': {
+    '/typicalTechniques/0': [primary('outcome-solve-game-by-parity-invariant')],
+    '/typicalTechniques/1': [primary('outcome-color-and-classify-bipartite-components')],
+    '/prerequisiteCandidates/0': [
+      sameTag('outcome-solve-game-by-parity-invariant'),
+      sameTag('outcome-color-and-classify-bipartite-components'),
     ],
   },
 };

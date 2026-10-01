@@ -1,0 +1,45 @@
+{
+  "id": "tag-number-theory-structure",
+  "name": "数論構造への変換",
+  "definition": "整数条件を合同・整除・指数・約数格子などの数論構造へ変換する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "剰余",
+      "整数",
+      "約数"
+    ],
+    "triggerPatterns": [
+      "合同",
+      "周期",
+      "整除"
+    ],
+    "invariantPatterns": [
+      "gcd",
+      "剰余類",
+      "指数"
+    ],
+    "goalPatterns": [
+      "整数条件を変換"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-transform-to-number-theory"
+  ],
+  "representativeProblemIds": [
+    "abc222-g",
+    "abc254-f"
+  ],
+  "aliases": [
+    "number theory",
+    "数論"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

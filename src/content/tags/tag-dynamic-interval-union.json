@@ -1,0 +1,44 @@
+{
+  "id": "tag-dynamic-interval-union",
+  "name": "動的な区間和集合長",
+  "definition": "区間の追加・削除に応じて被覆の重複を保ち、現在の和集合の長さを更新する。Inventoryで特定されていない実装backendを前提にしない。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "active interval",
+      "和集合の長さ",
+      "被覆区間"
+    ],
+    "triggerPatterns": [
+      "区間を追加・削除しながら被覆長を集計"
+    ],
+    "invariantPatterns": [
+      "active intervalの境界",
+      "被覆長",
+      "重複被覆数"
+    ],
+    "goalPatterns": [
+      "動的な区間和集合長",
+      "長方形和集合面積のsweep"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-dynamic-interval-union-length"
+  ],
+  "representativeProblemIds": [
+    "abc449-f"
+  ],
+  "aliases": [
+    "covered length",
+    "動的区間和集合",
+    "被覆長"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

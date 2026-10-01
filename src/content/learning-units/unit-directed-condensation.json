@@ -1,0 +1,58 @@
+{
+  "id": "unit-directed-condensation",
+  "kind": "section",
+  "title": "SCCで閉路・DAG順・2-SATを処理する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "無向辺追加だけを扱うDSU連結成分管理。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+    "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+    "source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7",
+    "source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3",
+    "source-abc245-editorial-3652-b716ad14ba697633a2ca377f2100df6202c59e1f1a7744a0e4556578fdb48d9c",
+    "source-abc245-f-problem-2111ce95b6ab338f9bfa8fd103b2e49052114125936604f2520989705f1d7a40"
+  ],
+  "tagIds": [
+    "tag-dag-topological-processing",
+    "tag-directed-core-peeling",
+    "tag-scc-condensation",
+    "tag-two-sat"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-condense-and-order-directed-graph",
+    "outcome-encode-threshold-constraints-as-two-sat",
+    "outcome-peel-directed-graph-toward-cycles",
+    "outcome-process-dag-in-topological-order"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/directed-condensation.md",
+  "problemIds": [
+    "abc245-f",
+    "abc277-ex",
+    "abc277-f",
+    "abc291-e",
+    "abc315-e",
+    "abc456-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc214-h",
+    "abc224-e",
+    "abc304-ex",
+    "abc306-ex",
+    "abc306-g",
+    "abc324-f",
+    "abc335-e",
+    "abc341-f",
+    "abc374-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "到達可能性を理解した後、相互到達する頂点を強連結成分へまとめ、DAG順の伝播またはimplication graphの矛盾判定へ使う。"
+}

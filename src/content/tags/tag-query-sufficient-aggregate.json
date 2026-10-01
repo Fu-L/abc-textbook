@@ -1,0 +1,52 @@
+{
+  "id": "tag-query-sufficient-aggregate",
+  "name": "更新可能な最小十分要約",
+  "definition": "問い合わせの答えを合成でき、更新で保てる十分な統計量を導く。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "query",
+      "区間",
+      "問い合わせ",
+      "統計量"
+    ],
+    "triggerPatterns": [
+      "クエリ",
+      "合成",
+      "更新"
+    ],
+    "invariantPatterns": [
+      "十分",
+      "統計",
+      "要約"
+    ],
+    "goalPatterns": [
+      "query",
+      "区間",
+      "問い合わせ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-derive-updateable-aggregate"
+  ],
+  "representativeProblemIds": [
+    "abc341-e",
+    "abc223-f",
+    "abc453-g"
+  ],
+  "aliases": [
+    "dynamic range aggregate",
+    "動的区間集約",
+    "更新可能な要約"
+  ],
+  "formerNames": [
+    "更新可能な区間集約の設計"
+  ],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

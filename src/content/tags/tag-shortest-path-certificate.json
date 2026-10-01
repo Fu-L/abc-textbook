@@ -1,0 +1,53 @@
+{
+  "id": "tag-shortest-path-certificate",
+  "name": "最短路を証明する木・経路の復元",
+  "definition": "最短距離の等式を満たす辺から、親・木・実現経路を選ぶ。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-shortest-path"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "parent",
+      "最短距離",
+      "経路",
+      "親辺"
+    ],
+    "triggerPatterns": [
+      "復元",
+      "木を構成",
+      "辺を出力"
+    ],
+    "invariantPatterns": [
+      "dist.*\\+",
+      "最短路上",
+      "距離等式"
+    ],
+    "goalPatterns": [
+      "構成",
+      "経路出力",
+      "辺の集合"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-shortest-path-certificate"
+  ],
+  "representativeProblemIds": [
+    "abc252-e",
+    "abc218-f",
+    "abc308-ex"
+  ],
+  "aliases": [
+    "path reconstruction",
+    "shortest-path tree",
+    "最短路木",
+    "経路復元"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

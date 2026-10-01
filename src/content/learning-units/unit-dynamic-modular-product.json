@@ -1,0 +1,43 @@
+{
+  "id": "unit-dynamic-modular-product",
+  "kind": "subsection",
+  "title": "可逆な非零剰余と剰余 0 因子を含む法上の動的積",
+  "parentId": "unit-modular-product-foundations",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "因子が変化しない一回限りの積、和やmin/maxの更新、任意区間積を求めるSegment Tree、および合成数法で非零の非可逆因子も差し替える一般の場合。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66",
+    "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5",
+    "source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd",
+    "source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd",
+    "source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae",
+    "source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb"
+  ],
+  "tagIds": [
+    "tag-dynamic-modular-product"
+  ],
+  "ownedTagIds": [
+    "tag-dynamic-modular-product"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-modular-product-under-factor-updates"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-modular-product-under-factor-updates"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/dynamic-modular-product.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc405-g",
+    "abc411-e",
+    "abc456-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "通常の法上演算と逆元の存在条件を前提に、取り得る因子のうち法 m で非零となるものがすべて可逆（典型的には素数法）かを確認する。剰余 0 だけは逆元を持たないため、その個数と可逆な非零剰余因子の積へ状態を分けて因子差し替えを定数時間で処理する。"
+}

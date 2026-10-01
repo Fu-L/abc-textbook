@@ -1,0 +1,56 @@
+{
+  "id": "tag-heavy-light-decomposition",
+  "name": "Heavy-Light Decomposition",
+  "definition": "木上pathをO(log N)本の連続区間へ分解し、配列data structure上のqueryへ変換する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-tree-ancestor-lca",
+    "tag-tree-euler-flattening"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "heavy path",
+      "木上path"
+    ],
+    "triggerPatterns": [
+      "path query",
+      "path update"
+    ],
+    "invariantPatterns": [
+      "chain head",
+      "heavy edge"
+    ],
+    "goalPatterns": [
+      "path区間分解"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-range-monoid-aggregation",
+      "type": "implementation_substrate",
+      "rationale": "分解した各heavy path区間の値を方向付きmonoid queryで合成する。"
+    },
+    {
+      "tagId": "tag-tree-euler-flattening",
+      "type": "implementation_substrate",
+      "rationale": "heavy pathごとの頂点を連続indexへ写し、pathを少数区間へ分解する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-apply-heavy-light-decomposition"
+  ],
+  "representativeProblemIds": [
+    "abc351-g"
+  ],
+  "aliases": [
+    "HLD",
+    "HL分解",
+    "Heavy-Light Decomposition"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

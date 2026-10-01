@@ -1,0 +1,15 @@
+{
+  "id": "outcome-balance-heavy-light-threshold",
+  "statement": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc219-g",
+    "abc259-ex",
+    "abc335-f",
+    "abc345-g",
+    "abc350-g",
+    "abc365-g",
+    "tag-threshold-heavy-light",
+    "unit-threshold-heavy-light"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "tag-persistence",
+  "name": "永続data structure・structural sharing",
+  "definition": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "immutable node",
+      "version root",
+      "共有部分"
+    ],
+    "triggerPatterns": [
+      "SAVE/LOAD",
+      "分岐する履歴",
+      "過去versionをquery"
+    ],
+    "invariantPatterns": [
+      "rootごとの版",
+      "旧node不変"
+    ],
+    "goalPatterns": [
+      "version保存",
+      "過去query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-rollback",
+      "type": "contrast",
+      "rationale": "過去版を共有して保持する永続化と、現在状態をundoして探索順に戻すrollbackを区別する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-persist-data-structure-versions"
+  ],
+  "representativeProblemIds": [
+    "abc273-e",
+    "abc453-g"
+  ],
+  "aliases": [
+    "path copying",
+    "persistent data structure",
+    "永続データ構造"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

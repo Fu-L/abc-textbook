@@ -1,0 +1,12 @@
+{
+  "id": "outcome-approximate-rational-by-euclid",
+  "statement": "Euclid互除法・連分数・Stern–Brocotの区間を使い、分母上限下の最良有理近似を求められる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc333-g",
+    "abc393-g",
+    "abc408-g",
+    "tag-rational-approximation",
+    "unit-rational-approximation"
+  ]
+}

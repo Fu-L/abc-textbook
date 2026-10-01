@@ -1,0 +1,11 @@
+{
+  "id": "outcome-peel-graph-core",
+  "statement": "連結成分のE−V+1から独立な閉路数を判定し、E=Vなら唯一のcycleを持つことを示せる。必要なら次数1以下の頂点を反復削除し、残るcoreと削除順を求められる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc226-e",
+    "abc266-f",
+    "tag-graph-core-peeling",
+    "unit-graph-core"
+  ]
+}

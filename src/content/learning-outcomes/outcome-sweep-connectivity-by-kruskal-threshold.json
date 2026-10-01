@@ -1,0 +1,18 @@
+{
+  "id": "outcome-sweep-connectivity-by-kruskal-threshold",
+  "statement": "同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components",
+    "outcome-maintain-connectivity-components"
+  ],
+  "scopeIds": [
+    "abc235-e",
+    "abc250-ex",
+    "abc301-ex",
+    "abc383-e",
+    "tag-kruskal-threshold-sweep",
+    "unit-kruskal-threshold-sweep"
+  ]
+}

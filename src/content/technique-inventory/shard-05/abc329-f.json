@@ -25,7 +25,7 @@
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "小集合の要素が移動すると所属集合のsizeは少なくとも2倍になるため、各colorの移動回数は対数回に抑えられる。",
+        "text": "重複を消すsetでは所属サイズの倍増は保証されない。例えば{1,2}と{2,3}のunionはサイズ3である。償却解析では色名でなく各container内の要素実体を数え、重複insertで消える実体にも仕事を課金する。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -55,7 +55,7 @@
         "evidenceIds": ["evidence-official-analysis"]
       },
       {
-        "text": "重複colorのinsertが集合sizeを増やさない場合も、移動元set size≤移動先set sizeなので要素処理の償却上界は維持される。",
+        "text": "小集合サイズs、移動先t≥s、重複数dとする。d≥s/2ならs回の処理をd個の消滅実体へ高々2ずつ課金する。d<s/2ならs-d個の生存実体へ高々2ずつ課金し、その所属サイズはt+s-d>3s/2となる。消滅への課金は一実体一回、生存への課金はサイズの単調増加によりO(log N)回なので、全insert試行はO(N log N)。平衡木setなら一試行O(log N)で全体O(N log²N+Q)。新規実体の再生成がある問題では別途その総数を界す。",
         "evidenceIds": ["evidence-official-analysis"]
       }
     ],
@@ -91,7 +91,7 @@
       "evidenceIds": ["evidence-official-analysis"]
     },
     {
-      "text": "small-to-largeの倍増解析",
+      "text": "重複を消すset併合の消滅・生存への課金による償却解析",
       "evidenceIds": ["evidence-official-analysis"]
     }
   ],

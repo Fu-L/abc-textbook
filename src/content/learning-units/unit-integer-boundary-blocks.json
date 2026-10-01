@@ -1,0 +1,74 @@
+{
+  "id": "unit-integer-boundary-blocks",
+  "kind": "section",
+  "title": "整数境界と同値区間を正確に分ける",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "素因数指数による整数条件の分解。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+    "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019",
+    "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+    "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"
+  ],
+  "tagIds": [
+    "tag-integer-boundary-blocks"
+  ],
+  "ownedTagIds": [
+    "tag-integer-boundary-blocks"
+  ],
+  "learningOutcomeIds": [
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-piecewise-linear-integer-ranges"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-piecewise-linear-integer-ranges"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
+  "problemIds": [
+    "abc230-e",
+    "abc239-ex",
+    "abc240-f",
+    "abc253-g",
+    "abc293-f",
+    "abc318-f",
+    "abc356-e",
+    "abc414-e",
+    "abc429-g",
+    "abc452-e"
+  ],
+  "directProblemIds": [
+    "abc230-e",
+    "abc414-e",
+    "abc452-e",
+    "abc356-e",
+    "abc240-f",
+    "abc293-f",
+    "abc318-f",
+    "abc253-g",
+    "abc239-ex",
+    "abc429-g"
+  ],
+  "relatedProblemIds": [
+    "abc216-e",
+    "abc243-g",
+    "abc303-f",
+    "abc361-f",
+    "abc370-g",
+    "abc444-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "floorや整数根の値が変わる境界を正確に求め、同値な整数範囲をまとめて処理する。"
+}

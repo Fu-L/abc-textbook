@@ -1,0 +1,43 @@
+{
+  "id": "unit-dp-carry-mixed-radix",
+  "kind": "section",
+  "title": "繰り上がり・借り・混合基数を状態にするDP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc231-e-problem-0182305520799068054aff752e2831be3da15feb444ad07a888d3504da02ae9c",
+    "source-abc231-editorial-3062-91f2da4e2d837098a67f6f1da5159eea0617558b9a263fe65a677fa0723e7fdb",
+    "source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6",
+    "source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"
+  ],
+  "tagIds": [
+    "tag-carry-mixed-radix-dp"
+  ],
+  "ownedTagIds": [
+    "tag-carry-mixed-radix-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-carry-or-mixed-radix-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-carry-or-mixed-radix-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md",
+  "problemIds": [
+    "abc231-e",
+    "abc466-g"
+  ],
+  "directProblemIds": [
+    "abc231-e",
+    "abc466-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態設計を土台に、整除鎖の丸めや複数項の加算で次の桁へ渡すcarryだけを有限状態として保つ。"
+}

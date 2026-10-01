@@ -1,0 +1,77 @@
+{
+  "id": "unit-decomposition-amortization",
+  "kind": "section",
+  "title": "軽重分類と償却解析で総仕事量を抑える",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "探索空間を分けて候補を列挙・照合するmeet-in-the-middleや分割統治。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc217-e-problem-1e6120a670aded81a6140b0683c3fbebcaf515943138cefcb894a42a7a8f66b2",
+    "source-abc217-editorial-2577-6c9a638e0f3bd96939a9d944fcbb933559e21b4dc87288def9136d0f371b017b",
+    "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+    "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34",
+    "source-abc255-editorial-4103-d20d115deccf3382ac7370948ba2c0426d66f1a17a620ed3c61ada4c52c95a2d",
+    "source-abc255-ex-problem-935ae4a05d3875c9b16346d07116f1332350b32f66245f03b2c6bbad2f0c5ef4"
+  ],
+  "tagIds": [
+    "tag-amortized-monotone-progress",
+    "tag-small-to-large",
+    "tag-threshold-heavy-light"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-balance-heavy-light-threshold",
+    "outcome-bound-monotone-total-work",
+    "outcome-merge-small-into-large"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/decomposition-amortization.md",
+  "problemIds": [
+    "abc217-e",
+    "abc219-g",
+    "abc256-ex",
+    "abc259-ex",
+    "abc302-e",
+    "abc324-g",
+    "abc329-f",
+    "abc335-f",
+    "abc350-g",
+    "abc365-g",
+    "abc368-g",
+    "abc403-e",
+    "abc411-f",
+    "abc428-f",
+    "abc454-g",
+    "abc466-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc255-ex",
+    "abc267-e",
+    "abc273-ex",
+    "abc275-ex",
+    "abc282-ex",
+    "abc295-g",
+    "abc305-f",
+    "abc307-f",
+    "abc312-ex",
+    "abc319-g",
+    "abc329-e",
+    "abc345-g",
+    "abc364-f",
+    "abc417-g",
+    "abc421-f",
+    "abc426-f",
+    "abc427-g",
+    "abc430-g",
+    "abc435-e",
+    "abc451-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "各操作ではなく操作列全体の変化回数を数え、軽重分類・部分問題サイズ半減・一度限りの移動や削除で総計算量を抑える。"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "outcome-aggregate-rooted-tree",
+  "statement": "根付き木で子側の状態を合成し、部分木または木全体の値を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc239-e",
+    "abc246-g",
+    "abc248-g",
+    "abc259-f",
+    "abc263-f",
+    "abc264-ex",
+    "abc269-ex",
+    "abc287-f",
+    "abc293-ex",
+    "abc298-ex",
+    "abc309-e",
+    "abc312-g",
+    "abc314-f",
+    "abc329-g",
+    "abc340-g",
+    "abc369-g",
+    "abc378-f",
+    "abc387-f",
+    "abc391-e",
+    "abc394-f",
+    "abc397-e",
+    "abc409-e",
+    "abc416-f",
+    "abc435-f",
+    "abc438-f",
+    "abc447-f",
+    "abc459-e",
+    "tag-rooted-tree-aggregation",
+    "unit-rooted-tree-aggregation"
+  ]
+}

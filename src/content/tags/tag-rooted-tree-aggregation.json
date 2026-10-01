@@ -1,0 +1,53 @@
+{
+  "id": "tag-rooted-tree-aggregation",
+  "name": "根付き木DP・部分木集約",
+  "definition": "子部分木の状態をbottom-upに合成し、親へ渡す最小十分なopen/closed状態や要約を設計する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "子状態",
+      "根付き木",
+      "部分木"
+    ],
+    "triggerPatterns": [
+      "bottom-up",
+      "部分木ごと"
+    ],
+    "invariantPatterns": [
+      "子の独立性",
+      "親へのinterface"
+    ],
+    "goalPatterns": [
+      "木上数え上げ",
+      "部分木集約"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-small-to-large",
+      "type": "often_combined",
+      "rationale": "子部分木の集合・mapを小さい側から大きい側へmergeする木DPで併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "representativeProblemIds": [
+    "abc239-e",
+    "abc394-f"
+  ],
+  "aliases": [
+    "subtree DP",
+    "tree DP",
+    "根付き木DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

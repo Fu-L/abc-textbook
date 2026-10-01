@@ -1,0 +1,12 @@
+{
+  "id": "outcome-solve-flow-with-lower-bounds",
+  "statement": "各辺のlower boundを先に流して頂点需要へ変換し、super source/sinkを加えたcirculationの飽和可能性を判定する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-model-max-flow-min-cut"
+  ],
+  "scopeIds": [
+    "abc285-g",
+    "tag-flow-feasibility-lower-bounds",
+    "unit-flow-lower-bounds"
+  ]
+}

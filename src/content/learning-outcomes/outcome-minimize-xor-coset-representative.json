@@ -1,0 +1,12 @@
+{
+  "id": "outcome-minimize-xor-coset-representative",
+  "statement": "XOR部分空間の基底をpivot bitごとにreduced formへ整え、高位bitから基底を加減してaffine cosetの最小整数代表を一意に得る。正規化写像の線形性を示し、二値のXOR最小化を各値の正規化へ分離できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-maintain-xor-linear-basis"
+  ],
+  "scopeIds": [
+    "abc451-g",
+    "tag-xor-linear-basis",
+    "unit-xor-linear-basis"
+  ]
+}

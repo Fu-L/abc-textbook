@@ -1,0 +1,20 @@
+{
+  "id": "outcome-prune-dominated-candidates-once",
+  "statement": "候補を捨てられる支配条件を証明し、各候補を高々一度だけ単調stack・queueから削除できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc213-f",
+    "abc228-f",
+    "abc234-g",
+    "abc248-ex",
+    "abc280-ex",
+    "abc303-g",
+    "abc334-f",
+    "abc359-e",
+    "abc379-f",
+    "abc420-f",
+    "abc435-f",
+    "tag-monotone-stack-queue",
+    "unit-monotone-stack-queue"
+  ]
+}

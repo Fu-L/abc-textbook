@@ -1,0 +1,55 @@
+{
+  "id": "tag-tree-balanced-separator",
+  "name": "木の均衡分離点と重心分解",
+  "definition": "非負重みの各成分を半分以下にする一点を選ぶ。頂点数を重みとし各成分で繰り返すと、対数深さの重心分解を得る。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "木",
+      "連結成分",
+      "部分木サイズ",
+      "重心"
+    ],
+    "triggerPatterns": [
+      "separator",
+      "再帰",
+      "半分以下",
+      "除いた各成分"
+    ],
+    "invariantPatterns": [
+      "成分サイズ",
+      "親を設定",
+      "重心",
+      "高さ.*log"
+    ],
+    "goalPatterns": [
+      "分解木",
+      "構成",
+      "親配列",
+      "距離query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-find-weighted-balanced-separator"
+  ],
+  "representativeProblemIds": [
+    "abc359-g",
+    "abc291-ex"
+  ],
+  "aliases": [
+    "centroid decomposition",
+    "tree separator",
+    "均衡分離点",
+    "重み付き重心",
+    "重心分解"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

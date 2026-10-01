@@ -1,0 +1,52 @@
+{
+  "id": "tag-weighted-bipartite-matching",
+  "name": "重み付き二部完全matching",
+  "definition": "assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または同値なmin-cost flowで完全matchingの重みを最適化する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-bipartite-matching-hall"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cost matrix",
+      "perfect matching",
+      "左右頂点"
+    ],
+    "triggerPatterns": [
+      "uncrossing",
+      "全頂点を対応",
+      "割当費用"
+    ],
+    "invariantPatterns": [
+      "dual potential",
+      "tight edge"
+    ],
+    "goalPatterns": [
+      "最小重み完全matching"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-bipartite-matching-hall",
+      "type": "extension",
+      "rationale": "二部matchingの割当模型へ辺重みと完全割当の最適化目的を加え、dual potentialとtight edgeという新しい不変条件まで扱う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-weighted-bipartite-matching"
+  ],
+  "representativeProblemIds": [
+    "abc373-g"
+  ],
+  "aliases": [
+    "assignment problem",
+    "weighted bipartite matching",
+    "ハンガリアン法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

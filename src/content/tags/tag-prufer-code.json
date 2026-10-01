@@ -1,0 +1,45 @@
+{
+  "id": "tag-prufer-code",
+  "name": "Prüfer code・次数制約付きlabel木",
+  "definition": "label付き木を長さN-2の列へ全単射し、頂点の出現回数=次数-1として次数条件を独立な係数条件へ変換する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-combinatorial-coefficients"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "label付き木",
+      "次数列",
+      "長さN-2の列"
+    ],
+    "triggerPatterns": [
+      "label付き木を数える",
+      "各頂点の次数条件"
+    ],
+    "invariantPatterns": [
+      "出現回数=次数-1",
+      "木との全単射"
+    ],
+    "goalPatterns": [
+      "次数制約付き木の数え上げ"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-encode-labeled-trees-by-prufer-code"
+  ],
+  "representativeProblemIds": [
+    "abc303-ex"
+  ],
+  "aliases": [
+    "Prüfer code",
+    "Prüfer sequence",
+    "次数制約付きラベル木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

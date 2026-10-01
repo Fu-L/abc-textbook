@@ -1,0 +1,52 @@
+{
+  "id": "tag-state-graph-search",
+  "name": "状態グラフのモデリングと探索",
+  "definition": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "グリッド",
+      "状態",
+      "遷移"
+    ],
+    "triggerPatterns": [
+      "到達可能",
+      "暗黙graph",
+      "最小手数"
+    ],
+    "invariantPatterns": [
+      "visited",
+      "探索frontier"
+    ],
+    "goalPatterns": [
+      "到達判定",
+      "最短手数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-shortest-path",
+      "type": "often_combined",
+      "rationale": "問題状態を頂点、合法操作を辺へ写してから、辺重みに応じた最短路algorithmを選ぶ流れで併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "representativeProblemIds": [
+    "abc302-f",
+    "abc427-e"
+  ],
+  "aliases": [
+    "implicit graph search",
+    "状態グラフ",
+    "状態空間探索"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

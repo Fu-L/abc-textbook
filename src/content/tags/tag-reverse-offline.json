@@ -1,0 +1,59 @@
+{
+  "id": "tag-reverse-offline",
+  "name": "逆向きのオフライン処理",
+  "definition": "時間依存を逆走査・逆操作・last-write時刻で単調または静的な処理へ変換し、元の時点の答えを復元する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "column",
+      "paint",
+      "query",
+      "row",
+      "上書き",
+      "削除",
+      "時間",
+      "更新"
+    ],
+    "triggerPatterns": [
+      "last.?write",
+      "offline",
+      "逆から",
+      "逆走査",
+      "逆順"
+    ],
+    "invariantPatterns": [
+      "将来",
+      "復元",
+      "最後のpaint",
+      "未処理",
+      "未確定",
+      "追加だけ"
+    ],
+    "goalPatterns": [
+      "クエリ",
+      "各時点",
+      "時系列"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-reverse-update-time"
+  ],
+  "representativeProblemIds": [
+    "abc229-e",
+    "abc346-e",
+    "abc375-f"
+  ],
+  "aliases": [
+    "reverse offline processing",
+    "クエリの逆読み",
+    "逆順処理"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

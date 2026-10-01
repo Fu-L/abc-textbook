@@ -1,0 +1,39 @@
+{
+  "id": "unit-degree-parity-subgraph",
+  "kind": "subsection",
+  "title": "指定次数parityの部分グラフ構成",
+  "parentId": "unit-euler-degree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "指定次数parityの部分グラフ構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830",
+    "source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3"
+  ],
+  "tagIds": [
+    "tag-degree-parity-subgraph"
+  ],
+  "ownedTagIds": [
+    "tag-degree-parity-subgraph"
+  ],
+  "learningOutcomeIds": [
+    "outcome-construct-degree-parity-subgraph"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-construct-degree-parity-subgraph"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/degree-parity-subgraph.md",
+  "problemIds": [
+    "abc345-f"
+  ],
+  "directProblemIds": [
+    "abc345-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "Euler trail・circuitで得た考え方と実装を再利用し、指定次数parityの部分グラフ構成の発動条件・正当化・境界を重複なく学ぶ。"
+}

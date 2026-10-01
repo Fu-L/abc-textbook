@@ -1,0 +1,47 @@
+{
+  "id": "tag-kinetic-order-maintenance",
+  "name": "kinetic sorting・交差event順序更新",
+  "definition": "連続parameterで隣接要素の順序が入れ替わる時刻だけをevent化し、次の有効交差を処理して全順序を更新する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [
+    "tag-event-sweep"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "adjacent pair",
+      "crossing time",
+      "moving order"
+    ],
+    "triggerPatterns": [
+      "parameterとともに順序が変化",
+      "全pairを列挙できない"
+    ],
+    "invariantPatterns": [
+      "local swap",
+      "next valid adjacent crossing"
+    ],
+    "goalPatterns": [
+      "交差集計",
+      "時間変化する順位"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-order-through-crossing-events"
+  ],
+  "representativeProblemIds": [
+    "abc344-g",
+    "abc257-ex"
+  ],
+  "aliases": [
+    "kinetic order maintenance",
+    "kinetic sorting",
+    "交差イベント順序更新"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

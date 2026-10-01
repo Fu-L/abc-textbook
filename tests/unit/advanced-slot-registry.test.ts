@@ -815,24 +815,11 @@ describe('official advanced slot registry', () => {
     ).toEqual(['abc999', 'abc1000']);
   });
 
-  it('orders learning units by prerequisites before applying the ID tie-breaker', () => {
+  it('sorts LearningUnit records by ID without implying a learning order', () => {
     expect(
-      sortCatalogEntityArray('learningUnits', [
-        {
-          id: 'unit-b',
-          additionalPrerequisiteUnitIds: ['unit-a'],
-          stageRank: 0,
-          difficultyRank: 0,
-          representativeRank: 0,
-        },
-        {
-          id: 'unit-a',
-          additionalPrerequisiteUnitIds: [],
-          stageRank: 0,
-          difficultyRank: 0,
-          representativeRank: 0,
-        },
-      ]).map(({ id }) => id),
+      sortCatalogEntityArray('learningUnits', [{ id: 'unit-b' }, { id: 'unit-a' }]).map(
+        ({ id }) => id,
+      ),
     ).toEqual(['unit-a', 'unit-b']);
   });
 

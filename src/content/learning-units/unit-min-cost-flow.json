@@ -1,0 +1,55 @@
+{
+  "id": "unit-min-cost-flow",
+  "kind": "subsection",
+  "title": "最小費用流・circulation",
+  "parentId": "unit-flow-matching",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+    "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+    "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+    "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59",
+    "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
+    "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"
+  ],
+  "tagIds": [
+    "tag-min-cost-flow"
+  ],
+  "ownedTagIds": [
+    "tag-min-cost-flow"
+  ],
+  "learningOutcomeIds": [
+    "outcome-model-min-cost-flow"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-model-min-cost-flow"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/min-cost-flow.md",
+  "problemIds": [
+    "abc214-h",
+    "abc224-h",
+    "abc231-h",
+    "abc247-g",
+    "abc407-g",
+    "abc421-g"
+  ],
+  "directProblemIds": [
+    "abc247-g",
+    "abc407-g",
+    "abc421-g",
+    "abc231-h",
+    "abc224-h",
+    "abc214-h"
+  ],
+  "relatedProblemIds": [
+    "abc393-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "最大流・最小カット・最短路モデルで得た考え方と実装を再利用し、最小費用流・circulationの発動条件・正当化・境界を重複なく学ぶ。"
+}

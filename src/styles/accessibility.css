@@ -111,6 +111,9 @@ button {
   min-block-size: 2.75rem;
   font: inherit;
 }
+.site-search [data-search-open]:disabled {
+  color: ButtonText;
+}
 dialog {
   inline-size: min(42rem, calc(100% - 2rem));
   max-block-size: calc(100% - 2rem);

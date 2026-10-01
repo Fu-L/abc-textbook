@@ -1,0 +1,48 @@
+{
+  "id": "unit-change-impact-localization",
+  "kind": "section",
+  "title": "基準witnessから変更影響を局所化する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "存在する解を一つ復元するだけで、変更後も同じwitnessが有効かを判定しない問題。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+    "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+    "source-abc243-e-problem-bc310b52f161ee93bfd9d688422df21267853b10cf5de15b07d37f5be4181b41",
+    "source-abc243-editorial-3561-242d54ccff8890b54fcc964e9543d50b94004320caf7d06b54a85eba02a6cb1f",
+    "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
+    "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b"
+  ],
+  "tagIds": [
+    "tag-witness-impact-localization"
+  ],
+  "ownedTagIds": [
+    "tag-witness-impact-localization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-localize-change-impact-by-witness"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-localize-change-impact-by-witness"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/change-impact-localization.md",
+  "problemIds": [
+    "abc218-f",
+    "abc279-e"
+  ],
+  "directProblemIds": [
+    "abc279-e",
+    "abc218-f"
+  ],
+  "relatedProblemIds": [
+    "abc243-e",
+    "abc448-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "変更前の最適解や実行列をwitnessとして固定し、それが壊れない変更では答えも変わらないことを証明して再計算対象を絞る。"
+}

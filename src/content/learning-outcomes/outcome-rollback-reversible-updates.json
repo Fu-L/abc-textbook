@@ -1,0 +1,12 @@
+{
+  "id": "outcome-rollback-reversible-updates",
+  "statement": "更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc218-g",
+    "abc302-ex",
+    "abc363-g",
+    "tag-rollback",
+    "unit-rollback"
+  ]
+}

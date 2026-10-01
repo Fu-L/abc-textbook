@@ -1,0 +1,57 @@
+{
+  "id": "unit-linear-algebra-xor",
+  "kind": "section",
+  "title": "線形方程式・基底・分離可能変換へ変換する",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "行列式による全域木・非交差pathの計数は行列式計数の単元で扱う。通常の多項式畳み込み・生成関数と、幾何の面積行列式も対象外とする。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc220-editorial-2685-963048b95ccf5ef8d000e370f95bedc59796bf4f0a790fc7802b001dd641f541",
+    "source-abc220-h-problem-2e6de3cff3c856603e21d122524328429d821c0772f846e71ccd66cb50b049da",
+    "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
+    "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e"
+  ],
+  "tagIds": [
+    "tag-linear-system-rank",
+    "tag-separable-linear-transform",
+    "tag-xor-linear-basis"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-factor-separable-linear-transform",
+    "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative",
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
+  "problemIds": [
+    "abc212-h",
+    "abc223-h",
+    "abc249-g",
+    "abc276-ex",
+    "abc283-g",
+    "abc288-g",
+    "abc366-g",
+    "abc367-g",
+    "abc451-g"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc220-h",
+    "abc236-f",
+    "abc265-ex",
+    "abc299-ex",
+    "abc323-g",
+    "abc399-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "制約を線形方程式へ写して解空間とrankを調べ、XORの生成可能性を基底で表す。多次元の線形変換は軸別に分離して計算する。行列式による数え上げは別の単元で扱う。"
+}

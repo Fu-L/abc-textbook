@@ -1,0 +1,50 @@
+{
+  "id": "unit-frontier-profile-dp",
+  "kind": "section",
+  "title": "frontier/profile DP・境界状態圧縮",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "frontier/profile DP・境界状態圧縮の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc248-editorial-3794-0f4bea9b117b2b0313d67e7f15133f3917b6a673e5fecf6ff3a0e0707a6a2d18",
+    "source-abc248-f-problem-c8c2e67d573ee79935a50ab8e09d8722bf5c2eb4263fdfdb4cf85cbb212ea1ad",
+    "source-abc295-editorial-6036-796acfed90d09b51faae4e6fb21564dcfd98f1d475ceae13a724275092f738f2",
+    "source-abc295-ex-problem-1e02e848a5cc4635ee1bd026e721a0fb41b6403946064c5547c988a507010f2f",
+    "source-abc296-editorial-6119-ac80203d7028d704d5d765eb1d8dbd94b2cdcfd612591e482994c1f616f2edf7",
+    "source-abc296-ex-problem-3aabe946154840170c4f778727509a499ce9e5bf35356b8c3f4d141a02904475"
+  ],
+  "tagIds": [
+    "tag-frontier-profile-dp"
+  ],
+  "ownedTagIds": [
+    "tag-frontier-profile-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-frontier-profile-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-frontier-profile-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/frontier-profile-dp.md",
+  "problemIds": [
+    "abc248-f",
+    "abc296-ex",
+    "abc379-g"
+  ],
+  "directProblemIds": [
+    "abc248-f",
+    "abc379-g",
+    "abc296-ex"
+  ],
+  "relatedProblemIds": [
+    "abc295-ex",
+    "abc309-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、frontier/profile DP・境界状態圧縮の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "tag-inclusion-exclusion",
+  "name": "集合上の包除原理",
+  "definition": "条件集合の交差をsubsetごとに数え、交互符号で「少なくとも一つ」「全てを避ける」対象を重複なく数える。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "subset",
+      "交差",
+      "条件集合"
+    ],
+    "triggerPatterns": [
+      "少なくとも一つ",
+      "重複して数える"
+    ],
+    "invariantPatterns": [
+      "intersection lattice",
+      "交互符号"
+    ],
+    "goalPatterns": [
+      "exact count",
+      "重複補正"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-subset-zeta-mobius-transform",
+      "type": "often_combined",
+      "rationale": "条件集合全体の包除をsubset lattice上で一括計算するときにzeta・Möbius変換を併用する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-correct-overlap-by-inversion"
+  ],
+  "representativeProblemIds": [
+    "abc246-f",
+    "abc462-g"
+  ],
+  "aliases": [
+    "inclusion-exclusion principle",
+    "包除原理"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,80 @@
+{
+  "id": "unit-normalization",
+  "kind": "section",
+  "title": "同値な状態を正規化する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "交換論による貪欲順の証明。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc218-editorial-2602-b0528a6671f0dcdb9faa1ec4ef660172c27c9dca2be84a213d6fccf220956ae8",
+    "source-abc218-h-problem-ef3aa80259d7936f07de61bb8bc41cb0f8441d5233bcd9d91c8e61b6e30cce70",
+    "source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014",
+    "source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5",
+    "source-abc232-editorial-3140-33bcd41478c7207b82cce3e1b87b03d84419cf4186633cc501442bbc51c6e634",
+    "source-abc232-h-problem-2fa16046cc8b2129e81b3850e6db5071ad203b31aa25ee42c6f09f75104425cd"
+  ],
+  "tagIds": [
+    "tag-state-normalization"
+  ],
+  "ownedTagIds": [
+    "tag-state-normalization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
+    "outcome-normalize-equivalent-states"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
+    "outcome-normalize-equivalent-states"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/normalization.md",
+  "problemIds": [
+    "abc219-f",
+    "abc242-e",
+    "abc250-e",
+    "abc296-f",
+    "abc302-g",
+    "abc313-g",
+    "abc323-f",
+    "abc382-g",
+    "abc427-g",
+    "abc446-g",
+    "abc462-e",
+    "abc463-f"
+  ],
+  "directProblemIds": [
+    "abc462-e",
+    "abc242-e",
+    "abc250-e",
+    "abc323-f",
+    "abc296-f",
+    "abc302-g",
+    "abc446-g",
+    "abc463-f",
+    "abc313-g",
+    "abc219-f",
+    "abc427-g",
+    "abc382-g"
+  ],
+  "relatedProblemIds": [
+    "abc218-h",
+    "abc232-h",
+    "abc278-g",
+    "abc284-g",
+    "abc301-f",
+    "abc307-e",
+    "abc360-e",
+    "abc404-f",
+    "abc411-g",
+    "abc421-e",
+    "abc425-f",
+    "abc450-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "対称な状態を同一視できると探索やDPの状態数を減らせるため、同値類の標準形と不変量を先に定める。"
+}

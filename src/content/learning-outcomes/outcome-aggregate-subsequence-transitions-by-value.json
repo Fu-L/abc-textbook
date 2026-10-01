@@ -1,0 +1,17 @@
+{
+  "id": "outcome-aggregate-subsequence-transitions-by-value",
+  "statement": "末尾の値ごとに最良状態を持ち、許される直前値の区間を集約して部分列DPの遷移を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-associative-range-summary",
+    "outcome-design-order-preserving-dp"
+  ],
+  "scopeIds": [
+    "abc240-ex",
+    "abc339-e",
+    "abc354-f",
+    "abc360-g",
+    "abc410-g",
+    "tag-value-range-dp",
+    "unit-dp-value-range"
+  ]
+}

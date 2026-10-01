@@ -1,0 +1,55 @@
+{
+  "id": "tag-directed-core-peeling",
+  "name": "有向cycle検出・sink/source peeling",
+  "definition": "三色DFSのrecursion stackまたは入次数・出次数零の反復削除により有向cycleを検出し、必要ならcycleへ到達するcoreと処理可能なDAG部分を分離する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cycle core",
+      "directed graph",
+      "source/sink"
+    ],
+    "triggerPatterns": [
+      "cycleに残る頂点",
+      "出次数0を削除",
+      "有向cycleが一つでも存在"
+    ],
+    "invariantPatterns": [
+      "DFS recursion stack",
+      "remaining indegree/outdegree"
+    ],
+    "goalPatterns": [
+      "cycle core",
+      "cycle存在判定",
+      "削除順"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-graph-core-peeling",
+      "type": "analogy",
+      "rationale": "局所次数条件を満たさない頂点をqueueで除き、残存核の不変条件を読む発想が共通する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-peel-directed-graph-toward-cycles"
+  ],
+  "representativeProblemIds": [
+    "abc245-f",
+    "abc456-e"
+  ],
+  "aliases": [
+    "Kahn elimination",
+    "sink peeling",
+    "three-color DFS",
+    "有向cycle検出",
+    "有向グラフの葉刈り"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

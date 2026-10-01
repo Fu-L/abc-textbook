@@ -1,0 +1,58 @@
+{
+  "id": "unit-monotone-stack-queue",
+  "kind": "section",
+  "title": "支配関係から不要な候補を単調stack・queueで削る",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "全候補から極値を反復取得するheap・ordered set。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+    "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82",
+    "source-abc228-editorial-2945-12052f0fe09662260111e151499b5f2b2c3b5c7537f68c1c357cefea7748b13c",
+    "source-abc228-f-problem-89dadce4e1a0dc6582e292f9fa5d8b96f6f301dbf03a4e01c582b05833b501da",
+    "source-abc234-editorial-3227-9fabd73639dc7e10a436503cbcb90c463de740b56e8f78de4a0fb4e8080453e6",
+    "source-abc234-g-problem-8abd243ffa8e3e459b73e6d9c43a87b061f09a6f6ef5b7c665a6fc5c1c4655fc"
+  ],
+  "tagIds": [
+    "tag-monotone-stack-queue"
+  ],
+  "ownedTagIds": [
+    "tag-monotone-stack-queue"
+  ],
+  "learningOutcomeIds": [
+    "outcome-prune-dominated-candidates-once"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-prune-dominated-candidates-once"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/monotone-stack-queue.md",
+  "problemIds": [
+    "abc228-f",
+    "abc234-g",
+    "abc248-ex",
+    "abc359-e",
+    "abc379-f"
+  ],
+  "directProblemIds": [
+    "abc359-e",
+    "abc379-f",
+    "abc228-f",
+    "abc234-g",
+    "abc248-ex"
+  ],
+  "relatedProblemIds": [
+    "abc213-f",
+    "abc280-ex",
+    "abc303-g",
+    "abc334-f",
+    "abc420-f",
+    "abc435-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "候補の支配関係を証明し、不要になった要素を一度だけ捨てて線形処理へ変える。"
+}

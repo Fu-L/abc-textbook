@@ -1,0 +1,47 @@
+{
+  "id": "tag-dag-topological-processing",
+  "name": "DAGのtopological processing",
+  "definition": "依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-state-graph-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DAG",
+      "dependency",
+      "indegree"
+    ],
+    "triggerPatterns": [
+      "依存順",
+      "前提を先に",
+      "閉路なし"
+    ],
+    "invariantPatterns": [
+      "processed prefix has no incoming edge"
+    ],
+    "goalPatterns": [
+      "DAG伝播",
+      "順序構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-process-dag-in-topological-order"
+  ],
+  "representativeProblemIds": [
+    "abc304-ex",
+    "abc315-e"
+  ],
+  "aliases": [
+    "DAG DP",
+    "topological processing",
+    "トポロジカルソート"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

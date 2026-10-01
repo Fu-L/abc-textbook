@@ -1,0 +1,39 @@
+{
+  "id": "unit-heavy-light-recursive-dp",
+  "kind": "section",
+  "title": "資源DPを引数で渡すHLRecDP",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "資源DPを引数で渡すHLRecDPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f",
+    "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"
+  ],
+  "tagIds": [
+    "tag-heavy-light-recursive-dp"
+  ],
+  "ownedTagIds": [
+    "tag-heavy-light-recursive-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-pass-resource-dp-through-heavy-recursion"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-pass-resource-dp-through-heavy-recursion"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
+  "problemIds": [
+    "abc311-ex"
+  ],
+  "directProblemIds": [
+    "abc311-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "資源軸knapsack DP・根付き木DP・部分木集約で得た考え方と実装を再利用し、資源DPを引数で渡すHLRecDPの発動条件・正当化・境界を重複なく学ぶ。"
+}

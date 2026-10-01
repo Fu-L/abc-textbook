@@ -1,0 +1,53 @@
+{
+  "id": "tag-interval-partition-dp",
+  "name": "区間合成・領域分割DP",
+  "definition": "区間・長方形の分割点を遷移にし、互いに独立な小領域の解を合成する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix",
+      "分割",
+      "区間",
+      "括弧"
+    ],
+    "triggerPatterns": [
+      "切れ目",
+      "区切る",
+      "右端",
+      "左端"
+    ],
+    "invariantPatterns": [
+      "合成",
+      "独立",
+      "部分区間"
+    ],
+    "goalPatterns": [
+      "コスト",
+      "場合の数",
+      "最小"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-interval-split-dp"
+  ],
+  "representativeProblemIds": [
+    "abc217-f",
+    "abc233-g",
+    "abc262-g"
+  ],
+  "aliases": [
+    "interval DP",
+    "区間DP",
+    "領域分割DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

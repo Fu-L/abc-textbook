@@ -1,0 +1,14 @@
+{
+  "id": "outcome-condense-and-order-directed-graph",
+  "statement": "有向グラフの閉路を扱い、必要なら強連結成分へ縮約してDAG順に情報を伝播できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-process-dag-in-topological-order"
+  ],
+  "scopeIds": [
+    "abc214-h",
+    "abc306-g",
+    "abc374-g",
+    "tag-scc-condensation",
+    "unit-scc-condensation"
+  ]
+}

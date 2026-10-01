@@ -1,0 +1,54 @@
+{
+  "id": "unit-binary-lifting",
+  "kind": "subsection",
+  "title": "doubling・binary lifting",
+  "parentId": "unit-functional-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "doubling・binary liftingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2362-aea76636a7c36404d7fbd71626002882ba2187c3d8d979b8c9005a8cb482628a",
+    "source-abc212-f-problem-62eaab628a2d9150c7f51b5a8a376dc3f779544501a3fe52df15eaafa0ea3e2b",
+    "source-abc254-editorial-4066-05bd0b7509c479dae1b93fe87469a756b306d5a0371b28bf7ce5d3a1f55f7197",
+    "source-abc254-g-problem-50d845b175a7b04cc11c1acd8b2012462ddd6b02728437d85b1a960ca3e1b190",
+    "source-abc310-editorial-6785-613fc6f1ebc6d3c217bb0d69198685d99a6c020d4aa8ea98d2921499ac0fccf5",
+    "source-abc310-g-problem-d670b111cffefaec620ceacce53ca59e0ec93e7ceaf9ad40d859cf2758514cb5"
+  ],
+  "tagIds": [
+    "tag-binary-lifting"
+  ],
+  "ownedTagIds": [
+    "tag-binary-lifting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-jump-deterministic-transition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-jump-deterministic-transition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/binary-lifting.md",
+  "problemIds": [
+    "abc212-f",
+    "abc254-g",
+    "abc310-g",
+    "abc367-e",
+    "abc438-e"
+  ],
+  "directProblemIds": [
+    "abc367-e",
+    "abc438-e",
+    "abc212-f",
+    "abc310-g",
+    "abc254-g"
+  ],
+  "relatedProblemIds": [
+    "abc370-f",
+    "abc417-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "決定的遷移の2^k回後と累積値を合成し、巨大回数のjumpを二進分解で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

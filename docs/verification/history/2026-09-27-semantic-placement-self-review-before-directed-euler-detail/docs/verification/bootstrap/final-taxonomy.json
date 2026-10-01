@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "bootstrap-final-taxonomy",
+  "taskId": "T159",
+  "generatedAt": "2026-09-26T17:36:45.189Z",
+  "status": "passed",
+  "buildPath": "staging/taxonomy/initial/final-taxonomy-build.json",
+  "integrationMapPath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
+  "reviewCheckResultsPath": "docs/verification/bootstrap/final-taxonomy-check-results.json",
+  "reviewEvidencePath": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
+  "taxonomySubjectDigest": "6934e3d8d95f5155f5b564103f8fa07c5a3f8a28c4128e5849a8263d9343d910",
+  "buildDigest": "a0d58d4ab1289901bf24a442a53cb7e88c3ca210e7d75cd2e0c2a449dd027e01",
+  "integrationMapDigest": "d4e0f40fc95501309d577d5b103a6f38789a3232f99198356eae6c35538f62c3",
+  "taxonomyDigest": "44005d45e8f5fdb737bd90012fe597db386fa8d30bb14f6a0a5184115dc3d803",
+  "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
+  "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30",
+  "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
+  "correctionImpactDigest": "3d9f3d374c2532f7a38478ec40f93d431071c520909d0ad3a021022d99d1d56a",
+  "problemCount": 868,
+  "sourceRevisionCount": 1738,
+  "knownCorpusSourceRevisionCount": 2246,
+  "candidateCounts": {
+    "tags": 213,
+    "outcomes": 242,
+    "units": 232
+  },
+  "correctionImpactCount": 12,
+  "reviewEvidenceRefs": [
+    {
+      "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
+      "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
+      "digest": "a50b6061c5f9307f7dd7c633161fd97f244c853938aa73521ea51e4744b6281e",
+      "subjectDigest": "6934e3d8d95f5155f5b564103f8fa07c5a3f8a28c4128e5849a8263d9343d910",
+      "authorIds": [
+        "person-maintainer"
+      ],
+      "reviewerIds": [
+        "person-maintainer"
+      ],
+      "reviewMode": "self",
+      "aggregatePassed": true
+    }
+  ],
+  "canonicalMaterializationAllowed": true,
+  "holdReasons": [],
+  "diagnosticCodes": [],
+  "evidenceDigest": "fa3049b491914025e4df10f073e4ebc499ff4c01ae6d5fcac318a76a4f17d60b"
+}

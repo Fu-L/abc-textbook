@@ -1,0 +1,37 @@
+{
+  "id": "unit-polynomial-taylor-shift",
+  "kind": "subsection",
+  "title": "factorial convolutionによる多項式Taylor shift",
+  "parentId": "unit-polynomial-convolution",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "factorial convolutionによる多項式Taylor shiftの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc323-editorial-7356-8e3292da3a2b2feb61e13f336e46bb0792b987da9de409b538dc51805a9a9b37",
+    "source-abc323-g-problem-aa2b668975ee5b61998c77543746047f4e34f404d488bff153ab12768784bcda"
+  ],
+  "tagIds": [
+    "tag-polynomial-taylor-shift"
+  ],
+  "ownedTagIds": [
+    "tag-polynomial-taylor-shift"
+  ],
+  "learningOutcomeIds": [
+    "outcome-shift-polynomial-by-factorial-convolution"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-shift-polynomial-by-factorial-convolution"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc323-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "畳み込みと二項係数の階乗表示を理解した後、二項展開の添字を反転して P(x+a) の全係数を一回の畳み込みへ落とす。多点評価や一般FPS合成とは目的を区別する。"
+}

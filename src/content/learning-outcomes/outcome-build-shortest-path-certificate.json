@@ -1,0 +1,15 @@
+{
+  "id": "outcome-build-shortest-path-certificate",
+  "statement": "距離等式を満たす親辺を選び、最短路の木または経路を復元できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "scopeIds": [
+    "abc218-f",
+    "abc252-e",
+    "abc308-ex",
+    "abc355-e",
+    "tag-shortest-path-certificate",
+    "unit-shortest-path-reconstruction"
+  ]
+}

@@ -1,4 +1,4 @@
-import { lstat } from 'node:fs/promises';
+import { lstat, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
@@ -18,10 +18,16 @@ import {
   writeJsonNoOverwrite,
 } from './cli-support.js';
 
-const USAGE = 'Usage: final-taxonomy (--check | --write)';
+const USAGE =
+  'Usage: final-taxonomy (--check | --write [--archive-accepted docs/verification/history/NAME])';
 
 type Mode = 'check' | 'write';
-type OutputDisposition = 'missing' | 'verified' | 'replace_proposal';
+type OutputDisposition = 'missing' | 'verified' | 'replace_proposal' | 'replace_accepted';
+
+interface CliOptions {
+  readonly mode: Mode;
+  readonly archiveRoot: string | null;
+}
 
 interface Output {
   readonly role: 'build' | 'integration' | 'verification';
@@ -32,11 +38,20 @@ interface Output {
 type ExistingJson =
   { readonly kind: 'missing' } | { readonly kind: 'present'; readonly value: unknown };
 
-const parseMode = (args: readonly string[]): Mode => {
-  if (args.length !== 1 || !['--check', '--write'].includes(args[0] ?? '')) {
+const parseOptions = (args: readonly string[]): CliOptions => {
+  if (args.length === 1 && args[0] === '--check') return { mode: 'check', archiveRoot: null };
+  if (args.length === 1 && args[0] === '--write') return { mode: 'write', archiveRoot: null };
+  if (
+    args.length !== 3 ||
+    args[0] !== '--write' ||
+    args[1] !== '--archive-accepted' ||
+    !args[2]?.startsWith('docs/verification/history/') ||
+    path.isAbsolute(args[2]) ||
+    args[2].split('/').some((segment) => segment === '.' || segment === '..' || segment === '')
+  ) {
     throw new CorpusCliError('ARGUMENTS_INVALID', USAGE);
   }
-  return args[0] === '--write' ? 'write' : 'check';
+  return { mode: 'write', archiveRoot: args[2] };
 };
 
 const isNodeError = (error: unknown): error is NodeJS.ErrnoException =>
@@ -65,6 +80,7 @@ const inspectOutput = async (
   repositoryRoot: string,
   output: Output,
   frozenProvisionalEvidence: unknown,
+  allowAcceptedReplacement: boolean,
 ): Promise<OutputDisposition> => {
   const absolutePath = path.join(repositoryRoot, output.relativePath);
   const existingResult = await existingJson(absolutePath);
@@ -87,6 +103,7 @@ const inspectOutput = async (
       !Array.isArray(existing) &&
       Reflect.get(existing, 'canonicalMaterializationAllowed') === true)
   ) {
+    if (allowAcceptedReplacement) return 'replace_accepted';
     throw new CorpusCliError('FINAL_TAXONOMY_ACCEPTED_OUTPUT_CONFLICT', output.relativePath);
   }
   const replaceableStatus = output.role === 'verification' ? 'on_hold' : 'proposed';
@@ -96,8 +113,39 @@ const inspectOutput = async (
   return 'replace_proposal';
 };
 
+const archiveCurrentReview = async (
+  repositoryRoot: string,
+  archiveRoot: string,
+  relativePaths: readonly string[],
+): Promise<void> => {
+  const entries = await Promise.all(
+    relativePaths.map(async (relativePath) => {
+      const sourcePath = path.join(repositoryRoot, relativePath);
+      const metadata = await lstat(sourcePath);
+      if (metadata.isSymbolicLink() || !metadata.isFile()) {
+        throw new CorpusCliError('FINAL_TAXONOMY_ARCHIVE_SOURCE_UNSAFE', relativePath);
+      }
+      const archivedPath = path.join(archiveRoot, relativePath);
+      const archivedMetadata = await lstat(path.join(repositoryRoot, archivedPath)).catch(
+        (error: unknown) => {
+          if (isNodeError(error) && error.code === 'ENOENT') return null;
+          throw error;
+        },
+      );
+      if (archivedMetadata !== null) {
+        throw new CorpusCliError('FINAL_TAXONOMY_ARCHIVE_EXISTS', archivedPath);
+      }
+      return { archivedPath, bytes: await readFile(sourcePath) };
+    }),
+  );
+  for (const entry of entries) {
+    await ensureNoSymlinkParents(repositoryRoot, entry.archivedPath);
+    await writeFile(path.join(repositoryRoot, entry.archivedPath), entry.bytes, { flag: 'wx' });
+  }
+};
+
 try {
-  const mode = parseMode(process.argv.slice(2));
+  const { mode, archiveRoot } = parseOptions(process.argv.slice(2));
   const layout = defaultFinalTaxonomyBuildLayout();
   const context = await loadFinalTaxonomySourceContext(layout);
   const build = buildFinalTaxonomyFromPolicy(context);
@@ -120,9 +168,18 @@ try {
   const dispositions = await Promise.all(
     outputs.map(
       async (output) =>
-        await inspectOutput(layout.repositoryRoot, output, context.provisionalEvidence),
+        await inspectOutput(
+          layout.repositoryRoot,
+          output,
+          context.provisionalEvidence,
+          archiveRoot !== null && build.status === 'proposed',
+        ),
     ),
   );
+  const replacingAccepted = dispositions.includes('replace_accepted');
+  if (archiveRoot !== null && !replacingAccepted) {
+    throw new CorpusCliError('FINAL_TAXONOMY_ARCHIVE_NOT_NEEDED', archiveRoot);
+  }
   const pending = outputs.filter((_output, index) => dispositions[index] !== 'verified');
   if (mode === 'check' && pending.length > 0) {
     throw new CorpusCliError(
@@ -131,6 +188,13 @@ try {
     );
   }
   if (mode === 'write') {
+    if (archiveRoot !== null) {
+      await archiveCurrentReview(layout.repositoryRoot, archiveRoot, [
+        ...outputs.map(({ relativePath }) => relativePath),
+        layout.reviewEvidencePath,
+        layout.reviewCheckResultsPath,
+      ]);
+    }
     for (let index = 0; index < outputs.length; index += 1) {
       const output = outputs[index];
       const disposition = dispositions[index];
@@ -139,6 +203,7 @@ try {
         layout.repositoryRoot,
         output,
         context.provisionalEvidence,
+        archiveRoot !== null,
       );
       if (currentDisposition !== disposition) {
         throw new CorpusCliError('FINAL_TAXONOMY_OUTPUT_CHANGED_DURING_WRITE', output.relativePath);
@@ -147,6 +212,10 @@ try {
       const absolutePath = path.join(layout.repositoryRoot, output.relativePath);
       if (disposition === 'missing') await writeJsonNoOverwrite(absolutePath, output.value);
       else await replaceJsonAtomically(absolutePath, output.value);
+    }
+    if (archiveRoot !== null) {
+      await unlink(path.join(layout.repositoryRoot, layout.reviewEvidencePath));
+      await unlink(path.join(layout.repositoryRoot, layout.reviewCheckResultsPath));
     }
   }
   console.log(

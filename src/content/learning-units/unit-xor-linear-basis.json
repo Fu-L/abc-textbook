@@ -1,0 +1,53 @@
+{
+  "id": "unit-xor-linear-basis",
+  "kind": "subsection",
+  "title": "XOR線形基底",
+  "parentId": "unit-linear-algebra-xor",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190",
+    "source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e",
+    "source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea",
+    "source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1",
+    "source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32",
+    "source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"
+  ],
+  "tagIds": [
+    "tag-xor-linear-basis"
+  ],
+  "ownedTagIds": [
+    "tag-xor-linear-basis"
+  ],
+  "learningOutcomeIds": [
+    "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
+  "problemIds": [
+    "abc223-h",
+    "abc249-g",
+    "abc283-g",
+    "abc451-g"
+  ],
+  "directProblemIds": [
+    "abc283-g",
+    "abc451-g",
+    "abc223-h",
+    "abc249-g"
+  ],
+  "relatedProblemIds": [
+    "abc236-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "整数をF_2 vectorとして最高bit pivotで消去し、独立性・最大XOR・表現可能性を管理する。基底をreduced formへ整えてaffine cosetの最小代表を求める方法も扱う。"
+}

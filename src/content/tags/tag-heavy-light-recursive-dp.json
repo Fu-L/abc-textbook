@@ -1,0 +1,41 @@
+{
+  "id": "tag-heavy-light-recursive-dp",
+  "name": "資源DPを引数で渡すHLRecDP",
+  "definition": "外部の資源DP配列を受け取って部分木の選択を反映する再帰を設計し、max-plusの子DP併合を避ける。重い子は一回だけ呼び、軽い子の重複呼出しを部分木サイズの半減により評価する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-knapsack-resource",
+    "tag-rooted-tree-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "木上資源DP"
+    ],
+    "triggerPatterns": [
+      "高価なmax-plus merge"
+    ],
+    "invariantPatterns": [
+      "重い子の呼出し一回"
+    ],
+    "goalPatterns": [
+      "再帰呼出し総量"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-pass-resource-dp-through-heavy-recursion"
+  ],
+  "representativeProblemIds": [
+    "abc311-ex"
+  ],
+  "aliases": [
+    "HLRecDP",
+    "heavy light recursive DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

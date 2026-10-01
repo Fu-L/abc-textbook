@@ -1,0 +1,47 @@
+{
+  "id": "unit-string-automata",
+  "kind": "section",
+  "title": "禁止・要求patternを有限状態へ圧縮する",
+  "parentId": "unit-chapter-string",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "数値上限・桁・繰り上がりを状態にする桁DP、および接頭辞一致長だけを求めるKMP・Z法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc228-editorial-2942-95765aba1977229808ad2c05816696527f7c547f42f56a6a101d6ed536bb8fdf",
+    "source-abc228-g-problem-0bda9bd2f12555defe74109966b56bc2d699f0f77de68f55f7136575c16a7719",
+    "source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2",
+    "source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f",
+    "source-abc301-editorial-6331-5ae6dc8c4af9784aa44c7ad8851a172873cb1701670c49d59de81601b3306d17",
+    "source-abc301-f-problem-431cc5cde126dc99944d72bcf4abe0ab3d79a81e62d19e355303dd39e89622f9"
+  ],
+  "tagIds": [
+    "tag-aho-corasick",
+    "tag-automaton-subset-construction",
+    "tag-finite-pattern-automaton"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-build-finite-string-automaton",
+    "outcome-build-multi-pattern-automaton",
+    "outcome-determinize-automaton-by-subsets"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/string-automata.md",
+  "problemIds": [
+    "abc228-g",
+    "abc264-g",
+    "abc301-f",
+    "abc305-g",
+    "abc418-g",
+    "abc419-f",
+    "abc458-f"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "未来の禁止・要求pattern到達や複数pattern一致だけを決める進行段階・接尾辞状態を作り、遷移表上のDP・行列計算へ接続する。"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "outcome-stabilize-unbounded-knapsack-by-best-density",
+  "statement": "剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-resource-dp"
+  ],
+  "scopeIds": [
+    "abc310-ex",
+    "abc415-g",
+    "tag-eventual-unbounded-knapsack",
+    "unit-eventual-unbounded-knapsack"
+  ]
+}

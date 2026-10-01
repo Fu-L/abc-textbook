@@ -1,0 +1,12 @@
+{
+  "id": "outcome-invert-generating-function-equation",
+  "statement": "F=xΦ(F)からLagrange反転 [x^n]F=[t^(n−1)]Φ(t)^n/nを導き、形式的条件と法上の除算可能性を確認して係数問題へ変換できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "scopeIds": [
+    "abc222-h",
+    "tag-generating-function-coefficients",
+    "unit-generating-function-coefficients"
+  ]
+}

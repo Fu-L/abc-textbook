@@ -1,0 +1,10 @@
+{
+  "id": "outcome-enumerate-subsets-by-mask",
+  "statement": "集合のbitmask表現から全部分集合と共通要素を列挙し、集合間のDP遷移を必要としない計数に利用できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc246-f",
+    "tag-bounded-enumeration",
+    "unit-bounded-enumeration"
+  ]
+}

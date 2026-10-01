@@ -13,3 +13,30 @@ docs/verification/bootstrap/technique-inventory.json
 .specify/
 specs/
 prompt.md
+
+# These byte-for-byte artifacts are formatted and checked by their deterministic generators.
+docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json
+docs/verification/bootstrap/canonical-taxonomy-materialization.json
+docs/verification/bootstrap/final-taxonomy-check-results.json
+docs/verification/bootstrap/final-taxonomy.json
+docs/verification/bootstrap/problem-placements.json
+docs/verification/previews/initial-v1/taxonomy-integration.json
+src/content/docs/learn/
+src/content/learning-outcomes/
+src/content/learning-units/
+src/content/policies/learning-order.json
+src/content/policies/problem-placements.json
+src/content/tags/
+staging/taxonomy/initial/final-taxonomy-build.json
+docs/verification/history/2026-09-26/semantic-placement-before/
+docs/verification/history/2026-09-26/pre-parity-cycle-xor/
+docs/verification/history/2026-09-26/final-taxonomy-pre-semantic-placement-repair/
+docs/verification/history/2026-09-26/inventory-semantic-audit-before/
+docs/verification/history/2026-09-27-semantic-placement-reassessment/
+docs/verification/history/2026-09-27-semantic-placement-self-review-before-directed-euler-detail/
+docs/verification/history/textbook-hierarchy-2026-09-29/
+
+# Locally supplied semantic review reports are source evidence, not maintained project docs.
+docs/reviews/final-semantic-placement-audit-2026-09-26.md
+docs/reviews/inventory-semantic-full-audit-2026-09-26.md
+docs/reviews/semantic-placement-full-review-2026-09-27.md

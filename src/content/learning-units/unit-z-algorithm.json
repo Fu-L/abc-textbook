@@ -1,0 +1,51 @@
+{
+  "id": "unit-z-algorithm",
+  "kind": "subsection",
+  "title": "Z algorithmによるprefix matching",
+  "parentId": "unit-string-prefix-automata",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Z algorithmによるprefix matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5",
+    "source-abc284-editorial-5469-086567d5bc108a7291f4c1d4973ccd013271e712328f658717cbe60d191ad88b",
+    "source-abc284-f-problem-cc633bf52d2810b496bd59853d6a158c16ff4f1060d5538c668187b9b09732e0",
+    "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
+    "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
+  ],
+  "tagIds": [
+    "tag-z-algorithm-prefix-matching"
+  ],
+  "ownedTagIds": [
+    "tag-z-algorithm-prefix-matching"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-prefix-match-state"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-prefix-match-state"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/string/z-algorithm.md",
+  "problemIds": [
+    "abc257-g",
+    "abc284-f",
+    "abc430-e"
+  ],
+  "directProblemIds": [
+    "abc430-e",
+    "abc284-f",
+    "abc257-g"
+  ],
+  "relatedProblemIds": [
+    "abc312-ex",
+    "abc343-g",
+    "abc434-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "各位置からprefixと一致する最大長を既知のZ-boxから再利用し、全位置の一致長を線形時間で求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

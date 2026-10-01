@@ -1,0 +1,11 @@
+{
+  "id": "outcome-check-euler-trail-existence",
+  "statement": "無向graphでは辺を持つ部分の連結性と奇数次数頂点数が0または2であることを調べ、有向graphでは辺を持つ部分の弱連結性と入次数・出次数の差（trailなら始点+1、終点−1、他0、circuitなら全頂点0）を調べ、全辺を一度ずつ使うtrail・circuitの存在を判定できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc286-g",
+    "abc336-g",
+    "tag-euler-trail-circuit",
+    "unit-euler-trail-circuit"
+  ]
+}

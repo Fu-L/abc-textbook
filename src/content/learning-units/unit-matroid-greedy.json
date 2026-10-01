@@ -1,0 +1,39 @@
+{
+  "id": "unit-matroid-greedy",
+  "kind": "subsection",
+  "title": "matroid greedy",
+  "parentId": "unit-matroid-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "matroid greedyの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea",
+    "source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1"
+  ],
+  "tagIds": [
+    "tag-matroid-greedy"
+  ],
+  "ownedTagIds": [
+    "tag-matroid-greedy"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-weighted-matroid-basis"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-weighted-matroid-basis"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/matroid-greedy.md",
+  "problemIds": [
+    "abc236-f"
+  ],
+  "directProblemIds": [
+    "abc236-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "Matroidの独立集合族と交換公理を定義した後、重み順greedyが最適基底を作る必要十分な構造を証明する。"
+}

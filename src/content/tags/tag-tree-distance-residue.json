@@ -1,0 +1,48 @@
+{
+  "id": "tag-tree-distance-residue",
+  "name": "木距離の剰余類による構造分類",
+  "definition": "木の一つの基準点から各頂点への距離を求め、距離の剰余類と局所構造から頂点の役割や周期的な部品構造を分類する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "剰余類",
+      "基準点",
+      "木",
+      "距離"
+    ],
+    "triggerPatterns": [
+      "中心からの距離剰余",
+      "層ごとの木構造",
+      "距離をmodで分類"
+    ],
+    "invariantPatterns": [
+      "基準点からの距離label",
+      "木の一意経路",
+      "距離剰余"
+    ],
+    "goalPatterns": [
+      "中心分類",
+      "周期構造の復元",
+      "頂点の役割"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-classify-tree-by-distance-residue"
+  ],
+  "representativeProblemIds": [
+    "abc303-e"
+  ],
+  "aliases": [
+    "distance mod k",
+    "tree distance residue classes",
+    "木距離剰余"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

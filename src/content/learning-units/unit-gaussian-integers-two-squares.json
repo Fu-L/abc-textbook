@@ -1,0 +1,39 @@
+{
+  "id": "unit-gaussian-integers-two-squares",
+  "kind": "section",
+  "title": "Gaussian整数・二平方和",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88",
+    "source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"
+  ],
+  "tagIds": [
+    "tag-gaussian-integers-two-squares"
+  ],
+  "ownedTagIds": [
+    "tag-gaussian-integers-two-squares"
+  ],
+  "learningOutcomeIds": [
+    "outcome-represent-integers-as-two-squares"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-represent-integers-as-two-squares"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/gaussian-integers-two-squares.md",
+  "problemIds": [
+    "abc444-g"
+  ],
+  "directProblemIds": [
+    "abc444-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "素因数・約数分解で得た考え方と実装を再利用し、Gaussian整数・二平方和の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "outcome-factor-and-accelerate-transitions",
+  "statement": "素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc214-f",
+    "abc221-h",
+    "abc249-e",
+    "abc253-e",
+    "abc263-e",
+    "abc265-f",
+    "abc279-g",
+    "abc282-g",
+    "abc311-f",
+    "abc334-f",
+    "abc342-f",
+    "abc353-g",
+    "abc387-f",
+    "abc408-f",
+    "abc412-f",
+    "abc436-g",
+    "abc442-f",
+    "abc446-g",
+    "tag-dp-transition-acceleration",
+    "unit-dp-transition-optimization"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "outcome-maintain-weighted-prefix-statistics",
+  "statement": "処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-linearize-static-range-information"
+  ],
+  "scopeIds": [
+    "abc221-e",
+    "abc231-f",
+    "abc233-ex",
+    "abc253-f",
+    "abc256-f",
+    "abc261-f",
+    "abc263-ex",
+    "abc276-f",
+    "abc287-g",
+    "abc294-g",
+    "abc296-f",
+    "abc306-f",
+    "abc337-g",
+    "abc341-e",
+    "abc351-f",
+    "abc368-g",
+    "abc378-e",
+    "abc380-g",
+    "abc384-g",
+    "abc392-f",
+    "abc396-f",
+    "abc406-f",
+    "abc431-g",
+    "abc436-f",
+    "abc438-g",
+    "abc439-f",
+    "abc441-e",
+    "abc449-e",
+    "abc452-f",
+    "abc461-e",
+    "tag-fenwick-weighted-prefix",
+    "unit-weighted-prefix-fenwick"
+  ]
+}

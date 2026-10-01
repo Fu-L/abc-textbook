@@ -1,0 +1,39 @@
+{
+  "id": "unit-linear-matroid-intersection",
+  "kind": "subsection",
+  "title": "線形matroid交差の乱択rank判定",
+  "parentId": "unit-matroid-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b",
+    "source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"
+  ],
+  "tagIds": [
+    "tag-linear-matroid-intersection"
+  ],
+  "ownedTagIds": [
+    "tag-linear-matroid-intersection"
+  ],
+  "learningOutcomeIds": [
+    "outcome-test-linear-matroid-intersection-rank"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-test-linear-matroid-intersection-rank"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/linear-matroid-intersection.md",
+  "problemIds": [
+    "abc399-g"
+  ],
+  "directProblemIds": [
+    "abc399-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "matroidの独立性・交換公理、線形方程式のrank計算、乱択誤り評価を学んだ後、二つの線形matroidの共通独立rankを一枚の乱択行列へ圧縮する。"
+}

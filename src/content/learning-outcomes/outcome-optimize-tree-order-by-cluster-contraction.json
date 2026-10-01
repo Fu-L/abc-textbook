@@ -1,0 +1,14 @@
+{
+  "id": "outcome-optimize-tree-order-by-cluster-contraction",
+  "statement": "親先行制約下の交換比較をcluster統計へまとめ、01 on Treeの縮約貪欲で最適順序を構成できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components",
+    "outcome-prove-greedy-order"
+  ],
+  "scopeIds": [
+    "abc376-g",
+    "tag-tree-precedence-contraction",
+    "unit-tree-precedence-contraction"
+  ]
+}

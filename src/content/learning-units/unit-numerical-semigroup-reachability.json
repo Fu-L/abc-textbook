@@ -1,0 +1,39 @@
+{
+  "id": "unit-numerical-semigroup-reachability",
+  "kind": "section",
+  "title": "数値半群のconductor以後を一括到達とみなす",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5",
+    "source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"
+  ],
+  "tagIds": [
+    "tag-numerical-semigroup"
+  ],
+  "ownedTagIds": [
+    "tag-numerical-semigroup"
+  ],
+  "learningOutcomeIds": [
+    "outcome-bound-reachability-in-numerical-semigroup"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-bound-reachability-in-numerical-semigroup"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/numerical-semigroup-reachability.md",
+  "problemIds": [
+    "abc388-f"
+  ],
+  "directProblemIds": [
+    "abc388-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "生成元をgcdで正規化し、非負整数結合の到達集合がconductor以後の全整数を含むことを示して巨大距離を有限prefixへ縮約する。"
+}

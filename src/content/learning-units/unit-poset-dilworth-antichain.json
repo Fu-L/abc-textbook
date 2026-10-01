@@ -1,0 +1,47 @@
+{
+  "id": "unit-poset-dilworth-antichain",
+  "kind": "section",
+  "title": "半順序・Dilworth・最大反鎖",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+    "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4",
+    "source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4",
+    "source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d",
+    "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
+    "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"
+  ],
+  "tagIds": [
+    "tag-poset-dilworth-antichain"
+  ],
+  "ownedTagIds": [
+    "tag-poset-dilworth-antichain"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-poset-antichain-by-dilworth"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-poset-antichain-by-dilworth"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md",
+  "problemIds": [
+    "abc237-ex",
+    "abc354-g",
+    "abc457-g"
+  ],
+  "directProblemIds": [
+    "abc457-g",
+    "abc237-ex",
+    "abc354-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "二部matching・Hall・Kőnig・列・subsequence DPで得た考え方と実装を再利用し、半順序・Dilworth・最大反鎖の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "unit-gcd-structure",
+  "kind": "section",
+  "title": "gcd不変量・差分構造",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+  ],
+  "tagIds": [
+    "tag-gcd-structure"
+  ],
+  "ownedTagIds": [
+    "tag-gcd-structure"
+  ],
+  "learningOutcomeIds": [
+    "outcome-reduce-integer-structure-by-gcd"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reduce-integer-structure-by-gcd"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/gcd-structure.md",
+  "problemIds": [
+    "abc254-f",
+    "abc438-g"
+  ],
+  "directProblemIds": [
+    "abc254-f",
+    "abc438-g"
+  ],
+  "relatedProblemIds": [
+    "abc212-g",
+    "abc222-g",
+    "abc248-g",
+    "abc306-g",
+    "abc445-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "差・周期・range条件に共通するgcd不変量を抽出し、共通因子や剰余classを分離する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

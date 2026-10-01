@@ -1,0 +1,14 @@
+{
+  "id": "outcome-sum-affine-floors-by-euclid",
+  "statement": "Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc283-ex",
+    "abc313-g",
+    "abc372-g",
+    "abc402-g",
+    "abc443-g",
+    "tag-euclidean-floor-sum",
+    "unit-euclidean-floor-sum"
+  ]
+}

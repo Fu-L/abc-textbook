@@ -1,0 +1,50 @@
+{
+  "id": "tag-constructive-witness",
+  "name": "構成解・witness復元",
+  "definition": "成立条件の証明が与える局所操作やparentを記録し、実際の解を復元する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "出力",
+      "操作列",
+      "経路",
+      "配置",
+      "順列"
+    ],
+    "triggerPatterns": [
+      "任意の一つ",
+      "実際に構成",
+      "手順を出力"
+    ],
+    "invariantPatterns": [
+      "parent",
+      "成立条件",
+      "記録"
+    ],
+    "goalPatterns": [
+      "復元",
+      "解を出力",
+      "配置を求め"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-recover-valid-witness"
+  ],
+  "representativeProblemIds": [
+    "abc333-e",
+    "abc239-f",
+    "abc244-g"
+  ],
+  "aliases": [
+    "constructive algorithms",
+    "構築問題"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

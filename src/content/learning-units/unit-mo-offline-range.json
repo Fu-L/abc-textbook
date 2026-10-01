@@ -1,0 +1,51 @@
+{
+  "id": "unit-mo-offline-range",
+  "kind": "section",
+  "title": "Moの順序で区間問い合わせの差分を更新する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "オンラインのpriority queue・multiset、および単調stack・queue。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
+    "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5",
+    "source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8",
+    "source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9",
+    "source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b",
+    "source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"
+  ],
+  "tagIds": [
+    "tag-mo-offline-range"
+  ],
+  "ownedTagIds": [
+    "tag-mo-offline-range"
+  ],
+  "learningOutcomeIds": [
+    "outcome-schedule-range-query-updates"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-schedule-range-query-updates"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/mo-offline-range.md",
+  "problemIds": [
+    "abc242-g",
+    "abc293-g",
+    "abc384-g",
+    "abc405-g"
+  ],
+  "directProblemIds": [
+    "abc242-g",
+    "abc293-g",
+    "abc384-g",
+    "abc405-g"
+  ],
+  "relatedProblemIds": [
+    "abc463-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "区間への要素の追加・削除を定義し、問い合わせ順を並べ替えて端点移動の総量を抑える。"
+}

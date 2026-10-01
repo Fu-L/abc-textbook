@@ -1,0 +1,49 @@
+{
+  "id": "tag-lagrangian-relaxation",
+  "name": "Lagrangian relaxation・Aliens trick",
+  "definition": "個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cardinality constraint",
+      "optimization oracle",
+      "penalty λ"
+    ],
+    "triggerPatterns": [
+      "ちょうどK個",
+      "個数制約を外す"
+    ],
+    "invariantPatterns": [
+      "dual bound",
+      "tie break",
+      "双対ギャップなし",
+      "選択数の単調性",
+      "離散凸性"
+    ],
+    "goalPatterns": [
+      "制約付き最適値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-by-lagrangian-relaxation"
+  ],
+  "representativeProblemIds": [
+    "abc305-ex",
+    "abc400-g"
+  ],
+  "aliases": [
+    "Aliens DP",
+    "Aliens trick",
+    "ラグランジュ緩和"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,47 @@
+{
+  "id": "tag-heavy-path-tree-dp",
+  "name": "heavy path上の多項式木DP",
+  "definition": "heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-convolution",
+    "tag-rooted-tree-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "heavy path",
+      "light subtree",
+      "木DP"
+    ],
+    "triggerPatterns": [
+      "heavy child",
+      "path recurrence",
+      "部分木多項式"
+    ],
+    "invariantPatterns": [
+      "light辺のsize総和",
+      "path合成"
+    ],
+    "goalPatterns": [
+      "多項式DP",
+      "木DP高速化"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-accelerate-tree-dp-by-heavy-path"
+  ],
+  "representativeProblemIds": [
+    "abc269-ex"
+  ],
+  "aliases": [
+    "heavy-path polynomial DP",
+    "heavy-path tree DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

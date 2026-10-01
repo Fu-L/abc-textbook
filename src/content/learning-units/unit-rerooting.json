@@ -1,0 +1,49 @@
+{
+  "id": "unit-rerooting",
+  "kind": "subsection",
+  "title": "rerooting・全方位木DP",
+  "parentId": "unit-tree-aggregation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "rerooting・全方位木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a",
+    "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
+    "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
+    "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e",
+    "source-abc348-e-problem-823e6b5e6f018b5c00d4d94d6bd9bf1fe258ca5d9a46580b391823fef195d866",
+    "source-abc348-editorial-9706-57a215cd911ca45ed5e672c5b31b51ffbcfc636f4ebb913932872b2cdaceed73"
+  ],
+  "tagIds": [
+    "tag-rerooting"
+  ],
+  "ownedTagIds": [
+    "tag-rerooting"
+  ],
+  "learningOutcomeIds": [
+    "outcome-reroot-tree-aggregation"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-reroot-tree-aggregation"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/rerooting.md",
+  "problemIds": [
+    "abc220-f",
+    "abc223-g",
+    "abc348-e"
+  ],
+  "directProblemIds": [
+    "abc220-f",
+    "abc348-e",
+    "abc223-g"
+  ],
+  "relatedProblemIds": [
+    "abc460-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "根付き木DP・部分木集約で得た考え方と実装を再利用し、rerooting・全方位木DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "outcome-solve-linear-system-and-rank",
+  "statement": "制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc276-ex",
+    "abc299-ex",
+    "abc323-g",
+    "abc366-g",
+    "abc399-g",
+    "tag-linear-system-rank",
+    "unit-linear-system-rank"
+  ]
+}

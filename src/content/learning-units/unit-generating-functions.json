@@ -1,0 +1,91 @@
+{
+  "id": "unit-generating-functions",
+  "kind": "section",
+  "title": "組合せを生成関数へ符号化する",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2442-52077edcf8cf051cc8cfc0cb24240ce0bdc9810984a67e168e3a35a98177dd15",
+    "source-abc214-g-problem-1d5f574ef1dcfb070b719ca8bec70d5120694520f60028351f343bdaac164613",
+    "source-abc225-editorial-2834-cdce3199f33b881049c53cbd155bf02b23ef7e989c6b1c6c5e6c04d5c5e8d01d",
+    "source-abc225-h-problem-eb012bb53f4a2575070ec7721fa3027063e62b8e837c718f9f96acbc0d54fafd",
+    "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
+    "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
+  ],
+  "tagIds": [
+    "tag-generating-functions"
+  ],
+  "ownedTagIds": [
+    "tag-generating-functions"
+  ],
+  "learningOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
+  "problemIds": [
+    "abc225-h",
+    "abc241-ex",
+    "abc247-ex",
+    "abc260-ex",
+    "abc267-ex",
+    "abc281-ex",
+    "abc297-ex",
+    "abc317-ex",
+    "abc345-g",
+    "abc352-g",
+    "abc385-g",
+    "abc390-g",
+    "abc422-g",
+    "abc436-g",
+    "abc449-g"
+  ],
+  "directProblemIds": [
+    "abc422-g",
+    "abc352-g",
+    "abc267-ex",
+    "abc385-g",
+    "abc436-g",
+    "abc390-g",
+    "abc449-g",
+    "abc247-ex",
+    "abc297-ex",
+    "abc241-ex",
+    "abc225-h",
+    "abc281-ex",
+    "abc260-ex",
+    "abc345-g",
+    "abc317-ex"
+  ],
+  "relatedProblemIds": [
+    "abc214-g",
+    "abc231-g",
+    "abc235-ex",
+    "abc269-ex",
+    "abc272-ex",
+    "abc285-ex",
+    "abc289-ex",
+    "abc303-ex",
+    "abc315-ex",
+    "abc318-ex",
+    "abc331-g",
+    "abc367-g",
+    "abc387-g",
+    "abc389-g",
+    "abc392-g",
+    "abc409-g",
+    "abc432-g",
+    "abc439-g",
+    "abc462-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "高速畳み込みを前提にせず、係数の意味を定義して和・積・sequence・set・cycleが表す組合せ構造を欲しい係数へ翻訳する。"
+}

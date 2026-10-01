@@ -1,0 +1,12 @@
+{
+  "id": "outcome-count-nonintersecting-paths-by-lgv",
+  "statement": "DAG上の経路数行列を作り、交差する経路族の符号反転と端点対応の条件から、LGVで頂点非共有経路族を数えられる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "scopeIds": [
+    "abc216-h",
+    "tag-determinant-counting",
+    "unit-determinant-counting"
+  ]
+}

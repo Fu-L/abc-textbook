@@ -1,0 +1,13 @@
+{
+  "id": "outcome-localize-change-impact-by-witness",
+  "statement": "基準となる解や経路を証拠に、答えが変わり得る変更だけを特定して再計算を局所化できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc218-f",
+    "abc243-e",
+    "abc279-e",
+    "abc448-g",
+    "tag-witness-impact-localization",
+    "unit-change-impact-localization"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-finite-function-composition",
+  "kind": "subsection",
+  "title": "有限関数・作用の合成",
+  "parentId": "unit-monoid-segment-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "有限関数・作用の合成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc261-e-problem-c8e8008b1c41ab6c87c76ae12879e203c622f67920eca7af05ced1c082b71578",
+    "source-abc261-editorial-4451-dfbb3f34b15ce9d7dbfa4321399954f2695e4cfa810541f982c32aa7c74e924f"
+  ],
+  "tagIds": [
+    "tag-finite-function-composition"
+  ],
+  "ownedTagIds": [
+    "tag-finite-function-composition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-compose-finite-functions"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-compose-finite-functions"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/finite-function-composition.md",
+  "problemIds": [
+    "abc261-e"
+  ],
+  "directProblemIds": [
+    "abc261-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "小さな有限集合上の関数を遷移表として表し、適用順を保ってprefix・区間の作用を合成する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

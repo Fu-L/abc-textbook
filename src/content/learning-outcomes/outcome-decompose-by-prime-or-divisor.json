@@ -1,0 +1,33 @@
+{
+  "id": "outcome-decompose-by-prime-or-divisor",
+  "statement": "整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc212-g",
+    "abc222-g",
+    "abc227-g",
+    "abc230-g",
+    "abc238-g",
+    "abc245-ex",
+    "abc259-e",
+    "abc272-g",
+    "abc285-ex",
+    "abc304-f",
+    "abc322-g",
+    "abc335-g",
+    "abc349-f",
+    "abc363-f",
+    "abc368-f",
+    "abc384-f",
+    "abc393-e",
+    "abc400-e",
+    "abc403-f",
+    "abc412-e",
+    "abc420-g",
+    "abc428-g",
+    "abc445-e",
+    "abc461-f",
+    "tag-prime-divisor-decomposition",
+    "unit-prime-divisor"
+  ]
+}

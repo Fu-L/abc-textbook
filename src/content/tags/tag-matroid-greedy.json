@@ -1,0 +1,45 @@
+{
+  "id": "tag-matroid-greedy",
+  "name": "matroid greedy",
+  "definition": "独立集合族の交換公理を確認し、重み順に独立性oracleを通すgreedyが最適基底を作ることを証明する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-greedy-exchange-order"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "basis",
+      "ground set",
+      "independence oracle"
+    ],
+    "triggerPatterns": [
+      "交換公理",
+      "独立性を保って選ぶ"
+    ],
+    "invariantPatterns": [
+      "augmentation property",
+      "rank"
+    ],
+    "goalPatterns": [
+      "最小重み基底"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-weighted-matroid-basis"
+  ],
+  "representativeProblemIds": [
+    "abc236-f"
+  ],
+  "aliases": [
+    "matroid greedy",
+    "weighted matroid basis",
+    "マトロイド貪欲法"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

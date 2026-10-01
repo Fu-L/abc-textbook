@@ -1,0 +1,52 @@
+{
+  "id": "tag-degree-parity-subgraph",
+  "name": "指定次数parityの部分グラフ構成",
+  "definition": "選択辺集合の奇数次数頂点を指定し、spanning forestの葉から必要辺を確定してT-join型の構成を行う。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-euler-trail-circuit"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "forest",
+      "選択辺集合",
+      "頂点次数"
+    ],
+    "triggerPatterns": [
+      "偶奇を指定",
+      "次数を奇数に"
+    ],
+    "invariantPatterns": [
+      "奇数頂点数は偶数",
+      "葉から確定"
+    ],
+    "goalPatterns": [
+      "parity条件",
+      "辺集合構成"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-cycle-space-basis",
+      "type": "analogy",
+      "rationale": "cycle spaceはincidence境界が0の辺集合全体であり、奇数次数頂点集合Tを固定したT-joinの解集合は、解が存在すればcycle spaceのaffine cosetになる。特に同じTを実現する二つの辺集合のXORはcycle spaceに属する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-construct-degree-parity-subgraph"
+  ],
+  "representativeProblemIds": [
+    "abc345-f"
+  ],
+  "aliases": [
+    "T-join",
+    "degree parity subgraph",
+    "次数偶奇部分グラフ"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

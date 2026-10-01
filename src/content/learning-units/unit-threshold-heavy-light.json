@@ -1,0 +1,53 @@
+{
+  "id": "unit-threshold-heavy-light",
+  "kind": "subsection",
+  "title": "平方根・閾値による軽重分類",
+  "parentId": "unit-decomposition-amortization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed",
+    "source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34",
+    "source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0",
+    "source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a",
+    "source-abc335-editorial-9038-75d1ffdd8b1f3f04351303bd37aa5663466c9211f668ed0c1fd1e25f0d815f2e",
+    "source-abc335-f-problem-43ce80c8813d030f4d8d45e6809eb385d25fd1db5fa21b707b2a9f9c32678483"
+  ],
+  "tagIds": [
+    "tag-threshold-heavy-light"
+  ],
+  "ownedTagIds": [
+    "tag-threshold-heavy-light"
+  ],
+  "learningOutcomeIds": [
+    "outcome-balance-heavy-light-threshold"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-balance-heavy-light-threshold"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/threshold-heavy-light.md",
+  "problemIds": [
+    "abc219-g",
+    "abc259-ex",
+    "abc335-f",
+    "abc350-g",
+    "abc365-g"
+  ],
+  "directProblemIds": [
+    "abc335-f",
+    "abc350-g",
+    "abc219-g",
+    "abc365-g",
+    "abc259-ex"
+  ],
+  "relatedProblemIds": [
+    "abc345-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

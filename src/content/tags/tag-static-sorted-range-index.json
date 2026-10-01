@@ -1,0 +1,52 @@
+{
+  "id": "tag-static-sorted-range-index",
+  "name": "静的sorted range index・Merge Sort Tree",
+  "definition": "各canonical区間へsorted列とprefix aggregateを構築し、値域境界付きのrange count/sumを二分探索で答える。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-segment-tree-canonical-decomposition"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix sum",
+      "sorted node array",
+      "静的配列"
+    ],
+    "triggerPatterns": [
+      "range count",
+      "range sum",
+      "区間内で値以下"
+    ],
+    "invariantPatterns": [
+      "canonical cover",
+      "node内sort順"
+    ],
+    "goalPatterns": [
+      "値域付き区間query"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-segment-tree-canonical-decomposition",
+      "type": "implementation_substrate",
+      "rationale": "query区間をcanonical node列へ分け、各nodeのsorted列を二分探索する実装に使う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-static-sorted-range-index"
+  ],
+  "representativeProblemIds": [
+    "abc339-g"
+  ],
+  "aliases": [
+    "Merge Sort Tree",
+    "merge sort tree",
+    "静的range tree"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

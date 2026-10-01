@@ -1,0 +1,43 @@
+{
+  "id": "unit-multiplicative-order-periods",
+  "kind": "section",
+  "title": "乗法的位数から最小周期を求める",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "約数格子上の指数計数・包除。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+    "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+  ],
+  "tagIds": [
+    "tag-multiplicative-order"
+  ],
+  "ownedTagIds": [
+    "tag-multiplicative-order"
+  ],
+  "learningOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/multiplicative-order-periods.md",
+  "problemIds": [
+    "abc222-g"
+  ],
+  "directProblemIds": [
+    "abc222-g"
+  ],
+  "relatedProblemIds": [
+    "abc335-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "合同算術と約数分解を使えることを前提に、最小周期を乗法的位数へ帰着して約数から絞る。"
+}

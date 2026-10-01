@@ -1,0 +1,41 @@
+{
+  "id": "tag-stern-brocot-ancestry",
+  "name": "Stern–Brocot木の経路と祖先",
+  "definition": "隣接分数の行列式が1であることを保ち、mediantとEuclidの商列からStern–Brocot木の経路を同方向の連続回数へ圧縮する。経路の共通prefixで祖先関係と必要な祖先集合を求める。",
+  "parentId": "tag-number-theory-structure",
+  "prerequisiteTagIds": [
+    "tag-gcd-structure"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "既約正有理数"
+    ],
+    "triggerPatterns": [
+      "mediant挿入"
+    ],
+    "invariantPatterns": [
+      "隣接分数の行列式1"
+    ],
+    "goalPatterns": [
+      "祖先集合と経路"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-traverse-stern-brocot-ancestors"
+  ],
+  "representativeProblemIds": [
+    "abc273-ex"
+  ],
+  "aliases": [
+    "Stern Brocot ancestor",
+    "mediant",
+    "連分数経路"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

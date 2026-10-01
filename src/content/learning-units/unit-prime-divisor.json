@@ -1,0 +1,75 @@
+{
+  "id": "unit-prime-divisor",
+  "kind": "section",
+  "title": "素因数分解と約数構造",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "床関数や整数根の値が一定となる区間への分割。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+    "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+    "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+    "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+    "source-abc227-editorial-2909-2d66e4e56bf7cf39ce74fbaf080ffc6ad85dd47a1bb5137c7e6393eb2a1ad3f5",
+    "source-abc227-g-problem-f6a6be930af8d51a2bcb681704a3b8055738ef7534d5e9e5fafefde5b007538c"
+  ],
+  "tagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "ownedTagIds": [
+    "tag-prime-divisor-decomposition"
+  ],
+  "learningOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/prime-divisor.md",
+  "problemIds": [
+    "abc227-g",
+    "abc259-e",
+    "abc322-g",
+    "abc384-f",
+    "abc393-e",
+    "abc400-e",
+    "abc412-e",
+    "abc420-g",
+    "abc445-e"
+  ],
+  "directProblemIds": [
+    "abc400-e",
+    "abc393-e",
+    "abc259-e",
+    "abc445-e",
+    "abc420-g",
+    "abc412-e",
+    "abc384-f",
+    "abc227-g",
+    "abc322-g"
+  ],
+  "relatedProblemIds": [
+    "abc212-g",
+    "abc222-g",
+    "abc230-g",
+    "abc238-g",
+    "abc245-ex",
+    "abc272-g",
+    "abc285-ex",
+    "abc304-f",
+    "abc335-g",
+    "abc349-f",
+    "abc363-f",
+    "abc368-f",
+    "abc403-f",
+    "abc428-g",
+    "abc461-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "初歩的な素因数分解を、指数vectorと約数格子へ条件を分解する道具として発展させる。"
+}

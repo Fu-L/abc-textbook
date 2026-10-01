@@ -1,0 +1,54 @@
+{
+  "id": "tag-monoid-exponentiation",
+  "name": "monoid exponentiation・連結演算doubling",
+  "definition": "長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "associative summary",
+      "binary power",
+      "concatenation"
+    ],
+    "triggerPatterns": [
+      "値を構築せず連結",
+      "同じblockを巨大回反復"
+    ],
+    "invariantPatterns": [
+      "associativity",
+      "summary is closed under concatenation"
+    ],
+    "goalPatterns": [
+      "反復連結の評価"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-binary-lifting",
+      "type": "analogy",
+      "rationale": "2冪長の遷移を前計算し、指数のbit分解で必要な合成だけを選ぶ構造が共通する。"
+    },
+    {
+      "tagId": "tag-semiring-matrix-exponentiation",
+      "type": "analogy",
+      "rationale": "閉じた結合的合成を二分累乗する共通原理を、行列半環と一般monoidの二つの表現から比較する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-exponentiate-associative-composition"
+  ],
+  "representativeProblemIds": [
+    "abc448-e"
+  ],
+  "aliases": [
+    "associative composition exponentiation",
+    "monoid exponentiation",
+    "連結演算ダブリング"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

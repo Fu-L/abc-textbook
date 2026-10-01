@@ -1,0 +1,15 @@
+{
+  "id": "outcome-exponentiate-transition-over-semiring",
+  "statement": "遷移を半環行列として定義し、結合則と単位元を保つ二分累乗・区間積で巨大回数の最適化遷移を計算できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-accelerate-fixed-linear-transition"
+  ],
+  "scopeIds": [
+    "abc236-g",
+    "abc429-f",
+    "abc445-f",
+    "abc456-f",
+    "tag-semiring-matrix-exponentiation",
+    "unit-semiring-matrix-exponentiation"
+  ]
+}

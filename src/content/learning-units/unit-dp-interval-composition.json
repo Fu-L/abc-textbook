@@ -1,0 +1,62 @@
+{
+  "id": "unit-dp-interval-composition",
+  "kind": "subsection",
+  "title": "区間合成・領域分割DP",
+  "parentId": "unit-dp-sequence-interval",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc217-editorial-2584-8b09223995860d1173156e579e5a3393e1a9a7dae0cd254195e0983a3f36ff57",
+    "source-abc217-f-problem-b52dba85a66465d286aa18201efb35ca00d135494c7ba865c3b40408a541133e",
+    "source-abc233-editorial-3184-ab4b36adbfd0c3b627d15746dfe4d9457e05f0c83e47e5e8554f2b06686d0f9d",
+    "source-abc233-g-problem-3b941d80cb692b12d25a1776c90c2c690d4c1f32cd5e2ff6fadcadb670749baf",
+    "source-abc238-editorial-3361-2a85ca62e2aaf6e541f5fa85d0a9d831577cef21b0b07cf76f5995ee6ffb24f3",
+    "source-abc238-ex-problem-925c57a0268e42b5c59c90d4c02a25c085f1bf9694c506d458661cbc37071238"
+  ],
+  "tagIds": [
+    "tag-interval-partition-dp"
+  ],
+  "ownedTagIds": [
+    "tag-interval-partition-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-interval-split-dp"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-interval-split-dp"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-interval-composition.md",
+  "problemIds": [
+    "abc217-f",
+    "abc233-g",
+    "abc252-g",
+    "abc261-g",
+    "abc262-g",
+    "abc292-g",
+    "abc298-g",
+    "abc325-g",
+    "abc400-f"
+  ],
+  "directProblemIds": [
+    "abc217-f",
+    "abc252-g",
+    "abc400-f",
+    "abc292-g",
+    "abc325-g",
+    "abc233-g",
+    "abc298-g",
+    "abc261-g",
+    "abc262-g"
+  ],
+  "relatedProblemIds": [
+    "abc238-ex",
+    "abc418-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、区間合成・領域分割DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

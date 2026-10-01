@@ -1,0 +1,48 @@
+{
+  "id": "unit-semiring-matrix-exponentiation",
+  "kind": "section",
+  "title": "半環行列・min-plus/max-min遷移",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "半環行列・min-plus/max-min遷移の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc236-editorial-3286-eb641db2ebe6102a3decfe3203d9f04dcb8427feefdb35660b1fe094417c333d",
+    "source-abc236-g-problem-f1eea62ce5aa1264a1a77a48af5df332be33d5dc6fc17e07d56e10c53c66baed",
+    "source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147",
+    "source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d",
+    "source-abc445-editorial-15907-89f35be3c547667a7b103bd1a349b102d4c891c815d9c3eb7304f679c2bfa2f7",
+    "source-abc445-f-problem-bbb5df2daeea8d608944b9dfacd26db3a65d3051c3e818bd05f1ec115d582db4"
+  ],
+  "tagIds": [
+    "tag-semiring-matrix-exponentiation"
+  ],
+  "ownedTagIds": [
+    "tag-semiring-matrix-exponentiation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-exponentiate-transition-over-semiring"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-exponentiate-transition-over-semiring"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
+  "problemIds": [
+    "abc236-g",
+    "abc445-f"
+  ],
+  "directProblemIds": [
+    "abc445-f",
+    "abc236-g"
+  ],
+  "relatedProblemIds": [
+    "abc429-f",
+    "abc456-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "線形遷移・行列累乗で得た考え方と実装を再利用し、半環行列・min-plus/max-min遷移の発動条件・正当化・境界を重複なく学ぶ。"
+}

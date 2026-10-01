@@ -1,0 +1,10 @@
+{
+  "id": "outcome-classify-tree-by-distance-residue",
+  "statement": "木の一つの基準点から全頂点への距離を求め、距離の剰余類と局所構造から各頂点の役割や周期的な部品構造を分類できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc303-e",
+    "tag-tree-distance-residue",
+    "unit-tree-metric"
+  ]
+}

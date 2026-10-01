@@ -1,0 +1,51 @@
+{
+  "id": "tag-backtracking-search",
+  "name": "backtracking・可逆な探索状態",
+  "definition": "再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。",
+  "parentId": "tag-model-reduction",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "current path",
+      "search tree",
+      "used set"
+    ],
+    "triggerPatterns": [
+      "単純pathを列挙",
+      "選択を戻して別branch"
+    ],
+    "invariantPatterns": [
+      "push/pop symmetry",
+      "used means current recursion path"
+    ],
+    "goalPatterns": [
+      "制約付き列挙",
+      "解候補探索"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-rollback",
+      "type": "analogy",
+      "rationale": "再帰へ入る前の更新と復帰時のundoを対にし、現在pathだけの不変条件を保つ設計が共通する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-enumerate-by-reversible-backtracking"
+  ],
+  "representativeProblemIds": [
+    "abc284-e",
+    "abc419-g"
+  ],
+  "aliases": [
+    "backtracking",
+    "mark-and-unmark DFS",
+    "バックトラック"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

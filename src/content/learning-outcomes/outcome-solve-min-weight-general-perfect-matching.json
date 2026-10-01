@@ -1,0 +1,13 @@
+{
+  "id": "outcome-solve-min-weight-general-perfect-matching",
+  "statement": "一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-solve-bipartite-matching"
+  ],
+  "scopeIds": [
+    "abc412-g",
+    "tag-min-weight-general-perfect-matching",
+    "unit-min-weight-general-perfect-matching"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "unit-separable-convex-marginals",
+  "kind": "subsection",
+  "title": "分離凸・凹の単調限界値選択",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+    "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+    "source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8",
+    "source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142",
+    "source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d",
+    "source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"
+  ],
+  "tagIds": [
+    "tag-separable-convex-marginals"
+  ],
+  "ownedTagIds": [
+    "tag-separable-convex-marginals"
+  ],
+  "learningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-allocate-by-convex-marginal-costs"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/separable-convex-marginals.md",
+  "problemIds": [
+    "abc216-e",
+    "abc359-f",
+    "abc369-g",
+    "abc373-f",
+    "abc383-g",
+    "abc389-e"
+  ],
+  "directProblemIds": [
+    "abc216-e",
+    "abc359-f",
+    "abc389-e",
+    "abc373-f",
+    "abc369-g",
+    "abc383-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "離散凸・凹の差分が単調になることを確認し、複数の限界値列から必要な上位・下位K項だけをheap mergeまたは閾値計数で選ぶ。"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "outcome-maintain-potential-differences",
+  "statement": "DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-augment-components-with-metadata",
+    "outcome-maintain-connectivity-components",
+    "outcome-propagate-static-graph-potentials"
+  ],
+  "scopeIds": [
+    "abc328-f",
+    "abc466-g",
+    "tag-potential-dsu",
+    "unit-potential-dsu"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "tag-monotone-stack-queue",
+  "name": "単調stack・queueによる支配候補の削除",
+  "definition": "順序に走査し、新しい要素に支配された候補を二度と必要にならないことを示して一度だけ削除する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "候補",
+      "次に大きい",
+      "次に小さい",
+      "窓",
+      "高さ"
+    ],
+    "triggerPatterns": [
+      "pop",
+      "各要素を一度",
+      "後ろから削除",
+      "支配",
+      "次に大きい"
+    ],
+    "invariantPatterns": [
+      "stack",
+      "不要になった候補",
+      "二度と戻らない",
+      "単調"
+    ],
+    "goalPatterns": [
+      "nearest greater",
+      "区間最大",
+      "各prefix",
+      "次の要素"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-prune-dominated-candidates-once"
+  ],
+  "representativeProblemIds": [
+    "abc359-e",
+    "abc379-f",
+    "abc248-ex"
+  ],
+  "aliases": [
+    "monotonic queue",
+    "monotonic stack",
+    "単調キュー",
+    "単調スタック"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

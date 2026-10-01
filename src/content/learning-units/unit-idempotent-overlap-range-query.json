@@ -1,0 +1,43 @@
+{
+  "id": "unit-idempotent-overlap-range-query",
+  "kind": "subsection",
+  "title": "冪等演算のoverlap range query・Sparse Table",
+  "parentId": "unit-monoid-segment-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "冪等演算のoverlap range query・Sparse Tableの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc282-editorial-5403-a6fc1b073b674859f239b20188df61ec3a08834c8b5f8c17af1ca21e9ccd56e4",
+    "source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c",
+    "source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e",
+    "source-abc282-f-problem-86da67b53a7e864329b60455cddbbc086b4f398d45a9087c6e381fc9847ec1d8"
+  ],
+  "tagIds": [
+    "tag-idempotent-overlap-range-query"
+  ],
+  "ownedTagIds": [
+    "tag-idempotent-overlap-range-query"
+  ],
+  "learningOutcomeIds": [
+    "outcome-answer-idempotent-range-query"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-answer-idempotent-range-query"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/idempotent-overlap-range-query.md",
+  "problemIds": [
+    "abc282-f"
+  ],
+  "directProblemIds": [
+    "abc282-f"
+  ],
+  "relatedProblemIds": [
+    "abc282-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。"
+}

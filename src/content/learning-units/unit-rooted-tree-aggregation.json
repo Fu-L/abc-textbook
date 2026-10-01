@@ -1,0 +1,86 @@
+{
+  "id": "unit-rooted-tree-aggregation",
+  "kind": "subsection",
+  "title": "根付き木DP・部分木集約",
+  "parentId": "unit-tree-aggregation",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b",
+    "source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5",
+    "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72",
+    "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362",
+    "source-abc248-editorial-3795-269ea6ccb408c6e988b7ae7031b9bc973992e1fde9ff3336da3675b54d83c721",
+    "source-abc248-g-problem-7416fec6a03ade341465de82302f2b17ae8d257704fdf74fdf9c1adc573762b6"
+  ],
+  "tagIds": [
+    "tag-rooted-tree-aggregation"
+  ],
+  "ownedTagIds": [
+    "tag-rooted-tree-aggregation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/rooted-tree-aggregation.md",
+  "problemIds": [
+    "abc239-e",
+    "abc248-g",
+    "abc259-f",
+    "abc263-f",
+    "abc264-ex",
+    "abc287-f",
+    "abc309-e",
+    "abc312-g",
+    "abc329-g",
+    "abc378-f",
+    "abc391-e",
+    "abc394-f",
+    "abc397-e",
+    "abc409-e",
+    "abc416-f",
+    "abc447-f",
+    "abc459-e"
+  ],
+  "directProblemIds": [
+    "abc309-e",
+    "abc409-e",
+    "abc239-e",
+    "abc391-e",
+    "abc459-e",
+    "abc378-f",
+    "abc447-f",
+    "abc397-e",
+    "abc394-f",
+    "abc312-g",
+    "abc259-f",
+    "abc287-f",
+    "abc263-f",
+    "abc416-f",
+    "abc248-g",
+    "abc264-ex",
+    "abc329-g"
+  ],
+  "relatedProblemIds": [
+    "abc246-g",
+    "abc269-ex",
+    "abc293-ex",
+    "abc298-ex",
+    "abc314-f",
+    "abc340-g",
+    "abc369-g",
+    "abc387-f",
+    "abc435-f",
+    "abc438-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DPの最小十分状態で得た考え方と実装を再利用し、根付き木DP・部分木集約の発動条件・正当化・境界を重複なく学ぶ。"
+}

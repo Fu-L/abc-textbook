@@ -1,0 +1,12 @@
+{
+  "id": "outcome-build-suffix-automaton",
+  "statement": "endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-build-finite-string-automaton"
+  ],
+  "scopeIds": [
+    "abc433-g",
+    "tag-suffix-automaton",
+    "unit-suffix-automaton"
+  ]
+}

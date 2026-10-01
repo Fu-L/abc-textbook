@@ -1,0 +1,59 @@
+{
+  "id": "unit-dp-game",
+  "kind": "section",
+  "title": "ゲーム状態の勝敗とGrundy数",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc212-editorial-2359-f9d87ccd5416d18dffb837aeec421ac629ded4d482abbc978a9039a7e7de81bc",
+    "source-abc212-h-problem-6d59df27e1ea2613396368476fb4fd191681ddd9c65d0af29f3e91fed9a03e93",
+    "source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132",
+    "source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a",
+    "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
+    "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
+  ],
+  "tagIds": [
+    "tag-game-grundy-dp"
+  ],
+  "ownedTagIds": [
+    "tag-game-grundy-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-classify-game-states"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-classify-game-states"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-game.md",
+  "problemIds": [
+    "abc255-g",
+    "abc278-f",
+    "abc278-g",
+    "abc297-g",
+    "abc354-e",
+    "abc368-f",
+    "abc380-f"
+  ],
+  "directProblemIds": [
+    "abc354-e",
+    "abc368-f",
+    "abc278-f",
+    "abc380-f",
+    "abc297-g",
+    "abc278-g",
+    "abc255-g"
+  ],
+  "relatedProblemIds": [
+    "abc212-h",
+    "abc265-ex",
+    "abc433-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態遷移を設計できることを前提に、後続状態の勝敗やGrundy数から現在局面を分類する。"
+}

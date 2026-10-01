@@ -1,0 +1,48 @@
+{
+  "id": "tag-scc-condensation",
+  "name": "SCC・縮約DAG・トポロジカル順序",
+  "definition": "強連結成分を一頂点へ縮約し、閉路を除いたDAG上の順序・DP・coverへ変換する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-dag-topological-processing"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DAG",
+      "強連結成分",
+      "有向graph"
+    ],
+    "triggerPatterns": [
+      "依存順",
+      "相互到達",
+      "閉路"
+    ],
+    "invariantPatterns": [
+      "DAG順",
+      "成分内同値"
+    ],
+    "goalPatterns": [
+      "縮約",
+      "順序付け"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-condense-and-order-directed-graph"
+  ],
+  "representativeProblemIds": [
+    "abc214-h",
+    "abc306-g"
+  ],
+  "aliases": [
+    "SCC",
+    "condensation DAG",
+    "強連結成分分解"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

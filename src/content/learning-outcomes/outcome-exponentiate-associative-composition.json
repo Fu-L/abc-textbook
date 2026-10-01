@@ -1,0 +1,10 @@
+{
+  "id": "outcome-exponentiate-associative-composition",
+  "statement": "反復対象を閉じた結合的要約へ持ち上げ、monoidの二分累乗で巨大な連結・合成を評価できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc448-e",
+    "tag-monoid-exponentiation",
+    "unit-monoid-exponentiation"
+  ]
+}

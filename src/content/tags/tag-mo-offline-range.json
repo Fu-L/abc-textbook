@@ -1,0 +1,61 @@
+{
+  "id": "tag-mo-offline-range",
+  "name": "Mo's algorithmによるオフライン区間問い合わせ",
+  "definition": "区間問い合わせを端点の移動量が小さい順に並べ、一要素の追加・削除で答えを更新する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "区間query",
+      "右端",
+      "左端",
+      "数列"
+    ],
+    "triggerPatterns": [
+      "offline",
+      "クエリを並べ",
+      "追加と削除"
+    ],
+    "invariantPatterns": [
+      "block",
+      "区間の差分",
+      "端点移動"
+    ],
+    "goalPatterns": [
+      "各区間",
+      "異なる値",
+      "頻度"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-threshold-heavy-light",
+      "type": "contrast",
+      "rationale": "Moはquery順の再配置で区間端の総移動を抑える。heavy/lightは対象ごとの処理頻度・次数で二種類の算法を使い分ける。平方根という計算量だけでは同じ分類にしない。"
+    },
+    {
+      "tagId": "tag-value-bucket-aggregation",
+      "type": "often_combined",
+      "rationale": "Moで区間位置を動かし、値軸のbucketで閾値以下の頻度和・積を取得する。ABC405 Gでは多数の端点更新をO(1)に保つことが両者を組み合わせる理由になる。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-schedule-range-query-updates"
+  ],
+  "representativeProblemIds": [
+    "abc242-g",
+    "abc293-g",
+    "abc405-g"
+  ],
+  "aliases": [
+    "Mo's algorithm",
+    "Mo法",
+    "ムーのアルゴリズム"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

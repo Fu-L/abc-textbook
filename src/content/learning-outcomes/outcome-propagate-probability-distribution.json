@@ -1,0 +1,23 @@
+{
+  "id": "outcome-propagate-probability-distribution",
+  "statement": "互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "scopeIds": [
+    "abc226-h",
+    "abc271-g",
+    "abc275-e",
+    "abc277-g",
+    "abc280-e",
+    "abc298-e",
+    "abc300-e",
+    "abc310-f",
+    "abc323-e",
+    "abc326-e",
+    "abc333-f",
+    "abc360-e",
+    "tag-stochastic-expectation-dp",
+    "unit-dp-stochastic"
+  ]
+}

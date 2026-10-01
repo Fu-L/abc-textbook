@@ -1,0 +1,13 @@
+{
+  "id": "outcome-compute-directed-walk-period",
+  "statement": "往復可能な有向領域のclosed walk長が作る周期gcdを求め、巨大な指定歩数での到達可能性を判定できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-condense-and-order-directed-graph",
+    "outcome-reduce-integer-structure-by-gcd"
+  ],
+  "scopeIds": [
+    "abc306-g",
+    "tag-directed-walk-periodicity",
+    "unit-directed-walk-periodicity"
+  ]
+}

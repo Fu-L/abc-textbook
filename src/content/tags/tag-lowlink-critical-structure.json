@@ -1,0 +1,56 @@
+{
+  "id": "tag-lowlink-critical-structure",
+  "name": "lowlinkによる橋・関節点の検出",
+  "definition": "DFS木の到達時刻とlowlink値から、除去で連結性が変わる辺・頂点を特定する。",
+  "parentId": "tag-graph-model-structure",
+  "prerequisiteTagIds": [
+    "tag-state-graph-search"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "back edge",
+      "dfs木",
+      "グラフ",
+      "辺",
+      "頂点"
+    ],
+    "triggerPatterns": [
+      "橋",
+      "連結成分が増え",
+      "関節点",
+      "除去すると切断"
+    ],
+    "invariantPatterns": [
+      "low",
+      "ord",
+      "先祖への辺",
+      "到達時刻"
+    ],
+    "goalPatterns": [
+      "bridge",
+      "critical edge",
+      "二辺連結成分",
+      "関節点"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-identify-bridges-and-articulations"
+  ],
+  "representativeProblemIds": [
+    "abc334-g",
+    "abc375-g",
+    "abc301-ex"
+  ],
+  "aliases": [
+    "Low-Link",
+    "bridges and articulation points",
+    "橋・関節点"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

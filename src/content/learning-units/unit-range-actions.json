@@ -1,0 +1,78 @@
+{
+  "id": "unit-range-actions",
+  "kind": "section",
+  "title": "区間更新を要約へ作用させる",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "過去の版の保存・rollback・構造共有。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc237-editorial-3341-f1734dda5225fe9572d62a871f0596aa63175e765d3694aba5ea9aad6315712b",
+    "source-abc237-g-problem-394b01373d29124e425a5c4ce66eeb9a2319483372e6457161698094c1e7c9ab",
+    "source-abc248-editorial-3748-51de1a635ac39c7fc5b595ff37e3681992e2acc608fc251c5f78b57f45d0bc6b",
+    "source-abc248-ex-problem-baf24b6ac5cb67b9c0b284a4a5ce0b4d0970da1abe68fafc5eb086f954a2e49d",
+    "source-abc256-editorial-4113-b667817153afbda977d604d7adff6aba7889dddc553740a456a9480f421ac953",
+    "source-abc256-ex-problem-35ffd11a0ff489dfad648c6600b49e72b4c999c80b95ba184ed68743c2218d80"
+  ],
+  "tagIds": [
+    "tag-lazy-segment-action"
+  ],
+  "ownedTagIds": [
+    "tag-lazy-segment-action"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-range-update-action"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-design-range-update-action"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/range-actions.md",
+  "problemIds": [
+    "abc237-g",
+    "abc265-g",
+    "abc322-f",
+    "abc332-f",
+    "abc340-e",
+    "abc357-f",
+    "abc371-f",
+    "abc382-f",
+    "abc389-f",
+    "abc397-f",
+    "abc417-f",
+    "abc426-f",
+    "abc441-g",
+    "abc455-f"
+  ],
+  "directProblemIds": [
+    "abc340-e",
+    "abc382-f",
+    "abc417-f",
+    "abc455-f",
+    "abc389-f",
+    "abc332-f",
+    "abc357-f",
+    "abc322-f",
+    "abc397-f",
+    "abc426-f",
+    "abc441-g",
+    "abc237-g",
+    "abc371-f",
+    "abc265-g"
+  ],
+  "relatedProblemIds": [
+    "abc248-ex",
+    "abc256-ex",
+    "abc262-ex",
+    "abc327-f",
+    "abc346-g",
+    "abc360-f",
+    "abc363-g",
+    "abc450-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "結合的な区間要約を設計した後、更新作用の合成順と要約への適用を遅延評価する。"
+}

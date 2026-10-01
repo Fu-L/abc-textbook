@@ -1,0 +1,52 @@
+{
+  "id": "tag-tree-precedence-contraction",
+  "name": "01 on Tree・親先行順序のcluster縮約",
+  "definition": "親が子より先という順序制約の下でclusterの交換比較量を導き、priority queueとDSUで最良clusterを親へ縮約する。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [
+    "tag-dsu-components",
+    "tag-greedy-exchange-order"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "cluster statistics",
+      "parent merge",
+      "rooted tree precedence"
+    ],
+    "triggerPatterns": [
+      "期待探索順",
+      "親を子より先に並べる"
+    ],
+    "invariantPatterns": [
+      "contracted parent relation",
+      "pairwise exchange ratio"
+    ],
+    "goalPatterns": [
+      "制約付き最適順序"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-dsu-components",
+      "type": "implementation_substrate",
+      "rationale": "cluster縮約後の代表と統計を管理し、既に統合した頂点を一つの成分として扱う。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-tree-order-by-cluster-contraction"
+  ],
+  "representativeProblemIds": [
+    "abc376-g"
+  ],
+  "aliases": [
+    "01 on Tree",
+    "cluster contraction",
+    "tree precedence scheduling"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

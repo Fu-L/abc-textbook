@@ -1,0 +1,43 @@
+{
+  "id": "unit-backtracking-search",
+  "kind": "section",
+  "title": "backtracking・可逆な探索状態",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1",
+    "source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f",
+    "source-abc419-editorial-13636-a04e992f7fda4e4105fa306cbdbd87a839e59db1971fb6c3485398f79ad70ad6",
+    "source-abc419-g-problem-878c630043f399210fb234e50a45e76f4c850b4ca999c206bce7f741a3e543bf"
+  ],
+  "tagIds": [
+    "tag-backtracking-search"
+  ],
+  "ownedTagIds": [
+    "tag-backtracking-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-enumerate-by-reversible-backtracking"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-enumerate-by-reversible-backtracking"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/backtracking-search.md",
+  "problemIds": [
+    "abc284-e"
+  ],
+  "directProblemIds": [
+    "abc284-e"
+  ],
+  "relatedProblemIds": [
+    "abc419-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "再帰へ入る直前に局所選択を反映し、復帰時に必ずundoして現在pathだけの制約を保ちながら探索木を列挙する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

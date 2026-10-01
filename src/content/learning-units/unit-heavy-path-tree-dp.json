@@ -1,0 +1,39 @@
+{
+  "id": "unit-heavy-path-tree-dp",
+  "kind": "section",
+  "title": "heavy path上の多項式木DP",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "heavy path上の多項式木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
+    "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"
+  ],
+  "tagIds": [
+    "tag-heavy-path-tree-dp"
+  ],
+  "ownedTagIds": [
+    "tag-heavy-path-tree-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-accelerate-tree-dp-by-heavy-path"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-accelerate-tree-dp-by-heavy-path"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/heavy-path-tree-dp.md",
+  "problemIds": [
+    "abc269-ex"
+  ],
+  "directProblemIds": [
+    "abc269-ex"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "畳み込み・相互相関・根付き木DP・部分木集約で得た考え方と実装を再利用し、heavy path上の多項式木DPの発動条件・正当化・境界を重複なく学ぶ。"
+}

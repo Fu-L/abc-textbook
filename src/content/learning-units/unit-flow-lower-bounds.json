@@ -1,0 +1,39 @@
+{
+  "id": "unit-flow-lower-bounds",
+  "kind": "subsection",
+  "title": "下限制約付きflowの実現可能性",
+  "parentId": "unit-flow-matching",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "下限制約付きflowの実現可能性の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc285-editorial-5500-15ce389fe4a17393dab7f63ad59b360a880879cee4ada634068acb3225c095af",
+    "source-abc285-g-problem-c175c30fd08313f9aff4bec8a706abc0de7c3ebf334e2d5b55ab72187ebddc0e"
+  ],
+  "tagIds": [
+    "tag-flow-feasibility-lower-bounds"
+  ],
+  "ownedTagIds": [
+    "tag-flow-feasibility-lower-bounds"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-flow-with-lower-bounds"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-flow-with-lower-bounds"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/flow-lower-bounds.md",
+  "problemIds": [
+    "abc285-g"
+  ],
+  "directProblemIds": [
+    "abc285-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "最大流・最小カットで得た考え方と実装を再利用し、下限制約付きflowの実現可能性の発動条件・正当化・境界を重複なく学ぶ。"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "unit-monoid-exponentiation",
+  "kind": "section",
+  "title": "monoid exponentiation・連結演算doubling",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "monoid exponentiation・連結演算doublingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc448-e-problem-2e75c00389f73522688e3410de62a0e400eaf627cb19ddf0616c8fa3ae397dfe",
+    "source-abc448-editorial-16749-7468a146eb2ed5b942c7fa3c4c47c44239fb8ad100daa5691a838e974f534b21"
+  ],
+  "tagIds": [
+    "tag-monoid-exponentiation"
+  ],
+  "ownedTagIds": [
+    "tag-monoid-exponentiation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-exponentiate-associative-composition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-exponentiate-associative-composition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/monoid-exponentiation.md",
+  "problemIds": [
+    "abc448-e"
+  ],
+  "directProblemIds": [
+    "abc448-e"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "長さ・値・補助剰余を含む要約の結合則と単位元を定義し、巨大な反復連結を二分累乗する。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

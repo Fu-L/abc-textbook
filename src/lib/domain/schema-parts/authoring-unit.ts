@@ -69,8 +69,9 @@ export const InlineExampleSchema = strictObject({
 }).superRefine(validateInlineExample);
 
 /** Example block owned by one Learning Unit document. */
-export const LearningUnitInlineExampleSchema =
-  strictObject(inlineExampleFields).superRefine(validateInlineExample);
+export const LearningUnitInlineExampleSchema = strictObject({
+  ...inlineExampleFields,
+}).superRefine(validateInlineExample);
 
 const InlineAssessmentSchema = strictObject({ method: text, successCondition: text });
 const InlineAnswerSchema = strictObject({
@@ -80,13 +81,20 @@ const InlineAnswerSchema = strictObject({
   verificationStatus: z.enum(['pending', 'passed', 'failed']),
 });
 
-export const InlineExerciseSchema = strictObject({
+const inlineExerciseFields = {
   key: ContentBlockKeySchema,
   learningOutcomeIds: entityIds.min(1),
   prerequisiteIds: entityIds,
   attainmentCondition: text,
   assessment: InlineAssessmentSchema,
   answer: InlineAnswerSchema,
+};
+
+export const InlineExerciseSchema = strictObject(inlineExerciseFields);
+
+/** Exercise block owned by one Learning Unit document. */
+export const LearningUnitInlineExerciseSchema = strictObject({
+  ...inlineExerciseFields,
 });
 
 const FullExplanationSectionsSchema = strictObject({

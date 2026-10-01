@@ -1,0 +1,11 @@
+{
+  "id": "outcome-persist-data-structure-versions",
+  "statement": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc273-e",
+    "abc453-g",
+    "tag-persistence",
+    "unit-persistence"
+  ]
+}

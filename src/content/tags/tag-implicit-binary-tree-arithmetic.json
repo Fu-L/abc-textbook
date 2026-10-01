@@ -1,0 +1,57 @@
+{
+  "id": "tag-implicit-binary-tree-arithmetic",
+  "name": "暗黙・対称な完全二分木の深さ算術",
+  "definition": "巨大な完全二分木を展開せず、同じ深さの対称性と2冪で集約するか、heap番号の祖先移動と深さdの子孫label区間を使って数える。",
+  "parentId": "tag-tree-model-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "heap番号",
+      "共通祖先",
+      "子孫",
+      "完全二分木",
+      "深さ"
+    ],
+    "triggerPatterns": [
+      "2v",
+      "2v\\+1",
+      "2倍",
+      "ancestorを上る",
+      "深さだけで同型",
+      "頂点数が指数的"
+    ],
+    "invariantPatterns": [
+      "同じ深さの部分木は同型",
+      "深さdの子孫は2冪個または連続区間",
+      "親はfloor\\(v/2\\)"
+    ],
+    "goalPatterns": [
+      "子孫数",
+      "深さ別集約",
+      "距離層の個数",
+      "頂点対の個数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-count-implicit-binary-tree-layers"
+  ],
+  "representativeProblemIds": [
+    "abc220-e",
+    "abc321-e",
+    "abc424-e"
+  ],
+  "aliases": [
+    "heap index tree",
+    "implicit complete binary tree",
+    "symmetric complete binary tree",
+    "完全二分木の深さ集約",
+    "暗黙の完全二分木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

@@ -1,0 +1,54 @@
+{
+  "id": "tag-linked-list-index",
+  "name": "索引付き連結リスト",
+  "definition": "要素IDから前後linkへ直接到達し、挿入・削除で影響する局所的なlinkだけを更新する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "link",
+      "node",
+      "列",
+      "前",
+      "後",
+      "要素"
+    ],
+    "triggerPatterns": [
+      "削除",
+      "前後をつなぐ",
+      "局所更新",
+      "直後に挿入"
+    ],
+    "invariantPatterns": [
+      "head",
+      "next",
+      "prev",
+      "tail",
+      "隣接関係"
+    ],
+    "goalPatterns": [
+      "列を復元",
+      "挿入削除",
+      "順序を出力"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-local-sequence-links"
+  ],
+  "representativeProblemIds": [
+    "abc344-e",
+    "abc421-f"
+  ],
+  "aliases": [
+    "doubly linked list",
+    "linked list",
+    "連結リスト"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

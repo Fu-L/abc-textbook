@@ -1,0 +1,16 @@
+{
+  "id": "outcome-design-lis-frontier",
+  "statement": "同じ長さなら小さい末尾が延長可能性を支配することを示し、長さ別最小末尾を二分探索で更新してLIS・非減少部分列を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-order-preserving-dp"
+  ],
+  "scopeIds": [
+    "abc237-f",
+    "abc369-f",
+    "abc393-f",
+    "abc439-e",
+    "abc457-g",
+    "tag-lis-state",
+    "unit-dp-lis"
+  ]
+}

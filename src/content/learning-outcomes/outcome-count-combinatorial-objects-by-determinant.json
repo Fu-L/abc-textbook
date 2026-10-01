@@ -1,0 +1,14 @@
+{
+  "id": "outcome-count-combinatorial-objects-by-determinant",
+  "statement": "辺重みからLaplacianを構成し、根の行列余因子を全域木の重み付き個数へ対応させられる。有向木の向きと自己ループの扱いを説明できる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "scopeIds": [
+    "abc253-ex",
+    "abc323-g",
+    "abc336-g",
+    "tag-determinant-counting",
+    "unit-determinant-counting"
+  ]
+}

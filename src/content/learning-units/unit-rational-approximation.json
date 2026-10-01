@@ -1,0 +1,47 @@
+{
+  "id": "unit-rational-approximation",
+  "kind": "section",
+  "title": "連分数・Stern–Brocotで有理近似する",
+  "parentId": "unit-chapter-number-theory",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41",
+    "source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392",
+    "source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756",
+    "source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201",
+    "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
+    "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"
+  ],
+  "tagIds": [
+    "tag-rational-approximation"
+  ],
+  "ownedTagIds": [
+    "tag-rational-approximation"
+  ],
+  "learningOutcomeIds": [
+    "outcome-approximate-rational-by-euclid"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-approximate-rational-by-euclid"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/number-theory/rational-approximation.md",
+  "problemIds": [
+    "abc333-g",
+    "abc408-g"
+  ],
+  "directProblemIds": [
+    "abc408-g",
+    "abc333-g"
+  ],
+  "relatedProblemIds": [
+    "abc393-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え、分母制約下の最良近似を求める。"
+}

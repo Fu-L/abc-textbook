@@ -1,0 +1,50 @@
+{
+  "id": "tag-subset-convolution",
+  "name": "subset convolution",
+  "definition": "互いに素な部分集合分割に沿う畳み込みをrank別zeta変換などで高速に計算する。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-subset-zeta-mobius-transform"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "subset function",
+      "集合分割"
+    ],
+    "triggerPatterns": [
+      "Sを二分",
+      "disjoint union",
+      "部分集合分割"
+    ],
+    "invariantPatterns": [
+      "disjointness",
+      "rank"
+    ],
+    "goalPatterns": [
+      "集合分割畳み込み"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convolution",
+      "type": "analogy",
+      "rationale": "分解ごとの積を足す二項演算としては共通するが、通常の添字加算 i+j=k とdisjoint subset分割は異なる合成則であり、互いを特殊化とはみなさない。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-compute-subset-convolution"
+  ],
+  "representativeProblemIds": [
+    "abc294-ex"
+  ],
+  "aliases": [
+    "subset convolution",
+    "部分集合畳み込み"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

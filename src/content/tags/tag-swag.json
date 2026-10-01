@@ -1,0 +1,46 @@
+{
+  "id": "tag-swag",
+  "name": "SWAG・two-stack queue aggregation",
+  "definition": "queueを二つのstackへ分け、それぞれの向きにmonoid積を持ってpush/pop/foldを償却O(1)で処理する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "monoid aggregate",
+      "queue",
+      "two stacks"
+    ],
+    "triggerPatterns": [
+      "sliding window fold",
+      "両端が一方向"
+    ],
+    "invariantPatterns": [
+      "back積",
+      "front積",
+      "要素移動一回"
+    ],
+    "goalPatterns": [
+      "queue aggregate"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-maintain-queue-aggregate-with-swag"
+  ],
+  "representativeProblemIds": [
+    "abc456-f"
+  ],
+  "aliases": [
+    "SWAG",
+    "sliding window aggregation",
+    "two-stack queue"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

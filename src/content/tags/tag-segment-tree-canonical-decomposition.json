@@ -1,0 +1,49 @@
+{
+  "id": "tag-segment-tree-canonical-decomposition",
+  "name": "Segment Treeのcanonical区間分解",
+  "definition": "区間をO(log N)個のcanonical nodeへ分解してrange object・生存時間・range edgeを配置し、point queryでは対応するroot-to-leaf pathから該当objectを集める。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [
+    "tag-range-monoid-aggregation"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "canonical node",
+      "区間",
+      "時間軸"
+    ],
+    "triggerPatterns": [
+      "range edge",
+      "区間へ登録",
+      "生存区間"
+    ],
+    "invariantPatterns": [
+      "O\\(log N\\) nodes",
+      "完全被覆"
+    ],
+    "goalPatterns": [
+      "offline dynamic",
+      "区間object配置"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-decompose-ranges-into-segment-tree-nodes"
+  ],
+  "representativeProblemIds": [
+    "abc342-g",
+    "abc414-g"
+  ],
+  "aliases": [
+    "Segment Tree canonical cover",
+    "canonical区間分解",
+    "segment tree graph",
+    "時間セグメント木"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

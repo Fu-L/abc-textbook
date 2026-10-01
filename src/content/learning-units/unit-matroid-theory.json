@@ -1,0 +1,38 @@
+{
+  "id": "unit-matroid-theory",
+  "kind": "section",
+  "title": "Matroidの独立性・greedy・線形交差",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "線形方程式一般、graph matching一般、および交換公理を用いない単なる貪欲選択。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc236-editorial-3287-6e194389570b5191f1996eca8fa2e2dbceabf9c43e18c3c8c2cc1f8d68fc40ea",
+    "source-abc236-f-problem-5222090d62cf04cc1359e633e3019bbd762b40f11c1fdff029f43675e704d3f1",
+    "source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b",
+    "source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77"
+  ],
+  "tagIds": [
+    "tag-linear-matroid-intersection",
+    "tag-matroid-greedy"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-weighted-matroid-basis",
+    "outcome-test-linear-matroid-intersection-rank"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/matroid-theory.md",
+  "problemIds": [
+    "abc236-f",
+    "abc399-g"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "独立集合族と交換公理を共通言語にし、単一matroidの重み付き基底と、現corpusで観測された二つの線形matroidの共通rank判定を分けて学ぶ。"
+}

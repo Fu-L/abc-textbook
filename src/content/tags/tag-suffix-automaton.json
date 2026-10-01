@@ -1,0 +1,47 @@
+{
+  "id": "tag-suffix-automaton",
+  "name": "Suffix Automaton",
+  "definition": "endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷移を線形状態数へ圧縮する。",
+  "parentId": "tag-string-state-representation",
+  "prerequisiteTagIds": [
+    "tag-finite-pattern-automaton"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "endpos class",
+      "substring",
+      "suffix link"
+    ],
+    "triggerPatterns": [
+      "全部分文字列",
+      "文字追加online"
+    ],
+    "invariantPatterns": [
+      "clone",
+      "link length",
+      "max length"
+    ],
+    "goalPatterns": [
+      "distinct substring",
+      "部分文字列DAG"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-build-suffix-automaton"
+  ],
+  "representativeProblemIds": [
+    "abc433-g"
+  ],
+  "aliases": [
+    "SAM",
+    "Suffix Automaton",
+    "接尾辞オートマトン"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

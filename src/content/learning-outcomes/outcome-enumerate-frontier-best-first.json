@@ -1,0 +1,29 @@
+{
+  "id": "outcome-enumerate-frontier-best-first",
+  "statement": "現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc214-e",
+    "abc217-e",
+    "abc218-h",
+    "abc249-f",
+    "abc250-g",
+    "abc252-f",
+    "abc297-e",
+    "abc305-e",
+    "abc307-f",
+    "abc319-f",
+    "abc320-e",
+    "abc331-e",
+    "abc359-f",
+    "abc373-f",
+    "abc376-g",
+    "abc384-e",
+    "abc391-f",
+    "abc407-e",
+    "abc409-f",
+    "abc440-e",
+    "tag-priority-queue-best-first",
+    "unit-priority-queue-best-first"
+  ]
+}

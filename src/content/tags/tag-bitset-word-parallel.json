@@ -1,0 +1,53 @@
+{
+  "id": "tag-bitset-word-parallel",
+  "name": "bitsetによるword並列集合演算",
+  "definition": "真偽集合をbit列へ詰め、交差・和・shift・popcountをword単位で実行して遷移や組数計算を加速する。",
+  "parentId": "tag-query-sufficient-aggregate",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "bit列",
+      "真偽配列",
+      "隣接集合",
+      "集合"
+    ],
+    "triggerPatterns": [
+      "bitset.*and",
+      "word単位",
+      "一括shift",
+      "集合の積"
+    ],
+    "invariantPatterns": [
+      "popcount",
+      "word幅",
+      "各bitが要素"
+    ],
+    "goalPatterns": [
+      "共通要素数",
+      "到達集合",
+      "遷移高速化"
+    ],
+    "excludedPatterns": [
+      "binary indexed tree",
+      "fenwick"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-accelerate-set-operations-with-bitsets"
+  ],
+  "representativeProblemIds": [
+    "abc258-g",
+    "abc348-f"
+  ],
+  "aliases": [
+    "bitset optimization",
+    "word-parallel algorithm",
+    "ビット集合"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

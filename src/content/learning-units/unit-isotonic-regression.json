@@ -1,0 +1,39 @@
+{
+  "id": "unit-isotonic-regression",
+  "kind": "subsection",
+  "title": "isotonic regression・PAV",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "isotonic regression・PAVの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc459-editorial-20507-0f56e72dcc42a017be4eb8cd3cab4a557b2c735265b6a856f36b07110843fb59",
+    "source-abc459-f-problem-8bdd1d46eed2a90f4a233fad12113cbd0bfc99cc42f9b10b18ae084bc1b985c3"
+  ],
+  "tagIds": [
+    "tag-isotonic-regression-pav"
+  ],
+  "ownedTagIds": [
+    "tag-isotonic-regression-pav"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-isotonic-regression-by-pav"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-isotonic-regression-by-pav"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/isotonic-regression.md",
+  "problemIds": [
+    "abc459-f"
+  ],
+  "directProblemIds": [
+    "abc459-f"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "一次元凸・単峰最適化で得た考え方と実装を再利用し、isotonic regression・PAVの発動条件・正当化・境界を重複なく学ぶ。"
+}

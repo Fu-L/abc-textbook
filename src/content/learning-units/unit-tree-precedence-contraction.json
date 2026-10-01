@@ -1,0 +1,39 @@
+{
+  "id": "unit-tree-precedence-contraction",
+  "kind": "section",
+  "title": "01 on Tree・親先行順序のcluster縮約",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "01 on Tree・親先行順序のcluster縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb",
+    "source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"
+  ],
+  "tagIds": [
+    "tag-tree-precedence-contraction"
+  ],
+  "ownedTagIds": [
+    "tag-tree-precedence-contraction"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-tree-order-by-cluster-contraction"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-tree-order-by-cluster-contraction"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-precedence-contraction.md",
+  "problemIds": [
+    "abc376-g"
+  ],
+  "directProblemIds": [
+    "abc376-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DSUによる連結成分管理・縮約・貪欲法と交換論で得た考え方と実装を再利用し、01 on Tree・親先行順序のcluster縮約の発動条件・正当化・境界を重複なく学ぶ。"
+}

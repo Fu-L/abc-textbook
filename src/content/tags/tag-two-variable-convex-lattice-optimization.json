@@ -1,0 +1,49 @@
+{
+  "id": "tag-two-variable-convex-lattice-optimization",
+  "name": "二変数の凸区分線形格子最適化",
+  "definition": "二つの整数parameter上の凸区分線形目的について、折れ目直線の交点から連続最小候補を作り、定数半径内に整数最適解があることを証明して有限格子点へ縮約する。",
+  "parentId": "tag-geometry-optimization-structure",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "二つの整数parameter",
+      "凸区分線形目的関数",
+      "格子点"
+    ],
+    "triggerPatterns": [
+      "二変数の整数最適化",
+      "有限本の折れ目直線",
+      "連続最小点近傍の格子候補"
+    ],
+    "invariantPatterns": [
+      "凸性",
+      "折れ目直線の交点",
+      "整数最適点までの定数距離"
+    ],
+    "goalPatterns": [
+      "大域最適解",
+      "整数最小値",
+      "有限近傍の全探索"
+    ],
+    "excludedPatterns": [
+      "一変数の傾き単調性だけで最小点を探す目的関数"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-optimize-two-variable-convex-lattice-function"
+  ],
+  "representativeProblemIds": [
+    "abc459-g"
+  ],
+  "aliases": [
+    "two-variable convex lattice optimization",
+    "二変数凸格子最適化",
+    "二変数区分線形凸最適化"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

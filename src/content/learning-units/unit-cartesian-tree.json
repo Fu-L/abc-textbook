@@ -1,0 +1,47 @@
+{
+  "id": "unit-cartesian-tree",
+  "kind": "section",
+  "title": "大小関係をCartesian treeへ変換する",
+  "parentId": "unit-chapter-query",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
+    "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f",
+    "source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7",
+    "source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95",
+    "source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217",
+    "source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"
+  ],
+  "tagIds": [
+    "tag-cartesian-tree"
+  ],
+  "ownedTagIds": [
+    "tag-cartesian-tree"
+  ],
+  "learningOutcomeIds": [
+    "outcome-build-cartesian-tree-decomposition"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-build-cartesian-tree-decomposition"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/cartesian-tree.md",
+  "problemIds": [
+    "abc420-f",
+    "abc435-f"
+  ],
+  "directProblemIds": [
+    "abc435-f",
+    "abc420-f"
+  ],
+  "relatedProblemIds": [
+    "abc275-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "単調stackの支配関係を親子関係へ持ち上げ、配列の区間極値を部分木境界として分割処理へ使う。"
+}

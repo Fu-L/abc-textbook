@@ -1,0 +1,47 @@
+{
+  "id": "unit-cyclic-order-crossing",
+  "kind": "subsection",
+  "title": "円環順序・chord交差",
+  "parentId": "unit-geometry-primitives",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+    "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+    "source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0",
+    "source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102",
+    "source-abc405-editorial-13009-1d7b17ced6a4c1fc7d01f37ceb74c95e482b1a3302bcb2771190dbb7e315ba8b",
+    "source-abc405-f-problem-70e32f453afc137a2b193ab96bb12c7ce40ba9c4471b84bff4b1e82d7cfa4d04"
+  ],
+  "tagIds": [
+    "tag-cyclic-order-crossing"
+  ],
+  "ownedTagIds": [
+    "tag-cyclic-order-crossing"
+  ],
+  "learningOutcomeIds": [
+    "outcome-detect-crossing-by-cyclic-order"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-detect-crossing-by-cyclic-order"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
+  "problemIds": [
+    "abc338-e"
+  ],
+  "directProblemIds": [
+    "abc338-e"
+  ],
+  "relatedProblemIds": [
+    "abc263-ex",
+    "abc405-f",
+    "abc424-f"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "幾何の基本判定・配置・座標変換で得た考え方と実装を再利用し、円環順序・chord交差の発動条件・正当化・境界を重複なく学ぶ。"
+}

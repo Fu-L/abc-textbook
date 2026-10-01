@@ -1,0 +1,49 @@
+{
+  "id": "unit-kruskal-threshold-sweep",
+  "kind": "subsection",
+  "title": "Kruskal順の閾値DSU sweep",
+  "parentId": "unit-spanning-tree-optimization",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Kruskal順の閾値DSU sweepの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc235-e-problem-dccad2a4c2f5987ff301944fb9581b4434faa1a3d9c6056a2a351517fb96d800",
+    "source-abc235-editorial-3254-3f27d67a0dbdcf3850835b7081f4364b176de8ed7482511f3e8c04b5bfb48b7b",
+    "source-abc250-editorial-3908-84b6822e58413631cb174d16a53162ff86c33af8a99cf464a2417867f42fe2eb",
+    "source-abc250-ex-problem-1b94344ef7430d7cd6a14d6af42b9dc930ae092021b163973b8890d38e62fa93",
+    "source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c",
+    "source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3"
+  ],
+  "tagIds": [
+    "tag-kruskal-threshold-sweep"
+  ],
+  "ownedTagIds": [
+    "tag-kruskal-threshold-sweep"
+  ],
+  "learningOutcomeIds": [
+    "outcome-sweep-connectivity-by-kruskal-threshold"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-sweep-connectivity-by-kruskal-threshold"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
+  "problemIds": [
+    "abc235-e",
+    "abc250-ex",
+    "abc383-e"
+  ],
+  "directProblemIds": [
+    "abc235-e",
+    "abc383-e",
+    "abc250-ex"
+  ],
+  "relatedProblemIds": [
+    "abc301-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "DSUによる成分管理とMSTのcut・cycle性質を学んだ後、辺重み順のprefixが閾値部分graphと一致する不変条件からminimax連結時刻をquery・集計へ使う。"
+}

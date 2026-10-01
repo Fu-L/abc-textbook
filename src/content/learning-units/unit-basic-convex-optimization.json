@@ -1,0 +1,51 @@
+{
+  "id": "unit-basic-convex-optimization",
+  "kind": "subsection",
+  "title": "一次元凸・単峰最適化",
+  "parentId": "unit-discrete-convex",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "一次元凸・単峰最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc224-editorial-2816-092c55acb67922ed532903f2a80456d83768e4b1f92e1282c7087463f2c55a92",
+    "source-abc224-g-problem-fe18c86a06443c15aef802f40b20abb901129623e2f8687d75fb58216dbace72",
+    "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+    "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708",
+    "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+    "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"
+  ],
+  "tagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "ownedTagIds": [
+    "tag-basic-convex-optimization"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-univariate-convex-function"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/geometry-optimization/basic-convex-optimization.md",
+  "problemIds": [
+    "abc224-g",
+    "abc314-ex"
+  ],
+  "directProblemIds": [
+    "abc224-g",
+    "abc314-ex"
+  ],
+  "relatedProblemIds": [
+    "abc229-g",
+    "abc240-f",
+    "abc263-g",
+    "abc330-f",
+    "abc462-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "差分/導関数の単調性または単峰性を証明し、連続解近傍・ternary search・整数境界で最適点を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

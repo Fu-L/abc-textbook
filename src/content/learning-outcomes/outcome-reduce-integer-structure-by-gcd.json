@@ -1,0 +1,16 @@
+{
+  "id": "outcome-reduce-integer-structure-by-gcd",
+  "statement": "gcd不変量によって共通因子・差分・周期成分を分離し、rangeまたは剰余類ごとの問いを処理できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc212-g",
+    "abc222-g",
+    "abc248-g",
+    "abc254-f",
+    "abc306-g",
+    "abc438-g",
+    "abc445-g",
+    "tag-gcd-structure",
+    "unit-gcd-structure"
+  ]
+}

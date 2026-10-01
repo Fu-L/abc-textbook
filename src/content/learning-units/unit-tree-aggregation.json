@@ -1,0 +1,70 @@
+{
+  "id": "unit-tree-aggregation",
+  "kind": "section",
+  "title": "木DP・集約・rerooting",
+  "parentId": "unit-chapter-tree",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "heap番号で暗黙に表された完全二分木の区間算術、木上パスの連続区間分解、重心による再帰分解、および更新のためのTop Tree cluster化。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc220-editorial-2693-f7c6eeff0635eb68893cc43c229955e8354a9299cc64b00ec9cdb3c26904d26a",
+    "source-abc220-f-problem-d42fddfdf8339e3b47c0adcae4d2d9f02a944bc94b4777e17427978c3d498223",
+    "source-abc223-editorial-2775-b9495e8e94b6b8b7e40cdb1fe86bdf8916d98f2e3f5da3a7f386d2f5a5eb7781",
+    "source-abc223-g-problem-01be590afa613a2946015c9dac83abad397f7c515256b827fd1817e48d4b932e",
+    "source-abc239-e-problem-0c0332ca346ab35bfa6ab96fb1358c42c5f5d1900beb6549ac2981886d6d849b",
+    "source-abc239-editorial-3385-b6460d588699cea27577b95603a64000088399f80feb54109efed334fa7c8ce5"
+  ],
+  "tagIds": [
+    "tag-rerooting",
+    "tag-rooted-tree-aggregation"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-aggregate-rooted-tree",
+    "outcome-reroot-tree-aggregation"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/tree/tree-aggregation.md",
+  "problemIds": [
+    "abc220-f",
+    "abc223-g",
+    "abc239-e",
+    "abc248-g",
+    "abc259-f",
+    "abc263-f",
+    "abc264-ex",
+    "abc287-f",
+    "abc309-e",
+    "abc312-g",
+    "abc329-g",
+    "abc348-e",
+    "abc378-f",
+    "abc391-e",
+    "abc394-f",
+    "abc397-e",
+    "abc409-e",
+    "abc416-f",
+    "abc447-f",
+    "abc459-e"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc246-g",
+    "abc269-ex",
+    "abc293-ex",
+    "abc298-ex",
+    "abc314-f",
+    "abc340-g",
+    "abc369-g",
+    "abc387-f",
+    "abc435-f",
+    "abc438-f",
+    "abc460-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "探索で親子関係を作りDP状態を定義できた後、子側の集約と親側への差し替えで木全体の値を求める。"
+}

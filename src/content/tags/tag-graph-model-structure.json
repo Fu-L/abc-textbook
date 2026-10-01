@@ -1,0 +1,49 @@
+{
+  "id": "tag-graph-model-structure",
+  "name": "グラフモデルと構造",
+  "definition": "対象を頂点・辺・木・有向遷移として構造化する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "グラフ",
+      "木",
+      "辺",
+      "頂点"
+    ],
+    "triggerPatterns": [
+      "到達",
+      "接続",
+      "経路"
+    ],
+    "invariantPatterns": [
+      "距離",
+      "連結",
+      "部分木"
+    ],
+    "goalPatterns": [
+      "グラフ",
+      "経路",
+      "連結"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-model-and-exploit-graph"
+  ],
+  "representativeProblemIds": [
+    "abc213-e",
+    "abc235-e",
+    "abc374-g"
+  ],
+  "aliases": [
+    "graph algorithms",
+    "グラフ理論"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

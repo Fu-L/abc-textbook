@@ -1,0 +1,14 @@
+{
+  "id": "outcome-optimize-ratio-by-parametric-search",
+  "statement": "比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。",
+  "prerequisiteOutcomeIds": [
+    "outcome-prove-and-search-threshold"
+  ],
+  "scopeIds": [
+    "abc236-e",
+    "abc294-f",
+    "abc324-f",
+    "tag-fractional-parametric-search",
+    "unit-fractional-parametric-search"
+  ]
+}

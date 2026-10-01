@@ -1,0 +1,37 @@
+{
+  "id": "unit-deletion-contraction",
+  "kind": "section",
+  "title": "削除・縮約recurrence",
+  "parentId": "unit-chapter-combinatorics-algebra",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "削除・縮約recurrenceの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
+    "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
+  ],
+  "tagIds": [
+    "tag-deletion-contraction"
+  ],
+  "ownedTagIds": [
+    "tag-deletion-contraction"
+  ],
+  "learningOutcomeIds": [
+    "outcome-recur-by-edge-deletion-contraction"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-recur-by-edge-deletion-contraction"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/combinatorics-algebra/deletion-contraction.md",
+  "problemIds": [],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc294-ex"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "辺を削除する場合と縮約する場合へ対象を分け、graph polynomialや連結構造のrecurrenceを立てる。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

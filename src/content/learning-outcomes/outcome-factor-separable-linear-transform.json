@@ -1,0 +1,14 @@
+{
+  "id": "outcome-factor-separable-linear-transform",
+  "statement": "Kronecker積で表される多次元線形変換を各軸の小変換へ分離し、stride走査で正変換または逆変換を計算できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc212-h",
+    "abc220-h",
+    "abc265-ex",
+    "abc288-g",
+    "abc367-g",
+    "tag-separable-linear-transform",
+    "unit-separable-linear-transform"
+  ]
+}

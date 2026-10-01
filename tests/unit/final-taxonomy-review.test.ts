@@ -209,7 +209,7 @@ const createImpact = (id: string, previewEntityId: string) => {
     'example',
     'exercise',
     'answer',
-    'standard_order',
+    'prerequisite_graph',
     'derived_index',
   ] as const;
   const subject = {
@@ -247,7 +247,6 @@ const createImpact = (id: string, previewEntityId: string) => {
         evidenceRefs,
       },
     ],
-    affectedLearningUnitOrderIds: ['unit-core'],
     derivedIndexPaths: ['docs/verification/bootstrap/final-taxonomy-index.json'],
     canonicalMaterializationTask: 'T049' as const,
     coverageStatus: 'complete' as const,
@@ -347,17 +346,16 @@ const createBuild = (
         parentId: null,
         baselineId: 'prereq-abc-advanced-v1',
         baselineVersion: '1.0.0',
-        additionalPrerequisiteUnitIds: [],
         excludedTopics: [],
         sourceRevisionIds,
         tagIds: ['tag-algorithms', 'tag-core'],
+        ownedTagIds: ['tag-algorithms', 'tag-core'],
         learningOutcomeIds: outcomeIds,
+        ownedLearningOutcomeIds: outcomeIds,
         problemIds,
-        stageRank: 0,
-        difficultyRank: 0,
-        representativeRank: 0,
-        globalIndex: 0,
-        orderReason: 'The single fixture Unit is first.',
+        directProblemIds: problemIds,
+        relatedProblemIds: [],
+        learningRationale: 'Learn the core technique and its standard use.',
       },
       sourceRevisionIds,
       evidenceRefs,
@@ -387,8 +385,6 @@ const createBuild = (
     primaryOutcomeId: outcomeIds[0] ?? 'outcome-core',
     additionalPrimaryOutcomeIds: [],
     supportingOutcomeIds: [],
-    learningUnitIds: ['unit-core'],
-    presentationUnitId: 'unit-core',
     adHocElements: [],
     claimDispositions: [
       {
@@ -427,6 +423,11 @@ const createBuild = (
       transactionId: `preview-snapshot:initial-v1:${integrationMap.previewSnapshotDigest}`,
       status: 'passed' as const,
     },
+    placementDecisionTable: {
+      path: 'src/content/policies/problem-placement.json',
+      version: '1.0.0',
+      digest: 'f'.repeat(64),
+    },
     integrationMapPath: 'docs/verification/previews/initial-v1/taxonomy-integration.json',
   };
   const policy = {
@@ -455,7 +456,6 @@ const createBuild = (
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements,
     correctionImpacts: correctionImpacts.map((impact) =>
       Object.fromEntries(
@@ -475,7 +475,6 @@ const createBuild = (
     finalCandidates: candidates,
     tagPrerequisites: [],
     learningUnitPrerequisites: [],
-    standardOrder: ['unit-core'],
     placements,
     correctionImpacts,
     sourceRevisionIds,
@@ -484,7 +483,6 @@ const createBuild = (
     taxonomyDigest: canonicalDigest(candidates),
     tagDagDigest: canonicalDigest([]),
     learningUnitDagDigest: canonicalDigest([]),
-    orderDigest: canonicalDigest(['unit-core']),
     placementDigest: canonicalDigest(placements),
     correctionImpactDigest: canonicalDigest(correctionImpacts),
     status: 'proposed' as const,

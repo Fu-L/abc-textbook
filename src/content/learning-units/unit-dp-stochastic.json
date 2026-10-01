@@ -1,0 +1,98 @@
+{
+  "id": "unit-dp-stochastic",
+  "kind": "section",
+  "title": "確率過程・期待値DP",
+  "parentId": "unit-chapter-dynamic-programming",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "二人零和ゲームの勝敗・Grundy数。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+    "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48",
+    "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+    "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94",
+    "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915",
+    "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
+  ],
+  "tagIds": [
+    "tag-stochastic-expectation-dp"
+  ],
+  "ownedTagIds": [
+    "tag-stochastic-expectation-dp"
+  ],
+  "learningOutcomeIds": [
+    "outcome-optimize-stochastic-actions",
+    "outcome-propagate-probability-distribution",
+    "outcome-solve-stochastic-recurrence"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-optimize-stochastic-actions",
+    "outcome-propagate-probability-distribution",
+    "outcome-solve-stochastic-recurrence"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/dynamic-programming/dp-stochastic.md",
+  "problemIds": [
+    "abc226-h",
+    "abc242-ex",
+    "abc263-e",
+    "abc266-e",
+    "abc270-ex",
+    "abc275-e",
+    "abc277-g",
+    "abc298-e",
+    "abc299-ex",
+    "abc300-e",
+    "abc314-e",
+    "abc323-e",
+    "abc326-e",
+    "abc333-f",
+    "abc342-f",
+    "abc350-e",
+    "abc360-e",
+    "abc382-e",
+    "abc402-e",
+    "abc404-f",
+    "abc412-f",
+    "abc421-e",
+    "abc450-g"
+  ],
+  "directProblemIds": [
+    "abc266-e",
+    "abc360-e",
+    "abc275-e",
+    "abc323-e",
+    "abc298-e",
+    "abc326-e",
+    "abc300-e",
+    "abc350-e",
+    "abc402-e",
+    "abc263-e",
+    "abc382-e",
+    "abc314-e",
+    "abc333-f",
+    "abc412-f",
+    "abc421-e",
+    "abc342-f",
+    "abc404-f",
+    "abc450-g",
+    "abc277-g",
+    "abc226-h",
+    "abc242-ex",
+    "abc299-ex",
+    "abc270-ex"
+  ],
+  "relatedProblemIds": [
+    "abc239-ex",
+    "abc249-ex",
+    "abc271-g",
+    "abc280-e",
+    "abc310-f",
+    "abc409-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "状態と遷移を定義できることを前提に、確率遷移から期待値・到達確率の方程式を立てる。"
+}

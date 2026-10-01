@@ -1,0 +1,43 @@
+{
+  "id": "unit-persistence",
+  "kind": "subsection",
+  "title": "永続data structure・structural sharing",
+  "parentId": "unit-persistence-rollback",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a",
+    "source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399",
+    "source-abc453-editorial-18526-99abc3e6c77c57725ffe9beb0d4040d7ea09e2940816f348844a2a020961876a",
+    "source-abc453-g-problem-5676b21220a116d2220557784e8ac4f0313dc2d19e5d9495e935c686aac6f1dc"
+  ],
+  "tagIds": [
+    "tag-persistence"
+  ],
+  "ownedTagIds": [
+    "tag-persistence"
+  ],
+  "learningOutcomeIds": [
+    "outcome-persist-data-structure-versions"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-persist-data-structure-versions"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/query/persistence.md",
+  "problemIds": [
+    "abc273-e",
+    "abc453-g"
+  ],
+  "directProblemIds": [
+    "abc273-e",
+    "abc453-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "変更pathだけを複製して未変更部分を共有し、各versionのrootから過去状態へアクセスする。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

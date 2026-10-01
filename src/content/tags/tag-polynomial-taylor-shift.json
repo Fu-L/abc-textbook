@@ -1,0 +1,59 @@
+{
+  "id": "tag-polynomial-taylor-shift",
+  "name": "factorial convolutionによる多項式Taylor shift",
+  "definition": "P(x+a) の全係数を二項展開し、階乗倍した係数列と a^i/i! の反転畳み込みへ変換して準線形時間で求める。",
+  "parentId": "tag-combinatorics-algebra-structure",
+  "prerequisiteTagIds": [
+    "tag-combinatorial-coefficients",
+    "tag-convolution"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "factorial-scaled sequence",
+      "polynomial coefficients",
+      "shift parameter"
+    ],
+    "triggerPatterns": [
+      "P\\(x\\+a\\) の全係数",
+      "binomial expansion becomes convolution",
+      "一つの平行移動を高速化"
+    ],
+    "invariantPatterns": [
+      "binomial coefficient factorization",
+      "coefficient reversal",
+      "degree bound"
+    ],
+    "goalPatterns": [
+      "shifted polynomial coefficients",
+      "準線形Taylor shift"
+    ],
+    "excludedPatterns": [
+      "一般の f\\(g\\(x\\)\\) を計算する",
+      "多数の点での値だけを求める"
+    ],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [
+    {
+      "tagId": "tag-convolution",
+      "type": "reduction",
+      "rationale": "P(x+a)の係数式を階乗で正規化し、係数反転を施した二列の一回の畳み込みへ意味保存変換する。"
+    }
+  ],
+  "learningOutcomeIds": [
+    "outcome-shift-polynomial-by-factorial-convolution"
+  ],
+  "representativeProblemIds": [
+    "abc323-g"
+  ],
+  "aliases": [
+    "factorial convolution shift",
+    "polynomial Taylor shift",
+    "多項式Taylor shift",
+    "多項式平行移動"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

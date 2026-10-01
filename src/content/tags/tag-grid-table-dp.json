@@ -1,0 +1,58 @@
+{
+  "id": "tag-grid-table-dp",
+  "name": "グリッド・多次元表の局所DP",
+  "definition": "グリッド経路や多次元表の依存関係をDAG順に並べ、隣接する小さな状態集合から各セル・各添字を更新する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [
+    "tag-dp-state-equivalence"
+  ],
+  "semanticSignature": {
+    "objectPatterns": [
+      "DAG",
+      "グリッド",
+      "セル",
+      "列",
+      "行",
+      "表"
+    ],
+    "triggerPatterns": [
+      "上と左",
+      "単調経路",
+      "小さい添字から",
+      "行ごとに",
+      "近傍状態"
+    ],
+    "invariantPatterns": [
+      "DAG順",
+      "依存先を計算済み",
+      "境界の番兵",
+      "局所遷移"
+    ],
+    "goalPatterns": [
+      "場合の数",
+      "多次元状態の値",
+      "最大正方形",
+      "経路の最適値"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-grid-table-dp"
+  ],
+  "representativeProblemIds": [
+    "abc227-f",
+    "abc311-e"
+  ],
+  "aliases": [
+    "grid DP",
+    "table DP",
+    "グリッドDP",
+    "二次元DP"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

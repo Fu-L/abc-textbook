@@ -1,0 +1,98 @@
+{
+  "id": "unit-bounded-enumeration",
+  "kind": "section",
+  "title": "候補数を界して全列挙・有限case分解する",
+  "parentId": "unit-chapter-modeling",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc219-e-problem-d3751faf2a5e10eeb5d4598775804d94d37a9e65155af89d89b3217d49f47b4b",
+    "source-abc219-editorial-2652-903281e108555192bca83c7928679324c5c0dde2dbef7f14d716583dd3f80943",
+    "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
+    "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed",
+    "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+    "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
+  ],
+  "tagIds": [
+    "tag-bounded-enumeration"
+  ],
+  "ownedTagIds": [
+    "tag-bounded-enumeration"
+  ],
+  "learningOutcomeIds": [
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/modeling/bounded-enumeration.md",
+  "problemIds": [
+    "abc219-e",
+    "abc227-f",
+    "abc234-e",
+    "abc254-e",
+    "abc260-f",
+    "abc272-e",
+    "abc312-e",
+    "abc313-f",
+    "abc328-e",
+    "abc343-e",
+    "abc347-f",
+    "abc369-e",
+    "abc386-e",
+    "abc442-g"
+  ],
+  "directProblemIds": [
+    "abc234-e",
+    "abc254-e",
+    "abc328-e",
+    "abc369-e",
+    "abc272-e",
+    "abc386-e",
+    "abc219-e",
+    "abc343-e",
+    "abc312-e",
+    "abc260-f",
+    "abc347-f",
+    "abc227-f",
+    "abc442-g",
+    "abc313-f"
+  ],
+  "relatedProblemIds": [
+    "abc220-g",
+    "abc223-e",
+    "abc226-f",
+    "abc227-h",
+    "abc234-ex",
+    "abc240-ex",
+    "abc246-f",
+    "abc248-e",
+    "abc257-f",
+    "abc258-f",
+    "abc270-f",
+    "abc271-ex",
+    "abc284-e",
+    "abc290-g",
+    "abc298-g",
+    "abc301-g",
+    "abc302-g",
+    "abc323-f",
+    "abc331-e",
+    "abc353-f",
+    "abc387-e",
+    "abc409-f",
+    "abc410-f",
+    "abc419-g",
+    "abc423-g",
+    "abc459-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。"
+}

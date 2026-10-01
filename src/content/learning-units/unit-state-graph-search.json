@@ -1,0 +1,77 @@
+{
+  "id": "unit-state-graph-search",
+  "kind": "subsection",
+  "title": "状態グラフのモデリングと探索",
+  "parentId": "unit-graph-search",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc241-editorial-3451-625adf44aa9c67024e10052849ef27e766fdad348a9d073622264ae8fad88011",
+    "source-abc241-f-problem-7a8f10675668b8b55c7beeb18e2aa2963c631763dcd108ce84dcd76aad1a5638",
+    "source-abc244-editorial-3599-31e608c39483172c4cb03453b14f042db185c12a49bdcbabfa8376f5cf85173c",
+    "source-abc244-f-problem-c639916f8a5ebb1a57e4806bd1bbe3cc4dc29844dbc86760776cc36b6fe3cdd6",
+    "source-abc257-editorial-4185-c3fb04f556015262925a65e6bf12351d871b3716e77dd6fc4e4bbf51a8112de9",
+    "source-abc257-g-problem-bfed9ff74f7b42b586492a4c2a60a24d45b4e07466b903b78455d5bd5f3a48a5"
+  ],
+  "tagIds": [
+    "tag-state-graph-search"
+  ],
+  "ownedTagIds": [
+    "tag-state-graph-search"
+  ],
+  "learningOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/state-graph-search.md",
+  "problemIds": [
+    "abc241-f",
+    "abc244-f",
+    "abc289-e",
+    "abc302-f",
+    "abc305-f",
+    "abc319-g",
+    "abc355-e",
+    "abc361-g",
+    "abc394-e",
+    "abc414-f",
+    "abc427-e",
+    "abc429-e",
+    "abc443-f",
+    "abc446-e",
+    "abc446-f"
+  ],
+  "directProblemIds": [
+    "abc446-e",
+    "abc289-e",
+    "abc429-e",
+    "abc302-f",
+    "abc305-f",
+    "abc394-e",
+    "abc446-f",
+    "abc244-f",
+    "abc427-e",
+    "abc241-f",
+    "abc443-f",
+    "abc319-g",
+    "abc355-e",
+    "abc414-f",
+    "abc361-g"
+  ],
+  "relatedProblemIds": [
+    "abc257-g",
+    "abc317-e",
+    "abc336-f",
+    "abc413-f",
+    "abc417-e"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "暗黙状態と重みなし合法遷移を頂点・辺へ写し、探索目的・訪問条件・frontierに応じてBFS・DFS・backtrackingを選ぶ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。"
+}

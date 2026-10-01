@@ -1,0 +1,81 @@
+{
+  "id": "unit-flow-matching",
+  "kind": "section",
+  "title": "フロー・マッチング・カットへ帰着する",
+  "parentId": "unit-chapter-graph",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "Eulerウォークの次数・偶奇条件。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+    "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+    "source-abc215-editorial-2505-739f01421358cdef8be39bc17210037343494e268605256b5ab7c88fa998748d",
+    "source-abc215-h-problem-f70b02b2b4fd3c9a1b9c69f8c2ad3d512bd7439abfa2d445be448c001881d377",
+    "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+    "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
+  ],
+  "tagIds": [
+    "tag-bipartite-matching-hall",
+    "tag-flow-feasibility-lower-bounds",
+    "tag-max-flow-min-cut",
+    "tag-min-cost-flow",
+    "tag-weighted-bipartite-matching"
+  ],
+  "ownedTagIds": [],
+  "learningOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-model-max-flow-min-cut",
+    "outcome-model-min-cost-flow",
+    "outcome-solve-bipartite-matching",
+    "outcome-solve-flow-with-lower-bounds",
+    "outcome-solve-weighted-bipartite-matching"
+  ],
+  "ownedLearningOutcomeIds": [],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/flow-matching.md",
+  "problemIds": [
+    "abc214-h",
+    "abc215-h",
+    "abc224-h",
+    "abc225-g",
+    "abc227-h",
+    "abc231-h",
+    "abc239-g",
+    "abc241-g",
+    "abc247-g",
+    "abc259-g",
+    "abc263-g",
+    "abc274-g",
+    "abc285-g",
+    "abc317-g",
+    "abc318-g",
+    "abc320-g",
+    "abc326-g",
+    "abc332-g",
+    "abc347-g",
+    "abc373-g",
+    "abc374-g",
+    "abc397-g",
+    "abc401-g",
+    "abc407-g",
+    "abc421-g",
+    "abc437-g",
+    "abc445-g",
+    "abc461-g"
+  ],
+  "directProblemIds": [],
+  "relatedProblemIds": [
+    "abc237-ex",
+    "abc313-ex",
+    "abc318-f",
+    "abc354-g",
+    "abc363-g",
+    "abc393-g",
+    "abc424-g"
+  ],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "頂点と辺のモデルを作れることを前提に、選択制約を容量・カット・マッチングへ翻訳する。"
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "evidenceId": "bootstrap-canonical-problem-placements",
+  "status": "passed",
+  "evidenceScope": "T049 taxonomy decisions and CorrectionImpact mapping completeness only. CorrectionImpact target verification stays pending until Problem authoring, content review, and the T160 derived-index projection are complete.",
+  "deferredVerificationTaskIds": [
+    "T057",
+    "T058",
+    "T065",
+    "T066",
+    "T067",
+    "T068",
+    "T069",
+    "T070",
+    "T071",
+    "T072",
+    "T073",
+    "T074",
+    "T075",
+    "T076",
+    "T077",
+    "T078",
+    "T160"
+  ],
+  "sourceBuild": {
+    "id": "final-taxonomy-build-initial",
+    "digest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
+    "acceptedAt": "2026-09-29T07:53:12.307Z"
+  },
+  "problemCount": 868,
+  "uniqueProblemCount": 868,
+  "primaryOutcomeReviewUnitBindingCount": 868,
+  "placementKindCounts": {
+    "full": 868,
+    "similar": 0,
+    "supplement": 0
+  },
+  "tagAssignmentCount": 1758,
+  "correctionImpactCount": 12,
+  "previewTaxonomyChangeCount": 12,
+  "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
+  "correctionImpactDigest": "9f481bcaf5a25e87f52a50fed89398744c2bd4b8125c4a53434754092a2a1064",
+  "checks": [
+    {
+      "checkId": "accepted-build-binding",
+      "passed": true
+    },
+    {
+      "checkId": "one-placement-per-problem",
+      "passed": true
+    },
+    {
+      "checkId": "primary-supporting-tag-disjointness",
+      "passed": true
+    },
+    {
+      "checkId": "canonical-outcome-closure",
+      "passed": true
+    },
+    {
+      "checkId": "unique-primary-outcome-home-unit",
+      "passed": true
+    },
+    {
+      "checkId": "full-similar-supplement-decision-evidence",
+      "passed": true
+    },
+    {
+      "checkId": "preview-correction-impact-mapping-coverage",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "tag-combinatorics-algebra-structure",
+  "name": "組合せ・多項式・線形代数への変換",
+  "definition": "数え上げや遷移を係数列・多項式・線形写像へ変換する。",
+  "parentId": null,
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "多項式",
+      "組合せ対象",
+      "行列"
+    ],
+    "triggerPatterns": [
+      "係数",
+      "数え上げ",
+      "線形"
+    ],
+    "invariantPatterns": [
+      "rank",
+      "全単射",
+      "次数"
+    ],
+    "goalPatterns": [
+      "代数化",
+      "係数を求める"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-transform-to-combinatorics-algebra"
+  ],
+  "representativeProblemIds": [
+    "abc230-h",
+    "abc276-ex"
+  ],
+  "aliases": [
+    "combinatorics and algebra",
+    "組合せ論・多項式・線形代数"
+  ],
+  "formerNames": [],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}

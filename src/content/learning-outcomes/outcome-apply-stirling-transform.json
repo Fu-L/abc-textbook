@@ -1,0 +1,10 @@
+{
+  "id": "outcome-apply-stirling-transform",
+  "statement": "冪基底と下降階乗基底の係数をStirling数で変換し、目的のrank別計数列を構成できる。",
+  "prerequisiteOutcomeIds": [],
+  "scopeIds": [
+    "abc278-ex",
+    "tag-stirling-transform",
+    "unit-combinatorial-coefficients"
+  ]
+}

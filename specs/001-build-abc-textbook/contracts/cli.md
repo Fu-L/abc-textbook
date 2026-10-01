@@ -120,7 +120,7 @@ npm run verify:release -- --commit HEAD
 - Problem集合とTechnique Inventory集合の一致。
 - 全ProblemのTag、Outcome、Placement、Learning Unit/Tag collection到達性。
 - ProblemAuthoringUnit、Source、Correction Impact。Claim、Example、Exercise、Assessment、Answerはauthoring unitの同一file transitionに含める。
-- Tag/Outcome/Unit DAGと生成順。
+- Tag/Outcome/Unitの3つの直接前提DAG、意味階層、独立した教科書掲載順と受理済みUnit内問題順。掲載順に親子subtreeの連続性やDAGのtopological orderを要求しない。
 - contest matrix、list alternative、search、LearningRecord shared route contract。
 - build、link、accessibility、client bundle、performance、zero-cost inventoryの適用check。
 

@@ -1,0 +1,43 @@
+{
+  "id": "unit-difference-constraints",
+  "kind": "subsection",
+  "title": "difference constraints・不等式系の最短路化",
+  "parentId": "unit-shortest-path-certificates",
+  "baselineId": "prereq-abc-advanced-v1",
+  "baselineVersion": "1.0.0",
+  "excludedTopics": [
+    "difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+  ],
+  "sourceRevisionIds": [
+    "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+    "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e",
+    "source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552",
+    "source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"
+  ],
+  "tagIds": [
+    "tag-difference-constraints"
+  ],
+  "ownedTagIds": [
+    "tag-difference-constraints"
+  ],
+  "learningOutcomeIds": [
+    "outcome-solve-difference-constraints"
+  ],
+  "ownedLearningOutcomeIds": [
+    "outcome-solve-difference-constraints"
+  ],
+  "contentPhase": "canonical_skeleton",
+  "docPath": "src/content/docs/learn/graph/difference-constraints.md",
+  "problemIds": [
+    "abc216-g",
+    "abc404-g"
+  ],
+  "directProblemIds": [
+    "abc216-g",
+    "abc404-g"
+  ],
+  "relatedProblemIds": [],
+  "examples": [],
+  "exercises": [],
+  "learningRationale": "最短路の緩和と負閉路を理解した後、差の不等式を辺へ写して制約系の可解性・極値・具体解を同じ不変条件で求める。"
+}

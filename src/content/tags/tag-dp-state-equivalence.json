@@ -1,0 +1,54 @@
+{
+  "id": "tag-dp-state-equivalence",
+  "name": "DPの最小十分状態",
+  "definition": "将来の選択肢と答えが同じprefixを同一状態に縮約する。",
+  "parentId": "tag-dp-state-transition",
+  "prerequisiteTagIds": [],
+  "semanticSignature": {
+    "objectPatterns": [
+      "prefix",
+      "未来",
+      "状態",
+      "過去"
+    ],
+    "triggerPatterns": [
+      "\\bdp\\b",
+      "動的計画",
+      "遷移"
+    ],
+    "invariantPatterns": [
+      "十分",
+      "同一視",
+      "圧縮",
+      "最後"
+    ],
+    "goalPatterns": [
+      "可否",
+      "場合の数",
+      "最適",
+      "状態数"
+    ],
+    "excludedPatterns": [],
+    "minimumDimensions": 2,
+    "requireObjectForStrictRecall": false
+  },
+  "relatedTags": [],
+  "learningOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "representativeProblemIds": [
+    "abc375-e",
+    "abc232-e",
+    "abc296-ex"
+  ],
+  "aliases": [
+    "minimal sufficient state",
+    "state-compressed DP",
+    "状態圧縮DP"
+  ],
+  "formerNames": [
+    "同値性によるDP状態圧縮"
+  ],
+  "lifecycle": "active",
+  "replacementTagIds": []
+}
