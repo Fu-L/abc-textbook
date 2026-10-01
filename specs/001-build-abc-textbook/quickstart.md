@@ -90,10 +90,10 @@ npm run test:contract -- canonical-taxonomy-materialization
 期待結果:
 
 - Tag/Outcome/Unitの前提DAGと、Tag・Unitの意味階層を独立に検証する。
-- primary Outcomeの唯一のowner Unitが各Problemのhomeとなり、additional-primary/supportingはrelated参照だけに使う。
+- primary Outcomeの唯一のowner Unitが各Problemのhomeとなる。additional-primaryは追加で学ぶ技能、supportingは既習技能として保持し、homeが別subtreeの問題をrelated参照へ含める。いずれもhomeを変えない。
 - sidebar/目次順で全Unitが一度ずつ現れ、Unit文書は直接前提と直接の依存先を複数件表示する。全体履修順や前後リンクを生成しない。
 - 目次順とUnit prerequisite DAGの編集でProblem配置は変わらない。
-- cycle、自己辺、未知参照、生成順改ざんを拒否する。
+- cycle、自己辺、未知参照、掲載順のUnit重複・欠落と所属章の不整合を拒否する。掲載順に親子subtreeの連続性やDAGのtopological orderを要求せず、概念上の親リンクと後にある前提へのリンクを確認する。
 - 新しい主成果・前提・解法・証明着眼点・漸近計算量を持つ問題をsimilar/supplementにできない。
 - preview taxonomyは直接canonicalへコピーせず、T159が全Inventoryから`FinalTaxonomyBuild`と全件`TaxonomyIntegrationMap`を生成し、review後にacceptしたdigestだけがT047–T050でmaterializeされる。
 
@@ -176,7 +176,8 @@ npm run test:integration -- correction-update
 
 期待結果:
 
-- Source Revision変更から本文、Claim、Example、Exercise、AnswerMaterial、Unit順、全派生indexへの影響を列挙する。
+- Source Revision変更からProblem本文・local block・配置、LearningUnit本文・任意のlocal block、前提policy、派生indexへの影響をowner付きlocatorで列挙し、全Source Revisionを保持する。Unit全順序を独立ownerにしない。
+- materializationでの写像完全性と実targetの検証を区別し、後続の本文執筆・前提/導線検証・数学的検証・公開index投影が未完了の影響は`pending`のまま保持する。
 - 一部だけ更新、古いsource参照、影響ID/path欠落を拒否する。
 - Problem IDが同じLearningRecordは変更しない。
 
@@ -188,7 +189,8 @@ npm run verify:merge -- --fixture tests/fixtures/reviews/logical-change
 
 期待結果:
 
-- Work ManifestがOutcome/Problem shard、Problem、Claim、Example、Exercise単位の非重複review unitを持ち、各shardに明示的なProblem ID、path、check、evidenceがある。
+- Problem authoringのWork ManifestはOutcome/Problem shardを非重複review unitとし、各shardに明示的なProblem ID、path、check、evidenceと同じ`indexDigest`を持たせる。Claim、Example、ExerciseはProblem本文にco-locateし、document-local keyを独立entity IDやreview unitにしない。
+- LearningUnit本文にはcanonical Unitごとに一件の別manifestを置き、章・構造Unitを含む全Unitを非重複に覆う。`full_authoring`への引継ぎ後も受理済みmetadata・配置・Unit内問題順を維持する。
 - 各shardを独立にbuild・review・previewでき、全shard joinで重複Problem、未割当Problem、path overlapが0件になる。
 - previewの仮entityはpromote、merge、split、retireのいずれかへ一度だけ対応付けられ、final taxonomyは全Inventoryから再計算される。
 - 通常fixtureは外部person IDなしで、manifest ownerのself-review、outcome coverage、全適用checkを記録して完了する。

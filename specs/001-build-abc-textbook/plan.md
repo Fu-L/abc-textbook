@@ -215,7 +215,7 @@ preview後も、公開taxonomyは全コーパスから再計算する。初期�
 6. domain別のLearning Unit概説と各Problemの解説を作り、全Problemが教科書順またはTag問題集から到達できることを検証する。
 7. T057/T075–T076/T078のfull-corpus content・explanation・mapping acceptance後にT160を実行し、preview fixtureへ接続していた共有catalog、route、matrix、search、Pagefind、sitemap/feedをcanonical full-corpus sourceへ一度だけ切り替えてdigestをfreezeする。T138/T140/T145/T146はこの固定projectionを検証・消費し、切替を暗黙に実行しない。
 
-Problemの唯一homeはprimary Outcomeのownerから導出し、Unit prerequisite DAGやsidebar順からは導出しない。読者向けの目次順は独立した編集データから反映する。Unit内Problem reading orderの再設計は別作業とする。
+Problemの唯一homeはprimary Outcomeのownerから導出し、Unit prerequisite DAGやsidebar順からは導出しない。読者向けの目次順は独立した編集データから反映する。Unit内Problem reading orderは受理済みの配列を本文執筆・公開projectionへ引き継ぎ、shardの公式順で並べ直さない。
 
 previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomyBuild`で全Inventoryを入力に一度だけ決定・review・acceptし、T047–T050がaccepted digestをmaterializeする。次の規則を必ず適用する。
 
@@ -227,15 +227,15 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 - final taxonomyの受理後にのみcanonical contentへmaterializeし、preview snapshotはimmutableな検証証跡として残す。previewの成果物を公開Releaseへ混在させない。
 - T050のcanonical skeletonはJSONを`contentPhase=canonical_skeleton`、Markdownを`draft: true`としてT160までroute・sidebar・Pagefindから除外する。後続のUnit執筆taskは担当Unitを`contentPhase=full_authoring`へ移して同じJSON/Markdownを引き継ぎ、materializerは本文byteを上書きせずtaxonomy projectionだけを検証する。
 
-コンテスト番号batchは公式metadata取得と進捗管理にだけ使い、taxonomyや章構成の境界には使わない。content work manifestはOutcome/Problem shardを一問単位の`ProblemAuthoringUnit`集合としてreview unitにし、scope、paths、前提、checks、review evidenceをcontent変更前に固定する。Claim、Example、Exercise、Assessment、Answerを独立review unitや別保存先へ分割しない。shardは他shardのcanonical fileを編集せず、共有LearningUnit/TagはUS2のfinal taxonomy joinだけが所有する。
+コンテスト番号batchは公式metadata取得と進捗管理にだけ使い、taxonomyや章構成の境界には使わない。content work manifestはOutcome/Problem shardを一問単位の`ProblemAuthoringUnit`集合としてreview unitにし、scope、paths、前提、checks、review evidenceをcontent変更前に固定する。Claim、Example、Exercise、Assessment、Answerを独立review unitや別保存先へ分割しない。shardは他shardのcanonical fileや共有LearningUnit/Tagを編集しない。分類metadataはaccepted final taxonomyからmaterializeし、LearningUnit本文はUnitごとのmanifestでT055–T056/T155–T158へ引き継ぐ。Problem shardの6作業分野と読者向け9章の区分は別々に保持する。
 
 ### Prerequisites, Placement, and Terminology
 
 共通前提baseline、problem placement decision table、glossaryを別々の唯一の正本にする。全LearningUnitとProblemAuthoringUnitはbaseline、追加前提または追加前提なし、対象外を直接参照する。placementは`full`既定で、主要解説と主成果・前提・解法・証明・漸近計算量が同じ場合だけ`similar`、単一の副次的技能だけを追加する場合だけ`supplement`を許す。どの行にも一意に一致しない場合は保留する。
 
-分類・前提・掲載表示を分離する。Tag / Outcome / LearningUnitの前提DAGは`src/content/policies/learning-prerequisites.json`に直接辺として保持し、全体順序・前後リンク・rankへ畳み込まない。分野別目次は`textbook-order.ts`を正本とし、Markdownの`sidebar.order`は`textbookIndex`から生成する。各Problemのhomeはprimary Outcomeの唯一のownerであり、additional-primary Outcomeは新たに学ぶ技能、supporting Outcomeは既習技能として別に表示する。Unit内Problem順は次ターンの作業対象とし、この変更では既存列をそのまま保つ。
+分類・前提・掲載表示を分離する。Tag / Outcome / LearningUnitの前提DAGは`src/content/policies/learning-prerequisites.json`に直接辺として保持し、全体順序・前後リンク・rankへ畳み込まない。分野別目次は`textbook-order.ts`を正本とし、Markdownの`sidebar.order`は`textbookIndex`から生成する。掲載順は親子subtreeの連続性やDAGのtopological orderを要求せず、章直下でないUnitの概念上の親と、後にある前提を明示的にリンクする。各Problemのhomeはprimary Outcomeの唯一のownerであり、additional-primary Outcomeは新たに学ぶ技能、supporting Outcomeは既習技能として別に表示する。Unit内Problem順は受理済みの配列を維持する。
 
-全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。DAGに全体順位を与えず、`textbook-order.ts`の編集だけでは前提やProblemのhomeを変更しない。Unit内Problem順の再設計は次ターンで行う。T160までdraftであることと、将来の公開projectionへの引継ぎは変えない。
+全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。DAGに全体順位を与えず、`textbook-order.ts`の編集だけでは前提やProblemのhomeを変更しない。対象色は全問題を解く難易度ではなく、difficulty/pointによる並べ替え基準にも使わない。T160までdraftとし、公開時には受理済みfull_authoring本文の公開状態とmaterialization検証の契約を合わせて切り替える。
 
 ### Initial Release Cutoff and Catch-up
 

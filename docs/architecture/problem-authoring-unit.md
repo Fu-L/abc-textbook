@@ -17,7 +17,7 @@ Claimは`ProblemAuthoringUnit`に、ExampleとExercise/Assessment/Answerは所�
 のExampleはリポジトリ相対の `executionTarget` を必ず持ち、`pseudocode` と `illustrative` は
 `executionTarget: null` とする。これにより、実行可能と宣言した例が実行対象なしで公開されない。
 
-LearningUnitは簡潔な概念説明と前提順の問題一覧を持つ。ExampleとExercise/Assessment/Answerは任意の通常本文であり、Outcomeごとの例・評価課題を要求しない。全Problemは固有のauthoring
+LearningUnitは簡潔な概念説明と受理済みの読む順に並べた問題一覧を持つ。意味階層、3つの直接前提DAG、編集上の教科書掲載順は独立に保持する。本文執筆はcanonical Unitごとのmanifestが所有し、`contentPhase=full_authoring`へ移して同じJSON/Markdownを引き継ぐ。ExampleとExercise/Assessment/Answerは任意の通常本文であり、Outcomeごとの例・評価課題を要求しない。全Problemは固有のauthoring
 unitを持ち、full解説を原則とする。CorrectionImpactも同じowner種別を持つ判別付きlocatorを正本とし、ProblemのsectionまたはLearningUnitの本文・local
 blockを実データへ解決する。document-local keyをCatalog全体のentity IDへ昇格させない。
 

@@ -224,7 +224,7 @@ Integration mapは仮DAGをfinalへコピーする記録ではない。final Inv
 | `taxonomyDigest` | final Tag/Outcome/LearningUnit候補、定義、成果、代表問題のdigest |
 | `tagDagDigest` / `learningUnitDagDigest` | 別々に再計算した前提DAGと未知参照・循環なしの証跡 |
 | `placementDigest` | 全ProblemPlacementのdigest。配置はprimary Outcome所有Unitから導出する |
-| `correctionImpactDigest` | taxonomy再編が本文、例、演習、解答、順序、索引へ与える影響の全件digest |
+| `correctionImpactDigest` | taxonomy再編が本文、任意の内包block、配置、前提policy、索引へ与える影響の全件digest。Unit全順序を独立ownerにしない |
 | `sourceRevisionIds` | 候補と分類判断の根拠。staleまたは矛盾した根拠は受理不可 |
 | `reviewEvidenceIds` | 固定policyに従ったcurrent-subject self/third-party evidence |
 | `status` / `acceptedAt` | `proposed`, `accepted`, `rejected`。`accepted`のみT047–T050がmaterialize可能 |
@@ -296,7 +296,6 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 | `exercises` | 任意の通常本文の演習。生成skeletonでは空配列。Outcomeごとの評価課題を要求しない |
 | `problemIds` | 自身のdirectProblemIdsと子のproblemIdsの和集合。coverageであり直接配置ではない |
 | `directProblemIds` | primary Outcomeを直接所有するhome UnitのProblem集合 |
-| `problemIds` | 自身と子孫がhome UnitであるProblem集合。直接配置を含むcoverage |
 | `relatedProblemIds` | homeが別subtreeにあり、当Unitのadditional-primaryまたはsupporting Outcomeを参照するProblem集合 |
 | `learningRationale` | Unit固有の学習意図。全体順序や隣接位置は符号化しない |
 
@@ -306,7 +305,7 @@ AssessmentはProblemAuthoringUnitまたはLearningUnitが所有するExercise内
 
 各Problemのhome Unitは`primaryOutcomeId`の唯一の所有Unitである。追加primary Outcomeは新しく学ぶ技能を、supporting Outcomeはすでに必要な技能を示し、home Unitを決めない。個別Problemのsupportingを理由にLearningUnit DAGへ辺を追加してはならない。Unitの`relatedProblemIds`はhome Unitのsubtree外から追加primaryまたはsupporting Outcomeを参照するProblemだけを含む。
 
-教科書掲載順は別の編集データ`TEXTBOOK_CHAPTERS`（`textbook-order.ts`）で章・構造Unitを含む全Unitをちょうど一度並べる。掲載順は意味階層と独立し、親と子孫を連続させる必要はない。章目次はこの順序を平坦な読書案内として表示し、章直下でないUnitには概念上の親をリンクする。親Unitのページは`parentId`に基づく下位単元を表示する。`textbookIndex`が文書の`sidebar.order`と章目次の順序を決める。習得対象色は`UNIT_LEARNING_TARGETS`（`unit-learning-targets.ts`）で全Unitに色と理由を対応付け、共通の色帯からレーティング表示を得る。どちらもLearningUnit JSONの新fieldではなく、文書生成用の編集データである。Unit内Problemの読む順はこの変更の範囲外とする。
+Unit内Problemの読む順は受理済みの配列を本文執筆・公開projectionへ引き継ぐ。Outcome/Problem shardの公式順は作業分割のための順序であり、Unit内の読む順を置き換えない。
 
 T050のcanonical skeletonは配置・順序と簡潔な概説を固定し、公開mappingが未受理の間は`draft: true`にする。`contentPhase=full_authoring`へ引き継いだ後は本文を上書きせず、所属・coverage・前提・出典・文書骨格の整合を確認する。T160が公開projectionを切り替える。
 
@@ -324,7 +323,7 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 | `checkIds` / `evidencePaths` | 概念・計算量・根拠の確認と、配置・順序・navigation reviewを追跡する |
 | `status` | `generated`, `in_progress`, `on_hold`, `reviewed`, `joined` |
 
-全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は3つの前提DAG・primary Outcome ownerによるhome配置・coverageと、教科書掲載順の親子連続性・対象色・直接前提リンク・導線を、T058は通常本文の数学的正確性を確認する。全Problemの固有解説はProblem authoring unitが所有する。
+全canonical LearningUnitとmanifestを一対一に対応させる。Tag / Outcomeの直接所属は分類metadataであり、教育課題の所有権を表さない。T057は3つの前提DAG・primary Outcome ownerによるhome配置・coverageと、全Unitが一度ずつ現れる掲載順・所属章と意味階層の一致・概念上の親リンク・対象色・直接前提リンク・導線を、T058は通常本文の数学的正確性を確認する。掲載順に親子subtreeの連続性を要求しない。全Problemの固有解説はProblem authoring unitが所有する。
 
 ### ProblemPlacement
 
@@ -380,7 +379,7 @@ T055–T056/T155–T158がfull-corpus LearningUnit本文を非重複に所有す
 
 ### SourceRecord / SourceRevision / CorrectionImpact
 
-SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。Problem pageまたは個別公式解説のSourceRevisionはofficialTaskIdを保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionではofficialTaskIdをnullにする。CorrectionImpactは本文と別の訂正ライフサイクルを持つ。sourceRevisionIdsは影響判断に使った重複のないSource Revisionを保持し、sourceRevisionIdを必ず含む。affectedContentLocatorsはproblem、learning_unit、problem_placement、learning_prerequisitesのownerを識別し、ProblemAuthoringUnitのsection/local block、LearningUnitの本文・Example・Exercise・Assessment・Answer、Problem配置、Unit prerequisite policyを対象にする。Unit prerequisite policyのlocatorはsrc/content/policies/learning-prerequisites.jsonを指す。Unit全順序・navigation metadataをCorrectionImpactのownerや派生indexとして保存しない。derivedIndexPathsは別個の派生indexを列挙する。previewで評価したProblemとLearning Unit候補の各surfaceはcanonical locator・prerequisite policy path・index pathへ完全に対応しなければならず、Learning Unit候補のprerequisite_graphはlearning_prerequisites locatorへ対応させる。standard_orderとaffectedLearningUnitOrderIdsは保持しない。T049で写像完全性をpassedにしてもverificationStatusはpendingとし、本文執筆、T057のcurriculum-routing検証、T058のOutcome到達度検証、T160の派生index投影を完了して実targetを検証した後にだけverifiedへ昇格する。各locatorが選択したownerの実データへ解決できない限り公開不可である。
+SourceRecordは公式URLと訂正系列、SourceRevisionは特定確認版のfingerprint、確認日時、利用条件を持つ。Problem pageまたは個別公式解説のSourceRevisionはofficialTaskIdを保持し、Contestのlabel-to-task-ID mappingおよび参照元Problemと一致しなければならない。Contest全体・task list・公式解説indexのrevisionではofficialTaskIdをnullにする。CorrectionImpactは本文と別の訂正ライフサイクルを持つ。sourceRevisionIdsは影響判断に使った重複のないSource Revisionを保持し、sourceRevisionIdを必ず含む。affectedContentLocatorsはproblem、learning_unit、problem_placement、learning_prerequisitesのownerを識別し、ProblemAuthoringUnitのsection/local block、LearningUnitの本文・任意のExample・Exercise・Assessment・Answer、Problem配置、Unit prerequisite policyを対象にする。Unit prerequisite policyのlocatorはsrc/content/policies/learning-prerequisites.jsonを指す。Unit全順序・navigation metadataをCorrectionImpactのownerや派生indexとして保存しない。derivedIndexPathsは別個の派生indexを列挙する。previewで評価したProblemとLearning Unit候補の各surfaceはcanonical locator・prerequisite policy path・index pathへ完全に対応しなければならず、Learning Unit候補のprerequisite_graphはlearning_prerequisites locatorへ対応させる。standard_orderとaffectedLearningUnitOrderIdsは保持しない。T049で写像完全性をpassedにしてもverificationStatusはpendingとし、本文執筆、T057の前提・掲載順・導線の検証、T058の通常本文の数学的検証、T160の派生index投影を完了して実targetを検証した後にだけverifiedへ昇格する。各locatorが選択したownerの実データへ解決できない限り公開不可である。
 
 ## 5. Learning records
 
