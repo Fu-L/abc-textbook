@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-exploit-modular-periodicity"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/modular-periodicity.md",
   "problemIds": [
     "abc228-e",

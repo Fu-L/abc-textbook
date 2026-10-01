@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-encode-labeled-trees-by-prufer-code"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/prufer-code.md",
   "problemIds": [
     "abc303-ex"

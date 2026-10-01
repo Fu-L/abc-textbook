@@ -22,6 +22,16 @@ sidebar:
 
 - 対象頂点と必要なLCAだけをEuler順・stackで結び、元の木上pathを保つvirtual treeを構成できる。
 
+## 考え方
+
+指定したk頂点をDFS順に並べ、隣接頂点のLCAを足すと、必要な分岐だけを持つ小さな木を作れる。省いた祖先pathを重み付き一辺へ写して、queryごとの木DPを小さくする。
+
+## 成立条件と計算量
+
+追加LCAを含む頂点数はO(k)。LCA一回O(log N)なら構築O(k log k+k log N)。辺の長さやpath上の属性を保存し、指定頂点の重複を除く。query間で古い辺や印を残さない。
+
+概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

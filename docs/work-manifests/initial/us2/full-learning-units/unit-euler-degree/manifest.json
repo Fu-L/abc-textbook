@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-euler-degree",
+  "taskId": "T155",
+  "scopeDigest": "833db071072b6f34977289b55cb1b3916ed46174615bff16424efe92f6ad30d7",
+  "digest": "07a4403eb197146bf7776620e08fe9032df8bce8a1d09bbe53c98ef1ac7f4f6f",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [],
+  "outcomeImpact": {
+    "kind": "none",
+    "rationale": "The change is infrastructure-only and does not alter learner-visible outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-euler-degree",
+      "changeKind": "mixed",
+      "paths": [
+        "src/content/docs/learn/graph/euler-degree.md",
+        "src/content/learning-units/unit-euler-degree.json"
+      ],
+      "itemIds": ["unit:unit-euler-degree"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

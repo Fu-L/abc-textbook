@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T055-unit-string-prefix-automata",
+  "taskId": "T055",
+  "scopeDigest": "d2b2e6887955af70437ccd66b53051c39a555c7b6f600a7d9caa001f69a666f6",
+  "digest": "24ce1c682f143f016a9153d6abb7c35fbd324f3bdc3edcb982bb67f026299566",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [],
+  "outcomeImpact": {
+    "kind": "none",
+    "rationale": "The change is infrastructure-only and does not alter learner-visible outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T055-unit-string-prefix-automata",
+      "changeKind": "mixed",
+      "paths": [
+        "src/content/docs/learn/string/string-prefix-automata.md",
+        "src/content/learning-units/unit-string-prefix-automata.json"
+      ],
+      "itemIds": ["unit:unit-string-prefix-automata"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

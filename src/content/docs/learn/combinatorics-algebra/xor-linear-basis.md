@@ -23,6 +23,16 @@ sidebar:
 - 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 - XOR部分空間の基底をpivot bitごとにreduced formへ整え、高位bitから基底を加減してaffine cosetの最小整数代表を一意に得る。正規化写像の線形性を示し、二値のXOR最小化を各値の正規化へ分離できる。
 
+## 考え方
+
+整数をF₂ベクトルと見なし、最高bitごとにpivotを保存する。新しい値からpivotをXORして消し、最後に非零なら独立な基底を追加する。各消去がspanを保つため表現可能性を判定できる。
+
+## 成立条件と計算量
+
+B bit・N値でO(NB)、基底空間O(B)。coset最小代表は高位pivotで値を小さくする向きへ消去し、reduced formで一意な代表を得る。最小代表への写像と、自由な二値のXOR比較を同じ操作と誤解しない。
+
+概念上の親: [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

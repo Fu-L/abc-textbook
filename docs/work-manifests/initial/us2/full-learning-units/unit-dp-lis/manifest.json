@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T156-unit-dp-lis",
+  "taskId": "T156",
+  "scopeDigest": "2ecd74c13b1fcb66efa6c33ee118a18aef1093420901643f512cba4504ffb838",
+  "digest": "11666125168d07a87810684333f48d9797fb670a5a1d6f20fcf8b993a4d2feb9",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-design-lis-frontier"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T156-unit-dp-lis",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/dynamic-programming/dp-lis.md",
+        "src/content/learning-units/unit-dp-lis.json"
+      ],
+      "itemIds": ["unit:unit-dp-lis"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-design-lis-frontier"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

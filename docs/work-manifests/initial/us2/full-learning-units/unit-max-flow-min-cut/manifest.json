@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-max-flow-min-cut",
+  "taskId": "T155",
+  "scopeDigest": "201220403a87fd4792b722f004b87ff20c71bf3dd729564f96db808818d79ac3",
+  "digest": "7b2c344cd7fa19cf8c0db3e9e083445f47173631421b71463b15184e9fc988f3",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-max-flow-min-cut",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/graph/max-flow-min-cut.md",
+        "src/content/learning-units/unit-max-flow-min-cut.json"
+      ],
+      "itemIds": ["unit:unit-max-flow-min-cut"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

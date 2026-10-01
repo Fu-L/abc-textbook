@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-path-matching-by-contraction"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/path-matching-contraction.md",
   "problemIds": [
     "abc218-h",

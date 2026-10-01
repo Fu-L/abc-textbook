@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-local-sequence-links"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/linked-list-index.md",
   "problemIds": [
     "abc344-e",

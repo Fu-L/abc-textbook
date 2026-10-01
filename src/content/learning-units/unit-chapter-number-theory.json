@@ -67,7 +67,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-transform-to-number-theory"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/index.md",
   "problemIds": [
     "abc212-g",

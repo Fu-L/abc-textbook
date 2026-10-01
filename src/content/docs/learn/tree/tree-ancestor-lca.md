@@ -22,6 +22,16 @@ sidebar:
 
 - binary lifting等を前計算し、level ancestor・LCA・木距離をqueryとして取得できる。
 
+## 考え方
+
+二頂点の深さを揃え、上位から同じ祖先へ近づけることでLCAを求める。binary liftingでは2^k上の祖先を保存し、同時に飛び越えてよい区間を判定する。
+
+## 成立条件と計算量
+
+O(N log N)前処理・空間、O(log N)query。Euler tourとRMQなら別の時間・空間 tradeoffになる。根の祖先、祖先同士のquery、kが深さを超える場合を明示する。
+
+概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

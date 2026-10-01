@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T156-unit-dp-transition-optimization",
+  "taskId": "T156",
+  "scopeDigest": "35476557b798ce006e901b50b4c1ff033f78b6016497b7d6a4328904e158f32f",
+  "digest": "a5c0c4df233db73e66aa852b92094bc63ce5d1bd14f45f73adffa545666fa56d",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-close-eventual-dp-tail",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-normalize-common-dp-action",
+    "outcome-slide-transition-recurrence",
+    "outcome-subtract-exception-transitions"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T156-unit-dp-transition-optimization",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/dynamic-programming/dp-transition-optimization.md",
+        "src/content/learning-units/unit-dp-transition-optimization.json"
+      ],
+      "itemIds": ["unit:unit-dp-transition-optimization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-close-eventual-dp-tail",
+        "outcome-compress-dp-sufficient-aggregates",
+        "outcome-factor-and-accelerate-transitions",
+        "outcome-normalize-common-dp-action",
+        "outcome-slide-transition-recurrence",
+        "outcome-subtract-exception-transitions"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

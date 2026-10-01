@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-meet-in-the-middle",
+  "taskId": "T056",
+  "scopeDigest": "232b887c6ee4ca50fc272074458f5f537999a7380cf294eedbe9def71e284a2a",
+  "digest": "14e083361f319aacadf2c40a36142851e1dfbedc647a94e21c8977f092b06035",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-split-enumeration-space"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-meet-in-the-middle",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/meet-in-the-middle.md",
+        "src/content/learning-units/unit-meet-in-the-middle.json"
+      ],
+      "itemIds": ["unit:unit-meet-in-the-middle"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-split-enumeration-space"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

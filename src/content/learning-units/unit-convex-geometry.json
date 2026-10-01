@@ -26,7 +26,7 @@
     "outcome-restrict-geometric-candidates-to-boundary"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/convex-geometry.md",
   "problemIds": [
     "abc244-ex",

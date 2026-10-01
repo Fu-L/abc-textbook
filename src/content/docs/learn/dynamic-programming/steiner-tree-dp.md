@@ -22,6 +22,16 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 
 - terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+端子集合Sをつなぎ、根位置vで終わる最小費用dp[S][v]を持つ。同じvで集合を二分して合成し、その後最短路で根位置を動かす。
+
+## 成立条件と計算量
+
+k端子・V頂点E辺なら典型的にO(3^k V+2^k(E+V) log V)。非負重みを仮定する最短路部分と集合合成を区別する。端子重複、単点集合の初期値、同じ集合の根移動を一巡で共有する。
+
+概念上の親: [動的計画法](/learn/dynamic-programming/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

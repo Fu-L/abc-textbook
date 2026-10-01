@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-chapter-tree",
+  "taskId": "T155",
+  "scopeDigest": "dd8ba48b61a2f6f6a34068af6b9418accedd5499b809efab490a4c9a767cf2ce",
+  "digest": "dbec438ac99d9fbacd3c91fc388b9a69fae456c00890bffabd82a60358f36bba",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-model-and-exploit-tree"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-chapter-tree",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/tree/index.md",
+        "src/content/learning-units/unit-chapter-tree.json"
+      ],
+      "itemIds": ["unit:unit-chapter-tree"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-model-and-exploit-tree"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

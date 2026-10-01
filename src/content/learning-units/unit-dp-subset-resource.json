@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-resource-dp"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-subset-resource.md",
   "problemIds": [
     "abc216-f",

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-tree-ancestor-lca",
+  "taskId": "T155",
+  "scopeDigest": "fd8c41e5645a8b9aeef6924722cbd5303a7d0994dfbfe526da8637667c38626a",
+  "digest": "56728bf779760fd81dc0885e5baf6936b2f9c533987df1b7679d843b411f4575",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-answer-tree-ancestor-queries"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-tree-ancestor-lca",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/tree/tree-ancestor-lca.md",
+        "src/content/learning-units/unit-tree-ancestor-lca.json"
+      ],
+      "itemIds": ["unit:unit-tree-ancestor-lca"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-answer-tree-ancestor-queries"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T055-unit-geometry-primitives",
+  "taskId": "T055",
+  "scopeDigest": "c737e1d2f785b9f194131c0be4e14210f3ac9a82b6b9792b9bd5ae93fff7c683",
+  "digest": "dbf0d99191370a67adb25e54802c022dbe889e555b30054d2d63174d465093a7",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T055-unit-geometry-primitives",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
+        "src/content/learning-units/unit-geometry-primitives.json"
+      ],
+      "itemIds": ["unit:unit-geometry-primitives"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

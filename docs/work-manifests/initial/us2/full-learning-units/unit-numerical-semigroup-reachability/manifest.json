@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-numerical-semigroup-reachability",
+  "taskId": "T158",
+  "scopeDigest": "5276d76366a6444e90e49aa3731ee34a1feafef680ae5acf40dcc5506f680e98",
+  "digest": "44004f747c25b39611e6495eddafdf75bd246926d3c5380ea299ccec0d896f03",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-bound-reachability-in-numerical-semigroup"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-numerical-semigroup-reachability",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/number-theory/numerical-semigroup-reachability.md",
+        "src/content/learning-units/unit-numerical-semigroup-reachability.json"
+      ],
+      "itemIds": ["unit:unit-numerical-semigroup-reachability"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-bound-reachability-in-numerical-semigroup"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

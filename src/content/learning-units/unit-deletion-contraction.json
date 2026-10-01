@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-recur-by-edge-deletion-contraction"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/deletion-contraction.md",
   "problemIds": [],
   "directProblemIds": [],

@@ -36,7 +36,7 @@
     "outcome-maintain-endpoint-run-partition",
     "outcome-maintain-ordered-interval-partition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/ordered-interval-partition.md",
   "problemIds": [
     "abc255-ex",

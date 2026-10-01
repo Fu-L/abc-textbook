@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-exponentiate-associative-composition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/monoid-exponentiation.md",
   "problemIds": [
     "abc448-e"

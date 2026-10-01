@@ -28,7 +28,7 @@
     "outcome-evaluate-at-geometric-points",
     "outcome-evaluate-polynomial-at-many-points"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md",
   "problemIds": [
     "abc272-ex"

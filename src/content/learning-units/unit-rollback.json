@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-rollback-reversible-updates"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/rollback.md",
   "problemIds": [
     "abc218-g",

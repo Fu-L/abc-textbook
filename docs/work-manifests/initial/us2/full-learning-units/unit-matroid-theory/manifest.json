@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-matroid-theory",
+  "taskId": "T158",
+  "scopeDigest": "bd5f5e61b89ab1568bff43aea238efac6739984d0a2deae3e1be16e022fc93a2",
+  "digest": "400deac4da1c52e9a55b0c8833bddbc16bcfd6a8a43b2482879154ca213cae44",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [],
+  "outcomeImpact": {
+    "kind": "none",
+    "rationale": "The change is infrastructure-only and does not alter learner-visible outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-matroid-theory",
+      "changeKind": "mixed",
+      "paths": [
+        "src/content/docs/learn/combinatorics-algebra/matroid-theory.md",
+        "src/content/learning-units/unit-matroid-theory.json"
+      ],
+      "itemIds": ["unit:unit-matroid-theory"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

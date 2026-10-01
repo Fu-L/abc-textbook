@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-directed-condensation",
+  "taskId": "T155",
+  "scopeDigest": "677ac4b046644b99eab896dc6b4f7ec237d43953e68130477150d51d1987fc9f",
+  "digest": "56ecd508d99c4945def87971d5cbb07b209c2e9170ad678ac86501a7df45f7fe",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [],
+  "outcomeImpact": {
+    "kind": "none",
+    "rationale": "The change is infrastructure-only and does not alter learner-visible outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-directed-condensation",
+      "changeKind": "mixed",
+      "paths": [
+        "src/content/docs/learn/graph/directed-condensation.md",
+        "src/content/learning-units/unit-directed-condensation.json"
+      ],
+      "itemIds": ["unit:unit-directed-condensation"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

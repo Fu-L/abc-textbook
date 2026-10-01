@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-laminar-interval-containment-tree"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/laminar-interval-containment-tree.md",
   "problemIds": [
     "abc405-f"

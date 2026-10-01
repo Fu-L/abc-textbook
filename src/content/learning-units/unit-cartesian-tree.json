@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-cartesian-tree-decomposition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/cartesian-tree.md",
   "problemIds": [
     "abc420-f",

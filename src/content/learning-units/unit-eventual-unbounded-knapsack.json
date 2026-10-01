@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-stabilize-unbounded-knapsack-by-best-density"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
   "problemIds": [
     "abc310-ex",

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T157-unit-ordered-interval-partition",
+  "taskId": "T157",
+  "scopeDigest": "a037c65de29bf2c122883663f34c826c5c789e82bcf57930edb7feff306f12a8",
+  "digest": "67158c4cb07488c7ebd29ef8348504378ec38c5aa37fe84b2ee2260d4ef8b5d4",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
+    "outcome-maintain-ordered-interval-partition"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T157-unit-ordered-interval-partition",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/query/ordered-interval-partition.md",
+        "src/content/learning-units/unit-ordered-interval-partition.json"
+      ],
+      "itemIds": ["unit:unit-ordered-interval-partition"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-maintain-dynamic-interval-union-length",
+        "outcome-maintain-endpoint-run-partition",
+        "outcome-maintain-ordered-interval-partition"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

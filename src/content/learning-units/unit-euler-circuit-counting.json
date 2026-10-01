@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-count-euler-circuits-by-best"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/euler-circuit-counting.md",
   "problemIds": [
     "abc336-g"

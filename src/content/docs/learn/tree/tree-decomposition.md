@@ -16,6 +16,16 @@ sidebar:
 
 基本的な木DFSを土台に、binary liftingでancestor・LCAを問い合わせ、Euler in/outで部分木を区間化し、HLDでpathをheavy path列へ分け、対象頂点と必要なLCAだけをvirtual treeへ縮約する。包含関係を木に変換する方法は独立した節で学ぶ。
 
+## 考え方
+
+木上の集合を配列区間や少数のpathへ写すと、query章の構造を再利用できる。Euler順は部分木、HLDはpath、virtual treeは少数の指定頂点という異なる対象を圧縮する。
+
+## 成立条件と計算量
+
+変換後に保存される関係を確かめる。Euler添字の差は木距離ではなく、HLD上の連結区間の積には方向がある。前処理と一queryの分割数を別に評価して子単元を選ぶ。
+
+概念上の親: [木構造](/learn/tree/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

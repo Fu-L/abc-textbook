@@ -22,6 +22,18 @@ sidebar:
 
 - 順列をYoung図形と二つの標準盤へ全単射し、LIS/LDS制約をshape制約とideal DPへ変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+列の要素を行へ挿入し、置き換えられた値を次の行へ送るRSK対応で、順列を同じ形のtableau対へ写す。第一行長とLIS長の一致により、部分列制約をYoung diagramの形へ変えられる。
+
+## 成立条件と計算量
+
+同値要素の挿入規則で狭義・非狭義の対応が変わる。hook-length公式はstandard tableauの個数であり、一般の文字列の個数には別の係数が必要。形の列挙数とtableau評価費用を合わせる。
+
+順列では一つのshape λに対応する二つのstandard tableauを選ぶため、shapeごとの順列数は(f^λ)²である。第一行長がLIS、第一列長がLDSに対応し、許すshapeを分類できる。追加の相対順序条件が付く場合はhook-lengthだけでなく、既に配置したcellが下方閉集合となるideal DPへ戻る。
+
+概念上の親: [組合せ・多項式・線形代数](/learn/combinatorics-algebra/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

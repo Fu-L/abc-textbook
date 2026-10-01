@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-sum-multiplicative-function-by-min25-sieve"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/min25-sieve.md",
   "problemIds": [
     "abc370-g"

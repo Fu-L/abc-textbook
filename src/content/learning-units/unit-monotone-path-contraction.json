@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-contract-monotone-paths-with-jump-pointers"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/monotone-path-contraction.md",
   "problemIds": [
     "abc295-g"

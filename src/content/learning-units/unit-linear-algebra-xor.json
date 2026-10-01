@@ -29,7 +29,7 @@
     "outcome-solve-linear-system-and-rank"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
   "problemIds": [
     "abc212-h",

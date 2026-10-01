@@ -30,7 +30,7 @@
     "outcome-maintain-xor-linear-basis",
     "outcome-minimize-xor-coset-representative"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
   "problemIds": [
     "abc223-h",

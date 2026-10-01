@@ -22,7 +22,7 @@
     "outcome-compare-sequences-by-rolling-fingerprint"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/string-hash.md",
   "problemIds": [
     "abc274-ex"

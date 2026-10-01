@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-characterize-integer-solvability"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/gcd-diophantine.md",
   "problemIds": [
     "abc271-ex",

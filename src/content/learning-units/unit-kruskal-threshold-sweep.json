@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-sweep-connectivity-by-kruskal-threshold"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
   "problemIds": [
     "abc235-e",

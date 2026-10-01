@@ -27,7 +27,7 @@
     "outcome-construct-euler-trail-or-circuit"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/euler-degree.md",
   "problemIds": [
     "abc286-g",

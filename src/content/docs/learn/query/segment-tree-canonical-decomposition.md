@@ -22,6 +22,16 @@ sidebar:
 
 - 区間をO(log N)個のcanonical nodeへ分解してrange object・時間生存区間・range edgeを配置し、point queryではroot-to-leaf path上のobjectを集められる。
 
+## 考え方
+
+区間をSegment Treeの互いに素な最大節点区間へ分ける。O(log N)個の節点を使うことで、区間を対象とする制約や辺を個別要素すべてへ作らず表現できる。
+
+## 成立条件と計算量
+
+Q区間の分解数はO(Q log N)。区間graphへの帰着では上向き・下向きの補助辺を分ける。query合成と補助graph構築は用途が違うため、最終graphの頂点・辺数と探索費用も数える。
+
+概念上の親: [結合的な区間要約・区間分解・合成](/learn/query/monoid-segment-tree/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

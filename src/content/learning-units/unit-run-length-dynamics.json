@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-evolve-run-length-encoded-state"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/run-length-dynamics.md",
   "problemIds": [
     "abc313-e"

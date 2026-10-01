@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T157-unit-sequence-fingerprint",
+  "taskId": "T157",
+  "scopeDigest": "93e57251994524dc9d07279783680f1e8aa3daad1a24602b52297e432facb155",
+  "digest": "43a111320c8bd2df9aecf19f3e7d69658abe1b5360e4c73dcb2c16fbf60de549",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-compare-sequences-by-rolling-fingerprint"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T157-unit-sequence-fingerprint",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/query/sequence-fingerprint.md",
+        "src/content/learning-units/unit-sequence-fingerprint.json"
+      ],
+      "itemIds": ["unit:unit-sequence-fingerprint"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-compare-sequences-by-rolling-fingerprint"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

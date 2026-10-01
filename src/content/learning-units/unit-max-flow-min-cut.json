@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-model-max-flow-min-cut"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/max-flow-min-cut.md",
   "problemIds": [
     "abc225-g",

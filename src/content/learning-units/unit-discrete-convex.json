@@ -30,7 +30,7 @@
     "outcome-solve-isotonic-regression-by-pav"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/discrete-convex.md",
   "problemIds": [
     "abc216-e",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-recover-valid-witness"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/constructive-witness.md",
   "problemIds": [
     "abc232-h",

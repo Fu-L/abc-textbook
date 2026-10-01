@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T055-unit-recursive-compressed-string",
+  "taskId": "T055",
+  "scopeDigest": "c5e3aa6b6ab472abe809552b9a28ef3341012bb646ae7c5d9ad74262d9d7f45d",
+  "digest": "43fa363ec2c4f0578c88bcf1afa51cb058f003d5508071b70671b10c2cbcca8d",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T055-unit-recursive-compressed-string",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/string/recursive-compressed-string.md",
+        "src/content/learning-units/unit-recursive-compressed-string.json"
+      ],
+      "itemIds": ["unit:unit-recursive-compressed-string"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compress-sparse-keys"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/coordinate-compression.md",
   "problemIds": [],
   "directProblemIds": [],

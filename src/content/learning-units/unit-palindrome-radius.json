@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-characterize-palindrome-intervals"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/palindrome-radius.md",
   "problemIds": [
     "abc349-g",

@@ -22,6 +22,16 @@ sidebar:
 
 - 対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。
 
+## 考え方
+
+比較可能関係を左右コピーの二部graphへ移すと、chain分割とmatchingが対応する。Dilworthの定理により最小chain数と最大antichainサイズが一致する。
+
+## 成立条件と計算量
+
+順序関係を作る費用とmatching費用を合わせる。DAGの元の辺だけでなく到達関係が必要な場合は推移閉包を含める。重み付きantichainには容量つき帰着など追加の議論が要り、単純なN−matchingだけでは済まない。
+
+概念上の親: [組合せ・多項式・線形代数](/learn/combinatorics-algebra/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

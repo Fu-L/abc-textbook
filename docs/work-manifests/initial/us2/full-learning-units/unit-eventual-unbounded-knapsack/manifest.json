@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T156-unit-eventual-unbounded-knapsack",
+  "taskId": "T156",
+  "scopeDigest": "41fca3e8f718202b7ceb23f3ed527b0004e6d81132a5c12bd8809970ce7e4eec",
+  "digest": "feb6296d0a71d0590695c300bc24cf6a8136b49a39e185d940d41c73f4854206",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-stabilize-unbounded-knapsack-by-best-density"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T156-unit-eventual-unbounded-knapsack",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
+        "src/content/learning-units/unit-eventual-unbounded-knapsack.json"
+      ],
+      "itemIds": ["unit:unit-eventual-unbounded-knapsack"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-stabilize-unbounded-knapsack-by-best-density"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

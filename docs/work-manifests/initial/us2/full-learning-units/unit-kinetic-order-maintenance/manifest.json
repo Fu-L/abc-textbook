@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-kinetic-order-maintenance",
+  "taskId": "T056",
+  "scopeDigest": "3468b69fe1af1c07c83758cb496123a15afc1a49ccd44596dc960cc4dfda78f2",
+  "digest": "8e1fdfd1d4909af7b213f8b7cfb085ead82f00a0509c7ad8002ea241a2f8c140",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-maintain-order-through-crossing-events"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-kinetic-order-maintenance",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/kinetic-order-maintenance.md",
+        "src/content/learning-units/unit-kinetic-order-maintenance.json"
+      ],
+      "itemIds": ["unit:unit-kinetic-order-maintenance"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-maintain-order-through-crossing-events"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

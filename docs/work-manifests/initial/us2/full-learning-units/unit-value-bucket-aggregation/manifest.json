@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T157-unit-value-bucket-aggregation",
+  "taskId": "T157",
+  "scopeDigest": "fdde99e5a4ff977f735d1b2542ec2bd2325fe1568df9863e5a47cba69b66243d",
+  "digest": "5f5428bd01c4916721cf98c72b22dd88ba2cdcdfa12c32275a43e16eb2068c6e",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-aggregate-value-prefix-by-buckets"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T157-unit-value-bucket-aggregation",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/query/value-bucket-aggregation.md",
+        "src/content/learning-units/unit-value-bucket-aggregation.json"
+      ],
+      "itemIds": ["unit:unit-value-bucket-aggregation"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-aggregate-value-prefix-by-buckets"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

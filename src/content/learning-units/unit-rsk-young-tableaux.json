@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-translate-sequences-by-rsk"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md",
   "problemIds": [
     "abc378-g"

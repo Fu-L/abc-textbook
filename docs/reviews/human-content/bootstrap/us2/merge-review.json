@@ -1,0 +1,3903 @@
+{
+  "schemaVersion": "3.0.0",
+  "id": "merge-review-bootstrap-us2-full-learning-units",
+  "changeId": "change-issue-46-full-learning-units",
+  "logicalChangeSubjectDigest": "19befbb82c7d4c439e5ede1b3810167759102b9e207e621aba5638ef6075e6ed",
+  "subjectFiles": [
+    {
+      "path": "docs/operations/full-learning-units.md",
+      "sha256": "6a72f4187bdfe5778a64940a0342032b29467fe6799f6ad52b53a4ea18a70d00",
+      "byteLength": 2040
+    },
+    {
+      "path": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
+      "sha256": "7da542a94b49464675e52b85d690efa4730da5774ff3bdafdf50d3b8900f59b0",
+      "byteLength": 6771
+    },
+    {
+      "path": "docs/verification/bootstrap/learning-unit-content.json",
+      "sha256": "b783ec42838f8d20208838d5be7918dce0819cdf79cc5af1bfcdae63f76e04ec",
+      "byteLength": 463695
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
+      "sha256": "8d7c1be4c838ba69c31a8f4b0fc869811826519d59551be5ed3050d437f84c2c",
+      "byteLength": 67082
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/index.json",
+      "sha256": "2e1225706d6c9186f2f8ba1f07d83324ac998d07c39b908fc6fd3aa9117cc2f9",
+      "byteLength": 124718
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-additive-expectation-potential/manifest.json",
+      "sha256": "4bd35e2c3331e04c8f23965ec5dfa1b2b84edba8db0479cf8890f0585d59a385",
+      "byteLength": 1905
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-additive-tree-metric-reconstruction/manifest.json",
+      "sha256": "216e60e16d5dd1b13c67415185513be5f2c51907728ebd3fbada5fba58f41850",
+      "byteLength": 1903
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-aho-corasick/manifest.json",
+      "sha256": "3b2baceed6d65e28ede85420fecb91f56c6735fda07c447b858cf2f767734404",
+      "byteLength": 1774
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-amortized-monotone-progress/manifest.json",
+      "sha256": "afc085b3e8f4f016a4e125241141426e7949265a4dd7d73eaed0e50065075dc1",
+      "byteLength": 1843
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-automaton-dp/manifest.json",
+      "sha256": "40943854995825777be356dcb72e403396b38fd7f8f8f10e186eec493af2b4d2",
+      "byteLength": 1781
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-automaton-subset-construction/manifest.json",
+      "sha256": "b10132150add094812d1b432fc6099ec7232d9bad68e4b762f2743d56b00b2ae",
+      "byteLength": 1865
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-baby-step-giant-step/manifest.json",
+      "sha256": "0402d9923cb254c0a01fa824e415b380c4f3154b4077c08e6e96f9e1b45b325b",
+      "byteLength": 1807
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-backtracking-search/manifest.json",
+      "sha256": "60679f74dc0d6062605136485b88c386d78447609cec63c12c60e659d3dab0e0",
+      "byteLength": 1825
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-basic-convex-optimization/manifest.json",
+      "sha256": "5c9e013a4a281df6e90bbe43b3e1e85d039edcac898b89b2203b042169bcb46d",
+      "byteLength": 1866
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-binary-lifting/manifest.json",
+      "sha256": "bf8390b822eda462e1f589291f6e843c3f33d5c1f3245973dd8f8e78f4061202",
+      "byteLength": 1783
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-binary-trie/manifest.json",
+      "sha256": "2d38093cda4bb5d1835850407a0226c49f4a4719be8e3545ee7f0df6c998e5f1",
+      "byteLength": 1768
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bipartite-matching/manifest.json",
+      "sha256": "36dec1049247326062b273650b79ea34e60313c5de99d6a66d68e0609c25685f",
+      "byteLength": 1937
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bipartite-structure/manifest.json",
+      "sha256": "a63a77c2dc89b849b7e4bc693150d263774797e0474854fc005c13a105ee7034",
+      "byteLength": 1996
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bitset-word-parallel/manifest.json",
+      "sha256": "5a2dab9f955f3188b2a229927d0390d744c911f8e4d16ddcc64b9f4b6fc328e7",
+      "byteLength": 1831
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bitwise-greedy-feasibility/manifest.json",
+      "sha256": "34b040709ba0cea31a01147a64c68bd53d54e3812fe80abe45fdd7e42b3c5c26",
+      "byteLength": 1860
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bitwise-minimax-partition/manifest.json",
+      "sha256": "0279255df3c8662ad39d516861d8c66f19df86ba1f1052bbae7f6a7f10a19019",
+      "byteLength": 1854
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bostan-mori/manifest.json",
+      "sha256": "e79959f39d96772d1bb2d818496958cfe34c0bea818007998d7ee44d76bf2eb9",
+      "byteLength": 1796
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-bounded-enumeration/manifest.json",
+      "sha256": "ad551866952e597b96cc673481288dfaeaa6e0438122eb6f5072ed81d73b1609",
+      "byteLength": 1937
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-cartesian-tree/manifest.json",
+      "sha256": "de29086bc57fd2fa45cd9ff4346e385384dea0f0da833f295b8dfe5dc43ff2c4",
+      "byteLength": 1793
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-change-impact-localization/manifest.json",
+      "sha256": "65b9bf648e7c9ddf11bd124a62f7f9124c5d4aa74b5404ab23e3dafc15556bb7",
+      "byteLength": 1854
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-combinatorics-algebra/manifest.json",
+      "sha256": "060f8bf972ded1f257e02e9f1223782bae2480431d5f9c5697c78ae1e5a4a409",
+      "byteLength": 1860
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-dynamic-programming/manifest.json",
+      "sha256": "e1196d02c6a634bf0cf5cbb610b2af35f7fa5ddced899ef6f85f45723e1265b4",
+      "byteLength": 1828
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-geometry-optimization/manifest.json",
+      "sha256": "cf1b8e055f877d6e1e715b4e4581dfe13ecf3a17bad593def27b7b5490bd3d63",
+      "byteLength": 1860
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-graph/manifest.json",
+      "sha256": "6917e2a61af5dd0acf38f102420bb9aca97f20acbcf9a3b3b1059184d599f8b1",
+      "byteLength": 1758
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-modeling/manifest.json",
+      "sha256": "67f528e59a0857a0637e0df92f07653fd44012a40989078b3918edfa2c26987c",
+      "byteLength": 1785
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-number-theory/manifest.json",
+      "sha256": "b1bde450feadbbf4caf75c9d49b45f25882b343631cc31a8fba4416c34214a84",
+      "byteLength": 1804
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-query/manifest.json",
+      "sha256": "f4b37010a3365a5c184ccce27d3c476f4e46b0c8e4804ef364fecb01bb93ad1a",
+      "byteLength": 1766
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-string/manifest.json",
+      "sha256": "29ee8280e06a0db51b43c46e075c1fe3e07436fc9de8b3e376d7c14ca499711d",
+      "byteLength": 1753
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-chapter-tree/manifest.json",
+      "sha256": "42e4566894f66c038b76de03acfe72cb37581b49e0f66db15508eb63ff0d0208",
+      "byteLength": 1751
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-combinatorial-coefficients/manifest.json",
+      "sha256": "6b59c30d5a27dc39df48f3331bdf8ee556ac2a9796cf69d7d240d63d1cf8b772",
+      "byteLength": 2175
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-connectivity/manifest.json",
+      "sha256": "4965cc1d643b62d6b0a762600e192a565cc4d2cebc4eac02bfd66ce5a174d6d4",
+      "byteLength": 1666
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-constructive-witness/manifest.json",
+      "sha256": "a0422a946c677f529b9eed9324ca4b55c791bf685f84cb725c74376d8385826b",
+      "byteLength": 1800
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-contribution-reordering/manifest.json",
+      "sha256": "cd275214db63771cd778214b669b5db7e7b827908465fbdaa643fb7034f3bfc4",
+      "byteLength": 1833
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-convex-boundary-hull/manifest.json",
+      "sha256": "282ad425943999c16d069df9801f9a5ed156d6ee7a49c0e6adc58866bff1c341",
+      "byteLength": 1853
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-convex-geometry/manifest.json",
+      "sha256": "9558f879009ca64c2a3cd7df5c59ed0be6ea4182da8dacdef521d86f56ec909a",
+      "byteLength": 1697
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-conway-number-games/manifest.json",
+      "sha256": "b802491e7d436956308ab24517145e7eb2690ef8b4018e49dbef1c47292a9226",
+      "byteLength": 1810
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-coordinate-compression/manifest.json",
+      "sha256": "1f76dd94ae18e21a32e4ab30a26ed65c9cc190a113e8cb88261e53c7b80e5f4f",
+      "byteLength": 1808
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-cycle-space-basis/manifest.json",
+      "sha256": "e11b0f6a2098dc4f6997c3447b8d878fda57aa6065fe95542b6b2d277931cfc7",
+      "byteLength": 1884
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-cyclic-group-exponent-counting/manifest.json",
+      "sha256": "4d09c4e0a6da86aa349ab295f0ea8cbd18f4ecc810e586b9ede5638e6e69c07e",
+      "byteLength": 1873
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-cyclic-minimax-game/manifest.json",
+      "sha256": "0f3def2a6c80f86a5dc9ab463523dec3521d8d80f3ed28654cd7a71f510fefd9",
+      "byteLength": 1814
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-cyclic-order-crossing/manifest.json",
+      "sha256": "7083f5da8fe522242aef827854cad769f27dbc665a85fc380c4284fc00710604",
+      "byteLength": 1838
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dag-topological-processing/manifest.json",
+      "sha256": "26aafa872cdb98ad4bc805f91f92beac1204f904464a9534375bdc1131f466bd",
+      "byteLength": 1849
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-decomposition-amortization/manifest.json",
+      "sha256": "86c044c6b94f88fa7dba6f102366bc4e3c72e3d97b97e0426bf055bcf48f3b5f",
+      "byteLength": 1739
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-degree-parity-subgraph/manifest.json",
+      "sha256": "266a6abcf59f730fee4ba1a817a2bb2cb8810a818709fdf675f3cceaf3e776c7",
+      "byteLength": 1829
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-deletion-contraction/manifest.json",
+      "sha256": "bd13f27c91d45868936eaf5f0eb5c4ab8c596312e0064eecbc6ac90bde4ff2e1",
+      "byteLength": 1839
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-determinant-counting/manifest.json",
+      "sha256": "e79d1c35363a2ffa832e73c833740bc948b2f281bdf2c72d20eca48b190d7a88",
+      "byteLength": 1983
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-difference-constraints/manifest.json",
+      "sha256": "78df3bfa2c5353530314bb2a714aac55a278aa6307d214acc55b38ec8d237c16",
+      "byteLength": 1821
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-digit-dp/manifest.json",
+      "sha256": "d526754cf38e683367cfe58d3d1e29048e955fcab1514174ed02b57801a9ef95",
+      "byteLength": 1773
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-directed-condensation/manifest.json",
+      "sha256": "0ca0251ecb94fd9ea4a75455b7c6d5ec42b56338919d2e2d04c1d95a537cac02",
+      "byteLength": 1711
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-directed-core-peeling/manifest.json",
+      "sha256": "844dcad97236a47a7cf9a588104d99ed5d93b8b738551721b1661263a595825c",
+      "byteLength": 1826
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-directed-walk-periodicity/manifest.json",
+      "sha256": "b619482368775a3b6f246c6f6172a118fbf404d8f385bbec39f414bb4f68828a",
+      "byteLength": 1836
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-directional-grid-effect-scan/manifest.json",
+      "sha256": "56c7e7a945b072ba74ce3469df78fad7f2393062f0a973d3417bb633ff8abbf2",
+      "byteLength": 1865
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-discrete-convex/manifest.json",
+      "sha256": "42c0292756d3b88b8d49b7baa8c3f4e4fa49ae7e7b0b43246c1cea611268a7ce",
+      "byteLength": 1697
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-divide-enumeration/manifest.json",
+      "sha256": "2a38c851c9edd03e75a66df0691ca839e01a3c91115fbcf0764f71b55702e66b",
+      "byteLength": 1699
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-divisor-mobius-inversion/manifest.json",
+      "sha256": "d391cf565b79238faaf022d503ff9594ae283f1a5335c29b5726fe4e603049df",
+      "byteLength": 1855
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-carry-mixed-radix/manifest.json",
+      "sha256": "62527f20e145c3993a0bfaf940b0e0f64995cd9c998e26768ef1911084580bcf",
+      "byteLength": 1829
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-digit-string/manifest.json",
+      "sha256": "dc4e377b563949e5bd0a434b1ac1a3820c6dfea4e9807b887724135fe7acd610",
+      "byteLength": 1695
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-game-value/manifest.json",
+      "sha256": "db4f21fee990f0ac00da4285e26b79846fcadf9c1a6032d8bb82d80c38aa13df",
+      "byteLength": 1796
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-game/manifest.json",
+      "sha256": "031715c105ec44d1f6e72036e468b00773543ccb522eb1a60a4e678518a1e493",
+      "byteLength": 1744
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-grid-table/manifest.json",
+      "sha256": "cbc5b149eade581f983f6cda0fccf3faeb7606a60f445e613712184c8937230b",
+      "byteLength": 1774
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-interval-composition/manifest.json",
+      "sha256": "7f414e879c1c0b919f39929d17e33da08cf32ef6e25853cf9b6a77f9192ed877",
+      "byteLength": 1832
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-interval-expansion/manifest.json",
+      "sha256": "fc19ce8ec8ef40dd3b43afcdc2b390899f59c5545207e8bff24a6bd76228042e",
+      "byteLength": 1830
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-lis/manifest.json",
+      "sha256": "91eb6fd37c7696b5806fbbd6490151402fb398acb8623f40b73c17c80bc79fa6",
+      "byteLength": 1737
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-prefix-partition/manifest.json",
+      "sha256": "7df964e0e17f75589817a85b6b6551b7185bebd43099454a8d4a7e65e53cb2ed",
+      "byteLength": 1816
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-sequence-interval/manifest.json",
+      "sha256": "17f7463139044d203b4ca58fd951bb292e2f652ecb8235f0eec596044543cca8",
+      "byteLength": 1720
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-sequence/manifest.json",
+      "sha256": "e0e75fe6249666f66c1e3ae877f5031d1688d52363be0e7b78ad13e8ba269021",
+      "byteLength": 1842
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-state-design/manifest.json",
+      "sha256": "d6e2e461c2aaf3b41ef29320f10ae6522622369fe96f73590290c65425a7b865",
+      "byteLength": 1806
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-stochastic/manifest.json",
+      "sha256": "f55ecfd6dd5bff5dd53f3f21dade3389486b594408bae020d678ead5e19fedb3",
+      "byteLength": 2006
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-subset-resource/manifest.json",
+      "sha256": "49a23b445cea1b590707fd8819e6d26bd60189c0d9e3a268119bd7b58c7ad66a",
+      "byteLength": 1795
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-subset-state/manifest.json",
+      "sha256": "63df29adabf96e7eb48af88f50debb40025b74411958e71c2aa5ed118300bb15",
+      "byteLength": 1800
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-transition-optimization/manifest.json",
+      "sha256": "5918b04b164d6a56baf3c94f691571124a2edbb0fac0439925eb59a3476d1157",
+      "byteLength": 2345
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-value-range/manifest.json",
+      "sha256": "751ac6235fb955d53b9d5ce51d2279cad9d231bf5907a58f1f21fcdcf12894db",
+      "byteLength": 1823
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dsu-components/manifest.json",
+      "sha256": "af881c7c5596ba0d205e3c13e9dc9ba69a8930bf24e803d150c5c6c5745af7b5",
+      "byteLength": 1913
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dsu-merge-tree/manifest.json",
+      "sha256": "1703ee25abc3dd62764bc281d09a49be5c3d7d2b7570f030d76fd1d0d8b78971",
+      "byteLength": 1776
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dynamic-modular-product/manifest.json",
+      "sha256": "97fbcabe28299ab66c12132658cd56151f5ef21e440cb250d1e0e116b92863e1",
+      "byteLength": 1868
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-dynamic-segment-tree/manifest.json",
+      "sha256": "389ad6bbc4749286421261a433ce74af7550dc8bfd50dbece00d88556ff14f91",
+      "byteLength": 1825
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-euclidean-floor-sum/manifest.json",
+      "sha256": "f917941f0ff4069d72a303b2212e238680e529b9d957e9e1ee768d3e0546d303",
+      "byteLength": 1812
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-euler-circuit-counting/manifest.json",
+      "sha256": "06859ff715008d132ec078dcdeeb0567dbb44209a6e9e126f6c0f321a7e49e73",
+      "byteLength": 1837
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-euler-degree/manifest.json",
+      "sha256": "8d8189d86a543671f0e0b72b2a107890f77c5dcee30372f6696039cb953cff71",
+      "byteLength": 1666
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-euler-trail-circuit/manifest.json",
+      "sha256": "0a922c9389d6553d372e8c5db2feef1a90173d527d7e1532ccc151e112d6c77c",
+      "byteLength": 1928
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-event-sweep/manifest.json",
+      "sha256": "a5fef97b4fc057f1816b48249898e233fae534249f96d6dba04e6fa076c5dee1",
+      "byteLength": 1745
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-eventual-unbounded-knapsack/manifest.json",
+      "sha256": "acb1c906f5b7f72c2c929220238a3409d6803c9f008fdf7ce8993c21268e0e2c",
+      "byteLength": 1892
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-finite-field-extension/manifest.json",
+      "sha256": "f81e5e5ca8fff2f1cc7814acdd837d5f3f504b0ba7c9b2c33db062a3670c8e8f",
+      "byteLength": 1839
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-finite-field-frobenius/manifest.json",
+      "sha256": "e107cccbbfcf9766aa8cd42278bc5f9906acc14d11c4f076d8f91e87484a1648",
+      "byteLength": 1873
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-finite-function-composition/manifest.json",
+      "sha256": "3389638506ead395383ef93c388fe80241f2670fc5499c94477dc6139c367cf7",
+      "byteLength": 1838
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-finite-pattern-automaton/manifest.json",
+      "sha256": "6ea4be00ccdd6009cb32298babe926763ea08143be2c0c33f68fde7ef030b133",
+      "byteLength": 1834
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-flow-lower-bounds/manifest.json",
+      "sha256": "17c4f8ef00525a882e9a74c08015cc3221a3241c41c03af746174eddae345981",
+      "byteLength": 1796
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-flow-matching/manifest.json",
+      "sha256": "ecfebca0e296f41bebe40e4731d774e3ecac4f02df38893ebaca4d2b92cdff76",
+      "byteLength": 1671
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-formal-power-series/manifest.json",
+      "sha256": "feca594244342efbfbcdb0b273dbcd4cc8be9fd46d30e345fb9caa3579c92f91",
+      "byteLength": 1838
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-fps-composition-power-projection/manifest.json",
+      "sha256": "71117a6f710b094edf6bdbf1520410f0c51dd5bd3c7d38afbea693f5ffed923e",
+      "byteLength": 1897
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-fractional-parametric-search/manifest.json",
+      "sha256": "ab2f1ae6e1a507afed3f52352d49c9c56e88733fb3e0899fbc6557f0c20690db",
+      "byteLength": 1881
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-frontier-profile-dp/manifest.json",
+      "sha256": "579e725c270b5b4795410720e9f242c069412ec324867d03820c5b5b02250799",
+      "byteLength": 1816
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-functional-graph-decomposition/manifest.json",
+      "sha256": "a0cc71fa91371cd90534bfc94936e8f52ce21e2fe16d7fa8557e523943cf30ef",
+      "byteLength": 1857
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-functional-graph/manifest.json",
+      "sha256": "010127f18469a22be87f2ab766651d903e775f90ec01e67265666f8d773fb1b4",
+      "byteLength": 1686
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-game-parity-invariant/manifest.json",
+      "sha256": "49a1ba4caeb9822bb4e08d2e715de18db0e9ed850a5601274b594cd5f232fe3c",
+      "byteLength": 1823
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-gaussian-integers-two-squares/manifest.json",
+      "sha256": "90a39581b01cdaac93a7b4e9f6007fd8a5b4829b777a82c4db4829d7aa20630b",
+      "byteLength": 1874
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-gcd-diophantine/manifest.json",
+      "sha256": "aacb7baef8436648802ec274d5b72b9f6390deda64eb580c682b6c069311d539",
+      "byteLength": 1802
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-gcd-structure/manifest.json",
+      "sha256": "4be3587be65be58c46a32b2c5148e3a3f6a03c3fc03937fbf807215d177d2132",
+      "byteLength": 1790
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-generating-function-coefficients/manifest.json",
+      "sha256": "a8d03199225608866154da715c6d11e0078c610de9cc454ce89936a3aa6d7213",
+      "byteLength": 2151
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-generating-functions/manifest.json",
+      "sha256": "b2af2f9ad0715020ac8d408356399ae8d0b0942a7ce37607f55ec456a9f066e3",
+      "byteLength": 1847
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-geometry-primitives/manifest.json",
+      "sha256": "4f35fa26af0bdd484d382b2660655ed79d74929cfd5089762f28bc324c5a8140",
+      "byteLength": 1844
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-graph-core-peeling/manifest.json",
+      "sha256": "67391bf7d9ffaa45c915816022022efcca0d9ecefb75ab8b2eb31b8897f09194",
+      "byteLength": 1696
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-graph-core/manifest.json",
+      "sha256": "1e5608e16ef530687d779bc9245d1f377398911c3b2007bb31874eb6948acca0",
+      "byteLength": 1735
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-graph-potential-propagation/manifest.json",
+      "sha256": "42757c19308c9c2f405cae9ffb0634406549dcd8644de0fe65f13cf73f835e10",
+      "byteLength": 1856
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-graph-search/manifest.json",
+      "sha256": "cf58cbeb41eb3542f01a247c2e383549f0d31a0373d7c6f0b8f37891a47499f9",
+      "byteLength": 1666
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-greedy-exchange/manifest.json",
+      "sha256": "d2181ef21798774f8ef8c65a02c7965a611ae95a51a2ab770f7b75a45f0d58b9",
+      "byteLength": 1769
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-half-plane-constraints/manifest.json",
+      "sha256": "6c5f3ec5c08769def9b5f67688e0fda177ba89c060ebe62be4c782a641811bd7",
+      "byteLength": 1867
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-heavy-light-decomposition/manifest.json",
+      "sha256": "c6a2fbd7499c6bce42eb19658bbf23f59ca5960c5f11007facf2a3610848e912",
+      "byteLength": 1841
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-heavy-light-recursive-dp/manifest.json",
+      "sha256": "dfc495660ac778a1c4afd9a2473a587b2d860a2a824632ab62f0154648ffbad4",
+      "byteLength": 1854
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-heavy-path-tree-dp/manifest.json",
+      "sha256": "72589717c100ce52fcf90a8eb7852194c431a6c2cff91ed3b077481cbe031e43",
+      "byteLength": 1808
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-idempotent-overlap-range-query/manifest.json",
+      "sha256": "5a712840874cb76b98c97db90f61febab5b36bf26183497bb44843f596201e14",
+      "byteLength": 1863
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-implicit-binary-tree/manifest.json",
+      "sha256": "98161c14115bb00e7f61c7f7e5abf876242197137f0eae47076f0af2f3e7d8fb",
+      "byteLength": 1820
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-inclusion-exclusion/manifest.json",
+      "sha256": "fa90bc1985f187eed4508d60c987d33d7bef6a5afcb97b1031760f43e0340958",
+      "byteLength": 1822
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-information-theoretic-query-design/manifest.json",
+      "sha256": "d8cca39f5e356ed95a51f7c15db4a633b8f19a102561c6a2ab36500c6957ab87",
+      "byteLength": 1904
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-integer-boundary-blocks/manifest.json",
+      "sha256": "e3498852301cc6912e073c513248998a9e833d49f6d4953be74e296115380a61",
+      "byteLength": 2196
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-interactive-protocol/manifest.json",
+      "sha256": "81d051bc389129b72e6fedc13536ebf0e33187618faac68181e51744c46ae690",
+      "byteLength": 1828
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-isotonic-regression/manifest.json",
+      "sha256": "2ddab20fca47dd7d41e14455baf8e5abba2791989798e58d3f97b74bbb45087a",
+      "byteLength": 1830
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-kinetic-order-maintenance/manifest.json",
+      "sha256": "fcce1b885a6cbc2e112481e0cf01a494af66ea5a73143085944314c44c7f742f",
+      "byteLength": 1859
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-kruskal-threshold-sweep/manifest.json",
+      "sha256": "b0801ca0d565617b81a85dd3a5ecb01c92fe6f2728c81227b64fede9c63c3b47",
+      "byteLength": 1848
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-labeled-component-decomposition/manifest.json",
+      "sha256": "95084b2552a31a071c1fd17ac1c7926415457c81b0f8901c0fc29ac817362b80",
+      "byteLength": 1902
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-lagrangian-relaxation/manifest.json",
+      "sha256": "7f171f82ecaad88472d5df3e9abae7a335a475bc409b0fd28e102907950d4abc",
+      "byteLength": 1842
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-laminar-interval-containment-tree/manifest.json",
+      "sha256": "e52d193ec86940aa5294132f2dee9db3914b29c5f2cf765a7112e6fc301a80b4",
+      "byteLength": 1897
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-line-envelope/manifest.json",
+      "sha256": "ad53141829cbbc44b519e5f094ff280aa19b56591e2f74cc3511c9938dcbe950",
+      "byteLength": 1786
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-linear-algebra-xor/manifest.json",
+      "sha256": "baef61790d1c8d5c3b6a78c53d36e8e7ba4c08687186a97977a510334867770f",
+      "byteLength": 1712
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-linear-matroid-intersection/manifest.json",
+      "sha256": "64ae32eb8e0b56586b1c4ba892ca21843e2084eb9e7c64ffdc1d215f32c74131",
+      "byteLength": 1880
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-linear-recurrence/manifest.json",
+      "sha256": "c4fca32678ed340bdb0e3dfa8d741e539be8f738732260d59b7f4d0e481032f6",
+      "byteLength": 1822
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-linear-system-rank/manifest.json",
+      "sha256": "32f0fcbd14405c4101225215d2d9567255f9cdd26756d3ff7f7379a8b412b53d",
+      "byteLength": 1817
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-linked-list-index/manifest.json",
+      "sha256": "ee26498d20540acd18bb779af5107e6c71da3a89929b52d1bb8d01719ef10138",
+      "byteLength": 1798
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-lowlink-critical-structure/manifest.json",
+      "sha256": "a47c7bfeb076e52422f78bd6e0ae2bce169580d097a395c4aab0440bc478531d",
+      "byteLength": 1853
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-matroid-greedy/manifest.json",
+      "sha256": "26c9dfb418febe65d2deae8f431d6e34fc8c8007a4668a5d4e3f6676bcb72a84",
+      "byteLength": 1803
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-matroid-theory/manifest.json",
+      "sha256": "9784c1760e0c0c339c978e369bc3ef46a14e4920b638e989ecb34114b1fea959",
+      "byteLength": 1692
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-max-flow-min-cut/manifest.json",
+      "sha256": "50e39196519754885828e932876c4a506b2de753881517a30721bbc5923c9bf6",
+      "byteLength": 1779
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-meet-in-the-middle/manifest.json",
+      "sha256": "710ddcd78787a20fcf042d01331a17e5e9d5fecde3e374bdf8552c0178875309",
+      "byteLength": 1794
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-min-cost-flow/manifest.json",
+      "sha256": "35d1dd8b6a968e75791e081be4701d0c6e43e78506d51c70b5c576ed6f62b728",
+      "byteLength": 1758
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-min-weight-general-perfect-matching/manifest.json",
+      "sha256": "51141b8d45a900bfb3c9debf9ea2616b47213add58d00234bf0e459056e29bab",
+      "byteLength": 1912
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-min25-sieve/manifest.json",
+      "sha256": "35ad0872f5a893ef1d2b57373927838f7f60ff886688723358e125192801030c",
+      "byteLength": 1802
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-mo-offline-range/manifest.json",
+      "sha256": "64a44ff534f519e1553b47a5af8c19b1a5f6b6674b4e46a02d6e6e14c40547d0",
+      "byteLength": 1791
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-modular-arithmetic/manifest.json",
+      "sha256": "950d780c56baf09c64b94685b4b94bdc6bb47a78fa77729baa98a006d79d8847",
+      "byteLength": 1811
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-modular-congruence/manifest.json",
+      "sha256": "fe8608bdf3c6c1d35c214de7702dc328f432b195d23e67f6e83d4a7ee599fb14",
+      "byteLength": 1803
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-modular-periodicity/manifest.json",
+      "sha256": "c2f3a4d1cac4964d457e7f210182c59ef799f5624ff6f2d034d27e7804e6e5ce",
+      "byteLength": 1812
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-modular-product-foundations/manifest.json",
+      "sha256": "ed016b84802374a9ed5b982c598a00a1f49fb03aa12806489523754460c3924f",
+      "byteLength": 1749
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-monge-optimization/manifest.json",
+      "sha256": "7e877ff1ef97efe127ff0554488177f92f72bf549e6bde25526d1cf9f6492348",
+      "byteLength": 1813
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-monoid-exponentiation/manifest.json",
+      "sha256": "8b5ef3105e8c8ac196c3e49170cefd17a0b65d8c7e25fb9be44868bb258bc513",
+      "byteLength": 1848
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-monoid-segment-tree/manifest.json",
+      "sha256": "0a72243f75cd82df6b7ec3b4e6a98383a03d8fc743cf04f436fe0ababfb280f2",
+      "byteLength": 1701
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-monotone-path-contraction/manifest.json",
+      "sha256": "4415e7cc97677c9ff7d70f876b519d33ae9688a21f8e15ad29663e444f827605",
+      "byteLength": 1864
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-monotone-search/manifest.json",
+      "sha256": "0aca21a2df906f348e79b29510a32f486fb35004c5e9676d343ccbf36beab4d2",
+      "byteLength": 1785
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-monotone-stack-queue/manifest.json",
+      "sha256": "fc7819e1ec7bcd564f46aaeb5c48e03f0dce87c04e650f3e6e147335fdcb7b01",
+      "byteLength": 1817
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-multiplicative-order-periods/manifest.json",
+      "sha256": "a13e3a7eb4fbc035ec79d6292b8d9a1f232be10b62aaba05348662269364b45b",
+      "byteLength": 1873
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-near-tree-kernelization/manifest.json",
+      "sha256": "879d7330c35ac9dcc39a04e217861e12ed13fa62af90395d9023c2cdaba43d1c",
+      "byteLength": 1820
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-normalization/manifest.json",
+      "sha256": "fa2e663a57a85baa6e5ac427aae8bd64200ea2692dc1358f9c08c61fddb4fe44",
+      "byteLength": 1915
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-numerical-semigroup-reachability/manifest.json",
+      "sha256": "ab25b61c2bd3a744ece0d0d6d542131585b9476749ba9abff14b6b1dc3d3fa83",
+      "byteLength": 1905
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-orbit-counting/manifest.json",
+      "sha256": "571cd9ed383ad6133d2bf03ec304033e8de91ea3169e1c6b5ebfdb1458395bd2",
+      "byteLength": 1797
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-ordered-interval-partition/manifest.json",
+      "sha256": "701d827f4e84f596d0d947c0c825f620544ccd412f6467706071fbfcb8c556bf",
+      "byteLength": 2089
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-ordered-set-heap/manifest.json",
+      "sha256": "bb3538bfef78e1c691b0d8d02a8f47212d6f25c5ef17ec32539c9a465359dc5c",
+      "byteLength": 1686
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-ordered-set-multiset/manifest.json",
+      "sha256": "5a4bdb044842247da940ba14b4ec32d7db708ddc774e78b65dc6184b369c1b32",
+      "byteLength": 1817
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-palindrome-radius/manifest.json",
+      "sha256": "75d6713e852f9426a2d4ab5df17434c3cfe032d4fadfec85a03fe56e83481dd0",
+      "byteLength": 1807
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-parallel-binary-search/manifest.json",
+      "sha256": "07b8c5cde47cf626067423cc4d608c6b6b32ad1a10bc8568455c217689bf8c3d",
+      "byteLength": 1864
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-path-matching-contraction/manifest.json",
+      "sha256": "ec70ba2cdd2632ec331e9571ef272edd2e6315abb5303409734229df3e584a44",
+      "byteLength": 1854
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-persistence-rollback/manifest.json",
+      "sha256": "e8df82d8013d9b41e326cf1ce3f078692e975d3dcd7fca7019cff7d216c90505",
+      "byteLength": 1706
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-persistence/manifest.json",
+      "sha256": "13c3bca0efe910454a194b1934ee36f0f5e4a8ecde2efe520e67fd18bbecab9b",
+      "byteLength": 1772
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-planar-duality/manifest.json",
+      "sha256": "91c496f420ec3f21a10cc9749efe9136fbce09b00dbc9fba1b3fe415d7c06e4f",
+      "byteLength": 1777
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-polynomial-convolution/manifest.json",
+      "sha256": "db911b803691f3caaaa4c1c5efa07792f7fdfa7f1c055432accde0ff2a3cb654",
+      "byteLength": 1849
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-polynomial-multipoint-evaluation/manifest.json",
+      "sha256": "17105e99b022a613b5121f5266e0b3fdddef270dce7a4f1f2f27fd505e07098e",
+      "byteLength": 2015
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-polynomial-taylor-shift/manifest.json",
+      "sha256": "fd129a9da5198de1c427f87e5f2f43039bf155b5a0c44bf0546da5fc78cede79",
+      "byteLength": 1868
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-poset-dilworth-antichain/manifest.json",
+      "sha256": "9cbedd37b2334cafda0accae040a0c9d05db371f65c1184997e7de9503180e77",
+      "byteLength": 1863
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-potential-dsu/manifest.json",
+      "sha256": "5dc69542915e9347951690b5d574d2bbf4ff244e0ea31b9c67ce7a8484ba5081",
+      "byteLength": 1780
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-prefix-aggregate/manifest.json",
+      "sha256": "960b29156b66bb88eb00a8039ea16a2769015c5dc50279725a7fa9f41a1ba950",
+      "byteLength": 1803
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-prime-divisor/manifest.json",
+      "sha256": "20418e9532ec8e8b88a7c0f07b23360c90a57770413c065abcfdf2565648c378",
+      "byteLength": 1786
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-priority-queue-best-first/manifest.json",
+      "sha256": "145a25c751ad42e36d6ea27c4f0ec65af3a7a48c5fef2ea6656d60fcb60be585",
+      "byteLength": 1838
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-prufer-code/manifest.json",
+      "sha256": "e6916468dd23c749f10b7a0ddc2782f61e29ea289e53f8707533ed446bf61216",
+      "byteLength": 1796
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-randomized-algebraic-fingerprint/manifest.json",
+      "sha256": "75ac659b22b5b498d74189891f05fc720746251e38bdbf461097d2159b61a4ec",
+      "byteLength": 1912
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-randomized-algorithms/manifest.json",
+      "sha256": "3aa981f0b067c0e63bbeb1a7321d49ff2c535ea62b99c3e369f4b4370a206054",
+      "byteLength": 1837
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-range-actions/manifest.json",
+      "sha256": "13e4fb98248683a24da194e8359392acb95df2bf0c1bf691de31d34a3b4b2c2b",
+      "byteLength": 1772
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-range-monoid-aggregation/manifest.json",
+      "sha256": "67f5937ec3e7c8cd93f38850da23a36a0ae1ba4c65e902c0556746e91a773ecf",
+      "byteLength": 1839
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-rational-approximation/manifest.json",
+      "sha256": "3bf79ca81e7abc7a0597188bea0d1883ea2d645d0be9527e8c41d17dff0fa551",
+      "byteLength": 1833
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-recursive-compressed-string/manifest.json",
+      "sha256": "102013476ab3677d8f1cd86302740634d67226faa7b2d9edf59f0ceb62924497",
+      "byteLength": 1855
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-recursive-divide-and-conquer/manifest.json",
+      "sha256": "39fc323c71e6e5654f9f54087e38b243008013c9db203bf5db34cd4a0d5160b8",
+      "byteLength": 1860
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-reflection-principle/manifest.json",
+      "sha256": "e740537410f5fef3481db9d10b4f1be51434688504d099fa11fcbe4c28d71a9f",
+      "byteLength": 1833
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-relaxed-convolution/manifest.json",
+      "sha256": "361629947d399eac4815a617171bfccacb70af6d0d77ac7123b324f0d9b9dc84",
+      "byteLength": 1834
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-rerooting/manifest.json",
+      "sha256": "9ab58bcdeb449ad79902d5ac4e58910578d83f0cb1b101a8aae86501fcfa9172",
+      "byteLength": 1745
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-reverse-offline/manifest.json",
+      "sha256": "fd85dc5cf7a61b7b763589831673984f256d4feccfbceec03197515787a98be5",
+      "byteLength": 1771
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-rollback/manifest.json",
+      "sha256": "06daf4c2fb5538276cb0503eb1059c70c359a3a4762393d4f70ae8245be65e8f",
+      "byteLength": 1749
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-rooted-tree-aggregation/manifest.json",
+      "sha256": "a392d2d1f7415df6e249424272bdd368ee7f23e032d6438b8e2823e44f02dd36",
+      "byteLength": 1811
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-rsk-young-tableaux/manifest.json",
+      "sha256": "792f7f11a803ea92f10bec6e6fac6734210b55d7ada931a1d49f532c6f9e9522",
+      "byteLength": 1813
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-run-length-dynamics/manifest.json",
+      "sha256": "e96de1cc28368df54ed9beb494923118a9680c13f6f140d9f87ce47351a98074",
+      "byteLength": 1813
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-scc-condensation/manifest.json",
+      "sha256": "8c8eecacfd0843c3e6f06b4ba74141e9bf1a45f1eeec96847a4e496ed4620c75",
+      "byteLength": 1801
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-segment-tree-beats/manifest.json",
+      "sha256": "975ea88fcf3c68ca7633259bc7acad3de5b5c56a14758c65d2ac1ad1f8cd6ced",
+      "byteLength": 1819
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-segment-tree-canonical-decomposition/manifest.json",
+      "sha256": "8ccd23418653925b761e1fd6667b6893f7a9cc787e65e7e1242cbdf95b729d21",
+      "byteLength": 1915
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-semiring-matrix-exponentiation/manifest.json",
+      "sha256": "8d80a70bfcd9593d0c757e779cdb302d1dfe185eb0bd954a1415a943ce5645a9",
+      "byteLength": 1895
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-separable-convex-marginals/manifest.json",
+      "sha256": "0cdeee6f6f524ade2c397ab9c4e30c24e3c3436a858e95b981aea4e6cfb57807",
+      "byteLength": 1867
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-separable-linear-transform/manifest.json",
+      "sha256": "22472c1e3a6fe44a41413f6ddb3115fef1755d87750197b21ddd857a26610f9b",
+      "byteLength": 1867
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-sequence-fingerprint/manifest.json",
+      "sha256": "b4daaca3cc1cbc6fc8ef8d0ea42bca059adfcf922154eedee3910e639eeb0f30",
+      "byteLength": 1835
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-shortest-path-certificates/manifest.json",
+      "sha256": "ab2bb3c4c7a8ebaa69a468604cfc61b4310c674125e60b1363f9a90b31e1e559",
+      "byteLength": 1736
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-shortest-path-reconstruction/manifest.json",
+      "sha256": "74733f22ce806f6dd0115c4848c386ba43a71e4a6a62be92d339896035e0cf73",
+      "byteLength": 1857
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-slope-trick/manifest.json",
+      "sha256": "f4cb91d04f0448677a68f5b4ac05d63806365e90df2c1b7745d8449114795933",
+      "byteLength": 1808
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-small-to-large/manifest.json",
+      "sha256": "8785e28d65f20497d63c61322621557e42b14c74f2bd679aacdce760695d6fb3",
+      "byteLength": 1772
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-spanning-tree-optimization/manifest.json",
+      "sha256": "c2a51ee6627babca97564d0f6a2d97ef8d976f9db6eac2445f583d0c6530459b",
+      "byteLength": 1993
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-state-graph-search/manifest.json",
+      "sha256": "80716cdc23889fbb570a6392e494fd1e5eb58b7a3f8c23d5e031cabadd393c61",
+      "byteLength": 1795
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-static-sorted-range-index/manifest.json",
+      "sha256": "55eff4e3f824c0ccee90d1edfaf462e8e896b81e0006333be26dcba0dd14fed1",
+      "byteLength": 1842
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-static-top-tree/manifest.json",
+      "sha256": "70b88d6a9b278acfcb6a4f42c3bbd3c228ae0e9aa1985cefda90fc7613e4ca5f",
+      "byteLength": 1787
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-steiner-tree-dp/manifest.json",
+      "sha256": "fda4a7d451e330ab0ecb79702917dcd4b10d42f9d682f1e5fd2b4afb4b9b05bf",
+      "byteLength": 1806
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-stern-brocot-ancestry/manifest.json",
+      "sha256": "f7a1633e6155e369104a5311d0dd10ca2a0048c2370bdd06bdf94ad112716315",
+      "byteLength": 1830
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-string-automata/manifest.json",
+      "sha256": "658b033c9f6327138a5b0b7cea42f2ecd6f0b7d0b267fc9d72107b92affccd1f",
+      "byteLength": 1682
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-string-hash/manifest.json",
+      "sha256": "c830650a3f0be53eee4294c098705496d18c6640f01c5f42e25492176f88829b",
+      "byteLength": 1661
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-string-periodicity/manifest.json",
+      "sha256": "1d0336578b26c79785bfefd116e8478e4830087b708955261fe2a6b3f2b8601d",
+      "byteLength": 1818
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-string-prefix-automata/manifest.json",
+      "sha256": "6a40efe80a79ae6bf90cb3086d77b2e016c96a1cbddc20a88ef8f6ea10c30826",
+      "byteLength": 1717
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-subset-convolution/manifest.json",
+      "sha256": "a225576ea7258f142403658ec2c7302fab728774136c94863b244a1820da39a0",
+      "byteLength": 1813
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-subset-transforms/manifest.json",
+      "sha256": "24b6e04e6fbc12028472c149ebf6861891affbfe08e5e2f27e0e5b732126ef59",
+      "byteLength": 1824
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-suffix-automaton/manifest.json",
+      "sha256": "8975b5eed86df65fbe7164b4ec53a29f7b852895a4410c6d0981bc04d7abb864",
+      "byteLength": 1780
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-suffix-lcp-index/manifest.json",
+      "sha256": "9b009c54705ac81f32d862ac5c942693ca25f556b4d85c39eb35b1e5a9d12b41",
+      "byteLength": 1780
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-swag/manifest.json",
+      "sha256": "728adade8dba55816e743306995e0962132ca152c9a441f8ae8839a705075964",
+      "byteLength": 1743
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-threshold-heavy-light/manifest.json",
+      "sha256": "d706e367411a4512b886f065899f6940e49a075ab108178734f75f67a13b3bb2",
+      "byteLength": 1821
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-transitive-closure/manifest.json",
+      "sha256": "5914d9bedf51d6327a116d647387d2b2bb4770ed4bef046b6b239e04f6cc7612",
+      "byteLength": 1797
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-aggregation/manifest.json",
+      "sha256": "58ab97b27397a09abb9e1170ba75690d18d0f17ab56097aae4b9f62b3c79e613",
+      "byteLength": 1685
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-ancestor-lca/manifest.json",
+      "sha256": "8c56ccfd1f72e8e1f64e36890e822b3049f8c96d96eb8241b53f14213f96378b",
+      "byteLength": 1795
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-balanced-separators/manifest.json",
+      "sha256": "8c8002072a3d82d6e094cb1ac564d67c2d1494b6145cc8c86f2b5fe0a081d8de",
+      "byteLength": 1974
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-decomposition/manifest.json",
+      "sha256": "cea2d01d95efde48341fde5ea48589151310c3228217ad05f43d1f0ddf47a9b6",
+      "byteLength": 1695
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-euler-flattening/manifest.json",
+      "sha256": "5bf3140424aaff20bf49f691d8675c5ec94f49282211426e3762fbce5bf75d89",
+      "byteLength": 1813
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-metric/manifest.json",
+      "sha256": "22111eae476013fe23f8392ac51aac3364c95656ed6d4503f85602594da5cc56",
+      "byteLength": 1885
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-precedence-contraction/manifest.json",
+      "sha256": "5b72348c950ff2057fd5d44d27f7f4eaad51b0a1976b7ecae57d064c82796ed0",
+      "byteLength": 1873
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-trie-prefix/manifest.json",
+      "sha256": "ce5648cd744ef7dad2932bbe25a495221435c7f72b5333174f5bad8cf7e391ed",
+      "byteLength": 1773
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-two-pointers-window/manifest.json",
+      "sha256": "0a06d1fef60d63f15cd9c4ad574c381a2c2856b0d93e9913674f087e0d3c8290",
+      "byteLength": 1801
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-two-sat/manifest.json",
+      "sha256": "1349995d6876619dc830d8d4e0d612aaac8f4685aa41df9b030522fdf50b67f8",
+      "byteLength": 1768
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-two-variable-convex-lattice-optimization/manifest.json",
+      "sha256": "002a0ce2b62c127fc9b8e953b1aaa4b422ab46cb0d11f38df82535366444849a",
+      "byteLength": 1961
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-value-bucket-aggregation/manifest.json",
+      "sha256": "b6f6f67ccb4d503e9244b7bbe0d34abe3df12fce0c4a1d7806669dc85bf91b02",
+      "byteLength": 1841
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-virtual-tree/manifest.json",
+      "sha256": "d38e86dc09128f81b232f84e03956bd651607d3e064e91de4465605cb045550e",
+      "byteLength": 1750
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-weighted-bipartite-matching/manifest.json",
+      "sha256": "571c6b8fff1f9b5e2c019c44c0834b5b9df43daeb1524e5472fe460207b1ed68",
+      "byteLength": 1856
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-weighted-prefix-fenwick/manifest.json",
+      "sha256": "81352c2a9e6e52359235f30fb1d51efad01f87bb68a9dafaf5c54912d75efb52",
+      "byteLength": 1840
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-weighted-shortest-path/manifest.json",
+      "sha256": "753a1cc33ec3c33a2e8d237cfecf9bd63d1d90149afbcd5ef6ab5c400cd2aec3",
+      "byteLength": 2229
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-xor-linear-basis/manifest.json",
+      "sha256": "fe374bd44fe62be6fc706d9f0be52f5f5d294fd8bb78eddf0271dc3f27449d2d",
+      "byteLength": 1927
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-xor-threshold-matching/manifest.json",
+      "sha256": "105add01b3194d9c45219024d7ab92f9196420cdfd08deca738fbb14a166c2fa",
+      "byteLength": 1824
+    },
+    {
+      "path": "docs/work-manifests/initial/us2/full-learning-units/unit-z-algorithm/manifest.json",
+      "sha256": "9240525892d13cc7d563e8a6cfa5c244e3f32c45a98fae1d409461e2c61d415a",
+      "byteLength": 1759
+    },
+    {
+      "path": "package.json",
+      "sha256": "63d1e18f34432e129565e7f2fca9b42e5e48d650ac2c7d4fd4e62310b2eeb150",
+      "byteLength": 5751
+    },
+    {
+      "path": "scripts/corpus/verify-full-learning-units.ts",
+      "sha256": "7e9f45fd4e2eeab0dc6594b24358e2c3769d866113d13cfbdd17e14fdec8e7c8",
+      "byteLength": 10157
+    },
+    {
+      "path": "scripts/verify/runner.ts",
+      "sha256": "779c54ee4f816c3c50a5b85a2477f16194ffb94febd70b9b55ae40cafe523ad8",
+      "byteLength": 3735
+    },
+    {
+      "path": "specs/001-build-abc-textbook/contracts/learner-outcome-evidence.schema.json",
+      "sha256": "f622945d437ceb0818d69b564caa60da8d35bf6435e414863dce536af0662fdd",
+      "byteLength": 10626
+    },
+    {
+      "path": "specs/001-build-abc-textbook/data-model.md",
+      "sha256": "6f73cbdcb2f5d6f6c1fe18c8048220532ec2e10f7d8d15339d3127d62c398033",
+      "byteLength": 46069
+    },
+    {
+      "path": "specs/001-build-abc-textbook/quickstart.md",
+      "sha256": "601be5c05e618327bfd2843ffdd6f26e8a788bba7f178bd0c08c73565fef8dfd",
+      "byteLength": 16694
+    },
+    {
+      "path": "specs/001-build-abc-textbook/spec.md",
+      "sha256": "1ba40a26957ec24adcc583b5c039b0f064b319063448ecfa6103fb2b67acb004",
+      "byteLength": 38533
+    },
+    {
+      "path": "specs/001-build-abc-textbook/tasks.md",
+      "sha256": "9eef9308970f7d47f17265f584fe9c70d65cb305f47352a5413765491359ed54",
+      "byteLength": 80562
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/bostan-mori.md",
+      "sha256": "4227b68a5a0f3f0ab97c90c810474b8375565697ca1394cc359459a877d02061",
+      "byteLength": 3562
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
+      "sha256": "06bdee58cb5c06d789c05eb89f37a6777d717114e0e408fd478abbfbea2deded",
+      "byteLength": 61619
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/deletion-contraction.md",
+      "sha256": "41e4bbc1ab1eed7eca11e6e6db91ae940874f99f8bb77575cca99a863e45b234",
+      "byteLength": 3579
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/determinant-counting.md",
+      "sha256": "65968bb146d897d8d0a364e2578f864995253a1f03b5b9c55ffb4bdd03b5586b",
+      "byteLength": 9537
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
+      "sha256": "846dc572783f645a1cbeb0397c6a055cf6c728d209dcbdcae0dd8197b3f140d1",
+      "byteLength": 7624
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/euler-circuit-counting.md",
+      "sha256": "f9926e7c926be436a60c32288979b2e1315b00a8e8677899d62b4fe6ed052791",
+      "byteLength": 4374
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
+      "sha256": "932d0d41ceb6cac262155f4936467f6023670b7ec035f5da9610da057434defe",
+      "byteLength": 15142
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md",
+      "sha256": "c93a8f899d13604c3399e2372d51a3b2c6da95ce96509d7bcaca2176b0441cd6",
+      "byteLength": 6083
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/generating-function-coefficients.md",
+      "sha256": "3b9cd58d9a57b4b71b3c077bc798e1edd8c78383cba259697b6879852a18a12a",
+      "byteLength": 7188
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
+      "sha256": "8c99d6931236f50682066caeb67883ad6eb6749da59cd7502596e758715c79a1",
+      "byteLength": 39906
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md",
+      "sha256": "3b72243c3715b1a42f1a38bac6cece1de13c07b4458ce8ed115ede9393cfb455",
+      "byteLength": 29923
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/index.md",
+      "sha256": "ae131441acde864ead8996762d2af72d21f69737a000a8de9f2c5409c80365bf",
+      "byteLength": 37916
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
+      "sha256": "71101795fc8c986c552cfa361d27557e84e4de90564e30ad02ea05388b160ad0",
+      "byteLength": 9979
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
+      "sha256": "030be0b3d3662d6da5570c23f887160f3c41b2e8a5aadb83a2d36e556637e523",
+      "byteLength": 8810
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/linear-matroid-intersection.md",
+      "sha256": "5cc5594b03566c3f907fde3b9763de9c65929268d777590fee29159311ec4e2b",
+      "byteLength": 4405
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/linear-system-rank.md",
+      "sha256": "b99c604871020979ebb209ba95e2a28ac9dfc3a3b2dbd2d52d5d6d0203fc10b0",
+      "byteLength": 8459
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/matroid-greedy.md",
+      "sha256": "cf48167b631b8fd727532169826e71d6e8d2be002f8315ca06fff87dc7054ef9",
+      "byteLength": 3373
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/matroid-theory.md",
+      "sha256": "69aa576eb2c81a85e910c45a481f7255f78fee3aa274c6f5c7dc4c8e5c227c08",
+      "byteLength": 2712
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/monoid-exponentiation.md",
+      "sha256": "ca6e1c4d79906ff2b2147f14233d1404b0e28611152d85fffff13ed23a601fa5",
+      "byteLength": 3196
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/orbit-counting.md",
+      "sha256": "29062cb77b00db4b6f36a68ee185f3393716461a364c05adfa123131f5b7ef8b",
+      "byteLength": 4600
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
+      "sha256": "ef98a5d884957e6e01dad56d464d3088a632f471d730288c8df5ed5b2b40663f",
+      "byteLength": 42618
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/polynomial-multipoint-evaluation.md",
+      "sha256": "f024da3cb5c8a8b5d508b174533928d3ab195df3efcca9eb6790983a1a3906e4",
+      "byteLength": 7471
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md",
+      "sha256": "ef918862009fa881756cd2f5b214e2684be2ec327ad035c2322d03faba561205",
+      "byteLength": 4107
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md",
+      "sha256": "38da87a8487ee845580473f86db941bf48eed5f2c39fa1a5f8103f96d008cd31",
+      "byteLength": 5183
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/prufer-code.md",
+      "sha256": "b069a4520ebf175d6320c9d49745a1a253bde0bb4385fc9806e81562b8905ccc",
+      "byteLength": 3914
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/reflection-principle.md",
+      "sha256": "e062bc67bff10159aca5018ea8ce2716aa4bfca8bbd2b1233380870a750ec17b",
+      "byteLength": 3298
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
+      "sha256": "7335de4914a9cae6cd64866f2aa712dd464ddcaf2ff01672fbbc4903895036be",
+      "byteLength": 7867
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md",
+      "sha256": "795a96577a28b964331efd57aedf5a9e340d3fd9daf5c9a38dac3480147d70f0",
+      "byteLength": 3654
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
+      "sha256": "96c141525c1462692b5e91c42004e4a687c5ae01e7de98d9d397ce32328f6dc7",
+      "byteLength": 5264
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
+      "sha256": "1dd3f0974da68b8c0540e7edd18cd15650044e71863f9278eb43938053e0f9ce",
+      "byteLength": 6715
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/subset-convolution.md",
+      "sha256": "b761e0a284247941687b7ddf568bea1facc6d06e26ca106a003ccd3fc21c6f46",
+      "byteLength": 3206
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/subset-transforms.md",
+      "sha256": "d87d00aef811a6166ad9bb0988dd937f5a6632a90ebd2cd69c841d62e1512a46",
+      "byteLength": 5720
+    },
+    {
+      "path": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
+      "sha256": "0a18d430a6c1c4b1e237e113e7e26a92a24674b45532ae5ecda1688048c521d3",
+      "byteLength": 6429
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
+      "sha256": "0201324adbb28d94f60fc93eff7216223b5efdd2455f372b4802adf482f226e3",
+      "byteLength": 5101
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/automaton-dp.md",
+      "sha256": "b6f6235f905694044c82536c710facc668b06ea50c21648cc01aff75b4c2c7e7",
+      "byteLength": 11198
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
+      "sha256": "07bae40a9c18770e40ab8dab567dfe3bfbfe428f80cbe9b25e1db8025477d684",
+      "byteLength": 6021
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/cyclic-minimax-game.md",
+      "sha256": "27974ac552c760ca3e1564153a21e4dd094c39821bec762d3b4358ef1b1c2a00",
+      "byteLength": 5145
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/digit-dp.md",
+      "sha256": "9743105d1493ce0b62617cc37bc1faaa2e50c5d0ac1d271978bcda9aa4fd5e66",
+      "byteLength": 5645
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md",
+      "sha256": "a91e11899470967bcdea3c535fb12a99a8b3581bf7970b2f4ea38b8c4d9efb2a",
+      "byteLength": 3916
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-digit-string.md",
+      "sha256": "38326c760dfc2b83d8fb29f457d1664c66da947e19d48a7a67a87027c9237cf3",
+      "byteLength": 10415
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
+      "sha256": "ad4d93eed040ab2f829c354b77cb6013bae12ba333811bf8e13358e37d01014b",
+      "byteLength": 5430
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-game.md",
+      "sha256": "4773a3a70afe4b584ec0f5f3458154ab7f65a4078dbfdf1e6f0ea1b333efccb3",
+      "byteLength": 9097
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
+      "sha256": "ae3ff447dc554f5eead876459eeac18c5c834d0b294339b2f93c9a49f94dfa60",
+      "byteLength": 9172
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-interval-composition.md",
+      "sha256": "ec8c0c64747060b0bcddd92982b3ee057d7b939e0711e3342721a216a1be16ca",
+      "byteLength": 10452
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-interval-expansion.md",
+      "sha256": "6acbb9b7368c830cad8814369733e5d4efcefa8632196aac736ef2be84c7a2e3",
+      "byteLength": 4568
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-lis.md",
+      "sha256": "86b0e7ac50d0f6949e184ef0883f69e5bbc4cf63b90a88cb106d7585f7e49752",
+      "byteLength": 7694
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-prefix-partition.md",
+      "sha256": "2c654055ab62e192989de292cafbb6a93a65d5295b72e8fcf2a0bb159393c489",
+      "byteLength": 10734
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-sequence-interval.md",
+      "sha256": "74b9ca2b35b5daa78610a9f79558215f4ac9b0d655664a85d59a4e6e5df61aea",
+      "byteLength": 12526
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-sequence.md",
+      "sha256": "1858f43eed6c5f089e1fb210b74f2da634f58fae97e671c3cb263892ba7d153f",
+      "byteLength": 10986
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
+      "sha256": "0285d9ee672bcbc9693e60e059e997a769e89587e4826745f7a10b8c0b4c81ff",
+      "byteLength": 32421
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-stochastic.md",
+      "sha256": "d608a707723573c2330d4a72107c09f12c0cf6b275b88e41536a630509767288",
+      "byteLength": 28417
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-subset-resource.md",
+      "sha256": "3d7f66a8e9accab8e4904f6973cdf5865f193c0f5f1eb9b3933abe9365a03e22",
+      "byteLength": 17281
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-subset-state.md",
+      "sha256": "709b44120894d915f65c168adc884525bc51686719acfa5abd1010447645990c",
+      "byteLength": 22530
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-transition-optimization.md",
+      "sha256": "1a32d003b98e3eeb1633e03bf23321ca5616e5b2c697b0965f1cefab322e28f4",
+      "byteLength": 32235
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/dp-value-range.md",
+      "sha256": "279001b080d8c68f8814407206ae6e83410b5b03776147d1ccf24cd54c52f843",
+      "byteLength": 9035
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md",
+      "sha256": "91971f1210adfa582e639dc78678250a976c9fe6ed54e903a7beac05b7734737",
+      "byteLength": 4874
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/frontier-profile-dp.md",
+      "sha256": "8095bddce4328f211e1e6aa4b8c86089d440fbe16aae49c0392152a399a08ea4",
+      "byteLength": 7687
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/index.md",
+      "sha256": "22e9c38ebd1c5c67c012e33ff8edd688c275ed9117771039e72923362d1b6ea0",
+      "byteLength": 53505
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/linear-recurrence.md",
+      "sha256": "725592c0bbfd355260b5a0129ef82dec4215247e057fdcbfa424c62c49bf32e1",
+      "byteLength": 11073
+    },
+    {
+      "path": "src/content/docs/learn/dynamic-programming/steiner-tree-dp.md",
+      "sha256": "056a7874e6e37ff9d987765341446b7cdf7cfbdff4cd4eae0e4be9195b378c83",
+      "byteLength": 4022
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/basic-convex-optimization.md",
+      "sha256": "5605d3fc647eba5b07422887910ab7c4e8cef34703ff78afe088c662f9f30f01",
+      "byteLength": 8162
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
+      "sha256": "89a8076edb8b1ade301f90c7201f79cbf61ff7d01c8b066f975ef234a1e4155e",
+      "byteLength": 5345
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/convex-geometry.md",
+      "sha256": "7d8dec95692f42577398fcb1dcec60344da145b617863e9481886a9e8b4353d7",
+      "byteLength": 3025
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
+      "sha256": "5f3a71d91c7ce3655510cb7af4f356a7c79a137fe828ae818fc43adab27def97",
+      "byteLength": 5944
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/discrete-convex.md",
+      "sha256": "fc968e5c6434db8d2cbf5409334ad20352b453b4bd9fcb82dc256bf283c27cd2",
+      "byteLength": 6687
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/fractional-parametric-search.md",
+      "sha256": "56999cc8530c136ac2c171821c93ba23ae48b1beeacc318082a0aae55169edce",
+      "byteLength": 5552
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
+      "sha256": "8b7190bf110da675b79d07a8c552db56189a9086d95e9458fa08eb37b49f2625",
+      "byteLength": 26928
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/half-plane-constraints.md",
+      "sha256": "7795f88a49ee24a88af35cccaf6e33627507dfb595a34a12dceac50141f21e47",
+      "byteLength": 3201
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/index.md",
+      "sha256": "b645811e4d74a2ba434883019a6a13ac1a4d3551fc703f6d691a16b1de3bfec1",
+      "byteLength": 24917
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/isotonic-regression.md",
+      "sha256": "4a17674d41d6dbafc512276e304965884c57285b51c4c10c0bb9d76bb93fed70",
+      "byteLength": 3064
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/lagrangian-relaxation.md",
+      "sha256": "7cfd99d6ead23f0e739ff2d034f951ab42838b093aad9f983932caf0bc14ccfe",
+      "byteLength": 7889
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/line-envelope.md",
+      "sha256": "fd3f92a0acb3249d755f5f38b7f9cd60b675506fd5bc7664c4a4fec471c782e3",
+      "byteLength": 4989
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/monge-optimization.md",
+      "sha256": "eda33cd95a065df12c3edbc4789333970fbaa3c5d8a3556a73ecc4a5ef7961d2",
+      "byteLength": 6252
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/separable-convex-marginals.md",
+      "sha256": "151e11449560cb5ab2f2448a7018ced54db879c12a7bc379561066365f07fbaf",
+      "byteLength": 7672
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/slope-trick.md",
+      "sha256": "f512fce643a202f9068e9371c36540dfdfd45ca4f0603a6f422cc00f79b3c586",
+      "byteLength": 6894
+    },
+    {
+      "path": "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
+      "sha256": "bb7843492d3a3e5fa29868e04c138a1ceac571775f3481c7ba749398da5559cb",
+      "byteLength": 3908
+    },
+    {
+      "path": "src/content/docs/learn/graph/binary-lifting.md",
+      "sha256": "a4c408678f475675cfd935a7b53af8302a6f214061ee38afded126b4ebcfc258",
+      "byteLength": 6588
+    },
+    {
+      "path": "src/content/docs/learn/graph/bipartite-matching.md",
+      "sha256": "38c4f73fd188e7b88c11f5adb547b99c45dcf517d3f747b0a45508ff2aa5db93",
+      "byteLength": 14459
+    },
+    {
+      "path": "src/content/docs/learn/graph/bipartite-structure.md",
+      "sha256": "662263efbe5fb8da1ae158e8224ff8247ca3bb92ac72e342da7600ebbba53a61",
+      "byteLength": 10055
+    },
+    {
+      "path": "src/content/docs/learn/graph/connectivity.md",
+      "sha256": "f133512818f6fae75a1c788ae3988b07772108cfb8eed6da7ced43c7b9ddee0d",
+      "byteLength": 25833
+    },
+    {
+      "path": "src/content/docs/learn/graph/cycle-space-basis.md",
+      "sha256": "5e2c9955712e9f265e3834d68a7e13e4c5bd78b0a3d342e012a296d0488031c6",
+      "byteLength": 6862
+    },
+    {
+      "path": "src/content/docs/learn/graph/dag-topological-processing.md",
+      "sha256": "0d3ce203376e7c5b4352ff3f6fc11be18edf832fab926a974450560bab3ac95b",
+      "byteLength": 9044
+    },
+    {
+      "path": "src/content/docs/learn/graph/degree-parity-subgraph.md",
+      "sha256": "feb78f663e29fe15bfe1013e4a8996b20c7064795cc707fdb767357357cf3e55",
+      "byteLength": 3359
+    },
+    {
+      "path": "src/content/docs/learn/graph/difference-constraints.md",
+      "sha256": "803f6e40cdd07c707677c98d03e0390540f0135d254776e13ece57f58f7d5ded",
+      "byteLength": 4234
+    },
+    {
+      "path": "src/content/docs/learn/graph/directed-condensation.md",
+      "sha256": "9a2215f3d83cb554d97fafab57f36154bb3461a89b2fc35e813e1bc7b08803f6",
+      "byteLength": 9856
+    },
+    {
+      "path": "src/content/docs/learn/graph/directed-core-peeling.md",
+      "sha256": "a7768af034aed7fd9604e4664c2e70a8161417ebc90ab11a88eaa438d156ffce",
+      "byteLength": 3562
+    },
+    {
+      "path": "src/content/docs/learn/graph/directed-walk-periodicity.md",
+      "sha256": "1ddf95c8db68bdf3fa258cc9f53407210e2421ba74c61456e5b8a80f0d32d1ba",
+      "byteLength": 3451
+    },
+    {
+      "path": "src/content/docs/learn/graph/directional-grid-effect-scan.md",
+      "sha256": "74e9fbabeb789b29d7192ede4f4802a57db537b41a560d9743a61e91c5cc8a52",
+      "byteLength": 3492
+    },
+    {
+      "path": "src/content/docs/learn/graph/dsu-components.md",
+      "sha256": "21d2ddab0433a12ba43afbc9f2051ad15c54994f8e3ab695cf789c50b5e41ed8",
+      "byteLength": 29781
+    },
+    {
+      "path": "src/content/docs/learn/graph/euler-degree.md",
+      "sha256": "cf85fa56c3dcc512a913af219f9cf691bdd786c36a2292fd84c64141d00f9a6c",
+      "byteLength": 5649
+    },
+    {
+      "path": "src/content/docs/learn/graph/euler-trail-circuit.md",
+      "sha256": "a732ef8f9178dd9fd34c4b1db88c79fcae560f62652aa97203fab7fc19a8adc8",
+      "byteLength": 7427
+    },
+    {
+      "path": "src/content/docs/learn/graph/flow-lower-bounds.md",
+      "sha256": "7c312db12172c3a3e35433cb7228b6934b99ed887e731f3c1ebecddbaa88e5a6",
+      "byteLength": 3445
+    },
+    {
+      "path": "src/content/docs/learn/graph/flow-matching.md",
+      "sha256": "22d410a9fa87973d2883737854c9e806293b3ed0ea6d76ade5079c346378a7a5",
+      "byteLength": 8866
+    },
+    {
+      "path": "src/content/docs/learn/graph/functional-graph-decomposition.md",
+      "sha256": "4039f9f6846c63003cc30b2733ed420703a322cf20f3f1b6134f75f8d665435a",
+      "byteLength": 9161
+    },
+    {
+      "path": "src/content/docs/learn/graph/functional-graph.md",
+      "sha256": "edf877c7cb53b1391c8cc0256bb8af11fa01db016e006c73146044dc4c4aae83",
+      "byteLength": 6343
+    },
+    {
+      "path": "src/content/docs/learn/graph/graph-core-peeling.md",
+      "sha256": "fb055d96dbca6624ca73d64148c56d856d5b22026169bd94a624cca60539f307",
+      "byteLength": 2557
+    },
+    {
+      "path": "src/content/docs/learn/graph/graph-core.md",
+      "sha256": "c083738e90f443c8fc133ad7003b430277e798c28866ddeb807ef75ad6f0ed1b",
+      "byteLength": 4680
+    },
+    {
+      "path": "src/content/docs/learn/graph/graph-potential-propagation.md",
+      "sha256": "f7227e0b2c54daa08ed9626996e05d3f085ebd7e7326f6cedfc6d8d720e18f70",
+      "byteLength": 4742
+    },
+    {
+      "path": "src/content/docs/learn/graph/graph-search.md",
+      "sha256": "fe75a711749e7f1db10af03ea4c8bee0be19c5854bff7834992d02cc4de44c56",
+      "byteLength": 6504
+    },
+    {
+      "path": "src/content/docs/learn/graph/index.md",
+      "sha256": "43b0198ae90d4ffa9e7fbb77418b19486d4813f4d3ffac43140fd571c583f35c",
+      "byteLength": 52783
+    },
+    {
+      "path": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
+      "sha256": "a0cdee5dd7962a046c77819d4d424c25c47d09c42c2c944f885aad725cfdbb32",
+      "byteLength": 6851
+    },
+    {
+      "path": "src/content/docs/learn/graph/lowlink-critical-structure.md",
+      "sha256": "7d35ff9b819ed12247d3f2270a85fe9d4d09ffb204d82c9d8e6df50d6ec487cd",
+      "byteLength": 5166
+    },
+    {
+      "path": "src/content/docs/learn/graph/max-flow-min-cut.md",
+      "sha256": "7e71450c771989dbd00216e68476858e7d139fb038605484b62763e721909720",
+      "byteLength": 14058
+    },
+    {
+      "path": "src/content/docs/learn/graph/min-cost-flow.md",
+      "sha256": "28f4b63b48777432f30ad4b93a1bd26e5820074d2e43b8328ee3018469126afe",
+      "byteLength": 7503
+    },
+    {
+      "path": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
+      "sha256": "07f65d425376a3a8d8a0850f7c52b9df2d69ba46e2a6a4f2ab8ccb9fdea2b47a",
+      "byteLength": 3150
+    },
+    {
+      "path": "src/content/docs/learn/graph/monotone-path-contraction.md",
+      "sha256": "ad714df3934e200d35f9cce5d1073d41362f0ec73f3b0ea75097591cf62835a6",
+      "byteLength": 3609
+    },
+    {
+      "path": "src/content/docs/learn/graph/near-tree-kernelization.md",
+      "sha256": "a18a95d7a4f821d3b34ed94d0da4abddbe0b09d06173229924513b57672fa1b9",
+      "byteLength": 4438
+    },
+    {
+      "path": "src/content/docs/learn/graph/path-matching-contraction.md",
+      "sha256": "02e46a710767fd409c3d57d2919319262a3af27ac21cab940b408fcafca31b0d",
+      "byteLength": 5243
+    },
+    {
+      "path": "src/content/docs/learn/graph/planar-duality.md",
+      "sha256": "7174f7a97d84ec8cedfd84a6b206258b047b7082e53532986a56f76d9cd2a388",
+      "byteLength": 3383
+    },
+    {
+      "path": "src/content/docs/learn/graph/potential-dsu.md",
+      "sha256": "3c449bfc2b497cc74d391268409aae413a3049f7f12c385f45423dd918aab393",
+      "byteLength": 4703
+    },
+    {
+      "path": "src/content/docs/learn/graph/scc-condensation.md",
+      "sha256": "5298fac4eb19046bd9ef25f596e4eb6313ec7455d9aca7093ca4f733f3c2053c",
+      "byteLength": 5492
+    },
+    {
+      "path": "src/content/docs/learn/graph/shortest-path-certificates.md",
+      "sha256": "ee0753108bd771fd9469b29de532221c29c4bec2f5a0294da5869abc23c2bbf2",
+      "byteLength": 15827
+    },
+    {
+      "path": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
+      "sha256": "99cacd5bae6507a27bd622c38bfcecc156d373bf8c7ea15d8cb69fcc1137fe3b",
+      "byteLength": 5792
+    },
+    {
+      "path": "src/content/docs/learn/graph/spanning-tree-optimization.md",
+      "sha256": "7c720473bcab388f02055d28230140bf31cb4fe5880129bd4c2f197efe219ddb",
+      "byteLength": 8764
+    },
+    {
+      "path": "src/content/docs/learn/graph/state-graph-search.md",
+      "sha256": "f8db2ab53b578245343b1d50f5cd97d881978d88ffbebeef30f41288c6fef001",
+      "byteLength": 15771
+    },
+    {
+      "path": "src/content/docs/learn/graph/transitive-closure.md",
+      "sha256": "4f5a0d44798a21999733ce912c80379d186b86931c4db9474ed579e9c9e5c345",
+      "byteLength": 4835
+    },
+    {
+      "path": "src/content/docs/learn/graph/two-sat.md",
+      "sha256": "c3a318bbf2adc36fe318db327f06f1c349cffcf4f027ae8636272326654d699f",
+      "byteLength": 2859
+    },
+    {
+      "path": "src/content/docs/learn/graph/weighted-bipartite-matching.md",
+      "sha256": "5ece3ebe5d5f54a614d795892ed9707c284db8f2205461dd8235060b62e43cfa",
+      "byteLength": 3193
+    },
+    {
+      "path": "src/content/docs/learn/graph/weighted-shortest-path.md",
+      "sha256": "bb9477b19a4596fae409a4028834aca463330bd116c605291138e8b2a2ab1470",
+      "byteLength": 26787
+    },
+    {
+      "path": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
+      "sha256": "be747ed9f362960231a81289cfb8c46556b4dcfda39da7edb60bdc7ffe74ae85",
+      "byteLength": 21274
+    },
+    {
+      "path": "src/content/docs/learn/modeling/backtracking-search.md",
+      "sha256": "89dad580acdbd9f6b7f964e1088da6991bbc859258e9d3d463b5c23568049060",
+      "byteLength": 5217
+    },
+    {
+      "path": "src/content/docs/learn/modeling/bitwise-greedy-feasibility.md",
+      "sha256": "8ca47b5ab9b7e769c5ed7ddb676d3b2d5240d8f3420e369d7d49bb5bc8bf05fc",
+      "byteLength": 3485
+    },
+    {
+      "path": "src/content/docs/learn/modeling/bounded-enumeration.md",
+      "sha256": "a642e3d47defd873dc8e57d54d13b751508bdb6b3b38c0f95dcfaaf66a4bb209",
+      "byteLength": 30799
+    },
+    {
+      "path": "src/content/docs/learn/modeling/change-impact-localization.md",
+      "sha256": "a6d92d60d91e58e41f0f292993664a3aae8b037edd576469828f1901e789c6ea",
+      "byteLength": 5256
+    },
+    {
+      "path": "src/content/docs/learn/modeling/constructive-witness.md",
+      "sha256": "20816cec797b08f610d04833b5c1305b855fe522cde15cbedaa2383694d4916b",
+      "byteLength": 22690
+    },
+    {
+      "path": "src/content/docs/learn/modeling/contribution-reordering.md",
+      "sha256": "b5409229e3c486832177e72bc2213d822a60701dbc868df4c283a944ea5b9568",
+      "byteLength": 54046
+    },
+    {
+      "path": "src/content/docs/learn/modeling/coordinate-compression.md",
+      "sha256": "1b4794797e765fa22d2d07b9164a4a861b83e458d62f8476a44845b7eb479a2f",
+      "byteLength": 24918
+    },
+    {
+      "path": "src/content/docs/learn/modeling/decomposition-amortization.md",
+      "sha256": "ba8e18234b3bcfa4abdfdd2ac40cda8388fa89792d0fc66b9a9aeba57ea144a5",
+      "byteLength": 22029
+    },
+    {
+      "path": "src/content/docs/learn/modeling/divide-enumeration.md",
+      "sha256": "ed0abc52eb0d0bbe46d997b759a29b71924564991c75d10c7234c601221d3363",
+      "byteLength": 26876
+    },
+    {
+      "path": "src/content/docs/learn/modeling/event-sweep.md",
+      "sha256": "65bd691757997ba8cbe0bbd4fc9ebf2ecc6033857a7889343cf4394509ec5ab8",
+      "byteLength": 42846
+    },
+    {
+      "path": "src/content/docs/learn/modeling/game-parity-invariant.md",
+      "sha256": "6103a8b28146bf77f0450ad04097295e28f878fdbef767d3199d0eb36415e193",
+      "byteLength": 4709
+    },
+    {
+      "path": "src/content/docs/learn/modeling/greedy-exchange.md",
+      "sha256": "71e27e932d7603b1e589b839b1cad0ec6769bc6418b5cd2e3f6c5d46fdf84de6",
+      "byteLength": 42970
+    },
+    {
+      "path": "src/content/docs/learn/modeling/index.md",
+      "sha256": "10f3cfbf64ae182576f9baa5c823d477e9c0e7632eaa186cf0a91c1f3295d571",
+      "byteLength": 156691
+    },
+    {
+      "path": "src/content/docs/learn/modeling/information-theoretic-query-design.md",
+      "sha256": "7e9fa8dab3dd319599d74bc396a2b15e54fb9c7f443911f18f5a7af1d461da0c",
+      "byteLength": 3297
+    },
+    {
+      "path": "src/content/docs/learn/modeling/interactive-protocol.md",
+      "sha256": "13a43081d5eaf7f8661f3839578cbc94db3aff2e056afb806de20a66d1dbf0bc",
+      "byteLength": 9932
+    },
+    {
+      "path": "src/content/docs/learn/modeling/kinetic-order-maintenance.md",
+      "sha256": "7a092db29a62aaa23c2c08e94f40aceb593ed41b6c6142604ed100e731cbf1d3",
+      "byteLength": 4088
+    },
+    {
+      "path": "src/content/docs/learn/modeling/meet-in-the-middle.md",
+      "sha256": "068394862e193f2aa6f3a8aa1caa8ee7121a78905dd7cb0819d3a42834ee8bb7",
+      "byteLength": 7449
+    },
+    {
+      "path": "src/content/docs/learn/modeling/monotone-search.md",
+      "sha256": "6d9afe126b764649245272bcb97452cce094524311ca632a3fe3cc3e2424ab0b",
+      "byteLength": 23087
+    },
+    {
+      "path": "src/content/docs/learn/modeling/normalization.md",
+      "sha256": "b6b8ee6c742aa5bd33293eafdefcd68dc51ed42c494310b2c7f122250acdb6ed",
+      "byteLength": 17643
+    },
+    {
+      "path": "src/content/docs/learn/modeling/parallel-binary-search.md",
+      "sha256": "d5139075ba240aab582d4648e948cb2073d627223edcacf6b09cbc52fb64027a",
+      "byteLength": 5287
+    },
+    {
+      "path": "src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md",
+      "sha256": "3a5ad73fe12124d900ee2de7dde602e8657576785cc0f61279cfb46ad43a31f3",
+      "byteLength": 6003
+    },
+    {
+      "path": "src/content/docs/learn/modeling/randomized-algorithms.md",
+      "sha256": "a43b4b3d5f0ace8eaa3fd51cf8f1ceebe99aa74b380ef9a0140f173d9923357f",
+      "byteLength": 5475
+    },
+    {
+      "path": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
+      "sha256": "51e07a8c09049cc6cfd3a391a6b8a58cd0c24981b17d539d5cf1c705686e8164",
+      "byteLength": 28698
+    },
+    {
+      "path": "src/content/docs/learn/modeling/reverse-offline.md",
+      "sha256": "8f2844caca3cf3b598ae838eccb138338471ffaf6114c38a4f134a76e4b21259",
+      "byteLength": 9540
+    },
+    {
+      "path": "src/content/docs/learn/modeling/small-to-large.md",
+      "sha256": "4c43f2b05dfd7beff924d1ad7c4929d4fbd4f5098ac8f658abb7b20f96e09b59",
+      "byteLength": 10760
+    },
+    {
+      "path": "src/content/docs/learn/modeling/threshold-heavy-light.md",
+      "sha256": "18b6349d1f3c5766dc682e6b39eecbf17fcaf8f51cbcc918d5b511f9cf90aadf",
+      "byteLength": 7251
+    },
+    {
+      "path": "src/content/docs/learn/modeling/two-pointers-window.md",
+      "sha256": "1ced7eebb9787e3300e287c56203ddc35ab9fa092e8c6d6f85e5ac94c49ed263",
+      "byteLength": 14582
+    },
+    {
+      "path": "src/content/docs/learn/modeling/xor-threshold-matching.md",
+      "sha256": "581f006ee49465341f85952522336a04c594620813df55eee696ddc50cc7a7fb",
+      "byteLength": 4050
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/baby-step-giant-step.md",
+      "sha256": "4be5ea52b164d17082df74597b123f37aae2c567b37d4e020f0de196b5853f23",
+      "byteLength": 3544
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+      "sha256": "57b6f3539a2ba35a738c3eabe037393693abfa6eae6ee9d6e3928bbb9d760e64",
+      "byteLength": 5002
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/dynamic-modular-product.md",
+      "sha256": "736affc5b549e9d6bdc108090bcccf359d19f8bba05fa35a272f971c64b2a972",
+      "byteLength": 7400
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/euclidean-floor-sum.md",
+      "sha256": "9e2c390275d9de05b33a3118d077c915b1f2fbfc1f51a47498b73868629e0c52",
+      "byteLength": 6635
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/finite-field-extension.md",
+      "sha256": "e9774c01f32e41e73bdbe0ccc47189b8b27d68ebbbfb61075a76e801b88b32d6",
+      "byteLength": 5094
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/finite-field-frobenius.md",
+      "sha256": "4eba10719210b009d7ee49057fa3560c2c25251dca974783bb8d036d2f1400a1",
+      "byteLength": 4574
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/gaussian-integers-two-squares.md",
+      "sha256": "e7f7e2dade321d6095499284764c0e344137da7ac51ff80a54ef44335eb3c78e",
+      "byteLength": 3195
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/gcd-diophantine.md",
+      "sha256": "3c5735bb9759cffd799a483600e4c706a53c29ee7520fdec043618c69da6a1aa",
+      "byteLength": 6560
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/gcd-structure.md",
+      "sha256": "a335123b31958cc7da62e0e07612b390d1a573121a47765a4dbce95afee17970",
+      "byteLength": 8273
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/index.md",
+      "sha256": "4ed476191c3a3512da96afdf6d32930d1d49d8d8e397b58f571ec5957c37a568",
+      "byteLength": 100437
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
+      "sha256": "86c626f2f7acee07c120998dd53a19efa0ea9d031678738561429f767f249c02",
+      "byteLength": 13295
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/min25-sieve.md",
+      "sha256": "833bb7e4890400d84ad534e3c74f89ea4eeb41fca80810405d3bef9a2caaad71",
+      "byteLength": 3738
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/modular-arithmetic.md",
+      "sha256": "da29bf74059ecc58e727ea1973fb3b5c95c1aeae3ce2fc16a7f4180773920841",
+      "byteLength": 84761
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/modular-congruence.md",
+      "sha256": "3cebb93ee4cba5b6ee4051840232ce45c9342411ddab978997f177db05884c29",
+      "byteLength": 6419
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/modular-periodicity.md",
+      "sha256": "43221c001f8875be1f0998ee85abe1b9c90efa48c6af6cd93792157b2e6cf35c",
+      "byteLength": 6292
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/modular-product-foundations.md",
+      "sha256": "aaed3545827c1fcde3c8ce5e00c7268d194171aa778eb29ca2acd205b1fd7401",
+      "byteLength": 86068
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/multiplicative-order-periods.md",
+      "sha256": "a1777537cdb1c867f17a14a8bcd422d62c8197941658875c4aafab6992cf1b24",
+      "byteLength": 4900
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/numerical-semigroup-reachability.md",
+      "sha256": "9b2cbd278634fe383f64fdc5d3d5f9f7d3f564233a5e6b42ee4043df82d8cf2b",
+      "byteLength": 3426
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/prime-divisor.md",
+      "sha256": "212258874e0c5fb4c0a8dbc86563c9ccb1f5f8b73c266d4cf947aaf236f248aa",
+      "byteLength": 17914
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/rational-approximation.md",
+      "sha256": "274c6c383705dddd921fee84afff4575b9f4444d00a4a4755de3cb94d545a288",
+      "byteLength": 5565
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/stern-brocot-ancestry.md",
+      "sha256": "e64daa4b490c981b24eaac538dd392c02a4a9791c3380d32273f85734a832d25",
+      "byteLength": 4721
+    },
+    {
+      "path": "src/content/docs/learn/query/binary-trie.md",
+      "sha256": "53e2c923fd19bc5fced529f2652124bc142ca2d818cd3d3f0360445d276d2bd3",
+      "byteLength": 6341
+    },
+    {
+      "path": "src/content/docs/learn/query/bitset-word-parallel.md",
+      "sha256": "0aa719c6e4dd69fd4db035398dbcbde2e96752682c204b0aa5fbf5409b416b4f",
+      "byteLength": 8448
+    },
+    {
+      "path": "src/content/docs/learn/query/bitwise-minimax-partition.md",
+      "sha256": "b10a699cefd2b165b9858cb07a5fbcff6720eda747abbbf1e819732da3cb38e7",
+      "byteLength": 3630
+    },
+    {
+      "path": "src/content/docs/learn/query/cartesian-tree.md",
+      "sha256": "e0e6c0edc477c16fb2974c9956e61b5e25d36c79fd1c95c49cffb4ff207f6d7e",
+      "byteLength": 6240
+    },
+    {
+      "path": "src/content/docs/learn/query/dynamic-segment-tree.md",
+      "sha256": "6b8f55a021d22e7261d40063c60d8a5dd9d25fa81dd92801591e76ed3c328111",
+      "byteLength": 2994
+    },
+    {
+      "path": "src/content/docs/learn/query/finite-function-composition.md",
+      "sha256": "1844e582294263a8f24d44a6e989195482c64114df1f55b4078fdb3420732910",
+      "byteLength": 3015
+    },
+    {
+      "path": "src/content/docs/learn/query/idempotent-overlap-range-query.md",
+      "sha256": "195da72f709f44a77cbee6afcd16e9a1fc2e2c68f129181324bc678a74b15c2d",
+      "byteLength": 5118
+    },
+    {
+      "path": "src/content/docs/learn/query/index.md",
+      "sha256": "18b45aa8da51a2c9e98cc7050c48bc67cd7c654739e4d2432462055cdf73b24e",
+      "byteLength": 89902
+    },
+    {
+      "path": "src/content/docs/learn/query/linked-list-index.md",
+      "sha256": "f0fffae074e75b4b21466f1e7b1109543eb2ca5227272959a6b766e5c242fdb1",
+      "byteLength": 4865
+    },
+    {
+      "path": "src/content/docs/learn/query/mo-offline-range.md",
+      "sha256": "a97bb4b3fd83bd23fc1217f125a607d423b4d8922c17f3e5857506491ec07acd",
+      "byteLength": 7428
+    },
+    {
+      "path": "src/content/docs/learn/query/monoid-segment-tree.md",
+      "sha256": "507cbe36ca69140c801be40e683fc74c32bb4a51761bafbce96acc83fe569309",
+      "byteLength": 23186
+    },
+    {
+      "path": "src/content/docs/learn/query/monotone-stack-queue.md",
+      "sha256": "ff01a6b647ce1b0d73b44c85648404af2f915a55e942196425f97e04df721569",
+      "byteLength": 10196
+    },
+    {
+      "path": "src/content/docs/learn/query/ordered-interval-partition.md",
+      "sha256": "16c69c12c897a17a35a4e562da7ed0d210f8963944df73b7e5715b8475b4b629",
+      "byteLength": 9850
+    },
+    {
+      "path": "src/content/docs/learn/query/ordered-set-heap.md",
+      "sha256": "0edc053fa8792ca5cd2f886b969632efd59d681a35826e6d66cf5e4306728d69",
+      "byteLength": 28663
+    },
+    {
+      "path": "src/content/docs/learn/query/ordered-set-multiset.md",
+      "sha256": "1d2b0e44dbc64034a647c8d895cbf35f031c3e867374dc0d000392b12ec9147a",
+      "byteLength": 23715
+    },
+    {
+      "path": "src/content/docs/learn/query/persistence-rollback.md",
+      "sha256": "502ae26f6b29d410ed9e446f5664500b3c2855527acab426a57e7bf5e7ce68e0",
+      "byteLength": 2746
+    },
+    {
+      "path": "src/content/docs/learn/query/persistence.md",
+      "sha256": "c06dc3c1c91b0234208878b99462b218fa1d40de7f3bb01fbd6bba2a81205915",
+      "byteLength": 3818
+    },
+    {
+      "path": "src/content/docs/learn/query/prefix-aggregate.md",
+      "sha256": "a3ad384b67297f8d256f9e9851c2d014819fc6f59b1a11d322ba3d1ffc5f25c7",
+      "byteLength": 29866
+    },
+    {
+      "path": "src/content/docs/learn/query/priority-queue-best-first.md",
+      "sha256": "1ab2b3a9c55b25937808b398032a59b8a01144c6f0fb3c8134869c33b3573e43",
+      "byteLength": 18441
+    },
+    {
+      "path": "src/content/docs/learn/query/range-actions.md",
+      "sha256": "f4fd359b6705d777f1e8fb80bb046be14f2abb6fcc32178597bece5bd3f32d9d",
+      "byteLength": 14701
+    },
+    {
+      "path": "src/content/docs/learn/query/range-monoid-aggregation.md",
+      "sha256": "95bb65a5275d2b895a98de6d67ff6a9b6f99b2b51adaf1b0aa5cff5aec3495db",
+      "byteLength": 27355
+    },
+    {
+      "path": "src/content/docs/learn/query/rollback.md",
+      "sha256": "da4d1b11e0efeaaaba61f63ba697506c7beb41008ecb84bc08e423794c8761b9",
+      "byteLength": 5741
+    },
+    {
+      "path": "src/content/docs/learn/query/segment-tree-beats.md",
+      "sha256": "3614a4ea0e7bd05e7d7e6bf8f6d65362f6e0414a6efe97b46454a54528aba3b8",
+      "byteLength": 3485
+    },
+    {
+      "path": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
+      "sha256": "d82bd8a614f6c00fa308a5d20865831ab03acb5819d199678b9ce7aa5a037d9c",
+      "byteLength": 6359
+    },
+    {
+      "path": "src/content/docs/learn/query/sequence-fingerprint.md",
+      "sha256": "1aa5f7f04a06fc9ef763913614b49a426143d95016b626b884d3c7decf9a1849",
+      "byteLength": 5462
+    },
+    {
+      "path": "src/content/docs/learn/query/static-sorted-range-index.md",
+      "sha256": "52b693b9a749e42bb5866b968c77f005ff1a755ccd1a11432eb7d5659d2d91f6",
+      "byteLength": 3172
+    },
+    {
+      "path": "src/content/docs/learn/query/string-hash.md",
+      "sha256": "ad539970279ad07b303e573c06e9f6eb5e8f736236ddaa00f70da48cbe099cf8",
+      "byteLength": 3352
+    },
+    {
+      "path": "src/content/docs/learn/query/swag.md",
+      "sha256": "857b719b286c4112a551fc40138af575e5adbf6a4819ee252cd423e3d29a08be",
+      "byteLength": 3262
+    },
+    {
+      "path": "src/content/docs/learn/query/value-bucket-aggregation.md",
+      "sha256": "d59606aae952e6c9c767f45e2bb722ef7dbc89f06493a2cc38b67dae3f316350",
+      "byteLength": 4858
+    },
+    {
+      "path": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
+      "sha256": "c42e279145ddd63b91bc1b4791f8252af01caf895aa23f9e756a8b42e917ea13",
+      "byteLength": 28197
+    },
+    {
+      "path": "src/content/docs/learn/string/aho-corasick.md",
+      "sha256": "a3d4e30241d6271401b7d0c94c69e831834d9c9c3210825de4a3a18fece1ad5b",
+      "byteLength": 4794
+    },
+    {
+      "path": "src/content/docs/learn/string/automaton-subset-construction.md",
+      "sha256": "a0f122db2cb8993d9e33c6d6fe2c9f291bdba4d0166b1f71341fdbc12f8b69e2",
+      "byteLength": 3954
+    },
+    {
+      "path": "src/content/docs/learn/string/finite-pattern-automaton.md",
+      "sha256": "eedd671226fc4a53721e2b90a686d5c40d6a2543799660b28452e1365e6ce021",
+      "byteLength": 7998
+    },
+    {
+      "path": "src/content/docs/learn/string/index.md",
+      "sha256": "7b9c46dc026244b405bcb1712669a0569fc235b71ea080ec0a3c313b99def3ce",
+      "byteLength": 9383
+    },
+    {
+      "path": "src/content/docs/learn/string/palindrome-radius.md",
+      "sha256": "d602748fea2330f5952ae825f148445ef8b742c03fa7d64bbe21e5c952e95f75",
+      "byteLength": 3633
+    },
+    {
+      "path": "src/content/docs/learn/string/recursive-compressed-string.md",
+      "sha256": "73895ec921b68cd25d95068c951b5b40eca7b24e6282c8cbcde6d43928380011",
+      "byteLength": 5107
+    },
+    {
+      "path": "src/content/docs/learn/string/run-length-dynamics.md",
+      "sha256": "f98e009b372810085d3d83a4e5b67369c2320cdbb436e3d823e1642bf18f3f06",
+      "byteLength": 2987
+    },
+    {
+      "path": "src/content/docs/learn/string/string-automata.md",
+      "sha256": "05e71912f2f045030acb1e2f321b703cf8248d2ef55a81d0f69eb58663ab6543",
+      "byteLength": 3007
+    },
+    {
+      "path": "src/content/docs/learn/string/string-periodicity.md",
+      "sha256": "0f6dce3d31464022ad9268912bc295b797e3fbdde28923fda14d5af1cab69f4f",
+      "byteLength": 3649
+    },
+    {
+      "path": "src/content/docs/learn/string/string-prefix-automata.md",
+      "sha256": "e4206af79ddc44444f9c0e7aafe76c8f2c34d7925f62d06eed7a68397be7e4c9",
+      "byteLength": 5090
+    },
+    {
+      "path": "src/content/docs/learn/string/suffix-automaton.md",
+      "sha256": "695ec8f0a71fb700415a7644feb7aec111b2516907f4cce8c60a48d6db2c7eee",
+      "byteLength": 3214
+    },
+    {
+      "path": "src/content/docs/learn/string/suffix-lcp-index.md",
+      "sha256": "2a31ed0302eba377d76a6d3e36101ffce70d1eb55c4c93ad0f39cbb3e3abdc53",
+      "byteLength": 6037
+    },
+    {
+      "path": "src/content/docs/learn/string/trie-prefix.md",
+      "sha256": "1fbfac305ebccf65d5e6357dec13d3a318da8e81d0cb918feee8651102cbb62e",
+      "byteLength": 7531
+    },
+    {
+      "path": "src/content/docs/learn/string/z-algorithm.md",
+      "sha256": "160112c2f05f5d5c2ae132cd6dbddc99590ba10efd99f934eda253eb142b3664",
+      "byteLength": 6820
+    },
+    {
+      "path": "src/content/docs/learn/tree/additive-tree-metric-reconstruction.md",
+      "sha256": "91eaaaf83c6f94fc0793eb9c7349eaa7e32e0f256da9d940d947208c3c8cc0cf",
+      "byteLength": 2891
+    },
+    {
+      "path": "src/content/docs/learn/tree/dsu-merge-tree.md",
+      "sha256": "eb616c96cb56d8592b9ef1467dc0d3b6de10f3d49cfb930b53bfc027c6b1d328",
+      "byteLength": 5053
+    },
+    {
+      "path": "src/content/docs/learn/tree/heavy-light-decomposition.md",
+      "sha256": "1d92af80a7cecfc90a82ce07ad46ad8eaf776097bca882e8bff56e3a03ec2d9f",
+      "byteLength": 4259
+    },
+    {
+      "path": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
+      "sha256": "d44ea9868bffb33214f338b5909fd8544003ed9bdcda9e616aa49e187b5c3382",
+      "byteLength": 4401
+    },
+    {
+      "path": "src/content/docs/learn/tree/heavy-path-tree-dp.md",
+      "sha256": "46ffb1d4d7f10b5055d8d8123715f1a9cfff98327bd17f73a5a979c2efc9e0b3",
+      "byteLength": 4383
+    },
+    {
+      "path": "src/content/docs/learn/tree/implicit-binary-tree.md",
+      "sha256": "ee5214e7a68057f2571d2494c4ca88c57ede8d573ade691a47e50ab9d1aae041",
+      "byteLength": 5187
+    },
+    {
+      "path": "src/content/docs/learn/tree/index.md",
+      "sha256": "be0d04fb7db96b72b2531e5028e69b4c3c993a3431bfef5286ce3596690e46f7",
+      "byteLength": 14347
+    },
+    {
+      "path": "src/content/docs/learn/tree/laminar-interval-containment-tree.md",
+      "sha256": "90298c5029bd8e4edb0fb47f8c5ab07927854891a24fe845be8ef74760cbf0d5",
+      "byteLength": 3414
+    },
+    {
+      "path": "src/content/docs/learn/tree/rerooting.md",
+      "sha256": "afd6b56611660eaeeda362f9f9c856633c6ba28fb3d97cc5b8ba978a46a461fd",
+      "byteLength": 4244
+    },
+    {
+      "path": "src/content/docs/learn/tree/rooted-tree-aggregation.md",
+      "sha256": "24d838521e1e72f2f92ee671ce49bc8b9ef1338a9bdcefc438a4420e4312348c",
+      "byteLength": 17089
+    },
+    {
+      "path": "src/content/docs/learn/tree/static-top-tree.md",
+      "sha256": "e3a9be1077bbb05521ef82cf34b1133162dafa10accd24a37d963b516022b82e",
+      "byteLength": 3658
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-aggregation.md",
+      "sha256": "1f37c09f07b9a8d284203ba3b69481a50c8371cdc1708663c137e1776b9df56d",
+      "byteLength": 11117
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-ancestor-lca.md",
+      "sha256": "6493082ac214140ac7a065c64fadf1281a67705a190f2d5524f14645eca3ca05",
+      "byteLength": 7523
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-balanced-separators.md",
+      "sha256": "6113c46e7c041df7b01cb1cdc316f8408f07d14d62e8c8b6c55cb5fe941943da",
+      "byteLength": 7013
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-decomposition.md",
+      "sha256": "8cb86ce25d26f2ef12b04e8223382588f3789e036cc852271dcbf50c42061873",
+      "byteLength": 7086
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-euler-flattening.md",
+      "sha256": "a2c0402415b3428f8f11db6030f00b61089b0d7d41f790a75a9012d2c0cd7858",
+      "byteLength": 5586
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-metric.md",
+      "sha256": "2cff4b74d3730a70721531e054012a6b4278dc2bb5fed7d26482b4f9474c1a26",
+      "byteLength": 7775
+    },
+    {
+      "path": "src/content/docs/learn/tree/tree-precedence-contraction.md",
+      "sha256": "42e39404c618e88a69c2d1acc3f157f4557d94fdb868b00f59f1d43ed6086573",
+      "byteLength": 3808
+    },
+    {
+      "path": "src/content/docs/learn/tree/virtual-tree.md",
+      "sha256": "200afa525aab1ffc3d48963c4519d5bf76f9d19d883ecf4bdca1c0beaa45d01c",
+      "byteLength": 3100
+    },
+    {
+      "path": "src/content/learning-units/unit-additive-expectation-potential.json",
+      "sha256": "9387fbc052edb46a5eebdd59fcaf8aa3169f95af14ed797f494c38f5a6915280",
+      "byteLength": 1458
+    },
+    {
+      "path": "src/content/learning-units/unit-additive-tree-metric-reconstruction.json",
+      "sha256": "a10c91105a1deaa9a08b177dc086d37371636b61e0e966a9dc40a41fe1290d14",
+      "byteLength": 1369
+    },
+    {
+      "path": "src/content/learning-units/unit-aho-corasick.json",
+      "sha256": "47e78dec280ec4863bf3f20fafa6d8b0547d228ef5d8b5057b1a6ee09f6ccebf",
+      "byteLength": 1494
+    },
+    {
+      "path": "src/content/learning-units/unit-amortized-monotone-progress.json",
+      "sha256": "c94df62df47eef19861c4d827cecf2052b4adb52fd78bbbf0139493bb4ab3003",
+      "byteLength": 2295
+    },
+    {
+      "path": "src/content/learning-units/unit-automaton-dp.json",
+      "sha256": "c5b255bc1dd39234c13d6df641c8027c9e1b02b0b7aa0f11458b262a23552938",
+      "byteLength": 1785
+    },
+    {
+      "path": "src/content/learning-units/unit-automaton-subset-construction.json",
+      "sha256": "55e7c5f76b80c0dceaa44569495af384814922a95aad1af1b0c58788cd0b8794",
+      "byteLength": 1384
+    },
+    {
+      "path": "src/content/learning-units/unit-baby-step-giant-step.json",
+      "sha256": "215e4112200f747fe47e728f6186bc83e58dada77e9f7f6b155a72d428c6d2b3",
+      "byteLength": 1445
+    },
+    {
+      "path": "src/content/learning-units/unit-backtracking-search.json",
+      "sha256": "3ed63d232cf310b321296551c6315b449b3efb7a14dafb2394824b3bc3d9ee9f",
+      "byteLength": 1609
+    },
+    {
+      "path": "src/content/learning-units/unit-basic-convex-optimization.json",
+      "sha256": "9356afbe4b9ee16229b65079f9834ccebc112956653c3bcc584b75a935c6cdd9",
+      "byteLength": 1914
+    },
+    {
+      "path": "src/content/learning-units/unit-binary-lifting.json",
+      "sha256": "39ba87d13379e5157804ee11a1a1bd6a4826bec81b954c258da9edf217d046e5",
+      "byteLength": 1847
+    },
+    {
+      "path": "src/content/learning-units/unit-binary-trie.json",
+      "sha256": "ec14100d020a7c03d0c44ece896fb91d751cad1d41f1feaa73eba3f99a094fcd",
+      "byteLength": 1637
+    },
+    {
+      "path": "src/content/learning-units/unit-bipartite-matching.json",
+      "sha256": "0eb726884bbf8a76f259766def983fb52a33b159d438422221d2a15e9ae21741",
+      "byteLength": 2120
+    },
+    {
+      "path": "src/content/learning-units/unit-bipartite-structure.json",
+      "sha256": "26ac7c11d0623c5023dc2225c9080f1dd5eca15affb8f81252685cfa75c1d174",
+      "byteLength": 1920
+    },
+    {
+      "path": "src/content/learning-units/unit-bitset-word-parallel.json",
+      "sha256": "6f4c92710915a1043af819a23de30bd43b369789121054813e0ba8dfadf27974",
+      "byteLength": 1821
+    },
+    {
+      "path": "src/content/learning-units/unit-bitwise-greedy-feasibility.json",
+      "sha256": "4e31e0590c863d3dd34421684b9492b422952795002d0daceb3be28b509fbde8",
+      "byteLength": 1398
+    },
+    {
+      "path": "src/content/learning-units/unit-bitwise-minimax-partition.json",
+      "sha256": "923ffd3087b392a21fdddba1f0f09ace4a02b38e4d568b2e5df9beb06cd7fb93",
+      "byteLength": 1546
+    },
+    {
+      "path": "src/content/learning-units/unit-bostan-mori.json",
+      "sha256": "2464411c7a088ed54db5477f6d8f400462304d9611afe5d1f92e321427b82086",
+      "byteLength": 1383
+    },
+    {
+      "path": "src/content/learning-units/unit-bounded-enumeration.json",
+      "sha256": "9ea79d938313a87b4236b855b73187f566e2a4a24c742b6ce96fd80adf376b5e",
+      "byteLength": 2650
+    },
+    {
+      "path": "src/content/learning-units/unit-cartesian-tree.json",
+      "sha256": "880375deab42856ea08e7deb7ad608f1f2f18258faf9ac30e3aa9db2046a0f84",
+      "byteLength": 1704
+    },
+    {
+      "path": "src/content/learning-units/unit-change-impact-localization.json",
+      "sha256": "11473167ba63bb3bbb3d23d3869028e8004e3f8800a34fea1327e33757869413",
+      "byteLength": 1812
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-combinatorics-algebra.json",
+      "sha256": "8b22fda6d147dc92173b2ce91fb9144ed0bd7e58ede8c79473e8eb9318332118",
+      "byteLength": 6693
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-dynamic-programming.json",
+      "sha256": "54651f62b4ba231779c366481333dd71deb5255aa11c378a1041d73caaadd866",
+      "byteLength": 7319
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-geometry-optimization.json",
+      "sha256": "9c0cb43d8dac625e26dcedcdbc3290478d9e35b79ea96735c479f8eb4357fa4b",
+      "byteLength": 3839
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-graph.json",
+      "sha256": "94e4b361c793e0c2fb74a37e4d9879c0f603139c1bea34d42ef0ecae0f8dc924",
+      "byteLength": 7611
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-modeling.json",
+      "sha256": "30192536cbab14e16b46a133511bd68f1c9b6e6d92c1b7573b5898d9c02b2452",
+      "byteLength": 9719
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-number-theory.json",
+      "sha256": "a65015339d9bdea7aa0053ade891861a5459a1e7d7f1b7b8ddcc8aeb3a3ad89a",
+      "byteLength": 5597
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-query.json",
+      "sha256": "c65fb1e71a6114efbe948e50015fb690e081403f5ddf0936b183f69fda3cdcab",
+      "byteLength": 6783
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-string.json",
+      "sha256": "89b7b070fb0db91809bd638e7f4a8466ba38b8537f142027c3f428968bc66330",
+      "byteLength": 2846
+    },
+    {
+      "path": "src/content/learning-units/unit-chapter-tree.json",
+      "sha256": "5f2631be807cafffc1f85763caf7f09e4c0649dfb5ef017242f574c2296de2d3",
+      "byteLength": 3745
+    },
+    {
+      "path": "src/content/learning-units/unit-combinatorial-coefficients.json",
+      "sha256": "c9bfca4487597201cd1e9eda4702ffecf70ad0f21d65e2fc95a7e04b065ec2f1",
+      "byteLength": 3402
+    },
+    {
+      "path": "src/content/learning-units/unit-connectivity.json",
+      "sha256": "c6f3992300e50dbf65af8b4d655d996322c134193dbd8ece27cf134e664adeb7",
+      "byteLength": 2430
+    },
+    {
+      "path": "src/content/learning-units/unit-constructive-witness.json",
+      "sha256": "19c4ba81fb211c78ed0617aba6fbfa5f2812463d920c9abdb1c269a80af953b1",
+      "byteLength": 2313
+    },
+    {
+      "path": "src/content/learning-units/unit-contribution-reordering.json",
+      "sha256": "bfb808810acee500d6787bdd832cdf9610edbccacf8e55d0df011495dadffbff",
+      "byteLength": 3384
+    },
+    {
+      "path": "src/content/learning-units/unit-convex-boundary-hull.json",
+      "sha256": "5df0b94704ab378af2ab51a27de8e64601851250a70305f765a8bf43a3d8f1fa",
+      "byteLength": 1937
+    },
+    {
+      "path": "src/content/learning-units/unit-convex-geometry.json",
+      "sha256": "0b7d6d1f26d37d868fc06f9732917e6215af0295baf9b46fe0c1d89d37d6f0a7",
+      "byteLength": 1936
+    },
+    {
+      "path": "src/content/learning-units/unit-conway-number-games.json",
+      "sha256": "4db2e4bacf41b964e0fe5406c79f33b606733d05a0aaa0e3514f34d4d4eff27d",
+      "byteLength": 1512
+    },
+    {
+      "path": "src/content/learning-units/unit-coordinate-compression.json",
+      "sha256": "1622fb3cb258e968f31835703990039ee40bbc52ffeb4996df0deebb9b35609b",
+      "byteLength": 2076
+    },
+    {
+      "path": "src/content/learning-units/unit-cycle-space-basis.json",
+      "sha256": "b880e34863e1441cfea316ecdd1fafb62251f3809093f13f5890a2dbed11a411",
+      "byteLength": 1762
+    },
+    {
+      "path": "src/content/learning-units/unit-cyclic-group-exponent-counting.json",
+      "sha256": "11ae99b5adab33d4bce87429dee4cea85064bf3746aff0a03008584a5dd6f121",
+      "byteLength": 1569
+    },
+    {
+      "path": "src/content/learning-units/unit-cyclic-minimax-game.json",
+      "sha256": "465173ca70ba0e614000d15252d3b7d1a4b98fcbf48ccfc4e84030193374c350",
+      "byteLength": 1580
+    },
+    {
+      "path": "src/content/learning-units/unit-cyclic-order-crossing.json",
+      "sha256": "fd343ea00d1028ecf274bf475ecdcf0663646dede8efe6ee5cb984c91b4a620d",
+      "byteLength": 1780
+    },
+    {
+      "path": "src/content/learning-units/unit-dag-topological-processing.json",
+      "sha256": "98acd01cec777c1dfbdc5d11c73370b96666789c19ad5ac07b96b1385fe16beb",
+      "byteLength": 1902
+    },
+    {
+      "path": "src/content/learning-units/unit-decomposition-amortization.json",
+      "sha256": "714fdf1231b7138f2b6feef3f7923ca3ee7cda16be0b2eea0b78b3c4089c4cbb",
+      "byteLength": 2322
+    },
+    {
+      "path": "src/content/learning-units/unit-degree-parity-subgraph.json",
+      "sha256": "f2c2f94be3f7834a0adc0855fbb13a977b1bd50a12ce2500a07de96329a30cbf",
+      "byteLength": 1340
+    },
+    {
+      "path": "src/content/learning-units/unit-deletion-contraction.json",
+      "sha256": "b89055d0cd5fe42f0849be1c2f493b8bb8855288908ed18f1eeb59c4ae17a181",
+      "byteLength": 1357
+    },
+    {
+      "path": "src/content/learning-units/unit-determinant-counting.json",
+      "sha256": "37b0f6812d40908bda3ded9c0f1efa96dadc0588553c92483f39b246557e2ee1",
+      "byteLength": 1926
+    },
+    {
+      "path": "src/content/learning-units/unit-difference-constraints.json",
+      "sha256": "901b0e288e47303ff3ee1b19188a8a8a71d797fc42ff2fea007c8b8c6c292760",
+      "byteLength": 1590
+    },
+    {
+      "path": "src/content/learning-units/unit-digit-dp.json",
+      "sha256": "513ef970c26d09455e15e374d1a89e0fbc00ea3b4171e467b1ca02666249dbe2",
+      "byteLength": 1814
+    },
+    {
+      "path": "src/content/learning-units/unit-directed-condensation.json",
+      "sha256": "8ba484e3cc2d584d6d9b327d07ab908e44976810002b3402d5721939318cd900",
+      "byteLength": 2009
+    },
+    {
+      "path": "src/content/learning-units/unit-directed-core-peeling.json",
+      "sha256": "9551f1c0f306cf819e8a39b64c090135c7451e249621cabceecf237c9e0971ba",
+      "byteLength": 1678
+    },
+    {
+      "path": "src/content/learning-units/unit-directed-walk-periodicity.json",
+      "sha256": "c937751ff7a37bfe78f352dc5750788e2b7ae27d4fc65126c839a1afc5b97b1c",
+      "byteLength": 1375
+    },
+    {
+      "path": "src/content/learning-units/unit-directional-grid-effect-scan.json",
+      "sha256": "7b154c008aeeddc05df9db7420080b6ff36c99c1f2ebed52ede746fc6b076619",
+      "byteLength": 1435
+    },
+    {
+      "path": "src/content/learning-units/unit-discrete-convex.json",
+      "sha256": "a034fddfb9b51e12aeb3fbd01a75503466ab08dc3a6c4949c3b66e448012029a",
+      "byteLength": 2080
+    },
+    {
+      "path": "src/content/learning-units/unit-divide-enumeration.json",
+      "sha256": "b11d9338da7c953322f605f997d7c53016f5026fdb385c5e90095f9f3b2fb784",
+      "byteLength": 2340
+    },
+    {
+      "path": "src/content/learning-units/unit-divisor-mobius-inversion.json",
+      "sha256": "d54eeb4c75f487ad167f42e6a4256b7a78fa42d419f8e0dd8b86e94722b9604d",
+      "byteLength": 1845
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-carry-mixed-radix.json",
+      "sha256": "88a632b3be8b8f744742b9361bd54ec5d96f68a43dd82b79bea254f3d12e5593",
+      "byteLength": 1536
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-digit-string.json",
+      "sha256": "e049f99052e0c226dba12eca63e706e41db0dfa3558c2b12cab4a81f6d6c3a59",
+      "byteLength": 1885
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-game-value.json",
+      "sha256": "a4dd9a04a0de089d04c65507c8c2df923b20d58199f038b22010a57deecf144e",
+      "byteLength": 1670
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-game.json",
+      "sha256": "b9c4bf62e99282ad34bc34c2b58edcb02ae5523f6187a74dc5bbc0d2ebbf75c6",
+      "byteLength": 1845
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-grid-table.json",
+      "sha256": "7d5b1b3034840f464d070ade8aad80a03b8667b9069c2d723b0fa10a9c8a3949",
+      "byteLength": 1830
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-interval-composition.json",
+      "sha256": "035566d4215fa2ed189391424ee6c4403b33c3d05c3fedca6ec2a988617b5b9d",
+      "byteLength": 1995
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-interval-expansion.json",
+      "sha256": "9dae62b22380a434d22fdd8070e83cfbc8eae25f62acaeec6616107c8bad5d08",
+      "byteLength": 1497
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-lis.json",
+      "sha256": "f660a1ed5c4b4159c2fe5c4cc50063e94ce6cc3031e0b7a34b9d7ba3af9e3964",
+      "byteLength": 1717
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-prefix-partition.json",
+      "sha256": "4ad8726beac045295e996ad229f484f4b99a82f2791b1068f228c3e054bf8710",
+      "byteLength": 1861
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-sequence-interval.json",
+      "sha256": "462c77559535f4b9155ac0e3c7181188083eb3b07f3a1eff27b96fcfb7117a45",
+      "byteLength": 2742
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-sequence.json",
+      "sha256": "ab829b803e38af30f4f8748d4e696da0fd8c2730be07b4d7e281a23ca2e3cd2c",
+      "byteLength": 2351
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-state-design.json",
+      "sha256": "c3f2db17155c9662af008c1f05cfed1ac193aaf42879a06beb69950221fd89b5",
+      "byteLength": 2885
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-stochastic.json",
+      "sha256": "e7a0c135e31c42b83142545fe151645b5e612c3baf69ee79eb934f42ccc12d12",
+      "byteLength": 2588
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-subset-resource.json",
+      "sha256": "bed7e4b4c124737ea4d8d8696b096414919168fe38563f68aab2f1d8baba474d",
+      "byteLength": 2446
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-subset-state.json",
+      "sha256": "20cdd85328fa0d2287d0ed1f20558bf5b348a7a44aa65fe1409f480c27dcec46",
+      "byteLength": 2353
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-transition-optimization.json",
+      "sha256": "56deab230d7eec684098cd7ca1b3fe727c49a620cc37c4fea6af68fded84c1af",
+      "byteLength": 2854
+    },
+    {
+      "path": "src/content/learning-units/unit-dp-value-range.json",
+      "sha256": "727d9162e67c49e151b85cdf6e5ae718347beef706284440b4111e8b1c09279a",
+      "byteLength": 1857
+    },
+    {
+      "path": "src/content/learning-units/unit-dsu-components.json",
+      "sha256": "4db3e0c76ecca0df4919faa9140223ad6bdf778854a90260cb2dc5d46e6c8fca",
+      "byteLength": 2556
+    },
+    {
+      "path": "src/content/learning-units/unit-dsu-merge-tree.json",
+      "sha256": "a5ec7932116ee094d071afe0bcff0389db62e1c72753feccd36587b41b4113ec",
+      "byteLength": 1548
+    },
+    {
+      "path": "src/content/learning-units/unit-dynamic-modular-product.json",
+      "sha256": "0e9ce27cdfd6f61de60d8e3e9b2d3dde67ea7462030544efde975aa05a08fb88",
+      "byteLength": 2078
+    },
+    {
+      "path": "src/content/learning-units/unit-dynamic-segment-tree.json",
+      "sha256": "70a8028ab385d6b8575661470c61e6f5bae2f74503a91d325e2db00113dd7bec",
+      "byteLength": 1307
+    },
+    {
+      "path": "src/content/learning-units/unit-euclidean-floor-sum.json",
+      "sha256": "be369b559f1c37a77244d2e3ba2e56144a6e23fdc18827a4499c5dfefcc927a2",
+      "byteLength": 1948
+    },
+    {
+      "path": "src/content/learning-units/unit-euler-circuit-counting.json",
+      "sha256": "d3a35ce6a930e8c5c05d22ee0a40eb113bc4198e3839b3bfd1964408dd6b5ae3",
+      "byteLength": 1401
+    },
+    {
+      "path": "src/content/learning-units/unit-euler-degree.json",
+      "sha256": "47f11df8db5080ad531dc3f23b8151b60b48eb3b95404bcc482d3a780672d42c",
+      "byteLength": 1743
+    },
+    {
+      "path": "src/content/learning-units/unit-euler-trail-circuit.json",
+      "sha256": "967688c4d01b0d6f28e4db3daf3d9dcbb76d0ecb0edd1ef367bc55520ead3914",
+      "byteLength": 1976
+    },
+    {
+      "path": "src/content/learning-units/unit-event-sweep.json",
+      "sha256": "76526a631eb53c647655361439d187c8bd7304cff58a5eb632f46158869c3782",
+      "byteLength": 2725
+    },
+    {
+      "path": "src/content/learning-units/unit-eventual-unbounded-knapsack.json",
+      "sha256": "afbe874d5a13a623a708594559a76220704ea4603e57323332a8ad50b39c1961",
+      "byteLength": 1681
+    },
+    {
+      "path": "src/content/learning-units/unit-finite-field-extension.json",
+      "sha256": "f8e8093bf4ec5814a665823a3421e372e52a4fea764c3797c4b5bc4e46b39faf",
+      "byteLength": 1532
+    },
+    {
+      "path": "src/content/learning-units/unit-finite-field-frobenius.json",
+      "sha256": "d5da5a166f1288023b26d6720826c86a46df239706181da0c90c7112efd8df70",
+      "byteLength": 1447
+    },
+    {
+      "path": "src/content/learning-units/unit-finite-function-composition.json",
+      "sha256": "08acf80fe873d8a7bd15a6c7e3b3429e02642f4dd8efc0fac016c37855b2bb7e",
+      "byteLength": 1369
+    },
+    {
+      "path": "src/content/learning-units/unit-finite-pattern-automaton.json",
+      "sha256": "32d8218be12e2deffd4381920a8f978d97d9828af5aea08c5a6dd172ca954edf",
+      "byteLength": 1928
+    },
+    {
+      "path": "src/content/learning-units/unit-flow-lower-bounds.json",
+      "sha256": "7f014e9d85d213edbe344ef6c142b2d720ae7e012ca8d29d7001ccb4c194a241",
+      "byteLength": 1337
+    },
+    {
+      "path": "src/content/learning-units/unit-flow-matching.json",
+      "sha256": "ba7b9bdb1db106eb061df88f48380c46978781de7bee6251c07523f2ec903a30",
+      "byteLength": 2390
+    },
+    {
+      "path": "src/content/learning-units/unit-formal-power-series.json",
+      "sha256": "358191dd9b020fb61ede69272862813cd006254d0aaa3083dde227631e985bc9",
+      "byteLength": 2153
+    },
+    {
+      "path": "src/content/learning-units/unit-fps-composition-power-projection.json",
+      "sha256": "9259d101f4953a58cacf2019161d96ae1f24224f4fa7158110ffc22bad21a5de",
+      "byteLength": 1616
+    },
+    {
+      "path": "src/content/learning-units/unit-fractional-parametric-search.json",
+      "sha256": "91e86d07352d1c235fa5aa1b8b4dd375f0fdeef494821e228c8c4890d30cca9e",
+      "byteLength": 1873
+    },
+    {
+      "path": "src/content/learning-units/unit-frontier-profile-dp.json",
+      "sha256": "2e74dded6aa835775a4c1ecbddb1f755c71c941956b820a4f5de19df430b5711",
+      "byteLength": 1835
+    },
+    {
+      "path": "src/content/learning-units/unit-functional-graph-decomposition.json",
+      "sha256": "d0ad7bcc2d829b55a7ee6a3be836af09baad9696123800f0f9a81b7f67b970e2",
+      "byteLength": 2067
+    },
+    {
+      "path": "src/content/learning-units/unit-functional-graph.json",
+      "sha256": "7ca20e578e01d1a11d820c65df601b9961a13e75125d9d361b05c9ddb936d1f0",
+      "byteLength": 1915
+    },
+    {
+      "path": "src/content/learning-units/unit-game-parity-invariant.json",
+      "sha256": "ddffe95b898ce012b16fd5ce34abb019ad83ba313e409f06a33572db3bc55dc8",
+      "byteLength": 1628
+    },
+    {
+      "path": "src/content/learning-units/unit-gaussian-integers-two-squares.json",
+      "sha256": "6744cccf843c0994cb27db8b9ec61ec16fa23377d3b5341699e6cb6392f9567a",
+      "byteLength": 1349
+    },
+    {
+      "path": "src/content/learning-units/unit-gcd-diophantine.json",
+      "sha256": "a78667c98334b5f95d5436804c09f9a504911cd3450e28c051334ef1be2e5649",
+      "byteLength": 1844
+    },
+    {
+      "path": "src/content/learning-units/unit-gcd-structure.json",
+      "sha256": "3cdcdb66dfeccd9afb038631d610a5d278107fb60f077ebe13d1c704e4591a91",
+      "byteLength": 1952
+    },
+    {
+      "path": "src/content/learning-units/unit-generating-function-coefficients.json",
+      "sha256": "73daaef90ee65fd6454a8808170ef1eba776b42fd7112513e99ab6cba61e19fc",
+      "byteLength": 2122
+    },
+    {
+      "path": "src/content/learning-units/unit-generating-functions.json",
+      "sha256": "25cbad06d18bdd1671e33866b1f19204095ade1e6b8b538257232659946e859b",
+      "byteLength": 2524
+    },
+    {
+      "path": "src/content/learning-units/unit-geometry-primitives.json",
+      "sha256": "2c1fbc123556329abbefb1840a0877364edb13d44a9c24d60956b3a7acd31876",
+      "byteLength": 2521
+    },
+    {
+      "path": "src/content/learning-units/unit-graph-core-peeling.json",
+      "sha256": "2f7f21d4987a0c6bcf0d9df08771a8e944eef593109ce2619dccbafb21b9a880",
+      "byteLength": 1383
+    },
+    {
+      "path": "src/content/learning-units/unit-graph-core.json",
+      "sha256": "7fb4e8991dbbbd1881bee009a25b61bb2ce9f8027dc4bc68e98d8f40b15bbe70",
+      "byteLength": 1549
+    },
+    {
+      "path": "src/content/learning-units/unit-graph-potential-propagation.json",
+      "sha256": "1effe107506f03580d3a2aae9213b0b9c4b2d12efa55da24708a1eb521dc14b2",
+      "byteLength": 1791
+    },
+    {
+      "path": "src/content/learning-units/unit-graph-search.json",
+      "sha256": "336aad46a528eb0832a74a31ad873d3f2252937ecddda6c79e75fef12403cca8",
+      "byteLength": 2166
+    },
+    {
+      "path": "src/content/learning-units/unit-greedy-exchange.json",
+      "sha256": "5cadc65f4083a39335703403d58f272b9129eac4319a53c949e85291ea2300a2",
+      "byteLength": 2924
+    },
+    {
+      "path": "src/content/learning-units/unit-half-plane-constraints.json",
+      "sha256": "80e1acdb6d02cf58e6a5cb17677e9779dc82c15df7ef359c23032e58c6bf3d09",
+      "byteLength": 1405
+    },
+    {
+      "path": "src/content/learning-units/unit-heavy-light-decomposition.json",
+      "sha256": "711031e3d7df8dd85e59ba4287571e1fa18d4eba7a7ca6d56e56e6d70743894f",
+      "byteLength": 1323
+    },
+    {
+      "path": "src/content/learning-units/unit-heavy-light-recursive-dp.json",
+      "sha256": "03f34321bbb164c90c727b95dd7b1a7e46b43fb89b9331ea2c09f930bdb67025",
+      "byteLength": 1370
+    },
+    {
+      "path": "src/content/learning-units/unit-heavy-path-tree-dp.json",
+      "sha256": "8a97b53673b6f477158879e2748f711432fe010586b04b8db3ea7bc0b6ed3212",
+      "byteLength": 1328
+    },
+    {
+      "path": "src/content/learning-units/unit-idempotent-overlap-range-query.json",
+      "sha256": "e64c2f69e4e21393317c0cf6d9fc5db9b1146cf09d78f6d4bc78cb092c096726",
+      "byteLength": 1608
+    },
+    {
+      "path": "src/content/learning-units/unit-implicit-binary-tree.json",
+      "sha256": "802bc64c4a66b6a6fd835483abf3ce7c8bfc506ece28d98d00566f683ecfa51b",
+      "byteLength": 1873
+    },
+    {
+      "path": "src/content/learning-units/unit-inclusion-exclusion.json",
+      "sha256": "b6fe84e3bedaa570fd4c13adc76e479bee7aca4ae2a077f4b86f1be6532adf12",
+      "byteLength": 2547
+    },
+    {
+      "path": "src/content/learning-units/unit-information-theoretic-query-design.json",
+      "sha256": "c3145c9ca6a65e7735dc4349bd06d059a1369885f442b075c9a5c31244ec0879",
+      "byteLength": 1450
+    },
+    {
+      "path": "src/content/learning-units/unit-integer-boundary-blocks.json",
+      "sha256": "a72d2c7a92269d26981ac14e8868e2608925c108c3c8a482f6d9956065cc05c3",
+      "byteLength": 2326
+    },
+    {
+      "path": "src/content/learning-units/unit-interactive-protocol.json",
+      "sha256": "c42279c56b994c5331180b29f3c25a66b87a7aefd4e88f4d293db7b188806cc3",
+      "byteLength": 1844
+    },
+    {
+      "path": "src/content/learning-units/unit-isotonic-regression.json",
+      "sha256": "3d12c3deae4e1cde293ab050a1f19f9c3fced2e71cbc5f7d9ce0f466eddea307",
+      "byteLength": 1314
+    },
+    {
+      "path": "src/content/learning-units/unit-kinetic-order-maintenance.json",
+      "sha256": "6295480f8375808fe03aef87a46a797470dc7b967c18e930d3d9231d2f1742a9",
+      "byteLength": 1599
+    },
+    {
+      "path": "src/content/learning-units/unit-kruskal-threshold-sweep.json",
+      "sha256": "f1757118af92f920b99062b3f39fc9a2022d5180dbec044b39f82f74d4c68c8f",
+      "byteLength": 1847
+    },
+    {
+      "path": "src/content/learning-units/unit-labeled-component-decomposition.json",
+      "sha256": "8b7f7850a94863fd0f4ecc944565423b828a8fa86f2552070b25f160531e84cc",
+      "byteLength": 2034
+    },
+    {
+      "path": "src/content/learning-units/unit-lagrangian-relaxation.json",
+      "sha256": "31b8343659e7c9fd6527d1bb51b058085792334da80fdadcbf02907629c6d898",
+      "byteLength": 1854
+    },
+    {
+      "path": "src/content/learning-units/unit-laminar-interval-containment-tree.json",
+      "sha256": "ae0b32b4268b576ebb6d623c2904156bd65ecbc0e5ce58d1230c45a55cb4dfb9",
+      "byteLength": 1402
+    },
+    {
+      "path": "src/content/learning-units/unit-line-envelope.json",
+      "sha256": "0421c2123a51487ba35bb510a35f42139a18296b1e474c0be481ed3512f75a07",
+      "byteLength": 1834
+    },
+    {
+      "path": "src/content/learning-units/unit-linear-algebra-xor.json",
+      "sha256": "9a40bfbf928925f1e7c7df91c16e0e85568584e97a1869960605ffc19e94302a",
+      "byteLength": 2212
+    },
+    {
+      "path": "src/content/learning-units/unit-linear-matroid-intersection.json",
+      "sha256": "eb704f74e86743ea0486021e62903e81c0422912cede5a85fe4c078f6c10da83",
+      "byteLength": 1400
+    },
+    {
+      "path": "src/content/learning-units/unit-linear-recurrence.json",
+      "sha256": "98ccb0d0b60154effa40798812d21c064718b6c1c2dc36855ce0e50b095bf65c",
+      "byteLength": 1849
+    },
+    {
+      "path": "src/content/learning-units/unit-linear-system-rank.json",
+      "sha256": "8925860631907eb5c908560be1609aba323be902df4c4a9ac738a9837f76d236",
+      "byteLength": 1818
+    },
+    {
+      "path": "src/content/learning-units/unit-linked-list-index.json",
+      "sha256": "79970396340592d46630eb953ea9472b86887301f228fa9176852bc50efcd396",
+      "byteLength": 1643
+    },
+    {
+      "path": "src/content/learning-units/unit-lowlink-critical-structure.json",
+      "sha256": "66f72a911681cf08082e69760d588f7f0b43d104f62e13ce385f4cc91265e002",
+      "byteLength": 1718
+    },
+    {
+      "path": "src/content/learning-units/unit-matroid-greedy.json",
+      "sha256": "831685e85ae49cf4580129094305d6958607b538fa448c56559eca8a97f5014a",
+      "byteLength": 1239
+    },
+    {
+      "path": "src/content/learning-units/unit-matroid-theory.json",
+      "sha256": "d1c9ebf3b906a865f33d103bdccf36b81cafe5c6a32234527573c7bf964942ae",
+      "byteLength": 1538
+    },
+    {
+      "path": "src/content/learning-units/unit-max-flow-min-cut.json",
+      "sha256": "702a9dd17d203d8de1d950faa3e1937c7ee723618fd553ef1fb5640e1145659f",
+      "byteLength": 2053
+    },
+    {
+      "path": "src/content/learning-units/unit-meet-in-the-middle.json",
+      "sha256": "c34a8d3db3a6388f15385542c27c29b64bd63bd961c56c76ad2d8f641683da19",
+      "byteLength": 1990
+    },
+    {
+      "path": "src/content/learning-units/unit-min-cost-flow.json",
+      "sha256": "7297a5f55252124022d913655d0df2aea6515398c8068848a5ea89052ab27624",
+      "byteLength": 1839
+    },
+    {
+      "path": "src/content/learning-units/unit-min-weight-general-perfect-matching.json",
+      "sha256": "582deb3c86a2274da8d15c4c8802dd0e9c2dcca77fcf1a85fa79748b5d0232f3",
+      "byteLength": 1409
+    },
+    {
+      "path": "src/content/learning-units/unit-min25-sieve.json",
+      "sha256": "7b4b0ef26b3e7ae06831146c1058fbe66af67f053123174876a7b79ba5429bbb",
+      "byteLength": 1301
+    },
+    {
+      "path": "src/content/learning-units/unit-mo-offline-range.json",
+      "sha256": "6c18733e5723f3e0940f1f2747314e6c9064e254b8778d01e7127b0ef4f011d4",
+      "byteLength": 1732
+    },
+    {
+      "path": "src/content/learning-units/unit-modular-arithmetic.json",
+      "sha256": "ee3d52eb7668758e80568baff99f91d41da07637855b438fe1c413259e0f89fa",
+      "byteLength": 3198
+    },
+    {
+      "path": "src/content/learning-units/unit-modular-congruence.json",
+      "sha256": "bfe12013fb72eeb1a89c858d6b0936bd0a0005ba2eefdcb074792ff6c2938c14",
+      "byteLength": 1800
+    },
+    {
+      "path": "src/content/learning-units/unit-modular-periodicity.json",
+      "sha256": "f7bcec57b758294fe7b4880248024d91bcc5f5fbba865d8c7bd90a2db456f5a2",
+      "byteLength": 1729
+    },
+    {
+      "path": "src/content/learning-units/unit-modular-product-foundations.json",
+      "sha256": "ffc86b99ab36dbf26798cd60a10aa57c190cbf431b26f792dc83559aaabfb3eb",
+      "byteLength": 3232
+    },
+    {
+      "path": "src/content/learning-units/unit-monge-optimization.json",
+      "sha256": "a90a868425d36e78a731f31966416aeb124f528747176e7dd6673151188be20b",
+      "byteLength": 1536
+    },
+    {
+      "path": "src/content/learning-units/unit-monoid-exponentiation.json",
+      "sha256": "1d6542a9390a29d6c56e11613ce3d6b3de98e2030030a5411d5f56da8d742507",
+      "byteLength": 1421
+    },
+    {
+      "path": "src/content/learning-units/unit-monoid-segment-tree.json",
+      "sha256": "537f4e4c196fe1aed12c6dd5683f31d17ba85c17d6545075aae90c0a970ab01a",
+      "byteLength": 2862
+    },
+    {
+      "path": "src/content/learning-units/unit-monotone-path-contraction.json",
+      "sha256": "77b8a51c5ffa4271e92da3a1c9db4e558c4418f1b028798a461ba3f874c3f764",
+      "byteLength": 1397
+    },
+    {
+      "path": "src/content/learning-units/unit-monotone-search.json",
+      "sha256": "89561fcf437d0e8c7e6f8b7bde8b1411ec1ad4465efa1ab0ec75462c77e4e771",
+      "byteLength": 2475
+    },
+    {
+      "path": "src/content/learning-units/unit-monotone-stack-queue.json",
+      "sha256": "e513a63a79a0c58abf5a13670804bf943a9c58ef83331db9e3b6d7274b3d38fa",
+      "byteLength": 1847
+    },
+    {
+      "path": "src/content/learning-units/unit-multiplicative-order-periods.json",
+      "sha256": "de1f9e38a42425890ca532ebdab091431f948aa4ee25ff83711552a590430198",
+      "byteLength": 1454
+    },
+    {
+      "path": "src/content/learning-units/unit-near-tree-kernelization.json",
+      "sha256": "13c3890023f48955e9d7e71a8564f8cf9630218ee7fa4e663a743a9b4f1f91fd",
+      "byteLength": 1340
+    },
+    {
+      "path": "src/content/learning-units/unit-normalization.json",
+      "sha256": "305c2acae31a7ad8449265037a2b4fcc9de0f21d774da1cd373e269865fc9bdd",
+      "byteLength": 2230
+    },
+    {
+      "path": "src/content/learning-units/unit-numerical-semigroup-reachability.json",
+      "sha256": "b8b9f3a0f63f71dfc275d1ddb7bf05710ee96290589b5e06fd88652c6accf2ea",
+      "byteLength": 1410
+    },
+    {
+      "path": "src/content/learning-units/unit-orbit-counting.json",
+      "sha256": "961b86bfead70343cacaafbc103d4eb70927c66a6103f90a4f1198ea25d60797",
+      "byteLength": 1559
+    },
+    {
+      "path": "src/content/learning-units/unit-ordered-interval-partition.json",
+      "sha256": "716b9c63323965414b9bf3edd518c4405788c790a789eb5053a569cde9599f27",
+      "byteLength": 2320
+    },
+    {
+      "path": "src/content/learning-units/unit-ordered-set-heap.json",
+      "sha256": "861a1fa02f1fa00af3a3730b249428a56880de41562665d76310a745f15b2199",
+      "byteLength": 2255
+    },
+    {
+      "path": "src/content/learning-units/unit-ordered-set-multiset.json",
+      "sha256": "fc2f95f7c26acac870fc6c09486a78e0f968e4b3e25e9a0abaf9ce46383e6b14",
+      "byteLength": 2219
+    },
+    {
+      "path": "src/content/learning-units/unit-palindrome-radius.json",
+      "sha256": "ca125c384261927cee535052de0a7f3450be0e02cd8cb5e9d61507356aedd0ae",
+      "byteLength": 1427
+    },
+    {
+      "path": "src/content/learning-units/unit-parallel-binary-search.json",
+      "sha256": "0d4f0e09ab0b64c25b2f57597a3bf63c0f13f55a63c20fe0e091d48c23791843",
+      "byteLength": 1629
+    },
+    {
+      "path": "src/content/learning-units/unit-path-matching-contraction.json",
+      "sha256": "468d22c7dbdf2bda3b5a53bccfbce588c58de1be6f1621f38edc68abfcd343de",
+      "byteLength": 1576
+    },
+    {
+      "path": "src/content/learning-units/unit-persistence-rollback.json",
+      "sha256": "ced5f246ca0fdb4f11891a3471680286668f510927e6c5c76531ada3cfcff5a8",
+      "byteLength": 1615
+    },
+    {
+      "path": "src/content/learning-units/unit-persistence.json",
+      "sha256": "5d4919f6d30e0c07efc4e9ca0121607d51e1b2d0d76844d195cd77e426d81967",
+      "byteLength": 1566
+    },
+    {
+      "path": "src/content/learning-units/unit-planar-duality.json",
+      "sha256": "4f4b50a8070c9a6ce488a4ffd68cb1ace2342c0b09fdc7acb8273598e3bf0af4",
+      "byteLength": 1298
+    },
+    {
+      "path": "src/content/learning-units/unit-polynomial-convolution.json",
+      "sha256": "81fbce27cd6914479d59e0261d8414081bed696fa46293f23ffbe11b33902746",
+      "byteLength": 2429
+    },
+    {
+      "path": "src/content/learning-units/unit-polynomial-multipoint-evaluation.json",
+      "sha256": "dfb4f6fc8915c223f79bda88b9d29e1151559b5795d5bab839ef7483c25d2a20",
+      "byteLength": 1732
+    },
+    {
+      "path": "src/content/learning-units/unit-polynomial-taylor-shift.json",
+      "sha256": "05203bee52b400c30611caede94fc643a24d646cbff4059628aeabbcc1d2fef5",
+      "byteLength": 1438
+    },
+    {
+      "path": "src/content/learning-units/unit-poset-dilworth-antichain.json",
+      "sha256": "cd1e7e71bdf92db5fbee2dc31c3fab7c560b3e99214790cdc82d415a13b36240",
+      "byteLength": 1860
+    },
+    {
+      "path": "src/content/learning-units/unit-potential-dsu.json",
+      "sha256": "dff3fe521a158305cc6f7ec7b4605bf71a9090d3d0a18de072423ba043b0dc58",
+      "byteLength": 1524
+    },
+    {
+      "path": "src/content/learning-units/unit-prefix-aggregate.json",
+      "sha256": "71d69d8e97d091db6644a221a02acaed02fd417c8c5bc1374c9f061e8d76c1dd",
+      "byteLength": 2312
+    },
+    {
+      "path": "src/content/learning-units/unit-prime-divisor.json",
+      "sha256": "de47d6451de9b2263ff2cbe850139da3fec1221786dd169485ee27fc09027b2f",
+      "byteLength": 2105
+    },
+    {
+      "path": "src/content/learning-units/unit-priority-queue-best-first.json",
+      "sha256": "96826ce68e4f1e7b88b3cc0eca27cfd88499a409b61a532da5d4b41e51a2af35",
+      "byteLength": 2186
+    },
+    {
+      "path": "src/content/learning-units/unit-prufer-code.json",
+      "sha256": "49e7dfffdbf048776e0a7786c26ffff48648c47f37959426a353ded217b15bca",
+      "byteLength": 1341
+    },
+    {
+      "path": "src/content/learning-units/unit-randomized-algebraic-fingerprint.json",
+      "sha256": "37b4472d32cead8d15dfc433052a1855512101df5cfa9d76a91c5c8d137fbe4a",
+      "byteLength": 1873
+    },
+    {
+      "path": "src/content/learning-units/unit-randomized-algorithms.json",
+      "sha256": "8216ada4c8cb7fe1f1808b6f350825cc7ad627c74ae997e8866d2b2191cfe57b",
+      "byteLength": 1922
+    },
+    {
+      "path": "src/content/learning-units/unit-range-actions.json",
+      "sha256": "2615eb6f46198dee82467e33317dd2d8e18e7970bbe1e266c6ea738d59d115c8",
+      "byteLength": 2108
+    },
+    {
+      "path": "src/content/learning-units/unit-range-monoid-aggregation.json",
+      "sha256": "58609d3609dcd919ca51067589ab3f272623e251a96174620974edc88140aaad",
+      "byteLength": 2585
+    },
+    {
+      "path": "src/content/learning-units/unit-rational-approximation.json",
+      "sha256": "1a7bfb7a39fd9f5c89bf6b4b07423214e253b6294638857edd27a9399ab64ebd",
+      "byteLength": 1826
+    },
+    {
+      "path": "src/content/learning-units/unit-recursive-compressed-string.json",
+      "sha256": "41c228674a7449520532545e22ce9076b8e74a2b45931ff15252b2351cf1257f",
+      "byteLength": 1742
+    },
+    {
+      "path": "src/content/learning-units/unit-recursive-divide-and-conquer.json",
+      "sha256": "714d4e2dca0003f2ad69b8e8c66108960712a3cbf0b8ec0579b34ec0bf1e1943",
+      "byteLength": 2177
+    },
+    {
+      "path": "src/content/learning-units/unit-reflection-principle.json",
+      "sha256": "a22171f68d97d8c377c8ef7ef2a08854691952f727b862ac29d96c42ec38383e",
+      "byteLength": 1342
+    },
+    {
+      "path": "src/content/learning-units/unit-relaxed-convolution.json",
+      "sha256": "d5dbd18a5347256d8409662bc346140fb863a392e7cc0601596646b52ef3b40f",
+      "byteLength": 1806
+    },
+    {
+      "path": "src/content/learning-units/unit-rerooting.json",
+      "sha256": "3e917fdb2e0d02386e80716397c521d6cdd23d1b9e6d5d2a540c71e62529a4aa",
+      "byteLength": 1712
+    },
+    {
+      "path": "src/content/learning-units/unit-reverse-offline.json",
+      "sha256": "2de8b8d6d7760e62b0a1d6577f2da4a93e1dc2ea01d023c5b3ff6b14ec1f6de2",
+      "byteLength": 2023
+    },
+    {
+      "path": "src/content/learning-units/unit-rollback.json",
+      "sha256": "dd66c660eac2860fc272167ac85b56ca8a54542d0cbdefc25310e5b46db4165d",
+      "byteLength": 1780
+    },
+    {
+      "path": "src/content/learning-units/unit-rooted-tree-aggregation.json",
+      "sha256": "cbbbf869f4cc6eb28d2c035ad51762411cb6e7e08c00ecc64765d274c1717e6c",
+      "byteLength": 2370
+    },
+    {
+      "path": "src/content/learning-units/unit-rsk-young-tableaux.json",
+      "sha256": "78428c4bdbf1fcaab28a4a111b73b7451be5c0b2a8fca13204965309891991dd",
+      "byteLength": 1374
+    },
+    {
+      "path": "src/content/learning-units/unit-run-length-dynamics.json",
+      "sha256": "10688231f0756f0057b3449182ba95b0a4bf1add1d4725ae1eead21793813efd",
+      "byteLength": 1336
+    },
+    {
+      "path": "src/content/learning-units/unit-scc-condensation.json",
+      "sha256": "169808aa012299ca30bcdfea120f8a111f3b60a12062c9c8a088ed22559dcd67",
+      "byteLength": 1743
+    },
+    {
+      "path": "src/content/learning-units/unit-segment-tree-beats.json",
+      "sha256": "4432217fd9edd95ec043aaabead78482e343aac441c604f01eaa6d74e326a29d",
+      "byteLength": 1258
+    },
+    {
+      "path": "src/content/learning-units/unit-segment-tree-canonical-decomposition.json",
+      "sha256": "8ae8f642af7d1fea3fb2f1f9295958966a36e2991d78e9a6519178f3ca12a172",
+      "byteLength": 1944
+    },
+    {
+      "path": "src/content/learning-units/unit-semiring-matrix-exponentiation.json",
+      "sha256": "5a7d8008d085038598b553f6738532fb34b909b0f982671b3142d67c0936be95",
+      "byteLength": 1865
+    },
+    {
+      "path": "src/content/learning-units/unit-separable-convex-marginals.json",
+      "sha256": "d0f0e0fe566648707f4a39a2d518266408d092c654b33928d840280b76e10f50",
+      "byteLength": 1929
+    },
+    {
+      "path": "src/content/learning-units/unit-separable-linear-transform.json",
+      "sha256": "bf502813a66969aa1ad5738ea12d5053bf393fc76cd2d7431d3391f499a42c08",
+      "byteLength": 1918
+    },
+    {
+      "path": "src/content/learning-units/unit-sequence-fingerprint.json",
+      "sha256": "91a5bf9c7187e2e105fe61785d67d53fe23ba6ebcd8cf494ab1c1137406d6315",
+      "byteLength": 1594
+    },
+    {
+      "path": "src/content/learning-units/unit-shortest-path-certificates.json",
+      "sha256": "678faa3ba40cbfe6c3dc493757b3c32bdef90ad54a6afe7acae56a930f9815a0",
+      "byteLength": 2608
+    },
+    {
+      "path": "src/content/learning-units/unit-shortest-path-reconstruction.json",
+      "sha256": "45ddde5d27231092a9f6ef133239be38b5254855de994f8eb74977ba51175458",
+      "byteLength": 1798
+    },
+    {
+      "path": "src/content/learning-units/unit-slope-trick.json",
+      "sha256": "08cef2836ec6e24aa2ce17becff415af095fe3a3a63eacc2a25e0cb81be4890c",
+      "byteLength": 1774
+    },
+    {
+      "path": "src/content/learning-units/unit-small-to-large.json",
+      "sha256": "906041c1b46b401d4d5beab27caf827e282c4e5ef7c9ba455bda5b81be6583b6",
+      "byteLength": 2010
+    },
+    {
+      "path": "src/content/learning-units/unit-spanning-tree-optimization.json",
+      "sha256": "f8ebeee4d9ff27681eedd04c101dd9b1724b16c886dbe926c9367e278d5aad18",
+      "byteLength": 2175
+    },
+    {
+      "path": "src/content/learning-units/unit-state-graph-search.json",
+      "sha256": "a8c65a86c875165b60e08e27116c392b973c48502e18b2013d39c49401afe012",
+      "byteLength": 2302
+    },
+    {
+      "path": "src/content/learning-units/unit-static-sorted-range-index.json",
+      "sha256": "59914865b2faa6b21cdf29f92bada0d861d58f0ea323bdbb2062757d6d0a2beb",
+      "byteLength": 1389
+    },
+    {
+      "path": "src/content/learning-units/unit-static-top-tree.json",
+      "sha256": "c6e3ee86320c6a34e18fe0d12c91d87ad9fd20ac6f3967cbb49d4b42a31dfbc9",
+      "byteLength": 1466
+    },
+    {
+      "path": "src/content/learning-units/unit-steiner-tree-dp.json",
+      "sha256": "fa1138d471525d353ebbb031c23e4f8bb23163d99e86b5417536b35186c2742b",
+      "byteLength": 1537
+    },
+    {
+      "path": "src/content/learning-units/unit-stern-brocot-ancestry.json",
+      "sha256": "24ab35563b83654dfee75770aa6e131372e02e1465aea5be81ffee1a681d3250",
+      "byteLength": 1421
+    },
+    {
+      "path": "src/content/learning-units/unit-string-automata.json",
+      "sha256": "5d2b40d63e0eb5acbf4c14955b4ba9f99fab6ea9b73ed7fdab5ce2c168130a9b",
+      "byteLength": 1868
+    },
+    {
+      "path": "src/content/learning-units/unit-string-hash.json",
+      "sha256": "fca68a5c12d44e69b511d83cc3fa0c686bebaf57ee7fa6475b451cacb0500b59",
+      "byteLength": 1400
+    },
+    {
+      "path": "src/content/learning-units/unit-string-periodicity.json",
+      "sha256": "a425bd87bc0aec8bdc7ef07d2a429f8ad1d17423d59314b88dfb8ee51060e3d8",
+      "byteLength": 1319
+    },
+    {
+      "path": "src/content/learning-units/unit-string-prefix-automata.json",
+      "sha256": "59aa3809081c183d23965e3ce902196fa3fa55b7f6dcffc236d7d4b34786e32e",
+      "byteLength": 1712
+    },
+    {
+      "path": "src/content/learning-units/unit-subset-convolution.json",
+      "sha256": "09db2f7e65ba5f98ea1a92a144c23fe6103c4f260a0b1f7ac3231e73b2fa8bf4",
+      "byteLength": 1279
+    },
+    {
+      "path": "src/content/learning-units/unit-subset-transforms.json",
+      "sha256": "6832ddd7a055ae96772bf4e8d890d59930fd126a7b429ce1a51f7e27c705afed",
+      "byteLength": 1839
+    },
+    {
+      "path": "src/content/learning-units/unit-suffix-automaton.json",
+      "sha256": "64093106e4fcf5a2d347d913015cd6d8e3a5f8b4c77dcc82a824f75084091624",
+      "byteLength": 1269
+    },
+    {
+      "path": "src/content/learning-units/unit-suffix-lcp-index.json",
+      "sha256": "f4ff96b10a19ef600785f8268ba339827a4b9287543c23d4ebe7fbf3dddcf6be",
+      "byteLength": 1723
+    },
+    {
+      "path": "src/content/learning-units/unit-swag.json",
+      "sha256": "dbded52394daf1084222db6343d42a7ab81d6efb4d232e910f81fe268f62857f",
+      "byteLength": 1253
+    },
+    {
+      "path": "src/content/learning-units/unit-threshold-heavy-light.json",
+      "sha256": "ffc430cdc516641775163d687c3717e1efbf51f44dedb4f7f857bfbd8c43d490",
+      "byteLength": 1904
+    },
+    {
+      "path": "src/content/learning-units/unit-transitive-closure.json",
+      "sha256": "70a99c2f5880ad0f13a0f6362e90d102d92690cb8489334b8497b563af4edb4f",
+      "byteLength": 1723
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-aggregation.json",
+      "sha256": "c4bb0d4de55020b2ff0209ba929f645e9c3b56776663f9f66fa3cd2716c723e6",
+      "byteLength": 2153
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-ancestor-lca.json",
+      "sha256": "4e60b5d4cf3f2965fe322f18c144e388fd6a631eaf94377b6e4d12f8df2251a1",
+      "byteLength": 1750
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-balanced-separators.json",
+      "sha256": "2de33e8d01bef27f4e722ea6fc9f30686a1e88ff1cf06b03c28527b09cc73a7b",
+      "byteLength": 1852
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-decomposition.json",
+      "sha256": "330e63e00803cd34538685634a3830c5c93fcd5c292e7c4681f8bc65e4d03027",
+      "byteLength": 2205
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-euler-flattening.json",
+      "sha256": "9d9d4d96d36460c9dca2610f0bd166174bdbe290bcd26c3952e40f1820c71da3",
+      "byteLength": 1825
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-metric.json",
+      "sha256": "7ecbd5abf688096b4cf6643970f2ca100483558413151f6ddef69ee8faec691c",
+      "byteLength": 2074
+    },
+    {
+      "path": "src/content/learning-units/unit-tree-precedence-contraction.json",
+      "sha256": "2006401357686060004c623aa6e8c267ff938e3c36f2e146d3b324e2a2acd1e7",
+      "byteLength": 1425
+    },
+    {
+      "path": "src/content/learning-units/unit-trie-prefix.json",
+      "sha256": "ed795481b33735c6dc776f7c9fd507f733d6251ca0997a7b7235423acec719c7",
+      "byteLength": 1739
+    },
+    {
+      "path": "src/content/learning-units/unit-two-pointers-window.json",
+      "sha256": "0f822be78c6a38d781bc780ef4316e3e76a5ad03766e16320c75d0f1f5e9a63e",
+      "byteLength": 2039
+    },
+    {
+      "path": "src/content/learning-units/unit-two-sat.json",
+      "sha256": "d465c9ae5e844598692b9ac648a1684b4f5b4ee933ae71894d816b9815a347fc",
+      "byteLength": 1270
+    },
+    {
+      "path": "src/content/learning-units/unit-two-variable-convex-lattice-optimization.json",
+      "sha256": "232f61648989f994a817e62fed0cb0d306aca74a0311ada69bd50e260c0fa4c4",
+      "byteLength": 1573
+    },
+    {
+      "path": "src/content/learning-units/unit-value-bucket-aggregation.json",
+      "sha256": "071a2d3378610272caaddf0cfb83ea3e1fe4382753ef1fae10b196dc87c2edca",
+      "byteLength": 1425
+    },
+    {
+      "path": "src/content/learning-units/unit-virtual-tree.json",
+      "sha256": "68950569017c51b70daedaaf6adfb5dd11cb0810da1f0eb8af3676c5a0932eca",
+      "byteLength": 1275
+    },
+    {
+      "path": "src/content/learning-units/unit-weighted-bipartite-matching.json",
+      "sha256": "eec3b475fc28dae920ed0810c7b1a534b42088dceb384176c245f1ab5c8a1905",
+      "byteLength": 1343
+    },
+    {
+      "path": "src/content/learning-units/unit-weighted-prefix-fenwick.json",
+      "sha256": "9218c714de8ec327e46b2ad0086a6c9a10cfc9803fa7ee87028b647180a61268",
+      "byteLength": 2210
+    },
+    {
+      "path": "src/content/learning-units/unit-weighted-shortest-path.json",
+      "sha256": "9b55fb65fbe96d476b8065793a965fcafbda29aa39698bc756d7d47939ae5bc8",
+      "byteLength": 2937
+    },
+    {
+      "path": "src/content/learning-units/unit-xor-linear-basis.json",
+      "sha256": "00812239935dc7accd724e610f094edf450c2204d4ccea8cdb3efb2e58300f5e",
+      "byteLength": 1913
+    },
+    {
+      "path": "src/content/learning-units/unit-xor-threshold-matching.json",
+      "sha256": "a2966fdc71b0a6ccb3facde16702ee010e41f7453ec6137cf056714d1792de93",
+      "byteLength": 1518
+    },
+    {
+      "path": "src/content/learning-units/unit-z-algorithm.json",
+      "sha256": "3913f0b76006e5b45e47981c01ec5b0014edbd2a8a48e2802a87a88ae7e80a7f",
+      "byteLength": 1869
+    },
+    {
+      "path": "src/lib/catalog/build-learning-path.ts",
+      "sha256": "fa0b175242da84d4845b8b6a5698f648f260bad3f90ef08e4752d4653792455e",
+      "byteLength": 7542
+    },
+    {
+      "path": "src/lib/domain/schema-parts/review-evidence.ts",
+      "sha256": "7bc35437ac8e14092ff80e4a42aface48ea4b4ff877e2ba37cf800e3e0a3c95e",
+      "byteLength": 22637
+    },
+    {
+      "path": "tests/contract/learner-outcome-evidence.test.ts",
+      "sha256": "3764dc2f8dd43ff6c76990d4c3bffdf9ff5b19b69afd3b9eccb1be4bec2ebd5d",
+      "byteLength": 3661
+    },
+    {
+      "path": "tests/contract/verify-fast.test.ts",
+      "sha256": "442b40212c722e97efeca447e07635be052505014fd0ff493e961c45555fa056",
+      "byteLength": 3936
+    },
+    {
+      "path": "tests/integration/full-learning-path.test.ts",
+      "sha256": "b460aa7852cdf196e55565482e6805a99a05d95bb51bcc167e73c62bacd39afc",
+      "byteLength": 4106
+    }
+  ],
+  "excludedArtifacts": [
+    {
+      "path": "docs/verification/bootstrap/full-learning-unit-check-results.json",
+      "sha256": "518be003152981d529d54e8a248055d0f2baa8e189489fb29dbfe2d9513a5d9b",
+      "byteLength": 1360
+    },
+    {
+      "path": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
+      "sha256": "768c5295cd7658a99133926920632ce37afd0a02f820d0e88472e4dc7117a4a3",
+      "byteLength": 26436
+    },
+    {
+      "path": "docs/verification/bootstrap/us2.json",
+      "sha256": "9d08e37ef74d964bd604e94a95d8e60530b8efaf339647c8b0d5de51dc622a55",
+      "byteLength": 1882
+    }
+  ],
+  "workManifestPath": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
+  "workManifestDigest": "b304398b633b4197309b714d68c0244060edee97c4a8ca9238df68fa6c9bc94a",
+  "learningOutcomeIds": [
+    "outcome-accelerate-fixed-linear-transition",
+    "outcome-accelerate-iteration-by-characteristic-p-frobenius",
+    "outcome-accelerate-set-operations-with-bitsets",
+    "outcome-accelerate-tree-dp-by-heavy-path",
+    "outcome-account-for-color-swap-in-connected-bipartite-counting",
+    "outcome-add-conway-number-games",
+    "outcome-aggregate-rooted-tree",
+    "outcome-aggregate-subsequence-transitions-by-value",
+    "outcome-aggregate-value-prefix-by-buckets",
+    "outcome-allocate-by-convex-marginal-costs",
+    "outcome-answer-idempotent-range-query",
+    "outcome-answer-tree-ancestor-queries",
+    "outcome-apply-formal-power-series-operations",
+    "outcome-apply-heavy-light-decomposition",
+    "outcome-apply-stirling-transform",
+    "outcome-apply-subset-zeta-mobius-transform",
+    "outcome-approximate-rational-by-euclid",
+    "outcome-augment-components-with-metadata",
+    "outcome-balance-heavy-light-threshold",
+    "outcome-bound-monotone-total-work",
+    "outcome-bound-reachability-in-numerical-semigroup",
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-build-cartesian-tree-decomposition",
+    "outcome-build-component-merge-tree",
+    "outcome-build-finite-string-automaton",
+    "outcome-build-laminar-interval-containment-tree",
+    "outcome-build-multi-pattern-automaton",
+    "outcome-build-prefix-match-state",
+    "outcome-build-shortest-path-certificate",
+    "outcome-build-static-sorted-range-index",
+    "outcome-build-suffix-automaton",
+    "outcome-build-suffix-lcp-index",
+    "outcome-build-virtual-tree",
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-characterize-integer-solvability",
+    "outcome-characterize-palindrome-intervals",
+    "outcome-check-euler-trail-existence",
+    "outcome-classify-game-states",
+    "outcome-classify-tree-by-distance-residue",
+    "outcome-close-eventual-dp-tail",
+    "outcome-color-and-classify-bipartite-components",
+    "outcome-compare-algebraic-objects-by-random-fingerprint",
+    "outcome-compare-sequences-by-rolling-fingerprint",
+    "outcome-compose-dynamic-tree-clusters",
+    "outcome-compose-finite-functions",
+    "outcome-compose-series-and-project-powers",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-compress-sparse-keys",
+    "outcome-compute-all-pairs-distance",
+    "outcome-compute-binomial-by-lucas",
+    "outcome-compute-convolution-or-correlation",
+    "outcome-compute-directed-walk-period",
+    "outcome-compute-edit-distance",
+    "outcome-compute-in-finite-field-extension",
+    "outcome-compute-in-modular-arithmetic",
+    "outcome-compute-online-relaxed-convolution",
+    "outcome-compute-subset-convolution",
+    "outcome-compute-transitive-closure",
+    "outcome-condense-and-order-directed-graph",
+    "outcome-construct-degree-parity-subgraph",
+    "outcome-construct-euler-trail-or-circuit",
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-contract-monotone-paths-with-jump-pointers",
+    "outcome-correct-overlap-by-inversion",
+    "outcome-count-combinatorial-objects-by-determinant",
+    "outcome-count-euler-circuits-by-best",
+    "outcome-count-finite-field-subspaces-by-rank",
+    "outcome-count-implicit-binary-tree-layers",
+    "outcome-count-labeled-structures-by-components",
+    "outcome-count-nonintersecting-paths-by-lgv",
+    "outcome-count-orbits-by-fixed-points",
+    "outcome-count-prefix-constrained-objects",
+    "outcome-count-symmetric-strings-under-lex-bound",
+    "outcome-count-through-cyclic-exponents",
+    "outcome-decompose-by-prime-or-divisor",
+    "outcome-decompose-expectation-by-additive-potential",
+    "outcome-decompose-functional-graph",
+    "outcome-decompose-ranges-into-segment-tree-nodes",
+    "outcome-derive-coefficient-recurrence-by-differentiation",
+    "outcome-derive-mst-weight-from-threshold-components",
+    "outcome-derive-updateable-aggregate",
+    "outcome-design-and-bound-randomized-algorithm",
+    "outcome-design-associative-range-summary",
+    "outcome-design-carry-or-mixed-radix-dp",
+    "outcome-design-frontier-profile-dp",
+    "outcome-design-grid-table-dp",
+    "outcome-design-interval-expansion-dp",
+    "outcome-design-interval-split-dp",
+    "outcome-design-lis-frontier",
+    "outcome-design-minimal-sufficient-state",
+    "outcome-design-order-preserving-dp",
+    "outcome-design-prefix-partition-dp",
+    "outcome-design-query-code-by-information-bound",
+    "outcome-design-range-update-action",
+    "outcome-design-resource-dp",
+    "outcome-design-state-transition",
+    "outcome-detect-crossing-by-cyclic-order",
+    "outcome-detect-improving-cycles",
+    "outcome-determinize-automaton-by-subsets",
+    "outcome-divide-search-space-recursively",
+    "outcome-dualize-planar-cut-to-path",
+    "outcome-encode-counting-by-generating-function",
+    "outcome-encode-labeled-trees-by-prufer-code",
+    "outcome-encode-threshold-constraints-as-two-sat",
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-by-reversible-backtracking",
+    "outcome-enumerate-frontier-best-first",
+    "outcome-enumerate-subset-state-space",
+    "outcome-enumerate-subsets-by-mask",
+    "outcome-evaluate-adversarial-game-value",
+    "outcome-evaluate-at-geometric-points",
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-evaluate-polynomial-at-many-points",
+    "outcome-evolve-run-length-encoded-state",
+    "outcome-expand-euler-product-sparsely",
+    "outcome-exploit-modular-periodicity",
+    "outcome-exponentiate-associative-composition",
+    "outcome-exponentiate-transition-over-semiring",
+    "outcome-extract-rational-series-coefficient",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-factor-separable-linear-transform",
+    "outcome-find-orbit-hit-by-bsgs",
+    "outcome-find-period-by-multiplicative-order",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
+    "outcome-find-weighted-balanced-separator",
+    "outcome-flatten-tree-by-euler-order",
+    "outcome-formulate-combinatorial-coefficients",
+    "outcome-identify-bridges-and-articulations",
+    "outcome-identify-reusable-abstraction",
+    "outcome-index-shared-prefixes-with-trie",
+    "outcome-invert-divisor-lattice-by-mobius",
+    "outcome-invert-generating-function-equation",
+    "outcome-jump-deterministic-transition",
+    "outcome-kernelize-near-tree-graph",
+    "outcome-linearize-events",
+    "outcome-linearize-static-range-information",
+    "outcome-localize-change-impact-by-witness",
+    "outcome-maintain-connectivity-components",
+    "outcome-maintain-dynamic-interval-union-length",
+    "outcome-maintain-endpoint-run-partition",
+    "outcome-maintain-interactive-query-protocol",
+    "outcome-maintain-local-sequence-links",
+    "outcome-maintain-modular-product-under-factor-updates",
+    "outcome-maintain-monotone-window",
+    "outcome-maintain-order-through-crossing-events",
+    "outcome-maintain-ordered-interval-partition",
+    "outcome-maintain-ordered-set-statistics",
+    "outcome-maintain-piecewise-linear-convex-function",
+    "outcome-maintain-potential-differences",
+    "outcome-maintain-queue-aggregate-with-swag",
+    "outcome-maintain-sparse-domain-segment-tree",
+    "outcome-maintain-weighted-prefix-statistics",
+    "outcome-maintain-xor-linear-basis",
+    "outcome-map-graph-cycle-xor-to-span",
+    "outcome-merge-small-into-large",
+    "outcome-minimize-maximum-xor-by-bit-partition",
+    "outcome-minimize-xor-coset-representative",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-model-and-exploit-graph",
+    "outcome-model-and-exploit-tree",
+    "outcome-model-max-flow-min-cut",
+    "outcome-model-min-cost-flow",
+    "outcome-model-string-state",
+    "outcome-normalize-common-dp-action",
+    "outcome-normalize-equivalent-states",
+    "outcome-normalize-string-to-primitive-period",
+    "outcome-optimize-by-lagrangian-relaxation",
+    "outcome-optimize-by-line-envelope",
+    "outcome-optimize-mask-by-bitwise-feasibility",
+    "outcome-optimize-monge-transitions",
+    "outcome-optimize-path-matching-by-contraction",
+    "outcome-optimize-poset-antichain-by-dilworth",
+    "outcome-optimize-ratio-by-parametric-search",
+    "outcome-optimize-stochastic-actions",
+    "outcome-optimize-tree-order-by-cluster-contraction",
+    "outcome-optimize-two-variable-convex-lattice-function",
+    "outcome-optimize-univariate-convex-function",
+    "outcome-optimize-weighted-matroid-basis",
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-pass-resource-dp-through-heavy-recursion",
+    "outcome-peel-directed-graph-toward-cycles",
+    "outcome-peel-graph-core",
+    "outcome-persist-data-structure-versions",
+    "outcome-precompute-directional-grid-effects",
+    "outcome-process-dag-in-topological-order",
+    "outcome-propagate-probability-distribution",
+    "outcome-propagate-static-graph-potentials",
+    "outcome-prove-and-search-threshold",
+    "outcome-prove-greedy-order",
+    "outcome-prune-dominated-candidates-once",
+    "outcome-prune-range-actions-by-node-invariant",
+    "outcome-query-bitwise-order-with-trie",
+    "outcome-query-recursively-defined-string",
+    "outcome-reconstruct-tree-from-distance-matrix",
+    "outcome-recover-valid-witness",
+    "outcome-recur-by-edge-deletion-contraction",
+    "outcome-reduce-geometry-to-algebraic-predicates",
+    "outcome-reduce-integer-structure-by-gcd",
+    "outcome-relax-in-dependency-order",
+    "outcome-remove-boundaries-by-reflection",
+    "outcome-reorder-counting-contributions",
+    "outcome-represent-convex-intersection-by-halfplanes",
+    "outcome-represent-integers-as-two-squares",
+    "outcome-reroot-tree-aggregation",
+    "outcome-restrict-geometric-candidates-to-boundary",
+    "outcome-reverse-update-time",
+    "outcome-rollback-reversible-updates",
+    "outcome-run-dp-on-finite-automaton",
+    "outcome-schedule-range-query-updates",
+    "outcome-select-state-graph-search",
+    "outcome-share-threshold-checks-by-parallel-binary-search",
+    "outcome-shift-polynomial-by-factorial-convolution",
+    "outcome-slide-transition-recurrence",
+    "outcome-solve-bipartite-matching",
+    "outcome-solve-cyclic-minimax-game",
+    "outcome-solve-difference-constraints",
+    "outcome-solve-flow-with-lower-bounds",
+    "outcome-solve-game-by-parity-invariant",
+    "outcome-solve-isotonic-regression-by-pav",
+    "outcome-solve-linear-system-and-rank",
+    "outcome-solve-min-weight-general-perfect-matching",
+    "outcome-solve-modular-constraints",
+    "outcome-solve-steiner-tree-by-subset-dp",
+    "outcome-solve-stochastic-recurrence",
+    "outcome-solve-weighted-bipartite-matching",
+    "outcome-solve-xor-threshold-matching",
+    "outcome-split-enumeration-space",
+    "outcome-stabilize-unbounded-knapsack-by-best-density",
+    "outcome-subtract-exception-transitions",
+    "outcome-sum-affine-floors-by-euclid",
+    "outcome-sum-multiplicative-function-by-min25-sieve",
+    "outcome-sum-piecewise-linear-integer-ranges",
+    "outcome-sweep-connectivity-by-kruskal-threshold",
+    "outcome-test-linear-matroid-intersection-rank",
+    "outcome-transform-to-combinatorics-algebra",
+    "outcome-transform-to-geometry-optimization",
+    "outcome-transform-to-number-theory",
+    "outcome-translate-sequences-by-rsk",
+    "outcome-traverse-stern-brocot-ancestors",
+    "outcome-use-cycle-space-basis",
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "All 242 accepted outcomes retain their direct owners, with concise concepts, applicability conditions, complexity, and navigation authored in all 232 Units."
+  },
+  "reviewMode": "self",
+  "reviewerId": "person-maintainer",
+  "applicableChecks": [
+    {
+      "checkId": "check-verify-fast",
+      "executedByReviewerId": "person-codex",
+      "command": "npm run verify:fast",
+      "subjectDigest": "19befbb82c7d4c439e5ede1b3810167759102b9e207e621aba5638ef6075e6ed",
+      "resultPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
+      "resultDigest": "518be003152981d529d54e8a248055d0f2baa8e189489fb29dbfe2d9513a5d9b",
+      "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
+      "rawResultDigest": "768c5295cd7658a99133926920632ce37afd0a02f820d0e88472e4dc7117a4a3",
+      "exitCode": 0,
+      "completedAt": "2026-10-01T17:42:24.146Z"
+    }
+  ],
+  "notApplicableChecks": [
+    {
+      "checkId": "check-executable-examples",
+      "rationale": "No executable examples, exercises, or answer keys were added."
+    },
+    {
+      "checkId": "check-sc010-self-study",
+      "rationale": "Owner removed this manual self-study requirement during Issue #46 implementation."
+    }
+  ],
+  "humanContentReviewEvidenceId": "human-content-review-bootstrap-us2-full-learning-units-pending",
+  "humanContentReviewEvidencePath": "docs/verification/bootstrap/us2.json",
+  "humanContentReviewEvidenceDigest": "9d08e37ef74d964bd604e94a95d8e60530b8efaf339647c8b0d5de51dc622a55",
+  "constitutionCheck": {
+    "constitutionPath": ".specify/memory/constitution.md",
+    "constitutionVersion": "3.0.0",
+    "constitutionDigest": "2278437f0563df79c489bd619d596eb9e16e494f0034d1cf729797429d090639",
+    "dependentTemplates": [
+      {
+        "path": ".specify/templates/plan-template.md",
+        "sha256": "648dfe0a8d817713ad1f58f0b06948f1cdb590a114b9a673dea8aa4bc9ae2c95",
+        "byteLength": 4550
+      },
+      {
+        "path": ".specify/templates/spec-template.md",
+        "sha256": "267cf99a43d94cf70bef382f20488803524e3b0a3205ddf818684abc8d8fbfa3",
+        "byteLength": 5725
+      },
+      {
+        "path": ".specify/templates/tasks-template.md",
+        "sha256": "e1889ed6865069725d1cb4f7b5f009ebc2c1993d45e241b02a998e4477362534",
+        "byteLength": 10107
+      }
+    ],
+    "violationCount": 0,
+    "passed": true,
+    "checkedAt": "2026-10-01T17:42:24.146Z"
+  },
+  "unresolvedBlockingFindingCount": 0,
+  "mergeApproved": false,
+  "reviewedAt": "2026-10-01T17:42:24.146Z",
+  "evidenceDigest": "d72ad91a33afe7afbde305fc5038ed2c4010a4dd53583e6cc1215665395b6574"
+}

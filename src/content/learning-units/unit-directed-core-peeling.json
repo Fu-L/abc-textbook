@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-peel-directed-graph-toward-cycles"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/directed-core-peeling.md",
   "problemIds": [
     "abc245-f",

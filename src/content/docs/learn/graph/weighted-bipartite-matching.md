@@ -22,6 +22,16 @@ assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または
 
 - assignment matrixのdual potentialとtight edgeを保ち、Hungarian法または同値なmin-cost flowで完全matchingの重みを最適化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+左右の頂点の一対一対応へ重みを付け、増加路の選択と双対変数で最適性を管理する。完全割当ではHungarian法、容量や部分対応を含むならmin-cost flowへの帰着を考える。
+
+## 成立条件と計算量
+
+N×Nの密な割当ならHungarian法O(N³)。禁止辺を非常に悪い重みへ置き換える際は、最後に禁止辺が選ばれていないか確認する。左右のサイズが違う場合や対応数を指定する場合はdummyの意味を固定する。
+
+概念上の親: [フロー・マッチング・カットへ帰着する](/learn/graph/flow-matching/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

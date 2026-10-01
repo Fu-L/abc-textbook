@@ -412,7 +412,8 @@ const learnerProtocol = strictObject({
         rubricId: EntityIdSchema,
       }),
     )
-    .min(5),
+    .min(5)
+    .optional(),
   rubrics: z
     .array(
       strictObject({
@@ -421,7 +422,7 @@ const learnerProtocol = strictObject({
         items: z.array(learnerRubricItem).min(1),
       }),
     )
-    .min(2),
+    .min(1),
   passingRatio: z.literal(0.8),
 });
 const criterionResult = strictObject({
@@ -462,8 +463,22 @@ export const LearnerOutcomeEvidenceSchema = strictObject({
   protocol: learnerProtocol,
   results: z
     .array(criterionResult)
-    .length(2)
-    .refine((items) => new Set(items.map(({ criterionId }) => criterionId)).size === 2),
+    .min(1)
+    .max(2)
+    .refine(
+      (items) =>
+        items.some(({ criterionId }) => criterionId === 'SC-009') &&
+        new Set(items.map(({ criterionId }) => criterionId)).size === items.length,
+      'SC-009 is required; legacy SC-010 evidence is optional and criteria must be unique.',
+    )
+    .meta({
+      contains: {
+        properties: { criterionId: { const: 'SC-009' } },
+        required: ['criterionId'],
+      },
+      minContains: 1,
+      maxContains: 1,
+    }),
   rawManifest: strictObject({
     path: SafePathSchema,
     digest: Sha256Schema,

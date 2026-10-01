@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-interactive-query-protocol"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/interactive-protocol.md",
   "problemIds": [],
   "directProblemIds": [],

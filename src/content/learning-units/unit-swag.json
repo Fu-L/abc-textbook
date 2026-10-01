@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-queue-aggregate-with-swag"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/swag.md",
   "problemIds": [
     "abc456-f"

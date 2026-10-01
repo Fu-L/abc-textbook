@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-decompose-by-prime-or-divisor"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/prime-divisor.md",
   "problemIds": [
     "abc227-g",

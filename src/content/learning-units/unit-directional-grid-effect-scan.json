@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-precompute-directional-grid-effects"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/directional-grid-effect-scan.md",
   "problemIds": [
     "abc317-e"

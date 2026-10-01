@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-cycle-space-basis",
+  "taskId": "T155",
+  "scopeDigest": "e122c3672373a12e249be70005e813bc80f816f87d9d39e341dee38e4450c19b",
+  "digest": "db31830c0eab8e1756374afeba0ebba0dc8a0930faa2532d255ab175f51252d0",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-map-graph-cycle-xor-to-span", "outcome-use-cycle-space-basis"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-cycle-space-basis",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/graph/cycle-space-basis.md",
+        "src/content/learning-units/unit-cycle-space-basis.json"
+      ],
+      "itemIds": ["unit:unit-cycle-space-basis"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-map-graph-cycle-xor-to-span",
+        "outcome-use-cycle-space-basis"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "19befbb82c7d4c439e5ede1b3810167759102b9e207e621aba5638ef6075e6ed",
+  "contentSubjectDigest": "902ca32988e74924470d52928d2c819730d738115a2c7a66e490a63b7a1473a8",
+  "executor": "Codex",
+  "executorId": "person-codex",
+  "humanReview": false,
+  "runtime": { "node": "24.18.0", "npm": "11.16.0" },
+  "checks": [
+    {
+      "checkId": "check-verify-fast",
+      "command": "npm run verify:fast",
+      "exitCode": 0,
+      "completedAt": "2026-10-01T17:42:24.146Z",
+      "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
+      "rawResultDigest": "768c5295cd7658a99133926920632ce37afd0a02f820d0e88472e4dc7117a4a3",
+      "summary": {
+        "typeAndAstroErrors": 0,
+        "typeAndAstroWarnings": 0,
+        "vitestFiles": 53,
+        "vitestTests": 457,
+        "playwrightTests": 99,
+        "browsers": ["chromium", "firefox", "webkit"],
+        "fullLearningUnits": {
+          "chapters": 9,
+          "units": 232,
+          "ownedOutcomes": 242,
+          "reachableProblems": 868
+        },
+        "lint": "passed",
+        "format": "passed",
+        "build": "passed",
+        "internalLinks": "passed",
+        "inventory": "passed",
+        "taxonomy": "accepted",
+        "canonicalMaterialization": "passed",
+        "frozenPreview": "passed"
+      }
+    }
+  ]
+}

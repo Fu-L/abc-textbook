@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-remove-boundaries-by-reflection"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/reflection-principle.md",
   "problemIds": [
     "abc309-ex"

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-solve-flow-with-lower-bounds"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/flow-lower-bounds.md",
   "problemIds": [
     "abc285-g"

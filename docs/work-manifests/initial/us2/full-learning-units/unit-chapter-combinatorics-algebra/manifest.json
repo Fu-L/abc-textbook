@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-chapter-combinatorics-algebra",
+  "taskId": "T158",
+  "scopeDigest": "cc00b1304bc141e3ec3e84ccb4ce5f05221ae35605e8e95b2f171627d1d3c76d",
+  "digest": "39433fc3009bf615f1e1e551da2c661bda3d45ba0bc34bc4c8bc859f9f7f0b15",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-transform-to-combinatorics-algebra"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-chapter-combinatorics-algebra",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/combinatorics-algebra/index.md",
+        "src/content/learning-units/unit-chapter-combinatorics-algebra.json"
+      ],
+      "itemIds": ["unit:unit-chapter-combinatorics-algebra"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-transform-to-combinatorics-algebra"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

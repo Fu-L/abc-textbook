@@ -22,6 +22,16 @@ endpos同値類をstateとし、suffix linkとcloneで全部分文字列の遷�
 
 - endpos同値類を状態にし、suffix linkと必要なcloneを正しく作って全部分文字列の遷移を線形状態数で表せる。
 
+## 考え方
+
+同じ終了位置集合を持つsubstringを一状態へまとめる。状態vが表す長さはlen(link(v))+1からlen(v)までで、suffix linkはより短い終了位置同値類へ向かう。cloneは新しい出現を足すためでなく同値類を分割するために作る。
+
+## 成立条件と計算量
+
+長さNで状態数はO(N)。固定文字種の遷移なら構築O(N)、連想配列なら探索費用を含める。出現数はlen降順にsuffix linkへ伝播し、cloneの初期出現数を0にする。distinct substring数は各状態の長さ幅の総和になる。
+
+概念上の親: [文字列アルゴリズム](/learn/string/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

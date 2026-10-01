@@ -22,6 +22,16 @@ Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転�
 
 - Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+F[S]=Σ_{T⊆S}f[T]を、各bitを含むかの伝播へ分ける。zeta変換ではf[S]へf[S\{bit}]を加え、Möbius反転では同じ段を引き算して元へ戻す。
+
+## 成立条件と計算量
+
+N bitに対しO(N·2^N)時間・O(2^N)空間。部分集合向きと上位集合向きを区別する。反転には加法逆元が必要で、min集約を同じ引き算で戻せない。更新前後の配列の意味を段ごとに保つ。
+
+概念上の親: [包除・Möbius反転で重複を補正する](/learn/combinatorics-algebra/inclusion-exclusion/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-xor-linear-basis",
+  "taskId": "T158",
+  "scopeDigest": "b20a3f0d1f97f7153dd0bb90a3822a1179cd20948f7a0c500aafc9288c470c48",
+  "digest": "e414676b44fc2e8fbd24f8561f419c83384d9e43aa16a5d2e754ee7490498f00",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-maintain-xor-linear-basis",
+    "outcome-minimize-xor-coset-representative"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-xor-linear-basis",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
+        "src/content/learning-units/unit-xor-linear-basis.json"
+      ],
+      "itemIds": ["unit:unit-xor-linear-basis"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-maintain-xor-linear-basis",
+        "outcome-minimize-xor-coset-representative"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

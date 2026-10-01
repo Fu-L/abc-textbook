@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-query-code-by-information-bound"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/information-theoretic-query-design.md",
   "problemIds": [
     "abc337-e"

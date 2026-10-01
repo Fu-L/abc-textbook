@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-evaluate-adversarial-game-value"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-game-value.md",
   "problemIds": [
     "abc303-g",

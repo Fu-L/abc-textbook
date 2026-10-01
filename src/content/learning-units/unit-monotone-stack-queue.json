@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-prune-dominated-candidates-once"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/monotone-stack-queue.md",
   "problemIds": [
     "abc228-f",

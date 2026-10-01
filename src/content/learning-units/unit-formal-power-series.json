@@ -31,7 +31,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-apply-formal-power-series-operations"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/formal-power-series.md",
   "problemIds": [
     "abc272-ex",

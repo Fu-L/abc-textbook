@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-tree-precedence-contraction",
+  "taskId": "T155",
+  "scopeDigest": "ca909f7d5766bdddf6650bc527a95294beb47b8749995631d81fd0c1d2f353c9",
+  "digest": "62b53e7f6fd7dab3a9f775134e1b46bf8e48c6ea22e16fb652019a712d0c1d60",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-optimize-tree-order-by-cluster-contraction"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-tree-precedence-contraction",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/tree/tree-precedence-contraction.md",
+        "src/content/learning-units/unit-tree-precedence-contraction.json"
+      ],
+      "itemIds": ["unit:unit-tree-precedence-contraction"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-optimize-tree-order-by-cluster-contraction"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-modular-product-under-factor-updates"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/dynamic-modular-product.md",
   "problemIds": [],
   "directProblemIds": [],

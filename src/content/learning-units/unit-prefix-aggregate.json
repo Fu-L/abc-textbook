@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-linearize-static-range-information"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/prefix-aggregate.md",
   "problemIds": [
     "abc260-g",

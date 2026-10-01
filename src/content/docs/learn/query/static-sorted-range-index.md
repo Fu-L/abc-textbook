@@ -22,6 +22,16 @@ sidebar:
 
 - 各canonical区間へsorted列とprefix aggregateを構築し、値域境界付きのrange count/sumを二分探索で答える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+各Segment Tree節点にその区間の値をsortした列として持つ。query区間を節点へ分け、各列でlower_bound・upper_boundを使えば値域に入る個数などを求められる。
+
+## 成立条件と計算量
+
+Merge Sort TreeはO(N log N)構築・空間、標準的なquery O(log² N)。静的データが前提。元の位置の区間と値の区間を別々に定義し、同値の個数は上下境界の差で数える。
+
+概念上の親: [Segment Treeのcanonical区間分解](/learn/query/segment-tree-canonical-decomposition/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-finite-string-automaton"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/finite-pattern-automaton.md",
   "problemIds": [
     "abc264-g",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-approximate-rational-by-euclid"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/rational-approximation.md",
   "problemIds": [
     "abc333-g",

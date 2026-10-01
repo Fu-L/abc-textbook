@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-balance-heavy-light-threshold"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/threshold-heavy-light.md",
   "problemIds": [
     "abc219-g",

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-represent-integers-as-two-squares"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/gaussian-integers-two-squares.md",
   "problemIds": [
     "abc444-g"

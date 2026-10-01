@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-bitwise-greedy-feasibility",
+  "taskId": "T056",
+  "scopeDigest": "6a6525d9d30aa5fcbdef6edddb2dde9165f70da7501aca637513424059190f0f",
+  "digest": "556ad7c541b49215202515ef60f6479bda45cf221f2c3e356b0327f33081d8a7",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-optimize-mask-by-bitwise-feasibility"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-bitwise-greedy-feasibility",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/bitwise-greedy-feasibility.md",
+        "src/content/learning-units/unit-bitwise-greedy-feasibility.json"
+      ],
+      "itemIds": ["unit:unit-bitwise-greedy-feasibility"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-optimize-mask-by-bitwise-feasibility"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

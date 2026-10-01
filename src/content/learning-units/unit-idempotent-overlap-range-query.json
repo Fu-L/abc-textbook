@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-answer-idempotent-range-query"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/idempotent-overlap-range-query.md",
   "problemIds": [
     "abc282-f"

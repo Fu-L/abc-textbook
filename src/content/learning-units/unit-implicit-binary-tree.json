@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-count-implicit-binary-tree-layers"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/implicit-binary-tree.md",
   "problemIds": [
     "abc321-e"

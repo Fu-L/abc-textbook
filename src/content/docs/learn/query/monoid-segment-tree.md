@@ -16,6 +16,16 @@ sidebar:
 
 区間をcanonical nodeへ置く操作と結合則を持つ要約を区別し、Segment Treeのrange object配置・point path取得、Sparse Table、SWAG、有限関数合成が使う分解方法を比較する。
 
+## 考え方
+
+区間を二分する木の各節点に子の積を置く。結合則と単位元を持つmonoidなら、query区間をO(log N)個へ分け順に合成できる。
+
+## 成立条件と計算量
+
+構築O(N)、点更新・区間積O(log N)に演算費用を掛ける。可換性は不要で、左側と右側の集計順を保つ。空区間は単位元、葉のpaddingも単位元にする。
+
+概念上の親: [データ構造と問い合わせ](/learn/query/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

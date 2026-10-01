@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-represent-convex-intersection-by-halfplanes"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/half-plane-constraints.md",
   "problemIds": [
     "abc251-g"

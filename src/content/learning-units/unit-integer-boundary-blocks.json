@@ -34,7 +34,7 @@
     "outcome-partition-integer-parameter-ranges",
     "outcome-sum-piecewise-linear-integer-ranges"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
   "problemIds": [
     "abc230-e",

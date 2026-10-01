@@ -32,7 +32,7 @@
     "outcome-expand-euler-product-sparsely",
     "outcome-invert-generating-function-equation"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/generating-function-coefficients.md",
   "problemIds": [
     "abc222-h",

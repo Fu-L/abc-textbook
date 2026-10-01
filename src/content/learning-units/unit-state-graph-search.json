@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-select-state-graph-search"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/state-graph-search.md",
   "problemIds": [
     "abc241-f",

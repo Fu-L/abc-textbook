@@ -22,6 +22,16 @@ sidebar:
 
 - 有向Euler graphのcircuit数をrooted arborescenceの行列式と各頂点の出辺順列へ分解して数える。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+強連結なEuler有向graphでは、各頂点の最後に使う出辺が根へ向かうarborescenceを作る。残りの出辺の順を数えると、BEST定理の木数と階乗因子が現れる。
+
+## 成立条件と計算量
+
+arborescence数は有向行列木定理のO(V³)消去などで計算する。始点や最初の辺を固定するか、巡回同値で数えるかで因子が変わる。parallel edgeを区別する規約と次数0の頂点を明示する。
+
+概念上の親: [組合せ・多項式・線形代数](/learn/combinatorics-algebra/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

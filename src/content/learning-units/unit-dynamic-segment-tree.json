@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-sparse-domain-segment-tree"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/dynamic-segment-tree.md",
   "problemIds": [
     "abc403-g"

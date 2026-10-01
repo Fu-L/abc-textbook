@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-mask-by-bitwise-feasibility"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/bitwise-greedy-feasibility.md",
   "problemIds": [
     "abc408-e"

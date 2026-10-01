@@ -30,7 +30,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-decompose-ranges-into-segment-tree-nodes"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
   "problemIds": [
     "abc339-g",

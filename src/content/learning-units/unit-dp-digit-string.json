@@ -26,7 +26,7 @@
     "outcome-run-dp-on-finite-automaton"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-digit-string.md",
   "problemIds": [
     "abc235-f",

@@ -30,7 +30,7 @@
     "outcome-count-combinatorial-objects-by-determinant",
     "outcome-count-nonintersecting-paths-by-lgv"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/determinant-counting.md",
   "problemIds": [
     "abc216-h",

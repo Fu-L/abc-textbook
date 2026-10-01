@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-bounded-enumeration",
+  "taskId": "T056",
+  "scopeDigest": "e94b84ee5364501c7c66ef3d4d5004ba28e4cad3fff1fadd92b4e0300703805a",
+  "digest": "3f30322e1cd720f453199a9a51b149785af205d4da8ac69c7006ae9b6db0f0da",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-bounded-enumeration",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/bounded-enumeration.md",
+        "src/content/learning-units/unit-bounded-enumeration.json"
+      ],
+      "itemIds": ["unit:unit-bounded-enumeration"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases",
+        "outcome-enumerate-subsets-by-mask"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

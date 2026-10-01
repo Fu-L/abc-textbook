@@ -26,7 +26,7 @@
     "outcome-rollback-reversible-updates"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/persistence-rollback.md",
   "problemIds": [
     "abc218-g",

@@ -22,6 +22,16 @@ DFS入退時刻で各部分木を連続区間へ写し、配列上の更新・�
 
 - Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。
 
+## 考え方
+
+DFSで入った時刻tinを付け、部分木の処理が終わる時刻toutを保存する。vの部分木は[tin[v],tout[v])になるため、部分木集約を配列区間queryへ移せる。
+
+## 成立条件と計算量
+
+前処理O(N)、以後はFenwick TreeやSegment Treeの費用。入場時一回の列と、LCA用に出場も記録するEuler tourは長さと意味が違う。祖先判定は区間包含で行い、rootの親の規約を固定する。
+
+概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

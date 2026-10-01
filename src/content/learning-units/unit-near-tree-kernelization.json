@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-kernelize-near-tree-graph"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/near-tree-kernelization.md",
   "problemIds": [
     "abc419-g"

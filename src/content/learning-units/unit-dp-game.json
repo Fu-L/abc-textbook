@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-classify-game-states"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-game.md",
   "problemIds": [
     "abc255-g",

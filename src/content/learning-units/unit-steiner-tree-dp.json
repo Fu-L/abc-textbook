@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-solve-steiner-tree-by-subset-dp"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/steiner-tree-dp.md",
   "problemIds": [
     "abc364-g",

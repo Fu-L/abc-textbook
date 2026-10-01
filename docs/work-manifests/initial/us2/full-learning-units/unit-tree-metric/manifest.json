@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-tree-metric",
+  "taskId": "T155",
+  "scopeDigest": "ab77e2ea916915c1f68f8e09fc590069ce3ac8e79ea2b667ebe4b49270441c23",
+  "digest": "8d9c2a0e515222e813b8d98181ccc9a0f24287f6cb28cbed76f8d960256fbc62",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-classify-tree-by-distance-residue",
+    "outcome-use-tree-diameter-extrema"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-tree-metric",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/tree/tree-metric.md",
+        "src/content/learning-units/unit-tree-metric.json"
+      ],
+      "itemIds": ["unit:unit-tree-metric"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-classify-tree-by-distance-residue",
+        "outcome-use-tree-diameter-extrema"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T156-unit-frontier-profile-dp",
+  "taskId": "T156",
+  "scopeDigest": "925c7bdf648c7bfde2977868eeb2cd22173e557c6f7b0b80b4a43db0ec801f25",
+  "digest": "9ef6cd70456312f08dd6c0106ba1bfb5c417d0dc33ffd6d95e5cd3dc70c52579",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-design-frontier-profile-dp"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T156-unit-frontier-profile-dp",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/dynamic-programming/frontier-profile-dp.md",
+        "src/content/learning-units/unit-frontier-profile-dp.json"
+      ],
+      "itemIds": ["unit:unit-frontier-profile-dp"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-design-frontier-profile-dp"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

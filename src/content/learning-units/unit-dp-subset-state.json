@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-enumerate-subset-state-space"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-subset-state.md",
   "problemIds": [
     "abc232-f",

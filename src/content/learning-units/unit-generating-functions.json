@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-encode-counting-by-generating-function"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
   "problemIds": [
     "abc225-h",

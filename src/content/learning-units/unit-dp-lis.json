@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-lis-frontier"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-lis.md",
   "problemIds": [
     "abc369-f",

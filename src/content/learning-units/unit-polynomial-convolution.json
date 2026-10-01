@@ -30,7 +30,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compute-convolution-or-correlation"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md",
   "problemIds": [
     "abc265-ex",

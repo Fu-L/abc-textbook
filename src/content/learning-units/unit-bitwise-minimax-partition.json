@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-minimize-maximum-xor-by-bit-partition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/bitwise-minimax-partition.md",
   "problemIds": [
     "abc281-f"

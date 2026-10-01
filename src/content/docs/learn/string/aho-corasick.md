@@ -22,6 +22,16 @@ sidebar:
 
 - 複数patternのTrieへfailure linkと出力情報を加え、Aho–Corasick automaton上で一致状態を更新できる。
 
+## 考え方
+
+複数patternをTrieに入れ、各節点から「現在のsuffixでもある最長のTrie prefix」へ失敗リンクを張る。失敗先の受理情報を伝播すれば、一つの走査で全patternの出現を扱える。失敗先は深さが小さいのでBFS順に構築できる。
+
+## 成立条件と計算量
+
+固定文字種の完全遷移表では総pattern長Lに対してO(Lσ)構築・空間、text長Nの走査はO(N)に報告する出現数を加える。禁止語DPでは失敗先経由の受理も禁止とする。pattern数だけの独立照合との違いを確認する。
+
+概念上の親: [禁止・要求patternを有限状態へ圧縮する](/learn/string/string-automata/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

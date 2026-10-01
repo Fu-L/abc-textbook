@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-flatten-tree-by-euler-order"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/tree-euler-flattening.md",
   "problemIds": [
     "abc240-e",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-decompose-functional-graph"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/functional-graph-decomposition.md",
   "problemIds": [
     "abc241-e",

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-suffix-automaton"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/suffix-automaton.md",
   "problemIds": [
     "abc433-g"

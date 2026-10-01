@@ -22,6 +22,7 @@ export interface VerificationStep {
     | 'final-taxonomy'
     | 'canonical-taxonomy'
     | 'learning-content'
+    | 'full-learning-content'
     | 'build'
     | 'links'
     | 'e2e';
@@ -39,6 +40,7 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'taxonomy', script: 'preview:taxonomy' },
   { id: 'final-taxonomy', script: 'corpus:final-taxonomy' },
   { id: 'canonical-taxonomy', script: 'corpus:materialize-taxonomy' },
+  { id: 'full-learning-content', script: 'corpus:verify-learning-units' },
   { id: 'learning-content', script: 'preview:learning-content' },
   { id: 'build', script: 'build' },
   { id: 'links', script: 'link:check:built' },

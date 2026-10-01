@@ -24,7 +24,7 @@
     "outcome-build-prefix-match-state"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/string-prefix-automata.md",
   "problemIds": [
     "abc257-g",

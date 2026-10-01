@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-traverse-stern-brocot-ancestors"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/stern-brocot-ancestry.md",
   "problemIds": [
     "abc273-ex"

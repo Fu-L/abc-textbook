@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T055-unit-two-variable-convex-lattice-optimization",
+  "taskId": "T055",
+  "scopeDigest": "17621bb0a84c7fd712158e7c86f720e4d7ea0fd63d98763c0aed32d932b792e7",
+  "digest": "0973855a9782b7546ad690436ee70c92a5a004a92ac2ba7091b668bc9c11e928",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-optimize-two-variable-convex-lattice-function"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T055-unit-two-variable-convex-lattice-optimization",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
+        "src/content/learning-units/unit-two-variable-convex-lattice-optimization.json"
+      ],
+      "itemIds": ["unit:unit-two-variable-convex-lattice-optimization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-optimize-two-variable-convex-lattice-function"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

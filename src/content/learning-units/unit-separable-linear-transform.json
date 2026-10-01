@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-factor-separable-linear-transform"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
   "problemIds": [
     "abc212-h",

@@ -22,6 +22,18 @@ sidebar:
 
 - 二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる。
 
+## 考え方
+
+二つの線形独立性条件を同時に満たす集合では、それぞれの列ベクトルを組み合わせた行列のrankを使う代数的な特徴付けがある。determinantの項が共通独立集合を表すことを示してから指紋評価を使う。
+
+## 成立条件と計算量
+
+行列の大きさに対する消去費用と、ランダム代入の多項式次数から誤判定率を評価する。rank一回だけで実際の最適集合まで復元できるとは限らない。一般のoracle matroid intersectionと前提を混同しない。
+
+表現行列の列を同じ要素順に揃え、A₁ diag(r_e) A₂ᵀのrankを調べる。Cauchy–Binet展開で、共通独立なr列に対応するminorが非零多項式になる。体から独立一様に選んだr_eで真のrankを過小評価する確率は、そのminorの次数rに対して高々r/|F|。二表現の行数がr程度なら素朴な行列構築O(|E|r²)と消去O(r³)を合わせる。
+
+概念上の親: [Matroidの独立性・greedy・線形交差](/learn/combinatorics-algebra/matroid-theory/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

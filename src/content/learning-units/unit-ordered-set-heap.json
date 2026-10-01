@@ -26,7 +26,7 @@
     "outcome-maintain-ordered-set-statistics"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/ordered-set-heap.md",
   "problemIds": [
     "abc281-e",

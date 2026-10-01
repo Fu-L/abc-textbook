@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-accelerate-fixed-linear-transition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/linear-recurrence.md",
   "problemIds": [
     "abc256-g",

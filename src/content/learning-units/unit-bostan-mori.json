@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-extract-rational-series-coefficient"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/bostan-mori.md",
   "problemIds": [
     "abc300-ex"

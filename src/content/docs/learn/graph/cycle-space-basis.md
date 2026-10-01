@@ -23,6 +23,16 @@ sidebar:
 - spanning treeのroot-to-vertex XOR potentialで辺ラベルをfundamental cycleのXORへ変換し、cycle spaceの線形像が非木辺ごとのcycle XORのspanと一致することを示して、walkへ挿入できるXOR値をbasisで表せる。
 - 無向graphの全頂点が偶数次数となる辺集合を、対称差を加法とするF_2上のcycle spaceとして扱い、spanning forestと各non-tree edgeが作るfundamental cycleからbasisを構成して、連結成分数Cに対するdim C(G)=M-N+Cを導ける。連結graphではC=1となる。さらに同一連結成分内のs,tに対して固定したs-t path P_0を取ると、任意のs-t path PについてPhi(P)=P XOR P_0がcycle spaceに属し、Phi(P) XOR P_0=Pからこの写像が単射であることを示せる。したがってcycle-space dimensionを用いて、s-t path族の大きさを2^(dim C(G))以下に抑えられる。
 
+## 考え方
+
+無向辺の部分集合をF₂ベクトルと見なし、各頂点の次数偶奇が0となる集合がcycle spaceになる。全域森の非木辺ごとに作るfundamental cycleは独立で、全cycle集合を張る。
+
+## 成立条件と計算量
+
+V頂点E辺C成分なら次元E−V+C。辺ラベルのXORはこの空間の線形像として基底へ送れる。木pathのXORを前計算すれば各非木辺のcycle XORはO(1)。単純pathと、cycleを挿入できるwalkを区別する。
+
+概念上の親: [グラフアルゴリズム](/learn/graph/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

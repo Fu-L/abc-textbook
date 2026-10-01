@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-apply-subset-zeta-mobius-transform"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/subset-transforms.md",
   "problemIds": [
     "abc295-ex",

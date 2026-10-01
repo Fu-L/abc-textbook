@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T157-unit-segment-tree-canonical-decomposition",
+  "taskId": "T157",
+  "scopeDigest": "38c0b89c7120f379cd1728340d8268ca530c8267886eae1b68eca5e1fd2a2faf",
+  "digest": "2cb9b1f955f80025d8a4247d7f5a5d50a06afc1915f4d73d001d6c56ed9a71cc",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-decompose-ranges-into-segment-tree-nodes"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T157-unit-segment-tree-canonical-decomposition",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/query/segment-tree-canonical-decomposition.md",
+        "src/content/learning-units/unit-segment-tree-canonical-decomposition.json"
+      ],
+      "itemIds": ["unit:unit-segment-tree-canonical-decomposition"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-decompose-ranges-into-segment-tree-nodes"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

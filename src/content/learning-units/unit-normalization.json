@@ -30,7 +30,7 @@
     "outcome-count-symmetric-strings-under-lex-bound",
     "outcome-normalize-equivalent-states"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/normalization.md",
   "problemIds": [
     "abc219-f",

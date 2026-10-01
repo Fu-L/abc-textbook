@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-kruskal-threshold-sweep",
+  "taskId": "T155",
+  "scopeDigest": "dda01ea0647ad881d251df58825ffe8d1be8c941e46cd8014639221d8668542e",
+  "digest": "0877976f45490afc5e94a69a148ba11ddc577a873df9f98363c476fdc80900b5",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-sweep-connectivity-by-kruskal-threshold"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-kruskal-threshold-sweep",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
+        "src/content/learning-units/unit-kruskal-threshold-sweep.json"
+      ],
+      "itemIds": ["unit:unit-kruskal-threshold-sweep"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-sweep-connectivity-by-kruskal-threshold"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

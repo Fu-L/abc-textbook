@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-shift-polynomial-by-factorial-convolution"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/polynomial-taylor-shift.md",
   "problemIds": [],
   "directProblemIds": [],

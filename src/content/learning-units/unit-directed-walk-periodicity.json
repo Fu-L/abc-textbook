@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compute-directed-walk-period"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/directed-walk-periodicity.md",
   "problemIds": [
     "abc306-g"

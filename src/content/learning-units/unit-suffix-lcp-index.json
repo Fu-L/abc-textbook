@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-suffix-lcp-index"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/suffix-lcp-index.md",
   "problemIds": [
     "abc213-f",

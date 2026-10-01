@@ -28,6 +28,16 @@ light辺を子へ降りると部分木サイズは半分未満になるため、
 
 - heavy childを選んで木をheavy path列へ分け、path range queryまたはbalanced tree-cluster構築へ接続できる。
 
+## 考え方
+
+最大の子部分木へ進む辺をheavyにし、他をlightにする。light辺を上へ越えるたび部分木サイズが少なくとも倍になるため、一pathをO(log N)本のheavy pathへ分けられる。
+
+## 成立条件と計算量
+
+構築O(N)、Segment Treeを使うpath queryは典型的にO(log² N)。非可換の合成は向きを反転した要約も必要。頂点値と辺値でLCAを含めるかが違うため、区間端点を固定する。
+
+概念上の親: [木のancestor・部分木・pathを索引化する](/learn/tree/tree-decomposition/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-bipartite-matching",
+  "taskId": "T155",
+  "scopeDigest": "4f650b29ef676958c30a462ccef8e750d3f52db0339a0a1902e49c8e585cf730",
+  "digest": "2ece17f0df3fc35787a560c3948146d971ca42cf6785c921af4e8fdd6ae1b9db",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-solve-bipartite-matching"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-bipartite-matching",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/graph/bipartite-matching.md",
+        "src/content/learning-units/unit-bipartite-matching.json"
+      ],
+      "itemIds": ["unit:unit-bipartite-matching"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-characterize-bipartite-feasibility-by-hall",
+        "outcome-solve-bipartite-matching"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

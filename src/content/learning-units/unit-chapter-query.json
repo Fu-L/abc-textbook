@@ -80,7 +80,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-derive-updateable-aggregate"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/index.md",
   "problemIds": [
     "abc218-g",

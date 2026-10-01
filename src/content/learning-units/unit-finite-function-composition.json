@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compose-finite-functions"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/finite-function-composition.md",
   "problemIds": [
     "abc261-e"

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-enumerate-frontier-best-first"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/priority-queue-best-first.md",
   "problemIds": [
     "abc297-e",

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-prune-range-actions-by-node-invariant"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/segment-tree-beats.md",
   "problemIds": [
     "abc430-g"
