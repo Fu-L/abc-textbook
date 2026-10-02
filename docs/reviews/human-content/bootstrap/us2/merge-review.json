@@ -2,12 +2,12 @@
   "schemaVersion": "3.0.0",
   "id": "merge-review-bootstrap-us2-full-learning-units",
   "changeId": "change-issue-46-full-learning-units",
-  "logicalChangeSubjectDigest": "4c19e62467ae411e3486a9c385bb78a62acbea289dd41502ba7549c1d8841dea",
+  "logicalChangeSubjectDigest": "2a519d1ebe4e0e2825f24ef7c9711871858a7d7cd00f1886c2cb82c854f812b5",
   "subjectFiles": [
     {
       "path": "docs/operations/full-learning-units.md",
-      "sha256": "6a72f4187bdfe5778a64940a0342032b29467fe6799f6ad52b53a4ea18a70d00",
-      "byteLength": 2040
+      "sha256": "1ad5bcab30194afc8e520d944533a7d1f24cf2173998d480ce2ff27d44e927df",
+      "byteLength": 2614
     },
     {
       "path": "docs/verification/bootstrap/canonical-taxonomy-materialization.json",
@@ -16,13 +16,13 @@
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
-      "sha256": "4dd606bd62eb8bcf9bb5d746fc91ad2cb9f4dd997194bf226e57c04cbfa52255",
-      "byteLength": 12218
+      "sha256": "47016ded3c820db75d3b7d6a94c9f7a76f5b892cbc1c442a23fe8a78a1eb4a05",
+      "byteLength": 16242
     },
     {
       "path": "docs/verification/bootstrap/learning-unit-content.json",
-      "sha256": "2cdc6c93799b8040ccb233b2597abb1b873c7d83ff9024ee6e9924e722f43e10",
-      "byteLength": 463361
+      "sha256": "9f8ae04f02272f6ed2b04539949001ee89b989ac2e656731c9f8166bf6e7d3ca",
+      "byteLength": 461686
     },
     {
       "path": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
@@ -1271,8 +1271,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md",
-      "sha256": "c93a8f899d13604c3399e2372d51a3b2c6da95ce96509d7bcaca2176b0441cd6",
-      "byteLength": 6083
+      "sha256": "823f208f814fb91477fd228eca97a53249034aa6ae988b2aa10fc7df8a461f4d",
+      "byteLength": 8537
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/generating-function-coefficients.md",
@@ -1281,8 +1281,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
-      "sha256": "8c99d6931236f50682066caeb67883ad6eb6749da59cd7502596e758715c79a1",
-      "byteLength": 39906
+      "sha256": "00c61e9942c3cd1357732f297808c94cc94ad8b0a7716b64729430cd27ebc3f9",
+      "byteLength": 42298
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md",
@@ -1296,8 +1296,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
-      "sha256": "71101795fc8c986c552cfa361d27557e84e4de90564e30ad02ea05388b160ad0",
-      "byteLength": 9979
+      "sha256": "e53333f8863fa743536c75d25843121bf9eff5e6cd03ac5b138f4d79b644e20a",
+      "byteLength": 11761
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/linear-algebra-xor.md",
@@ -1366,13 +1366,13 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
-      "sha256": "7335de4914a9cae6cd64866f2aa712dd464ddcaf2ff01672fbbc4903895036be",
-      "byteLength": 7867
+      "sha256": "717b7cf52b530aca5cc7370dfd76a51ec1a2c6e46c4353b7bfec21a048429f6c",
+      "byteLength": 10056
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md",
-      "sha256": "795a96577a28b964331efd57aedf5a9e340d3fd9daf5c9a38dac3480147d70f0",
-      "byteLength": 3654
+      "sha256": "a960402f0b43b6add2e14bf58c77e11f7d48a8d986cdb1a33a820b5d4b3ecfe1",
+      "byteLength": 6727
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
@@ -1381,13 +1381,13 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
-      "sha256": "1dd3f0974da68b8c0540e7edd18cd15650044e71863f9278eb43938053e0f9ce",
-      "byteLength": 6715
+      "sha256": "89fd6feb0092adf235b6baad38ed3d1f936cbf08c7a75ef008f51473e6393f88",
+      "byteLength": 8281
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/subset-convolution.md",
-      "sha256": "b761e0a284247941687b7ddf568bea1facc6d06e26ca106a003ccd3fc21c6f46",
-      "byteLength": 3206
+      "sha256": "67848e5c15c0ad23ab3ec30ad424ff9f526edd1c934ea5e994071833fa1d4797",
+      "byteLength": 4618
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/subset-transforms.md",
@@ -1411,13 +1411,13 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
-      "sha256": "07bae40a9c18770e40ab8dab567dfe3bfbfe428f80cbe9b25e1db8025477d684",
-      "byteLength": 6021
+      "sha256": "1dbc6edc2b7c1acd2a0ec6a217bb4390167001d4293d4d1200af35058d66b53e",
+      "byteLength": 9423
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/cyclic-minimax-game.md",
-      "sha256": "27974ac552c760ca3e1564153a21e4dd094c39821bec762d3b4358ef1b1c2a00",
-      "byteLength": 5145
+      "sha256": "21c6d234da313fc4ccaea77d528f1f686343064ed2390ebe9c880bd35957b643",
+      "byteLength": 9426
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/digit-dp.md",
@@ -1441,8 +1441,8 @@
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-game.md",
-      "sha256": "4773a3a70afe4b584ec0f5f3458154ab7f65a4078dbfdf1e6f0ea1b333efccb3",
-      "byteLength": 9097
+      "sha256": "2e038f02b2c14e909e44343f393747326a9abb4661a7f80e629fad6d9feef5da",
+      "byteLength": 11582
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
@@ -1611,8 +1611,8 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
-      "sha256": "bb7843492d3a3e5fa29868e04c138a1ceac571775f3481c7ba749398da5559cb",
-      "byteLength": 3908
+      "sha256": "46be7b4a91c045393e139eae572fa8ddfdd541c55c3842dad33d25d293c7c00e",
+      "byteLength": 7527
     },
     {
       "path": "src/content/docs/learn/graph/binary-lifting.md",
@@ -1751,8 +1751,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/min-cost-flow.md",
-      "sha256": "28f4b63b48777432f30ad4b93a1bd26e5820074d2e43b8328ee3018469126afe",
-      "byteLength": 7503
+      "sha256": "8cbaebbf0abb20d470fe70b71a049ecac7b6bc5cb723f66f76694fac342a8c2c",
+      "byteLength": 13439
     },
     {
       "path": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
@@ -1771,8 +1771,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/path-matching-contraction.md",
-      "sha256": "02e46a710767fd409c3d57d2919319262a3af27ac21cab940b408fcafca31b0d",
-      "byteLength": 5243
+      "sha256": "d44743aa5a91fd721294f23b9639882ec4c17daca3c9e55c15065aface4a15db",
+      "byteLength": 8373
     },
     {
       "path": "src/content/docs/learn/graph/planar-duality.md",
@@ -1971,8 +1971,8 @@
     },
     {
       "path": "src/content/docs/learn/modeling/xor-threshold-matching.md",
-      "sha256": "581f006ee49465341f85952522336a04c594620813df55eee696ddc50cc7a7fb",
-      "byteLength": 4050
+      "sha256": "512c667bee74a8a10cb67e71c15b84b2e1b3c2e213337333244c8bd56b115451",
+      "byteLength": 6993
     },
     {
       "path": "src/content/docs/learn/number-theory/baby-step-giant-step.md",
@@ -2006,8 +2006,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/gaussian-integers-two-squares.md",
-      "sha256": "e7f7e2dade321d6095499284764c0e344137da7ac51ff80a54ef44335eb3c78e",
-      "byteLength": 3195
+      "sha256": "7bd9369fdbd1d818d635e965244438fba169105a6e52f74e568f55a4358f258f",
+      "byteLength": 8193
     },
     {
       "path": "src/content/docs/learn/number-theory/gcd-diophantine.md",
@@ -2031,8 +2031,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/min25-sieve.md",
-      "sha256": "833bb7e4890400d84ad534e3c74f89ea4eeb41fca80810405d3bef9a2caaad71",
-      "byteLength": 3738
+      "sha256": "e7f1bc5c7c680b356941370762e22aa6ca252a9c410d8056d20cf4a29ce980ac",
+      "byteLength": 8751
     },
     {
       "path": "src/content/docs/learn/number-theory/modular-arithmetic.md",
@@ -2316,13 +2316,13 @@
     },
     {
       "path": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
-      "sha256": "d44ea9868bffb33214f338b5909fd8544003ed9bdcda9e616aa49e187b5c3382",
-      "byteLength": 4401
+      "sha256": "97b1d183fc659b71b690821ab42db902af546c703a93620b6af17f96366ad51b",
+      "byteLength": 7861
     },
     {
       "path": "src/content/docs/learn/tree/heavy-path-tree-dp.md",
-      "sha256": "46ffb1d4d7f10b5055d8d8123715f1a9cfff98327bd17f73a5a979c2efc9e0b3",
-      "byteLength": 4383
+      "sha256": "91bbda8a6c01ee2784860e27f447e665a0879521308fc880c8a7d4177038c835",
+      "byteLength": 7001
     },
     {
       "path": "src/content/docs/learn/tree/implicit-binary-tree.md",
@@ -2351,8 +2351,8 @@
     },
     {
       "path": "src/content/docs/learn/tree/static-top-tree.md",
-      "sha256": "e3a9be1077bbb05521ef82cf34b1133162dafa10accd24a37d963b516022b82e",
-      "byteLength": 3658
+      "sha256": "fa301d15775b8c525c1b6e56be25f61e57d8489c2003cfec4431f7bee047fcc2",
+      "byteLength": 6524
     },
     {
       "path": "src/content/docs/learn/tree/tree-aggregation.md",
@@ -2386,8 +2386,8 @@
     },
     {
       "path": "src/content/docs/learn/tree/tree-precedence-contraction.md",
-      "sha256": "42e39404c618e88a69c2d1acc3f157f4557d94fdb868b00f59f1d43ed6086573",
-      "byteLength": 3808
+      "sha256": "36ca3b582614c506dbbb60dce161ee67020bd703c91148eb164e608351fdd90b",
+      "byteLength": 6715
     },
     {
       "path": "src/content/docs/learn/tree/virtual-tree.md",
@@ -3588,17 +3588,17 @@
   "excludedArtifacts": [
     {
       "path": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "sha256": "c0492bc92efd41f75f7abb21041dd84fda4ad624e6b667012912d2705eda7f9b",
+      "sha256": "aeaa1ba582647d3c8563c2dc92a350c7c7ae65be7242a3a69dcacaaa908671c8",
       "byteLength": 1360
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "sha256": "36cff919d394f513b0588e7f8bc3dc795c2726bee489f27c356eb31c0b1343b8",
-      "byteLength": 26460
+      "sha256": "652a9f97d9482eaf7b3839711db69abeb438e86d828a7322b63265ab5d801e90",
+      "byteLength": 26459
     },
     {
       "path": "docs/verification/bootstrap/us2.json",
-      "sha256": "6b983e00a2bf4ee93efdaf4937aa19caa0be96612e0711d0eddb16c64b2c8291",
+      "sha256": "b5774632ee9dd795915c63862b3a1447b3eb9eccf2e90ccd9a4081b93bf8e3b0",
       "byteLength": 1988
     }
   ],
@@ -3850,7 +3850,7 @@
   ],
   "outcomeImpact": {
     "kind": "affects_learning_outcomes",
-    "rationale": "All 242 accepted outcomes retain their direct owners. PR #64 review corrections derive optimality-preserving witness localization, exact-order NTT roots, FPS Newton updates, suffix automaton clone construction, and weighted Tutte determinant interpolation in the existing owning Units."
+    "rationale": "All 242 accepted outcomes retain their direct owners. PR #64 review corrections derive min-cost-flow potentials and circulation, optimality-preserving tree and path contractions, Gaussian prime-exponent construction and counting, normal-play Grundy and number-game evaluations, and cyclic OR/AND minimax updates in the existing owning Units."
   },
   "reviewMode": "self",
   "reviewerId": "person-maintainer",
@@ -3859,13 +3859,13 @@
       "checkId": "check-verify-fast",
       "executedByReviewerId": "person-codex",
       "command": "npm run verify:fast",
-      "subjectDigest": "4c19e62467ae411e3486a9c385bb78a62acbea289dd41502ba7549c1d8841dea",
+      "subjectDigest": "2a519d1ebe4e0e2825f24ef7c9711871858a7d7cd00f1886c2cb82c854f812b5",
       "resultPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "resultDigest": "c0492bc92efd41f75f7abb21041dd84fda4ad624e6b667012912d2705eda7f9b",
+      "resultDigest": "aeaa1ba582647d3c8563c2dc92a350c7c7ae65be7242a3a69dcacaaa908671c8",
       "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "rawResultDigest": "36cff919d394f513b0588e7f8bc3dc795c2726bee489f27c356eb31c0b1343b8",
+      "rawResultDigest": "652a9f97d9482eaf7b3839711db69abeb438e86d828a7322b63265ab5d801e90",
       "exitCode": 0,
-      "completedAt": "2026-10-02T02:49:12.607Z"
+      "completedAt": "2026-10-02T04:20:51.806Z"
     }
   ],
   "notApplicableChecks": [
@@ -3880,7 +3880,7 @@
   ],
   "humanContentReviewEvidenceId": "human-content-review-bootstrap-us2-full-learning-units-pending",
   "humanContentReviewEvidencePath": "docs/verification/bootstrap/us2.json",
-  "humanContentReviewEvidenceDigest": "6b983e00a2bf4ee93efdaf4937aa19caa0be96612e0711d0eddb16c64b2c8291",
+  "humanContentReviewEvidenceDigest": "b5774632ee9dd795915c63862b3a1447b3eb9eccf2e90ccd9a4081b93bf8e3b0",
   "constitutionCheck": {
     "constitutionPath": ".specify/memory/constitution.md",
     "constitutionVersion": "3.0.0",
@@ -3908,6 +3908,6 @@
   },
   "unresolvedBlockingFindingCount": 0,
   "mergeApproved": false,
-  "reviewedAt": "2026-10-02T02:49:12.607Z",
-  "evidenceDigest": "2b7308019cc659760a2ef5cd1acadb9c9a659cfe3e39a8e3084b021dbce69600"
+  "reviewedAt": "2026-10-02T04:20:51.806Z",
+  "evidenceDigest": "0ead8d94e24991cd0a45ad050d2173b4a7ae1d66f14cd6c5f850b0f37ac4788c"
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "770264d43fd3bfa7abb4c9ddb783b070cfb16d7dc87a3b38237993e218827c1f",
+  "subjectDigest": "2611080d421f2130a407a717d0a4e5ddfb3b7b4e1c882b840a66b44cc0464024",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -1006,7 +1006,7 @@
       "taskId": "T156",
       "chapterId": "unit-chapter-dynamic-programming",
       "documentPath": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
-      "documentDigest": "07bae40a9c18770e40ab8dab567dfe3bfbfe428f80cbe9b25e1db8025477d684",
+      "documentDigest": "1dbc6edc2b7c1acd2a0ec6a217bb4390167001d4293d4d1200af35058d66b53e",
       "metadataDigest": "b061bca71a3bf1f6502cd2495f6b34b91f0682e4b68cf8b49bf2c36861adee8a",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-conway-number-games/manifest.json",
       "manifestDigest": "2392acf1d13b9be77ec3523d662ae67168203d2c476676d4ed5183c692bb62a2",
@@ -1017,7 +1017,7 @@
         "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
         "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
       ],
-      "conceptSummary": "左右の手を別々に持つpartizan gameのうち、左選択が右選択より小さい条件を満たす数ゲームは、選択肢の間の最も単純な数として評価する。独立な和を数の加算",
+      "conceptSummary": "### simplest-number規則を計算手順にする",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -1119,7 +1119,7 @@
       "taskId": "T156",
       "chapterId": "unit-chapter-dynamic-programming",
       "documentPath": "src/content/docs/learn/dynamic-programming/cyclic-minimax-game.md",
-      "documentDigest": "27974ac552c760ca3e1564153a21e4dd094c39821bec762d3b4358ef1b1c2a00",
+      "documentDigest": "21c6d234da313fc4ccaea77d528f1f686343064ed2390ebe9c880bd35957b643",
       "metadataDigest": "b0c0de5dfeaa805ea0a07a6c3a349ad5f1b73bd6baf7193df341f7846203897f",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-cyclic-minimax-game/manifest.json",
       "manifestDigest": "d8b30a563c09b54cb21fcc79d0083cc569c0a1f98554bab3099c24b0874fa07a",
@@ -1130,7 +1130,7 @@
         "source-abc413-editorial-13408-cd7c7c368b8c3394a09057f9e21edc8dfb0e06849b10d0912d749b319ba1ff42",
         "source-abc413-f-problem-8805a2f473ce9f9fa49142fa614df418d215a03b5b7f886312e72512ee30c28c"
       ],
-      "conceptSummary": "cycleのあるゲームでは、単なる再帰DPを止める根拠がない。終局から逆辺を使い、後続に必敗がある局面を必勝、全後続が必勝になった局面を必敗として確定する。",
+      "conceptSummary": "### 終了を目指すmin側と、妨害するmax側",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -1620,7 +1620,7 @@
       "taskId": "T156",
       "chapterId": "unit-chapter-dynamic-programming",
       "documentPath": "src/content/docs/learn/dynamic-programming/dp-game.md",
-      "documentDigest": "4773a3a70afe4b584ec0f5f3458154ab7f65a4078dbfdf1e6f0ea1b333efccb3",
+      "documentDigest": "2e038f02b2c14e909e44343f393747326a9abb4661a7f80e629fad6d9feef5da",
       "metadataDigest": "3291c1856d0cbf47db93aa5378ee1c7a0ff32a0df4ac42123bacb8736f964a19",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-dp-game/manifest.json",
       "manifestDigest": "8322a24b752134adbd5faa1f15829c80691817642f1d2eb058be6d3f1fe8fbc0",
@@ -1633,7 +1633,7 @@
         "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
         "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
       ],
-      "conceptSummary": "有限で終わる完全情報のimpartial gameでは、後続に必敗があれば必勝、なければ必敗。独立なゲームの和を扱うときは、後続Grundy数のmexを取りXO",
+      "conceptSummary": "### normal playの局面値を後続から定義する",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -2710,7 +2710,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-number-theory",
       "documentPath": "src/content/docs/learn/number-theory/gaussian-integers-two-squares.md",
-      "documentDigest": "e7f7e2dade321d6095499284764c0e344137da7ac51ff80a54ef44335eb3c78e",
+      "documentDigest": "7bd9369fdbd1d818d635e965244438fba169105a6e52f74e568f55a4358f258f",
       "metadataDigest": "f4022ffafaf3e53f1383e7539cb2682f6f3adb4a581eaa114f44be76758a3fce",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-gaussian-integers-two-squares/manifest.json",
       "manifestDigest": "02b33a190eaa13c2c5597bae1dea70ce19b15b722ccbaf7bf0f0177facefb02e",
@@ -2719,7 +2719,7 @@
         "source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88",
         "source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f"
       ],
-      "conceptSummary": "a²+b²はGaussian整数a+biのnormであり、積のnormが積になる。整数の素因数ごとの振る舞いへ分けると、二平方表示の存在や構成を扱える。",
+      "conceptSummary": "### normと有理素数の三分類",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3771,7 +3771,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-graph",
       "documentPath": "src/content/docs/learn/graph/min-cost-flow.md",
-      "documentDigest": "28f4b63b48777432f30ad4b93a1bd26e5820074d2e43b8328ee3018469126afe",
+      "documentDigest": "8cbaebbf0abb20d470fe70b71a049ecac7b6bc5cb723f66f76694fac342a8c2c",
       "metadataDigest": "74a869d501ea8640052a09a2877976f49c1b391bbf0dc1e893b89195df39d66d",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-min-cost-flow/manifest.json",
       "manifestDigest": "8e7d6e17c9999bee64df62c490826e5f28e01bb296f162700e0481c912175896",
@@ -3784,7 +3784,7 @@
         "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
         "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"
       ],
-      "conceptSummary": "各辺に容量と一単位の費用を置き、残余逆辺に負の費用を持たせて以前の割当を変更する。指定流量について最も安い増加路を選び、ポテンシャルで残余辺の費用を非負化する。",
+      "conceptSummary": "### 残余費用と、固定流量の最適性",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -4440,7 +4440,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-graph",
       "documentPath": "src/content/docs/learn/graph/path-matching-contraction.md",
-      "documentDigest": "02e46a710767fd409c3d57d2919319262a3af27ac21cab940b408fcafca31b0d",
+      "documentDigest": "d44743aa5a91fd721294f23b9639882ec4c17daca3c9e55c15065aface4a15db",
       "metadataDigest": "507b800e90086b4b7eef9e8fd5db48a24e9b3e474aaaa2bab70d3e8df555e0b7",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-path-matching-contraction/manifest.json",
       "manifestDigest": "4ea50499ba8ba734fe3cb6a65ce6c65b36d81635b2c880051806f5af274911e7",
@@ -4451,7 +4451,7 @@
         "source-abc464-editorial-22263-0960a9f1dc1410f75f462b47b2a53f7d625d4255420c30b453009cd454388b54",
         "source-abc464-g-problem-985c658fee637f7070d0b04d92ae4b8089f5ec419f593aafab19ab36913e711a"
       ],
-      "conceptSummary": "path上の隣接辺matchingでは、安い辺を選んだ後の競合を縮約したpathへ移せる場合がある。中央辺を採る・左右辺で置き換える費用差を新しい辺へ集め、選択",
+      "conceptSummary": "### 最適matchingを二つの形に正規化する",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -6182,7 +6182,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-tree",
       "documentPath": "src/content/docs/learn/tree/tree-precedence-contraction.md",
-      "documentDigest": "42e39404c618e88a69c2d1acc3f157f4557d94fdb868b00f59f1d43ed6086573",
+      "documentDigest": "36ca3b582614c506dbbb60dce161ee67020bd703c91148eb164e608351fdd90b",
       "metadataDigest": "6fac26dee15b747ff24056978c64ae69075e27d274e7a5ca5f5868ffcc762e9b",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-tree-precedence-contraction/manifest.json",
       "manifestDigest": "62b53e7f6fd7dab3a9f775134e1b46bf8e48c6ea22e16fb652019a712d0c1d60",
@@ -6191,7 +6191,7 @@
         "source-abc376-editorial-11196-a18251ecf2055b932d102aa3f8bccd2f6b2e4df137f625ae2ae766a90759e2fb",
         "source-abc376-g-problem-d1e80774f47d87b619c3d47de0ca47347deb38146893cecb69ba3b4bdde81378"
       ],
-      "conceptSummary": "親を先に処理する順序制約のもと、隣接する処理群を一blockへ縮約する。blockを並べ替えたときの目的値の差を式にし、比率などの優先基準が交換に対して安全かを",
+      "conceptSummary": "### 標準形とblockの交換比較",
       "checks": [
         "accepted_metadata",
         "source_references",

@@ -37,6 +37,28 @@ Revision、accepted Tag/Outcomeの意味、通常本文との整合を確認し�
   len・link・next・lastを定義し、cloneが必要になる条件、コピー、付け替え、link更新を順序付きで記述した。状態数と構築時間の評価を分けた。[ABC433 G公式解説](https://atcoder.jp/contests/abc433/editorial/14604)が参照する[構築算法](https://cp-algorithms.com/string/suffix-automaton.html)と照合し、長さ0〜8の全511二進文字列で遷移の受理範囲、endpos同値類、長さ区間、出現数、状態数上限を直接列挙と比較した。
 - 一般の最小重み完全matching: 重み付きTutte行列の符号・次数、最小非零次数の因子2、固定した辺乱数、行列式評価と係数補間を導いた。乱択の片側誤りと重み値Wに依存する費用を分離した。[ABC412 G公式解説](https://atcoder.jp/contests/abc412/editorial/13380)と照合し、4頂点の全4,096グラフ（各辺は不在または重み0・1・2）と6頂点100グラフで行列式の補間結果を完全matchingの全探索と比較した。
 
+### 技能の定義・最適値保存・答えへの復元の補足
+
+[今回のレビュー](https://github.com/Fu-L/abc-textbook/pull/64#pullrequestreview-5388175962)では、本文が説明すべき内容を読者への指示で済ませ、宣言した技能を直接前提と本文から再構成できない7単元が指摘された。定義、状態、初期化・更新、正当性、答えへの復元、成立条件と費用の順に既存本文を補った。構造検証の成功だけで技能の被覆を判定しない基準を、既存の編集ガイドにも明記した。
+
+- 最小費用流: reduced
+  cost、全頂点を対象にした初期potential、距離の打切りによる全残余辺の非負性保存、増加後の逆辺の費用0を導出。流量別最適性とslopeの限界費用をつなぎ、負閉路のcycle
+  cancelingとs→t増加を区別した。[ACL仕様](https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html)・[実装](https://github.com/atcoder/ac-library/blob/master/atcoder/mincostflow.hpp)と照合し、有限容量の501
+  networkで全実行可能flowの列挙と比較。別成分の負閉路、負辺、多重辺、到達不能頂点を含め、各増加の全残余辺のreduced
+  cost、pathのtightness、限界費用の非減少も確認した。
+- 01 on
+  Tree: 転倒数の標準形、C0・C1・内部費用、隣接交換の差、最優先blockを親の直後へ移す証明、統計更新・DSU・heap・列の復元を説明。[ABC376 G公式解説](https://atcoder.jp/contests/abc376/editorial/11196)と照合し、二値・重み付きblockの2,752ケースを親先行順序の全列挙と比較した。
+- path
+  matching: 最適解の正規化から、中央辺採用と左右辺への置換の二方向の対応で全cardinalityの最適値保存を証明。端点、符号反転、逆順復元を補足した。[ABC464 G公式解説](https://atcoder.jp/contests/abc464/editorial/22263)と照合し、長さ0〜8・各重み−2,0,1,3の全87,381列で全cardinalityの最適値と復元解を非隣接部分集合の全列挙と比較した。
+- Gaussian整数: 三種類の素数、共役への指数配分、四単元倍から二平方和の構成・計数を導出。[ABC444 G公式解説](https://atcoder.jp/contests/abc444/editorial/15201)と照合し、N=0〜2,000の符号・順序付き格子点列挙と完全一致、重複なしを確認した。Euclid除法と分裂の根拠は[Ben Lynnのノート](https://crypto.stanford.edu/pbc/notes/numberfield/sumsquares.html)にも照合。mod
+  pの−1の平方根とGaussian gcdによる構成は、10,000以下の1 mod 4の609素数でnormの減少とnorm
+  pの出力を検算した。
+- Grundy: normal
+  play、mex、終端0、XORから勝敗と合法手へ戻す二方向の証明を説明。[ABC229 H公式解説](https://atcoder.jp/contests/abc229/editorial/2977)と照合し、5頂点の全1,024
+  DAGと各125通りの三成分初期状態（計128,000ケース）でXOR判定を直接の勝敗再帰と比較した。
+- 数ゲーム: 開区間の整数選択と最小2冪分母の探索、Left・Right・後手の勝敗規則、厳密加算を説明。[ABC229 H公式解説](https://atcoder.jp/contests/abc229/editorial/2977)と照合し、−2〜2の分母8以下の33値について、標準形の1,089組の二成分和と300組の三成分和を、双方の開始手番で合法手の勝敗再帰と比較した。{0|0}が数として未定義であることも確認した。
+- 循環minimax: 終了目的と無限継続∞、minのOR候補、maxのrem・最大候補、登録と確定の違い、非負重みによる確定順を説明。[ABC261 Ex公式解説](https://atcoder.jp/contests/abc261/editorial/4449)と照合し、3状態の全512有向グラフ×8手番割当と300追加ケース（計4,396）で両者の固定戦略の全列挙と一致した。零重みcycle、自己loop、多重辺、ANDが未確定後続を持つケースも含む。
+
 検算は一時スクリプトによる反例検出の補助であり、本文の導出を置き換えない。本文に実行可能Exampleや固定評価課題は追加せず、分類・所有成果・問題順の受理済みmetadataも変更していない。
 
 自動検査は、232件の編集前manifest・受理済みmetadata・出典リンク・本文構造・導線を実ファイルから読み直す。数学的正しさを文字列検査だけで判定するものではない。本文ごとのhash、所有成果、Source
