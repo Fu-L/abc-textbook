@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC224-H — Security Camera 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC224-H — Security Camera 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/min-cost-flow.md">最小費用流・circulation</a></p>
+<ul>
+<li>流量と費用を持つ残余networkを設計し、potential付き最短路・slope・cycle cancelingで流量別最小費用を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/max-flow-min-cut.md">最大流・最小カット</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>左頂点のカメラ数l_i、右頂点のカメラ数r_jと置くと、全条件は l_i+r_j≥C_ij、目的はΣA_i l_i+ΣB_j r_jの最小化という線形不等式系になる。 双対変数k_ijの制約はΣ_j k_ij≤A_i、Σ_i k_ij≤B_jであり、左から右へ流す量の行・列容量そのものになる。 二部構造の整数性により実数LPへ緩和しても整数最適解が存在し、双対の整数容量フローから元問題の整数答えが得られる。</p>
+<p>採用する候補: 線形計画の双対を取り、行容量A_i、列容量B_j、単位流あたり報酬C_ijの二部ネットワークとして最小費用流で解く。</p>
+<p>元の下限制約へ非負係数を掛けた最良の下界が双対となり、その行列は二部フローとして表せて整数最適解も保証される。</p>
+<p>棄却する候補: 各頂点に置くカメラ数を0から100まで列挙する多次元DPを行う。</p>
+<p>最大200頂点の選択が直積になり、頂点ごとの個数を状態として保持できない。</p>
+<p>双対変数k_ijの制約はΣ_j k_ij≤A_i、Σ_i k_ij≤B_jであり、左から右へ流す量の行・列容量そのものになる。</p>
+<p>二部構造の整数性により実数LPへ緩和しても整数最適解が存在し、双対の整数容量フローから元問題の整数答えが得られる。</p>
+<p>sourceから左iへ容量A_i、左iから右jへ報酬C_ij、右jからsinkへ容量B_jを張り、送流を任意にできる最大費用流、または符号を反転した最小費用流を計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="線形計画の双対化">線形計画の双対化</h3>
+<p>発動条件: 非負変数に対する多数の一次下限制約と線形費用の最小化があり、制約の重み付き和が目的関数の下界を与えるとき。</p>
+<p>各l_i+r_j≥C_ijへ双対変数k_ijを置き、頂点費用を行・列の容量制約へ移す。</p>
+<h3 id="二部ネットワークの最小費用流">二部ネットワークの最小費用流</h3>
+<p>発動条件: 非負変数k_ijに行和・列和の上限があり、セルごとの線形報酬を最大化するとき。</p>
+<p>行と列を二部頂点にし、容量をsource側・sink側、C_ijを中央辺の負費用として表す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>元問題ではA_i,B_jがカメラ一個の価格だが、双対ではそのまま左・右頂点から流せる総量の容量になる。</p>
+<p>別の問題へ持ち帰る視点: 『変数ごとの価格』と『変数対の下限制約』が交差するLPでは、双対を取って価格を容量、下限値を報酬へ交換する。</p>
+<h2 id="正当性">正当性</h2>
+<p>元camera LPの各下限へ非負双対係数kを掛けると報酬ΣCkを得る下界。行和≤A、列和≤Bが二部flow容量になり、元/双対の整数性と強双対で最大flow報酬が元camera最小費用に等しい。任意送流量を許し負利益のaugmentationは採らない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>報酬C_ijを負費用として扱う場合、負の改善路がなくなれば止めるか、0費用の迂回辺を加えて固定流量を送る。費用総和は64 bitで保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二部の各組に l_i+r_j≥C_ij が並ぶ形を見たら、制約へ掛ける係数を流量とみなす双対を紙上で作る。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>左N右M、総flow上限F=min(ΣA,ΣB)、V=N+M+2,E=O(NM+N+M)。potential付き任意流量min-cost flow O(F E log V) の整数容量による安全上界。</p>
+<h3 id="空間">空間</h3>
+<p>network O(NM+N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le L,R \le 100; 1 \le A_i,B_i \le 10; 0 \le C_{i,j} \le 100</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>左一個右一個、A=2,B=3,C=4。</p>
+<ol>
+<li>元制約l+r≥4、費用2l+3r。</li>
+<li>l=4,r=0で8が最小。</li>
+<li>dual flow容量min(2,3)=2、単位報酬4で8。</li>
+</ol>
+<p>期待される結果: 8</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>双対を全capacityまで必ず流すべきか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>一般には送流量を任意にする。利益を悪化させる追加flowを強制してはいけない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc224/editorial/2812">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f</li>
+<li><a href="https://atcoder.jp/contests/abc224/tasks/abc224_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59</li>
+</ul></main>
+</body></html>

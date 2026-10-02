@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC452-G — 221 Substring</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC452-G — 221 Substring</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>S を run-length encoding すると、221部分文字列の内部 run は値=長さ、両端 run は値≤長さである。各 run を値・0・値の短列へ置換すると候補は0を含まない部分列へ一対一対応する。</p>
+<p>採用する候補: RLE から変換列 T を作り、suffix array と LCP を構築する。各 suffix の先頭から0までの長さ zerofree と直前 suffix との LCP の差の正部分を足す。</p>
+<p>辞書順 suffix 順に初めて現れる substring 長は LCP+1 以降であり、0を含まない最大長で打ち切ると distinct な有効 substring を一度ずつ数えられる。</p>
+<p>棄却する候補: S の全連続部分文字列を列挙し、run 長が221条件を満たすか set で重複除去する。</p>
+<p>候補が Θ(N^2) 個あり、文字列比較と set 格納も大きすぎる。</p>
+<p>run が短すぎる v&gt;m なら使用不能で0、ぴったりなら内部可の v、余裕 v&lt;m なら左右端利用を区切る v,0,v に置換する。</p>
+<p>suffix p_k から始まる新規有効 substring 数は max(0,zerofree[p_k]-LCP[k]) である。</p>
+<p>S を (v_i,m_i) に圧縮して規則により T を長さO(N)で生成する。T の suffix array・LCP を作り、後ろから各位置の次の0までの長さを求め、suffix順に正部分差を64 bitで合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="run-length-条件の記号列変換">run-length 条件の記号列変換</h3>
+<p>発動条件: 部分文字列の各 run に内部・端点で異なる制約があるとき。</p>
+<p>利用可能性を sentinel 0 付きの短列へ符号化する。</p>
+<h3 id="suffix-array-による-distinct-substring-数え上げ">suffix array による distinct substring 数え上げ</h3>
+<p>発動条件: 禁止記号までに限った異なる連続部分列数を数えたいとき。</p>
+<p>suffix ごとの有効 prefix 長から前 suffix との LCP を引く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>複雑な run 条件を、候補 block 列に sentinel を挿入して単なる禁止記号なし substring へ変換できる。</p>
+<p>別の問題へ持ち帰る視点: distinct substring は各 suffix が辞書順で初めて追加する prefix 長区間として数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>221列は各数字vのrun長がvに等しい。元run長m&lt;vは使えず0で区切り、m=vは内部使用可、m&gt;vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>v&lt;m の同じ run が左右端の二役を持つため v,0,v の対応を崩さない。LCP index と zerofree の位置 mapping を一致させる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>v&gt;m、v=m、v&lt;m の三runを端・内部として使えるか比較し、変換 T 上の substring との一対一対応を小例で確かめる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)を線形suffix arrayとLCP構築の場合とする。RLEと短列生成もO(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 500,000; 1 \leq A_i \leq 9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,2,2,1)。</p>
+<ol>
+<li>runは(2,3),(1,1)、変換T=(2,0,2,1)。</li>
+<li>zerofreeのdistinct列は2,1,21で、元valid列22,1,221に対応。</li>
+</ol>
+<p>期待される結果: 3種類。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=(2,1)なら数字2のrunを採れるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>run長1&lt;値2なので22を作れない。変換は0,1でvalid種類は1だけ。</p>
+<p>確認結果: 1種類。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc452/editorial/18406">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938</li>
+<li><a href="https://atcoder.jp/contests/abc452/tasks/abc452_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08</li>
+</ul></main>
+</body></html>

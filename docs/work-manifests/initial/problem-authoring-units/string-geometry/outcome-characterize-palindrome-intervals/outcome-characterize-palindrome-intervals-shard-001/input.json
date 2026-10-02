@@ -1,0 +1,149 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-characterize-palindrome-intervals-shard-001",
+  "packets": [
+    {
+      "problemId": "abc349-g",
+      "learningOutcomeIds": [
+        "outcome-characterize-palindrome-intervals"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-constructive-witness",
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "一般の部分文字列hash比較と、接尾辞・LCPの索引。"
+      ],
+      "tagIds": [
+        "tag-palindrome-radius",
+        "tag-constructive-witness",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq A_i \\leq \\min\\{i-1,N-i\\}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "要求半径内のmirror位置は等値、次の外側pairは不等であり半径exact条件に必要十分。等値をDSU縮約すると不等self-loopは矛盾。重なる内部等値はmirrorで再利用でき新右端だけunionすれば全必要制約を得る。componentを初出順に既着色neighborと異なる最小色で塗ればprefix辞書順を最小化でき、未着色componentは後で別色を選べる。通常Manacherで全半径を照合して仮定付き省略の不整合を排除する。",
+          "sourceRevisionIds": [
+            "source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030",
+            "source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030",
+          "path": "src/content/sources/abc316-abc367/source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc349_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474",
+          "path": "src/content/sources/abc316-abc367/source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc349_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc398-f",
+      "learningOutcomeIds": [
+        "outcome-characterize-palindrome-intervals"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "一般の部分文字列hash比較と、接尾辞・LCPの索引。"
+      ],
+      "tagIds": [
+        "tag-palindrome-radius"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 500000, inclusive, consisting of uppercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "S先頭k文字のmirrorは追加suffixとして一意に強制される。残るS[k..]が回文ならその両側をmirrorで挟んで全回文になり、逆にも全回文なら残りは回文である。従って追加最小は最長回文suffixの開始k最小。Manacherは偶奇全中心の最大半径を求めるので右端Nへ届く候補を尽くす。",
+          "sourceRevisionIds": [
+            "source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f",
+            "source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f",
+          "path": "src/content/sources/abc368-abc419/source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc398_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb",
+          "path": "src/content/sources/abc368-abc419/source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc398_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

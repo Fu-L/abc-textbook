@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC420-E — Reachability Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC420-E — Reachability Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></p>
+<ul>
+<li>成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>edge追加だけの無向graphではconnected componentsはmergeするだけで分裂せず、type3の答えはvのcomponent内にblack vertexが一個以上あるかだけで決まる。 各vertexの色toggleはその時点のrootが持つblack countを±1すればよく、merge時は二componentのcountを加算できる。 toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。 union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。</p>
+<p>採用する候補: componentごとのblack vertex数を追加情報として持つDSU</p>
+<p>type1はunion時にsizeとblackCountを合成、type2はcolor配列を反転してfind(v)のcountを更新、type3はroot count&gt;0を判定する。各queryほぼ定数時間。</p>
+<p>棄却する候補: type3ごとにvからBFSしてblack vertexを探す</p>
+<p>Q=6×10^5で大componentを何度も走査しO(NQ)になり得る。edge削除がないためcomponentを再探索する必要はない。</p>
+<p>toggle対象vのcomponent代表は過去のunionで変わり得るので、保存した古いrootではなく毎回find(v)してblackCountを更新する。</p>
+<p>union by size/rankで新rootを決めた直後に二rootのblackCountを足せば、個々のblack vertexを移し替えずcomponent aggregateを保てる。</p>
+<p>parent,size,blackCount,colorを初期化する。type1(u,v)はrootsが異なればunionしてcount和を新rootへ置く。type2(v)はr=find(v)としてwhite→blackならcount[r]++、逆なら—しcolorを反転。type3(v)はblackCount[find(v)]&gt;0ならYes。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="augmented-dsu">augmented DSU</h3>
+<p>発動条件: merge-only componentに対する集計値queryとvertex属性更新があるとき。</p>
+<p>rootにblack数を持ち、unionで加法mergeする。</p>
+<h3 id="component-aggregate">component aggregate</h3>
+<p>発動条件: queryがcomponent内の存在判定で、要素ごとのboolean和で表せるとき。</p>
+<p>black存在をblack count&gt;0へ置き換える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>DSUのconnectivityだけでなく、toggle可能な頂点属性の総数をrootへ持たせればcomponent存在queryまで同じ構造で処理できる。</p>
+<p>別の問題へ持ち帰る視点: merge可能aggregateに加えて要素更新があるDSUでは、更新時に現在rootへ差分を入れればよい。</p>
+<h2 id="正当性">正当性</h2>
+<p>黒数を成分内の黒頂点数とする不変条件は union の加算と toggle の±1で保たれる。到達可能集合は現在の成分だから、find(v) の黒数が正であることが質問の必要十分条件。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同component内へのedge追加ではcountを二重加算しない。toggle前のcolorを保持し、path compression後のrootへ±1する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>isolated vertexのtoggle、同component内edge追加、black頂点を含む二componentのmerge、最後のblackをwhiteへ戻す例を愚直component探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、Q 操作で O((N+Q)α(N))。</p>
+<h3 id="空間">空間</h3>
+<p>DSU、色と成分黒数で O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le Q \le 6 \times 10^5; Type 1 queries satisfy the following constraints: 1 \le u &lt; v \le N For each query, no edge connecting u and v has been added before that query.; 1 \le u &lt; v \le N; For each query, no edge connecting u and v has been added before that query.; Type 2,3 queries satisfy the following constraints: 1 \le v \le N; 1 \le v \le N</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3全白。1–2追加、2黒化、1と3を質問、2白化、1を質問。</p>
+<ol>
+<li>成分{1,2},{3}。</li>
+<li>2黒化で前者の黒数1。</li>
+<li>白化で黒数0。</li>
+</ol>
+<p>期待される結果: Yes,No,No</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同成分辺追加で黒数を足し直してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。頂点集合は変わらず、加算すると二重計上する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc420/tasks/abc420_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd</li>
+<li><a href="https://atcoder.jp/contests/abc420/editorial/13740">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0</li>
+</ul></main>
+</body></html>

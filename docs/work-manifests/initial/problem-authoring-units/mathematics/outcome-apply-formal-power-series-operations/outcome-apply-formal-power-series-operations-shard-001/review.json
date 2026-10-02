@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-apply-formal-power-series-operations-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b554258c2e8ea6db13796166af4a9b18c4a7734a270d03e81ba6ace354a669b1",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc289-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md",
+      "learningOutcomeIds": [
+        "outcome-apply-formal-power-series-operations",
+        "outcome-compute-convolution-or-correlation",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

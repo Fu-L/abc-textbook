@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC279-EX — Sum of Prod of Min</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC279-EX — Sum of Prod of Min</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-function-coefficients.md">母関数方程式・高度な係数抽出</a></p>
+<ul>
+<li>Eulerの五角数定理により∏(1−x^i)を符号付きの疎な係数列へ展開し、必要次数までのO(√N)項で係数抽出できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各S_kの寄与min(k,S_k)を係数とする生成関数を掛ければ、ΣS_k=Mの重み総和は積のx^M係数になる。</p>
+<p>d=M-N≤Nなので、各要素から最低1を引いた後に必要な次数はN以下に限られ、有限積∏_{i=1}^N(1-x^i)を無限積へ置き換えても低次係数は変わらない。</p>
+<p>採用する候補: 各factorをx(1-x^k)/(1-x)^2へ変形し、Eulerの五角数定理で分子の疎な係数だけ列挙し、分母係数をLucas定理の二項係数で足す。</p>
+<p>Nが10^12でも必要な分子項は√N個で、巨大引数の組合せを小さい法200003のdigitごとに計算できる。</p>
+<p>棄却する候補: kと現在sumを持つknapsack DPで生成関数の係数を順に更新する。</p>
+<p>N,Mが10^12で状態もfactor数も列挙できない。</p>
+<p>Σ_{s≥1}min(k,s)x^sは係数差分を2回取るとx-x^{k+1}となり、x(1-x^k)/(1-x)^2を得る。</p>
+<p>Euler積の非零次数はgeneralized pentagonal numbers t(3t±1)/2、係数は(-1)^tなのでd以下に疎にしか現れない。</p>
+<p>[x^{d-e}](1-x)^{-2N}=C(M+N-e-1,2N-1)であり、prime modulusのLucas定理で巨大Nのまま求められる。</p>
+<p>d=M-Nとし、e=0およびt(3t±1)/2≤dを列挙する。符号(-1)^tを掛けたC(M+N-e-1,2N-1)をmod200003で加算する。二項係数は0…p-1のfactorial/逆factorialを前計算してLucasで評価する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="重み付き列の生成関数">重み付き列の生成関数</h3>
+<p>発動条件: 独立な各位置の値と重みの積を、総和条件の下で合計するとき。</p>
+<p>位置kのΣ weight(s)x^sを作り、全factor積の指定係数を取る。</p>
+<h3 id="euler-pentagonal-number-theorem">Euler pentagonal number theorem</h3>
+<p>発動条件: partition関連の∏(1-x^i)が現れ、低次係数だけ必要なとき。</p>
+<p>無限積をgeneralized pentagonal number上の疎な±1級数へ展開する。</p>
+<h3 id="lucas-theorem">Lucas theorem</h3>
+<p>発動条件: prime pを法とする二項係数の上下引数が非常に大きいとき。</p>
+<p>base-p digitごとの小二項係数の積として計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>M≤2Nにより必要次数d≤Nとなるため、有限Euler積のtailを捨てて有名な無限積公式をそのまま使える。</p>
+<p>別の問題へ持ち帰る視点: 有限積を無限積へ延長する際は、求める係数次数より追加factorの最小次数が大きいかを確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>各因子Σ_{s≥1}min(k,s)x^s=x(1−x^k)/(1−x)²なので全積はx^NΠ_{k≤N}(1−x^k)/(1−x)^{2N}。d=M−N≤Nの範囲ではk&gt;Nの因子は低次を変えず無限Euler積へ替えられる。五角数定理で非零項だけを出し、残りの係数を巨大二項係数としてLucasで正確に評価すれば目的の重み和を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>generalized pentagonal numberはtの±側t(3t-1)/2,t(3t+1)/2を重複なく列挙し、e=0の符号は+1とする。</li>
+<li>通常のmod998244353ではなくp=200003でfactorialと全演算を行い、巨大な二項引数には64 bitを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>k=3の係数列1,2,3,3,…へ(1-x)を2回掛けてx-x^4になることと、d≤Nが無限積化を許す理由を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(p+√(M−N) log_p(N+M))、p=200003。五角数だけ列挙してLucasを適用する。</p>
+<h3 id="空間">空間</h3>
+<p>O(p)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{12}; N \leq M \leq 2N; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、M=3。</p>
+<ol>
+<li>正整数列は(1,2),(2,1)。</li>
+<li>積min(1,S_1)min(2,S_2)は2,1。</li>
+</ol>
+<p>期待される結果: 3 mod200003。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>M=Nなら何が残るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全要素1の一列で重み1。d=0なので五角数項e=0だけ、二項係数も1。</p>
+<p>確認結果: 1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc279/editorial/5290">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-editorial-5290-5a65ca8395c9d2fad6bc31056f401b8415bb0f4275c14878aea98dfbd2d40b88</li>
+<li><a href="https://atcoder.jp/contests/abc279/tasks/abc279_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-ex-problem-23a78a33a742148d71c9f1f19a378907e506745b7fa6cc46b96f23443970ae65</li>
+</ul></main>
+</body></html>

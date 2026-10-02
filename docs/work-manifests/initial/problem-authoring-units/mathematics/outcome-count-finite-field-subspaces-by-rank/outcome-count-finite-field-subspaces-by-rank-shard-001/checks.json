@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-count-finite-field-subspaces-by-rank-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ba29c1b2eb4295c9ab8e5bada64ce8b785f879d0e6e8a685324b04c4607337d7",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc278-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "初回goodは5列。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "1列。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-finite-field-subspaces-by-rank/outcome-count-finite-field-subspaces-by-rank-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

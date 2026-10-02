@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC252-EX — K-th beautiful Necklace</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC252-EX — K-th beautiful Necklace</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/meet-in-the-middle.md">meet-in-the-middle・半分全列挙</a></p>
+<ul>
+<li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/binary-trie.md">bit列をTrieで索引化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>色cからちょうど1枚選ぶ組合せ数は各色の枚数n_cの積であり、総枚数N≤70の下ではこの積は整数分割の評価により高々およそ3^(N/3)に抑えられる。</p>
+<p>採用する候補: 積が均衡する二群へのmeet-in-the-middleとXOR trie</p>
+<p>色群を選択数の積がほぼ等しくなるよう分ければ各側のXOR列挙は全体の平方根規模になり、上位ビットからK番目を数えられる。</p>
+<p>棄却する候補: 全ネックレスのXORを列挙してソート</p>
+<p>組合せ数が最大で10^11級になり、列挙も保存もできない。</p>
+<p>棄却する候補: 答え候補を二分探索して各回trie全走査</p>
+<p>XOR順序は通常の数値閾値との数え上げが複雑で、判定の反復も必要になるため、ビットごとの候補群絞り込みを直接行う方が適する。</p>
+<p>色数ではなく各色の選択肢数の積を重みとして二群を平衡化することで、左右の列挙数をともに約3^(N/6)へ抑える。</p>
+<p>答えの上位ビットを一つ固定するごとに、その接頭辞を作れる左右XORの組数をtrieで数え、Kが入る側だけを残せる。</p>
+<p>色を選択数の積が均衡する二群へ分け、各群で一色一枚を選ぶ全XORを重複込みで列挙する。一方を二進trieへ入れ、上位ビットから1側を選んだ組数を数えてKを更新しながらK番目に大きいXORを確定する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="meet-in-the-middle">meet-in-the-middle</h3>
+<p>発動条件: 独立グループごとの選択肢積は大きいが、全体積の平方根なら列挙できる。</p>
+<p>色を積で平衡化し、左右の部分XOR列を生成する。</p>
+<h3 id="k番目xorの二進trie">K番目XORの二進trie</h3>
+<p>発動条件: 二つの多重集合から一つずつ選んだXORの順位を求めたい。</p>
+<p>答え接頭辞に対応するtrie節点群を維持し、各ビットで候補ペア数を数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>N≤70で総組合せ数が小さく見えない制約でも、各色枚数の積には整数分割由来の上界があり、その平方根列挙が成立する。</p>
+<p>別の問題へ持ち帰る視点: 直積型の選択問題では、要素数ではなく各群の選択肢数の積を見積もって分割と計算量を設計する。</p>
+<h2 id="正当性">正当性</h2>
+<p>色数ではなく各色の選択肢数の積を重みとして二群を平衡化することで、左右の列挙数をともに約3^(N/6)へ抑える。 答えの上位ビットを一つ固定するごとに、その接頭辞を作れる左右XORの組数をtrieで数え、Kが入る側だけを残せる。 色群を選択数の積がほぼ等しくなるよう分ければ各側のXOR列挙は全体の平方根規模になり、上位ビットからK番目を数えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じXOR値も別の選び方として重複計数し、組数とKは最大10^18を超えないよう飽和させる。色の分割は色数ではなくn_cの積を基準にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>選択総数が小さい例で全列挙ソートと比較し、同値XORの多重度、各色1枚、積が偏る色分布、K=1とK=総数を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(B(U+V))、B=60、左右選択数U,Vを積で平衡化、trie順位探索。</p>
+<h3 id="空間">空間</h3>
+<p>O(BV+U)、右trieと左XOR list。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq C \leq N \leq 70; 1 \leq D_i \leq C; 0 \leq V_i &lt; 2^{60}; 1 \leq K \leq 10^{18}; There are at least K ways to make a necklace.; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>二色の値候補は{0,1},{2,3}、K=2。</p>
+<ol>
+<li>全組XORは2,3,3,2。</li>
+<li>降順は3,3,2,2。</li>
+</ol>
+<p>期待される結果: 二番目は3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同XOR3を一つへまとめるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>異なる色選択の組なので多重度を保つ。frequency/trie countで二順位を数える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc252/editorial/3981">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc252-editorial-3981-9ae004fee11a4bcddf79782797df62c05bdc9094fd3da4ae7894295d92b348fc</li>
+<li><a href="https://atcoder.jp/contests/abc252/tasks/abc252_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc252-ex-problem-cc5a2f480c4a17997587a18fd8d84e14270465786d6556c6c61c92be6f7ea1ed</li>
+</ul></main>
+</body></html>

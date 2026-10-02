@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-answer-idempotent-range-query-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a719c623a87d7d0b50bef47052dea8062024b269ab06e480006a49742ea45b2c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "405ce08391aa0c30fc45dabbd83dc69f68056ab6d5dc2fcb2b3f454019c56fa9",
+  "reviewDigest": "9569c8cee3559891d9006ceda285e2ebaccda6844c4b68d45ebb27256ed12760",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/abc282-f.html",
+      "digest": "c69daca9fef368c498587437ff15a2e73cb614220c359ddb12edf52a1d9d435f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/index.html",
+      "digest": "794a65b3545e6d0775ae5797bd1c969e1165471b0e6a4a726a5b2c6864bb9b12"
+    }
+  ],
+  "snapshotDigest": "9849433a7d107ea1224564895e85a4a10200ac7b3d82219b86f869151935f889"
+}

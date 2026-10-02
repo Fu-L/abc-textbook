@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-derive-coefficient-recurrence-by-differentiation-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "04a8d8ea1f7e51565a40805a538b4c4b1366d2e996360cc6e6c496397e973401",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "05ff20668947a6d4cddbf8ba8fa4856757565d2c926e06dfe3e687246333a4b0",
+  "reviewDigest": "ae513b9f000f1b7dc58b117e61d336b33582888f78ffc6924cebd698af818b6a",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-derive-coefficient-recurrence-by-differentiation/outcome-derive-coefficient-recurrence-by-differentiation-shard-001/abc230-h.html",
+      "digest": "d723d480e0196386fd40b4870c9c3845da3ed9f2fc64791212be0d1c746cd215"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-derive-coefficient-recurrence-by-differentiation/outcome-derive-coefficient-recurrence-by-differentiation-shard-001/index.html",
+      "digest": "29095259f84360ce707e10e86fc274f5a76362c18a4b04015c88e780db5fd55a"
+    }
+  ],
+  "snapshotDigest": "040be198c202684ab6a66ab686dde416733ba2e2141294afcad4c5b7496a04f2"
+}

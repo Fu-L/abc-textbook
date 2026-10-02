@@ -1,0 +1,75 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-implicit-binary-tree-layers-shard-001",
+  "packets": [
+    {
+      "problemId": "abc321-e",
+      "learningOutcomeIds": [
+        "outcome-count-implicit-binary-tree-layers"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。"
+      ],
+      "tagIds": [
+        "tag-implicit-binary-tree-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T \\leq 10^5; 1\\leq N \\leq 10^{18}; 1\\leq X \\leq N; 0\\leq K \\leq N-1; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "距離Kの相手をLCAがXか各祖先かで一意分類する。祖先z側の残り深さ子孫からX方向の子孫だけ除けばLCAが正確にzの頂点を得る。heap子孫は連続区間なのでNで切って数え、互いに素な全場合を足す。",
+          "sourceRevisionIds": [
+            "source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615",
+            "source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615",
+          "path": "src/content/sources/abc316-abc367/source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc321_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305",
+          "path": "src/content/sources/abc316-abc367/source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc321_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

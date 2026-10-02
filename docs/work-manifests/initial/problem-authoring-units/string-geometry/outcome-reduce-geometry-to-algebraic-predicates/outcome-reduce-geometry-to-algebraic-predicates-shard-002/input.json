@@ -1,0 +1,501 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
+  "packets": [
+    {
+      "problemId": "abc353-f",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq K\\leq10^{16}; 0\\leq S_x\\leq2\\times10^{16}; 0\\leq S_y\\leq2\\times10^{16}; 0\\leq T_x\\leq2\\times10^{16}; 0\\leq T_y\\leq2\\times10^{16}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "小tileだけの経路はManhattan直行候補。大tileを使う経路では最初と最後に入る大tileを固定でき、その外側を最短直進へ置換して悪化しない。各端から四方向最初の大tileを全て候補にすれば最適を覆う。大tile間の閉式をK=2とその他で分けて評価し、両端tollと直行を比較すれば最小になる。",
+          "sourceRevisionIds": [
+            "source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9",
+            "source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9",
+          "path": "src/content/sources/abc316-abc367/source-abc353-editorial-9936-509e9f0eee652edd2a928ddd74ea483002ee0d86c772f63f19bc7c42870e77e9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc353_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9",
+          "path": "src/content/sources/abc316-abc367/source-abc353-f-problem-75ae7813bfc2b129711ae72749e8cc373492d2c390c7354744dbf827865695a9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc353_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc366-e",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq D \\leq 10^6; -10^6 \\leq x_i, y_i \\leq 10^6; (x_i, y_i) \\neq (x_j, y_j) for i \\neq j.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "距離和はx軸fとy軸gの和へ分離される。外側座標は一点への距離だけでもDを超えるので有限範囲で十分。隣接移動の差は左点数−右点数で各f,gを正確に求められ、その値列をsortしても各coordinateの重複度を保持する。F+G≤Dのpair数を単調pointerで足せば全格子点を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a",
+            "source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a",
+          "path": "src/content/sources/abc316-abc367/source-abc366-e-problem-cb0d25a165a19479b8e9217c5f357fd3f13c4f691ad47579238461a6f90e952a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc366_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc",
+          "path": "src/content/sources/abc316-abc367/source-abc366-editorial-10640-a7dbc542388d153275ac2f9047c67898840b39621ff70e6e0be9a1e5046143fc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc366_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc377-f",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-inclusion-exclusion"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-inclusion-exclusion"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq10^9; 1\\leq M\\leq10^3; 1\\leq a_k\\leq N,1\\leq b_k\\leq N\\ (1\\leq k\\leq M); (a_k,b_k)\\neq(a_l,b_l)\\ (1\\leq k\\lt l\\leq M); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同方向線は一致かdisjointなので先にunique化する。新線のlengthから既存攻撃領域との交点数を引けば新增攻撃cell数になる。既存方向ごとに列挙した同一交点はsetで一つにするので三方向以上の重複も正しく補正する。盤面内整数交点だけ残し全線を足すことで攻撃unionをexactに得る。N²との差が安全cell数。",
+          "sourceRevisionIds": [
+            "source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a",
+            "source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a",
+          "path": "src/content/sources/abc368-abc419/source-abc377-editorial-11246-f29d5b7dfcda9fe5a743e462d4bb6d1048af559b76f7ebedbd5b7dd2dcd4694a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc377_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c",
+          "path": "src/content/sources/abc368-abc419/source-abc377-f-problem-0783e8d2bcd70768494a36d61bb0dc1ea442c8f69fafc99c889c5d04e78fcf0c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc377_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc385-f",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq X_1 < \\dots < X_N \\leq 10^9; 1 \\leq H_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "(0,h)から各頂点への傾きがx順に適切に並ぶことが非遮蔽条件。隣接傾きの全比較が成り立てば推移律で全pair比較が成り立つ。各隣接pairの等傾き境界を整数分子/分母で解けば必要hの下限になるため、全境界と0の最大が要求境界高さ。等号を除く可視規約でもこの値は下限として返す。",
+          "sourceRevisionIds": [
+            "source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920",
+            "source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920",
+          "path": "src/content/sources/abc368-abc419/source-abc385-editorial-11664-76d5a0bbd1baef5fe071c2d300507fca7164300e970ad633d9c5f17e3591e920.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc385_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2",
+          "path": "src/content/sources/abc368-abc419/source-abc385-f-problem-75176a21b1f00a0a84ff4c1c5737571a51db5a16d6aefba6f634abe016ff81d2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc385_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc426-e",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 2\\times 10^5; -100\\leq TS_X,TS_Y,TG_X,TG_Y,AS_X,AS_Y,AG_X,AG_Y \\leq 100; (TS_X,TS_Y)\\neq (TG_X,TG_Y); (AS_X,AS_Y)\\neq (AG_X,AG_Y); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "到着時刻順に区間を分けると相対位置は各区間で一次関数なので、距離最小は原点とその相対segmentの最短距離に等しい。同時移動区間の端相対位置と停止後の移動segmentを求めれば全時刻を覆う。segmentへの射影を[0,1]にclampすることで区間外の最小点を除き、二区間最小を取ると全時刻最小になる。",
+          "sourceRevisionIds": [
+            "source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3",
+            "source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3",
+          "path": "src/content/sources/abc420-abc466/source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc426_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877",
+          "path": "src/content/sources/abc420-abc466/source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc426_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc437-f",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N,Q\\le 2\\times 10^5; -10^9\\le X_i,Y_i\\le 10^9; 1\\le i\\le N; 1\\le L\\le R\\le N; -10^9\\le x,y\\le 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Manhattan距離は45度座標のChebyshev距離へ等しい。集合内の|u−U_i|最大はU最小または最大で達成し、vも同様なので四極値以外は不要。segment treeが各区間のmin/maxを合成し更新後も保存するため、四候補の最大が指定区間の正確な最遠距離になる。",
+          "sourceRevisionIds": [
+            "source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7",
+            "source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7",
+          "path": "src/content/sources/abc420-abc466/source-abc437-editorial-14891-8e01dd8035d7e76c1dc9842c0d289021678532fec32f01c9901a6228611703a7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc437_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e",
+          "path": "src/content/sources/abc420-abc466/source-abc437-f-problem-31ca98501d7cea40b88574c6ad692175c9d92992d30517409358061afde8c90e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc437_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc442-e",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq Q \\leq 2\\times 10^5; -10^9\\leq X_i,Y_i \\leq 10^9; (X_i,Y_i)\\neq (0,0); 1\\leq A_j,B_j\\leq N; A_j\\neq B_j; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "レーザーrotationでは偏角だけが被照射時刻を決め、同ray全体は同時に消える。半平面区分と外積比較が正確な円周順を作り、外積0かつ内積正だけを同rayへまとめる。各queryをstart block左端、end block右端へ広げて円環長を数えれば同時消滅個体を全て含む。wrapの場合も円周区間を二つに分けるだけで同じ集合を数える。",
+          "sourceRevisionIds": [
+            "source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f",
+            "source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f",
+          "path": "src/content/sources/abc420-abc466/source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc442_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7",
+          "path": "src/content/sources/abc420-abc466/source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc442_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

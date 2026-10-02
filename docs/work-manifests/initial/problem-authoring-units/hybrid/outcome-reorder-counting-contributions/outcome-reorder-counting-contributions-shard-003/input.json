@@ -1,0 +1,574 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reorder-counting-contributions-shard-003",
+  "packets": [
+    {
+      "problemId": "abc324-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1 \\leq N \\leq 5 \\times 10^5; S_i and T are strings of length 1 to 5 \\times 10^5, inclusive, consisting of lowercase English letters.; The total length of S_1, S_2, \\ldots, S_N is at most 5 \\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "subsequenceとして取れるprefix最大長はS_iを左からT pointerと照合するgreedy、suffix最大長は両文字列を右から照合するgreedyで得られる。 A_i最大長まで前半で取れるなら、それより短いprefixも取れるため、残りsuffixの長さだけが後半への必要条件になる。 全N^2 pairを調べず、文字列scan総長と|T|の前計算だけで各iの相手数を得られる。",
+          "sourceRevisionIds": [
+            "source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8",
+            "source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8",
+          "path": "src/content/sources/abc316-abc367/source-abc324-e-problem-122462833dadb1a89dbaa3b7de191d7423f1c4b68966e12b5abbd2ed0bcb20e8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc324_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba",
+          "path": "src/content/sources/abc316-abc367/source-abc324-editorial-7407-ac1b02cade60fe34b326d626abed852b9d908175f319770f619c493b275c28ba.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc324_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc330-g",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 3000; A_i = -1 or 1\\leq A_i \\leq N.; Each integer from 1 to N is contained at most once in A.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未確定位置pへ未使用値の順位vを置いたときの確定値とのinversion数をw[p][v]=左の確定値>u_vの個数＋右の確定値<u_vの個数とすると、B=Σ_p w[p][π_p]になる。 Uの既知momentはE[U]=q(q-1)/4、Var(U)=q(q-1)(2q+5)/72で、E[U²]=Var+E[U]²である。 π_p=vで条件付けたUの期待値はC(q-1,2)/2+((p-1)(q-v)+(q-p)(v-1))/(q-1)となり、Σw[p][v]との積でE[UB]を二次loopだけで求められる。 公式のindicator積の型分けをmoment計算へ整理し、4 index全列挙を避けながら共有endpointの依存も条件付き期待値で扱える。",
+          "sourceRevisionIds": [
+            "source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e",
+            "source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e",
+          "path": "src/content/sources/abc316-abc367/source-abc330-editorial-7743-75b295b2b27227610092fa695ea99440e8b479574687a9365b727193c93cb23e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc330_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8",
+          "path": "src/content/sources/abc316-abc367/source-abc330-g-problem-253e1f6725532d08590375dc5679214a715482cb9c47a9d4eb020640e1e340a8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc330_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc334-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 1000; S_{i,j} = . or S_{i,j} = #.; There is at least one (i,j) such that S_{i,j} = .."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "x=0でも式C-x+1は新しい孤立成分が増える場合を正しく表す。四近傍に同じ成分のcellが複数あってもmergeされる成分は一つなので、cell数でなく成分IDのdistinct数を数える。 一回のBFS/DFS後は各選択結果を定数個の近傍だけで評価できる。",
+          "sourceRevisionIds": [
+            "source-abc334-e-problem-3fcc496e040f815592e86224b94ccb06f704495a049994d43e2236e1750702f2",
+            "source-abc334-editorial-8987-b5406de59fd4abbb6979c1bc648407117b6f6e6a3358fba9e90bfcb7a486295f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc334-e-problem-3fcc496e040f815592e86224b94ccb06f704495a049994d43e2236e1750702f2",
+          "path": "src/content/sources/abc316-abc367/source-abc334-e-problem-3fcc496e040f815592e86224b94ccb06f704495a049994d43e2236e1750702f2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc334_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc334-editorial-8987-b5406de59fd4abbb6979c1bc648407117b6f6e6a3358fba9e90bfcb7a486295f",
+          "path": "src/content/sources/abc316-abc367/source-abc334-editorial-8987-b5406de59fd4abbb6979c1bc648407117b6f6e6a3358fba9e90bfcb7a486295f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc334_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc347-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,Q\\leq 2\\times10^5; 1\\leq x_i\\leq N; All given numbers are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "xがquery lで挿入されquery rで削除されるなら、xはtoggle後の時刻l,…,r-1でSにいるため寄与はpref[r-1]-pref[l-1]である。最後まで残る場合はpref[Q]-pref[l-1]になる。 toggleをO(1)で処理し、削除時または最後に一期間の寄与をprefix差で加算できる。",
+          "sourceRevisionIds": [
+            "source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2",
+            "source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2",
+          "path": "src/content/sources/abc316-abc367/source-abc347-e-problem-2279a1a95ed2bb4dcab5638b92a7a79a3d5f86306ccaf60f0782cebaf5ad85e2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc347_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2",
+          "path": "src/content/sources/abc316-abc367/source-abc347-editorial-9698-544bfc4af8fe0b31f60059cf56a1f1319c7d7c7404590873bca6f6954b49b3f2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc347_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc362-f",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-constructive-witness",
+        "unit-tree-balanced-separators"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-constructive-witness",
+        "tag-tree-balanced-separator"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq u_i < v_i \\leq N; The input graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "目的値をpair単位から辺単位へ主客転倒すると、全辺について独立な明確な上界Σmin(c,N−c)が得られる。 各重心子成分が半分以下なので、配列上でfloor(N/2)離れた位置同士は同一blockに入れず、pathは必ず重心側へ抜ける。 全pairが重心を挟む異なる成分に属し、各辺の小さい側の全頂点を外側と組ませて辺ごとの上界を同時達成する。",
+          "sourceRevisionIds": [
+            "source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe",
+            "source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe",
+          "path": "src/content/sources/abc316-abc367/source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc362_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400",
+          "path": "src/content/sources/abc316-abc367/source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc362_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc365-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^8; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。",
+          "sourceRevisionIds": [
+            "source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f",
+            "source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f",
+          "path": "src/content/sources/abc316-abc367/source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc365_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370",
+          "path": "src/content/sources/abc316-abc367/source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc365_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc371-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 1\\leq A_i\\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "値 i の出現位置に 0 と N+1 を番兵として加えると、長さ g の各 gap が i を含まない区間を g(g+1)/2 個だけ生む。 全区間数 N(N+1)/2 から非出現区間数を引いた量が、値 i が答えへ 1 を寄与する区間数そのものである。 値 i の非出現区間は隣接する出現位置の間へ一意に属し、全値にわたる出現位置の総数が N なので O(N) で集計できる。",
+          "sourceRevisionIds": [
+            "source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9",
+            "source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9",
+          "path": "src/content/sources/abc368-abc419/source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc371_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad",
+          "path": "src/content/sources/abc368-abc419/source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc371_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc378-e",
+      "learningOutcomeIds": [
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 0 \\leq A_i \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "0≤a,b<M なら (b-a) mod M=b-a+M·[a>b] で、mod による非線形部分は大小比較一つだけになる。 過去 prefix の個数と総和を分けて持てば、固定 S_r に対する全 l の差の和をまとめて計算できる。 各右端について式 S_r·r-ΣpastS+M·countGreater を O(log M) で計算でき、全区間を列挙しない。",
+          "sourceRevisionIds": [
+            "source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef",
+            "source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef",
+          "path": "src/content/sources/abc368-abc419/source-abc378-e-problem-455f55c529853840624b25849197cee4c28e915574c44a8492c3d9fcd9bb42ef.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc378_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104",
+          "path": "src/content/sources/abc368-abc419/source-abc378-editorial-11289-eaba34e24cab47788301f40dea4d5dcb36caf39e402be420a4e51caceff84104.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc378_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

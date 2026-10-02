@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "0c4442a4cdfb5e6b98137453783e36f39e004bbe6d016d75704815c5bbab3e33",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1ccffa3afd54d9e7daf3de2f7160cc3afc405b7d5f0a59b07f115a658cec2da9",
+  "reviewDigest": "03c9c8ea3509620ed17b04e62e6fbb2fe0c982ac58f4941b89cda317361818c0",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc251-e.html",
+      "digest": "9cf570184264e16a64cc6f897b5c2cc38783dee9781c1d57bb69d62262a06818"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc264-f.html",
+      "digest": "8d3cffbf35481a04aaadccbbdd0108e463c8ad2f26a24d0944d5ab3354b0bb78"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc265-e.html",
+      "digest": "9e861e27c1fbb3fb9b21343093008c06525cceb7ffefe28800574d4bf3790ea5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc273-g.html",
+      "digest": "33c27ad6e0e198ab9b862fed07be74a8002529b8637d0871eb2202168e0f07fb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc279-g.html",
+      "digest": "82eeac28b5dbcf20cf1b32856e7343824154844c9028ba3794db43b336011245"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc281-g.html",
+      "digest": "b02016518a562fa5a7d31bd72267f0ad1cb78b5863fcc53afbbcf694f1448732"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc283-e.html",
+      "digest": "0c044ea1b49697b21f8bd9fbbd2ffe28bddac67b7c2eba5e796dbb78e86ad168"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/abc307-e.html",
+      "digest": "d7fc38916c549727fec22d21dcd7f2008f3164242348febb0933008bc305310a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-002/index.html",
+      "digest": "a070907143a99f63aaa1e9e371110030538d18777b35ebdbce8aa7cbe5f42841"
+    }
+  ],
+  "snapshotDigest": "288b30317156ebd77b869db0d5b2b0cd5e7c3f0e7b66847e1d0c35a2b7c31a03"
+}

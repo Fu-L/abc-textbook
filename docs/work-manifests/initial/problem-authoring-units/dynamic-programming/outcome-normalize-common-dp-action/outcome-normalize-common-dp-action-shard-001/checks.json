@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-normalize-common-dp-action-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "f771bb122fe296f971ef7802de9e1706b8d59cb7b2948c38c14a6159fec2f2a0",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc372-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "全walk数2",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "不可。一手で複数追加辺を渡るwalkを誤って作る。旧値を退避する。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc435-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "9",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "4。空白1と一本dominoの位置3だけ。二本を隣接させることはできない。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc457-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "4",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "2。第三位追加は距離条件不一致で全消去。旧最大位置3から最高・第二位の二通りだけが残る。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-normalize-common-dp-action/outcome-normalize-common-dp-action-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

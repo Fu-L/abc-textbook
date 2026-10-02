@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-encode-counting-by-generating-function-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "fb855524089b6e37640ad8de5826ddc8ad7bba143ab5c7372ef42c15f1ca6c9f",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc345-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc345-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc352-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc352-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc385-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc385-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc390-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc390-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc422-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc422-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc436-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc436-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc449-g",
+      "path": "src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc449-g.md",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

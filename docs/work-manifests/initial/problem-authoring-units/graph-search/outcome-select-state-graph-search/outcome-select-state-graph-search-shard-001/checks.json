@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-select-state-graph-search-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c9059f2774871718b135a08adb69fa2eecbb7e55fc9da12e51f13ecb95a7ae3b",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc241-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "不可。障害物がない方向は崖へ落ちて禁止であり端では止まれない。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc244-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "総和4",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "不可。二回訪れた頂点は偶数へ戻るのでxorが必要。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc289-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "不可。操作は同時で、色制約も同時destinationへ掛かる。二位置pairが必要。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc302-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "距離2なので2/2−1=0。最初から同居している。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc305-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "2移動",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "戻らない。judgeの成功応答を受けたら直ちに終了する。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc319-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "最短path数2",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "引かない。最短path末辺はちょうど前layerからだけ来る。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc355-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "2質問で目的和（法100）",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "引く。prefix差の向きが逆なので符号反転が必要。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc361-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

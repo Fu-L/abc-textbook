@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC223-H — Xor Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC223-H — Xor Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md">XOR線形基底</a></p>
+<ul>
+<li>整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>部分列の要素を選んだXORは、各数の二進表現を F_2 上の60次元ベクトルと見たときの線形結合である。したがって各問い合わせは区間ベクトルが X を生成するかという所属判定になる。</p>
+<p>採用する候補: 右端を左から伸ばしながら、各pivotにできるだけ新しい添字を残すXOR線形基底を管理し、Rごとの問い合わせをその基底で判定する。</p>
+<p>基底の次元は高々60であり、各基底ベクトルに区間左端の可否を判定する添字情報を持たせれば、N,Qの大きさに依らず一問を60bitで処理できる。</p>
+<p>棄却する候補: 各問い合わせの A_L,…,A_R から掃き出し法をやり直して X の所属を判定する。</p>
+<p>区間長に比例して基底を作り直すため、最大2×10^5問では同じ要素を繰り返し掃き出して間に合わない。</p>
+<p>右端 r のprefixから、各suffixのspanが変化する添字だけを残すと、その集合は全prefixのspanの基底であり、添字が l 以上のものだけで span(A_l,…,A_r) を生成できる。</p>
+<p>新しいベクトルを挿入するとき同じpivotの古いベクトルより新しい添字を優先して交換すると、各pivotの表現可能範囲を最も右へ保てる。</p>
+<p>問い合わせをRでまとめ、A_Rを添字付き線形基底へ挿入する。Xを高bitから、添字がL以上のpivotだけで消去し、0まで落とせればYesとする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="f_2-上のxor線形基底">F_2 上のXOR線形基底</h3>
+<p>発動条件: 部分集合XORの実現可能性を問われ、値のbit幅が小さく固定されているとき。</p>
+<p>数をベクトルとしてpivotごとに掃き出し、目標ベクトルが生成部分空間に属するかを判定する。</p>
+<h3 id="右端オフライン走査と添字付き基底">右端オフライン走査と添字付き基底</h3>
+<p>発動条件: 区間問い合わせを右端までのprefixデータへ追加でき、左端制約を要素の時刻で判定できるとき。</p>
+<p>基底ベクトルへ有効な最新添字を付け、Rを固定したまま異なるLのsuffix spanを一つの基底から取り出す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>区間ごとの基底を保存する代わりに、同じpivotでは新しい添字を勝たせると、一つのprefix基底が全ての左端に答えられる。</p>
+<p>別の問題へ持ち帰る視点: 可逆な要約構造で区間を扱うとき、要約要素に『どこから有効か』という時刻を持たせてprefixをsuffix判定へ転用する。</p>
+<h2 id="正当性">正当性</h2>
+<p>同pivotでは新しい添字を優先し交換すると、任意の左端Lに対して添字L以上の基底行がA_L..A_Rのspanを生成する不変条件を保てる。Xをその行だけで消去して0になることと区間内要素の線形結合で表せることは同値。R順の処理で必要なprefixだけを基底へ入れる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>基底挿入時はベクトルと添字を必ず同時にswapし、60bit全てを符号なし整数で高位から処理する。X_i&gt;0 なので空集合だけで作る0の扱いは答えに影響しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>区間XORの『選び方』を追わず、まず生成部分空間への所属へ言い換え、左端を基底の有効時刻として持たせる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+Q)B)、B=60。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q+B)、入力保持込みO(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 4 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \lt 2^{60}; 1 \leq L_i \leq R_i \leq N; 1 \leq X_i \lt 2^{60}; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,3)、(L,R,X)=(2,3,1)。</p>
+<ol>
+<li>2 XOR 3=1なので区間の両要素を選ぶ。</li>
+</ol>
+<p>期待される結果: Yes。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ配列の[3,3]で1を作れるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>spanは{0,3}だけ。全prefix基底を左端制限なしで用いると誤る。</p>
+<p>確認結果: No。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc223/editorial/2784">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc223-editorial-2784-5514fdbcce2c4b2a9d2f9c24e0f8d8e15f239d9ff2f9d3caad45c97eff24f190</li>
+<li><a href="https://atcoder.jp/contests/abc223/tasks/abc223_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc223-h-problem-49bdf1820ba1be91722759d396d83747e61e76f7fc1c2bf12dec85e6a8be7c0e</li>
+</ul></main>
+</body></html>

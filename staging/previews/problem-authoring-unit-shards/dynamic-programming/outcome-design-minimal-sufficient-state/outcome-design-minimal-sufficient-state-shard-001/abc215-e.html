@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC215-E — Chain Contestant</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC215-E — Chain Contestant</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>文字の種類は A..J の 10 種類だけである。選ぶ部分列では各文字が高々一つの連続区間に現れるため、過去の並び全体ではなく使用済み文字集合と現在の末尾文字が次の選択可否を決める。 同じ文字を続ける遷移だけは使用済みでも許し、別文字へ移った後の再登場を mask で禁止する。</p>
+<p>採用する候補: 使用済み文字の bitmask と末尾文字を状態にし、選ばない・同じ文字を続ける・未使用文字へ移る遷移を数える。</p>
+<p>この二情報が「一度離れた文字へ戻れない」という条件を必要十分に表す。</p>
+<p>棄却する候補: 使用済み文字の bitmask だけを状態にして部分列を数える。</p>
+<p>同じ mask でも末尾が現在の文字かどうかで、使用済み文字を続けられるかが変わるため、将来の遷移を決定できない。</p>
+<p>棄却する候補: 各位置を選ぶか選ばないかで全ての部分列を列挙する。</p>
+<p>2^N 通りとなり、同じ使用済み集合と末尾を持つ履歴をまとめられない。</p>
+<p>同じ文字を続ける遷移だけは使用済みでも許し、別文字へ移った後の再登場を mask で禁止する。</p>
+<p>文字列を左から走査し、各位置の文字 x について current から next へ、選ばない・last=x なら同じブロックを続ける・bit x が未使用なら新ブロックを始める遷移を行う。さらにその位置だけを選ぶ singleton を next[1&lt;&lt;x][x] へ加え、最後に全ての非空状態を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="bitmask-dp">bitmask DP</h3>
+<p>発動条件: 種類数が小さく、各種類を使ったかどうかが将来の可否を決めるとき。</p>
+<p>使用済み文字集合を bitmask で保持する。</p>
+<h3 id="末尾状態による履歴圧縮">末尾状態による履歴圧縮</h3>
+<p>発動条件: 直前と同種かどうかだけが継続条件を変えるとき。</p>
+<p>現在の連続区間の文字を末尾状態として持つ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「各文字が高々一ブロック」という全体条件を、再登場禁止と同種継続という局所遷移へ言い換える。</p>
+<p>別の問題へ持ち帰る視点: 部分列の履歴条件を、使用済み集合と現在開いている区間の種類へ分解できないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>既使用文字集合と末尾block文字が将来合法性を決める。同じ末尾は継続可、未使用字は新block可、使用済み別字は再登場禁止。選ぶ/選ばない分岐で各位置部分列を一意に生成しsingletonで空から開始するため全合法非空部分列を数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各位置ごとに next を別配列として作り、更新途中の状態から同じ位置の文字を再利用しない。選ばない遷移も current から next へ移す。</li>
+<li>新ブロック開始は bit x が未使用の場合だけ許し、singleton の初期化を忘れない。全加算を mod 998244353 で行い、空部分列は答えに含めない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>AAB と ABA で許される部分列を列挙し、mask だけでは同種継続と再登場を区別できない理由、二層配列で同じ位置の再利用を防ぐ理由を説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>列長N、文字種C=10。O(NC2^C)。</p>
+<h3 id="空間">空間</h3>
+<p>rolling mask×last O(C2^C)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 1000; |S|=N; S consists of uppercase English letters from A through J.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=ABA。</p>
+<ol>
+<li>位置部分列はA(1),B(2),A(3),AB,AA,BA,ABA。</li>
+<li>ABAだけがAへ戻るため禁止。</li>
+<li>他6を数える。</li>
+</ol>
+<p>期待される結果: 6</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ文字列Aを二回の位置から選ぶ場合は一つにまとめるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>まとめない。本問は選ぶ位置の部分列を数え、別位置選択は別通り。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc215/tasks/abc215_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846</li>
+<li><a href="https://atcoder.jp/contests/abc215/editorial/2483">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f</li>
+</ul></main>
+</body></html>

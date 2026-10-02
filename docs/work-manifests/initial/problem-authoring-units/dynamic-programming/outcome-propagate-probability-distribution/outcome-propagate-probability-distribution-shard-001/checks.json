@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-propagate-probability-distribution-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2f764ffbd5310ee176b61f672f3d6ac4e8d817660c26d09bdb5d06c61bd3c650",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc226-h",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "期待値2/3（法では2·3の逆元）。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "P(min≥x)=(1−x)²の積分で1/3。少なくともK個という成功数条件を大きい順と小さい順で取り違えない。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc275-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1/2",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "終了済み事象を後の手数でも数えて二重計上する。終端は展開しない。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc277-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "期待収入5。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc298-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "一般に違う。先手が先にgoalする場合があり上例は1。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc300-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1/5",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "到達値は2,3,5素因数のみなので7は不可能、確率0。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc323-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "1/4",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "含めない。その曲はちょうどXに終了して次曲へ移る。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc326-e",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "20",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "不要。指示変数の期待値の線形性で各報酬を別々に集計できる。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc333-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "最後の生存確率は(1/3,2/3)。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "最初除去確率和が3/4で1に届かない。1/(1−p^m)で任意周回分を吸収する。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

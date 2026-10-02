@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-kernelize-near-tree-graph-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "85b08e15a48ced5f8bc6764f5469739589d002b04370a99b2e40780d180c2f49",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "9038819bce7898585029a94a2f4a5cfdf37515b42ae1fbcbbdfbdebe20d7b755",
+  "reviewDigest": "87719384520f5d1337254dc69526f38c9c89dd0d0a742a22927a360de51b1357",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.html",
+      "digest": "a0e5e9836be90cfd8a4932becca16ded581668a1b2f2ddcee53b70d4c39966de"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/index.html",
+      "digest": "ad831db3687af97c340e0765ae6913a6f9da90ea29156a76a1aea5c4664326f0"
+    }
+  ],
+  "snapshotDigest": "cf32f122d3e6a16959d953e6a6c8e9d51755f14cd120264f8ca48c42b5d16572"
+}

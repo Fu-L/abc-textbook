@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "95e402531d4bc96fdcd574ce7699a6e452d302559d57de33a34bc3f97b0d283a",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc244-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "順に1,2。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc257-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "二番目を選び最大3。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "一般には不可。二乗期待値は平均の二乗に分散も加わる。平均が小さくても分散や費用の差で目的値が逆転し得るため、点のy座標を捨てない。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc275-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "極限効率1/2。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "解けない。得られる1/3は混合の1/2より小さい。二資源の不足側を違う品物で補完する凸結合が必要である。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc286-ex",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "最短距離2+2√2。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "4。辺に沿う直線移動は内部へ入らず許される。境界接触を内部交差と誤判定すると不要な迂回が起こる。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc341-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "(4,6,1)。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "(5,5)。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    },
+    {
+      "problemId": "abc356-g",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "最短1.5秒。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "不可能。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

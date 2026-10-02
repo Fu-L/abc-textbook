@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC348-G — Max (Sum - Max)</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC348-G — Max (Sum - Max)</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/monge-optimization.md">Monge・monotone minima最適化</a></p>
+<ul>
+<li>quadrangle inequality/Monge性から各行の最適遷移位置が単調になることを示し、divide-and-conquerやSMAWKで最小値を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Monge・monotone minima最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>B昇順にsortすると、左右区間の両方から選ぶ集合のmax Bは必ず右区間側で決まる。よって左からj個選ぶ寄与はAの上位j個prefix和、右からk個選ぶ寄与は右部分問題の答えとして分離できる。</p>
+<p>採用する候補: B順divide-and-conquerとconcave max-plus convolutionを行う</p>
+<p>各区間のk個選択答えを統合し、左prefix和のconcavityからMonotone Minimaで全kを準二次未満に計算できる。</p>
+<p>棄却する候補: 各kについて候補max-B indexと選ぶAを全探索する</p>
+<p>kとmax位置の二重以上の探索になり、全kでO(N^2)を超える。</p>
+<p>左Aの降順prefix和xは差分が非増加である。行を合計個数i、列を右選択数kとしてM[i,k]=x[i-k]+y[k]を作ると、列差M[i,k+1]−M[i,k]=y[k+1]−y[k]−(x[i-k]−x[i-k-1])はiについて非減少。したがって同点を左優先した行最大位置kは非減少であり、分割統治で探索範囲を絞れる。単調なのは右選択数kで、左選択数j=i-kではない。</p>
+<p>pair(A_i,B_i)をB昇順sortする。solve(l,r)は各選択数の最大値vectorを返し、左右を再帰する。merge時に左Aを降順sortしたprefix x、右answer yからmonotone max-plus convolution zをO(len log len)で計算し、left-only、right-only、cross zの最大を各kへ格納する。root vectorの1…Nを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="分割統治による最大要素の所在分離">分割統治による最大要素の所在分離</h3>
+<p>発動条件: 目的に集合内max Bがあり、B順区間を左右に分けられる。</p>
+<p>両側選択時のpenalty担当を右側へ固定し、左側はA和だけにする。</p>
+<h3 id="concave-max-plus-convolution">concave max-plus convolution</h3>
+<p>発動条件: z_i=max_j(x_j+y_{i-j})を多数iで求め、xの差分が単調である。</p>
+<p>Monge性からargmax単調性を使い、Monotone Minimaまたは分割統治最適化で計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>max penaltyをB sortで右端側へ割り当てることで、通常は非分離なΣA-maxBを、concaveな自由選択prefixと再帰部分問題のconvolutionへ変えられる。</p>
+<p>別の問題へ持ち帰る視点: 集合objectiveのmax項はkey順divide-and-conquerでmaxを含む側へ責任を持たせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>B順のcross選択ではmax Bは右にあるので、左側の最適寄与は個数jのA上位和x_j、右はその部分問題の答えy_kになる。xの限界利得が非増加なので行iの列k差はiについて非減少、左tie優先の右選択数kが単調になる。単調探索で各行最大を取り、left-only/right-only/crossを比較すると全選択を互いに素に覆う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>0個選択は問題答えとして-∞としつつ、cross用x_0=0を許す範囲を明示する。A,Bが負でもsort・prefix・-INF演算を64bitで安全に行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N小で全subsetを列挙し、A負値、B tie、最適集合が左右片側だけ・両側に跨る場合をmerge結果と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)。B順分割統治と単調max-plus mergeを行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(N log N)の再帰保持、解放でO(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; -10^9 \leq A_i \leq 10^9; -2 \times 10^{14} \leq B_i \leq 2 \times 10^{14}</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>pair(A,B)=(5,1),(2,3),(4,2)。</p>
+<ol>
+<li>個数1の値A−Bは4,−1,2で最大4。</li>
+<li>個数2は{第一,第三}で9−2=7、他は4,3。個数3は11−3=8。</li>
+</ol>
+<p>期待される結果: 各個数最大(4,7,8)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>mergeで単調なのは左個数jか右個数kか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>証明したのはk。j=i−kはiも変わるため同じ単調性をそのまま移せない。</p>
+<p>確認結果: 右選択数k。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc348/editorial/9707">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc348-editorial-9707-e31a81617e57dd150c2c05cfe814e6a9b424cc80720ccfe1da0f26a7f8fad44a</li>
+<li><a href="https://atcoder.jp/contests/abc348/tasks/abc348_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc348-g-problem-c6f9ebb220dc35e4c233cabf0a3b5e1898952199a2414b14ee2c8587232d84a4</li>
+</ul></main>
+</body></html>

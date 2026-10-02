@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-subset-convolution-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b9066c75164d7106b01ec5e55803df52970a4325347c95fb6617a07535bc479e",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "029b24b3bf1f8eff842ba6cdc00c0ea91cfcaf421edbeb2233f8ceb912f310bd",
+  "reviewDigest": "efe8229701087e9531443fd06a1604b6807f23cd7afb5e80dd7a999a86b59be2",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/abc294-ex.html",
+      "digest": "8832492255d12bf22505256a6ed383fb920046d41b51a674b4a9bfc9830ba43e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-subset-convolution/outcome-compute-subset-convolution-shard-001/index.html",
+      "digest": "f0d49237a5c9da323e6e44b137c3660a39fa771ec93790abdf6e2239773ee818"
+    }
+  ],
+  "snapshotDigest": "5eed4108a39729944266faafd248bfa064b3f58a6a34f66bf20bc45ad6c60231"
+}

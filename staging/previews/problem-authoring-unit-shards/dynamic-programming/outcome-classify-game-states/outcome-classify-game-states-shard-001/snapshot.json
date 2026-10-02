@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-classify-game-states-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6d6012bb058cc11aa34b44fccae14061359e56aee96da396f23c6f8ffce22dcb",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1d72269c52e609f97fc2aba367eabd49df505c573a8699e66060de2752c2573e",
+  "reviewDigest": "cc361ffde7d367b6c47b5dc4c1fea88c8dd732ffac8c9d117f39b33219a8c19c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc255-g.html",
+      "digest": "8a365e5f2910b4c787ce20433b8b8ab500e67c364efa0ae8dbd852b7ea70c068"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-f.html",
+      "digest": "52cc896683f2e3a92175d8698c908d77674b8b31965132e86abb20101137149a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc278-g.html",
+      "digest": "498a0dc80858165f5dc946b12eccf0e886e0ba020b897a3fa78add227eecfff1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc297-g.html",
+      "digest": "e011134d3ca9ed9c4b22ee4b4c22091cad4899eb8f9744c4ecd8d1f34fc4cc9c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc354-e.html",
+      "digest": "1da521293b52835f136c9c83adff7cd313ca11f4d38a776644a6da41f126abf3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc368-f.html",
+      "digest": "d162ddbbb5cabe42cac94aa1bee0e2e15b7988756ef89f32e7c7532db7da1c6d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/abc380-f.html",
+      "digest": "5563a1c04cad03327702209ef0bfbe55eddbb9805297c8e7098772b28843797a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-classify-game-states/outcome-classify-game-states-shard-001/index.html",
+      "digest": "4c7fabd63ec9cd08c76d2a9ea492301fa5d7ec69aa0984727c0e6f18b9f25dd3"
+    }
+  ],
+  "snapshotDigest": "572112c6bc3783350e53ce54e59c941bb3f4e824155fef6af8e23f6e34eaa3bb"
+}

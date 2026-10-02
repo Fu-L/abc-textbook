@@ -1,0 +1,512 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-stochastic-actions-shard-001",
+  "packets": [
+    {
+      "problemId": "abc266-e",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "出目xを見た後、停止価値xと残り試行の最適期待値fの最大を選べる。各出目の条件付き最適を平均すれば一回追加した最適期待値。最終一回の平均3.5から試行数の帰納法で正しい。",
+          "sourceRevisionIds": [
+            "source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c",
+            "source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c",
+          "path": "src/content/sources/abc264-abc315/source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc266_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f",
+          "path": "src/content/sources/abc264-abc315/source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc266_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc314-e",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 100; 1\\leq M\\leq 100; 1\\leq C _ i\\leq 10 ^ 4\\ (1\\leq i\\leq N); 1\\leq P _ i\\leq 100\\ (1\\leq i\\leq N); 0\\leq S _ {i,j}\\leq M\\ (1\\leq i\\leq N,1\\leq j\\leq P _ i); \\displaystyle\\sum _ {j=1}^{P _ i}S _ {i,j}\\gt0\\ (1\\leq i\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "0出目は同状態を繰り返す。固定rouletteを選ぶBellman式の自己項を移項すると有効cost C_iP_i/(P_i−Z_i)と非零出目平均になる。全依存先が目標へ近いので後退DPしroulette最小を取ると最適策略が得られる。全零rouletteは進めず候補外。",
+          "sourceRevisionIds": [
+            "source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231",
+            "source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231",
+          "path": "src/content/sources/abc264-abc315/source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc314_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731",
+          "path": "src/content/sources/abc264-abc315/source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc314_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc342-f",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-transition-optimization"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \\leq L \\leq N \\leq 2 \\times 10^5; 1 \\leq D \\leq N"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dealerはscore<Lの状態からだけ続行するので、前向きの確率分布更新で最終score分布を求められる。playerがscore iで止めて勝つのはdealerのscoreがi未満、またはN超過の場合だけである。続行の勝率はi+1..i+Dの最適勝率の平均で、N超過は0とする。scoreが常に増えるためr[i]=max(停止勝率,続行平均)をNから逆順に解く帰納法が成立する。区間和の差分更新と窓平均は同じ確率和を保つので、線形時間の計算も最適停止判断を失わない。",
+          "sourceRevisionIds": [
+            "source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c",
+            "source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c",
+          "path": "src/content/sources/abc316-abc367/source-abc342-editorial-9345-8a51974000f630b7d802fb75a217b7d432774ee320d77cce7436e8a20bbf9f9c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc342_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd",
+          "path": "src/content/sources/abc316-abc367/source-abc342-f-problem-770139f9098b2222706e511e4bcbd138336b0c0da643a589410258d701e9eedd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc342_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc350-e",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 2 \\leq A \\leq 6; 1 \\leq X, Y \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。",
+          "sourceRevisionIds": [
+            "source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19",
+            "source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19",
+          "path": "src/content/sources/abc316-abc367/source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc350_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4",
+          "path": "src/content/sources/abc316-abc367/source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc350_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc402-e",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 8; 1 \\leq S_i \\leq 2718; 1 \\leq C_i \\leq X \\leq 5000; 1 \\leq P_i \\leq 100; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "状態maskと残予算で各再挑戦の成功失敗確率が定まる。costを引いた小予算先で成功報酬+solve状態と失敗未solve状態を重み付けするBellman式は全策略の第一行動を網羅する。予算昇順で依存先が既計算になり最大を取れる。",
+          "sourceRevisionIds": [
+            "source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e",
+            "source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e",
+          "path": "src/content/sources/abc368-abc419/source-abc402-e-problem-084ab41cc39dd19ddaad7ec9c07bf94060aa33c49ff382844c77c4c0a97a5a2e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc402_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615",
+          "path": "src/content/sources/abc368-abc419/source-abc402-editorial-12715-edfc33d3cc4411475c03d3005acbc0c97b5b5cbfa25eb5c7961b9ea9ae792615.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc402_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc404-f",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-normalization"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2\\times 10^5; 1 \\le T \\le 30; 1 \\le M \\le 30; 1 \\le K \\le 30; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "並べ替え後の当たり位置は N 箇所で一様で、押下中に新情報は得られない。同じ位置を c 回押せば当たりなら回数が c 増え、外れなら不変。従って各位置の押下数だけが一ターンの遷移分布を決める。n個の正押下数を合計Mで割り当てた期待値は、各位置の次ターン勝率の和をNで割ったもの。h[n][s]の加算 knapsack は全正分割を網羅し、未押下N−n箇所の寄与を足す。有限ターンの後退帰納法で最適戦略となる。",
+          "sourceRevisionIds": [
+            "source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3",
+            "source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3",
+          "path": "src/content/sources/abc368-abc419/source-abc404-editorial-12846-02a4f8e1d277892cd04c396236017ee727c354a0679b96a497b9856107a626f3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc404_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab",
+          "path": "src/content/sources/abc368-abc419/source-abc404-f-problem-0177ad06dec4c00128c31966769f7140fae58529868e6963494b7bd013a756ab.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc404_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc421-e",
+      "learningOutcomeIds": [
+        "outcome-optimize-stochastic-actions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-normalization"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: A_i is an integer between 1 and 100, inclusive."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "保持済み出目と残roll数が将来分布と合法keepを全て決める。最終roll後の得点はmax_x(x×個数)。各roll結果を等確率で列挙し、その結果を見てからkeep subsetの最大値を取る順序が意思決定と一致する。既保持diceは外せないので、次状態へ追加keepだけを加える。残roll数の帰納法で最適期待値を得る。同値faceも六面の別結果として確率を保つ。",
+          "sourceRevisionIds": [
+            "source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e",
+            "source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e",
+          "path": "src/content/sources/abc420-abc466/source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc421_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63",
+          "path": "src/content/sources/abc420-abc466/source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc421_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-min-weight-general-perfect-matching-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "bcae5a296b7e8017b0c0fd4997dcbda36736fc4d048716ec41215f9a88eee358",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "db998d6c12ca0750d98f47b065f81f703ba11a02604fafcc8fd2b96272bf6259",
+  "reviewDigest": "dcf3d2ca26677549aba7982b2dc66a27c9161510bb1eb214aa62ddba56622945",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.html",
+      "digest": "b92a7fb5b017a5a30f2a6cce4af82f8456e122ca96c6e6c20a77ac9768f5f2b2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/index.html",
+      "digest": "5d8ce3acb7ef952e337e67387a0a5a563738953772b09e279be9eca39260f975"
+    }
+  ],
+  "snapshotDigest": "3230c2b95a16c43449d66b3d46328fc1e52d3a5937d8d198cfd3a995a101d239"
+}

@@ -1,0 +1,580 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-model-and-compute-shortest-path-shard-001",
+  "packets": [
+    {
+      "problemId": "abc213-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H,W \\leq 500; H and W are integers.; S_{i,j} is . or #.; S_{1,1} and S_{H,W} are .."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "通路移動は0、パンチで開く局所領域へ移ることを1辺にする。パンチを必要時まで遅らせる公式正規化により過去破壊集合を状態に持たず位置最小費用だけでよい。局所1辺は実際のパンチと移動で実現でき、0辺も合法なので最短costが最小パンチ数。",
+          "sourceRevisionIds": [
+            "source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf",
+            "source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf",
+          "path": "src/content/sources/abc212-abc263/source-abc213-e-problem-624292782f4c8b364f18dc594853524d1d33202469ad5e99cae8bafb8fdb49cf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc213_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0",
+          "path": "src/content/sources/abc212-abc263/source-abc213-editorial-2397-60e8361c70415c0dfa7bed299c0772eb609d9a5146949cc6a4184e0d40204db0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc213_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc232-g",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path",
+        "tag-coordinate-compression"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 2 \\leq M \\leq 10^9; 0 \\leq A_i, B_j < M; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "元辺costは出発座標−A_iから到着B_jへの正方向円周距離。この移動を隣接圧縮座標の差分辺で分解するとcostが一致する。元→出発、到着→元の0辺で元pathを再現し、逆に補助pathの円周区間を元辺へ畳めるので最短距離を保つ。",
+          "sourceRevisionIds": [
+            "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98",
+            "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98",
+          "path": "src/content/sources/abc212-abc263/source-abc232-editorial-3141-2951a49cd33bc935f5823eafcf19bc0beab84b703bd3957a9ff08215c41b6b98.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc232_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52",
+          "path": "src/content/sources/abc212-abc263/source-abc232-g-problem-57304d62b13d759e52b9e4264b402d227ea4d3c3650e3c74ed8f871cd3110e52.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc232_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc237-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq \\min( 2\\times 10^5,\\frac{N(N-1)}{2}); 0 \\leq H_i\\leq 10^8 (1 \\leq i \\leq N); 1 \\leq U_i < V_i \\leq N (1 \\leq i \\leq M); (U_i,V_i) \\neq (U_j, V_j) if i \\neq j.; All values in input are integers.; It is possible to travel between any two spaces using some slopes."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "楽しさ+現在標高は下りで不変、上りで上昇分だけ減る。よってpath楽しさ=H_start−H_end−累積上昇量。累積上昇を非負辺costとして最小化すれば各終点の楽しさを最大化でき、その最大が全答え。",
+          "sourceRevisionIds": [
+            "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+            "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4",
+          "path": "src/content/sources/abc212-abc263/source-abc237-e-problem-7beb830ceedf710e6780afbe251c64ed7894804a10a0b4965116bc0418ccd4e4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc237_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064",
+          "path": "src/content/sources/abc212-abc263/source-abc237-editorial-3339-1fcc5407294a72af90f0c1270c4e3a9453333a0a2865360534b45792a07ba064.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc237_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc243-ex",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H \\leq 100; 2 \\leq W \\leq 100; C_{i,j} is S, G, ., or O.; Each of S and G appears exactly once in C_{i,j}."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "barrierの閉曲線が固定S–G曲線を奇数回横切ることと両点分離が同値。edge crossing bitをxorする二層pathはこの交差parityを正確に表す。same開始の奇parity帰還は分離barrierで、canonical開始規約が同じ壁集合の重複を除く。最短壁costと同最短countをBFSで集計する。",
+          "sourceRevisionIds": [
+            "source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971",
+            "source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971",
+          "path": "src/content/sources/abc212-abc263/source-abc243-editorial-3546-89a660b3c8dda82dde57aa36a38a94770e60efb75f91ba72b8d5d4ac1c78a971.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc243_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe",
+          "path": "src/content/sources/abc212-abc263/source-abc243-ex-problem-cb35728cca943b2ff65de0edea1b620bf01183421366f241251dbf8132adbebe.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc243_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc245-g",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq M \\leq 10^5; 1 \\leq K \\leq 10^5; 1 \\leq L \\leq N; 1 \\leq A_i \\leq K; 1 \\leq B_1<B_2<\\cdots<B_L\\leq N; 1\\leq C_i\\leq 10^9; 1\\leq U_i<V_i\\leq N; (U_i, V_i)\\neq (U_j,V_j) if i \\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "自国除外は一labelだけ禁止するので最短二相異国候補の一方が最良合法候補。第三以降の国はある点で既に二国に劣り同一後続pathでも順位が上がらないため伝播不要。非負距離順で二labelを確定して全自国除外距離を得る。",
+          "sourceRevisionIds": [
+            "source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa",
+            "source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa",
+          "path": "src/content/sources/abc212-abc263/source-abc245-editorial-3662-b961c3b834480885405633505668f8bd0f604a93e90d0b28607b613e678492fa.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc245_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad",
+          "path": "src/content/sources/abc212-abc263/source-abc245-g-problem-6d7761263d562528347302c74f18394766880c6fdc390684c8189239dba378ad.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc245_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc246-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 1500; 1 \\le A_x,A_y \\le N; 1 \\le B_x,B_y \\le N; (A_x,A_y) \\neq (B_x,B_y); S_i is a string of length N consisting of . and #.; S_{A_x,A_y}= .; S_{B_x,B_y}= ."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一手の斜め移動を同方向の単位移動列へ分解すると開始だけ1、継続0。逆に同方向連続を一手へまとめられ、方向変更数付きcostと手数が一致する。位置と前方向が将来を決めるので4状態の最短路が正しい。",
+          "sourceRevisionIds": [
+            "source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e",
+            "source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e",
+          "path": "src/content/sources/abc212-abc263/source-abc246-e-problem-0e2f0bb30b88da59ba7287e7e33d67229dfb820dceb6b1c2053d6b9fce77a94e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc246_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51",
+          "path": "src/content/sources/abc212-abc263/source-abc246-editorial-3702-98ab0c26bf215624b89817acec8ece6263f72ade00b9fd1d31ad410235d80a51.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc246_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc257-f",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3\\times 10^5; 1\\leq M\\leq 3\\times 10^5; 0\\leq U_i<V_i\\leq N; If i \\neq j, then (U_i,V_i)\\neq (U_j,V_j).; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "共通Tを使うsimple pathはTを高々一度訪れ、可変辺を0回、1回二方向、2回の四型へ分類できる。各型の通常区間は端点距離とS最短で独立評価できる。最短単純化は長さを増やさないので全Tに四候補最小が十分。",
+          "sourceRevisionIds": [
+            "source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35",
+            "source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35",
+          "path": "src/content/sources/abc212-abc263/source-abc257-editorial-4183-5d92754316053c465897b9e88ffc5ef61cb42a4e33fbc5988791c8dca2c32f35.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc257_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c",
+          "path": "src/content/sources/abc212-abc263/source-abc257-f-problem-197deaa7efd3411cbd75855ce09f6c750437b8f49c923abeb74faff7ab91218c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc257_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc277-e",
+      "learningOutcomeIds": [
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-state-graph-search"
+      ],
+      "excludedTopics": [
+        "最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 0 \\leq K \\leq N; 1 \\leq u_i, v_i \\leq N; u_i \\neq v_i; a_i \\in \\lbrace 0, 1\\rbrace; 1 \\leq s_1 \\lt s_2 \\lt \\cdots \\lt s_K \\leq N; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "switch全反転は偶奇だけで通行可能辺集合を決める。各合法操作列は同costの二層path、二層pathは合法移動・switch列に戻せる。移動1、switch0なので01-BFSの距離が最小Move回数。",
+          "sourceRevisionIds": [
+            "source-abc277-e-problem-5fd6f47054e6357210bc28f89e696a6bbc68ee3694420e2e65f169375a9326ba",
+            "source-abc277-editorial-5204-9f1b83876c5a570274814530d6aa3abd7d02126577dc192eb2446c0c9fd44fc8"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc277-e-problem-5fd6f47054e6357210bc28f89e696a6bbc68ee3694420e2e65f169375a9326ba",
+          "path": "src/content/sources/abc264-abc315/source-abc277-e-problem-5fd6f47054e6357210bc28f89e696a6bbc68ee3694420e2e65f169375a9326ba.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc277_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc277-editorial-5204-9f1b83876c5a570274814530d6aa3abd7d02126577dc192eb2446c0c9fd44fc8",
+          "path": "src/content/sources/abc264-abc315/source-abc277-editorial-5204-9f1b83876c5a570274814530d6aa3abd7d02126577dc192eb2446c0c9fd44fc8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc277_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

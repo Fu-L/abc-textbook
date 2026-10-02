@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC455-F — Merge Slimes 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC455-F — Merge Slimes 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一群になるまで slime をmergeする総costはmerge順に依存せず、初期size B_m の異group pair総数 ((ΣB)^2-ΣB^2)/2 に等しい。</p>
+<p>採用する候補: 各segment tree nodeに要素数、区間和、二乗和を持ち、range addのlazy作用で和と二乗和を更新してquery区間の閉形式costを返す。</p>
+<p>Bへd加算したとき ΣB は sum+d×len、ΣB^2 は sumSq+2d×sum+d^2×len と定数情報で更新でき、node mergeも各momentの和で閉じる。</p>
+<p>棄却する候補: 各query区間の slime sizeを取り出し、priority queue等でmerge順をsimulationする。</p>
+<p>区間長に比例する処理をQ回行ううえ、merge順探索は不要な再計算で二乗規模になる。</p>
+<p>異なる初期groupの二人pairは、その二groupが初めてmergeされる一回だけcostへ数えられるため順序不変である。</p>
+<p>range add後の二乗和更新には更新前sumを使うので、式を計算してからsumを書き換える。</p>
+<p>leafを(len=1,sum=A_i,sumSq=A_i^2)で初期化する。lazy dのapplyで二momentを公式更新し、range addを処理する。query nodeの S,Q から (S^2-Q)/2 をmodulus上で返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="操作順不変量のpair寄与">操作順不変量のpair寄与</h3>
+<p>発動条件: cluster merge costが二群sizeの積で与えられるとき。</p>
+<p>初期要素pairが初めて同群になる一回へ寄与を割り当てる。</p>
+<h3 id="moment付きlazy-segment-tree">moment付きlazy segment tree</h3>
+<p>発動条件: range add下で区間の和と二乗和を問い合わせたいとき。</p>
+<p>0次・1次・2次momentを二項展開で更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>merge過程の最適化に見えても、各元要素pairの寄与回数を数えると操作順が消える場合がある。</p>
+<p>別の問題へ持ち帰る視点: 多項式統計へのrange addは、必要次数までのmomentを持てば二項定理で作用が閉じる。</p>
+<h2 id="正当性">正当性</h2>
+<p>異なる初期groupの二人pairは、その二groupが初めてmergeされる一回だけcostへ数えられるため順序不変である。 range add後の二乗和更新には更新前sumを使うので、式を計算してからsumを書き換える。 Bへd加算したとき ΣB は sum+d×len、ΣB^2 は sumSq+2d×sum+d^2×len と定数情報で更新でき、node mergeも各momentの和で閉じる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>sumSq更新でold sumを保持し、d^2×lenを十分広い整数またはmod乗算で計算する。2のinverseと負modを正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三groupの異group pairをmerge順二通りで数え、range addの二乗展開をnode値へ代入して確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq Q \leq 10^5; 1 \leq l_q \leq r_q \leq N; 1 \leq a_q \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>初期group sizeは(2,3,4)。</p>
+<ol>
+<li>閉形式は(9²−(4+9+16))/2=26。</li>
+<li>2と3をmergeして6、その5と4をmergeして20。</li>
+</ol>
+<p>期待される結果: 総cost26。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最初に3と4をmergeすると総costは変わるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>12+(7·2)=26で同じ。異なる初期groupの各pairは初めて同群となる時に一度だけ数えられる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc455/editorial/19241">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc455-editorial-19241-da4989a5ebdd44c503c9363a958049ed6ec3f1adcafafec35f4534d0ffedbc7d</li>
+<li><a href="https://atcoder.jp/contests/abc455/tasks/abc455_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc455-f-problem-76c0283331a2cf3cb4b1a40e1c35a7935555beb137dc24ad0e9e5e21b01cf28e</li>
+</ul></main>
+</body></html>

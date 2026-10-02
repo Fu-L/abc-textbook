@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC220-G — Isosceles Trapezium</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC220-G — Isosceles Trapezium</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></p>
+<ul>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>凸包の境界候補列挙・半平面交差。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>等脚台形の平行な二辺を取り出すと、対称軸である垂直二等分線が一致する。逆に二線分の垂直二等分線が同じで中点が異なれば、その四端点は等脚台形を作る。</p>
+<p>N≤1000 なので点対を辺候補として全列挙できるが、四点の全列挙はできない。必要なのは同じ垂直二等分線を持つ二辺のうち、中点が異なる重い組である。</p>
+<p>採用する候補: 全点対を正規化した垂直二等分線で group 化し、各 group で中点の異なる二辺の重み和最大を求める。</p>
+<p>等脚条件の必要十分条件を二辺の共通 key に変え、点対列挙後は group 内の上位候補だけを比較すればよい。</p>
+<p>棄却する候補: 四点集合を全て選び、頂点順を試して辺の平行性と角を判定する。</p>
+<p>候補数が N^4 であり、N=1000 に対して列挙できない。</p>
+<p>線分方向の primitive vector (dx,dy) と、二倍中点 (x_i+x_j,y_i+y_j) のその方向への内積を組にすれば、垂直二等分線を実数なしで一意に正規化できる。</p>
+<p>同じ垂直二等分線でも中点が一致する二辺は平行な対辺にならないため、最大辺と組ませる候補は中点 key が異なるものに限る。</p>
+<p>各 i&lt;j について方向差を gcd と符号で primitive 化し、bisector key と二倍中点、重み C_i+C_j を記録する。bisector key で分類し、重み降順に見て中点が異なる二候補の最大和を更新し、存在しなければ -1 を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="幾何条件の線分対への分解">幾何条件の線分対への分解</h3>
+<p>発動条件: 四点図形の条件が、向かい合う二線分が共有する軸・中点・長さなどで特徴付けられるとき。</p>
+<p>全点対を列挙して共通 invariant で group 化し、四点列挙を二辺選択へ落とす。</p>
+<h3 id="整数による直線正規化">整数による直線正規化</h3>
+<p>発動条件: 傾き0・無限大を含む直線の一致判定を誤差なく行いたいとき。</p>
+<p>方向係数を gcd と符号で正規化し、直線定数も整数の内積で表す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>平行な辺そのものを key にするのではなく、等脚性まで同時に保証する共通の垂直二等分線を key にする。</p>
+<p>別の問題へ持ち帰る視点: 図形の名称から辺条件を順に検査せず、図形を特徴付ける対称軸や中心という一つの invariant を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>等脚台形の二底辺は平行で、両中点を通る共通の垂直二等分線を持つ。逆に同じ垂直二等分線を持ち中点が異なる二線分を選ぶと、両端の対応は軸対称となり、四頂点は異なる二平行線上にあって等脚台形を作る。したがって直線keyが同じで中点keyが異なる二候補を選べば十分である。同じ中点groupでは最大重みの線分以外は不要で、異なる二groupの最大重み和を選ぶ。primitive方向と中点の内積によるkeyは同じ直線を一意に表す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>方向 vector の符号を一意にし、中点は割らず座標和で比較する。直線 key の内積と四点重みは 64 bit を使い、同じ中点の辺二本を採用しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>長さの異なる二本の平行辺を描き、なぜ等脚なら垂直二等分線が同じか、また中点一致を除く必要があるかを図で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>Vを座標差の最大絶対値として、全点対のgcd計算とgroupのsortで O(N²(log(V+1)+log(N+1)))。</p>
+<h3 id="空間">空間</h3>
+<p>点対のkey・中点・重みを保持して O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 4 \leq N \leq 1000; -10^9 \leq X_i,Y_i \leq 10^9; 1 \leq C_i \leq 10^9; (X_i,Y_i) \neq (X_j,Y_j) if i \neq j.; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点(−1,0),(1,0),(−2,2),(2,2)、重みは順に1,2,3,4。</p>
+<ol>
+<li>下の点対と上の点対はいずれも水平で、垂直二等分線はx=0。</li>
+<li>二倍中点は(0,0)と(0,4)で異なる。点対重みは3と7。</li>
+</ol>
+<p>期待される結果: 四頂点の重み和10の等脚台形を作れる。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同一直線keyだけで採用すると、点(−1,0),(1,0),(−2,0),(2,0)で何が起こるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>二線分の垂直二等分線は共通だが、中点も共通で四点は一直線。台形にならないため中点keyが異なる条件が必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc220/editorial/2684">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327</li>
+<li><a href="https://atcoder.jp/contests/abc220/tasks/abc220_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed</li>
+</ul></main>
+</body></html>

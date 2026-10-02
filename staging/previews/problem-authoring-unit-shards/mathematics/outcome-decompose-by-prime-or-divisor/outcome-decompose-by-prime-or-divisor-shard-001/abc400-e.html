@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC400-E — Ringo's Favorite Numbers 3</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC400-E — Ringo's Favorite Numbers 3</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></p>
+<ul>
+<li>整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>床関数や整数根の値が一定となる区間への分割。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各prime exponentが偶数である条件はNが完全平方数であることと同値である。N=k²とするとdistinct prime factor集合はkと同じなので、kの素因数種類数がちょうど2かだけ調べればよい。</p>
+<p>A≤10^12よりk≤10^6で、全平方候補を事前列挙できる。</p>
+<p>採用する候補: 1..10^6のdistinct prime factor countをsieveし、count=2のk²をsortしてqueryをupper_boundする</p>
+<p>候補は高々10^6個、前計算O(V log log V相当)、各Q query O(log V)で処理できる。</p>
+<p>棄却する候補: 各queryから下へ整数を減らしながらfactorizationする</p>
+<p>400 number間のgapと素因数分解回数に十分な上界がなく、Q=2×10^5では重い。</p>
+<p>prime pを見つけたらpの全multipleへ種類数+1することで指数に関係なくdistinct countを得る。</p>
+<p>候補値k²は64 bitで作り、query A以下の最後の位置をupper_bound-1で取る。</p>
+<p>spf/count配列を0初期化し、count[p]=0のpをprimeとしてp,2p,…へ+1する。count[k]=2ならk²を候補へ追加する。各Aにupper_bound(candidates,A)直前を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="平方根への構造変換">平方根への構造変換</h3>
+<p>発動条件: 全素因数指数が偶数という条件があるとき。</p>
+<p>N=k²としてprime factor種類条件をkへ移す。</p>
+<h3 id="distinct-prime-divisor-sieve">distinct prime divisor sieve</h3>
+<p>発動条件: 全n≤Vの素因数種類数を一括で求めたいとき。</p>
+<p>各primeのmultipleへ一回ずつ加算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>10^12という上限でも平方数条件により探索対象のrootは10^6へ落ち、query前計算型問題になる。</p>
+<p>別の問題へ持ち帰る視点: 指数parity条件を見たら平方free partや平方根へ変数変換し、値域を縮める。</p>
+<h2 id="正当性">正当性</h2>
+<p>素因数指数が全て偶数の数はk²と一意に表される。k²とkの相異なるprime集合は同じなので種類数2のkだけ篩で列挙すれば全候補を得る。k昇順はk²昇順だからupper_bound直前がquery以下の最大候補になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>1は素因数0種で除外する。k*kは64 bitで計算し、保証によりupper_boundが先頭になるcaseはない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>k≤500をtrial divisionしてsieve countと比較し、p²q²、より高い偶数指数、三prime平方が正しく分類されるか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(V log log V+Q log V)、V=10^6。素因数種類数の篩と候補二分探索。</p>
+<h3 id="空間">空間</h3>
+<p>O(V+Q)、query逐次ならO(V)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 2 \times 10^5; For each query, 36 \leq A \leq 10^{12}.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>query A=90,100。</p>
+<ol>
+<li>k≤10の二prime値は6,10。候補平方は36,100。</li>
+<li>90以下最大は36、100以下最大は100。</li>
+</ol>
+<p>期待される結果: 36,100。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>k=12を三primeと数えてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>12=2²·3で相異なるprimeは2種類。指数は種類数を増やさないので144は候補。</p>
+<p>確認結果: 144は適格。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc400/tasks/abc400_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc400-e-problem-0c4d02c2dcebc6cb631b724b729e0968a0f291ddae678ae91bd387a3003e31c2</li>
+<li><a href="https://atcoder.jp/contests/abc400/editorial/12624">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc400-editorial-12624-03cb010f7c808a65ab47555784b4fe0713e5db9d43effcda12e4f104f4523505</li>
+</ul></main>
+</body></html>

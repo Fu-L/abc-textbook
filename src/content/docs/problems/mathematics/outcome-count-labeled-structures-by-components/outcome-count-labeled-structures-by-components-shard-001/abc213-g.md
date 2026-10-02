@@ -1,0 +1,122 @@
+---
+title: "ABC213-G — Connectivity 2"
+draft: true
+authoringUnit: {"problemId":"abc213-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-generating-functions"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f","source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各部分グラフの基準頂点の連結成分Tは一意である。内部はf(T)通り、補集合内部は2^{e(S\\T)}通り、境界辺は不採用に固定する。この分類で非連結分を全グラフ数から引くとf(S)を得る。同様に1とkを含む成分Sを合計すればその二頂点が連結なグラフだけを一度数える。","sourceRevisionIds":["source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f","source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"3頂点の辺{(1,2),(2,3)}。","procedure":["全部分グラフは4個。","1と2の連結には辺(1,2)が必要、1と3には両辺が必要。"],"executionTarget":null,"expectedResult":"k=2は2、k=3は1。","verificationStatus":"not_applicable","learningUnitIds":["unit-labeled-component-decomposition"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"prerequisiteIds":["unit-dp-subset-state","unit-generating-functions"],"attainmentCondition":"成分Tの境界辺を自由に選んでよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"境界辺は全て不採用。"},"answer":{"reasoningOrVerification":"選ぶとTが連結成分でなくなる。自由なのは補集合内部だけ。","procedure":["具体例の各状態・寄与を再計算する。","選ぶとTが連結成分でなくなる。自由なのは補集合内部だけ。"],"expectedResult":"境界辺は全て不採用。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [label付き連結成分分解・exponential formula](src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md)
+
+- 最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [部分集合・bitmask状態DP](src/content/docs/learn/dynamic-programming/dp-subset-state.md)
+- [組合せを生成関数へ符号化する](src/content/docs/learn/combinatorics-algebra/generating-functions.md)
+
+対象外:
+
+- label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+頂点集合 S の内部にある元グラフの辺数を e(S) とすると、S 上で選べる全ての部分グラフは各辺を選ぶか否かで 2 の e(S) 乗個ある。
+
+頂点 1 と頂点 k が連結である部分グラフは、頂点 1 を含む連結成分 S を一意に取り出すことで分類できる。
+
+棄却する候補: 元グラフの各辺を使うかどうか全て列挙し、そのたびに頂点 1 から連結性を調べる。
+
+辺数に対して指数個の部分グラフがあり、M が大きい制約では列挙できない。
+
+採用する候補: 頂点部分集合ごとに、その集合全体を連結にする辺選択数を、頂点 1 側の連結成分を固定する包除型の部分集合 DP で求める。
+
+N が小さいことを利用し、辺部分集合ではなく頂点部分集合とその部分集合の列挙へ計算対象を移せる。
+
+連結グラフ数 f(S) は全グラフ数から、固定した基準頂点を含む真部分集合 T がその連結成分になる場合を全て引けば得られる。
+
+基準頂点を T に必ず含めることで、非連結グラフを基準頂点の連結成分によりちょうど一度だけ数えられる。
+
+各頂点集合の内部辺数から全部分グラフ数を作り、基準頂点の連結成分による再帰で連結数を求めた後、1 と k を含む成分 S と外側の自由な辺選択を合成する。
+
+## 典型の発動条件
+
+### 連結成分を固定する数え上げ
+
+発動条件: 全グラフの数は容易だが、頂点集合全体が連結な場合だけを数えたいとき。
+
+基準頂点を含む連結成分 T を一意な証人として、全グラフ数から非連結な場合を差し引く。
+
+### 部分集合 DP と部分集合列挙
+
+発動条件: 頂点数は小さく、集合 S ごとにその部分集合 T を走査する再帰が自然に現れるとき。
+
+ビット集合 S の真部分集合 T のうち基準頂点を含むものを列挙し、連結成分と残りのグラフ数を掛ける。
+
+## 問題固有の要素
+
+頂点 1 の成分が S と決まると、S と外部を結ぶ辺は全て不使用でなければならず、外部内部の辺だけが自由に選べる。
+
+別の問題へ持ち帰る視点: 特定頂点の連結成分で対象を分類するときは、成分内部・成分外部・境界をまたぐ辺の三種類へ分けて自由度を数える。
+
+## 正当性
+
+各部分グラフの基準頂点の連結成分Tは一意である。内部はf(T)通り、補集合内部は2^{e(S\T)}通り、境界辺は不採用に固定する。この分類で非連結分を全グラフ数から引くとf(S)を得る。同様に1とkを含む成分Sを合計すればその二頂点が連結なグラフだけを一度数える。
+
+## 実装上の注意
+
+- f(S) の再帰では S 内の固定頂点を一つ選び、T はその頂点を含む真部分集合だけに限定する。
+- 各集合の内部辺数と 2 の冪を事前計算し、減算結果を法 998244353 の範囲へ正規化する。
+
+## 復習の核
+
+- 連結性の数え上げでは、非連結な対象を一意に代表する「固定頂点を含む成分」を先に選ぶ。
+- 最終式で S の外側を自由に数える前に、境界辺が不使用で固定される理由を成分の最大性から確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(3^N+N²2^N)。
+
+### 空間
+
+O(2^N+N²)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 17; 0 \leq M \leq \frac{N(N-1)}{2}; 1 \leq a_i \lt b_i \leq N; (a_i, b_i) \neq (a_j, b_j) if i \neq j.; All values in input are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+3頂点の辺{(1,2),(2,3)}。
+
+1. 全部分グラフは4個。
+2. 1と2の連結には辺(1,2)が必要、1と3には両辺が必要。
+
+期待される結果: k=2は2、k=3は1。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+成分Tの境界辺を自由に選んでよいか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+選ぶとTが連結成分でなくなる。自由なのは補集合内部だけ。
+
+確認結果: 境界辺は全て不採用。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc213/editorial/2392) — source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc213/tasks/abc213_g) — source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2

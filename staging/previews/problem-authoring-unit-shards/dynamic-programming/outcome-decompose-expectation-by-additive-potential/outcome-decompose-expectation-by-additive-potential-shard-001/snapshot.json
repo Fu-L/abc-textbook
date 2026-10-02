@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-decompose-expectation-by-additive-potential-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "5143f357e12dbd4052366112a6ea8e24499bbd62b4b2285a631340fed27be948",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0b41975414c7be5909e4850a27360796757ec5e73d5ce615ebe4f309f36fbce8",
+  "reviewDigest": "450233b6015050e24887e5e916ebe99cea5408d82ab0aae0ea24f6e2dbf73bd9",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.html",
+      "digest": "7819a296b6900d99276f8ca8f6f4bf412ddae6afb27e4d8d858ec829d446b1dc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/index.html",
+      "digest": "564867c3c8ce1321df5f0ea78782acb834b998ecd0e441eb8cac16a3bc20d5f5"
+    }
+  ],
+  "snapshotDigest": "4034985abcf4e898a3addcbcef960c8745b36d4c52deb1a27025e43252f0542e"
+}

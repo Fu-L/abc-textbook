@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC280-EX — Substring Sort</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC280-EX — Substring Sort</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/monotone-stack-queue.md">支配関係から不要な候補を単調stack・queueで削る</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全substring tripleは総数Mが二次規模になり得るため実体化できないが、各substringはある元string suffixの非空prefixとして一意に表せる。</p>
+<p>suffixを辞書順に並べると、同じprefix文字列を持つsuffixはLCP条件で連続区間になり、その文字列のoccurrence tripleも連続blockとして数えられる。</p>
+<p>採用する候補: 全stringをseparator付きで連結してsuffix array/LCPを作り、LCP intervalをmonotone stackで辞書順blockへ圧縮し、query rankを累積個数から逆算する。</p>
+<p>suffix総数は10^5で、最大二次個のsubstring occurrenceをO(total length)個のLCP blockとして扱える。</p>
+<p>棄却する候補: 各suffixの全prefix tripleを生成し、文字列比較でsortする。</p>
+<p>substring数Mが各|S_i|²の和で、memory・sortingとも制約を超える。</p>
+<p>separatorを全英小文字より小さく置いた連結stringのsuffix順は、separatorで切った各元suffixの辞書順を保つ。LCPは元string末尾までにcapする。</p>
+<p>suffix区間[i,j]についてa=max(LCP[i-1],LCP[j])、b=min(LCP[i…j-1])なら、a&lt;R≤bの各prefix長はちょうどj-i+1個の等しいsubstring occurrenceを持つ。</p>
+<p>有効な(i,j) blockはLCPのCartesian/stack構造上線形個しかなく、所与xがblock内ならoffsetをmultiplicityで割ってprefix長とoccurrenceを復元できる。</p>
+<p>各S_iにseparatorを付けて連結しSAとLCPを構築、separator suffixを除いたT=(string id,start)とcap済みLCPを得る。stackで有効(i,j,a,b)を辞書順に走査しblock size=(j-i+1)(b-a)を累積する。昇順query xが入るblockでRとT内occurrenceを選び(K,L,L+R-1)を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="suffix-arrayとlcp">suffix arrayとLCP</h3>
+<p>発動条件: 多数のsuffix/prefix由来文字列を辞書順に扱い、共通prefix区間を知りたいとき。</p>
+<p>全suffixをsortし、隣接LCPから同prefixを共有する連続範囲を得る。</p>
+<h3 id="lcp-intervalのmonotone-stack">LCP intervalのmonotone stack</h3>
+<p>発動条件: suffix tree相当のprefix groupを明示treeなしで線形列挙したいとき。</p>
+<p>LCPの増減をstackで管理し、有効なsuffix区間と深さ範囲をblock化する。</p>
+<h3 id="巨大sorted-multisetのrank-selection">巨大sorted multisetのrank selection</h3>
+<p>発動条件: 要素総数は巨大だが等値groupのsizeを圧縮して順に数えられるとき。</p>
+<p>block累積数でrankをlocateし、block内offsetから代表要素を復元する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>substringの辞書順multisetは、suffix順とLCP intervalごとのprefix長帯(a,b]を組み合わせると線形個の長方形blockに分解できる。</p>
+<p>別の問題へ持ち帰る視点: quadraticなsubstring occurrenceを扱うときは、suffixを起点にし、同prefixのoccurrence区間×長さ区間として圧縮する。</p>
+<h2 id="正当性">正当性</h2>
+<p>全substring occurrenceは各有効suffixの非空prefixと一対一対応する。SAと元文字列末端でcapしたLCPは、同じprefixを持つsuffix群の連続区間を与える。LCP stackで辞書順に、長さ(a,b]とsuffix区間[i,j]のblockを列挙すると、各長さにj−i+1個の等しいoccurrenceがありblock個数は(b−a)(j−i+1)。全blockはprefixを過不足なく分割する。累積個数と昇順のrank質問を同時走査し、block内の長さとoccurrenceへ逆算すれば正しい順位を復元できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>separatorを跨ぐLCPを元suffix長で必ずcapし、separator始まりsuffixと空prefixをTから除外する。</li>
+<li>Mとblock累積は文字列長の二次規模で32 bitを超え得るため64 bitを使い、block内のequal occurrenceは任意順でよいという出力許容を利用する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>suffix群abab,bab,ab…のprefixをLCP区間へ並べ、同じ’ab’が区間[i,j]・長さR=2のmultiplicityとして現れることを手で確かめる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>SA-ISと線形LCP/stack構成でO(L+Q)。L=Σ|S_i|+N。</p>
+<h3 id="空間">空間</h3>
+<p>O(L+Q)（全回答を保持する場合）。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq \lvert S_i\rvert \leq 10^5; \displaystyle\sum_{i=1}^N \lvert S_i\rvert\leq 10^5; 1 \leq Q \leq 2\times 10^5; 1 \leq x_1&lt;x_2&lt;\cdots&lt;x_Q \leq \displaystyle\sum_{i=1}^N \frac{|S_i|(|S_i|+1)}{2}; N,Q,x_1,x_2,\ldots,x_Q are integers.; S_i is a string consisting of lowercase English letters.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=1、S_1=aba、質問rank1,2,3,4,5,6。</p>
+<ol>
+<li>substring occurrenceはa（位置1）,ab,aba,b,ba,a（位置3）。</li>
+<li>辞書順ではa,a,ab,aba,b,ba。</li>
+<li>同じaの二occurrenceの順序は任意。</li>
+</ol>
+<p>期待される結果: 順にa,a,ab,aba,b,baを表す(K,L,R)を出力する。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>aを一度だけ数えるとrank3はどう誤るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>本来rank3はabだが、distinct substringだけではa,ab,aba,b,baとなりrank3がabaになる。重複occurrenceの乗数を保持する必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc280/editorial/5332">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5</li>
+<li><a href="https://atcoder.jp/contests/abc280/tasks/abc280_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14</li>
+</ul></main>
+</body></html>

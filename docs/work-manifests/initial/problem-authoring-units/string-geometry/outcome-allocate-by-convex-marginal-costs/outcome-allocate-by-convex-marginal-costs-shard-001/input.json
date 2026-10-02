@@ -1,0 +1,452 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
+  "packets": [
+    {
+      "problemId": "abc216-e",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-integer-boundary-blocks",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-separable-convex-marginals",
+        "tag-integer-boundary-blocks",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq K \\leq 2 \\times 10^9; 1 \\leq A_i \\leq 2 \\times 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各施設の利益は A_i,A_i−1,…,1 という非増加列である。各時点の最大利益を取る貪欲では、その項を取る前に必要な同じ施設の項は全てそれ以上なので、全列を合わせた上位K項を選べる。境界mを固定するとm超の項は全て採用され、mの項を残数だけ採用する。m超の個数はmに対して単調であり、各列の和は等差数列の公式で求まる。正の項を取り尽くした後は0だけなので、余った操作は答えを変えない。",
+          "sourceRevisionIds": [
+            "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+            "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812",
+          "path": "src/content/sources/abc212-abc263/source-abc216-e-problem-c2a9f442c019499487e7d2a54ccff8f94df6d66cc82f716a4dc4e26a80874812.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc216_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd",
+          "path": "src/content/sources/abc212-abc263/source-abc216-editorial-2469-f775cb9327920f22d1752df9ead3b71e28fa49edbfb5a3eda2128bd156f79edd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc216_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc359-f",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-greedy-exchange",
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-separable-convex-marginals",
+        "tag-greedy-exchange-order",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 1\\leq A_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "木次数は正で和2N−2が必要十分なので次数1からN−2増分を配る問題になる。各頂点の限界費用は3A,5A,7A,…の非減少列。全列の最小N−2個を取ると、後の項だけ先に取られることはなくprefix条件を満たす。交換でより高費用の増分を含む他解を改善できるのでheap greedyが全体最小になる。",
+          "sourceRevisionIds": [
+            "source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8",
+            "source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8",
+          "path": "src/content/sources/abc316-abc367/source-abc359-editorial-10260-2b6d1547de087bbf4176fd0e68c8db96a391c2283b8cae857798b0b04b0ffab8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc359_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142",
+          "path": "src/content/sources/abc316-abc367/source-abc359-f-problem-2b056103c3c211859dd536326e8594c8e2edc62f670339e9bf6745247be29142.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc359_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc369-g",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-rooted-tree-aggregation"
+      ],
+      "excludedTopics": [
+        "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-separable-convex-marginals",
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 1\\leq U_i<V_i\\leq N; 1\\leq L_i\\leq 10^9; All input values are integers.; The given graph is a tree."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "選択頂点を含む根部分木の各辺は最短walkで往復するのでscoreは辺和の2倍。子へ一頂点でも選ぶ初回だけ辺重み2Lが付くため、子の非増加限界列の先頭へ足す。独立な子列の上位K項を選ぶとprefix条件が自動的に守られ最適。最大先頭だけ親へ返し他をglobalへ出す分解はこのmergeの全項を保存し、最終prefix和が全Kの最適値になる。",
+          "sourceRevisionIds": [
+            "source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d",
+            "source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d",
+          "path": "src/content/sources/abc368-abc419/source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc369_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265",
+          "path": "src/content/sources/abc368-abc419/source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc369_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc373-f",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-dp-subset-resource",
+        "unit-greedy-exchange",
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-separable-convex-marginals",
+        "tag-greedy-exchange-order",
+        "tag-knapsack-resource",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3000; 1 \\leq W \\leq 3000; 1 \\leq w_i \\leq W; 1 \\leq v_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "種類iのk個価値kv−k²はv−1,v−3,…のprefix和。各同重さ群の全限界列から上位kを取ると後項だけ先に採らないので実現可能で、そのk個の価値最大を与える。容量増分kwが固定なので種類差はf_w(k)へ吸収できる。重さ群のDPは全群個数の分配を一度比較し、容量以下の最大が全品物選択の最適値になる。",
+          "sourceRevisionIds": [
+            "source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef",
+            "source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef",
+          "path": "src/content/sources/abc368-abc419/source-abc373-editorial-11027-c6c0619121e108fd210ffb428ef6ed0ca00886e85025e203d1dbacdcb60e9bef.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc373_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf",
+          "path": "src/content/sources/abc368-abc419/source-abc373-f-problem-348bb5a78629c2632be75b5dcdad18b3f4b3bf80e5f231fa2738edf23e5338bf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc373_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc383-g",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-separable-convex-marginals",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq \\min(5,N); -10^9 \\leq A_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "bar選択は開始位置距離K以上の集合に等しい。左右分割時の跨ぎ衝突は右端禁止jと左端禁止K−1−jで全合法組を覆える。各状態の個数別最適値は凹列で、二列のmax-plus積は非増加限界利得のmergeで正しく得られる。境界split全てのmaxを取るため各個数の合法解を取りこぼさず、再帰から全体最適列になる。",
+          "sourceRevisionIds": [
+            "source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251",
+            "source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251",
+          "path": "src/content/sources/abc368-abc419/source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc383_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444",
+          "path": "src/content/sources/abc368-abc419/source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc383_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc389-e",
+      "learningOutcomeIds": [
+        "outcome-allocate-by-convex-marginal-costs"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-separable-convex-marginals",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^{5}; 1 \\leq M \\leq 10^{18}; 1 \\leq P_i \\leq 2 \\times 10^{9}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "商品iのk個costは増加限界価格P_i,3P_i,…のprefix和。全限界単位を安い順に買うとprefix条件が自動的に守られ、同個数の最小costを与える。threshold以下全購入costが予算内となる最大整数xを選ぶと、次価格x+1全ては買えない。残金でその同価格単位だけ追加した後はどの安い単位も残っておらず個数最大になる。",
+          "sourceRevisionIds": [
+            "source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c",
+            "source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c",
+          "path": "src/content/sources/abc368-abc419/source-abc389-e-problem-3a553297817d29a27dfb7d11685a16ed62c082e74450f447d074a561c7780d7c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc389_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d",
+          "path": "src/content/sources/abc368-abc419/source-abc389-editorial-11933-465f9d18cab3042f93ba18a34e19f674ce5a62395f1b557e7fa003637d1dcd6d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc389_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

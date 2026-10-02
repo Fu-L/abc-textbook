@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-stochastic-actions-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7f6acd8adf4898e6f2eb00a362e8e2085e296860556fdb0fc7fbe38309f99bfc",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "7b08a8cb6753b99f35f7d5def3bd04d48602f08c68ba6ceea2a843ea5f45aad4",
+  "reviewDigest": "de2788507f490dba93b1a6d0ce83e801307664b1ecde15e3ddf00b549d4330a4",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc266-e.html",
+      "digest": "e45d6c56f5f68c45d88940380183392862328299780d5758351453d2ec6f1bd5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc314-e.html",
+      "digest": "7215126c7ebbedacc5fd15bfe3719946df635df239aa6aa74f7f3bd3784b3f73"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc342-f.html",
+      "digest": "e355cb3b6d2a7bf10f1b950a836a630edf5f2437c415c684620c70452a427621"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.html",
+      "digest": "0327081d90fe4f39eb1f4ec4e3fc4200e537556902c6ceb6889b5de1eb7d74f3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc402-e.html",
+      "digest": "804b94132077c0e5e592f5bfd274cf0d78389a4dcdf5dfdd0462011b3986fb5e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc404-f.html",
+      "digest": "7fea6af1c0347f18d83a927ba2ec6bfcca897fc58607117b967a91a2490e59c2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc421-e.html",
+      "digest": "a05212cb0fe3790907081560e47f966a5d0f8b875d7534ebcd2cecf2d8cc791f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/index.html",
+      "digest": "808bee4390c81a1a330c3c5410c2080544b18ec8f08426b02cde52a10ec22afd"
+    }
+  ],
+  "snapshotDigest": "8b9e7af260e1e0fcea9ff2b549ac69f4d2bb9e874a10c669c6f10e42c40cfe3d"
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "f23d757ceb81a73c7b68eeb0a3ba4380f7e561db3cecef4717f270a4d52c0e2d",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "506723c101f42dfbcb3e018db864c87c9553421e3a52ca3352a55de6a1846972",
+  "reviewDigest": "9c5d94c813247f49309bcc34c6bf4ecb9c7252426eee076bce4b6e0ce2ff65eb",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.html",
+      "digest": "15eb4a62f2634f6b4bfae358228fe8f6a1a50907e652dc9722a222c5e5e8d505"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc250-g.html",
+      "digest": "b5b71d55865da65f642db71e1f1814c10d04bfdae87947d6333c6cd85b35dfd5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc275-ex.html",
+      "digest": "d55c144b9ec683c21c052fc039da46e0d85564129914ed838ce25f7ee9db26c4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc406-g.html",
+      "digest": "4c218cad626f5da504f298250eb1883d83811f10430ca618009adb522ba62bac"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc458-g.html",
+      "digest": "309aa6e1a61c016dae08dae7d3b524d97bd9973dfb34c918113cfe35b71860ee"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/index.html",
+      "digest": "bda582e84ba89fa3bee08d30d477d1a114ff5750443549966994dd1b591c859c"
+    }
+  ],
+  "snapshotDigest": "dfe551740a06682058982b35d16ee645acf00e2959f606783f88aa8d942e54a0"
+}

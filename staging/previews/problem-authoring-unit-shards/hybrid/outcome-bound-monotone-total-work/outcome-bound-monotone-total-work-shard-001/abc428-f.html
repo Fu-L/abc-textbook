@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC428-F — Pyramid Alignment</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC428-F — Pyramid Alignment</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></p>
+<ul>
+<li>要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-interval-partition.md">端点更新型のrun分割管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各区間は番号が増えるほど前の区間を包含する。左寄せ・右寄せ操作後も、連続した番号帯では同じ左端または右端を共有するため、個々の座標を更新する必要はない。</p>
+<p>採用する候補: 番号の連続範囲を (l,r,左/右揃え,x) のブロック列で持ち、端からの整列操作で覆われるブロックをまとめて削除・分割する。</p>
+<p>各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。</p>
+<p>棄却する候補: N 本すべての区間端点を整列操作のたびに更新する。</p>
+<p>一回の操作が Θ(N) になり、Q 回で時間制限を超える。</p>
+<p>操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。</p>
+<p>包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。</p>
+<p>deque/list に整列ブロックを順に保持する。左または右の整列クエリでは対象端から i_q を含むブロックまで除去し、必要なら残部を切り、新しい整列ブロックを追加する。点を含む区間数の質問はブロック終端を二分探索し、該当ブロック内でも端点式から境界番号を求める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="ランレングス状の区間管理">ランレングス状の区間管理</h3>
+<p>発動条件: 連続添字範囲が同じ規則・同じ端点を共有し、更新が端から範囲を上書きするとき。</p>
+<p>同一整列状態を一ブロックに圧縮し、クエリを split・pop・push で表す。</p>
+<h3 id="ポテンシャル法による償却">ポテンシャル法による償却</h3>
+<p>発動条件: 一操作で多数要素を削除し得るが、各操作が追加する要素数は定数のとき。</p>
+<p>ブロック数をポテンシャルと見て、全 pop 回数を全 push 回数で抑える。</p>
+<h3 id="包含列上の二分探索">包含列上の二分探索</h3>
+<p>発動条件: 対象を含むかという述語が添字順に単調なとき。</p>
+<p>点 x+1/2 を初めて含む区間番号 k+1 を探し、N-k を答える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>更新対象を値の配列ではなく、同じ幾何制約を共有する最大連続範囲として持つと一括上書きが安くなる。</p>
+<p>別の問題へ持ち帰る視点: 大量 pop を伴う端更新は、ブロックの生成回数が少なければ償却定数時間になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>操作対象の境界区間 i_q の現在端点だけ分かれば、新しい [1,i_q] または対応する端側の整列ブロックを一つ作れる。途中の既存ブロックは丸ごと上書きされる。 包含関係により座標 x+1/2 を含むかは区間番号について false から true へ一度だけ変わる。 各クエリでブロックを一つ追加し、削除されたブロックは戻らないので更新全体が O(Q) に償却される。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>右端共有ブロックの左端は x-W_i、左端共有ブロックの右端は x+W_i で復元する。半整数判定は 2 倍した整数で比較すると安全である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>ブロックを途中で切る場合の l,r と、左右どちらの端から pop するかを操作定義に合わせて確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>全Q更新のblock処理は償却O(Q log Q)、照会は二段二分探索O(log Q+log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、整列block数。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq W_i \leq 10^9 (1 \leq i \leq N); W_1 &lt; W_2 &lt; \dots &lt; W_N; For v given in queries of types 1 and 2, 1 \leq v \leq N.; For x given in queries of type 3, 0 \leq x \leq 10^9.; At least one query of type 3 is given.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>入れ子区間[0,2],[0,4],[0,6]、点x+1/2=3.5。</p>
+<ol>
+<li>最初の区間は含まず、後二つは含む。</li>
+<li>区間番号の包含bitはfalse,true,true。</li>
+</ol>
+<p>期待される結果: 包含数2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>左端で区間2までを一blockへ上書きする際全境界を個別更新するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不要。端点の規則を一blockへ保存し、旧blockの除去回数を生成数へ償却する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc428/editorial/14251">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-editorial-14251-082c02c8b9e966ba57d73b732f79daf94bc5104df159a8dbbbb9e5983d13b906</li>
+<li><a href="https://atcoder.jp/contests/abc428/tasks/abc428_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc428-f-problem-4f19f9612d7f02e7fbc4bb6cd7c6e7b3a8e08c66c01328bb80a49359e57d3edb</li>
+</ul></main>
+</body></html>

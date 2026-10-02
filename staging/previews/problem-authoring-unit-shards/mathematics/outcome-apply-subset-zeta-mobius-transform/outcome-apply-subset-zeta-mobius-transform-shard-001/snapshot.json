@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-apply-subset-zeta-mobius-transform-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d518aced27c2622c86cfb42a4bab8ee7a00c21d319cef4c0aa73f1761f8cb65f",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "265d46a62f17171472811299c872830fefdeac2abebcaa3389bb35f11b1d4a89",
+  "reviewDigest": "6408cefeea57fd95b63ea914f3ae472948d8fd7c3b801cfa39b043b50df7738c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.html",
+      "digest": "792fd7c137f8523553cc85ba42a727bd98524844cd1499cbd99d1e34b1505fc2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc349-f.html",
+      "digest": "5e2fe315a8982207be3b33d3cac49102e0bda852bc93532d4c8bf49aff0ab055"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc423-f.html",
+      "digest": "364d52eef6247d48b03b6d3a10c38440b191323ce67bb244652411fdc9d36a01"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/index.html",
+      "digest": "6b2cfa6f0d2e0d9546250c9706f3b8287e08d3b79b5a8ac1df1f05a5febba879"
+    }
+  ],
+  "snapshotDigest": "e62f51f90a741f26db4bb8974dd08b34ecd492577f2c5887d56cf46e9321d521"
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC380-E — 1D Bucket Tool</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC380-E — 1D Bucket Tool</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-interval-partition.md">端点更新型のrun分割管理</a></p>
+<ul>
+<li>互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一度の塗替えは x を含む同色連続成分全体に作用し、その後に併合し得るのは左右隣の成分だけである。各色の総セル数も成分長の移動として差分更新できる。</p>
+<p>採用する候補: 各連続成分の左端を ordered set で持ち、左端から右端と色を特定して再着色し、同色になった左右境界を削除する。</p>
+<p>成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。</p>
+<p>棄却する候補: type 1 ごとに x から左右へ同色セルを走査して全要素を書き換える。</p>
+<p>大きな成分を何度も塗り直す query 列で Θ(NQ) になり得る。</p>
+<p>境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。</p>
+<p>再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。</p>
+<p>各位置を長さ1成分として境界set・左端色map・色別個数を初期化する。塗替えで旧色個数を R-L 減らし新色へ足し、右境界、次に左境界を同色なら削除する。count query は色別個数を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="run-length-interval-の動的管理">run-length interval の動的管理</h3>
+<p>発動条件: 区間全体への操作が同値 run を作り、隣接 run だけと併合する場合。</p>
+<p>ordered set に run 左端を持ち、境界の挿入削除で列を表す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>セル列ではなく最大同色区間を原子にすると、一操作の変更箇所が定数個の境界になる。</p>
+<p>別の問題へ持ち帰る視点: 区間長を色別集計へ差分反映すれば global count query も同時に解ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>境界 set で x 以下最大の左端 L と次の境界 R を取れば、x の成分は半開区間 [L,R) と一意に分かる。 再着色後に左・右と同色なら境界だけを消せばよく、内部セルを更新しなくても成分表現は正しい。 成分境界は局所的にしか変わらず、predecessor/successor と高々二回の merge で各 query を O(log N) にできる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>右端番兵 N+1 を置き、右 merge 後に左 predecessor を取り直す。色map を消す境界と残す左端を取り違えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>[L,R) の再着色前後を図にし、右併合と左併合でどの境界を消すかを個別に確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)、count照会O(1)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq Q \leq 2 \times 10^5; In queries of the first type, 1 \leq x \leq N.; In queries of the first and second types, 1 \leq c \leq N.; There is at least one query of the second type.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>初期色列(1,2,3)、位置2の成分を1へ、次に位置3の成分を1へ。</p>
+<ol>
+<li>一回目(1,1,3)で色1数2。</li>
+<li>二回目は左右同色成分を統合し(1,1,1)。</li>
+</ol>
+<p>期待される結果: 色1数3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>色を同じ値へ再着色したらcountを増やすか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>増やさない。同じ長さを旧色から引き新色へ戻すだけで総数は不変。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc380/tasks/abc380_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc380-e-problem-dd8c10305a788a2a30b313d2210feba55617308d1e2496b89242163d2d5a0dd1</li>
+<li><a href="https://atcoder.jp/contests/abc380/editorial/11356">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc380-editorial-11356-041c38a9de6037d2568c49211fd531c4c502c153b71bf9b9b1787e13924fb222</li>
+</ul></main>
+</body></html>

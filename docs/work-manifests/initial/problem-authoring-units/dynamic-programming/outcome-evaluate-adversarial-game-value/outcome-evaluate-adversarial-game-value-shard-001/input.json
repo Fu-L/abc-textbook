@@ -1,0 +1,150 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
+  "packets": [
+    {
+      "problemId": "abc303-g",
+      "learningOutcomeIds": [
+        "outcome-evaluate-adversarial-game-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-monotone-stack-queue"
+      ],
+      "excludedTopics": [
+        "勝敗だけを分類する通常の後退解析・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-game-value-dp",
+        "tag-monotone-stack-queue"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3000; 1 \\leq x_i \\leq 10^9; 1 \\leq A,C \\leq 10^9; 1 \\leq B,D \\leq N; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "残袋は連続区間である。一手後に残す長さkとその左端lを固定すると、取る袋の総額は区間総額S(i,j)−S(k,l)、費用はZ、相手の最適差はdp[k,l]なので、手番側の差はS(i,j)−S(k,l)−Z−dp[k,l]となる。全合法lを試した最大がその行動のminimax値であり、三行動の最大を取れば正しい。長さkが同じ全始点について必要なのはS(k,l)+dp[k,l]の窓最小であり、単調キューで計算しても全lの最小と一致する。",
+          "sourceRevisionIds": [
+            "source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1",
+            "source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1",
+          "path": "src/content/sources/abc264-abc315/source-abc303-editorial-6444-5611246de28948f9c9a7b632b84c007be451b111f0e0f135a76d5e329d598ad1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc303_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f",
+          "path": "src/content/sources/abc264-abc315/source-abc303-g-problem-fbcaf504a69e006d352d0458cb7b4b758db0b7d6fce4cdda38956ce856ca348f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc303_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc349-e",
+      "learningOutcomeIds": [
+        "outcome-evaluate-adversarial-game-value"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "勝敗だけを分類する通常の後退解析・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-game-value-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: |A_{i,j}| \\leq 10^9; \\sum_{i=1}^3 \\sum_{j=1}^3 A_{i,j} is odd.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "三目成立なら即勝敗、全埋めなら重み合計で終端。非終端は手番の人が自分勝ちchildを一つでも選べると勝ち、全child負けなら負け。このminimax帰納法は空き数を減らすDAG上で厳密。同盤面は将来同じなのでmemo可能。",
+          "sourceRevisionIds": [
+            "source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14",
+            "source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14",
+          "path": "src/content/sources/abc316-abc367/source-abc349-e-problem-d85b1428d634ff73f6e42fa7cec9d7e7d380c8a49707ceea3650eb6132304b14.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc349_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7",
+          "path": "src/content/sources/abc316-abc367/source-abc349-editorial-9780-919791b6256f66739ac67ccbd469d346f11d403d464187d1024aa862d9bfa6e7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc349_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

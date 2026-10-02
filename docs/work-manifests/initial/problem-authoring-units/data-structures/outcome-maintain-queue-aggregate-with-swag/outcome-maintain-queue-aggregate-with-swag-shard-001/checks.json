@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "55e74348cb870d5226133b4e5518a22bcf8ae1db499e73c805d49d9023812e1c",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "checks": [
+    {
+      "problemId": "abc456-f",
+      "source": "passed",
+      "structure": "passed",
+      "example": {
+        "status": "passed",
+        "kind": "illustrative",
+        "execution": "not_applicable",
+        "expectedResult": "最終休日stateの費用9。",
+        "basis": "Original hand-worked trace; automated check validates the declared procedure and expected-result contract. Mathematical inspection remains in the shard review inventory."
+      },
+      "answer": {
+        "status": "passed",
+        "expectedResult": "写像は非可換。f_2(f_5(0,INF))=(5,7)に対しf_5(f_2(0,INF))=(2,7)なので順序を保つ。"
+      },
+      "link": "passed",
+      "accessibility": "passed_static_text_structure"
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "path": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-maintain-queue-aggregate-with-swag/outcome-maintain-queue-aggregate-with-swag-shard-001/review.json"
+  },
+  "automatedStatus": "passed",
+  "releaseAcceptance": false
+}

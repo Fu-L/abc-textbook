@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
+  "packets": [
+    {
+      "problemId": "abc274-ex",
+      "learningOutcomeIds": [
+        "outcome-compare-sequences-by-rolling-fingerprint",
+        "outcome-compute-in-finite-field-extension"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-finite-field-extension",
+        "tag-sequence-fingerprint"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5 \\times 10^5; 0 \\leq A_i \\leq 10^{18}; 1 \\leq Q \\leq 5 \\times 10^4; 1 \\leq a \\leq b \\leq N; 1 \\leq c \\leq d \\leq N; 1 \\leq e \\leq f \\leq N; b - a = d - c; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。",
+          "sourceRevisionIds": [
+            "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f",
+            "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f",
+          "path": "src/content/sources/abc264-abc315/source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc274_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838",
+          "path": "src/content/sources/abc264-abc315/source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc274_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

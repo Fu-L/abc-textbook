@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC284-G — Only Once</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC284-G — Only Once</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/functional-graph-decomposition.md">関数グラフのcycle・tree分解</a></p>
+<ul>
+<li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全頂点は対称なので、全写像Aに対するS_1の総和だけを求め、最後にN倍すれば全頂点分になる。 1からfunctional graphを辿り、最初の重複までに異なる頂点がl個、戻り先がpath上のp番目なら、ちょうど1回訪れる頂点数はp-1である。 1以外のl-1個のpath頂点の並べ方は(N-1)P(l-1)、path外N-l頂点の遷移は軌道へ影響せず各N通りである。 固定lで戻り先p=1..lの寄与を合計すると0+1+…+(l-1)=l(l-1)/2になる。</p>
+<p>採用する候補: 軌道の異なる頂点数lと戻り先pで写像を分類し、pathの順列・未使用遷移・寄与p-1を積で数える。</p>
+<p>N^N個の写像を直接扱わず、lごとの閉形式へまとめられ、合成数modulusでも整数演算で計算できる。</p>
+<p>棄却する候補: すべてのA_1..A_Nを列挙して各functional graphをsimulationする。</p>
+<p>写像がN^N個あり、Nが大きい制約では列挙不能である。</p>
+<p>棄却する候補: l(l-1)/2をmod Mで2の逆元を掛けて求める。</p>
+<p>Mは素数とは限らず、Mが偶数なら2の逆元が存在しない。</p>
+<p>1以外のl-1個のpath頂点の並べ方は(N-1)P(l-1)、path外N-l頂点の遷移は軌道へ影響せず各N通りである。</p>
+<p>固定lで戻り先p=1..lの寄与を合計すると0+1+…+(l-1)=l(l-1)/2になる。</p>
+<p>l=1..Nを走査し、falling=(N-1)P(l-1)とpow=N^(N-l)をmod Mで管理する。term=falling·pow·l(l-1)/2を加算し、最後に対称性のNを掛ける。三角数はlまたはl-1の偶数側を整数として2で割ってからmod Mへ落とし、modular inverseを使わない。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="functional-graphの軌道分類">functional graphの軌道分類</h3>
+<p>発動条件: 各頂点の出次数が1で、開始点から最初のcycleまでの訪問性質を数えるとき。</p>
+<p>tailとcycleを、最初の重複までの長さと戻り先で表す。</p>
+<h3 id="対称性による代表頂点">対称性による代表頂点</h3>
+<p>発動条件: labelled頂点すべてが同じ役割を持つ総和を求めるとき。</p>
+<p>頂点1の総寄与を数えてN倍する。</p>
+<h3 id="合成数modでの整数除算">合成数modでの整数除算</h3>
+<p>発動条件: 組合せ式に小さい整数除算があるがmodulusが素数とは限らないとき。</p>
+<p>積の中で割り切れる因子をmodを取る前に除く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>戻り先より前のtailだけが1回訪問され、戻り先以降のcycle頂点は無限回訪問されるため、S_1=p-1へ単純化する。</p>
+<p>別の問題へ持ち帰る視点: functional graphの訪問回数条件は、tail・cycle・未到達の三分類へ分けると数えやすい。</p>
+<h2 id="正当性">正当性</h2>
+<p>頂点1の重複前pathの異頂点数lを固定すると、順序は(N−1)P(l−1)、外側写像はN^(N−l)通り。戻り先pの一回訪問頂点数p−1の和はl(l−1)/2。これら分類は各写像を一意に表す。頂点対称性でN倍すれば全頂点の総和となる。三角数は整数で2除算してから法を取る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>l=1の三角数は0であり、積の更新順をずらして(N-1)P(l-1)とN^(N-l)を正しく対応させる。</li>
+<li>M=1でも動くよう全加算・乗算をmod Mで行い、逆元に依存しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>l=3の軌道を描き、戻り先p=1,2,3で寄与が0,1,2になること、path外の遷移がN^(N-l)通り自由なこと、偶数Mで逆元を使っていないことを点検する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点。Nの冪表と falling product を一巡で作り O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>冪表 O(N)、総和作業 O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 10^8\leq M \leq 10^9; N and M are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、法100。写像は(1,1),(1,2),(2,1),(2,2)。</p>
+<ol>
+<li>自己loopの点は一回訪問数0。</li>
+<li>写像(1,1)では2だけ一回訪れ総和1、(2,2)では1だけで1。</li>
+<li>残る二写像の総和0。</li>
+</ol>
+<p>期待される結果: 全写像総和2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>法が偶数のとき1/2の逆元を使えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>使えない。lとl−1の偶数側を整数で2除算してから積と剰余を取る。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc284/editorial/5468">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc284-editorial-5468-0fc55757cb97e3e299eab495bb719d3ad048cf14d4177dd2d8ef414fe487605b</li>
+<li><a href="https://atcoder.jp/contests/abc284/tasks/abc284_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc284-g-problem-1539f7f7aca16e6da918cb5ede8914eaa0801ff2016afa105f09e3cccbd0a7ad</li>
+</ul></main>
+</body></html>

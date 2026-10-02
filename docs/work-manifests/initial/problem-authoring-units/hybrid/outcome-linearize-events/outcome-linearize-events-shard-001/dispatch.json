@@ -1,0 +1,181 @@
+{
+  "shardId": "outcome-linearize-events-shard-001",
+  "primaryOutcomeId": "outcome-linearize-events",
+  "domain": "hybrid",
+  "taskId": "T071",
+  "problemIds": [
+    "abc231-f",
+    "abc266-ex",
+    "abc274-f",
+    "abc283-f",
+    "abc309-f",
+    "abc311-g",
+    "abc320-e",
+    "abc327-f"
+  ],
+  "homeUnitId": "unit-event-sweep",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc231-f.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc274-f.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc283-f.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc309-f.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.md",
+    "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc327-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "edd2b42f7c91e5874a2ce9d8800d02172d300044f03f2a819d1cb81c0b3159ba",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc231-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc231-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc266-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc274-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc274-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc283-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc283-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc309-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc309-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc311-g",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc320-e",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc327-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc327-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

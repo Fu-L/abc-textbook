@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC354-G — Select Strings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC354-G — Select Strings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md">半順序・Dilworth・最大反鎖</a></p>
+<ul>
+<li>対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/max-flow-min-cut.md">最大流・最小カット</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>S_i が S_j の substring なら両方は選べず、substring 関係は推移的なので、異なる文字列を頂点とする poset の antichain 最大重み問題になる。</p>
+<p>重みなしの Dilworth 定理では最大 antichain と最小 chain cover が二部 matching で双対になる。重み付き版は各頂点容量 A_i と比較辺容量∞の min-cutへ拡張できる。</p>
+<p>採用する候補: substring poset を左右二部化し、source→left_i と right_i→sink に A_i、比較可能 i→j に∞容量を張る min-cut から最大重み antichain を求める。</p>
+<p>ΣA_i−maxflow が weighted Dilworth の antichain 重みに一致し、N≤100 の dense network を扱える。</p>
+<p>棄却する候補: 文字列を重み降順に見て、既選択の substring/superstring でなければ貪欲に追加する。</p>
+<p>高重みの一文字列を捨てて複数の互いに比較不能な中重み文字列を選ぶ方が良い場合があり、局所選択は成立しない。</p>
+<p>比較関係 i&lt;j へ∞辺を置くことで cut は poset の closure 条件を破れず、有限cutが選択/非選択の整合した分割だけを表す。</p>
+<p>同一文字列は互いに選べないので、最大重み occurrence 一つへ統合するか、index 順に片向き比較を張って DAG 性を保つ。</p>
+<p>同一 S を最大 A にまとめる。全 ordered pair で KMP/Z/標準検索により substring 関係を判定する。左右コピーを作り source→L_i capacity A_i、R_i→sink capacity A_i、S_i substring S_j なら L_i→R_j capacity INF を張る。answer=ΣA_i−maxflow。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="weighted-dilworth--antichain-の-min-cut">weighted Dilworth / antichain の min-cut</h3>
+<p>発動条件: 推移的 DAG・poset から比較不能な頂点集合の最大重みを選ぶとき。</p>
+<p>頂点重みを二部両端容量、比較関係を∞辺にして flow dual を用いる。</p>
+<h3 id="substring-関係の-poset-化">substring 関係の poset 化</h3>
+<p>発動条件: 選択集合内でどの二文字列も包含関係を持てないとき。</p>
+<p>substring の推移性を比較関係として DAG/poset にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>一般 graph の最大重み独立集合ではなく、substring 関係が推移閉包を持つ特殊な comparability graph だから flow で解ける。</p>
+<p>別の問題へ持ち帰る視点: 難しい独立集合問題では、辺関係が順序・区間・二部など追加構造を持つかを確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>相異なる文字列の真のsubstring関係は半順序で、合法集合はantichain。重み付きDilworthのflow双対で、source/terminal容量Aと比較関係の無限辺がchainへの共通重みを流し、最大antichain重みはΣA−maxflowになる。同一文字列は一つしか選べないので最大重み代表への統合で最適値を保ち、真の比較だけをgraphに入れる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>INF は ΣA_i より大きい 64 bit 値にする。同一文字列を両方残すと cycle になるため、統合または一方向化を必ず行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず関係の推移性を確認して一般独立集合との差を説明する。flow network は有限 cut と antichain/chain cover の対応を小posetで検算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²L+N³)を単純substring検査と二部flowの上界とする。L=Σ|S_i|。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100; S_i is a string consisting of lowercase English letters.; 1 \leq |S_i|; |S_1| + |S_2| + \ldots + |S_N| \leq 5000; 1 \leq A_i \leq 10^9</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>文字列(a,ab,b)、重み(3,4,2)。</p>
+<ol>
+<li>abを選ぶとa,bを選べない。</li>
+<li>a,bは互いを含まないので合計5。</li>
+</ol>
+<p>期待される結果: 最大5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じaが重み3,7で二つ与えられたら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>二つ同時選択は不許可。最大の7だけ残しても任意の最適解を悪化させない。</p>
+<p>確認結果: 代表重み7。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc354/editorial/10029">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4</li>
+<li><a href="https://atcoder.jp/contests/abc354/tasks/abc354_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d</li>
+</ul></main>
+</body></html>

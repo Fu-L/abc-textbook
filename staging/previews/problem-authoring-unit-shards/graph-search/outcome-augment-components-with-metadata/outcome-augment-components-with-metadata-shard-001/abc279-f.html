@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC279-F — BOX</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC279-F — BOX</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></p>
+<ul>
+<li>成分へmetadataまたはmerge履歴を集約し、成分を一頂点に縮約した隣接関係、または併合後の代表情報を構成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>box移動は多数のballを一括して別boxへ移すため、ballごとのbox番号更新では同じ巨大集合を何度も走査し得る。 操作1はball集合の併合であり、各boxが現在どのDSU componentを持つか、各componentがどのboxにあるかを対応付ければよい。 DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。 空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。</p>
+<p>採用する候補: ballをDSU要素にし、box→component leaderとleader→boxの双方向mapを更新する。</p>
+<p>集合併合と新ball追加をamortizedに処理し、queryはballのleaderからboxを即座に得られる。</p>
+<p>棄却する候補: 各boxにball listを持ち、type1でYの全ballの所属boxをXへ書き換える。</p>
+<p>大集合を箱間で繰り返し移す入力では総更新数が二次になり得る。</p>
+<p>DSU leaderはunion by sizeで変わり得るため、union後に返された新leaderへowner boxを設定し直す。</p>
+<p>空boxにはcomponentがないというsentinelを持てば、空→非空移動・非空同士union・新ball追加を同じ対応で処理できる。</p>
+<p>最大N+Q ballのDSUを用意し、rootOfBox[x]とboxOfRoot[r]を持つ。move Y→Xは空caseを分けてcomponentをunionしYを空にする。addはsingleton ballをX componentへunionし、query ball bはboxOfRoot[find(b)]を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="dsu-componentへのmetadata付与">DSU componentへのmetadata付与</h3>
+<p>発動条件: 集合の併合と、要素が属する集合の外部属性queryが混在するとき。</p>
+<p>leaderにbox番号を紐付け、leader変更後にmetadataを新rootへ移す。</p>
+<h3 id="containerとcomponentの間接参照">containerとcomponentの間接参照</h3>
+<p>発動条件: 多数要素のcontainer移動を個別更新したくないとき。</p>
+<p>containerは集合代表だけ、query要素はfind経由でcontainerへ到達する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>boxがball集合を所有するのではなく、DSU componentとboxの対応だけを動かすと、10^100個という表現上のball上限も実際の追加数N+Qへ縮む。</p>
+<p>別の問題へ持ち帰る視点: bulk moveでは要素属性を書き換えず、集合objectへのpointer/代表とownerの対応を付け替える。</p>
+<h2 id="正当性">正当性</h2>
+<p>非空箱に球成分、成分代表に所有箱を対応させる。移動は成分併合または移管、追加は singleton 併合なのでこの不変条件を保つ。union後の新代表に所有箱を書き直せば代表変更にも対応し、find(ball) の所有箱が正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>Yが空なら何もせず、Xが空ならunionせずcomponent pointerだけ移してYを空にする。</li>
+<li>union後は旧leaderを使わず新leaderをrootOfBox[X]へ保存し、boxOfRoot[newLeader]=Xを必ず更新する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>大集合をbox1→2→3と移す例で、ball側は一度も更新せずowner[root]だけが変わることを追跡する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>初期球 N、操作 Q。O((N+Q)α(N+Q))。</p>
+<h3 id="空間">空間</h3>
+<p>球 DSU と箱対応で O(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \le N \le 3 \times 10^5; 1 \le Q \le 3 \times 10^5; For each type-1 operation, 1 \le X,Y \le N and X \neq Y.; For each type-2 operation, 1 \le X \le N.; For each type-3 operation, ball X is contained in some box at that point.; There is at least one type-3 operation.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>箱1球1、箱2球2。2→1移動、箱2へ球3追加。球2,3の箱を質問。</p>
+<ol>
+<li>移動後{1,2}は箱1、箱2は空。</li>
+<li>球3は箱2の新成分。</li>
+<li>球2の箱1、球3の箱2。</li>
+</ol>
+<p>期待される結果: 1,2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>空箱に古い代表を残してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。球3を旧成分へ混ぜて箱1の球とも同成分にしてしまう。空 sentinel が必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc279/editorial/5284">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18</li>
+<li><a href="https://atcoder.jp/contests/abc279/tasks/abc279_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc279-f-problem-073733efc404d7b820298114bdc572224b608dd2d787fb84b3b51bc0d56d875b</li>
+</ul></main>
+</body></html>

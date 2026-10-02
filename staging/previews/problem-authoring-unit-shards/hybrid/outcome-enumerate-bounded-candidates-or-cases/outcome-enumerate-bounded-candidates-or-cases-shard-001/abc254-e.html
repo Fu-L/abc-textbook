@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC254-E — Small d and k</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC254-E — Small d and k</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各頂点の次数が高々3で探索深さkも高々3なので、始点から距離k以内に現れる頂点は粗く数えても1+3+9+27=40個以下である。</p>
+<p>採用する候補: 深さkで打ち切る局所BFSまたはDFS</p>
+<p>各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。</p>
+<p>棄却する候補: 毎回グラフ全体をBFSする</p>
+<p>一回O(M)となり、全Q問い合わせでO(MQ)かかる。</p>
+<p>大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。</p>
+<p>グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。</p>
+<p>各問い合わせ(x,k)ごとにxからBFSまたは深さ制限DFSを行い、距離kへ達した頂点から先へは進まない。訪れた頂点番号を一度ずつ合計し、訪問印は今回触れた頂点だけ戻す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="パラメータ制限付き局所探索">パラメータ制限付き局所探索</h3>
+<p>発動条件: 問い合わせ数は多いが、探索半径と最大次数がともに小さい。</p>
+<p>距離k以内だけBFS/DFSし、全グラフを走査しない。</p>
+<h3 id="触れた要素だけの初期化">触れた要素だけの初期化</h3>
+<p>発動条件: 各問い合わせで訪問配列のごく一部しか変更しない。</p>
+<p>訪問頂点リストを保存し、その頂点の印だけを探索後に消す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>制約の「次数3以下」と「k≤3」は別々ではなく、組み合わせることで一問い合わせの探索量そのものを40程度へ制限する。</p>
+<p>別の問題へ持ち帰る視点: 多数問い合わせでも、分岐数^深さが十分小さいなら前計算より問い合わせごとの打ち切り探索が単純で強い。</p>
+<h2 id="正当性">正当性</h2>
+<p>大きいQだけを見ると探索の反復は難しそうだが、次数上限と深さ上限の積が探索木の大きさを定数へ抑える。 グラフに閉路があるので、同じ頂点を複数経路から数えないための訪問済み管理は必要である。 各問い合わせで実際に到達する定数個程度の頂点だけを訪ねれば、Q=1.5×10^5でも十分高速である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>距離kの頂点は合計へ含めるが隣接先へは展開しない。問い合わせ間の訪問印を全N初期化せず、今回訪れた頂点だけ戻す。k=0ではxのみを答える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全点BFSとのランダム比較に加え、k=0、次数3の木、三角形など複数経路で同じ頂点へ着くグラフ、孤立頂点を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M+Q·3ᵏmax)、最大次数3、kmax≤3。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)、訪問stampと小さいqueue。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3.5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1.5 \times 10^5; 0 \leq M \leq \min (\frac{N(N-1)}{2},\frac{3N}{2}); 1 \leq a_i \lt b_i \leq N; (a_i,b_i) \neq (a_j,b_j), if i\neq j.; The degree of each vertex in the graph is at most 3.; 1 \leq Q \leq 1.5 \times 10^5; 1 \leq x_i \leq N; 0 \leq k_i \leq 3; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1-2-3-4、query(x,k)=(2,1)。</p>
+<ol>
+<li>距離0,1の頂点は2,1,3。</li>
+<li>番号を一度ずつ加える。</li>
+</ol>
+<p>期待される結果: 和6。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>三角形の始点から深さ2探索で再訪を数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>数えない。複数経路で同じ頂点へ届くためvisitedで重複を防ぐ。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc254/tasks/abc254_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc254-e-problem-9669d130852dcc7e44d7b12aa782824240270e2896770b7770dd3635168bc518</li>
+<li><a href="https://atcoder.jp/contests/abc254/editorial/4052">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc254-editorial-4052-1b8d54f29177ebc1039748dd5940323d575efb47a490fea211a369a0a6252efc</li>
+</ul></main>
+</body></html>

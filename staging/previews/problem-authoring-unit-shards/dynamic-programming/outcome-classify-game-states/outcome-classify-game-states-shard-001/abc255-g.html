@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC255-G — Constrained Nim</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC255-G — Constrained Nim</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game.md">ゲーム状態の勝敗とGrundy数</a></p>
+<ul>
+<li>後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>禁止手がない山nの遷移先には0..n-1が全て含まれるためGrundy数はそれまでの最大値hに1を足して伸び、挙動が変わるのはX_iだけである。</p>
+<p>採用する候補: 例外点だけのGrundy前計算と頻度mex</p>
+<p>X_iを昇順に処理し、禁止された遷移先のGrundy頻度と全過去頻度を比較すれば例外点のmexを求め、その他の巨大nは直前例外からの線形式で評価できる。</p>
+<p>棄却する候補: 0からmax AまでGrundy数をDP</p>
+<p>山サイズが最大10^18なので一つずつ計算・保存できない。</p>
+<p>例外でないnでは、直前の例外値bar nからg(n)=n-bar n+h(bar n)と連続的に増える。</p>
+<p>0..hのGrundy値は最低一回ずつ現れるので、全頻度表には追加出現分だけを記録すれば、保持するキー数をO(M)へ抑えられる。</p>
+<p>S={0,X_i}を昇順に処理し、各例外Xについて禁止遷移先X-YのGrundy値を求める。過去全体での出現数が禁止分を上回る最小値をmexとしてg(X)にし、hと追加頻度を更新する。各A_iは直前例外を二分探索して式で求め、全山のxorを判定する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="sprague-grundy分解">Sprague-Grundy分解</h3>
+<p>発動条件: 複数の独立な山から一つを選んで動かす不偏ゲームで勝敗を求める。</p>
+<p>各山のGrundy数を求めてxorし、0かどうかで勝者を決める。</p>
+<h3 id="疎な例外点圧縮">疎な例外点圧縮</h3>
+<p>発動条件: 通常位置では単純な規則で状態値が増え、少数の指定位置だけ遷移が欠ける。</p>
+<p>例外X_iのみmexを計算し、例外間を閉形式で補間する。</p>
+<h3 id="mexの頻度差分">mexの頻度差分</h3>
+<p>発動条件: 遷移全集合から少数の禁止先を除いたmexを求めたい。</p>
+<p>過去全体のGrundy出現数と禁止先側の出現数を比較する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>自由に減らせるNimの線形なGrundy列を基準にし、禁止手が置かれたX_iだけを補正することで10^18の状態空間を疎に扱える。</p>
+<p>別の問題へ持ち帰る視点: ほぼ完全な遷移集合から少数の辺だけが欠けるゲームでは、例外位置と値頻度の差だけを追う。</p>
+<h2 id="正当性">正当性</h2>
+<p>Grundy値は合法な全ての次状態の値のmexである。通常の山xは0..x−1へ移るため、過去の値の集合を管理すればよい。例外(x,y)ではその一手に対応する移動先x−yだけを一時的に頻度集合から除き、残る値のmexを求め、次の山のために頻度を復元する。同じGrundy値を持つ別の合法移動先が残る場合はその値を除かない点が必要である。小さい山から求める帰納法で各mexが正しく、独立な山の合成の勝敗はそのxorで決まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じXに複数の禁止手があるためグループ単位で処理し、禁止先Grundyの重複頻度も数える。山サイズと式の値は64ビットで持ち、例外点自身には線形式を適用しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>山サイズが小さい場合の素朴なmex DPと比較し、同一Xの複数禁止手、同じGrundy値を指す禁止先、A_iが例外点・例外直後にある場合を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)log M)、例外sortと各禁止遷移先のGrundy照会・頻度map。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq 2 \times 10^5; 1 \leq A_i \leq 10^{18}; 1 \leq Y_i \leq X_i \leq 10^{18}; i \neq j \Rightarrow (X_i, Y_i) \neq (X_j, Y_j); All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>山一つA=2、禁止(X,Y)=(2,1)。</p>
+<ol>
+<li>g0=0,g1=1。山2から残1への遷移は禁止、残0へだけ進める。</li>
+<li>g2=mex{0}=1。</li>
+</ol>
+<p>期待される結果: 先手勝ち。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ山2を二個置くと。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>g2 xor g2=1 xor1=0なので後手勝ち。例外評価後の通常Nim合成はxor。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc255/editorial/4104">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc255-editorial-4104-288a99b8f1df078ea734326cb7131a93d2cca7735df2874eb154854207cd9132</li>
+<li><a href="https://atcoder.jp/contests/abc255/tasks/abc255_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc255-g-problem-59258e001b3423159eff6cd38e7a077c6b9b40d1c3137d2e4ff4dda6aefd317a</li>
+</ul></main>
+</body></html>

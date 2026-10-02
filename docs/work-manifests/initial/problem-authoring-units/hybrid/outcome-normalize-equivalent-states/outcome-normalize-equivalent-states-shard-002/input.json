@@ -1,0 +1,224 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-normalize-equivalent-states-shard-002",
+  "packets": [
+    {
+      "problemId": "abc446-g",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-transition-optimization"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 500\\,000; 1 \\leq A_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各値列には辞書順最小の貪欲添字列が一意に対応するため、値列を添字表現 P として重複なく数えられる。 C_p-A_p≥0 のとき、同値の (C_p-A_p) 回目と次の出現位置の間だけが直前末尾の許容範囲になる。 選んだ値をちょうど A_p 個追加するための前回位置条件が同値な開区間になり、point add・range sum または累積和で全遷移を高速化できる。",
+          "sourceRevisionIds": [
+            "source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c",
+            "source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c",
+          "path": "src/content/sources/abc420-abc466/source-abc446-editorial-16371-7e2dc85c07817b4f562f8b85ebccbeff91d4ca31241e7a4e9ef0df77a9872b6c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc446_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770",
+          "path": "src/content/sources/abc420-abc466/source-abc446-g-problem-37f1079958d3a19d18560c59f5699b3a1c2bca70a9712cbbda23a45c3d983770.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc446_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc462-e",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-basic-convex-optimization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le A,B\\le 10^9; -10^9\\le X,Y\\le 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最適walkは折返し位置を調整して、parityが奇数なら最後の一歩を目標へ近づくXまたはY方向に限定できる。 偶数2K歩では各costがK回ずつ現れ、座標達成に必要なB側move数だけがKのpiecewise-linear関数を作る。 正規化後、K≤Yで必要な高cost移動最小数から g(K)=2KA+(Y-K)(B-A) が一次式となり、K≥Yでは2KAでYが最小なので端点以外に最適はない。",
+          "sourceRevisionIds": [
+            "source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4",
+            "source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4",
+          "path": "src/content/sources/abc420-abc466/source-abc462-e-problem-00806f6d57842b99312dcaefcffc5016befda8ee2283e0605fe7955230afdeb4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc462_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236",
+          "path": "src/content/sources/abc420-abc466/source-abc462-editorial-21400-74eb05e0e855bd0c2c27e61b16b3533c5cc934b55ca3c73f9e7d0ec6974d2236.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc462_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc463-f",
+      "learningOutcomeIds": [
+        "outcome-normalize-equivalent-states"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "交換論による貪欲順の証明。"
+      ],
+      "tagIds": [
+        "tag-state-normalization",
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 0\\le A _ i\\lt2N\\ (1\\le i\\le 2N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "優勝者勝数はWまたはW+1だけで、各caseで六試合classがtype1/type2のどちらになるかが固定される。 type1がx試合なら候補者数の可変部分はbinomial係数 C(x,t)/2^x で、type2の整合確率積Pと確定人数Kを掛ければよい。 各試合はcase固定後、候補者を確率1/2で一人作るtype1か、整合確率pと確定候補数kを持つtype2に独立化され、type1成功数だけがbinomial分布になる。",
+          "sourceRevisionIds": [
+            "source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f",
+            "source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f",
+          "path": "src/content/sources/abc420-abc466/source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc463_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01",
+          "path": "src/content/sources/abc420-abc466/source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc463_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

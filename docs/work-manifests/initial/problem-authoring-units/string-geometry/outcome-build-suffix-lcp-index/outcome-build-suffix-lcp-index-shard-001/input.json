@@ -1,0 +1,435 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-suffix-lcp-index-shard-001",
+  "packets": [
+    {
+      "problemId": "abc213-f",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-monotone-stack-queue"
+      ],
+      "excludedTopics": [
+        "rolling hashによる一致比較と回文半径。"
+      ],
+      "tagIds": [
+        "tag-suffix-lcp-index",
+        "tag-monotone-stack-queue"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^6; S is a string of length N consisting of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "接尾辞配列上で順位p<qの二接尾辞のLCPは、その間の隣接LCPの最小値である。隣接区間で共通するprefixは全接尾辞へ共通し、区間内にそれより短い隣接LCPがあれば全体の一致もそこで途切れる。各順位から左への区間最小値和をstackで保ち、新しい値vが来たらv以上の末尾groupを併合する。各開始位置はただ一つの最小値groupへ属し、個数×最小値の和が寄与になる。右からも同じ処理を行い、自己とのLCPである接尾辞長を加えれば全相手を一度ずつ数える。各groupは一度pushされ一度popされる。",
+          "sourceRevisionIds": [
+            "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+            "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d",
+          "path": "src/content/sources/abc212-abc263/source-abc213-editorial-2391-534c84f6432876508004b5c292c65c02485f600cd78973b126d80cdd50be2a0d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc213_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82",
+          "path": "src/content/sources/abc212-abc263/source-abc213-f-problem-db1b92140a905bd0d6d2a457fed88756303e0d045ee8df1a5f163cd555443a82.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc213_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc268-ex",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep",
+        "unit-greedy-exchange",
+        "unit-ordered-set-multiset",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "rolling hashによる一致比較と回文半径。"
+      ],
+      "tagIds": [
+        "tag-suffix-lcp-index",
+        "tag-event-sweep",
+        "tag-greedy-exchange-order",
+        "tag-ordered-set-multiset",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 5 \\times 10^5; 1 \\leq N; N is an integer.; 1 \\leq |T_i|; \\sum{|T_i|} \\leq 5 \\times 10^5; T_i \\neq T_j if i \\neq j.; S and T_i are strings consisting of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各禁止語に一致する接頭辞を持つsuffixはSA上の連続区間になる。禁止語を短い順に処理し、未割当のS内suffixだけをordered setから削除して最短一致長を渡せば、各開始点は一回しか割り当てられない。同じ開始点の長い禁止区間は最短区間をhitすれば自動的にhitするので捨てられる。残る区間を右端昇順に見て未hitなら右端を変更する貪欲は、最初の未hit区間を変更する位置をその右端に交換しても後続区間への有効性を減らさない。変更文字に入力外の文字を使えば新しい禁止語も生じない。",
+          "sourceRevisionIds": [
+            "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
+            "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a",
+          "path": "src/content/sources/abc264-abc315/source-abc268-ex-problem-7bc3740f33b773d694da1a30daf23c74899b34ee2b31af87754be5930ed8a57a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc268_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81",
+          "path": "src/content/sources/abc264-abc315/source-abc268-editorial-4786-b4bee560711f772c733767744ffc966a1a9147566653114ecb210162924eac81.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc268_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc272-f",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "rolling hashによる一致比較と回文半径。"
+      ],
+      "tagIds": [
+        "tag-suffix-lcp-index"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; S and T are strings of length N each, consisting of lowercase English letters.; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。",
+          "sourceRevisionIds": [
+            "source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8",
+            "source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8",
+          "path": "src/content/sources/abc264-abc315/source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc272_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860",
+          "path": "src/content/sources/abc264-abc315/source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc272_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc280-ex",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-monotone-stack-queue"
+      ],
+      "excludedTopics": [
+        "rolling hashによる一致比較と回文半径。"
+      ],
+      "tagIds": [
+        "tag-suffix-lcp-index",
+        "tag-monotone-stack-queue"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq \\lvert S_i\\rvert \\leq 10^5; \\displaystyle\\sum_{i=1}^N \\lvert S_i\\rvert\\leq 10^5; 1 \\leq Q \\leq 2\\times 10^5; 1 \\leq x_1<x_2<\\cdots<x_Q \\leq \\displaystyle\\sum_{i=1}^N \\frac{|S_i|(|S_i|+1)}{2}; N,Q,x_1,x_2,\\ldots,x_Q are integers.; S_i is a string consisting of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "全substring occurrenceは各有効suffixの非空prefixと一対一対応する。SAと元文字列末端でcapしたLCPは、同じprefixを持つsuffix群の連続区間を与える。LCP stackで辞書順に、長さ(a,b]とsuffix区間[i,j]のblockを列挙すると、各長さにj−i+1個の等しいoccurrenceがありblock個数は(b−a)(j−i+1)。全blockはprefixを過不足なく分割する。累積個数と昇順のrank質問を同時走査し、block内の長さとoccurrenceへ逆算すれば正しい順位を復元できる。",
+          "sourceRevisionIds": [
+            "source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5",
+            "source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5",
+          "path": "src/content/sources/abc264-abc315/source-abc280-editorial-5332-5fe0f42d10a24b904294ed89de5b1f424075902dd282d2607ff3986a8efa79c5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc280_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14",
+          "path": "src/content/sources/abc264-abc315/source-abc280-ex-problem-82d5cbd4eb164acf4fca03545ef6fead6bb70019652981eb20d6143b041a7b14.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc280_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc362-g",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "rolling hashによる一致比較と回文半径。"
+      ],
+      "tagIds": [
+        "tag-suffix-lcp-index"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 5 \\times 10^5; 1 \\leq Q \\leq 5 \\times 10^5; 1 \\leq |T_i| \\leq |S|; \\displaystyle \\sum_{i=1}^Q |T_i| \\leq 5 \\times 10^5; S and T_i are strings consisting of lowercase English letters.; Q is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "pattern出現の開始位置はそのpatternをprefixに持つsuffixと全単射。辞書順では共通prefixのsuffix集合が連続なので、Tのlower boundとTに仮想最大文字を付けたupper境界との差が全出現数になる。suffix開始位置を一つずつ数えるため重なりも自然に含み、短suffixは比較で境界外へ落ちる。",
+          "sourceRevisionIds": [
+            "source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8",
+            "source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8",
+          "path": "src/content/sources/abc316-abc367/source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc362_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788",
+          "path": "src/content/sources/abc316-abc367/source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc362_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc452-g",
+      "learningOutcomeIds": [
+        "outcome-build-suffix-lcp-index"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "rolling hashによる一致比較と回文半径。"
+      ],
+      "tagIds": [
+        "tag-suffix-lcp-index"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 500\\,000; 1 \\leq A_i \\leq 9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "221列は各数字vのrun長がvに等しい。元run長m<vは使えず0で区切り、m=vは内部使用可、m>vは端としてだけ使えるのでv,0,vで左右利用を分ける。この変換はvalid列種類とzerofree短列substring種類を一対一に写す。SA順の既出共有prefixは直前LCPまでなのでzerofree長からそれを引いた正部分が各suffixの新種類数。全和がdistinct数になる。",
+          "sourceRevisionIds": [
+            "source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938",
+            "source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938",
+          "path": "src/content/sources/abc420-abc466/source-abc452-editorial-18406-31af11ca79f4f4e52658cb366e92976bda9c6c0bf3f3dd361472a8d6f5b88938.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc452_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08",
+          "path": "src/content/sources/abc420-abc466/source-abc452-g-problem-2dcf1791ac2d6bae9c05b1ac88dfedaeb943e4967b9246015a391dde2148eb08.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc452_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

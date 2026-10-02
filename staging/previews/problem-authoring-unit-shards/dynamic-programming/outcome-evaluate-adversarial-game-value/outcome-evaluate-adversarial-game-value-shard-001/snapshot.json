@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ce3f72b94aa739eadff42001a792060d83ff855859f74093308931edff2e76bd",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a3c5cecd8c20294e819027b379f38a400300e84862d19739928526435dfa58bd",
+  "reviewDigest": "fa7c61dc59d38041ada813d5064fbc5a4911380c6dd19b1fbc18847952e162c7",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.html",
+      "digest": "7d564493aea4d97ed9e59ef386be57657d009ca13dbd72b0689a4f07f8d73fea"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc349-e.html",
+      "digest": "e3435eae0488bbd31ab309c5216cb87fa9d170d065a4227fb960798b50c5ddd1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/index.html",
+      "digest": "cd2fafba31b3737c2b025c059805e5c729d21d3e95dece608bdaf7b3659ea018"
+    }
+  ],
+  "snapshotDigest": "1318ea0143cf096ec5e6e7a4d97c68705cb620c7bff9fac5816072d17e028a67"
+}

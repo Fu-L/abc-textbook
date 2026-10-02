@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC334-F — Christmas Present 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC334-F — Christmas Present 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/monotone-stack-queue.md">支配関係から不要な候補を単調stack・queueで削る</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>子供iからi+1へは直接進むか、Santa宅へ戻って補充してから進むかの二択だけを考えればよい。補充境界を0とNも含めて並べると、携帯上限Kは隣接境界間の子供数がK以下という条件になる。</p>
+<p>採用する候補: 直接巡回をbaselineにし、補充境界の追加costをwindow-min DPで選ぶ</p>
+<p>幾何部分を各境界の独立な差分へ分け、K間隔制約を一次元DPとしてO(N)またはO(N log N)で解ける。</p>
+<p>棄却する候補: 持っているpresent数を含む二次元DPを全位置で遷移する</p>
+<p>O(NK)状態になりK=Nでは二乗時間となる一方、必要情報は最後の補充位置だけに圧縮できる。</p>
+<p>baselineをS→1→…→N→Sとし、境界iで補充する追加距離をd_i=dist(i,S)+dist(S,i+1)-dist(i,i+1)と置く。選んだ境界間隔≤Kなら実行可能で、総距離はbaseline+Σd_iになる。</p>
+<p>d_0=d_N=0としてdp[0]=0、dp[i]=d_i+min{dp[j] | i-K≤j&lt;i}をi=1,…,Nで計算する。dequeの先頭をwindow最小に保てばO(N)でdp[N]を得て、baselineへ加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="baselineとの差分化">baselineとの差分化</h3>
+<p>発動条件: 二種類の移動が共通部分を持ち、一方が既定routeの一辺を置換する。</p>
+<p>直接routeを全て足し、補充を選ぶ境界だけdetour minus directの差分を加える。</p>
+<h3 id="sliding-window-minimum-dp">sliding-window minimum DP</h3>
+<p>発動条件: 次の補充位置iは直前の補充位置が幅Kの範囲にあればよい。</p>
+<p>直近K個のdp最小値をmonotone dequeで維持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>携帯個数を逐次状態にせず、補充した位置同士のgap≤Kへ言い換えると、route選択がinterval covering型の最短pathになる。</p>
+<p>別の問題へ持ち帰る視点: 容量制約は補給・reset点の間隔制約へ変換すると状態次元を減らせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一回の積載で配達するのは訪問順の連続区間で、長さはK以下である。補充せず全点を巡るbaselineに対し、境界iへ補充を挟むとi→i+1がi→S→i+1に替わるだけなので追加距離d_iが独立に加算される。従って実行可能な旅程と、隣接間隔K以下の選択境界列が一対一になる。最後の境界から次の境界へ進む一次元最小費用DPは全境界列を覆い、dequeはその範囲最小を正確に維持する。baselineを足した終点値が最短距離となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>座標差を浮動小数へ変換してhypotを計算し、baselineにはS→1とN→Sも含める。dequeからi-K未満のindexを削除してから最小を参照する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>K=1、K=N、一直線配置、detour差がほぼ0の座標でO(NK) DPとの誤差を含めて比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、境界cost前計算と幅Kのdeque最小DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq K\leq N \leq 2\times 10^5; -10^9\leq S_X,S_Y,X_i,Y_i \leq 10^9; (S_X,S_Y)\neq (X_i,Y_i); (X_i,Y_i)\neq (X_j,Y_j)\ (i\neq j); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=(0,0)、配達点(1,0),(2,0)、K=1。</p>
+<ol>
+<li>baselineは0→1→2→0で4。</li>
+<li>点1後の補充追加は1+2−1=2。</li>
+</ol>
+<p>期待される結果: 最短6。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>K=2なら同じ補充境界を必ず選ぶか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>二個を一度に持てるので境界不要、baseline4が最適。選択境界間隔≤KだけをDPで強制する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc334/editorial/8982">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc334-editorial-8982-8917f4a224d06b6aea49f249e93291c2c820606bc4687557ef5132cf2fbee41c</li>
+<li><a href="https://atcoder.jp/contests/abc334/tasks/abc334_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc334-f-problem-8df90cafee9c55969daaf7f93fe4840a719f1e1de48c92e1a6d995f4e39b467d</li>
+</ul></main>
+</body></html>

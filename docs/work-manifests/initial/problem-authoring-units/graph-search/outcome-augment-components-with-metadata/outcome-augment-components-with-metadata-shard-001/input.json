@@ -1,0 +1,429 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-augment-components-with-metadata-shard-001",
+  "packets": [
+    {
+      "problemId": "abc279-f",
+      "learningOutcomeIds": [
+        "outcome-augment-components-with-metadata"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 2 \\le N \\le 3 \\times 10^5; 1 \\le Q \\le 3 \\times 10^5; For each type-1 operation, 1 \\le X,Y \\le N and X \\neq Y.; For each type-2 operation, 1 \\le X \\le N.; For each type-3 operation, ball X is contained in some box at that point.; There is at least one type-3 operation."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非空箱に球成分、成分代表に所有箱を対応させる。移動は成分併合または移管、追加は singleton 併合なのでこの不変条件を保つ。union後の新代表に所有箱を書き直せば代表変更にも対応し、find(ball) の所有箱が正しい。",
+          "sourceRevisionIds": [
+            "source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18",
+            "source-abc279-f-problem-073733efc404d7b820298114bdc572224b608dd2d787fb84b3b51bc0d56d875b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18",
+          "path": "src/content/sources/abc264-abc315/source-abc279-editorial-5284-2ea014c0428701362b5eb54e72479b68b510301e5a6ea983c6cd976648341c18.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc279_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc279-f-problem-073733efc404d7b820298114bdc572224b608dd2d787fb84b3b51bc0d56d875b",
+          "path": "src/content/sources/abc264-abc315/source-abc279-f-problem-073733efc404d7b820298114bdc572224b608dd2d787fb84b3b51bc0d56d875b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc279_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc372-e",
+      "learningOutcomeIds": [
+        "outcome-augment-components-with-metadata"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, Q \\leq 2 \\times 10^5; In a Type 1 query, 1 \\leq u < v \\leq N.; In a Type 2 query, 1 \\leq v \\leq N, 1 \\leq k \\leq 10.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "成分内B位以下の頂点には既にB個の大きい頂点があり、併合で順位は上がらない。二成分の上位Bだけを merge すれば新列を復元できる。singleton からの帰納法で正しく、同成分 union を無視して重複を防ぐ。",
+          "sourceRevisionIds": [
+            "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
+            "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59",
+          "path": "src/content/sources/abc368-abc419/source-abc372-e-problem-95435329aea6c364a0302b7ecf8c28324ac869ea42fe835baaecb395a3689e59.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc372_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011",
+          "path": "src/content/sources/abc368-abc419/source-abc372-editorial-10967-abf15d02f03a6ce0612e3ba16d6281389413d47d0d0a4904b7c4235a262c1011.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc372_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc392-e",
+      "learningOutcomeIds": [
+        "outcome-augment-components-with-metadata"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-constructive-witness"
+      ],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components",
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; N-1 \\leq M \\leq 2\\times 10^5; 1 \\leq A_i, B_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一操作の成分数減少は高々1なので C−1 が下界。forest外辺は外しても元成分を分断せず、一端を他成分へ付け替えると一成分減る。余剰総数 M−N+C≥C−1 のため成分を併合し余剰を引き継げば下界回数を達成できる。",
+          "sourceRevisionIds": [
+            "source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e",
+            "source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e",
+          "path": "src/content/sources/abc368-abc419/source-abc392-e-problem-cca914b773f4300547dd13f0be4ee0b93de98f083a9d832610bdb677c12e588e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc392_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df",
+          "path": "src/content/sources/abc368-abc419/source-abc392-editorial-12146-7cc0915fcaf1a0c3a3b0187c3dbd572b27a4d78f55584d727f99b1a9ca50c1df.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc392_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc401-e",
+      "learningOutcomeIds": [
+        "outcome-augment-components-with-metadata"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^{5}; 0 \\le M \\le 3 \\times 10^{5}; 1 \\le u_i < v_i \\le N\\ (1 \\le i \\le M); (u_i,v_i) \\ne (u_j,v_j)\\ (1 \\le i < j \\le M); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "ちょうどprefixを到達集合にするには内部誘導グラフが連結である必要がある。連結なら外隣接頂点は一歩で到達するため削除必須。これら全てを消すと外へ出る最初の辺がなくなり十分。DSU連結性と相異なる境界頂点数を保つことで最小削除数を得る。",
+          "sourceRevisionIds": [
+            "source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757",
+            "source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757",
+          "path": "src/content/sources/abc368-abc419/source-abc401-e-problem-f5b4b49bf6752971d0100ab55024ebd0faf72125b6e54b66fe4e4eecd4f53757.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc401_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf",
+          "path": "src/content/sources/abc368-abc419/source-abc401-editorial-12693-13b4b3a7596f5056fd2c1375310ea6e7add2d326705300c44e9b4e72b7d0b1bf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc401_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc420-e",
+      "learningOutcomeIds": [
+        "outcome-augment-components-with-metadata"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le Q \\le 6 \\times 10^5; Type 1 queries satisfy the following constraints: 1 \\le u < v \\le N For each query, no edge connecting u and v has been added before that query.; 1 \\le u < v \\le N; For each query, no edge connecting u and v has been added before that query.; Type 2,3 queries satisfy the following constraints: 1 \\le v \\le N; 1 \\le v \\le N"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "黒数を成分内の黒頂点数とする不変条件は union の加算と toggle の±1で保たれる。到達可能集合は現在の成分だから、find(v) の黒数が正であることが質問の必要十分条件。",
+          "sourceRevisionIds": [
+            "source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd",
+            "source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd",
+          "path": "src/content/sources/abc420-abc466/source-abc420-e-problem-b6016caae15322571513fb4e8ebe0517017b69ad0aca81d2df344d8b777ab3dd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc420_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0",
+          "path": "src/content/sources/abc420-abc466/source-abc420-editorial-13740-fbc874bf93e3cbceb11245d4736f4752fe753e5b8cade0041bf7bc50fc97d2c0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc420_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc434-e",
+      "learningOutcomeIds": [
+        "outcome-augment-components-with-metadata"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression"
+      ],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components",
+        "tag-coordinate-compression"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; -10^9 \\leq X_i \\leq 10^9; 1 \\leq R_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一成分で覆う頂点数は min(n,m) 以下。木では根以外を各親辺で選び n−1=m を達成。閉路成分では閉路辺を循環方向へ選んで閉路全頂点を覆い、付く木の枝を子方向へ選べば全n頂点を覆える。成分間に座標重複がないので寄与を足す。",
+          "sourceRevisionIds": [
+            "source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c",
+            "source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c",
+          "path": "src/content/sources/abc420-abc466/source-abc434-e-problem-57a85c270331d5a998fe7241beb665e9a2a94be6ab8e403b818953267214041c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc434_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74",
+          "path": "src/content/sources/abc420-abc466/source-abc434-editorial-14684-e3f7929aa75b4bff090151a80f1d38ab481ab915f85146db5cb26658674d2e74.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc434_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-flow-with-lower-bounds-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "e84bc2c9d072399dacfeb5df45ffb0c2074a4e28a37b6bc953378b45c0860a54",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "fe708fb047dbd1435944cae83225da2d4e6e9ec1d729a68731e1638b5f8156af",
+  "reviewDigest": "2924b1f02a61d1c14ec84bd924fec44ee12e0cc3899baf1d5a7285688471d9ed",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-flow-with-lower-bounds/outcome-solve-flow-with-lower-bounds-shard-001/abc285-g.html",
+      "digest": "34352bf76ff44c4409ad54854ea0a0bac6be7f48d47e049d9cc3ce6a76878b22"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-flow-with-lower-bounds/outcome-solve-flow-with-lower-bounds-shard-001/index.html",
+      "digest": "ba42a22b23b1672942bff85581ed8d1538c9e16cb2d424bbb0deb1c0a71834d2"
+    }
+  ],
+  "snapshotDigest": "2ad8b1e17b82d6222233619e64b3f175014ca274e32196c2024739fc8c21b13c"
+}

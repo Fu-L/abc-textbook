@@ -40,3 +40,8 @@ docs/verification/history/textbook-hierarchy-2026-09-29/
 docs/reviews/final-semantic-placement-audit-2026-09-26.md
 docs/reviews/inventory-semantic-full-audit-2026-09-26.md
 docs/reviews/semantic-placement-full-review-2026-09-27.md
+
+# Frozen Problem shards and their exact Markdown/HTML projections are checked by the shard CLI.
+docs/work-manifests/initial/problem-authoring-units/
+src/content/docs/problems/
+staging/previews/problem-authoring-unit-shards/

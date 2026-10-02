@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-characterize-palindrome-intervals-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "5149992617fe69321489785cc9de10f721006efa1d8a4c61a84464dfdcc7e9e6",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "7c90fe28f579349ba31ed3300b0a69f9e3d16658c2c390b0d3c6c1c1f94eecef",
+  "reviewDigest": "2228bb957d5976f592c722de137b62dcbc2efbb214987294f352cae44c001e22",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.html",
+      "digest": "575292c4903635152aa968eff74a962c0914d38bf55db68ca36b31b025d86140"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc398-f.html",
+      "digest": "3380cb209ae7d906e4d5e39550034c7e0a529e55d9403667fc26f8c4d094743f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/index.html",
+      "digest": "3b9dc128b5445f9470d85379661a6df98b72f1e365fa3948048f71f2eefa50fa"
+    }
+  ],
+  "snapshotDigest": "02d2e74d1b5bf8de194bb2e1aac775a3c11e78894e22b4c4823cc17e20dd4430"
+}

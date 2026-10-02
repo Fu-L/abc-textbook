@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-color-and-classify-bipartite-components-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d49574062c1363c962b92be0cbb7853b20c58e30ecdb8f84d2d57cc7dabedb9b",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "7fb7fe5f3b0f787d19a3538c0e58d206c96d559897d7124f6e7d000839994138",
+  "reviewDigest": "1e9dc72106eaeb78f35036f01a522044ba14d294cede812209057fa5923ab1fd",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/abc451-f.html",
+      "digest": "850aba11f65bf72a07c583459e07f31c15ee6d18116f5ed866ed8776b90e9ed4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-color-and-classify-bipartite-components/outcome-color-and-classify-bipartite-components-shard-001/index.html",
+      "digest": "46cca9b261aef57aa624d7b2aeb29c25cc2dbff0e2ad48ac7cd741b2cedbe348"
+    }
+  ],
+  "snapshotDigest": "afdde574a11bebe56a1b7bc716becc8d14c9a716bbcaeec5bd6e9e419652898f"
+}

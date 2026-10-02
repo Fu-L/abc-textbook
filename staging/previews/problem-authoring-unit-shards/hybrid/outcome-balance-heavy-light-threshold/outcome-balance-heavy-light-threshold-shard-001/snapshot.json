@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-balance-heavy-light-threshold-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "61930faecb02ff0192a4166cc4073ea99aa540b4ce79966fba2a30f034ebb0b1",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "e4eafd78c02360eb0d2bea9f31f07de2577a8531f985312911e2c638aa608d25",
+  "reviewDigest": "4c8b0603ceb8596b2b7ef65ee6a49aa49c0ff791e09546b37f4477b88a9882a2",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.html",
+      "digest": "e890ea26e82671962cd7659dba07d642fde69a07e471a68384a13cac4f33984e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.html",
+      "digest": "48c2f75d2009932409397fc5c69b2de8fee57ef7c1526b2d97c50ab90b2bf4e5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc335-f.html",
+      "digest": "0491028a0b012671c5b80036056d1509c31a9a8a5b38ec5f889dba7221a28196"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc350-g.html",
+      "digest": "d739eda0026c130ce49401091f2dbee5f929ba2c49789b5d3c451ef06e5a654e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc365-g.html",
+      "digest": "acbe4aecb57a6f1a0eadfd2b7510ed8a00bf09a2a22906ef32876abbbb5a5f36"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/index.html",
+      "digest": "cabf35158a58ba15fd37075d4bfe560f36f198d1b98f7670c3226d13b0a4fac7"
+    }
+  ],
+  "snapshotDigest": "e7eab8ea9fb03a5290e73db727fa2fe00b558639562a6b0eb329df8a7eba3cbc"
+}

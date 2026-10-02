@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC418-F — We're teapots</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC418-F — We're teapots</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>coffee位置は隣接してはならず、長さnにr個を置く方法は間隔を一つずつ圧縮するbijectionから noadj(n,r)=C(n-r+1,r) となる。</p>
+<p>prefix coffee数が指定されたindexを順に並べると、隣り合う指定index間ではcoffee個数の差だけが固定される。区間同士の依存は両端がtea/coffeeの二状態だけである。</p>
+<p>採用する候補: 各隣接制約間の2×2遷移行列f(n,r)を作り、active constraintの順序積をsegment treeで動的維持する</p>
+<p>a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。</p>
+<p>棄却する候補: 各query後に左からposition×coffee数DPをやり直す</p>
+<p>一回O(N^2)または少なくともO(N)となりQ=2×10^5に間に合わず、変更で影響する制約区間が局所的なことを使っていない。</p>
+<p>前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。</p>
+<p>制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。</p>
+<p>a_0=0をsentinelにactive index setを持つ。active iのF_iを predecessor p に対するf(i-p,a_i-a_p)、inactiveはidentityとして、非可換な左→右積をsegment treeで管理する。更新時はxの削除／挿入に伴いF_xとsuccessorのmatrixだけ再計算し、積Mの第0行とlast active以降のfibを掛けて答えを得る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="境界状態のtransfer-matrix">境界状態のtransfer matrix</h3>
+<p>発動条件: 列を区間分割したとき、隣接禁止の依存が左右endpointの有限状態だけに残るとき。</p>
+<p>各制約間をtea/coffeeの2×2matrixにし、順序積で全prefixを合成する。</p>
+<h3 id="動的非可換積segment-tree">動的非可換積segment tree</h3>
+<p>発動条件: 列中の少数matrixが点更新され、全順序積を毎回求めたいとき。</p>
+<p>identityをinactive位置に置き、mergeをleftMatrix×rightMatrixとする。</p>
+<h3 id="ordered-setの前後制約">ordered setの前後制約</h3>
+<p>発動条件: active indexの追加削除で隣接区間分割だけが変化するとき。</p>
+<p>predecessor/successorを探し、該当二matrixを張り替える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>prefix count制約を差分区間のexact coffee数へ変え、隣接禁止の跨ぎ情報をendpoint二bitだけに圧縮する。</p>
+<p>別の問題へ持ち帰る視点: 動的prefix制約ではactive制約間のtransferを辺とみなし、頂点挿入削除が隣接辺だけを変更する構造を使う。</p>
+<h2 id="正当性">正当性</h2>
+<p>前端状態s・後端状態tごとの係数は、強制coffeeの隣をteaにして残りへnoadjを適用する。例えばf00=noadj(n-1,r)、n≥3のf11=noadj(n-3,r-1)である。 制約なしsuffixは、直前がteaならfib[m]、coffeeならfib[max(m-1,0)]通り。ここでfib[0]=1,fib[1]=2,fib[m]=fib[m-1]+fib[m-2]である。 a_x変更で変わる区間はx自身と次のactive indexだけ。ordered setで前後制約を求め、二点matrix更新と全積取得をO(log N)で行える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>noadj(n,r)はr&lt;0やn&lt;0、n-r+1&lt;rなら0とし、n=1,2のf各成分を公式どおり個別処理する。更新前後のsuccessorとlast active、matrix積順を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>active制約なし、一点制約、矛盾するcount差、隣接二indexをともにcoffee指定、制約解除で区間が再結合する例を全bit列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>前計算O(N)、Q更新O(Q log N)、固定2×2行列。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、階乗・逆階乗・fib・制約木。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq X_j \leq N (1 \leq j \leq Q); -1 \leq Y_j \leq X_j (1 \leq j \leq Q); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>長さ3、最初2日でcoffee数1、全3日でcoffee数2。</p>
+<ol>
+<li>非隣接coffee配置を調べる。</li>
+<li>101だけが両prefix個数を満たし、110,011は隣接違反。</li>
+</ol>
+<p>期待される結果: 1通り。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最初2日でcoffee数2へ変更すると何通りか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>最初の2日が11を強制するため0通り。二項係数の不可能範囲は0として扱う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc418/editorial/13626">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc418-editorial-13626-7b22a94fd013f7f050961852897a733c49ad51c660ebfcd71d272c56a57fd8b6</li>
+<li><a href="https://atcoder.jp/contests/abc418/tasks/abc418_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc418-f-problem-0dd69620bcc18403d81b76c9df85aa3b6d929eacf105e40fb1bc9060f727e07a</li>
+</ul></main>
+</body></html>

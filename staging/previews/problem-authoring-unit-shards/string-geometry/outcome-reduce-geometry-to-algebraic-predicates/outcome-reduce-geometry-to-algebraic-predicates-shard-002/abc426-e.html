@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC426-E — Closest Moment</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC426-E — Closest Moment</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></p>
+<ul>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>凸包の境界候補列挙・半平面交差。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>二人はいずれも線分上を単位速度で進み、短い方が到着した後だけ一人が動く。長い移動時間 p と短い移動時間 q に揃えると、距離ベクトルは各時間区間で一次関数になる。</p>
+<p>採用する候補: p≥q となるよう二人を交換し、同時移動区間 [0,q] と一人だけ動く区間 [q,p] をそれぞれ原点と線分の最短距離へ帰着する。</p>
+<p>各フェーズの相対位置が線分を動く点となり、点と線分の距離を定数時間で求められる。</p>
+<p>棄却する候補: 時刻全体を細かく刻んで二人の距離をサンプリングする。</p>
+<p>連続時刻の真の最小値を保証できず、刻み幅による誤差管理も不要に難しい。</p>
+<p>同時移動中の相対位置は (A-C)+(t/q)((E-A)-(D-C)) であり、t/q∈[0,1] に対して一つの線分を描く。</p>
+<p>一人の到着後は、動く側の線分 EB と停止点 D の距離を求めればよい。</p>
+<p>p&lt;q なら人物を入れ替える。時刻 q の長い側の位置 E=A+(q/p)(B-A) を求め、相対位置の端点 A-C と E-D を結ぶ線分から原点への距離、および線分 EB から D への距離の小さい方を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="相対運動">相対運動</h3>
+<p>発動条件: 複数点が同時に等速直線運動し、その距離の最小値を求めるとき。</p>
+<p>一方から他方を引いた相対位置を考え、時間に対する一本の線分へ変換する。</p>
+<h3 id="点と線分の距離">点と線分の距離</h3>
+<p>発動条件: 連続パラメータ上の一次ベクトルのノルムを最小化するとき。</p>
+<p>射影係数を [0,1] に clamp して最近点を求めるか、凸性を用いた三分探索で評価する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>停止時刻で区切ることで、速度が変わる運動も二本の相対位置線分だけに整理できる。</p>
+<p>別の問題へ持ち帰る視点: 連続時間の等速運動では座標を個別追跡せず、相対位置が描く幾何図形を見る。</p>
+<h2 id="正当性">正当性</h2>
+<p>到着時刻順に区間を分けると相対位置は各区間で一次関数なので、距離最小は原点とその相対segmentの最短距離に等しい。同時移動区間の端相対位置と停止後の移動segmentを求めれば全時刻を覆う。segmentへの射影を[0,1]にclampすることで区間外の最小点を除き、二区間最小を取ると全時刻最小になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>長さ 0 の線分では除算を避けて端点距離を使う。浮動小数の出力精度と、p&lt;q の人物交換後の座標対応に注意する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>時刻 q の E が長い側の移動比 q/p で計算されているか、両フェーズの端点が時刻 q で連続するかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(1)。同時移動と片方停止の二segment距離。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 2\times 10^5; -100\leq TS_X,TS_Y,TG_X,TG_Y,AS_X,AS_Y,AG_X,AG_Y \leq 100; (TS_X,TS_Y)\neq (TG_X,TG_Y); (AS_X,AS_Y)\neq (AG_X,AG_Y); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>Takahashiは(0,0)→(4,0)、Aokiは(2,2)→(2,0)、共に単位速度。</p>
+<ol>
+<li>時刻2で両者(2,0)にいる。</li>
+<li>距離は非負なので0が下限かつ達成。</li>
+</ol>
+<p>期待される結果: 0。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>両者が(0,0)→(4,0)と(0,3)→(4,3)なら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>同じ速度で並走し相対位置は常に(0,−3)。同時到着後も距離3。</p>
+<p>確認結果: 3。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc426/tasks/abc426_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc426-e-problem-064cb3ae02052d71eb4c77ee70984fb8d76f9ba8578c9bc580933b2b46f0cef3</li>
+<li><a href="https://atcoder.jp/contests/abc426/editorial/14151">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc426-editorial-14151-841f0e2f065f1d8848b53ab8df599a199a5740f9c0153aa032edd6c748269877</li>
+</ul></main>
+</body></html>

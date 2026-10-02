@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-univariate-convex-function-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6df4d692fdf21170c56e6d1a9f8f62bf3f5980538d8f47aa09ff4ce025df2bee",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0525dc8d292a8bbdf7c9038ed9414e747fb0d8a6f2e164584ef9988867b925cf",
+  "reviewDigest": "95dd348bdf456a867f2fd8670fa3080c7267a4185fac2b8921472647afbc315b",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc224-g.html",
+      "digest": "5e7a20ccdb94274b3492833558a4c4bbfb77184f5c2bab0bc10f109a589dddc8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc314-ex.html",
+      "digest": "283f3c93a46f04cbdc852f4434ddca769a4dee5dc2ba1fad733976ad3cf826b3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/index.html",
+      "digest": "a987af1228937e53915f3a25eb44a0a90492b142b462fad0fb76764c6f4cf066"
+    }
+  ],
+  "snapshotDigest": "8d0b0f69dc9cde1ae2180f9a9da5777ace8ad43a357d4ebddade5888bbe8b7de"
+}

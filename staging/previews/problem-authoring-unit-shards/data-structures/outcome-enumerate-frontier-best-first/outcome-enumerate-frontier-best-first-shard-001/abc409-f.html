@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC409-F — Connecting Points</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC409-F — Connecting Points</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></p>
+<ul>
+<li>現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>component 間距離の最小値は、異なる component に属する頂点 pair の Manhattan 距離の最小値と同じなので、候補を全頂点 pair として持てる。</p>
+<p>type 2 で最小距離 k の全 pair を同時に union すれば、同じ k の辺による推移的な連結も一回の query 内で正しく反映される。</p>
+<p>採用する候補: 追加済み全頂点 pair を距離付き min-heap に入れ、DSU で既に同 component の stale pair を遅延削除する</p>
+<p>頂点追加時に過去頂点との pair だけを追加し、type 2 では最初の非連結 pair の距離 k と同距離の全 pair を union する。各 pair は一度 push/pop される。</p>
+<p>棄却する候補: type 2 ごとに現在の component pair ごとの距離を全頂点 pair から再計算する</p>
+<p>最大約3000頂点の二乗走査を最大1500 queryで繰り返し、component merge後も同じ距離を何度も評価する。</p>
+<p>heap 上位が既に連結ならその pair は将来も連結のままなので、永久に捨ててよい。この単調性で stale entry の再構築が不要になる。</p>
+<p>最初の有効 pair を union した後も heap key が k の entry をすべて処理する必要がある。途中で component が変化しても、距離 k の全辺を加えた連結成分が問題文の同時 merge と一致する。</p>
+<p>初期 N 頂点の全 unordered pair を heap に入れる。type 1 では新頂点と既存全頂点の pair を追加する。type 2 は連結済み pair を pop し、heap が空なら -1、そうでなければ最小 key k を固定して key=k の pair を全て pop・unionして k を出力する。type 3 は DSU.same を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="priority-queue-の遅延削除">priority queue の遅延削除</h3>
+<p>発動条件: 候補の有効性が DSU の merge で失われるが、失効後に復活しないとき。</p>
+<p>heap top を使う直前に same を確認し、stale pair を捨てる。</p>
+<h3 id="dsu">DSU</h3>
+<p>発動条件: 辺追加だけで component が併合され、connectivity query があるとき。</p>
+<p>最小距離 group の全 pair を union し、type 3 をほぼ定数時間で答える。</p>
+<h3 id="全-pair-の-offline-候補化">全 pair の offline 候補化</h3>
+<p>発動条件: 総頂点数が約3000で、各 pair の固定距離を一度だけ計算すればよいとき。</p>
+<p>初期および追加時に unordered pair を heap へ一度登録する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>component 距離を明示管理せず、頂点 pair の supersets を heap に保持して DSU で現在有効な最小だけを抽出する。</p>
+<p>別の問題へ持ち帰る視点: 集合間最小値が要素 pair の最小で、集合がmergeしかしないなら、全 pair候補＋単調なlazy invalidationを検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>heap 上位が既に連結ならその pair は将来も連結のままなので、永久に捨ててよい。この単調性で stale entry の再構築が不要になる。 最初の有効 pair を union した後も heap key が k の entry をすべて処理する必要がある。途中で component が変化しても、距離 k の全辺を加えた連結成分が問題文の同時 merge と一致する。 頂点追加時に過去頂点との pair だけを追加し、type 2 では最初の非連結 pair の距離 k と同距離の全 pair を union する。各 pair は一度 push/pop される。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>type 2 の開始前に k 未満を含む連結済み top をすべて除く。同距離 k は有効・無効を問わず全て pop し、距離は 64 bit、総 pair 数分のmemoryを確保する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>既に全連結、同じ最小距離がchain状に並ぶ、同距離pairの一部がstale、新頂点が最小距離を更新する例を愚直component距離計算と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(P² log P+Q α(P))、Pは全追加後の頂点数。各pairは一回push/popされる。</p>
+<h3 id="空間">空間</h3>
+<p>O(P²+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 1500; 1\leq Q\leq 1500; 0\leq x_i,y_i\leq 10^9; For queries of type 1, 0\leq a,b\leq 10^9.; For queries of type 3, let n be the number of vertices in G just before processing that query, then 1\leq u\lt v\leq n.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点(0,0),(1,0),(2,0)、初めは各別成分。</p>
+<ol>
+<li>最小距離1のpairは12,23。</li>
+<li>同じqueryで両方unionする。</li>
+</ol>
+<p>期待される結果: type2の出力1、全三点が同成分。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最初のpair12だけunionしてqueryを終えてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>同距離23も同時merge対象なので不可。同じkeyの全entryを処理する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc409/editorial/13228">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8</li>
+<li><a href="https://atcoder.jp/contests/abc409/tasks/abc409_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e</li>
+</ul></main>
+</body></html>

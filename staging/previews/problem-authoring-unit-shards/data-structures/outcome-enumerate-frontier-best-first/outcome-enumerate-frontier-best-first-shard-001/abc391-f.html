@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC391-F — K-th Largest Triplet</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC391-F — K-th Largest Triplet</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></p>
+<ul>
+<li>現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>A,B,Cを降順にすると目的f(i,j,k)=A_iB_j+B_jC_k+C_kA_iは各indexについて単調非増加である。</p>
+<p>三次元gridの点(i,j,k)が列挙された後にだけ、各軸を1増やした三近傍が次の候補になり得る。</p>
+<p>採用する候補: (1,1,1)からmax-heapで単調三次元gridの値をbest-first列挙する</p>
+<p>上位K≤5×10^5点だけをpopし、各点から三近傍を一度だけpushすればO(N log N+K log K)でK番目へ到達する。</p>
+<p>棄却する候補: N^3個のtriplet値を全て生成してsortする</p>
+<p>N=2×10^5で候補数が巨大で、Kが小さい制約を活用していない。</p>
+<p>未列挙点へ至るindex減少path上には必ずfrontier点があり、単調性によりheap最大が全未列挙中の最大である。</p>
+<p>同じ点は複数の親から生成されるのでvisited setで一度だけpushする。</p>
+<p>各列を降順sortし、(value,0,0,0)をmax-heapへ入れる。K回popし、範囲内の(i+1,j,k),(i,j+1,k),(i,j,k+1)を未訪問なら計算してpushする。K回目のvalueを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="monotone-multidimensional-best-first-search">monotone multidimensional best-first search</h3>
+<p>発動条件: 各座標増加でscoreが悪化し、上位少数だけ欲しいとき。</p>
+<p>原点からpriority queueでfrontierを展開する。</p>
+<h3 id="implicit-graphの重複排除">implicit graphの重複排除</h3>
+<p>発動条件: 複数経路から同じ状態へ到達するheap探索をするとき。</p>
+<p>tupleをhash setへ登録して一回だけ追加する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>三項式にcross termがあっても全値が正なので各配列index方向の単調性が保たれ、一般の三次元上位列挙として扱える。</p>
+<p>別の問題へ持ち帰る視点: 複雑なscoreでも各変数をsortした後の偏微分的な単調性を確認し、K-best grid探索へ落とす。</p>
+<h2 id="正当性">正当性</h2>
+<p>未列挙点へ至るindex減少path上には必ずfrontier点があり、単調性によりheap最大が全未列挙中の最大である。 同じ点は複数の親から生成されるのでvisited setで一度だけpushする。 上位K≤5×10^5点だけをpopし、各点から三近傍を一度だけpushすればO(N log N+K log K)でK番目へ到達する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>積と和は最大3×10^18付近なので符号付き64 bit境界を確認する。visited keyのpackingでcollisionやoverflowを起こさない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤8で全triplet sortと比較し、同値が多く同一点が三方向から生成されるcaseで重複countを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+K log K)、三列の長さN、上位K点。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 1\leq K \leq \min(N^3,5\times 10^5); 1\leq A_i,B_i,C_i \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=B=C=(2,1)、K=4。</p>
+<ol>
+<li>初期(2,2,2)は12。</li>
+<li>一軸を1にした三点は各8なので次の三順位を占める。</li>
+</ol>
+<p>期待される結果: 4番目の値8。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値8の三点を一つにまとめてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>別のindex三つ組なので三順位として数える。visitedは値でなくindex tupleに付ける。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc391/editorial/12085">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928</li>
+<li><a href="https://atcoder.jp/contests/abc391/tasks/abc391_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0</li>
+</ul></main>
+</body></html>

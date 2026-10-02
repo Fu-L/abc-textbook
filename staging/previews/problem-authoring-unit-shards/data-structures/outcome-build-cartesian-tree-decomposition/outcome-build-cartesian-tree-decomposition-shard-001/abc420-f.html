@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC420-F — kirinuki</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC420-F — kirinuki</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/cartesian-tree.md">大小関係をCartesian treeへ変換する</a></p>
+<ul>
+<li>配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/monotone-stack-queue.md">支配関係から不要な候補を単調stack・queueで削る</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>bottom rowを固定し、各columnの上向き連続dot数h_jを更新すると、横interval幅wから作れるrectangle数はmin(min h on interval,floor(K/w))である。</p>
+<p>各intervalをtie-break付き最小h_iへ一意に担当させると、iから左右へ伸ばせる長さa,bが決まり、幅wのinterval個数は増加・一定・減少する台形状の一次関数g(w)になる。</p>
+<p>採用する候補: 各rowのhistogramにCartesian tree／monotonic stackでminimum担当範囲を求め、幅別寄与をfloor(K/w)のprefix sumsでO(1)集計する</p>
+<p>g(w)は三つの一次関数区間。min(h_i,floor(K/w))はw≤floor(K/h_i)でh_i、それ以降floor(K/w)なので、Σq_wとΣwq_wの前計算で各iを定数時間処理できる。</p>
+<p>棄却する候補: 全top/bottom row pairについて共通dot列を作り、全horizontal intervalを数える</p>
+<p>row pairがO(N^2)、さらにcolumn走査が必要で面積制約NM≤5×10^6でも二乗規模になる。</p>
+<p>a≤bとすればg(w)=w (1≤w≤a)、a (a&lt;w≤b)、a+b-w (b&lt;w≤a+b-1)。したがって各部分はαw+βで表せる。</p>
+<p>q_w=floor(K/w)とwq_w=w floor(K/w)のprefixを用意すれば、threshold d=floor(K/h_i)でsplitしたΣg(w)min(h_i,q_w)を、各一次区間につき定数個のprefix差で求められる。</p>
+<p>各bottom rowでh_jを更新し、(h_j,j)などの一意順序によるnearest smaller境界からa=i-l+1,b=r-i+1を得る。h_i=0はskipし、gの三rangeをd=K/h_iでも分割して、h_iΣ(αw+β)またはαΣwq_w+βΣq_wを足す。全rowの寄与を64 bitで合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="histogram-reduction">histogram reduction</h3>
+<p>発動条件: all-dot subrectangleをbottom固定の連続高さ配列へ変換するとき。</p>
+<p>各columnの連続dot数をrowごとにO(1)更新する。</p>
+<h3 id="cartesian-treemonotonic-stack">Cartesian tree／monotonic stack</h3>
+<p>発動条件: 全subarrayを一意なminimum位置へ割り当てたいとき。</p>
+<p>tie-break付きnearest smaller境界から各iがminimumとなる左右extentを得る。</p>
+<h3 id="floor値の重み付きprefix-sum">floor値の重み付きprefix sum</h3>
+<p>発動条件: Σ(αw+β)floor(K/w)を多数rangeで求めたいとき。</p>
+<p>floor(K/w)とw倍の二prefix配列を前計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>area≤Kを高さごとに列挙せず、interval minimum hと幅wのmin(h,K/w)へし、幅の選択multiplicityが一次関数になることまで利用する。</p>
+<p>別の問題へ持ち帰る視点: subarray minimum寄与に長さ依存capが掛かる場合、担当範囲の長さ分布をpiecewise polynomial化し、cap列のmoment prefixと掛け合わせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>a≤bとすればg(w)=w (1≤w≤a)、a (a&lt;w≤b)、a+b-w (b&lt;w≤a+b-1)。したがって各部分はαw+βで表せる。 q_w=floor(K/w)とwq_w=w floor(K/w)のprefixを用意すれば、threshold d=floor(K/h_i)でsplitしたΣg(w)min(h_i,q_w)を、各一次区間につき定数個のprefix差で求められる。 g(w)は三つの一次関数区間。min(h_i,floor(K/w))はw≤floor(K/h_i)でh_i、それ以降floor(K/w)なので、Σq_wとΣwq_wの前計算で各iを定数時間処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>equal hの担当が重複しないよう左右stackのstrict/non-strict規約を対にする。h=0でK/hを計算せず、幅上限M、dのrange外clamp、答えは64 bitとする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全dot、全#、K=1、同じ高さが連続するhistogram、Kが全area以上の小gridをrectangle全列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(HW+W)、H,Wは盤面の高さと幅。floor(K/w)のprefixを先に構築する。</p>
+<h3 id="空間">空間</h3>
+<p>O(W)、高さ・stack・prefix表。入力保存を含めるならO(HW)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N, M, and K are integers.; 1 \le N,M \le 5 \times 10^5; 1 \le N \times M \le 5 \times 10^6; 1 \le K \le N \times M; S_i is a string of length M consisting of . and #.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>1×3盤面が全てdot、K=2。</p>
+<ol>
+<li>高さは(1,1,1)。幅1の長方形は3、幅2は2。</li>
+<li>幅3は面積3で除外。等高さの担当は一意にする。</li>
+</ol>
+<p>期待される結果: 面積2以下のdot長方形は5個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値を左右両方でstrict比較するとどうなるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>複数位置が同じ区間の最小値を担当し重複計数する。左右のstrict/non-strict規約を対にする必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc420/editorial/13741">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7</li>
+<li><a href="https://atcoder.jp/contests/abc420/tasks/abc420_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95</li>
+</ul></main>
+</body></html>

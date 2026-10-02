@@ -1,0 +1,428 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-partition-integer-parameter-ranges-shard-001",
+  "packets": [
+    {
+      "problemId": "abc230-e",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{12}; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "s=floor√Nとしてi≤sは直接足す。i>sの商q≤sについてfloor(N/(q+1))<i≤floor(N/q)をi>sへ制限して個数を数える。この二領域は互いに素で全iを覆い、各商の寄与を一度だけ足す。",
+          "sourceRevisionIds": [
+            "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+            "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0",
+          "path": "src/content/sources/abc212-abc263/source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc230_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019",
+          "path": "src/content/sources/abc212-abc263/source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc230_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc239-ex",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-stochastic",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks",
+        "tag-modular-arithmetic",
+        "tag-stochastic-expectation-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^9; 1 \\leq M \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "積pの後に掛けられる上限x=floor(M/p)が将来を全て決める。出目1の自己ループを移項するとf(x)=(N+Σ_{i=2}^N f(floor(x/i)))/(N−1)。i≥2では状態が減るので再帰が停止する。同じ商を持つ区間の項は同値なため個数を掛けてまとめても和は変わらず、商集合の閉性でmemoが全必要状態を網羅する。",
+          "sourceRevisionIds": [
+            "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+            "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd",
+          "path": "src/content/sources/abc212-abc263/source-abc239-editorial-3357-54463da08e324651d0050c5b6c170c4021d501f36f2649802462363b16ca18dd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc239_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94",
+          "path": "src/content/sources/abc212-abc263/source-abc239-ex-problem-13680a65b0b6c1c57a37d580471b16ddc14afd764ec4d8b683c581db1f284e94.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc239_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc293-f",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 1000; 2 \\leq N \\leq 10^{18}; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "d≥3桁の01表現が存在するならb^{d−1}≤N≤Σ_{i<d}b^i。後者は(b+1)^{d−1}未満なので異基数の可能域は重ならず、その桁数で調べるbは高々一つ。d=2のN,N−1と全d≥3の候補を取り、実際の除算で全桁0/1を確認すれば全可能基数を尽くす。",
+          "sourceRevisionIds": [
+            "source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529",
+            "source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529",
+          "path": "src/content/sources/abc264-abc315/source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc293_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f",
+          "path": "src/content/sources/abc264-abc315/source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc293_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc356-e",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq A_i \\leq 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各unordered pairは小値dと大値xで一意に向きを決められる。同値はC(freq[d],2)で別に数える。異値では商qの正確な区間[qd,(q+1)d−1]をx>dで切り、freq[d]·区間個数·qを足す。頻度prefix和は各bucketの個数を正確に返すので全pairのfloor(max/min)を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc356-e-problem-1e0f17fba263518103ea1f25c1e38af9f2d1c4ad5354e40fadfa9575c47bfe5e",
+            "source-abc356-editorial-10116-e9887115bd504bac202ff7241b487b6e336f909dd8f4ea7952d06e6079a07c56"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc356-e-problem-1e0f17fba263518103ea1f25c1e38af9f2d1c4ad5354e40fadfa9575c47bfe5e",
+          "path": "src/content/sources/abc316-abc367/source-abc356-e-problem-1e0f17fba263518103ea1f25c1e38af9f2d1c4ad5354e40fadfa9575c47bfe5e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc356_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc356-editorial-10116-e9887115bd504bac202ff7241b487b6e336f909dd8f4ea7952d06e6079a07c56",
+          "path": "src/content/sources/abc316-abc367/source-abc356-editorial-10116-e9887115bd504bac202ff7241b487b6e336f909dd8f4ea7952d06e6079a07c56.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc356_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc414-e",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^{12}; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "相異なる正a,b,cのa mod b=cはb<aと非倍数条件に等しく、cは自動的に0<c<b<aで一意。bごとの候補N−bから倍数floor(N/b)−1を除いた和はN(N+1)/2−Σfloor(N/b)。同商区間[l,N/q]の一括加算は全bを一度覆うので、その差がexact個数になる。",
+          "sourceRevisionIds": [
+            "source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7",
+            "source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7",
+          "path": "src/content/sources/abc368-abc419/source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc414_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a",
+          "path": "src/content/sources/abc368-abc419/source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc414_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc452-e",
+      "learningOutcomeIds": [
+        "outcome-partition-integer-parameter-ranges"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 5 \\times 10^5; 1 \\leq A_i, B_j \\leq 5 \\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "商q固定の正確なbucketは[jq,j(q+1)−1]。この範囲でi modj=i−jqなので、A_i重み和はΣiA_i−jqΣA_iとなる。二つのprefix差でその全寄与を評価でき、商bucketは互いに素で指定添字領域を覆う。特にi<jを含む領域ではq=0も別途加える必要がある。",
+          "sourceRevisionIds": [
+            "source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db",
+            "source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db",
+          "path": "src/content/sources/abc420-abc466/source-abc452-e-problem-5f1581080675f4fb95414d24e1530ca25f21b78a01cd26a7d776c5f9af5964db.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc452_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88",
+          "path": "src/content/sources/abc420-abc466/source-abc452-editorial-18408-85a9ae859fce76e2bd46d644fe5a8e22341b3d766381b400fb2476808c5ddc88.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc452_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

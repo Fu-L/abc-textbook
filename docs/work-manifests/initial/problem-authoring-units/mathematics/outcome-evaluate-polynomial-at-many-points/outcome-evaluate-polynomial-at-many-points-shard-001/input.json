@@ -1,0 +1,87 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-evaluate-polynomial-at-many-points-shard-001",
+  "packets": [
+    {
+      "problemId": "abc272-ex",
+      "learningOutcomeIds": [
+        "outcome-evaluate-polynomial-at-many-points",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-formal-power-series",
+        "unit-inclusion-exclusion",
+        "unit-polynomial-convolution",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "多項式の多点評価・補間の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-generating-functions",
+        "tag-polynomial-multipoint-evaluation",
+        "tag-combinatorial-coefficients",
+        "tag-convolution",
+        "tag-inclusion-exclusion",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N\\leq 2\\times 10^5; 0\\leq A_i \\leq N-1; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "rotation対称性で一枚の上向き確率をN倍すればよい。指定L条件の成立総数G(L)はexact成立数F(K)をC(K,L)で重み付けした二項変換である。g=f e^xへの変換でDPの微分作用が(j+C_i)の乗算へ対角化されるため、その積の多点評価とe^{−x}畳み込みが元DPを復元する。最後の二項反転でFを得て奇数回flipの重みだけ足す。",
+          "sourceRevisionIds": [
+            "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba",
+            "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba",
+          "path": "src/content/sources/abc264-abc315/source-abc272-ex-problem-13a1b5608d7d4c4ef6a93585f42563a31743bd693135ae3e339b3dbcbf3657ba.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc272_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477",
+          "path": "src/content/sources/abc264-abc315/source-abc272-editorial-4963-2fab3266c32ba5ad324a1e421e6f7965abecb00b9e8fbd6bf7be0ce24b25d477.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc272_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

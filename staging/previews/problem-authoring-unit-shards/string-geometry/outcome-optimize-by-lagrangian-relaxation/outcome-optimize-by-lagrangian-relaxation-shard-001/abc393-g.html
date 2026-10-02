@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC393-G — Unevenness</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC393-G — Unevenness</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/lagrangian-relaxation.md">Lagrangian relaxation・Aliens trick</a></p>
+<ul>
+<li>個数制約へpenalty λを加えたoracleで双対下界を求める。厳密復元には個数別最適値の離散凸性などから対象個数で双対ギャップがないことを証明し、その上で個数単調性とtie-breakにより支持直線を探索する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/min-cost-flow.md">最小費用流・circulation</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/rational-approximation.md">連分数・Stern–Brocotで有理近似する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Lagrangian relaxation・Aliens trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>目的Φ=Σ隣接差、変更量L=Σ|B−A|とする。budget L≤Kの制約へλ≥0を付け、h(λ)=min_B(Φ+λL)をoracleで求める。hは一次式の下包絡線なので凹で、h(λ)−λKは常にprimal最適値の下限。強双対によりその最大が答えになる。費用circulationの値をf=−hと定義する場合はmin(f+λK)の符号を最後に反転する。grid両向き辺とsuper nodeの容量λ・cost±Aによるflow双対から残余potentialを復元する。budgetを挟むbreakpoint両側のpotentialを同支持面で補間すればdual下限を達成する配置が得られる。breakpointを有理Stern–Brocot探索し容量は分母倍で整数化する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<p>budget付き凸LPはLagrange oracleの支持線を探索し、双対値と主potentialを同時に復元する。min_B(Φ+λL)の値は凹であり、min-cost flow値との符号を明示する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>grid隣接絶対差と入力値からのL1変更はnetwork flow双対へ落ちる。rational breakpoint両側の最適potentialを補間してbudget境界の解を構成できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>Φ(B)=Σedge|B_u−B_v|、L(B)=Σ|B−A|と置く。固定λ≥0のh(λ)=min_B(Φ+λL)は各Bの一次式の下包絡線で凹。任意budget合法Bにh−λK≤Φが成り立ち、LP強双対によりmax_λ(h−λK)が最適値。費用circulationの残余差分制約から各λの最適potentialを復元し、budgetを挟む同支持面の二potentialを凸結合するとL≤Kを満たしdual下限を達成する。flow値をf=−hとする実装では符号を一貫して戻す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>hとflow値fの符号を固定し、max(h−λK)または−min(f+λK)のどちらか一貫した式で返す。負cost辺と有理λ容量の分母倍を扱う。budgetが余るΦ=0のcorner caseでは等号補間を強制しない。</p>
+<h2 id="復習の核">復習の核</h2>
+<p>N2のA=[[0,2],[0,2]],K1で最適3を三角不等式と構成の両側から確認する。minを取った一次式の包絡線は凹であることとflow双対値の符号を復習する。</p>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(I·F(V,E,Cmax))。V=N²+1、E=O(N²)、Iは有理Stern–Brocot探索回数、Fは整数容量min-cost circulationの一回費用。</p>
+<h3 id="空間">空間</h3>
+<p>O(V+E)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10; 1 \leq P \leq 10^{12}; 1 \leq Q \leq 10^{12}; \gcd(P, Q) = 1; 0 \leq A_{i,j} \leq 10; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、A=[[0,2],[0,2]]、budget K=1。</p>
+<ol>
+<li>B=[[0,1.5],[0,1.5]]なら変更cost1、隣接差和3。</li>
+<li>横二edgeの三角不等式よりΦ(B)≥4−L(B)≥3、縦edgeは非負。</li>
+</ol>
+<p>期待される結果: 最小3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>budget K=5で変更costを必ず5へ合わせるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全cellを1にするとL=4でΦ=0の絶対下限。制約は≤Kなので余ってよく、budget等号補間が不要なcorner case。</p>
+<p>確認結果: Φ=0、budgetは余ってよい。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc393/editorial/12192">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc393-editorial-12192-51ff1775a4a84d6ea3fa0c64dbec89b06500e2c486d30a6f6b6b6bac1f4c3756</li>
+<li><a href="https://atcoder.jp/contests/abc393/tasks/abc393_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc393-g-problem-941c6da45dc5fe62551ec4fb6a70726479c20b28a4f3308d466fa9cb8822a201</li>
+</ul></main>
+</body></html>

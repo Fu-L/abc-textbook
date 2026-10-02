@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC377-G — Edit to Match</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC377-G — Edit to Match</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/trie-prefix.md">Trieで共有接頭辞を索引化する</a></p>
+<ul>
+<li>文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>過去文字列 T を S_k に変える最小操作数は |S_k|+|T|-2·lcp(S_k,T) である。各 prefix p について、p を接頭辞にもつ過去文字列の最小長だけ分かれば全 T の最小を取れる。</p>
+<p>採用する候補: 過去文字列を trie に挿入し、各 node にその prefix をもつ文字列の最小長を保持して、S_k の root-to-leaf path 上で式を最小化する。</p>
+<p>必要な候補は S_k の各 prefix に対応する O(|S_k|) 個へ集約され、全長和に比例する時間で query と挿入ができる。</p>
+<p>棄却する候補: 新しい文字列ごとに全過去文字列との LCP を直接比較する。</p>
+<p>文字列数と総長が2×10^5でも、類似した長い文字列が多いと比較総量が二乗になる。</p>
+<p>削除して LCP まで戻り、残りを追加する編集だけなので距離式は長さと LCP だけで決まる。</p>
+<p>固定 prefix 長 i の候補では |T| が最小の過去文字列だけ残せば、他は同じ LCP で必ず劣る。</p>
+<p>trie root を空文字列長0で初期化する。S_k を辿りながら node の minLen を使い |S_k|+minLen-2i を評価し、出力後に path 上の minLen を |S_k| で chmin する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="trie-上の-prefix-dp">Trie 上の prefix DP</h3>
+<p>発動条件: 文字列間コストが共通 prefix 長と相手の要約値で決まるとき。</p>
+<p>各 prefix node に過去候補の最小長を集約する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>編集列を考える代わりに、最適な折返し地点が二文字列の LCP であることを式にする。</p>
+<p>別の問題へ持ち帰る視点: 同じ prefix を共有する候補は、将来の query に必要な min 長だけを残せる。</p>
+<h2 id="正当性">正当性</h2>
+<p>末尾削除追加だけの最短編集は共通prefixまで戻る距離|S|+|T|−2LCP。固定prefix深さiでは最短の過去Tだけ残せば他Tより候補が悪化しない。全prefix候補を走査するため実際の最良LCPも含まれる。自己挿入前に評価し空列候補をrootへ入れれば全許可過去列との最小値を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>空文字列を過去候補として root に長さ0で入れる。答えを計算してから S_k 自身を挿入し、同時刻の自己利用を防ぐ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>距離式 |S|+|T|-2·lcp を先に導き、固定 LCP なら T のどの情報だけが必要かを問い直す。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(L)、L=Σ|S_i|。trie上の最小長を更新する。</p>
+<h3 id="空間">空間</h3>
+<p>O(L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; Each S_i is a string of length at least 1 consisting of lowercase English letters.; \displaystyle \sum_{i=1}^N |S_i|\le 2\times 10^5</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>入力順abc,abd,ab。</p>
+<ol>
+<li>abcは空から3追加。abdはabcからc削除+d追加で2。</li>
+<li>abはabc/abdから末尾一文字削除で1。</li>
+</ol>
+<p>期待される結果: 3,2,1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>現在文字列をtrieへ先に登録すると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>自分自身を距離0候補にしてしまう。前の列だけ使えるので評価後にminLen更新する。</p>
+<p>確認結果: 評価後に登録。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc377/editorial/11244">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b</li>
+<li><a href="https://atcoder.jp/contests/abc377/tasks/abc377_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a</li>
+</ul></main>
+</body></html>

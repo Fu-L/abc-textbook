@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC224-E — Integers on Grid</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC224-E — Integers on Grid</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dag-topological-processing.md">DAGのtopological processing</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>移動のたびに書かれた値が狭義に増えるので遷移に閉路はなく、値の大きいマスから答えを確定できる。ただし同じ行・列の全候補を毎回走査すると疎なNマスでも二乗時間になる。 dp_i は max(rmax[r_i],cmax[c_i]) であり、rmax,cmax を『現在値より真に大きいマスの dp+1』に保てば漸化式と一致する。 同じ a_i のマス同士は移動できないため、同値の一群は全てdpを計算してからrmax,cmaxへ反映しなければならない。</p>
+<p>採用する候補: a_i の降順にマスを処理し、各行・列について既に処理した大きい値への最長移動数を rmax,cmax として集約する。</p>
+<p>次の移動先に必要なのは同じ行と列にある大きい値のdp最大値だけであり、二つの配列から各マスを定数回で評価できる。</p>
+<p>棄却する候補: 各マスから同じ行・列にある全ての大きい値のマスを列挙してdp遷移する。</p>
+<p>一つの行または列にN個近く集中すると遷移辺が二乗個になり、N=2×10^5 を処理できない。</p>
+<p>dp_i は max(rmax[r_i],cmax[c_i]) であり、rmax,cmax を『現在値より真に大きいマスの dp+1』に保てば漸化式と一致する。</p>
+<p>同じ a_i のマス同士は移動できないため、同値の一群は全てdpを計算してからrmax,cmaxへ反映しなければならない。</p>
+<p>N個のマスをa_i降順にsortし、等しい値のbatchごとに dp_i=max(rmax[r_i],cmax[c_i]) を先に求め、その後で両最大値をdp_i+1に更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="値順オフラインdp">値順オフラインDP</h3>
+<p>発動条件: 遷移が値の狭義な大小方向だけに進み、値順がDAGのトポロジカル順序になるとき。</p>
+<p>大きい値から処理して遷移先のdpを確定済みにし、同値は一括処理して狭義条件を守る。</p>
+<h3 id="属性別最大値による遷移集約">属性別最大値による遷移集約</h3>
+<p>発動条件: 次状態候補が同じ行・列・色など少数の属性集合の和で、必要なのが候補値の最大だけのとき。</p>
+<p>行ごと・列ごとの最大dpを保持し、明示的な全遷移辺を作らず二つの参照へ縮約する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>狭義増加条件は処理順を与えるだけでなく、同じ値の更新を遅延させる必要性まで決めている。</p>
+<p>別の問題へ持ち帰る視点: 値順DPでは同値間遷移の可否を先に確認し、不可ならquery段階とupdate段階をbatchで分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>値が大きい順なら移動先DPは確定済み。同じ行列の最大dp+1だけで最良の一手先が求まる。同値batchは先に全dpを計算し後で更新するため禁止された等値移動を混ぜない。終端からの帰納法で最大移動回数が正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>等しいa_iの全dpを保存してから更新し、列側は必ず cmax[c_i] を更新する。入力順へ戻して答えるため元indexも保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>狭義不等号を見たら、同値を一件ずつ更新してはいけないことを思い出し、batchの読取りと書込みを分ける。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>指定マス数N、行H、列W。sort O(N log N)、集約 O(N)、初期配列O(H+W)。</p>
+<h3 id="空間">空間</h3>
+<p>マス、行列最大で O(N+H+W)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H, W \leq 2 \times 10^5; 1 \leq N \leq \min(2 \times 10^5, HW); 1 \leq r_i \leq H; 1 \leq c_i \leq W; 1 \leq a_i \leq 10^9; i \neq j \Rightarrow (r_i, c_i) \neq (r_j, c_j); All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>マス(1,1,5),(1,2,5),(2,2,9)。</p>
+<ol>
+<li>値9のdp0を行2列2へ1で登録。</li>
+<li>同値5の(1,2)は列2よりdp1、(1,1)は0。</li>
+<li>batch後に行1を更新。</li>
+</ol>
+<p>期待される結果: 順に0,1,0</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値5を一個計算直後に更新すると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>(1,1)が同値の(1,2)へ動けると誤認する。batch更新を遅らせる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc224/tasks/abc224_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc224-e-problem-76cd3a405fe7f1d2134f718f6be23b3b90252ef48741c934da2f1df943fe6ab7</li>
+<li><a href="https://atcoder.jp/contests/abc224/editorial/2814">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc224-editorial-2814-c729c4251bf523697578ba281e01425700ec2626b809d0607f13cd22b1acbba3</li>
+</ul></main>
+</body></html>

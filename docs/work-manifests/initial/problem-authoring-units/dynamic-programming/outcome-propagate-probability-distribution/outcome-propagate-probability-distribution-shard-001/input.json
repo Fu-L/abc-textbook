@@ -1,0 +1,596 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-propagate-probability-distribution-shard-001",
+  "packets": [
+    {
+      "problemId": "abc226-h",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 50; 1 \\leq K \\leq N; 0 \\leq L_i \\lt R_i \\leq 100; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "YをK番目に大きい値とするとY≥xは少なくともK個のX_i≥xと同値。独立性により成功数の生成多項式は∏((1−p_i(x))+p_i(x)z)。各単位区間ではp_i(x)が一次以下なので係数DPで正確に構成できる。非負変数の尾積分E[Y]=∫P(Y≥x)dxを各区間へ分割し、次数ごとの積分と総和を取れば期待値を求められる。法では全ての分母が可逆な範囲である。",
+          "sourceRevisionIds": [
+            "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+            "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412",
+          "path": "src/content/sources/abc212-abc263/source-abc226-editorial-2879-dfe38a694cf47c0cb83e3c33f246a7711411d10765451cf115ab90033ef59412.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc226_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48",
+          "path": "src/content/sources/abc212-abc263/source-abc226-h-problem-a3f12c676bb041bedf550f1c1ae5d7a4ea8ecc01e2399ae7cf16c95ddc393d48.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc226_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc275-e",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: M \\leq N \\leq 1000; 1 \\leq M \\leq 10; 1 \\leq K \\leq 1000; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非終端状態から全diceを1/Mで配り、超過は問題の反射式へ写すと一手の遷移確率を厳密に表す。到達時だけ答えへ加え終端からは再配布しないのでK手以内の初到達事象を重複なく合計する。",
+          "sourceRevisionIds": [
+            "source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35",
+            "source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35",
+          "path": "src/content/sources/abc264-abc315/source-abc275-e-problem-b97561aecbcc89972a79e16233b56c34864be19f2cce5013fb79a717c8681b35.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc275_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754",
+          "path": "src/content/sources/abc264-abc315/source-abc275-editorial-5116-c768f7063a150fe8d31d4a09abf16de832b93f5fad9ef4ef79a9903135411754.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc275_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc277-g",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3000; N-1 \\leq M \\leq \\min\\lbrace N(N-1)/2, 3000\\rbrace; 1 \\leq K \\leq 3000; 1 \\leq u_i, v_i \\leq N; u_i \\neq v_i; i \\neq j \\implies \\lbrace u_i, v_i\\rbrace \\neq \\lbrace u_j, v_j \\rbrace; The given graph is connected.; C_i \\in \\lbrace 0, 1\\rbrace; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "長さtの歩行prefixを固定すると、levelはそのprefix内のC=0到着数Xである。X²は、その到着時刻から同じ時刻も許して二つを順序付きで選ぶ方法数である。二つのmarkerの未選択/選択済みを四状態で追跡し、C=0到着で各markerを選ぶかを分岐させると、両方選択済みの重みはprefix確率×X²になる。したがってC=1到着時にその重みを足すと、まさに期待収入を足している。全歩行prefixの確率を辺の1/degで更新するので、K歩までの和が期待総収入になる。",
+          "sourceRevisionIds": [
+            "source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55",
+            "source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55",
+          "path": "src/content/sources/abc264-abc315/source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc277_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787",
+          "path": "src/content/sources/abc264-abc315/source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc277_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc298-e",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 100; 1 \\leq A, B < N; 1 \\leq P, Q \\leq 10; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各手番で全dice遷移先の勝率を平均する。先にgoalした側の勝敗は確定し、非終端遷移は少なくとも一位置が増えるから降順の二位置で依存先を先に計算できる。手番を持つことで先手優位も正確に反映する。",
+          "sourceRevisionIds": [
+            "source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff",
+            "source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff",
+          "path": "src/content/sources/abc264-abc315/source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc298_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a",
+          "path": "src/content/sources/abc264-abc315/source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc298_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc300-e",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^{18}; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一回の出目1は値不変の自己loopで、その項を移すと2..6の確率平均1/5になる。全依存先は現在値より大きく、N到達1、超過0から再帰評価できる。乗法状態は素因数2,3,5しか含まず疎memoで全到達値を覆う。",
+          "sourceRevisionIds": [
+            "source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5",
+            "source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5",
+          "path": "src/content/sources/abc264-abc315/source-abc300-e-problem-a38ec87a7c321ea6f527b93db8330fb37309527e8eba47c2e47dddd381fa27c5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc300_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd",
+          "path": "src/content/sources/abc264-abc315/source-abc300-editorial-6279-c63fd978778493f959f6e294f89bff61afe306d587bf48a2cc19ca5eaa2ca9dd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc300_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc323-e",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N\\leq 10^3; 0 \\leq X\\leq 10^4; 1 \\leq T_i\\leq 10^4; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "曲終了時刻tの確率は各曲が開始したt−T_i確率の1/N倍の和。曲1が時刻Xに演奏中なのは開始tがX−T1<t≤Xという互いに排他的な事象だから、その開始確率和へ選曲1/Nを掛ける。境界の終了時刻は演奏中でない。",
+          "sourceRevisionIds": [
+            "source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3",
+            "source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3",
+          "path": "src/content/sources/abc316-abc367/source-abc323-e-problem-5e48fc5e3fa5d92f3844f5dd695d5020a4a80f9ae516bc9c7211ae200296dcf3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc323_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf",
+          "path": "src/content/sources/abc316-abc367/source-abc323-editorial-7357-bc6da2c0f9b70d0ca06c9e349916b5e0405fbf5c764658dc443b7ce468946ecf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc323_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc326-e",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \\le N \\le 3 \\times 10^5; 0 \\le A_i < 998244353"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "次のdiceが現在indexより大きい場合だけ継続するため各indexiへ届く確率は過去全到達確率和/N。訪問indexは厳密増加で各報酬一回なので期待報酬はΣA_i p_i。prefix維持がこの和を厳密に共有する。",
+          "sourceRevisionIds": [
+            "source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b",
+            "source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b",
+          "path": "src/content/sources/abc316-abc367/source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc326_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c",
+          "path": "src/content/sources/abc316-abc367/source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc326_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc333-f",
+      "learningOutcomeIds": [
+        "outcome-propagate-probability-distribution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-transition-optimization",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-dp-transition-acceleration",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 3000; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "人数mの先頭から位置kで最初に除去が起きる確率は、先のk−1人が失敗してk人目が成功する確率を、一周全失敗の幾何級数で正規化したp^k/(1−p^m)である。各最初除去位置の後は人数m−1の同じゲームなので、その生存確率rowを回転して重み付き和を取れば人数mのrowとなる。隣接位置の和はほぼp倍のshiftで、円環を跨ぐ一項だけを補正すればよい。この代数変形は全除去位置の和を保つため、先頭位置だけ全和を計算して残りを定数更新しても同じ確率分布になる。",
+          "sourceRevisionIds": [
+            "source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431",
+            "source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431",
+          "path": "src/content/sources/abc316-abc367/source-abc333-editorial-7948-878d3c4235c73de09b12d30fc039195e9b1841d59732fe12bea2294109950431.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc333_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235",
+          "path": "src/content/sources/abc316-abc367/source-abc333-f-problem-5cc10600d7c767aafc3b18bc813406a6568df55bfe456eb9dcd8c41c7789f235.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc333_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
+  "packets": [
+    {
+      "problemId": "abc287-e",
+      "learningOutcomeIds": [
+        "outcome-index-shared-prefixes-with-trie"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"
+      ],
+      "tagIds": [
+        "tag-trie-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^5; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters (i = 1, 2, \\dots, N).; The sum of lengths of S_i is at most 5 \\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "depth kのgroupは先頭k文字が同じ文字列全体を保持する。終端はこれ以上一致できず最大k、一文字先groupがsingletonなら他と次文字で必ず異なり最大k。二本以上なら少なくともk+1一致するためそのgroupだけ再帰する。この分類は全他文字列とのLCP候補を保存し、最初の分離または終端で最大値を確定する。",
+          "sourceRevisionIds": [
+            "source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331",
+            "source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331",
+          "path": "src/content/sources/abc264-abc315/source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc287_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb",
+          "path": "src/content/sources/abc264-abc315/source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc287_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc353-e",
+      "learningOutcomeIds": [
+        "outcome-index-shared-prefixes-with-trie"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"
+      ],
+      "tagIds": [
+        "tag-trie-prefix",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 3\\times 10^5; S_i is a string consisting of lowercase English letters.; 1 \\leq |S_i|; |S_1|+|S_2|+\\ldots+|S_N|\\leq 3\\times 10^5; All input numbers are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "LCPは共有する非空prefix個数。各prefix nodeの通過文字列pair数を足す主客転倒が全LCP和と一致する。新文字列のnodeで既存countを先に足すとi<jのpairだけ各共有prefixで一回数え、その後countを増やして次入力へ備えられる。root空prefixは長さ0なので足さない。",
+          "sourceRevisionIds": [
+            "source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432",
+            "source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432",
+          "path": "src/content/sources/abc316-abc367/source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc353_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09",
+          "path": "src/content/sources/abc316-abc367/source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc353_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc377-g",
+      "learningOutcomeIds": [
+        "outcome-index-shared-prefixes-with-trie"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"
+      ],
+      "tagIds": [
+        "tag-trie-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; Each S_i is a string of length at least 1 consisting of lowercase English letters.; \\displaystyle \\sum_{i=1}^N |S_i|\\le 2\\times 10^5"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "末尾削除追加だけの最短編集は共通prefixまで戻る距離|S|+|T|−2LCP。固定prefix深さiでは最短の過去Tだけ残せば他Tより候補が悪化しない。全prefix候補を走査するため実際の最良LCPも含まれる。自己挿入前に評価し空列候補をrootへ入れれば全許可過去列との最小値を得る。",
+          "sourceRevisionIds": [
+            "source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b",
+            "source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b",
+          "path": "src/content/sources/abc368-abc419/source-abc377-editorial-11244-f5941b10cd7d44e81a62374d091caa772405c26ae8fe723044fa153ec8db2c9b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc377_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a",
+          "path": "src/content/sources/abc368-abc419/source-abc377-g-problem-c47c0dc695430363ff5c459e97a1f4cdc8c4d0ed503230ac98b5fc0495cda29a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc377_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc437-e",
+      "learningOutcomeIds": [
+        "outcome-index-shared-prefixes-with-trie"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。"
+      ],
+      "tagIds": [
+        "tag-trie-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 3\\times 10^5; 0\\leq x_i\\lt i; 1\\leq y_i\\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "A_i=A_{x_i}+[y_i]なのでnode[x_i]のラベルy_iの子がA_iの終端である。同じ親prefixと同じyは同nodeに統合され、各入力は高々一node増やす。辞書順ではprefix自身が延長より先、異なる次要素はラベル昇順なので、終端index先・子昇順DFSが全配列の辞書順になる。同列indexは昇順で出す。",
+          "sourceRevisionIds": [
+            "source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4",
+            "source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4",
+          "path": "src/content/sources/abc420-abc466/source-abc437-e-problem-4cba7e5ca3c04372a2c7647c04627c95c7aceaacc84a6d8c0b462fb52ad53db4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc437_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5",
+          "path": "src/content/sources/abc420-abc466/source-abc437-editorial-14880-76723f083e28ba8b598f49540087d2b1e45e518ac5b7972abb09408ca9ce43e5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc437_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

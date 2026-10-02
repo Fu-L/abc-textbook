@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC335-E — Non-Decreasing Colorful Path</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC335-E — Non-Decreasing Colorful Path</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></p>
+<ul>
+<li>静的な辺を探索して成分を付けるか、辺追加ごとに成分を併合し、同一成分・サイズを判定できる。</li>
+<li>依存辺の向きを定め、入次数またはpostorderからtopological順を作って制約伝播・DP・scheduleを処理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>非減少pathではAが小さい頂点から大きい頂点へしか辺を進めず、Aが等しい辺だけは双方向に使える。同じ値の辺で連結な頂点群は、入った場所から任意の出口へ移れてscore増分も一度だけなので一頂点へ縮約できる。 等値成分内の移動ではdistinct値数は増えず、異なる値の成分へ移るたび必ず1増える。縮約後の辺は値が厳密増加するためDAGであり、simple path条件もcycleを除いた最長pathの構成を妨げない。</p>
+<p>採用する候補: 同値連結成分をDSUで縮約し、値が増えるDAG上で最長path DPを行う</p>
+<p>等値cycleを消した後は全辺がAの小さい成分から大きい成分へ向き、値順に安全に遷移できる。</p>
+<p>棄却する候補: 元graph上で頂点番号順にdpを更新する</p>
+<p>依存順は頂点番号でなくAの大小で決まり、等値辺のcycleもあるため一回の走査では伝播しない。</p>
+<p>等値成分内の移動ではdistinct値数は増えず、異なる値の成分へ移るたび必ず1増える。縮約後の辺は値が厳密増加するためDAGであり、simple path条件もcycleを除いた最長pathの構成を妨げない。</p>
+<p>A_u=A_vの全辺をDSUでunionする。各元辺の異なる代表元間に小さいAから大きいAへの有向辺を作る。頂点1の成分dp=1、他を到達不能として、成分をA昇順に処理しdp[next]=max(dp[next],dp[cur]+1)を行い、頂点Nの成分値を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="同値辺のcomponent縮約">同値辺のcomponent縮約</h3>
+<p>発動条件: 同じlabel間の移動が双方向でcost増分0となりcycleを作る。</p>
+<p>DSUで同値連結部分をまとめ、内部pathを一状態として扱う。</p>
+<h3 id="dag最長path">DAG最長path</h3>
+<p>発動条件: 縮約後の遷移ごとにlabelが厳密増加し、scoreが1増える。</p>
+<p>label昇順をtopological orderとしてdp最大値を伝播する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>scoreは訪問頂点数ではなくdistinctなAの数なので、同じAの連結領域を何頂点通っても一段として数える。</p>
+<p>別の問題へ持ち帰る視点: 非減少label pathでは、等値移動を0-cost componentへ縮約して厳密増加DAGへ変える。</p>
+<h2 id="正当性">正当性</h2>
+<p>等値連結成分内はscoreを増やさず任意出口へ行けるため縮約可能。残る辺は厳密値増加でDAG。各成分の最大scoreを値順更新する帰納法で全非減少pathの最適を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>A_1&gt;A_Nなど到達不能なら答え0とする。同じ代表元の辺は捨て、並行辺は残しても正しさは変わらないがdeduplicate可能である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>1とNが同じ等値成分、等値cycleから複数出口、値が下がる辺しかない場合を小graphの全simple pathと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M 辺。DSU O(Mα(N))、値sort O(N log N)、DAG DP O(N+M)。</p>
+<h3 id="空間">空間</h3>
+<p>縮約graphとDSU・DP O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 2 \times 10^5; N-1 \le M \le 2 \times 10^5; 1 \le A_i \le 2 \times 10^5; The graph is connected.; 1 \le U_i &lt; V_i \le N; (U_i,V_i) \neq (U_j,V_j) if i \neq j.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3、A=(1,1,2)。</p>
+<ol>
+<li>1,2を等値成分に縮約しscore1。</li>
+<li>値2成分へ移るとscore2。</li>
+<li>終点3の最大を読む。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>等値辺もscore+1にしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。scoreは異なる値の個数なので同値成分内は増加しない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc335/tasks/abc335_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9</li>
+<li><a href="https://atcoder.jp/contests/abc335/editorial/9037">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f</li>
+</ul></main>
+</body></html>

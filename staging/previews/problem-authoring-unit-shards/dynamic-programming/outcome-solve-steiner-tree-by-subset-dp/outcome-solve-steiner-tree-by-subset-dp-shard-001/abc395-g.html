@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC395-G — Minimum Steiner Tree 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC395-G — Minimum Steiner Tree 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/steiner-tree-dp.md">Steiner tree subset DP</a></p>
+<ul>
+<li>terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>非負edgeのconnected subgraph最小costはSteiner treeであり、必須terminalは固定1..Kにquery固有s,tを加えたもの。K≤8なのでfixed terminal subset DPが使える。 dp[mask][v]をmask terminalsとvを結ぶ最小costとすると、vで二treeを結ぶsubset mergeと、endpointをedge沿いに移すshortest-path closureの二段階で更新できる。 同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。 merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。</p>
+<p>採用する候補: Dreyfus–Wagner型subset Steiner DPを、固定terminal集合＋各sを追加した状態まで前計算する</p>
+<p>必要maskは固定K terminalに高々一query頂点を加えたものに整理でき、密graphのO(N²) Dijkstra closureとsubset mergeでO(3^K N²+2^K N³)に収まる。</p>
+<p>棄却する候補: 各queryごとにK+2 terminalのSteiner DPを独立に実行する</p>
+<p>Q≤5000で同じ固定terminal部分の計算を繰り返し、指数DPをquery数倍する。</p>
+<p>同じroot vでmaskをzとmask\zに分けるdp[z][v]+dp[mask\z][v]がbranch結合を表す。</p>
+<p>merge遷移を確定後、dp[mask][*]を初期距離とするmulti-source shortest pathで任意Steiner vertexまで延長する。</p>
+<p>固定terminal bitmaskについてsubset merge→dense Dijkstra closureを昇順maskで計算する。さらに各s&gt;Kを一つ追加したterminal stateを同じ遷移で計算し、そのstateからtへclosureしたdp値をquery答えとして参照する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="subset-steiner-tree-dp">subset Steiner tree DP</h3>
+<p>発動条件: terminal数が小さく、Steiner vertexを自由に使える最小connected subgraphを求めるとき。</p>
+<p>terminal subsetと接続rootを状態にする。</p>
+<h3 id="subset-mergeshortest-path-closure">subset merge＋shortest-path closure</h3>
+<p>発動条件: Steiner treeのbranch結合とedge延長を分離するとき。</p>
+<p>submask partition後にDijkstraでroot位置を緩和する。</p>
+<h3 id="query共通部分の前計算">query共通部分の前計算</h3>
+<p>発動条件: 多数queryが大半のterminalを共有するとき。</p>
+<p>固定K集合と追加sごとまでを共有計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>queryの二terminal s,tを同時にsubset bitへ加えず、sをterminal集合へ入れてtを最終root位置として読むとquery pair全体を前計算できる。</p>
+<p>別の問題へ持ち帰る視点: 小さい固定集合＋二可変endpointの問題では、一方を状態生成軸、他方を全頂点closureの参照先にする。</p>
+<h2 id="正当性">正当性</h2>
+<p>固定端点集合と s を結ぶ木を root t で読むことは、固定端点・s・t を結ぶ問題と同値であり、tに別のbitは不要。subset merge と最短路 closure は root 付き Steiner 木の分岐と枝延長を網羅する。可変 s の bit を含む状態では、併合の一方だけが s を含み、他方は共有済み固定 subset DP となる。端点数の帰納法で全追加 s の最適値を求め、一度の計算を全 t で共有できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>Cはtriangle inequalityを満たすとは限らないので元complete edgeでclosureを必ず行う。submask重複は正しさを保つが計算量を見積もる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤9,K≤3でedge subset全探索または全Steiner vertex subsetのMSTと比較し、s/tが中継点として使われるcaseを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点 complete graph、固定端点 K、Q 質問。固定集合＋各 s の共有前計算で O(3^K N²+2^K N³+Q)。</p>
+<h3 id="空間">空間</h3>
+<p>固定 subset と追加 s の dp を全保持すると O(2^K N²)、答え pair 表 O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 80; 1\leq K\leq \min(N-2,\textcolor{red}{8}); 0 \leq C_{i,j} \leq 10^9 \ (1 \leq i,j \leq N, i \ne j); C_{i,j} = C_{j,i} \ (1 \leq i,j \leq N, i \ne j); C_{i,i} = 0 \ (1 \leq i \leq N); 1 \leq Q \leq 5000; K+1 \leq s_i, t_i \leq N \ (1 \leq i \leq Q); s_i \ne t_i \ (1 \leq i \leq Q); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=4,K=1、C12=2,C23=1,C34=2、他 pair の辺重み10。質問 s=2,t=4。</p>
+<ol>
+<li>必須は1,2,4。</li>
+<li>中継3を使う道1–2–3–4は費用5。</li>
+<li>元 complete graph の直接辺だけ使う候補12より小さい。</li>
+</ol>
+<p>期待される結果: 5</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>C14=10をそのまま最短距離と見なしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。経由2,3で5になる。入力行列に三角不等式は保証されず closure が要る。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc395/editorial/12307">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc395-editorial-12307-e3846bd673cb29dc671b045fefc51c7af285741c36938e39669b440a4ba00500</li>
+<li><a href="https://atcoder.jp/contests/abc395/tasks/abc395_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc395-g-problem-28b4b77f6fd7b5f3d752638e1f2aa35eefec8abc1a034fccb30e919e725d5d55</li>
+</ul></main>
+</body></html>

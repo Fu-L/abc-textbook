@@ -1,0 +1,577 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-003",
+  "packets": [
+    {
+      "problemId": "abc310-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq10^6; S is a string of length N consisting of 0 and 1.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "NANDの出力は前結果と次bitだけで決まる。全左端の前結果数をzero/oneへ分け、次bit0では全延長が1、次bit1では前結果を反転する。singletonを足すと各右端の全区間を厳密に生成しone合計が目的数。",
+          "sourceRevisionIds": [
+            "source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b",
+            "source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b",
+          "path": "src/content/sources/abc264-abc315/source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc310_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c",
+          "path": "src/content/sources/abc264-abc315/source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc310_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc311-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-transition-optimization"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M \\le 2000; S_i is a string of length M consisting of . and #."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "美しさの局所条件を繰り返すと、入力の黒セルから強制される全黒セルが決まる。残りの自由な黒白は斜め境界の切替位置で一意に表せる。隣接対角線間の局所含意は境界位置の大小条件k≥jと等価であり、それ以外の履歴を参照しない。したがって現在境界jへ来る全合法前境界kの個数を足すDPが全美しい盤面を一回ずつ数える。suffix sumはその和をまとめるだけなので正しさを保ち、強制黒に反する境界を除けば元の黒セルも全て残る。",
+          "sourceRevisionIds": [
+            "source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d",
+            "source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d",
+          "path": "src/content/sources/abc264-abc315/source-abc311-editorial-6822-96ffb790c28543d7f79fc0523feb4155ae1ba103221e11e8a1d4b6cbd3e8b05d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc311_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2",
+          "path": "src/content/sources/abc264-abc315/source-abc311-f-problem-d6a1ad02dc19a3597fe316ab786a8642371fa801c5ddddd5ce5fb8b9e8fba0b2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc311_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc313-ex",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-matching",
+        "unit-combinatorial-coefficients"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-bipartite-matching-hall",
+        "tag-combinatorial-coefficients"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 5000; 1 \\leq A_i,B_i \\leq 10^9; A_i \\neq A_j\\ (1 \\leq i < j \\leq N); B_i \\neq B_j\\ (1 \\leq i < j \\leq N+1); A_i \\neq B_j\\ (1 \\leq i \\leq N, 1 \\leq j \\leq N+1); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "前列を固定すると後列各位置に必要な高さの下限は、端のAと隣接Aのminである。後列を割り当てられる必要十分条件は、この下限列とBをそれぞれsortして対応する全組がstrictに大小条件を満たすことである。Aを小さい順に挿入すると配置済み要素はfragmentとなり、次要素の挿入は新fragment・片端へ付加・二fragment結合の三種類に一意に分類できる。処理済み人数iとfragment数jから確定済み下限数i+jが分かるので、上述のsorted条件をその時点で検査できる。fragment長や順序の選択数を係数で掛ければ前列を一回だけ数え、後列の存在だけを判定する。",
+          "sourceRevisionIds": [
+            "source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5",
+            "source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5",
+          "path": "src/content/sources/abc264-abc315/source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc313_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35",
+          "path": "src/content/sources/abc264-abc315/source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc313_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc344-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 80; 1 \\leq P_{i,j} \\leq 10^9; 1 \\leq R_{i,j},D_{i,j} \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "経路上で得た最大収入率pで稼ぐ操作は、その率を得た地点で前倒しできるので、必要額が不足した移動の直前に抽象的に稼いでも最適値は変わらない。必要最小回だけ稼ぐ正規形では移動後の残金は常に0以上p未満になる。同cell・pでaction数が少ない状態は、一回追加してpを稼げば残金が他状態以上となり、action差が少なくとも一回あるため他状態の続行を遅れず再現できる。action同数なら残金大だけを残せばよい。この支配性により辞書順一状態へ圧縮しても最適経路は失われず、右・下の全移動を緩和した終点最小が答えとなる。",
+          "sourceRevisionIds": [
+            "source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822",
+            "source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822",
+          "path": "src/content/sources/abc316-abc367/source-abc344-editorial-9473-e93b9c642a9f4fdca8fc80437b3b360b32bbfd6554894e058ecf9eef3b29e822.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc344_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3",
+          "path": "src/content/sources/abc316-abc367/source-abc344-f-problem-1ce348dacdf45e7ee430869830c57cb7ab4b03f187e2300e665afb33c4dde6b3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc344_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc345-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-sequence"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq K<N\\leq 2\\times 10^5; K\\leq 500; 1\\leq C_i\\leq N; 1\\leq V_i\\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "保持時は直前色と異なる最良値だけ必要。最大値候補の色が当前色と同じなら二位の異色候補が最良なので、各削除数で異色二候補が十分。削除は旧状態をそのまま移し、保持は現在色の値を生成するため全合法列を覆う。",
+          "sourceRevisionIds": [
+            "source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64",
+            "source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64",
+          "path": "src/content/sources/abc316-abc367/source-abc345-e-problem-5aa8fc0b31bf873d4f9d40975c86630bb9be6aca22f86462b97b93ef518bfa64.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc345_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b",
+          "path": "src/content/sources/abc316-abc367/source-abc345-editorial-9580-f52243b3d88a2f4066020b56630b08a6be5e2a0c09850fc5d8e221e1fd0a870b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc345_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc375-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-subset-resource"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 100; A_i \\in \\lbrace 1, 2, 3 \\rbrace; For each x \\in \\lbrace 1, 2, 3 \\rbrace, there exists some i with A_i = x.; 1 \\leq B_i; \\displaystyle\\sum_{i = 1}^{N} B_i \\leq 1500; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "処理prefixの第三チーム和はprefix総和−x−yで復元できる。三チームへの配置を全て遷移し元チームと違う場合だけ費用1なので各割当を正しく評価する。同じ二和では変更数最小が全将来に優越し、終端(B,B)で三つ目もBになる。",
+          "sourceRevisionIds": [
+            "source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946",
+            "source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946",
+          "path": "src/content/sources/abc368-abc419/source-abc375-e-problem-e634cc42bacb06c26385cba565e1e223f751929f8335e4de342352ec8335c946.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc375_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885",
+          "path": "src/content/sources/abc368-abc419/source-abc375-editorial-11140-5e3559638ffdc90c2295a763c1e5bb8be59bca1f0c8512a9a2e3312d822c9885.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc375_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc376-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N \\leq 3000; 1\\leq Q \\leq 3000; H_i is L or R.; 1 \\leq T_i \\leq N; N, Q, and T_i are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "指示済みの手の終点は固定なので、もう一方の手の位置と最小費用が次の判断の十分統計である。指定手が一方向の弧を進むとき、障害となる手を弧の外の最寄り位置、すなわち終点の一歩先へ同方向に動かすのが必要かつ最小である。これより遠く動かす余分な操作は、後で必要になった時に移しても費用を増やさない。指定手の往復も削除できるため二方向の候補が全最適解を代表する。層ごとの最小化で全指示の最小費用を得る。",
+          "sourceRevisionIds": [
+            "source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086",
+            "source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086",
+          "path": "src/content/sources/abc368-abc419/source-abc376-editorial-11195-040762248031ac7680f47cb7c002938ab7b4625bfbd63b69822874e35813e086.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc376_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0",
+          "path": "src/content/sources/abc368-abc419/source-abc376-f-problem-f65a441087b389494550c813f98e5ae8fd78b78dcb1a9e01ef1483924261a2e0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc376_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc389-g",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-generating-functions"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-combinatorial-coefficients",
+        "tag-generating-functions"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 30; 10^8 \\leq P \\leq 10^9; N is even.; P is prime.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "距離 i の頂点は前層に一本以上接続し、辺の距離差は高々1という条件が必要。逆に全頂点が前層へ接続すれば root への長さ i の道があり、距離差2以上の辺がないので i 未満の道はなく十分である。距離層は graph から一意に復元される。各新層の label 選択と、前層への非空接続・層内自由辺の係数を掛ける DP は各 graph を一度だけ数える。",
+          "sourceRevisionIds": [
+            "source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b",
+            "source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b",
+          "path": "src/content/sources/abc368-abc419/source-abc389-editorial-11929-f9fe21efa00fe689b598c3b8fa861a7f0f477d812f06e83e7567cde9bcbbae0b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc389_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647",
+          "path": "src/content/sources/abc368-abc419/source-abc389-g-problem-b82f036922a0daf1c33b346b56d5501063d655887bb21100bd2ad06619ca3647.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc389_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

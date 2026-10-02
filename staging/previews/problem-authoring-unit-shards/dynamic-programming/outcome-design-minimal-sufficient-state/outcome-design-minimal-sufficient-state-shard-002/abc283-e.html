@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC283-E — Don't Isolate Elements</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC283-E — Don't Isolate Elements</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>同じrowを2回反転すると元へ戻り、row反転同士は可換なので、各rowを反転するかのbitだけを決めればよい。 row iのcellが孤立するかはhorizontal neighborとrow i-1,i+1だけに依存し、row i+1の反転bitを決めた時点で確定する。 i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。 horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。</p>
+<p>採用する候補: 直前2rowの反転bitを状態にし、次rowのbitを試したら中央rowの全cellが非孤立か検査するrow DP。</p>
+<p>2^H通りをlocalな3row依存へ圧縮し、各遷移でW cellだけを確認できる。</p>
+<p>棄却する候補: 全rowの反転subsetを列挙し、完成matrixを検査する。</p>
+<p>H≤1000で2^H候補は不可能である。</p>
+<p>i+1行目の反転を決めてもi-1行目以前の孤立性は変わらないため、上から確定して捨てられる。</p>
+<p>horizontalな同値関係はrow全体反転で変わらず、vertical比較だけが二rowの反転xorに応じて変わる。</p>
+<p>flip1,flip2の4通りでrow1を検証できる初期状態を作る。row i-1,i,i+1のflipを使ってrow iの各cellに同値neighborがあるか調べ、validならcostへflip(i+1)を加えて遷移する。最後にrow Hも下neighborなしで検証し最小値、なければ-1。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="幅2の履歴dp">幅2の履歴DP</h3>
+<p>発動条件: 列/行を順に決め、位置iの妥当性がi-1,i,i+1の選択だけに依存するとき。</p>
+<p>直前2bitだけを状態にして次bit決定時に中央を確定する。</p>
+<h3 id="局所制約の遅延検証">局所制約の遅延検証</h3>
+<p>発動条件: future隣接要素が1つ決まるまで現在位置の合法性を判定できないとき。</p>
+<p>次rowを選んだ直後に1つ前のrowを検査する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>孤立判定は4近傍だがrow操作なので、未確定の影響は下1rowだけに限られ、3row windowへ閉じる。</p>
+<p>別の問題へ持ち帰る視点: 操作単位と制約近傍の交差幅を見て、frontierに必要な過去操作bit数を決める。</p>
+<h2 id="正当性">正当性</h2>
+<p>ある行の孤立判定はその行と上下二行のflipだけに依存する。下行flipが決まった時点で中央行を確定してよい。二直前flipを残すと未来に必要な情報を失わず、最初と最後は存在しない隣行を除いて検査するので全行条件を正しく満たす。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>最上rowは上neighborなし、最下rowは下neighborなしとして別途境界検証する。</li>
+<li>cell値はA[i][j] xor flip[i]で比較し、操作costは各rowのflipを一度だけ加える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>3rowだけを書き、3行目のflipを決めるまで2行目のvertical neighbor判定を保留する理由と、1行目/最下行の境界を追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>H 行W列。各行のflip三bit組を検査して O(HW)。</p>
+<h3 id="空間">空間</h3>
+<p>二行flipの4状態 O(1)、入力盤面O(HW)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq H,W \leq 1000; A_{i,j} = 0 or A_{i,j} = 1; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>2×2盤面 01 / 10。</p>
+<ol>
+<li>flipなしでは各cellの上下左右が逆色で孤立。</li>
+<li>第二行をflipして 01 / 01 にする。</li>
+<li>全cellは上下に同色neighborを持つ。</li>
+</ol>
+<p>期待される結果: 最小1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>横に同色neighborがあるcellも上下同色を必須にするか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>しない。同色neighborは上下左右のいずれか一つで十分。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc283/tasks/abc283_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc283-e-problem-2c21d492459ec8f7874377ac680303a0204b699b8e17735499e5767b9d4f6ce9</li>
+<li><a href="https://atcoder.jp/contests/abc283/editorial/5433">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc283-editorial-5433-8ab24c07cdb4e5b5e837256ab0c6ad1b43e508c1a6c4ef356e10edaad95b1ed2</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC323-F — Push and Carry</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC323-F — Push and Carry</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>cargo初期位置Bを原点へ平行移動すると、cargoを+xへ押すには人が(-1,0)、-xなら(1,0)、+yなら(0,-1)、-yなら(0,1)を必ず一度訪れる。</p>
+<p>cargoのpush回数は|X_C-X_B|+|Y_C-Y_B|から減らせず、残る最適化は人が必要な1個または2個の押出し位置へ原点を通らず移動する距離である。</p>
+<p>同一直線上で開始点と必要位置が原点を挟む場合だけ、Manhattan最短路がcargo位置を通るため2歩の迂回が必要になる。</p>
+<p>採用する候補: Bを原点に正規化し、必要な押出し位置への障害物付きManhattan距離とpush回数を足す。</p>
+<p>64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。</p>
+<p>棄却する候補: 広いgrid上で人とcargoの位置pairをBFSする。</p>
+<p>座標が10^17まであり状態空間を列挙できない。</p>
+<p>棄却する候補: 人→cargo距離−1とcargo→target距離を常に足す。</p>
+<p>押す向きの反対側へ回り込む必要や、x方向からy方向へ切り替える2歩を数え落とす。</p>
+<p>normalized start A’からstance pへの距離は通常Manhattan距離で、A’,pが同じ座標軸上の原点反対側にあるときだけ+2する。</p>
+<p>x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。</p>
+<p>stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。</p>
+<p>A’=(X_A-X_B,Y_A-Y_B)、D=(X_C-X_B,Y_C-Y_B)とする。D_x&gt;0なら(-1,0)、D_x&lt;0なら(1,0)をrequiredへ入れ、yも符号と逆側の点を入れる。avoidDist(A’,p)=Manhattan距離に、同一axisで原点を挟む場合だけ2を足す。requiredが1点ならwalk=avoidDist、2点ならwalk=min(avoidDist(A’,p_1),avoidDist(A’,p_2))+2。答えはwalk+|D_x|+|D_y|。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="平行移動による正規化">平行移動による正規化</h3>
+<p>発動条件: 点配置問題で相対位置だけが操作を決めるとき。</p>
+<p>cargo初期位置を原点に移し、人とtargetを差分座標にする。</p>
+<h3 id="必須通過点への縮約">必須通過点への縮約</h3>
+<p>発動条件: 対象を各方向へ動かすため特定の隣接位置へ立つ必要があるとき。</p>
+<p>push方向ごとのstanceを列挙し、その訪問距離だけ最適化する。</p>
+<h3 id="manhattan最短路の一点障害">Manhattan最短路の一点障害</h3>
+<p>発動条件: 格子最短路で唯一避ける点があり、端点が同一axis上にあるとき。</p>
+<p>障害点を挟む唯一のcaseへ2歩加える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>cargoと人の連成移動を、cargoの不可避push数と、人がpush方向を準備するための最大2 stance訪問へ分解できる。</p>
+<p>別の問題へ持ち帰る視点: 押す操作の最短化では、対象物の移動量と操作者の向き変更・回り込みcostを別々に数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>normalized start A’からstance pへの距離は通常Manhattan距離で、A’,pが同じ座標軸上の原点反対側にあるときだけ+2する。 x,y両方向のpushが必要ならstanceは直交する2点で、その間は原点を避けて常に2歩なので、先に訪れる方だけを2候補比較すればよい。 stanceへ到着後の各push action自体はcargoのManhattan移動量と1対1に対応する。 64通りの方向caseを、最大2点の訪問順と原点迂回という共通式へまとめられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>座標差・距離和は最大10^18近くなるため64bit整数を使い、符号判定を差の積ではなく比較で行う。</li>
+<li>D_xまたはD_yが0なら対応stanceを追加せず、requiredはB≠Cの保証により空にならない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>人と必要stanceがcargoを挟んで一直線の例、x/y両pushで順序を替える例を描き、+2迂回とstance間2歩を区別する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(1)、二つ以下のstance候補とManhattan距離。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17}\leq X_A,Y_A,X_B,Y_B,X_C,Y_C\leq 10^{17}; (X_A,Y_A)\neq (X_B,Y_B); (X_B,Y_B)\neq (X_C,Y_C); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>人A=(−1,0)、荷物B=(0,0)、目標C=(1,1)。</p>
+<ol>
+<li>右push stanceは(−1,0)で既に到着。</li>
+<li>一回右へ押し、直交stanceへ回り込む2歩後に一回上へ押す。</li>
+</ol>
+<p>期待される結果: 総移動4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>人が(1,0)、最初のstanceが(−1,0)なら距離2で足りるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>荷物原点を通れないので迂回2を加え4歩。座標axisで原点を挟む場合だけ補正する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc323/editorial/7358">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc323-editorial-7358-370aebf0591df8f5c36451aa6f2f5067c6c01a5d3283a77333bcfc0fdf0c9b30</li>
+<li><a href="https://atcoder.jp/contests/abc323/tasks/abc323_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc323-f-problem-3ff85140a4659479a5b62f24de1ad91652ffa3d65987caf1dadff61e5348d6f7</li>
+</ul></main>
+</body></html>

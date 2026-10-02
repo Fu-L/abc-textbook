@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC265-G — 012 Inversion</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC265-G — 012 Inversion</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>値域が0,1,2だけなので、区間の反転数は各値の個数と、値xが値yより前に現れるordered pair数だけで表せる。</p>
+<p>更新は三値集合上の関数 f=(S,T,U) を区間全体へ作用させる操作で、複数更新の遅延tagも関数合成で閉じる。</p>
+<p>棄却する候補: 更新区間の全要素を書き換え、問い合わせごとにFenwick木等で反転数を数え直す。</p>
+<p>区間長に比例する更新・照会が10万回あり最悪二乗時間になる。</p>
+<p>採用する候補: 各segment nodeにcnt[x]とpair[x][y]を持ち、三値写像をlazy actionとしてpair表を写し替える遅延segment treeを使う。</p>
+<p>node結合も写像適用も固定3値の定数個演算で閉じ、反転数はΣ_{x&gt;y}pair[x][y]として直ちに得られる。</p>
+<p>左右nodeを結合すると pair[x][y]=leftPair[x][y]+rightPair[x][y]+leftCnt[x]×rightCnt[y] になる。</p>
+<p>写像f適用後はnewCnt[u]=Σ_{f(x)=u}cnt[x]、newPair[u][v]=Σ_{f(x)=u,f(y)=v}pair[x][y] と再分類できる。</p>
+<p>small-alphabet sequence statisticsをordered-pair monoidへ持ち上げ、alphabet endomorphismをそのmonoidへのlazy actionとしてsegment treeに載せる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="小値域のpair統計量monoid">小値域のpair統計量monoid</h3>
+<p>発動条件: 列の順序統計が値種類ごとの個数とordered pair数で決まり、値域が定数のとき。</p>
+<p>部分列結合時に左右内部pairと左右をまたぐcnt積を足す。</p>
+<h3 id="写像作用付き遅延segment-tree">写像作用付き遅延segment tree</h3>
+<p>発動条件: 区間更新が有限集合上の一括写像で、更新合成とnode統計の写し替えが定数時間でできるとき。</p>
+<p>lazy tagを値ごとの行き先配列として持ち、新tagを既存tagの出力へ適用して合成する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>逆向きpairは pair[x][y]+pair[y][x]=cnt[x]cnt[y] から復元できるため、個数3つと反転方向3つの計6量だけを持つ実装も可能である。</p>
+<p>別の問題へ持ち帰る視点: ordered pair表に対称な恒等式があるなら、必要方向だけ保存してstateを縮められる。</p>
+<h2 id="正当性">正当性</h2>
+<p>左右nodeを結合すると pair[x][y]=leftPair[x][y]+rightPair[x][y]+leftCnt[x]×rightCnt[y] になる。 写像f適用後はnewCnt[u]=Σ_{f(x)=u}cnt[x]、newPair[u][v]=Σ_{f(x)=u,f(y)=v}pair[x][y] と再分類できる。 node結合も写像適用も固定3値の定数個演算で閉じ、反転数はΣ_{x&gt;y}pair[x][y]として直ちに得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>full 3×3 pair表を持つ場合、pair[x][x]は同値二位置の組数として扱い、leafでは0、mergeでcnt積を加える。</li>
+<li>lazy合成の順序は「既存の写像を受けた値へ新しい写像を適用」であり、配列代入順を逆にしない。</li>
+<li>pair数と反転数はN(N−1)/2まで増えるため64 bit整数を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小alphabetの区間統計は、全値pairの個数を持てば更新写像に対して閉じるか検討する。</li>
+<li>遅延作用素が代入値ではなく写像なら、恒等写像と合成順序を先に定義してから実装する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)、値域3なのでpair表は定数サイズ。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i \leq 2; 1\leq Q\leq 10^5; In each query, 1\leq L \leq R \leq N.; In each query of the second kind, 0\leq S,T,U \leq 2.; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,0,1)、写像f=(1,1,0)。</p>
+<ol>
+<li>初期反転は(2,0),(2,1)の2。</li>
+<li>更新後は(0,1,1)で反転0。</li>
+</ol>
+<p>期待される結果: 更新後反転数0。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>二値が同じ値に写るとpair情報は消してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>消さず同値pairへ合算する。後の結合には元の位置二つが残っているためfull pair表は同値組も保持する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc265/tasks/abc265_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc265-g-problem-8dbb301709bd4fc77f81f3ea41c287ffaa6d5aa567c6fab03d38eb782514e17e</li>
+<li><a href="https://atcoder.jp/contests/abc265/editorial/4586">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc265-editorial-4586-307b3949ba570b71f3bef422c5922b5378f3b38810cbee2dec0feb621c99ab00</li>
+</ul></main>
+</body></html>

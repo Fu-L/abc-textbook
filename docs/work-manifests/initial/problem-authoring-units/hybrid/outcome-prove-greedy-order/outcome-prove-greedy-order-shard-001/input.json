@@ -1,0 +1,580 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-greedy-order-shard-001",
+  "packets": [
+    {
+      "problemId": "abc214-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep",
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-event-sweep",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le N \\le 2 \\times 10^5; 1 \\le L_i \\le R_i \\le 10^9; The sum of N across the test cases in one input is at most 2 \\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "ある割当てが現在選んだ区間より右端の遅い区間を先に使っていても、両者を交換すれば可否を悪化させない。 候補キューが空なら、次の区間の左端までの箱にはどのボールも入れられないため、その位置へ直接ジャンプできる。 締切が早いボールを先に使う交換法が成立し、明示する箱は実際に割り当てる位置だけでよい。",
+          "sourceRevisionIds": [
+            "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+            "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2",
+          "path": "src/content/sources/abc212-abc263/source-abc214-e-problem-d1fdaec6de4fed3cfd86ef4c32a8db6296592dd2110c1212c04889a965286ec2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc214_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028",
+          "path": "src/content/sources/abc212-abc263/source-abc214-editorial-2431-b96a04cf27a43abcbda6cae609842210c4be15e77860a2a3a3d666ce872f3028.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc214_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc225-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq x_i,y_i \\leq 10^9; (x_i,y_i) \\neq (x_j,y_j)\\ (i \\neq j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二つの7がともに完全に見えるための条件は対応する偏角開区間が交わらないことで、平面上の遮蔽関係を一次元区間へ落とせる。 選べる区間のうち右端が最小のものを先に選んでも、最適解の最初の区間と交換して残りの実行可能性を悪化させない。 全体可視性が偏角区間の非交差と同値になり、最も早く終わる区間を選ぶ交換論法をそのまま適用できる。",
+          "sourceRevisionIds": [
+            "source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52",
+            "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52",
+          "path": "src/content/sources/abc212-abc263/source-abc225-e-problem-0d3017b2dfe2abfe833608265208285af613540490d3cb26da28ae4fc8171c52.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc225_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1",
+          "path": "src/content/sources/abc212-abc263/source-abc225-editorial-2853-f719138f91644e50bd53db2ad2f5a40a6b475c4e83da9cb3be6b5dad7d6632f1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc225_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc225-f",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-sequence"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 50; 1 \\leq |S_i| \\leq 50; S_i consists of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "比較 A+B≤B+A は隣接交換で全選択カードを標準順へ直せる順序を与え、『好きな順に連結』という自由度を除去する。 dp[i][j]をi以降からj枚選ぶ最小文字列とすれば、S_iを使う場合は必ず先頭へ付くので min(dp[i+1][j], S_i+dp[i+1][j-1]) が成立する。 交換によって任意の選択集合をこの順へ直せる一方、所属選択は独立に残るため、sortで順序を消してDPで集合を選べる。",
+          "sourceRevisionIds": [
+            "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
+            "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01",
+          "path": "src/content/sources/abc212-abc263/source-abc225-editorial-2833-3524723dd16f9bf7321758d0940e988afddbc986f74729f27ac93f2c0e0b4a01.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc225_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1",
+          "path": "src/content/sources/abc212-abc263/source-abc225-f-problem-c9d2fa9bbe5253d826ec4a50e12e7af66a23aba6bfb0db79e81fc01912c837c1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc225_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc226-g",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 5\\times 10^4; 0 \\leq A_i,B_i \\leq 10^{16}; 1 \\leq A_1+A_2+A_3+A_4+A_5; 1 \\leq B_1+B_2+B_3+B_4+B_5; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "重さ5・4・3の荷物は一人が高々一個しか持てないため、5→体力5、4→体力4の後5、3→体力3の後5、最後に4という順で割り当てても実現可能解を失わない。 重さ3を体力4へ載せる人数を最後に抑えることが、残余体力の奇数個数を最小化し、重さ2を載せられるfloor(残余体力/2)の総和を最大化する。 種類数が定数であり、重い荷物の必要条件と重さ2に使える偶数容量を最大化する交換論法により、各bucket間の一括移動だけで実現可能性を判定できる。",
+          "sourceRevisionIds": [
+            "source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3",
+            "source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3",
+          "path": "src/content/sources/abc212-abc263/source-abc226-editorial-2893-076ae72bda5cc8a1b8ee64def3d23a6ba381b9bb1921e492f8a0941f3b95f5a3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc226_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61",
+          "path": "src/content/sources/abc212-abc263/source-abc226-g-problem-db27166d4299d8860197e33fc6c7489032bd1c44693888a1e988e8aa9a7b4e61.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc226_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc245-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep",
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-event-sweep",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq M \\leq 2\\times 10^5; 1 \\leq A_i,B_i,C_i,D_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "現在使える D のうち B 以上で最小のものを選んでも、より大きい D を将来へ残すので不利にならない。任意の実現可能な割当てで現在の箱をこの最小箱と交換できる。 A=C の箱はそのチョコレートに使用可能なので、同値イベントでは箱を先に処理しなければならない。 大きいチョコレートに過剰に大きい箱を残さず、各要素の挿入・検索・削除だけで割当てを構成できる。",
+          "sourceRevisionIds": [
+            "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
+            "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235",
+          "path": "src/content/sources/abc212-abc263/source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc245_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b",
+          "path": "src/content/sources/abc212-abc263/source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc245_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc252-f",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1\\leq A_i\\leq 10^9; A_1+A_2+\\cdots+A_N\\leq L\\leq 10^{15}; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "指定片の総和がL未満なら、使われていない長さL-ΣAを一つの追加片として含めてから併合問題にする。 追加の余りを複数片へ分割しても併合回数と寄与を増やすだけなので、一片として扱えばよい。 最適併合問題そのものであり、毎回最小の二片をまとめる交換論により総費用が最小になる。",
+          "sourceRevisionIds": [
+            "source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc",
+            "source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc",
+          "path": "src/content/sources/abc212-abc263/source-abc252-editorial-3998-ca987e0b6f9f09b37cc5ee02e435b26498e04365c6786f935ba0c3c5501d29fc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc252_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b",
+          "path": "src/content/sources/abc212-abc263/source-abc252-f-problem-407bef3a8254ef3bcb6695a21b41be40fd863a5e4f768ace7a2b4c04abe77c9b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc252_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc254-ex",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-binary-trie"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-binary-trie"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq a_1 \\leq \\ldots \\leq a_N \\leq 10^9; 0 \\leq b_1 \\leq \\ldots \\leq b_N \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Aの余剰はどの末尾ビットでも削除して親へ上げられるが、Bの余剰は現在節点へ入る辺が0の場合だけ親へ上げられる。 葉側で可能な一致を後回しにしてもより浅い一致しか得られないため、最深部から最大数を即座に対応させるのが最適である。 深い同一接頭辞でA,Bを先に対応させ、余剰だけを親へ上げれば移動回数を最小化でき、B側の上昇可否も辺ビットで判定できる。",
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+            "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52",
+          "path": "src/content/sources/abc212-abc263/source-abc254-editorial-4053-9f7aacfde939525dde4cc480e4bd0f24b599dc75a8c1aa04ccda2ffa485a7a52.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc254_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea",
+          "path": "src/content/sources/abc212-abc263/source-abc254-ex-problem-5438f1770b7e9bd0fd963bfa2d187dcc3fa87438470a7da1f7fcb681b9e15cea.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc254_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc257-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^6; 1 \\leq C_i \\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最小費用c_minなら長さL=floor(N/c_min)を達成でき、これより長い数は作れない。 位置pで数字dを選べる条件はC_d+(残り桁数)c_min≤現在予算であり、この条件内の最大dを選べばよい。 残り桁を全て最安費用で埋められる条件を守れば桁数を失わず、各位置で最大数字を選ぶことが辞書順最大化になる。",
+          "sourceRevisionIds": [
+            "source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0",
+            "source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0",
+          "path": "src/content/sources/abc212-abc263/source-abc257-e-problem-b33005b0902468fb8bbf836f0cf3530048887c4bfa46d52752acafc3b8352eb0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc257_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b",
+          "path": "src/content/sources/abc212-abc263/source-abc257-editorial-4136-df45cb5e61aa92019c3173bf77a20a61a9f38c9da0b025e5d6480521f28ab87b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc257_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

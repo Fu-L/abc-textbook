@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-resource-dp-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "71f2d9f3d1fb597f516fc3fae244d2c04aa529499eec144d4ba8b426f0ddc4ff",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "80a7042af7b9ae8b1be459a337d4626da1a148cea7233adddfe0985b281e4ad3",
+  "reviewDigest": "1db9ab4d6caabc86b5c93e57db0e18cc6cbf52aec4ea855f160cfe83f3358144",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.html",
+      "digest": "b8ddfbe71e507bfd0c78d4eba664ed94f6b81ef4a0d7a2dc6299a4ade06670e8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc325-f.html",
+      "digest": "f7b3d27ed1c772843686e38243e9c36f4b78c38e383f07785993f64cb95b1087"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc341-f.html",
+      "digest": "b0673d46240d80cc1e2b60d70e6d1bdb70336683c6f57e543fe1ed451bab9c57"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc364-e.html",
+      "digest": "67cfb70f988de58deb8be6c1097bd558c52ecfd4e588a1a7297ea840f7f2b045"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc383-f.html",
+      "digest": "1987c37c985b2b7ad5aa330faa6b73d78083b4f4b5c431cc4bc2ab2b24045eac"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc390-e.html",
+      "digest": "d3f0e5487a59f391083d7f2eb0e1712b386a5507aee7c62261dbf36cface6d49"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc410-e.html",
+      "digest": "22010e0acce2cd7d3aacba17a1cf411d5ef9efe5094b096b52c38a75ef0a6ffa"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc419-e.html",
+      "digest": "be41d4a813b60d8d9ed31199f046ca0e499b851044e5e7a5b91ea4ba68ad7752"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/index.html",
+      "digest": "63f2b6628fa8eed17642f37c027fe0a9a5ff2ee2b6536799a8678846797c9bd2"
+    }
+  ],
+  "snapshotDigest": "9a030366cb5a26ad9dabe99d78474889f5204f20e8e14e8c984238800337b61b"
+}

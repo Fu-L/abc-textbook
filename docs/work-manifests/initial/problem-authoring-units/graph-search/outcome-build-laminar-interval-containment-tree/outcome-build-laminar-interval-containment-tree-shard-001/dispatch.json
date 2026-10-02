@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-build-laminar-interval-containment-tree-shard-001",
+  "primaryOutcomeId": "outcome-build-laminar-interval-containment-tree",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc405-f"
+  ],
+  "homeUnitId": "unit-laminar-interval-containment-tree",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "151084ab6ff73661961bb2ef85cc6696c8cdcc11404e8f5fcef55303ae90cdfb",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc405-f",
+      "path": "src/content/docs/problems/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

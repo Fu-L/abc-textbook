@@ -1,0 +1,150 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-and-bound-randomized-algorithm-shard-001",
+  "packets": [
+    {
+      "problemId": "abc272-g",
+      "learningOutcomeIds": [
+        "outcome-design-and-bound-randomized-algorithm"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"
+      ],
+      "tagIds": [
+        "tag-randomized-algorithm",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\le N \\le 5000; 1 \\le A_i \\le 10^9; The elements of A are distinct.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。 divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。 majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。",
+          "sourceRevisionIds": [
+            "source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370",
+            "source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370",
+          "path": "src/content/sources/abc264-abc315/source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc272_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952",
+          "path": "src/content/sources/abc264-abc315/source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc272_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc422-e",
+      "learningOutcomeIds": [
+        "outcome-design-and-bound-randomized-algorithm"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。"
+      ],
+      "tagIds": [
+        "tag-randomized-algorithm",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 5 \\times 10^5; N is odd.; -10^8 \\leq x_i \\leq 10^8; -10^8 \\leq y_i \\leq 10^8; If i \\neq j, then (x_i, y_i) \\neq (x_j, y_j).; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "line上点数m≥(N+1)/2ならpair hit確率m/N·(m-1)/(N-1)≥(N+1)/(4N)>1/4。hitしたcandidateはexact integer determinantで必ず認証でき、false positiveはない。 存在時の失敗確率を(3/4)^Tまで下げ、O(TN)で十分高速かつ高確率に正答する。",
+          "sourceRevisionIds": [
+            "source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f",
+            "source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f",
+          "path": "src/content/sources/abc420-abc466/source-abc422-e-problem-44e69a3fb5e8d2422de1f335ba82aceb7f4466392b01cdcc3d8a17560541554f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc422_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864",
+          "path": "src/content/sources/abc420-abc466/source-abc422-editorial-13820-84a6d94e189cefe290ad2d1e79ce85ef37836d033117cbd8b62d65041716a864.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc422_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

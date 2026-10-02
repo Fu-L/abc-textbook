@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC278-EX — make 1</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC278-EX — make 1</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>生成ベクトルのspan条件をrank別の部分空間数へ変換し、有限体上のGaussian binomial係数で各rankの寄与を数えられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各cardをB-bitのF_2 vectorとみなすと、sequenceがgoodであることはunit vector 1が選択vectorのspanに含まれることと同値である。</p>
+<p>final length Nとは、長さNで初めてgoodになることなので、distinct-card good列N個から、既にN-1でgoodなprefixの全extensionを引けばよい。</p>
+<p>採用する候補: bad distinct列数F(s)を、with-replacement bad列数G(s)とのStirling変換で求める。G(s)はrank別部分空間数をq=2のGaussian binomialで表し、convolutionで全sを列挙する。</p>
+<p>distinct制約・span条件・巨大BをそれぞれStirling反転、q-binomial、NTTへ分解できる。</p>
+<p>棄却する候補: distinct cardを順に選び、現在のlinear basisそのものを状態としてDPする。</p>
+<p>B≤10^7で部分空間の種類数が莫大で、basis状態を列挙できない。</p>
+<p>targetはGoodDistinct(N)−GoodDistinct(N-1)·(2^B-N+1)で、後者は既にgoodなprefixが未使用cardのどれを追加してもgoodなままだからである。</p>
+<p>replacement列を等値位置のset partitionでdistinct値列へ潰すとG(s)=Σ_t {s\brace t}F(t)となり、signed first-kind Stirling数でFへ反転できる。</p>
+<p>rank rでspanがvector 1を含まない行列数は、B-1次元側の部分空間選択とq-binomialを用いる公式に集約される。</p>
+<p>q=2のq-factorialと逆元を前計算し、rank式をconvolution形へ整理してG(1…N)をNTTで求める。必要なsigned Stirling係数でF(N),F(N-1)を反転し、distinct全列−Fからgood列を作って初回goodの差を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="線形span条件への翻訳">線形span条件への翻訳</h3>
+<p>発動条件: subset xorで特定vectorを作れるかを数えるとき。</p>
+<p>整数をF_2 vectorとみなし、targetがrow spanに属するかで分類する。</p>
+<h3 id="q-binomial-coefficient">q-binomial coefficient</h3>
+<p>発動条件: 有限体上のrank・部分空間の個数を数え、q^n-q^mの積が現れるとき。</p>
+<p>q-factorialを前計算してdimension別部分空間数とrank行列数を評価する。</p>
+<h3 id="stirling変換">Stirling変換</h3>
+<p>発動条件: with-replacement列とdistinct要素列を、等値位置のpartition数を介して変換するとき。</p>
+<p>second-kindで集約し、signed first-kindで反転する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>『初めてgood』はgood N列からgood prefixの自由extensionを引け、bad列のdistinct制約はreplacement列とのStirling変換で外せる。</p>
+<p>別の問題へ持ち帰る視点: 停止時刻付き列数え上げでは、吸収性を使ったprefix差と、distinct/repetitionのpartition変換を別々に検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>goodは単位vector1がspanに含まれること。既に長さN−1でgoodなdistinct列は未使用値をどれだけ追加してもgoodで、拡張数は2^B−N+1。したがってgood distinct長Nの数からこの拡張数を引くと初回goodだけ残る。重複ありの列とdistinct値列の関係は等値位置の集合分割のStirling変換であり、逆変換は同じspan条件を保ってdistinct分布を復元する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>rank rの範囲は0≤r≤min(s,B-1)で、q-factorialの負indexを参照しない。</li>
+<li>2^B、falling factorial、q-factorialはいずれもmod998244353で管理し、最終差を非負剰余へ正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>B=2,N=2でbad spanがunit vector1を含まない列を手で分類し、distinct版Fとreplacement版Gの違いを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+min(N,B))の高速Stirling反転・q係数畳み込みを用いる。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq B \leq 10^7; N \leq 2^B; N and B are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>B=2、値集合{0,1,2,3}、N=2。</p>
+<ol>
+<li>長さ2でgoodなdistinct列は1を含む6列と(2,3),(3,2)の2列。</li>
+<li>初項1の3列は既にgoodなので除く。</li>
+</ol>
+<p>期待される結果: 初回goodは5列。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>N=1で初回goodは何列か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>単体spanに1を含む値は1だけ。0や2や3は単体では1を作れない。</p>
+<p>確認結果: 1列。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc278/editorial/5210">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc278-editorial-5210-0f1a56156ff30245ba49db87069bf35c61ea37eecc6e019379bf06fedd2ac83b</li>
+<li><a href="https://atcoder.jp/contests/abc278/tasks/abc278_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc278-ex-problem-49227ad1d2ec3968bf08a7cbc0c1fab87d217b52980f2097766caae5bfd774f7</li>
+</ul></main>
+</body></html>

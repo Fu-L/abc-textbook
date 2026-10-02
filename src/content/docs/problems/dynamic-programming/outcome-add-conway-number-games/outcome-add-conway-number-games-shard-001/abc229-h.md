@@ -1,0 +1,120 @@
+---
+title: "ABC229-H — Advance or Eat"
+draft: true
+authoringUnit: {"problemId":"abc229-h","docPath":"src/content/docs/problems/dynamic-programming/outcome-add-conway-number-games/outcome-add-conway-number-games-shard-001/abc229-h.md","learningOutcomeIds":["outcome-add-conway-number-games"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-game-value"],"excludedTopics":["独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-conway-number-games"],"sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。","sourceRevisionIds":["source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c","source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-add-conway-number-games"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"N=2、盤面の上段は.B、下段はW.。","procedure":["左列の底の白駒は、白が進めると上の白駒の値−1、黒が食べると空列0になるので{−1|0}=−1/2。","右列の上の黒駒は白が食べると0、黒は進めないので{0|}=1。","合計は−1/2+1=1/2>0。白が底の駒を上げると総値0を黒番へ渡せる。"],"executionTarget":null,"expectedResult":"Takahashi（白勝ち）。","verificationStatus":"not_applicable","learningUnitIds":["unit-conway-number-games"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-add-conway-number-games"],"prerequisiteIds":["unit-dp-game-value"],"attainmentCondition":"局所数値ゲーム{0|}=1と{|0}=−1を直和すると、白先手は勝てるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。"},"answer":{"reasoningOrVerification":"総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。","procedure":["具体例の各状態・寄与を再計算する。","総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。"],"expectedResult":"総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [独立な数ゲームの和](src/content/docs/learn/dynamic-programming/conway-number-games.md)
+
+- 全ての後続局面が数で、左選択肢の全値が右選択肢の全値より小さいことを確認し、その間の最も単純な二進有理数を局面値とする。独立和は厳密な数の加算で評価する。一般のpartisan gameは数とは限らず、この規則を適用しない。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [minimax・得点差・局面値を評価するゲームDP](src/content/docs/learn/dynamic-programming/dp-game-value.md)
+
+対象外:
+
+- 独立な数ゲームの和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+駒の前進は同じ列の盤面だけを変え、相手駒を食べる操作も選んだ一駒が属する列だけを変えるため、盤面は N 個の列ゲームの直和である。
+
+白番と黒番では動かせる色と食べられる色が異なるので、遷移集合が手番に依存し、通常の不偏ゲームの Grundy 数は適用できない。
+
+棄却する候補: 各列の Grundy 数を求め、その XOR で盤面全体の勝敗を判定する。
+
+白と黒で許される手が異なる partisan game であり、同じ状態からの遷移を共有する Grundy 理論の前提を満たさない。
+
+採用する候補: 一列の 3 の N 乗状態 DAG に白手・黒手の辺を張り、両者の後継評価の間にある最も単純な二進有理数を評価値として計算し、列評価の総和で勝敗を判定する。
+
+このゲームでは全状態の左右後継評価が分離して数が定義でき、独立な列ゲームの和は評価値の加算に対応する。
+
+状態 v の白手後継評価の最大値より大きく、黒手後継評価の最小値より小さい最も単純な dyadic rational を eval(v) とすると、正なら先手白が勝つ。
+
+白手と黒手が干渉しない場合は操作順を交換した共通状態を作れ、干渉する食べる・進める場合にも一方から他方への辺があるため、左後継評価は右後継評価より小さい。
+
+列状態を三進数で列挙した有限 partisan game DAG に Conway 型の数値評価を付け、入力各列の評価値を厳密な二進有理数として合計して符号を判定する。
+
+## 典型の発動条件
+
+### 独立ゲームの直和分解
+
+発動条件: 一手が複数領域のうち一領域だけを変え、領域間で合法手が干渉しないとき。
+
+各列を独立なゲーム成分として評価し、列評価を加算して盤面全体を扱う。
+
+### partisan game の数値評価
+
+発動条件: 二人の合法手が異なるが、全ての左選択肢が全ての右選択肢より小さい数ゲームとして表せるとき。
+
+白後継の上界と黒後継の下界の間にある最小絶対値の整数、なければ最小分母の二進有理数を選ぶ。
+
+## 問題固有の要素
+
+食べる操作は任意列の駒を消せるが、一手で変わるのはその駒の列だけなので、見かけに反して列分解を壊さない。
+
+別の問題へ持ち帰る視点: 操作対象を全盤面から自由に選べても、状態変更が一成分内に閉じるならゲーム和への分解を検討する。
+
+## 正当性
+
+一手は一列だけを変えるため盤面は列ゲームの直和。手番で遷移が異なるのでGrundy XORは適用できない。白手v→aと黒手v→bが干渉しなければ双方を適用した状態cが存在し、a→cは黒手、b→cは白手なので帰納法でeval(a)<eval(c)<eval(b)。唯一の干渉は同じ駒を食べる・進める場合で、進めた後に食べる辺が存在するため直接eval(a)<eval(b)となる。ゆえに全左値<全右値を満たす数のゲームである。左右値間の最も単純な二進有理数を再帰的に割り当てるConway評価は直和で加算できる。総値が正なら白のTakahashiが先手勝ち、0以下ならSnukeが勝つ。駒減少または前進によるDAG順で全状態を評価し、浮動小数へ丸めない。
+
+## 実装上の注意
+
+- 一列状態を各マスの空・白・黒の三進数で表し、駒数減少または上方移動により必ず進む順序で評価する。
+- 評価値は分母が 2 の冪の有理数として厳密に比較・加算し、浮動小数の丸めで総和の符号を誤判定しない。
+
+## 復習の核
+
+- ゲームを見て即座に Grundy 数へ進まず、両プレイヤーが各状態から同じ遷移を選べる不偏性を先に確認する。
+- 数ゲームの評価可能性は、任意の白手後継が任意の黒手後継より小さいことを操作交換図で確認する。
+
+## 計算量と制約
+
+### 時間
+
+列長NについてO(N·3^N)の遷移生成・評価に加え、二進有理数の厳密演算費用。
+
+### 空間
+
+O(3^N)状態と評価値。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; N is an integer.; S_{i,j} is W, B, or ..
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+N=2、盤面の上段は.B、下段はW.。
+
+1. 左列の底の白駒は、白が進めると上の白駒の値−1、黒が食べると空列0になるので{−1|0}=−1/2。
+2. 右列の上の黒駒は白が食べると0、黒は進めないので{0|}=1。
+3. 合計は−1/2+1=1/2>0。白が底の駒を上げると総値0を黒番へ渡せる。
+
+期待される結果: Takahashi（白勝ち）。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+局所数値ゲーム{0|}=1と{|0}=−1を直和すると、白先手は勝てるか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+総値0なので勝てない。一方の有利さだけを見ず、列の二進有理数を厳密に加算する。これは局所数値ゲームの例で、具体的盤面の完全入力ではない。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc229/editorial/2977) — source-abc229-editorial-2977-8c1ea4ac1f89ee1ecf0daedcd6b221490a15874cd35a916c06558694c49f1f2c
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc229/tasks/abc229_h) — source-abc229-h-problem-b34c60175ff9097263f94c9e57fe5a45f4cddf8755617239cd3620a2fb7d49cb

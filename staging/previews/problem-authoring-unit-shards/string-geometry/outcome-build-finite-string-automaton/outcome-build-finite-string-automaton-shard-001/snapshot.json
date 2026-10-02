@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-finite-string-automaton-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ab763d734fd34a57dcee772194114eb23a0bddfb1c6358b7a33c6723028081aa",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "4a028ea3883db11e7bb3bad721482d5648dc4935927d506ef0ed0a2b8c58fa08",
+  "reviewDigest": "586aaab23857ae6d98b1bd6ec682d818970f589756bf40ce67dc3681138c4d63",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.html",
+      "digest": "456bdf64f302cc98ea3b8bbc109648cb021af428989c25455ed8d990790ee316"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc301-f.html",
+      "digest": "1a44581f7560ff8cb3178262dcb07479d93f844b6fd152a6c8471d899f29bf84"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc305-g.html",
+      "digest": "964c23124c9d28e8c5442baed6bf674a3c5c0bd84f66b4855cb1ff78cf4c375e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc418-g.html",
+      "digest": "2225f5468e17acf1913d7eff90eb646ed4d7fb44893018f197fda5519f52a3f5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/index.html",
+      "digest": "626ae8cc87b220401e43b0391919f17a708e725d5fcd394e11a31064d0dfd01e"
+    }
+  ],
+  "snapshotDigest": "96281298fc0eb7d5c4c6104e00da7bb6e913432fcbb0c0e6041072311e947b67"
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-represent-integers-as-two-squares-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2f0613ec237345fabc8d1b88def2ac054d86630186cda2e60847860260f1d84b",
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "riskReasons": [
+    "official_source_conflict"
+  ],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc444-g",
+      "url": "https://atcoder.jp/contests/abc444/tasks/abc444_g",
+      "checkedAt": "2026-10-02T22:34:14+09:00",
+      "reason": "中心(A/C,B/C)、半径sqrt(N)/Cから整数二平方和と座標合同条件へ変換する。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc444-g",
+      "path": "src/content/docs/problems/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/abc444-g.md",
+      "learningOutcomeIds": [
+        "outcome-represent-integers-as-two-squares"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

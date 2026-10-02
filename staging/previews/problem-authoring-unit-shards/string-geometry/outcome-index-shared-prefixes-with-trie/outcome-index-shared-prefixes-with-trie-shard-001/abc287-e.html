@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC287-E — Karuta</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC287-E — Karuta</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/trie-prefix.md">Trieで共有接頭辞を索引化する</a></p>
+<ul>
+<li>文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>同じprefix長kを持つ文字列groupでは、長さがちょうどkの文字列はそれ以上一致できず答えkで確定する。</p>
+<p>残りをk+1文字目で分類すると、size 1のgroupは他とk文字までしか一致せず答えk、size 2以上のgroupだけを次の深さへ再帰すればよい。</p>
+<p>採用する候補: 共通prefixごとのgroupを次文字で再帰分割し、単独になった深さを各文字列の答えにする。</p>
+<p>trieの各文字を総入力長に比例して辿るだけで、全文字列の最大LCPを同時に確定できる。</p>
+<p>棄却する候補: 各iについて他のN-1文字列とのLCPを先頭から比較する。</p>
+<p>文字列pairが二次個あり、総文字数5×10^5の制約では比較回数が大きすぎる。</p>
+<p>棄却する候補: 文字列全体の最頻prefix長を1つ求め、全iへ同じ値を返す。</p>
+<p>各文字列が属するbranchの混み方によって最長共有prefixは異なる。</p>
+<p>ある深さのprefixを共有する文字列が2本以上なら、その全ては少なくともその深さまで誰かと一致し、1本になった直前の深さが最大値になる。</p>
+<p>同じ文字列が複数回入力されても、終端深さのgroup sizeが2以上なので文字列長そのものが答えになる。</p>
+<p>全indexをdepth 0のgroupとして再帰関数へ渡す。depth kで長さkの文字列へ答えkを設定し、それより長い文字列を次文字a..zでbucket分けする。bucket size 1ならそのindexの答えをk、size 2以上ならdepth k+1で再帰する。全indexの答えを入力順に出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="trie相当のprefix分割">trie相当のprefix分割</h3>
+<p>発動条件: 多数文字列について共有prefixの深さをまとめて追いたいとき。</p>
+<p>次文字bucketへ再帰し、groupが単独になる深さを記録する。</p>
+<h3 id="総入力長による計算量評価">総入力長による計算量評価</h3>
+<p>発動条件: 可変長文字列をdepthごとに処理する再帰があるとき。</p>
+<p>各文字を所属文字列の1段として一度だけbucket処理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>求める相手jを直接選ばず、「同じprefix nodeを通る文字列が2本以上か」という集合sizeへ置き換えると全iを同時に解ける。</p>
+<p>別の問題へ持ち帰る視点: 各要素の最良なpartnerを問う問題では、partnerが存在する共有分類の最深levelを求める形へ変換できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>depth kのgroupは先頭k文字が同じ文字列全体を保持する。終端はこれ以上一致できず最大k、一文字先groupがsingletonなら他と次文字で必ず異なり最大k。二本以上なら少なくともk+1一致するためそのgroupだけ再帰する。この分類は全他文字列とのLCP候補を保存し、最初の分離または終端で最大値を確定する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>group内で文字列長が現在depthと等しいindexは終端として先に処理し、次文字へaccessしない。</li>
+<li>再帰depthが最大文字列長になるため、stack制限が不安なら明示stackまたはtrie走査で実装する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>重複文字列、他文字列のprefixになっている文字列、最初の1文字で単独になる文字列を同時に含むtrieを描き、確定depthを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(L)、L=Σ|S_i|。共通prefix groupの各文字を一度分類する。</p>
+<h3 id="空間">空間</h3>
+<p>O(L+N)。明示stackまたはtrie。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5 \times 10^5; N is an integer.; S_i is a string of length at least 1 consisting of lowercase English letters (i = 1, 2, \dots, N).; The sum of lengths of S_i is at most 5 \times 10^5.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=(ab,abc,ax,ab)。</p>
+<ol>
+<li>abの二本は文字列長2まで一致、abcも両abと2まで。</li>
+<li>axは全他とaの1文字だけ一致。</li>
+</ol>
+<p>期待される結果: (2,2,1,2)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ文字列が二本あるとunique trie leafでも答え0か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>入力indexは別で互いに全文字一致する。終端group数も保持して答えを文字列長にする。</p>
+<p>確認結果: 全文字列長。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc287/tasks/abc287_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc287-e-problem-4db894920640533697c1ae44f746223d25b228dff8a43790261e0db6b225e331</li>
+<li><a href="https://atcoder.jp/contests/abc287/editorial/5609">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc287-editorial-5609-3eae5d32344ce4b280463e67fdc31b14606774c7b48316b446410cb81ae139bb</li>
+</ul></main>
+</body></html>

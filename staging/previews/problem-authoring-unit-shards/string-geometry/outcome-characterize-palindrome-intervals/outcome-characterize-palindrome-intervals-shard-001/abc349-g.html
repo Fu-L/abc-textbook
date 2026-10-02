@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC349-G — Palindrome Construction</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC349-G — Palindrome Construction</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/palindrome-radius.md">回文半径と左右対称区間を特定する</a></p>
+<ul>
+<li>各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>一般の部分文字列hash比較と、接尾辞・LCPの索引。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各iの内側palindrome条件は対称位置同士のequality、もう一つ外側までpalindromeでない条件は外側pairのinequalityになる。equality edgeをDSUで縮約し、inequality edgeをcomponent間の色違い制約として扱える。</p>
+<p>採用する候補: Manacher型の再利用でO(N)本のequality unionだけ生成し、縮約graphをgreedy coloringする</p>
+<p>本来O(ΣA_i)本ある対称pairの連結性を線形に保ち、最終検証込みで大入力へ対応できる。</p>
+<p>棄却する候補: 各iで距離1…A_iの全対称pairをunionする</p>
+<p>A_iが大きいcenterが多数あるとequality edge数がO(N^2)になる。</p>
+<p>既に処理したcenterのradius情報で重なるpalindrome内部のequalityをmirrorから再利用し、新しく右端を伸ばす対称pairだけunionすれば、Manacherと同じ償却でunion回数をO(N)にできる。得たcomponent内にinequality edge両端が入れば不可能である。</p>
+<p>modified Manacher走査で各center iの要求radius A_iまで、既知mirror範囲をskipしつつ新規対称位置をDSU unionする。境界内なら(i-A_i-1,i+A_i+1)をinequality edgeにする。自己loopがなければ元index昇順に未着色componentへ、既着色のinequality neighborが使わない最小正整数を割り当てる。生成Sを通常Manacherで検証し全radius=A_iなら出力、違えばNo。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="manacher型の対称制約圧縮">Manacher型の対称制約圧縮</h3>
+<p>発動条件: 多数centerのpalindrome equality区間が大きく重複する。</p>
+<p>既知の右端とmirror radiusを再利用し、未確認部分だけ対称pairを接続する。</p>
+<h3 id="equality縮約後のgreedy-coloring">equality縮約後のgreedy coloring</h3>
+<p>発動条件: 等しい変数群と、異なる必要がある群pairがあり、正整数color数に上限がない。</p>
+<p>DSU componentを最初の出現順に処理し、colored neighborのmexを割り当てる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>lexicographic最小化はindexを左から見て、そのindexのcomponentが初出の時に利用可能な最小値を選べばよい。未来componentは無制限な新色で必ず調整できるため、このgreedyを妨げない。</p>
+<p>別の問題へ持ち帰る視点: unbounded graph coloringのlexicographic最小列はcomponent初出順のneighbor-color mexで構成できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>要求半径内のmirror位置は等値、次の外側pairは不等であり半径exact条件に必要十分。等値をDSU縮約すると不等self-loopは矛盾。重なる内部等値はmirrorで再利用でき新右端だけunionすれば全必要制約を得る。componentを初出順に既着色neighborと異なる最小色で塗ればprefix辞書順を最小化でき、未着色componentは後で別色を選べる。通常Manacherで全半径を照合して仮定付き省略の不整合を排除する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>modified union生成は入力が不整合でも仮定付きなので、構成後に標準ManacherでradiusがAと完全一致するか必ず検証する。inequality self-loopを先に弾く。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>A_i=0、全体palindrome、重なるradiusが矛盾する配列、inequality self-loopを小Nのpartition/color全探索と比較し最終radiusを再計算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Nα(N))。Manacher償却でO(N) unionと不等辺処理、最終検証。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq A_i \leq \min{i-1,N-i}; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=5、A=(0,0,1,0,0)。</p>
+<ol>
+<li>半径1の中心3で位置2=4。中心2,4と中心3外側から1≠3,3≠5,1≠5。</li>
+<li>初出順の最小色は(1,1,2,1,3)。中心3だけ半径1。</li>
+</ol>
+<p>期待される結果: 構成(1,1,2,1,3)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最終Manacherを省いてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>入力半径が不整合でもmirror再利用は仮定付きで進む。全radius一致を最後に検証して初めて構成が要求を満たすと保証できる。</p>
+<p>確認結果: 省かない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc349/editorial/9782">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc349-editorial-9782-4abdcd44aecd9b4532728588d61fa361d9924abf347e49b7857cc9d5a622f030</li>
+<li><a href="https://atcoder.jp/contests/abc349/tasks/abc349_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc349-g-problem-47759f44ba66a31c4361f8d924405fe5fbe9dbcce3c7982e2ae33a3f07457474</li>
+</ul></main>
+</body></html>

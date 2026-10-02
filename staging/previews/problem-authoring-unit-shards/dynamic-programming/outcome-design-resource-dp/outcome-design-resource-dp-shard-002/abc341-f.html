@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC341-F — Breakdown</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC341-F — Breakdown</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dag-topological-processing.md">DAGのtopological processing</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一つのpieceから派生する操作木は他のpieceと相互作用せず、頂点vのpiece一つが生む最大操作回数dp[v]を求めれば答えはΣA_vdp[v]になる。子として置けるのは重みがW_v未満の隣接頂点だけである。</p>
+<p>採用する候補: W昇順に頂点を処理し、各頂点で0/1 knapsackを解く</p>
+<p>dp[v]はstrictly smaller weightのdpだけに依存し、選択集合のweight制約をknapsackとして正確に最大化できる。</p>
+<p>棄却する候補: 各操作をpieceごとに実際にsimulationする</p>
+<p>pieceが分岐して数が増え、A_iも10^9まであるため操作列を陽に生成できない。</p>
+<p>vの一回目の除去で1操作を得た後、選んだ隣接集合Sの各pieceは独立にdp[u]回寄与するのでdp[v]=1+max_{ΣW_u&lt;W_v}Σdp[u]である。これはcost W_u、value dp[u]、capacity W_v-1の0/1 knapsackになる。</p>
+<p>頂点をW昇順に並べる。各vについて長さW_vのknapsack配列を0初期化し、W_u&lt;W_vの全neighbor uをitemとしてcapacity降順にvalue dp[u]を更新する。dp[v]=1+max tableとし、全頂点後にΣdp[v]A_vを計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="依存順付きvertex-dp">依存順付きvertex DP</h3>
+<p>発動条件: 遷移先のweightが必ず現在より小さく、再帰がwell-foundedである。</p>
+<p>W昇順をtopological orderとして小weight頂点のdpを先に確定する。</p>
+<h3 id="頂点ごとの01-knapsack">頂点ごとの0/1 knapsack</h3>
+<p>発動条件: 隣接候補から各頂点を高々一度選び、weight和のstrict上限下でvalue和を最大化する。</p>
+<p>capacity W_v-1でneighborをitemとして一次元knapsackを行う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>piecesの由来を分けて考えると最大操作回数が線形に加算され、巨大な初期個数A_vは最後の内積にだけ現れる。</p>
+<p>別の問題へ持ち帰る視点: 独立に分岐するprocessは、一個あたりの最適価値を求めて初期multiplicityで重み付けできる。</p>
+<h2 id="正当性">正当性</h2>
+<p>頂点vの一pieceを除くとまず一操作を得て、選んだ隣接集合Sの各頂点へpieceが独立に置かれる。条件ΣW_u&lt;W_vから全選択頂点はvより小さいweightであり、その後の最大操作数dp[u]は既に確定している。従ってdp[v]=1+max Σdp[u]はweight W_u・価値dp[u]・容量W_v−1の0/1 knapsackに等しい。各pieceは他pieceの存在で選択条件を変えないので、初期A_v個のpieceの寄与も線形に加算でき、ΣA_v dp[v]が全操作数の最大となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>strict inequalityなのでcapacityはW_v-1で、W_u≥W_vのneighborはitemにしない。knapsackはcapacity降順に更新し同じneighborの重複使用を防ぐ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Sが空しか選べない頂点、同じWの隣接、複数neighborのknapsack選択、A_v=0を小規模再帰探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+MWmax)、各辺の小weight側をitemとするknapsack。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M+Wmax)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \leq N \leq 5000; 1 \leq M \leq \min \lbrace N(N-1)/2, 5000 \rbrace; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i \rbrace \neq \lbrace u_j, v_j \rbrace; 1 \leq W_i \leq 5000; 0 \leq A_i \leq 10^9</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1-2-3、W=(1,3,2),A=(1,1,1)。</p>
+<ol>
+<li>dp1=dp3=1。</li>
+<li>dp2のcapacity2ではweight1,2の両方は取れず価値1、dp2=2。</li>
+</ol>
+<p>期待される結果: ΣA_vdp_v=4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>capacityをW_vへすると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>ΣW_u&lt;W_vというstrict条件を≤へ変え、1と2を両採用してdp2=3と過大計上する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc341/editorial/9319">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc341-editorial-9319-c2b0e9dbc56db339bda0518027c8dc5caad4b31760a71c1288b9fca5b28dd5cd</li>
+<li><a href="https://atcoder.jp/contests/abc341/tasks/abc341_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc341-f-problem-84d3b92c05bd3e31d944be2d3ad095c7de0164eb8a5929504ae55cb49acd0f1e</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,250 @@
+{
+  "domain": "data-structures",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shards": [
+    {
+      "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
+      "domain": "data-structures",
+      "problemCount": 3,
+      "subjectDigest": "b4f71e237383e27adf245022d40f02d05926d1ec2effda7350da9d9516ea5596",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-answer-idempotent-range-query-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "a719c623a87d7d0b50bef47052dea8062024b269ab06e480006a49742ea45b2c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
+      "domain": "data-structures",
+      "problemCount": 2,
+      "subjectDigest": "10d0b49817077dbd7cf42f1eb454d05fc0f9ff9c565a244038c5b4f3c48257a9",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-static-sorted-range-index-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "a1cb22a74d58e5bb866e06e75d9b4e7021bf8debbd5cd9b5384ca22c6cf71a6b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "44b72187cf02f62cdfdd83e40825df9c6e1c99b9ba955b19b8bfcdf99ee43860",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compose-finite-functions-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "b9843ed5c52b610faecaef3b83e2721065e349c999d5d0f25a28db57c2246712",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-decompose-ranges-into-segment-tree-nodes-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "c62e4853aaf7676ff9e0449f7724c92190112618ef915efa317fbae063dcdbc7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-associative-range-summary-shard-001",
+      "domain": "data-structures",
+      "problemCount": 8,
+      "subjectDigest": "9fe55f255e8c8e083ddf4c78cc10ad825381ad802f9884d94290081aafda52f8",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-associative-range-summary-shard-002",
+      "domain": "data-structures",
+      "problemCount": 8,
+      "subjectDigest": "6af72c9a494a6e490b1742bb1997984390b942eae9f17873455fb33b7664ef55",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-range-update-action-shard-001",
+      "domain": "data-structures",
+      "problemCount": 8,
+      "subjectDigest": "7b5580f032a653dda2c5742420f4b599e0d744196f50facafd76f398d3c0311a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-range-update-action-shard-002",
+      "domain": "data-structures",
+      "problemCount": 6,
+      "subjectDigest": "3bdc5ed2a3178bebfd8655c02d17a00aacb1f790d50aede40d93a76b52156fc4",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-enumerate-frontier-best-first-shard-001",
+      "domain": "data-structures",
+      "problemCount": 7,
+      "subjectDigest": "d015db5a867ff33b7ceeca530ccd6f737e3894db069456150beb4cb6acf50343",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-linearize-static-range-information-shard-001",
+      "domain": "data-structures",
+      "problemCount": 8,
+      "subjectDigest": "3bebb32c4c99405cea3f8af08d3d5c794b9f13a8bc5073d2c8e59c67d611b8a0",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-linearize-static-range-information-shard-002",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "8b2fe52727f19280c44d2d3fd8bd082107acf980825b91640a91c61c86485e13",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-local-sequence-links-shard-001",
+      "domain": "data-structures",
+      "problemCount": 2,
+      "subjectDigest": "f863aeb5f827134412f683337f1b8cd6d8114119a7b5d0cd0e87be12c14c21e2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
+      "domain": "data-structures",
+      "problemCount": 4,
+      "subjectDigest": "89e0da76142f9ac7a39c551c95bcacaf07b5ddcbfa9816424c133a9556e2fb55",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
+      "domain": "data-structures",
+      "problemCount": 7,
+      "subjectDigest": "6e39bf43866e3b3a41b38ded76929cdfc72c82f0838f94b600c7a0d0543b53c6",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "55e74348cb870d5226133b4e5518a22bcf8ae1db499e73c805d49d9023812e1c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "72c93e04c8291fd1ed3820050e0d8a863726e086a636d4fb7a1ccfd829440ab5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-weighted-prefix-statistics-shard-001",
+      "domain": "data-structures",
+      "problemCount": 6,
+      "subjectDigest": "d57b681516d9ad21766ee25e5b1d08c98d2dfe7945990dfeef48a58cd7105605",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-minimize-maximum-xor-by-bit-partition-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "04be363056d3cb55b14c4022ecff59bf4e52430f94a115088cd487aff57c0e5f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-persist-data-structure-versions-shard-001",
+      "domain": "data-structures",
+      "problemCount": 2,
+      "subjectDigest": "880d78a75a345b401d0ba45b9a8e30a0d5c13080f4cdda28dfa030511fce2a3f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prune-dominated-candidates-once-shard-001",
+      "domain": "data-structures",
+      "problemCount": 5,
+      "subjectDigest": "920de3c8eaa37be945a6f344729ca25dbb2d76865922d23d4bee876e9b37b209",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prune-range-actions-by-node-invariant-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "9eb08c101734998553c8653953074659bcebf9723943d15f4b88c2b3cbd9c21f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-query-bitwise-order-with-trie-shard-001",
+      "domain": "data-structures",
+      "problemCount": 1,
+      "subjectDigest": "5347385b8e9de2c318a6e21ff46c57919c9668ba4548f07e1025e07c1159fea7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-rollback-reversible-updates-shard-001",
+      "domain": "data-structures",
+      "problemCount": 3,
+      "subjectDigest": "e8b064e7834d8dc22149fa8aa0d3a5eb393789bf30fcf127f38a9bc7bfb60817",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-schedule-range-query-updates-shard-001",
+      "domain": "data-structures",
+      "problemCount": 4,
+      "subjectDigest": "de414680f5e5dfac1275732b3535a0f1f501b7d99e8c1506002f0412d404776f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    }
+  ],
+  "scope": "Independent shard evidence only; no global join or human acceptance."
+}

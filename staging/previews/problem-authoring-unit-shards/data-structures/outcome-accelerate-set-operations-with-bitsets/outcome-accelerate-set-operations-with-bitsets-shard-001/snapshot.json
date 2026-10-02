@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-accelerate-set-operations-with-bitsets-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b4f71e237383e27adf245022d40f02d05926d1ec2effda7350da9d9516ea5596",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0a3bbc4aa9d3c16a1116dd2db2561bd86514dac19245fc26c00401c5d0114e5a",
+  "reviewDigest": "7f10dd20114748366f282341ae0a40064b79d7844027317b1047003301d271a2",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc221-g.html",
+      "digest": "b7670f44afd64136e0e02037c76de1a55df7827fc4eead90def7e01726e56f95"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc258-g.html",
+      "digest": "4730cca73a664f8a21f4206a70cf85199773afce2bba777c8d71b03e4ed76ff2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/abc348-f.html",
+      "digest": "158de27645036baf1c54cca767948ebb1977db327873cfc12d66a6f70c7a9729"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-accelerate-set-operations-with-bitsets/outcome-accelerate-set-operations-with-bitsets-shard-001/index.html",
+      "digest": "c5bc4caa17dbe1d516b41bbb50558a8116c4c348acc1992fa789279ac6e0ece2"
+    }
+  ],
+  "snapshotDigest": "d4a7cfd62cf8b5ed2366a72232f00aeb4d63231793b63327466393dbdb9c2b8e"
+}

@@ -1,0 +1,375 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
+  "packets": [
+    {
+      "problemId": "abc217-h",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization"
+      ],
+      "excludedTopics": [
+        "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-slope-trick"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq T_1 \\lt T_2 \\lt \\dots \\lt T_N \\leq 10^9; D_i (1 \\leq i \\leq N) is 0 or 1.; -10^9 \\leq X_i \\leq 10^9 (1 \\leq i \\leq N); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "時刻tで位置xにいる最小累積被害をf_t(x)とする。速度制約の下で次の移動更新は区間[x−Δt,x+Δt]で前の凸関数を最小化する操作となる。凸関数の減少側・増加側の折れ点をそれぞれ左右へΔtずらすと、この区間最小化を正確に表せる。射撃被害は向きに応じた片側hingeであり、傾きに一段の変化を加えるだけである。二つのheapとoffsetはこれらの折れ点と現在の最小値を保持するので、移動してからhingeを加える順序を守ればDPの帰納法が成立する。初期位置0以外を有限費用にしてはならない。",
+          "sourceRevisionIds": [
+            "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef",
+            "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef",
+          "path": "src/content/sources/abc212-abc263/source-abc217-editorial-2581-5cfe6e31c3ff5d31da68a002a05248a0efb60b183ccd53f67b66edfeec1c8eef.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc217_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323",
+          "path": "src/content/sources/abc212-abc263/source-abc217-h-problem-c9df3d72bfdd2c9dde80f0832a31542448dc4195a205a6a0c17f3f6dea3d0323.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc217_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc250-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-slope-trick",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le P_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "所持株数に対する最大利益DPは凹で、限界的に一株増やす費用の変化点を最小ヒープに保持できる。価格pが最小値mを上回ると、最安の限界買値をpで売ることでp−mだけ最終利益が改善する。mを取り除きpを二個挿入するのは、pでの新規購入候補と、過去の売却を後で取り消してより高く売る候補の両方を残す操作である。そうでなければ新規購入候補一個を追加する。これは毎日の購入・売却・待機DPを圧縮した更新であり、同一日に二回実売買するという意味ではない。",
+          "sourceRevisionIds": [
+            "source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b",
+            "source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b",
+          "path": "src/content/sources/abc212-abc263/source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc250_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907",
+          "path": "src/content/sources/abc212-abc263/source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc250_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc275-ex",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function",
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-ordered-set-multiset",
+        "unit-small-to-large"
+      ],
+      "excludedTopics": [
+        "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-cartesian-tree",
+        "tag-slope-trick",
+        "tag-ordered-set-multiset",
+        "tag-small-to-large"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq A_i,B_i \\leq 10^9; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。",
+          "sourceRevisionIds": [
+            "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
+            "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0",
+          "path": "src/content/sources/abc264-abc315/source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc275_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f",
+          "path": "src/content/sources/abc264-abc315/source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc275_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc406-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-constructive-witness",
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-slope-trick",
+        "tag-constructive-witness",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq C, D \\leq 10^5; -10^5 \\leq X_i \\leq 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存履歴を逆順に戻して全受取位置も最適に構成できる。",
+          "sourceRevisionIds": [
+            "source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00",
+            "source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00",
+          "path": "src/content/sources/abc368-abc419/source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc406_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2",
+          "path": "src/content/sources/abc368-abc419/source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc406_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc458-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-piecewise-linear-convex-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-slope-trick",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 3 \\times 10^5; 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq A_i \\leq 10^6; 1 \\leq B_i \\leq 10^6; 1 \\leq C_i \\leq 10^6; The sum of N over all test cases is at most 3 \\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "脱出予定者mだけを追えば他者は初日に脱落させられ、余計な支出を省ける。固定mの日次DPは残人数ごとの最大medalを持ち、収入A−Bx追加、負state除去、脱出ごとのC消費は元処理と一致する。凹折れ線の一次加算と傾きclip/延長はこの最大遷移を正確に実行する。m人数成功から任意少人数へ余分な支出を減らせるため可否は単調、二分探索で最大を得る。",
+          "sourceRevisionIds": [
+            "source-abc458-editorial-20460-e7a773e046a413de8fde9c92430ead7c8be1da0c945dda54fa45a64f9d7646e0",
+            "source-abc458-g-problem-daae3589eb6dc548e2acfaefe7b95b81cff1f2ffe69465dc271f2fccdfe38cae"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc458-editorial-20460-e7a773e046a413de8fde9c92430ead7c8be1da0c945dda54fa45a64f9d7646e0",
+          "path": "src/content/sources/abc420-abc466/source-abc458-editorial-20460-e7a773e046a413de8fde9c92430ead7c8be1da0c945dda54fa45a64f9d7646e0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc458_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc458-g-problem-daae3589eb6dc548e2acfaefe7b95b81cff1f2ffe69465dc271f2fccdfe38cae",
+          "path": "src/content/sources/abc420-abc466/source-abc458-g-problem-daae3589eb6dc548e2acfaefe7b95b81cff1f2ffe69465dc271f2fccdfe38cae.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc458_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

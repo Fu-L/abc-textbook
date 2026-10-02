@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC446-F — Reachable Set 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC446-F — Reachable Set 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></p>
+<ul>
+<li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点1から到達可能な集合をちょうど {1..i} にできる必要条件は、誘導部分 graph G_i で1から全1..iへ到達できること。可能なら削除すべき外側頂点は、その集合から一辺で出る頂点に限られる。 G_i で到達不能な j≤i は、外側頂点を削除しても新たに到達可能にはならないので、その i の答えは -1 である。 prefix が全到達なら、外へ出る path の最初の外側頂点を全て削除すれば、それより先の外側頂点は自動的に到達不能になる。</p>
+<p>採用する候補: 頂点番号順に G_i を増やし、新たに1から到達可能になった頂点を増分 DFS で伝播する。同時に到達集合から外側へ出る隣接先の distinct 数を保ち、各 i の答えを出す。</p>
+<p>到達済み頂点・辺は全過程で定数回だけ走査され、G_i で prefix 全体が reachable なら境界を一歩越える頂点を削除することが必要十分になる。</p>
+<p>棄却する候補: 各 i ごとに頂点 i+1..N の削除集合を探索し、到達可能集合を最初から計算する。</p>
+<p>N 回の graph traversal だけでも O(N(N+M)) となり、削除集合の探索はさらに指数的である。</p>
+<p>G_i で到達不能な j≤i は、外側頂点を削除しても新たに到達可能にはならないので、その i の答えは -1 である。</p>
+<p>prefix が全到達なら、外へ出る path の最初の外側頂点を全て削除すれば、それより先の外側頂点は自動的に到達不能になる。</p>
+<p>頂点 i と内部辺を順に有効化し、到達済み頂点から i への入辺があれば i を queue に入れる。新規到達頂点から有効な出辺を探索して連鎖到達を広げ、全 graph 上の一歩隣接先を集合/最小前駆集計へ反映する。reachableCount=i なら境界数を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="増分-reachability">増分 reachability</h3>
+<p>発動条件: 頂点番号 prefix を順に追加した誘導 graph の到達集合を全 prefix で求めたいとき。</p>
+<p>新規到達頂点だけから DFS を再開し、各辺を定数回処理する。</p>
+<h3 id="到達境界の必要十分化">到達境界の必要十分化</h3>
+<p>発動条件: reachable set を指定集合へ一致させるための最小削除を問うとき。</p>
+<p>指定集合から一歩で外へ出る頂点だけを削除対象として数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>頂点削除の組合せを探す前に、残したい集合内の reachability と、その集合から出る最初の境界を分離する。</p>
+<p>別の問題へ持ち帰る視点: prefix ごとの graph query は、状態を捨てず頂点追加に伴う新規到達分だけを処理できる場合がある。</p>
+<h2 id="正当性">正当性</h2>
+<p>prefix誘導graphで全頂点に届かなければ外削除で新到達性を作れず不可能。全到達なら外へ出る最初のneighborを全削除するのが必須で、それらを消せば外へのpathがなく十分。prefix追加で到達性は増加のみなので新到達queueを伝播しboundaryをdistinct countすると全最小値を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>未有効頂点への辺は到達伝播にはまだ使わず、境界数には重複なく数える。自己loop・多重辺があっても count を二重加算しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>prefix 内に未到達頂点がある不可能性と、境界頂点を全削除すれば十分なことを path の最初の外側頂点で証明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N有向頂点M辺。activate/reach/boundaryを各edge定数回処理して O(N+M)。</p>
+<h3 id="空間">空間</h3>
+<p>正逆adjacencyとreach,boundary flag O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 3\times 10^5; 1\leq M\leq 3\times 10^5; 1\leq U_i,V_i\leq N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>有向辺1→2,2→3,1→4、N=4。</p>
+<ol>
+<li>prefix1は全到達、境界{2,4}。</li>
+<li>prefix2は境界{3,4}。</li>
+<li>prefix3は{4}、prefix4は空。</li>
+</ol>
+<p>期待される結果: 2,2,1,0</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>無向DSUだけでprefix内部全到達を判定してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。有向辺2→1だけでは弱連結でも1から2へ届かない。方向付き到達伝播が必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc446/editorial/16384">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc446-editorial-16384-e279164f75dd3bd2328adc1e2913cfadc8fe01e518d1feeff4473560ea3eae4f</li>
+<li><a href="https://atcoder.jp/contests/abc446/tasks/abc446_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc446-f-problem-f542f915a44d41318c9a77b17d56066f497fa351159eabce91ad755de4b504ba</li>
+</ul></main>
+</body></html>

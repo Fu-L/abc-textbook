@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC395-F — Smooth Occlusion</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC395-F — Smooth Occlusion</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最終sum Hを固定すると削る総量はΣ(U_i+D_i)-NHで構成によらないため、cost最小化は実現可能なH最大化と同値である。</p>
+<p>各上歯a_iは0≤a_i≤U_iかつ0≤H-a_i≤D_iより区間[max(0,H-D_i),min(U_i,H)]に入り、隣接差≤Xを満たす列の存在判定になる。</p>
+<p>採用する候補: Hを二分探索し、左から到達可能なa_iの区間を伝播して可否判定する</p>
+<p>Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。</p>
+<p>棄却する候補: 各歯の最終上長を個別にgreedyで最大化する</p>
+<p>隣接差制約が連鎖するため局所最大選択は将来区間を空にし得て、共通Hも保証しない。</p>
+<p>前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。</p>
+<p>Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。</p>
+<p>H候補ごとにpossible=[max(0,H-D_1),min(U_1,H)]から始め、iを進めてpossibleを[possible.low-X,possible.high+X]と歯iの許容区間で交差する。空ならNo。最大Yes Hから総和-NHを出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="区間到達可能性dp">区間到達可能性DP</h3>
+<p>発動条件: 一次元列で各値が区間制約と隣接Lipschitz制約を満たすか判定するとき。</p>
+<p>到達値集合を一つのintervalとして伝播する。</p>
+<h3 id="実現可能値最大化の二分探索">実現可能値最大化の二分探索</h3>
+<p>発動条件: 目的が共通parameter Hの単調可否と線形に結び付くとき。</p>
+<p>最大feasible Hを探す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>削り方のcostを直接最適化せず、上下和Hを固定すると目的が消え、上歯だけの区間列feasibilityへ変わる。</p>
+<p>別の問題へ持ち帰る視点: 総量削減問題では最終総和parameterを固定し、局所変数の可到達区間を調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。 Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。 Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>許容区間下端max(0,H-D_i)、上端min(U_i,H)を使い、交差空判定を等号込みで行う。Σ(U+D)-NHは64 bit整数。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤7、小heightで全最終U’_iを列挙し、H=0、区間が一点、差がXちょうどのcaseを二分探索判定と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log Hmax)、歯一つごとの可能値区間伝播はO(1)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、判定自体O(1)補助。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq U _ i \leq 10^9 \ (1 \leq i \leq N); 1 \leq D _ i \leq 10^9 \ (1 \leq i \leq N); 1 \leq X \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>U=(3,1),D=(1,3),X=0。</p>
+<ol>
+<li>各合計初期4。H=2では上歯範囲[1,2]と[0,1]が1で交わる。</li>
+<li>H=3は[2,3]と[0,1]で不交差。</li>
+</ol>
+<p>期待される結果: 最大H2、削除数8−2·2=4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>可能上歯値を一点だけgreedy固定すると安全か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>将来歯の制約と交差する候補を失うので連続区間全体を保存する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc395/editorial/12344">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5</li>
+<li><a href="https://atcoder.jp/contests/abc395/tasks/abc395_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48</li>
+</ul></main>
+</body></html>

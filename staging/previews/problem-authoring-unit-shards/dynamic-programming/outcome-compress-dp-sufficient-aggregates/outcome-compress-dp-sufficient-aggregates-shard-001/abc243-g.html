@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC243-G — Sqrt</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC243-G — Sqrt</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>遷移式を属性別極値・少数の重み付き和へ分解し、その集計値が更新について閉じることを示せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>どの選択でも値は平方根以下へ落ち続け、1に着けば以後は1しか選べない。10^100回の長さではなく、1へ至る有限な prefix の選び方だけを数えればよい。</p>
+<p>dp[x] を x から始まる種類数とすると dp[1]=1、x&gt;1 で dp[x]=Σ_{i≤floor√x}dp[i] だが、X の平方根は約3×10^9で直接前計算できない。</p>
+<p>採用する候補: 二手先 A_3=i を固定し、中間 A_2 の個数 floor√x-i²+1 を係数にして i≤floor fourth-root(x) だけを和にする。</p>
+<p>一段多く遷移をまとめることで query の列挙範囲を四乗根へ縮め、さらに二種類の prefix sum で和を一括評価できる。</p>
+<p>棄却する候補: dp[1..floor√X] を全て順に計算して dp[X] を求める。</p>
+<p>X は9×10^18で平方根範囲が数十億になり、T=20に対して保持・走査できない。</p>
+<p>A_3=i なら A_2 は i²≤A_2≤floor√x の任意値なので、dp[x]=Σ_{i≤floor fourth-root x}(floor√x-i²+1)dp[i] となる。</p>
+<p>P0[r]=Σ_{i≤r}dp[i]、P2[r]=Σ_{i≤r}i²dp[i] を持てば、s=floor√x、r=floor√s に対して dp[x]=(s+1)P0[r]-P2[r] と評価できる。</p>
+<p>全 query の最大 fourth-root まで dp[1]=1、dp[v]=P0[floor√v] を順に前計算し、P0,P2 を更新する。各 X は整数平方根 s と r を厳密に求め、(s+1)P0[r]-P2[r] を64 bitで出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="遷移を二段まとめる-state-space-縮小">遷移を二段まとめる state-space 縮小</h3>
+<p>発動条件: 一段遷移先がまだ多いが、二段先を固定すると中間状態数を閉形式で数えられるとき。</p>
+<p>中間選択の multiplicity を係数にして、より小さい二段先だけを列挙する。</p>
+<h3 id="重み付き-prefix-sum">重み付き prefix sum</h3>
+<p>発動条件: Σ(a-bi²)dp[i] のように係数が少数の基底へ分解できるとき。</p>
+<p>Σdp と Σi²dp を別々に前計算して query の和を線形結合する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>平方根遷移を二回合成すると探索上限が X^{1/2} から X^{1/4} へ下がり、中間値 A_2 の範囲長が単純な係数になる。</p>
+<p>別の問題へ持ち帰る視点: 単調に値が縮む recurrence では、複数 step を飛ばした遷移先数を数えて指数を半減できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>1へ到達すると以後の値は全て1なので、無限に長い列は有限の減少prefixで決まる。dp(1)=1、x&gt;1ではdp(x)=Σ_{i≤floor√x}dp(i)。二段目の選択を入れ替えて和を数えると、第三値iを持つ第二値はi²からs=floor√xまでのs−i²+1個だからdp(x)=(s+1)Σ_{i≤r}dp(i)−Σ_{i≤r}i²dp(i)、r=floor√s。小さいdpと二つのprefix和だけで全質問を評価できる。x=1でも同式は1を返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>浮動小数の sqrt だけを信じず、候補を __int128 の平方比較で補正する。式の中間積も signed 64 bit 境界を意識して広い型で計算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>X=16で A_3=1,2 ごとの A_2 候補を列挙し、係数 floor√X-i²+1 と答え5を対応させる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>前計算O(X_max^(1/4))、各質問O(1)の整数平方根と式評価。整数平方根を二分探索する場合はO(log X)も含める。</p>
+<h3 id="空間">空間</h3>
+<p>O(X_max^(1/4))。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 20; 1 \leq X \leq 9\times 10^{18}; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>X=16。</p>
+<ol>
+<li>第二値は1,2,3,4。</li>
+<li>dp(1)=dp(2)=dp(3)=1、dp(4)=2。</li>
+<li>dp(16)=1+1+1+2=5。s=4,r=2の式も5·2−(1+4)=5。</li>
+</ol>
+<p>期待される結果: 答え5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>平方根を浮動小数の切り捨てだけで求めてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。10^18級の平方数近傍では丸めで一つずれる。広い整数型の平方比較で候補を補正し、floor√xとfloor√sを厳密に求める。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc243/editorial/3510">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc243-editorial-3510-390624bcb30e413c9c5a41a55f2872e9d60338300d004b539c551de1c561a5b1</li>
+<li><a href="https://atcoder.jp/contests/abc243/tasks/abc243_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc243-g-problem-b11ec941d82d048180799a902b0fd591a98479641423b35d2b627222a5187a82</li>
+</ul></main>
+</body></html>

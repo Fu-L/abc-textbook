@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-accelerate-tree-dp-by-heavy-path-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7be31c76135f31578b51dd34c81477b0dab0d7899552f0b8184686917b1a6fd1",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0a266b13ba9aeaed2e55e4a47379f6bf76ad67008c6803e3c8fd313d5f734054",
+  "reviewDigest": "07d8d3518a4f2d76ecbebd9fb4e338d3bafb3a1310783092a68212becfc15daa",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/abc269-ex.html",
+      "digest": "e9aa1d4ccfcab2abddd1cc0134971245281cb6c1595dc61a381c45613c1cc4f8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-accelerate-tree-dp-by-heavy-path/outcome-accelerate-tree-dp-by-heavy-path-shard-001/index.html",
+      "digest": "68c5d370dcd109c102b5aec7f9ceb8c06928dfbd303642d4b87152f8c92aebac"
+    }
+  ],
+  "snapshotDigest": "e13c994b171720433d4886f1b653cc2d4dc4e814c91d0b53bedaa7e2d219e39a"
+}

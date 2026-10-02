@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC275-EX — Monster</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC275-EX — Monster</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/slope-trick.md">slope trick</a></p>
+<ul>
+<li>区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+<li>配列順とheap順を保つCartesian treeを単調stackで構成し、各部分木が表す連続区間へ問題を分解できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/small-to-large.md">small-to-large・DSU on Tree</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>操作順は総費用に影響せず、同じ最大 shield 値のままなら区間を広げても損をしないため、候補区間は B の極大支配区間へ絞れる。</p>
+<p>各 B_i を区間最大の代表とし、同値では右側を代表にする規約を置くと、候補区間は max Cartesian tree の部分木区間になる。</p>
+<p>採用する候補: B の Cartesian tree 上で、区間全体が既に j 回攻撃済みのときの最小追加費用 F_i(j) を子から合成し、離散凸な折れ線の変化点だけを small-to-large で管理する。</p>
+<p>A_i,j が 10^9 でも関数の傾き変化は部分木頂点数程度であり、全 j を列挙せず再帰式を評価できる。</p>
+<p>棄却する候補: 各 node について j=0,…,max A の DP 配列を明示して recurrence の最小 k を調べる。</p>
+<p>A_i≤10^9 のため添字範囲だけで不可能で、各 k の探索も重い。</p>
+<p>node i で追加の全区間攻撃を k 回行うと、k≥max(A_i-j,0) かつ費用は kB_i+F_left(j+k)+F_right(j+k) になる。</p>
+<p>子関数の限界削減量が j とともに減る離散凸性により、最適な到達高さ j_0 は『子側の次の1回の節約が B_i を下回る最初』という閾値になる。</p>
+<p>F_i の全値ではなく F_i(0)、初期傾き、二階差分が非零になる位置の multiset を持てば、子の和は集合併合、node追加は prefix傾きの置換として処理できる。</p>
+<p>単調 stack等で tie規約付き max Cartesian treeを構築する。postorderで子の折れ線event集合を大きい方へ併合し、j≥A_i かつ子の限界節約&lt;B_iとなる j_0 までeventを消費する。prefix slopeをB_iへ置換するbreakpointを挿入し、rootのF(0)を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="cartesian-tree">Cartesian tree</h3>
+<p>発動条件: 各区間の最大値で操作費用が決まり、最大要素を境に左右が独立するとき。</p>
+<p>shield B の最大位置を根にし、最大値支配区間の包含関係を二分木へする。</p>
+<h3 id="離散凸関数のbreakpoint表現">離散凸関数のbreakpoint表現</h3>
+<p>発動条件: 巨大な整数引数上のDP関数が単調な傾きを持ち、和・prefix切替で更新されるとき。</p>
+<p>初期値・傾き・二階差分eventだけを保持してmin-plus recurrenceを評価する。</p>
+<h3 id="small-to-large-merge">small-to-large merge</h3>
+<p>発動条件: 木DPで各部分木のordered event集合を親へ併合し、要素の移動回数を抑えたいとき。</p>
+<p>左右の小さい集合を大きい集合へ挿入して折れ線を合成する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最大shieldの区間攻撃を何回まとめて行うかは、子部分木で1回余分に攻撃して節約できる限界費用とB_iの比較で決まる。</p>
+<p>別の問題へ持ち帰る視点: 階層的な一括操作では、親操作の単価と子解の限界差分を比較し、最適回数を傾きの閾値として探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>区間攻撃の費用が最大Bで決まるので、同じ最大値を保つ限り区間を広げて損はない。最大Cartesian treeの部分木区間だけで最適解を表せる。部分木が既にj回攻撃されているとき、根でk≥max(A_i−j,0)回の追加攻撃を行う費用はkB_i+F_left(j+k)+F_right(j+k)。子関数は減少する離散凸関数だから、追加一回の子側節約がB_iを下回る位置まで進むのが最適。子の二階差分eventを合成し、そのprefixの傾きを−B_iへ置換してこの最小化を表現する。葉からの帰納で全関数とrootのF(0)が正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>前方の strictly greater、後方の greater-or-equal という非対称規約を守り、同じ B では右端が区間代表になる tree を構成する。</li>
+<li>F(0) や A_iB_i は 10^18 規模になるため 64 bit を使い、event削除時の傾き・関数値更新の符号を固定する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>葉のF(j)=max(A_i-j,0)B_iから一階差分を描き、親で子の限界節約とB_iが交差するj_0、および同値Bの代表規約を小例で検証する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log² N)。small-to-largeにより各eventの移動はO(log N)回、ordered set更新がO(log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_i,B_i \leq 10^9; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=1、A_1=3,B_1=2。</p>
+<ol>
+<li>唯一の区間を一回攻撃する費用は2。</li>
+<li>残体力が0になるまで三回が必要。</li>
+<li>F(j)=2max(3−j,0)で、傾きはj&lt;3で−2、以後0。</li>
+</ol>
+<p>期待される結果: 最小費用F(0)=6。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=[1,1],B=[1,3]のとき、別々の攻撃と全体攻撃を比較せよ。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>別々なら1+3=4、全体を一回ならmax B=3。Cartesian treeの根の区間を使えば3を達成し、B=3の個体を倒すため少なくとも3必要だから最適。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc275/editorial/5128">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc275-editorial-5128-cd020736ab87fd89ea58cc741d720fd4ffa5ef0ccf38982b50a633ccf882f0b0</li>
+<li><a href="https://atcoder.jp/contests/abc275/tasks/abc275_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc275-ex-problem-847c185976e5ab7661a10935fc2208fe522a3d06be197f9411a7d74de78f081f</li>
+</ul></main>
+</body></html>

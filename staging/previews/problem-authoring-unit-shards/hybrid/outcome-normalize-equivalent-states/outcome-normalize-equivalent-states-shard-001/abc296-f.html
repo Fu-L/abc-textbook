@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC296-F — Simultaneous Swap</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC296-F — Simultaneous Swap</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>操作はAとBで同時に一回ずつ互換を行うため、要素が全て異なる場合は二列の反転数parityのxorが不変である。</p>
+<p>採用する候補: multiset一致と重複有無・反転parity判定</p>
+<p>値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。</p>
+<p>棄却する候補: 操作列を探索</p>
+<p>状態数が順列対で指数的。</p>
+<p>重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。</p>
+<p>A,Bをsortしてmultiset一致を確認し、重複があればYes。全相異ならFenwick tree等で両反転数parityを求め、一致するときだけYes。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="置換parity不変量">置換parity不変量</h3>
+<p>発動条件: 二列へ同時に互換を施す。</p>
+<p>反転数の偶奇変化を追う。</p>
+<h3 id="重複によるparity自由化">重複によるparity自由化</h3>
+<p>発動条件: 同値要素があり識別順を交換しても観測列が変わらない。</p>
+<p>一方のparityを任意に反転できるとみなす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同時swap制約は全相異時だけ効き、重複一組があるだけでparity障害が消える。</p>
+<p>別の問題へ持ち帰る視点: 重複を持つ並べ替えでは置換符号が一意でなくなる。</p>
+<h2 id="正当性">正当性</h2>
+<p>重複値二個の識別ラベルを交換しても元配列は変わらないため、必要な置換parityを選べる。 値集合が違えば不能、重複があれば同値要素の交換でparityを自由に反転でき、なければparity一致が必要十分となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>multiset不一致を先に除外し、parityだけなら反転数全値でなくmod2更新でよい。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Nの状態BFSと比較し、重複なしの奇偶両例、重複あり、multiset不一致を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、multiset sortと反転parity。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 2\times 10^5; 1\leq A_i,B_i\leq N; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,3),B=(2,1,3)。</p>
+<ol>
+<li>multisetは同じ、反転数parityは0対1。</li>
+<li>全相異なのでparityを変える見かけ不変の交換はない。</li>
+</ol>
+<p>期待される結果: No。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=(1,1,2),B=(1,2,1)では。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>重複1の識別labelを交換して必要parityを調整でき、multisetが一致するのでYes。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc296/editorial/6117">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc296-editorial-6117-1769e9bb180dcae3fdd30d6b6507c3bc5af74e5774cd87d74c48940d71cb8bed</li>
+<li><a href="https://atcoder.jp/contests/abc296/tasks/abc296_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc296-f-problem-0d48463f14482bc686535f0cb2ff2767ea3733bafa058b49333b9ecddf2193e6</li>
+</ul></main>
+</body></html>

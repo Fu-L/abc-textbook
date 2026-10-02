@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC289-F — Teleporter Takahashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC289-F — Teleporter Takahashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>点(x,y)中心のreflectionは(p_x,p_y)→(2x-p_x,2y-p_y)なので、各座標のparityはどの操作でも不変である。</p>
+<p>1次元で中心区間が1点aだけなら、偶数回後はs、奇数回後は2a-sに限られる。区間にa,a+1があれば、その順の2回で+2、逆順で-2を実現できる。</p>
+<p>2次元では操作回数の偶奇を両座標で共有するため、singletonなx/y区間が要求する偶奇が矛盾しないことも必要になる。</p>
+<p>採用する候補: 到達可能性を座標parityとsingleton軸の操作回数parityで判定し、必要なら最初に1回反射してから±2平行移動pairを並べる。</p>
+<p>x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。</p>
+<p>棄却する候補: x座標用とy座標用の1次元操作列を独立に作って単純に連結する。</p>
+<p>各reflectionは両座標へ同時に作用し、特にsingleton軸が要求する総操作回数の偶奇が衝突し得る。</p>
+<p>棄却する候補: 現在点からtargetへ近づく中心を毎回greedyに選ぶ。</p>
+<p>reflectionは距離を単調に減らすとは限らず、到達不可能条件や10^6回上限の保証を与えない。</p>
+<p>(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。</p>
+<p>singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。</p>
+<p>まずs_x≡t_x、s_y≡t_y (mod 2)を確認する。a=bならt_xがs_xまたは2a-s_xか、c=dならyも同様かを調べ、singleton軸同士の要求parityが一致しなければNo。成立時、要求parityが奇なら(a,c)を1回出力して現在点を更新する。x差が正なら(a,c),(a+1,c)、負なら逆順を|差|/2回、yも(a,c),(a,c+1)または逆順で調整し、Yesと操作列を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="reflection合成によるtranslation">reflection合成によるtranslation</h3>
+<p>発動条件: 中心反転を複数回使って目標座標へ構成的に移動するとき。</p>
+<p>近接2中心での反射を合成して±2の平行移動を作る。</p>
+<h3 id="不変量と退化case">不変量と退化case</h3>
+<p>発動条件: 操作可能領域が区間で、長さ0の場合だけ自由度が失われるとき。</p>
+<p>座標parityに加え、singleton中心での操作回数parityを判定する。</p>
+<h3 id="構成問題の現在状態更新">構成問題の現在状態更新</h3>
+<p>発動条件: 出力操作列を段階的に組み立てるとき。</p>
+<p>各reflection後の現在座標を更新し、残差をtranslation pairで消す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>2操作を同じy中心で行えばyへの反射が相殺され、xだけを動かせるため、2次元の結合は総操作回数parity以外ほぼ分離できる。</p>
+<p>別の問題へ持ち帰る視点: 複数座標へ同時作用する操作は、短い操作列を合成して不要座標への作用をidentityにできないか探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>(a,c),(a+1,c)の2操作はyを元へ戻してxだけ+2し、逆順ならxだけ-2する。y方向も(a,c),(a,c+1)の順序で同様に独立調整できる。 singleton軸でtargetが初期値なら偶数、中心反射値なら奇数を要求する。奇数が必要なら最初に(a,c)で1回反射し、残りを偶数回のtranslationへ帰着する。 x,yを変えない2操作単位で一方ずつ調整でき、共有する偶奇だけを先に整えれば具体的な操作列を構成できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>a=bのときa+1を、c=dのときc+1を中心として出力しない。必要な差が非zeroなら対応区間が非退化であることを判定済みにする。</li>
+<li>最初の奇数回reflection後にcurrent x,yを両方更新してからtranslation回数を計算する。</li>
+<li>最大でも先頭1回と両座標差に比例する80万回余りで、10^6上限内だがvector容量と出力時間を考慮する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>両区間がsingletonで一方だけ反射を要求する不可能例と、片軸だけ非退化な可能例を試し、初回reflection後の±2 pairが他軸を保つか追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Dx+Dy)、Dx,Dyは2刻みtranslation数。</p>
+<h3 id="空間">空間</h3>
+<p>O(Dx+Dy)、操作列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\leq s _ x,s _ y,t _ x,t _ y\leq2\times10^5; 0\leq a\leq b\leq2\times10^5; 0\leq c\leq d\leq2\times10^5; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>start(0,0),target(2,0)、中心矩形x∈[0,1],y=0。</p>
+<ol>
+<li>中心(0,0)反射で(0,0)、中心(1,0)で(2,0)。</li>
+<li>二回でyを保つ。</li>
+</ol>
+<p>期待される結果: 二操作で到達。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>x軸も中心0に固定した場合target2へ届くか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>xは初期0と反射0の二候補しかなく、target2は不可。singleton軸の反射parity制約を検査する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc289/editorial/5711">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc289-editorial-5711-35f815926d997c26a481f222916a555bfe995f3ce8b5e932baaacd706600b73d</li>
+<li><a href="https://atcoder.jp/contests/abc289/tasks/abc289_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc289-f-problem-1f32a1a08520a0ac19fdb978380f591e6a40ecbc56db75f6b3597ba6821413a8</li>
+</ul></main>
+</body></html>

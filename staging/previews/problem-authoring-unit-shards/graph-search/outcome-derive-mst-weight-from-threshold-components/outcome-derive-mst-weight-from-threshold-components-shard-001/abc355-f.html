@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC355-F — MST Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC355-F — MST Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/spanning-tree-optimization.md">cut・cycle性質から最適全域木を構成する</a></p>
+<ul>
+<li>重み閾値以下のグラフの成分数からMST重みを層別和として導き、辺追加時に各閾値の連結性を更新して最適重みを維持できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>任意の全域木を一つ構成するだけの探索、および辺重みを最適化しない連結成分管理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>辺重みが1..10と極端に小さい。G_k を重み k 以下の辺だけの graph とすると、Kruskal の telescoping から MST 重みは Σ_{k=0}^{9}(components(G_k)−1) で表せる。 辺 (u,v,w) の追加は全 k≥w の G_k に同じ connectivity edge を追加するだけで、削除がないため各 threshold を Union-Find で独立管理できる。 MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。 k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。</p>
+<p>採用する候補: 重み threshold 0..9 ごとの DSU と component 数を持ち、追加辺を該当 threshold 全てへ unite する。</p>
+<p>threshold 数が定数10で、union 成功のたび components が1減りMST和も1減るため一 query ほぼ定数で更新できる。</p>
+<p>棄却する候補: 各辺追加後に全辺を重み順に走査して Kruskal 法をやり直す。</p>
+<p>辺数が Q とともに増え、全 query 合計が O(Q(N+Q)) になる。</p>
+<p>MST の重み w は「重み≥1,…,w の層を一つずつ払う」と分解でき、層 k+1 で必要な辺数が c(G_k)−1 になる。</p>
+<p>k≥w の各 DSU で u,v が別 component の時だけ answer を1減らすと、Σ(c_k−1) を直接維持できる。</p>
+<p>10個の DSU を初期化し、初期木の各辺 (a,b,c) を k=c..9 へ unite する。component 数から ans=Σ_{k=0}^9(c_k−1) を作る。query (u,v,w) では k=w..9 で unite が成功するたび ans— し、更新後 ans を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="小重みの-threshold-分解">小重みの threshold 分解</h3>
+<p>発動条件: 重み種類数 W が小さく、MST/最小 bottleneck 情報を追加辺下で維持するとき。</p>
+<p>重み≤k の連結性を全 k で持ち、目的値を component 数の層和にする。</p>
+<h3 id="追加専用-connectivity-の並列-dsu">追加専用 connectivity の並列 DSU</h3>
+<p>発動条件: 複数の単調な edge filter graph に同じ追加が波及するとき。</p>
+<p>filter ごとに Union-Find を持ち、successful union だけ集約量へ反映する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>動的 MST の一般データ構造ではなく、重み上限10を使って MST重みそのものを connectivity layers の面積として表す。</p>
+<p>別の問題へ持ち帰る視点: 重み値域が小さいとき、weighted quantity を threshold indicator の総和へ主客転倒する。</p>
+<h2 id="正当性">正当性</h2>
+<p>重みk以下graphの成分数c_kについてMST和はΣ_{k=0}^{W−1}(c_k−1)。追加辺重みwはk≥wだけを変え、union成功ごとc_kが1減る。従って各成功で答え1減算が正確で再MST不要。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>G_0 は辺なし、G_10 は常に連結で和には k=0..9 を使う。追加重み w の辺は threshold k≥w だけへ入れる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>MST辺一本の重みを threshold 層へ分解し、Σ(c_k−1) の式を自分で telescoping する。DSU merge失敗時に答えを変えない。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点Q追加、重み上限W=10。10 DSUで O(W(N+Q)α(N))。</p>
+<h3 id="空間">空間</h3>
+<p>W個DSUで O(WN)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq a_i &lt; b_i \leq N; 1 \leq u_i &lt; v_i \leq N; 1 \leq c_i, w_i \leq 10; The graph is connected before processing the queries.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>初期道1–2重み5、2–3重み5。辺1–3重み2追加。</p>
+<ol>
+<li>初期MST10。</li>
+<li>threshold2,3,4で新辺union成功し各1減る。</li>
+<li>threshold5以上は既連結。</li>
+</ol>
+<p>期待される結果: 7</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>threshold10のDSUも和へ入れるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>入れない。全辺重み≤10でその層の連結不足は0。必要層は0..9。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc355/editorial/10072">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc355-editorial-10072-b0b2651882f9eced13b53a7f7015c8fee4a5eda9771810884da1635af703c536</li>
+<li><a href="https://atcoder.jp/contests/abc355/tasks/abc355_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc355-f-problem-777f87d12143504d9185ddb463ae9444b5ce67579a5df710def09ff6c653a930</li>
+</ul></main>
+</body></html>

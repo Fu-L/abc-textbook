@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-prune-dominated-candidates-once-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "920de3c8eaa37be945a6f344729ca25dbb2d76865922d23d4bee876e9b37b209",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "75db399e5f5c0b92bb6f7fb56c47ffdc11a5a3dcc86145e22c2d0d48455ace58",
+  "reviewDigest": "54686cddb0492419cceeabeadb1ae8e8e964d1bc77a3e41d051489c334bff4c8",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc228-f.html",
+      "digest": "a36eb4505830988514dfb14307d60af959bcf76cf62f289e04edf4321d55400c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc234-g.html",
+      "digest": "4157ad69177274dc1c7c35fec5502d85efa09c6bb7595d86d84c100a66887eac"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc248-ex.html",
+      "digest": "6ce4e39a5eaff4c87557538a04115d0db4246574f9e8e648a39560d68fb25aa4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc359-e.html",
+      "digest": "10b5c14d80a15c4af39f3b8d7d925eacc207caf51f2ee8b2c7937843b3b421b2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc379-f.html",
+      "digest": "7473d3003a7408b9e3c440007321075bf106f10d8b2834b41f14e0e3ed8ab2fe"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/index.html",
+      "digest": "de5d24dd83b9aca15bf49f06e04813e90226942921c327178dfbd9a205a2ca04"
+    }
+  ],
+  "snapshotDigest": "35da594fb7e97db0f233e3fb396a4a6634c388815410b407ef121c8bb04a5232"
+}

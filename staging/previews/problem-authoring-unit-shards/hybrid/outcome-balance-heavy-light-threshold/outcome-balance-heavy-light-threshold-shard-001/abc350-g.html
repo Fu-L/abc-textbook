@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC350-G — Mediator</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC350-G — Mediator</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/threshold-heavy-light.md">平方根・閾値による軽重分類</a></p>
+<ul>
+<li>頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>現在グラフは常にforestなので、u,vが同じ木にあり共通隣接点wを持つなら、任意に根を付けたときwはparent[u]またはparent[v]のどちらかである。最終forestを先読みできれば候補は二つだが、queryが直前回答で暗号化されているためonlineで近似的に固定する必要がある。</p>
+<p>採用する候補: queryをblock分割し、block前のforestだけ親・成分を再構築してblock内新辺を直接検査する</p>
+<p>一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。</p>
+<p>棄却する候補: 全queryを復号して最終forestに根を付け、各質問でparent候補だけを見る</p>
+<p>次queryの復号が過去のtype 2回答に依存するため、回答前に将来の辺を確定するoffline処理は循環してしまう。</p>
+<p>棄却する候補: 辺追加のたびに現在forest全体のparentと成分を再計算する</p>
+<p>一回O(N)、Q回でO(NQ)となり、N,Q≤10^5では実行できない。</p>
+<p>block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。</p>
+<p>過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。</p>
+<p>B件ごとに、それまでの全辺からforestをDFSしてparentとcomponentを再計算しpendingを空にする。辺追加は全体の隣接判定構造とpendingへ記録する。質問ではbase成分が同じなら二つのparent候補、異なるならuまたはvに接するpending辺の反対端を候補にし、現在辺集合で両隣接を確認して唯一のwまたは0を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="query平方分割">query平方分割</h3>
+<p>発動条件: 更新を完全反映した全体再構築は重いが、少数の未反映更新ならquery時に直接走査できる。</p>
+<p>過去辺をO(N)の親・成分情報へ固め、block内のO(B)辺をdeltaとして残す。</p>
+<h3 id="根付きforestの距離2候補">根付きforestの距離2候補</h3>
+<p>発動条件: forest上で二頂点に共通して隣接する頂点を求めたい。</p>
+<p>同一treeではparent[u]とparent[v]だけを候補にして実辺の存在を確認する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>暗号化はoffline化だけを封じており、過去を定期的に固定するblock処理は可能である。baseで別成分という情報が、答えを作る辺の少なくとも一方をdelta側へ限定する。</p>
+<p>別の問題へ持ち帰る視点: online制約下では、全履歴を固定部分と小さい差分に分け、固定部分で候補を定数個へ絞るか、差分に証人が必ず現れることを示す。</p>
+<h2 id="正当性">正当性</h2>
+<p>block開始時forest G_0でu,vが同一成分なら、共通隣接点候補はparent[u],parent[v]だけである。別成分なのに現在は共通隣接点を持つなら、その二辺の少なくとも一方は現在blockで追加されたのでpending辺の走査で候補を拾える。 過去blockの全辺は親・component IDへO(N)で圧縮し、現在blockの高々B辺だけを未反映差分として残す。このbase+delta不変条件がonline性と平方根計算量を両立させる。 一blockごとのO(N)再構築と一queryごとのO(B)pending辺走査に分けられ、O(NQ/B+BQ)をB≈√NでO(Q√N)へ均衡できる。暗号化queryも到着順に復号して扱える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>a,b,cは必ず直前のtype 2回答を使って64 bitで復号し、その後にquery種別を判定する。pendingには現在blockで既に処理した辺だけを入れ、rootのparent=0を候補から除き、無向辺keyは端点順を正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さいforestの隣接list全走査と比較し、u,vがbaseで同成分・別成分の両場合、共通点を作る一辺がpendingの場合、block先頭と末尾、答え0後の復号、rootが端点になる場合を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(QN/B+QB)、森林の再構築O(N)、差分辺最大B。B≈√N。隣接hash検査は期待O(1)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+B)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 256 MiB; Constraints: All input values are integers.; 2 \le N \le 10^5; 1 \le Q \le 10^5; 1 \le u &lt; v \le N; 0 \le a,b,c &lt; 998244353</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>辺1-2,2-3、query(1,3)。</p>
+<ol>
+<li>既存forestで共通隣接候補2を得る。</li>
+<li>両辺の存在を検査する。</li>
+</ol>
+<p>期待される結果: 答え2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>block内に辺3-4を追加しquery(2,4)を問うと。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>共通隣接3が答え。base成分が異なるならpending辺3-4から候補3を拾う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc350/editorial/9875">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc350-editorial-9875-c1953a91ccf515b4855ce59eab0463bd9066284f0794c7d3e7d2b535ae72be78</li>
+<li><a href="https://atcoder.jp/contests/abc350/tasks/abc350_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc350-g-problem-3e794967dfdad695f3e5812d9a3bc0dc5b72f581425872eb0a655d97428cdd83</li>
+</ul></main>
+</body></html>

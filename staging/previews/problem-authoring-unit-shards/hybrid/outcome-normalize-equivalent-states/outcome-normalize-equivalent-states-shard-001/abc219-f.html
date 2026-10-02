@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC219-F — Cleaning Robot</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC219-F — Cleaning Robot</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>S を一回実行して訪れる重複なしの集合 V と、終了変位 v=(a,b) を求めると、r 回目に訪れる集合は V+(r-1)v である。K は巨大でも、異なる形を K 回シミュレーションしているわけではない。</p>
+<p>二つの基準点 p,q が異なる反復で同じマスを生成するのは q-p が v の整数倍のときだけである。したがって V を v に平行な同一直線・同じ剰余の orbit ごとに分ければ、重複は一次元の平行移動として数えられる。</p>
+<p>採用する候補: V の各点を変位 v による orbit key で分類し、orbit 内の整数位置 q をソートして、次の基準点までの gap と K の小さい方を足す。</p>
+<p>各基準点が新しいマスを生む反復回数は、正方向で次に V と重なる最小 shift d に対する min(d,K) であり、隣接 gap だけから求められる。</p>
+<p>棄却する候補: S を K 回連結した経路を順にたどり、訪問座標を hash set に入れる。</p>
+<p>K は 10^12 まであり、同じ平行移動構造を反復回数分展開できない。</p>
+<p>a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。</p>
+<p>同じ group の q を q_1&lt;…&lt;q_m とすると、各 q_r の寄与は r&lt;m なら min(q_{r+1}-q_r,K)、最後は K である。</p>
+<p>一回分の全 prefix 座標を set で重複除去して V とする。v=0 なら |V| を返す。そうでなければ必要なら座標軸を交換して a≠0 とし、各点を (s,t,q) へ正規化して (s,t) ごとに q をソートし、隣接 gap の min と末尾の K を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="反復経路の平行移動分解">反復経路の平行移動分解</h3>
+<p>発動条件: 同じ移動列を非常に多く繰り返し、一周期後の変位が一定であるとき。</p>
+<p>一周期の訪問集合を求め、全体をその集合の等差的な平行移動の union として扱う。</p>
+<h3 id="格子点の-orbit-正規化">格子点の orbit 正規化</h3>
+<p>発動条件: 点集合の重複条件が固定ベクトルの整数倍差で表されるとき。</p>
+<p>ベクトル方向の整数座標 q と、それに不変な剰余 key を作り、group 内を一次元ソートする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各基準点の K 個の像を全て数えるのではなく、その像が V の別基準点の系列へ初めて吸収される正の shift d までだけ新規と数える。</p>
+<p>別の問題へ持ち帰る視点: 有限集合を同じベクトルで多数回動かした union では、各 orbit の開始点列と隣接 gap が新規出現数を決める。</p>
+<h2 id="正当性">正当性</h2>
+<p>a≠0 としたとき q=floor(X/a)、s=X-qa、t=Y-qb を使うと、二点の (s,t) が等しいことと差が v の整数倍であることが同値になる。 同じ group の q を q_1&lt;…&lt;q_m とすると、各 q_r の寄与は r&lt;m なら min(q_{r+1}-q_r,K)、最後は K である。 各基準点が新しいマスを生む反復回数は、正方向で次に V と重なる最小 shift d に対する min(d,K) であり、隣接 gap だけから求められる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>V には開始点と一周期終了点を含めて重複除去する。a=0 なら x,y を交換し、さらに a&gt;0 へ座標全体を反転すると正規化しやすい。負の X に対する floor divisionを切り捨て除算で代用せず、積と答えは 64 bit にする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>変位が0の例と、同じ orbit に q=0,2 がある例を手計算し、後者の最初の基準点が min(2,K) 回だけ新規マスを作る理由を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(L log L)、Lは一回の移動文字数、prefix点の正規化group sort。</p>
+<h3 id="空間">空間</h3>
+<p>O(L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \times 10^5 (inclusive) consisting of L, R, U, D.; 1 \leq K \leq 10^{12}</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>移動列RL、K=3。</p>
+<ol>
+<li>一回の変位は0。訪問prefixは(0,0),(1,0),(0,0)。</li>
+<li>各回は同じ点を訪れる。</li>
+</ol>
+<p>期待される結果: 異なる訪問点2個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>変位0をq=floor(X/a)の式へ入れられるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>a=0で割れない。総変位0はprefix点集合の個数を直接返す。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc219/editorial/2654">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc219-editorial-2654-d2708597a9cadb88dccc2c9f35a8c64a02b03f3a9ae097b4f4498eb46d234014</li>
+<li><a href="https://atcoder.jp/contests/abc219/tasks/abc219_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc219-f-problem-81357b19bc73aa408a3ae3da0732b554e100dd724249f7455f547dfa6db1cbf5</li>
+</ul></main>
+</body></html>

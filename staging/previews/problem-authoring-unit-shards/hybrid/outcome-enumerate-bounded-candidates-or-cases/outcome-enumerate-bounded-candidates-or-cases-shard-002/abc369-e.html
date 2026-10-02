@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC369-E — Sightseeing Tour</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC369-E — Sightseeing Tour</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>指定橋以外の移動には制約がないので、全頂点pairの通常最短距離を前計算すれば、指定橋間の移動は端点間距離の参照に置き換えられる。</p>
+<p>queryで必須な橋は高々5本であり、最適walkはそれらを渡る順列と各橋を渡る向きの全候補から選べる。</p>
+<p>採用する候補: 全点対最短距離を前計算し、各queryで必須橋の順列と向きを列挙して接続距離を評価する。</p>
+<p>大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。</p>
+<p>棄却する候補: queryごとに「何本の指定橋を通過済みか」を状態にして元graph上を最短路探索する。</p>
+<p>最大3000 queryで大きいgraph探索を繰り返し、K≤5だから可能な小さな順序列挙を活かせない。</p>
+<p>順番と向きをx_1→y_1,…,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。</p>
+<p>指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。</p>
+<p>Floyd-Warshallでdist[u][v]を全pairについて求める。各queryのK橋indexをpermutationし、各bit maskで端点方向を決め、島1から各橋入口、橋出口から次入口、最後の出口から島Nまでのdistと橋重みを足す。全候補最小を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="全点対最短路による経路segment圧縮">全点対最短路による経路segment圧縮</h3>
+<p>発動条件: 多数queryで少数の必須edge・地点を任意順に訪れるとき。</p>
+<p>制約のない区間をendpoint間distのlookupへ置き換える。</p>
+<h3 id="小kの順列向き全探索">小Kの順列・向き全探索</h3>
+<p>発動条件: 必須対象数だけが非常に小さく、順序とorientationが未知なとき。</p>
+<p>permutationとbit maskを直積列挙して各固定caseを評価する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>元graphの辺数は大きいがN=400なので、query前にmetric closureを作ることでqueryをK個の橋だけの問題にできる。</p>
+<p>別の問題へ持ち帰る視点: static graph上の多数routing queryでは、端点候補が小さくなる前にmetric closureを検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>順番と向きをx_1→y_1,…,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>平行辺があればdist初期化をminにし、dist[i][i]=0とする。橋重みは順序によらず一度ずつ足し、64 bitでINF加算を避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>K=1で両方向の式を手計算し、開始1・終了Nとの接続を確認する。permutation配列はqueryごとに初期sortして全候補を生成する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N³+Σ_query K!2ᴷK)、K≤5は指定橋数。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+M)、距離と辺情報。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 400; N-1 \leq M \leq 2 \times 10^5; 1 \leq U_i &lt; V_i \leq N; 1 \leq T_i \leq 10^9; 1 \leq Q \leq 3000; 1 \leq K_i \leq 5; 1 \leq B_{i,1} &lt; B_{i,2} &lt; \cdots &lt; B_{i,K_i} \leq M; All input values are integers.; It is possible to travel between any two islands using some bridges.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>島1,2,3、辺12=2,23=3,13=1、必須橋23。</p>
+<ol>
+<li>1→2の最短2、必須2→3が3で合計5。</li>
+<li>逆向きは1→3=1,3→2=3,2→3の最短3で7。</li>
+</ol>
+<p>期待される結果: 最短5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>通常移動中に必須橋を先に通っても候補を禁止するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>禁止しない。最初の必須通過順を採れば列挙候補へ含まれ、余分な通過があってもvalid walkである。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc369/tasks/abc369_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc</li>
+<li><a href="https://atcoder.jp/contests/abc369/editorial/10842">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1</li>
+</ul></main>
+</body></html>

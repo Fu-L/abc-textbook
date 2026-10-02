@@ -1,0 +1,508 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-recover-valid-witness-shard-002",
+  "packets": [
+    {
+      "problemId": "abc333-e",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-greedy-exchange-order",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq t _ i\\leq2\\ (1\\leq i\\leq N); 1\\leq x _ i\\leq N\\ (1\\leq i\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最適戦略があるmonsterで貪欲より早いpotionを使っていれば、貪欲が選ぶ遅いpotionが未使用なら置換し、後のmonsterに使われるなら二本の割当を交換できる。いずれも各時点の所持数を増やさないため、全割当を最新優先へ変形できる。 不足判定を正しく行いつつ、交換argumentにより所持本数の最大値Kを最小化する対応を構成できる。",
+          "sourceRevisionIds": [
+            "source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f",
+            "source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f",
+          "path": "src/content/sources/abc316-abc367/source-abc333-e-problem-54ee0e837a75eef0633b0e658e46acd1d10b413d37f5dafb8780346845b23b7f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc333_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3",
+          "path": "src/content/sources/abc316-abc367/source-abc333-editorial-7939-a9a410ed926a18653f5725e36ab57c65fc00f2c1379deaed6109c889708766d3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc333_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc358-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 100; 1\\leq M \\leq 100; 1\\leq K\\leq NM; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "checkerboard parityは任意のgrid pathに対する不変条件で、Kの偶奇必要性を与える。 全cell間を壁で閉じてから選んだpathの連続辺だけ開ければ、通路graphは一本のpathそのものになり余分なbranchが存在しない。 path列を先に確定すれば「branchなし」は次数がpath通りで自動保証され、壁出力の複雑な場合分けを分離できる。",
+          "sourceRevisionIds": [
+            "source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5",
+            "source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5",
+          "path": "src/content/sources/abc316-abc367/source-abc358-editorial-10222-fe9e7381e43a0e97ee4abbc7649ef7e3ff6d224a4a46e7d042ab685e16ba82d5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc358_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b",
+          "path": "src/content/sources/abc316-abc367/source-abc358-f-problem-10dc7b1dbf735ed686b12077ee24559ce712c76dcfaee3b541cd3d97cd9e510b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc358_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc363-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{12}; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "数字0を含む整数はfactorとして使用できないため、x候補とbase caseのnをdecimal stringで検査する。 nがxで割れ、さらにn/xがrev(x)で割れるときだけmiddle=n/(x·rev(x))へ進み、成功文字列をx*middle*rev(x)で包む。 式の文字列回文性を外側から保証し、積n/(x·rev(x))だけを同じ問題として再帰できる。",
+          "sourceRevisionIds": [
+            "source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93",
+            "source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93",
+          "path": "src/content/sources/abc316-abc367/source-abc363-editorial-10441-6343dfa8d3eb739cbdd3548d2c316644249356ca852bdc9634393c27fa3b6a93.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc363_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae",
+          "path": "src/content/sources/abc316-abc367/source-abc363-f-problem-3275745df92b9f92ad4f647c61c6536ebaff0452c26dd65d5d4b7cf674d3e2ae.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc363_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc387-e",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer at least 1 and less than 10^{100000}."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "aの末尾を十分な個数の0にすればa+1でcarryが起きず、桁和はちょうど1増える。 範囲保証とgood性を分離し、前者は先頭桁の区間被覆、後者は桁和と2・8・3・9の倍数判定で証明する。 公式のprefix候補17,26,35,62,107等は全て双子良整数を作り、上位2桁の区分により必ずN≤a<2Nを満たす候補を選べる。",
+          "sourceRevisionIds": [
+            "source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0",
+            "source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0",
+          "path": "src/content/sources/abc368-abc419/source-abc387-e-problem-192a642a754258adc79e3149680c6874fbae41bc1334c46ab2b728e8375555e0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc387_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d",
+          "path": "src/content/sources/abc368-abc419/source-abc387-editorial-11830-ec18309bf0ba574d1dc8dcab13f48dccc3aaeeabb60104e678c384b60544669d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc387_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc448-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 6 \\times 10^4; 0 \\leq X_i \\leq 2 \\times 10^7; 0 \\leq Y_i \\leq 2 \\times 10^7; (X_i, Y_i) \\neq (X_j, Y_j) if i \\neq j; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。 W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。 縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。",
+          "sourceRevisionIds": [
+            "source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5",
+            "source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5",
+          "path": "src/content/sources/abc420-abc466/source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc448_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86",
+          "path": "src/content/sources/abc420-abc466/source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc448_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc453-f",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange",
+        "unit-tree-balanced-separators"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-greedy-exchange-order",
+        "tag-tree-balanced-separator"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 10^5; 2\\leq N\\leq 3\\times 10^5; 1\\leq K\\leq N; 1\\leq U_i,V_i\\leq N; The given graph is a tree.; 1\\leq C_i\\leq N; C_1+C_2+\\cdots+C_K\\geq N; All input values are integers.; The sum of N over all test cases does not exceed 3\\times 10^5."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "葉数 centroid X は、削除後のどの成分も元の葉を L/2 以下しか含まないよう選べる。 同色を異なる leaf group に一つずつ置けば、任意辺の X を含まない側にある葉と同色が X 側にも必ず存在する。 各 group の葉数が L/2以下なので、未着色葉が二枚以上なら異groupから二枚選べる不変量を保て、各葉と同色の葉またはXが必ず別側に存在する。",
+          "sourceRevisionIds": [
+            "source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538",
+            "source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538",
+          "path": "src/content/sources/abc420-abc466/source-abc453-editorial-18542-f9a8c0e1290b6e0de3f5965661b14b1d687ff34da0cb9346b90765da4e5f5538.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc453_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0",
+          "path": "src/content/sources/abc420-abc466/source-abc453-f-problem-a43bf257c0e7952d6827bb65f98a641ea874ce027dffcdb7652ff68e4a907ae0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc453_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc454-e",
+      "learningOutcomeIds": [
+        "outcome-recover-valid-witness"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure"
+      ],
+      "excludedTopics": [
+        "存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。"
+      ],
+      "tagIds": [
+        "tag-constructive-witness",
+        "tag-bipartite-structure"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T \\le 5000; 2\\le N\\le 10^3; 1\\le A,B\\le N; (A,B)\\neq (1,1),(N,N); The sum of N^2 over all test cases is at most 10^6.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "N が奇数なら両端同色なのに中間頂点数の色交互性が合わず、N 偶数でも欠損が黒色なら白黒個数が path 順と一致しない。 二行の蛇行を切り取る操作は prefix または suffix の移動列として接続点を保ち、残る問題の A 座標だけ2ずらす場合がある。 A が外周から離れている側の二行/二列は欠損を含まず Hamilton 部分pathとして接続でき、縮約後も偶数寸法と欠損色条件を保つため基底まで構成できる。",
+          "sourceRevisionIds": [
+            "source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3",
+            "source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3",
+          "path": "src/content/sources/abc420-abc466/source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc454_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62",
+          "path": "src/content/sources/abc420-abc466/source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc454_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

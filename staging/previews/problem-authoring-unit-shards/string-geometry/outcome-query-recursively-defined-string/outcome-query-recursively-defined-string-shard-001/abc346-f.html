@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC346-F — SSttrriinngg in StringString</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC346-F — SSttrriinngg in StringString</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/recursive-compressed-string.md">圧縮・反復・再帰文字列へ問い合わせる</a></p>
+<ul>
+<li>圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>明示された文字列への接尾辞索引の構築。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>kを大きくしてg(T,k)がsubsequenceでなくなれば、それ以上も不可能なので答えは単調判定を二分探索できる。固定kではTの各文字をk回ずつ、f(S,N)内の最早位置へgreedy matchingすればよい。</p>
+<p>採用する候補: 文字別出現位置と周期countを使うsubsequence判定＋k二分探索</p>
+<p>巨大なS^Nを構築せず、各T文字についてk個先の出現をO(log |S|)またはO(1)算術で飛べる。</p>
+<p>棄却する候補: f(S,N)とg(T,k)を実際に生成する</p>
+<p>Nは10^12で繰返し文字列長が巨大になりmemory/timeとも不可能である。</p>
+<p>現在absolute位置a以降で文字cのb回目出現は、S一周期内のc個数cnt_cでfull cyclesをまとめ、S+S内の出現位置またはposition vectorのlower_boundで残りを決められる。最早出現を選ぶgreedyは後続に最大の余地を残す。</p>
+<p>S内の各文字の出現positionを前計算し、TにS不在文字があれば0を返す。feasible(k)ではpos=0から各c∈Tについて、pos mod |S|以降のc出現数、必要なfull cycle数、周期内indexを算術とbinary searchで求めてposをk個目の直後へ進め、pos≤N|S|か判定する。0…floor(N|S|/|T|)で最大kを二分探索する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="周期文字列上のk-th-occurrence-jump">周期文字列上のk-th occurrence jump</h3>
+<p>発動条件: 有限base stringの巨大反復上で、指定文字の多数回先の出現位置が欲しい。</p>
+<p>一周期countで商を飛ばし、周期内position listで余りを定位する。</p>
+<h3 id="答えの二分探索">答えの二分探索</h3>
+<p>発動条件: k回のblock反復がsubsequenceなら、それより小さい回数も必ずsubsequenceである。</p>
+<p>feasible(k)を単調predicateとして最大の真を探す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>g(T,k)はT全体をk回繰り返すのではなく、各T文字を連続k回要求するので、判定loopはT順に文字ごとのk-th occurrence jumpを行う。</p>
+<p>別の問題へ持ち帰る視点: 似た二種類のrepeat定義は展開順序を明示し、要求run単位のjumpへ合わせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>subsequence照合は各要求文字の最早出現を選べば、任意の他照合より後続余地を減らさないので必要十分判定になる。一文字k連続要求は周期内頻度から完全周回を飛ばし残り出現順位を求めることと同じ。kを増やすと要求列は長くなり可否は単調なので上限までの二分探索が最大kを得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>absolute positionとN|S|は最大10^17級なので64bitを使い、jump途中で上限超過したら早期falseにする。positionは「次に探すindex」か「最後に使ったindex」かを統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>TにS不在文字、k=0、S一周期境界を跨ぐrun、同じ文字が疎なSを小さい反復文字列の直接matchingと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(|S|+|T| log|S|·log(N|S|/|T|+1))。文字別position列のlower_boundで各batchをjumpする。</p>
+<h3 id="空間">空間</h3>
+<p>O(|S|+|T|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: N is an integer.; 1\leq N\leq 10^{12}; S and T are strings consisting of lowercase English letters with lengths between 1 and 10^5, inclusive.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=ab、N=3、T=ab。</p>
+<ol>
+<li>繰返し元はababab。k=2のaabbは位置1,3,4,6で選べる。</li>
+<li>k=3ではaを1,3,5で取った後bは一個だけ。</li>
+</ol>
+<p>期待される結果: 最大k=2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>TにSにないcがある場合は。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>周期を何回繰返してもcは現れないので正のkは全て不可能。</p>
+<p>確認結果: 0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc346/editorial/9644">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc346-editorial-9644-88f7e07664cbfa0a620f9e228a583be943e0b1dd2c9f831fa6a5d315791ddf01</li>
+<li><a href="https://atcoder.jp/contests/abc346/tasks/abc346_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc346-f-problem-769406fbef8b7355fc2543f1baf82c8095f9f130818a7db02444532f78852c8a</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ae3bc65fbb2cd4f873dca3827a1177d5512bb67ac192f11b11f2b8537d535a55",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc310-ex",
+      "url": "https://atcoder.jp/contests/abc310/editorial/6794",
+      "checkedAt": "2026-10-02",
+      "reason": "基本列の分解と最効率comboへの交換を照合した。ゼロ収支区間の有効化は最小prefixからの巡回で独立に証明し、全C=0にも対応するLを定義した。"
+    }
+  ],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc310-ex",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.md",
+      "learningOutcomeIds": [
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc415-g",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc415-g.md",
+      "learningOutcomeIds": [
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

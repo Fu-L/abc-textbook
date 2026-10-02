@@ -1,0 +1,65 @@
+{
+  "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
+  "primaryOutcomeId": "outcome-pass-resource-dp-through-heavy-recursion",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc311-ex"
+  ],
+  "homeUnitId": "unit-heavy-light-recursive-dp",
+  "prerequisiteOutcomeIds": [
+    "outcome-aggregate-rooted-tree",
+    "outcome-design-resource-dp"
+  ],
+  "dependencyShardIds": [
+    "outcome-aggregate-rooted-tree-shard-001",
+    "outcome-aggregate-rooted-tree-shard-002",
+    "outcome-aggregate-rooted-tree-shard-003",
+    "outcome-design-resource-dp-shard-001",
+    "outcome-design-resource-dp-shard-002",
+    "outcome-design-resource-dp-shard-003"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "7aa89d4c9769c3f0f815ed4df5753e833241458c04d165130298c036c0dd1ea0",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc311-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

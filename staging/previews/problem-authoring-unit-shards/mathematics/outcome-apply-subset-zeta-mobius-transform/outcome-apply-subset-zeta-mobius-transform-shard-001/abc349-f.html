@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC349-F — Subsequence LCM</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC349-F — Subsequence LCM</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/subset-transforms.md">subset zeta・Möbius変換</a></p>
+<ul>
+<li>Boolean lattice上のsubset/superset和とexact値をzeta変換・Möbius反転で相互変換する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>subset zeta・Möbius変換の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>LCMがMになるsubsequenceはMを割らない要素を含められない。M=∏p_t^{e_t}に対し、各divisor A_iが最大指数p_t^{e_t}を供給するかをbit tで表すと、選択LCM=MはmaskのORがfullになることと同値である。</p>
+<p>採用する候補: mask frequencyへ圧縮し、subset zeta/Möbius transformでOR=fullを数える</p>
+<p>Mのdistinct prime数K≤13なので2^K状態で全subsequenceをまとめて数えられる。</p>
+<p>棄却する候補: 全subsequenceのLCMを列挙する</p>
+<p>N=2×10^5で2^N選択を扱えない。</p>
+<p>OR結果がmaskのsubsetに収まるsubsequence数h[mask]は、そのmaskのsubmask型を持つ全要素から任意に選ぶ2^{Σ_{s⊆mask}cnt[s]}通りである。hはexact OR個数gのsubset zeta transformなのでMöbius inversionでg[full]を得られる。</p>
+<p>Mをfactorizeし、各A_iでM%A_i≠0なら捨てる。残りについて各primeのmax powerで割り切れるbit maskを作りcntへ加える。cntをsubset zetaして各maskのeligible個数を得てh=2^countとし、subset Möbius transformを行ってg[full]を出す。M=1はA_i=1の個数cから2^c-1。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="prime-exponent-coverage-mask">prime-exponent coverage mask</h3>
+<p>発動条件: LCMが各primeの最大指数を少なくとも一要素から得る条件である。</p>
+<p>divisorごとにどの最大prime powerを供給するかをbitset化し、LCMをORへ写す。</p>
+<h3 id="subset-zetamöbius-transform">subset zeta・Möbius transform</h3>
+<p>発動条件: OR結果がmask以内の選択数からexact OR別個数へ反転したい。</p>
+<p>submask frequency和をzetaで求め、2の冪を取った後Möbiusでexact値を復元する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>A_iの中間的なprime指数は、Mの最大指数に達していない限りそのprimeのLCM達成へ寄与しないので、各primeにつき一bitだけで十分である。</p>
+<p>別の問題へ持ち帰る視点: target LCM固定の数え上げは、各target prime powerをcoverするset-union問題に圧縮できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>Mを割らない要素はLCMをMにできない。残りの要素は各prime最大指数の供給bitを持ち、そのORがfullとLCM=Mは同値。h[mask]=2^{Σ_{submask}cnt}はORがmask以内の全subsetを数えるのでexact OR数のzeta変換であり、Möbius反転が目的fullの数を得る。M=1では空subsetもfullになるため1を引く。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>M=1ではK=0かつempty subsequenceもOR=0なので1を引く。一般でもMを割らないA_iを必ず除外し、10^16の剰余・prime powerを64bitで扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>M=1、Mがprime power、複数prime、A_i=Mの重複、M非divisor要素を小N全subset LCMと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(√M+Ns+s2^s)を試し割りfactorizationの場合の上界とする。sはMの相異なる素因数数。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^s+N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \leq 10^{16}; 1 \leq A_i \leq 10^{16}; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>M=6、A=(2,3,6)。</p>
+<ol>
+<li>LCM6の選択は{6},{2,3},{2,6},{3,6},{2,3,6}。</li>
+</ol>
+<p>期待される結果: 5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>M=1,A=(1,1,2)なら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>2はMを割らないので除く。二つの1を選ぶ非空subsetは2²−1。</p>
+<p>確認結果: 3。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc349/editorial/9771">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc349-editorial-9771-ece89ac4e36de2f5b5d715a4a4c0a80b82289d20f20e5bf5efa6edc90eb3f1f1</li>
+<li><a href="https://atcoder.jp/contests/abc349/tasks/abc349_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc349-f-problem-a6ea07412e8e6d7e00fa627dc9c4f61d080085e14c0ca44face1f0083b8b2ec8</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC310-EX — Negative Cost</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC310-EX — Negative Cost</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md">大容量unbounded knapsackのeventual linearity</a></p>
+<ul>
+<li>剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>魔力増減 C_i の絶対値上限 L=300 は小さい一方、目標ダメージ H は 10^18 と巨大で、使用回数をそのまま DP の軸にできない。</p>
+<p>有効列の prefix 収支が高くなり過ぎた部分は技の交換で並べ替えられ、同じ長さ・ダメージを保ったまま収支 2L 未満の基本列の連結へ分解できる。</p>
+<p>採用する候補: 長さ 2L 以下の基本有効列をコンボへ圧縮し、効率最大コンボの大量反復と少数の例外コンボを組み合わせる。</p>
+<p>収支状態が O(L)、基本列長が 2L に制限され、さらに最適解の非最強コンボ数も 2L 未満へ交換できるため H 依存を消せる。</p>
+<p>棄却する候補: 魔力と累積ダメージを状態にして、技を一手ずつ選ぶ最短路または DP を行う。</p>
+<p>魔力は上限がなく H も 10^18 なので状態空間を有限の実用範囲へ切れない。</p>
+<p>prefix 収支を 0..2L−1 に抑えた列では 2L+1 個の prefix に同じ収支が現れ、ゼロ収支区間を切り出して短い基本列へ分解できる。</p>
+<p>コスト当たりダメージ最大の長さ z のコンボに対し、z 個の例外コンボにはコスト和が mod z で一致する部分列があり、最強コンボへ置換できる。</p>
+<p>dp[len][balance] で長さ 2L 以下の基本列の最大ダメージを O(NL²) で求め、長さごとの最大値 d_len をコンボとする。効率 d_z/z 最大の z を選び、例外コンボ総コスト O(L²) までの無制限 knapsack で最大ダメージ M_x を O(L³) で計算する。各 x に不足分を z コンボで補った総手数の最小を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="交換論法による列の正規形">交換論法による列の正規形</h3>
+<p>発動条件: 順序制約付きの長い列で、十分な資源がある区間の要素交換が実行可能性を壊さないとき。</p>
+<p>高収支域で正負の技を交換し、短い有効ブロックの連結へ正規化する。</p>
+<h3 id="効率最大要素有界な例外">効率最大要素＋有界な例外</h3>
+<p>発動条件: 目標値だけが巨大な unbounded knapsack で、品物コストが小さく効率順の置換が可能なとき。</p>
+<p>最良比率の品物を大量使用し、それ以外の総コストだけ小範囲 DP する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>小さいのは技数 N ではなく魔力変化幅 L であり、鳩の巣原理を prefix 収支へ使うことで任意長の戦闘を有限コンボへ圧縮できる。</p>
+<p>別の問題へ持ち帰る視点: 巨大目標の最適化では、局所変化幅から周期・交換・短い生成元を作れないか探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>符号を反転した魔力増分を用いる。高い魔力で隣接する増加技と減少技を交換しても、減少幅はL以下なので有効性を保つ。この交換で任意の有効列を、全prefix魔力が2L未満の列の連結へ変えられる。長い基本列では最初2L+1個のprefixに同じ魔力が現れる。間のゼロ収支区間を取り除いた列は有効で、その区間は最小prefixの直後へ巡回して有効にできる。長さに関する帰納法で長さ2L以下の基本列だけで十分となる。各長さの最大damageをDPで求める。最良damage/長さのcombo z以外がz個あれば、prefix長さのmod zが一致する区間をzの反復に交換し、長さを増やさずdamageを減らさず例外数を減らせる。従って例外総長さO(L²)だけをknapsackで調べ、残りをzで埋める全候補の最小が最適値である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>C の符号反転後の「魔力増加」の向きを統一し、到達不能 dp を十分小さい sentinel にする。比率は除算せず d_i·z で比較し、H 付近の切上げを 128 bit で行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>制約の小さい定数 L が何を有界化するかを追う。二段の交換論法――有効列の短ブロック化と最良効率以外の回数制限――を混同せず復元する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NL²+L³)、L=max(1,max_i abs(C_i))≤300。長さ2L・魔力2L未満の基本列DPとO(L²)総長さの例外knapsack。</p>
+<h3 id="空間">空間</h3>
+<p>O(L²)、基本列と例外table。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 300; 1 \leq H \leq 10^{18}; -300 \leq C_i \leq 300; C_i \leq 0 for some 1 \leq i \leq N.; 1 \leq D_i \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>攻撃(C,D)=(0,3),(−1,1)、H=5。</p>
+<ol>
+<li>一actionの最大damage3なので一回では届かない。</li>
+<li>cost0攻撃二回でdamage6、費用制約を満たす。</li>
+</ol>
+<p>期待される結果: 最少2action。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>Hを直接knapsackの軸にするべきか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>Hは10¹⁸なので不可。最大効率comboの反復を閉形式にし、交換でO(L²)費用の例外だけDPする。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc310/editorial/6794">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-editorial-6794-7767ff020d4423335f0997e80c56115825006dcfae36bf7a5468095cc489bb5b</li>
+<li><a href="https://atcoder.jp/contests/abc310/tasks/abc310_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-ex-problem-db87c46124e4ba901645279dde5b9f7c4b4c380f5d256656c04f6cee7ec94eba</li>
+</ul></main>
+</body></html>

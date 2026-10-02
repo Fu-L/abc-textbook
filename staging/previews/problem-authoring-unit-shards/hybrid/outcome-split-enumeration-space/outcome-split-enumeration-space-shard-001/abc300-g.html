@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC300-G — P-smooth number</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC300-G — P-smooth number</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/meet-in-the-middle.md">meet-in-the-middle・半分全列挙</a></p>
+<ul>
+<li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>P≤100の素数因子だけを持つ数は約2×10^9個以下で、素数集合を二分すれば各側の生成数列を現実的サイズに抑えられる。</p>
+<p>採用する候補: 素数を生成数列サイズが小さい側へgreedy分配するmeet-in-the-middle</p>
+<p>各半分で許される素数冪積をN以下だけ列挙し、sort後に積≤Nとなるpair数を二ポインタで数えられる。</p>
+<p>棄却する候補: 1..Nをfactor判定</p>
+<p>Nは10^16で走査不能。</p>
+<p>素数を個数ではなく現在の列挙数が小さい側へ追加すると、二つの直積サイズを均衡化できる。</p>
+<p>P以下の素数を列挙し、各qについて小さい側のlistをq^e倍した値で拡張する。両listをsortし、一方昇順・他方pointer降順でuv≤Nのpair数を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="meet-in-the-middle">meet-in-the-middle</h3>
+<p>発動条件: 独立な素因数選択の全積は大きいが二群なら列挙可能。</p>
+<p>素数集合を分割して半側smooth数を生成する。</p>
+<h3 id="積制約pair-counting">積制約pair counting</h3>
+<p>発動条件: sort済み正数列からuv≤Nを数える。</p>
+<p>overflowを避けN/uで上限pointerを動かす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>分割品質を素数数でなく実際の生成listサイズでonline均衡化するのが最大ケースを抑える。</p>
+<p>別の問題へ持ち帰る視点: MITMの群分けは状態数推定を重みにする。</p>
+<h2 id="正当性">正当性</h2>
+<p>素数を個数ではなく現在の列挙数が小さい側へ追加すると、二つの直積サイズを均衡化できる。 各半分で許される素数冪積をN以下だけ列挙し、sort後に積≤Nとなるpair数を二ポインタで数えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>1を両listに含め、q倍でNを越える前に除算判定し、答えは64ビットで持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Nのfactor全探索と比較し、P=2、N=1、P以下最大素数の冪境界を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(U log U+V log V+P(U+V))、P以下primeを列挙し生成list最大長U,V、最後のpair走査O(U+V)。</p>
+<h3 id="空間">空間</h3>
+<p>O(U+V+P)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: N is an integer such that 1 \le N \le 10^{16}.; P is a prime such that 2 \le P \le 100.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=10,P=3。</p>
+<ol>
+<li>allowed primes2,3なので数は1,2,3,4,6,8,9。</li>
+<li>左2冪と右3冪の積≤10を数える。</li>
+</ol>
+<p>期待される結果: 答え7。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>1を除いてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>素因数を一つも持たない1も条件を満たす。両listの初期値1の組が一回寄与する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc300/editorial/6275">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-editorial-6275-de32447888ea06423b4d3f52d5dc0aff7bb6361d3c92f9f0202a1507ea3f6adf</li>
+<li><a href="https://atcoder.jp/contests/abc300/tasks/abc300_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-g-problem-a16c13e539b88958dae8d540944e6b9357faeb711b672eb6bf043bd81c0d080b</li>
+</ul></main>
+</body></html>

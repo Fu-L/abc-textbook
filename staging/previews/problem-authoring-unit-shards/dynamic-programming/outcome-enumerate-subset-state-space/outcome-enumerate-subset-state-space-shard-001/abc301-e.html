@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC301-E — Pac-Takahashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC301-E — Pac-Takahashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>お菓子は高々18個なので、S/G/各菓子間のgrid最短距離を圧縮すれば訪問順だけのTSP型問題になる。 障害物grid上の移動経路は訪問する重要点順が決まれば点間最短距離へ置き換えてよい。</p>
+<p>採用する候補: 重要点BFS＋bitmask TSP DP</p>
+<p>各重要点間距離をBFSし、dp[mask][last]で菓子集合を訪問する最短時間を求めてgoalまで含めT以下の最大個数を選べる。</p>
+<p>棄却する候補: 時刻付きgrid BFSで取得集合も状態化</p>
+<p>HWTまたはgrid×2^18状態が大きく、重要点圧縮の方が小さい。</p>
+<p>障害物grid上の移動経路は訪問する重要点順が決まれば点間最短距離へ置き換えてよい。</p>
+<p>S,G,菓子各点からBFSして距離行列を作る。dp[mask][i]をSからmask菓子を訪れiで終わる最短距離として遷移し、dp+dist(i,G)≤Tのpopcount最大を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="metric-closure">metric closure</h3>
+<p>発動条件: 大きいgraphで少数の必訪候補間移動だけが重要。</p>
+<p>各重要点BFSで完全距離graphへ圧縮する。</p>
+<h3 id="bitmask-tsp-dp">bitmask TSP DP</h3>
+<p>発動条件: 高々18候補から訪問subsetと順序を最適化する。</p>
+<p>mask,lastで最短路を計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>時間TをDP軸にせず最短距離を値に持つことでT=2×10^6を避ける。</p>
+<p>別の問題へ持ち帰る視点: 候補数が小さい収集問題はmetric closure＋subset DPへ落とす。</p>
+<h2 id="正当性">正当性</h2>
+<p>重要点間の動きはBFS最短pathへ置換して時間を増やさない。訪問集合と末尾だけで将来を決められ、最短時間だけ保持すれば全訪問順を覆う。最後のgoal距離まで加えT以内の最大popcountを取る。最短区間に他菓子を通る場合も実際の獲得数を減らさず最適上界を保つ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>S→Gが到達不能またはT超なら-1。INF距離を足さず、菓子0個maskも評価する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小gridの状態BFSと比較し、菓子なし、回収不能菓子、最短S-GがTちょうど、訪問順依存を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>盤面HW、菓子C≤18。重要点BFS O((C+2)HW)、subset DP O(C²2^C)。</p>
+<h3 id="空間">空間</h3>
+<p>盤面とBFS O(HW)、mask DP O(C2^C)、距離O(C²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq H,W \leq 300; 1 \leq T \leq 2\times 10^6; H, W, and T are integers.; A_{i,j} is one of S, G, ., #, and o.; Exactly one pair (i,j) satisfies A_{i,j}= S.; Exactly one pair (i,j) satisfies A_{i,j}= G.; At most 18 pairs (i,j) satisfy A_{i,j}= o.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>1×4盤面 S o o G、T=3。</p>
+<ol>
+<li>Sから菓子への距離1,2、Gまで3。</li>
+<li>二菓子を順に訪れ合計3。</li>
+<li>時間上限以内。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>goalまでの距離を最後に足さなくてもよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。菓子を拾えても制限時間内にGへ着かなければ無効。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc301/tasks/abc301_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-e-problem-45e3a1d01ba2f854b9b279464d0582b090383ac094c182a9319430e2547f9e8e</li>
+<li><a href="https://atcoder.jp/contests/abc301/editorial/6343">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-editorial-6343-b11e11924058addc198935bbd91d06286574d2bfb73d521c8b78cb42849fa957</li>
+</ul></main>
+</body></html>

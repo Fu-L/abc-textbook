@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC283-EX — Popcount Sum</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC283-EX — Popcount Sum</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/euclidean-floor-sum.md">格子点転置によるfloor_sum</a></p>
+<ul>
+<li>Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>popcount総和はbitごとの1の個数の和なので、k=0…29について合同条件を満たしbit kが1の整数数を数えればよい。</p>
+<p>合同条件の整数はA_t=R+tMという等差数列になり、bit indicatorをfloorの差へ変えればfloor_sumを適用できる。</p>
+<p>採用する候補: 各bitで1_{bit k(A)=1}=floor((A+2^k)/2^{k+1})−floor(A/2^{k+1})を使い、合同等差数列上の二つのfloor和をACL floor_sumで求める。</p>
+<p>Nまでの対象整数を列挙せず、各bitをlogarithmicなEuclid型計算へ集約でき、T≤10^5に対応する。</p>
+<p>棄却する候補: R mod Mの整数を1からNまで列挙し、各popcountを足す。</p>
+<p>M=1,N=10^9のtestが多数あると対象数が巨大になる。</p>
+<p>bit kはA mod2^{k+1}が[2^k,2^{k+1})にあるindicatorで、floor差が周期blockを正確に数える。</p>
+<p>t=t_0,…,t_0+n-1にshiftすると各項はfloor((M·i+b)/2^{k+1})となり、floor_sum(n,mod,M,b)の形になる。</p>
+<p>最小正のA=R+tMと最大≤Nからt rangeを求める。各kでm=2^{k+1}とし、shift後b=R+t_0Mについてfloor_sum(n,m,M,b+2^k)−floor_sum(n,m,M,b)をanswerへ足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="popcountのbit別寄与">popcountのbit別寄与</h3>
+<p>発動条件: 多数整数のpopcount総和を求め、各bitの立つ個数を別々に数えられるとき。</p>
+<p>sum_x popcount(x)=sum_k count(bit_k=1)へ交換する。</p>
+<h3 id="floor-sum">floor sum</h3>
+<p>発動条件: 等差数列上のfloor((ai+b)/m)の総和が必要なとき。</p>
+<p>Euclid algorithm型floor_sumでindex数に依存せず計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>周期的bit patternを直接区間数えせず、半周期shiftしたfloor quotientの差にすると合同等差列とも自然に合成できる。</p>
+<p>別の問題へ持ち帰る視点: periodic 0/1 indicatorはfloor((x+shift)/period)-floor(x/period)で表せないか試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>対象値は正の等差数列R+tMに一意に並ぶ。bit kの指示値はfloor((A+2^k)/2^{k+1})−floor(A/2^{k+1})であり各Aについて0または1になる。これを等差数列で合計した二つのfloor_sumの差は当該bitの1個数そのもの。全bitを足すことでpopcount総和を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>R=0ではt=0のA=0を除き最初をMにし、1≤A≤Nの項数を正確に作る。</li>
+<li>floor_sum内部積とanswerは64 bitを使い、b=R+t_0Mが大きい場合も型幅を確保する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>k=2のbit pattern00001111…とfloor((A+4)/8)-floor(A/8)をA=0…15で並べ、合同列へ抜き出して確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(log N·log max(N,M))。30bitそれぞれをEuclid型floor_sumで数える。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 1 \leq M \leq N \leq 10^9; 0 \leq R &lt; M; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=10,M=3,R=1。</p>
+<ol>
+<li>対象は1,4,7,10。popcountは1,1,3,2。</li>
+</ol>
+<p>期待される結果: 7。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>R=0では0を対象へ含めてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>範囲は1..Nなので除く。例えばN=6,M=3の対象は3,6でpopcount和2+2=4。</p>
+<p>確認結果: 最初の値M、例の答え4。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc283/editorial/5432">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc283-editorial-5432-69576b5888a8b64c6839b15fc69174eba2a3541e05c98db79b7dad54d564ab00</li>
+<li><a href="https://atcoder.jp/contests/abc283/tasks/abc283_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc283-ex-problem-bcb6222919f7d6e23a9fbed1f4a936cf8936716ec7c9e09f842b1856896e3ee3</li>
+</ul></main>
+</body></html>

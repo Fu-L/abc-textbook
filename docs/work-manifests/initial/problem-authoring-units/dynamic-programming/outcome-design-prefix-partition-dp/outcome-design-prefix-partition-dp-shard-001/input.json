@@ -1,0 +1,445 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-prefix-partition-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc230-f",
+      "learningOutcomeIds": [
+        "outcome-design-prefix-partition-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-prefix-partition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; |A_i| \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "隣接併合の結果は元列の連続ブロック分割の和列。切れ目の元prefix和を列挙すると、ブロック和からその列を累積和として一意に復元でき、逆に差分でブロック和が決まる。全体和は固定なので、異なる完成列の個数は内部prefix和列のdistinct subsequence（空を含む）の個数に等しい。次prefix和vを付加すると既存列全てへvを足せるが、前回vが現れた時点に付加した個数を引けば重複が消える。prefix和の最終出現を保持する累積DPはこの全単射と一致する。",
+          "sourceRevisionIds": [
+            "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
+            "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c",
+          "path": "src/content/sources/abc212-abc263/source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc230_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba",
+          "path": "src/content/sources/abc212-abc263/source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc230_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc262-ex",
+      "learningOutcomeIds": [
+        "outcome-design-prefix-partition-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-coordinate-compression",
+        "unit-dp-state-design",
+        "unit-range-actions"
+      ],
+      "excludedTopics": [
+        "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-prefix-partition",
+        "tag-contribution-reordering",
+        "tag-coordinate-compression",
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\lt 998244353; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq L_i \\leq R_i \\leq N \\, (1 \\leq i \\leq Q); 1 \\leq X_i \\leq M \\, (1 \\leq i \\leq Q); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少なくとも一位置がxに等しいことに分かれる。まず区間chminで各位置の上限を求める。値xを実現できるのは上限がxの位置だけなので、異なるxの選択は独立になる。同じxの位置を順に処理し、最後にxを選んだ位置が各制約区間の左端以上であることを右端到着時に検査する。xを選ばない位置には上限未満の値の通り数を掛けるので、数値の大小と存在条件を両方満たす配列を一回ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e",
+            "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e",
+          "path": "src/content/sources/abc212-abc263/source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc262_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058",
+          "path": "src/content/sources/abc212-abc263/source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc262_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc285-e",
+      "learningOutcomeIds": [
+        "outcome-design-prefix-partition-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-prefix-partition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \\le N \\le 5000; 1 \\le A_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "休日が一つ以上ある円環では、隣接休日の間が独立な平日runへ分かれる。長さdのrunの生産性は両端の近い休日までの距離からA_1,A_1,A_2,A_2,…の最初d項の和B_dになる。回転して曜日1を休日と固定しても、生産性が曜日名によらないので最適値は変わらない。新休日を置く際に直前runのBを確定し、最後のrunを曜日1へ閉じれば全曜日の寄与が一回ずつ入る。末尾run長だけを持つ最大化DPが全休日集合を覆う。",
+          "sourceRevisionIds": [
+            "source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7",
+            "source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7",
+          "path": "src/content/sources/abc264-abc315/source-abc285-e-problem-5969ddb4e4b20f1cde65314e6076f59514c97d2a96fac730b85ceab969eca9a7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc285_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5",
+          "path": "src/content/sources/abc264-abc315/source-abc285-editorial-5530-310be7210dbffe3c8ce1ed2c646edf0cf96ed70c1505ae86db112906fbd424f5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc285_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc288-f",
+      "learningOutcomeIds": [
+        "outcome-design-prefix-partition-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-transition-optimization"
+      ],
+      "excludedTopics": [
+        "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-prefix-partition",
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; X has N digits in decimal representation, none of which is 0.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最後blockへ次digitを連結すると各分割積の末尾因子は十倍されdp旧値の10倍を作る。次digitの加算寄与は全旧切れ目prefix積和に比例するので d_iΣdp_j。これに新block開始も含まれ、最後blockの切れ目分類で全分割を一度ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f",
+            "source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f",
+          "path": "src/content/sources/abc264-abc315/source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc288_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70",
+          "path": "src/content/sources/abc264-abc315/source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc288_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc374-f",
+      "learningOutcomeIds": [
+        "outcome-design-prefix-partition-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-prefix-partition",
+        "tag-coordinate-compression",
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le K \\le N \\le 100; 1 \\le X \\le 10^9; 1 \\le T_1 \\le T_2 \\le \\dots \\le T_N \\le 10^{12}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "早着注文を遅い便へ、遅着注文を早い便へ入れる逆転を交換すると、到着制約を保ち総待ち時間は変わらない。よって連続 prefix ごとの便だけを考えればよい。固定分割では各便を前便+Xと最後の到着日の大きい方まで早めるのが最適。この再帰から全便日は T_i+kX に含まれる。イベント DP の待つ遷移と次の1..K件を送る遷移は全正規化解を網羅し、待ち時間加算も各注文を一回だけ数える。",
+          "sourceRevisionIds": [
+            "source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703",
+            "source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703",
+          "path": "src/content/sources/abc368-abc419/source-abc374-editorial-11095-96d88404a0b6b88070e5ffa964c6c9a7809ac83cb8431a9044b0de85ad249703.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc374_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf",
+          "path": "src/content/sources/abc368-abc419/source-abc374-f-problem-23882ecbf159233e00a1d0f004e255e55db05c60e57a2c9909ea3a84c4ed95bf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc374_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc466-e",
+      "learningOutcomeIds": [
+        "outcome-design-prefix-partition-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dp-prefix-partition",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq 10; 1 \\leq A_i, B_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "K区間flipのxor結果には向きの切替境界が高々2K個あるので、裏runは高々K本。逆に裏runを各一回flipすれば同じ向き列を高々K操作で作れる。従って重なりを消した表・裏交互phaseへ正規化できる。先頭末尾の表phaseや未使用phaseは空を許す。左から各カードを現在phaseへ置くか次phaseへ進めるDPは全向き列の分割を網羅し、各phaseで対応面値を一度加えるため最大和を正確に求める。",
+          "sourceRevisionIds": [
+            "source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd",
+            "source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd",
+          "path": "src/content/sources/abc420-abc466/source-abc466-e-problem-4ba87520bee3c600fc85b2af5308f919b501ce18367da34fe56b758004d431dd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc466_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757",
+          "path": "src/content/sources/abc420-abc466/source-abc466-editorial-22629-4ae993f0eb49e129b14e741f409c3997322e3cb8a3254fa1d3e195ceb2170757.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc466_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

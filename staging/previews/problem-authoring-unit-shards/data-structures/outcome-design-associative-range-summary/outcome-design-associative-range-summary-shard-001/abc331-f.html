@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC331-F — Palindrome Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC331-F — Palindrome Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/sequence-fingerprint.md">列・文字列のrolling fingerprint</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>1点更新を挟むため、各queryでsubstringを直接反転比較すると合計O(NQ)になり得る。一方、回文条件は順方向列と逆方向列の一致なので、結合可能な要約を区間データ構造へ載せたい。</p>
+<p>多項式hashなら、区間を左・右に結合するとき長さに応じた基数冪を掛けるだけで順方向hashと逆方向hashを合成できる。</p>
+<p>採用する候補: 順方向・逆方向Rolling Hashと長さをsegment treeのmonoidとして管理する</p>
+<p>葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。</p>
+<p>棄却する候補: 各回文queryでS[L..R]を両端から比較する</p>
+<p>長さNのqueryがQ回続くとO(NQ)で、N=10^6,Q=10^5には間に合わない。</p>
+<p>棄却する候補: Manacher法で全回文半径を前計算する</p>
+<p>静的文字列には有効だが、1点更新後に多数の回文半径が変化し得て更新を局所化できない。</p>
+<p>nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。</p>
+<p>hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。</p>
+<p>各文字をhash nodeとしてsegment treeを構築する。更新queryでは対応葉を置換し、判定queryでは[L,R]のnodeを取得してforward hashとbackward hashを全採用modulusで比較する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="rolling-hashの結合monoid">Rolling Hashの結合monoid</h3>
+<p>発動条件: 文字列の連結順を保つ区間情報を、更新可能な木へ載せたいとき。</p>
+<p>両向きhashと基数冪をnodeに持ち、区間結合を定数時間にする。</p>
+<h3 id="segment-treeによる動的文字列query">segment treeによる動的文字列query</h3>
+<p>発動条件: 1点更新と任意区間の結合可能な性質判定が混在するとき。</p>
+<p>文字更新を葉更新、substring hashを区間積としてO(log N)処理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>回文を直接表す情報は結合しにくいが、同じ区間を左右から読んだ二つのhashへ言い換えるとmonoidになる。</p>
+<p>別の問題へ持ち帰る視点: 区間性質そのものが合成不能なら、その性質を比較可能な二つの合成可能な表現へ写す。</p>
+<h2 id="正当性">正当性</h2>
+<p>nodeを(forward hash, backward hash, power=x^length)とし、S+Tではforward=S.f×T.power+T.f、backward=S.b+S.power×T.bとすれば結合順を保てる。 hash一致は決定的な同値判定ではない。十分大きい法と複数独立hashを使い、衝突確率を実用上無視できる水準へ落とす。 葉の1点変更と任意substringの両向きhash取得をともにO(log N)で処理でき、回文を高確率で判定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>左右nodeの長さ（または基数冪）を取り違えず、query区間のindex規約を統一する。単一modulusの衝突率を過小評価せず複数hashを用いる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>長さ1・偶数長・奇数長、先頭末尾更新、同文字への更新を素朴な反転比較とrandom testし、特に左右結合式を検証する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)、採用hash本数は固定。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^6; 1 \leq Q \leq 10^5; S is a string of length N consisting of lowercase English letters.; 1 \leq x \leq N; c is a lowercase English letter.; 1 \leq L \leq R \leq N; N, Q, x, L, R are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=abca、質問全区間、次に位置3をbへ変更。</p>
+<ol>
+<li>初期列と逆列はabca,acbaで不一致。</li>
+<li>変更後はabbaで両向きが一致。</li>
+</ol>
+<p>期待される結果: 初回No、変更後Yes。ただしhash判定には衝突の可能性がある。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>hash一致を決定的証明と呼べるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>呼べない。実列の回文なら必ずhash一致するが逆向きは衝突し得る。独立hashで誤判定確率を抑える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc331/editorial/7820">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc331-editorial-7820-84f397ddaac63f4cee808b3ca295902b86653b9cfaf7abb14f91cbc35c371522</li>
+<li><a href="https://atcoder.jp/contests/abc331/tasks/abc331_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc331-f-problem-0825f85271fc207f1f00eedd069b0591836c847c6da3ce4b4c51085bd71ae66b</li>
+</ul></main>
+</body></html>

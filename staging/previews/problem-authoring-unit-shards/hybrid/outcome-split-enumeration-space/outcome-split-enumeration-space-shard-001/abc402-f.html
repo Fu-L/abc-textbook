@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC402-F — Path to Integer</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC402-F — Path to Integer</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/meet-in-the-middle.md">meet-in-the-middle・半分全列挙</a></p>
+<ul>
+<li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>pathが通るcell(i,j)のdigitは最終decimal numberで10^{2N-i-j}の位を占めるため、各path scoreは通過cell weightの和mod Mになる。</p>
+<p>任意pathは反対角線i+j=N+1をちょうど一cell通る。そこまでの前半と以後の後半は各O(2^{N})通りで独立に列挙できる。</p>
+<p>採用する候補: 反対角線でmeet-in-the-middleし、cell別の前半/後半剰余集合をsortして最大mod和を探す</p>
+<p>全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。</p>
+<p>棄却する候補: 全start-to-goal pathを列挙してdecimal値を計算する</p>
+<p>N=20でも約C(38,19)が大きく、中央分割を使わないと間に合わない。</p>
+<p>中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。</p>
+<p>固定xに対し(x+y) mod M最大は、y&lt;M-xの最大があればそれ、なければS2最大である。</p>
+<p>10冪mod Mでcell weightを作る。DFS/DPでstartから各反対角cellまでのsum residue、goalから同cell直後までのsum residueを列挙する。後半listをsortし各前半xへlower_bound(M-x)直前または末尾を組み合わせてmaxを取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="meet-in-the-middle-on-lattice-paths">meet-in-the-middle on lattice paths</h3>
+<p>発動条件: path長が約40で全path列挙は重いが中央layerで二分できるとき。</p>
+<p>反対角線cellごとに前後path residueを列挙する。</p>
+<h3 id="maximum-modular-pair-sum">maximum modular pair sum</h3>
+<p>発動条件: 二集合から(x+y) mod Mの最大を求めるとき。</p>
+<p>wrap直前のyをbinary searchする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>decimal連結を逐次value更新する代わりに各cellの固定place valueへ展開すると、前後pathの寄与が加法的になりmeet-in-the-middleできる。</p>
+<p>別の問題へ持ち帰る視点: path上で順序依存に見える数値も、位置がpath長で固定なら重み付き和へ変換する。</p>
+<h2 id="正当性">正当性</h2>
+<p>中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。 固定xに対し(x+y) mod M最大は、y&lt;M-xの最大があればそれ、なければS2最大である。 全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>中央cellを前半/後半どちらか一方だけに含める。M-x=0のlower_bound境界、N=1の空後半を扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤6で全pathを列挙し、Mが小さくresidue重複が多いcase、wrap有無、N=1を比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N2ᴺ)、半path列挙・後半sort・各前半lower_bound。</p>
+<h3 id="空間">空間</h3>
+<p>O(2ᴺ+N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 20; 2 \leq M \leq 10^9; 1 \leq A_{i,j} \leq 9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2,M=7、grid((1,2),(3,4))。</p>
+<ol>
+<li>二path数は124と134。</li>
+<li>124 mod7=5、134 mod7=1。</li>
+</ol>
+<p>期待される結果: 最大residue5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>中央digitを両半の重みに含めるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>一回だけ含める。十進位はcell座標で決まるため前半側に入れ後半から除外する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc402/editorial/12713">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817</li>
+<li><a href="https://atcoder.jp/contests/abc402/tasks/abc402_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC240-G — Teleporting Takahashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC240-G — Teleporting Takahashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一次元で n 歩後に座標 x へ着く経路は、到達可能性 n≥|x| と parity が合う場合に正方向歩数を固定でき、二項係数一つで数えられる。</p>
+<p>三次元の六方向を直接方向回数へ分けると自由度が多いが、z 軸へ使う k 回を固定すれば、残り N-k 回は独立な二次元格子問題になる。</p>
+<p>採用する候補: z 移動回数 k を総和し、z 部分を一次元公式、xy 部分を (x+y,x-y) 変換で二つの一次元公式へ分解して二項係数を掛ける。</p>
+<p>各 k の寄与を組合せ公式だけで評価でき、方向回数の二重列挙を一つの和へ減らせる。</p>
+<p>棄却する候補: ±x,±y,±z の六方向回数を全て列挙し、多項係数を足す。</p>
+<p>終点条件を入れても複数の自由変数が残り、N が10^7のとき二重以上の列挙はできない。</p>
+<p>xy 平面で (u,v)=(x+y,x-y) とすると、一回の四方向移動が u,v それぞれ独立な ±1 になり、f_2(n,x,y)=f_1(n,x+y)f_1(n,x-y) と積に分かれる。</p>
+<p>k 個の z 手を N 個の時刻から選ぶ binomial(N,k) が、z の経路と xy の経路を元の時系列へ interleave する係数になる。</p>
+<p>階乗と逆階乗を N まで前計算し、到達不能なら0を返す一次元関数 f1(n,x)=C(n,(n+|x|)/2) を用意する。k=0..N について C(N,k)f1(k,Z)f1(N-k,X+Y)f1(N-k,X-Y) を加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="座標変換による独立化">座標変換による独立化</h3>
+<p>発動条件: 二次元の一手候補が二つの符号選択の直積へ写せるとき。</p>
+<p>(x+y,x-y) 座標で各成分の一次元 walk を独立に数える。</p>
+<h3 id="操作列の-interleave">操作列の interleave</h3>
+<p>発動条件: 異なる種類の操作をそれぞれ内部順序付きで選び、全時系列へ混ぜるとき。</p>
+<p>種類ごとの回数を固定し、binomial coefficient で配置時刻を選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>三次元を一度に解かず、z 手数を固定して「一次元×変換済み二次元」へ段階的に次元を落とす。</p>
+<p>別の問題へ持ち帰る視点: 高次元 walk は一軸の使用回数を外側で和にし、残り次元に独立化できる変換がないか探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>zへ使うk時刻をC(N,k)で選べばz経路とxy経路は独立に決まる。xyの四方向はu=x+y,v=x−y上の±1の全4組に一対一対応するため、二つの一次元経路数の積になる。各経路はz歩数kが一意なのでその積を全kで足すと全三次元経路を一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>f1 は n&lt;|x| または n-|x| が奇数なら0とする。N&lt;998244353 なので階乗逆元を使え、k の全範囲で負の combination index を参照しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一回の x/y 四方向を (u,v) の四符号へ写し、独立選択が元方向へ一意に戻ることを表で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)。階乗表とz方向の歩数kを列挙する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^7; -10^7 \leq X, Y, Z \leq 10^7; N, X, Y, and Z are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、目標(0,0,0)。</p>
+<ol>
+<li>最初の6方向に対して二歩目をその反対にすれば原点へ戻る。</li>
+<li>式ではk=0の平面4通りとk=2のz軸2通り。</li>
+</ol>
+<p>期待される結果: 6通り。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>N=1で原点へ行く経路数は。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>一歩で座標和の偶奇が変わる。f1の到達条件とparity判定によって全項0。</p>
+<p>確認結果: 0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc240/editorial/3423">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc240-editorial-3423-f1ae91f9a88b3ccf4ed145d2a904347e29aa782a320a7510c8ee6f1a870d9c0d</li>
+<li><a href="https://atcoder.jp/contests/abc240/tasks/abc240_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc240-g-problem-0d05122adbbea727dceed2629d2df052e4505a4b6829b2188ad615c73666d1c9</li>
+</ul></main>
+</body></html>

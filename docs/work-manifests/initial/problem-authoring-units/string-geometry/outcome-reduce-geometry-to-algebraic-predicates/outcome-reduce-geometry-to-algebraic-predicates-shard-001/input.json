@@ -1,0 +1,582 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
+  "packets": [
+    {
+      "problemId": "abc220-g",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq N \\leq 1000; -10^9 \\leq X_i,Y_i \\leq 10^9; 1 \\leq C_i \\leq 10^9; (X_i,Y_i) \\neq (X_j,Y_j) if i \\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "等脚台形の二底辺は平行で、両中点を通る共通の垂直二等分線を持つ。逆に同じ垂直二等分線を持ち中点が異なる二線分を選ぶと、両端の対応は軸対称となり、四頂点は異なる二平行線上にあって等脚台形を作る。したがって直線keyが同じで中点keyが異なる二候補を選べば十分である。同じ中点groupでは最大重みの線分以外は不要で、異なる二groupの最大重み和を選ぶ。primitive方向と中点の内積によるkeyは同じ直線を一意に表す。",
+          "sourceRevisionIds": [
+            "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
+            "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327",
+          "path": "src/content/sources/abc212-abc263/source-abc220-editorial-2684-ebe75396fb3dc16f89b1952b2f1e9bb2bc23e34bff5179ed35fe39c2888ac327.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc220_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed",
+          "path": "src/content/sources/abc212-abc263/source-abc220-g-problem-11cd77caf912f0d4d4a1772f3a50e387c0c294519ddc6ef41e8278462c72a6ed.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc220_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc223-e",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq X, Y \\leq 10^9; 1 \\leq A, B, C \\leq 10^{18}; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "面積Sを幅wの帯に置くための最小整数高さはceil(S/w)であり、それより狭い帯では面積が不足する。三つの互いに重ならない軸平行長方形には、一つと残り二つを分離する水平または垂直な切り線が存在する。横方向に二枚が分離している場合、その間を三枚目が遮れば三枚目は両方から縦に分離しており、縦の切り線を選べる。この一枚を最小の帯へ縮めても残りの領域は減らない。残り二枚は縦か横に分離でき、必要幅・高さの天井除算で正確に判定できる。全一枚目と全方向を試すので配置を漏らさない。",
+          "sourceRevisionIds": [
+            "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+            "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1",
+          "path": "src/content/sources/abc212-abc263/source-abc223-e-problem-166cf74c15959fb17162cb4f1aec3b1d5c94f834c1ffa02de9873e7753d6fed1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc223_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf",
+          "path": "src/content/sources/abc212-abc263/source-abc223-editorial-2781-24b456093448226fc8a924b5af78bb6af9a44a183e3a3b363da7c6b935d63adf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc223_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc234-ex",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le K \\le 1.5 \\times 10^9; 0 \\le x_i,y_i \\le 10^9; There are at most 4 \\times 10^5 pairs of integers that should be listed."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "距離K以下の点対は各座標差もK以下なので、幅Kの格子bucketでは同一または隣接bucketに限られる。一つのbucketを四つの半幅正方形へ分けると各小正方形の直径はK以下で、bucket内B点から真の出力がΩ(B²)−O(B)個生じる。隣接bucket間の候補積は2B_uB_v≤B_u²+B_v²で抑えられ、各bucketの隣接数は定数。よって全距離判定は O(N+R)。実際の二乗距離を最後に確認し、index順p<qだけを採用するので漏れも二重計数もない。",
+          "sourceRevisionIds": [
+            "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
+            "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015",
+          "path": "src/content/sources/abc212-abc263/source-abc234-editorial-3226-f232d4ffcb06885e5072dcae4a2b6363748007bee7fe77327ffb0b96620eb015.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc234_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4",
+          "path": "src/content/sources/abc212-abc263/source-abc234-ex-problem-07118ff864612051334090e1f97931adfd6226874136d32df91d62fe2a7b0db4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc234_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc248-e",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 300; \\lvert X_i \\rvert, \\lvert Y_i \\rvert \\leq 10^9; X_i\\neq X_j or Y_i\\neq Y_j, if i\\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "K=1なら各点を通る無限の直線が存在する。K≥2の有効直線は必ず入力点の対から生成されるので、全点対を調べれば漏れない。外積0で所属点数を正確に求め、gcdと符号で正規化した(A,B,C)の集合へ入れると、どの点対で生成しても同じ直線は一度だけ数えられる。座標積には浮動小数を使わない。",
+          "sourceRevisionIds": [
+            "source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8",
+            "source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8",
+          "path": "src/content/sources/abc212-abc263/source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc248_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6",
+          "path": "src/content/sources/abc212-abc263/source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc248_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc258-f",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le B,K \\le 10^9; 0 \\le S_x,S_y,G_x,G_y \\le 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "大通りを使わない経路は通常道路のManhattan距離を費用K倍した候補で覆う。使う経路では最初と最後の大通りへの出入りを各点の上下左右の直近のB倍線への射影へ移して損をしない。四入口×四出口を尽くせば最適経路を含む。大通り間は交差する方向や別帯ではManhattan距離、同じ帯の平行路なら両側の直交大通りを経由する二つの迂回を比較する。この例外を含めた厳密な網内距離と出入り費用を最小化する。",
+          "sourceRevisionIds": [
+            "source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5",
+            "source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5",
+          "path": "src/content/sources/abc212-abc263/source-abc258-editorial-4237-f64386f7dcd8dcbd2521070103668d59be2948a5eba1d7c8349965e9de0754d5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc258_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788",
+          "path": "src/content/sources/abc212-abc263/source-abc258-f-problem-e69b00e450a590b4f1f26d98031df0a0dcbc28ede9a4274f20f2b21b68bab788.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc258_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc296-g",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2\\times 10^5; 1 \\leq Q \\leq 2\\times 10^5; -10^9 \\leq X_i,Y_i,A_i,B_i \\leq 10^9; S is a strictly convex N-gon. That is, its interior angles are all less than 180 degrees.; (X_1,Y_1),\\ldots,(X_N,Y_N) are the vertices of S in counter-clockwise order.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "strict convex polygonの各x断面は空か一つの閉区間で、端点は上下chainの該当辺にある。x昇順sweepのpointerはその辺を一意に特定する。外積が0で辺範囲内ならON、上下の内側ならIN、それ以外OUT。縦端辺と左右端を別処理すれば断面が縮む境界も含めて全点を正しく分類する。",
+          "sourceRevisionIds": [
+            "source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d",
+            "source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d",
+          "path": "src/content/sources/abc264-abc315/source-abc296-editorial-6070-b5928528038187f1b949dfb21f42a524e70864b1ac6f8ee5a13996ec0cb4556d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc296_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b",
+          "path": "src/content/sources/abc264-abc315/source-abc296-g-problem-d9afff8c741acc3edb639a2230ca8b48afa26b9f844da97b64b74fb6f9cd2e3b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc296_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc301-g",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 50; 0 < X_i \\leq 1000; -1000 \\leq Y_i,Z_i \\leq 1000; The triples (X_i,Y_i,Z_i) are distinct.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "写る人数がN未満なら撮影点は重なる二人の直線上にある。一つのrayでcnt人が重なれば隠れるのはcnt−1人。最適点は単一有効直線上か複数有効直線の交点として列挙され、同じ直線をcanonical統合すればその隠人数を二重加算しない。x<0からx>0の人を見るため同一直線上の人は同じrayに入り、直線間の隠れ寄与は独立に足せる。",
+          "sourceRevisionIds": [
+            "source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28",
+            "source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28",
+          "path": "src/content/sources/abc264-abc315/source-abc301-editorial-6330-6027599d6197eb06cbd58bb5c57e1270afe2a37a348e6cf70da2d5141b3e2b28.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc301_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f",
+          "path": "src/content/sources/abc264-abc315/source-abc301-g-problem-17e39979cd39918343e6cf0d6f6bdcf1ea2e6c4245a8daedcf5c8a493c60522f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc301_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc351-e",
+      "learningOutcomeIds": [
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "凸包の境界候補列挙・半平面交差。"
+      ],
+      "tagIds": [
+        "tag-geometry-orientation-transform",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq X_i, Y_i \\leq 10^8; For i \\neq j, (X_i, Y_i) \\neq (X_j, Y_j); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "斜めmoveはu=x+y,v=x−yの一軸±2moveになるためparity不一致は到達不能。同parityでは各軸を必要差分だけ動かせ、最短距離は(|Δu|+|Δv|)/2。各sorted軸で新値z_iの過去全値との絶対差はiz_i−prefix。両軸合計して2で割れば全到達可能unordered pair距離を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f",
+            "source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f",
+          "path": "src/content/sources/abc316-abc367/source-abc351-e-problem-a298ef7244fa4a1ea123aa4d1d3434a2f4331859aa342b3f4d3bd12b576fde0f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc351_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2",
+          "path": "src/content/sources/abc316-abc367/source-abc351-editorial-9890-252c10a6f3108732a2cc331dac4102643e03c18803abef766d1c416cce70baf2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc351_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

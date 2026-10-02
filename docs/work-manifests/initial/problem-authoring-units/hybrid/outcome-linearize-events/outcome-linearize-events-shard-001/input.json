@@ -1,0 +1,596 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-linearize-events-shard-001",
+  "packets": [
+    {
+      "problemId": "abc231-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-coordinate-compression",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 0 \\leq A_i \\leq 10^9; 0 \\leq B_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "A が同値の点では B の大きい順に置くことで条件を満たす向きが処理済み側に現れるが、完全に同じ点の複数個はまとめて双方向を数える必要がある。 一方の不等式をソート順へ吸収し、他方を一次元の動的な範囲和へ落とせる。",
+          "sourceRevisionIds": [
+            "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
+            "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3",
+          "path": "src/content/sources/abc212-abc263/source-abc231-editorial-3059-2800894ed0012eda3c59d85ce01046fba8bf0c21479cd2c0c4e8eb9298de0bc3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc231_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2",
+          "path": "src/content/sources/abc212-abc263/source-abc231-f-problem-37c3e1fabb258af6c0177d00752d792cedf5ab67a0ea32e2697bfe540ba9a2d2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc231_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc266-ex",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-geometry-primitives",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-coordinate-compression",
+        "tag-geometry-orientation-transform",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq T_i \\leq 10^9; 0 \\leq X_i,Y_i \\leq 10^9; 1 \\leq A_i \\leq 10^9; The triples (T_i,X_i,Y_i) are distinct.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "開始状態(0,0,0)も変換後点(a,b,y)=(0,0,0)、dp=0として追加すれば、原点から直接到達可能なeventを同じ照会で扱える。 三座標が全て非減少なら変換の逆式から時刻も非減少なので、dominance順はdpの有向非巡回依存を保つ。 移動可能な全過去eventが直交prefix領域になり、座標圧縮した二次元dominance maxへ置き換えられる。",
+          "sourceRevisionIds": [
+            "source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e",
+            "source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e",
+          "path": "src/content/sources/abc264-abc315/source-abc266-ex-problem-d42280e7018a1832423bfbe7980967b58fd966efa151456d572a7ccc05e30b6e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc266_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193",
+          "path": "src/content/sources/abc264-abc315/source-abc266-editorial-4664-3de16c26abac708494bcebe75ef4adbd62f02c063d34f554e601c77db6142193.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc266_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc274-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2000; 1 \\leq A \\leq 10^4; 1 \\leq W_i\\leq 10^4; 0 \\leq X_i\\leq 10^4; 1 \\leq V_i\\leq 10^4; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "relative velocity ΔVが0ならrelative position ΔXが[0,A]かで全時刻/emptyを判定し、ΔV≠0なら二不等式からentry/exit timesを得る。 net endpointsはinclusiveなので同じtimeにentryとexitが重なる場合、その瞬間のweightを評価するためadd eventsをremove eventsより先に処理する。 固定anchorでは捕獲weightがinterval endpointsでのみ変化し、2N eventsの最大prefix weightを求めればよい。",
+          "sourceRevisionIds": [
+            "source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933",
+            "source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933",
+          "path": "src/content/sources/abc264-abc315/source-abc274-f-problem-2fc534f53deab4a68e673f61f407eb17832df060862c7177163e534a96ea2933.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc274_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866",
+          "path": "src/content/sources/abc264-abc315/source-abc274-editorial-5021-c2218204378652ca3ddfe2ed53d7212a742a711610e7d343c09631410bf41866.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc274_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc283-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-geometry-orientation-transform",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times10^5; 1 \\leq P _ i \\leq N\\ (1\\leq i\\leq N); i\\neq j\\implies P _ i\\neq P _ j; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "j<i,P_j<P_iではdistance=P_i+i-(P_j+j)なので、P_j<P_i上のP_j+j最大値だけが必要である。 他の3caseもP_j-jのmax/minや反対向きsweepへ変わるだけで、座標反転・値反転を使えば同じhelperを再利用できる。 全pair比較を、各pointあたり定数回のvalue range queryへ変えられる。",
+          "sourceRevisionIds": [
+            "source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a",
+            "source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a",
+          "path": "src/content/sources/abc264-abc315/source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc283_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307",
+          "path": "src/content/sources/abc264-abc315/source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc283_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc309-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-coordinate-compression",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq h_i,w_i,d_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "回転の選択を探索する代わりに三辺をソートすれば、「ある向きで入る」と正規化後の成分ごとの strict dominance が同値になる。 w を座標圧縮し、prefix [0,w) に登録済みの d の最小値を持てば、存在判定に必要な過去全体を一値へ集約できる。 過去集合を h が真に小さい箱だけに限定し、区間最小値が d 未満かで残る二座標の strict dominance を判定できる。",
+          "sourceRevisionIds": [
+            "source-abc309-editorial-6749-98ac1871ea8d174b0bd5bff4727ef3a6150b1be6a81d3de97f6a84f185d3dc37",
+            "source-abc309-f-problem-af7da23718a2c29e3bde282433111f3d78b057a829c074e805216bd258134b85"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc309-editorial-6749-98ac1871ea8d174b0bd5bff4727ef3a6150b1be6a81d3de97f6a84f185d3dc37",
+          "path": "src/content/sources/abc264-abc315/source-abc309-editorial-6749-98ac1871ea8d174b0bd5bff4727ef3a6150b1be6a81d3de97f6a84f185d3dc37.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc309_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc309-f-problem-af7da23718a2c29e3bde282433111f3d78b057a829c074e805216bd258134b85",
+          "path": "src/content/sources/abc264-abc315/source-abc309-f-problem-af7da23718a2c29e3bde282433111f3d78b057a829c074e805216bd258134b85.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc309_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc311-g",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-dsu-components",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N,M \\le 300; 1 \\le A_{i,j} \\le 300"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "高さが大きい列から有効化すると、列 j の追加時に左右の既存連続成分を結んだ区間は全列が少なくとも H_j 行伸び、j が高さのボトルネックになる。 真の最小値が a の長方形は threshold m=a の走査で必ず評価されるため、「最小値が m 以上」の領域へ m を掛けても最大値を取り逃さない。 各候補長方形は最小高さを与える列が追加された時点の連続成分として現れ、二次元 prefix sum で領域和を O(1) 取得できる。",
+          "sourceRevisionIds": [
+            "source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27",
+            "source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27",
+          "path": "src/content/sources/abc264-abc315/source-abc311-editorial-6823-e9cae54078c6ad33bc3642aa2558197d3003df36df591ffaaf3e8b0cfa764b27.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc311_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544",
+          "path": "src/content/sources/abc264-abc315/source-abc311-g-problem-2a29d86b1d8c2c308850ebf04c6a3b490eb4775f13e72bbb91d5ff45a96d0544.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc311_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc320-e",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-set-multiset",
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-ordered-set-multiset",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 0 <T_1 <\\ldots < T_M \\leq 10^9; 1 \\leq S_i \\leq 10^9; 1 \\leq W_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。 列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。 最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。",
+          "sourceRevisionIds": [
+            "source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d",
+            "source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d",
+          "path": "src/content/sources/abc316-abc367/source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc320_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6",
+          "path": "src/content/sources/abc316-abc367/source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc320_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc327-f",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-actions"
+      ],
+      "excludedTopics": [
+        "更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。"
+      ],
+      "tagIds": [
+        "tag-event-sweep",
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N\\leq 2\\times 10^5; 1 \\leq D\\leq 2\\times 10^5; 1 \\leq W\\leq 2\\times 10^5; 1 \\leq T_i\\leq 2\\times 10^5; 1 \\leq X_i\\leq 2\\times 10^5; All pairs (T_i,X_i) are different.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "時間intervalはinclusiveなのでstart=max(1,T_i-D+1)で+1、T_i+1で−1を発生させると、S=T_iまでactiveになる。 空間intervalもLの整数候補に対するinclusive範囲で、segment treeでは[lower,X_i+1)へ変換する。 二次元rectangle加算を1次元の動的区間加算へ落とし、各appleを追加・削除の2回だけ処理できる。",
+          "sourceRevisionIds": [
+            "source-abc327-editorial-7579-19143f964595c33a9fb75c3de2ae24608c840e791233afa2c12a9619ca872058",
+            "source-abc327-f-problem-caf95a8c3cb45ee5a85c76cc95ddb9e61bf314152fb11c7235ef0b035e9b269a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc327-editorial-7579-19143f964595c33a9fb75c3de2ae24608c840e791233afa2c12a9619ca872058",
+          "path": "src/content/sources/abc316-abc367/source-abc327-editorial-7579-19143f964595c33a9fb75c3de2ae24608c840e791233afa2c12a9619ca872058.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc327_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc327-f-problem-caf95a8c3cb45ee5a85c76cc95ddb9e61bf314152fb11c7235ef0b035e9b269a",
+          "path": "src/content/sources/abc316-abc367/source-abc327-f-problem-caf95a8c3cb45ee5a85c76cc95ddb9e61bf314152fb11c7235ef0b035e9b269a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc327_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

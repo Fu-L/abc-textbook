@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-mask-by-bitwise-feasibility-shard-001",
+  "packets": [
+    {
+      "problemId": "abc408-e",
+      "learningOutcomeIds": [
+        "outcome-optimize-mask-by-bitwise-feasibility"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "bitwise greedyによるmask最適化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-bitwise-greedy-feasibility",
+        "tag-dsu-components",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; N-1\\le M\\le 2\\times 10^5; 1\\le u_i < v_i\\le N; 0\\le w_i< 2^{30}; The given graph is connected.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "simple path 条件は connectivity 判定を妨げない。許可辺で walk があれば cycle を除いて simple path にでき、その OR は増えない。 ある候補 x が可能なら x に bit を足した mask も同じ経路を許すので、lexicographic な bit 最小化と同様に高位から貪欲決定できる。 各判定は edge label が候補 mask の submask かを調べて DSU で結ぶだけで、全体 O(30(N+M)α(N)) になる。",
+          "sourceRevisionIds": [
+            "source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4",
+            "source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4",
+          "path": "src/content/sources/abc368-abc419/source-abc408-e-problem-e774814460ea12d306f48f206f13754908f23756db98f6c49a2ff4c6c7a65dc4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc408_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62",
+          "path": "src/content/sources/abc368-abc419/source-abc408-editorial-13159-2968fa014b41358592ba76d3443d3b647cb6d15d7a38b7853c252eec434eea62.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc408_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "shardId": "outcome-decompose-functional-graph-shard-002",
+  "primaryOutcomeId": "outcome-decompose-functional-graph",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc436-e"
+  ],
+  "homeUnitId": "unit-functional-graph-decomposition",
+  "prerequisiteOutcomeIds": [
+    "outcome-select-state-graph-search"
+  ],
+  "dependencyShardIds": [
+    "outcome-select-state-graph-search-shard-001",
+    "outcome-select-state-graph-search-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "3e0926c6850748ffa6c3331e0eb83fe8797c90931ba7720d3baa75f9c5cde099",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc436-e",
+      "path": "src/content/docs/problems/graph-search/outcome-decompose-functional-graph/outcome-decompose-functional-graph-shard-002/abc436-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

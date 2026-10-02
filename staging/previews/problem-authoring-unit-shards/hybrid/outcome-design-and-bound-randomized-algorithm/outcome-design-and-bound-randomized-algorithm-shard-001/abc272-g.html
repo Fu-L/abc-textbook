@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC272-G — Yet Another mod M</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC272-G — Yet Another mod M</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a></p>
+<ul>
+<li>乱数で選ぶ対象と成功条件を定め、誤り確率を上から評価して必要な反復回数または決定的な事後検証を設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>誤り確率の評価を伴わない固定hash、および入力全体を確定的に列挙できる探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>valid Mで同じremainder Xを持つmajority index set Sを考えると、任意のi,j∈SについてM divides |A_i−A_j|となる。</p>
+<p>|S|&gt;N/2なのでrandomに二indexを選んだとき両方がSに入る確率は1/4より大きく、正しいdifferenceをconstant probabilityで得られる。</p>
+<p>棄却する候補: M=3,…,10^9を列挙してremainder frequenciesを調べる。</p>
+<p>modulus候補範囲が大きすぎる。</p>
+<p>採用する候補: random pairsのdifferenceをfactorizeし、その3以上のdivisorsを候補Mとして全Aのremainder majorityを検証する。</p>
+<p>majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。</p>
+<p>candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。</p>
+<p>divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。</p>
+<p>hidden majority congruence classからrandom pair samplingでmodulus divisorを抽出し、factorization-generated candidatesをdeterministically verifyするMonte Carlo searchである。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="majority集合からの乱択sampling">majority集合からの乱択sampling</h3>
+<p>発動条件: 未知のgood subsetが全体の半数超を占め、その中の少数sampleから答え候補を生成できるとき。</p>
+<p>random pairを複数回選び、両方がmajority residue classに入るeventを利用する。</p>
+<h3 id="差の約数による合同類候補">差の約数による合同類候補</h3>
+<p>発動条件: 複数整数が同じmodulo remainderを持つ未知modulusを探すとき。</p>
+<p>sample differenceをfactorizeし、3以上のdivisorsまたは必要十分なprime-factor candidatesを列挙する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>入力値はdistinctなのでsampleした異なるindicesのdifferenceは正で、factorization対象0の例外を避けられる。</p>
+<p>別の問題へ持ち帰る視点: majority構造はrandom pairが同じhidden classへ入る定数確率を与え、candidate generationのrandomizationに使える。</p>
+<h2 id="正当性">正当性</h2>
+<p>candidateは推測だけで返さず、A_i mod Mのfrequencyが実際にN/2を超えるかO(N)で検証するためfalse positiveはない。 divisor closureより全divisorsの代わりにdifferenceのodd prime factorsと4だけを試しても、valid divisorがある場合のより小さいvalid candidateを拾える。 majority pairを引けば真のMがdifferenceのdivisorに現れ、反復でfailure probabilityが幾何的に減る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同一pair・同一factorから出るcandidateをdeduplicateし、M≥3かつM≤10^9を満たすものだけ検証する。</li>
+<li>試行回数を要求failure probabilityから決め、random generatorのindex選択で同じindexを避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じmodulo classの二値差はmodulusの倍数になるので、未知modulus候補をdifference factorizationへ移す。</li>
+<li>majorityが保証するconstant hit probabilityと、候補の完全検証を組み合わせてone-sided errorにする。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>T回sample、差の試し割りO(T√D)、候補C個の検査O(CN)、D=maxA−minA。固定Tで失敗確率を制御する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+√D)、候補とfrequency。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \le N \le 5000; 1 \le A_i \le 10^9; The elements of A are distinct.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,4,7,2,8)、候補M=3。</p>
+<ol>
+<li>mod3は(1,1,1,2,2)。</li>
+<li>剰余1の3個はN/2=2.5を超える。</li>
+</ol>
+<p>期待される結果: M=3は有効。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>random sampleで外れた候補を認証なしに出せるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>出せない。各候補の全N residue頻度を確認してから出すのでfalse positiveはない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc272/tasks/abc272_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-g-problem-ddd168bffdcf96e57760fa8e5da7e2cb2a407776125006901a509571a5ec8370</li>
+<li><a href="https://atcoder.jp/contests/abc272/editorial/4981">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-editorial-4981-11a3815cb43ca9a01f77c8e7c479f8da8cc14d3f210287c9c2c57cc6254bd952</li>
+</ul></main>
+</body></html>

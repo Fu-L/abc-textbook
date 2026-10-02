@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC262-EX — Max Limited Sequence</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC262-EX — Max Limited Sequence</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-prefix-partition.md">prefix分割DP</a></p>
+<ul>
+<li>列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>位置 i を含む全制約の X の最小値 B_i は A_i の必要上界であり、区間 chmin・一点取得で全位置について求められる。</p>
+<p>最大値 X の制約で X の witness になれるのは B_i=X の位置だけで、B_i&lt;X は届かず、B_i&gt;X の位置はその区間内には存在しない。</p>
+<p>棄却する候補: 各 A_i を 0,…,M から選ぶ DP に全区間最大値を状態として持たせる。</p>
+<p>値域と重なる区間制約の組合せが大きく、位置順だけの局所状態にできない。</p>
+<p>採用する候補: B_i ごとに位置をグループ化し、同じ X の圧縮列上で「各指定区間に値 X が少なくとも一つある」数え上げ DP を行い、全 X の答えを掛ける。</p>
+<p>各位置の値選択は所属する上界グループだけに関与し、異なる最大値の制約が独立な witness 条件へ分離される。</p>
+<p>固定 X の列では各位置に 0,…,X−1 の X 通りと値 X の一通りがあり、最後に X を置いた圧縮位置だけを状態にすれば全区間の witness を判定できる。</p>
+<p>右端まで処理した制約 [l,r] は lastX≥l を要求するので、必要下限より前を最後の X とする DP 状態をまとめて無効化できる。</p>
+<p>range maximum equality を pointwise envelope B と level-set ごとの hitting constraint に分解し、各levelを last occurrence DP で数える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="区間制約の点ごとの包絡上界">区間制約の点ごとの包絡上界</h3>
+<p>発動条件: 各区間の最大値・最小値が指定され、まず全要素へ必要な上下界を伝播したいとき。</p>
+<p>区間 chmin の双対セグメント木で各位置を覆う制約値の最小を取る。</p>
+<h3 id="値の-level-set-への独立分解">値の level set への独立分解</h3>
+<p>発動条件: 点ごとの上界を作ると、値 X の等号条件を上界がちょうど X の点だけが満たせるとき。</p>
+<p>同じ B_i の位置を座標圧縮し、その値の制約だけを投影して独立に数える。</p>
+<h3 id="最終出現位置-dp">最終出現位置 DP</h3>
+<p>発動条件: 各区間が特別値を少なくとも一つ含む条件を持つ列を数えるとき。</p>
+<p>特別値の最後の位置を状態にし、区間右端で許されない古い状態を切り捨てる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>X 制約の区間を B_i=X の位置列へ射影した結果が空なら、その最大値 X を達成する位置がなく答えは0になる。</p>
+<p>別の問題へ持ち帰る視点: 制約を部分集合へ射影して独立化するときは、射影後の実現可能 witness が消えていないか最初に検査する。</p>
+<h2 id="正当性">正当性</h2>
+<p>max(A_l..A_r)=xは、その区間の全位置がx以下であることと、少なくとも一位置がxに等しいことに分かれる。まず区間chminで各位置の上限を求める。値xを実現できるのは上限がxの位置だけなので、異なるxの選択は独立になる。同じxの位置を順に処理し、最後にxを選んだ位置が各制約区間の左端以上であることを右端到着時に検査する。xを選ばない位置には上限未満の値の通り数を掛けるので、数値の大小と存在条件を両方満たす配列を一回ずつ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>固定 X の位置を元添字順に並べ、各制約 [L,R] を lower_bound/upper_bound で圧縮区間へ写す。</li>
+<li>通常値を置く遷移は既存状態を X 倍し、X を置く遷移は全既存状態の和を現在位置の last 状態へ加える。</li>
+<li>右端ごとの条件は lastX の必要下限の最大を取り、走査中の累積下限より小さい状態を再び数えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>区間最大値の等式は、全点が X 以下という上界条件と、少なくとも一点が X という witness 条件に分解する。</li>
+<li>点ごとの最も厳しい制約を先に確定すると、等号を達成できる点が値ごとに分離しないか調べる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)log N)、上界envelopeの構築とlevel内のrange DP更新をsegment treeで処理。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq M \lt 998244353; 1 \leq Q \leq 2 \times 10^5; 1 \leq L_i \leq R_i \leq N , (1 \leq i \leq Q); 1 \leq X_i \leq M , (1 \leq i \leq Q); All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、区間[1,2]の最大値1。</p>
+<ol>
+<li>各位置は0または1。</li>
+<li>少なくとも一つ1を置き(0,1),(1,0),(1,1)。</li>
+</ol>
+<p>期待される結果: 3通り。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>両位置を0にした状態を右端で残せるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>last1が制約左端1未満なので無効化する。上界だけでは最大値の等号を保証しない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc262/tasks/abc262_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc262-ex-problem-de2025a355403c5a29188b1a2c77e5202aae675d072424616bc9234ffc54934e</li>
+<li><a href="https://atcoder.jp/contests/abc262/editorial/4481">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc262-editorial-4481-7dc9800d861a624cb870e308fc7f960ae57d9e219b101185ba6966ef8b2e5058</li>
+</ul></main>
+</body></html>

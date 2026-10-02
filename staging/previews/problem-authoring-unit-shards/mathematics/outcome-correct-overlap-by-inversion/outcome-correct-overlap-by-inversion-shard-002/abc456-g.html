@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC456-G — Count Holidays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC456-G — Count Holidays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/dynamic-modular-product.md">可逆な非零剰余と剰余 0 因子を含む法上の動的積</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>固定勤務日xで分断された各 ’.’ run は独立で、最長連休≤kの予定数 F(S,k) はrun長nごとの f(n,k) の積になる。最長連休がちょうどkは隣接kの差で得られる。</p>
+<p>採用する候補: 各run長のfrequencyをまとめ、包除原理で f(n,k) を O(n/(k+2)) に計算し、全runの積をkごとに更新して F(S,k) を列挙する。</p>
+<p>k+1連休の開始点をm個指定すると各禁止blockが勤務1日+休日k+1日を占め、mの上限は (n+1)/(k+2) なので全kの計算量が調和級数型に収まる。</p>
+<p>棄却する候補: 2^N 通りの勤務・休日割当を列挙し、各列の最長連休を測る。</p>
+<p>自由日数に対して指数時間で、Nの制約を扱えない。</p>
+<p>固定xは連休を必ず切るので各 ’.’ run の割当選択は独立で、総数は積になる。</p>
+<p>包除で k+1以上の連休開始を選ぶと、1日目を選ぶ/選ばない二ケースの g(n,k,m) が二項係数と2冪で閉形式になる。</p>
+<p>Sをxでsplitしてrun長frequencyを作り、階乗・逆階乗・2冪を前計算する。k=0..Nで各distinct nの f(n,k) をmの交代和から求め、frequency乗してF_kを作る。F_k-F_{k-1}を所望の分布として出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="固定separatorによる積分解">固定separatorによる積分解</h3>
+<p>発動条件: 列の禁止patternが固定記号を跨がず、自由runごとに独立なとき。</p>
+<p>run別の数え上げを掛け合わせる。</p>
+<h3 id="長run禁止の包除原理">長run禁止の包除原理</h3>
+<p>発動条件: binary列で連続1の最大長を制限したいとき。</p>
+<p>違反runの開始blockを選び、圧縮配置を二項係数で数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最長値の分布は『最大≤k』の累積数を先に列挙し、差分でexact値へ戻す。</p>
+<p>別の問題へ持ち帰る視点: 全kで重いように見える和も、各項のstepがk+2なら二重総和を調和級数で評価できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>固定勤務xが連休を切るためrun割当ては独立。runごとの長い連休開始に包除を施したf(n,k)は最大連休≤kの正確な数で、frequency乗の積が全予定の累積分布F_kになる。exact最大kは互いに入れ子の事象差F_k−F_{k−1}。F_{−1}=0とk≥nの全2^nを保てば最大0も正しく含む。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>f(n,k)=2^n となる k≥n を早期処理し、積の0因子やmod逆元更新を安全に扱う。F_{-1}=0の差分境界を置く。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>違反run開始blockが互いに必要な間隔を図示し、1日目を含む/含まない g の二式とm上限を再導出する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)をrun長頻度と包除交代和の調和級数集計の目安とする。厳密にはO(N+Σ_{k=0}^NΣ_{n∈R}⌊n/(k+1)⌋+|R|N log N)、Rはdistinct run長、frequency冪を二分累乗する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。階乗・2冪とrun頻度。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 2 \times 10^5, inclusive.; S is a string of length N consisting of ., x.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=..x.。</p>
+<ol>
+<li>自由3日で全8予定。最大0は全勤務の1個。</li>
+<li>最大≤1は長さ2runの3割当て×長さ1runの2割当て=6。</li>
+</ol>
+<p>期待される結果: 最大0,1,2の数は1,5,2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>全日xなら最大0を数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>自由runがなく積は1。連休は0なのでexact最大0が1、他0。</p>
+<p>確認結果: 最大0だけ1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc456/editorial/19853">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae</li>
+<li><a href="https://atcoder.jp/contests/abc456/tasks/abc456_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb</li>
+</ul></main>
+</body></html>

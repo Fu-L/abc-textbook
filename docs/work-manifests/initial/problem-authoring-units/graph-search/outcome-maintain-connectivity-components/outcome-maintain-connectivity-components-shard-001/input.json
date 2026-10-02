@@ -1,0 +1,287 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-connectivity-components-shard-001",
+  "packets": [
+    {
+      "problemId": "abc238-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq \\min(2 \\times 10^5,\\frac{N(N+1)}{2}); 1 \\leq l_i \\leq r_i \\leq N; (l_i,r_i) \\neq (l_j,r_j)\\ (i \\neq j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "既知区間和はprefix二点差を固定する。同成分内ではpath上の差を加減して差が分かる。別成分では各成分の全potentialを独立に平行移動できb_N−b_0を変えられる。よって0,N連結が必要十分。",
+          "sourceRevisionIds": [
+            "source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d",
+            "source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d",
+          "path": "src/content/sources/abc212-abc263/source-abc238-e-problem-23858cb0b8327d7909b2ba084110a53ec3f41b699d7c0050441271a7357f831d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc238_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379",
+          "path": "src/content/sources/abc212-abc263/source-abc238-editorial-3360-c88ae382af000b2dc17c108012343b71051b9356699ea7799af2350a85566379.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc238_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc276-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq H \\times W \\leq 10^6; H and W are integers greater than or equal to 2.; C_{i, j} is S, ., or #.; There is exactly one (i, j) such that C_{i, j} = S."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Sを通るsimple cycleは異なる二隣接をS以外のpathで結ぶ。逆に二隣接がSを除いたroad成分でつながるならsimple pathを取りSの二辺を足してcycleを得る。成分一致を全隣接対で検査すれば必要十分。",
+          "sourceRevisionIds": [
+            "source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628",
+            "source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628",
+          "path": "src/content/sources/abc264-abc315/source-abc276-e-problem-426c86932b36db5a3d07ccaf25ee679a3eccfae746c5dcd0916fbad027f00628.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc276_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4",
+          "path": "src/content/sources/abc264-abc315/source-abc276-editorial-5162-d44653efd19dfda81c93f3f3e585971c184a46f681ddffdb2dbdc9cb775d0ea4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc276_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc304-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq 2 \\times10^5; 1 \\leq u_i, v_i \\leq N; 1 \\leq K \\leq 2 \\times 10^5; 1 \\leq x_i, y_i \\leq N; x_i \\neq y_i; i \\neq j \\implies \\lbrace x_i, y_i \\rbrace \\neq \\lbrace x_j, y_j \\rbrace; For all i = 1, 2, \\ldots, K, there is no path connecting vertices x_i and y_i.; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq p_i, q_i \\leq N; p_i \\neq q_i; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一辺追加で併合されるのは二端成分だけ。新たに禁止pairを連結にするのはその二成分pairが登録されている場合に限る。非順序pairを正規化して同一成分関係を保つのでmembership判定が必要十分。各質問は独立でDSUを変えない。",
+          "sourceRevisionIds": [
+            "source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278",
+            "source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278",
+          "path": "src/content/sources/abc264-abc315/source-abc304-e-problem-eceb26672ff8b114ebdbb725a98843b79d1d4e87c576f3cb95f33d4f4da65278.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc304_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354",
+          "path": "src/content/sources/abc264-abc315/source-abc304-editorial-6504-0562080137e001ac38d8ca6f87d21048aa78824c5b21340ea4dd542855a78354.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc304_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc335-e",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components",
+        "outcome-process-dag-in-topological-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "DSUによる連結成分管理・縮約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-dag-topological-processing",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 2 \\times 10^5; N-1 \\le M \\le 2 \\times 10^5; 1 \\le A_i \\le 2 \\times 10^5; The graph is connected.; 1 \\le U_i < V_i \\le N; (U_i,V_i) \\neq (U_j,V_j) if i \\neq j."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "等値連結成分内はscoreを増やさず任意出口へ行けるため縮約可能。残る辺は厳密値増加でDAG。各成分の最大scoreを値順更新する帰納法で全非減少pathの最適を得る。",
+          "sourceRevisionIds": [
+            "source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9",
+            "source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9",
+          "path": "src/content/sources/abc316-abc367/source-abc335-e-problem-74667aba09b44fd468f310632df8e11f7ecd7d1da6aa64ea7e5846d0d52755e9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc335_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f",
+          "path": "src/content/sources/abc316-abc367/source-abc335-editorial-9037-b36c2054e83f43171398cad8f9e3b09d456bbdec6363016acbfd0880e4b4c48f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc335_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

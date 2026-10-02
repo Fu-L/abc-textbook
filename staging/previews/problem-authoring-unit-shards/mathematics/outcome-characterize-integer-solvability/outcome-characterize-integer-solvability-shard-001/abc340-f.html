@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC340-F — S = 1</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC340-F — S = 1</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/gcd-diophantine.md">gcdと整数解の成立条件</a></p>
+<ul>
+<li>整除条件や一次不定方程式の可解性をgcdで特徴付け、必要なら拡張EuclidでBézout整数解を構成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>三点(0,0),(X,Y),(A,B)の三角形面積は|XB-YA|/2、同値に|AY-BX|/2である。面積1の条件は整数一次不定方程式|AY-BX|=2になる。</p>
+<p>採用する候補: gcd判定後、extended Euclidean algorithmでBézout係数を構成する</p>
+<p>解存在条件gcd(X,Y)|2を判定し、存在時は係数を定数倍して範囲内の整数解を直接得られる。</p>
+<p>棄却する候補: A,Bを座標範囲内で探索する</p>
+<p>各座標は±10^18で候補が広大であり、線形探索も二重探索も不可能である。</p>
+<p>g=gcd(|X|,|Y|)はAY-BXの全ての値を割るためg∤2なら不可能である。g=1または2ならextended gcdを(Y,-X)へ適用してcY-dX=±gを得て、2/g倍すれば絶対値2の解になる。</p>
+<p>g=gcd(abs(X),abs(Y))を求め、2 mod g≠0なら-1を出す。extended gcdでY·u+(-X)·v=gまたは-gとなる係数を得て、scale=2/gを掛けA=u·scale,B=v·scaleとする。必要なら符号を反転し出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="determinantによる面積">determinantによる面積</h3>
+<p>発動条件: 原点を含む格子三角形の面積条件が座標のbilinear式になる。</p>
+<p>2倍面積をdeterminant |XB-YA|として整数方程式へ変換する。</p>
+<h3 id="bézout-identity">Bézout identity</h3>
+<p>発動条件: aA+bBが指定整数2になる整数係数を構成したい。</p>
+<p>extended Euclidでgcdの線形結合を得て、gcdが2を割る分だけscaleする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>gcdが3以上なら不可能、gcdが1または2なら常に可能と完全に分類でき、座標上限もBézout係数の標準boundと2/g倍から満たせる。</p>
+<p>別の問題へ持ち帰る視点: 格子上のdeterminant指定は係数のgcdによる存在判定とBézout構成に直結する。</p>
+<h2 id="正当性">正当性</h2>
+<p>面積1は|AY−BX|=2と同値。左辺の符号付き整数値はgcd(|X|,|Y|)の倍数だけなのでg∤2なら不可能。逆にg|2ならBézout係数を2/g倍することで値2を作れ、三角形面積も1になる。従って判定と構成が必要十分。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>XまたはYが0、負数をextended gcdへ渡す時の符号を確認する。中間積は入力上限とscaleから64bit内だがabsの扱いを統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>(X,Y)=(±1,0),(0,±2)、gcd=1,2,3の例でdeterminantを再計算し|AY-BX|=2を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(log max(|X|,|Y|))。extended gcd。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)、再帰実装ならO(log max(|X|,|Y|))。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17} \leq X, Y \leq 10^{17}; (X, Y) \neq (0, 0); X and Y are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>(X,Y)=(4,6)。</p>
+<ol>
+<li>(A,B)=(1,1)ならAY−BX=6−4=2。</li>
+</ol>
+<p>期待される結果: 面積1の一解(1,1)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>(X,Y)=(3,6)では。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>gcd=3が2を割らず、どの整数(A,B)でも行列式は3の倍数。</p>
+<p>確認結果: −1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc340/editorial/9250">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f</li>
+<li><a href="https://atcoder.jp/contests/abc340/tasks/abc340_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd</li>
+</ul></main>
+</body></html>

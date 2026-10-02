@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC434-G — Keyboard</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC434-G — Keyboard</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>数字の直後に B があればその数字と B が消える操作を尽くした正規形を考える。正規化は連結と両立し、normalize(S+T)=normalize(normalize(S)+normalize(T)) なので本来はモノイドになる。</p>
+<p>採用する候補: 各区間を先頭 B 数 b、残存数字長 l、その数値 mod 998244353 の三値で要約し、必要な左区間末尾だけセグメント木の子を降りて取得する。</p>
+<p>通常は失われる末尾情報をマージ履歴から O(log N) で補い、更新・区間積を O(log^2 N) にできる。</p>
+<p>棄却する候補: 各セグメント木節点に正規化後文字列を丸ごと保存して連結・削除する。</p>
+<p>節点文字列が区間長に比例し、積やクエリが最悪 Ω(N) になる。</p>
+<p>右データの先頭 B は左データ末尾の数字を同数だけ削除し、足りなければ余った B が結果先頭へ残る。よって積には左の末尾 min(l_left,b_right) 桁の値が必要である。</p>
+<p>三値 Data だけでは任意同士の積は閉じないが、左 Data がセグメント木節点なら子の要約を辿って必要な suffix 値を復元できる。</p>
+<p>残存数字の連結値は 10 の冪を用いて (prefix·10^len+suffix) mod p として合成できる。</p>
+<p>葉を数字または B の Data にし、内部節点は左の末尾照会を使って正規化積を構築する。末尾 n 桁照会は右子から必要分を取り、足りなければ左子へ降る。点更新で祖先を再構築し、区間クエリでは canonical nodes を左から順に同じ積で合成して (l,x) を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="正規形モノイド">正規形モノイド</h3>
+<p>発動条件: 局所削除規則が合流的で、連結前後の正規化が同じ結果になるとき。</p>
+<p>数字+B の削除を尽くした正規形を区間積として扱う。</p>
+<h3 id="セグメント木の履歴を使う要約補完">セグメント木の履歴を使う要約補完</h3>
+<p>発動条件: 定数サイズ要約同士は直接マージ不能だが、一方の元区間が木に保持され追加情報を探索できるとき。</p>
+<p>左節点の子へ二分探索し、要約から欠けた末尾 n 桁だけを O(log N) で取り出す。</p>
+<h3 id="十進連結のローリング値">十進連結のローリング値</h3>
+<p>発動条件: 長い数字列の連結・suffix の値を法上で扱うとき。</p>
+<p>10^k を前計算し、長さと剰余値の組で連結を計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>定数サイズ要約が演算に閉じなくても、セグメント木が持つ分解履歴を補助 oracle にすれば必要情報だけ復元できる。</p>
+<p>別の問題へ持ち帰る視点: データ構造の節点値は必ずしも自己完結モノイドでなく、木上探索込みの部分演算として設計できる場合がある。</p>
+<h2 id="正当性">正当性</h2>
+<p>右データの先頭 B は左データ末尾の数字を同数だけ削除し、足りなければ余った B が結果先頭へ残る。よって積には左の末尾 min(l_left,b_right) 桁の値が必要である。 三値 Data だけでは任意同士の積は閉じないが、左 Data がセグメント木節点なら子の要約を辿って必要な suffix 値を復元できる。 残存数字の連結値は 10 の冪を用いて (prefix·10^len+suffix) mod p として合成できる。 通常は失われる末尾情報をマージ履歴から O(log N) で補い、更新・区間積を O(log^2 N) にできる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>区間クエリの canonical node は左からの順序を保って合成する。B が左の数字数を超える場合の余り、全削除時の長さ 0、10 冪添字を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Data 積に本当に必要な欠落情報が左末尾だけか、末尾取得が複数節点を跨いでも O(log N) に収まるかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>構築O(N log N)、点更新・区間照会O(log²N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、三値summaryと子参照・10の冪。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8 \times 10^6; 1 \leq Q \leq 2 \times 10^5; S is a string of length N consisting of 1, 2, \dots, 9, and B.; 1 \leq x \leq N; c is 1, 2, \dots, 9, or B.; 1 \leq l \leq r \leq N; N, Q, x, l, r are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=12B3BB。</p>
+<ol>
+<li>12B→1、1の後に3で13。</li>
+<li>Bで1、次のBで空列になる。</li>
+</ol>
+<p>期待される結果: 残存数字長0、値0。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>S=B12の先頭Bは数字を消せるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>消せない。Bは右の未来の数字を削除せず先頭に残る。正規形はBと12で、b=1,l=2,x=12。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc434/editorial/14660">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc434-editorial-14660-4785cdf7b0084f7d5c689355b827060d0d221e16c9681d8d879b37fe5b53c749</li>
+<li><a href="https://atcoder.jp/contests/abc434/tasks/abc434_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc434-g-problem-219a37c2c31b58e0fc0f91969f4b52ea76287629a8c2208d1712b50b9f3c895c</li>
+</ul></main>
+</body></html>

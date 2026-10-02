@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-multi-pattern-automaton-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ed82eab51a63724bbba7caa8953be9957d4c26596a92ef8216dd9c321866e7f8",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc419-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/abc419-f.md",
+      "learningOutcomeIds": [
+        "outcome-build-multi-pattern-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc458-f",
+      "path": "src/content/docs/problems/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/abc458-f.md",
+      "learningOutcomeIds": [
+        "outcome-build-multi-pattern-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

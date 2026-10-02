@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC441-G — Takoyaki and Flip</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC441-G — Takoyaki and Flip</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一つの区間に作用した複数更新は、最後の反転より前の追加が消えるため「a 回反転した後に b 個追加する」という組 (a,b) へ圧縮できる。作用の合成は順序依存だが結合的である。</p>
+<p>採用する候補: 区間の最大値と表向き・裏向きの皿数を segment tree に持ち、更新作用 (a,b) の合成則を lazy tag として実装する。</p>
+<p>区間要約から任意の (a,b) 後の要約を定数時間で計算でき、作用合成も結合的なので遅延伝播の要件を満たす。</p>
+<p>棄却する候補: 反転または追加のたびに区間内の各皿の向きと個数を直接更新する。</p>
+<p>一回の query が Θ(N) 要素へ及び得るため、Q=2×10^5 では総更新量が二乗になる。</p>
+<p>後段の反転回数 c が0なら以前の追加 b は残って d と加算され、c&gt;0なら以前の追加は消えて d だけが残る。</p>
+<p>区間要約 (最大値,表数,裏数) は反転 parity と表向き皿の有無に応じて、最大値を 0・b・旧最大+b のいずれかへ更新できる。</p>
+<p>各 node に最大たこ焼き数と両向きの皿数を保存する。追加を (0,b)、反転を (1,0) とし、node 要約への action と oldTag⊕newTag の合成を定義して range apply、全体 max query を処理する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="作用モノイド付き-lazy-segment-tree">作用モノイド付き lazy segment tree</h3>
+<p>発動条件: 区間更新が順序依存でも、有限情報へ圧縮して結合的に合成できるとき。</p>
+<p>更新列を (反転回数,最後の反転後の追加量) として tag に保持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>操作履歴はすべて保持せず、将来の結果に残る最後のリセット以後だけを作用として要約できる。</p>
+<p>別の問題へ持ち帰る視点: lazy 作用では node 情報だけでなく、old と new の tag をどちらの順に合成するかを代数的に先に定める。</p>
+<h2 id="正当性">正当性</h2>
+<p>後段の反転回数 c が0なら以前の追加 b は残って d と加算され、c&gt;0なら以前の追加は消えて d だけが残る。 区間要約 (最大値,表数,裏数) は反転 parity と表向き皿の有無に応じて、最大値を 0・b・旧最大+b のいずれかへ更新できる。 区間要約から任意の (a,b) 後の要約を定数時間で計算でき、作用合成も結合的なので遅延伝播の要件を満たす。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>tag の合成は非可換なので old⊕new の順を逆にしない。表向き枚数0の区間では追加が最大値へ影響しない分岐も必要。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短い操作列「追加→反転→追加」と「反転→追加→追加」を合成式へ代入し、tag と node action の双方を照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le Q\le2\times10 ^ 5; In all queries, 1\le L\le R\le N.; In type 1 queries, 1\le X\le10 ^ 9.; There is at least one type 3 query.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>表向き一皿に3個追加、反転、再反転、2個追加。</p>
+<ol>
+<li>最初の反転で3個は落ちる。</li>
+<li>二度反転で表向きへ戻るが旧3個は復活せず、最後2個だけ残る。</li>
+</ol>
+<p>期待される結果: 最大2個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>反転回数をparityだけにして追加情報を残してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>二回反転は向きのparityが0でも旧追加は消える。合成では反転の有無と最後の反転後の追加を区別する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc441/editorial/15103">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-editorial-15103-53734a38f511a7b1b7f989c215be897bae76dac5c7e5ee46f8df14a502c06245</li>
+<li><a href="https://atcoder.jp/contests/abc441/tasks/abc441_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-g-problem-6b1f42602dae00eb8633de4f6741c2c4433f2b299f53f8ca86aea2176c99a261</li>
+</ul></main>
+</body></html>

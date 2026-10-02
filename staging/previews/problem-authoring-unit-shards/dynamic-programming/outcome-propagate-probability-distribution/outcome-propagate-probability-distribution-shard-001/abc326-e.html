@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC326-E — Revenge of "The Salary of AtCoder Inc."</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC326-E — Revenge of "The Salary of AtCoder Inc."</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>salary総額は各A_iの支払indicatorの和なので、期待値の線形性によりΣA_i·Pr(A_iが支払われる)で求められる。 A_iが支払われる直前のxは0..i-1のいずれかで、各状態jへ到達した後に出目iを1/Nで出すeventは互いに排反である。 p_jをstate x=jへ到達してA_jを受け取る確率、p_0=1とするとp_i=(1/N)Σ_{j&lt;i}p_jになる。 stateは出目が現在値より大きいときだけ増え、一度訪れたiを再訪しないため、A_iの支払確率とstate iへの到達確率が同じである。 Σ_{j&lt;i}p_jをprefとして持てばp_i=pref/N、続いてpref+=p_iと更新するだけでよい。</p>
+<p>採用する候補: 各indexへ到達する確率p_iをprefix sumで更新し、A_i p_iを加える。</p>
+<p>strictly increasingなstate遷移を1次元確率DPにし、全過去和を累積値1つで線形計算できる。</p>
+<p>棄却する候補: die roll列をterminationまで全列挙してsalaryを平均する。</p>
+<p>長さは有限でもroll列の分岐数が指数的である。</p>
+<p>棄却する候補: 各stepの期待paymentが一定としてexpected step数を掛ける。</p>
+<p>現在xにより支払対象となる出目とpayment A_yが変わり、stepごとの分布は同じでない。</p>
+<p>stateは出目が現在値より大きいときだけ増え、一度訪れたiを再訪しないため、A_iの支払確率とstate iへの到達確率が同じである。</p>
+<p>Σ_{j&lt;i}p_jをprefとして持てばp_i=pref/N、続いてpref+=p_iと更新するだけでよい。</p>
+<p>mod 998244353でinvN=N^{-1}を求め、pref=p_0=1、answer=0とする。i=1..Nでp_i=pref·invN、answer+=A_i·p_i、pref+=p_iと更新する。最後にanswerを正規化して出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="indicator期待値">indicator期待値</h3>
+<p>発動条件: random過程中に各rewardが高々一度発生し総額がその和になるとき。</p>
+<p>各rewardの発生確率を独立に求めて重み付き加算する。</p>
+<h3 id="単調stateの到達確率dp">単調stateの到達確率DP</h3>
+<p>発動条件: state indexが遷移ごとにstrictly増加し、前状態から同確率で飛ぶとき。</p>
+<p>過去到達確率のprefix sumで次stateを計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>processの終了時刻分布を求めず、各salary項目が一度支払われる確率だけを見ると、停止rollはDP遷移に明示せず自然に確率massから抜ける。</p>
+<p>別の問題へ持ち帰る視点: 期待総報酬では過程全体を追うより、各一回限りeventの到達確率へ分解できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>次のdiceが現在indexより大きい場合だけ継続するため各indexiへ届く確率は過去全到達確率和/N。訪問indexは厳密増加で各報酬一回なので期待報酬はΣA_i p_i。prefix維持がこの和を厳密に共有する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>p_0=1は実在するpaymentではなく初期state用なのでanswerへA_0を加えない。</li>
+<li>invNはmodがprimeかつN&lt;modなので存在し、一度だけ計算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=2で全roll列を短く展開し、p_1=1/2、p_2=(p_0+p_1)/2と停止eventを含む確率が一致するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>報酬列長N。累積確率一値で O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>prefix、answerだけ O(1)、入力O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All inputs are integers.; 1 \le N \le 3 \times 10^5; 0 \le A_i &lt; 998244353</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2,A=(10,20)。</p>
+<ol>
+<li>p0=1、p1=1/2。</li>
+<li>p2=(1+1/2)/2=3/4。</li>
+<li>期待10/2+20×3/4。</li>
+</ol>
+<p>期待される結果: 20</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>報酬期待値に各index到達確率を足すのに独立性は必要か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不要。指示変数の期待値の線形性で各報酬を別々に集計できる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc326/tasks/abc326_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-e-problem-826a5d0552e758924802b9b180548c1d4f7f8cd80e3b0db5723f958e890a850b</li>
+<li><a href="https://atcoder.jp/contests/abc326/editorial/7538">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-editorial-7538-cfe2fc8d0501fdbb3376caf6ada2c9b1872bf406e2fe711524bf9960abd1918c</li>
+</ul></main>
+</body></html>

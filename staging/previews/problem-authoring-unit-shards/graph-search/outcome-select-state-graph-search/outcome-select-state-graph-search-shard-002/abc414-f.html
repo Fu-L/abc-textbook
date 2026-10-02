@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC414-F — Jump Traveling</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC414-F — Jump Traveling</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></p>
+<ul>
+<li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>treeで距離Kの一jumpは、K本のedgeからなるbacktrackなしのsimple pathである。jump境界では次のpathを自由に選べるため、直前edgeへ戻ることも許される。 有向edge(u,v)と現在jump内のstep kを状態にすれば通常BFSにできるが、vの高次数で全incoming×outgoingを遷移すると二次的に膨らむ。 k&lt;Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。 BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。</p>
+<p>採用する候補: directed-edge×step状態をBFSし、各(v,k)へ到着した最初の二incomingだけを展開する</p>
+<p>最初のincoming aはa以外の全outgoingを覆い、二番目のincoming bは未処理だったv→aも覆う。三番目以降に新しいoutgoingはなく、全体O(NK)。</p>
+<p>棄却する候補: 距離Kの頂点pairを各頂点からBFS/DFSで列挙してjump graphを作る</p>
+<p>K≤20でもstar状treeでは距離2のpairだけでΘ(N^2)本になり、jump graphを明示できない。</p>
+<p>k&lt;Kでは同じjump内なのでw=uを禁止し、k=Kでは新jump開始なので全neighbor wを許す。この差だけでtree上の距離ちょうどKを正確に表現できる。</p>
+<p>BFS距離を元tree上で進んだedge数として持つと、k=Kで頂点vへ着いた状態の距離はKの倍数で、最小jump回数はdistance/Kになる。</p>
+<p>頂点1から出る各有向edge状態k=1を距離1で初期化する。state(u,v,k)をpopし、k&lt;Kならw≠uへk+1、k=Kなら全wへ1として緩和する。ただし各(v,nextK)で展開するincomingは先着2個までに制限する。各vのk=K状態の最小距離/Kを答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="edge-state-bfs">edge-state BFS</h3>
+<p>発動条件: path内部で直前edgeへの即時backtrackを禁止し、一定長ごとに制約をresetするとき。</p>
+<p>直前頂点u、現在v、segment内step kを状態にする。</p>
+<h3 id="高次数遷移の二回打ち切り">高次数遷移の二回打ち切り</h3>
+<p>発動条件: 各incomingが除外するoutgoingがそのreverse一つだけのとき。</p>
+<p>最初の二つの異なるincomingを処理すれば全outgoing緩和が網羅される。</p>
+<h3 id="implicit-graph-shortest-path">implicit graph shortest path</h3>
+<p>発動条件: 明示すると二次本になる固定距離jump edge上の最短路を求めるとき。</p>
+<p>tree edgeをK段ずつ辿るstate graphをon-the-fly BFSする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>一jumpのsimple path制約は直前頂点だけで表せ、transitionの欠落辺がincomingごとに一つなので二到着で完全coverできる。</p>
+<p>別の問題へ持ち帰る視点: 高次数頂点でincoming×outgoingが重いとき、各incomingが除外・追加する遷移差分の種類数が小さければ代表到着だけ処理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>木の距離K移動はK辺のbacktrackなしpath。jump内は直前頂点禁止、境界では戻りも許すedge状態で正確に再現できる。同(v,k)の最初incomingはその逆以外全neighbor、第二が未展開の逆一本も覆うので第三以降は新遷移を改善しない。BFS距離/Kが最小jump数。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ有向edge状態の最短距離だけを保持し、各(v,k)の到着元を区別して先着二つを数える。K=1では毎edgeがjump境界で、頂点1の答え0は出力対象外。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>K=1、diameter&lt;K、starでK=2、chainで往復jumpが必要な例を距離K pairを明示した小graph BFSと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N木頂点、jump距離K。edge向き×進行段状態 O(NK)、各(v,nextK)で二incomingまで展開し O(NK)。</p>
+<h3 id="空間">空間</h3>
+<p>状態dist、queue、二incoming記録 O(NK)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq N\leq 2\times 10^5; 1\leq K\leq 20; 1\leq u_i\lt v_i\leq N; The given graph is a tree.; The sum of N over all test cases is at most 2\times 10^5.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3–4–5、K=2、source1。</p>
+<ol>
+<li>一jumpで3。</li>
+<li>次は5または1へ行ける。</li>
+<li>2,4は偶数距離jumpで届かない。</li>
+</ol>
+<p>期待される結果: 最少jump数:3へ1、5へ2、2,4は−1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>jump境界でも直前edge逆走を禁止してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。3から1へ次jumpで戻るのは合法で、禁止は同一jump内部だけ。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc414/editorial/13439">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-editorial-13439-06426077f4ac1f7611d8310107d8325328cb341b45aef3eb6ff0c5f6495a3df6</li>
+<li><a href="https://atcoder.jp/contests/abc414/tasks/abc414_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-f-problem-29225b0da36f7b897e7b7bd84e8bac500cee8ae58044912e0baaf0317ecf04e0</li>
+</ul></main>
+</body></html>

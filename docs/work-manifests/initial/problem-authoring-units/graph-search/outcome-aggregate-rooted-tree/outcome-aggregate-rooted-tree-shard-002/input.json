@@ -1,0 +1,578 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-aggregate-rooted-tree-shard-002",
+  "packets": [
+    {
+      "problemId": "abc329-g",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-tree-ancestor-lca"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation",
+        "tag-tree-ancestor-lca"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 10^4; 1\\leq M \\leq 2\\times 10^5; 1\\leq K \\leq 10^3; 1\\leq P_i \\leq i; For every v\\ (1\\leq v \\leq N), there are at most two i's such that P_i=v.; 1\\leq S_j, T_j \\leq N; S_j \\neq T_j; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各辺往復一回のtourはchild順だけで決まる。異LCA子間ballはsource子を先にする必要がありport順制約は必要十分。pickupを必要path直前、dropを到着直後に寄せると保持時間最短で容量を悪化させない。各subtreeのexit load差は固定なのでentry load状態でchild tourを順に合成し途中0..K判定すれば全合法tourを数える。",
+          "sourceRevisionIds": [
+            "source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6",
+            "source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6",
+          "path": "src/content/sources/abc316-abc367/source-abc329-editorial-7725-8f3501023fac4b0edb0b0240cae4f8f7f80503e0f89022c3459f972cb22ca3b6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc329_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf",
+          "path": "src/content/sources/abc316-abc367/source-abc329-g-problem-719f9728e3b7d21f69d02f2758daa01b8efdebc54757ed867e07efe3c42fb1bf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc329_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc378-f",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq u_i, v_i \\leq N; The given graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "追加辺の閉路は元の端点間道そのもの。端点の次数だけ1増えるので端点は元次数2、内部は元次数3が必要十分。道を最高点で分類すると異子方向の結合と上端自身の場合に一意分解される。次数2端点同士の隣接を除くことで3頂点以上の閉路だけを数える。",
+          "sourceRevisionIds": [
+            "source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d",
+            "source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d",
+          "path": "src/content/sources/abc368-abc419/source-abc378-editorial-11293-8a6a5dc991589df7d159e121ccdb27acd14bd59dc31992b6fed747eeee3d9a3d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc378_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b",
+          "path": "src/content/sources/abc368-abc419/source-abc378-f-problem-581d56027b2dfeff972127fc57895ebaef53d01db5febed2d6ff99433034dc3b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc378_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc391-e",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer with 1 \\leq N \\leq 13.; A is a string of length 3^N consisting of 0 and 1."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "現在多数派が二子なら、その二子の一方を反転することが必要十分で最小費用を選ぶ。三子なら二子以上の反転が必要で最小二費用を足す。子部分木は互いに素だから費用加算が可能。葉費用1から帰納的に全頂点の最小反転費用が正しい。",
+          "sourceRevisionIds": [
+            "source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9",
+            "source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9",
+          "path": "src/content/sources/abc368-abc419/source-abc391-e-problem-c7663c0eba32ca0257568c987b448555e1cef6dc88d5c173f6626d06a2ff40a9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc391_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17",
+          "path": "src/content/sources/abc368-abc419/source-abc391-editorial-12103-02f2a7126e883bad329f4df3b7d3aae4f7ce4db3eefada45c04a8987ca605c17.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc391_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc394-f",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq N; The given graph is an undirected tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "親辺込み部分解では頂点は子0個の葉または子3個の次数4内部点である。子解は独立なので上位3個が最適。完成根は子4個の内部点の場合と子1個の葉の場合を検査する。これで任意の採用木の最高点を網羅し、サイズ5以上の最大値が条件を満たす。",
+          "sourceRevisionIds": [
+            "source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649",
+            "source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649",
+          "path": "src/content/sources/abc368-abc419/source-abc394-editorial-12283-9e8571a67606edb0bccda0297d83e847959ade1d8be2cc5bd09640e922dc4649.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc394_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa",
+          "path": "src/content/sources/abc368-abc419/source-abc394-f-problem-1f2184925d9f211ba2d82c8f61da0fd467a120bd7c86f6a34980aa4dcab2c8fa.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc394_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc397-e",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N; 1 \\leq K; NK \\leq 2 \\times 10^5; 1 \\leq u_i < v_i \\leq NK; The given graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "子部分木の境界は親辺一本なので、親へ渡す未完成集合は延長可能な一本道に限られる。K頂点に達すれば完成して切り離し、未達なら未完成子が二本あると親への延長で次数3になるため失敗。完成時だけ子二本まで許す。サイズ超過は不可能。局所判定は子解からの帰納法で必要十分。",
+          "sourceRevisionIds": [
+            "source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc",
+            "source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc",
+          "path": "src/content/sources/abc368-abc419/source-abc397-e-problem-6391988738ab7ffddb6170482d1b9a39b433f5fe46fbe0d30cd85ae1f62672dc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc397_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994",
+          "path": "src/content/sources/abc368-abc419/source-abc397-editorial-12452-6f1addea97f53055105b3c7b3d938e0577f71b2db53329cc44e477b36745c994.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc397_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc409-e",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; |x_i| \\leq 10^4; \\sum_{i=1}^N x_i = 0; 1 \\leq u_j < v_j \\leq N; 0 \\leq w_j \\leq 10^4; The given graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "辺を切った子側の符号付き電荷 X は内部消滅で不変なので、全消滅には少なくとも |X| 粒子がその辺を通る。postorder で余剰を親へ送ると必要量ちょうど通り、各辺の費用下界 |X|w を同時達成する。総電荷0より根でも全消滅する。",
+          "sourceRevisionIds": [
+            "source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502",
+            "source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502",
+          "path": "src/content/sources/abc368-abc419/source-abc409-e-problem-a96c7b6c7aa0834cfa6b5144034c339f6e4eaf5c0da3e12bcc0015b52bcc1502.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc409_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d",
+          "path": "src/content/sources/abc368-abc419/source-abc409-editorial-13202-d5393c36f73ea44afaa45a10186dc2939b238a33d6a9064ed96d17f5e12ff06d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc409_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc416-f",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-subset-resource"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation",
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 1\\le K\\le 5; 1\\le A_i\\le 10^9; 1\\le U_i < V_i \\le N; The given graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "選択辺のdegree≤2を保つforestはvertex-disjoint path集合。未選択、root選択でdegree0/1/2という境界状態とcomponent数が親との結合に十分。childとedgeで結ぶと二componentが一つになるので数−1、結ばなければ加算。全選択forestを子分解で一意に覆い重み最大を得る。",
+          "sourceRevisionIds": [
+            "source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c",
+            "source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c",
+          "path": "src/content/sources/abc368-abc419/source-abc416-editorial-13537-e498a5292eb7b837e39dbab06dc44482b245fe9998c203baf15a4b0c8c9e0c9c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc416_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69",
+          "path": "src/content/sources/abc368-abc419/source-abc416-f-problem-1b4e0e1da18c3f3627fb622d402fd0d6accd17b478479dd2f626227f6c211a69.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc416_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc447-f",
+      "learningOutcomeIds": [
+        "outcome-aggregate-rooted-tree"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le Q; 3 \\le N \\le 2 \\times 10^5; 1 \\le A_i, B_i \\le N; The given graph is a tree.; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "背骨内部には背骨二辺と脚二辺、端点には背骨一辺と脚二辺が要るので元木次数4/3条件となる。木では別背骨点の脚が衝突しない。背骨を最高点で分けると高々二つの子pathとなり、延長と上位二本結合で全候補を覆える。x=1 の単点背骨の脚条件は別に検査する。",
+          "sourceRevisionIds": [
+            "source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e",
+            "source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e",
+          "path": "src/content/sources/abc420-abc466/source-abc447-editorial-16458-cc8202a42fd8a8e168d6e0a40a0c6b481b5a43ceb67302805d03f285b5a78d1e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc447_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca",
+          "path": "src/content/sources/abc420-abc466/source-abc447-f-problem-b82e4de98e75c38cc3a5431dacc8918dd5c39e05ce67f2bd72d7523b2724acca.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc447_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

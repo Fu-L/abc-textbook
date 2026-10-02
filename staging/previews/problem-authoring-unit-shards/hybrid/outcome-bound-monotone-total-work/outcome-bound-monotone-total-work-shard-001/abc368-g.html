@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC368-G — Add and Multiply Queries</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC368-G — Add and Multiply Queries</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></p>
+<ul>
+<li>要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>位置iでの最適更新はv=max(v+A_i,v·B_i)である。B_i=1なら必ず加算なので、判断が必要なのはB_i&gt;1の位置だけである。</p>
+<p>v&gt;0になった後、B_i&gt;1の位置では乗算を選べば少なくとも2倍、加算を選ぶ場合もA_i&gt;v(B_i−1)≥vなので結果は2倍超になる。答え上限から判断回数は少ない。</p>
+<p>採用する候補: Aのrange sumとB&gt;1のindex集合を動的管理し、queryでは特殊index間を一括加算して各特殊点だけ比較する。</p>
+<p>長いB=1区間をまとめ、値が倍増する特殊点は一queryでごく少数しか訪れない。</p>
+<p>棄却する候補: type 3ごとにl..rの全位置でmax(v+A_i,vB_i)を計算する。</p>
+<p>式自体は正しいが、長いrange queryが多数ある場合に更新の局所性を活かせない。</p>
+<p>AはFenwick treeまたはsegment treeで区間和を持ち、B_i&gt;1のindexはordered setで次位置をlower_bound取得する。</p>
+<p>開始v=0では乗算が0なので最初の要素は加算する。以後、処理する特殊indexごとにvが倍増し10^18保証がiteration上限を与える。</p>
+<p>type 1ではAのrange-sum構造を一点更新し、type 2ではB_i&gt;1かに応じてordered setを挿入・削除する。type 3ではpos=lから次の特殊index jまでのA和をvへ足し、j≤rならv=max(v+A_j,vB_j)として先へ進む。残りA和を加えて出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="例外位置だけの区間simulation">例外位置だけの区間simulation</h3>
+<p>発動条件: 大多数の位置が加法などまとめられる遷移で、少数位置だけ個別判断が要るとき。</p>
+<p>例外indexをordered setで列挙し、通常区間をrange aggregateする。</p>
+<h3 id="値倍増による反復回数上界">値倍増による反復回数上界</h3>
+<p>発動条件: 訪れる例外ごとに値が一定倍率以上増え、答えに上限があるとき。</p>
+<p>例外数自体が多くても一queryで実処理する数を数値上限で抑える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「乗算を選ばなかった」特殊点でも、選ばない条件がA_i&gt;v(B_i−1)を意味して加算後に倍増する。</p>
+<p>別の問題へ持ち帰る視点: 分岐algorithmのiteration boundは、どちらのbranchでも同じprogress measureが増えるか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>AはFenwick treeまたはsegment treeで区間和を持ち、B_i&gt;1のindexはordered setで次位置をlower_bound取得する。 開始v=0では乗算が0なので最初の要素は加算する。以後、処理する特殊indexごとにvが倍増し10^18保証がiteration上限を与える。 長いB=1区間をまとめ、値が倍増する特殊点は一queryでごく少数しか訪れない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>特殊index jのA_jを手前の区間和へ重複させず、[pos,j)とjを分ける。B更新で1との境界を正しくsetへ反映する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>B=1のみ、l=r、特殊点が連続する例で区間境界を追う。倍増証明はvが正になる最初の加算後から適用する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各照会O(log N·log V)、V≤10¹⁸は照会途中値上限。更新O(log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq A_i \leq 10^9; 1 \leq B_i \leq 10^9; 1 \leq Q \leq 10^5; For type 1 and 2 queries, 1 \leq i \leq N.; For type 1 and 2 queries, 1 \leq x \leq 10^9.; For type 3 queries, 1 \leq l \leq r \leq N.; For type 3 queries, the value to be printed is at most 10^{18}.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,1,3),B=(1,2,1)、初期v=0。</p>
+<ol>
+<li>位置1はmax(0+2,0)=2。</li>
+<li>位置2はmax(3,4)=4、位置3は加算で7。</li>
+</ol>
+<p>期待される結果: 照会値7。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>初期v=0でもB&gt;1なら倍増回数へ数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>0の乗算は増えないので最初は加算する。その後の正値で特殊位置ごとにvが少なくとも倍増する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc368/editorial/10764">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc368-editorial-10764-9b45a08a22ce98f11311581d85dcdca1fd865b97e679d67b801719ea69204c1d</li>
+<li><a href="https://atcoder.jp/contests/abc368/tasks/abc368_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc368-g-problem-6972426d6decd4bedceb4613cca81bf4610fbab9f3dcefe37256139e096fea76</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "95e402531d4bc96fdcd574ce7699a6e452d302559d57de33a34bc3f97b0d283a",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "43486428fa117be7bc4281dff9e4d1926bbed5b2bbee49cfaa04033833867e7f",
+  "reviewDigest": "8a50222e9273124325deb283b509871b087a738416e77be33d347223f327e171",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc244-ex.html",
+      "digest": "227852d42f92ecf0964b7eeb8669091d367004bfb6f2f687c03056154117120d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc257-ex.html",
+      "digest": "afcd89bfac518ee0913354fee96e4ee64c73c566b64556b21f0b9e234f116229"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc275-g.html",
+      "digest": "d064999fd812b17a5b786557a7ca7415c0ac48ec994c75b6e028b9cd0913b891"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc286-ex.html",
+      "digest": "0232cd68ca4e5d60700602563aa404c3de066e174a00c0a524068290645586a3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc341-g.html",
+      "digest": "3729d6cd6cfc04109d7df12ad0028a887809186bebf36fdbbaa94ca5e200ff74"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc356-g.html",
+      "digest": "6e48e81f7aef35edf045e6538ee4b845b697f8de08423bf5694853452ec37742"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/index.html",
+      "digest": "1270c66e28ecd02f6b5bd9314d8efc71be5e6e490ceffdcca600b9feab6678b5"
+    }
+  ],
+  "snapshotDigest": "d3999c830506aebac9cd2c351024b583285e36ff45d435465bab6c656027c6d1"
+}

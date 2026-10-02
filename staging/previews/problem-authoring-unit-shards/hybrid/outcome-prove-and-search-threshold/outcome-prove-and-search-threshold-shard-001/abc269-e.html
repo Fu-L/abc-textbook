@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC269-E — Last Rook</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC269-E — Last Rook</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/interactive-protocol.md">対話protocolを守って情報を取得する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>N−1個のrookは行も列も重ならないため、rookのない行とrookのない列がそれぞれちょうど一つあり、その交点が答えになる。</p>
+<p>列範囲を全列に固定すると、連続するk行のrectangle queryはmissing rowを含まなければk、含めばk−1を返す。</p>
+<p>棄却する候補: 各行と各列を一つずつqueryしてrookのないものを探す。</p>
+<p>最大2N回を要し、20回のquery上限を超える。</p>
+<p>採用する候補: 全列を含むqueryでmissing rowを二分探索し、全行を含むqueryでも同様にmissing columnを二分探索する。</p>
+<p>各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。</p>
+<p>二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。</p>
+<p>候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。</p>
+<p>rectangle count queryを一次元のdefect detectorとして使い、独立な二回のbinary searchで唯一欠けたrowとcolumnを復元する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="座標ごとの問題分離">座標ごとの問題分離</h3>
+<p>発動条件: 二次元対象でも、一方の軸を全範囲にしたqueryが他方の軸の独立な統計量を返すとき。</p>
+<p>全列を覆って各行のrook有無を数え、全行を覆って各列のrook有無を数える。</p>
+<h3 id="欠損位置の二分探索">欠損位置の二分探索</h3>
+<p>発動条件: 区間内の正常要素数から、唯一の欠損がその区間に含まれるか判定できるとき。</p>
+<p>queried intervalの長さとrook数を比較し、欠損を含む半区間だけを残す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>rookが同じ行・列を共有しないという条件により、全幅rectangleの返値が行ごとの0/1列の区間和になる。</p>
+<p>別の問題へ持ち帰る視点: 高次元queryは、不要な次元を全域に固定して低次元の探索oracleへ落とせないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。 候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。 各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各queryを改行してflushし、judgeから−1が返った場合は直ちに終了する。</li>
+<li>inclusive query [L,M]の長さM−L+1と返値を比較し、更新後も答えが[L,R]にある不変条件を保つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二次元の未知位置を探す前に、全面queryで各座標を独立に観測できるかを確認する。</li>
+<li>区間countが期待される満杯数から何個不足するかをbinary-search predicateにする。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(log N)質問、行・列それぞれ二分探索。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^3; N is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=4、欠けた行3、行1..2の全面列queryの返値2。</p>
+<ol>
+<li>長さ2と返値2が一致するので欠け行は3..4。</li>
+<li>行3だけの返値0なら行3が欠けている。</li>
+</ol>
+<p>期待される結果: 欠け行3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>行1..2の返値1なら何を選ぶか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>長さより1少ないので欠け行は左半分1..2。列についても同じ判定を独立に行う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc269/tasks/abc269_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096</li>
+<li><a href="https://atcoder.jp/contests/abc269/editorial/4840">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51</li>
+</ul></main>
+</body></html>

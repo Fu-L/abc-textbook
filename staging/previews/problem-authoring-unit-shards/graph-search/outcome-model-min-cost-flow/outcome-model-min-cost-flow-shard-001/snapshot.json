@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-model-min-cost-flow-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "776cab654e520d5dc173010b16617084b225802ccd3adc0df2bd194fc60f842d",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "a8e82c015ed5f06eb0c08e175e40bcb010419013c98cfac7fbf79fe40582d394",
+  "reviewDigest": "e8786e4c405af2906442c0f8f9fd75b53a78151e162d6179e57c52e61208e0df",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc214-h.html",
+      "digest": "e576f47a63dcf6037db81040a039a7b63858602547d5ab8c96d72cc59a8344ec"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc224-h.html",
+      "digest": "f36ad173f6779fd838c573d3e37fe1f57e4b757cb8b711ecec9e839b3f023975"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc231-h.html",
+      "digest": "e87b6674f1c41323ef41b5614b29148fade9af19cc6f1207d439838919823e74"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc247-g.html",
+      "digest": "4840bac1f7f0d649100f69ee0e179a246ce6ab1632ca7b7932fa850f5ef88f51"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc407-g.html",
+      "digest": "a87df5f64b282afd17a9d23974a4a5a60f3076e9c9b71accfb6edb4f9beaf115"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc421-g.html",
+      "digest": "e760aa15fa796d8ac68e96c63889abdfc8c16cc829fd85108d3f3cce57b1be72"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/index.html",
+      "digest": "897f95280b82fdb47899048df3c64b2f2383ee8ef7d7b60dca804d38202a3216"
+    }
+  ],
+  "snapshotDigest": "3b58a667ae4bd2cd59c883fcd4533bdc26bddb4773bd537eddd0d8dcb97bc3bb"
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC399-G — Colorful Spanning Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC399-G — Colorful Spanning Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/linear-matroid-intersection.md">線形matroid交差の乱択rank判定</a></p>
+<ul>
+<li>二つの線形matroid表現から乱択intersection matrixを構成し、Schwartz–Zippelの誤り上界を示したうえでrankを最大共通独立sizeとして判定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/linear-system-rank.md">線形方程式・rank</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/matroid-greedy.md">matroid greedy</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>線形matroid交差の乱択rank判定の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>color上限はpartition matroid、cycleを含まないedge集合はgraphic matroidであり、colorful spanning tree存在は両matroidのcommon independent set rankがN-1かに等しい。</p>
+<p>両matroidを有限体上の線形表現A_1,A_2へ写すと、random diagonal Dを挟むM=A_1DA_2^Tのrankが高確率でintersection rankになる。color interval[L,R]はA_1の対応row blockだけを残すことに一致する。</p>
+<p>採用する候補: partition/graphic matroidの線形表現からrandomized intersection matrixを作り、連続row区間のrank N-1可否をbasis sweepで数える</p>
+<p>ΣA_c≤300,N≤150なので、各Lからrowを追加するGaussian basisまたはABC223H型offline basisで最小Rを求め、可否の単調性から全interval数を多項式時間で集計できる。</p>
+<p>棄却する候補: 各(L,R)で一般matroid intersectionを独立に実行する</p>
+<p>O(C²)区間×大きなedge集合で重く、colorが連続row blockになる線形構造を捨てている。</p>
+<p>graphic matroidはoriented incidence columns、color cのpartition matroidはA_c行のVandermonde columnsで線形表現できる。</p>
+<p>Schwartz–Zippelにより各edge変数へ大きな有限体の乱数を代入したrankは真のsymbolic rankを高確率で保つ。</p>
+<p>A_1のcolor別row blockとincidence A_2からrandomized Mを構成する。各Lについてrow S_L..をcolor順にbasisへ追加しrankが初めてN-1になるRを記録し、それ以降のRを加算する。必要ならoffline sliding-basis techniqueでO(N²ΣA)へ高速化する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="linear-matroid-intersectionのrandom-rank">linear matroid intersectionのrandom rank</h3>
+<p>発動条件: 二つの線形matroidの最大common independent sizeだけが必要なとき。</p>
+<p>A_1 diag(random) A_2^Tのrankを計算する。</p>
+<h3 id="vandermonde-representation-of-partition-matroid">Vandermonde representation of partition matroid</h3>
+<p>発動条件: group cから高々A_c列を独立に選ばせたいとき。</p>
+<p>color blockのA_c行へedge indexの冪を置く。</p>
+<h3 id="連続row区間rank-query">連続row区間rank query</h3>
+<p>発動条件: color interval制約がmatrixの連続row選択に対応するとき。</p>
+<p>basis追加と可否単調性で最小右端を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>color容量制約とspanning-tree制約を別々に満たすedge選択が、一枚のrandom matrixのrow interval rankへ圧縮される。</p>
+<p>別の問題へ持ち帰る視点: matroid intersectionで両matroidが線形表現できるなら、構成不要のrank判定をrandomized matrix algebraへ落とす。</p>
+<h2 id="正当性">正当性</h2>
+<p>森林独立性はincidence列の線形独立、色上限はcolor別Vandermonde列のpartition matroid独立性で表せる。random diagonalを挟む行列のsymbolic rankはcommon independent rankに等しく、有限体代入では非零minorが消えない限り保持される。色区間row blockのrank N−1がtree存在と同値。Rを増やすとrankは減らないため最初の成立R以降を全て数えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>有限体と乱数を十分大きくし、再現可能性が必要ならseedを固定または複数回検査する。incidence rankはN-1なので一rowを落とし、color prefix S_cのoff-by-oneを確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤7,C≤5でedge subsetから全spanning treeを列挙し、各intervalの真値と複数seedのrank判定・最小R単調性を比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(M·S+CN²S)を単純実装の上界とする。S=ΣA_c≤300、各左色端でrow基底を作り直す。offline基底更新ならO(MS+N²S)。</p>
+<h3 id="空間">空間</h3>
+<p>O(NS+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 150; N - 1 \leq M \leq \min\left(\frac{C N (N-1)}{2}, 5 \times 10^5\right); 1 \leq C \leq 300; 1 \leq A_i \leq N-1; \sum_{i=1}^C A_i \leq 300; 1 \leq u_i &lt; v_i \leq N; 1 \leq c_i \leq C; If i \neq j, then (u_i, v_i, c_i) \neq (u_j, v_j, c_j); The given graph is connected.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、色1の辺12,23で上限1、色2の辺13で上限1。</p>
+<ol>
+<li>[1]は二辺とも同色上限でtree不可、[2]は辺一本。</li>
+<li>[1,2]では13と12または23でtreeを作れる。</li>
+</ol>
+<p>期待される結果: 成立色区間1個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>色1の上限を2にすると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>[1]も12,23のtreeで成立。[1,2]も成立、[2]は不成立。</p>
+<p>確認結果: 成立2区間。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc399/editorial/12546">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc399-editorial-12546-fc4c117409e2577675560e62f6e1d2eec87d7bb3a6f9dcab3241262e0c07220b</li>
+<li><a href="https://atcoder.jp/contests/abc399/tasks/abc399_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc399-g-problem-64dc201e99aaace0c2f4335a95713fce174bc105a9d26e74927fd75ff7e1ef77</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC362-G — Count Substring Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC362-G — Count Substring Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>TのS中での出現回数は、SのsuffixのうちprefixがTと一致するものの個数に等しい。開始位置ごとのsubstring照合を直接行う必要はない。</p>
+<p>suffixを辞書順に並べると、prefixがTのsuffixは連続区間をなす。その左右端はTと、全英小文字より大きい終端記号を付けたT~へのlower boundで得られる。</p>
+<p>採用する候補: Sのsuffix arrayを一度構築し、各Tについて辞書順区間の両端を二分探索する。</p>
+<p>全queryで共有できるsuffix順序を前処理し、query文字列との比較だけで出現開始位置数を数えられる。</p>
+<p>棄却する候補: 各queryごとにSを先頭から走査し、全開始位置でTとの一致を調べる。</p>
+<p>Sとquery数がともに大きく、同じS上の探索をqueryごとに繰り返せない。</p>
+<p>T≤suffix&lt;Tより辞書順で大きい最小境界という半開区間を作れば、Tがsuffixのprefixである条件を比較演算へ変換できる。</p>
+<p>suffix arrayの要素は開始indexなので、二つの境界indexの差が重なりを含むsubstring出現回数になる。</p>
+<p>Sのsuffix arrayを構築する。各query Tで、suffixとTを比較するlower boundを求め、次にTへ仮想的な最大終端文字を付けた上側境界のlower boundを求める。二位置の差を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="suffix-arrayによるpattern-counting">suffix arrayによるpattern counting</h3>
+<p>発動条件: 固定textに多数のsubstring出現数queryが来るとき。</p>
+<p>全suffixを辞書順にし、pattern-prefix集合を連続区間として数える。</p>
+<h3 id="辞書順の番兵境界">辞書順の番兵境界</h3>
+<p>発動条件: ある文字列をprefixに持つ全文字列の上端を表したいとき。</p>
+<p>alphabetより大きい仮想文字を末尾に置いてupper boundaryを作る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>substringの重なりは開始位置を表すsuffixを数える方式なら特別扱いせず自然に含まれる。</p>
+<p>別の問題へ持ち帰る視点: 出現queryは各開始位置をsuffixへ対応させ、prefix条件へ変換する。</p>
+<h2 id="正当性">正当性</h2>
+<p>pattern出現の開始位置はそのpatternをprefixに持つsuffixと全単射。辞書順では共通prefixのsuffix集合が連続なので、Tのlower boundとTに仮想最大文字を付けたupper境界との差が全出現数になる。suffix開始位置を一つずつ数えるため重なりも自然に含み、短suffixは比較で境界外へ落ちる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>実体のない~を文字列へ追加できない実装では比較関数またはupper_bound相当を用意する。suffixがTより短い場合の比較を正しく扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>TがS末尾に一致する例、Sより長い例、重なる出現例で左右境界を確認する。標準suffix array APIの比較規約も先に固定する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(|S|+Σ|T_i| log|S|)を線形SA構築と直接pattern比較binary searchの場合の時間とする。</p>
+<h3 id="空間">空間</h3>
+<p>O(|S|+Σ|T_i|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 5 \times 10^5; 1 \leq Q \leq 5 \times 10^5; 1 \leq |T_i| \leq |S|; \displaystyle \sum_{i=1}^Q |T_i| \leq 5 \times 10^5; S and T_i are strings consisting of lowercase English letters.; Q is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=banana、query ana,na,nana。</p>
+<ol>
+<li>開始位置はanaが2,4、naが3,5、nanaが3（一始まり）。</li>
+</ol>
+<p>期待される結果: 2,2,1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>S=aaaa,T=aaで重なりを除くか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>出現開始1,2,3を全て数えるので3。suffix区間もこの三つを含む。</p>
+<p>確認結果: 3。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc362/editorial/10389">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc362-editorial-10389-cd25661c8e446fefee36440cf1ecaca75515c4fe36b465e457e753f332b276b8</li>
+<li><a href="https://atcoder.jp/contests/abc362/tasks/abc362_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc362-g-problem-cf10480009e3293213e9936deb4c1888fee228da4bfeed2b831a6f9392208788</li>
+</ul></main>
+</body></html>

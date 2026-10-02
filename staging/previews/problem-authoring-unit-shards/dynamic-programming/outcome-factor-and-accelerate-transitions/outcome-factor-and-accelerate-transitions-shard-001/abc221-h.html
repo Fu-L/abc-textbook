@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC221-H — Count Multiset</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC221-H — Count Multiset</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-grid-table.md">グリッド・多次元表の局所DPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>サイズ k の多重集合を非減少列 a_1≤…≤a_k として一意に表すと、値の重複は隣接差が0である区間として見える。直接「各値を何個使うか」を持つより差分列の方が上限 M を局所条件にできる。</p>
+<p>差分を取り添字を反転した b_1,…,b_k では、Σ i b_i=N、b_k&gt;0 となる。同じ値が M+1 個以上並ぶことは M 個以上の連続する0差分に対応するため、「0が M 個連続しない」が multiplicity 上限になる。</p>
+<p>採用する候補: f[x][y] を長さ x、重み和 y、末尾 b_x&gt;0、0の M 連続なしの差分列数とし、直前の正要素位置を M 幅の累積和で集約する。</p>
+<p>末尾の正値と一つ前の正値の間隔だけで0-run条件を判定でき、正値 b_x の全候補も同じ行の累積遷移へまとめられる。</p>
+<p>棄却する候補: 使用する値、現在の総和、要素数を状態にし、各値を0個から M 個追加する bounded-knapsack DP を行う。</p>
+<p>値・総和・要素数の三次元状態と multiplicity 遷移が必要になり、N=5000 で全 k の答えを求めるには大きすぎる。</p>
+<p>一つ前の正要素位置 p は max(0,x-M)≤p&lt;x に限られる。g[x][y]=Σ f[p][y] をこの幅 M の sliding sum とすれば、許される0-runを一括で数えられる。</p>
+<p>b_x=c≥1 の全候補を足す式 f[x][y]=Σ_{c≥1}g[x][y-cx] は、f[x][y]=f[x][y-x]+g[x][y-x] と同じ行の一段前だけで更新できる。</p>
+<p>番兵 f[0][0]=1 を置く。x=1..N について各 y の g[x][y] を直前 M 行の f の sliding sum で保ち、y≥x なら f[x][y]=f[x][y-x]+g[x][y-x] を法 998244353 で計算する。求める k ごとの答えは f[k][N] である。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="整数分割の差分列変換">整数分割の差分列変換</h3>
+<p>発動条件: 非減少列や多重集合の値・重複条件を同時に数えたいとき。</p>
+<p>隣接差へ移して総和を添字付き重み和にし、等値 block を0-runとして表す。</p>
+<h3 id="dp-遷移の-sliding-sum">DP 遷移の sliding sum</h3>
+<p>発動条件: 遷移元が直前の固定幅の状態集合、または同じ刻みの過去項の総和になるとき。</p>
+<p>行方向の幅 M 和と y 方向の x 刻み和をそれぞれ差分更新し、多重 loop を除く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>「各整数の出現回数≤M」が、反転差分列では「正の要素どうしの index 間隔≤M」という局所的な距離制約へ変わる。</p>
+<p>別の問題へ持ち帰る視点: multiplicity 制約は、ソート列の等値 block 長や差分列の連続0数へ写すと有限幅 DP になることがある。</p>
+<h2 id="正当性">正当性</h2>
+<p>正整数の非減少列と反転差分列は一対一で、総和はΣi b_i、最終b_k&gt;0になる。同値がM+1個以上続くことは差分0がM個以上続くことに一致する。正要素の前位置pを直前M位置に限るsliding sum gでその条件を表し、b_x≥1の全候補をf[x][y−x]+g[x][y−x]で重複なく足せる。番兵f[0][0]=1が先頭の0-runも扱うので、f[k][N]は求めるサイズkの多重集合数。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>p=0 の番兵は y=0 だけ1で、x≤M の先頭0-runを表すため sliding window に含める。y-x&lt;0 は遷移せず、行方向の加減算を法で正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>M=2 の {1,1,2} を非減少列、差分、反転差分へ順に写し、二つの同値要素が「0は一個まで」に対応することを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²)。各x,yの遷移と幅Mのsliding sum更新はO(1)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 5000; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3,M=1。</p>
+<ol>
+<li>サイズ1なら{3}の一つ。</li>
+<li>サイズ2なら{1,2}の一つ。</li>
+<li>サイズ3の{1,1,1}は同値上限1に反する。</li>
+</ol>
+<p>期待される結果: k=1,2,3の答えは1,1,0。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じN=3でM=3ならサイズ2と3の答えはいくつか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>サイズ2は{1,2}で1、サイズ3は{1,1,1}で1。差分の連続0を許す長さが上限Mで変わる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc221/editorial/2719">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-editorial-2719-7d0a4f6a911b12cda7b3a1e70f53d64016b01e1a7616f1dace14babf5de7061a</li>
+<li><a href="https://atcoder.jp/contests/abc221/tasks/abc221_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-h-problem-007d88780f471378894ba67fde15552d3170f77ca35c3818d479b162d1a50d50</li>
+</ul></main>
+</body></html>

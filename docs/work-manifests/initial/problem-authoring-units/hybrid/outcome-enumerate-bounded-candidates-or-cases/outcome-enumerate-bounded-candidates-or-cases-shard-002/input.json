@@ -1,0 +1,436 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-002",
+  "packets": [
+    {
+      "problemId": "abc328-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+      ],
+      "tagIds": [
+        "tag-bounded-enumeration",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq8; N-1\\leq M\\leq\\dfrac{N(N-1)}2; 1\\leq K\\leq10^{15}; 1\\leq u_i\\lt v_i\\leq N\\ (1\\leq i\\leq M); 0\\leq w_i\\lt K\\ (1\\leq i\\leq M); The given graph is simple and connected.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。",
+          "sourceRevisionIds": [
+            "source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2",
+            "source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2",
+          "path": "src/content/sources/abc316-abc367/source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc328_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5",
+          "path": "src/content/sources/abc316-abc367/source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc328_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc343-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives",
+        "unit-inclusion-exclusion"
+      ],
+      "excludedTopics": [
+        "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+      ],
+      "tagIds": [
+        "tag-bounded-enumeration",
+        "tag-geometry-orientation-transform",
+        "tag-inclusion-exclusion"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \\leq V_1, V_2, V_3 \\leq 3 \\times 7^3; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "pair intersection総和Pとtriple intersection Tに対し、exactly-three v3=T、exactly-two v2=P-3Tである。cube体積総和3·7^3=v1+2v2+3v3なのでv1も一意に復元できる。 候補は15^6程度で、各候補のpair/triple交差体積を定数時間で計算できる。",
+          "sourceRevisionIds": [
+            "source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e",
+            "source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e",
+          "path": "src/content/sources/abc316-abc367/source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc343_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03",
+          "path": "src/content/sources/abc316-abc367/source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc343_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc347-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-grid-table",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+      ],
+      "tagIds": [
+        "tag-bounded-enumeration",
+        "tag-grid-table-dp",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 1000; 1\\leq M\\leq N/2; 0\\leq A _ {i,j}\\leq10 ^ 9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "分離線で三squareを1対2へ分け、2側も分離すると、横三段・縦三列の2形と、一領域に一つ、反対側を直交方向に二分する4回転が得られる。各領域がdisjointなので、その内部で最大和のsquareを独立に選んだ和がその分割の最適値である。 任意の最適三square配置をいずれかの分割が捕捉し、各領域の独立最大値を足してO(N^2)で評価できる。",
+          "sourceRevisionIds": [
+            "source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b",
+            "source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b",
+          "path": "src/content/sources/abc316-abc367/source-abc347-editorial-9674-b89f6ddb46ab39f5e1366cdd0ad3836f4e803e074f692895f943143278d4db8b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc347_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746",
+          "path": "src/content/sources/abc316-abc367/source-abc347-f-problem-e2875573657b924b63f4733c94f662d48472b19786e646e654b93ffcc2389746.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc347_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc369-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+      ],
+      "tagIds": [
+        "tag-bounded-enumeration",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 400; N-1 \\leq M \\leq 2 \\times 10^5; 1 \\leq U_i < V_i \\leq N; 1 \\leq T_i \\leq 10^9; 1 \\leq Q \\leq 3000; 1 \\leq K_i \\leq 5; 1 \\leq B_{i,1} < B_{i,2} < \\cdots < B_{i,K_i} \\leq M; All input values are integers.; It is possible to travel between any two islands using some bridges."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。",
+          "sourceRevisionIds": [
+            "source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc",
+            "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc",
+          "path": "src/content/sources/abc368-abc419/source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc369_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1",
+          "path": "src/content/sources/abc368-abc419/source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc369_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc386-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+      ],
+      "tagIds": [
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq K\\leq N\\leq 2\\times 10^5; 0\\leq A_i<2^{60}; \\dbinom{N}{K}\\leq 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "XORではtotal XOR = selected XOR xor omitted XORなので、補集合の値からselected値を定数時間で得られる。 C(N,K)=C(N,N-K)により補集合側へ替えても候補数は変わらず、深さだけを小さくできる。 探索深さを小さい側に選べば列挙数はC(N,K)、一候補の処理もmin(K,N-K)で、保証された上限内に収まる。",
+          "sourceRevisionIds": [
+            "source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0",
+            "source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0",
+          "path": "src/content/sources/abc368-abc419/source-abc386-e-problem-e1f49d50548e219465a1696d7c45828cea62061cc1995fd3f4e74f29d60e63c0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc386_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251",
+          "path": "src/content/sources/abc368-abc419/source-abc386-editorial-11697-1f8ad337c682c1b9ee95e2c2265649f581f30715ea292ca96743620dacd5c251.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc386_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc442-g",
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"
+      ],
+      "tagIds": [
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 1\\leq C \\leq 2\\times 10^9; 1\\leq W_i \\leq 3; 1\\leq V_i \\leq 10^9; 1\\leq K_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "F_i=R_i+(6/i)Q_i と分けると、Q_i 一単位は重さ i×(6/i)=6 の連続した価値群になる。 同じ重さの group は価値の高い順に選ぶだけで最適なので、三種類の group 列を統合した prefix 最大へ落ちる。 剰余の組は36通りしかなく、固定後は全候補の重さが同じ6なので prefix 和または merge で容量内の最良値を直接選べる。",
+          "sourceRevisionIds": [
+            "source-abc442-editorial-15137-f9062b3b9b33f08c57c2c63af857ea694d32c7f63bab8f599644261528074d25",
+            "source-abc442-g-problem-786c4b7e64b2b3683fa610e7c89bbca283ff887a211e5bcba2c472babb3f0e46"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc442-editorial-15137-f9062b3b9b33f08c57c2c63af857ea694d32c7f63bab8f599644261528074d25",
+          "path": "src/content/sources/abc420-abc466/source-abc442-editorial-15137-f9062b3b9b33f08c57c2c63af857ea694d32c7f63bab8f599644261528074d25.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc442_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc442-g-problem-786c4b7e64b2b3683fa610e7c89bbca283ff887a211e5bcba2c472babb3f0e46",
+          "path": "src/content/sources/abc420-abc466/source-abc442-g-problem-786c4b7e64b2b3683fa610e7c89bbca283ff887a211e5bcba2c472babb3f0e46.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc442_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

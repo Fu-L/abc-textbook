@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC294-F — Sugar Water 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC294-F — Sugar Water 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/fractional-parametric-search.md">fractional programming・比率parametric search</a></p>
+<ul>
+<li>比率候補xをbenefit-x·costの加法目的へ変換し、単調な判定問題を解いて最適比率を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>濃度x以上かは各溶液の余剰量s-t*x/(1-x)を足した値が0以上かで判定できる。</p>
+<p>採用する候補: 答え濃度の二分探索と余剰列sort</p>
+<p>固定xで一方の余剰をsortし、各他方に対し和が非負となる個数を二分探索すればK番目判定ができる。</p>
+<p>棄却する候補: NM個の混合濃度を列挙sort</p>
+<p>最大2.5×10^9組で生成できない。</p>
+<p>比率不等式をA_i-(A_i+B_i)xとC_j-(C_j+D_j)xの和へ交差乗算すれば、ペア条件が二数の和の符号になる。</p>
+<p>xを0..1で十分回二分探索し、各判定で青木側scoreをsort、各高橋側scoreについてlower_boundで和≥0のペア数を数え、K以上なら下限を上げる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="k番目値の二分探索">K番目値の二分探索</h3>
+<p>発動条件: 巨大な直積集合の順位値を求める。</p>
+<p>閾値以上の要素数を判定する。</p>
+<h3 id="二集合pair和数え上げ">二集合pair和数え上げ</h3>
+<p>発動条件: 条件がu_i+v_j≥0へ分離できる。</p>
+<p>片側sortとlower_boundで数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>混合後の分数比較を各容器の閾値余剰へ分離すると、直積濃度がpair和問題になる。</p>
+<p>別の問題へ持ち帰る視点: 比率の順位問題は閾値との差を加法分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>濃度≥xは総sugar−x総weight≥0で、各溶液の変換scoreの和が非負と同値。片側scoreをsortして補数境界をlower_boundすれば重複濃度も含む全pair数を正確に数える。xを上げると成立pair数は減るので、count≥Kの最大境界がK番目の濃度になる。正weightにより変形の不等号向きは保存される。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>百分率出力の100倍を忘れず、判定回数を誤差保証に十分取り、pair数は64ビットで持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小NMの全濃度sortと比較し、同濃度多数、K=1,NM、極端な砂糖水比を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(I(M log M+N log M))、Iは誤差保証用二分探索回数。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 5 \times 10^4; 1 \leq K \leq N \times M; 1 \leq A_i, B_i, C_i, D_i \leq 10^5; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>第一群(糖,水)=(1,1),(3,1)、第二群=(1,3)。</p>
+<ol>
+<li>混合濃度は2/6=1/3と4/8=1/2。</li>
+<li>K=1なら大きい1/2、K=2なら1/3。</li>
+</ol>
+<p>期待される結果: 50%、33と1/3%。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>濃度ちょうどxのpairを除外してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>判定は≥xなので含める。tieを含む個数がKを跨ぐ境界でも同じ濃度を返す。</p>
+<p>確認結果: lower_boundで等号を含む。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc294/editorial/6007">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416</li>
+<li><a href="https://atcoder.jp/contests/abc294/tasks/abc294_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613</li>
+</ul></main>
+</body></html>

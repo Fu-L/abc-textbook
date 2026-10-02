@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC320-E — Somen Nagashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC320-E — Somen Nagashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>列にいる人は常に元の番号順に並ぶため、そうめんを受け取るfrontは在列者の最小番号である。</p>
+<p>列を離れた人は決まった時刻T_i+S_iに戻るので、各そうめん時刻より前にreturn eventを時刻順で反映すれば現在の列を復元できる。</p>
+<p>return時刻がそうめん時刻と同じならその人は既に列にいる扱いなので、同時刻ではreturnを先に処理する必要がある。</p>
+<p>採用する候補: 在列者を番号ordered set、離脱者をreturn時刻min-heapで管理し、そうめんeventを時刻順にsimulationする。</p>
+<p>最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。</p>
+<p>棄却する候補: 各そうめん時刻に全N人を番号順に走査して在列者を探す。</p>
+<p>N,Mとも2×10^5で、先頭付近が長く不在だと二次走査になる。</p>
+<p>棄却する候補: 一度受け取った人をqueue末尾へ戻す。</p>
+<p>復帰位置は受取順の末尾ではなく元の番号順であり、return時刻も人ごとに異なる。</p>
+<p>そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。</p>
+<p>列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。</p>
+<p>available setを{1..N}、return min-heapを空、answerを0で初期化する。各(T_i,W_i,S_i)の前にheap先頭のreturnTime≤T_iを全てpopしてpersonをavailableへ戻す。availableが非空なら最小personをeraseしanswerへW_iを加え、(T_i+S_i,person)をheapへpushする。最後に全answerを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="event-sweep">event sweep</h3>
+<p>発動条件: 時刻付き到着・復帰と入力済みeventを順にsimulationするとき。</p>
+<p>次の主event前にpriority queueから期限到来eventを処理する。</p>
+<h3 id="ordered-setでの最優先対象">ordered setでの最優先対象</h3>
+<p>発動条件: active集合から最小IDを取り出し、後で再挿入するとき。</p>
+<p>在列者のbeginをfront personとして使う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>列の物理的な詰め直しをsimulationせず、「在列中の番号集合の昇順」が列そのものを完全に表す。</p>
+<p>別の問題へ持ち帰る視点: 順序が固定keyで復元できる待ち行列では、位置更新ではなくactive key集合として管理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>そうめん時刻T_iはstrictly increasingなので、入力をそのまま主event順として使い、return heapからtime≤T_iをすべて移すだけでよい。 列が空ならeventは誰にも影響せず、新しいreturn eventも生成しない。 最小番号の取得・削除と時刻以下の復帰をどちらも対数時間で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>returnTime==T_iも先に復帰させるためheap条件を&lt;ではなく≤にする。</li>
+<li>獲得量累積とreturn時刻は32bitを超え得るので64bit整数を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>人の復帰とそうめんが同時刻の例、列が空の例、番号の大きい人が先に復帰する例を追ってevent順とset最小値を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)log N)、Mそうめんevent、各受取は一returnを生成。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)、通常heapの同時entry数≤N。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq M \leq 2\times 10^5; 0 &lt;T_1 &lt;\ldots &lt; T_M \leq 10^9; 1 \leq S_i \leq 10^9; 1 \leq W_i \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、event(時刻,重み,不在長)=(1,5,2),(2,4,1),(3,7,1)。</p>
+<ol>
+<li>時刻1は人1、時刻2は人2。</li>
+<li>時刻3では両者が先に戻り最小人1が受け取る。</li>
+</ol>
+<p>期待される結果: 総受取人1=12、人2=4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>returnTime=3を時刻3の配布後に戻すと何が崩れるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>本来受取可能な人を除外する。return≤eventTimeを全て処理してから最小personを選ぶ。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc320/tasks/abc320_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc320-e-problem-12283801c6795f9728446ffd483e652ec89d9b9d9905e5e0d79f5a7727acb16d</li>
+<li><a href="https://atcoder.jp/contests/abc320/editorial/7125">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc320-editorial-7125-606774792fcfd0b76f743eab75028895ecdc10a505dbd84e14df2a86807d39e6</li>
+</ul></main>
+</body></html>

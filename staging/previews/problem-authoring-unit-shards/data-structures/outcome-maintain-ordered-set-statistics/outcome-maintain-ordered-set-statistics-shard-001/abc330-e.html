@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC330-E — Mex and Update</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC330-E — Mex and Update</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></p>
+<ul>
+<li>比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>長さNの非負整数列のmexは必ず0..Nの範囲にあるため、Nより大きい値の出現数は答えへ影響しない。</p>
+<p>各v∈[0,N]のfrequencyを持てば、mexはfrequency 0の値のうち最小のものになる。</p>
+<p>1点更新でmissing集合が変わる可能性があるのは旧値と新値だけである。</p>
+<p>採用する候補: 0..Nのfrequencyと、現在欠けている値のordered setを保ち、更新2値だけを反映する。</p>
+<p>mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。</p>
+<p>棄却する候補: 各query後に0から順にA内にあるか調べ直す。</p>
+<p>mexが大きいqueryが続くと毎回O(N)走査になる。</p>
+<p>棄却する候補: A全体をordered setにして最小要素をmexとする。</p>
+<p>mexは最小の存在値でなく最小の不存在値であり、重複frequencyの消滅も管理できない。</p>
+<p>旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。</p>
+<p>値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。</p>
+<p>cnt[0..N]を初期Aから作り、cnt[v]=0の全vをordered set missingへ入れる。query(i,x)で旧A_i≤Nならcntを減らし0になればinsertする。x≤Nなら更新前cnt[x]=0ならmissingからeraseし、その後増やす。A_i=xへ更新し、*missing.begin()を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="mexの値域制限">mexの値域制限</h3>
+<p>発動条件: 長さNの非負multisetのmexを動的に求めるとき。</p>
+<p>候補を0..Nだけに絞る。</p>
+<h3 id="zero-frequency-set">zero-frequency set</h3>
+<p>発動条件: 動的frequencyから最小の欠損keyを問うとき。</p>
+<p>count 0のkeyだけをordered setへ保持する。</p>
+<h3 id="境界crossing更新">境界crossing更新</h3>
+<p>発動条件: 集合membershipがcount&gt;0かだけで決まるとき。</p>
+<p>0↔1を跨ぐ更新時だけsetを変える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>入力値は10^9まででも、N+1個の候補0..Nのどれかは必ず欠ける鳩ノ巣原理により、巨大値を完全に無視できる。</p>
+<p>別の問題へ持ち帰る視点: 欠損最小値問題では、要素数から答え候補の上界を先に証明して座標範囲を切る。</p>
+<h2 id="正当性">正当性</h2>
+<p>旧値vのfrequencyを減らして0になった瞬間だけvをmissingへ追加し、新値vが0から1になる瞬間だけmissingから削除する。 値がNより大きい場合はfrequency arrayもmissing setも触らず、A_i本体だけ更新すればよい。 mex範囲を有限化し、各queryを定数個のset insert/eraseと最小値参照で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>旧値と新値が同じ場合も減算→増算の順で整合するが、0↔1判定の順序を統一する。</li>
+<li>missingは0..Nの少なくとも1要素を常に含むためbegin参照が空にならない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>重複していた旧値を1個消すcaseと最後の1個を消すcase、N超の新旧値を含むcaseでmissing更新を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N,Q \le 2 \times 10^5; 0 \le A_i \le 10^9; 1 \le i_k \le N; 0 \le x_k \le 10^9</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(0,1,1)、位置2を4へ、次に位置3を2へ。</p>
+<ol>
+<li>初mex=2、最初は(0,4,1)でmex2。</li>
+<li>次は(0,4,2)で1が欠ける。</li>
+</ol>
+<p>期待される結果: 各更新後mex2,1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>Nより大きい4の頻度を持つ必要があるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>mexは0..Nにあるので不要。ただしA本体に4は保存し将来の旧値判定に使う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc330/tasks/abc330_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc330-e-problem-c9b8f55f67731908d9b6568c81445ed2e45abb094bbce6983b56400d4f72aa57</li>
+<li><a href="https://atcoder.jp/contests/abc330/editorial/7752">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc330-editorial-7752-701993db3856eaa396d8e9b0d19710eeefa288e210731f5c6cf0074c7dfa0cd6</li>
+</ul></main>
+</body></html>

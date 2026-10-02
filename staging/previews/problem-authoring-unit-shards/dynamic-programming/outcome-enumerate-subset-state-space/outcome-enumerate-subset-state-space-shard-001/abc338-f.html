@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC338-F — Negative Traveling Salesman</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC338-F — Negative Traveling Salesman</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点iからjへwalkの途中で何頂点を通ってもよいので、まずその区間を最短距離d[i][j]へ置換できる。全頂点をある順序で代表点として並べ、その隣接間を最短walkで結ぶ問題へ帰着する。 任意の実行可能walkから各頂点を一度ずつ選んだ出現順pを取り出すと、選択頂点間の部分walkを最短路へ置換して重みを増やさない。逆に任意の順列間の最短路を連結すれば全頂点を少なくとも一度訪れるため、順列上の最小和と答えが一致する。</p>
+<p>採用する候補: Floyd–Warshall後にbitmask Hamiltonian-path DPを行う</p>
+<p>N≤20なので全順序を2^N状態へ圧縮でき、負辺も負閉路なしのall-pairs shortest pathで正しく扱える。</p>
+<p>棄却する候補: 元graphのwalkを状態なしで最短路探索する</p>
+<p>訪問済み頂点集合を区別しなければ全頂点訪問条件を判定できず、同じ頂点への再訪もある。</p>
+<p>任意の実行可能walkから各頂点を一度ずつ選んだ出現順pを取り出すと、選択頂点間の部分walkを最短路へ置換して重みを増やさない。逆に任意の順列間の最短路を連結すれば全頂点を少なくとも一度訪れるため、順列上の最小和と答えが一致する。</p>
+<p>edge重みからFloyd–Warshallでdを求める。dp[mask][i]をmask内の頂点を代表順として訪ねiで終わる最小costとし、全iでdp[1&lt;&lt;i][i]=0、j∉maskへdp[mask|1&lt;&lt;j][j]=min(…,dp[mask][i]+d[i][j])を行う。full mask最小がINFならNo。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="metric-closure">metric closure</h3>
+<p>発動条件: walkの区間で中間頂点再訪を許し、端点間の最安costだけが後段に必要である。</p>
+<p>負辺を含む有向graphの全点対最短距離をFloyd–Warshallで計算する。</p>
+<h3 id="bitmask-dp">bitmask DP</h3>
+<p>発動条件: N≤20で、訪問対象集合と最後の頂点が将来costを決める。</p>
+<p>部分集合maskと終点iを状態にし、未選択頂点を次の代表点として加える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>shortest pathがmask外頂点を途中で通っても問題はなく、maskは実際の全訪問集合ではなく順列で明示的に選んだ代表頂点集合と解釈する。</p>
+<p>別の問題へ持ち帰る視点: metric closure後のsubset DPでは、中間経路が未選択対象を先取りしても「少なくとも一度」条件なら許容できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>任意全頂点walkの初訪問順を取ると各区間costはAPSP距離以上。逆にその順の最短区間をつなげれば全頂点walkが作れる。よってAPSP距離で全順序を最小化するsubset DPと最適walk値が等しい。負閉路なしで区間最短が有限に定義される。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>INF同士やINF+負値の加算を避け、costは64bitを使う。full maskの全終点がINFの場合だけNoとする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>到達不能な有向graph、負辺を含むが負cycleなし、最短路が別の未選択頂点を経由する例を小規模walk探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N≤20、M辺。Floyd O(N³)、subset TSP O(N²2^N)。</p>
+<h3 id="空間">空間</h3>
+<p>距離O(N²)、mask×last O(N2^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 20; 1\leq M \leq N(N-1); 1\leq U_i,V_i \leq N; U_i \neq V_i; (U_i,V_i) \neq (U_j,V_j) for i\neq j; -10^6\leq W_i \leq 10^6; The given graph does not contain negative cycles.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>辺1→2費用−1、2→3費用2、1→3費用5。</p>
+<ol>
+<li>APSP d13は1。</li>
+<li>順1→2→3で全頂点を訪れcost−1+2=1。</li>
+<li>逆向き訪問順は到達不能。</li>
+</ol>
+<p>期待される結果: 1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>負辺があるからこの前計算にDijkstraを使えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>一般には不可。負閉路なしのFloyd–Warshallで全pair距離を得る。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc338/editorial/9170">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc338-editorial-9170-0547dd2070c8672755ddefc73c4931953514fb9b26bbac55b5feff56a4ee3c2e</li>
+<li><a href="https://atcoder.jp/contests/abc338/tasks/abc338_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc338-f-problem-3bd2d4f58dc54a3808d0f8d12cefc87a8165a6dc4a30746fd31e162afd914735</li>
+</ul></main>
+</body></html>

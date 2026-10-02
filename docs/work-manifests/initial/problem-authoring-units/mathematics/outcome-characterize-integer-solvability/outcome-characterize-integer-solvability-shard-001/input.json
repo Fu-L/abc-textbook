@@ -1,0 +1,218 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-characterize-integer-solvability-shard-001",
+  "packets": [
+    {
+      "problemId": "abc271-ex",
+      "learningOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"
+      ],
+      "tagIds": [
+        "tag-bezout-diophantine",
+        "tag-bounded-enumeration",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^4; -10^9 \\leq A,B \\leq 10^9; s_i is 0 or 1.; T, A, and B are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "順序を忘れて各方向の非負使用回数を考える。局所交換で同じ変位を保ち操作数を増やさずsupportを2方向へ減らせ、残りうる例外は軸1回と二対角の形である。列挙した非平行pairは行列式で係数が一意に決まり、整数性と非負性を満たすものだけ実現可能。例外も軸を一回引いてpair solverへ渡すので全最適形を覆う。",
+          "sourceRevisionIds": [
+            "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b",
+            "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b",
+          "path": "src/content/sources/abc264-abc315/source-abc271-ex-problem-9abb57848a51cc20c07d75f488b4a5fb140a9b2c476da22b1063d27dd964c85b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc271_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a",
+          "path": "src/content/sources/abc264-abc315/source-abc271-editorial-4932-e1684d9e0f3cc5470b43074d0974aa4a5e5e858b299595ed97e3b743f74bcf6a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc271_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc315-g",
+      "learningOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"
+      ],
+      "tagIds": [
+        "tag-bezout-diophantine"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 10^6; 1 \\le A,B,C \\le 10^9; 1 \\le X \\le 3 \\times 10^{15}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "i固定後のBj+Ck=Yが解を持つのはg=gcd(B,C)がYを割るとき。基準解から全解はj=j0+tC/g,k=k0−tB/gと一意に表される。j,k各々の1..N制限がtの閉整数区間を与えるため、交差長がそのiの全解数になる。異なるiは別三tupleなので合計に重複はない。",
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+            "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de",
+          "path": "src/content/sources/abc264-abc315/source-abc315-editorial-6994-7c574a3d3acdded049b42b9ab7f3876e513205fddd22ac930901e1e9463cf6de.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc315_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77",
+          "path": "src/content/sources/abc264-abc315/source-abc315-g-problem-6b4951d4ac0f3ab72b81c5813a5ea6b1af9c9ca19f08b32ff99923a0bae38e77.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc315_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc340-f",
+      "learningOutcomeIds": [
+        "outcome-characterize-integer-solvability"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "差や周期をgcdへ集約する不変量の抽出は「gcd不変量・差分構造」で扱う。複数の合同条件の統合は合同式・CRT、有理近似は連分数・Stern–Brocotの単元へ進む。"
+      ],
+      "tagIds": [
+        "tag-bezout-diophantine"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: -10^{17} \\leq X, Y \\leq 10^{17}; (X, Y) \\neq (0, 0); X and Y are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "面積1は|AY−BX|=2と同値。左辺の符号付き整数値はgcd(|X|,|Y|)の倍数だけなのでg∤2なら不可能。逆にg|2ならBézout係数を2/g倍することで値2を作れ、三角形面積も1になる。従って判定と構成が必要十分。",
+          "sourceRevisionIds": [
+            "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+            "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f",
+          "path": "src/content/sources/abc316-abc367/source-abc340-editorial-9250-dd0c5135086252fc4d9f1a23b1d18e0098e3fc9cf7d1678338de2aefd31a461f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc340_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd",
+          "path": "src/content/sources/abc316-abc367/source-abc340-f-problem-56c98b2943218a0a2280a44dbf2e2cfb359a0045e00d14918e2c72085f6610cd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc340_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

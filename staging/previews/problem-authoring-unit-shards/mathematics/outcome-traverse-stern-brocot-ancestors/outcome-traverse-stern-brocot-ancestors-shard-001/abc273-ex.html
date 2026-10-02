@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC273-EX — Inv(0,1)ving Insert(1,0)n</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC273-EX — Inv(0,1)ving Insert(1,0)n</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/stern-brocot-ancestry.md">Stern–Brocot木の経路と祖先</a></p>
+<ul>
+<li>隣接分数の行列式が1であることを保ち、mediantとEuclidの商列からStern–Brocot木の経路を同方向の連続回数へ圧縮する。経路の共通prefixで祖先関係と必要な祖先集合を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/gcd-structure.md">gcd不変量・差分構造</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/small-to-large.md">small-to-large・DSU on Tree</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>分母制約の下で最良近似を選ぶ問題は「連分数・Stern–Brocotで有理近似する」で扱う。本Unitでは同じ分数の境界表現を、木上の経路と祖先関係へ利用する。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>隣接pairsの和を挿入する操作はStern–Brocot treeのinterval nodeでmediantを生成する操作そのもので、追加可能な(p,q)はprimitive pair gcd(p,q)=1である。</p>
+<p>あるStern–Brocot interval nodeの操作がsubarray Tに必要なのは、そのopen interval内にTのtarget fractionが一つ以上存在するときである。</p>
+<p>棄却する候補: 各subarrayについて必要なfractionsを一つずつStern–Brocot tree上で辿り、操作集合のunion sizeを求める。</p>
+<p>subarrayがΘ(N^2)個あり、単一fractionのdepthも座標値に比例し得る。</p>
+<p>採用する候補: 全targetsをfraction順にStern–Brocot intervalへ再帰分割し、各nodeを必要とするposition集合からsubarray数を数え、unary descentはまとめてskipする。</p>
+<p>必要なtree部分だけを圧縮構築し、position setsをsmall-to-large mergeすることで全nodesの寄与を集約できる。</p>
+<p>node interval内targetのoriginal indicesをsorted set Pとすると、そのnodeが必要なsubarraysは全subarraysからPを一つも含まないindex-gap内subarraysを引いて求められる。</p>
+<p>targetsが片側childにしか入らない連続区間では、fraction boundsへ同じendpointをk回加える形をbinary searchし、そのk nodesは同じposition set寄与として一括加算できる。</p>
+<p>mediant insertion costをcompressed Stern–Brocot trie上のancestor-union countへ写し、ordered-position set mergingで全consecutive subarraysへのnode寄与を合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="sternbrocot-treeと連分数的skip">Stern–Brocot treeと連分数的skip</h3>
+<p>発動条件: coprime positive pairsがmediant operationsで生成され、naive tree depthが座標値まで伸びるとき。</p>
+<p>各nodeでtargetsを左右へ再帰分割し、全targetsが同じ側にある最大連続step数はinterval boundsからまとめて進める。</p>
+<h3 id="position集合のsmall-to-large-merge">position集合のsmall-to-large merge</h3>
+<p>発動条件: 再帰tree各nodeでdescendant itemsのoriginal positions集合に依存する統計を求めたいとき。</p>
+<p>小さいordered setを大きいsetへ挿入し、隣接gapの変化からnodeのsubarray coverageを維持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>非primitive pairを含むsubarrayは実現不能でf=0なので、primitive targetsだけからなる連続区間を独立に処理し、invalid positionを境界にする。</p>
+<p>別の問題へ持ち帰る視点: 定義がimpossible caseを0にする集計では、invalid elementを含むrangesを単に除外し、valid runsへ分割する。</p>
+<h2 id="正当性">正当性</h2>
+<p>原始pairのfractionはStern–Brocot木に一意に現れ、生成に必要な操作はその祖先node集合である。各nodeが区間Tに必要かはT内targetの存在だけで決まる。位置集合Pを含まないsubarrayはP間のgap内に限るので、全subarray数から各gapの三角数を引けばそのnodeの寄与になる。片側しかtargetを持たない連続祖先は位置集合が同じため長さを掛けて圧縮できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>fraction比較とbound更新のcross productsは10^18級となるため十分な整数幅を使い、q=0のinfinite endpointを別扱いする。</li>
+<li>position追加時は所属valid runの両端をsentinelとしてgap contributionを更新し、subarrayをrun外へ広げて数えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>生成操作がmediantなら、各targetまでの共通操作列をStern–Brocot treeのancestor setsとして共有する。</li>
+<li>implicit treeの長いunary chainは、一方へ分岐し続ける最大stepを数論式でまとめて進める。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N+N log V)を上界とする。V=max(a_i,b_i)+1、圧縮木の探索と位置集合small-to-large mergeを行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(N log V)。圧縮nodeと位置集合。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^5; 0 \le a_i,b_i \le 10^9; a_i \neq a_j or b_i \neq b_j, if i \neq j.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>targetsは(1,1),(1,2)の順。</p>
+<ol>
+<li>1/1には1操作、1/2には1/1と1/2の2操作が必要。</li>
+<li>一要素区間の費用1,2と二要素区間の費用2を足す。</li>
+</ol>
+<p>期待される結果: 総操作数5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>pair(2,2)をtargetにしたら祖先だけ作ればよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>mediant生成のpairは常にgcd1。既約値1/1が同じでもpair(2,2)は生成不能で、原始性を確認する。</p>
+<p>確認結果: 生成不能。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc273/tasks/abc273_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba</li>
+<li><a href="https://atcoder.jp/contests/abc273/editorial/5032">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598</li>
+</ul></main>
+</body></html>

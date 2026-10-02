@@ -1,0 +1,59 @@
+{
+  "shardId": "outcome-answer-tree-ancestor-queries-shard-001",
+  "primaryOutcomeId": "outcome-answer-tree-ancestor-queries",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc298-ex"
+  ],
+  "homeUnitId": "unit-tree-ancestor-lca",
+  "prerequisiteOutcomeIds": [
+    "outcome-jump-deterministic-transition"
+  ],
+  "dependencyShardIds": [
+    "outcome-jump-deterministic-transition-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/abc298-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "0b0b924767df0c529f1797a675fca3fd711badf600e252a4b2d3d9630260de18",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc298-ex",
+      "path": "src/content/docs/problems/graph-search/outcome-answer-tree-ancestor-queries/outcome-answer-tree-ancestor-queries-shard-001/abc298-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

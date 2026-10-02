@@ -1,0 +1,161 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
+  "packets": [
+    {
+      "problemId": "abc233-ex",
+      "learningOutcomeIds": [
+        "outcome-share-threshold-checks-by-parallel-binary-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep",
+        "unit-geometry-primitives",
+        "unit-monotone-search",
+        "unit-prefix-aggregate",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-parallel-binary-search",
+        "tag-event-sweep",
+        "tag-fenwick-weighted-prefix",
+        "tag-geometry-orientation-transform",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^5; 0\\leq x_i\\leq 10^5; 0\\leq y_i\\leq 10^5; (x_i,y_i) \\neq (x_j,y_j) if i\\neq j.; 1\\leq Q \\leq 10^5; 0\\leq a_i\\leq 10^5; 0\\leq b_i\\leq 10^5; 1\\leq K_i\\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "長方形内点数は x≤u＋r の prefix 個数から x＜u−r の prefix 個数を引き、各 prefix を y 区間和で求められる。 距離判定を軸平行長方形数え上げへ変換し、全クエリを各反復でまとめて点・イベントの一走査にできる。",
+          "sourceRevisionIds": [
+            "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+            "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9",
+          "path": "src/content/sources/abc212-abc263/source-abc233-editorial-3168-0c1d165e93d68d3bf3499da6e2d8b3e121078becbde551ea0e8a2b64167288e9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc233_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be",
+          "path": "src/content/sources/abc212-abc263/source-abc233-ex-problem-f04ff824ef976aa10b24fb65f3c09e6e23d13bd4fb674bd11610f90e72dcb0be.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc233_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc394-g",
+      "learningOutcomeIds": [
+        "outcome-share-threshold-checks-by-parallel-binary-search"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-event-sweep",
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-parallel-binary-search",
+        "tag-dsu-components",
+        "tag-event-sweep",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H \\leq 500; 1\\leq W \\leq 500; 1\\leq F_{i,j} \\leq 10^6; 1\\leq Q\\leq 2\\times 10^5; 1\\leq A_i,C_i\\leq H; 1\\leq B_i,D_i\\leq W; 1\\leq Y_i\\leq F_{A_i,B_i}; 1\\leq Z_i\\leq F_{C_i,D_i}; (A_i,B_i,Y_i)\\neq (C_i,D_i,Z_i); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。",
+          "sourceRevisionIds": [
+            "source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598",
+            "source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598",
+          "path": "src/content/sources/abc368-abc419/source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc394_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905",
+          "path": "src/content/sources/abc368-abc419/source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc394_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

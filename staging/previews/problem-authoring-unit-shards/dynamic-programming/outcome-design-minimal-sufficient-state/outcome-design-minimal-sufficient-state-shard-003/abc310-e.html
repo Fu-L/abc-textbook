@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC310-E — NAND repeatedly</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC310-E — NAND repeatedly</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>右端 i を固定すると、各左端からの NAND の畳み込み結果は 0 か 1 の二種類しかない。新しい bit を右へ付けたとき、必要なのは各結果の個数であって左端そのものではない。 NAND は入力 bit が 0 なら過去の結果をすべて 1 にし、1 なら過去の 0/1 を 1/0 に反転させるため、二個の count を定数時間で更新できる。 前段で結果 r だった各部分文字列は append した bit b により r NAND b へ一斉に移るので、個数の遷移として扱える。 長さ 1 の新しい部分文字列は演算を行わず bit 自身が値になるため、既存区間の写像とは別に一個加える。</p>
+<p>採用する候補: 各右端で NAND 結果が 0/1 になる部分文字列数だけを持ち、新しい文字による写像で更新する。</p>
+<p>結果空間が二値に閉じ、全左端の状態を同値類二つへ完全に集約できるので O(N) になる。</p>
+<p>棄却する候補: 全区間について左から NAND を計算し直して 1 になるものを数える。</p>
+<p>区間数だけで Θ(N²) あり、N=10^6 の制約を満たせない。</p>
+<p>前段で結果 r だった各部分文字列は append した bit b により r NAND b へ一斉に移るので、個数の遷移として扱える。</p>
+<p>長さ 1 の新しい部分文字列は演算を行わず bit 自身が値になるため、既存区間の写像とは別に一個加える。</p>
+<p>zero,one を直前位置で終わる部分文字列の結果別個数とする。b=0 なら (zero,one)=(1,zero+one)、b=1 なら (zero,one)=(one,zero+1) と更新し、毎回 one を答えへ加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="終点を伸ばす区間-dp-の集約">終点を伸ばす区間 DP の集約</h3>
+<p>発動条件: 全部分配列を数えるが、末尾要素の追加後の状態が小さい有限集合に閉じるとき。</p>
+<p>左端を列挙せず、直前の各状態に属する区間数をまとめて遷移させる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>非結合な NAND でも評価順が問題文で固定されているため、現在値だけを状態にした逐次更新が成立する。</p>
+<p>別の問題へ持ち帰る視点: 演算が結合的かより、prefix の評価結果から次結果が決まる有限オートマトンかを確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>NANDの出力は前結果と次bitだけで決まる。全左端の前結果数をzero/oneへ分け、次bit0では全延長が1、次bit1では前結果を反転する。singletonを足すと各右端の全区間を厳密に生成しone合計が目的数。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>更新前の zero と one を同時に参照するので一時変数を使う。答えは部分文字列数規模になるため 64 bit 整数で保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さい真理値表を実際に書き、append が各状態をどこへ写すかを確認する。長さ1の区間を遷移へ入れ忘れない。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>bit列長N。末尾位置ごと二集約で O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>zero,one,total O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq10^6; S is a string of length N consisting of 0 and 1.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=101。</p>
+<ol>
+<li>右端1:one1。</li>
+<li>右端2:結果1の10と結果0の0でone1。</li>
+<li>右端3:101は0、01は1、1は1でone2。</li>
+</ol>
+<p>期待される結果: 合計4</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>全区間をbooleanの「存在」だけへ集約できるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。求めるのは個数なので各結果へ到達する左端数を保つ。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc310/tasks/abc310_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-e-problem-f2927b0359bb36b1994aa8571b67f18c439768beab5d4039fef78349c294794b</li>
+<li><a href="https://atcoder.jp/contests/abc310/editorial/6784">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc310-editorial-6784-a46512a53029c8d50e7fcb5089853b29b9081838e7484e6853edbf730cfbb93c</li>
+</ul></main>
+</body></html>

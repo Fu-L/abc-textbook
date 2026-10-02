@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC351-G — Hash on Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC351-G — Hash on Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/static-top-tree.md">rake・compressで動的木DPを保つ</a></p>
+<ul>
+<li>境界頂点を持つtree clusterの要約と結合を定義し、局所更新後の木DP値を保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/tree/heavy-light-decomposition.md">Heavy-Light Decomposition</a></li>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各頂点更新は祖先の hash に影響する。公式の定義は葉なら f(v)=A_v、非葉なら f(v)=A_v+∏f(child) である。鎖では祖先数、星では子積再計算が大きいので単純更新では遅い。light子の積を係数にするとheavy pathの作用はax+bで閉じる。rakeの積とcompressのaffine合成を頂点数balancedなStatic Top Treeでまとめ、一点変更は深さ対数のmerge祖先だけ再計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="static-top-tree-による動的木-dp">Static Top Tree による動的木 DP</h3>
+<p>発動条件: 木構造は固定で頂点値だけ更新され、全体の木 DP 値を毎回求めるとき。</p>
+<p>木を深さ O(log N) の二分 cluster merge tree に変換し、DP 合成則を載せる。</p>
+<h3 id="path-cluster-の-affine-作用">path cluster の affine 作用</h3>
+<p>発動条件: 一つの未確定 boundary 値を通じて cluster 外部と接続し、DP 式が一次式に閉じるとき。</p>
+<p>cluster を ax+b として表し、compress を関数合成にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>木 DP の式を速くするのでなく、「木を組み立てる計算グラフ」自体を平衡二分木へ変える発想が核心である。</p>
+<p>別の問題へ持ち帰る視点: 静的構造・動的ラベルの全体 DP では、再計算依存 DAG を balance できないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>葉はf=A、非葉はA+子積とする公式baseを保持する。point clusterは子積、path clusterは未接続子値xに作用するax+bなのでrakeは積、compressはaffine合成となる。各mergeが元DPの局所計算と一致する帰納法でroot hashを保ち、一点更新の影響はmerge祖先だけ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>葉はA_vを直接返し、空積1を加算しない。path clusterの近端/遠端を固定し、compressは実際の作用順でaffine合成する。0係数を含めて逆元に頼らずrake積を維持する。法998244353で正規化する。</p>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず五つの cluster 操作ごとに情報の意味を式で検証し、その後に平衡化へ進む。特に葉の例と一子の鎖で affine 係数を手計算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点Q更新。balanced Static Top Tree構築 O(N)、各leaf更新O(log N)、全体 O(N+Qlog N)。</p>
+<h3 id="空間">空間</h3>
+<p>木とO(N)個定数情報clusterで O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq p_i &lt; i; 0 \leq A_i &lt; 998244353; 1 \leq v \leq N; 0 \leq x &lt; 998244353; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>root1、子2,3、A=(2,3,4)。A2を5へ更新。</p>
+<ol>
+<li>葉f2=3,f3=4で旧root2+12=14。</li>
+<li>葉2を5へ更新。</li>
+<li>新root2+5×4。</li>
+</ol>
+<p>期待される結果: 22</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>葉にもA+空積1を使ってよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。公式baseはf(leaf)=A。空積1を加えると二葉例のroot値が別物になる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc351/editorial/9868">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e</li>
+<li><a href="https://atcoder.jp/contests/abc351/tasks/abc351_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9</li>
+</ul></main>
+</body></html>

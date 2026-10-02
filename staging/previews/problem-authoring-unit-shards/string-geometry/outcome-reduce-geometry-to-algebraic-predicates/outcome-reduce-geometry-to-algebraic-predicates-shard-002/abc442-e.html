@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC442-E — Laser Takahashi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC442-E — Laser Takahashi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></p>
+<ul>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>凸包の境界候補列挙・半平面交差。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>レーザーが当たる順序は原点から見た偏角だけで決まり、同じ半直線上のモンスターは同時に消える。query の端点は個体順位ではなく同偏角 block の両端へ広げる必要がある。</p>
+<p>採用する候補: 点を半平面分類と外積比較で偏角降順に sort し、各点に同偏角 block の L_i,R_i を前計算して query 区間を円環上で数える。</p>
+<p>整数外積なら角度誤差がなく、同時消滅を block へまとめることで各 query は L_a と R_b の循環区間長を定数時間で返せる。</p>
+<p>棄却する候補: atan2 で各点の実数角度を計算し、query ごとに回転過程をシミュレーションする。</p>
+<p>浮動小数点では同一直線上の等角判定が不安定で、query ごとの走査も NQ となる。</p>
+<p>偏角比較は上半平面・下半平面を先に分け、同一半平面内では外積の符号だけで全順序を作れる。</p>
+<p>点 a が消える向きから点 b が消える向きまでに含む個数は、非wrapなら R_b-L_a+1、wrapなら N-L_a+1+R_b になる。</p>
+<p>各点を元 index 付きで偏角降順に並べ、外積0かつ内積正の同一半直線を連続 block にする。元 index から L,R へ写し、各 query の円環区間長を二ケースで出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="整数偏角-sort">整数偏角 sort</h3>
+<p>発動条件: 原点回りの方向順を誤差なく並べたいとき。</p>
+<p>半平面分類と外積で比較関数を構成する。</p>
+<h3 id="同値-block-の端点前計算">同値 block の端点前計算</h3>
+<p>発動条件: 同じ key の要素が同時に処理され、query 端点を group 単位へ広げるとき。</p>
+<p>同偏角の連続 run に共通の L,R を与える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>回転の連続時間は偏角の循環順序へ離散化でき、同時刻だけを block として扱えばよい。</p>
+<p>別の問題へ持ち帰る視点: 幾何順序を sort へ落とすときは、collinear の中でも同方向と反対方向を区別する。</p>
+<h2 id="正当性">正当性</h2>
+<p>レーザーrotationでは偏角だけが被照射時刻を決め、同ray全体は同時に消える。半平面区分と外積比較が正確な円周順を作り、外積0かつ内積正だけを同rayへまとめる。各queryをstart block左端、end block右端へ広げて円環長を数えれば同時消滅個体を全て含む。wrapの場合も円周区間を二つに分けるだけで同じ集合を数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>外積は座標積に十分な整数幅を使い、原点は入力されない前提を確認する。降順規約と wrap 条件を一貫させる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>正の x 軸、負の x 軸、同一半直線、正反対の点を含む小例を sort し、L/R と円環式を手計算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+Q)。偏角sortと同ray blockの端順位。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 2\times 10^5; 1\leq Q \leq 2\times 10^5; -10^9\leq X_i,Y_i \leq 10^9; (X_i,Y_i)\neq (0,0); 1\leq A_j,B_j\leq N; A_j\neq B_j; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点1=(1,0),2=(2,0),3=(0,1),4=(0,−1)、query開始1終了4。</p>
+<ol>
+<li>偏角降順は北、東二点、南。</li>
+<li>東から南までで東二点と南一点を含む。</li>
+</ol>
+<p>期待される結果: 3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>開始1終了2では二点同時だから一個か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>同ray block全体が同時に消えるので2個を数える。逆rayは外積0でも内積負で別block。</p>
+<p>確認結果: 2。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc442/tasks/abc442_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc442-e-problem-42087373ff2c255f67b0ad5bbad3ca4ea618df2041a9b7e0063309028f7c148f</li>
+<li><a href="https://atcoder.jp/contests/abc442/editorial/15136">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc442-editorial-15136-380daa78228677f1f43f35e09299c4abd5f07bea270b151f820cb4909ce5bda7</li>
+</ul></main>
+</body></html>

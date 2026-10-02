@@ -1,0 +1,297 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
+  "packets": [
+    {
+      "problemId": "abc238-g",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prime-divisor",
+        "unit-randomized-algorithms"
+      ],
+      "excludedTopics": [
+        "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-randomized-algebraic-fingerprint",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N,Q \\le 2 \\times 10^5; 1 \\le A_i \\le 10^6; 1 \\le L_i \\le R_i \\le N"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "a_p XOR b_p XOR (a_p XOR b_p)=0 なので、連続する素因数出現を三個周期で符号化すると、任意区間の p の指数が 3 の倍数の場合だけ寄与が必ず消える。 区間 hash は prefixHash[R] XOR prefixHash[L−1] で得られ、少なくとも一素数の指数が非零 mod 3 なら独立一様乱数を含むため 0 との衝突確率は 2 の 64 乗分の 1 である。 同じ素数の三出現は XOR で 0 になり、非立方区間が偶然 hash 0 になる確率だけを 2 の 64 乗分の 1 に抑えて各クエリを O(1) 判定できる。",
+          "sourceRevisionIds": [
+            "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+            "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc",
+          "path": "src/content/sources/abc212-abc263/source-abc238-editorial-3358-0e7ddf62b5a984e913d0092536b369695921406bf4aa04b085c18c56765db4cc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc238_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f",
+          "path": "src/content/sources/abc212-abc263/source-abc238-g-problem-d954f62c0f399cfe89c60ca4be68feb1a93261e55d2deba9757ba8fe1185ab6f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc238_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc339-f",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-randomized-algorithms"
+      ],
+      "excludedTopics": [
+        "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-randomized-algebraic-fingerprint",
+        "tag-randomized-algorithm"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 1000; \\color{red}{1 \\le A_i < 10^{1000}}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "p×q≠rなのに一つのprime modulus xで一致するのは、非零整数pq-rをxが割る時だけである。|pq-r|<10^2000が持つ10^9以上の相異なるprime factorは高々約222個なので、広い範囲から複数primeを選ぶと全てでcollisionする確率は極小になる。 各巨大整数を短いresidue vectorへ前計算し、N^2 pairを高速にfrequency lookupでき、誤判定確率を十分小さくできる。",
+          "sourceRevisionIds": [
+            "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2",
+            "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2",
+          "path": "src/content/sources/abc316-abc367/source-abc339-editorial-9206-783ff9c3caa8b6c79125699ba25139d0f342ede0ece4c0a1081ab3044f3c70a2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc339_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5",
+          "path": "src/content/sources/abc316-abc367/source-abc339-f-problem-fd4fd095dde8aba7756de773d9f4b871b37d3563a7e3899c3f38b694662189b5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc339_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc367-f",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-randomized-algorithms"
+      ],
+      "excludedTopics": [
+        "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-randomized-algebraic-fingerprint",
+        "tag-randomized-algorithm"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N,Q\\leq 2\\times 10^5; 1\\leq A_i,B_i\\leq N; 1\\leq l_i \\leq r_i\\leq N; 1\\leq L_i \\leq R_i\\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。 prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。 multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。",
+          "sourceRevisionIds": [
+            "source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4",
+            "source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4",
+          "path": "src/content/sources/abc316-abc367/source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc367_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9",
+          "path": "src/content/sources/abc316-abc367/source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc367_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc455-g",
+      "learningOutcomeIds": [
+        "outcome-compare-algebraic-objects-by-random-fingerprint"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-randomized-algorithms",
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-randomized-algebraic-fingerprint",
+        "tag-randomized-algorithm",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq K \\leq \\min(N,10); 1 \\leq A_i \\leq N; 1 \\leq B_k \\leq N; B_1,B_2,\\dots,B_K are pairwise distinct.; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一値がB_k+1回以上出ない左端下限を越えた範囲では、全count≡0 mod B_kが『各値0回またはB_k回』と同値になる。 distinct集合が固定の区間ではそのhash H も固定で、等頻度条件は S_rB_k-Hr=S_lB_k-Hl というscalar key一致になる。 各値B_k回条件は回数mod B_kが全0というhash一致へ、B_k種類同頻度条件は B_k S_i-H i のprefix同値へ高確率で変換でき、左端範囲内だけを頻度表で数えられる。",
+          "sourceRevisionIds": [
+            "source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e",
+            "source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e",
+          "path": "src/content/sources/abc420-abc466/source-abc455-editorial-19242-16be212d8a47e174a761d504e94ff9061056414ab00385d78fe9255b5a47e33e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc455_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03",
+          "path": "src/content/sources/abc420-abc466/source-abc455-g-problem-589c9d726c2fed90e273ef6782a6fe73f9d7c81870a2855eb09d2d2b4c519a03.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc455_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

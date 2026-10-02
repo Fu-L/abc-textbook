@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC454-E — LRUD Moving</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC454-E — LRUD Moving</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Hamilton path は市松色を毎手交互に通る。始点(1,1)と終点(N,N)を除く全マスを通るには N が偶数で、欠けるマス (A,B) が始終点と反対色、すなわち A+B が奇数であることが必要になる。</p>
+<p>採用する候補: 必要条件を確認し、外周二行または二列を蛇行 path として先頭・末尾へ取り除きながら (H,W,A,B) を2×2まで縮める再帰構成を行う。</p>
+<p>A が外周から離れている側の二行/二列は欠損を含まず Hamilton 部分pathとして接続でき、縮約後も偶数寸法と欠損色条件を保つため基底まで構成できる。</p>
+<p>棄却する候補: 未訪問マスから隣接マスを選ぶ DFS backtracking で Hamilton path を探索する。</p>
+<p>Hamilton path 探索は指数的に分岐し、N^2 頂点の盤面では構成可能な大入力を処理できない。</p>
+<p>N が奇数なら両端同色なのに中間頂点数の色交互性が合わず、N 偶数でも欠損が黒色なら白黒個数が path 順と一致しない。</p>
+<p>二行の蛇行を切り取る操作は prefix または suffix の移動列として接続点を保ち、残る問題の A 座標だけ2ずらす場合がある。</p>
+<p>N偶数かつ A+B奇数でなければ No。H,Wを持つ矩形で欠損より上/下に二行余裕があれば対応する蛇行文字列を前後bufferへ追加してHを2減らす。列方向も同様に縮め、2×2の二ケースを接続して答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="二部-graph-の色数必要条件">二部 graph の色数必要条件</h3>
+<p>発動条件: grid Hamilton path で端点・欠損が指定されるとき。</p>
+<p>市松色の交互性から寸法と欠損色を判定する。</p>
+<h3 id="外周-strip-の再帰構成">外周 strip の再帰構成</h3>
+<p>発動条件: 大きな矩形 grid の Hamilton path を局所patternで縮約できるとき。</p>
+<p>二行・二列の蛇行pathを剥がして定数基底へ落とす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>Hamilton 構成では、まず二部色数差で不可能性を完全に絞り、その条件を保つ縮約patternを探す。</p>
+<p>別の問題へ持ち帰る視点: 出力文字列を prefix と suffix に分けて蓄積すると、両端から外周を剥がす再帰をiterativeに実装できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>N が奇数なら両端同色なのに中間頂点数の色交互性が合わず、N 偶数でも欠損が黒色なら白黒個数が path 順と一致しない。 二行の蛇行を切り取る操作は prefix または suffix の移動列として接続点を保ち、残る問題の A 座標だけ2ずらす場合がある。 A が外周から離れている側の二行/二列は欠損を含まず Hamilton 部分pathとして接続でき、縮約後も偶数寸法と欠損色条件を保つため基底まで構成できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>strip を上側から剥がす場合だけ欠損座標を減らし、文字列の回転・反転方向を誤らない。出力長は N^2-2 で全合法マスを一度ずつ通ることを検査する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>市松色の個数を N 奇偶・欠損色で数え、各strip patternの入口・出口と縮約座標を小さい盤面に描いて確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²)、二行/二列を剥離し移動列を出力。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T \le 5000; 2\le N\le 10^3; 1\le A,B\le N; (A,B)\neq (1,1),(N,N); The sum of N^2 over all test cases is at most 10^6.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、欠損(A,B)=(1,2)。</p>
+<ol>
+<li>残セルは(1,1),(2,1),(2,2)。</li>
+<li>D,Rで始点から終点まで一回ずつ訪問。</li>
+</ol>
+<p>期待される結果: 移動列DR。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>欠損が(2,1)ならどの列がvalidか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>R,DでRD。N偶数かつA+B奇数の必要条件をともに満たす。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc454/tasks/abc454_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc454-e-problem-926f64349f9bacfad7ce606af35dd93eff1ebb06c061b88c4938da52cb11b5a3</li>
+<li><a href="https://atcoder.jp/contests/abc454/editorial/19007">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc454-editorial-19007-ae18eff082434ecb90bf56be028eceb50ec7840c65d922f42903b01f762b8f62</li>
+</ul></main>
+</body></html>

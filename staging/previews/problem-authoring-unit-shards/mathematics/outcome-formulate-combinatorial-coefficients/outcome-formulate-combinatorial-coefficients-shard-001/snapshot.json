@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-formulate-combinatorial-coefficients-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "08783aa27e4f3f7585195d86cd79f92c5b62ffb6f6a55856adfc89fc20292491",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "60233f6bef94572a264b125ffcd1d1c5e35c334624f996bc29f906ec896169ab",
+  "reviewDigest": "7a0ed1c3ad3291e569ed9de454a3bd047205fd2d47e01f3bcc0a8c6f23b48477",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc226-f.html",
+      "digest": "470eb7e725d80564e80960ce42e9a463ca6d3d09b74aea4f43812762b120a562"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc234-f.html",
+      "digest": "07b48857528494245a6c0f557c428de50123f123102ef65599f20faad43791c6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc240-g.html",
+      "digest": "ca8a3ac96cd110254f3e2d49db241aa9272146672d3e1ec98629f89fa6144775"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc243-f.html",
+      "digest": "6bdb7b5dc495d083ce0ad5077cab6a05c27622be3c328d7673b7b87c1c7f66ad"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc262-e.html",
+      "digest": "0bdf22c85fa19dc7c98ed9915963a60aac05ce54cfbf114fc61da82cd1d366ce"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc266-g.html",
+      "digest": "1d06793fb6685ca619aae0ef8c087c08cfaadd5375fcd3cc2d65c8ea33a445ce"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc267-g.html",
+      "digest": "7073f2da11a2ab78ec6913e4933f800be739a3311cc15c43749454b3b48f0a42"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/abc276-g.html",
+      "digest": "c5df5bc87af5b4692d4155f697fc0a0a61abe601b9d3b1b25b66093b020e64a4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-001/index.html",
+      "digest": "e22c87db64592856b3ecc3c8483b1c4ea6349c2dde797c9fdfb759b633a318fa"
+    }
+  ],
+  "snapshotDigest": "03ef2e212a3fe07f23cf9f6a2ca79993c3e05b7b07f5870b6238de4d9d9387b7"
+}

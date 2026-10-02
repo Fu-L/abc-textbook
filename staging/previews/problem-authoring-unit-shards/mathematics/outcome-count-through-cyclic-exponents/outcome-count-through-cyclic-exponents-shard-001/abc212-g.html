@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC212-G — Power Pair</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC212-G — Power Pair</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md">巡回群を指数化して数える</a></p>
+<ul>
+<li>巡回部分群を指数と約数格子で分類し、重複を補正して対象を数えられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md">約数格子のzeta・Möbius反転</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/gcd-structure.md">gcd不変量・差分構造</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/multiplicative-order-periods.md">乗法的位数から最小周期を求める</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>乗法的位数から最小周期だけを求める問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>x=0 なら正の整数 n に対して x^n=0 なので、寄与する組は (x,y)=(0,0) の 1 組だけである。残る非零剰余を乗法群として扱えばよい。</p>
+<p>P が素数なので非零剰余は位数 m=P-1 の巡回群をなす。原始根 r を取り x=r^a,y=r^b と書くと、ある n で x^n=y となる条件は an≡b (mod m) へ移る。</p>
+<p>採用する候補: 原始根の指数へ写し、g=gcd(m,a) ごとに指数 a の個数と到達可能な b の個数を約数上で集約する。</p>
+<p>寄与は g=gcd(m,a) だけで決まり、g は m の約数に限られる。m&lt;10^12 の約数数は高々 6720 なので、約数列挙と約数間の差し引きで制約内に収まる。</p>
+<p>棄却する候補: a=1..m を全走査し、各 a について m/gcd(m,a) を答えへ加える。</p>
+<p>式自体は正しいが O(P) となり P≤10^12 に間に合わないため、同じ gcd を持つ a をまとめる必要がある。</p>
+<p>an≡b (mod m) が n について解を持つのは gcd(m,a) が b を割るときに限る。したがって固定した a から到達できる b は m/gcd(m,a) 個であり、a の gcd ごとに寄与をまとめられる。</p>
+<p>m の約数を降順に処理し、f(g)=m/g−Σ_{h:g|h,h&gt;g}f(h) により gcd(m,a)=g となる a の個数を求める。最後に (0,0) の寄与を含む 1+Σ_g f(g)(m/g) を mod 998244353 で計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="原始根による指数化">原始根による指数化</h3>
+<p>発動条件: 素数法の非零剰余に積と冪が現れるとき。</p>
+<p>乗法群を Z/(P-1)Z の加法的な指数へ写す。</p>
+<h3 id="約数上の包除的集計">約数上の包除的集計</h3>
+<p>発動条件: 値が gcd(P-1,a) のみに依存するとき。</p>
+<p>倍数側の個数を大きい約数から差し引き、gcd が各約数に等しい個数を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>x=0 を非零剰余の巡回群から先に分離すると、残りを原始根の指数だけで統一できる。</p>
+<p>別の問題へ持ち帰る視点: 演算が有限体の乗法に閉じる部分と例外値を分け、群構造へ写せる範囲を確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>非零剰余を原始根の指数aに写す。an≡bの可解条件はgcd(a,P−1)|bなので到達先数は(P−1)/g。gcdがgの指数数f(g)は、gの倍数である指数(P−1)/g個からgcdが真の倍数である分を除くことで得られる。よってΣf(g)(P−1)/gは全非零組を一度数え、最後の1が(0,0)を補う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>m の全約数を列挙して大きい順に処理し、f(g) からは g の真の倍数に対応する既計算値だけを差し引く。最後に巡回群外の (0,0) を 1 組加える。</li>
+<li>m/g と f(g) はそれぞれ 10^12 規模になり得るため、両因子を mod 998244353 へ落としてから 64-bit 整数で掛ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>固定した a に対する冪写像の像の大きさを gcd から再導出し、P=2 を含む小さい素数で (0,0) の 1 組と約数上の差し引きを全列挙結果に照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(√P+D²)、D=τ(P−1)。約数間の倍数関係を全対比較する。</p>
+<h3 id="空間">空間</h3>
+<p>O(D)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq P \leq 10^{12}; P is a prime number.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>P=5。</p>
+<ol>
+<li>x=1の到達先は{1}、x=2,3は{1,2,3,4}、x=4は{1,4}。</li>
+<li>非零寄与1+4+4+2に零の1組を加える。</li>
+</ol>
+<p>期待される結果: 12組。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>P=2では答えはいくつか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>非零組(1,1)と零の組(0,0)だけ。位数1の約数項も1となる。</p>
+<p>確認結果: 2組。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc212/editorial/2289">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05</li>
+<li><a href="https://atcoder.jp/contests/abc212/tasks/abc212_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5</li>
+</ul></main>
+</body></html>

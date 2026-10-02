@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC415-G — Get Many Cola</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC415-G — Get Many Cola</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/eventual-unbounded-knapsack.md">大容量unbounded knapsackのeventual linearity</a></p>
+<ul>
+<li>剰余の鳩の巣原理と密度交換で非基準itemの使用量を界し、有限prefix DPと最大密度itemの反復から巨大capacityの最適値を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>大容量unbounded knapsackのeventual linearityの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一本飲んでexchange iを一回行うと最終的な瓶総数をD_i=A_i-B_iだけ消費し、追加でB_i本飲める。逆向きに見ると、容量Nでweight D_i・value B_iのunbounded knapsackに近い。 ただし初期段階にはx≥B_iという実行条件がある。x≥K=max A_iになれば全B_i&lt;Kなので条件は自動的に満たされ、以後は通常のunbounded knapsackになる。 同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。 非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。</p>
+<p>採用する候補: best ratio B_i/D_i のitem i<em>以外を使う総weightがK(K+1)未満の最適解を利用し、小容量DP後をi</em>の反復で埋める</p>
+<p>prefix x&lt;K(K+1)だけ全itemでDPし、各到達xから残容量へi<em>を可能なだけ使う。鳩の巣原理でK個以上の非i</em> item blockは同weightのi*群へ価値を下げず交換できる。</p>
+<p>棄却する候補: 常にB_i/D_i最大のexchangeだけを最初から繰り返す</p>
+<p>小さいxではx≥B_iを満たさないことがあり、容量の剰余調整でもratioが劣るitemを有限回使う方が総価値を増やす場合がある。</p>
+<p>同じA_iならB_i最大のoptionだけがD_iも小さくvalueも大きいので他を削除でき、残る種類数はK以下になる。</p>
+<p>非i* itemがK個あればprefix weight和K+1個のmod D_{i*} residueに一致pairがあり、そのblockを同weightのi*複数へ交換できる。best ratioにより価値は減らない。</p>
+<p>同じAを最大Bだけにdeduplicateし、cross multiplicationでi<em>を選ぶ。limit=K(K+1)付近まで、開始xを自由に選べる基底0と条件x≥B_iを反映したunbounded DPで最大追加drink数を求める。各DP state xからi</em>をfloor((N-x)/D*)回追加する候補を評価し、初期N本を足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="best-density-itemによる大容量knapsack">best density itemによる大容量knapsack</h3>
+<p>発動条件: capacityが巨大だがitem weightが小さく、best ratio以外の使用量をboundedにできるとき。</p>
+<p>有限prefixだけDPし、残りをbest-density itemで埋める。</p>
+<h3 id="鳩の巣原理による交換">鳩の巣原理による交換</h3>
+<p>発動条件: 非基準itemが多数並び、prefix weight residueを基準weight moduloで比較できるとき。</p>
+<p>同余りの区間を同総weightの基準itemへ置換して非基準総weightを制限する。</p>
+<h3 id="支配optionの除去">支配optionの除去</h3>
+<p>発動条件: 同じ必要量parameterを持つ選択肢で一方が常に多い返却を与えるとき。</p>
+<p>同じAでは最大Bだけ残して種類数をK以下へ減らす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>Nが10^15でも、ratio最良以外が必要なのは実行条件を抜けるprefixとresidue調整だけで、その総weightをK(K+1)未満へ押し込める。</p>
+<p>別の問題へ持ち帰る視点: 巨大capacityのunbounded knapsackではbest ratio解との差分をcycle交換でboundedにし、短いprefix DP＋周期的tailへ分ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>全瓶を飲んでから交換・飲酒する形に整理すると、一交換は残瓶をD=A−B減らしB本を追加する。逆向きではx≥Bの条件でxへDを足す。x≥K以降は条件が消える。最良比率B*/D<em>以外の操作が多数あるなら、最初のK回までの消費prefixをmod D</em>で見て同剰余二点を得る。その間を同消費の最良種だけへ交換すると価値は減らない。これを反復し、x&lt;K付近の初動を含めた非最良種消費をK(K+1)未満へ抑えられる。小容量DPがこの全初動を網羅し、その後を最良種の最大反復へ置換しても最適を失わない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>DP上限をまたぐ遷移とbest-item tailの開始条件x≥B*を正確に扱い、Nがlimit未満ならNまでで止める。answerと回数積は64 bit、ratio比較はcross productにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一種類、best ratioが初期に使えない、同A重複、残容量の剰余で別itemが必要な小Nを状態全探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>K=max A_i≤300、元交換数 M。A同値を最大Bへ統合し高々K種類。O(M+K³)、巨大Nに比例する処理はない。</p>
+<h3 id="空間">空間</h3>
+<p>小容量 O(K²) のDPと種類表 O(K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^{15}; 1\leq M \leq 2\times 10^5; 1\leq B_i &lt; A_i \leq 300; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=7、交換(A,B)=(3,2),(5,3)。</p>
+<ol>
+<li>最初7本を飲む。</li>
+<li>3→2交換を行って飲むと瓶数7→6、追加2。</li>
+<li>同じ操作を瓶3まで計5回行い、瓶2で終了。</li>
+<li>7+5×2=17、他交換は消費2で追加3なので消費1あたり劣る。</li>
+</ol>
+<p>期待される結果: 17</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最高B/DだけをNが小さい時にも無条件で使えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。例えばN=2で3→2交換は必要空瓶3に足りない。小容量DPはこの実行条件を残す。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc415/editorial/13491">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc415-editorial-13491-7ff02c91fc89331a46e6a0fde2e67669aaeba522f010beb4e5082f6094228007</li>
+<li><a href="https://atcoder.jp/contests/abc415/tasks/abc415_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc415-g-problem-30342d182a7e8aad786d0e0357570b03b351ad48294fbde0112e5e3197c04006</li>
+</ul></main>
+</body></html>

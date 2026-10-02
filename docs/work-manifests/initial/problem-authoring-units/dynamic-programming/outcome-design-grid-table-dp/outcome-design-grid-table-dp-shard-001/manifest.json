@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T067-outcome-design-grid-table-dp-shard-001",
+  "taskId": "T067",
+  "scopeDigest": "1c025cb08528bf48a0f44355378d88ca2470cc61d1c71787824734bb7ae9f672",
+  "digest": "016beb1f531582f52aeadd274b1b14d93e1885ad2f0a759f37a4e5b3558b0116",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-design-grid-table-dp",
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T067-outcome-design-grid-table-dp-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc311-e",
+        "abc415-e",
+        "abc443-e"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-design-grid-table-dp",
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md",
+        "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md",
+        "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc443-e.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:37:56.623Z"
+}

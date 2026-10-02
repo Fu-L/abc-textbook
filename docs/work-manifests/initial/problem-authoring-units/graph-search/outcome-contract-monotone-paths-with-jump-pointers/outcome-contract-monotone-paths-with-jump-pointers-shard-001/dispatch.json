@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
+  "primaryOutcomeId": "outcome-contract-monotone-paths-with-jump-pointers",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc295-g"
+  ],
+  "homeUnitId": "unit-monotone-path-contraction",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/abc295-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "e8906c9709dc077c103aa5d01836e5bed30e6180c249197867bb98d8a9c3e4c3",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc295-g",
+      "path": "src/content/docs/problems/graph-search/outcome-contract-monotone-paths-with-jump-pointers/outcome-contract-monotone-paths-with-jump-pointers-shard-001/abc295-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

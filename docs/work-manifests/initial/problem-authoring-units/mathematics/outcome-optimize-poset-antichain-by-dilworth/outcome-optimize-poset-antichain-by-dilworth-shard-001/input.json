@@ -1,0 +1,229 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-poset-antichain-by-dilworth-shard-001",
+  "packets": [
+    {
+      "problemId": "abc237-ex",
+      "learningOutcomeIds": [
+        "outcome-optimize-poset-antichain-by-dilworth"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-matching",
+        "unit-dp-sequence"
+      ],
+      "excludedTopics": [
+        "半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-poset-dilworth-antichain",
+        "tag-bipartite-matching-hall"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq |S| \\leq 200; S consists of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "相異なる回文文字列の真の包含は半順序で、同時に選べる集合はantichain。Dilworthの定理により最大antichain数は最小chain cover数に等しい。左右複製グラフのmatchingの各辺を鎖の連結として使うとp−|matching|本になり、逆に鎖の隣接関係はmatchingを与えるので最大matchingから幅を得る。",
+          "sourceRevisionIds": [
+            "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+            "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa",
+          "path": "src/content/sources/abc212-abc263/source-abc237-editorial-3321-d5b30fa3486e51958e009d418e34e1ada90f4939a73ff3554ad6c2888c3b3eaa.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc237_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4",
+          "path": "src/content/sources/abc212-abc263/source-abc237-ex-problem-363079beeddaa885c316734b881a1aec71be00f9e5ec57a208f69c47a72bffb4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc237_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc354-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-poset-antichain-by-dilworth"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-matching",
+        "unit-dp-sequence",
+        "unit-max-flow-min-cut"
+      ],
+      "excludedTopics": [
+        "半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-poset-dilworth-antichain",
+        "tag-max-flow-min-cut"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 100; S_i is a string consisting of lowercase English letters.; 1 \\leq |S_i|; |S_1| + |S_2| + \\ldots + |S_N| \\leq 5000; 1 \\leq A_i \\leq 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "相異なる文字列の真のsubstring関係は半順序で、合法集合はantichain。重み付きDilworthのflow双対で、source/terminal容量Aと比較関係の無限辺がchainへの共通重みを流し、最大antichain重みはΣA−maxflowになる。同一文字列は一つしか選べないので最大重み代表への統合で最適値を保ち、真の比較だけをgraphに入れる。",
+          "sourceRevisionIds": [
+            "source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4",
+            "source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4",
+          "path": "src/content/sources/abc316-abc367/source-abc354-editorial-10029-71112419c3ca2e0f8e450a31c21672da849fab8fe54f6d6b73f10dcdbbcf5ea4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc354_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d",
+          "path": "src/content/sources/abc316-abc367/source-abc354-g-problem-7fdec5e1c59064d4ae3f21325120b426c2d4375d6b5c4782d7c92404f8b6511d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc354_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc457-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-poset-antichain-by-dilworth"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-matching",
+        "unit-dp-lis",
+        "unit-dp-sequence",
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-poset-dilworth-antichain",
+        "tag-geometry-orientation-transform",
+        "tag-lis-state"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 3 \\times 10^5; 0 \\le T_i \\le 3 \\times 10^5; 0 \\le X_i \\le 3 \\times 10^5; (T_i, X_i) \\neq (T_j, X_j) (i \\neq j); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一台で時刻順に回収できる関係は|ΔX|≤ΔTで、u=T+X,v=T−Xの両座標非減少に同値。必要台数はこのposetの最小chain coverでありDilworthより最大antichain幅。u昇順同値v昇順でsortするとantichainはv狭義減少列に対応するため、そのLIS相当の長さが幅になる。同vを比較不能と誤認しないstrict規約を使う。",
+          "sourceRevisionIds": [
+            "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
+            "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
+          "path": "src/content/sources/abc420-abc466/source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc457_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320",
+          "path": "src/content/sources/abc420-abc466/source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc457_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,388 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-count-labeled-structures-by-components-shard-001",
+  "packets": [
+    {
+      "problemId": "abc213-g",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-subset-state",
+        "unit-generating-functions"
+      ],
+      "excludedTopics": [
+        "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-labeled-component-decomposition",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 17; 0 \\leq M \\leq \\frac{N(N-1)}{2}; 1 \\leq a_i \\lt b_i \\leq N; (a_i, b_i) \\neq (a_j, b_j) if i \\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各部分グラフの基準頂点の連結成分Tは一意である。内部はf(T)通り、補集合内部は2^{e(S\\T)}通り、境界辺は不採用に固定する。この分類で非連結分を全グラフ数から引くとf(S)を得る。同様に1とkを含む成分Sを合計すればその二頂点が連結なグラフだけを一度数える。",
+          "sourceRevisionIds": [
+            "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+            "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f",
+          "path": "src/content/sources/abc212-abc263/source-abc213-editorial-2392-a77f364b1e7b177ec3f179dad0c14139860b6d91d40d6a428c5e19b73c58347f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc213_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2",
+          "path": "src/content/sources/abc212-abc263/source-abc213-g-problem-a41d6e24a828cd97f8c0228d9c72e22bc66ef598cc2ab9f59f3781e016a642d2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc213_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc318-ex",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-polynomial-convolution"
+      ],
+      "excludedTopics": [
+        "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-formal-power-series",
+        "tag-labeled-component-decomposition",
+        "tag-convolution",
+        "tag-generating-functions"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "cycle typeを固定するとlabel割当・cycle順序・重み順序の積がN!²Π(1/i²)^{C_i}/C_i!になる。独立cycle集合を全て合計するEGFはexp(Σx^i/i²)。これが片方のAC分類を数え、対称な二分類の包除と全1cycleの共通分N!を戻すことで公式式になる。係数ごとのexpが全cycle分割を一度ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
+            "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84",
+          "path": "src/content/sources/abc316-abc367/source-abc318-editorial-7055-a1f2d8b4d9b9838ad9251dd3361dbbe4bd442b52fdea27a26a15f6e6f648ff84.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc318_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01",
+          "path": "src/content/sources/abc316-abc367/source-abc318-ex-problem-db3d1678c216e1f2e2683df3ed9ead14ec7bd4a4487fb5f6b659e6ac4b66ef01.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc318_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc321-g",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-contribution-reordering",
+        "unit-dp-subset-state",
+        "unit-generating-functions",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-labeled-component-decomposition",
+        "tag-combinatorial-coefficients",
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 17; 1 \\leq M \\leq 10^5; 1 \\leq R_i, B_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "subset内端子数が等しければ内部matchingはm!、違えば0。anchorを含む真の連結成分Tで分類して非連結分を引く再帰によりconnected内部数g(S)を得る。Sが全graphの一成分となるmatchingはg(S)(M−m)!で、他との端子接続は禁止される。各実現graphの成分indicatorを全非空Sで足すとその成分数になるので期待値の線形性が答えを与える。",
+          "sourceRevisionIds": [
+            "source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05",
+            "source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05",
+          "path": "src/content/sources/abc316-abc367/source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc321_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b",
+          "path": "src/content/sources/abc316-abc367/source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc321_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc327-g",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bipartite-structure",
+        "unit-combinatorial-coefficients",
+        "unit-generating-functions",
+        "unit-inclusion-exclusion",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-labeled-component-decomposition",
+        "tag-bipartite-structure",
+        "tag-combinatorial-coefficients",
+        "tag-inclusion-exclusion",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 30; 1 \\leq M \\leq 10^9; N and M are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "tupleの制約はunderlying graphが二部であることと同値。supportの各辺へM本のlabel付き辺を全射割当てする数をb(M,k)とすれば、同supportの多重辺を正確に復元できる。彩色二部graphからanchor成分でconnected数を抽出し、その2色交換の倍率2を除くとuncolored connected数になる。再び成分を組立て、各辺の向き2^Mを戻せば全tupleを一度数える。",
+          "sourceRevisionIds": [
+            "source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648",
+            "source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648",
+          "path": "src/content/sources/abc316-abc367/source-abc327-editorial-7557-0fcf35f1e484448d15834cb135cc88d160f0ab24b20f773c61b5421416b61648.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc327_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05",
+          "path": "src/content/sources/abc316-abc367/source-abc327-g-problem-e15ba600d96ccb73f7b9a4c04dce5db974afc7a1b7f89aaccede41e988ce5d05.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc327_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc386-g",
+      "learningOutcomeIds": [
+        "outcome-count-labeled-structures-by-components",
+        "outcome-reorder-counting-contributions"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-generating-functions"
+      ],
+      "excludedTopics": [
+        "label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-contribution-reordering",
+        "tag-labeled-component-decomposition",
+        "tag-combinatorial-coefficients"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 500; 1 \\le M \\le 500; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "Kruskalで重みk未満のgraphの成分数は、MSTでk以上の辺を何本必要とするかに1を加えた値。threshold和と定数補正が各graphのMST重みに一致する。成分数総和は成分subsetを先に固定し、内部connected重み数・境界高重み・外側自由辺数を掛けて数える。anchor再帰が内部connected数を一度抽出するので全graphのMST総和が得られる。",
+          "sourceRevisionIds": [
+            "source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c",
+            "source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c",
+          "path": "src/content/sources/abc368-abc419/source-abc386-editorial-11690-735344c6a541a928331f8cc43afb46668a5259454f97d0e988843c3e9502bc1c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc386_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822",
+          "path": "src/content/sources/abc368-abc419/source-abc386-g-problem-4fe3a667a55c7a659d2989372828511e074d4a9b1e7389fd83c4b0b640f28822.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc386_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

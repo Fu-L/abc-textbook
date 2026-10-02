@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC274-EX — XOR Sum of Arrays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC274-EX — XOR Sum of Arrays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/sequence-fingerprint.md">列・文字列のrolling fingerprint</a></p>
+<ul>
+<li>順序を保つprefix hashと連結則を設計し、部分列のhash差やLCP二分探索で列の一致を比較する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+<li>基底と既約関係を定めて拡大有限体の元を一意に表し、標準形を保つ加減乗除を実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>列・文字列のrolling fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>lexicographic comparisonは二列のLCP長を求め、最初の不一致要素またはlengthだけを比較すればよい。</p>
+<p>通常rolling hashはelementwise additionに線形だが、nimber fieldではfield additionがbitwise XORなので H(B xor C)=H(B) xor H(C) が成り立つ。</p>
+<p>棄却する候補: 各queryでXOR列を実際に生成し、target subarrayと先頭から比較する。</p>
+<p>query lengthの総和がNQ規模になり得る。</p>
+<p>採用する候補: 64-bit nimbers上のrandom-base rolling hashを前計算し、virtual XOR sequenceとtargetのprefix equalityをbinary searchしてLCPを得る。</p>
+<p>各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。</p>
+<p>hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。</p>
+<p>LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。</p>
+<p>XORを加法とするfinite fieldへrolling hashを移植し、linear hash compositionとLCP binary searchでvirtual arraysを比較する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="rolling-hashによるlcp二分探索">rolling hashによるLCP二分探索</h3>
+<p>発動条件: 多数のsubstring/virtual sequenceをlexicographically比較し、prefix equalityを高速判定できるとき。</p>
+<p>prefix length kのhash一致をpredicateとして最大共通prefix長をbinary searchする。</p>
+<h3 id="演算に線形なhash-fieldの選択">演算に線形なhash fieldの選択</h3>
+<p>発動条件: elementwise演算後のsequence hashをoperand hashesから直接合成したいとき。</p>
+<p>XORが加法になるnimber fieldとNim productをrolling-hashの係数演算に用いる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>64-bit nimber hashでruntime-random baseを選ぶと、入力を固定するjudgeがcollision rootを狙うことを防ぎ、長さに対して小さいfailure probabilityを得る。</p>
+<p>別の問題へ持ち帰る視点: combined sequenceの演算とhash加法を一致させるには、その演算を加法に持つalgebraic fieldを探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>hash(A[a..a+k)) xor hash(A[c..c+k))がelementwise XOR列prefixのhashに一致するため、virtual sequenceをmaterializeせずequality判定できる。 LCPがmin(leftLength,rightLength)未満なら実値A_{a+l} xor A_{c+l}とA_{e+l}を比較し、全prefix一致なら短い列だけがstrictly smallerである。 各substring hashとXOR-combined hashを定数時間で作れ、一queryをO(log N) hash comparisonsにできる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>substring hashのlength normalizationを揃え、三prefixが同じ次数配置になるようprefix formulaとpowersを統一する。</li>
+<li>Nim productは再帰分解と小block tableで実装し、baseは実行時randomかつ0,1など退化値を避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>virtual elementwise sequenceの比較は、演算に線形なhashを作ってprefix equality oracleにする。</li>
+<li>lexicographic判定ではLCP探索後の不一致比較と、片方がprefixになったlength比較を分離する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>前計算O(N)、Q比較O(Q log N)。64-bit nimber演算の固定幅コストを定数とする。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、hashと基数冪。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 0 \leq A_i \leq 10^{18}; 1 \leq Q \leq 5 \times 10^4; 1 \leq a \leq b \leq N; 1 \leq c \leq d \leq N; 1 \leq e \leq f \leq N; b - a = d - c; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>仮想列(1,2) xor (3,1)と対象列(2,4)。</p>
+<ol>
+<li>仮想列は(2,3)。</li>
+<li>LCPは1で、最初の不一致は3と4。</li>
+</ol>
+<p>期待される結果: 仮想列の方が辞書順で小さい。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>通常の整数法rolling hashをXORで合成してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>整数法の加法はbitwise XORでなく、要素XORとhash XORの線形性は保証されない。nimber fieldの加法を使う必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc274/tasks/abc274_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-ex-problem-1977cb083717a817883b8a1b0087b2f48e93b0d3dc6a6476be2d4f433637865f</li>
+<li><a href="https://atcoder.jp/contests/abc274/editorial/5026">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-editorial-5026-a8d70954ac8fc6d04a66ca8b0fe9fa0e4f8c4e764783633bec1da60e35e26838</li>
+</ul></main>
+</body></html>

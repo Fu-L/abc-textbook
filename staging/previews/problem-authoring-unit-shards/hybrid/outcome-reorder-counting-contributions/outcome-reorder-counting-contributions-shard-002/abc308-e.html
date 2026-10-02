@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC308-E — MEX</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC308-E — MEX</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>middle index j with S_j=‘E’を固定すると、left M indexとright X indexのidentityは不要で、それぞれのA value 0,1,2別countだけで全組をまとめられる。</p>
+<p>mex(a,A_j,b)は3^3の定数表として前計算でき、left/right value countsの積が対応triples数になる。</p>
+<p>棄却する候補: 全i&lt;j&lt;k triplesを列挙して文字条件とmexを調べる。</p>
+<p>Θ(N^3)である。</p>
+<p>採用する候補: left M counts[3]とright X counts[3]を維持し、各E positionで9 value pairsのcount積×mexを加える。</p>
+<p>value universeが3なのでpositionごとの処理が定数になり全体O(N)である。</p>
+<p>scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i&lt;j&lt;kを保てる。</p>
+<p>同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。</p>
+<p>ordered triple sumをmiddle-index sweepとsmall-alphabet frequency aggregationへ分解する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="中央要素固定のtriplet-counting">中央要素固定のtriplet counting</h3>
+<p>発動条件: i&lt;j&lt;kの寄与がsmall categories of endpointsとmiddle valueだけで決まるとき。</p>
+<p>jをscanし、left/right category frequenciesの直積で全endpoint pairsを数える。</p>
+<h3 id="小さい値域の全組表">小さい値域の全組表</h3>
+<p>発動条件: 状態値が少数で、三値関数を繰り返し評価するとき。</p>
+<p>a,b∈{0,1,2}を9通り列挙してmex(a,A_j,b)を加える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>M/E/Xという文字役割とAの数値役割を分離し、文字が位置のside、Aがfrequency classを決める。</p>
+<p>別の問題へ持ち帰る視点: subsequence countingでは順序をscanで、値依存をcategory countsで処理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i&lt;j&lt;kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>current positionがXならE評価前にright countから外し、Mなら評価後にleftへ足してstrict inequalityを保つ。</li>
+<li>triple数はN^3規模なので64 bit整数で積と答えを保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>ordered tripleはmiddleを固定し、左右要素を答えに必要な最小categoryへ集約する。</li>
+<li>値域が定数ならendpoint categoriesを全列挙し、frequency積でsubsequencesを数える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、alphabet0,1,2の固定九組を各Eで集計。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)補助。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 2\times 10^5; N is an integer.; A_i \in \lbrace 0,1,2\rbrace; S is a string of length N consisting of M, E, and X.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(0,1,2)、S=MEX。</p>
+<ol>
+<li>唯一のM,E,X tripleの値集合は{0,1,2}。</li>
+<li>mexは3。</li>
+</ol>
+<p>期待される結果: 答え3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=(0,0,0)なら同じmex3か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>集合{0}のmexは1なので答え1。三値の重複を数えてmexを位置数で決めない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc308/tasks/abc308_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098</li>
+<li><a href="https://atcoder.jp/contests/abc308/editorial/6708">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205</li>
+</ul></main>
+</body></html>

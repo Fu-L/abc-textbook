@@ -1,0 +1,436 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-order-preserving-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc214-f",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-transition-optimization"
+      ],
+      "excludedTopics": [
+        "列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-sequence-subsequence-dp",
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \\times 10^5 (inclusive) consisting of lowercase English letters."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各文字列をその末尾文字の最右の採用位置へ割り当てる。位置iに付加できるprefixは隣接を避けるためi−2以前で終わるものと空文字。直前の同文字位置kへ既に付加できたprefixを除けば重複は消える。よって新規分はprefix終了位置の連続区間の和となり、累積和で計算できる。任意の実現可能な文字列を末尾の同文字のより右の出現へ移しても隣接禁止を破らないので、この除去で実現可能な文字列を失わない。",
+          "sourceRevisionIds": [
+            "source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac",
+            "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac",
+          "path": "src/content/sources/abc212-abc263/source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc214_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75",
+          "path": "src/content/sources/abc212-abc263/source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc214_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc238-f",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 300; 1 \\le K \\le N; Each of P and Q is a permutation of (1,2,...,N)."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "第一順位順に処理すると現在より第一試験で上位の者は全て処理済み。現在を選ぶとき両試験で優れた未選択者がいない条件は、現在の第二順位が未選択者全体の最小第二順位より小さいことと同値。したがって未選択集合の履歴はその最小値だけで十分。選択人数とその境界を状態にし、選ぶ・選ばないを両方遷移すれば、支配する人を含む必要条件を全て守ったK人集合を一度ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
+            "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21",
+          "path": "src/content/sources/abc212-abc263/source-abc238-editorial-3354-883010a86d52c338be2cfc1329fe84067574c5b9934ac040ec239599a6f3dd21.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc238_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d",
+          "path": "src/content/sources/abc212-abc263/source-abc238-f-problem-6b3d02d02a5297c375adc6e5bf98f0e8d425228f8f6f6e2361b490e773cdea9d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc238_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc299-f",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of lowercase English letters whose length is between 1 and 100, inclusive."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同じ値列Tを与える部分列の取り方は多数あるので、各次文字を最左next位置で取る正準表現を使う。後半の先頭q1=xを固定し、前後の位置pairから同じ文字を最左で延長する。前半の直後にTの先頭文字を最左で探した位置がxとなる終了条件が、二つの半分の境界を確定する。任意のTTはこの正準経路と境界を一意に持ち、任意の受理経路は前半より後に同じTを構成するため、全xのDPの和が異なるsquare文字列を一回ずつ数える。",
+          "sourceRevisionIds": [
+            "source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905",
+            "source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905",
+          "path": "src/content/sources/abc264-abc315/source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc299_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a",
+          "path": "src/content/sources/abc264-abc315/source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc299_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc315-f",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-sequence-subsequence-dp",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 10^4; 0 \\le X_i,Y_i \\le 10^4; (X_i,Y_i) \\neq (X_j,Y_j) if i \\neq j."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dp[i,c]を点iへ到達し、途中でc点を省いた最小距離とする。直前に訪れた点jからiへ移ると距離を一度足し、省略数をi−j−1だけ足すので全経路と遷移列が一対一になる。全点経由の既知距離Uよりpenalty 2^{c−1}が大きいcは、非負距離と合わせて既知解より劣るため捨ててよい。残るcだけのDPで全最適候補を保持し、終点で総cに対するpenaltyを一回加えた最小を取れば目的関数そのものになる。",
+          "sourceRevisionIds": [
+            "source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4",
+            "source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4",
+          "path": "src/content/sources/abc264-abc315/source-abc315-editorial-6993-49cc68eab96132414d85a799b382c6666858d61b80fc2bace9f31c8cd0fdfed4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc315_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b",
+          "path": "src/content/sources/abc264-abc315/source-abc315-f-problem-e216857b05d3a1490f0d20893059c08b33dfb0d4ea423314d90b0869d0359b5b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc315_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc327-e",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 5000; 1\\leq P_i\\leq 5000; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "k個選択の分子は前のk−1個分子へ0.9を掛け現在Pを足す。同じkの分母と罰則は固定なので分子最大だけを残せる。降順k更新は一つの成績の再使用を防ぐ。全kのrating最大を最後に取る。",
+          "sourceRevisionIds": [
+            "source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a",
+            "source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a",
+          "path": "src/content/sources/abc316-abc367/source-abc327-e-problem-82d5cd0e3dc3b2ed0e77e993c4eabfa3545fb9ffef0f62201f860b0559a5a75a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc327_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24",
+          "path": "src/content/sources/abc316-abc367/source-abc327-editorial-7564-c0d8558ee7fe61bcffb1c1da0f5f606c581d76c70301dc25ce5eda2de40c4d24.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc327_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc362-e",
+      "learningOutcomeIds": [
+        "outcome-design-order-preserving-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 80; 1 \\leq A_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "等差列の最初二indexを固定すると公差が定まり、その後は同公差の次index始まり列だけ接げる。右から計算して依存先を確定する。各列は最初二indexと残りに一意分解され長さ別に漏れ重複なく数えられる。",
+          "sourceRevisionIds": [
+            "source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace",
+            "source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace",
+          "path": "src/content/sources/abc316-abc367/source-abc362-e-problem-12d537dccbcb369fc5a6142726d86335fa37a673f581d34beeb99b6bda5e0ace.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc362_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9",
+          "path": "src/content/sources/abc316-abc367/source-abc362-editorial-10399-fb31b09b5e81b48ced70ca519f2ccf93e7c7fc2c9e0291693eee4c5e26ffdbc9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc362_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

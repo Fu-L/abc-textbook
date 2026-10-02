@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC293-F — Zero or One</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC293-F — Zero or One</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>d≥3桁では基数bごとの可能値区間[b^(d-1),Σb^i]が互いに交わらず、Nに対する候補bは高々一つである。</p>
+<p>採用する候補: 桁数列挙と整数(d-1)乗根候補の検査</p>
+<p>d=2を別処理し、各d≥3で最大b^(d-1)≤Nのbだけを実際に基数変換すればよい。</p>
+<p>棄却する候補: 全基数2..Nを試す</p>
+<p>Nは10^18で線形列挙できない。</p>
+<p>Σ_(i=0)^(d-1)b^i &lt; (b+1)^(d-1)により隣接基数のd桁01表現範囲が分離する。</p>
+<p>d=2..floor(log2 N)+1を列挙し、d=2の候補N,N-1を処理する。d≥3は整数二分探索でbを求め、Nをb進除算して全桁0/1か検査し重複なく数える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="整数k乗根">整数k乗根</h3>
+<p>発動条件: 巨大整数Nに対しb^k≤Nの最大bを求める。</p>
+<p>オーバーフローを抑えた比較で二分探索する。</p>
+<h3 id="表現範囲の分離">表現範囲の分離</h3>
+<p>発動条件: 基数候補が多そうだが桁数固定で値域が離れる。</p>
+<p>O(log N)個の桁数を列挙し、各桁数では表現範囲の非交差性から候補基数を高々一つへ絞る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>01桁という疎な表現条件が、二項定理によって基数ごとの値域を非交差にする。</p>
+<p>別の問題へ持ち帰る視点: 基数探索は桁数固定時の表現可能区間の重なりを調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>d≥3桁の01表現が存在するならb^{d−1}≤N≤Σ_{i&lt;d}b^i。後者は(b+1)^{d−1}未満なので異基数の可能域は重ならず、その桁数で調べるbは高々一つ。d=2のN,N−1と全d≥3の候補を取り、実際の除算で全桁0/1を確認すれば全可能基数を尽くす。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>b≥2、d=2の候補重複、N=2境界を処理し、冪計算はN超で飽和する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Nで全基数を試し、2桁候補、同じbが別dで数えられないこと、最大桁数を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O((log N)³)を上界とする。桁数ごとに整数二分探索と飽和冪評価を行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(log N)。候補基数を重複除去する。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 1000; 2 \leq N \leq 10^{18}; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=7。</p>
+<ol>
+<li>2進111、6進11、7進10は条件を満たす。</li>
+<li>3進21、4進13、5進12は満たさない。</li>
+</ol>
+<p>期待される結果: 3基数。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>N=2の二桁候補N,N−1を両方採るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>基数は2以上なので1を除く。2進10だけが残る。</p>
+<p>確認結果: 1基数。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc293/editorial/5945">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc293-editorial-5945-a10a0b003741ded035e6b0ff15b384193828cd111785bd4b8963d93f6bbaa529</li>
+<li><a href="https://atcoder.jp/contests/abc293/tasks/abc293_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc293-f-problem-40d4cd66fa2af2e4845b6d59fdb8eb0d12fff10f92cc15b47f545dbd7549439f</li>
+</ul></main>
+</body></html>

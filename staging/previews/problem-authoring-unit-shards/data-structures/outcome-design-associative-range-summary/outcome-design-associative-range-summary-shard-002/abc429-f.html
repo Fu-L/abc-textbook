@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC429-F — Shortest Path Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC429-F — Shortest Path Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md">半環行列・min-plus/max-min遷移</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>3×N グリッドの左上から右下への最短路には列を左へ戻る移動を含まない最短路が存在する。すると列 j までの三行の距離ベクトルは、直前列のベクトルと列 j の通行可否だけで決まる。</p>
+<p>採用する候補: 各列を三成分の距離ベクトルに作用する min-plus 写像として表し、写像の合成をセグメント木に載せる。</p>
+<p>写像合成は結合的で、一点更新後の全列合成を O(log N) で再計算できる。</p>
+<p>棄却する候補: 各マス更新のたびにグリッド全体で BFS をやり直す。</p>
+<p>一質問 O(N) 以上となり、Q 回に対して遅い。</p>
+<p>列内では上下移動を何回か行ってから右へ進むだけなので、入力三距離から出力三距離への最短コストは固定サイズの min-plus 行列で表せる。</p>
+<p>写像 f,g の合成 h(x)=g(f(x)) は結合的で、区間を左右に分けても全体作用が変わらない。</p>
+<p>各列の障害配置から、前列各行から当列各行へ左戻りなしで移る 3×3 の min-plus 遷移行列を作る。セグメント木の積を min-plus 行列積で定義し、更新列の行列を差し替える。初期ベクトルへ全体積を作用させた第3成分を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="min-plus-行列">min-plus 行列</h3>
+<p>発動条件: 少数状態の最短距離 DP の遷移を合成したいとき。</p>
+<p>三行間の遷移コストを行列にし、加算を経路連結、min を中間状態選択として積を定義する。</p>
+<h3 id="モノイドセグメント木">モノイドセグメント木</h3>
+<p>発動条件: 一点更新があり、列順に並ぶ結合的な写像の全体合成を繰り返し求めるとき。</p>
+<p>葉へ列写像、内部節点へ左写像の後に右写像を置いた合成を保存する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>幅が定数の動的グリッド最短路は、各列を境界距離ベクトル間の小さな写像として要約できる。</p>
+<p>別の問題へ持ち帰る視点: DP 遷移が結合可能なら、列更新は遷移モノイドの一点更新へ置き換えられる。</p>
+<h2 id="正当性">正当性</h2>
+<p>列内では上下移動を何回か行ってから右へ進むだけなので、入力三距離から出力三距離への最短コストは固定サイズの min-plus 行列で表せる。 写像 f,g の合成 h(x)=g(f(x)) は結合的で、区間を左右に分けても全体作用が変わらない。 写像合成は結合的で、一点更新後の全列合成を O(log N) で再計算できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>行列積の左右順序を列順と合わせ、通行不能遷移は十分大きい INF にする。始点・終点が塞がる場合と第1列の初期化を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>左戻り不要の根拠、列行列が列内の全上下経路を含むこと、セグメント木の積順序を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)、3×3 min-plus合成はO(1)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\le N\le 2\times 10^5; S_{i,j} is # or ..; S_{1,1}=S_{3,N}= .; 1\le Q\le 2\times 10^5; 1\le r\le 3; 1\le c\le N; (r,c) \neq (1,1),(3,N); N,Q,r,c are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>全て通行可能な3×2盤面、始点(1,1)、終点(3,2)。</p>
+<ol>
+<li>右へ1、下へ2の計3手で到達。</li>
+<li>行列合成も最終第3成分を3とする。</li>
+</ol>
+<p>期待される結果: 最短距離3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>第2列の全3マスを塞ぐとINFはどう解釈するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>右端へ進む経路がなく到達不能。INFを通常値として足してoverflowさせず、到達不能として維持する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc429/editorial/14274">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc429-editorial-14274-e36534099806a283b2248f27f8ce44b278b6971a5ea492de86fba015f0759147</li>
+<li><a href="https://atcoder.jp/contests/abc429/tasks/abc429_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc429-f-problem-1daa51f4404cecb7602f514823810f40e0027d401966fcea1a1fdb1d37da475d</li>
+</ul></main>
+</body></html>

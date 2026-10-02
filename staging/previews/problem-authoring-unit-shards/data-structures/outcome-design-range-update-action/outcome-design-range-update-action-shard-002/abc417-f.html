@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC417-F — Random Gathering</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC417-F — Random Gathering</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一操作後、区間[L,R]の各plateの期待stone数は、操作前区間総和をlenで割った同じ値になる。選択位置とstone数は相関しても、期待値の線形性により総和の期待値だけでよい。</p>
+<p>区間外の期待値は変わらないため、必要操作は現在期待値配列へのrange sum queryと、その区間全体へのconstant assignmentである。</p>
+<p>採用する候補: range sumとrange assignment lazy propagationを持つsegment treeで期待値配列をオンライン更新する</p>
+<p>各操作でsum=prod(L,R)、v=sum/(R-L+1)を求めrange assign vとし、全体O((N+M)log N)で処理できる。</p>
+<p>棄却する候補: 各操作で[L,R]の全要素を走査して合計し同じ期待値を書き込む</p>
+<p>区間長がNの操作がM回あり得てO(NM)となる。</p>
+<p>実際の配置は一皿に全stoneが集まるが、各jが選ばれる確率1/lenなのでE[X’_j]=E[ΣX_k]/len=ΣE[X_k]/lenとなる。</p>
+<p>lazy tagは加算ではなく上書きで、node区間長lenNodeに値vをassignしたときsum=v·lenNodeへ置換し、後のtagが前のtagを上書きする。</p>
+<p>leafをA_iでbuildする。各(L,R)でrange sum sを取得し、v=s·inv(R-L+1) mod 998244353を計算してrange assignする。全操作後に各point value、またはtreeを展開したleafを順に出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="期待値の線形性">期待値の線形性</h3>
+<p>発動条件: ランダムに全量を一地点へ集める操作の各位置期待値を追うとき。</p>
+<p>選択indicatorと区間総量の積を条件付けし、期待総和を均等配分する。</p>
+<h3 id="lazy-segment-tree">lazy segment tree</h3>
+<p>発動条件: range aggregate取得とrange全代入が混在するとき。</p>
+<p>node sumとoptional assignment tagを持ち、区間長倍でapplyする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>ランダム過程の分布や共分散を保持せず、操作が線形なので期待値vector自体へ同じ確定range平均操作を適用できる。</p>
+<p>別の問題へ持ち帰る視点: 確率操作が状態の線形変換なら、期待値にも同じ線形変換を施し、deterministic data structureで処理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>実際の配置は一皿に全stoneが集まるが、各jが選ばれる確率1/lenなのでE[X’_j]=E[ΣX_k]/len=ΣE[X_k]/lenとなる。 lazy tagは加算ではなく上書きで、node区間長lenNodeに値vをassignしたときsum=v·lenNodeへ置換し、後のtagが前のtagを上書きする。 各操作でsum=prod(L,R)、v=sum/(R-L+1)を求めrange assign vとし、全体O((N+M)log N)で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>assignment値0とtagなしを別flagで区別する。区間長の逆元をmodで計算し、half-open indexとnode長を揃える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>長さ1、全区間、重なる区間、期待値0のassignmentを小Nの全乱数列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>長さ逆元前計算O(N)、操作O(M log N)、葉展開O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le M\le2\times10 ^ 5; 0\le A _ i\lt998244353\ (1\le i\le N); 1\le L _ i\le R _ i\le N\ (1\le i\le M); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,8)、全区間から一皿を等確率で選んで全石を集める。</p>
+<ol>
+<li>合計10。</li>
+<li>各皿が選ばれる確率1/2なので両期待値は5。</li>
+</ol>
+<p>期待される結果: 期待値列(5,5)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>期待値が0の区間代入をtagなしとしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>区間総和0も正規の更新である。値0とtagなしを区別しないと過去の値が残る。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc417/editorial/13549">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc417-editorial-13549-9592f5d00c9cb4b14771101aa832aa0791fe2e15d3b99f55a07229f40675b664</li>
+<li><a href="https://atcoder.jp/contests/abc417/tasks/abc417_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc417-f-problem-1fbb588cf6c343f09c00dde44b41f0da9c4ec9e47246eac1da54be528285f28c</li>
+</ul></main>
+</body></html>

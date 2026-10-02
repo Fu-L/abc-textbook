@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC309-EX — Simple Path Counting Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC309-EX — Simple Path Counting Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/reflection-principle.md">鏡像法・reflection principle</a></p>
+<ul>
+<li>最初に境界を破るpathとの鏡像対応を構成し、壁付きwalkの数え上げを符号付きの無境界問題へ変換できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>鏡像法・reflection principleの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>高さ 1..M の単純路を一段進む遷移は、位置を −1,0,+1 だけ動かす線形作用である。N は 10^9 なので段数 DP はできない一方、幅 M は 10^5 に収まる。</p>
+<p>端 0 と M+1 から外へ出る歩道を排除する境界条件だけが平行移動不変性を壊しており、鏡像の負符号でその寄与を相殺できる。</p>
+<p>採用する候補: 長さ 2M+2 の符号付き鏡像列へ拡張し、循環畳み込み (x^{-1}+1+x)^{N−1} を高速累乗する。</p>
+<p>境界を鏡像で吸収すると各段が同じ巡回畳み込みになり、NTT と二乗法で O(M log M log N) にできる。</p>
+<p>棄却する候補: M 状態の遷移行列を二乗して N−1 段をまとめる。</p>
+<p>疎行列でも二乗後は密になり、M=10^5 に対する行列積・保持は不可能である。</p>
+<p>開始分布を位置 j に正、鏡位置 2M+2−j に負で置くと、禁止境界を越えて戻る経路が一対一に逆符号で対応して消える。</p>
+<p>巡回添字を x^{2M+2}=1 とみなせば、一段の遷移は多項式への (x^{-1}+1+x) の乗算そのものになる。</p>
+<p>長さ D=2M+2 の f を作り、各開始 A_i の係数を +1、D−A_i を −1 とする。環 Z[x]/(x^D−1) で g=x^{-1}+1+x を N−1 乗し f と畳み込み、B_i の係数を合計する。各積は NTT 後に次数を D 周期で折り返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="鏡像法による境界条件の除去">鏡像法による境界条件の除去</h3>
+<p>発動条件: 一様なランダムウォーク・格子路で、壁だけが畳み込み構造を妨げるとき。</p>
+<p>反射位置へ逆符号の初期値を置き、壁越え経路を相殺する。</p>
+<h3 id="多項式遷移の高速累乗">多項式遷移の高速累乗</h3>
+<p>発動条件: 巨大な反復回数に対し、一段の線形遷移が平行移動不変な小 kernel で表せるとき。</p>
+<p>状態列を多項式とみなし、商環上で kernel を二分累乗する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>鏡像法は確率の閉形式だけでなく、有限区間 DP を巡回畳み込みへ変換するためにも使える。</p>
+<p>別の問題へ持ち帰る視点: 巨大な時間軸と中程度の空間軸を見たら、境界を処理して遷移を convolution にできないか検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>開始分布を鏡位置へ逆符号で置くと、反射対称な移動作用のもと境界0,M+1の係数は常に0である。内部では隣接・停止の通常遷移と一致するため、内部係数は外へ出ない経路数のDPを満たす。周期環でN−1乗してもこの不変条件を保ち、終点分布との内積で全指定開始終点の経路を数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>x^{-1} は配列添字 D−1 に置き、畳み込み後の次数を D で正しく折り返す。負係数を法で正規化し、問題文の B の重複もそのまま加算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>巨大回数の DP ではまず一段作用が線形かを見る。その後、境界だけを切り離し、鏡像で translation invariant に戻せるかを追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(M log M·log N+K+L)。周期長D=2M+2の積をNTTで累乗する。</p>
+<h3 id="空間">空間</h3>
+<p>O(M+K+L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^9; 1 \le M,K,L \le 10^5; 1 \le A_i,B_j \le M</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>M=2、N=3、開始1、終点1。</p>
+<ol>
+<li>二段の高さ列は1→1→1と1→2→1。</li>
+<li>境界0,3へ出る列は除く。</li>
+</ol>
+<p>期待される結果: 2経路。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>M=1ではNが巨大でも経路数は。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>高さ1しかないので毎段停止する唯一の経路。鏡像差分もこの境界条件を保存する。</p>
+<p>確認結果: 1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc309/editorial/6751">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc309-editorial-6751-6ce08329a6ac1858c581d4dcaf20125dccad02bd6b0c6a0898679de12244393d</li>
+<li><a href="https://atcoder.jp/contests/abc309/tasks/abc309_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc309-ex-problem-65aeeef57cba7aec6c3dfae69feb941b8f786bc151fe34154c429e4013c949e7</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC269-G — Reversible Cards 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC269-G — Reversible Cards 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>front-side sum S_Aからcard iをflipするとvisible sumはC_i=B_i−A_iだけ変わるため、各targetは差分のsubset sumで表せる。</p>
+<p>Σ|C_i|≤Σ(A_i+B_i)=Mなので、非零な異なる差分値の種類数と、そのmultiplicityをbinary decompositionした総group数はO(√M)に抑えられる。</p>
+<p>棄却する候補: cardを一枚ずつ処理するminimum-card subset-sum DPを行う。</p>
+<p>状態幅O(M)の遷移をN回行うためO(NM)となる。</p>
+<p>採用する候補: 同じCのcardsをまとめ、個数をpowers of twoとremainderへ分割して0/1 knapsack itemsに変換する。</p>
+<p>0からmultiplicityまでの任意個数をgroup subsetで表せ、全group数O(√M)に対するDPでO(N+M√M)となる。</p>
+<p>multiplicity nを1,2,4,…と残余へ分ければ、0,…,nの全個数をgroup sizesのsubset sumとして表現できる。</p>
+<p>size sのgroupは差分sC、flip cost sの一つの0/1 itemなので、DP値を選択枚数の最小値としてそのまま更新できる。</p>
+<p>equal flip deltasをfrequency compressionし、binary-split bounded knapsackへ帰着して全visible sumsのminimum flipsを同時に得る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="個数制限付きknapsackの二進分割">個数制限付きknapsackの二進分割</h3>
+<p>発動条件: 同じweight/costのitemが多数あり、0から上限まで任意個選べるとき。</p>
+<p>同じCのfrequencyを二進groupへ分け、各groupを一度だけ選べるitemとしてminimum-cost DPする。</p>
+<h3 id="l1-budgetによる種類数の評価">L1 budgetによる種類数の評価</h3>
+<p>発動条件: 整数値の絶対値総和に上限があり、異なる値ごとの処理回数を評価したいとき。</p>
+<p>Σ|C_i|≤Mからfrequency階層ごとの異なるCの数を評価し、binary groups総数をO(√M)と示す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>答えkはDP index k−S_Aに対応し、Cが負でも差分軸をoffset付き配列にすれば同じsubset-sum transitionで扱える。</p>
+<p>別の問題へ持ち帰る視点: 二択の総和問題は一方をbaselineとし、選択変更量のsubset sumへ移すと目的値とcostを分離できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>表面総和を基準に、カードiの反転を差δ_i=B_i−A_iと費用1の0/1選択にする。同じ差のc枚を大きさ1,2,4,…と残りへ分けると、0..cの全枚数をgroupのsubsetとして表せる。大きさsのgroupを差sδ・費用sのitemにすれば、元の選択と実現する和・費用の最小値が一致する。よって各groupを一回ずつ0/1最小化DPへ入れると、全カードの最少反転数が求まる。groupの絶対差総和はΣ|δ_i|≤Mである。閾値T以下のpower-of-two group数はΣ_j O(T/2^j)=O(T)、残りgroupも差種類ごとに一つでO(T)、T超のgroupはO(M/T)個なので、T=√Mで全group数O(√M)となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>C=0のcardはflipしてもsumを変えず最小枚数を改善しないため、group化せず無視できる。</li>
+<li>正負両方のshiftで同一itemを二重使用しないよう、各groupごとに更新元DPを分離するか走査方向を厳密に選ぶ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>二面cardの総和はfrontをbaselineにしてflip deltaだけを集め、同値deltaのfrequencyを活用する。</li>
+<li>値の絶対値総和が小さい制約は、DP幅だけでなく異なる値やbinary groupsの総数評価にも使う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M√M)、M=Σ(A_i+B_i)、差分頻度のbinary split群総数O(√M)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq 2 \times 10^5; 0 \leq A_i, B_i \leq M; \sum_{i=1}^N (A_i + B_i) = M; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>カード(A,B)=(2,0),(0,3)、M=5。</p>
+<ol>
+<li>初期sum2はflip0。第一flipで0、第二flipで5、両flipで3。</li>
+<li>他sum1,4は不可。</li>
+</ol>
+<p>期待される結果: sum0..5の最少flipは(1,−1,0,2,−1,1)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同deltaがn枚なら一groupだけcost1にできるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>任意個数0..nを選べる必要がある。group size sはdelta sC、cost sでbinary splitする。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc269/editorial/4841">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84</li>
+<li><a href="https://atcoder.jp/contests/abc269/tasks/abc269_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88</li>
+</ul></main>
+</body></html>

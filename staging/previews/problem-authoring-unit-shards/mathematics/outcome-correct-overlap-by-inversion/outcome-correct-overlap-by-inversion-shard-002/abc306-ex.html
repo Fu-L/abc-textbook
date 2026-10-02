@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC306-EX — Balance Scale</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC306-EX — Balance Scale</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dag-topological-processing.md">DAGのtopological processing</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各comparisonの&lt;,&gt;,=はedgeの向きまたは両端の同一weight classへのcontractに対応し、実現可能性はcontract後のstrict-order digraphがDAGであることと同値である。</p>
+<p>DAGからindegree-zero classesを順に除く数え方は複数sourcesの除去順を重複計上するため、source集合に包除原理が必要になる。</p>
+<p>棄却する候補: M edgesへ3結果をすべて割り当て、cycle consistencyを検査する。</p>
+<p>3^MでMは最大136となる。</p>
+<p>採用する候補: vertex subset maskのDPを用い、除去する非空subset sが元graph上で持つconnected components数c(s)に応じて符号(−1)^(c(s)+1)を掛ける。</p>
+<p>source equality classesの全選択を包除で一度ずつ数え、全submask遷移はO(3^N)でN≤17に収まる。</p>
+<p>同時にindegree zeroとして除くverticesは、元のundirected selected subgraphの各connected component内で=により一classへcontractされる必要がある。</p>
+<p>dp[mask]=Σ_{∅≠s⊆mask}dp[mask\s](−1)^(c(s)+1)とすると、複数zero-indegree componentsを持つcaseのalternating sumが1になる。</p>
+<p>comparison outcomesのrealisabilityをcontracted DAG countingへ写し、minimal classesのsubset inclusion-exclusionを3^N bit DPで評価する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="dagのsource除去と包除原理">DAGのsource除去と包除原理</h3>
+<p>発動条件: partial orderをminimal elementsの除去で数えると複数の除去順が同じ構造を表すとき。</p>
+<p>nonempty source subsetを選ぶsubmask transitionにconnected-component数由来のalternating signを付ける。</p>
+<h3 id="全subsetの連結成分数前計算">全subsetの連結成分数前計算</h3>
+<p>発動条件: Nが20未満で、各submask transitionの係数がinduced subgraphのcomponent countに依存するとき。</p>
+<p>least bitを追加するrecurrence等でc(mask)を全2^N masksについて求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>equal outcomesは単なるbidirectional edgesではなくvertex identificationであり、異なるmass classes間だけにstrict directed edgesが残る。</p>
+<p>別の問題へ持ち帰る視点: 比較結果の=を含む整合性問題は、equality classesをcontractしてstrict relationのacyclicityを見る。</p>
+<h2 id="正当性">正当性</h2>
+<p>等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>submask loopはs=maskから(s−1)&amp;maskでempty直前まで回し、mask\sの既計算順を保証する。</li>
+<li>c(s)のparityでmodular加減を行い、負値を998244353へ正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三値比較はequality contract後のstrict partial orderとしてmodel化する。</li>
+<li>DAGをsourcesから生成する数え上げでは、同時に選べるsourcesによる重複を包除で補正する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(3^N+N²2^N)。誘導graphの成分数を前計算してsource集合包除を行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^N+N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 17; 1 \le M \le \frac{N \times (N-1)}{2}; 1 \le A_i &lt; B_i \le N; i \neq j \Rightarrow (A_i,B_i) \neq (A_j,B_j)</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、比較edge一本。</p>
+<ol>
+<li>結果は小、大、等の3通りで全て実数重みにより実現できる。</li>
+<li>dp[11]はsingleton除去2項と両頂点除去1項。</li>
+</ol>
+<p>期待される結果: 3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>三頂点全pair比較では全3³=27結果が可能か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>厳密cycleは実現不能。三要素の弱順序は全等1、二class6、三class6の13。</p>
+<p>確認結果: 13。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc306/tasks/abc306_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b</li>
+<li><a href="https://atcoder.jp/contests/abc306/editorial/6608">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10</li>
+</ul></main>
+</body></html>

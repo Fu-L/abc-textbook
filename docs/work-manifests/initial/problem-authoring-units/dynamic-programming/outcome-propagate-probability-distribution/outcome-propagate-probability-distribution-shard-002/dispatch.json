@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-propagate-probability-distribution-shard-002",
+  "primaryOutcomeId": "outcome-propagate-probability-distribution",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc360-e"
+  ],
+  "homeUnitId": "unit-dp-stochastic",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-minimal-sufficient-state-shard-001",
+    "outcome-design-minimal-sufficient-state-shard-002",
+    "outcome-design-minimal-sufficient-state-shard-003",
+    "outcome-design-minimal-sufficient-state-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "12c3d5b5a00fe86df4f022c3d0fbbb301e069b1a78465b6a24d66a8a0dd798c2",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc360-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

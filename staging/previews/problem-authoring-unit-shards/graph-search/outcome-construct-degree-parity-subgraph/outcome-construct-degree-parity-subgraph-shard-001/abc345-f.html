@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC345-F — Many Lamps</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC345-F — Many Lamps</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/degree-parity-subgraph.md">指定次数parityの部分グラフ構成</a></p>
+<ul>
+<li>選択辺集合の奇数次数頂点を指定し、spanning forestの葉から必要辺を確定してT-join型の構成を行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/euler-trail-circuit.md">Euler trail・circuit</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>指定次数parityの部分グラフ構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一edge操作は両端lampをtoggleするため、各connected component内のon個数parityは常に偶数である。size sのcomponentで到達可能な最大on数は最大の偶数2floor(s/2)で、全component合計をYとする。 postorderで非root頂点vがoffならparent edgeをtoggleしてvをonに固定してからvを切り離す。この操作はvをoff→on、parentをtoggleするので全体on数は0または2増え、component終了時にはroot以外全てon、parityによりちょうど2floor(s/2)個onになる。</p>
+<p>採用する候補: DFS forestの帰りがけに必要なparent edgeだけ使い、on数がKになった時点で止める</p>
+<p>各edgeを高々一度使い、on数を0からYまで0または2ずつ単調に増やす構成が得られる。</p>
+<p>棄却する候補: 任意edgeを選ぶ状態空間BFS</p>
+<p>lamp状態は2^N通りで、N=2×10^5では探索できない。</p>
+<p>postorderで非root頂点vがoffならparent edgeをtoggleしてvをonに固定してからvを切り離す。この操作はvをoff→on、parentをtoggleするので全体on数は0または2増え、component終了時にはroot以外全てon、parityによりちょうど2floor(s/2)個onになる。</p>
+<p>全componentでDFS spanning treeとparent edgeを記録しY=Σ2floor(size/2)を計算する。Kが奇数またはK&gt;YならNo。そうでなければ各treeをpostorder走査し、v≠rootがoffならparent edge IDを答えへ追加して両端stateをtoggleする。on countがKになった瞬間に停止してedge列を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="parity-invariant">parity invariant</h3>
+<p>発動条件: 一操作が各component内のbitを二つ反転する。</p>
+<p>on個数の偶奇が0から変わらないことを必要条件として使う。</p>
+<h3 id="spanning-tree上のleaf-elimination">spanning tree上のleaf elimination</h3>
+<p>発動条件: 任意graphでedge操作構成が必要だがcycleは不要である。</p>
+<p>DFS treeを葉から処理し、各非root頂点の最終stateをparent edge一回で確定する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>leaf elimination中のon数が減らないため、最終最大値だけでなく途中の全偶数値を必ず通り、希望Kでprefixを切れば構成になる。</p>
+<p>別の問題へ持ち帰る視点: 単調な構成processが到達値を刻み幅ごとに通過するなら、途中停止で全中間目標を実現できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一辺toggleはon数parityを変えず成分ごと最大偶数2floor(size/2)が上界。postorderでoff子を親辺でonにすると親がoffならon数+2、onなら±0で減らない。最終各非根がonで上界Yへ達し、0..Yを2刻みで通るため任意偶数Kで停止可能。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>K=0なら操作0回で即終了する。edge IDは入力番号を保存し、component rootにはparent edge操作を行わない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>孤立頂点、奇数/偶数size componentの混在、K=0・Y、parentがonのため増分0となるstepをsimulationして最終個数を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点M辺。spanning forestとpostorder O(N+M)、出力O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>木親辺、色、走査順 O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min\left( 2 \times 10^5, \frac{N(N-1)}{2} \right); 0 \leq K \leq N; 1 \leq u_i &lt; v_i \leq N; The given graph is simple.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3、K=2。</p>
+<ol>
+<li>葉3がoffなので辺2–3を採用。</li>
+<li>2,3がonでcount2。</li>
+<li>直ちに停止。</li>
+</ol>
+<p>期待される結果: Yes、辺2–3一個</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>K=1は作れるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>作れない。初期on0から一辺が二端を反転するため総on数は常に偶数。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc345/editorial/9558">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc345-editorial-9558-cb10281ba2d26e522eaef3bebf2b27924a4104f16b20a401b0d5d54fcc969830</li>
+<li><a href="https://atcoder.jp/contests/abc345/tasks/abc345_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc345-f-problem-e058936f6d4cce8ac7c5b99b904a5b93cfeb2f98a0b9d9d7000bfb8e042710e3</li>
+</ul></main>
+</body></html>

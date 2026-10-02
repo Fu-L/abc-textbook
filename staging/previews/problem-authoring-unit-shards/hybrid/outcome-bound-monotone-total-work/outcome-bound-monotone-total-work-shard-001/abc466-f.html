@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC466-F — Many Mod Calculation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC466-F — Many Mod Calculation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></p>
+<ul>
+<li>要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑えられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>単調進行による償却解析の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>連続整数[0,x)をmod Mへ写すと、剰余0..M-1のfull cycleがfloor(x/M)個とprefix[0,x mod M)一個になる。値multisetはprefix intervalの重み付き集合として閉じる。</p>
+<p>採用する候補: 同じ終端xのinterval [0,x) を係数付きでまとめ、priority queue/mapで管理し、各mod操作ごとに各終端を[0,M)と[0,x mod M)へ分解して同終端を併合する。</p>
+<p>共通[0,M)部分は全intervalから一つの係数へ集約でき、残余終端はx自身またはx/2未満へ減るため、一つの起点が生成する非共通終端数は対数個に抑えられる。</p>
+<p>棄却する候補: 0..X-1の全整数を保持し、各modulusを一要素ずつ順番に適用する。</p>
+<p>Xが巨大で初期要素列挙だけで不可能で、同じ剰余prefixが大量重複する。</p>
+<p>一つの[0,x)の係数kは[0,M)へk×floor(x/M)、[0,x mod M)へkだけ寄与する。</p>
+<p>操作ごとに生成される共通終端Mを一括し、同じ終端の係数をmergeすればinterval数の爆発を防げる。</p>
+<p>multisetをend→count mapとend順priority queueで持つ。mod Mを処理する際、各distinct xのcountを取り出し、full countをend Mへ加え、remainder&gt;0ならend remainderへ加える。同一endをcombineし、最終multisetから要求統計を計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="値multisetのprefix-interval表現">値multisetのprefix interval表現</h3>
+<p>発動条件: 連続整数集合へmod操作を繰り返し適用するとき。</p>
+<p>剰余frequencyを[0,x)の重み付き和として保持する。</p>
+<h3 id="終端別の同類項merge">終端別の同類項merge</h3>
+<p>発動条件: 各変換で同じ標準objectが多数生成されるとき。</p>
+<p>mapで係数をまとめ、priority queueにはdistinct終端だけを載せる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各値を追う代わりに、modが連続区間へ作る剰余分布の形をbasis objectとして持つ。</p>
+<p>別の問題へ持ち帰る視点: 変換で毎回生まれる共通項と縮小する残余項を分けると、object数を償却解析できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>一つの[0,x)の係数kは[0,M)へk×floor(x/M)、[0,x mod M)へkだけ寄与する。 操作ごとに生成される共通終端Mを一括し、同じ終端の係数をmergeすればinterval数の爆発を防げる。 共通[0,M)部分は全intervalから一つの係数へ集約でき、残余終端はx自身またはx/2未満へ減るため、一つの起点が生成する非共通終端数は対数個に抑えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>x mod M=0の空intervalを入れず、M≥xならfloor0でend xがそのまま残る。heap stale keyと大きなcountのmodulus処理を管理する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さなx,Mで剰余frequencyを書き、full cycle係数とremainder prefixがinterval変換式に一致するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+Q)log(N+Q))、初期distinct終端N、各modが新規共通終端を高々一つ作る。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)、終端ごとの係数。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 2\times 10^5; 1\le N\le 2\times 10^5; The sum of N over all test cases is at most 2\times 10^5.; 1\le X\le 10^{18}; 1\le A_i\le 10^{18}; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>一つの区間[0,8)へmod3を作用。</p>
+<ol>
+<li>8=2·3+2。</li>
+<li>各residue0,1は3回、2は2回出るので[0,3)係数2と[0,2)係数1。</li>
+</ol>
+<p>期待される結果: 重み総数8を保つ。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>余り0の[0,0)も登録するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>空なので不要。8でなく9なら[0,3)係数3だけとなる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc466/editorial/22630">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-editorial-22630-cbfbf9767fbe0e56fedfe2f8f125beafc77a919ae8c72f58beb9e1a131f58b16</li>
+<li><a href="https://atcoder.jp/contests/abc466/tasks/abc466_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-f-problem-61f5d40f1844a22aebc97da6336d8c31093ba6eda92e3f506f3545f90be057a5</li>
+</ul></main>
+</body></html>

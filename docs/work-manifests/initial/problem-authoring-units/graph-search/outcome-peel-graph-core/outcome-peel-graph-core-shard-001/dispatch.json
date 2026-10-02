@@ -1,0 +1,73 @@
+{
+  "shardId": "outcome-peel-graph-core-shard-001",
+  "primaryOutcomeId": "outcome-peel-graph-core",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc226-e",
+    "abc266-f"
+  ],
+  "homeUnitId": "unit-graph-core",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc226-e.md",
+    "src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "56dce0e90482784d1df0860831f3f8e1d83fee95bafe560677be98a749507e95",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc226-e",
+      "path": "src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc226-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc266-f",
+      "path": "src/content/docs/problems/graph-search/outcome-peel-graph-core/outcome-peel-graph-core-shard-001/abc266-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

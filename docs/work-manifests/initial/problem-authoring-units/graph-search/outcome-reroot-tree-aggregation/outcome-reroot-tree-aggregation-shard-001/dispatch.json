@@ -1,0 +1,97 @@
+{
+  "shardId": "outcome-reroot-tree-aggregation-shard-001",
+  "primaryOutcomeId": "outcome-reroot-tree-aggregation",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc220-f",
+    "abc223-g",
+    "abc348-e"
+  ],
+  "homeUnitId": "unit-rerooting",
+  "prerequisiteOutcomeIds": [
+    "outcome-aggregate-rooted-tree"
+  ],
+  "dependencyShardIds": [
+    "outcome-aggregate-rooted-tree-shard-001",
+    "outcome-aggregate-rooted-tree-shard-002",
+    "outcome-aggregate-rooted-tree-shard-003"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.md",
+    "src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.md",
+    "src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc348-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "5c4eb2c2cb7f631ba3c1d34160aebd0a77b509137c55983c6bfe387bbbeda59a",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc220-f",
+      "path": "src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc220-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc223-g",
+      "path": "src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc223-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc348-e",
+      "path": "src/content/docs/problems/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/abc348-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

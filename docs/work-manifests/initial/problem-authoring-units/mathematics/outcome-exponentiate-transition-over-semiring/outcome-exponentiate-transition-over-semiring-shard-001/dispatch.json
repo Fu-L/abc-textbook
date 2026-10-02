@@ -1,0 +1,77 @@
+{
+  "shardId": "outcome-exponentiate-transition-over-semiring-shard-001",
+  "primaryOutcomeId": "outcome-exponentiate-transition-over-semiring",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc236-g",
+    "abc445-f"
+  ],
+  "homeUnitId": "unit-semiring-matrix-exponentiation",
+  "prerequisiteOutcomeIds": [
+    "outcome-accelerate-fixed-linear-transition"
+  ],
+  "dependencyShardIds": [
+    "outcome-accelerate-fixed-linear-transition-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc236-g.md",
+    "src/content/docs/problems/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc445-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "230df8792f5646e46fb601412f8084e27eb0b2999944822c61b59d51457e2cc5",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc236-g",
+      "path": "src/content/docs/problems/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc236-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc445-f",
+      "path": "src/content/docs/problems/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc445-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

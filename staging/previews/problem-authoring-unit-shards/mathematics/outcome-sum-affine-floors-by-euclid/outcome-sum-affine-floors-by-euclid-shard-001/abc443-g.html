@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC443-G — Another Mod of Linear Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC443-G — Another Mod of Linear Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/euclidean-floor-sum.md">格子点転置によるfloor_sum</a></p>
+<ul>
+<li>Σ floor((ai+b)/m)を整数部分の取り出しと格子点領域の転置で再帰し、Euclid型の引数減少からO(log m)を示せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>格子点転置によるfloor_sumの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>条件 k&lt;(Ak+B) mod M は、二つの床関数 floor((Ak+B)/M) と floor(((A-1)k+B-1)/M) の差が0であることへ変形できる。</p>
+<p>採用する候補: 条件を満たす個数を N から二つの floor_sum の差の総和を引く形で計算する。</p>
+<p>各 k で二つの床の差は0か1に限られ、差1が不成立を示すため、標準 floor_sum を二回呼ぶだけで全範囲を数えられる。</p>
+<p>棄却する候補: k=0..N-1 を一つずつ走査し、剰余を計算して比較する。</p>
+<p>N は最大10^9で、各 k の判定が定数時間でもtest caseごとの線形走査は不可能である。</p>
+<p>整数 k+1≤r を床関数へ移すと、k&lt;(Ak+B) mod M の wrap 回数の差として不成立を表せる。</p>
+<p>係数を A から A-1、定数を B から B-1 へずらした二式の差は区間幅が k+1≤M のため0または1に収まる。</p>
+<p>S1=Σ_{k=0}^{N-1}floor((Ak+B)/M)、S2=Σfloor(((A-1)k+B-1)/M) を floor_sum の符号・係数正規化込みで求め、N-(S1-S2) を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="条件指示関数の-floor-差分化">条件指示関数の floor 差分化</h3>
+<p>発動条件: 線形剰余と添字の大小を巨大区間で数えたいとき。</p>
+<p>wrap 回数を表す二つの床関数の差へ変換する。</p>
+<h3 id="floor_sum">floor_sum</h3>
+<p>発動条件: 一次式を modulus で割った床の連続和が現れるとき。</p>
+<p>各 test case を対数時間で集計する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>剰余不等式は剰余値を直接追わず、除算で何回 modulus をまたいだかの差として数えられる。</p>
+<p>別の問題へ持ち帰る視点: 0/1 しか取らない床関数差を見つけると、それ自体が条件の指示関数になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>r=(Ak+B) modMとすると二floorの差はfloor((Ak+B)/M)−floor((Ak+B−k−1)/M)。k+1≤Mよりこの差は0/1で、r≥k+1なら0、それ以外なら1になる。従ってNから全差を引けばstrict条件k&lt;rの成立数。符号付き正規化は数学的floor値を保つのでA=0やB=0も同式で扱える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>A-1 や B-1 が負になる入力を floor_sum 実装の受理範囲へ正規化し、数学的 floor と切捨て除算を混同しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一つの k について式変形を逆向きにたどり、床差が0なら成立・1なら不成立となることを境界 k=r でも確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(log M)。符号付きfloor_sumを二回行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)、再帰ならO(log M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le T\le 3\times 10^5; 1\le N \le M\le 10^9; 0\le A,B &lt; M; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=4,M=5,A=2,B=1。</p>
+<ol>
+<li>剰余は1,3,0,2。</li>
+<li>k=0,1だけ自身より大きい。</li>
+</ol>
+<p>期待される結果: 2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=B=0のとき負floorを0方向へ丸めてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全剰余0で成立数0。第二floorはfloor((−k−1)/M)=−1であり、0にするとNと誤る。</p>
+<p>確認結果: 成立0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc443/editorial/15138">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc443-editorial-15138-3aa9463ceddd2142f504b5b736ccfc887e550c9c69317c0bbca14a01bd6ecfad</li>
+<li><a href="https://atcoder.jp/contests/abc443/tasks/abc443_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc443-g-problem-57b82a295ac386c53ab1317886a8f4ffc40c4bc853f1f6c66fb8dba9f12f4a16</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-reconstruct-tree-from-distance-matrix-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7ac004716d29859d664493ca4b1ec5fcb7b82887f761d3a1d9575ae237166670",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "1ad3a80e9db7b9fae7fc0f8fcd7720760ded3b23deb762a9466ff52e922e5f61",
+  "reviewDigest": "06adffa9e77232dbd23118876ed17c45e05d6cb7fdf131038df4c21a9ac1318f",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/abc451-e.html",
+      "digest": "e95fdee11a11fc2ddd7f68abaaaf1b8f4c17eff8cd612d5a363204bab4aaad12"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-reconstruct-tree-from-distance-matrix/outcome-reconstruct-tree-from-distance-matrix-shard-001/index.html",
+      "digest": "63c2f3eff58f14d69d2f59ce757a39640a0c3292932e44841fcc13c7ae30bb5a"
+    }
+  ],
+  "snapshotDigest": "15485d021790f5431d9682d8a8e768174d86a07bbf69306c5f16497c724d4fdd"
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC422-F — Eat and Ride</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC422-F — Eat and Ride</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>path上で頂点vを訪れた後に残りedge数がnなら、W_vは以後n回の燃料へ寄与しnW_vとなる。最適pathはcycleを除けるため長さはN-1以下である。 最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。</p>
+<p>採用する候補: (vertex,残りticket数)のlayered DAG DP</p>
+<p>edge移動ごとにticketが1減るためacyclicで、全path長候補をO(NM)で同時に評価できる。</p>
+<p>棄却する候補: 通常edge weightによる一回のDijkstra</p>
+<p>edge costがそれまで訪れたvertex weight累積に依存し、現在vertexだけではMarkovな固定重みにならない。</p>
+<p>最初にpath長d枚のticketを持ち、vertex uでn枚ならnW_uを払いedgeを渡ってn-1枚にする表現は、元の各W_uが残り全edgeで消費される総額と一致する。</p>
+<p>全n=0..N-1のstate(1,n)をcost0にし、nを大から小へ処理する。元edgeu-vごとに(u,n)→(v,n-1) cost nW_uと逆向きをrelaxし、最終layer0の各vertex距離を出す。rolling layerでspaceを抑える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="時間展開dag">時間展開DAG</h3>
+<p>発動条件: 遷移回数上限があり、step残数が必ず1減る。</p>
+<p>vertex×remaining stepsへ展開して依存costを固定edge weightにする。</p>
+<h3 id="寄与の順序交換">寄与の順序交換</h3>
+<p>発動条件: 累積weightをedgeごとに足す目的をvertexごとの残り回数寄与へ変える。</p>
+<p>pathの二重和をW_v×後続edge数として数え直す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>開始ticket数を0…N-1全て許すことで、到達先ごとに最適path長を別に選べる。</p>
+<p>別の問題へ持ち帰る視点: 可変長pathは全layerのsource初期化で一つのDAG shortest pathへ統合できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>長さlの道の燃料はΣ_{j=0}^{l−1}(l−j)W_{v_j}へ順序を入れ替えられる。残りn辺の状態から一歩進む重みnW_vはこの式の一項である。全初期残歩数0..N−1からcost0で始めると各長さのpathを同一DPで比較できる。正の体重増分により閉路を削除すれば後の体重も辺数も減って燃料は増えないため最適は単純path、長さ≤N−1。従ってlayer0の最小が全最適を網羅する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じlayer内でedgeを連鎖させず必ずn→n-1へ遷移する。costは最大級なので64bitとINF guardを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>path/cycle graphで全simple pathを列挙し、ticket DPと元costを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>元 graph N頂点 M辺。残歩数 N層、各層 O(N+M) 更新で O(N(N+M))。</p>
+<h3 id="空間">空間</h3>
+<p>rolling二層距離とgraphで O(N+M)、出力 N個。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5000; 1\le M\le5000; 1\le W _ i\le10 ^ 9\ (1\le i\le N); 1\le u _ i\le v _ i\le N\ (1\le i\le M); The given graph is connected.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、道1–2–3、W=(2,3,7)。</p>
+<ol>
+<li>1への燃料0。</li>
+<li>2へは体重2で一辺、燃料2。</li>
+<li>3へは二辺で2+(2+3)=7、layer式でも2×2+1×3=7。</li>
+</ol>
+<p>期待される結果: 0 2 7</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>到着頂点3のW3=7は頂点3への答えへ加えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>加えない。到着後にもう辺を通らないので残歩数0、係数0となる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc422/editorial/13819">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01</li>
+<li><a href="https://atcoder.jp/contests/abc422/tasks/abc422_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1</li>
+</ul></main>
+</body></html>

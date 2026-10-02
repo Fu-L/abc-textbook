@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC369-G — As far as possible</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC369-G — As far as possible</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/separable-convex-marginals.md">分離凸・凹の単調限界値選択</a></p>
+<ul>
+<li>分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Aokiが選んだ頂点を全て含む根1からの最小部分木を往復するのがTakahashiの最短walkで、scoreはその部分木の辺重み和の2倍になる。</p>
+<p>部分木T_uのK別最適値S_u(K)の差分列は非増加になる。子vへの辺では最初の一頂点を選ぶ限界利得だけが2L+S_v(1)へ増え、以後の限界利得は子の差分を引き継ぐ。</p>
+<p>採用する候補: DFSで各子の第一限界利得に辺往復分を足し、頂点ごとに最大一つを親へ残して他と0をglobal multisetへ集める。</p>
+<p>非増加な限界利得列のmergeとして木DPを表し、全Kの値を一つのsorted multisetのprefix和へ圧縮できる。</p>
+<p>棄却する候補: 各頂点uでKごとのknapsack DPを子部分木サイズに沿ってmergeする。</p>
+<p>定義どおりだが全頂点の部分木サイズを掛け合わせる二次的処理になり、限界利得のconcavityを使えていない。</p>
+<p>子vから一頂点以上選ぶと辺(u,v)を必ず往復するため、子列の先頭だけへ2Lを加える。各子列が非増加なら全列から大きい順に限界利得を取るのが最適である。</p>
+<p>u自身を選ぶ選択肢の限界利得は0であり、K=|T_u|ではuを追加してもscoreが増えないというS_u(last)=S_u(last−1)を表す。</p>
+<p>葉はbest=0を返す。内部uでは各子vからcandidate=best_v+2L_{uv}を得て最大一つをbest_uとして親へ返し、残りcandidateとu自身分の0をglobal配列へ追加する。rootのbestとglobal配列を合わせて降順限界利得列を作り、そのprefix sumをK=1..Nの答えとして出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="concave-tree-dpの限界利得merge">concave tree DPの限界利得merge</h3>
+<p>発動条件: 子ごとの選択数DPが離散concaveで、合計選択数を配分するとき。</p>
+<p>値列でなく非増加差分列をmergeして上位K個を取る。</p>
+<h3 id="最大要素だけのsmall-to-large圧縮">最大要素だけのsmall-to-large圧縮</h3>
+<p>発動条件: 各nodeで子列先頭の最大一つだけが親の先頭へ連鎖するとき。</p>
+<p>最大candidateを返し、確定した他のmarginalをglobal multisetへ退避する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各辺の往復価値は、その子部分木から最初の一頂点を選ぶ瞬間だけ発生する固定bonusとして限界利得へ載る。</p>
+<p>別の問題へ持ち帰る視点: subset活性化costがある資源配分では、各groupのfirst marginalだけを修正して差分列をmergeする。</p>
+<h2 id="正当性">正当性</h2>
+<p>選択頂点を含む根部分木の各辺は最短walkで往復するのでscoreは辺和の2倍。子へ一頂点でも選ぶ初回だけ辺重み2Lが付くため、子の非増加限界列の先頭へ足す。独立な子列の上位K項を選ぶとprefix条件が自動的に守られ最適。最大先頭だけ親へ返し他をglobalへ出す分解はこのmergeの全項を保存し、最終prefix和が全Kの最適値になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>scoreは往復なので辺長を2倍する。各内部頂点につき0を一つだけ追加し、最終限界利得数がN個になることをassertする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>葉・chain・starで返すbestとglobalへ置く値を手計算する。S(K)差分が非増加という帰納と0追加の意味を説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。tree差分の分解と全限界利得sort。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 2\times 10^5; 1\leq U_i&lt;V_i\leq N; 1\leq L_i\leq 10^9; All input values are integers.; The given graph is a tree.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>辺12長1、23長2、14長2、root1。</p>
+<ol>
+<li>一頂点なら3を選び往復6。</li>
+<li>二頂点で3,4を選び全三辺往復10、以後2や1を足しても増えない。</li>
+</ol>
+<p>期待される結果: K=1..4で6,10,10,10。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>scoreへ辺長を一度だけ足してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>rootへ戻るwalkなので各必要辺は二回通る。片道scoreへ変えると半分になる。</p>
+<p>確認結果: 2Lを用いる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc369/editorial/10843">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc369-editorial-10843-eb21fd07b98e399bdb811ec27018dcd1a8fd54d28bf702aab3b536eeb23d9c3d</li>
+<li><a href="https://atcoder.jp/contests/abc369/tasks/abc369_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc369-g-problem-2b9423c419137fa16d4dc77e6739a0ec2fe5858da5fda63a67ee7e0247093265</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC337-G — Tree Inversion</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC337-G — Tree Inversion</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-euler-flattening.md">Euler順による部分木区間化</a></p>
+<ul>
+<li>Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>pair(v,w),v&lt;wを固定する。root u=wではendpoint条件で常に寄与する。u≠wでは、wを消したときuとvが別成分なら元u–v pathにwが載る。よって各wの自己rootにw−1を置き、各方向成分の外側rootへその方向内のv&lt;wの数を範囲加算する。固定根のEuler区間と補集合へ分解し、label昇順BITで必要個数を求め木imosで全rootへ届ける。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="euler-tourによるsubtree区間化">Euler tourによるsubtree区間化</h3>
+<p>発動条件: 寄与先がsubtreeまたはその補集合で、範囲加算したい。</p>
+<p>subtreeを連続区間へ写し、区間addと全体add-minus-subtreeで表す。</p>
+<h3 id="offline二次元counting">offline二次元counting</h3>
+<p>発動条件: subtree区間内でvertex labelがthreshold未満の個数をO(N)回求めたい。</p>
+<p>threshold順に頂点をBITへ追加し、Euler区間sumで矩形countを得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>pair(v,w)をuごとに数える代わりに、wを切った時のv側componentを特定し、その補集合に属する全uへ一括加算する。</p>
+<p>別の問題へ持ち帰る視点: path包含条件はcut vertexでcomponentを分け、寄与先集合へのrange updateへ主客転倒できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>pair(v,w),v&lt;wが寄与するroot uは、u=wなら必ず寄与し、u≠wならw削除後にvと異なる成分にいることが必要十分。各wの自己root寄与w−1を先に入れる。残りは固定rootのchild subtreeかその補集合への範囲加算となり、各方向の小label数をoffline BITで数えられる。木imosでこれら領域の全寄与を合算すると元の全pairを正確に数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>u=wのendpoint寄与を忘れずans[w]へw−1を足す。BITへ当前label wを登録する前にlabel&lt;w個数をqueryする。Euler区間と補集合をrange差分へ正しく変換し、全値は64bit。</p>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>path、star、rootを跨ぐpairでN小の三重loop真値と比較し、subtree境界の半開区間とv=w除外を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点。Euler、O(N)集約queryのBITと木imosで O(N log N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、Euler順、BIT、range差分 O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq2\times10^5; 1\leq u_i\leq N\ (1\leq i\leq N); 1\leq v_i\leq N\ (1\leq i\leq N); The given graph is a tree.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3。root2で各頂点から根へのpathを考える。</p>
+<ol>
+<li>path1→2はlabel増加でpair(1,2)が一寄与。</li>
+<li>path3→2は増加pairなし。</li>
+<li>root2自身は空path。</li>
+</ol>
+<p>期待される結果: root2のf=1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>u=wの場合、w削除後の異成分条件へそのまま入れられるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>そのままではuが消えて分類できない。公式ではendpoint w=uもpath上に含むので、root wにはv&lt;wの全w−1個を別途加える必要がある。</p>
+<p>確認結果: root wの自己endpoint寄与はw−1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc337/editorial/9128">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc337-editorial-9128-cbe0bd941506e286fb57dadf72d10bcbdf8ee413c5cf00a8d08e9186e3731f52</li>
+<li><a href="https://atcoder.jp/contests/abc337/tasks/abc337_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc337-g-problem-c93d5e000c3d22efaf05c107e0398fe3076143c17dd8518cc30a3383278210cd</li>
+</ul></main>
+</body></html>

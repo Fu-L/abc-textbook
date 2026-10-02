@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC239-F — Construct Highway</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC239-F — Construct Highway</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>追加後は連結で辺数が N-1 なので最終グラフは木である。したがって既存辺に cycle がある場合、現在次数が D_i を超える場合、または ΣD_i≠2N-2 の場合は直ちに不可能である。</p>
+<p>既存 forest の各連結成分を一点へ縮約すると、新しい辺は異なる成分間だけを結ぶ。各頂点の残り次数を stub として並べれば、成分が外へ出すべき次数は stub 数の合計になる。</p>
+<p>採用する候補: 不足次数1の成分を leaf として不足次数2以上の成分へ順に接続し、最後の不足次数1の二成分を結ぶ。</p>
+<p>成分数 m に対する総不足 2m-2 と各成分の正の不足を保ち、縮約木の leaf を一つずつ確定できる。</p>
+<p>棄却する候補: 異なる既存成分を任意順に結び、その場で余っている頂点の stub を使う。</p>
+<p>不足次数の小さい成分を内部頂点にして stub を使い切ると、未接続成分が残っても接続口がなくなる。</p>
+<p>不足1の成分 X と不足 d≥2 の成分 Y を結ぶと、併合後の不足は 1+d-2=d-1 であり、総不足=2·成分数-2 の不変量も保たれる。</p>
+<p>DSU で既存辺の cycle と各 current degree を検査し、各成分に頂点 i を D_i-currentDegree_i 回並べた stub list を持つ。不足1 queue と不足2以上 queue から成分を取り、各 list の末尾同士を新辺として出して併合・再分類し、最後の二つの不足1成分を結ぶ。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="連結成分の縮約">連結成分の縮約</h3>
+<p>発動条件: 既存辺を必ず残したまま全体を木や連結グラフへ拡張するとき。</p>
+<p>既存 forest の各成分を supernode とし、外部へ必要な次数だけを扱う。</p>
+<h3 id="木次数列の-leaf-除去">木次数列の leaf 除去</h3>
+<p>発動条件: 正の次数列の総和が2m-2で、対応する木を構成したいとき。</p>
+<p>次数1の頂点を leaf として次数2以上の頂点へ接続し、後者の次数を一つ減らす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>成分の不足次数を、その成分に残る接続口の本数と見なすと、頂点レベルの指定次数と成分レベルの木構築が分離する。</p>
+<p>別の問題へ持ち帰る視点: 指定部分グラフを含む構成問題では、固定成分を縮約し、残余資源を stub の多重集合として持つ。</p>
+<h2 id="正当性">正当性</h2>
+<p>不足1の成分 X と不足 d≥2 の成分 Y を結ぶと、併合後の不足は 1+d-2=d-1 であり、総不足=2·成分数-2 の不変量も保たれる。 成分数 m に対する総不足 2m-2 と各成分の正の不足を保ち、縮約木の leaf を一つずつ確定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>既存辺を読む時点で cycle と degree 超過を検出し、各成分の不足が0なら複数成分を結べないので失敗する。stub の総数だけを格納し、出力辺数が N-M-1 か最後に確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>成分数 m、総不足 2m-2、各不足正という三条件を一回の併合前後で書き、なぜ途中で leaf が必ず存在するかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)α(N))、総stub≤2N−2、DSUとcomponent queue。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 0 \leq M \lt N-1; 1 \leq D_i \leq N-1; 1\leq A_i \lt B_i \leq N; If i\neq j, then (A_i, B_i) \neq (A_j,B_j).; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、既存辺12、目標degree(1,2,1)。</p>
+<ol>
+<li>成分{1,2}のstubは頂点2に一個、成分{3}は3に一個。</li>
+<li>残り二不足1成分を23で結ぶ。</li>
+</ol>
+<p>期待される結果: 追加辺(2,3)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>既存辺がcycleならdegree総和だけで判定できるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>木は既存cycleを消せないため即不可能。cycle検査と個別degree超過の検査も必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc239/editorial/3388">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc239-editorial-3388-dc81d0d4766dbac2e06bc9e0143f085c6d867ff6751d63ac3b5cfa05ba65cac5</li>
+<li><a href="https://atcoder.jp/contests/abc239/tasks/abc239_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc239-f-problem-48a1c8d798e7adf11e9a1d0cf8599c96e887b6cb653727685a9cd5aa55e9a0c5</li>
+</ul></main>
+</body></html>

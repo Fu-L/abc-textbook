@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC284-E — Count Simple Paths</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC284-E — Count Simple Paths</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/backtracking-search.md">backtracking・可逆な探索状態</a></p>
+<ul>
+<li>再帰の前後で使用状態を対称に更新・復元し、現在pathだけの制約を保って探索木を漏れなく列挙できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>数える対象は頂点1から始まる単純pathであり、DFS中の現在の再帰stackがそのまま1本のpathを表す。</p>
+<p>答えは10^6へ達した時点で打ち切ってよいので、指数個になり得る単純pathを最後まで列挙する必要はない。</p>
+<p>採用する候補: 現在path上の頂点だけをvisitedにし、進入時に1本を数えて未訪問neighborへDFSし、復帰時にunmarkする。</p>
+<p>単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。</p>
+<p>棄却する候補: 一度訪れた頂点を探索終了までvisitedのままにする通常の到達性DFS。</p>
+<p>同じ頂点へ別の単純pathから到達する場合まで捨て、path本数を過小評価する。</p>
+<p>棄却する候補: 上限を考えず全単純pathを列挙してから10^6との最小値を取る。</p>
+<p>単純path数は指数的になり得て、答えが早く上限へ達する入力でも探索が終わらない。</p>
+<p>頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。</p>
+<p>visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。</p>
+<p>visited[1]=trueとしてDFS(1)を始め、各呼出しの冒頭でcountを1増やす。countが10^6なら終了flagを立てて全再帰から戻る。各neighborについて未訪問ならmarkして再帰し、戻ったらunmarkする。最後にcountを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="backtracking-dfs">backtracking DFS</h3>
+<p>発動条件: 単純pathや重複なし列を列挙し、使用済み集合が現在候補にだけ依存するとき。</p>
+<p>再帰の前後で頂点をmark/unmarkしてpath上の重複だけを禁止する。</p>
+<h3 id="上限付き列挙">上限付き列挙</h3>
+<p>発動条件: 必要な答えがmin(候補数,C)で、Cが十分小さいとき。</p>
+<p>C件見つけた時点で終了を全再帰へ伝播する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最大次数10なので、10^6個を見つけるまでの各DFS状態から試すedge数も小さく抑えられる。</p>
+<p>別の問題へ持ち帰る視点: 列挙数にcapがある探索では、訪問状態数だけでなく各状態の分岐確認量も合わせて実行可能性を判断する。</p>
+<h2 id="正当性">正当性</h2>
+<p>頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>終了flagまたはcount判定を各loopと再帰復帰直後に確認し、10^6到達後に別branchへ進まない。</li>
+<li>頂点1だけのpathも数えるため、edgeを選ぶ前に現在状態を加算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三角形で1→2→3と1→3がともに数えられることを手計算し、2から戻った後に頂点をunmarkする位置と上限終了の伝播を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(min(P,10⁶)Δ+N+M)、Pは単純path数、Δ≤10。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)、path visitedとDFS stack。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min \left(2 \times 10^5, \frac{N(N-1)}{2}\right); 1 \leq u_i, v_i \leq N; The given graph is simple.; The degree of each vertex in the given graph is at most 10.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>三角形1-2-3-1、始点1。</p>
+<ol>
+<li>長さ0は1、長さ1は1→2,1→3。</li>
+<li>長さ2は1→2→3,1→3→2。</li>
+</ol>
+<p>期待される結果: 単純path5本。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>visitedを永久にmarkすると何を落とすか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>1→2処理後に2,3を解除しないと別path1→3を探索できない。visitedは現在pathだけを表す。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc284/tasks/abc284_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1</li>
+<li><a href="https://atcoder.jp/contests/abc284/editorial/5494">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f</li>
+</ul></main>
+</body></html>

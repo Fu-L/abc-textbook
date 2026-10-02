@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC418-E — Trapezium</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC418-E — Trapezium</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>四点がtrapezoidを作るたび、平行な対辺pairが一組あれば同じdirectionの二segmentとして数えられる。parallelogramだけは平行対辺が二組あるので二重に数えられる。</p>
+<p>四点がparallelogramを作る必要十分条件は二diagonalのmidpointが一致することであり、segment pairのmidpoint keyから個数を数えられる。</p>
+<p>採用する候補: 全点pairの正規化direction別にC(c,2)を足し、midpoint別のC(d,2)を引く</p>
+<p>前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。</p>
+<p>棄却する候補: 四点subsetを全列挙し、並べ替えて辺の平行性を判定する</p>
+<p>C(N,4)=Θ(N^4)でN=2000に使えず、parallel sideとdiagonal midpointというpair統計へ分解できていない。</p>
+<p>direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。</p>
+<p>midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。</p>
+<p>i&lt;jの全pairについてcanonical(dx,dy)の頻度と(x_i+x_j,y_i+y_j)の頻度をmapへ加える。ans=Σ_direction c(c-1)/2-Σ_midpoint d(d-1)/2を64 bitで計算して出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="pair-invariant-の頻度数え上げ">pair invariant の頻度数え上げ</h3>
+<p>発動条件: 四要素構造が同じ不変量を持つ二pairとして特徴づくとき。</p>
+<p>全O(N^2) pairをdirection/midpoint keyでgroup化してpair-of-pairsを数える。</p>
+<h3 id="有理方向の正規化">有理方向の正規化</h3>
+<p>発動条件: segmentの傾き一致をexactに比較したいとき。</p>
+<p>差vectorをgcdでprimitive化し、符号をcanonicalにする。</p>
+<h3 id="二重計数の補正">二重計数の補正</h3>
+<p>発動条件: 特殊構造だけが複数の証拠を持ち主計数で重複するとき。</p>
+<p>二組の平行辺を持つparallelogramをdiagonal midpointで一回数えて引く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>trapezoidの平行辺pairを数えた後、二証拠を持つparallelogramだけを別のpair invariantで抽出して一回補正する。</p>
+<p>別の問題へ持ち帰る視点: 対象ごとのcertificate数が通常1・特殊case2なら、certificate総数から特殊case数を引く設計が使える。</p>
+<h2 id="正当性">正当性</h2>
+<p>direction(dx,dy)はgcd(|dx|,|dy|)で割り、最初の非零成分が正になるよう符号を統一すれば、verticalを含め浮動小数なしに平行判定できる。 midpointは((x_i+x_j)/2,(y_i+y_j)/2)だが、keyを座標和(x_i+x_j,y_i+y_j)にすれば分数を使わず完全一致を判定できる。 前半は非parallelogram trapezoidを1回、parallelogramを2回数え、後半はparallelogramを1回ずつ数えるため最終的に全対象が一回になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>dx=0/dy=0の符号規約を統一する。同directionの二segmentがendpointを共有するcaseは三点共線禁止で生じない。頻度pair数と答えは64 bitを使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>parallelogram一個、平行辺一組だけのtrapezoid、vertical/horizontal、同directionが多数ある小点集合を四点全列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N² log N)、全pairのdirection/midpoint map。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 4 \leq N \leq 2,000; 0 \leq X_i, Y_i \leq 10^7 (1 \leq i \leq N); No two points are at the same location.; No three points are collinear.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>四点(0,0),(2,0),(0,1),(2,1)。</p>
+<ol>
+<li>平行辺pairは水平一組、垂直一組で2。</li>
+<li>対角線同midpoint一組を引く。</li>
+</ol>
+<p>期待される結果: 台形（平行四辺形を含む）1個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>方向を(dx,dy)のまま比較してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>長さが違う平行線を別扱いしてしまう。gcdと符号でcanonical directionへ正規化する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc418/tasks/abc418_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc418-e-problem-ceda433652ba568626bdd50b726f80c88bbda34617dc2502db914c5ce5bb4ac6</li>
+<li><a href="https://atcoder.jp/contests/abc418/editorial/13627">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc418-editorial-13627-d8fc47873256b4fbd91ba38e3378afaacd51b78b21354fe97c2f17f521c0f38a</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC286-F — Guess The Number 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC286-F — Guess The Number 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/modular-congruence.md">一次合同・CRTで解の類を統合する</a></p>
+<ul>
+<li>合同条件の可解性を判定し、逆元・一次合同・CRTで解の類を構成できる。</li>
+<li>剰余類上の周期または指数法則を示し、周期状態の前計算や巨大指数の簡約で値を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/gcd-diophantine.md">gcdと整数解の成立条件</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/interactive-protocol.md">対話protocolを守って情報を取得する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>可解性判定を要しない通常の法上加減乗除・高速累乗、および剰余周期だけの利用。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>写像Aに長さcのcycleを作ると、judgeのB=f^NはそのcycleをN mod cだけ回転させるため、応答から合同式N≡r (mod c)を読める。</p>
+<p>互いに素なcycle長の積が10^9を超えれば、全合同式を満たす[0,LCM)の値はhidden Nに一意に一致する。</p>
+<p>cycle長4,9,5,7,11,13,17,19,23は互いに素で、頂点数の和108≤110、積1338557220&gt;10^9を同時に満たす。</p>
+<p>採用する候補: 108頂点を指定した9個の互いに素なcycleへ分け、各回転量を中国剰余定理で統合する。</p>
+<p>query長制約内で復元範囲がhidden Nの上限を超え、1回の応答から正確に決定できる。</p>
+<p>棄却する候補: 29以下の全prime長2,3,5,…,29のcycleを使う。</p>
+<p>LCMは十分大きいがcycle長の和が129となりM≤110を超える。</p>
+<p>棄却する候補: 1本の長いcycleだけでNを復元する。</p>
+<p>M≤110なので得られる剰余はmod 110以下で、10^9通りを区別できない。</p>
+<p>block先頭をsとする長さcのcycleをs→s+1→…→s+c-1→sと張れば、residueは(B_s-s+c) mod cで得られる。</p>
+<p>cycle長にはprimeそのものだけでなくprime power 4,9を使うと、互いに素性を保ったまま、同程度の頂点数でLCMを大きくできる。</p>
+<p>長さ[4,9,5,7,11,13,17,19,23]の各連続blockをcycleにしたAを出力してflushする。Bを受け取り、各block先頭の移動量からN mod cを復元する。得た9合同式を中国剰余定理で統合し、[0,1338557220)の解を出力して直ちに終了する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="中国剰余定理によるhidden値復元">中国剰余定理によるhidden値復元</h3>
+<p>発動条件: 1回の観測から複数modulusの剰余を独立に得られるとき。</p>
+<p>互いに素なcycleの回転量を合同式として統合する。</p>
+<h3 id="functional-graphのcycle-encoding">functional graphのcycle encoding</h3>
+<p>発動条件: 写像の反復回数を応答から推定するinteractive問題。</p>
+<p>cycle上の位置ずれへ反復回数の剰余を符号化する。</p>
+<h3 id="modulusのpacking">modulusのpacking</h3>
+<p>発動条件: 観測サイズの和に制限があり、LCMを閾値以上へしたいとき。</p>
+<p>互いに素なprime powerを選び、和108で積を10^9超へする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各cycleはNの別々の剰余を並列に返す独立な計測器であり、A全体をpermutationとして構成すればBの1位置だけで回転量を読める。</p>
+<p>別の問題へ持ち帰る視点: interactive設計では、応答を解析しやすい独立componentに分け、各componentへ合同情報を埋め込む。</p>
+<h2 id="正当性">正当性</h2>
+<p>長さcのcycleに写像N乗を適用するとblock先頭がN mod cだけ動く。選んだcycle長は互いに素なのでCRTで[0,L)に唯一解があり、L&gt;10^9は隠し値全域を覆う。そのため応答から得た剰余を統合した解が隠しNそのものになる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>A,Bは1-indexed頂点番号なので、block内offsetとresidueの0-index差を混同しない。</li>
+<li>出力のたびにnewlineとflushを行い、judgeから-1を受け取った場合や最終回答後は即終了する。</li>
+<li>CRTの積と途中計算は32bitを超えるため64bit整数を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短いcycleでN=2のB先頭位置からresidueを手計算し、9長の和・互いに素性・積の範囲とinteractive出力順を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(108+log L)のCRT統合、L=1338557220。対話は固定長108。</p>
+<h3 id="空間">空間</h3>
+<p>O(108)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 10^9 (inclusive).</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>縮小例としてcycle長3,5、隠しN=8、保証1≤N≤14。</p>
+<ol>
+<li>先頭移動は3cycleで2、5cycleで3。</li>
+<li>n≡2 mod3,n≡3 mod5の[0,15)唯一解は8。</li>
+</ol>
+<p>期待される結果: N=8を復元。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>cycle長4,6なら和は小さいが情報量は積24か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>互いに素でないため識別周期はLCM12。NとN+12が同じ応答になる。</p>
+<p>確認結果: 情報周期12。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc286/editorial/5588">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc286-editorial-5588-84001bb2b92333c70401743584f2dd937e4435e68da73f58abd8dedc18635260</li>
+<li><a href="https://atcoder.jp/contests/abc286/tasks/abc286_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc286-f-problem-cafbda3fb64fbcd274bf163b32a922c2c5d1798c0c2c6c4ec0f55dd8b60aaacb</li>
+</ul></main>
+</body></html>

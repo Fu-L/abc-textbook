@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC384-E — Takahashi is Slime 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC384-E — Takahashi is Slime 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></p>
+<ul>
+<li>現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一度境界に現れたslimeは吸収するまで候補に残り、自分の強さは吸収で増えるだけである。今吸収可能なものを取って将来不利になることはない。</p>
+<p>候補の最小強さが条件を満たさないなら、それ以上の候補も満たさず、新しい候補を開く方法もないのでそこで終了できる。</p>
+<p>採用する候補: 到達境界をmin-heapで管理し、吸収可能な最小slimeから広げる</p>
+<p>最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。</p>
+<p>棄却する候補: gridを通常のBFS順に走査して吸収判定する</p>
+<p>大きくて今は吸収不能な境界を先に捨てると、他の小さいslimeで強化した後に再考できず、探索順へ答えが依存する。</p>
+<p>heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。</p>
+<p>吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。</p>
+<p>開始cellを吸収済みとして強さへ加え、隣接cellをmin-heapへ入れる。最小候補が現在強さに対する公式条件を満たす間だけpop・吸収し、その未訪問隣接を追加する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="best-first-search">best-first search</h3>
+<p>発動条件: 到達可能frontierからkey最小の要素を繰り返し選び、選択で能力が単調改善するとき。</p>
+<p>境界slimeをmin-heapに入れ、最弱から吸収する。</p>
+<h3 id="単調greedyの停止判定">単調greedyの停止判定</h3>
+<p>発動条件: 候補が全順序で並び、最良候補すら実行不能なら他も不能なとき。</p>
+<p>heap先頭が条件を満たさない時点で探索を終了する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>到達可能性と吸収可能性を分け、未吸収でも接しているcellをheapに残すことが、後から強くなった際の再考を自然に実現する。</p>
+<p>別の問題へ持ち帰る視点: 能力が増える探索では、現時点で不能な候補を破棄せずfrontierへ保持し、最小要求から処理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。 吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。 最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>cellをheapへ入れた時点でvisitedにして重複pushを防ぐ。吸収条件の積はoverflowしない広い整数型で評価し、等号を許すかは問題文どおりにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>最初の最小候補が等号境界、強化後に以前の候補が吸収可能になるcase、細い通路を含む小gridを手順全探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(HW log(HW))、各cellを一度だけpush。</p>
+<h3 id="空間">空間</h3>
+<p>O(HW)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq H,W\leq500; 1\leq P\leq H; 1\leq Q\leq W; 1\leq X\leq10^9; 1\leq S _ {i,j}\leq10^{12}; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>横3cellの強さ(10,3,4)、左端開始、倍率X=3。</p>
+<ol>
+<li>境界3は3·3=9&lt;10なので吸収し強さ13。</li>
+<li>次4も12&lt;13なので吸収。</li>
+</ol>
+<p>期待される結果: 最終強さ17。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>開始強さ9なら3を吸収できるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>3·3=9は等号なので厳密条件を満たさず停止し最終9。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc384/tasks/abc384_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f</li>
+<li><a href="https://atcoder.jp/contests/abc384/editorial/11601">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734</li>
+</ul></main>
+</body></html>

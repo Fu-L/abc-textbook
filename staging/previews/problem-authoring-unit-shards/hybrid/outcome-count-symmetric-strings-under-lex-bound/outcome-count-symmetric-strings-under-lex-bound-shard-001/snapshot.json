@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-count-symmetric-strings-under-lex-bound-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "0ccb5ed0264de5365f316b8bc85996014b27a3786096646d9c324ad5392973b2",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "23167af11272c44c235d82d71813656b7e6c102c17832396508c516129229d52",
+  "reviewDigest": "23095428c5372ca12f9fe3f753e88ea74522a7f2c9d9eede5c685d9d209824ff",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/abc242-e.html",
+      "digest": "9ef3e4ff9d9cc7d2db5828250f633edd9a61af34acd7facb9b3728097601c727"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-count-symmetric-strings-under-lex-bound/outcome-count-symmetric-strings-under-lex-bound-shard-001/index.html",
+      "digest": "75e08207049c50363b8b6d3377e992f7743b0dbba69c76739cf5a43e021aa287"
+    }
+  ],
+  "snapshotDigest": "02842908be0fcd81f34849ceeed01f2e1a6e27e25d87480e77c615b46f2877da"
+}

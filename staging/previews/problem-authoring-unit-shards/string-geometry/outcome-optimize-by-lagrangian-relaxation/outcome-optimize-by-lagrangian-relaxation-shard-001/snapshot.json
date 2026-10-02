@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "1ca6d915450b8fc3112b5deb840ef2ab2f16b87e01216987bd4a9f6506847888",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "ee1b397815396a16b900704e2f430ca282bd1ea40c386c553f81b4d1fb0e6d24",
+  "reviewDigest": "c5e31fe3a2b706081c4f57d14ac0187b0757450d9dc9ed528e7df9c2ec3254fb",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.html",
+      "digest": "99ed20697b35cd4aa03b5e308794abf053429e544d2f876dbc7421ba3a55e87e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc355-g.html",
+      "digest": "a1fc2ab7d7b43373f25edd64596fed6dabdfc46e01db9253aacfffd63a81c83f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc393-g.html",
+      "digest": "e24a8975def9ea1e966f5ab8a218edaad2bd49fff84e26092296b447a789f458"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc400-g.html",
+      "digest": "4e5e9b4df82e9d4e8d59853c1ed20430351a3ec18d4c723331a1aaabfd1821f0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/index.html",
+      "digest": "e93510f8a5e7a6510e6cf6a2c982f379a99b6117297a680a1ed81c6b526eb272"
+    }
+  ],
+  "snapshotDigest": "b206b8607530dedcdf871ea9874bd58d6d199caaf0fbe57ddf69f6c996a0e1bb"
+}

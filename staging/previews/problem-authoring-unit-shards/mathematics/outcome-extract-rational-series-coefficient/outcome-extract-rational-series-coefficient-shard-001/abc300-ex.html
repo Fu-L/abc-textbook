@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC300-EX — Fibonacci: Revisited</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC300-EX — Fibonacci: Revisited</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/bostan-mori.md">Bostan–Mori・有理生成関数の係数抽出</a></p>
+<ul>
+<li>P(x)/Q(x)のN次係数をQ(-x)との積の偶奇係数へ半減し、対数段で巨大indexへ進む。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/linear-recurrence.md">固定線形遷移を巨大回数進める</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Bostan–Mori・有理生成関数の係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>K-bonacciは有理母関数P/Qを持ち、求めるsubmask m⊆Nの係数和はBostan–Moriのbit選択を0/1両枝の和へ置き換えると追跡できる。</p>
+<p>採用する候補: submask和へ拡張したBostan–Mori</p>
+<p>Nの各bitで0なら偶数係数、1なら偶数＋奇数係数を残し、indexを半減しながら次数Kの有理式を保てる。</p>
+<p>棄却する候補: 全submask mを列挙してK-bonacciを計算</p>
+<p>popcount(N)が大きいと2^60候補になる。</p>
+<p>棄却する候補: K×K行列を各候補へ累乗</p>
+<p>候補数に加え一回O(K^3 logN)でK=5×10^4を扱えない。</p>
+<p>Q(x)Q(-x)が偶多項式になるため、係数の偶数/奇数抽出後も次数K以下の有理式としてNTT畳み込みで更新できる。</p>
+<p>K-bonacciのP,Qを構成し、Nを下位bitから処理する。Q(-x)を掛けて分母を偶次数へ圧縮し、N bitが0なら分子偶部、1なら偶部＋奇部を選び、最後の定数係数比を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="bostanmori">Bostan–Mori</h3>
+<p>発動条件: 線形漸化式の巨大index項を高速取得する。</p>
+<p>P/QへQ(-x)を掛け偶奇係数を抽出する。</p>
+<h3 id="bit-dpと母関数">bit DPと母関数</h3>
+<p>発動条件: indexの各bitが0/1の選択制約を持つ。</p>
+<p>submask条件を偶部または偶奇和の作用素として合成する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>単一係数を選ぶBostan–Moriの分岐を線形結合に替えるだけで、全submask係数和を同じ有理式更新で扱える。</p>
+<p>別の問題へ持ち帰る視点: 係数index集合がbitごとの正則言語ならdigit抽出作用素を母関数へ作用させる。</p>
+<h2 id="正当性">正当性</h2>
+<p>P/QへQ(−x)を掛けると分母が偶関数になるため、偶係数列と奇係数列は同じ圧縮分母で表される。submaskのbitが0なら偶列だけ、1なら0/1どちらの選択も許すので偶列と奇列を足す。各bit後の分子は未処理上位bitに対応する係数和を表す不変条件を保ち、最後に定数項比が全submaskの係数和になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>P,Qを次数Kにtruncateし、N=0とK=1、偶奇抽出後の正規化を確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小K,Nで漸化式を直接生成し全submask和と比較し、N=0、bitが連続1、最高bit処理を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(K log K·log(N+1))。各bitでBostan–Mori型の積と偶奇抽出を行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq 5 \times 10^4; 0 \leq N \leq 10^{18}; N and K are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>原理の例としてP=1,Q=1−x−x²、N=3。</p>
+<ol>
+<li>級数係数は1,1,2,3,…。</li>
+<li>3=11₂のsubmaskは0,1,2,3なので合計1+1+2+3。</li>
+</ol>
+<p>期待される結果: 係数和7。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ級数でN=2なら係数1,2,3を全て足すか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>2=10₂のsubmaskは0,2だけ。連続prefix和とは異なる。</p>
+<p>確認結果: 1+2=3。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc300/editorial/6269">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-editorial-6269-8ee6c801cc635135e368a145e5422f67ea6f3b84bb1f84c9a3d8abdbe3e9c62f</li>
+<li><a href="https://atcoder.jp/contests/abc300/tasks/abc300_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc300-ex-problem-a4193e2c6420fe848a52d2fcde204ca005b9263c25643e305fd3a0f5154a481f</li>
+</ul></main>
+</body></html>

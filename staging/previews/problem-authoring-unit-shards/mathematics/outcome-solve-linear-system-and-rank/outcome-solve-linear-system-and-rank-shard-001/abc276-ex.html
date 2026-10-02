@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC276-EX — Construct a Matrix</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC276-EX — Construct a Matrix</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/linear-system-rank.md">線形方程式・rank</a></p>
+<ul>
+<li>制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/bitset-word-parallel.md">bitsetで集合演算をword並列化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>線形方程式・rankの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>積が1または2 mod 3の長方形には0を置けず、要素を1=2^0,2=2^1と書けば積条件は2の個数のparity、すなわちF_2上の長方形xorになる。</p>
+<p>積が0の条件は長方形内に少なくとも1個0があることなので、非零条件を満たす領域と0を置ける領域を分離して考えられる。</p>
+<p>採用する候補: 非零queryを2D prefix xorの4 corner変数によるF_2連立方程式にし、出現cornerだけをbitset Gaussian eliminationで解く。非零queryに覆われないcellを0にする。</p>
+<p>cell N²個ではなく高々4Q個のprefix変数で方程式を表し、zero条件もcoverageで最大限満たせる構成になる。</p>
+<p>棄却する候補: 各x_{i,j}を変数とするN²変数の連立方程式を直接掃き出す。</p>
+<p>N,Q≤2000では変数が最大4×10^6となり、bitsetを使っても掃き出し法が重すぎる。</p>
+<p>prefix xor p_{i,j}を使うとrectangle parityはp_{b,d}⊕p_{a-1,d}⊕p_{b,c-1}⊕p_{a-1,c-1}で、queryに現れるcorner以外は0に固定してよい。</p>
+<p>非零queryのunion外のcellはどの非零積も壊さないので全て0にできる。これで満たせない0-queryは全cellがunion内であり、どの解でもそこへ0を置けないため不可能である。</p>
+<p>e=1,2のqueryだけからcorner prefix変数と右辺(e=2なら1)を作り、F_2掃き出しで一解を得る。未使用prefixは0として2D差分から1/2 matrixを復元し、2D imosで非零queryに覆われないcellを0化する。最後に全queryを検証する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="multiplicative-conditionの指数化">multiplicative conditionの指数化</h3>
+<p>発動条件: 有限体の非零元が小さな巡回群をなし、積条件を加法条件へ変えられるとき。</p>
+<p>mod3の1,2を2の指数0,1へ写し、積をxorへする。</p>
+<h3 id="rectangle-queryのprefix-corner化">rectangle queryのprefix corner化</h3>
+<p>発動条件: 長方形和/xorの線形制約が多数あり、cell変数を減らしたいとき。</p>
+<p>各式を4 cornerだけで表し、全queryに現れる高々4Q個のcorner座標をsort-uniqueしてdenseな変数IDへ写す。</p>
+<h3 id="bitset-gaussian-elimination">bitset Gaussian elimination</h3>
+<p>発動条件: F_2上の変数・式が数千規模で、密な連立方程式の可解性と一解が必要なとき。</p>
+<p>rowをbitset化してpivot消去し、矛盾行を検出する。pivot情報から一解を復元し、2D差分で出力matrixへ戻す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>非零積queryのunionは0を絶対に置けない領域であり、その外をすべて0にする構成が全zero queryを同時に満たすための最強の選択になる。</p>
+<p>別の問題へ持ち帰る視点: 制約が『禁止領域』と『少なくとも1個のmarker』に分かれるとき、許可領域を全面marker化して残る条件だけを検査する。</p>
+<h2 id="正当性">正当性</h2>
+<p>非零queryのunion内には0を置けない。そこで1,2を2の指数0,1としてprefix XORを作ると各長方形条件は四cornerの線形方程式になる。任意の解から二次元差分でcellを復元しunion外を0化しても非零queryは変わらない。0queryがunion外cellを持てば成立し、持たなければどの解でも不可能。最後の全query確認で双方を保証する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>prefix cornerにはindex 0を含め、同じcornerを座標圧縮して1変数として共有する。</li>
+<li>掃き出し後のmatrix復元だけで安心せず、0-queryにuncovered cellがあるか、または完成matrixの全queryを検証してNoを判定する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>2×2のprefix xorからcell値を復元する式と、非零rectangleのunion内へ1個でも0を置くと壊れる理由を別々に手計算する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²+Q·C²/w+Q²)、C≤4Qは圧縮prefix変数数、wはbitset語長。素朴消去はO(QC²)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+QC/w)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2000; 1 \leq a_i \leq b_i \leq N; 1 \leq c_i \leq d_i \leq N; e_i \in {0,1,2 }; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、全盤積2、左上cell積2。</p>
+<ol>
+<li>全cellを1にして左上だけ2にすると双方の積2。</li>
+<li>prefix指数の方程式にも左上1、全体1が入る。</li>
+</ol>
+<p>期待される結果: 行列[[2,1],[1,1]]が一解。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ全盤に積0のqueryを追加すると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全盤非零queryが全cellを覆うためどこにも0を置けず、積0とは矛盾する。</p>
+<p>確認結果: No。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc276/editorial/5169">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc276-editorial-5169-30499c5ad8dee84dc3313dc5030eb15318ac0f2c796eeb2d8ebbe00f6c34532c</li>
+<li><a href="https://atcoder.jp/contests/abc276/tasks/abc276_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc276-ex-problem-9ff677eed53889aa49b0fdb815218f25f42392d1ebcf2d8b2595757bc6879c43</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC392-G — Fine Triplets</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC392-G — Fine Triplets</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></p>
+<ul>
+<li>係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>等差三項条件は2B=A+Cである。集合indicator多項式F(x)=Σ_{s∈S}x^sを二乗すると、係数[x^k]F²がA+C=kとなる順序付きpair数になる。</p>
+<p>B∈Sを固定すると係数[x^{2B}]には(A,C)と(C,A)が両方入り、さらに無効な(B,B)が一つ含まれる。</p>
+<p>採用する候補: 集合indicatorを自己convolutionし、各Bの2B係数から自己pairを引いて2で割る</p>
+<p>最大値10^6までの一回のNTTで全sum別pair数をO(V log V)で得られ、N個のBを線形走査できる。</p>
+<p>棄却する候補: 各A&lt;B&lt;Cのtripletを列挙して差を比較する</p>
+<p>候補がΘ(N³)でN=10^6には到底間に合わない。</p>
+<p>Sの要素はdistinctなので(B,B)の係数寄与は必ず1である。</p>
+<p>残った順序付きpairはA≠Cで二つ一組になり、一方が自動的にA&lt;B&lt;Cを満たすので整数として半分にする。</p>
+<p>maxSまでの0/1係数配列fを作り、convolution(f,f)を求める。各B∈Sについて(conv[2B]-1)/2を整数で答えへ足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="加法pair-countingのconvolution">加法pair countingのconvolution</h3>
+<p>発動条件: 集合から二要素を選び和ごとの個数を一括で求めるとき。</p>
+<p>indicator多項式の積の係数を使う。</p>
+<h3 id="orderedunordered補正">ordered/unordered補正</h3>
+<p>発動条件: convolutionが順序付きpairと自己pairを数えるとき。</p>
+<p>対角を引いて対称な二重countを2で割る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>中心Bを跨ぐ左右距離一致は差を直接数えるより、端点和2Bとしてadditive convolutionへ変えると全Bを同時に処理できる。</p>
+<p>別の問題へ持ち帰る視点: 三項等差・中点条件は2middle=end1+end2へ移項し、和convolutionを検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>二乗係数2BはA+C=2Bの順序付きpair数。distinct集合では(B,B)がちょうど1個入り、残りは(A,C)と(C,A)のpairである。これを引いて2で割るとA&lt;B&lt;Cの等差tripletを一度得る。各tripletの中項Bは一意なのでB全体の和にも重複はない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>係数は最大Nで998244353未満なのでmod convolution結果を整数countとして使える。2Bまで配列長を確保し、通常整数で2除算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小集合で全triplet列挙し、Bが端点、(B,B)だけが存在、左右pairが複数あるcaseの係数補正を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(V log V+N)、V=max S。indicator二乗をNTTで計算する。</p>
+<h3 id="空間">空間</h3>
+<p>O(V)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 10^6; 1 \le S_i \le 10^6; The elements of S are distinct.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S={1,2,3,4}。</p>
+<ol>
+<li>B=2の外側pairは(1,3),(3,1)、B=3は(2,4),(4,2)。</li>
+<li>各Bの畳み込み係数3から1を引き2で割る。</li>
+</ol>
+<p>期待される結果: 2triplet。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>S={2}なら係数[4]を2で割るだけでよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>(2,2)の自己pair1を先に除く必要がある。集合一要素からtripletは作れない。</p>
+<p>確認結果: 0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc392/editorial/12175">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc392-editorial-12175-d00afb91d1eb85a0a43b828ca1e68d4aff9b65365ce8a51e2724334e95acd568</li>
+<li><a href="https://atcoder.jp/contests/abc392/tasks/abc392_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc392-g-problem-0ecceae1087a498df7b9a28343f0cd4bd59d0a352b474711ebed70002f6dbc4b</li>
+</ul></main>
+</body></html>

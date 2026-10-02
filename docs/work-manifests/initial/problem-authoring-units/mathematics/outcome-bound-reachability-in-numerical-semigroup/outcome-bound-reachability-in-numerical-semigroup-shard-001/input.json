@@ -1,0 +1,79 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
+  "packets": [
+    {
+      "problemId": "abc388-f",
+      "learningOutcomeIds": [
+        "outcome-bound-reachability-in-numerical-semigroup"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-gcd-diophantine"
+      ],
+      "excludedTopics": [
+        "負の係数も許す整数線形結合のgcd可解性だけを判定する問題、および使用回数に上限がある有限knapsack。"
+      ],
+      "tagIds": [
+        "tag-numerical-semigroup",
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^{12}; 0 \\leq M \\leq 2 \\times 10^4; 1 \\leq A \\leq B \\leq 20; 1 < L_i \\leq R_i < N \\ (1 \\leq i \\leq M); R_i < L_{i+1} \\ (1 \\leq i \\leq M - 1); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "外部との一歩接続は幅B以内なのでsafe区間のhead/tailだけ保持すれば必要接続を全て残せる。同区間内の二点は距離がstep和なら単調に進んで安全で、長距離は連続step B−1,Bによる表現可能性から一括判定できる。boundary graphの各辺は実経路で実現可能、実経路も境界を通る順へ縮約できるので到達可能性が一致する。",
+          "sourceRevisionIds": [
+            "source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5",
+            "source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5",
+          "path": "src/content/sources/abc368-abc419/source-abc388-editorial-11910-44c135f6f2bb0c5394307649d28958752d8dc1dfbb0d91533670c8a14ce272d5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc388_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698",
+          "path": "src/content/sources/abc368-abc419/source-abc388-f-problem-4a77b90240fbb5b9a0c466ac85f65c4fcbfd5d55efb81144da0bee3978cb3698.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc388_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

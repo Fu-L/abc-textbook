@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-carry-or-mixed-radix-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "e98151539f3080c1a3bc20bb046e66816d1f916cd7b03ffe5015496208b34799",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "693f8fc24a00303baf2851d6415fc604a9bcc1471e89e2d1d75332f6dcd7c682",
+  "reviewDigest": "9cb107a05bcc634b88cd663e415ed68d95f821afb45bf694980fbccb2aae3fa1",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc231-e.html",
+      "digest": "3dd94724d6e899ff3146f0493f5c6c33898904ebf8886ac7eadc0efc8aa14726"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.html",
+      "digest": "42754daf6cffd0547e22ea6ca9361aee60c69d5504e2709eca5bd5ab01d6dc14"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/index.html",
+      "digest": "673009543691b9183f34f15d2398e14382eb8181bb7018839cff0aca8dba56c3"
+    }
+  ],
+  "snapshotDigest": "d1873b01e92924d4a28dcb10c42b230cef4875ccf9d9e6c5a70ba068097c1a5b"
+}

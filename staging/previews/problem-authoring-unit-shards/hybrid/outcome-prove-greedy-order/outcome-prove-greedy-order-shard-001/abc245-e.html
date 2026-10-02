@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC245-E — Wrapping Chocolate</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC245-E — Wrapping Chocolate</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></p>
+<ul>
+<li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>対称操作による状態の正規化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各チョコレートは回転できず、2 辺とも箱以下でなければならない。N≤M でも、同じ箱を 2 回使えないため、辺ごとの存在判定だけでは足りない。</p>
+<p>一方の辺 A,C を大きい順に処理すると、現在のチョコレートに使える箱は C≥A を満たす処理済みの箱だけになる。残る選択条件は B≤D の 1 次元に落ちる。</p>
+<p>採用する候補: A,C の降順に箱とチョコレートを走査し、利用可能になった箱の D を multiset に入れる。チョコレートでは B 以上の最小 D を 1 個取り除く。</p>
+<p>大きいチョコレートに過剰に大きい箱を残さず、各要素の挿入・検索・削除だけで割当てを構成できる。</p>
+<p>棄却する候補: 各チョコレートについて、未使用箱を先頭から探して最初に入る箱へ割り当てる。</p>
+<p>探索順により必要な箱を浪費し得るうえ、全組を調べると N,M≤2×10^5 に対して二次時間になる。</p>
+<p>現在使える D のうち B 以上で最小のものを選んでも、より大きい D を将来へ残すので不利にならない。任意の実現可能な割当てで現在の箱をこの最小箱と交換できる。</p>
+<p>A=C の箱はそのチョコレートに使用可能なので、同値イベントでは箱を先に処理しなければならない。</p>
+<p>2 次元の支配条件を一方の座標で sweep し、もう一方を ordered multiset の lower_bound で貪欲に照合する。途中で候補がなければ No、全チョコレートを処理できれば Yes とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="sweep-line-と-ordered-multiset">sweep line と ordered multiset</h3>
+<p>発動条件: 2 属性の両方が閾値を満たす一対一割当てで、一方の属性順に候補集合を単調に追加できるとき。</p>
+<p>A,C を降順 sweep し、C≥A の箱だけを multiset に入れて D の下限検索を行う。</p>
+<h3 id="交換法による貪欲">交換法による貪欲</h3>
+<p>発動条件: 複数の候補から最小限の資源を選ぶと、残りの候補集合が将来に対して支配的になるとき。</p>
+<p>B を満たす最小 D を選び、元の実現可能解との箱の交換で安全性を示す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>箱を第一辺で利用可能化してから第二辺の最小適合値を消費すれば、長方形の 2 条件を独立な貪欲処理へ分解できる。</p>
+<p>別の問題へ持ち帰る視点: 多次元マッチングでも、候補集合が一方向にだけ増える順序を作れるなら、残り 1 軸の ordered set 問題に落とせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>現在使える D のうち B 以上で最小のものを選んでも、より大きい D を将来へ残すので不利にならない。任意の実現可能な割当てで現在の箱をこの最小箱と交換できる。 A=C の箱はそのチョコレートに使用可能なので、同値イベントでは箱を先に処理しなければならない。 大きいチョコレートに過剰に大きい箱を残さず、各要素の挿入・検索・削除だけで割当てを構成できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>箱とチョコレートを同じ event 列へ入れる場合、第一辺が同じなら箱を先に並べる。</li>
+<li>lower_bound(B) が end なら即 No とし、erase(value) ではなく iterator を消して重複 D を 1 個だけ使用する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>A=C かつ B=D の箱を使う最小例と、同じ D の箱が複数ある例で、tie-break と 1 個だけの削除を説明させる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+M)log(N+M))、箱とチョコの幅sweep、高さmultiset。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq M \leq 2\times 10^5; 1 \leq A_i,B_i,C_i,D_i \leq 10^9; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>チョコ(幅,高さ)=(2,3),(2,5)、箱=(2,3),(2,6)。</p>
+<ol>
+<li>高さ3のチョコへ使用可能最小高さ3を選ぶ。</li>
+<li>高さ5には箱6を残す。</li>
+</ol>
+<p>期待される結果: Yes。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ幅2でチョコeventを箱より先に処理すると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>本来使える箱を未登録とみなしNoを返し得る。幅同値では箱を先に解禁する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc245/tasks/abc245_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc245-e-problem-3747bf2b4d93efbb6cebd8f5f3fdd6af7abf39175b1aaa9e00dd0c74491f2235</li>
+<li><a href="https://atcoder.jp/contests/abc245/editorial/3635">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc245-editorial-3635-9cd671c90db1c3c45428f2c40f8f2eefb4be5c6ff55de05211aa69c0363ddd9b</li>
+</ul></main>
+</body></html>

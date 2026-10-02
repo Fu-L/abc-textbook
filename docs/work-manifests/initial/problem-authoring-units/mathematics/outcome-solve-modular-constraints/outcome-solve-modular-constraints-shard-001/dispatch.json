@@ -1,0 +1,114 @@
+{
+  "shardId": "outcome-solve-modular-constraints-shard-001",
+  "primaryOutcomeId": "outcome-solve-modular-constraints",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc245-ex",
+    "abc286-f",
+    "abc423-g",
+    "abc460-e"
+  ],
+  "homeUnitId": "unit-modular-congruence",
+  "prerequisiteOutcomeIds": [
+    "outcome-characterize-integer-solvability",
+    "outcome-compute-in-modular-arithmetic"
+  ],
+  "dependencyShardIds": [
+    "outcome-characterize-integer-solvability-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.md",
+    "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc286-f.md",
+    "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.md",
+    "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc460-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "03fef4fe164d76cc05dad3b39a31271679dd841ffc2758d5c3b8e518ded0a3ab",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc245-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc286-f",
+      "path": "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc286-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc423-g",
+      "path": "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc460-e",
+      "path": "src/content/docs/problems/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc460-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

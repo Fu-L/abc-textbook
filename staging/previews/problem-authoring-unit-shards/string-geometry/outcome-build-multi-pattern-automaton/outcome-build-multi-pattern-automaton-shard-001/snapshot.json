@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-multi-pattern-automaton-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "ed82eab51a63724bbba7caa8953be9957d4c26596a92ef8216dd9c321866e7f8",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "f4a7b24d992816a82be253d3c3a3908a7bb0cb606db1708d1ec8371e500b238d",
+  "reviewDigest": "4e99d16d282e1a6f42ce5301719e47bf5f8315fac621e10ee86ee72c3960f182",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/abc419-f.html",
+      "digest": "3dbcd3549217d096a939e59667fa0e582ad4f2ae9d94d92a9fcbab3567fcf002"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/abc458-f.html",
+      "digest": "c08c6779c9b3ce087d610a30e53d3960658127733c299868b3e78296e9da8d59"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-multi-pattern-automaton/outcome-build-multi-pattern-automaton-shard-001/index.html",
+      "digest": "065fc0a0e7f25a962668251e4fa366f5f36d2206e696e6c1c4866c700c2accb4"
+    }
+  ],
+  "snapshotDigest": "d1c91b04fd605c2f68c3376f4ad8a70679af9f42448b2b47e5dbe213d209ad5d"
+}

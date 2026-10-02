@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-apply-formal-power-series-operations-shard-001",
+  "primaryOutcomeId": "outcome-apply-formal-power-series-operations",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc289-ex"
+  ],
+  "homeUnitId": "unit-formal-power-series",
+  "prerequisiteOutcomeIds": [
+    "outcome-compute-convolution-or-correlation",
+    "outcome-encode-counting-by-generating-function"
+  ],
+  "dependencyShardIds": [
+    "outcome-compute-convolution-or-correlation-shard-001",
+    "outcome-encode-counting-by-generating-function-shard-001",
+    "outcome-encode-counting-by-generating-function-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "315fc7942eda515aecf769c956c99b33209b3368beb7b7122736e546ff921060",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc289-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-apply-formal-power-series-operations/outcome-apply-formal-power-series-operations-shard-001/abc289-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

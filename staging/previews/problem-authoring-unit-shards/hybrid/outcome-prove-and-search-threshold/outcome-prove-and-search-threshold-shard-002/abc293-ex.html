@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC293-EX — Optimal Path Decomposition</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC293-EX — Optimal Path Decomposition</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最大色数K以下の判定は、根付き部分木から親へ伸びるパスの必要色数と、親を根と同色にできるかの1bitだけを残せば統合できる。</p>
+<p>採用する候補: 答え二分探索と定数候補だけ見る木DP</p>
+<p>各頂点では子を同色にする0/1/2個の選択だけで、子dpの上位定数個から最適遷移とK可否を判定できる。</p>
+<p>棄却する候補: 全頂点の色を列挙</p>
+<p>色数・割当とも指数的で木構造を利用しない。</p>
+<p>同色にする子はdpが大きいものを優先し、3個以上は同色連結成分がパスでなくなるため高々2個だけ考える。</p>
+<p>Kを固定し葉から(dp_v,f_v)を計算して全パス制約を検査する。判定の単調性でKを二分探索し、子値は最大数個だけ保持する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="答えの二分探索">答えの二分探索</h3>
+<p>発動条件: 最大値最小化でK以下の可否が単調。</p>
+<p>木DP判定を繰り返す。</p>
+<h3 id="木dpの支配状態削減">木DPの支配状態削減</h3>
+<p>発動条件: 親との接続可否と最悪値だけが上位へ影響する。</p>
+<p>(dp,f)の非支配状態一つへ圧縮する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同色辺を選ぶことを各頂点次数高々2のパス分解とみると、子の選択肢が0〜2個に限定される。</p>
+<p>別の問題へ持ち帰る視点: 木上のパス制約は親境界で必要な要約状態を探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>同色にする子はdpが大きいものを優先し、3個以上は同色連結成分がパスでなくなるため高々2個だけ考える。 各頂点では子を同色にする0/1/2個の選択だけで、子dpの上位定数個から最適遷移とK可否を判定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>子dpの上位値とf別上位を定数個正確に拾い、根には親接続可否を要求しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小木の全分解と比較し、星・鎖・同値子が多い場合とK判定境界を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、K判定O(N)、子summaryの上位定数個を保持。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq A_i, B_i \leq N; The given graph is a tree.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>同じ色の中心に三つの同色子を付ける候補。</p>
+<ol>
+<li>同色成分の中心次数は3。</li>
+<li>一つのpathで覆うための局所degree≤2に反する。</li>
+</ol>
+<p>期待される結果: 三子を同時に同色pathへ採用する候補は不適。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最大二子だけを見る根拠は単なる高速化か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>path成分は分岐しないという必要条件に基づく。上位三個以上を選ぶ状態自体がinvalid。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc293/editorial/5964">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc293-editorial-5964-fa661f02f6876e8896f80d4179788d50bb5a6502ede71ab300bd6a35945c80c9</li>
+<li><a href="https://atcoder.jp/contests/abc293/tasks/abc293_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc293-ex-problem-a073d501650d2242c62acd73265aeb8e9e62825f1dbe51a2e2cbb5363343f6b9</li>
+</ul></main>
+</body></html>

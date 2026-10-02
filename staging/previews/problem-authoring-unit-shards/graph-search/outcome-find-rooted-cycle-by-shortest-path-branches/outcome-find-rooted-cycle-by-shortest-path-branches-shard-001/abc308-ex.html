@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC308-EX — Make Q</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC308-EX — Make Q</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>根からの最短路木で第一枝の異なる頂点を結ぶ辺を列挙し、二本の木上経路と合わせて根を通る最小閉路を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/shortest-path-reconstruction.md">最短路を証明する木・経路の復元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Qのtail edgeがcycle vertex aからdへ出るとし、cycleでaに隣接するverticesをb,cとすると、本質的制約はd≠b,cまで緩和できる。 固定aのminimum cycleはa-rooted shortest path treeでfirst branch labelsを付け、異なるbranchesを結ぶedgeと二root pathsを合わせた候補のminimumとして得られる。 異branch edge(u,v)はtree paths a→u,a→vと合わせてsimple cycleを作り、任意のa-cycleにも異branch edgeが含まれるためshortest-tree replacementでminimum性が示せる。 baseline cycleのa-b/a-c edgeをtailにしたい場合、そのedgeをcycleから除いてminimum a-cycleを再計算すればtailとcycleのedge重複を防げる。</p>
+<p>棄却する候補: 全simple cyclesとincident tail edgeを列挙する。</p>
+<p>simple cyclesは指数個存在し得る。</p>
+<p>採用する候補: aを全探索し、minimum cycleとそのa-neighborsを求め、通常tail候補およびcycle incident edgeをtailにする二つのedge-deletion caseを評価する。</p>
+<p>最適Qのa,b,c,dを全ケースで覆い、各rootのcycle計算をdense O(N^2)で行って全体O(N^3)となる。</p>
+<p>異branch edge(u,v)はtree paths a→u,a→vと合わせてsimple cycleを作り、任意のa-cycleにも異branch edgeが含まれるためshortest-tree replacementでminimum性が示せる。</p>
+<p>baseline cycleのa-b/a-c edgeをtailにしたい場合、そのedgeをcycleから除いてminimum a-cycleを再計算すればtailとcycleのedge重複を防げる。</p>
+<p>cycle-with-tail subgraph optimizationをattachment vertexごとに分け、shortest-path-tree branch crossingによるminimum rooted cycle oracleで解く。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最短路木からのrooted-minimum-cycle">最短路木からのrooted minimum cycle</h3>
+<p>発動条件: positive weighted undirected graphで指定rootを含むminimum cycleが必要なとき。</p>
+<p>root children別にverticesをlabelし、異label endpointsのedge+両distanceを最小化する。</p>
+<h3 id="構成edgeの役割別case分け">構成edgeの役割別case分け</h3>
+<p>発動条件: 同じincident edgeがcycle側とextra側のどちらかになり得るが重複使用できないとき。</p>
+<p>通常extra edgeと、候補incident edgeを一時削除してcycleを求めるcasesを分ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>tail endpoint dがcycleの別vertexでも、そこまでのcycle arcを消せばcostを増やさず真のQへ縮められるためdがcycle外という条件をd≠b,cへ緩和できる。</p>
+<p>別の問題へ持ち帰る視点: subgraph形状制約は余分なcycle/path edgesを削除するnormalizationで局所条件へ弱められることがある。</p>
+<h2 id="正当性">正当性</h2>
+<p>a-rooted shortest treeの異branch辺は二root pathと合わせsimple cycleを作る。任意a-cycleは異branch辺を含み、その両側を最短tree pathへ置換して重みを増やさない。tailがcycleのa隣接辺と衝突する場合はその辺を除いたoracleで検査し、attachmentとtail候補を全て覆うことで最適cycle-with-tailを得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>edge deletion caseでは該当edge IDだけをDijkstra/cycle scanから除き、parallel edgeのない入力でもID管理を保つ。</li>
+<li>cycleまたはeligible tailがないcaseはinfinityとし、最終minimumがinfinityなら−1を出す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>指定vertexを含むminimum cycleはshortest-path-treeの異なるroot branchesを結ぶedgeで特徴付ける。</li>
+<li>extra edgeがcycle edgeと競合する場合は、そのedgeを役割固定してcycle oracleから除外する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点のdense graph。各attachment rootの定数回cycle oracleをO(N²)で行い全体 O(N³)。</p>
+<h3 id="空間">空間</h3>
+<p>隣接重み表 O(N²)、各rootの距離・branchラベル O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 4\leq N \leq 300; 4\leq M \leq \frac{N(N-1)}{2}; 1 \leq A_i &lt; B_i \leq N; (A_i,B_i) \neq (A_j,B_j), if i \neq j.; 1 \leq C_i \leq 10^5; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>三角形1–2,2–3,3–1が各重み1、tail辺1–4重み2。</p>
+<ol>
+<li>attachment1のminimum cycleは1–2–3–1、重み3。</li>
+<li>tail1–4はcycle外。</li>
+<li>合計3+2。</li>
+</ol>
+<p>期待される結果: 最小Q重み5</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>tail端点をcycleの隣接点2にして同じ辺1–2を使ってよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。cycleとtailの辺が重複する。対象辺をcycle oracleから除外した候補が必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc308/tasks/abc308_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8</li>
+<li><a href="https://atcoder.jp/contests/abc308/editorial/6709">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60</li>
+</ul></main>
+</body></html>

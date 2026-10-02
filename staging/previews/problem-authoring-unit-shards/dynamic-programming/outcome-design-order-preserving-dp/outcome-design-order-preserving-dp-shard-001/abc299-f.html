@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC299-F — Square Subsequence</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC299-F — Square Subsequence</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a></p>
+<ul>
+<li>列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>同じ部分列文字列を重複なく数えるには、各文字を常に直前位置より右で最左の出現から取るcanonical embeddingを固定できる。</p>
+<p>採用する候補: 後継位置σと前後半同時DP</p>
+<p>TTの後半先頭q1を固定し、前半位置pと後半位置qを同じ次文字で最左遷移させれば、文字列Tを一度ずつ数えられる。</p>
+<p>棄却する候補: 部分列の取り出し方を全列挙</p>
+<p>同じTTを多数回数え、2^Nの候補も大きい。</p>
+<p>q1=xを固定するとT_1=S_xと前半p1の最左位置が決まり、終了条件σ(p_last,T_1)=xが前半と後半の境界を保証する。</p>
+<p>全位置i・文字cのnext σ(i,c)を前計算する。各xをq1としてdp[p][q]を初期化し、26文字で(dp[next(p,c)][next(q,c)])へ遷移し、σ(p,S_x)=xを満たす状態を答えに加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="distinct-subsequenceのcanonical-embedding">distinct subsequenceのcanonical embedding</h3>
+<p>発動条件: 同一文字列の複数取り出し方を一度だけ数える。</p>
+<p>各文字を常に最左の可能位置から選ぶ。</p>
+<h3 id="二列同期遷移dp">二列同期遷移DP</h3>
+<p>発動条件: 同じ未知文字列を二つのsubsequenceとして並行に埋め込む。</p>
+<p>前半・後半位置対を状態にし同じ文字で進める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>square TTの二コピーを同時に追い、後半の最初位置で分類すると重複除去条件を局所化できる。</p>
+<p>別の問題へ持ち帰る視点: 繰返しsubsequenceは複数embeddingを最左規則で正規化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>同じ値列Tを与える部分列の取り方は多数あるので、各次文字を最左next位置で取る正準表現を使う。後半の先頭q1=xを固定し、前後の位置pairから同じ文字を最左で延長する。前半の直後にTの先頭文字を最左で探した位置がxとなる終了条件が、二つの半分の境界を確定する。任意のTTはこの正準経路と境界を一意に持ち、任意の受理経路は前半より後に同じTを構成するため、全xのDPの和が異なるsquare文字列を一回ずつ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>nextが∞の遷移を除き、長さ0のTを数えず、終了条件を各状態で重複加算しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤12の全subsequence文字列setと比較し、同文字反復、重なるembedding、長さ奇数でsquare不能な例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(26N³)、後半先頭xごとに位置pair DP。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+26N)、一xのDPとnext表。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string consisting of lowercase English letters whose length is between 1 and 100, inclusive.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=aaaa。</p>
+<ol>
+<li>square部分列TTの値はaaとaaaa。</li>
+<li>aaは多くの添字pairから取れるがT=aとして一回だけ数える。</li>
+</ol>
+<p>期待される結果: 異なるsquare文字列2個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>添字部分列として数えると何個か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>長さ2はC(4,2)=6、長さ4は1で7。問題の値列数2と違うので最左next表による正準表現が必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc299/editorial/6251">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc299-editorial-6251-94128205fc1b51c51fdfe62c4746d7ae50cc2230ebb5f40e1ca4799fb2f23905</li>
+<li><a href="https://atcoder.jp/contests/abc299/tasks/abc299_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc299-f-problem-33a84192a9a499265c4e7d0f05a7e4276ac4e4d1674e1d1a89a8f8f2e075fe6a</li>
+</ul></main>
+</body></html>

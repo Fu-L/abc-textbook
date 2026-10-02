@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compute-all-pairs-distance-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "33e9160819816d3c23d1034f42a88b800884cad83b0bac38e668e87e8c4839af",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "6555fdb00bd930514d90c1cfaa495eaf50e4893d1e1cda6dc9b03fa74c3faad0",
+  "reviewDigest": "0339ada90021cff8ecefccdb22d4d52b4f10efbd9e81015adb5a42e3105246b4",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.html",
+      "digest": "ed1f993b1de96f7ca1d4d4e75408ee255052804a739182cbc1d2362d9c629e6a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc286-e.html",
+      "digest": "8f21bc25f9fd88de1ba1290251cdb930b08af4161d9da3c2c51bec96ed1b666b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc416-e.html",
+      "digest": "2259e6b6535516402d628951502f20abfdd11fa2bc6c779470ae4d7d4d2bea6e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/index.html",
+      "digest": "bebf110b8cfc9c03f2a43419df925defdaa845e55a3b02d9318a82bc8597e6ea"
+    }
+  ],
+  "snapshotDigest": "023c52ac467e1c90d0454e58b9d97329d6822ee0959ded2566494b4931ac62d6"
+}

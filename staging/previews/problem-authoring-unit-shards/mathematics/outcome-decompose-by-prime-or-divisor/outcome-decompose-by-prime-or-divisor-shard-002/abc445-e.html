@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC445-E — Many LCMs</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC445-E — Many LCMs</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></p>
+<ul>
+<li>整数の条件を素因数ごとの指数または約数格子上の条件に分解できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>床関数や整数根の値が一定となる区間への分割。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>A_k を除いた lcm の各素数 p の指数は、全 A_i における p 指数の最大値と二番目の最大値だけで決まる。</p>
+<p>採用する候補: 全数を素因数分解して各 p の最大指数 e1 と第二最大 e2 を保持し、全体 lcm L から A_k が担う最大指数分だけ p^{e1-e2} を除いて各 L_k を求める。</p>
+<p>lcm は素数ごとに指数 max を取るため、最大を担う要素を一つ除いた後の max が e2 であり、その他の素数指数は変化しない。</p>
+<p>棄却する候補: 各 k について N-1 個の lcm を先頭から掛け合わせて計算する。</p>
+<p>N 回の再計算で O(N^2) となり、値自体も巨大なのでそのまま保持できない。</p>
+<p>同じ最大指数を複数要素が持つ場合は e2=e1 となり、どれを除いてもその素数因子は減らない。</p>
+<p>全体 L を modulus 上で持ち、減る因子の逆元を掛ければ巨大な整数 lcm を構築せず各答えを得られる。</p>
+<p>篩の最小素因数で全 A_i を分解し、p ごとの top2 指数を更新する。L=∏p^{e1} mod MOD を作り、各 k は L から A_k の指数が e1 である p について p^{e1-e2} の逆元を掛けて出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="素数指数ごとの-top-2">素数指数ごとの top-2</h3>
+<p>発動条件: 一要素除外後の gcd・lcm を全要素について求めたいとき。</p>
+<p>各素数の最大指数と第二最大指数だけを十分統計として保持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>一要素除外 query では、集約演算 max の最大値だけでなく次点を持つと除外後を定数情報で復元できる。</p>
+<p>別の問題へ持ち帰る視点: lcm の巨大値は素数指数空間で設計し、最終的な積だけ modulus 上へ写す。</p>
+<h2 id="正当性">正当性</h2>
+<p>全LCMのprime指数は最大e1。要素kを除いたときはその要素だけが最大を担うprimeに限り二番目e2へ下がる。最大が重複すればe2=e1で不変。この差のprime冪で全体LCMを割れば除去後LCMになる。各primeは法より小さく可逆なのでmod上の逆元乗算でも同じ整数比を表す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>存在しない第二指数は0とし、最大値の重複を e2=e1 として記録する。modular inverse は MOD の倍数でない因子だけに使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>最大指数が一意な場合と複数ある場合を分け、除外後指数が e2 になる更新規則を同じ素数の例で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(V log log V+Σ_i log A_i+S log MOD)、V=10^7、Sは全factor pair数。逆元をfactorごとに作る。</p>
+<h3 id="空間">空間</h3>
+<p>O(V+S+N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^7; All input values are integers.; The sum of N over all test cases in a single input is at most 2 \times 10^5.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(4,6,3)。</p>
+<ol>
+<li>LCMは12。2の最大指数2は4だけ、3の最大指数1は6と3が共有。</li>
+<li>除去結果は6,12,12。</li>
+</ol>
+<p>期待される結果: 6,12,12（法上も同値）。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最大指数が二人で同じなら第二最大を0にしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>残る人が同最大を供給するためe2=e1。A=(4,4)の除去LCMはいずれも4。</p>
+<p>確認結果: e2=e1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc445/tasks/abc445_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc445-e-problem-50135848a5878b8a158943534dbfed90b6878bc27e5ccea5387b9cf9efb99965</li>
+<li><a href="https://atcoder.jp/contests/abc445/editorial/15897">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc445-editorial-15897-cb7d716d9e102facbb220e48ba70de743c4fb5a4c813c547c6652e11a22000e2</li>
+</ul></main>
+</body></html>

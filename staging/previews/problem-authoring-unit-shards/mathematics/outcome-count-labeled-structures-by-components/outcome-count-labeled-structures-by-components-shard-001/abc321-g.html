@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC321-G — Electric Circuit</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC321-G — Electric Circuit</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md">label付き連結成分分解・exponential formula</a></p>
+<ul>
+<li>最小labelを含む成分を一意に切り出し、全構造とconnected構造の関係をsubset DPまたは指数型母関数で解ける。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最終graphの各connected componentの頂点集合Sについてindicatorを置くと、component数は非空Sのindicator和なので期待値の線形性を使える。</p>
+<p>S内のred端子数とblue端子数が異なればSだけでcableを閉じられず、等しくmならS内端子の全matching数f(S)はm!である。</p>
+<p>Sが1componentとなる内部matching数g(S)は、f(S)から複数componentへ分かれるmatchingをsubset DPで引いて求められる。</p>
+<p>採用する候補: 各subsetの全内部matching fからconnected matching gをanchor付きsubset recurrenceで抽出し、component indicator確率を総和する。</p>
+<p>N≤17のsubset空間でM!個の配線を列挙せず、連結成分分割をO(3^N)の一意な分解として数えられる。</p>
+<p>棄却する候補: M!通りのred-blue terminal matchingを列挙し、毎回DSUでcomponent数を数える。</p>
+<p>M≤10^5でfactorial個の配線は列挙不能である。</p>
+<p>棄却する候補: 各part pair間の期待cable本数からexpected component数を直接求める。</p>
+<p>component数はedge本数の線形関数ではなく、cycleや連結性の高次依存を失う。</p>
+<p>Sの固定anchor aを含むcomponentをTとすると、Tはconnectedにg(T)通り、残りS\Tは任意の内部matching f(S\T)通りで、非連結caseを一意に分類できる。</p>
+<p>従ってg(S)=f(S)-Σ_{T⊊S,a∈T}g(T)f(S\T)となり、小subsetから順に計算できる。</p>
+<p>Sが全体の1componentとなるfull matching数はg(S)(M-m)!なので、その確率はこれをM!で割った値になる。</p>
+<p>各partのred/blue端子数を数え、subset sumでr[S],b[S]を作る。等しいときf[S]=r[S]!、否则0。popcount昇順に、Sの最下位bit aを固定してproper submask T⊂S,a∈Tを列挙し、g[S]=f[S]-Σg[T]f[S\T]を求める。各非空Sでm=r[S]=b[S]ならg[S](M-m)!/M!をanswerへ加え、mod 998244353で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="indicator期待値">indicator期待値</h3>
+<p>発動条件: random構造のconnected component数など、部分集合eventの個数として表せる量。</p>
+<p>各Sがちょうど1componentになる確率を足す。</p>
+<h3 id="connected構造のsubset-dp">connected構造のsubset DP</h3>
+<p>発動条件: 全構造数f(S)からconnected構造数g(S)を抽出したいとき。</p>
+<p>anchorを含むcomponent Tで非連結構造を一意分解する。</p>
+<h3 id="3n-submask-enumeration">3^N submask enumeration</h3>
+<p>発動条件: 各subset Sに対しanchor条件付きの全submaskを走査するとき。</p>
+<p>S,T,S\Tの三分類として総計を評価する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>terminal matchingがSの外へ1本も出ない確率と、その内部graphがconnectedな割合をg(S)(M-m)!/M!で同時に数えられる。</p>
+<p>別の問題へ持ち帰る視点: subsetがcomponentになるeventは、subset内connected構造と補集合側の任意構造を積に分け、全体構造数で割る。</p>
+<h2 id="正当性">正当性</h2>
+<p>subset内端子数が等しければ内部matchingはm!、違えば0。anchorを含む真の連結成分Tで分類して非連結分を引く再帰によりconnected内部数g(S)を得る。Sが全graphの一成分となるmatchingはg(S)(M−m)!で、他との端子接続は禁止される。各実現graphの成分indicatorを全非空Sで足すとその成分数になるので期待値の線形性が答えを与える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>red/blue数が異なるsubsetはf=g=0とし、m=0のsingletonはedgeなしでもconnectedなのでrecurrence上g=1になる。</li>
+<li>proper submaskだけを引き、anchor bitを含む条件で同じpartitionを重複計数しない。</li>
+<li>最後にinv(M!)を共通で掛け、mod減算を正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=2で端子なしsingletonと両partを結ぶ1 cableのcaseを計算し、fからgを引くrecurrenceとcomponent確率の(M-m)!因子を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(3^N+N2^N+M)。subsetの端子数とanchor成分再帰。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^N+M+N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 17; 1 \leq M \leq 10^5; 1 \leq R_i, B_i \leq N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、赤青端子とも各頂点に1個、M=2。</p>
+<ol>
+<li>matchingは自己接続2本のcaseで2成分、交差接続2本のcaseで1成分。</li>
+</ol>
+<p>期待される結果: 期待成分数3/2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>端子のない孤立頂点のsingleton gは0か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>辺なしでもsingletonはconnected。f=0!=1でproper anchor subsetがないためg=1。</p>
+<p>確認結果: g=1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc321/editorial/7268">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05</li>
+<li><a href="https://atcoder.jp/contests/abc321/tasks/abc321_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b</li>
+</ul></main>
+</body></html>

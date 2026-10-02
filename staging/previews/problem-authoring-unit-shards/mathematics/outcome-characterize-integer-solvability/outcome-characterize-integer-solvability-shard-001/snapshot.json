@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-characterize-integer-solvability-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "827a8e16b0580e0d34176a23c33ca2e7e69bee6f29133ed8d1fbe4b7b0d0e892",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "58da661e26c199e836b8e55971aa168242a2bd4dae5f9daf5ac92dadf0f12198",
+  "reviewDigest": "82c6a37a18922866537fcdc03f120373e3d508978517b5a7e2cd6cf2e003396e",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc271-ex.html",
+      "digest": "beb034f935d91f3008a8ce1a0c2f3407e76ffa95b4cbf901a3db9197b96508b7"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc315-g.html",
+      "digest": "97ad2747073ac1c59e1790b0d0e3439e1dac56e797e8eaccbc3db766a6f426c9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/abc340-f.html",
+      "digest": "88f93ce6df6fa4fdc0ad991534bea2fc4ed7aaa43fe0e737e180670ef6f2e3e8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-characterize-integer-solvability/outcome-characterize-integer-solvability-shard-001/index.html",
+      "digest": "4fc91f0805670e36f79492bf33658302486ea126cdc31b2ed31a09b08a01b770"
+    }
+  ],
+  "snapshotDigest": "b34653401b47065fe1edfb65d25367d7a01e2b137abb111fd47bed8ef6c2726a"
+}

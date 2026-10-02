@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC293-G — Triple Index</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC293-G — Triple Index</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/mo-offline-range.md">Moの順序で区間問い合わせの差分を更新する</a></p>
+<ul>
+<li>区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>オンラインのpriority queue・multiset、および単調stack・queue。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間に値xを一個追加すると同値三つ組はC(cnt_x,2)個増え、削除時も逆順で定数時間更新できる。</p>
+<p>採用する候補: Mo’s algorithmで区間端を並べ替える</p>
+<p>全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。</p>
+<p>棄却する候補: 各質問で頻度を数え直す</p>
+<p>区間長の総和がO(NQ)になり得る。</p>
+<p>答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。</p>
+<p>質問を左端blockと右端順でソートし、現在区間を伸縮しながらfreq[A_i]と三つ組数を差分更新して元の質問順へ答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="mos-algorithm">Mo’s algorithm</h3>
+<p>発動条件: 静的配列の多数区間質問で端点一歩更新が軽い。</p>
+<p>質問順をblock分割で並べ替えて区間移動を共有する。</p>
+<h3 id="組合せ数の差分">組合せ数の差分</h3>
+<p>発動条件: 頻度cに一要素を加えた統計量C(c,3)の変化を知りたい。</p>
+<p>C(c+1,3)-C(c,3)=C(c,2)を使う。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>三重ループをせず、値別頻度の三項組合せ和をオンライン維持できる。</p>
+<p>別の問題へ持ち帰る視点: 区間内k組数は追加時に既存(k-1)組数を足す。</p>
+<h2 id="正当性">正当性</h2>
+<p>答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。 全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>追加と削除のfreq更新順を逆にし、答えは64ビットで保持する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>素朴三重ループと照合し、全同値・全相異・長さ3未満・同じ区間の重複質問を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Q log Q+NB+NQ/B)、B≈N/√Qで移動O(N√Q+Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq A_i \leq 2 \times 10^5; 1 \leq l_q \leq r_q \leq N; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>区間の値は(2,2,2,2)。</p>
+<ol>
+<li>同値三つ組はC(4,3)=4。</li>
+<li>2を一個追加すると増分C(4,2)=6。</li>
+</ol>
+<p>期待される結果: 追加後10。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>一個削除する減分は削除前C(5,2)か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>削除後頻度4を用いたC(4,2)=6を引く。削除前を使うと10を引き過ぎる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc293/editorial/5947">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8</li>
+<li><a href="https://atcoder.jp/contests/abc293/tasks/abc293_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9</li>
+</ul></main>
+</body></html>

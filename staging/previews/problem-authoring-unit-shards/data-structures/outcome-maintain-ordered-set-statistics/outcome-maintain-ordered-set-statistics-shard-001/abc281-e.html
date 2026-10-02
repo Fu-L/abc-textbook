@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC281-E — Least Elements</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC281-E — Least Elements</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></p>
+<ul>
+<li>比較順を保つ集合でpredecessor/successor・極値・重複・二集合のk-smallest aggregateを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>隣接windowは左端1要素を削除し右端1要素を追加するだけなので、毎回sortし直す情報の大半は共通である。</p>
+<p>windowを小さいK個のmultiset Lと残りRに分ければ、答えはsum(L)であり、必要な不変条件は|L|=Kかつmax(L)≤min(R)である。</p>
+<p>採用する候補: ordered multiset L,RとsumLを維持し、削除・挿入後に境界要素を高々1個移して|L|=Kへ戻す。</p>
+<p>window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。</p>
+<p>棄却する候補: 各windowのM要素をcopyしてsortし先頭K個を足す。</p>
+<p>window数とMの積が二次規模になり、N≤2×10^5に間に合わない。</p>
+<p>新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。</p>
+<p>重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。</p>
+<p>初windowをsortしてK個をL、残りをRへ入れsumLを作る。slideごとにoutgoingを所属setから削除し、incomingを境界比較で挿入する。|L|&lt;KならminRをLへ、&gt;KならmaxLをRへ移しsumLを更新して出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="two-multiset-order-statistics">two-multiset order statistics</h3>
+<p>発動条件: 動的multisetの小さい方K個と残りを分け、その集約値を維持したいとき。</p>
+<p>境界maxL/minRとsizeを不変量にし、insert/erase後にrebalanceする。</p>
+<h3 id="sliding-window差分更新">sliding window差分更新</h3>
+<p>発動条件: 連続window間で出入りする要素が少数のとき。</p>
+<p>outgoing削除とincoming挿入だけをdata structureへ反映する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>K-th値そのものではなくK最小値の和なので、balanced partitionにsum metadataを足すだけでqueryがO(1)になる。</p>
+<p>別の問題へ持ち帰る視点: dynamic order statisticのprefix集約では、境界で集合を二分し片側のsum/countを持つ。</p>
+<h2 id="正当性">正当性</h2>
+<p>新値をmax(L)以下ならL、そうでなければRへ入れればorder不変量を保てる。削除後を含め|L|はK±1以内なので1回のrebalanceで足りる。 重複値があるため、削除対象をどちらのmultisetに属するか判定し、iteratorまたは(value,index)で1個だけ消す必要がある。 window更新2要素だけを対数時間で反映し、K最小値の和を直接保持できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>K=MでRが空の場合にmaxL比較やminR移動を空参照しない。</li>
+<li>sumLはK·A_iで64 bitが必要で、値移動・削除・挿入のたび増減を同時更新する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>境界値が重複するwindowで同値要素がL/R両方にある例を作り、どちらから1個消しても不変量を戻せる実装を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(M log M+(N−M)log M)、N列長、M窓長。</p>
+<h3 id="空間">空間</h3>
+<p>O(M)、二multiset。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq M \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(4,1,3,2),M=3,K=2。</p>
+<ol>
+<li>初窓(4,1,3)の小さい2個は1,3で和4。</li>
+<li>次窓(1,3,2)は1,2で和3。</li>
+</ol>
+<p>期待される結果: 出力4,3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>K=Mなら残り集合Rからminを読むか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>Rは空なので読まない。Lが全窓を持ち、その和を答える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc281/tasks/abc281_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc281-e-problem-d11db2b277b008f6758177c2a8c9dba9b4523974a151f78e84dcd865c5a052c3</li>
+<li><a href="https://atcoder.jp/contests/abc281/editorial/5368">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc281-editorial-5368-7f7b3eb734d53ddac960e9b66733c44c86def4cd7d960ac3b14835a4669980bf</li>
+</ul></main>
+</body></html>

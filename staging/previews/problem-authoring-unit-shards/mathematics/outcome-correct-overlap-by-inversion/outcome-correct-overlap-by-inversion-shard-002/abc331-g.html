@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC331-G — Collect Them All</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC331-G — Collect Them All</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全種類を得るまでの回数Tは、tail-sum公式E[T]=Σ_{n≥0}Pr(T&gt;n)で表せる。n回で全種類を得る確率へ包除原理を適用すると、subset Sだけから引く確率(Σ_{i∈S}C_i/N)^nが現れる。</p>
+<p>subsetごとの寄与はC_iの総和kだけで決まり、nについての無限和はN/(N-k)という等比級数へ閉じる。残る課題は同じkを持つsubsetの符号和を全kについて求めることである。</p>
+<p>採用する候補: 包除原理を母関数∏(1-X^{C_i})へまとめ、積をdivide-and-conquer convolutionする</p>
+<p>subset符号和を次数Nの多項式係数として一括計算でき、NTTによる積でO(N(log N)^2)に抑えられる。</p>
+<p>棄却する候補: 未収集種類subsetを状態とするcoupon collector DP</p>
+<p>Mは2×10^5で2^M状態を持てず、種類ごとの出現確率も異なるため収集種類数だけには圧縮できない。</p>
+<p>棄却する候補: DP[m][k]で多項式積を逐次更新する</p>
+<p>式は正しいがO(MN)となり、双方が最大2×10^5では実行できない。</p>
+<p>係数d_k=[X^k](-1)^{M-1}∏(1-X^{C_i})は、総枚数kになるsubsetの(-1)^{M-1-|S|}の総和そのものである。</p>
+<p>全集合S=Uではf(S)=1となって等比級数が発散するが、tail probabilityの変形ではS⊊Uだけが残るため次数Nの項を除きk=0..N-1だけを使う。</p>
+<p>各iの疎多項式(1-X^{C_i})を用意し、次数Nで打ち切りながら小さい多項式同士を優先してconvolutionする。得た係数へ全体符号を掛け、Σ_{k=0}^{N-1} d_k×N/(N-k)をmod 998244353で計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="tail-sum-formulaと包除原理">tail-sum formulaと包除原理</h3>
+<p>発動条件: 非負整数停止時刻の期待値を、時刻nまでに全条件を満たす確率から求められるとき。</p>
+<p>未完了確率を全nで足し、種類subsetだけを引く確率へ展開する。</p>
+<h3 id="subset和の母関数化">subset和の母関数化</h3>
+<p>発動条件: subsetの寄与が選択要素の重み総和と選択数の符号だけに依存するとき。</p>
+<p>符号付きsubset sumを∏(1-X^{C_i})の係数へ集約する。</p>
+<h3 id="divide-and-conquer-polynomial-product">divide-and-conquer polynomial product</h3>
+<p>発動条件: 多数の低次数多項式の積を所要次数まで高速に得たいとき。</p>
+<p>NTT convolutionを積木状に行いO(N(log N)^2)で係数を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>非一様coupon collectorの無限時間期待値が、包除後にはカード枚数subset sum kごとの有限な多項式係数とN/(N-k)の内積になる。</p>
+<p>別の問題へ持ち帰る視点: 確率過程の無限和でも、イベントを包除して各項を等比級数にできれば有限の組合せ集計へ落ちることがある。</p>
+<h2 id="正当性">正当性</h2>
+<p>tail-sumの包除では未取得種類集合の確率を等比和で足す。取得可能subsetの総枚数kだけが分母N−kを決め、その符号付きsubset数はΠ(1−x^{C_i})の係数に等しい。次数Nは全集合で分母0だがtail式から除外される。k&lt;Nの係数へN/(N−k)を掛けて足せば全種類取得の期待値になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>多項式の全体符号と各因子の負号を二重に扱わない。次数N項は分母0なので加えず、mod除算には逆元を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>M=1とC_i=1の等確率ケースを既知のNH_Mと照合し、小さいNではsubset包除の直接計算と係数・符号・k=N除外を比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)。総次数Nの疎因子積木と逆元和。</p>
+<h3 id="空間">空間</h3>
+<p>O(N log M)の積木保持、逐次解放でO(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq M \leq N \leq 2\times 10^5; 1 \leq C_i; \sum_{i=1}^{M}C_i=N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、M=2、C=(1,1)。</p>
+<ol>
+<li>符号付き多項式は−(1−x)²=−1+2x−x²。</li>
+<li>k&lt;2の寄与は−1·2/2+2·2/1。</li>
+</ol>
+<p>期待される結果: 期待回数3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>M=1なら次数Nの項を足すか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全種類は一回で必ず揃う。定数項だけで1、次数Nは分母0なので加えない。</p>
+<p>確認結果: 期待回数1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc331/editorial/7763">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38</li>
+<li><a href="https://atcoder.jp/contests/abc331/tasks/abc331_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76</li>
+</ul></main>
+</body></html>

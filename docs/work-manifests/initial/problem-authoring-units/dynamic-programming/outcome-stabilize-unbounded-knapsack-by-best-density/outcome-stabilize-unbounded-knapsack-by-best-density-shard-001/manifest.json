@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T067-outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
+  "taskId": "T067",
+  "scopeDigest": "0505689b4a621a35ccb418bec9495dc613a7d9d2e9be3b45758bedee6c091cc0",
+  "digest": "077d21b5bc25582b8b0ec08dfa852700a62bfe1fb147b256775d04ed355a04c4",
+  "changeKind": "content",
+  "requiredRequirementIds": [
+    "CQ-001",
+    "CQ-003",
+    "CQ-005",
+    "FR-004",
+    "FR-006",
+    "FR-023"
+  ],
+  "learningOutcomeIds": [
+    "outcome-stabilize-unbounded-knapsack-by-best-density"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T067-outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
+      "changeKind": "content",
+      "itemIds": [
+        "abc310-ex",
+        "abc415-g"
+      ],
+      "requirementIds": [
+        "CQ-001",
+        "CQ-003",
+        "CQ-005",
+        "FR-004",
+        "FR-006",
+        "FR-023"
+      ],
+      "learningOutcomeIds": [
+        "outcome-stabilize-unbounded-knapsack-by-best-density"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "paths": [
+        "src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.md",
+        "src/content/docs/problems/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc415-g.md"
+      ],
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-shard-accessibility",
+        "check-shard-answer",
+        "check-shard-example",
+        "check-shard-link",
+        "check-shard-review",
+        "check-shard-source",
+        "check-shard-structure"
+      ],
+      "evidenceRoles": [
+        "problem_authoring"
+      ],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "in_progress"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "in_progress",
+  "createdAt": "2026-10-02T11:55:13.087Z",
+  "updatedAt": "2026-10-02T13:37:57.225Z"
+}

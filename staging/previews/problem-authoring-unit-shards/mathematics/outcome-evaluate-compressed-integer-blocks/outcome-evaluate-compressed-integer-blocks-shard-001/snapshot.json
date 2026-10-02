@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-evaluate-compressed-integer-blocks-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "47a7b410badcc1f2fb3cec431c4691d87be1b9f4f9120221f23530ecd37735b8",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "dc47b98a291f11f1d110209763d27cb559b35a9581824801b108687c974b6172",
+  "reviewDigest": "6356193895a38b77e245f06a67bd101403d519b7d4646bd3457bf886e13346d0",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc240-f.html",
+      "digest": "09c21ed8947b7a1f882e4406204e5560f7beecf9fd0c0ce22d05734d878666cc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc253-g.html",
+      "digest": "9312f94194c064d93de50ec046dd743db84cf456bcaf19adaea5c32ea1db98c6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/abc429-g.html",
+      "digest": "ebeb40d8ff417e5a1743c73fd1b39772a1ccf1b358578c04f3d146d8e101a7fc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-evaluate-compressed-integer-blocks/outcome-evaluate-compressed-integer-blocks-shard-001/index.html",
+      "digest": "b6db926ea95f5c49fc998c02bb27419161a67b0c60121b4b011b85b5abf2ca58"
+    }
+  ],
+  "snapshotDigest": "0672b99e0010f77fc91ef840c700b04f0bbf212b13afec2b70561256bceedca0"
+}

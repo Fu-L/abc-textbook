@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC382-F — Falling Bars</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC382-F — Falling Bars</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>下にあるバーから最終位置を確定すると、上のバーはそれを追い越さない。各列について確定済みバーの最上段位置 m_j が分かれば、新しい水平バーは被覆列の min(m_j)-1 まで落ちる。</p>
+<p>採用する候補: 初期行の降順にバーを処理し、列配列 m に区間 min query と区間代入を行う遅延セグメント木で最終行を決める。</p>
+<p>未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。</p>
+<p>棄却する候補: 時刻ごと・番号順に全バーの一段落下をシミュレーションする。</p>
+<p>安定までの時間は H 級で、各時刻に N バーを調べると HN が最大4×10^10になる。</p>
+<p>初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。</p>
+<p>バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。</p>
+<p>バーを R 降順に sort し、m_j=H+1 で初期化する。各 (R,C,L) で y=min m[C..C+L)-1 を答えにし、同区間を y へ range assign する。元 index 順に出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="落下過程の支持面-dp">落下過程の支持面 DP</h3>
+<p>発動条件: 物体が追い越さず、下から確定すると上の最終位置が決まるとき。</p>
+<p>各座標列の最高障害を区間 query/update で管理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>長時間の同時シミュレーションを止め、安定状態を下から一回だけ構築する。</p>
+<p>別の問題へ持ち帰る視点: 横棒の停止は被覆列の中で最も高い障害一つが支配する。</p>
+<h2 id="正当性">正当性</h2>
+<p>初期位置が下のバーは上のバーより先に障害となり、上のバーが途中で下側へ回り込むことはないため処理順を固定できる。 バーは水平かつ剛体なので、被覆するどれか一列で最初に衝突する高さ、すなわち区間 m の最小値が全体の停止位置を決める。 未来の落下を列ごとの最上障害だけへ要約でき、各バーを O(log W) で配置できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ初期 R のバーは非交差なので順序によらないが、sort 規約を固定する。区間は [C,C+L)、空列初期値 H+1 とする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>各列の m_j が何を表すかを言語化し、min-1 がバー全体の停止位置になる図を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+N log W+W)、H,Wは盤面寸法、Nはバー数。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+W)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W \leq 2 \times 10^5; 1 \leq N \leq 2 \times 10^5; 1 \leq R_i \leq H; 1 \leq C_i \leq W; 1 \leq L_i \leq W - C_i + 1; In the initial state, there is no cell occupied by two different bars.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>H=5,W=3、下のバーは初期行4で列1..2、上のバーは初期行2で列2..3。</p>
+<ol>
+<li>下バーはmin(6,6)−1=5へ落下し列1,2を5にする。</li>
+<li>上バーはmin(5,6)−1=4。</li>
+</ol>
+<p>期待される結果: 最終行は下5、上4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>上を先に確定するとよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>床しか見ず上バーを5へ置いてしまう。初期行の降順で障害を確定する必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc382/editorial/11476">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc382-editorial-11476-0492bb268332837af972819863dd94fa5bf870e8304d6ff03347d414bd5f4cff</li>
+<li><a href="https://atcoder.jp/contests/abc382/tasks/abc382_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc382-f-problem-3ba32cb296718a12fbaaced8b18b8752ca1051e7437047ad000ce8c979c72c68</li>
+</ul></main>
+</body></html>

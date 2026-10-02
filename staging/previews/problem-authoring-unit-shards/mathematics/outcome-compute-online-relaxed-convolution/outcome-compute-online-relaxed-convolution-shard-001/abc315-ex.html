@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC315-EX — Typical Convolution Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC315-EX — Typical Convolution Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md">Relaxed・online convolution</a></p>
+<ul>
+<li>係数が順に確定する因果的畳み込みをblock分割し、確定済みblock間だけをNTTでまとめて更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Relaxed・online convolutionの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>F_n は過去の F_i だけから決まるが、必要な量は G_n=[x^n]F(x)^2 の prefix sum である。F_n を確定した直後に次の convolution 係数を知りたいオンライン依存になっている。</p>
+<p>通常の NTT で F² を一括計算しようとしても F 自身がまだ未確定で循環する。一方、既確定 prefix を 2 冪 block に分ければ、新旧 block 間の積を確定時にだけ畳み込める。</p>
+<p>採用する候補: Relaxed Convolution で F の係数を一つずつ追加しながら G=[F·F] の同次数係数を返し、G の prefix sum から次 F を求める。</p>
+<p>block ごとの NTT により online convolution を O(N(log N)²) にし、漸化式の因果順を保てる。</p>
+<p>棄却する候補: 各 n で Σ_{i+j&lt;n}F_iF_j を二重和として再計算する。</p>
+<p>一係数 O(n)、総 O(N²) となり N=2×10^5 に間に合わない。</p>
+<p>係数対 (i,j) は binary block 分解で一意な「片側 block が完成した時」に課金され、漏れ・重複なく未来の convolution 係数へ加えられる。</p>
+<p>G_n がオンラインで得られれば prefixG_n=Σ_{t≤n}G_t を更新し、F_{n+1}=A_{n+1}·prefixG_n を O(1) で確定できる。</p>
+<p>F_0=1 を relaxed convolution 構造へ追加する。n=0..N−1 で現在返された G_n を prefix sum へ足し、F_{n+1}=A_{n+1}prefixG を計算して構造へ追加する。構造内部では時点ごとの lowbit/2冪区間に応じ、完成 block と既知 block の F/G polynomial product を NTT して該当する未来係数へ蓄積する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="relaxed-convolution">Relaxed Convolution</h3>
+<p>発動条件: a_n,b_n が順次確定し、その時点で c_n=[x^n]AB が必要なオンライン漸化式。</p>
+<p>2冪 block が完成するたび必要な block 積を FFT/NTT し、未来係数へ分配する。</p>
+<h3 id="生成関数による二重和の係数化">生成関数による二重和の係数化</h3>
+<p>発動条件: Σ_{i+j&lt;n}F_iF_j のような添字和条件を高速化したいとき。</p>
+<p>F² の係数 G_t とその prefix sum に書き換える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>漸化式を閉形式へ解くのでなく、必要な convolution 係数だけを確定順に供給する online algorithm が循環依存を解く。</p>
+<p>別の問題へ持ち帰る視点: 未知級数を含む再帰では、一括 FPS 操作だけでなく semi-online/relaxed convolution を候補にする。</p>
+<h2 id="正当性">正当性</h2>
+<p>確定済みFだけの積を完成block時に送ると各係数pair(i,j)は一意なblock完成時点に対応し一度加算される。したがってF_nを求める前に必要なG_0..G_{n−1}が正しく揃う。prefix和へA_nを掛ける元の再帰と同じ順に値を確定するため、帰納的に全Fが一致する。自己積の左右pairと対角の倍率を区別する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>Σ_{i+j&lt;n} は G_0..G_{n−1} であり G_n を含む添字をずらさない。自己畳み込みでも左右 block の寄与係数2と対角項を実装構造の契約に従う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず二重和を「どの convolution 係数のどこまでの prefix か」へ正確に変形する。Relaxed Convolution は各係数対の担当 block を図で追ってから実装する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log²N)。完成二冪blockのrelaxed convolutionで未来係数を蓄積する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq A_i &lt; 998244353; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,3,1)、F_0=1。</p>
+<ol>
+<li>G_0=1よりF_1=2。G_1=2F_0F_1=4よりF_2=3(1+4)=15。</li>
+<li>G_2=2F_0F_2+F_1²=34よりF_3=1(1+4+34)=39。</li>
+</ol>
+<p>期待される結果: F=(1,2,15,39)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>F_2を求めるときG_2を含めてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>G_2はF_2自身を含み循環する。要求はi+j&lt;2なのでG_0,G_1だけ。</p>
+<p>確認結果: G_{n−1}までのprefix和。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc315/editorial/6988">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc315-editorial-6988-b53258fb99c95ed3c9be8e0bc9c648f0b80d4c02084f9f308b103e2a37486a0f</li>
+<li><a href="https://atcoder.jp/contests/abc315/tasks/abc315_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc315-ex-problem-40bcbcc33db6b7b1af7bba91db3f5d6c977a6f3287c5b475390cc7bfa6f313f9</li>
+</ul></main>
+</body></html>

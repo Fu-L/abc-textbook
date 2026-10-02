@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC370-E — Avoid K Partition</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC370-E — Avoid K Partition</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>全遷移の総和から禁止辺・禁止keyの集計値を引き、例外の総数で計算量を評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>partitionはprefix境界0..Nの選択とみなせる。直前境界mから新境界nへのsegment sumがKでない場合だけdp[m]をdp[n]へ遷移できる。 prefix sum Bを使うと禁止条件はB_m=B_n−Kとなり、過去境界の個別位置ではなくprefix値ごとのdp総和だけが必要になる。 dp[0]=1を空prefixの境界としてallとbucket[B_0=0]へ先に登録すると、最初のsegmentも同じ式で処理できる。 A_iは負を含むためprefix sumは単調でなく、two pointersではなくhash mapによる値別集約が必要である。</p>
+<p>採用する候補: 全過去dpの総和allとprefix sum値別のdp総和bucketを持ち、dp[n]=all−bucket[B_n−K]とする。</p>
+<p>許可される全境界の和を毎回列挙せず、禁止される同値class一つだけを差し引ける。</p>
+<p>棄却する候補: 各終端nについて全開始境界mを走査し、区間和がKか判定する。</p>
+<p>prefix sumで一区間判定は速くても境界pairが二次で、同じ禁止prefix値をまとめていない。</p>
+<p>dp[0]=1を空prefixの境界としてallとbucket[B_0=0]へ先に登録すると、最初のsegmentも同じ式で処理できる。</p>
+<p>A_iは負を含むためprefix sumは単調でなく、two pointersではなくhash mapによる値別集約が必要である。</p>
+<p>B_0=0、dp[0]=1、all=1、bucket[0]=1で始める。n=1..Nでprefix B_nを更新し、dp[n]=(all−bucket[B_n−K]) mod 998244353とする。その後allへdp[n]を足し、bucket[B_n]へも足す。dp[N]を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="全遷移和から禁止classを除くdp">全遷移和から禁止classを除くDP</h3>
+<p>発動条件: 過去状態の大半が遷移可能で、禁止条件が一つのkey一致で表せるとき。</p>
+<p>全dp総和を保ち、key別総和だけ差し引く。</p>
+<h3 id="prefix-sum値別集約">prefix sum値別集約</h3>
+<p>発動条件: segment sum条件が固定値との一致・不一致で決まるとき。</p>
+<p>開始境界をprefix値でgroup化して連想配列に蓄積する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>許可条件「Kではない」を直接列挙するより、全候補から唯一の禁止prefix値を引く補集合が単純である。</p>
+<p>別の問題へ持ち帰る視点: 否定条件付きDPでは、禁止側のequivalence classが小さく表せるか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>最後区間が(j+1..i)ならprefix差B_i−B_j。禁止和Kの切れ目はB_j=B_i−Kに限られる。全旧dp和からそのbucketだけ引くと全許可最後区間の数になる。計算後に当前dpを登録するので空区間を混ぜない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>添字を境界0..Nで統一し、bucket登録はdp計算後に行って空segmentを許さない。mod減算を負のまま残さず64 bit prefix sumをkeyにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=1でA_1=K/≠Kの二例を追い、初期bucketと更新順を確認する。負数を含むため順序性を仮定しない。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>列長N。prefix値bucketをhashで保持し expected O(N)、balanced mapなら O(N log N)。</p>
+<h3 id="空間">空間</h3>
+<p>dp値集約bucket O(N)、列逐次処理可。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; -10^{15} \leq K \leq 10^{15}; -10^9 \leq A_i \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,1),K=2。</p>
+<ol>
+<li>dp0=1。</li>
+<li>一個prefixは和1なのでdp1=1。</li>
+<li>二個全体和2は禁、切れ目1の二blockだけ可。</li>
+</ol>
+<p>期待される結果: 1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>dp[i]を計算前にbucketへ入れると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>j=iの空最後区間を含めたり循環依存を作る。必ず計算後に登録する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc370/tasks/abc370_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4</li>
+<li><a href="https://atcoder.jp/contests/abc370/editorial/10858">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7</li>
+</ul></main>
+</body></html>

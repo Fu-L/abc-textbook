@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-exponentiate-transition-over-semiring-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a8d6ad96abe0835a3e2c32854d216ef984df8f998b7f71c28a9d6b696389c86f",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "5107025f394965b657cbadf917c61daa6fed7dc8bca12792f100bb2a8f289a40",
+  "reviewDigest": "3d98421bef97823273fc01a2505ba67cd185ce63bc05ced0c15dd899710377dc",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc236-g.html",
+      "digest": "1424ab129e6732aefbf6730b0413210afc34fd648284ae85c943a2536ee507e5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/abc445-f.html",
+      "digest": "ac39a78f349c995244f6d41615697ab690d1fcc3ed40271ac79b601303610e2c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-transition-over-semiring/outcome-exponentiate-transition-over-semiring-shard-001/index.html",
+      "digest": "b29693efb2f89331072375e12e87b0c88f02654e21716275bdb174d1a4bb7c9a"
+    }
+  ],
+  "snapshotDigest": "93bfaefcc0d3687cfc05241bd363b839ff14616124140bb8a967ebbaf0ddcacc"
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC466-G — Segment Sum Constraints</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC466-G — Segment Sum Constraints</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md">繰り上がり・借り・混合基数を状態にするDP</a></p>
+<ul>
+<li>整除鎖の端数または加算式を下位桁から処理し、切り上げ・切り下げや次桁へのcarryだけを状態にした遷移を設計できる。</li>
+<li>DSUの親辺にpotential差を持たせ、経路圧縮時の差の累積と根の併合方向に応じた符号を導出し、オンラインの差制約追加と頂点間差・矛盾のqueryを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>正整数AをA_i-1で非負化し、prefix sum B_iで各区間和条件を差分等式 B_R-B_{L-1}=S と表すと、条件間の整合性はpotential差付き連結成分として扱える。 同じweighted DSU成分のprefix二点へ新制約を追加すると、既存potential差とSが不一致なら解は0である。 bit iで式jのcarry C_jと区間内bit和を足し、S’_jのbitとparityを合わせた後の半分が次carryになる。</p>
+<p>採用する候補: weighted DSUでprefix変数間の差制約を統合・矛盾検出し、独立な必要十分区間式へ整理する。その後、各A_jのbit選択と各式のcarry vectorだけを状態にして下位bitから進むcarry DPで解数を数える。</p>
+<p>DSU potentialが同成分内の全prefix差を一意に決め、独立式数は高々Nになる。N≤8なのでcarry state積≤1024、各bitの2^N選択を前計算して全遷移を列挙できる。</p>
+<p>棄却する候補: 各A_iを0..10^9で列挙し、M個の区間和条件を検査する。</p>
+<p>候補が10^{9N}級で、Nが小さくても値域全探索は成立しない。</p>
+<p>同じweighted DSU成分のprefix二点へ新制約を追加すると、既存potential差とSが不一致なら解は0である。</p>
+<p>bit iで式jのcarry C_jと区間内bit和を足し、S’_jのbitとparityを合わせた後の半分が次carryになる。</p>
+<p>各Sから区間長を引き非負問題へ変換する。weighted DSUでB_{L-1},B_Rを差Sでunionし矛盾を検出、成分内隣接prefixから独立区間式を抽出する。carry vector DPをbit0..29で回し、各bitのN-bit maskからnext carryを更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="weighted-dsuの差制約">weighted DSUの差制約</h3>
+<p>発動条件: 変数差x_v-x_u=wの整合性をonlineで統合したいとき。</p>
+<p>component rootへのpotentialを持ち、同成分constraintの矛盾を検出する。</p>
+<h3 id="加算式のbitwise-carry-dp">加算式のbitwise carry DP</h3>
+<p>発動条件: 少数変数の複数subset sum等式を大きな値域で数えたいとき。</p>
+<p>各等式のcarry vectorだけを桁間状態として下位bitから遷移する。数値上限との一致を追うtight flagは持たない。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>区間和等式はprefix差制約として線形依存を先に除くと、bitwise carry DPで追う式数とcarry空間を縮められる。</p>
+<p>別の問題へ持ち帰る視点: 複数加算式も下位bitから処理すれば、過去情報は各式の小さなcarryだけに圧縮できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>A_i−1へ変換して非負列との全単射を作る。prefix差等式のpotential整理で矛盾を検出し、同成分のindexを順に結ぶ差だけ残せば、元差はそれらの和で再現でき必要十分である。低bit既決定部分の和とtarget下位部分の差を2^bで割ったcarryが、上位桁へ残る唯一の影響となる。次bitmaskの区間和とcarryの偶奇をtargetbitへ合わせ、半分をnextcarryとする遷移は各bit式と同値。30bit後carry0は全整数式の完全一致を保証する。未登場変数があれば一解からその変数を任意に増やせるので無限、存在判定はmod個数0とは別に保持する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>未登場A_jがあれば可解時Infinity、不可解時0なので、mod countとは別に存在boolを持つ。31bit目の最終carry0を確認し、正数→非負shiftを戻す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>prefix差への変換とDSU potential符号を小式で確認し、一つの区間和のbit加算からnext carry式を導いて複数式vectorへ拡張する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N≤8、式M、独立式q≤N、bit数B=30、carry候補C≤1024。potential整理O(Mα(N)+N²)。各maskの式内bit数を前計算O(2^N qN)、直接carry遷移O(BC2^Nq)。hash状態表ならこの部分は期待計算量、carryをmixed-radix配列にすれば確定的。</p>
+<h3 id="空間">空間</h3>
+<p>rollingcarry O(C)、mask式内和O(2^Nq)、式potential O(N+M)。遷移表全保持ならO(C2^Nq)が追加。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; 1 \leq M \leq 36; 1\leq L_i\leq R_i\leq N; 1\leq S_i\leq 10^9; All (L_i,R_i) are distinct.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、A1+A2=4、A2+A3=5。</p>
+<ol>
+<li>正数条件からA2は1,2,3の三候補。</li>
+<li>各候補で残りは(3,4),(2,3),(1,2)へ一意確定。</li>
+<li>非負変換後の式x1+x2=2,x2+x3=3もx2=0,1,2の三解。</li>
+</ol>
+<p>期待される結果: 3</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>N=2で式A1=2だけなら、同じ式にA1+A2=1も加えるなら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>前者はA2を任意の正整数にできInfinity。後者は正数A2=−1を要求するため0。未登場変数だけを見て、矛盾確認を省いてはいけない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc466/editorial/22603">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6</li>
+<li><a href="https://atcoder.jp/contests/abc466/tasks/abc466_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6</li>
+</ul></main>
+</body></html>

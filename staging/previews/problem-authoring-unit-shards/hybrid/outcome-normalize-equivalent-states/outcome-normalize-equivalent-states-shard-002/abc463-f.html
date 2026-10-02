@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC463-F — Senshuraku</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC463-F — Senshuraku</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最後のN試合前の最多勝数をWとすると、W-2以下の選手は最終優勝できない。各試合は両者の初期勝数class W,W-1,other の組で六種類に分類できる。</p>
+<p>採用する候補: 六種類の試合数m_0..m_5を数え、最終最多勝数がW+1またはWの二caseで、優勝候補人数分布と各選手が候補に入る確率を二項係数の閉形式で総和する。</p>
+<p>各試合はcase固定後、候補者を確率1/2で一人作るtype1か、整合確率pと確定候補数kを持つtype2に独立化され、type1成功数だけがbinomial分布になる。</p>
+<p>棄却する候補: 最後のN試合の勝敗2^N通りを列挙し、各結果で優勝者を数える。</p>
+<p>Nが大きく指数列挙できず、同class試合の交換対称性を使えていない。</p>
+<p>優勝者勝数はWまたはW+1だけで、各caseで六試合classがtype1/type2のどちらになるかが固定される。</p>
+<p>type1がx試合なら候補者数の可変部分はbinomial係数 C(x,t)/2^x で、type2の整合確率積Pと確定人数Kを掛ければよい。</p>
+<p>各選手初期勝数と対戦pairから六mを集計し、factorial・inverse・2冪を前計算する。W+1caseとWcaseで公式のP,K,xを設定し、候補人数wについて各試合class由来選手の優勝確率/人数をbinomial項で加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="結果classの対称圧縮">結果classの対称圧縮</h3>
+<p>発動条件: 独立二択試合が多数あり、参加者の初期状態が少数classに限られるとき。</p>
+<p>試合をclass数へまとめ、個別勝敗をbinomial分布で数える。</p>
+<h3 id="候補人数での期待値分解">候補人数での期待値分解</h3>
+<p>発動条件: 同率首位から一様に優勝者が選ばれる確率を求めたいとき。</p>
+<p>候補に含まれる確率を候補総数ごとに求めて1/wを掛ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>指数個の勝敗列も、最終threshold周辺の状態classだけ残すと独立なtypeとbinomial成功数へ縮約できる。</p>
+<p>別の問題へ持ち帰る視点: tie-break期待値は候補集合を列挙せず、特定選手を含む候補人数分布を数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>優勝者勝数はWまたはW+1だけで、各caseで六試合classがtype1/type2のどちらになるかが固定される。 type1がx試合なら候補者数の可変部分はbinomial係数 C(x,t)/2^x で、type2の整合確率積Pと確定人数Kを掛ければよい。 各試合はcase固定後、候補者を確率1/2で一人作るtype1か、整合確率pと確定候補数kを持つtype2に独立化され、type1成功数だけがbinomial分布になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>m_0..m_5のclass対応とW/W+1caseのtype表を実装前に固定し、binomial範囲外を0として扱う。mod確率の2逆元・w逆元を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>W-2以下を捨てられる理由を確認し、各六classが二つの最多勝caseで候補者を何人作るか表にしてから公式へ落とす。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、六試合classごとの確率を候補人数w=0..Nで一度ずつ集計して同classの全選手へ共有する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、階乗・逆元・2冪。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 0\le A _ i\lt2N\ (1\le i\le 2N); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、対戦pairの初期勝数は(1,1),(0,0)。</p>
+<ol>
+<li>第一試合の勝者だけが2勝、敗者は1勝。第二試合の勝者も1勝まで。</li>
+<li>第一試合の二選手が各確率1/2で単独優勝し、残り二選手は優勝できない。</li>
+</ol>
+<p>期待される結果: 優勝確率は(1/2,1/2,0,0)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>W+2のcaseも数える必要があるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>各選手に追加一試合しかなく初期最大Wから二勝増えないので不要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc463/editorial/21939">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc463-editorial-21939-26e1a13f3658448a171da4673027ddd725353abf1088ea3ea4b2a4efd008b71f</li>
+<li><a href="https://atcoder.jp/contests/abc463/tasks/abc463_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc463-f-problem-343004a4d30ce016eb3f93c1835e2c9c7d71f67e5334acf08a7861f15901ce01</li>
+</ul></main>
+</body></html>

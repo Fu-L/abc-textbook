@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC313-F — Flip Machines</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC313-F — Flip Machines</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></p>
+<ul>
+<li>制約・生成パラメータ・固定選択数・有限caseから候補総数を界し、漏れなく全候補を生成・評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>X_j≠Y_j の機械を一度でもカード i に接続して選ぶと、最後に i に触る機械の二択対称性から、i の裏向き確率は過去によらず 1/2 になる。期待値はカードごとに独立に足せる。</p>
+<p>確定反転 X=Y を有利な時だけ先に処理した後、機械で触ると得するカード Q と、|A−B|/2 だけ損するカード P に分かれる。N≤40 なので小さい側だけ指数探索できる。</p>
+<p>採用する候補: |P| と |Q| の小さい側を選び、P の subset 全探索または Q-mask の bit DP を使い分ける meet-in-the-middle 型最適化を行う。</p>
+<p>機械選択は「触れた頂点集合」の重み付き被覆へ帰着し、P∪Q=N より min(|P|,|Q|)≤20 を必ず利用できる。</p>
+<p>棄却する候補: M 台それぞれを使う/使わないで全 subset を探索する。</p>
+<p>M は 10^5 で 2^M は不可能であり、同じ端点ペアの機械が期待値上同じ効果を持つことも無視している。</p>
+<p>P-P 辺は損だけなので不要、Q-Q 辺は利益だけなので採用してよい。P-Q 辺では触る P 集合を固定すれば、その P に隣接する全 Q を触るのが最適になる。</p>
+<p>P が小さければその subset を直接評価し、Q が小さければ P を順に採否して現在覆われた Q-mask を持つ DP にする。</p>
+<p>X=Y の機械による確定反転を有利なカードだけ適用し基準和を作る。D_i=|A_i−B_i|/2 と P,Q を定義し、Q-Q の隣接利益を確定する。|P|≤|Q| なら全 P subset に対し −ΣD_P+ΣD_{隣接Q} を評価し、逆なら Q-mask DP で各 P の選択とその隣接 mask の OR を遷移する。最大増分を基準へ足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最後の乱択による確率のリセット">最後の乱択による確率のリセット</h3>
+<p>発動条件: 独立な確率1/2の反転を同じ対象へ複数回適用するとき。</p>
+<p>最後に対象へ触る試行で parity が一様になるため、回数でなく一度でも触るかだけを見る。</p>
+<h3 id="二分割の小さい側を指数化">二分割の小さい側を指数化</h3>
+<p>発動条件: 要素が利得側と損失側へ分かれ、全体 N は40程度のとき。</p>
+<p>min(|P|,|Q|) の側に応じて subset 列挙と mask DP を切り替える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>確率過程が最終的に weighted vertex coverage へ落ち、機械の順序・重複が消えることが最大の簡約である。</p>
+<p>別の問題へ持ち帰る視点: 確率1/2の反転を見たら parity 分布が最終試行で一様化しないか調べ、選択問題へ分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>P-P 辺は損だけなので不要、Q-Q 辺は利益だけなので採用してよい。P-Q 辺では触る P 集合を固定すれば、その P に隣接する全 Q を触るのが最適になる。 P が小さければその subset を直接評価し、Q が小さければ P を順に採否して現在覆われた Q-mask を持つ DP にする。 機械選択は「触れた頂点集合」の重み付き被覆へ帰着し、P∪Q=N より min(|P|,|Q|)≤20 を必ず利用できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>期待値の 1/2 は double で扱うか全値を2倍して最後に割る。X=Y の確定反転を確率1/2扱いせず、処理後の表裏を基準に P,Q を作る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず固定した機械集合の期待値をカード単位で完全に解く。最適化へ進むのは、各カードが「未接触/一様」の二状態になることを証明してからにする。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²2^min(P,Q))、P,Qは有利/不利カード集合の小さい側mask。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+2^min(P,Q))。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 40; 1\leq M \leq 10^5; 1\leq A_i,B_i \leq 10^4; 1\leq X_j,Y_j \leq N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>利益重みDのP頂点p=2、Q頂点q=5、辺p-q。</p>
+<ol>
+<li>Pを触らなければ増分0。</li>
+<li>Pを触ると−2+5=3。</li>
+</ol>
+<p>期待される結果: 最適増分3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>pに繋がるQを一部だけ触る意味はあるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>Pを触る費用は固定で、Qは触るほど利益なので繋がる全Qを触る方が最適。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc313/editorial/6902">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc313-editorial-6902-6d3c247afee2f117aee815d0cbeb6a571934752c6bdc476c7d3c035f4d3178c6</li>
+<li><a href="https://atcoder.jp/contests/abc313/tasks/abc313_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc313-f-problem-00388b1b978884ab084a0d18e374bfd1d5a20819c1e12e48215b2f8ccd687a60</li>
+</ul></main>
+</body></html>

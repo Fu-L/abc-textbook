@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC432-G — Sum of Binom(A, B)</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC432-G — Sum of Binom(A, B)</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></p>
+<ul>
+<li>係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>組合せ解釈を必要とする生成関数の設計、および逆数・対数・指数などのFPS演算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>求める二重和は値の頻度 C_a(i),C_b(j) でまとめられる。二項係数 i!/(j!(i-j)!) の j と i-j の部分は畳み込みの係数に一致する。</p>
+<p>採用する候補: C_b(j)/j! と 1/k! の多項式を NTT で畳み込み、係数へ C_a(i)i! を掛けて総和する。</p>
+<p>二重和を一回の畳み込みへ変形でき、O(K log K) で全 i の内側和を得られる。</p>
+<p>棄却する候補: 全ての値 i,j または全 A,B の組について二項係数を加える。</p>
+<p>最大で O(K^2) または O(NM) となる。</p>
+<p>h_i=Σ_{j+k=i}(C_b(j)/j!)(1/k!) とおけば、i!h_i=Σ_j C_b(j)binom(i,j) である。</p>
+<p>binom(i,j)=0 とみなす j&gt;i は畳み込みの係数 i に現れないため、特別な枝分けなしで除外される。</p>
+<p>K まで factorial と inverse factorial を前計算する。f[j]=C_b(j)·invfact[j]、g[k]=invfact[k] を作り、NTT convolution h=f*g を求める。i=0…K について C_a(i)·fact[i]·h[i] を足す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="階乗正規化による畳み込み">階乗正規化による畳み込み</h3>
+<p>発動条件: 二項係数を含む二重和で添字和 i=j+k の形が見えるとき。</p>
+<p>j! と k! を各列へ分離し、通常の多項式積の係数へ変換する。</p>
+<h3 id="ntt">NTT</h3>
+<p>発動条件: 法が適合し、大きな二列の畳み込みを高速に求めたいとき。</p>
+<p>頻度を階乗で正規化した多項式を O(K log K) で乗算する。</p>
+<h3 id="値頻度への集約">値頻度への集約</h3>
+<p>発動条件: 式が要素の位置でなく値だけに依存するとき。</p>
+<p>同じ A_i、B_j の寄与を頻度でまとめて値域上の式にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>二項係数付き和は i! を外へ出し、両入力を逆階乗で正規化すると通常畳み込みになる。</p>
+<p>別の問題へ持ち帰る視点: 組合せ核 K(i,j) が j と i-j の積へ分離できれば、全組集計を convolution に落とせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>C(i,j)=i!/(j!(i−j)!)のj側をB頻度/j!、残差側を1/k!として積のi次係数へ移すと、h_i=Σ_j freq_B(j)/(j!(i−j)!)になる。i!とA頻度を掛けると同値pairの全寄与を回復する。j&gt;iは非負残差kが存在しないので自然に0になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>0! と値 0 の頻度を問題の範囲に合わせて含める。畳み込み結果は長さ 2K+1 だが使用係数は i≤K だけである。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>h[i] の添字条件 j+k=i と、fact[i] を掛け戻した式が元の binom(i,j) に一致することを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(V log V+N+M)、V=max(A_i,B_j)。階乗正規化とNTT。</p>
+<h3 id="空間">空間</h3>
+<p>O(V)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,M \leq 5\times 10^5; 1\leq A_i,B_j \leq 5\times 10^5; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,3)、B=(1,2)。</p>
+<ol>
+<li>四項はC(2,1)=2,C(2,2)=1,C(3,1)=3,C(3,2)=3。</li>
+</ol>
+<p>期待される結果: 9。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=(1),B=(2)なら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>二項係数C(1,2)=0。convolutionの1次へBの2次項は入らない。</p>
+<p>確認結果: 0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc432/editorial/14573">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc432-editorial-14573-21fb5018d3fab75809ccff8511b070d8ba4e456ef07fcaed46009f687478889c</li>
+<li><a href="https://atcoder.jp/contests/abc432/tasks/abc432_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc432-g-problem-b59b6f3bdc3b67c8c130001cf7ac8a17227de2582d0a4e9bbcc21f124b4734ca</li>
+</ul></main>
+</body></html>

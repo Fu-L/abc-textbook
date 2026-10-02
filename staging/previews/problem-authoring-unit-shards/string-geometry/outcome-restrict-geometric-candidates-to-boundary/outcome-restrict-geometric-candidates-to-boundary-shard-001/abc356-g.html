@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC356-G — Freestyle</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC356-G — Freestyle</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/convex-boundary-hull.md">凸包・支持方向・境界候補</a></p>
+<ul>
+<li>目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各styleを一秒使う rate pair (distance B, stamina A) とすると、時間比で混ぜた平均rateは点 (B_i,A_i) の凸包内の任意点、またそれだけである。</p>
+<p>Dを時間最小で進むには、stamina/distance≤C/D という原点を通る直線以下のfeasible rateのうち、B座標最大の点を選べば所要時間D/Bになる。</p>
+<p>採用する候補: rate点の凸包で、体力効率最良点から速度最大点までの下側chainを作り、各query直線との交点辺を二分探索する。</p>
+<p>最適混合は凸包境界の一点で、queryごとにchain上のfeasible/infeasible境界を O(log N) で特定できる。</p>
+<p>棄却する候補: 各queryで全style pairの混合比を調べ、最速feasible rateを探す。</p>
+<p>候補pairがN²でQも2×10^5あり、凸結合の極値が凸包辺上に限られることを使えていない。</p>
+<p>最小 A/B の点でも C/D を上回れば不可能、最大 B の点が制約線以下ならそれ単独が最速、残りの場合だけ両点間chain上に交点が一意にある。</p>
+<p>辺 endpointsとの cross product AD? を使えば slope 比較を除算なしで行え、交点でのBも一次補間の有理式から計算できる。</p>
+<p>重複Bでは最小Aなど支配点を除き、(B,A) の下側凸包を構築する。各query q=C/D の傾きについて、最小A/B点の判定、最大B点の判定後、chain上で A/B≤q から &gt;q へ変わる隣接点を二分探索する。線分と A=qB の交点B_optを求め D/B_opt を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="連続時間混合の凸包">連続時間混合の凸包</h3>
+<p>発動条件: 複数行動を任意の実時間比で混ぜ、平均rateの線形制約下で最適化するとき。</p>
+<p>行動rateを点とし、可能集合をconvex hullとして境界上の極値を探す。</p>
+<h3 id="凸chain上の傾きquery">凸chain上の傾きquery</h3>
+<p>発動条件: 原点からのslope制約とx最大化queryが多数あるとき。</p>
+<p>関連する凸包chainでslope順序を使ってedgeを二分探索する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>切替回数mは本質でなく、各styleに費やす時間割合だけが総distance/staminaを決めるためconvex combinationへ落ちる。</p>
+<p>別の問題へ持ち帰る視点: 連続量で行動を混ぜられる問題では、整数DPより先にrate spaceの凸性を見る。</p>
+<h2 id="正当性">正当性</h2>
+<p>時間比でstyleを混ぜる平均rateは凸結合そのものであり逆に全凸結合を実現できる。距離Dへ時間D/B、必要stamina D A/Bなので許容率A/B≤C/Dの中で最大Bが最短になる。支配された点を除いた下側hullだけで最大Bを達成でき、制約線との交点は二style混合で実現可能。chainの単調傾きからbinary searchでその辺を特定する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>可否比較は A·D≤B·C を128 bitで行う。collinear/同一点の支配点を除き、凸包chainの向きとslope単調性を揃える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず総時間で割って平均rateを作り、可能集合が凸包になることを証明する。query直線の上下判定は浮動比較でなく整数cross productを優先する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+Q log N)。下側凸包とquery交点binary search。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 1 \le A_i, B_i \le 10^9; 1 \le Q \le 2 \times 10^5; 1 \le C_i, D_i \le 10^9</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>style(B,A)=(2,1),(4,4)、query C=3,D=4。</p>
+<ol>
+<li>速いstyleを0.5秒、遅いstyleを1秒で距離2+2=4、stamina2+1=3。</li>
+<li>制約線とhull辺の交点B=8/3なので時間4/(8/3)=1.5。</li>
+</ol>
+<p>期待される結果: 最短1.5秒。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じstyleでC=1,D=4は可能か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>最小stamina/distanceは1/2、予算比1/4より大きい。混合でも下回れない。</p>
+<p>確認結果: 不可能。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc356/editorial/10127">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244</li>
+<li><a href="https://atcoder.jp/contests/abc356/tasks/abc356_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601</li>
+</ul></main>
+</body></html>

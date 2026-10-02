@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC364-E — Maximum Glutton</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC364-E — Maximum Glutton</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>食事が終了するのは、直前までの甘さまたはしょっぱさが上限を超えた後である。したがって最後に食べる一皿を除いた集合の二合計はX,Y以下である。 二合計を上限内に保って選べる最大皿数をmとすると、答えは全皿を選べる場合を除いてm+1である。最後の一皿の値は上限内である必要がない。 dp[k][a]を甘さ合計aでk皿選ぶ最小しょっぱさとすれば、bを足す通常0/1 knapsackで存在性を圧縮できる。 m&lt;Nなら上限内集合を先に食べ、未選択の任意一皿を最後に食べることでm+1皿を必ず達成できる。</p>
+<p>採用する候補: 選択個数と甘さ合計をkey、最小しょっぱさをvalueとするknapsack DPでmを求め、min(m+1,N)を返す。</p>
+<p>大きい二予算の片方を最小化valueへ移し、Nが小さいことを状態軸として活用できる。</p>
+<p>棄却する候補: 甘さ合計・しょっぱさ合計の二次元表に最大個数を持つ。</p>
+<p>XとYがともに10000で積の状態数が大きく、料理数80という小さい軸を使えていない。</p>
+<p>dp[k][a]を甘さ合計aでk皿選ぶ最小しょっぱさとすれば、bを足す通常0/1 knapsackで存在性を圧縮できる。</p>
+<p>m&lt;Nなら上限内集合を先に食べ、未選択の任意一皿を最後に食べることでm+1皿を必ず達成できる。</p>
+<p>dp[0][0]=0、他を∞とする。各料理(A_i,B_i)についてkと甘さaを降順に走査し、dp[k+1][a+A_i]をdp[k][a]+B_iでmin更新する。a≤Xかつdp[k][a]≤Yとなる最大kを探し、min(k+1,N)を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="dpのkey-value交換">DPのkey-value交換</h3>
+<p>発動条件: 二つの資源上限の積が大きいが、選択個数が小さいとき。</p>
+<p>一方の資源と個数をindexにし、もう一方の最小消費をvalueにする。</p>
+<h3 id="停止直前集合への変換">停止直前集合への変換</h3>
+<p>発動条件: 閾値超過を起こす最後の操作も回数に含まれるとき。</p>
+<p>最後の一手を外したfeasible集合を最適化し、答えへ一つ戻す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>制約を満たす皿数そのものではなく、その直後に閾値を超える一皿も食べ終えられるため+1が付く。</p>
+<p>別の問題へ持ち帰る視点: processが違反検出後に停止するなら、違反を起こしたactionが成果に含まれるか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>countと甘さを固定して塩気最小だけ持つと、他の候補は両制約への余裕で劣る。全料理の選択/非選択を旧行から更新して最大feasible count kを得る。実際はそのk個の後に閾値を超す一皿も食べられるため min(k+1,N)。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>0/1選択なのでkとaを降順更新する。a+A_iはXを超える状態を保持せず、答えの+1はNでcapする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>「食べられる」と「次を選べる」の時点を区別し、N=1や全皿が上限内の例で+1処理を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N料理、甘上限X。選択個数×甘さ DP O(N²X)。</p>
+<h3 id="空間">空間</h3>
+<p>count×甘さ O(NX)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 80; 1 \leq A_i, B_i \leq 10000; 1 \leq X, Y \leq 10000; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>3料理、全て(A,B)=(2,2)、X=Y=3。</p>
+<ol>
+<li>閾値以内subsetは一皿まで。</li>
+<li>二皿目を食べると累積4で停止する。</li>
+<li>min(1+1,3)。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>feasible subset最大数だけ出力してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。閾値を超える最後の一皿も食べた個数に含む。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc364/tasks/abc364_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc364-e-problem-f289fab9c8381e2b4f56dcd0a8aede73e15a87dea934c8f489c8e1d2581d1bb0</li>
+<li><a href="https://atcoder.jp/contests/abc364/editorial/10550">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc364-editorial-10550-6bd9421e81822ad43403ee3bc7600cc7eae49364d5f67e86c9a5e3dc896a7e25</li>
+</ul></main>
+</body></html>

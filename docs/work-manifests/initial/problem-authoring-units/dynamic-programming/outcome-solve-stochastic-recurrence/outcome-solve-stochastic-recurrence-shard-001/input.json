@@ -1,0 +1,535 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-stochastic-recurrence-shard-001",
+  "packets": [
+    {
+      "problemId": "abc242-ex",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-sequence",
+        "unit-dp-state-design",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic",
+        "tag-sequence-subsequence-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 400; 1 \\leq L_i \\leq R_i \\leq N; For every square i, there is an integer j such that L_j \\leq i \\leq R_j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "初出区間がk種類に達した時点の集合は全k-subsetに一様であり、次の未出区間までの待ち時間の期待値はM/(M−k)。まだ被覆しない確率を掛け各stageを足せば完了時間の期待値になる。区間を左端順に処理すると、既にprefixを覆う選択集合にgapを作る区間は後の区間ではそのgapを埋められないため棄却してよい。端jと選択数kのDPで全被覆subset数f(k)を得て、Σ(1−f(k)/C(M,k))M/(M−k)を計算すれば正しい。",
+          "sourceRevisionIds": [
+            "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915",
+            "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915",
+          "path": "src/content/sources/abc212-abc263/source-abc242-editorial-3523-6c7d7a84d375e87a884786bdb60c66a2e8a6081f3cf44a1686a13d05bbd63915.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc242_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d",
+          "path": "src/content/sources/abc212-abc263/source-abc242-ex-problem-688c5992478881c0309ca6ee0c8e2e4440242d1747b024058c622e22ee750a4d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc242_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc263-e",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-transition-optimization",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-dp-transition-acceleration",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 2 \\times 10^5; 1 \\le A_i \\le N-i(1 \\le i \\le N-1); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "位置iからの一手は0..A_iの等確率で、0は自己ループである。期待値E_iは1+(E_i+Σ_{k=1}^{A_i}E_{i+k})/(A_i+1)を満たす。自己ループを移項するとE_i=(A_i+1+ΣE_{i+k})/A_iとなり、右側はiより右の値だけなので終点E_N=0から逆順に求められる。累積和はこの連続区間の和を正確に保持するため、自己ループを除外した単純平均と違って一手の失敗も数えている。",
+          "sourceRevisionIds": [
+            "source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2",
+            "source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2",
+          "path": "src/content/sources/abc212-abc263/source-abc263-e-problem-eef4590c663d3faba07d180145406aac13d7d7c43bf20125fb419d5f195586f2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc263_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4",
+          "path": "src/content/sources/abc212-abc263/source-abc263-editorial-4546-50da0faeb7c80a60d2182c11cba30b7434a8e34da04c987b8c7eb076641af9a4.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc263_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc270-ex",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-linear-recurrence",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-linear-recurrence-matrix",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 2\\times 10^5; 0=A_1\\leq A_2\\leq \\cdots \\leq A_N\\leq 10^{18}; A_N>0; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最大不足量k=max_i(A_i−C_i)が同じなら次状態分布も同じであり、期待値x_kを一変数へ圧縮できる。A_r<k≤A_{r+1}では、選ぶindexがi≤rならk−1、i>rならA_iへ移るので、x_k=1+(r/N)x_{k−1}+(1/N)Σ_{i>r}x_{A_i}を満たす。y_k=x_{A_N}−x_kと置き、s_r=Σ_{i>r}y_{A_i}を既知として保つと、r y_{k−1}=N y_k−s_r+Nになる。同じrの区間ではaffine recurrenceの係数が一定なので、N/rのgap長乗で一歩ずつの更新をまとめられる。y_{A_N}=0から降順に求め、x_0=0より最後のy_0がx_{A_N}、すなわち初期状態の期待停止回数になる。",
+          "sourceRevisionIds": [
+            "source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d",
+            "source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d",
+          "path": "src/content/sources/abc264-abc315/source-abc270-ex-problem-0b01642c8ebddbe08cc870b2e38f520a70ba664454fa39d28c4064833109dc4d.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc270_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989",
+          "path": "src/content/sources/abc264-abc315/source-abc270-editorial-4880-5daf49f85c53245b3cda565c56b18dfe60eb5e14c4b8e6c3669f215321f2c989.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc270_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc299-ex",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-linear-recurrence",
+        "unit-linear-system-rank",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-linear-recurrence-matrix",
+        "tag-linear-system-rank",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\\lt R\\lt10^9; R is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一周期内の到達・overshoot補助過程は、残距離rから六つの残距離r−1..r−6へ等確率で移る。従って期待歩数とovershoot各確率は直前六項の線形漸化式を満たし、行列累乗はその一歩ずつの更新と等価である。周期を跨いだovershootごとに次周期の残差状態を接続すると、真の停止条件である和≡R mod10^9に対する六状態の期待値方程式になる。有限のmod状態の連鎖は停止点へ到達でき、期待値方程式の解が一意なので、その連立解が全体の期待停止回数である。",
+          "sourceRevisionIds": [
+            "source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6",
+            "source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6",
+          "path": "src/content/sources/abc264-abc315/source-abc299-editorial-6260-65b8d99af67681a1820012f1d17b9df647e78d51e1826d273df53aa9871b6ba6.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc299_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516",
+          "path": "src/content/sources/abc264-abc315/source-abc299-ex-problem-32f2b01f495d613cb5a4fd47805f94440359d726706a4732dbfa27c6093fc516.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc299_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc382-e",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-subset-resource"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; 1 \\leq X \\leq 5000; 1 \\leq P_i \\leq 100; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "独立各カードの成功率からpack成功枚数gをconvolutionで求める。残りi枚のBellman式f_i=1+g0f_i+Σ_{j≥1}g_j f_max(i−j,0)を移項し、依存先が小さい期待値へ変わる。昇順計算が最適でなく固定過程の厳密期待値を返す。",
+          "sourceRevisionIds": [
+            "source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4",
+            "source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4",
+          "path": "src/content/sources/abc368-abc419/source-abc382-e-problem-cada6e51e9f885d9c7388f9f82fbbc352ce0221cb90919bc0c7a3f43f1288ec4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc382_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c",
+          "path": "src/content/sources/abc368-abc419/source-abc382-editorial-11483-80a132d8f84c3778cfcddf11c6c3dfc6b0ab8e23bcda3deb951f31b6b3aa827c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc382_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc412-f",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-transition-optimization",
+        "unit-greedy-exchange",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-dp-transition-acceleration",
+        "tag-greedy-exchange-order",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq C \\leq N; 1 \\leq A_i \\leq 3000; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j>i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。",
+          "sourceRevisionIds": [
+            "source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55",
+            "source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55",
+          "path": "src/content/sources/abc368-abc419/source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc412_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787",
+          "path": "src/content/sources/abc368-abc419/source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc412_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc450-g",
+      "learningOutcomeIds": [
+        "outcome-solve-stochastic-recurrence"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-modular-arithmetic",
+        "unit-normalization"
+      ],
+      "excludedTopics": [
+        "二人零和ゲームの勝敗・Grundy数。"
+      ],
+      "tagIds": [
+        "tag-stochastic-expectation-dp",
+        "tag-modular-arithmetic",
+        "tag-state-normalization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq A_i \\leq 998244352; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最終x=Σc_iA_i、c_i=±1なのでx²の対角項は固定で、交差項だけの相関を求めればよい。操作はindexについて対称だから各pairのE[c_ic_j]は等しい。最初に二要素を減算併合すると、その二つの符号は常に逆でpair寄与−1、他要素との寄与は相殺。残るN−2要素同士の相関はN−1要素問題と同じで、C_N=−1+(N−3)/(N−1)C_{N−1}を得る。C_Nをpair数で割り、2ΣA_iA_jへ掛けた期待値が求める二次モーメントである。",
+          "sourceRevisionIds": [
+            "source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43",
+            "source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43",
+          "path": "src/content/sources/abc420-abc466/source-abc450-editorial-17336-bf2c5e1844b10675c3cdfa066abdf715122241b5d2f24c86c619da6d4c8d2f43.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc450_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98",
+          "path": "src/content/sources/abc420-abc466/source-abc450-g-problem-2340ce7f0c546b54eb6c3073d60a40b2ae28e46d1a0fcb4b73e9ac6181415c98.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc450_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

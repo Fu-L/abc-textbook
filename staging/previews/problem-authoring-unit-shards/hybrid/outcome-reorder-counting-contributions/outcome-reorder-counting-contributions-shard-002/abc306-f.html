@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC306-F — Merge Sets</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC306-F — Merge Sets</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>f(S_i,S_j)は各x∈S_iについてS_i∪S_j内のx以下の要素数を足したもので、S_i自身からの寄与は常に1+…+Mである。</p>
+<p>残るcross termはi&lt;jかつy∈S_j, y≤x∈S_iとなるordered element pairsの個数である。</p>
+<p>棄却する候補: 各set pairをmerge-sortしてS_i elementsのranksを足す。</p>
+<p>N^2 pairsがありN=10^4では重すぎる。</p>
+<p>採用する候補: iをNから1へ走査し、後続setsの全valuesをFenwick treeへ入れて各A_{i,k}以下の個数をqueryする。</p>
+<p>全NM elementsについて一回のqueryと一回のinsertだけでcross termを数えられる。</p>
+<p>全valuesがdistinctなのでcoordinate compression後のprefix countが≤比較の個数にそのまま一致する。</p>
+<p>within-set constant contributionはC(M+1,2)×C(N,2)として先に加え、Fenwickは他set由来だけを担当する。</p>
+<p>rank-sum definitionをconstant self ranksとcross inversionsへ分解し、set index逆走査のFenwick prefix countsで集計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="式変形によるpair-contribution化">式変形によるpair contribution化</h3>
+<p>発動条件: set merge後のrank和を全set pairsについて求め、自己寄与と他集合寄与へ分けられるとき。</p>
+<p>各S_i要素以下のS_j要素数というcross comparisonへ展開する。</p>
+<h3 id="fenwick-treeのoffline走査">Fenwick treeのoffline走査</h3>
+<p>発動条件: index順条件i&lt;jとvalue順条件y≤xを同時に満たすpairsを数えたいとき。</p>
+<p>indexを逆走査してj&gt;iだけをdata structureへ保持し、compressed value prefixをqueryする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>S_i内で各要素のrankは1,…,Mを一度ずつ取るため、値の並びに依らずself contributionはM(M+1)/2である。</p>
+<p>別の問題へ持ち帰る視点: rank aggregateは同一group内の固定項を閉形式にし、group間比較だけをdata structureへ残す。</p>
+<h2 id="正当性">正当性</h2>
+<p>全valuesがdistinctなのでcoordinate compression後のprefix countが≤比較の個数にそのまま一致する。 within-set constant contributionはC(M+1,2)×C(N,2)として先に加え、Fenwickは他set由来だけを担当する。 全NM elementsについて一回のqueryと一回のinsertだけでcross termを数えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>set iのqueriesをすべて終えてからそのM valuesをinsertし、同じsetをcross termへ混ぜない。</li>
+<li>答えはN^2M^2規模になり得るため64 bit整数を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>rankの定義を「自分以下の要素数」に展開し、各ordered pairの寄与として読み替える。</li>
+<li>indexとvalueの二条件を持つpair countingは、一方をscan順、他方をFenwick軸に割り当てる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(NM log(NM))、全値圧縮とFenwick。</p>
+<h3 id="空間">空間</h3>
+<p>O(NM)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^4; 1\leq M \leq 10^2; 1\leq A_{i,j} \leq 10^9; If i_1 \neq i_2 or j_1 \neq j_2, then A_{i_1,j_1} \neq A_{i_2,j_2}.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>二setは(3,4),(1,2)。</p>
+<ol>
+<li>merge列は1,2,3,4、第一setのrankは3,4。</li>
+<li>constant1+2=3とcross inversion4を足す。</li>
+</ol>
+<p>期待される結果: rank和7。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同setの内部pairをBITにも入れるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>constant部で既に担当するのでBITは他set由来だけを数える。逆set sweepで一set照会後に登録する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc306/tasks/abc306_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc306-f-problem-63fe6d6c7ae0bf5d4e0b393df64ed190600bfaf0159f4d78ea5e158e1c75a3c8</li>
+<li><a href="https://atcoder.jp/contests/abc306/editorial/6601">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc306-editorial-6601-7f08b56f50b5a14b21a2e311a92a05e3f3dcea5339f6c4fe18fd5dc598b9117e</li>
+</ul></main>
+</body></html>

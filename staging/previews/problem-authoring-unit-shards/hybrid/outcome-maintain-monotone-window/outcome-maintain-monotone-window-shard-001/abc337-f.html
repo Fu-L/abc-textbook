@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC337-F — Usual Color Ball Problems</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC337-F — Usual Color Ball Problems</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/two-pointers-window.md">尺取り法・sliding windowで連続区間を走査する</a></p>
+<ul>
+<li>一列の窓または二列の現在blockに関する不変条件を保ち、各pointerを単調に進められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>値域上の真偽境界を探す二分探索・パラメトリックサーチ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>rotation rはCを二つ連結した列C’の長さN window [l,l+N)として扱える。ある色では処理順の1,K+1,2K+1,…個目だけが新しい空箱を要求する「chance ball」になる。</p>
+<p>採用する候補: M個目のchance ballまでの最小window端をtwo pointersで追い、答えを差分維持する</p>
+<p>開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。</p>
+<p>棄却する候補: 各rotationを先頭からsimulationする</p>
+<p>一回O(N)でN回必要となりO(N^2)になる。</p>
+<p>window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。</p>
+<p>C’を作り、色別総数g、現在window count cnt、chance総数S、収納総数Vを持つ。各左端lで、長さN以内かつS&lt;Mの間右端を進め、色cのceil(cnt/K)変化に応じSとmin(ceil(cnt/K)K,g_c)を差分更新する。Vを答えに記録後、左端ballを同様に削除する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="circular列の二重化">circular列の二重化</h3>
+<p>発動条件: 全cyclic shiftを同じ線形window処理へ統一したい。</p>
+<p>列を二つ連結し、開始l=0,…,N-1の長さN区間として表す。</p>
+<h3 id="two-pointersと集約値の差分更新">two pointersと集約値の差分更新</h3>
+<p>発動条件: 条件S(l,r)≥Mの最小rがlに対して単調で、要素追加削除が一色だけを変える。</p>
+<p>右端を戻さず進め、ceil(cnt/K)と収納数の変化だけをglobal値へ反映する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>boxを開く可能性があるのは各色でK個ごとのblock先頭だけなので、複雑なsmallest box番号のsimulationは全色chance ballの到着順へ置き換えられる。</p>
+<p>別の問題へ持ち帰る視点: 容量付き同種groupingでは、新容器を要求する周期的な要素だけをeventとして抽出する。</p>
+<h2 id="正当性">正当性</h2>
+<p>window内の色c個数をcnt_cとすると、そこまでのchance ball数はceil(cnt_c/K)である。先着M個のchance ballが使うbox数を決めるため、最小r with Σ_c ceil(cnt_c/K)≥Mを取り、色cの収納ball数はmin(ceil(cnt_c/K)K,g_c)となる。 開始位置を進めると必要な右端は単調非減少で、各ballを定数回追加削除して全rotationをO(N)で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>M個目のchance ballが長さN内に存在しない場合は右端をl+Nまでに止める。cntがKの倍数を跨ぐ追加・削除時だけceil値が変わることを丁寧に実装する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Mが十分大きく全ballが入る場合、K=1、一色だけ、M個目がwindow末尾、左端削除でchance数が減る例を愚直simulationと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、円環二周とchance総数の単調window。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、色頻度と二周列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N \leq 2 \times 10^5; 1 \leq M, K \leq N; 1 \leq C_i \leq N</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>K=2、色総数g_a=3,g_b=2、window cnt_a=3,cnt_b=1。</p>
+<ol>
+<li>chance数はceil(3/2)+ceil(1/2)=3。</li>
+<li>収納数はmin(4,3)+min(2,2)=5。</li>
+</ol>
+<p>期待される結果: このwindowのchance3、収納5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>cnt_aを2へ減らすと収納も一つだけ減るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>chanceが2→1となりa収納は3→2。差は1だが色総数によりKとの差は一定でないのでmin式で更新する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc337/editorial/9141">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc337-editorial-9141-81f4d2d348ba4cbf459d3850ba9989780768d7db4d1e7d35eb72fa69791fc173</li>
+<li><a href="https://atcoder.jp/contests/abc337/tasks/abc337_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc337-f-problem-ec424f4b73083b657b5d99a1d85b37a7a9d1f374d95d031eb7849c2641b84eaa</li>
+</ul></main>
+</body></html>

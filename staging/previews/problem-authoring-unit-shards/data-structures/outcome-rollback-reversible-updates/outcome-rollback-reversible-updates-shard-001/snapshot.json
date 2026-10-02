@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-rollback-reversible-updates-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "e8b064e7834d8dc22149fa8aa0d3a5eb393789bf30fcf127f38a9bc7bfb60817",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "23e5804fe2e44bde1c17f66208c8bd774d2ab3f75ab18daf72059c565298a411",
+  "reviewDigest": "0079bf3eccc39059d1b61797975a80b2eb8fc55d3a6761a07c8997bf0507d33e",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc218-g.html",
+      "digest": "fb6ed8f547e6ae813c73d29654a2f8248796584c84fc865656133be7f88c7ae9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc302-ex.html",
+      "digest": "66e07a98070d5f26ab0178ce4b8ca1eab9882fcca84a50d815848d6a94cacb3a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/abc363-g.html",
+      "digest": "d2947142f41867db4aefb1dc552fd5e25f03b97422f8f2e69e4c455a4143e8ba"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-rollback-reversible-updates/outcome-rollback-reversible-updates-shard-001/index.html",
+      "digest": "b204fa74ae1a9c65383be37e30f27c55a781fea4136ec05f1fece6cd4ba66537"
+    }
+  ],
+  "snapshotDigest": "0f212ccdbb1f35db3a2e37bc8e85a0cb90d53f0787698959e813b6541119e009"
+}

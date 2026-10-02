@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC370-G — Divisible by 3</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC370-G — Divisible by 3</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/min25-sieve.md">Min_25・Lucy DP型の総和篩</a></p>
+<ul>
+<li>floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Min_25・Lucy DP型の総和篩の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>積がnとなる長さMの正整数列数g(n)は、n=∏p^eに対して指数eをM要素へ配る方法の積∏C(e+M−1,M−1)となり、乗法的である。</p>
+<p>約数和σも乗法的で、σ(n)が3の倍数なのは少なくとも一つのprime-power因子p^eでσ(p^e)≡0となる場合に限る。</p>
+<p>採用する候補: 乗法的gと「bad prime-powerを含まない」hを定義し、Lucy DP＋Min_25型prefix sumでΣg−Σhを求める。</p>
+<p>good条件を二つの乗法的関数の差へ変換し、Nまでの全整数を列挙せず商集合上で総和を計算できる。</p>
+<p>棄却する候補: 各n≤Nを素因数分解し、σ(n)%3と積がnの列数を求めて足す。</p>
+<p>Nが10^10で整数を一つずつ訪問できず、gとσの乗法性を利用していない。</p>
+<p>h(p^e)=0 if σ(p^e)≡0 else g(p^e) と乗法的に延長すると、h(n)はσ(n)非零mod3のときだけg(n)に等しく、求めるindicator付き重みはg(n)−h(n)になる。</p>
+<p>floor(N/i)の異なる値集合Q_Nは小さく、Lucy DPで各q∈Q_Nの素数重みprefixを作れば、prime-power遷移によるMin_25型DPを圧縮状態上で行える。</p>
+<p>各eについてg(p^e)=C(e+M−1,M−1)、h(p^e)は幾何和1+p+…+p^eのmod3判定で0またはgとする。Lucy DPでq=floor(N/i)ごとのΣ_{p≤q}g(p),Σh(p)を、hでは素数のmod3 classも分けて得る。それぞれを初期値にprimeを逆順処理する簡略Min_25 DPでG(N)=Σg,H(N)=Σhを計算し、G−Hを法上で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="条件indicatorの乗法的関数差分化">条件indicatorの乗法的関数差分化</h3>
+<p>発動条件: 乗法的量の積が0となるprime-power factorを少なくとも一つ含む対象を数えるとき。</p>
+<p>全重みgからbad factorを一つも含まない乗法的重みhを引く。</p>
+<h3 id="lucy-dpとmin_25型乗法的prefix-sum">Lucy DPとMin_25型乗法的prefix sum</h3>
+<p>発動条件: Nが巨大でprime-power値が容易に計算できる乗法的関数の総和。</p>
+<p>floor quotient集合上でprime prefixを篩い、prime-powerを最小素因数順に追加する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>σ(n)%3=0というglobal条件が、mod3が体でσの積のどれかが0というlocal prime-power条件へ分解する。</p>
+<p>別の問題へ持ち帰る視点: 乗法的関数の零判定では、法が素数なら積が零となるfactor条件を補集合化できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>積nの指数をM位置へ配る個数g(n)=ΠC(e+M−1,M−1)は乗法的。σも乗法的なのでσ(n) mod3が非零なのは全prime-powerのσが非零のとき。hをそのcaseの重みだけ残す乗法関数として作るとg−hが目的重みになる。素因数の最小primeで分類するMin_25再帰は各nを一度生成し、商状態圧縮は必要な上限を全て保持する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>n=1ではσ(1)=1なのでg−h=0になる初期値を揃える。binomialは必要な小さいeだけ前計算し、p^eとfloor quotient計算のoverflowを防ぐ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>prime powerごとにp mod3とeからσ(p^e)を手計算しhを検証する。汎用prefix-sum routineへg,hのprime-power callbackを渡し、両者の初期値差を比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N^{3/4}/log N)を標準Min_25系の目安とし、厳密にはO(√N+Σ_{p≤√N}|{q∈Q_N:q≥p²}|+素数冪遷移数)。</p>
+<h3 id="空間">空間</h3>
+<p>O(√N+M+log N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{10}; 1 \leq M \leq 10^5; N and M are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=6、M=1。</p>
+<ol>
+<li>σ(1..6)=1,3,4,7,6,12。</li>
+<li>3の倍数はn=2,5,6、M=1なので各重み1。</li>
+</ol>
+<p>期待される結果: 3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>prime p=3のpowerはσ(p^e) mod3でどの状態か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>1+3+…+3^e≡1で常に非零。hはそのprime-power重みを残す。</p>
+<p>確認結果: σ(3^e)≡1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc370/editorial/10869">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1</li>
+<li><a href="https://atcoder.jp/contests/abc370/tasks/abc370_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f</li>
+</ul></main>
+</body></html>

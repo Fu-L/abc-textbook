@@ -1,0 +1,219 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-and-search-threshold-shard-003",
+  "packets": [
+    {
+      "problemId": "abc395-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq U _ i \\leq 10^9 \\ (1 \\leq i \\leq N); 1 \\leq D _ i \\leq 10^9 \\ (1 \\leq i \\leq N); 1 \\leq X \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "前位置で可能な値が連続区間[l,r]なら、次位置へ差X以内で移れる値全体も[l-X,r+X]という区間である。 Hが実現できれば適切に上下歯を追加で削って任意の小さいHも実現でき、binary searchの単調性が成立する。 Hの可否は下方向に単調で、各位置の可能区間を前区間±XとのintersectionでO(N)更新できるためO(N log maxHeight)で解ける。",
+          "sourceRevisionIds": [
+            "source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5",
+            "source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5",
+          "path": "src/content/sources/abc368-abc419/source-abc395-editorial-12344-2eb8137f8829c1e0b7a623f2ec4e13324710e3793f7e853d5497c8205592d1d5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc395_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48",
+          "path": "src/content/sources/abc368-abc419/source-abc395-f-problem-df822de6d2bbd93a79019da4bb858e300849ca17a277929a897ccf9206036c48.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc395_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc424-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-implicit-binary-tree"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-implicit-binary-tree-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; For each test case: 1 \\leq N \\leq 10^5 1 \\leq A_i \\leq 10^9 1 \\leq K \\leq 10^9 1 \\leq X \\leq N+K; 1 \\leq N \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq K \\leq 10^9; 1 \\leq X \\leq N+K; The sum of N over all test cases does not exceed 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "need(D)=Σ(2^{q_i}-1)はDが増えるほど非増加で、need(D)≤Kとなる境界がK回後のmaximumを定める。境界まで分割後の余剰splitは同じ最大長pieceだけを最大数未満割り、長さ半分へ移す。 K回greedy後の最大値を単調な必要split数で求め、全K回をheap simulationせず処理できる。",
+          "sourceRevisionIds": [
+            "source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6",
+            "source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6",
+          "path": "src/content/sources/abc420-abc466/source-abc424-e-problem-02b9995b4ccab9db6e4ad63955d08e26ca78ed293099894cb655b42315c3c4a6.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc424_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e",
+          "path": "src/content/sources/abc420-abc466/source-abc424-editorial-13858-a4d5f909bedd3be212f27b0394ffd777966ae96bbccd6e09e08a6e08a6a3857e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc424_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc444-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-integer-boundary-blocks"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10^5; 1 \\leq N \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq M \\leq \\sum_{i=1}^{N}{A_i} - N; N+M is odd.; The sum of N over all test cases is at most 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "最終本数 N+M に対し中央値を X 以上にするには、X 以上の棒が (N+M+1)/2 本以上必要である。 一つの棒を二分して現れる長さは floor(A_i/2^k) とその+1の少数種類で、同じ長さの本数をまとめて倍増できる。 長い棒を分割する限り両方を X 以上に保てるので閾値以上本数を最大化でき、得られた短い方の必要本数の長さ和から残り操作をちょうど M 回に調整可能か判定できる。",
+          "sourceRevisionIds": [
+            "source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014",
+            "source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014",
+          "path": "src/content/sources/abc420-abc466/source-abc444-editorial-15602-c21a6434cb06e4723e4eb545714a5a1a3cba6a985682ebb65a7b726a0d862014.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc444_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7",
+          "path": "src/content/sources/abc420-abc466/source-abc444-f-problem-b4872450af25b28ec6bd11f0e8c1fdd997ae8032197cd69e0bbec08ae84867d7.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc444_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC382-G — Tile Distance 3</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC382-G — Tile Distance 3</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>敷き詰めは回転・反転・K 単位の平行移動で同型になり、始点を一つの基本ブロックへ正規化できる。遠方への距離は対角ブロックを一つ縮めるごとに一定だけ減る再帰性を持つ。</p>
+<p>採用する候補: 対称変換で座標を標準形へ移し、始点の局所 offset と終点 tile index を飽和させた有限ケースへ分類し、ブロック差の再帰式と基底表で距離を O(1) 算出する。</p>
+<p>K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。</p>
+<p>棄却する候補: 各 tile を頂点とするグラフを作り、始点から BFS する。</p>
+<p>座標範囲が10^16で tile 数は無限に近く、局所探索だけでは遠方 query を処理できない。</p>
+<p>i,j&gt;0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。</p>
+<p>始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。</p>
+<p>符号・軸・平行移動を使って 0≤Sx,Sy&lt;K、Tx,Ty≥0 へ正規化し終点 tile (i,j,k) を特定する。min(i,j) などを再帰式で引き、残る i=0/j=0/(1,1) の基底ケースを K=2、parity、飽和 offset ごとの式で評価する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="周期幾何の対称性再帰縮約">周期幾何の対称性・再帰縮約</h3>
+<p>発動条件: 巨大周期タイル上の最短距離で局所形が繰り返されるとき。</p>
+<p>標準領域へ正規化し、一定距離を持つブロック移動を閉形式化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>casework を座標値そのものではなく、距離が変わる境界までの飽和値と parity に整理する。</p>
+<p>別の問題へ持ち帰る視点: 愚直 0-1 BFS は小座標の oracle として使い、有限ケース式の検証へ回す。</p>
+<h2 id="正当性">正当性</h2>
+<p>i,j&gt;0 の一般位置では (i,j) から (i-1,j-1) へ縮約すると最短距離がちょうど2減るため、対角方向の大部分を一括処理できる。 始点が境界から十分離れた offset や終点 tile 内の k≥2 は到達距離を変えず、少数の境界ケースだけ残る。 K や座標は10^16でも、距離に影響する局所量は max(S_y,K-3)、min(k,2)、parity 等へ縮約でき、遠距離分は閉形式で剥がせる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>負座標の floor division を数学的床で実装し、軸交換・反転後の tile orientation を揃える。K=2 と基底領域は専用ケースを網羅する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一般位置の (i,j)→(i-1,j-1)+2 をまず証明し、残った有限ケースは小範囲 BFS と全列挙比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(1)、正規化後に対角成分min(i,j)を一括除去して有限個の基底式へ落とす。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^4; 2 \leq K \leq 10^{16}; -10^{16} \leq S_x, S_y, T_x, T_y \leq 10^{16}; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>正規化した終点tile index(i,j)=(4,5)、基底index(1,2)。</p>
+<ol>
+<li>両成分から3を引く対角縮約を三回分まとめる。</li>
+<li>各縮約で距離は2だけ減る。</li>
+</ol>
+<p>期待される結果: 元距離は基底距離+6。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>tile内offsetだけで全caseを一式にできるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>境界、parity、K=2の基底分岐が残る。対角縮約で大きい座標を除いてもそれらの条件は保存して評価する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc382/editorial/11484">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc382-editorial-11484-0f3ef9d23b66d088e18cfb5962464302ed86cbefccd2ea96cb2571746d938f73</li>
+<li><a href="https://atcoder.jp/contests/abc382/tasks/abc382_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc382-g-problem-3d4b8aa9c36ebcefd1ffb0e2050e7b22f5ad9f8929f9034f4cb70707c3a5cc8f</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a024780af5fa41edcd56443b031ffc0ecd112afe3ea997e059f30dc09eb616ad",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "149d021b5052ccc7c422547f0c1e1c464ab09dbf32188648d420f8e65d372cab",
+  "reviewDigest": "79547ca664157d7840e6c1db6f56c77be767bfdf5c651a3389c20f239e6743b8",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc235-e.html",
+      "digest": "476c57a8b46e9c4a6d8bcf3093d63b9c3d0dba037228b2c2abc11a220efd67ae"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc250-ex.html",
+      "digest": "a9b4b7478ec134bf1c1f95cde3c4dff8280c524e4cad71cf020363d7d091a3fa"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/abc383-e.html",
+      "digest": "2a15537fb64da2f3c253ec59cd5bdad04ec4bc0717f75042bbd8c6ee95007913"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-sweep-connectivity-by-kruskal-threshold/outcome-sweep-connectivity-by-kruskal-threshold-shard-001/index.html",
+      "digest": "7ee4a20540f437927b07eb1aeb112dfcad005f279350ca66e4330e8aa795397c"
+    }
+  ],
+  "snapshotDigest": "7b29f583020c3c485719f47225cdbf55bc129a42e08a9421c94fe8635757ab63"
+}

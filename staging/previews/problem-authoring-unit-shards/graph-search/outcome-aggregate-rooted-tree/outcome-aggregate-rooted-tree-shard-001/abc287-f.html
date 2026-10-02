@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC287-F — Components</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC287-F — Components</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></p>
+<ul>
+<li>根付き木で子側の状態を合成し、部分木または木全体の値を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>根付き木DP・部分木集約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>treeの頂点subsetが誘導するgraphはforestなので、連結成分数は選択頂点数−両端を選んだtree edge数で表せる。 rooted subtreeをchildから結合するとき、親rootとchild rootを両方選んだ場合だけ、その間のedgeが2成分を1つへ繋いで成分数を1減らす。 dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。 v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。 child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。</p>
+<p>採用する候補: 各subtreeについて成分数とsubtree rootの選択bitを持つtree knapsack DPを行う。</p>
+<p>child結合時に境界edgeが成分をmergeするかをroot bitだけで判断でき、全component数を同時に数えられる。</p>
+<p>棄却する候補: 全2^N個の頂点subsetを列挙し、誘導graphをDFSして成分数を数える。</p>
+<p>N≤5000でsubset列挙は不可能である。</p>
+<p>棄却する候補: connectedな誘導subgraphの個数だけを数え、複数componentの答えを積で作る。</p>
+<p>異なるconnected subset同士の非隣接条件が依存し、独立な積には分解できない。</p>
+<p>dp_v[j][b]をsubtree v内の選択で成分数j、vの選択状態bとすれば、親subtree外との接続可能性をbだけで保持できる。</p>
+<p>v単体の初期状態は未選択(j=0,b=0)と選択(j=1,b=1)が各1通りである。</p>
+<p>child状態(k,c)を結合した新成分数はj+k−(b∧c)となる。</p>
+<p>任意のrootでtreeを親子化しpostorderに処理する。各vをdp[0][0]=1,dp[1][1]=1で初期化し、child uごとに現在arrayとdp_uを全組合せで畳み込む。indexはj+k-(b&amp;&amp;c)、root選択bitはbのままとして加算する。全treeのrootでdp[x][0]+dp[x][1]をx=1..Nについて出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="境界状態付きtree-dp">境界状態付きtree DP</h3>
+<p>発動条件: subtreeを外へ接続する辺がrootにだけあり、結合結果がroot属性に依存するとき。</p>
+<p>root選択bitを状態へ加えて親子edgeのmerge有無を判定する。</p>
+<h3 id="二乗tree-knapsack">二乗tree knapsack</h3>
+<p>発動条件: 各subtreeのサイズまでの個数分布をchildごとに畳み込みたいとき。</p>
+<p>処理済みsizeとchild sizeの範囲だけをloopする。</p>
+<h3 id="forestのcn-m">forestのc=n-m</h3>
+<p>発動条件: treeの誘導subgraphでcomponent数を追うとき。</p>
+<p>頂点選択で+1、選択済み両端のedgeで-1と更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>成分の形や代表点を保持せず、forestであることから成分数の増減を選択頂点と採用edgeだけで追える。</p>
+<p>別の問題へ持ち帰る視点: acyclic構造上のcomponent-count DPでは、境界の接続bitとc=n-mで状態を大幅に削れる。</p>
+<h2 id="正当性">正当性</h2>
+<p>選択頂点の誘導グラフは森。親子の境界辺は一本で、両端選択時だけ二成分が結合するため新成分数は j+k−(b∧c)。頂点集合は各子の集合へ一意に分解でき、積で併合しても漏れ重複がない。根の二 bit 状態を合計すると成分別の全個数を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>空subsetは成分数0の状態として遷移に必要だが、出力はx=1..Nだけなので含めない。</li>
+<li>childをmergeするたび有効index上限を処理済みsubtree sizeまで広げ、未初期化値との三重loopを避ける。</li>
+<li>全加算をmod 998244353で行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>2頂点treeで4つの親子選択bitを結合し、両方選択時だけ成分数が2でなく1になることを確認してから3頂点へ拡張する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点。子併合の状態対は全体 O(N²)。</p>
+<h3 id="空間">空間</h3>
+<p>子配列を併合後解放すると O(N)。全頂点の完成配列を保存すると最悪 O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5000; 1 \leq a_i \lt b_i \leq N; The given graph is a tree.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3。</p>
+<ol>
+<li>一頂点集合3通り、隣接二頂点集合2通り、全体集合1通りは1成分。</li>
+<li>{1,3}だけが2成分。</li>
+<li>空集合は0成分で出力対象外。</li>
+</ol>
+<p>期待される結果: 1成分6通り、2成分1通り、3成分0通り。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>両境界頂点選択時に成分数を2減らしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。一辺で結ぶのは二成分だから減少はちょうど1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc287/editorial/5632">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc287-editorial-5632-36fff4af2ff56b09b2f6827fd12c787f4bba6f0510b282ceb2ed77f90a1d8eba</li>
+<li><a href="https://atcoder.jp/contests/abc287/tasks/abc287_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc287-f-problem-e74e569b0d278aac06c0a9b4ffdd3abf77989fd2a435607ec62fd7f8ff6347f7</li>
+</ul></main>
+</body></html>

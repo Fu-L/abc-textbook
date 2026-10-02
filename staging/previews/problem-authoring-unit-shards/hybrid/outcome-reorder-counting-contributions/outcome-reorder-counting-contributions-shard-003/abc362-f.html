@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC362-F — Perfect Matching on a Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC362-F — Perfect Matching on a Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/tree/tree-balanced-separators.md">木の均衡分離点から重心分解へ進む</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>matchingの距離総和は、各木辺をまたぐpair数の総和に言い換えられる。辺を切った両側のサイズがc,N−cなら、その辺をまたげるpair数は高々min(c,N−c)である。</p>
+<p>重心gを除いた各成分の大きさはfloor(N/2)以下なので、成分ごとに連結した配列を半周ずらしてpairingすると、同じ成分内の二頂点が組にならない。</p>
+<p>採用する候補: 重心を求め、子成分単位で並べた頂点列の前半と後半を対応させる。</p>
+<p>全pairが重心を挟む異なる成分に属し、各辺の小さい側の全頂点を外側と組ませて辺ごとの上界を同時達成する。</p>
+<p>棄却する候補: 全頂点pairを距離順に並べ、長いものから端点が未使用なら選ぶ。</p>
+<p>一般の重み最大matchingの局所貪欲は、長い一組が他の二組を塞ぐため最適性を保証せず、pair列挙も大きい。</p>
+<p>目的値をpair単位から辺単位へ主客転倒すると、全辺について独立な明確な上界Σmin(c,N−c)が得られる。</p>
+<p>各重心子成分が半分以下なので、配列上でfloor(N/2)離れた位置同士は同一blockに入れず、pathは必ず重心側へ抜ける。</p>
+<p>部分木サイズから重心gを一つ選ぶ。gを除く各連結成分をDFS順で一つずつ配列Aへ連結し、Nが偶数なら末尾へgを加える。i=0..floor(N/2)−1についてA[i]とA[i+floor(N/2)]をpairとして出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="距離和の辺寄与への主客転倒">距離和の辺寄与への主客転倒</h3>
+<p>発動条件: 木上pair距離の和を最大化・最小化するとき。</p>
+<p>各辺を何pairが横断するか数え、cut容量から上界を得る。</p>
+<h3 id="重心blockの半周pairing">重心blockの半周pairing</h3>
+<p>発動条件: 各groupの大きさが全体の半分以下で異group同士を完全に組みたいとき。</p>
+<p>groupを連結配置し、列の半分だけずらした対応を取る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>一つのmatchingが全ての辺のcut上界を同時に達成する構成を、重心が保証する。</p>
+<p>別の問題へ持ち帰る視点: 上界を辺ごとに足したら、各局所上界を同時達成するglobal structureを探す。</p>
+<h2 id="正当性">正当性</h2>
+<p>目的値をpair単位から辺単位へ主客転倒すると、全辺について独立な明確な上界Σmin(c,N−c)が得られる。 各重心子成分が半分以下なので、配列上でfloor(N/2)離れた位置同士は同一blockに入れず、pathは必ず重心側へ抜ける。 全pairが重心を挟む異なる成分に属し、各辺の小さい側の全頂点を外側と組ませて辺ごとの上界を同時達成する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>奇数Nでは重心を配列へ入れず一頂点を未使用にし、偶数Nでは加えて配列長をNにする。成分の頂点は必ず連続blockとして並べる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>path木とstar木で配列blockと半周対応を書き、同一成分pairが生じない証明を確認する。偶奇の重心扱いを分離して実装する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、重心と子成分DFS列、半周pair。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i &lt; v_i \leq N; The input graph is a tree.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1-2-3-4。</p>
+<ol>
+<li>pair(1,3),(2,4)の距離は2+2=4。</li>
+<li>辺ごとの上界は1+2+1=4。</li>
+</ol>
+<p>期待される結果: 最大距離和4を達成。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最大化をpairごとにgreedy遠点選択すればよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>共有頂点を消費して他pairを悪化させる。辺のcut容量上界を同時達成する重心block構成を使う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc362/editorial/10400">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc362-editorial-10400-67877117f904681bf5f7341a10ea811ab5b7ec1c957d8c63356c59322909a4fe</li>
+<li><a href="https://atcoder.jp/contests/abc362/tasks/abc362_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc362-f-problem-478fb0aa4c449bd520170fcc42b91ee8e62258931e4202c7f8141c16aca91400</li>
+</ul></main>
+</body></html>

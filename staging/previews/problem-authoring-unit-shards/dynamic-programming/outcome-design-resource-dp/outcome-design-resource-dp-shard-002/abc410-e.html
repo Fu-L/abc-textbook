@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC410-E — Battles in a Row</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC410-E — Battles in a Row</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>i 体まで倒した後、同じ残り魔力 m なら残り体力が大きい状態が常に優越するため、二資源の全組を boolean 状態にせず各 m の最大体力だけ残せる。 モンスターは順番固定なので、i-1 体撃破後の状態から体力 A_i を払うか魔力 B_i を払うかの二遷移だけを考えればよい。 将来の行動条件は体力と魔力が各必要量以上かだけなので、魔力を固定したとき小さい体力の状態が大きい体力を上回ることはない。 i 層がすべて未到達になった最初のモンスター以後は進めないため、その直前の i-1 が答え。各層に到達状態があれば i を更新できる。</p>
+<p>採用する候補: dp[m] を現在まで倒して残り魔力 m のときの最大残り体力とする一次元 frontier DP</p>
+<p>各層で物理攻撃は同じ m へ hp-A_i、魔法攻撃は m-B_i へ hp を遷移する。同じ m の劣る hp を捨てても将来の可否に影響せず O(NM) になる。</p>
+<p>棄却する候補: 倒した数・残り体力・残り魔力の全三次元 reachable DP</p>
+<p>H,M,N が各3000で O(NHM) の状態を持てず、同じ魔力で最大体力だけ残せる支配関係を使っていない。</p>
+<p>将来の行動条件は体力と魔力が各必要量以上かだけなので、魔力を固定したとき小さい体力の状態が大きい体力を上回ることはない。</p>
+<p>i 層がすべて未到達になった最初のモンスター以後は進めないため、その直前の i-1 が答え。各層に到達状態があれば i を更新できる。</p>
+<p>dp[M]=H、他を -1 で初期化する。各 (A_i,B_i) で next を -1 にし、dp[m]≥A_i なら next[m]をdp[m]-A_iで、m≥B_iならnext[m-B_i]をdp[m]で最大更新する。next が全 -1 なら直前の撃破数を出力し、最後まで到達すれば N。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="pareto-frontier-の-dp-圧縮">Pareto frontier の DP 圧縮</h3>
+<p>発動条件: 二資源状態で一方を固定すると他方の大きい値が常に優越するとき。</p>
+<p>残り魔力ごとに最大体力だけを保持する。</p>
+<h3 id="層別-rolling-dp">層別 rolling DP</h3>
+<p>発動条件: 順番固定の選択を一段ずつ処理し、遷移が直前層だけに依存するとき。</p>
+<p>current/next 配列を分けて同じモンスターを二度倒す in-place 更新を防ぐ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>体力と魔力を対称に全列挙せず、上限の小さい一資源を index、もう一資源を優越値にすると二次元 frontier が一次元になる。</p>
+<p>別の問題へ持ち帰る視点: 複数消費資源の到達 DP では、固定した座標上で最大化できる残量が将来を完全に代表するか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>同じ残魔力で体力が大きい状態は、以後の任意の戦い方を小さい体力状態以上に実行できる。よって最大体力以外を捨てても最適撃破数を失わない。次敵を物理か魔法で倒す二遷移は全選択を網羅し、層間更新で一敵を一回だけ消費する。到達層が空ならそれ以後のprefixも不可能であり、直前層が最大撃破数となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>hp=A_i、m=B_i は使用可能で残量0になる。next は毎層初期化し、物理・魔法の両遷移を同じ旧 dp から行う。-1 と有効な体力0を区別する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>初戦で両方不足、ちょうど0を残す選択、同じ魔力で異なる体力が合流する例、全撃破可能例を全選択列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 敵、初期魔力 M。各敵で残魔力0..Mを更新し O(NM)。</p>
+<h3 id="空間">空間</h3>
+<p>rolling二層で O(M)、敵入力を持つなら O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3000; 1 \leq H,M \leq 3000; 1 \leq A_i,B_i \leq 3000; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>H=5,M=3、敵(A,B)=(4,2),(3,2),(2,2)。</p>
+<ol>
+<li>一体目後は(体力1,魔力3)と(5,1)。</li>
+<li>二体目後は(1,1)または(2,1)。</li>
+<li>三体目は後者から物理で倒し(0,1)。</li>
+</ol>
+<p>期待される結果: 3</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>体力を正の値に保つ必要はあるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>ない。支払額とちょうど等しければ倒した後0で有効。-1の未到達とは区別する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc410/tasks/abc410_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc410-e-problem-09512e3fad866c3fca6c4920a703b97c609e72fbf2633d9801c0a9920c269219</li>
+<li><a href="https://atcoder.jp/contests/abc410/editorial/13207">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc410-editorial-13207-31c2b3aa0ee74e2d42158ed1cc19ab2115b53d6d4b1f68b14c06b208681d5fb5</li>
+</ul></main>
+</body></html>

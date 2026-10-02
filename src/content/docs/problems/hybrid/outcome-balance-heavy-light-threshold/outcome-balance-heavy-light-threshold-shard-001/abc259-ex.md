@@ -1,0 +1,129 @@
+---
+title: "ABC259-EX — Yet Another Path Counting"
+draft: true
+authoringUnit: {"problemId":"abc259-ex","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc259-ex.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light","tag-combinatorial-coefficients","tag-grid-table-dp"],"sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"軽いラベルでは、始点が終点の左上にある対だけを選び、移動差dx,dyに対してC(dx+dy,dx)を加える。同一マス対も長さ0の経路として1を加える。 重いラベルでは、各マスへの値を上と左から伝播し、そのマス自身が対象ラベルなら新しい長さ0経路を1追加する。対象ラベルのマスに到着した時点の値を答えへ足せば、全始点からの経路をまとめて数えられる。 軽い側はΣk^2≤NΣk、重いラベル数はN未満なので、それぞれ盤面サイズの三乗相当までに収まる。","sourceRevisionIds":["source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0","source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"2×2全て同じラベル。","procedure":["長さ0経路4本、隣接1歩4本。","左上→右下は右下・下右の2本。"],"executionTarget":null,"expectedResult":"全寄与10。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":["unit-combinatorial-coefficients","unit-dp-grid-table"],"attainmentCondition":"同一マス対を除いてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。"},"answer":{"reasoningOrVerification":"長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。","procedure":["具体例の各状態・寄与を再計算する。","長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。"],"expectedResult":"長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [平方根・閾値による軽重分類](src/content/docs/learn/modeling/threshold-heavy-light.md)
+
+- 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [組合せ係数と対称性で数える](src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md)
+- [グリッド・多次元表の局所DPを設計する](src/content/docs/learn/dynamic-programming/dp-grid-table.md)
+
+対象外:
+
+- 平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+始点と終点のラベルが同じなので、ラベルごとに独立に経路を数えられる。固定した二マス(x1,y1),(x2,y2)が右下関係なら、経路数は下移動と右移動の並べ方を選ぶ二項係数で求まる。
+
+同じラベルの出現数をkとすると、端点対列挙はk^2、盤面DPはラベル一つにつきN^2である。どちらも単独では最悪N^4だが、出現数Nを境に使い分けると総仕事量を抑えられる。
+
+棄却する候補: 全ラベルについて同ラベルの始点・終点対を列挙し、各経路数を二項係数で足す。
+
+一つのラベルがN^2マス全てに現れると端点対がN^4個になる。
+
+棄却する候補: 全ラベルについて、同ラベルの各マスを始点にした右下経路を盤面DPでまとめる。
+
+ラベルがN^2種類ある場合、N^2マスのDPを各ラベルで行ってN^4になる。
+
+採用する候補: 出現数がN以下の軽いラベルは端点対列挙、Nを超える重いラベルは盤面DPで処理する。
+
+軽い側はΣk^2≤NΣk、重いラベル数はN未満なので、それぞれ盤面サイズの三乗相当までに収まる。
+
+軽いラベルでは、始点が終点の左上にある対だけを選び、移動差dx,dyに対してC(dx+dy,dx)を加える。同一マス対も長さ0の経路として1を加える。
+
+重いラベルでは、各マスへの値を上と左から伝播し、そのマス自身が対象ラベルなら新しい長さ0経路を1追加する。対象ラベルのマスに到着した時点の値を答えへ足せば、全始点からの経路をまとめて数えられる。
+
+階乗と逆階乗を2Nまで前計算する。ラベルごとに座標を集め、k≤Nなら比較可能な全座標対へ二項係数を加え、k>Nなら盤面を左上から走査するDPを一回行って対象マスで値を回収する。全加算は998244353で剰余を取る。
+
+## 典型の発動条件
+
+### 頻度による軽重分解
+
+発動条件: 種類ごとの出現数kに対してk^2の列挙と、種類に依らない全体走査の二解法があり、出現数の総和が既知のとき。
+
+閾値N以下のラベルへ端点対列挙、それより多いラベルへN^2盤面DPを割り当てる。
+
+### 格子最短経路の二項係数
+
+発動条件: 右・下だけで二点間を移動し、障害物など経路途中の追加条件がないとき。
+
+行差dxと列差dyの移動順をC(dx+dy,dx)として軽いラベルの端点対を評価する。
+
+### 複数始点を重ねる格子DP
+
+発動条件: 同じ種類の多数の始点から各終点への経路数を、線形性を使って一度に伝播できるとき。
+
+重いラベルの全出現マスで1を注入し、上・左から来る経路数と合算する。
+
+## 問題固有の要素
+
+端点対ごとの閉形式と、始点を重ねた全盤面DPは、同じ量をk^2とN^2という異なる軸で計算する。この相補性が頻度分割を成立させる。
+
+別の問題へ持ち帰る視点: カテゴリごとの処理で『出現数依存』と『全体サイズ依存』の解法があるとき、頻度閾値で分けた総和評価を試す。
+
+## 正当性
+
+軽いラベルでは、始点が終点の左上にある対だけを選び、移動差dx,dyに対してC(dx+dy,dx)を加える。同一マス対も長さ0の経路として1を加える。 重いラベルでは、各マスへの値を上と左から伝播し、そのマス自身が対象ラベルなら新しい長さ0経路を1追加する。対象ラベルのマスに到着した時点の値を答えへ足せば、全始点からの経路をまとめて数えられる。 軽い側はΣk^2≤NΣk、重いラベル数はN未満なので、それぞれ盤面サイズの三乗相当までに収まる。
+
+## 実装上の注意
+
+- 軽い側では二点が右下関係にある向きだけを加え、同一マスをちょうど一度含める。座標対の順序による二重計上を避ける。
+- 重い側のDPでは上・左の値を得た後、対象ラベルなら始点分の1を加え、その更新済み値を答えへ足す。
+
+## 復習の核
+
+- 二つの単独解法がそれぞれどの入力でN^4になるかを示してから、軽い側のΣk^2と重い種類数の上界を別々に導く。閾値だけを暗記する説明にしない。
+
+## 計算量と制約
+
+### 時間
+
+O(N⁴/B+N²B)、N×N盤面、B≈NでO(N³)。
+
+### 空間
+
+O(N²)、同一ラベル位置と重いラベル一つ分のDP。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 400; 1 \leq a_{i,j} \leq N^2; All values in input are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+2×2全て同じラベル。
+
+1. 長さ0経路4本、隣接1歩4本。
+2. 左上→右下は右下・下右の2本。
+
+期待される結果: 全寄与10。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+同一マス対を除いてよいか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+長さ0の有効経路を一マスにつき一つ失う。この例は6となり正しい10でない。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc259/editorial/4269) — source-abc259-editorial-4269-ab3a62ea5d1a2e2e51a1770205deb57b88426326869e872a80443b6ffaee29e0
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc259/tasks/abc259_h) — source-abc259-ex-problem-194ac23b0f2d620565251d567145aca5c48d0e9209dc146dea43050af60a368a

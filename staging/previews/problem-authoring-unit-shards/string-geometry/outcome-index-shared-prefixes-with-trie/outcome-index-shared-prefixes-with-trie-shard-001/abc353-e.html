@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC353-E — Yet Another Sigma Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC353-E — Yet Another Sigma Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/trie-prefix.md">Trieで共有接頭辞を索引化する</a></p>
+<ul>
+<li>文字列集合をTrieへ挿入し、nodeの通過数・子遷移・辞書順を使って共有接頭辞の問いを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>failure linkやZ値で接頭辞と接尾辞の一致状態を更新する文字列照合。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>LCP(S_i,S_j) は二文字列が共有する非空 prefix の個数に等しい。したがって各 prefix p について、それを持つ文字列 pair 数を足せば同じ答えになる。</p>
+<p>全入力長が3×10^5なので、全 prefix を Trie の node として共有すれば、同じ文字列断片を重複保持せずに頻度を集計できる。</p>
+<p>採用する候補: 文字列を順に Trie へ挿入し、各 prefix node を過去に通った文字列数を今回の寄与へ加える。</p>
+<p>各 pair は共有する各 prefix node で一回ずつ数えられ、処理量は総文字数に比例する。</p>
+<p>棄却する候補: 全文字列 pair ごとに先頭から一致長を比較する。</p>
+<p>文字列が似ている最悪例で pair 数 N² と比較長が重なり、総入力長制約内でも二乗時間になる。</p>
+<p>S_j の各 prefix node の count は、それを共有する i&lt;j の本数なので、その総和が j と過去全文字列との LCP 合計になる。</p>
+<p>文字列末端かどうかではなく、root 以外の通過 node すべてへ count を持つことで prefix 一個ごとの寄与を表す。</p>
+<p>空 Trie を用意し、j=1..N の順に S_j の文字をたどる。各文字後の node で現在 count を答えへ加え、その後（または二段目の走査で）S_j が通る全 node の count を1増やす。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="lcp-の共通-prefix-数への分解">LCP の共通 prefix 数への分解</h3>
+<p>発動条件: 全 pair の longest common prefix 長総和を求めるとき。</p>
+<p>長さを共有 prefix ごとの indicator sum に展開する。</p>
+<h3 id="trie-上の通過頻度">Trie 上の通過頻度</h3>
+<p>発動条件: 多数文字列の prefix ごとの出現数を総入力長で集計したいとき。</p>
+<p>prefix を node に共有し、挿入時に path count を更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最大一致長という max 型量を「長さ k 以上である」の layer cake に分けると、prefix node ごとの単純な pair 数になる。</p>
+<p>別の問題へ持ち帰る視点: 整数値の総和は threshold indicator の和へ展開すると、共有構造で数えやすくなる場合がある。</p>
+<h2 id="正当性">正当性</h2>
+<p>LCPは共有する非空prefix個数。各prefix nodeの通過文字列pair数を足す主客転倒が全LCP和と一致する。新文字列のnodeで既存countを先に足すとi&lt;jのpairだけ各共有prefixで一回数え、その後countを増やして次入力へ備えられる。root空prefixは長さ0なので足さない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>count を加えてから今回文字列を登録し、自分自身との pair を数えない。空 prefix root は LCP 長に寄与しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>LCP=共有prefix数という等式を短い二文字列で確認する。Trie node の count が「末端数」でなく「通過文字列数」であることに注意する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(L)、L=Σ|S_i|。trie通過頻度。</p>
+<h3 id="空間">空間</h3>
+<p>O(L)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3\times 10^5; S_i is a string consisting of lowercase English letters.; 1 \leq |S_i|; |S_1|+|S_2|+\ldots+|S_N|\leq 3\times 10^5; All input numbers are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=(ab,abc,ax)。</p>
+<ol>
+<li>各pair LCPは2,1,1。</li>
+<li>prefix aの3pairとprefix abの1pairを足しても同じ。</li>
+</ol>
+<p>期待される結果: 4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>新文字列countを加えてから照会すると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>自分自身とのpairを各文字数だけ追加してしまう。例で|ab|=2分の過計数になる。</p>
+<p>確認結果: 照会後に登録。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc353/tasks/abc353_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc353-e-problem-664ff6752d2dc14f04612070c41408399f4e648f0981d19c455ddc9db9b84432</li>
+<li><a href="https://atcoder.jp/contests/abc353/editorial/9969">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc353-editorial-9969-137ec1c5bd08e5a9fce39a58eb3825b744473a3d2ac97cb0be953ee76fae6e09</li>
+</ul></main>
+</body></html>

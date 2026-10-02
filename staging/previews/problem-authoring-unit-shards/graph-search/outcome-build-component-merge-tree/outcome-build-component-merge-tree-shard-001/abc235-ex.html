@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC235-EX — Painting Weighted Graph</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC235-EX — Painting Weighted Graph</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/dsu-merge-tree.md">DSU merge tree・Kruskal reconstruction tree</a></p>
+<ul>
+<li>成分併合ごとに新しい親nodeを作り、併合時刻・threshold・成分包含を一つのrooted treeへ記録する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>DSU merge tree・Kruskal reconstruction treeの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一回の操作で赤くなる集合は、ある重み閾値以下の辺だけを残したグラフにおける一つの連結成分である。 辺を重み昇順に追加すると成分が階層的に併合され、同じ重みの辺で同時につながる複数成分は一つの新成分として扱う必要がある。 m 個の子成分が一つになるとき、独立選択の積に含まれる「各子全体を一回ずつ塗る」X^m は、親全体を一回で塗る同じ集合 X に置き換える。 係数 k をその集合に必要な最小操作回数と定義すれば、同じ赤集合を余分な操作回数でも作れる重複を排除できる。</p>
+<p>棄却する候補: K 回以下の操作で選ぶ開始点と閾値の全組を列挙し、得られる赤頂点集合を重複排除する。</p>
+<p>一操作の候補だけでも多数あり、その組合せと集合重複を扱えない。</p>
+<p>採用する候補: 最小全域森が作る閾値連結成分の併合階層上で、各成分の赤集合を作る最小操作回数別の生成多項式を畳み込む。</p>
+<p>任意閾値の連結成分は最小全域森で再現でき、子成分の独立選択と親全体を一操作で塗る場合を局所式で統合できる。</p>
+<p>m 個の子成分が一つになるとき、独立選択の積に含まれる「各子全体を一回ずつ塗る」X^m は、親全体を一回で塗る同じ集合 X に置き換える。</p>
+<p>係数 k をその集合に必要な最小操作回数と定義すれば、同じ赤集合を余分な操作回数でも作れる重複を排除できる。</p>
+<p>Kruskal の重み別成分併合を reconstruction forest として、葉の 1＋X から親で ∏dp_child−X^m＋X を計算し、最後に森の根多項式を掛けて K 次まで合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="kruskal-reconstruction-tree">Kruskal reconstruction tree</h3>
+<p>発動条件: 辺重み閾値ごとの連結成分集合が操作候補となり、その包含階層上で数え上げるとき。</p>
+<p>同重みで連結する現在成分をまとめて親とし、閾値成分の階層を最小全域森から作る。</p>
+<h3 id="最小使用回数別の生成多項式-dp">最小使用回数別の生成多項式 DP</h3>
+<p>発動条件: 独立成分の選択数を畳み込みつつ、同じ完成物を作る異なる使用回数を最小回数へ正規化したいとき。</p>
+<p>子多項式積から全子一括選択の重複項を引き、親を一操作で選ぶ一次項へ置換する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>非木辺を含む元グラフでも、任意二頂点の最小 bottleneck 閾値を保つ最小全域森だけで全操作の到達集合を再現できる。</p>
+<p>別の問題へ持ち帰る視点: 操作が重み閾値以下の連結成分を選ぶなら、全辺よりも minimax connectivity を保存する MST・MSF への圧縮を検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>閾値成分は重み別併合の階層をなす。子の赤集合を独立選択する積のうち全子が全赤の一項 X^m だけが親全赤と一致する。この集合の最小必要操作は m から1に下がるので ∏dp_child−X^m+X と置く。ほかの赤集合は親全体操作で作れず子独立選択の最小操作和を保つ。同重みを一つの多子併合にまとめれば存在しない中間閾値成分を混ぜない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ重みの辺は Union-Find を更新する前の成分間グラフで連結塊を作り、二分併合へ恣意的に分けない。</li>
+<li>各多項式は K 次で打ち切り、孤立頂点は黒の一通りと一回で赤にする一通りを表す 1＋X から始める。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>閾値以下辺の到達集合が操作単位なら、重み sweep で成分がどう包含されるかを木として可視化する。</li>
+<li>多項式積の中で同じ完成集合を表す項がないか確認し、親全体を一回で選ぶ項との重複を最小回数へ置き換える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M 辺、次数打切り K。sort O(M log M)、Kruskal DSU O(Mα(N))、素朴多項式 merge の安全な上界 O(NK²)。</p>
+<h3 id="空間">空間</h3>
+<p>復元森と辺 O(N+M)、全ノードの打切り DP を保存する場合 O(NK)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 0 \leq M \leq 10^5; 1 \leq K \leq 500; 1 \leq A_i,B_i \leq N; 1 \leq C_i \leq 10^9; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>頂点1,2,3が同重みの辺1–2,2–3で併合。K=1。</p>
+<ol>
+<li>葉は1+x。</li>
+<li>親は(1+x)^3−x³+x=1+4x+3x²。</li>
+<li>操作1回以下では空、各単独、全体を数える。</li>
+</ol>
+<p>期待される結果: 5集合</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同重み三頂点を二分木にして中間{1,2}を一操作で塗る状態を作ってよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。その閾値では三頂点が同時に連結なので{1,2}だけの成分は存在しない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc235/editorial/3250">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc235-editorial-3250-cd5c501ff9ee547bbc0513197461dfe95bd5595c90ffe6e31f27efc8c83e342c</li>
+<li><a href="https://atcoder.jp/contests/abc235/tasks/abc235_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc235-ex-problem-c8f86bd896468479c054ae82a8c0d91b851ee22cd52180f59f0be8a321f0651f</li>
+</ul></main>
+</body></html>

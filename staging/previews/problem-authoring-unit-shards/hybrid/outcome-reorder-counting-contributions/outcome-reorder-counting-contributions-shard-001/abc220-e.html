@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC220-E — Distance on Large Perfect Binary Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC220-E — Distance on Large Perfect Binary Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/tree/implicit-binary-tree.md">対称性・深さ・label区間で巨大な完全二分木を数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>頂点数は 2^N-1 なので頂点を生成できないが、同じ深さの頂点は残りの部分木高さも子孫数も全て等しい。深さ d の頂点数自体も 2^d と式で扱える。</p>
+<p>順序付き対 (i,j) を LCA v で一意に分類し、v から両端までの距離を k と D-k に分けると、両端が部分木の高さ内に収まるかと、最初の辺が左右別になるかだけで個数が決まる。</p>
+<p>採用する候補: 二端点のpathが最初に合流する頂点の深さごとに、片端が合流点の場合と両端が左右の子部分木にある場合を式で数え、同深さの頂点数を掛ける。</p>
+<p>完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。</p>
+<p>棄却する候補: 2^N-1 頂点の木を構築し、各頂点から距離 D の頂点を探索する。</p>
+<p>N は 10^6 で、木の頂点数そのものが指数的なため入力上の構造を展開できない。</p>
+<p>残り高さ H=N-1-d に対し、0&lt;k&lt;D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。</p>
+<p>有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。</p>
+<p>2 の冪を法 998244353 で前計算する。各深さ d で H=N-1-d とし、D≤H なら片端が LCA の 2×2^D を加え、内部 split 区間の長さに 2^{D-1} を掛けて加える。その一頂点分へ 2^d を掛け、全深さを合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="完全二分木の距離分割">完全二分木の距離分割</h3>
+<p>発動条件: 暗黙の完全二分木で距離を固定した頂点対を数えるとき。</p>
+<p>二端点のpathが最初に合流する深さと、そこから両端への距離分割で各対を一意に分類する。</p>
+<h3 id="対称構造の深さ集約">対称構造の深さ集約</h3>
+<p>発動条件: 完全木などで、頂点に依存する量が深さだけで決まるとき。</p>
+<p>一頂点分の数を深さから求め、その深さの頂点数を掛けて明示的な木を消す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>距離 split k を一つずつ調べる必要もなく、高さ制約二つの共通部分が整数区間なので、内部 split 数を区間長だけで集約できる。</p>
+<p>別の問題へ持ち帰る視点: 対称な木の path 数え上げで深さ二条件が現れたら、自由変数の可動域が連続区間にならないかを確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>残り高さ H=N-1-d に対し、0&lt;k&lt;D の有効範囲は max(1,D-H)≤k≤min(D-1,H) という一つの整数区間になる。 有効な内部 split 一つにつき、左右の向きを含む順序付き対は 2^{D-1} 個であり、片端が LCA の場合は k=0,D を別々に数える。 完全二分木の対称性により個々の頂点を消し、さらに有効な距離分割 k が連続区間になるため、その個数も端点だけで求められる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>問題の pair は順序付きなので左右反転と k=0,D の両方を落とさない。内部区間が空なら0とし、D=1 のとき 2^{D-1} を使う項が発生しない境界も分ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=3,D=2 で LCA が根の10対と深さ1の各2対を分け、サンプルの14対へ一致させて向きの係数を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+D)、2冪前計算とN深さのclosed form。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+D)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^6; 1 \leq D \leq 2\times 10^6; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>高さN=2の完全二分木、距離D=1。</p>
+<ol>
+<li>根と各葉の二辺がある。</li>
+<li>各辺は両向きに数える。</li>
+</ol>
+<p>期待される結果: 順序付き頂点pair4個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>D=2なら内部splitは何か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>根LCAでk=1だけが有効。二葉間の両向き2個を数え、片端LCAのcaseは残高さ1で不可。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc220/tasks/abc220_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc220-e-problem-66c6b2866e62c6df8bb0a46f0eb92adf42dca9e61996008817ce7c16e797911f</li>
+<li><a href="https://atcoder.jp/contests/abc220/editorial/2679">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc220-editorial-2679-d998641315051a650c1186e20c01322b5ec0524a266fda2c39d83c2a5535e9c7</li>
+</ul></main>
+</body></html>

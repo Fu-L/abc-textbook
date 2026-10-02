@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC247-F — Cards</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC247-F — Cards</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>数 1,…,N を頂点、card i を P_i と Q_i を結ぶ辺とみなすと、全数を少なくとも 1 回出す条件は、選んだ辺が全頂点を被覆することになる。</p>
+<p>P,Q がともに permutation なので各頂点には front 側と back 側から計 2 回接続し、loop や平行辺も許した 2-正則 graph、すなわち cycle 成分の集合になる。</p>
+<p>採用する候補: 各 cycle 成分の頂点数 m を求め、cycle の辺被覆数 g(m) を Fibonacci 型漸化式で前計算して成分ごとに掛ける。</p>
+<p>辺被覆条件が連結成分間で独立し、各成分はサイズだけで同じ円環二値列の数え上げになる。</p>
+<p>棄却する候補: N 枚の card subset を全列挙し、全ての数が現れるかを検査する。</p>
+<p>候補が 2^N 個あり、N≤2×10^5 では列挙できない。</p>
+<p>cycle 上で辺を選ぶ/選ばないを二値化すると、各頂点を覆う条件は隣接する 2 辺を同時に非選択にしない条件である。</p>
+<p>path 版 f(1)=2,f(2)=3,f(m)=f(m-1)+f(m-2) を使えば cycle 版は端の扱いを分けて求まり、g(1)=1,g(2)=3,g(3)=4 となる。</p>
+<p>DSU または traversal で graph の連結成分サイズを集計する。N まで f と cycle 辺被覆数 g を前計算し、各成分の g(size) を 998244353 で乗算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="permutation-からできる-cycle-分解">permutation からできる cycle 分解</h3>
+<p>発動条件: 2 個の permutation の対応を辺にすると各頂点の次数が固定されるとき。</p>
+<p>P_i,Q_i を結ぶ多重 graph が 2-正則であることから cycle 成分へ分解する。</p>
+<h3 id="円環-dp">円環 DP</h3>
+<p>発動条件: 隣接制約を持つ選択列が cycle 上にあり、先頭と末尾の整合も必要なとき。</p>
+<p>path の Fibonacci 型数え上げを端の辺の選択で場合分けして cycle の辺被覆数にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>card を選ぶ問題を number 頂点の辺被覆へ写すと、2 つの permutation が保証する次数 2 により一般 graph ではなく cycle DP だけで済む。</p>
+<p>別の問題へ持ち帰る視点: 入力の『各ラベルがちょうど一度ずつ現れる』条件は、構成 graph の次数や連結成分形を強く制約する手掛かりになる。</p>
+<h2 id="正当性">正当性</h2>
+<p>P,Qがともにpermutationなので各数字の次数は2で、成分はcycleに限る。一数字を覆う条件は、その両側のカードの少なくとも一枚を選ぶことに等しい。したがって各cycleで隣接する二辺を同時に未選択にしない二値円環列を数えればよい。先頭辺の選否を固定したpath DPで末尾との条件まで検査するため漏れも重複もなく、別成分の選択は独立なので個数の積が答えになる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>P_i=Q_i の self-loop 成分は size 1 で、その card を選ぶ 1 通りだけなので g(1)=1 とする。</li>
+<li>size 2 は平行な 2 辺から少なくとも 1 本を選ぶ 3 通りであり、simple graph 前提の cycle traversal にしない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>self-loop、2 頂点の平行辺、通常の 3-cycle を並べ、それぞれの g(1)=1,g(2)=3,g(3)=4 を手で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Nα(N))、N辺の成分集計とNまでのFibonacci前計算。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; 1 \leq P_i,Q_i \leq N; P and Q are permutations of (1, 2, \dots, N).; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>P=(1,2,3),Q=(2,3,1)。</p>
+<ol>
+<li>三カードの端点はcycle1-2-3-1。</li>
+<li>二辺選択三通りと三辺全選択一通りが全頂点を覆う。</li>
+</ol>
+<p>期待される結果: 被覆部分集合4通り。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>成分size1のloopを未選択にできるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>唯一の頂点を覆えないので選択必須でg(1)=1。通常path初期値2とは分ける。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc247/editorial/3719">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d</li>
+<li><a href="https://atcoder.jp/contests/abc247/tasks/abc247_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e</li>
+</ul></main>
+</body></html>

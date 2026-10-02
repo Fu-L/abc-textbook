@@ -1,0 +1,294 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-schedule-range-query-updates-shard-001",
+  "packets": [
+    {
+      "problemId": "abc242-g",
+      "learningOutcomeIds": [
+        "outcome-schedule-range-query-updates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "オンラインのpriority queue・multiset、および単調stack・queue。"
+      ],
+      "tagIds": [
+        "tag-mo-offline-range"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le N \\le 10^5; 1 \\le Q \\le 10^6; 1 \\le A_i \\le N; 1 \\le l \\le r \\le N in each query."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。 各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。",
+          "sourceRevisionIds": [
+            "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
+            "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8",
+          "path": "src/content/sources/abc212-abc263/source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc242_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5",
+          "path": "src/content/sources/abc212-abc263/source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc242_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc293-g",
+      "learningOutcomeIds": [
+        "outcome-schedule-range-query-updates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "オンラインのpriority queue・multiset、および単調stack・queue。"
+      ],
+      "tagIds": [
+        "tag-mo-offline-range"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 2 \\times 10^5; 1 \\leq l_q \\leq r_q \\leq N; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "答えΣ_x C(cnt_x,3)を直接持てば、追加前cntのC(cnt,2)を足し、削除後のcntに対する同値を引くだけでよい。 全質問が事前にあり、左右端一歩の追加削除がO(1)なので総移動量を約N√Qへ抑えられる。",
+          "sourceRevisionIds": [
+            "source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8",
+            "source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8",
+          "path": "src/content/sources/abc264-abc315/source-abc293-editorial-5947-521de1ac63f5adc46869cbc5a4afac67b6cb0cc2757590c8211288fd0f5561c8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc293_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9",
+          "path": "src/content/sources/abc264-abc315/source-abc293-g-problem-a415ae157c4931a162c6f1e20e5dd417d648595dbe7573e4ea2ecb325b7fa3f9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc293_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc384-g",
+      "learningOutcomeIds": [
+        "outcome-schedule-range-query-updates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-coordinate-compression",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "オンラインのpriority queue・multiset、および単調stack・queue。"
+      ],
+      "tagIds": [
+        "tag-mo-offline-range",
+        "tag-coordinate-compression",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 10^5; 0\\le A_i,B_j\\le 2\\times 10^8; 1\\le K\\le 10^4; 1\\le X_k,Y_k\\le N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "座標圧縮した値軸にcount BITとsum BITを持てば、v未満・以上の寄与をv·cnt-sumとsum-v·cntへ分けられる。 二つの集合を同時に変えるため、追加前の反対集合への寄与を加え、削除前の寄与を引くという対称な更新を用意する。 X方向のblock移動とY方向の単調走査を均衡させて総移動O(N√K)とし、各add/removeの絶対差寄与をO(log N)で求められる。",
+          "sourceRevisionIds": [
+            "source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b",
+            "source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b",
+          "path": "src/content/sources/abc368-abc419/source-abc384-editorial-11548-b15bbcf84e1a645622eedbcb5b6c4df173f974b4e32990f5b3377802a1a6619b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc384_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286",
+          "path": "src/content/sources/abc368-abc419/source-abc384-g-problem-e28558fe4f9d3cd66de0fdd5adcab4a395f351abae49033d7107c6661f591286.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc384_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc405-g",
+      "learningOutcomeIds": [
+        "outcome-schedule-range-query-updates"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dynamic-modular-product",
+        "unit-value-bucket-aggregation"
+      ],
+      "excludedTopics": [
+        "オンラインのpriority queue・multiset、および単調stack・queue。"
+      ],
+      "tagIds": [
+        "tag-mo-offline-range",
+        "tag-combinatorial-coefficients",
+        "tag-dynamic-modular-product",
+        "tag-value-bucket-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2.5 \\times 10^5; 1 \\le Q \\le 2.5 \\times 10^5; 1 \\le A_i \\le N; 1 \\le L \\le R \\le N; 1 \\le X \\le N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "値vの頻度がfからf±1へ変わると、対応bucketの頻度和とinvFact[f]の積だけを差分更新すればよい。区間位置と値軸を別々に平方根分割することで、Moの移動と閾値queryの双方を軽くできる。 X以上は削除されるので値prefixは[1,X)であり、この範囲のbucket集約から得たkとp=∏invFact[f_v]にfact[k]を掛ければ、多重度を保った答えが復元できる。 区間端の移動では一つの頻度だけをO(1)で更新でき、各queryはX未満の完全bucketと端数だけをO(√N)で合成できるため、N,Qとも2.5×10^5でも対数因子なしで処理できる。",
+          "sourceRevisionIds": [
+            "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66",
+            "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66",
+          "path": "src/content/sources/abc368-abc419/source-abc405-editorial-12997-8d1a52b7eec8ba1e235d005c7c0f233f6fc13ee79e5c108af0ad19d9941fac66.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc405_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5",
+          "path": "src/content/sources/abc368-abc419/source-abc405-g-problem-70703459c6038a4aec1df7c9f35196b5d58ef8eb61d7fd3d35c2140ab07d77a5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc405_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

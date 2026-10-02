@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC255-E — Lucky Numbers</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC255-E — Lucky Numbers</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>A_1=Zと置くと和条件から全項が一意に伝播し、A_i=(-1)^(i+1)Z+B_iというZの係数が±1の形になる。</p>
+<p>採用する候補: 各位置・ラッキーナンバーが要求するZへの投票</p>
+<p>A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。</p>
+<p>棄却する候補: Zの数値範囲を走査する</p>
+<p>S_i,X_jが±10^9でZ候補範囲は広く、必要な候補は入力から導かれるN M個だけである。</p>
+<p>B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。</p>
+<p>A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。</p>
+<p>Bを漸化式で作り、全i,jについて候補Z=(-1)^(i+1)(X_j-B_i)を連想配列で数える。最大頻度を答えとする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="一次自由度のアフィン伝播">一次自由度のアフィン伝播</h3>
+<p>発動条件: 隣接項の式があり、一つの初期値を決めると全列が決まる。</p>
+<p>A_1をパラメータZとし、各項を符号付きZと定数B_iへ分離する。</p>
+<h3 id="候補パラメータの頻度最大化">候補パラメータの頻度最大化</h3>
+<p>発動条件: 各制約を満たすパラメータ値が一意に求まる。</p>
+<p>位置と目標値の各組が要求するZを数え、最多票のZを選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>交互和で現れる符号反転を保ったまま一変数化すると、数列最適化が候補値の同値数え上げへ変わる。</p>
+<p>別の問題へ持ち帰る視点: 一自由度の構成で評価条件が等式なら、各評価項目が要求するパラメータ値を列挙して投票問題へ落とせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。 A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。 A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>B_iと候補Zは負になり得るため符号付き64ビットで保持し、iの偶奇による符号を一致させる。X_jは相異なるので一位置が同じZへ二重投票しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小さい範囲のZを全探索した結果と比較し、正負のS・X、偶奇位置、同じZへ多くの位置が集まる例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>平衡map版O(NM log(NM))、M候補値数。hash mapなら期待O(NM)。</p>
+<h3 id="空間">空間</h3>
+<p>O(NM)、候補Z頻度。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq M \leq 10; -10^9 \leq S_i \leq 10^9; -10^9 \leq X_i \leq 10^9; X_1 \lt X_2 \lt \cdots \lt X_M; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、S=(3,3)、lucky値X={1}。</p>
+<ol>
+<li>B=(0,3,0)、候補Zは1,2,1。</li>
+<li>Z=1なら列(1,2,1)。</li>
+</ol>
+<p>期待される結果: lucky一致最大2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>各位置の候補を独立に選んでよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全位置は共通Zと交互符号に依存する。同じZのfrequencyを集計して初めて達成可能な最大数を得る。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc255/tasks/abc255_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a</li>
+<li><a href="https://atcoder.jp/contests/abc255/editorial/4098">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10</li>
+</ul></main>
+</body></html>

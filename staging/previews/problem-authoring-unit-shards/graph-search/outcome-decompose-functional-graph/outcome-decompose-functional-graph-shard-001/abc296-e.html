@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC296-E — Transition Game</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC296-E — Transition Game</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/functional-graph-decomposition.md">関数グラフのcycle・tree分解</a></p>
+<ul>
+<li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>写像f(i)=A_iの反復像S_0⊇S_1⊇…の安定集合はfunctional graphの閉路頂点だけになる。 削除された頂点xは唯一の出辺先A_xの有効入次数を一つ減らし、新たに0なら同様に消える。</p>
+<p>採用する候補: 入次数0からのleaf pruning</p>
+<p>閉路外頂点をqueueで順に削れば残る頂点数が無限反復後にも選べる数と一致する。</p>
+<p>棄却する候補: ゲーム回数ごとに集合像を再構成</p>
+<p>安定まで最大N回、各回N走査で二次になる。</p>
+<p>削除された頂点xは唯一の出辺先A_xの有効入次数を一つ減らし、新たに0なら同様に消える。</p>
+<p>全入次数を数え、0の頂点をqueueへ入れて取り出すたびA_xの入次数を減らす。削除されなかった頂点数を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="functional-graphの閉路抽出">functional graphの閉路抽出</h3>
+<p>発動条件: 各頂点の出次数が1で、反復後に残る頂点を求める。</p>
+<p>入次数0から木部分を剥がす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>ゲームの全時刻条件を写像の安定像へ変えると、functional graphのcycle membershipになる。</p>
+<p>別の問題へ持ち帰る視点: 有限写像の無限反復像は閉路集合である。</p>
+<h2 id="正当性">正当性</h2>
+<p>写像像を繰り返すと先行点を持たない木頂点から順に失われる。一方cycle頂点はcycle内先行点を常に持ち像に残る。入次数peelingの未削除点はこの安定集合と一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>自己loopも閉路として残し、削除済み数または残数を一度だけ更新する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>直接集合反復と比較し、自己loop、複数cycle、長いtailを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点に対して O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>入次数、出辺とqueue O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; 1\leq A_i\leq N; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,3,2,3)。</p>
+<ol>
+<li>頂点1,4は入次数0で消える。</li>
+<li>2↔3は互いに先行点を持ち残る。</li>
+<li>残存を数える。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>自己loop一頂点は残るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>残る。自己先行点を持つ長さ1cycleである。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc296/tasks/abc296_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc296-e-problem-d20cd3f48bf987b0261459fa8579faa57de6822c5f637a3d263bf0c442985204</li>
+<li><a href="https://atcoder.jp/contests/abc296/editorial/6116">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc296-editorial-6116-dbe4ddefbb6d44eab7ed7f4d8bd3b687af7526bb5b0e973a6dd18f091a411f0b</li>
+</ul></main>
+</body></html>

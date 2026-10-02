@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
+  "packets": [
+    {
+      "problemId": "abc295-g",
+      "learningOutcomeIds": [
+        "outcome-contract-monotone-paths-with-jump-pointers"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress",
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "単調path contraction・DSU jumpの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-monotone-path-contraction",
+        "tag-amortized-monotone-progress",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq Q \\leq 2\\times 10^5; 1\\leq p_i\\leq i; For each query in the first format: 1\\leq u,v \\leq N. u \\neq v. On G_S, vertex u is reachable from vertex v via some edges.; 1\\leq u,v \\leq N.; u \\neq v.; On G_S, vertex u is reachable from vertex v via some edges.; For each query in the second format, 1\\leq x \\leq N.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "追加u→vで親向きのv→u pathがcycleになり、pathの既存SCCだけを併合する。SCC最小labelは最上位なのでそれから親境界を辿れば必要成分を漏れなく吸収する。吸収済境界は代表でskipされ二度処理しない。",
+          "sourceRevisionIds": [
+            "source-abc295-editorial-6052-e8a82887ceedd6e246d7ee23d6abb37b105a7c8de6a510a6a1a6cd79cf4fb735",
+            "source-abc295-g-problem-1e1a3e055f7aad2cd56a4f89ed9743a56d6ccc6b472446f9aa7eb01f150272ba"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc295-editorial-6052-e8a82887ceedd6e246d7ee23d6abb37b105a7c8de6a510a6a1a6cd79cf4fb735",
+          "path": "src/content/sources/abc264-abc315/source-abc295-editorial-6052-e8a82887ceedd6e246d7ee23d6abb37b105a7c8de6a510a6a1a6cd79cf4fb735.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc295_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc295-g-problem-1e1a3e055f7aad2cd56a4f89ed9743a56d6ccc6b472446f9aa7eb01f150272ba",
+          "path": "src/content/sources/abc264-abc315/source-abc295-g-problem-1e1a3e055f7aad2cd56a4f89ed9743a56d6ccc6b472446f9aa7eb01f150272ba.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc295_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

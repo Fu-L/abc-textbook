@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC359-G — Sum of Tree Distance</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC359-G — Sum of Tree Distance</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-balanced-separators.md">木の均衡分離点から重心分解へ進む</a></p>
+<ul>
+<li>各連結成分の重心を選び、除去後の成分サイズが半分以下になる再帰分解木を構成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>LCA・HLDによる固定木上パスの区間分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>求めるのは同じラベルAを持つ頂点pairの距離総和である。各pathを辺ごとの寄与へ分ければ、ある分離をまたぐ同色pair数を数える問題になる。 重心を通るpairに限定すると、頂点vから重心までのpathは、同色頂点の全個数からvと同じ重心子部分木内の個数を引いた回数だけ使われる。 重心自身を端点とするpairは、同色頂点の重心からの深さの和として直接加える。 非重心頂点vの重心向き辺は、同色の全頂点数−同じ子部分木内の同色数だけ同色pathに含まれ、各辺単位の加算で距離になる。</p>
+<p>採用する候補: 重心分解し、各段でラベル別の全体個数と子部分木別個数から重心を通る同色pairの距離寄与を数える。</p>
+<p>各pairは、その両端が初めて別部分木へ分かれる重心段で一度だけ集計される。</p>
+<p>棄却する候補: ラベルごとに頂点を列挙し、全pairへLCA距離を足す。</p>
+<p>一つのラベルが全頂点に付く場合にpair数自体が巨大で、距離照会を高速化しても列挙できない。</p>
+<p>重心自身を端点とするpairは、同色頂点の重心からの深さの和として直接加える。</p>
+<p>非重心頂点vの重心向き辺は、同色の全頂点数−同じ子部分木内の同色数だけ同色pathに含まれ、各辺単位の加算で距離になる。</p>
+<p>現在成分の重心cを求め、DFSで各頂点のラベル、深さ、所属するcの子部分木を集める。ラベル別全数・深さ和からcを端点とする寄与と異なる子部分木間の寄与を加え、子部分木内だけの寄与を差し引く。cを除いた各成分へ再帰する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="重心分解">重心分解</h3>
+<p>発動条件: 木上の多数のpair量を、ある中心を通るpathごとに分割して数えるとき。</p>
+<p>各段で重心を通るpairのみを集計し、残りを独立な子成分へ送る。</p>
+<h3 id="全体集計から同一groupを除く">全体集計から同一groupを除く</h3>
+<p>発動条件: 異なる部分木に属する同属性pairを数えたいとき。</p>
+<p>ラベル別全体count・sumから、処理中の子部分木の同ラベル集計を差し引く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>距離をpairごとに測る代わりに、重心へ向かう各path segmentが何組に使われるかを数えると積の集計へ落ちる。</p>
+<p>別の問題へ持ち帰る視点: pair距離総和では「pairを列挙」ではなく「辺または中心への距離の利用回数」を数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>各同色対は重心分解で初めて異なる子成分へ分かれる段、または重心が一端になる段に一度だけ属する。その段では距離が両端深さの和で、同子成分を引く集計はまさに重心経由の対だけを残す。残る同子対を再帰で数えれば全対の距離を重複なく合計できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ重心子部分木内のpairをこの段で混ぜない。ラベル配列を毎段全初期化せず、訪れたラベルだけ消去するなど総作業量を守る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>各pairがどの重心段で一度だけ数えられるかを先に説明する。実装では全体寄与と子部分木内の除外寄与を別関数にすると二重計上を追いやすい。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点。各重心段の DFS 集計が線形なら O(N log N)。ラベルを balanced map で集計する場合 O(N log²N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、重心情報、現在成分のラベル集計で O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; 1 \leq A_i \leq N; The input graph is a tree.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3、ラベル(8,1,8)。</p>
+<ol>
+<li>重心2で色8の頂点1,3は別方向。</li>
+<li>深さ1+1で寄与2。</li>
+<li>他に同色対はない。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>全段でラベル値域全体を初期化すると線形集計になるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>ならない。値域 U を毎成分走査すると成分数分の O(NU) が生じ得る。訪れたラベルだけ消去する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc359/editorial/10255">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc359-editorial-10255-fa04795b52dc53305443c6a4e796293ae03ceecf0d2aae499b55cdd328735db6</li>
+<li><a href="https://atcoder.jp/contests/abc359/tasks/abc359_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc359-g-problem-8807cff19735b7bad644485d89225be83901ac5aa78ee97ba0357f51da0c4dbc</li>
+</ul></main>
+</body></html>

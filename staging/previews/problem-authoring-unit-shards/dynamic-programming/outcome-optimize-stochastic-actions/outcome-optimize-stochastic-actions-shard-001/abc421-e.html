@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC421-E — Yacht</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC421-E — Yacht</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>keep済みdiceの出目multisetと残りroll回数だけで将来の最適期待scoreが決まる。diceは5個、rollは3回だけなので、全出目とkeep subsetを列挙できる。 最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。</p>
+<p>採用する候補: f(k,S)のmemoized expectation DP</p>
+<p>同じheld multisetの将来を共有し、各roll結果で最適keepを選ぶBellman式を直接評価できる。</p>
+<p>棄却する候補: 各diceを特定の値になるまで固定するgreedy</p>
+<p>face値と残り回数により別の目を混在keepする価値が変わり、局所規則では最適性がない。</p>
+<p>最終scoreは出目xの個数×xの最大値。途中では未keep diceの全6^r結果Pごとに、Pの全subset Tからf(k-1,S∪T)最大を選び、その期待値を取る。</p>
+<p>held multisetをsort tupleでcanonical化し、f(1,S)は残diceを一回振ったscore平均、f(k,S)は各result tupleに対するkeep subset最大の平均としてmemoする。答えはf(3,empty)。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="有限horizon確率dp">有限horizon確率DP</h3>
+<p>発動条件: 観測後にactionを選べ、残りstepと保持情報が小さい。</p>
+<p>chance nodeで確率平均、decision nodeで最大を交互に取る。</p>
+<h3 id="multiset-state圧縮">multiset state圧縮</h3>
+<p>発動条件: dice個体は同一で、将来は保持値の個数だけに依存する。</p>
+<p>保持出目をsorted tuple/count vectorへ正規化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同じroll結果でもどのdice個体をkeepしたかは不要で、値multisetだけをmemo keyにすればstateを大幅に共有できる。</p>
+<p>別の問題へ持ち帰る視点: 交換可能な個体の確率DPは個体labelを捨てfrequency stateへ圧縮する。</p>
+<h2 id="正当性">正当性</h2>
+<p>保持済み出目と残roll数が将来分布と合法keepを全て決める。最終roll後の得点はmax_x(x×個数)。各roll結果を等確率で列挙し、その結果を見てからkeep subsetの最大値を取る順序が意思決定と一致する。既保持diceは外せないので、次状態へ追加keepだけを加える。残roll数の帰納法で最適期待値を得る。同値faceも六面の別結果として確率を保つ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>重複face値がある場合も6 faceを等確率として列挙し、同じmultisetへ確率を正しく合算する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>全face同値、最大値だけkeepが不利な例を全strategy列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>D=5 dice、面 F=6、roll R=3。held size h別に multiset状態 C(F+h−1,h)、O(R·Σ_{h=0}^D C(F+h−1,h)F^(D−h)2^(D−h)D log(D+1)) の直接列挙。D,F,Rは固定なので入力サイズに対し定数時間。</p>
+<h3 id="空間">空間</h3>
+<p>held multiset memo は O(R·C(F+D,D))、一時結果とsubsetは O(D)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: A_i is an integer between 1 and 100, inclusive.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,2,2,2,2,2)。</p>
+<ol>
+<li>全rollで全diceが必ず2。</li>
+<li>keep数に関係なく最後は五個の2。</li>
+<li>score=5×2。</li>
+</ol>
+<p>期待される結果: 10</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値六面を一種類にまとめて確率1/6を割り当ててよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。この例の2は確率1である。まとめるなら面数6の重みを持たせる必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc421/tasks/abc421_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc421-e-problem-004c6251d80a7f4907fed4b1c3aaa5783078d1cdd19063600de8bfa61402589e</li>
+<li><a href="https://atcoder.jp/contests/abc421/editorial/13731">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc421-editorial-13731-a00fc8b5577348b07e11c5ce24fb1c87bdf1be6a9323e4b8276408a3f0c6ae63</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC344-G — Points and Comparison</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC344-G — Points and Comparison</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/kinetic-order-maintenance.md">kinetic sorting・交差event順序更新</a></p>
+<ul>
+<li>隣接要素が入れ替わる有効時刻だけをevent処理し、連続parameterに対する全順序と集計を更新できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>query(A,B)は各点のscore_A(i)=-A X_i+Y_iがB以上かを数える問題である。Aを昇順に処理すれば各scoreはAの一次関数で、二点の順序は両点を結ぶslopeを跨ぐ時に高々一度だけ反転する。</p>
+<p>採用する候補: queryをA順にsortし、点score順を隣接swap eventでkineticに維持する</p>
+<p>全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。</p>
+<p>棄却する候補: 各queryでN点のinequalityを直接判定する</p>
+<p>Qは10^7でNQは最大5×10^10となり実行できない。</p>
+<p>現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。</p>
+<p>生成器からQ個の(A,B)を作りA昇順にsortする。点列はA→-∞での順序に対応する(X,Y)辞書順から始め、隣接crossing slopeをexact rational keyのheapへ入れる。各query A前にslope≤Aの有効eventを処理してswap・隣接event更新し、現在順のscore=-AX+Yへlower_boundしてscore≥Bの個数を加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="kinetic-sorting">kinetic sorting</h3>
+<p>発動条件: parameter Aの変化に伴いlinear keyのsorted orderが変わり、多数の同parameter queryがある。</p>
+<p>隣接要素の次crossingだけをevent queueで管理し、局所swapで全順序を更新する。</p>
+<h3 id="offline-query-sorting">offline query sorting</h3>
+<p>発動条件: query同士は独立で、parameterを単調順に並べるとdata structure更新を共有できる。</p>
+<p>生成した(A,B)をA昇順に処理し、点順序を戻さず進める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>N本の一次関数のarrangementを全Aで構築せず、query Aへ到達するまでの隣接交差だけ処理すると、順序変更総数をpair数O(N^2)で抑えられる。</p>
+<p>別の問題へ持ち帰る視点: moving-order queryは隣接swap eventのkinetic data structureとして扱える。</p>
+<h2 id="正当性">正当性</h2>
+<p>現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。 全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>scoreはY−AX。A直後の順序を採用するなら同scoreのtieはX降順、Xも同じなら固定indexで安定化する。次eventは現在隣接していて左X&lt;右Xのpairだけへ登録し、同slopeも同じ向きの確認後に一回だけswapする。逆向きへ戻すeventを生成せず、多点の同時crossingが有限回で整列する。scoreとrational cross productは128bitで評価する。</p>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>X同値でswapしないpair、複数pairが同slopeで交差、同A query、R_a=0をN小の全点sort真値と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N²+Q)log(N+Q))、各点pairは高々一crossing、隣接event heap。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²+Q)、生成event上界。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 5000; 1 \le Q \le 10^7; |X_i|, |Y_i| \le 10^8; The pairs (X_i,Y_i) are distinct.; 0 \le G_0 &lt; (2^{31}-1); 0 \le R_a \le 10^8; 0 \le R_b \le 10^{16}</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点(0,0),(1,1)、score=Y−AX。</p>
+<ol>
+<li>A&lt;1では第一点score0が先、第二点score1−Aが後。</li>
+<li>A=1で同値、A&gt;1で順序が交換する。</li>
+</ol>
+<p>期待される結果: crossing slopeは1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>A=1のqueryでcrossingを後回しにできるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>score同値のtie規約を一貫させる必要がある。slope≤Aを処理し、同傾き多点は安定したindex規約で整列させる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc344/editorial/9491">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd</li>
+<li><a href="https://atcoder.jp/contests/abc344/tasks/abc344_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3</li>
+</ul></main>
+</body></html>

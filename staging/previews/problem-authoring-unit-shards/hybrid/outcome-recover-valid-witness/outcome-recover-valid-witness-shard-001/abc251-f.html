@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC251-F — Two Spanning Trees</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC251-F — Two Spanning Trees</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>DFSとBFSが辺に対して保証する距離/祖先構造を比較する。無向DFSの非tree辺は祖先子孫間に限られる。一方BFSの全元辺はdepth差が高々1で、親子でない祖先子孫間に存在できない。両方の発見辺を出せば異なる要求を持つ二つのspanning treeを構成できる。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="dfs木の非木辺性質">DFS木の非木辺性質</h3>
+<p>発動条件: 無向グラフで全ての非木辺を祖先・子孫関係にしたい。</p>
+<p>深さ優先探索の発見辺を全域木にする。</p>
+<h3 id="bfs層">BFS層</h3>
+<p>発動条件: 元グラフの辺の両端を木上の離れた祖先・子孫にしたくない。</p>
+<p>最短距離層を作り、幅優先探索の発見辺を全域木にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>問題の二つの相反する祖先条件は、無向グラフにおけるDFS木とBFS木の標準的な構造そのものである。</p>
+<p>別の問題へ持ち帰る視点: 全域木の追加条件が非木辺の深さ関係なら、探索順が保証する辺分類や距離層を利用する。</p>
+<h2 id="正当性">正当性</h2>
+<p>無向DFSの非tree辺の両端は祖先子孫関係となるためDFS木は求める第一条件を満たす。既訪問先が常に祖先という意味ではなく、後から子孫への辺を検査する場合もある。BFSでは各元辺の両端depth差≤1。tree上で親子でない祖先子孫ならdepth差≥2なので矛盾し第二条件を満たす。両探索は新規発見辺を一頂点につき一つ採り連結性と無閉路を保つ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>N=2×10^5なのでDFSは反復実装も検討し、頂点はキューやスタックへ入れる発見時点で訪問済みにする。各木で必ずN-1辺を出す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>出力木が連結かつN-1辺かを機械的に検査し、全ての元辺について第一木・第二木の祖先条件を小グラフ上で直接確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+M)、DFS木とBFS木。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; N-1 \leq M \leq \min\lbrace 2 \times 10^5, N(N-1)/2 \rbrace; 1 \leq u_i, v_i \leq N; All values in input are integers.; The given graph is simple and connected.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>triangle辺12,23,13、根1、隣接を小さい順。</p>
+<ol>
+<li>DFS木は12,23。</li>
+<li>BFS木は12,13。</li>
+</ol>
+<p>期待される結果: 異なる二本のspanning tree。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>無向DFSで既訪問辺先が常に祖先と無条件に書いてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>処理済み子孫への向きもあり得る。非tree辺の両端が祖先子孫関係にあるという表現が正確。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc251/editorial/3967">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc251-editorial-3967-90601373bb0e48091b049de5b708197d859997f1f2faef7f32ed1bfdd64f586d</li>
+<li><a href="https://atcoder.jp/contests/abc251/tasks/abc251_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc251-f-problem-b2dfea0a68dca2ab444448bb5b5a71d3d04bfc7e01ad8f791a84e7a8463e97e4</li>
+</ul></main>
+</body></html>

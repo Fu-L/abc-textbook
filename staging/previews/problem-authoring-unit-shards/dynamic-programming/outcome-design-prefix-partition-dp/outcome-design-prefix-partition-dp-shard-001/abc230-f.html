@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC230-F — Predilection</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC230-F — Predilection</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-prefix-partition.md">prefix分割DP</a></p>
+<ul>
+<li>列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>隣接要素の加算を繰り返した最終列の各値は、元列を順序を保つ連続ブロックへ分割した各ブロック和になる。</p>
+<p>異なる分割でも途中の区間和が 0 なら同じ最終列を作り得るため、分割数をそのまま数えると重複する。</p>
+<p>棄却する候補: N−1 個の境界を残すか消すか全て列挙し、得られたブロック和列を集合で重複排除する。</p>
+<p>境界選択が指数個あり、生成列を保存して比較することもできない。</p>
+<p>採用する候補: 完成列を左から作る標準的な貪欲操作列へ一意化し、直前に同じ prefix 和が現れた位置を境界にした DP 区間和で数える。</p>
+<p>完成列と標準操作列が一対一になり、重複を生む 0 和区間以前からの遷移だけをまとめて除外できる。</p>
+<p>左端の目標値ができるまで左端二要素を併合する規則を固定すると、同じ完成列に複数の操作順を対応させずに済む。</p>
+<p>区間和 0 は二つの prefix 和が等しいことなので、各 prefix 和の最新位置だけを map で保持すれば遷移の左端が分かる。</p>
+<p>連続ブロック和列を左優先の正規形へ写し、prefix 和の最新重複位置で許される切れ目範囲を決め、DP の prefix sum から個数を計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="生成過程の正規形による重複排除">生成過程の正規形による重複排除</h3>
+<p>発動条件: 複数の操作列が同じ完成物を作り、操作列数と完成物数が一致しないとき。</p>
+<p>左から目標要素を確定する貪欲規則を固定し、完成列ごとに一つの操作列だけを数える。</p>
+<h3 id="prefix-和の最新出現位置">prefix 和の最新出現位置</h3>
+<p>発動条件: 0 和区間の存在が遷移可能範囲の境界を決めるとき。</p>
+<p>同じ prefix 和の直前位置を連想配列で取得し、DP の区間和を累積和で求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>未対応の末尾が残っても、その総和が 0 なら最後の完成値へ吸収して同じ列を作れるため、答えも 0 和 suffix に対応する DP の和になる。</p>
+<p>別の問題へ持ち帰る視点: 正規化した生成過程に余りが生じる場合、余りが完成物を変えない条件を終端条件として別に数える。</p>
+<h2 id="正当性">正当性</h2>
+<p>隣接併合の結果は元列の連続ブロック分割の和列。切れ目の元prefix和を列挙すると、ブロック和からその列を累積和として一意に復元でき、逆に差分でブロック和が決まる。全体和は固定なので、異なる完成列の個数は内部prefix和列のdistinct subsequence（空を含む）の個数に等しい。次prefix和vを付加すると既存列全てへvを足せるが、前回vが現れた時点に付加した個数を引けば重複が消える。prefix和の最終出現を保持する累積DPはこの全単射と一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>prefix 和は負にも 32 bit 範囲外にもなるため 64 bit のキーを使い、現在位置を計算した後に最新位置を更新する。</li>
+<li>DP・その累積和・最後の 0 和 suffix の添字基準を揃え、全体和が 0 の場合の先頭境界も含める。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>操作結果を数える問題では、操作列の列挙前に同じ結果を生む操作順・分割の例を作って一意性を検査する。</li>
+<li>0 和区間が重複の原因なら、同じ prefix 和の「最新」出現がどの古い遷移を代表して消すかを追う。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>ordered map使用でO(N log N)、平均O(1)hash mapなら期待O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2\times 10^5; |A_i| \leq 10^9; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=[1,0,1]。</p>
+<ol>
+<li>全切れ目なら[1,0,1]。</li>
+<li>どちらか一つだけ切ればいずれも[1,1]。</li>
+<li>全併合なら[2]。内部prefix和列は[1,1]でdistinct subsequenceは空,[1],[1,1]。</li>
+</ol>
+<p>期待される結果: 答え3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>要素0がなくても重複する区間和はあり得るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>あり得る。例えば[1,−1,1]のprefix和は0,1,0,1と繰り返す。重複排除は要素0の検出でなく64bit prefix和の同値で行う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc230/editorial/91">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc230-editorial-91-57398345efd5ab0d2f88d3e9a2bbc42970b339618e80adec35b099cbfc65b27c</li>
+<li><a href="https://atcoder.jp/contests/abc230/tasks/abc230_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc230-f-problem-ae9e6183c1407560712788cce7e669f67b0385a0059c8ab7450168b151f495ba</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "89e0da76142f9ac7a39c551c95bcacaf07b5ddcbfa9816424c133a9556e2fb55",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "fed30463b39d77a2b011ca3062cc336cd5113a86608726939cba9aa6bdd43f54",
+  "reviewDigest": "7dcff28ea607d51d467b75e44fc10ec83bc97f323da562b4a094e0087e46cdcd",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.html",
+      "digest": "dbcc1437be9529e9dbe91c9ab850f65080fdf9470b037c4d9b1c5e15447fd2a3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc380-e.html",
+      "digest": "7aeeaa2340c3beed8cdde40222eaddebe6d641d7e3dadacbf70de19a7bd40543"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc435-e.html",
+      "digest": "f6aa1f06466dafd51da6fd5663c06180bfdaadd7da9384d1dcec062d48fc4565"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc465-g.html",
+      "digest": "c3d4bfa6e0d8bdffcbc7e1042099ff8b25336df593f8989a411c0bba2619625c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/index.html",
+      "digest": "d8bee933e8ace51fa18a0aa8818c7eec2e43a20f6202c5e87c56cae3ad188dcf"
+    }
+  ],
+  "snapshotDigest": "8612bfee91589591eb81cc341937915982e229ab0245f0c8747646bcdf0505db"
+}

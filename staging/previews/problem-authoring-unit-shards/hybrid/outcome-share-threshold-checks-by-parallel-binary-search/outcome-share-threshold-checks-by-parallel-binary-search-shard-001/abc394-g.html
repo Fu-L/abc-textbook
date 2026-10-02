@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC394-G — Dense Buildings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC394-G — Dense Buildings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/parallel-binary-search.md">parallel binary search・多数境界の判定共有</a></p>
+<ul>
+<li>各queryの未確定区間を保ち、同じroundのmidをbucketして一方向更新できる判定器を共有し、全queryの最小・最大成立境界を求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>parallel binary search・多数境界の判定共有の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>高さXのwalkwayだけで二building間を移動できるのは、高さX以上のcellだけを残したgridで両cellが連結なことと同値である。</p>
+<p>二cellが連結でいられる最大threshold Mが分かれば、実際に使う高さはmin(M,Y,Z)で、階段回数はY+Z-2min(M,Y,Z)になる。</p>
+<p>採用する候補: 隣接edgeのcapacity=min(F_u,F_v)でthreshold connectivityをDSU処理し、全queryをparallel binary searchする</p>
+<p>高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。</p>
+<p>棄却する候補: queryごとに高さを二分探索し、その都度grid BFSする</p>
+<p>一判定O(HW)をQ logF回行い、最大2×10^5 queryでは不可能である。</p>
+<p>thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。</p>
+<p>edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。</p>
+<p>全grid隣接edgeをcapacity降順にsortする。各queryの[L,R) thresholdを持ち、mid別bucketを作るroundごとにDSUを初期化してedgeをthresholdまで追加し、endpoint連結ならL=mid、否ならR=midと更新する。確定Mから式を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="offline-dynamic-connectivity-by-threshold">offline dynamic connectivity by threshold</h3>
+<p>発動条件: edgeがkey threshold以下/以上で単調に追加され、多数のpair接続閾値を求めるとき。</p>
+<p>edge sortとDSU sweepを共有する。</p>
+<h3 id="parallel-binary-search">parallel binary search</h3>
+<p>発動条件: 多数queryが同じ単調更新列上でbinary searchするとき。</p>
+<p>同じmid判定を一roundのdata structure sweepへまとめる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>walkway回数は無料なのでpath長でなく「path上の最小building高さを最大化するwidest path」だけがstairs最小化を決める。</p>
+<p>別の問題へ持ち帰る視点: 移動costが高度を一度下げて戻す形なら、空間部分はbottleneck connectivityへ分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>thresholdを下げるほど利用可能cell/edgeが増えるのでconnectivityは単調である。 edge capacityは両端buildingの低い方で、その高さ以下なら同階walkwayを渡れる。 高さmidでの連結判定をquery間で共有し、各roundにedgeを降順追加する一回のDSU sweepで全queryを更新できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>same cell queryでもfloorが異なるcaseはMをbuilding高さ相当として式が成り立つ。mid bucket処理のedge≥mid境界とL/R初期値を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小gridで全threshold BFSとmax-min pathを列挙し、同cell、隣接cell、start/end floorがbottleneckより低いcaseを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(E log E+log Hmax·(Eα(V)+Qα(V)+Q log Q))、V=HW,E=O(V)、midをsortするPBS版。</p>
+<h3 id="空間">空間</h3>
+<p>O(V+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq H \leq 500; 1\leq W \leq 500; 1\leq F_{i,j} \leq 10^6; 1\leq Q\leq 2\times 10^5; 1\leq A_i,C_i\leq H; 1\leq B_i,D_i\leq W; 1\leq Y_i\leq F_{A_i,B_i}; 1\leq Z_i\leq F_{C_i,D_i}; (A_i,B_i,Y_i)\neq (C_i,D_i,Z_i); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>二隣接building高さ5,3。</p>
+<ol>
+<li>edge capacity=min(5,3)=3。</li>
+<li>threshold3で接続、4で不接続。</li>
+</ol>
+<p>期待される結果: walkway bottleneck3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>capacityを高い方5にしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>低いbuildingの階4は存在せず移動できないので両端のminが必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc394/editorial/12282">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc394-editorial-12282-bf22c5a958afc0c0ebfae7594d29091c765a99a1e40f40090bb106e241d13598</li>
+<li><a href="https://atcoder.jp/contests/abc394/tasks/abc394_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc394-g-problem-3d32764e92489392c72461f71cf57a7da6e8abcfe3e4b109a0a7423b7500e905</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-interval-expansion-dp-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "0e84ba87edf1d17c478393883ca156b7dcf5a18397831523656b0030f1a15be1",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "d5505be85b77828a05e3a23bcbc09c5c20f5a782ed614a1d9d5239ba8438c99b",
+  "reviewDigest": "aa3b4aadac90572afe3e6b50d12aae9473294ae4253b9fe229b55b883d4032c7",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc219-h.html",
+      "digest": "5fa2a4091b9e5bbd501fcf8d6dee0609115f6719e81048ee5e4c6a09be88cc1e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/abc273-f.html",
+      "digest": "24e678fc1a2cf75f4f299ac0406d78a95d397a9501e6865ab47adace0bcfcbda"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-expansion-dp/outcome-design-interval-expansion-dp-shard-001/index.html",
+      "digest": "d59b760f613bcbb399174ec2655745ee7e5590b0a0f7a19008a9dc643541b3e7"
+    }
+  ],
+  "snapshotDigest": "aa8862c03e356f2041761c980a0c453ca73b4871004541c766ad772a1d96cff2"
+}

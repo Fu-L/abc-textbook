@@ -1,0 +1,575 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-greedy-order-shard-003",
+  "packets": [
+    {
+      "problemId": "abc312-f",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2 \\times 10^5; T_i is 0, 1, or 2.; 1 \\leq X_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未使用 opener capacity>0 なら次の通常缶を取ることが最善で、capacity=0 のときだけ最大容量 opener を取るという交換可能な順序がある。 type0 の prefix sum と、type1/type2 を合わせて s 個取った最適値を M−s と s で足せば、全構成をちょうど覆う。 各長さ s で通常缶側の最大満足度が得られ、残り M−s 個は type0 の最大 prefix と独立に組み合わせられる。",
+          "sourceRevisionIds": [
+            "source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64",
+            "source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64",
+          "path": "src/content/sources/abc264-abc315/source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc312_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03",
+          "path": "src/content/sources/abc264-abc315/source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc312_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc366-f",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-subset-resource"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^{5}; 1 \\leq K \\leq \\text{min}(N,10); 1 \\leq A_i, B_i \\leq 50 (1 \\leq i \\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "比率比較は除算せず(A_i−1)B_jと(A_j−1)B_iの整数cross productで行い、丸め誤差を避ける。 内側から得た現在値xへ外側関数を適用するため、sort方向とDP走査方向を揃えてA_i x+B_iで更新する。 順列探索をpairwise exchangeで消去し、K≤10の部分列選択へ落とせる。",
+          "sourceRevisionIds": [
+            "source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912",
+            "source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912",
+          "path": "src/content/sources/abc316-abc367/source-abc366-editorial-10646-cce9c13c291c60591c0bfcc4be2a74401d1d89fdd993fae0b53c42322a8c8912.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc366_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139",
+          "path": "src/content/sources/abc316-abc367/source-abc366-f-problem-90080f7f8506f8e37f734bfd765355c4ec2df0e9951c637fe2158bfe5590f139.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc366_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc371-g",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order",
+        "outcome-solve-modular-constraints"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-functional-graph-decomposition"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-modular-congruence-crt",
+        "tag-functional-graph-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq2\\times10^5; 1\\leq P_i\\leq N\\ (1\\leq i\\leq N); P_i\\neq P_j\\ (1\\leq i<j\\leq N); 1\\leq A_i\\leq N\\ (1\\leq i\\leq N); A_i\\neq A_j\\ (1\\leq i<j\\leq N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "先頭 i-1 項を固定する操作回数は一つの合同類で表せ、i 項で選べる位置は歩幅 m を cycle 長 L_i で見た軌道になる。 新しい法は lcm(m,L_i) だが、巨大整数そのものを保持せず、各 cycle に対する m の剰余的な作用だけを更新できる。 前の成分を変えない操作回数だけを調べるので辞書順の貪欲が正当で、各 cycle を確定時に一括処理すれば総走査量を O(N) に抑えられる。",
+          "sourceRevisionIds": [
+            "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+            "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a",
+          "path": "src/content/sources/abc368-abc419/source-abc371-editorial-10927-b78b5dfbfa5fd637b4b32dffd7d05bf2479c2b7f2048d6ef632c89442c2e911a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc371_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923",
+          "path": "src/content/sources/abc368-abc419/source-abc371-g-problem-66e221723f80cbd939ec99dfb1c3296a6f08aa68cc9b6232599d4a402642c923.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc371_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc376-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-ordered-set-multiset"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-ordered-set-multiset"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq K \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq 10^6; The sum of N over all test cases is at most 2 \\times 10^5.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "r を選択集合中で A が最大の最後の index とすれば、候補は prefix r に限定され、A の値は A_r に固定される。 max-heap に K-1 個を保ち、新しい B を入れて最大を捨てると、各 prefix の最小 K-1 個の和が維持される。 最大 A の担当を全探索することで積の二要素を分離でき、各 prefix の K-1 最小和を差分更新して O(N log N) になる。",
+          "sourceRevisionIds": [
+            "source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740",
+            "source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740",
+          "path": "src/content/sources/abc368-abc419/source-abc376-e-problem-7bc711965a6cb1a7ffa745402a6fb1ece00c92df9108f71ecf78624601b0b740.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc376_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993",
+          "path": "src/content/sources/abc368-abc419/source-abc376-editorial-11187-abe02a99a58ed4a8685fd3fd6fcfabae2aaf5b2597061f987de0b9d63ec82993.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc376_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc385-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 3 \\times 10^5; 1 \\leq u_i < v_i \\leq N; The given graph is a tree.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "第一層v自身が中心との辺を一本使うため、葉数候補はdeg(v)-1である。 最大残存頂点数を求めれば、必要削除数はNから引くだけである。 x番目の次数dがbottleneckとなり、残せる頂点数1+x+x(d-1)を各候補で直接評価でき、全隣接sortの合計O(N log N)で済む。",
+          "sourceRevisionIds": [
+            "source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4",
+            "source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4",
+          "path": "src/content/sources/abc368-abc419/source-abc385-e-problem-31f1e48e1b47f94d6bfe746b537b31b8fd3189cc059f04a525da7a930b91abe4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc385_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93",
+          "path": "src/content/sources/abc368-abc419/source-abc385-editorial-11640-df769f63cf1103b792437bd9b3be1880bc948f70c7a9e56e6de1c5f0ee721a93.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc385_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc388-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-monotone-search"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5 \\times 10^5; 1 \\leq A_i \\leq 10^9 \\ (1 \\leq i \\leq N); A_i \\leq A_{i+1} \\ (1 \\leq i < N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。 sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。 可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。",
+          "sourceRevisionIds": [
+            "source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f",
+            "source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f",
+          "path": "src/content/sources/abc368-abc419/source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc388_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c",
+          "path": "src/content/sources/abc368-abc419/source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc388_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc404-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 2000; 1 \\le C_i \\le i; 0 \\le A_i \\le 1; \\displaystyle \\sum_{i=1}^{N-1} A_i > 0"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "先にある豆へ後ろの豆が到達すれば、以後は同じ茶碗の一塊として動かせるため、その後ろの豆について独立に 0 まで運ぶ必要はない。 到達可能集合が穴のない区間になるので、次状態は個々の経路ではなく左端 l だけで表せる。右端 r は開始位置として固定したままよい。 後続の豆は先行する豆の位置へ到達した時点で合流できる。答えは高々 N-1 なので区間最小を毎回走査しても O(N^2) に収まる。",
+          "sourceRevisionIds": [
+            "source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5",
+            "source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5",
+          "path": "src/content/sources/abc368-abc419/source-abc404-e-problem-ba601f0017973e934f6482d36aa2100fe6081ac61aed87ffa1167ad37ac1f9f5.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc404_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c",
+          "path": "src/content/sources/abc368-abc419/source-abc404-editorial-12866-47e6f33188ac21f645f2d92a415f44a523bc1d6126e3574c93bf87a7c4efe33c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc404_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc407-e",
+      "learningOutcomeIds": [
+        "outcome-prove-greedy-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-priority-queue-best-first"
+      ],
+      "excludedTopics": [
+        "対称操作による状態の正規化。"
+      ],
+      "tagIds": [
+        "tag-greedy-exchange-order",
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 500; 1 \\le N \\le 2 \\times 10^{5}; For each input file, the sum of N over all test cases is at most 2 \\times 10^{5}.; 0 \\le A_i \\le 10^{9} (1 \\le i \\le 2N); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "段階 t で最大候補 x の代わりに y を選んだ解は、x を後でも選ばないなら y→x、後の段階で選ぶなら x と y の選択時刻を交換できる。候補は一度入ると残るので交換後も合法である。 位置 2N は候補に一度も入らず必ず ')' になる。S_1 と N-1 回の選択で '(' の個数は正確に N になる。 早い段階で選べる最大要素を後回しにする解があれば、その段階の選択と後の選択を交換して実行可能性を保ったまま得点を下げずに置換できる。",
+          "sourceRevisionIds": [
+            "source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc",
+            "source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc",
+          "path": "src/content/sources/abc368-abc419/source-abc407-e-problem-142aa7cdf55acfde7d5e2e287f4974df8318542384b1b70c8d4c79c892201fbc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc407_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43",
+          "path": "src/content/sources/abc368-abc419/source-abc407-editorial-13106-5e2099b28d8365f9edeaf8a1e74f2037a1759ad055f6de3b1be589764b499f43.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc407_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

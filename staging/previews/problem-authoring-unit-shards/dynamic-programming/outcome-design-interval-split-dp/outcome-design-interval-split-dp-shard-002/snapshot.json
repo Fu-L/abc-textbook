@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-design-interval-split-dp-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "eac85fd99db0c86816bffa866336ebaf96970621ddadb2f92d08ce2531e68e54",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "358900254e5958635caa97f125a1a30a9a012c3c0b14fb67ff8a2eb978a90a54",
+  "reviewDigest": "d7264a503dd5f8e822b206df434ca85f4c1d62ca42fc0b39c637a34565ec5b70",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/abc400-f.html",
+      "digest": "48f08594b22fd6438e8e3eb34d1ef33a7f6fdf055602e5d9c50fa23344dfabaa"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-002/index.html",
+      "digest": "f3338b837f9bcfbafbae2d2aab61ea8ac5daaf20ab5ebac9396cebfd6a1c39ed"
+    }
+  ],
+  "snapshotDigest": "2638bd5639ddaf305af2b2f40bf7639768eedc58ba2af787319b22cc0f21ff03"
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC448-F — Authentic Traveling Salesman Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC448-F — Authentic Traveling Salesman Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></p>
+<ul>
+<li>成立証明に対応する親・局所操作・選択を記録し、要件を満たす構成を出力できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>存在判定・個数計算だけで、具体的な解や操作列を復元しない問題。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>要求は全点を一度ずつ訪れて戻る Hamilton cycle であり、最短でなく総 Manhattan 距離10^10以下ならよい。平面を縦 strip に分けて y 順を交互反転すると移動量を評価できる。</p>
+<p>採用する候補: 幅 B≈W/√N の x strip に点を分類し、strip 番号昇順、内部は奇偶で y 昇順・降順に蛇行 sort して巡回順を構成する。</p>
+<p>縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。</p>
+<p>棄却する候補: 任意の点から常に最も近い未訪問点へ進む nearest-neighbor 貪欲を行う。</p>
+<p>局所貪欲には総距離上限の保証がなく、全候補探索も O(N^2) で制約を超える。</p>
+<p>隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。</p>
+<p>W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。</p>
+<p>座標幅 W と N から整数 B を選び、key=(floor(x/B), parityに応じた ±y) で sort する。得た巡回列を点1が先頭になるよう rotate して全 index を出力し、末尾から先頭へ戻る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="空間-strip-の蛇行構成">空間 strip の蛇行構成</h3>
+<p>発動条件: 平面上の全点巡回を厳密最適化せず距離上界付きで構成したいとき。</p>
+<p>細長い領域ごとに順方向を交互にして Hamilton cycle を作る。</p>
+<h3 id="上界式の-parameter-balancing">上界式の parameter balancing</h3>
+<p>発動条件: 構成コストが A/B+CB の形で評価できるとき。</p>
+<p>二項を均衡させる B を選んで最悪上界を最小化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>出力構築問題では最適 TSP を解かず、制約値を下回ることを証明できる規則的巡回を設計する。</p>
+<p>別の問題へ持ち帰る視点: Mo順のような蛇行 sort は、区画をまたぐたびの大きな座標方向の戻りを相殺する。</p>
+<h2 id="正当性">正当性</h2>
+<p>隣り合う strip で y の走査向きを反転すると、strip 境界で上下端を毎回往復せず蛇行してつながる。 W^2/B と NB の trade-off は B=W/√N 付近で均衡し、総距離が O(W√N) になる。 縦移動総量は O(W^2/B)、同 strip 内横移動は O(NB)、strip 間と閉路復帰は O(W) となり、B の選択で制限内に収まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>B を0にせず整数丸め後の距離上界を確認する。全点を一度ずつ出力し、点1への rotate と閉路の最後の辺を忘れない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>縦・同strip横・strip間・閉路復帰の四項を別々に上界評価し、選んだ B で10^10以下となる数値まで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、strip keyでsort、output rotate O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 6 \times 10^4; 0 \leq X_i \leq 2 \times 10^7; 0 \leq Y_i \leq 2 \times 10^7; (X_i, Y_i) \neq (X_j, Y_j) if i \neq j; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点1=(0,0),2=(1,3),3=(3,3),4=(4,0)、strip幅B=2。</p>
+<ol>
+<li>第一stripをy昇順で1,2、次stripをy降順で3、最後4。</li>
+<li>巡回1→2→3→4→1のManhattan距離は4+2+4+4。</li>
+</ol>
+<p>期待される結果: 総距離14。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>全stripをy昇順にすると何が増えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>strip境界ごとに高いyから低いyへ戻る上下往復が増える。蛇行のparity反転で境界移動を抑える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc448/editorial/16776">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc448-editorial-16776-3bc7b72384fc188ec6b67c28ddf6a6693a283de4ce56f68b910592f6556b75c5</li>
+<li><a href="https://atcoder.jp/contests/abc448/tasks/abc448_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc448-f-problem-1d4b90b63b2d294b7123ff349949419179a137fe39504cf132e8ad287f5c2f86</li>
+</ul></main>
+</body></html>

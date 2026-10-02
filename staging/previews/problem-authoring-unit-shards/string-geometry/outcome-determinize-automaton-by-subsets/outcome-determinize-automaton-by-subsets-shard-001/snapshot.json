@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-determinize-automaton-by-subsets-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "95ac9da95b36a84b54b2df24e255923860a876dd7e98c77f6a2e840942b183ff",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "41bfd304e96dd64be288c2b5b6af47175f64250e04de8d147711199a6b4cc1ca",
+  "reviewDigest": "5009e6f5d13fb0f2f4b448488dffd708af4d44a03722224364e88aa656605e3c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-determinize-automaton-by-subsets/outcome-determinize-automaton-by-subsets-shard-001/abc228-g.html",
+      "digest": "be230d0d72300331e0747aec7613aa09a414447c29b0a921992a560f99a23829"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-determinize-automaton-by-subsets/outcome-determinize-automaton-by-subsets-shard-001/index.html",
+      "digest": "749e319b3d1ad86588bca14e599700ea3b753b20f842e87080caa44645d6d09e"
+    }
+  ],
+  "snapshotDigest": "13d4693ea0a5d9ed3aa88b304bdca92c7f95c8ab1774a25923d2df0045f43bfe"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "190a18c4ab9b078d65a51670050e2cafaab1c12e464c94ffd8f9153fc831db35",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "c3afdfa78a77d30e58013da6377c96842c3c474a83b27394fa966ab81e82dae1",
+  "reviewDigest": "be3e644f2675d36360d4d388c9125e1a744e7b5c34a7e7b1afe4627c6ae5f509",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc238-g.html",
+      "digest": "7255a99474a91d8d57a9a2a5d2f2915dc4953411c37c4730f5e926a0663e7040"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc339-f.html",
+      "digest": "8108055a700ae9f390ee7be1766f2c5785efd889730eb87521a3333afe9d7680"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc367-f.html",
+      "digest": "cfd00d43bae3b70d456a529b78ca23fa8d34e2027c9e939fc16fd4b9feae0edc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc455-g.html",
+      "digest": "875e46b8332d698ec071d755e65d517962402ee692efa671f640472e78ec576b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/index.html",
+      "digest": "eb4d6e6e17dd74be1b7cc78e2920f4d9c2a7faca4be8ac06403dbc68e608cc04"
+    }
+  ],
+  "snapshotDigest": "e3aca1e1fd13ba09b8c45cc77fc4a5382fb923ce7fe61e53568356391312e267"
+}

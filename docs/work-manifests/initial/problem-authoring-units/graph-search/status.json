@@ -1,0 +1,547 @@
+{
+  "domain": "graph-search",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shards": [
+    {
+      "shardId": "outcome-accelerate-tree-dp-by-heavy-path-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "7be31c76135f31578b51dd34c81477b0dab0d7899552f0b8184686917b1a6fd1",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-aggregate-rooted-tree-shard-001",
+      "domain": "graph-search",
+      "problemCount": 8,
+      "subjectDigest": "ad69012651a4da98b25bfe5d74e4d44e0c0643a9e4cc03d67393ab9ded317c7e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-aggregate-rooted-tree-shard-002",
+      "domain": "graph-search",
+      "problemCount": 8,
+      "subjectDigest": "21dcb0b6c4c8ec26c1e1b6e2b6e3063c70afa879e821fb3d374c6a5cd5eff95b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-aggregate-rooted-tree-shard-003",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "7d0c022952ca10d5f743486f373a6281ceaeacd98a163dcc0796dea276c075ea",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-answer-tree-ancestor-queries-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "b932574b53710631f2cc400ba7f45ecf7670b55a0ff6760d2021e7bafac18d98",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-augment-components-with-metadata-shard-001",
+      "domain": "graph-search",
+      "problemCount": 6,
+      "subjectDigest": "2dd613f76b7af5d31c033472645f23cf8298596e22c50de8d9f500f1fec19b0a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "08ea25a3e9a57965649f3232ea2eb3f1725c1e42320f9317966653d56f29c103",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-component-merge-tree-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "fcbc8ddd15d4757c4a2babdd5aa094d4cf0fd499b49932f0efa578b3a6ee32d4",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-laminar-interval-containment-tree-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "ca99808a88b1d470c349ddaf2ccd8dcfc01b5bc0edaa4a901d33c800cd90e6bb",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-shortest-path-certificate-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "0b8046e1dae7f515c141468406aed1c437dbcd4ecbc738b2d8f8ed0c24291482",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-virtual-tree-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "16f12153b92c57084a168872c4d1980c7be98160cc91e76cb170c87826e3072b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "9067187028deeac5a5a887b041c212d98c9f22099c55d892c05c67c448b63732",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-check-euler-trail-existence-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "12d1bf001662a108d008c24813ce00a76fce2360e2d2fa6ee40c4f1c2320fe1d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-classify-tree-by-distance-residue-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "87b8ab087dadae2cce41ea89bddf3f703925c8bb775e1f9fec1d9366b458a3fe",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-color-and-classify-bipartite-components-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "d49574062c1363c962b92be0cbb7853b20c58e30ecdb8f84d2d57cc7dabedb9b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "7f03c52781361855a9edef14b60c233b33ad99f46f04f5ebbb39dd50a553cfb7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-all-pairs-distance-shard-001",
+      "domain": "graph-search",
+      "problemCount": 3,
+      "subjectDigest": "33e9160819816d3c23d1034f42a88b800884cad83b0bac38e668e87e8c4839af",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-directed-walk-period-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "70876963b9e2473d43c8539dbaacdcdcdb218e62ba6cf09e85444cafc0191998",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-transitive-closure-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "6cb9c49e0392717cc01449e392f524320a9a23cac5ae18a6024ae01b47d0750d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-construct-degree-parity-subgraph-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "d6b2f0289c52f63f278e461c4132192e36dcc63cd23dc9a8af17d6731d304b9f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-construct-optimal-spanning-tree-shard-001",
+      "domain": "graph-search",
+      "problemCount": 5,
+      "subjectDigest": "1fe4055aad0784221d7f6e4960a08d6e25a2e0935538812bd854169dbbc28473",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "31462f2a8c80f71de5c10face231c82ec1400be3ffb417bd7c8b47770c294d58",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-implicit-binary-tree-layers-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "5f634bfff9d88a35794f2f467e6a57329db0588d7dd88378ae17f256184bc776",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-decompose-functional-graph-shard-001",
+      "domain": "graph-search",
+      "problemCount": 8,
+      "subjectDigest": "c1d832caedf524a4e3ab31df02e95f4f090337f4889d316aefb145632b44e2b4",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-decompose-functional-graph-shard-002",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "bc5310342ad2d996d7395322e07046985a83a2ed5fe9defca35583c5be3809ee",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-derive-mst-weight-from-threshold-components-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "419fe4339d6a7d9f16dbeb8385465ae582328a49a3b41c4bb2b161e91f1ce8d2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-dualize-planar-cut-to-path-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "150e7d7ed1b25b416a24192e77d3e3744ef64ac8418686a4ae73ff18f98ea95b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-encode-threshold-constraints-as-two-sat-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "eec8f670be6c0d408cebff3f42ee36ed070ba25aa0ae7bf08cfbe72bf325c968",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-find-rooted-cycle-by-shortest-path-branches-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "318e46aab93ff5efe62459aa540a4c0bacec10f46f7aa35871477663d660d7f2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
+      "domain": "graph-search",
+      "problemCount": 4,
+      "subjectDigest": "894c49e5c09b29fb358dc7f903dc6082ca486938c1094ca11783a71bea4c571a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-identify-bridges-and-articulations-shard-001",
+      "domain": "graph-search",
+      "problemCount": 3,
+      "subjectDigest": "d17b60717fd70e3b64c7ca085e693819979a9cdfdf057ca9de728aef8291cac3",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-jump-deterministic-transition-shard-001",
+      "domain": "graph-search",
+      "problemCount": 5,
+      "subjectDigest": "a37f73b4112906663da04778ae277632250921d3a910ae20b0d29e79be0c756b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-kernelize-near-tree-graph-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "85b08e15a48ced5f8bc6764f5469739589d002b04370a99b2e40780d180c2f49",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-connectivity-components-shard-001",
+      "domain": "graph-search",
+      "problemCount": 4,
+      "subjectDigest": "f583b503e2c16b3cf3c53e307796ae1b2ef6781329e6f367045fe7af4f425620",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-potential-differences-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "546b0fb7795dc22d766a988b2b82535932c61f45d8be6c0b2830281fc5a14684",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-model-and-compute-shortest-path-shard-001",
+      "domain": "graph-search",
+      "problemCount": 8,
+      "subjectDigest": "d245fb4af26896db9bbe6eabf510c92932ad98271934ab22e72aa05de1921599",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-model-and-compute-shortest-path-shard-002",
+      "domain": "graph-search",
+      "problemCount": 7,
+      "subjectDigest": "01cf4eaade85c165c46ee2bf530c67c9618ba362dd61722a5aa99c0f54988142",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-model-max-flow-min-cut-shard-001",
+      "domain": "graph-search",
+      "problemCount": 8,
+      "subjectDigest": "8d5959274af41b837936add56d88441003ebb77a19d3b969ed318d568081a6ae",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-model-max-flow-min-cut-shard-002",
+      "domain": "graph-search",
+      "problemCount": 4,
+      "subjectDigest": "4d86a91bee582bd646c4a51f046eaf83051eb5312e7398d79431a077cb42d27a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-model-min-cost-flow-shard-001",
+      "domain": "graph-search",
+      "problemCount": 6,
+      "subjectDigest": "776cab654e520d5dc173010b16617084b225802ccd3adc0df2bd194fc60f842d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "b0864a1771c519df4e5f6a1d5a7fc2d259eff1f926b66de243abe1b7d15552c8",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-tree-order-by-cluster-contraction-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "5f8398d9d285f35667bb703f2c5a99c6a61c006d8863d74e9e3a25c2751e086f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "16e0cfa59df662a9e193d540b118223f9a16a63d5274d2649485e7c3bfa6708f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-peel-directed-graph-toward-cycles-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "2569d25670e1b110a2c3c9f33dae72e5782edf06e5621541946d3e659ab5613f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-peel-graph-core-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "666222d0324775c94d52d7b043a2313249501bc4d734aa7753503ac40a00714f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-precompute-directional-grid-effects-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "fa435abe816d6ec1d459209f4039a57444744d8076e4c20ba11c5a167367bbfa",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-process-dag-in-topological-order-shard-001",
+      "domain": "graph-search",
+      "problemCount": 3,
+      "subjectDigest": "2e9e33766da0def34cffe6cc18da115fce4916e31b6deb239d4f2f87a7e41293",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-propagate-static-graph-potentials-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "301f7d59e742627dd61e76adcc4c65fd1ed555a6dbdae7e5a51bcad0b76ca0af",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reconstruct-tree-from-distance-matrix-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "7ac004716d29859d664493ca4b1ec5fcb7b82887f761d3a1d9575ae237166670",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-relax-in-dependency-order-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "aca17e5da5f3d059e55caadec3dac97f0da1dcc8f8cead4673733fb599677dfd",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reroot-tree-aggregation-shard-001",
+      "domain": "graph-search",
+      "problemCount": 3,
+      "subjectDigest": "3d071da113bd80e1a7bf37f3024b40fa134e961207f8ef817f3c1d09e498d07c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-select-state-graph-search-shard-001",
+      "domain": "graph-search",
+      "problemCount": 8,
+      "subjectDigest": "c9059f2774871718b135a08adb69fa2eecbb7e55fc9da12e51f13ecb95a7ae3b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-select-state-graph-search-shard-002",
+      "domain": "graph-search",
+      "problemCount": 7,
+      "subjectDigest": "a4489ee68a631570c539af1c9ba68f14cb3a7955ce55faaaf7c5eb3e9d2abf9c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-bipartite-matching-shard-001",
+      "domain": "graph-search",
+      "problemCount": 7,
+      "subjectDigest": "142054960ebfcd894fa65cbcfe037cf92b21522191f413913e370fa006d83361",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-difference-constraints-shard-001",
+      "domain": "graph-search",
+      "problemCount": 2,
+      "subjectDigest": "07ff394f391efa77cc5a0c7b8aba0266e748f0aad5d2c79c686b69b409e207e6",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-flow-with-lower-bounds-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "e84bc2c9d072399dacfeb5df45ffb0c2074a4e28a37b6bc953378b45c0860a54",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-min-weight-general-perfect-matching-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "bcae5a296b7e8017b0c0fd4997dcbda36736fc4d048716ec41215f9a88eee358",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-weighted-bipartite-matching-shard-001",
+      "domain": "graph-search",
+      "problemCount": 1,
+      "subjectDigest": "44e651e1d346d834ef255eb0eca8292e965ec49a886b83b8ff1b29afb087e9a2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
+      "domain": "graph-search",
+      "problemCount": 3,
+      "subjectDigest": "a024780af5fa41edcd56443b031ffc0ecd112afe3ea997e059f30dc09eb616ad",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-use-tree-diameter-extrema-shard-001",
+      "domain": "graph-search",
+      "problemCount": 6,
+      "subjectDigest": "36508d67f01576c2270902d37850587680d5fcdc717fedcbdfdc6049f964b125",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    }
+  ],
+  "scope": "Independent shard evidence only; no global join or human acceptance."
+}

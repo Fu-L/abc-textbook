@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC244-EX — Linear Maximization</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC244-EX — Linear Maximization</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/convex-boundary-hull.md">凸包・支持方向・境界候補</a></p>
+<ul>
+<li>目的関数に対して内部候補が不要な理由を示し、凸境界だけを列挙できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Ax+By は query vector (A,B) と点 (x,y) の内積であり、最大値は点集合の convex hull 上で達成される。hull の頂点順では支持方向に対する内積が unimodal になる。</p>
+<p>i 回目に利用できる点は入力順 prefix [1,i] なので、online insertion と見なくても、全 query を先読みして index 区間への線形最大 query として処理できる。</p>
+<p>採用する候補: index segment tree の各 node 区間に点の convex hull を前計算し、prefix [1,i] を覆う node 群の hull で最大内積を二分・三分探索する。</p>
+<p>標準的な静的 hull と segment tree だけで、動的 hull 用の高度な平衡木を避けられる。</p>
+<p>棄却する候補: 各 query 後に、それまでの全点を走査して内積最大を取る。</p>
+<p>prefix 長の総和が Q^2 になり、Q=2×10^5では間に合わない。</p>
+<p>棄却する候補: convex hull を挿入ごとに動的更新する。</p>
+<p>有効な方針だが、hull 上の順序統計と削除を扱う高機能な平衡木が必要なため、この record では offline 区間化を採用する。</p>
+<p>追加-only 集合は時刻 index の prefix なので、segment tree の range decomposition を使えば一つの query を O(log Q) 個の静的点集合 query へ分解できる。</p>
+<p>全 Q 点を葉へ置く segment tree を作り、各 node の点を sort して上下 convex hull を構築する。時刻 i では range [1,i] を分解し、各 hull 上で A x+B y の最大頂点を unimodal search して全 node の最大を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="convex-hull-trick-for-dot-product-query">convex hull trick for dot-product query</h3>
+<p>発動条件: 固定点集合に対し、様々な方向 vector との最大内積を問うとき。</p>
+<p>内部点を捨てた convex hull 上で支持点を単峰探索する。</p>
+<h3 id="segment-tree-of-static-structures">segment tree of static structures</h3>
+<p>発動条件: 時刻 prefix や index range ごとに、集合上の重い query を行いたいとき。</p>
+<p>各 segment node に静的 data structure を前計算し、range を少数 node に分解する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>逐次追加 query を、点の入力 index に対する prefix range query と読み替えると、dynamic geometry が static hull の集合へ変わる。</p>
+<p>別の問題へ持ち帰る視点: 追加-only の online 風問題では、全入力が既知なら time/index 軸の区間 query 化を試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>線形関数の最大は点集合の凸包頂点にある。時刻iで使用可能な点集合は葉prefix[1,i]で、segment treeのO(log Q)個の互いに素な区間へ分解できる。各区間の上下鎖では内積列が単峰となるためO(log Q)で最大を得る。全区間の最大を取ればprefix全体の最大に等しい。未来の点を構築には使っても、問い合わせ区間へ含めないことで時間制約を守る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>hull の collinear 点処理と1点・2点 nodeを分け、A=B=0なら答え0になる。外積は __int128、内積と出力は符号付き64 bitで扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>内積の等高線を query vector 方向へ動かす図を描き、内部点が最大にならないことと hull 上の支持点探索を結び付ける。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各nodeを個別sortする実装で前処理O(Q log² Q)、全問い合わせO(Q log² Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q log Q)。各点は木の各階層で一度格納される。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1≤Q≤2 \times 10^5; |X_i|, |Y_i|, |A_i|, |B_i| ≤10^9; If i ≠ j, then (X_i, Y_i) ≠ (X_j, Y_j).</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>順に点(1,0),(0,2)を追加。各時刻の質問方向は(A,B)=(1,1)。</p>
+<ol>
+<li>時刻1のprefixには(1,0)だけあり内積1。</li>
+<li>時刻2には内積1と2の二点があり最大2。</li>
+</ol>
+<p>期待される結果: 順に1,2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>未来の点の凸包を一つだけ作って全時刻に使うと何が起こるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>時刻1でも(0,2)を選び2を返してしまう。静的前処理と時刻ごとの利用可能範囲を分け、prefix区間だけを問い合わせる必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc244/editorial/3602">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102</li>
+<li><a href="https://atcoder.jp/contests/abc244/tasks/abc244_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64</li>
+</ul></main>
+</body></html>

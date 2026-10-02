@@ -1,0 +1,506 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-enumerate-frontier-best-first-shard-001",
+  "packets": [
+    {
+      "problemId": "abc297-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 10; 1 \\le K \\le 2 \\times 10^5; 1 \\le A_i \\le 10^9; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。",
+          "sourceRevisionIds": [
+            "source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8",
+            "source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8",
+          "path": "src/content/sources/abc264-abc315/source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc297_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886",
+          "path": "src/content/sources/abc264-abc315/source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc297_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc305-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first",
+        "tag-shortest-path"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq \\min \\left(\\frac{N(N-1)}{2}, 2 \\times 10^5 \\right); 1 \\leq K \\leq N; 1 \\leq a_i, b_i \\leq N; The given graph is simple.; 1 \\leq p_i \\leq N; All p_i are distinct.; 1 \\leq h_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未確定候補で最大の体力xを持つ頂点vを取り出すと、別経路が後からvへ届ける体力はxを超えない。これは辺ごとに値が1だけ減る、Dijkstra法の符号を反転したlabel-settingである。 複数の警備員は、各p_iの初期値をh_iにする多始点として同じ探索へ同時投入できる。警備員の個別BFSを合成する必要はない。 より小さい体力で同じ頂点へ着く経路は以後も大きい体力の経路を上回れず、最大値一つへ支配関係でまとめられる。",
+          "sourceRevisionIds": [
+            "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
+            "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f",
+          "path": "src/content/sources/abc264-abc315/source-abc305-e-problem-03168a468ff5b7f12311033f32db62599adf5a0287f95d9a4b4270b9c3701d8f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc305_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880",
+          "path": "src/content/sources/abc264-abc315/source-abc305-editorial-6539-dbccec279dda77fe4e284c020f8ec0b6c0726521fc1806fec4d8c56e8f19b880.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc305_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc331-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, M \\leq 10^5; 0 \\leq L \\leq \\min(10^5, NM - 1); 1 \\leq a_i, b_i \\leq 10^9; 1 \\leq c_i \\leq N; 1 \\leq d_j \\leq M; (c_i, d_i) \\neq (c_j, d_j) if i \\neq j.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "heapから主菜iの現在候補を取り出した直後に、その主菜の次の副菜との組だけを追加すれば、未調査全体の最大値を失わない。 禁止判定には元の副菜indexが必要なので、降順sort後も価格と元indexを組で保持する。 heapには各降順列の最大未調査要素が必ずあり、禁止組をL個読み飛ばしてもL+1回以内に答えへ着くので、列挙数を禁止数に比例させられる。",
+          "sourceRevisionIds": [
+            "source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab",
+            "source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab",
+          "path": "src/content/sources/abc316-abc367/source-abc331-e-problem-c771615a9e19ac2c74b6969333bbc0bcf052767532d5a88a24ccf1d88f07dfab.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc331_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b",
+          "path": "src/content/sources/abc316-abc367/source-abc331-editorial-7821-c847e2b391347e4d5dbf43067cce67fdb9d95ff161189a9d94fe04ec3eba528b.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc331_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc384-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H,W\\leq500; 1\\leq P\\leq H; 1\\leq Q\\leq W; 1\\leq X\\leq10^9; 1\\leq S _ {i,j}\\leq10^{12}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "heapは現在の吸収済み領域に隣接する未訪問cellを全て保持し、先頭が全候補の最小値という不変条件を保つ。 吸収条件は積を含む厳密不等号なので、除算による丸めを避けて元の整数関係で判定する。 最小候補を選ぶgreedyは強さを単調増加させ、別の実行列で吸収できる最初の未採用slimeも同時点で吸収可能という交換論が成立する。",
+          "sourceRevisionIds": [
+            "source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f",
+            "source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f",
+          "path": "src/content/sources/abc368-abc419/source-abc384-e-problem-bf8dd0cf62300333fdccb8dc42ae38215ce96de4b03444906f29b0514d33429f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc384_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734",
+          "path": "src/content/sources/abc368-abc419/source-abc384-editorial-11601-3047b5bcf8eef85bfdeecf094fd18e1e497b93ecddd3ce83bdc1d58ea4b9f734.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc384_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc391-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 2\\times 10^5; 1\\leq K \\leq \\min(N^3,5\\times 10^5); 1\\leq A_i,B_i,C_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未列挙点へ至るindex減少path上には必ずfrontier点があり、単調性によりheap最大が全未列挙中の最大である。 同じ点は複数の親から生成されるのでvisited setで一度だけpushする。 上位K≤5×10^5点だけをpopし、各点から三近傍を一度だけpushすればO(N log N+K log K)でK番目へ到達する。",
+          "sourceRevisionIds": [
+            "source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928",
+            "source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928",
+          "path": "src/content/sources/abc368-abc419/source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc391_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0",
+          "path": "src/content/sources/abc368-abc419/source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc391_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc409-f",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration",
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first",
+        "tag-bounded-enumeration",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N\\leq 1500; 1\\leq Q\\leq 1500; 0\\leq x_i,y_i\\leq 10^9; For queries of type 1, 0\\leq a,b\\leq 10^9.; For queries of type 3, let n be the number of vertices in G just before processing that query, then 1\\leq u\\lt v\\leq n.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "heap 上位が既に連結ならその pair は将来も連結のままなので、永久に捨ててよい。この単調性で stale entry の再構築が不要になる。 最初の有効 pair を union した後も heap key が k の entry をすべて処理する必要がある。途中で component が変化しても、距離 k の全辺を加えた連結成分が問題文の同時 merge と一致する。 頂点追加時に過去頂点との pair だけを追加し、type 2 では最初の非連結 pair の距離 k と同距離の全 pair を union する。各 pair は一度 push/pop される。",
+          "sourceRevisionIds": [
+            "source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8",
+            "source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8",
+          "path": "src/content/sources/abc368-abc419/source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc409_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e",
+          "path": "src/content/sources/abc368-abc419/source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc409_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc440-e",
+      "learningOutcomeIds": [
+        "outcome-enumerate-frontier-best-first"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-priority-queue-best-first"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 50; 1 \\leq K \\leq 10^5; 1 \\leq X \\leq \\min\\left(10^5, \\binom{N+K-1}{K}\\right); -10^9 \\leq A_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "すべての状態が最大状態から到達可能で、親候補より子候補の和が大きくならないため、まだヒープに現れていない状態が現在の最大候補を追い越すことはない。 一つの枚数ベクトルへ複数の妥協順から到達できるので、visited は和ではなく C 全体をキーにして重複挿入を防ぐ。 全辺で評価値が非増加なので、未処理状態の最大値を取り出す best-first search がそのまま上位 X 個の列挙順になる。",
+          "sourceRevisionIds": [
+            "source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29",
+            "source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29",
+          "path": "src/content/sources/abc420-abc466/source-abc440-e-problem-f89833a96662127092b91631b0acdc65154d16ee3b87c9932c2feed24ed1db29.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc440_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c",
+          "path": "src/content/sources/abc420-abc466/source-abc440-editorial-15015-bb7a452f0626cf265d8db0e660d4c12d4b42c6c2c082d611debd70795e99722c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc440_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC246-F — typewriter</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC246-F — typewriter</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>ある文字列を入力できる行が 1 行以上存在すれば数えるので、求める集合は各行から入力可能な文字列集合の和集合である。</p>
+<p>選んだ複数行すべてで入力可能な文字列に使える文字は、それらの行の文字集合の共通部分だけであり、種類数を c とすれば長さ L の列は c^L 個ある。</p>
+<p>採用する候補: 非空な行 subset を全列挙し、文字 bitmask の AND の popcount を c として c^L を subset size の奇偶で足し引きする。</p>
+<p>N≤18 なので 2^N を列挙でき、重複する文字列を包除原理で一度だけ数えられる。</p>
+<p>棄却する候補: 長さ L の全小文字列を生成し、少なくとも 1 行で打てるか検査する。</p>
+<p>L≤10^9 で候補数 26^L は列挙不能である。</p>
+<p>行集合 I の共通部分を数えるとき、I に含まれない行で入力可能かどうかは問わないため、包除原理の交差項として正しく使える。</p>
+<p>文字の順序には追加制約がないので、共通 alphabet の各文字を L 箇所で独立に選び、交差集合の大きさは popcount(AND)^L になる。</p>
+<p>各 S_i を 26 bit mask にする。mask=1,…,2^N-1 ごとに選択行の AND と選択数を求め、共通文字数^L を高速累乗する。選択数が奇数なら加算、偶数なら減算し、998244353 で正規化する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="包除原理">包除原理</h3>
+<p>発動条件: 複数集合の和集合を数えたいが、要素が複数集合に重複して現れるとき。</p>
+<p>少なくとも 1 行で打てる文字列を、非空な行集合の交差数の符号付き和として数える。</p>
+<h3 id="bitmask-subset-全探索">bitmask subset 全探索</h3>
+<p>発動条件: 対象集合数 N が 20 前後で、各 subset の共通属性を高速に集約できるとき。</p>
+<p>行集合を 2^N で走査し、26 bit AND と popcount で共通 alphabet を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>入力可能文字列という巨大集合を直接持たず、行 subset の共通 alphabet の大きさだけで交差項を評価できる。</p>
+<p>別の問題へ持ち帰る視点: 集合要素の列挙が巨大でも、任意の集合交差の要素数に閉形式があれば包除原理が候補になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>ある行で入力可能な文字列集合の和集合を包除する。複数行の交差集合は共通alphabetの文字だけで全L位置を埋める列なのでc^L通り。各非空行subsetを奇数なら足し偶数なら引くと、使える行がt≥1ある文字列の係数はΣ(−1)^{k+1}C(t,k)=1となる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>空 subset は含めず、符号は選択行数が奇数なら正、偶数なら負にする。</li>
+<li>共通文字数が 0 の項も L≥1 なので 0 とし、減算後は 998244353 の非負剰余へ戻す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>2 行が一部だけ文字を共有する例で、単純和が共通 alphabet^L を重複計上し、偶数 subset で引くことを具体的に示す。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(2^N log L+Σ|S_i|)。subset ANDを1bit除去から計算する。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^N)、subset DFSならO(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and L are integers.; 1 \le N \le 18; 1 \le L \le 10^9; S_i is a (not necessarily contiguous) non-empty subsequence of abcdefghijklmnopqrstuvwxyz.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S_1=ab、S_2=bc、L=2。</p>
+<ol>
+<li>各行4列、交差alphabetはbだけでbbの1列。</li>
+</ol>
+<p>期待される結果: 4+4−1=7列。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じalphabetの行が2本でも答えを2倍にするか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>同じ文字列集合の和なので増えない。包除で4+4−4=4となる。</p>
+<p>確認結果: alphabet ab,L=2なら4列。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc246/editorial/3703">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc246-editorial-3703-5f85057e90e262a99e173328f8aea104b062c4190fe41c301f6b3005f52e5521</li>
+<li><a href="https://atcoder.jp/contests/abc246/tasks/abc246_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc246-f-problem-b94ffbe6c9d6fa14522518bddc097e6ac7134d9d96564598d89d696b6f231de5</li>
+</ul></main>
+</body></html>

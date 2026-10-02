@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC346-E — Paint</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC346-E — Paint</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/reverse-offline.md">時間を逆向きにして未来依存を消す</a></p>
+<ul>
+<li>時間依存を逆走査・逆操作・last-write時刻で単調または静的にし、元の時点へ答えを戻せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各cellの最終色は、そのrowまたはcolumnに対して最後に行われたpaintだけで決まる。operationを逆順に見ると、まだ確定していないcellだけを初めて出会うrow/column操作で一括確定できる。</p>
+<p>採用する候補: operationを逆走査し、未処理row/column数から色countを加える</p>
+<p>各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。</p>
+<p>棄却する候補: operationを順にgridへ直接塗る</p>
+<p>一回O(H)またはO(W)で、最大4×10^10 cell更新になる。</p>
+<p>逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。</p>
+<p>rowUsed・colUsedをfalse、fixedRows=fixedCols=0としてM-1から0へ走査する。未使用rowならcount[X]+=W-fixedColsとしてmark・fixedRows++、未使用columnならcount[X]+=H-fixedRowsとしてmark・fixedCols++する。残る(H-fixedRows)(W-fixedCols)をcolor0へ加え、正countだけ色昇順に出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="last-write-winsの逆走査">last-write-winsの逆走査</h3>
+<p>発動条件: 上書き更新列の最終結果だけが必要である。</p>
+<p>時系列を逆に辿り、各対象への最初の未確定部分だけを確定する。</p>
+<h3 id="未処理dimension数の積">未処理dimension数の積</h3>
+<p>発動条件: row/column全体操作の交差cellを個別に見ず、新規確定数を数えたい。</p>
+<p>既確定の反対軸本数を引き、残る列数または行数を寄与にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>同じrowへの古いoperationは、逆走査でrowが既使用なら全cellがより新しいrow/column操作により既に確定しているため完全に無視できる。</p>
+<p>別の問題へ持ち帰る視点: 上書き矩形処理は逆順のcovered判定で冗長な過去更新を捨てられる。</p>
+<h2 id="正当性">正当性</h2>
+<p>逆順で未処理row rをcolor xに確定すると、既に後時刻のcolumn操作で確定した列を除くW-fixedCols個だけがxになる。columnも対称にH-fixedRows個を確定する。 各row/columnを高々一度だけ処理し、grid cellを列挙せずO(H+W+M)で最終頻度を得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>X_i=0のpaintも通常色としてcountへ足し、最後の未確定cellも同じcolor0へ合算する。0個のcolorは出力しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じrowの反復、rowとcolumnの上書き順逆転、全軸が一度も塗られない部分、color0によるpaintを小grid simulationと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(H+W+M log M)、色countの平衡mapでM更新。配列色域ならO(H+W+M)。</p>
+<h3 id="空間">空間</h3>
+<p>O(H+W+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H, W, M \leq 2 \times 10^5; T_i \in \lbrace 1, 2 \rbrace; 1 \leq A_i \leq H for each i such that T_i = 1,; 1 \leq A_i \leq W for each i such that T_i = 2.; 0 \leq X_i \leq 2 \times 10^5; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>2×2、行1を色1、列2を色2。</p>
+<ol>
+<li>reverseで列2二cellを色2確定。</li>
+<li>行1は未確定列1一cellだけ色1、残一cell初期0。</li>
+</ol>
+<p>期待される結果: 色0:1,色1:1,色2:2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ行の古いpaintを再度数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>後のrow操作が全行を既に確定するので古い操作は無視する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc346/tasks/abc346_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc346-e-problem-ca81f4e33e78560e300d9dbcde26306dd299325b95d112657967a1936cb2a4ec</li>
+<li><a href="https://atcoder.jp/contests/abc346/editorial/9637">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc346-editorial-9637-e17476c5f04b9dc0792f60a828c84e4e77af5e0aecc3a795d37ad2ce37d383bb</li>
+</ul></main>
+</body></html>

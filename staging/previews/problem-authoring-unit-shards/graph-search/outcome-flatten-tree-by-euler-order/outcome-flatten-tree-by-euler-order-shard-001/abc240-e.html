@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC240-E — Ranges on Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC240-E — Ranges on Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-euler-flattening.md">Euler順による部分木区間化</a></p>
+<ul>
+<li>Euler tourのin/out時刻を構成し、部分木または根からのpath寄与を配列の区間へ写せる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Euler順による部分木区間化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>異なる葉の部分木は互いに素なので、その区間も互いに交わらなければならない。葉が M 個なら少なくとも M 個の異なる正整数が必要で、最大値は M 未満にできない。 DFS で葉を訪問順に1..Mと番号付けすると、任意の部分木に属する葉は DFS 順の連続区間を占める。よってその最小番号と最大番号を頂点の区間にできる。 最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。</p>
+<p>採用する候補: 葉だけへ DFS 順の連番を与え、内部頂点の [L,R] を子区間の最小左端・最大右端として bottom-up に作る。</p>
+<p>葉数 M という下界と同じ最大値で、包含する部分木は包含区間、互いに素な部分木は非交差区間になる構成を与える。</p>
+<p>棄却する候補: 全頂点へ preorder 番号を付け、部分木の Euler tour 区間をそのまま出力する。</p>
+<p>条件は満たせるが最大値が N まで増え、葉数 M&lt;N の木では最小性を達成しない。</p>
+<p>最適値を決めるのは頂点数ではなく、互いに素な最小部分木である葉の個数であり、内部頂点は葉区間の包として新しい整数を消費しない。</p>
+<p>根1から DFS し、子を持たない頂点に counter の現在値を L=R として割り当てて増やす。内部頂点では全 child の L の最小と R の最大を取り、全頂点の区間を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="dfs-順の部分木連続性">DFS 順の部分木連続性</h3>
+<p>発動条件: 部分木や連結な再帰部分が並び順上の区間になる表現を作りたいとき。</p>
+<p>各子部分木を連続して処理し、葉または頂点の訪問時刻の min/max を要約にする。</p>
+<h3 id="下界と一致する構成">下界と一致する構成</h3>
+<p>発動条件: 最大使用値などを最小化する構成問題で最適性も示す必要があるとき。</p>
+<p>互いに異なる値を強制する対象から下界を出し、その個数だけで全条件を満たす構成を作る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>葉だけが互いに素な区間のための新しい座標を必要とし、内部頂点の区間は配下の葉番号の hull で十分である。</p>
+<p>別の問題へ持ち帰る視点: 階層区間の構成では、独立な原子だけへ座標を割り当て、祖先を原子集合の min/max で表せないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>DFSで葉を連番化すると部分木内葉は連続する。内部点の最小葉番号・最大葉番号を区間にすれば包含条件と非交差条件を満たす。M枚の互いに素な葉区間には少なくともM個の整数が必要なので最大番号Mが最小。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>葉は無向次数1ではなく、根付け後に子が0個の頂点として判定する。path 木では根以外の末端一つだけが葉になり、全区間が [1,1] でも正しい。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>star と path の二例で葉数と最適最大値を比べ、全頂点の Euler 番号では余計な整数を使う理由を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点で O(N)、出力 O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、走査順、区間 O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; All values in input are integers.; The given graph is a tree.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>根1、子2,3、3の子4,5。</p>
+<ol>
+<li>DFS葉順2,4,5へ番号1,2,3。</li>
+<li>区間2=[1,1],4=[2,2],5=[3,3]。</li>
+<li>3=[2,3],1=[1,3]。</li>
+</ol>
+<p>期待される結果: 最大番号3</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>葉へ同じ番号を振っても親区間条件だけならよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。異なる葉の部分木は互いに素なので区間も非交差にする必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc240/tasks/abc240_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc240-e-problem-e5054fcf5d3834274ce994f833dfba65cf31ca0fe481cfa0ce55dcc59c577637</li>
+<li><a href="https://atcoder.jp/contests/abc240/editorial/3426">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc240-editorial-3426-8e200e9bd56c3e859f7d501769cda07a476bed0894e6fd3b3efb2a6757a0d8f8</li>
+</ul></main>
+</body></html>

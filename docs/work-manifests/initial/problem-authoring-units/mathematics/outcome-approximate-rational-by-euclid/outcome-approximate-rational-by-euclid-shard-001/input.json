@@ -1,0 +1,144 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-approximate-rational-by-euclid-shard-001",
+  "packets": [
+    {
+      "problemId": "abc333-g",
+      "learningOutcomeIds": [
+        "outcome-approximate-rational-by-euclid"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"
+      ],
+      "tagIds": [
+        "tag-rational-approximation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0\\lt r\\lt 1; r is given as a real number with at most 18 decimal places.; 1\\leq N\\leq 10^{10}; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "r以下最大とr以上最小の分母≤N分数より遠い同側候補は最適でない。連分数pathの両境界はStern–Brocotの隣接分数で、次のmediant分母がNを超えたらその間に許容分母のfractionはない。係数を最大許容まで進めて左右最隣接を得た後、整数cross積で誤差を比較すれば最適分数になり、tieは小さい側を選ぶ。",
+          "sourceRevisionIds": [
+            "source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41",
+            "source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41",
+          "path": "src/content/sources/abc316-abc367/source-abc333-editorial-7937-5a836e814431d363952a01dc5dbeda64c09a4350d01a20b81a2e83c91a6b3c41.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc333_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392",
+          "path": "src/content/sources/abc316-abc367/source-abc333-g-problem-b2e14eaffb1822e38f5d7dd39d9676c48331b39abfc476cfc57e273fab568392.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc333_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc408-g",
+      "learningOutcomeIds": [
+        "outcome-approximate-rational-by-euclid"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "Stern–Brocot木上の経路・祖先集合は「Stern–Brocot木の経路と祖先」で扱う。本Unitは分母制約の下で近似誤差を最小にする候補の選択を目的とする。"
+      ],
+      "tagIds": [
+        "tag-rational-approximation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le A,B,C,D\\le 10^{18}; \\displaystyle\\frac AB < \\frac CD; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間の整数平行移動は分母を保つ。整数を含まない正規化区間では逆数を取り順序反転すると、最小分母の分数を連分数の次段へ移せる。最小分母q>1では二つの分子が入るならより小さい分母の間のfractionを作れて矛盾するので候補は一意。strict端点を保って再帰し分子分母をswapして戻せば最小qが得られる。",
+          "sourceRevisionIds": [
+            "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
+            "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
+          "path": "src/content/sources/abc368-abc419/source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc408_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c",
+          "path": "src/content/sources/abc368-abc419/source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc408_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

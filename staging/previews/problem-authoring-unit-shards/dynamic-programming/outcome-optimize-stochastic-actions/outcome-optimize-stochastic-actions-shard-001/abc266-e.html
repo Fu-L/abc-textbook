@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC266-E — Throwing the Die</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC266-E — Throwing the Die</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>続行を選ぶと過去の出目は最終scoreに残らないため、将来の最適期待値は残りturn数だけで決まる。 現在の出目xを見た後は、今終了してxを得るか、残りturnの最適期待値を得るかの大きい方を選べる。 最適方策は出目xが継続価値f(n−1)以上なら終了し、未満なら続行するthreshold ruleになる。</p>
+<p>棄却する候補: 全ての出目履歴と各時点の終了・続行判断を決定木として列挙する。</p>
+<p>履歴数が6^Nに増える一方、過去履歴は続行後の価値へ影響しない。</p>
+<p>採用する候補: f(n)を残りn回での最適期待値とし、f(n)=Σ_{x=1}^6 max(x,f(n−1))/6 を小さいnから計算する。</p>
+<p>出目を観測した後の最適行動を各xで独立に選び、その条件付き価値を平均すればよい。</p>
+<p>最適方策は出目xが継続価値f(n−1)以上なら終了し、未満なら続行するthreshold ruleになる。</p>
+<p>有限期限optimal stoppingをBellman value iterationにし、観測後のstop payoffとcontinuation valueの最大を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="有限期限の最適停止dp">有限期限の最適停止DP</h3>
+<p>発動条件: 各stepで確率結果を観測してから終了か続行を選び、期限が固定されているとき。</p>
+<p>残りstep数の価値を状態にし、各観測結果で即時報酬と継続価値の最大を平均する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>N=1では強制終了なのでf(1)=3.5となり、同じ漸化式をf(0)=0から始めてもこの基底を自然に得られる。</p>
+<p>別の問題へ持ち帰る視点: 期限付き停止問題は残り0stepの継続価値を定義すると基底と遷移を統一できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>出目xを見た後、停止価値xと残り試行の最適期待値fの最大を選べる。各出目の条件付き最適を平均すれば一回追加した最適期待値。最終一回の平均3.5から試行数の帰納法で正しい。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>doubleでN回更新し、各回で1から6までのmaxを加えて6で割る。</li>
+<li>十分な小数桁を出力して絶対・相対誤差10^{-6}を満たす。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>最適停止では、続行後に過去情報が残るかを確認し、残らないなら残り期限だけへ状態を圧縮する。</li>
+<li>判断が確率結果の観測後なら、期待値を取る前に各結果でmaxを取る順序を守る。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>再抽選上限N、dice6面。Bellman更新 O(6N)=O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>直前期待値 O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 100</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>最大2回の6面dice。</p>
+<ol>
+<li>残り1回期待3.5。</li>
+<li>一回目1,2,3なら振り直し、4,5,6なら停止。</li>
+<li>期待(3×3.5+4+5+6)/6。</li>
+</ol>
+<p>期待される結果: 4.25</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>E[max(x,f)]をmax(E[x],f)へ交換できるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>できない。出目を観測して行動を変えられる利益を失う。二回例で4.25が3.5へ落ちる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc266/tasks/abc266_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc266-e-problem-b4078f3a25c0f7222945ea73787db8dea7832e63499ac27ff98aeab7b4f4bb5c</li>
+<li><a href="https://atcoder.jp/contests/abc266/editorial/4662">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc266-editorial-4662-d09848e18c64c28b2b8aa10f7b697eaec58d646a27870109e976be8eb7c9cb8f</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC432-E — Clamp</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC432-E — Clamp</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></p>
+<ul>
+<li>要約する値・単位元・結合的な合成規則を定義し、prefix fold・Segment Tree・SWAGで答えを求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>clamp(A_i,l,r)=max(l,min(r,A_i)) は A_i&lt;l なら l、l≤A_i≤r なら A_i、A_i&gt;r なら r の三領域に分かれる。更新は値一個の頻度移動に過ぎない。</p>
+<p>採用する候補: 値ごとの個数 C_j と重み付き和 jC_j を二つの集約値としてセグメント木で管理する。</p>
+<p>三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。</p>
+<p>棄却する候補: 各求値クエリで全 A_i を clamp して合計する。</p>
+<p>一質問 O(N) で、Q が大きいと間に合わない。</p>
+<p>答えは l·count(A&lt;l)+sum(l≤A≤r)+r·count(A&gt;r) と分解できる。</p>
+<p>l&gt;r の場合は min(r,x)≤r&lt;l なので全要素の値が max により l となり、答えは lN である。</p>
+<p>各値 j の葉に (count,sum=j·count) を持つセグメント木を構築する。更新では旧値の葉から一つ減らし新値へ加える。照会 l≤r では三範囲の count/sum を取得して式を計算し、l&gt;r は lN を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="値域上の頻度データ構造">値域上の頻度データ構造</h3>
+<p>発動条件: 配列順序ではなく値の大小で区間集計し、一点の値更新があるとき。</p>
+<p>値を添字として頻度と値和を保持し、閾値未満・区間内・超過を取得する。</p>
+<h3 id="区分線形関数の集約">区分線形関数の集約</h3>
+<p>発動条件: 各要素への関数が値域ごとに定数または一次式になるとき。</p>
+<p>各区間で必要な count と sum のモーメントだけを集めて関数値総和を復元する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>clamp の総和は元の要素を個別処理せず、閾値で分けた個数と一次モーメントだけで決まる。</p>
+<p>別の問題へ持ち帰る視点: 区分多項式の一括評価は、各区間の低次モーメントをデータ構造に持つと高速化できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>答えは l·count(A&lt;l)+sum(l≤A≤r)+r·count(A&gt;r) と分解できる。 l&gt;r の場合は min(r,x)≤r&lt;l なので全要素の値が max により l となり、答えは lN である。 三領域の個数・総和を各 O(log K) で得て、一点更新も同じ計算量で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>値域 K の外に l,r が来る場合は検索区間を clamp し、空区間を 0 とする。積 l·N や値和には十分広い整数型を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三領域の境界で A_i=l,r を中央へ含めることと、l&gt;r の演算順に基づく特例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>構築O(N+K)、Q操作O(Q log K)、Kは管理値域。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+K)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 5\times 10^5; 1\leq Q \leq 2\times 10^5; 0\leq A_i \leq 5\times 10^5; For queries of the first type, 1\leq x\leq N 0\leq y \leq 5\times 10^5; 1\leq x\leq N; 0\leq y \leq 5\times 10^5; For queries of the second type, 0\leq l,r \leq 5\times 10^5; 0\leq l,r \leq 5\times 10^5; All inputs are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,4,8)、l=3,r=6。</p>
+<ol>
+<li>1→3、4→4、8→6。</li>
+<li>count低=1、中央和4、count高=1。</li>
+</ol>
+<p>期待される結果: 合計13。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>l=7,r=2なら合計は何か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>max(7,min(2,A_i))は全て7となり21。l&gt;rを通常の三領域式へ流してはいけない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc432/tasks/abc432_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc432-e-problem-80faeeba809117447ceb08d66cf6a35cb7e0492c35323f90c7398b76d946fde4</li>
+<li><a href="https://atcoder.jp/contests/abc432/editorial/14572">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc432-editorial-14572-764bfa5a99ff52099e6cc8417442383b9b5d78e8b93cb45529ea827bf613f6d9</li>
+</ul></main>
+</body></html>

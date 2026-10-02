@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC221-F — Diameter set</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC221-F — Diameter set</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-metric.md">基準点からの木距離・剰余類・直径・中心</a></p>
+<ul>
+<li>一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>任意の二赤頂点間距離が木の直径 D なので、赤頂点は直径 path の中心から最大半径にある必要がある。同じ中心側の成分から二頂点を選ぶと path が中心を通らず距離が D 未満になる。 D が奇数なら中心は一本の辺で二成分、D が偶数なら中心は一頂点で隣接 branch が複数ある。サンプル2のように偶数直径では異なる三 branch 以上から一頂点ずつ選ぶ集合も有効になる。 奇数 D では中心辺を切った両側から距離 (D-1)/2 の頂点を一つずつ選ぶしかなく、答えは二側の個数の積になる。 偶数 D では中心 C の各 branch i にある距離 D/2 の頂点数を M_i とすると、各 branch から0または1頂点を選ぶ総数 ∏(M_i+1) から選択数0と1を除けばよい。</p>
+<p>採用する候補: 直径 path とその中心を求め、中心辺の両側または中心頂点の各 branch で、中心から距離 D/2 相当の頂点数を数えて組合せを計算する。</p>
+<p>全ての赤頂点対が直径になる条件を、中心からの距離と「同じ branch から高々一つ」という独立な選択条件へ変えられる。</p>
+<p>棄却する候補: 直径を成す頂点対だけを数え、それを赤集合の個数とする。</p>
+<p>D が偶数のときは異なる三つ以上の branch から一頂点ずつ選んだ集合も全ての対が距離 D となり、二頂点集合だけでは不足する。</p>
+<p>奇数 D では中心辺を切った両側から距離 (D-1)/2 の頂点を一つずつ選ぶしかなく、答えは二側の個数の積になる。</p>
+<p>偶数 D では中心 C の各 branch i にある距離 D/2 の頂点数を M_i とすると、各 branch から0または1頂点を選ぶ総数 ∏(M_i+1) から選択数0と1を除けばよい。</p>
+<p>任意点から最遠点 X、X から最遠点 Y を求めて直径 path を復元する。D が奇数なら中央辺を越えない DFS で両側の対象深さ個数を数えて積を取る。偶数なら中心の各隣接 branch ごとに対象深さ個数 M_i を数え、∏(M_i+1)-1-ΣM_i を法 998244353 で求める。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="木の直径と中心">木の直径と中心</h3>
+<p>発動条件: 全頂点対の最大距離や、互いの距離が直径に等しい頂点集合を扱うとき。</p>
+<p>二回の最遠点探索で直径 path を得て、中心頂点または中心辺を基準に構造を分ける。</p>
+<h3 id="branch-独立な選択数え上げ">branch 独立な選択数え上げ</h3>
+<p>発動条件: 中心を除く各成分から高々一要素を独立に選べるとき。</p>
+<p>各 branch の「選ばない1通り＋候補数」を掛け、必要な選択個数未満の項を引く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>直径の偶奇が、赤集合をちょうど二側から選ぶ積と、複数 branch から選べる積-minus-small-cases に分ける。</p>
+<p>別の問題へ持ち帰る視点: 木の等距離条件では path の中点が頂点か辺かを最初に分け、同じ中心成分内の二点が条件を満たせるか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>全選択pairが直径距離Dなら端点は中心から半径D/2の点で、同branch二点はD未満になるため高々一つ。奇数中心辺なら両側一点ずつ、偶数中心頂点なら各branchの0/1選択を独立に掛け、0点1点集合を引く。これでsize≥2全有効集合を一意に数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>奇数の場合は中央辺を探索で横断せず、偶数の場合は branch ごとに独立して距離 D/2-1 を数える。積・差し引きは負にならないよう法を正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>中心が辺の path 木と中心が頂点の star を並べ、同じ側・同じ branch から二点選ぶと距離が短くなることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点。直径と中央branch距離集計 O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>木、距離、直径path O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq U_i,V_i \leq N; U_i \neq V_i; All values in input are integers.; The given graph is a tree.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>中心1、三葉2,3,4の星。</p>
+<ol>
+<li>D=2、各branch対象数1。</li>
+<li>各葉subsetのsize≥2はbinom(3,2)+binom(3,3)=4。</li>
+<li>式(1+1)^3−1−3。</li>
+</ol>
+<p>期待される結果: 4</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>有効集合は常に赤二点だけか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>違う。偶数直径では三branch以上から一つずつ選べ、星の三葉全体も有効。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc221/editorial/2723">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-editorial-2723-01dbf678db5978ad71d6df2181e0715eae7f3cf04da07171bc34889c9fd67072</li>
+<li><a href="https://atcoder.jp/contests/abc221/tasks/abc221_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-f-problem-512793d11e35b885d25db8856f0a858005fae5fecc133200f64901b517e322ea</li>
+</ul></main>
+</body></html>

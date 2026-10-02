@@ -1,0 +1,367 @@
+{
+  "domain": "hybrid",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shards": [
+    {
+      "shardId": "outcome-balance-heavy-light-threshold-shard-001",
+      "domain": "hybrid",
+      "problemCount": 5,
+      "subjectDigest": "61930faecb02ff0192a4166cc4073ea99aa540b4ce79966fba2a30f034ebb0b1",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-bound-monotone-total-work-shard-001",
+      "domain": "hybrid",
+      "problemCount": 7,
+      "subjectDigest": "b6cb7764c270b7c0bad78f7ea5f3dadd56d2a8ab20a8a6b50037b9cc4eb7128a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
+      "domain": "hybrid",
+      "problemCount": 4,
+      "subjectDigest": "190a18c4ab9b078d65a51670050e2cafaab1c12e464c94ffd8f9153fc831db35",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-symmetric-strings-under-lex-bound-shard-001",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "0ccb5ed0264de5365f316b8bc85996014b27a3786096646d9c324ad5392973b2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-and-bound-randomized-algorithm-shard-001",
+      "domain": "hybrid",
+      "problemCount": 2,
+      "subjectDigest": "ad2f9d09cf14d49158208022b1161662c3d73d36491f26cd385b91591e7f9d88",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-design-query-code-by-information-bound-shard-001",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "90cf9d50e0cbf4bfec181ebe99d0ab7414fcd768bb1036f321dfa24693495bf6",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-divide-search-space-recursively-shard-001",
+      "domain": "hybrid",
+      "problemCount": 3,
+      "subjectDigest": "de6d10350c0695f2d2ab0d1b5afe90d5f28893f4545d717fb4299af907269f89",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "bb664b183cccb978fe06add3d858f5def0e941c1c8a11034b7f85301a70ce0ba",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-002",
+      "domain": "hybrid",
+      "problemCount": 6,
+      "subjectDigest": "0c9d8d83eb0711ce03483af71d8abaa39330c6dbd3b3d906503a4a7bd262c9df",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-enumerate-by-reversible-backtracking-shard-001",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "313016a83853fb3a9140b3ae38b40a0a00db27a828d77f36eb4ba64a8f4b20ca",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-linearize-events-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "b349fcbb0c092c13d9c9dc660dde382b3b219278c31189986d76ae990b9df29f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-linearize-events-shard-002",
+      "domain": "hybrid",
+      "problemCount": 7,
+      "subjectDigest": "a4912c1c1186c712c021c6f557faa2b993332e29346160f200ed76fe609a2bb9",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-localize-change-impact-by-witness-shard-001",
+      "domain": "hybrid",
+      "problemCount": 2,
+      "subjectDigest": "298d6cfdce3bd5449ac89a7a99a2b267f2492dd784c379834edc798c3d5113c9",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-monotone-window-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "a8488a4b8d0ccf5fd67dd13c504c9c009bf6e9df174333c18ccab175c371e9c5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "69d73582efc96fb7ba9d3c93dded09347203b65cfc2af67c2b3eed8faed925e5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-merge-small-into-large-shard-001",
+      "domain": "hybrid",
+      "problemCount": 4,
+      "subjectDigest": "680c85dc6bc66f7b6cf9e655c0ba093d4e7347074419bd178ae018eb2853ed6d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-normalize-equivalent-states-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "f4613232a658fc38b6511a9f8c938ce44afc9e0241a2b1cad84dc62f2d7fa5e7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-normalize-equivalent-states-shard-002",
+      "domain": "hybrid",
+      "problemCount": 3,
+      "subjectDigest": "85a14bb50c8583798f23a9d7b950eb7b4b9d14271e42302f672f49757a2f95f7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-mask-by-bitwise-feasibility-shard-001",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "8ca394fd4ea77de0c8d94533448b44f8e352cbc0648f2e79a0dff6d571094aff",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-and-search-threshold-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "604a39842d49b3ce748547c3a055eb358aed5abc5c5900564984dfd64082f2ca",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-and-search-threshold-shard-002",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "e4bce4fcf3f8d3b455758c6cfc4c1c3f93fc2465ebcab9183602d67fa8db06d2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-and-search-threshold-shard-003",
+      "domain": "hybrid",
+      "problemCount": 3,
+      "subjectDigest": "cec5835c5aedc95a127bb22364898e5f3f206bf347918263d0fa900cd3e5468a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-greedy-order-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "ec0139ec9adcab37eb3ac3d9f4bd60a7784926649f54e2d6e2f1698fba10183c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-greedy-order-shard-002",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "dad2cab06c5fed627be9ac1b52d4daad2e41285bca627d5a3a672c625033a21f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-greedy-order-shard-003",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "5a518fd9b73d612a33a54ae2a82f597ce79adc51ca6398b397ddf624c5d3346e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-prove-greedy-order-shard-004",
+      "domain": "hybrid",
+      "problemCount": 5,
+      "subjectDigest": "460fe513e84b48e2507b1f5efac21af103daef1b68b2910dbb4d40275b18d5c3",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-recover-valid-witness-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "3afe561f3816bc966cc6c8f6818c0b7a8cb4ae8a8829c791eba07e3c30bcd535",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-recover-valid-witness-shard-002",
+      "domain": "hybrid",
+      "problemCount": 7,
+      "subjectDigest": "eec57b58242ef4c5e152dc9cd2a1096ed2758c9f6750cbae0204197930082c63",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reorder-counting-contributions-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "1aa31a9de92c09559ffd107e4ff0fedd435c082ce99f025be9921181423a18ed",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reorder-counting-contributions-shard-002",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "4a6af8ff8bc2b176a5155710904ed67d05fbd998352c132b467c9e2e98c9d7e8",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reorder-counting-contributions-shard-003",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "ad2b4e403e0d095b6f65c477a2df8525688fb8bdf4584803ba2e281d94cd1f27",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reorder-counting-contributions-shard-004",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "fd7701e0a1aa1602d79bc7d99f208b5215227ef0868d0f0e849e17d67fef2c36",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reorder-counting-contributions-shard-005",
+      "domain": "hybrid",
+      "problemCount": 3,
+      "subjectDigest": "74049a10430b6ab787a05ee540dcf440f32ba7250e770446f926bc39b5164e5f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reverse-update-time-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "af4d669e85f3fb29b0c0b6cda2a6091beb38919a885d7825e13e29236520fa9d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reverse-update-time-shard-002",
+      "domain": "hybrid",
+      "problemCount": 2,
+      "subjectDigest": "3f2067d707156263b7575239d8e7ab092f26276276543b66db3ecacdd70e56d2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
+      "domain": "hybrid",
+      "problemCount": 2,
+      "subjectDigest": "5811989751547c3c286d2c15703d53f78e689fb7bb2dd8042faf0cb722687f59",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
+      "domain": "hybrid",
+      "problemCount": 2,
+      "subjectDigest": "cb916b60fcf941f27ba5777062cc71915a64f78e295eb9417998874800d18cc2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-xor-threshold-matching-shard-001",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "350a16f34d4e583dc6acffb479743a806cb820726b4a3586510ed75d4af35c97",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-split-enumeration-space-shard-001",
+      "domain": "hybrid",
+      "problemCount": 8,
+      "subjectDigest": "217c0e7159ca5b91bbd083cb3c504c794a33c8e679ca4117cb6f3bcd7b4fe816",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-split-enumeration-space-shard-002",
+      "domain": "hybrid",
+      "problemCount": 1,
+      "subjectDigest": "132dad21f7ba79045011c27d8e7f4307e3443915d1a711d7e6b3fcc3c0a18b38",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    }
+  ],
+  "scope": "Independent shard evidence only; no global join or human acceptance."
+}

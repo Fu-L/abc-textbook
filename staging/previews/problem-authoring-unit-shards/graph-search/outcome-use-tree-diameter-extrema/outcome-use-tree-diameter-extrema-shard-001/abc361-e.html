@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC361-E — Tree and Hamilton Path 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC361-E — Tree and Hamilton Path 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/tree-metric.md">基準点からの木距離・剰余類・直径・中心</a></p>
+<ul>
+<li>一回または二回の木探索で少数の基準点からの距離を求め、一意経路・直径端点・中心の性質から頂点分類や最遠距離条件を整理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>木の全頂点を訪れて出発点へ戻るwalkでは、各辺を切った両側を往復する必要があり、全辺を少なくとも二回使う。DFS巡回でこの下界は達成できる。 終点を自由にすると、始点から終点までの一本のpathだけは戻らずに済む。節約できる重みを最大にするpathが木の直径である。 任意の訪問walkに終点から始点へのpathを加えると閉路walkになり、その長さは少なくとも2ΣCなので元walkは2ΣC−dist(s,t)以上である。 直径端からDFSし、直径へ進む枝を最後に回せば、直径辺を一回、他辺を二回通って下界を達成できる。</p>
+<p>採用する候補: 全辺重みの2倍から重み付き木の直径を引く。</p>
+<p>直径外の枝は往復し、直径上だけ一方向に進むwalkが下界2ΣC−Dを実現する。</p>
+<p>棄却する候補: 開始・終了頂点の全組について、全頂点を訪れる最短walkを探索する。</p>
+<p>端点選択と巡回順を同時に扱っているが、木では往復回数が辺ごとに決まり端点間pathだけが例外である。</p>
+<p>任意の訪問walkに終点から始点へのpathを加えると閉路walkになり、その長さは少なくとも2ΣCなので元walkは2ΣC−dist(s,t)以上である。</p>
+<p>直径端からDFSし、直径へ進む枝を最後に回せば、直径辺を一回、他辺を二回通って下界を達成できる。</p>
+<p>辺重み総和Sを求める。任意頂点から最遠点uを探索し、uからの最遠距離Dをもう一度の木走査で求める。答えとして2S−Dを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="木walkの辺横断下界">木walkの辺横断下界</h3>
+<p>発動条件: 全頂点訪問で同じ辺を再利用でき、開始・終了位置が自由なとき。</p>
+<p>辺cutの両側を訪れる必要性から往復回数を数える。</p>
+<h3 id="二回探索による重み付き直径">二回探索による重み付き直径</h3>
+<p>発動条件: 木上で最大端点間距離を求めるとき。</p>
+<p>任意点の最遠点を一端とし、そこから最遠の距離を得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>Hamilton pathという名前でも頂点の再訪が許されるため、問題は順列ではなくDFS巡回から一本の戻り道を省く形になる。</p>
+<p>別の問題へ持ち帰る視点: 訪問問題では再訪可否を確認し、木なら各辺を何回横断すべきかへ分解する。</p>
+<h2 id="正当性">正当性</h2>
+<p>開始終了s,t間pathの辺は一回以上、それ以外は木のcutを出て戻るため二回以上通る。下界は2Σw−dist(s,t)、最小化には直径を引く。直径を背骨に枝を往復するwalkが下界を達成する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>重み付きなので辺数ではなく距離和で最遠点を選ぶ。再帰深さを避ける実装と64 bitの合計値を用意する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず閉じたwalkの2ΣCをcut argumentで示し、開いたwalkとの差を端点pathとして説明する。直径探索が重み付きである点も明記する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点。辺和と二直径探索で O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>重み付き木と距離stack O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times 10^5; 1 \leq A_i, B_i \leq N; 1 \leq C_i \leq 10^9; All input values are integers.; Any pair of cities can be reached from each other by traveling through some roads.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2重み2、2–3重み5。</p>
+<ol>
+<li>辺和7、直径7。</li>
+<li>端1から端3へ各辺一回。</li>
+<li>2×7−7。</li>
+</ol>
+<p>期待される結果: 7</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>始点終点を同じに固定するなら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全辺を往復する必要があり2Σw=14。自由終点だから直径を一回分節約できる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc361/tasks/abc361_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc361-e-problem-ce9c750a97916f18b3d3098bd260d0c8f15bdb0ee35f6faabcfc877e62a4776f</li>
+<li><a href="https://atcoder.jp/contests/abc361/editorial/10329">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc361-editorial-10329-5d702ad8ea3a3933c9202a8a2ff757fbc503462e86d378c4ad3fe10892ebd359</li>
+</ul></main>
+</body></html>

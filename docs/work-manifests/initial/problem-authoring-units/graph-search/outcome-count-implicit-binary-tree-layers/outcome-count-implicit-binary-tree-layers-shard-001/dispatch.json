@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-count-implicit-binary-tree-layers-shard-001",
+  "primaryOutcomeId": "outcome-count-implicit-binary-tree-layers",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc321-e"
+  ],
+  "homeUnitId": "unit-implicit-binary-tree",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "d90411c405cc0551cc2fbb845996f158a5a9759445619a265b9c9f897ff87d18",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc321-e",
+      "path": "src/content/docs/problems/graph-search/outcome-count-implicit-binary-tree-layers/outcome-count-implicit-binary-tree-layers-shard-001/abc321-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

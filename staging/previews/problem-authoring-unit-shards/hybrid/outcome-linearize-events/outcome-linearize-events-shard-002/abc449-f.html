@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC449-F — Grid Clipping</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC449-F — Grid Clipping</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-interval-partition.md">端点更新型のrun分割管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>切り出し開始位置 (r_0,c_0) が黒マスを含む条件は、各黒マスが開始位置平面上に作る axis-aligned rectangle の和集合へ入ることと同値である。</p>
+<p>採用する候補: 各黒マスの開始位置 rectangle を有効範囲で clip し、行方向の追加・削除 event を sort して、active 列 interval の union 長を保つ sweep line で被覆面積を求める。</p>
+<p>行座標間では active interval 集合が変わらず、union 長×行幅を加算すれば全 rectangle 和集合を O(N log N) で数えられる。</p>
+<p>棄却する候補: 全 (H-h+1)(W-w+1) 個の切り出し位置で、内部に黒マスがあるか走査する。</p>
+<p>盤面寸法が巨大で開始位置を列挙できず、各窓検査も重複が大きい。</p>
+<p>黒マス (R,C) を含む開始位置は [R-h+1,R]×[C-w+1,C] で、合法開始範囲との共通部分だけを残す。</p>
+<p>rectangle は上端で列 interval を追加し下端+1で削除する差分 event になり、同じ行の event はまとめてから次区間面積へ進む。</p>
+<p>各 rectangle を clip して (rL,+interval),(rR+1,-interval) を作る。r 昇順に走査し、前行との差×現在union長を加算してから event を multiset/map構造へ反映する。全合法窓数からunion面積を引く。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="rectangle-union-の-sweep-line">rectangle union の sweep line</h3>
+<p>発動条件: 疎な点が巨大な座標平面上の長方形領域を被覆するとき。</p>
+<p>一軸を event 化し、他軸 interval の union 長を動的管理する。</p>
+<h3 id="逆像としての窓位置数え上げ">逆像としての窓位置数え上げ</h3>
+<p>発動条件: 各対象物を含む sliding window の開始位置を数えたいとき。</p>
+<p>対象物ごとの開始位置 rectangle の和集合へ写す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>窓を盤面上で動かす代わりに、一つの黒マスから見た『このマスを含む窓の左上』領域へ視点を反転する。</p>
+<p>別の問題へ持ち帰る視点: 巨大座標の面積は座標を全走査せず、状態が変わる境界 event 間を幅付きでまとめる。</p>
+<h2 id="正当性">正当性</h2>
+<p>黒マス (R,C) を含む開始位置は [R-h+1,R]×[C-w+1,C] で、合法開始範囲との共通部分だけを残す。 rectangle は上端で列 interval を追加し下端+1で削除する差分 event になり、同じ行の event はまとめてから次区間面積へ進む。 行座標間では active interval 集合が変わらず、union 長×行幅を加算すれば全 rectangle 和集合を O(N log N) で数えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>開始位置の合法範囲へ両軸を clip し、空 rectangle は捨てる。閉区間を rR+1 の event と半開区間長へ一貫変換する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一つの黒マスで開始位置 rectangle を導き、複数 rectangle の重複を inclusion-exclusion でなく union sweep が処理することを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、N黒マスのrectangle eventと圧縮列union長segment tree。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、event・列圧縮。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\le h\le H\le 10^9; 1\le w\le W\le 10^9; 0\le N\le 2\times 10^5; 1\le R_k\le H; 1\le C_k\le W; (R_{k_1},C_{k_1}) \neq (R_{k_2},C_{k_2}) (k_1 \neq k_2); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>3×3盤面、2×2窓、黒マス(1,1)。</p>
+<ol>
+<li>合法窓開始は(1,1),(1,2),(2,1),(2,2)。</li>
+<li>黒を含むのは(1,1)だけ。</li>
+</ol>
+<p>期待される結果: 黒を含まない窓3個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>二つの黒マスが同じ開始位置rectangleを覆うと二回引くか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>union面積として一回だけ引く。重複被覆頻度と被覆長を分けて管理する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc449/editorial/17255">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc449-editorial-17255-6fd682baa90baf074010360d09d0a80654a34ffb17c7ac564f6a460f8a1daf80</li>
+<li><a href="https://atcoder.jp/contests/abc449/tasks/abc449_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc449-f-problem-c9b7085ff7a09e8e38747fb18533e3d4dcc619eb39292a2eb76476305b7c0dc3</li>
+</ul></main>
+</body></html>

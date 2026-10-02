@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC248-E — K-colinear Line</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC248-E — K-colinear Line</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></p>
+<ul>
+<li>幾何条件を外積・距離式・端点順・格子占有・変換後座標の局所判定へ落とし込める。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/bounded-enumeration.md">候補数を界して全列挙・有限case分解する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>凸包の境界候補列挙・半平面交差。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>K=1 なら、与えられた任意の 1 点を通る直線だけでも傾きを連続的に変えられるため無限本存在する。</p>
+<p>K≥2 なら条件を満たす直線は必ず与えられた相異なる 2 点で一意に定まり、候補は点対から得られる有限個に限られる。</p>
+<p>採用する候補: 全点対が定める直線について全 N 点の共線性を外積で調べ、K 点以上なら正規化した直線表現を set に入れる。</p>
+<p>N≤300 なので点対×全点を調べられ、正規化 key により同一直線を一度だけ数えられる。</p>
+<p>棄却する候補: 各点対が K 点以上を通るたびに、そのまま答えを 1 増やす。</p>
+<p>m 点が同一直線上にあると同じ直線を mC2 回数えてしまい、重複除去がない。</p>
+<p>点 A,B,P の共線条件は (B_x-A_x)(P_y-A_y)=(B_y-A_y)(P_x-A_x) で、傾きの除算を使わず垂直線も同じ式で扱える。</p>
+<p>直線 Ax+By+C=0 の係数を gcd で割り、最初の非零係数が正になるよう符号をそろえると、同一直線が同一の整数 tuple になる。</p>
+<p>K=1 なら Infinity を出力する。それ以外は i&lt;j の各点対から直線を作り、全点を外積で数えて K 以上なら canonical (A,B,C) を set へ挿入し、set size を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="2-点で決まる候補の全列挙">2 点で決まる候補の全列挙</h3>
+<p>発動条件: 求める幾何対象が任意の 2 入力点で一意に決まり、N が数百程度のとき。</p>
+<p>O(N^2) 個の候補直線ごとに全点の共線性を検査する。</p>
+<h3 id="整数係数による幾何正規化">整数係数による幾何正規化</h3>
+<p>発動条件: 同じ直線や方向を浮動小数なしで重複排除したいとき。</p>
+<p>直線係数を gcd と符号で canonicalize し、tuple を set key にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>K=1 の無限性と K≥2 の『必ず点対で決まる』を分けることで、連続な直線集合が有限候補列挙へ変わる。</p>
+<p>別の問題へ持ち帰る視点: 幾何数え上げでは、必要な入力点数で対象が一意に決まる閾値を先に確認し、退化時だけ別処理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>K=1なら各点を通る無限の直線が存在する。K≥2の有効直線は必ず入力点の対から生成されるので、全点対を調べれば漏れない。外積0で所属点数を正確に求め、gcdと符号で正規化した(A,B,C)の集合へ入れると、どの点対で生成しても同じ直線は一度だけ数えられる。座標積には浮動小数を使わない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>座標差と積は大きくなるため、外積および C 係数の計算には十分な幅の整数型を使う。</li>
+<li>垂直線・水平線も含めて gcd(|A|,|B|,|C|) と符号規約を一貫させ、同じ線の点対順による符号反転を除く。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>3 点が同一直線上にある例で 3 点対が 1 key に潰れることと、K=1 だけが Infinity になる理由を別々に確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N³+N² log N log V)。Vは係数の最大絶対値。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)（直線keyの集合）。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 300; \lvert X_i \rvert, \lvert Y_i \rvert \leq 10^9; X_i\neq X_j or Y_i\neq Y_j, if i\neq j.; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点(0,0),(1,1),(2,2),(0,1)、K=3。</p>
+<ol>
+<li>前三点の各対が生成する直線は全てy=x。</li>
+<li>残る点との対の直線は入力点を二点しか含まない。</li>
+<li>y=xの正規化keyは一つにまとめられる。</li>
+</ol>
+<p>期待される結果: 答え1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>K=2でこの四点を使うと、有効な直線はいくつか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>y=xが一つ、(0,1)と前三点それぞれを結ぶ直線が三つなので4。点対数6をそのまま答えるとy=xの三重計数が起こる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc248/tasks/abc248_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-e-problem-3bdb5230e435e45ecdada0339b5aa4d424d0a6dcecc863712b12270c320c19a8</li>
+<li><a href="https://atcoder.jp/contests/abc248/editorial/3792">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc248-editorial-3792-678e0d64c5fea2844c27e28f78b4fffc0bd8497479aa439587db945b60c3fac6</li>
+</ul></main>
+</body></html>

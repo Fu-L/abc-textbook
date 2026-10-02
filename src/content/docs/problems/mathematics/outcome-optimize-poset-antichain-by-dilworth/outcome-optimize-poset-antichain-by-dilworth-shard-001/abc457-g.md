@@ -1,0 +1,120 @@
+---
+title: "ABC457-G — Catch All Apples"
+draft: true
+authoringUnit: {"problemId":"abc457-g","docPath":"src/content/docs/problems/mathematics/outcome-optimize-poset-antichain-by-dilworth/outcome-optimize-poset-antichain-by-dilworth-shard-001/abc457-g.md","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-matching","unit-dp-lis","unit-dp-sequence","unit-geometry-primitives"],"excludedTopics":["半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-poset-dilworth-antichain","tag-geometry-orientation-transform","tag-lis-state"],"sourceRevisionIds":["source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6","source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"一台で時刻順に回収できる関係は|ΔX|≤ΔTで、u=T+X,v=T−Xの両座標非減少に同値。必要台数はこのposetの最小chain coverでありDilworthより最大antichain幅。u昇順同値v昇順でsortするとantichainはv狭義減少列に対応するため、そのLIS相当の長さが幅になる。同vを比較不能と誤認しないstrict規約を使う。","sourceRevisionIds":["source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6","source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"apple(T,X)=(0,0),(1,1),(1,0)。","procedure":["後ろ二つは同時刻の異位置なので別台が必要。","最初のappleは後ろのどちらにも一台で繋げられる。"],"executionTarget":null,"expectedResult":"最小2台。","verificationStatus":"not_applicable","learningUnitIds":["unit-poset-dilworth-antichain"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-optimize-poset-antichain-by-dilworth"],"prerequisiteIds":["unit-bipartite-matching","unit-dp-lis","unit-dp-sequence","unit-geometry-primitives"],"attainmentCondition":"(0,0),(1,1),(2,2)で同v=0が三つなら。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"1台。"},"answer":{"reasoningOrVerification":"同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。","procedure":["具体例の各状態・寄与を再計算する。","同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。"],"expectedResult":"1台。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [半順序・Dilworth・最大反鎖](src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md)
+
+- 対象を半順序へ写し、Dilworth型のchain/antichain双対をLDS・matching・min-cutの適切な形で解ける。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [二部matching・Hall・Kőnig](src/content/docs/learn/graph/bipartite-matching.md)
+- [LIS・末尾の支配関係](src/content/docs/learn/dynamic-programming/dp-lis.md)
+- [列・subsequence DP](src/content/docs/learn/dynamic-programming/dp-sequence.md)
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
+
+対象外:
+
+- 半順序・Dilworth・最大反鎖の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+apple iを時刻順に一台で回収できる関係は |X_i-X_j|≤T_j-T_i であり、u=T+X、v=T-Xへ変換すると二座標とも非減少という半順序になる。
+
+採用する候補: appleを (u,v) 辞書順にsortし、v列の最長狭義減少部分列長を求めて必要robot最小数とする。
+
+一台の回収列は半順序のchainで、Dilworthの定理により最小chain分割数は最大antichainサイズに等しい。u順ではantichainがvの狭義減少列に一致する。
+
+棄却する候補: robotを一台ずつ追加し、各appleをどのrobotのrouteへ割り当てるかgreedyまたはbacktrackingする。
+
+局所割当は将来時刻の位置制約を誤り得て、分岐探索は指数的になる。
+
+|ΔX|≤ΔT は T_i+X_i≤T_j+X_j と T_i-X_i≤T_j-X_j の二不等式へ分解できる。
+
+u同値時のsort tieをv昇順にすると、比較可能な同u点を誤って狭義減少列へ同時採用しない。
+
+各appleを(u_i,v_i)へ変換しpair昇順sortする。vを順に見て、狭義減少LIS相当として -v の狭義LISまたはlower_bound規約を使うpatience sortingを行い、その長さを出力する。
+
+## 典型の発動条件
+
+### 座標変換による到達半順序
+
+発動条件: 一次元速度制約 |Δx|≤Δt があるevent回収問題のとき。
+
+light-cone座標 t+x,t-xで二次元dominanceへ変換する。
+
+### DilworthとLDS
+
+発動条件: 半順序集合を最小本数のchainへ分割したいとき。
+
+最大antichainをsort後の最長減少部分列として求める。
+
+## 問題固有の要素
+
+移動可能性の絶対値不等式は時空座標を45度回転するとproduct orderになる。
+
+別の問題へ持ち帰る視点: 最小台数のschedule分割は直接greedyせず、chain coverとantichainの双対定理で一つのLISへ変換できる。
+
+## 正当性
+
+一台で時刻順に回収できる関係は|ΔX|≤ΔTで、u=T+X,v=T−Xの両座標非減少に同値。必要台数はこのposetの最小chain coverでありDilworthより最大antichain幅。u昇順同値v昇順でsortするとantichainはv狭義減少列に対応するため、そのLIS相当の長さが幅になる。同vを比較不能と誤認しないstrict規約を使う。
+
+## 実装上の注意
+
+- 同じ時刻・座標の反対称性と重複入力を問題定義に合わせ、u tie時のv sortおよび狭義/広義LIS規約を統一する。
+
+## 復習の核
+
+- 絶対値からu,v二不等式を導き、chain=一台route、antichain=LDSの対応を同u・同vのtie例で確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(N log N)。座標変換sortと狭義LIS型patience sorting。
+
+### 空間
+
+O(N)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 3 \times 10^5; 0 \le T_i \le 3 \times 10^5; 0 \le X_i \le 3 \times 10^5; (T_i, X_i) \neq (T_j, X_j) (i \neq j); All input values are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+apple(T,X)=(0,0),(1,1),(1,0)。
+
+1. 後ろ二つは同時刻の異位置なので別台が必要。
+2. 最初のappleは後ろのどちらにも一台で繋げられる。
+
+期待される結果: 最小2台。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+(0,0),(1,1),(2,2)で同v=0が三つなら。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+同vでもu非減少で一chain。同値をLISへ延ばす広義規約だと三台と誤る。
+
+確認結果: 1台。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc457/editorial/20073) — source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc457/tasks/abc457_g) — source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320

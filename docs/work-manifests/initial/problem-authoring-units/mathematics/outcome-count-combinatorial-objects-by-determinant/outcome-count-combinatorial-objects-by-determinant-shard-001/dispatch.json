@@ -1,0 +1,77 @@
+{
+  "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
+  "primaryOutcomeId": "outcome-count-combinatorial-objects-by-determinant",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc253-ex",
+    "abc323-g"
+  ],
+  "homeUnitId": "unit-determinant-counting",
+  "prerequisiteOutcomeIds": [
+    "outcome-solve-linear-system-and-rank"
+  ],
+  "dependencyShardIds": [
+    "outcome-solve-linear-system-and-rank-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc253-ex.md",
+    "src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "957021c0bf7f1b02140bd9d2a77924fb198541b8c1aa676dc0a3a77469f2abe0",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc253-ex",
+      "path": "src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc253-ex.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc323-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-combinatorial-objects-by-determinant/outcome-count-combinatorial-objects-by-determinant-shard-001/abc323-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

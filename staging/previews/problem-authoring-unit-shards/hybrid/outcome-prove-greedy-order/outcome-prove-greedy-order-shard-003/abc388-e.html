@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC388-E — Simultaneous Kagamimochi</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC388-E — Simultaneous Kagamimochi</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></p>
+<ul>
+<li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>対称操作による状態の正規化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Aは昇順で、K組作るなら上段を先頭K個、下段を末尾K個へ交換しても条件を悪化させない。</p>
+<p>二集合を決めた後は小さい順同士をpairにできることと任意matchingの存在が同値なので、K個可能かはK本の不等式だけで判定できる。</p>
+<p>採用する候補: K個可能かを先頭K・末尾Kの同順位pairで判定し、Kを二分探索する</p>
+<p>可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。</p>
+<p>棄却する候補: 餅を頂点とする二部matchingを毎回求める</p>
+<p>sorted orderの交換論によりmatching graphを構築する必要がなく、一般matchingは過剰である。</p>
+<p>任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。</p>
+<p>sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。</p>
+<p>lo=0,hi=N/2+1で最大Kを二分探索する。判定ではi=0..K-1について上A[i]と下A[N-K+i]が鏡餅条件を満たすか全て確認する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="交換論によるextreme選択">交換論によるextreme選択</h3>
+<p>発動条件: 大小条件付きで二集合から同数をpairingするとき。</p>
+<p>小さい側は全体の先頭、大きい側は末尾へ置換する。</p>
+<h3 id="単調可否の二分探索">単調可否の二分探索</h3>
+<p>発動条件: k個作れるなら任意の少ない個数も作れるとき。</p>
+<p>最大KをYes/No境界として探す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>選ぶ集合とpairingの二段階を、極端集合への交換とsorted matchingの二つの交換論で完全に固定できる。</p>
+<p>別の問題へ持ち帰る視点: 順序付き二部matchingでは、最小同士のgreedy pairがHall条件を一次元化することがある。</p>
+<h2 id="正当性">正当性</h2>
+<p>任意解の上段をより小さい先頭要素へ、下段をより大きい末尾要素へ置換しても2倍条件を保つ。 sorted同順位pairが全て成立すれば構成でき、一箇所でも失敗すれば順序保存matchingは存在しない。 可否がKについて単調で、一回O(K)の判定をO(log N)回行うO(N log N)が制約内に収まる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>K=0を常に可能とし、下段開始N-Kと上段終了Kが重ならない範囲K≤N/2だけを探す。積2A[i]は64 bitで比較する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤12で全matchingを列挙し、重複値、等号2A=bottom、奇数Nについて判定関数と最大Kを比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、各K判定O(K)、sorted入力。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、入力のみ。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5 \times 10^5; 1 \leq A_i \leq 10^9 \ (1 \leq i \leq N); A_i \leq A_{i+1} \ (1 \leq i &lt; N); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,3,4,8,9)。</p>
+<ol>
+<li>K=3は上1,2,3と下4,8,9で全て2倍以上。</li>
+<li>N/2=3なのでこれが最大。</li>
+</ol>
+<p>期待される結果: 最大3組。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>好きな大餅を先にmatchingしないと失敗するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>任意解の上側をより小さく下側をより大きく交換できるので、先頭Kと末尾Kの同順位pair判定で十分。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc388/tasks/abc388_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc388-e-problem-58cfdf1ac841ef4f66e880f4cbe6cb2c4453df6feb38924782bc1f32005b321f</li>
+<li><a href="https://atcoder.jp/contests/abc388/editorial/11901">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc388-editorial-11901-e2fa9408a0fa74b2bc0da25b91cb0d18fd626ea3c05d14bb311e2e75cae3ac4c</li>
+</ul></main>
+</body></html>

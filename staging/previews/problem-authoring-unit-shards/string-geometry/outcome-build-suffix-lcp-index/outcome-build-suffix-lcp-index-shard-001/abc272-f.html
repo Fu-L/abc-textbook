@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC272-F — Two Strings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC272-F — Two Strings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/suffix-lcp-index.md">接尾辞の順序とLCPを索引化する</a></p>
+<ul>
+<li>接尾辞の辞書順とLCPを索引化し、出現範囲・部分文字列順位・distinct数・巡回shiftを処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>rolling hashによる一致比較と回文半径。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>rotation f(S,i)はdoubled string SSのposition iから始まるlength-N substringとして表せるが、通常のsuffix orderだけでは同一rotationの≤を正しくtie-breakできない。</p>
+<p>X=SS+a^N+TT+z^Nというpadding付き文字列では、S側とT側の対象suffix順が長さNのrotationsの≤関係と一致する。</p>
+<p>棄却する候補: N^2個のrotation pairsごとにlength Nの文字列を比較する。</p>
+<p>pair数だけでO(N^2)となり、比較生成まで含めるとさらに重い。</p>
+<p>採用する候補: padding付きcombined stringのsuffix arrayを構築し、対象S/T suffixのrank順を一回走査して条件を満たすpair数を数える。</p>
+<p>全rotation比較を一つのtotal orderに埋め込み、SA-IS構築後はlinear scanだけで集計できる。</p>
+<p>rotationsが最初のN文字以内で異なればsuffix比較も同じ箇所で決まり、等しい場合はa-paddingとz-paddingがS側≤T側になるよう順序を固定する。</p>
+<p>suffix arrayを小さい順に走査して既出S rotations数を持てば、各T rotationでrank(S)≤rank(T)の個数を答えへ加えられる。</p>
+<p>cyclic-string comparisonをcarefully padded doubled stringsのsuffix rankingへ変換し、cross-group order pairsをrank sweepで数える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="二倍文字列によるrotation表現">二倍文字列によるrotation表現</h3>
+<p>発動条件: 固定長stringの全cyclic shiftsをsubstringとして同時に扱いたいとき。</p>
+<p>SとTをそれぞれ二回連結し、先頭N positionsをrotation startsとみなす。</p>
+<h3 id="suffix-arrayによる全比較の順位化">suffix arrayによる全比較の順位化</h3>
+<p>発動条件: 多数のsubstring間のlexicographic relationを一括で数えたいとき。</p>
+<p>combined stringのsuffix arrayからS/T rotation startsの相対rankを得てpair countingする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>equal rotationsも条件≤には含むため、S側の後続を小さく、T側の後続を大きくするa^N/z^N paddingがtieを望む向きへ崩す。</p>
+<p>別の問題へ持ち帰る視点: fixed-length substring比較をsuffix比較へ移すときは、prefix-equal caseの後続文字が要求するstrict/non-strict relationを再現するようsentinelを設計する。</p>
+<h2 id="正当性">正当性</h2>
+<p>各巡回シフトは倍化文字列内の長さNの区間として現れる。比較の最初のN文字で差が出ればsuffix順と巡回文字列順が一致する。等しい場合はS側が先になるようpaddingの字母と長さを設計し、S≤Tという等号込みの条件をsuffixの全順序へ埋め込む。対象の開始点だけをSA順に走査し、T側ごとに先行S側の個数を加えれば全条件成立対を一度ずつ数える。paddingの正しさが等号処理の証明に不可欠である。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>combined string内で対象にするのは各SS/TT blockの最初のN start positionsだけで、paddingや二個目のcopyを数えない。</li>
+<li>pair数はN^2まで達するため64 bit整数で集計する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>cyclic shiftsはdoubled stringへ置き換え、全比較をsuffix ranksのcross-group countingへまとめる。</li>
+<li>fixed-length prefixが完全一致するcaseでsuffix orderが何を返すかを確認し、paddingで≤のtieを制御する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>SA-IS使用でO(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; S and T are strings of length N each, consisting of lowercase English letters.; N is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、S=aa、T=aa。</p>
+<ol>
+<li>Sの二つのシフトはどちらもaa。Tも同様。</li>
+<li>四つの組全てでSのシフト≤Tのシフトが等号により成立する。</li>
+<li>同値のS側をT側より先に並べるpaddingなら2×2が数えられる。</li>
+</ol>
+<p>期待される結果: 答え4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値のT側を先に並べるpaddingだと何を数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>S&lt;Tの厳密な比較になり、この例では0を返してしまう。非厳密な比較の等号を意図的にsuffix順へ符号化する必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc272/tasks/abc272_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-f-problem-a727b0bf5f488819f551a42b8159ea16d18ca49319439ea98beeb18aec176ec8</li>
+<li><a href="https://atcoder.jp/contests/abc272/editorial/4980">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc272-editorial-4980-d52fbe747f96935bfd3eb3b09ba0482022ee7a90764a755c9d61e48a8e329860</li>
+</ul></main>
+</body></html>

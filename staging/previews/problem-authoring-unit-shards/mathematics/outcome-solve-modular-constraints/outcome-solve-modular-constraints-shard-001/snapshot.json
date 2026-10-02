@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-solve-modular-constraints-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "9e6567e0c0d2f117883b8a5f4d5e56d6a2cab3ce45b6160b6d24165c67c4f19c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "32a39a467265fe944c443cb3fe5c9558e5c22c8c8de8cb1e95861d80190aeef4",
+  "reviewDigest": "97c92ead205423a7d3d1d6b779fde23fc3fbb138b780cce2a174167276f622d2",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.html",
+      "digest": "306dc6c3520fad78bd96d9dc90ebef0ac7a0aef7d5ad621c8f9e491b4b2c4c5b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc286-f.html",
+      "digest": "94b9bb808c00b9d30c035ec4c83e2b377b0182c78bb724276a9d9d8d151df2a2"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc423-g.html",
+      "digest": "ea0c60242d64d451ebf778f0b033e3e58e55deeff8136af8e255697bdbd830cd"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc460-e.html",
+      "digest": "2e22fa4dce13df675e8879613e7830361bd6d4536648fab591b5867503a03a06"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/index.html",
+      "digest": "a2284bf1fa33650a04323cc747aa411d309af08762e7484d638964d1decefd21"
+    }
+  ],
+  "snapshotDigest": "0d10a504250120ae0f2a0cd73778186edde23ba8fd822618ae795be1382f5151"
+}

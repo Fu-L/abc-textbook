@@ -1,0 +1,79 @@
+# ProblemAuthoringUnit shard の執筆と検証
+
+Issue #47（T065–T071）は、受理済み配置の868問を209の主成果に基づく248
+shardへ分け、各問題のfull本文と分野別証跡を作成する。分割は `primaryOutcomeId`
+のみを用い、同じ成果の問題を公式contest/task順で最大8問ずつ並べる。追加primaryとsupportingは学習範囲・前提を記録するが、問題の重複配属には使わない。
+
+固定indexは `docs/work-manifests/initial/problem-authoring-units/index.json`。全分野は同じ
+`indexDigest`
+を参照する。6分野は作業の振り分けであり、読者向け9章、Unitの成果所有、所属、読む順を変更しない。
+
+| 作業分野            | 問題数 |
+| ------------------- | -----: |
+| graph-search        |    172 |
+| dynamic-programming |    174 |
+| data-structures     |     94 |
+| mathematics         |    147 |
+| string-geometry     |     79 |
+| hybrid              |    202 |
+
+## 正本と証跡
+
+正本はindexの `documentPaths` にある `src/content/docs/problems/`
+以下のMarkdown。各文書にProblem全体の考察、典型の発動条件、固有要素、正当性、実装上の注意、復習の核、計算量・公式制約、手計算例、確認問題・評価観点・解答、Source
+Revisionを置く。frontmatterの `authoringUnit`
+は同じ文書の型付きmetadataであり、本文のsectionsは複製しない。`correctness`、`worked`、`transfer`
+はProblem内のローカルkeyで、独立したClaim・Example・Exercise entityを作らない。
+
+各shardの作業ディレクトリには以下を置く。
+
+- `manifest.json`：全Problem文書を一つのreview
+  unitとする所有範囲、主・追加成果、必要checks、現在のreview policy。
+- `dispatch.json`：固定indexとの対応、前提shard、所有パス・problemIds・ローカルlocator、証跡パス。
+- `input.json`：受理済み配置と検証済みの公式問題・個別解説revisionから作るskill入力packet。
+- `checks.json`：source、structure、example、answer、link、accessibilityの自動検査と未完了reviewの区別。
+- `review.json`：問題ごとの数学的点検項目、公式情報との不一致・独立証明のリスク、追加公式照合、技術保留と本人レビューの状態。
+
+私用HTMLと `snapshot.json` は `staging/previews/problem-authoring-unit-shards/`
+以下の分野・成果・shardと同じ所有パスにある。snapshotは本文・入力packet・manifestのsubject、checks、review、HTMLのdigestに結び付く。固定indexのmembership・順序・digestは再生成で書き換えない。執筆中に見つかったリスクだけは、当該shardのmanifestとdispatchの現在のpolicyを更新し、subjectに対応する証跡を再生成する。
+
+## 再検査と編集
+
+```bash
+npm run corpus:verify-problem-shard-index
+npm run corpus:verify-problem-shards
+npm run corpus:author-problem-shards -- --check --domain mathematics
+npm run corpus:author-problem-shards -- --check --shard outcome-aggregate-rooted-tree-shard-003
+npm run verify:fast
+```
+
+編集後はそのshardの本文を技術的に点検してから、当該shardの証跡だけを更新する。
+
+```bash
+npm run corpus:author-problem-shards -- --write --shard outcome-aggregate-rooted-tree-shard-003
+npm run corpus:author-problem-shards -- --check --shard outcome-aggregate-rooted-tree-shard-003
+```
+
+新規執筆または明示的な原稿差替えには `--write --details FILE`
+を使える。入力は選択範囲内のproblemIdをkeyとし、正当性、全採用手法の時間・空間、小例の入力・手順・結果、確認問題・解答・評価条件を与える。`sectionOverrides`
+で既存分析の誤りを当該Problem本文内だけで補正する。検証済み原典、canonical
+Unit・Tag・placement、固定indexは変更しない。既存文書への `--details`
+付きwriteは指定原稿で本文を置き換えるため、手編集を保存する場合はdetailsを付けない。
+
+手計算例は `illustrative`
+であり、架空のプログラム実行結果を記録しない。自動検査は構造・同一subject・リンク・静的テキストのアクセス可能性を確認する。小例の数学的な正しさ、証明の仮定、計算量と最大制約の適合はreview
+inventoryで点検する。保守的上界や乱択の期待計算量を、無条件の実行時間保証として扱わない。
+
+## 受入状態
+
+本文は全868問をfullとして執筆する。claimとanswerの技術確認はCodexによる原典付き執筆の記録であり、運用者本人の承認ではない。全文書は
+`draft: true`、private snapshotは `on_hold`
+とし、選択されたselfまたはthird-partyの本人レビューを待つ。reviewは `humanApproval: false`
+を保持する。
+
+通常はself review、公式との不一致・独立証明・大きな分類変更があるshardはthird-party
+reviewを指定する。skill側の `independent_proof` は作業manifest契約の `original_proof`
+に対応する。公式解説の記述を補正した場合も原典のrevisionは保持し、補正の理由と再照合を当該reviewへ記録する。
+
+この検査は各shardの独立した執筆確認である。T072–T078のglobal
+join・統合受入・coverage承認、T160の公開projectionへの切替は、このIssueに含めない。未実施の本人レビューをpassedにしたり、公開catalogへ未受理本文を投入したりしない。

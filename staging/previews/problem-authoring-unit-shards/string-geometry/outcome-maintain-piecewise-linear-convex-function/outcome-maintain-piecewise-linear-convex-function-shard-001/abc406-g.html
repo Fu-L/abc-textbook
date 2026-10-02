@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC406-G — Travelling Salesman Problem</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC406-G — Travelling Salesman Problem</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/slope-trick.md">slope trick</a></p>
+<ul>
+<li>区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>品物 i を座標 x で受け取るときの最小費用 f_i(x) は、直前座標 y から自分が動く C|x-y| と商人 i が X_i から動く D|X_i-x| の和で遷移する。</p>
+<p>f が離散凸なら g(x)=min_y(f(y)+C|x-y|) も凸であり、これは f の傾きを [-C,C] に切り詰める操作に一致する。その後 D|X_i-x| を加えると X_i に傾き差 2D が入る。</p>
+<p>採用する候補: 凸区分線形関数の傾き変化を slope trick で管理し、絶対値の min-plus convolution と加算を各商人について更新する</p>
+<p>変化点を map または Fenwick tree で扱えば各更新を対数時間で行え、変更履歴を保存して逆順に最適な受取座標も復元できる。</p>
+<p>棄却する候補: 全座標 x,y を列挙して dp_i[x]=min_y(dp_{i-1}[y]+C|x-y|)+D|X_i-x| を計算する</p>
+<p>座標候補が約 2×10^5、商人も 2×10^5 で、少なくとも状態数だけで O(NR)、素朴遷移は O(NR^2) になる。</p>
+<p>min convolution で値が f から変わらない座標は一つの区間をなし、その外側では端点から傾き ±C で延長される。したがって傾き変化を左右から削るだけで g を得られる。</p>
+<p>最終 f_N の最小点を選び、各段階で現在座標 x を「f_{i-1}=g_i だった区間」へ clamp すると最適な直前座標を得る。更新履歴を巻き戻せばこの区間を逆順に再現できる。</p>
+<p>初期位置 0 を表す凸関数から始める。各 i で現在関数の傾きを [-C,C] に clip して g_i を作り、D|X_i-x| を加える。最小値を出力し、保存した変化点更新を後ろから undo しながら最終 minimizer を各不変区間へ射影して A_N..A_1 を復元する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="slope-trick">slope trick</h3>
+<p>発動条件: 絶対値を加える操作や絶対値との min-plus convolution を繰り返す凸 DP のとき。</p>
+<p>傾きの変化点・変化量と基準値を持ち、傾き clip と kink 追加で関数全体を更新する。</p>
+<h3 id="凸-dp-の最適解復元">凸 DP の最適解復元</h3>
+<p>発動条件: 関数値の最小値だけでなく各段階の argmin 列が必要なとき。</p>
+<p>前向き更新の履歴を保存し、逆向きに convolution の不変区間へ座標を clamp する。</p>
+<h3 id="離散凸関数の傾き管理">離散凸関数の傾き管理</h3>
+<p>発動条件: 整数座標上の区分線形凸関数を多数更新したいとき。</p>
+<p>傾き差分を ordered map や座標範囲上の Fenwick tree で保持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>商人と自分の移動順序を受取座標列だけに集約すると、二種類の移動費は連続する座標差と入力座標からの絶対値として完全に分離する。</p>
+<p>別の問題へ持ち帰る視点: 絶対値距離の列最適化では DP 関数そのものではなく傾きの変化だけを持ち、復元には clip で失った領域の境界履歴を残す。</p>
+<h2 id="正当性">正当性</h2>
+<p>C|x−y|とのmin convolutionは任意y候補の凸costを比較し、元関数の傾きを[−C,C]へ切る操作に等しい。D|X_i−x|追加は現在受取費用であり、従って各f_iは最適prefix費用そのもの。最終minimizerからclipで元fと一致した区間へclampすると最適yが得られるので、保存履歴を逆順に戻して全受取位置も最適に構成できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>費用は 64 bit とし、整数点での左・右傾きと clip 境界の包含を統一する。初期位置 0 の関数、各 X_i の kink、undo の順序を小例で検証する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=1、C≪D、C≫D、同一 X の反復、X が左右に交互に振れる場合を小座標の全 DP と比較し、費用と復元列の双方を再評価する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。左右の傾き変化をheap/treeでclipし履歴を復元する。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq C, D \leq 10^5; -10^5 \leq X_i \leq 10^5; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=1、X_1=3,C=1,D=2、初期位置0。</p>
+<ol>
+<li>費用は|x|+2|3−x|。</li>
+<li>0≤x≤3では6−xなのでx=3が最小、外側は増える。</li>
+</ol>
+<p>期待される結果: 最小3、受取位置3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>C=D=1なら最適受取位置は一意か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>0≤x≤3で|x|+|3−x|=3。全区間がminimizerで、clamp復元はどれを選んでも最適。</p>
+<p>確認結果: 区間[0,3]全て最適。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc406/editorial/13048">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc406-editorial-13048-920868b4aa7b9d1ecd1f5cb46d721512ac85991b33891224b3674ac02c77ee00</li>
+<li><a href="https://atcoder.jp/contests/abc406/tasks/abc406_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc406-g-problem-af05a869e705437c9cfa5c822aa6d808b155b4a5c08c1bb41d36ec3d3f5db3f2</li>
+</ul></main>
+</body></html>

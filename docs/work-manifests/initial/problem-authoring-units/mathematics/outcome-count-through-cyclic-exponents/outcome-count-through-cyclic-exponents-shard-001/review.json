@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-count-through-cyclic-exponents-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "3a766413fd5e7a4bd9e06b90220379826ef78ae2665931f1cd32df0c395a0a5e",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc212-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+      "learningOutcomeIds": [
+        "outcome-count-through-cyclic-exponents"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc335-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.md",
+      "learningOutcomeIds": [
+        "outcome-count-through-cyclic-exponents",
+        "outcome-find-period-by-multiplicative-order"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

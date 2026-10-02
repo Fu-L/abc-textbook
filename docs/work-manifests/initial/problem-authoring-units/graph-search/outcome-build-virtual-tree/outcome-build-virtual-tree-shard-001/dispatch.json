@@ -1,0 +1,61 @@
+{
+  "shardId": "outcome-build-virtual-tree-shard-001",
+  "primaryOutcomeId": "outcome-build-virtual-tree",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc340-g"
+  ],
+  "homeUnitId": "unit-virtual-tree",
+  "prerequisiteOutcomeIds": [
+    "outcome-answer-tree-ancestor-queries",
+    "outcome-flatten-tree-by-euler-order"
+  ],
+  "dependencyShardIds": [
+    "outcome-answer-tree-ancestor-queries-shard-001",
+    "outcome-flatten-tree-by-euler-order-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "4d985ef23bb87f9949ba8b5eab9aa03a075c950327f65b38b3d242cbe83bd051",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc340-g",
+      "path": "src/content/docs/problems/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

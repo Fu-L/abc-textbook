@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC441-E — A &gt; B substring</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC441-E — A &gt; B substring</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></p>
+<ul>
+<li>prefix配列またはprefix変数を置き、区間和を二つのprefix値の差で表現できる。多次元の直方体は2^D隅の包除で取得し、一括加算は端点差分へ変換できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>オンライン更新を伴うFenwick Tree・Segment Treeの動的区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>部分文字列内の A と B の個数差は、prefix 差 D_i=(先頭 i 文字の A 数)-(B 数) の差 D_j-D_{i-1} で表せる。したがって条件は二つの prefix 値の狭義大小だけに落ちる。</p>
+<p>採用する候補: D_0=0 から順に走査し、過去に現れた D_i のうち現在値 D_j より小さいものの個数を Fenwick tree または値域 frequency で加算する。</p>
+<p>各有効部分文字列と i&lt;j かつ D_i&lt;D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。</p>
+<p>棄却する候補: 各左端から右端を伸ばし、A と B の個数を数え直す。</p>
+<p>個数差を更新できても部分文字列の候補は Θ(N^2) 個あり、N=5×10^5 では列挙できない。</p>
+<p>区間条件 A_count&gt;B_count は D_j&gt;D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。</p>
+<p>等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。</p>
+<p>A を +1、B を -1 として prefix 差を作る。各 D_j の処理前に過去頻度の D&lt;D_j を答えへ加え、その後 D_j を登録する。値域を offset して累積頻度または Fenwick tree で管理する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="prefix-差への変換">prefix 差への変換</h3>
+<p>発動条件: 部分区間内の二種類の個数差や和の符号を問われるとき。</p>
+<p>区間条件を二つの prefix 値の大小関係へ変換する。</p>
+<h3 id="オンライン順序対の数え上げ">オンライン順序対の数え上げ</h3>
+<p>発動条件: i&lt;j を保ちながら prefix 値の大小を数えたいとき。</p>
+<p>過去値の頻度に対する狭義 prefix sum を加算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>文字列条件を +1/-1 の累積和にすると、部分文字列の内容ではなく端点の順序対だけを数えればよい。</p>
+<p>別の問題へ持ち帰る視点: 区間の和や個数差の総数では、prefix 値の大小・一致へ言い換えられないかを確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>区間条件 A_count&gt;B_count は D_j&gt;D_{i-1} と同値で、空 prefix D_0 も左端1の区間を表す。 等しい prefix 差は個数差0の区間なので数えず、strict less の query にする必要がある。 各有効部分文字列と i&lt;j かつ D_i&lt;D_j の組が一対一に対応し、D_i は [-N,N] に収まるため全組を高速に数えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>D_0 を先に登録し、D_j 自身は query の後で登録する。同値を含めると A と B が同数の区間まで誤って数える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>区間 [l,r] と prefix の組 (l-1,r) の対応を書き、空 prefix・狭義不等号・登録順の三点を小例で照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、Dの値域[-N,N]。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le5\times10 ^ 5; S is a string of length N consisting of A, B, and C.; N is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=ABA。</p>
+<ol>
+<li>prefix差は0,1,0,1。</li>
+<li>過去strictly smaller数は1,0,2。</li>
+</ol>
+<p>期待される結果: AがBより多い部分列は3個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>過去値≤現在値を数えるとどうなるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>差0のAB,BAまで含めて5個となる。狭義大小で同数区間を除く。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc441/tasks/abc441_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-e-problem-36a728463fec107cef6ad052a2c07ef41c766a99bf71452baa8c2277046cd8cb</li>
+<li><a href="https://atcoder.jp/contests/abc441/editorial/15101">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc441-editorial-15101-836aa71057f4008e66fae982f48c48538e32df6d86a9d632e5cd47750c32ee31</li>
+</ul></main>
+</body></html>

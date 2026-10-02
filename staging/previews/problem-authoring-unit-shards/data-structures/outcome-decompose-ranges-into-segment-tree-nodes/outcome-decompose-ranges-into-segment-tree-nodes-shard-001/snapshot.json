@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-decompose-ranges-into-segment-tree-nodes-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c62e4853aaf7676ff9e0449f7724c92190112618ef915efa317fbae063dcdbc7",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "c77973cab896eb717d6287f94c9d170be04ccf98108fca746ea6fa64850e7c74",
+  "reviewDigest": "627e99d481a751d06d61d46a39fb4671ce0a863d74fd5cdb794af40ee7e2e430",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-decompose-ranges-into-segment-tree-nodes/outcome-decompose-ranges-into-segment-tree-nodes-shard-001/abc342-g.html",
+      "digest": "3233e2bc3b7b39536f714ffc76c729259d0336888ae01781a6a6cc6bcf7028e3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-decompose-ranges-into-segment-tree-nodes/outcome-decompose-ranges-into-segment-tree-nodes-shard-001/index.html",
+      "digest": "6d00b6787ee90c92952fc2d508be1657e2e6c454952f954cafa47b90bd168f44"
+    }
+  ],
+  "snapshotDigest": "2c41815af00ec3be8d8c7c0a1c1bf23ffa63a6a8e7d0c369ea689434f47041b6"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-merge-small-into-large-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "680c85dc6bc66f7b6cf9e655c0ba093d4e7347074419bd178ae018eb2853ed6d",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "79cd3d3f2f768f16009ff83cd704dae272650a07373f32833d50271c151e4780",
+  "reviewDigest": "5b4566221d223a4a549ef858c21ed5d1b6e1a2818bb9d802836fd70f66ed70f3",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc324-g.html",
+      "digest": "950a68f4ab5d476aaaf1c0393edbc87a70dcebb957646cc36b0c86e5f1d38441"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc329-f.html",
+      "digest": "807a458afbb04447fb28682bf590493ca54d4ed8597c26efc719066592578f38"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc411-f.html",
+      "digest": "c6765c95812b7f493a38e4c78ba8a7701f64bf3745e2b0937fa4452cf8fd52d7"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc454-g.html",
+      "digest": "006411ceb64a8408a9d4f89511dbbb244fa3570a2dc2f4239aa5de3d759918e7"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/index.html",
+      "digest": "09d9f1d7a943adb809da494a54d33c4aa9d1b3a6ca3811801b039c25aec2b1cb"
+    }
+  ],
+  "snapshotDigest": "78f81382cb1dc4ba5b0e6193441826d190c7af82c7e6ea09adb23077ed4c16e4"
+}

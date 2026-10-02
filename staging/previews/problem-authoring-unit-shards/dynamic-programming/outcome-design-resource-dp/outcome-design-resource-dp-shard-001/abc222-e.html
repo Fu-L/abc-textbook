@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC222-E — Red and Blue Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC222-E — Red and Blue Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>色を決める前から駒が通る道は木の一意な単純路で確定しているため、各辺が何回使われるかだけを先に数えれば、移動列そのものは以後の判定に不要になる。 S=ΣC_e とおくと R+B=S なので、R-B=K は赤い辺に対応する C_e の和が (S+K)/2 であることと同値になる。 S+K が奇数、または目標和が 0 未満・S より大きい場合は不可能であり、C_e=0 の辺も二つの色を別の選択としてDPに通す必要がある。</p>
+<p>採用する候補: 連続する A_i,A_{i+1} 間のパスから各辺の通過回数 C_e を求め、赤にする辺の通過回数の和を数える部分和DPへ変換する。</p>
+<p>色の寄与が辺ごとの C_e に分離し、R-B=K を一つの部分和条件へ直せるため、2^(N-1) 通りの彩色を列挙せずに数えられる。</p>
+<p>棄却する候補: 全ての辺の赤青を列挙し、各彩色について移動列を再現して R-B を調べる。</p>
+<p>辺数に対して指数個の彩色があり、N=1000 では列挙できないうえ、同じ辺を通る移動を何度も評価してしまう。</p>
+<p>S=ΣC_e とおくと R+B=S なので、R-B=K は赤い辺に対応する C_e の和が (S+K)/2 であることと同値になる。</p>
+<p>S+K が奇数、または目標和が 0 未満・S より大きい場合は不可能であり、C_e=0 の辺も二つの色を別の選択としてDPに通す必要がある。</p>
+<p>各 A_i から A_{i+1} への木上パスをDFSで復元して C_e を加算し、目標 (S+K)/2 に対して C_e を一度ずつ選ぶ0/1部分和DPを行う。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="木上パスの辺使用回数への圧縮">木上パスの辺使用回数への圧縮</h3>
+<p>発動条件: 木上の複数の移動に対し、最終評価が各辺を通った回数と辺属性だけで決まるとき。</p>
+<p>一意なパスごとに辺カウンタを加算し、長い移動列を N-1 個の独立な辺の重み C_e へ縮約する。</p>
+<h3 id="符号割当てから部分和dpへの変換">符号割当てから部分和DPへの変換</h3>
+<p>発動条件: 各要素を正負のどちらかへ割り当て、その符号付き総和を指定値にしたいとき。</p>
+<p>総和 S と符号差 K から正側の和を (S+K)/2 と定め、各 C_e を選ぶかどうかの数え上げにする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>辺の色は全移動で共通でも、色が答えに与える影響は『その辺の総通過回数』だけなので、時系列と彩色を分離できる。</p>
+<p>別の問題へ持ち帰る視点: 同じ選択が多数のイベントへ繰り返し作用するときは、イベントを再生する代わりに選択対象ごとの使用回数を集計する。</p>
+<h2 id="正当性">正当性</h2>
+<p>木pathは一意なので各辺の通過Cが確定する。赤寄与R、青寄与BについてR+B=S,R−B=KよりR=(S+K)/2。赤辺subsetをこの和で数えることは彩色と一対一。負・奇数・範囲外目標なら不可能。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>S+K の偶奇と目標和の範囲をDP前に検査し、C_e=0 でも『赤にする・青にする』の二遷移を残す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>『正側の和−負側の和』を見たら、まず全体和との連立で片側の和を決められないか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点、訪問列長M、全通過回数S。各path DFS O(NM)、0/1 DP O(NS)。</p>
+<h3 id="空間">空間</h3>
+<p>木、辺回数 O(N)、和DP O(S)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 1000; 2 \leq M \leq 100; |K| \leq 10^5; 1 \leq A_i \leq N; 1\leq U_i,V_i\leq N; The given graph is a tree.; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>道1–2–3、訪問列(1,3)、K=0。</p>
+<ol>
+<li>辺回数(1,1)、S=2。</li>
+<li>赤和目標1。</li>
+<li>二辺のどちらか赤で2通り。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>C_e=0の辺をDPから除いてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。赤青どちらも目的値を変えないが別彩色なので通り数を二倍にする。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc222/tasks/abc222_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75</li>
+<li><a href="https://atcoder.jp/contests/abc222/editorial/2751">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c</li>
+</ul></main>
+</body></html>

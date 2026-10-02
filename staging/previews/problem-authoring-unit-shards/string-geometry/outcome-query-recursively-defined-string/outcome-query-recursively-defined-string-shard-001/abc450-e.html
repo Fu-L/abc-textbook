@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC450-E — Fibonacci String</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC450-E — Fibonacci String</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/recursive-compressed-string.md">圧縮・反復・再帰文字列へ問い合わせる</a></p>
+<ul>
+<li>圧縮・反復・再帰または入れ子で定義された文字列を展開せず、block長・対応区切り・作用から照会・変換・評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>明示された文字列への接尾辞索引の構築。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>S_k=S_{k-1}+S_{k-2} で k≥2 の S_k は以後の文字列の prefix になる。query 右端を覆う最小 K まで長さを作れば、添字10^18を直接扱う必要はない。</p>
+<p>採用する候補: 各 S_k の飽和長と文字別総数を前計算し、prefix n 文字の文字頻度を、n が S_{k-1} 内か後半 S_{k-2} へ入るかで再帰的に求める。</p>
+<p>長さは Fibonacci 的に増えて K=O(log R_max) となり、各 prefix query は再帰で k を一つ以上減らしながら完全な前半の頻度を加えるだけで処理できる。</p>
+<p>棄却する候補: S_{10^18} を文字列として構築し、各 query 区間を走査する。</p>
+<p>文字列長は指数的に増大して保存不能で、query ごとの区間走査も長さ制約を超える。</p>
+<p>区間 [L,R] の頻度は prefix(R)-prefix(L-1) なので、再帰関数は先頭 n 文字だけを答えればよい。</p>
+<p>n&gt;|S_{k-1}| なら S_{k-1} 全体の頻度を加え、残り n-|S_{k-1}| を S_{k-2} の prefix として再帰する。</p>
+<p>X,Y の文字別 prefix 頻度を作り、len[k] と total[k][c] を query 最大長で飽和させて K まで計算する。各 query の R,L-1 を prefixCount(K,n) で求めて成分差を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="再帰的連結文字列の-prefix-query">再帰的連結文字列の prefix query</h3>
+<p>発動条件: 文字列が過去二項の連結で巨大化し、短い prefix の統計だけ必要なとき。</p>
+<p>長さと全体統計を持ち、所属する連結片へ再帰する。</p>
+<h3 id="長さの飽和前計算">長さの飽和前計算</h3>
+<p>発動条件: 再帰列の長さが整数上限を越えるが query 上限だけ比較に使うとき。</p>
+<p>必要最大値で cap して overflow を避ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>巨大再帰 object も、query 位置を含むまでの浅い構築木と完全 subtree の集約値だけで探索できる。</p>
+<p>別の問題へ持ち帰る視点: 区間 query を prefix 差へ統一すると、連結境界をまたぐ場合分けが一方向になる。</p>
+<h2 id="正当性">正当性</h2>
+<p>k≥3の列は前列をprefixとして含み、query範囲を覆うK以後はそのprefixが変わらない。prefixCount(k,n)はnが左列内なら左へ、超えるなら左列全countと右prefixへ一意分解できる。基底X,Yのprefix頻度から帰納的に正しいcountを得て、Rprefix−(L−1)prefixでexact区間頻度を返す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>K=1,2 の基底を X,Y の実長で処理し、n=0 はゼロ vector とする。len 加算は R_max 以上に飽和させる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>prefix が前半内・前半を全て含み後半へ入る二ケースを実際の S_3,S_4 で追い、query 上限までの K で十分な理由を説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(|X|+|Y|+Q log Rmax)。Fibonacci長さのため再帰深さO(log Rmax)。</p>
+<h3 id="空間">空間</h3>
+<p>O(|X|+|Y|+26 log Rmax)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: X and Y are strings of lowercase English letters of length between 1 and 10^4, inclusive.; 1 \leq Q \leq 10^5; 1 \leq L_i \leq R_i \leq 10^{18}; C_i is a lowercase English letter.; All given numerical values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S_1=a,S_2=b、S_k=S_{k−1}+S_{k−2}、query[1,5]。</p>
+<ol>
+<li>S_3=ba,S_4=bab,S_5=babba。</li>
+<li>先頭5文字にa2個,b3個。</li>
+</ol>
+<p>期待される結果: aは2、bは3。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>L=1でprefix(L−1)は。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>空prefix0文字なので全count0。基底文字列へ負添字を渡さない。</p>
+<p>確認結果: 0vector。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc450/tasks/abc450_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc450-e-problem-efc22d39ed734230017484cb7e87124414d20103212076eec2b5e102f889b523</li>
+<li><a href="https://atcoder.jp/contests/abc450/editorial/17731">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc450-editorial-17731-ba8f7af7a46ad94dd872c9507b5fa717441d510369ba60f4c58ebe189cfb4f11</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,532 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-correct-overlap-by-inversion-shard-002",
+  "packets": [
+    {
+      "problemId": "abc306-ex",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dag-topological-processing",
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-dag-topological-processing",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \\le N \\le 17; 1 \\le M \\le \\frac{N \\times (N-1)}{2}; 1 \\le A_i < B_i \\le N; i \\neq j \\Rightarrow (A_i,B_i) \\neq (A_j,B_j)"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b",
+            "source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b",
+          "path": "src/content/sources/abc264-abc315/source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc306_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10",
+          "path": "src/content/sources/abc264-abc315/source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc306_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc309-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-subset-state",
+        "unit-frontier-profile-dp"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients",
+        "tag-frontier-profile-dp",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 100; 1 \\le X \\le 5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "禁止pairを指定する包除項では、指定位置に相異なる禁止値を割り当てたpartial matchingを選び残りを(N−k)!で埋める。窓maskは将来の禁止近傍へ残る使用値だけを保持し、外へ出た値は今後のpartial matchingと競合しないため捨てられる。全kを符号付きで足すと禁止pairを一つでも持つ順列が相殺される。",
+          "sourceRevisionIds": [
+            "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
+            "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa",
+          "path": "src/content/sources/abc264-abc315/source-abc309-editorial-6745-aaa99caff75cb1a246058f851c6c5a1de3f91b8eac72a75526bcf7377af1afaa.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc309_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055",
+          "path": "src/content/sources/abc264-abc315/source-abc309-g-problem-c1e6822f34d592e0edb0f90f28cc68a4cb1ddb7f18418e139e888a06c4e3d055.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc309_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc331-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-modular-arithmetic",
+        "unit-polynomial-convolution",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-generating-functions",
+        "tag-inclusion-exclusion",
+        "tag-convolution",
+        "tag-modular-arithmetic",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 2\\times 10^5; 1 \\leq C_i; \\sum_{i=1}^{M}C_i=N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "tail-sumの包除では未取得種類集合の確率を等比和で足す。取得可能subsetの総枚数kだけが分母N−kを決め、その符号付きsubset数はΠ(1−x^{C_i})の係数に等しい。次数Nは全集合で分母0だがtail式から除外される。k<Nの係数へN/(N−k)を掛けて足せば全種類取得の期待値になる。",
+          "sourceRevisionIds": [
+            "source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38",
+            "source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38",
+          "path": "src/content/sources/abc316-abc367/source-abc331-editorial-7763-4a22d39e350c730d06c236f2536ec68f54b34f357f0788f08790e344b88caf38.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc331_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76",
+          "path": "src/content/sources/abc316-abc367/source-abc331-g-problem-2ff1239dc9161ed18837a37d3769cd399cf62e34a2065aca8ff9f5a278f1cc76.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc331_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc357-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion",
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-relaxed-convolution",
+        "tag-combinatorial-coefficients",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2.5 \\times 10^5; N is even.; 0 \\leq M \\leq 50; 1 \\leq a_i \\leq N; 1 \\leq b_i \\leq \\left \\lceil \\frac{a_i}{2} \\right \\rceil \\times 2; (a_i, b_i) \\neq (1, 1) and (a_i, b_i) \\neq (N, N).; (a_i, b_i) \\neq (a_j, b_j) if i \\neq j.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "任意の禁止wallを通るpathは最初に通るwallを一意に持つ。そのwallまでの既に補正済み寄与を終点までの自由path数で延ばし引けば、禁止wallを通る全pathを一度除ける。規則境界wallは本来grid外へ出るpathだけを表し、差kernelのCDQ畳み込みは同じ補正和を因果順に計算するため、通常のwall DPと結果が一致する。",
+          "sourceRevisionIds": [
+            "source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06",
+            "source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06",
+          "path": "src/content/sources/abc316-abc367/source-abc357-editorial-10179-6ee21b6ab16f35a854bce875f0abbc9f40ed38233e4cb1f9f4f40a634ef45b06.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc357_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f",
+          "path": "src/content/sources/abc316-abc367/source-abc357-g-problem-5e7319708b23faaeb5d7dad6022dc6e5aa4cc5268b0249022bbd607aa38d484f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc357_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc455-e",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; |S|=N; N is an integer.; S is a string consisting of the three characters A, B, and C."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "個数等値はprefix差の一致へ変わるので同key二端点数が当該区間数になる。A=B,A=C,B=Cの任意二交差は全三等値で、和集合包除は三単独和−2全等値になる。全区間数から引けば三個数pairwise相異だけ残る。prefix0を入れ、各位置で過去頻度だけ足すので非空区間を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440",
+            "source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440",
+          "path": "src/content/sources/abc420-abc466/source-abc455-e-problem-3d7ca11f8e6a99a3aa31989bf56bdb6637d1a0113ea8bc0fa0f58ed824f52440.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc455_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5",
+          "path": "src/content/sources/abc420-abc466/source-abc455-editorial-19240-86f0fce7057716e2b98af3d3c42d24426a245f19338fc426ade5917a739d82f5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc455_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc456-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dynamic-modular-product"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-combinatorial-coefficients",
+        "tag-dynamic-modular-product"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer between 1 and 2 \\times 10^5, inclusive.; S is a string of length N consisting of ., x."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "固定勤務xが連休を切るためrun割当ては独立。runごとの長い連休開始に包除を施したf(n,k)は最大連休≤kの正確な数で、frequency乗の積が全予定の累積分布F_kになる。exact最大kは互いに入れ子の事象差F_k−F_{k−1}。F_{−1}=0とk≥nの全2^nを保てば最大0も正しく含む。",
+          "sourceRevisionIds": [
+            "source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae",
+            "source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae",
+          "path": "src/content/sources/abc420-abc466/source-abc456-editorial-19853-85c25e151a71ee941f2b1cd32f444f6f1c74dc4e15b57ca939670e623d7db1ae.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc456_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb",
+          "path": "src/content/sources/abc420-abc466/source-abc456-g-problem-2c386fec87007ddfba9b7c501fd2d26ba3aa37f87bc2f8f493ebe2ece0f8e9cb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc456_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc462-g",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-modular-arithmetic",
+        "unit-polynomial-convolution"
+      ],
+      "excludedTopics": [
+        "選択順を二項係数だけで式化する数え上げ。"
+      ],
+      "tagIds": [
+        "tag-inclusion-exclusion",
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2\\times 10^5; 1\\le C_i,G_k\\le N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一致位置を指定する包除で、値kのj位置選択はC(Y_k,j)、それへ相異なるC側indexを割り当てる数は(X_k)_j。従ってfactorのj次係数は(−1)^j C(Y_k,j)(X_k)_j。積のi次係数は全一致指定i位置の交差項で、残り(N−i)!を掛けて合計すると完全不一致順列数。全N!で割るとその確率になる。",
+          "sourceRevisionIds": [
+            "source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857",
+            "source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857",
+          "path": "src/content/sources/abc420-abc466/source-abc462-editorial-21456-125bd5706c0cdf5e896a02d1a23eef13dc6df29f4a75b59feaf156115895e857.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc462_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03",
+          "path": "src/content/sources/abc420-abc466/source-abc462-g-problem-73f7e339d052db10556f4c6375992f51700de1db87661f7cad566dd5896ace03.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc462_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

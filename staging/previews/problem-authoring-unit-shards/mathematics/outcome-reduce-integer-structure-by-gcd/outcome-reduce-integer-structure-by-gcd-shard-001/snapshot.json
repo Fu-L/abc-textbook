@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "dbaba018b20baca32cab14aa129e5722d1c077db03c3e741e850d31d50c4555d",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "9988f9b84e626394e9e07e9cdaac572df564fa34443d917bb9b8f629394bdda9",
+  "reviewDigest": "711b29c420bb4d46e6cd2bf1c18eee5878c2bf213e4749d523703b699435c8ec",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.html",
+      "digest": "7d1d5e7557e0c89d25f1048278aba68917922c2793e0a2e93c494d08590252f9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc438-g.html",
+      "digest": "bff57e10ca8a891ba10c9ab184522c59c00c83c166c29368f3187cddb1d1cd60"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/index.html",
+      "digest": "5c3657d82cfc02eec2f305ece31405c0f334064a0d020fb1363b92f93e6e3db8"
+    }
+  ],
+  "snapshotDigest": "48ce783096b1e4d42cda57cf77f58af0260d8fd935fad9e7a714ac4015a898e8"
+}

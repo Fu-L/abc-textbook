@@ -1,0 +1,296 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-accelerate-fixed-linear-transition-shard-001",
+  "packets": [
+    {
+      "problemId": "abc256-g",
+      "learningOutcomeIds": [
+        "outcome-accelerate-fixed-linear-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "一般のDP遷移の区間集約・単調最適化。"
+      ],
+      "tagIds": [
+        "tag-linear-recurrence-matrix",
+        "tag-combinatorial-coefficients"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 10^{12}; 1 \\leq D \\leq 10^4; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一辺で必要な白頂点数kを固定すると、両端の色を固定した内部D−1頂点の塗り方は二項係数で数えられる。これを両端色0/1の2×2行列T_kの成分とする。N辺の積で内部頂点の色を足し合わせると、隣り合う辺の共有頂点の色が必ず一致する。さらにtrace(T_k^N)は始点色と終点色を一致させるので円環の閉条件も満たす。各塗り方が共通kを一意に持つため、全kのtraceを合算して重複はない。",
+          "sourceRevisionIds": [
+            "source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a",
+            "source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a",
+          "path": "src/content/sources/abc212-abc263/source-abc256-editorial-4130-c937a3ca3ad9ce902644773130814a2722819fd3dcbf5fa9616c506c5796c96a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc256_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c",
+          "path": "src/content/sources/abc212-abc263/source-abc256-g-problem-e2d7ac823f51f5a8e20aba7cec2631acd3bcab48b3e8a5eed6b8a1039de3f27c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc256_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc258-ex",
+      "learningOutcomeIds": [
+        "outcome-accelerate-fixed-linear-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "一般のDP遷移の区間集約・単調最適化。"
+      ],
+      "tagIds": [
+        "tag-linear-recurrence-matrix"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_N \\lt S \\leq 10^{18}; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "f(s)を禁止和を避けて総和sへ至る列数とすると、最後の正の奇数aを除いた列は総和s−aへ至る合法列であり、その全aについての和がf(s)になる。ただしsが禁止和なら到着自体が不可能なのでf(s)=0とする。この最後の項による分割は一意である。禁止されない連続区間では同じ線形漸化式が成立するため、必要な隣接値を行列で進める累乗は一歩ずつのDPと等価である。禁止イベントの直前まで進めて該当成分を0へ置き直せば、全禁止点を反映できる。",
+          "sourceRevisionIds": [
+            "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5",
+            "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5",
+          "path": "src/content/sources/abc212-abc263/source-abc258-editorial-4214-72a89899a08f2d41b860c48fb5f3c7b96791737313047cff559161dcc961c9e5.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc258_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba",
+          "path": "src/content/sources/abc212-abc263/source-abc258-ex-problem-9e2caaf526e12085da313ab4343980f7b9055b33fdb2f61a7be7ef9ef6a55cba.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc258_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc271-g",
+      "learningOutcomeIds": [
+        "outcome-accelerate-fixed-linear-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-dp-stochastic",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "一般のDP遷移の区間集約・単調最適化。"
+      ],
+      "tagIds": [
+        "tag-linear-recurrence-matrix",
+        "tag-modular-arithmetic",
+        "tag-stochastic-expectation-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^{18}; 1 \\leq X,Y \\leq 99; c_i is T or A.; N, X, and Y are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "現在の成功時刻から次の成功時刻への確率は、その間の各時刻で失敗する確率の積と、次時刻で成功する確率の積である。全24時間を失敗する確率qで同じ状況へ戻るため、全周回を幾何級数1/(1−q)で吸収する。これで各行の和が1の24状態遷移行列が得られる。成功を一回ずつ数えるMarkov性より、初成功分布へこの行列のN−1乗を掛けた分布が第N成功時刻の分布となる。",
+          "sourceRevisionIds": [
+            "source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58",
+            "source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58",
+          "path": "src/content/sources/abc264-abc315/source-abc271-g-problem-7232f294682424bce273370bc368433bbd7331d706edf9a5151c81840824fc58.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc271_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf",
+          "path": "src/content/sources/abc264-abc315/source-abc271-editorial-4931-b01c59d4b4297b12ce5e2936b33964cc01626c4dea121fda7d515768c9f8faaf.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc271_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc293-e",
+      "learningOutcomeIds": [
+        "outcome-accelerate-fixed-linear-transition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "一般のDP遷移の区間集約・単調最適化。"
+      ],
+      "tagIds": [
+        "tag-linear-recurrence-matrix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq A, M \\leq 10^9; 1 \\leq X \\leq 10^{12}; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "f(n+1)=Af(n)+1、f(0)=0 は幾何和に一致する。定数1を添えたvectorへの行列作用はこのaffine更新と同じで、行列積は操作合成に一致する。二分累乗でX回合成した第一成分が答え。法M上でも除算を用いないので合成数とA=1を扱える。",
+          "sourceRevisionIds": [
+            "source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3",
+            "source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3",
+          "path": "src/content/sources/abc264-abc315/source-abc293-e-problem-34dffe16b25f63d64a14ea0e51c23a469f311873f2c9f9d6402e85cde91a89d3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc293_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3",
+          "path": "src/content/sources/abc264-abc315/source-abc293-editorial-5955-af80e9c73937033b345abba821c9c5a5e318dbbda9ef3aa34d15aa0e121cc6d3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc293_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

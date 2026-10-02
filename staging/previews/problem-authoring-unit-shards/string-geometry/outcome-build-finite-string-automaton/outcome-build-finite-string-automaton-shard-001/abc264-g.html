@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC264-G — String Fair</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC264-G — String Fair</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/finite-pattern-automaton.md">有限状態automatonの構成</a></p>
+<ul>
+<li>未来の一文字遷移を決める有限同値類を定義し、pattern suffix・subsequence進行・圧縮DP rowなどから完全遷移表を構成してDPや行列累乗に接続できる。</li>
+<li>辺数を制限した反復緩和から負閉路・正閉路の検出を導き、始点到達性と終点への影響を区別できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>有限状態automatonの構成の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>文字を一つ末尾へ追加したとき新たに発生する長さ1〜3の出現は、その文字と追加前の末尾2文字だけで決まる。</p>
+<p>一度加点済みのprefixは将来へ影響しないため、現在文字列を末尾2文字だけの有限状態へ圧縮できる。</p>
+<p>棄却する候補: 文字列長を伸ばしながら全ての文字列を列挙し、美しさの最大値を更新する。</p>
+<p>長さに上限がなく各長さで26分岐し、Infinity判定もできない。</p>
+<p>採用する候補: 末尾2文字を頂点、次文字追加を重み付き辺とするグラフを作り、初期状態 $$ からの最大walkと到達可能な正閉路をBellman-Ford型緩和で調べる。</p>
+<p>全文字列が始点からのwalkに一対一対応し、正重みcycleがあれば反復して無限大、なければ有限最大距離になる。</p>
+<p>状態 xy から文字 z を追加する辺は yz へ進み、重み P(z)+P(yz)+P(xyz) を持つ。</p>
+<p>ダミー文字 $ を二つ置き、$を含むpatternの点数を0にすれば、長さ1・2のprefixも同じ遷移式で扱える。</p>
+<p>bounded-length substring score を de Bruijn 型 suffix automaton のedge weightへ変換し、unbounded sequence optimization を positive-cycle detection 付き longest walk にする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="有限suffix状態への文字列圧縮">有限suffix状態への文字列圧縮</h3>
+<p>発動条件: 次の文字を加えた増分が直前の高々L文字だけで決まるとき。</p>
+<p>末尾L文字を状態、文字追加をshift遷移とする有限オートマトンを構築する。</p>
+<h3 id="最大walkの正閉路判定">最大walkの正閉路判定</h3>
+<p>発動条件: 長さ無制限のwalk重みを最大化し、値が有限か無限かも判定するとき。</p>
+<p>到達可能状態だけを最大距離緩和し、|V|回目にも改善すれば正cycleとしてInfinityにする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>長さ3以下の全英小文字pattern数は26+26^2+26^3で入力上限と一致し、未指定patternは重み0のtableとして直接持てる。</p>
+<p>別の問題へ持ち帰る視点: 短い全pattern空間が小さいときは、trieを作らず固定長lookup tableへ不足値0で展開できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>次文字の追加で新しく生まれる得点項は長さ1,2,3の接尾辞だけなので、末尾二文字とdummy初期文字が将来に必要十分な状態。辺重みをその三項の和にすると非空文字列と始点から一回以上進んだwalkの得点が一致する。到達可能な正閉路は反復して無限大にできる。正閉路がなければ閉路を除いて得点を悪化させない有限最長walkが存在し、Bellman-Ford型最大緩和で求まる。始点の空文字得点0を候補に入れてはいけない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>距離は負になり得るので未到達を十分小さい−INFで初期化し、$$だけを0にする。</li>
+<li>空文字は禁止なので始点距離0自体を有限答え候補にせず、一回以上遷移した状態の最大値を取る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>追加文字によるscore増分が局所suffixだけを見るなら、文字列全体を状態にせずweighted automatonへ変換する。</li>
+<li>長さ無制限の最大化では、有限DPを始める前に正利益cycleの反復がInfinityを作るか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+VE)。V≤27²、E=O(26V)は末尾二文字グラフの規模。</p>
+<h3 id="空間">空間</h3>
+<p>O(V+E+N)（入力スコアを保持する場合）。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 18278; N is an integer.; T_i is a string of length between 1 and 3 consisting of lowercase English letters.; i \neq j \Rightarrow T_i \neq T_j; -10^9 \leq P_i \leq 10^9; P_i is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>全26個の一文字語の得点を−1、aaの得点を3とし、その他の語は得点0。</p>
+<ol>
+<li>文字a一個の得点は−1。</li>
+<li>aaの得点は−2+3=1。</li>
+<li>aを追加するたび一文字の−1と新しいaaの+3が増え、差は+2。</li>
+</ol>
+<p>期待される結果: Infinity。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>aaの得点も0にした場合、最適な非空文字列の得点はいくつか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>−1。一文字追加ごとに−1だけ減るので一文字が最適。空文字を許す誤実装は0を返す。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc264/tasks/abc264_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-g-problem-09dddce54ca2e241785fe37fb400d3c7bc821302dc9139e62bd5831725eae29f</li>
+<li><a href="https://atcoder.jp/contests/abc264/editorial/4580">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc264-editorial-4580-9a15438df46f1a33d6d81400041f5950bad8c5ea8f0953e5f683c001e42709d2</li>
+</ul></main>
+</body></html>

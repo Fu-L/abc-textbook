@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC322-F — Vacation Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC322-F — Vacation Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間の最長1-runだけでは左右区間をmergeできず、左区間のsuffix 1-runと右区間のprefix 1-runも必要になる。</p>
+<p>range flip後の1-run情報はflip前の0-run情報と完全に入れ替わるため、0と1の両方についてprefix・suffix・maximumを保持すればlazy作用が定数時間になる。</p>
+<p>flipを2回行うと元へ戻るのでlazy tagは1bitのxorで合成できる。</p>
+<p>採用する候補: lenとbit別prefix/suffix/max-runをnodeに持ち、flip lazy tagで0/1情報をswapする遅延segment tree。</p>
+<p>range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。</p>
+<p>棄却する候補: 各queryでS[L,R]を直接反転またはscanして最長runを測る。</p>
+<p>N≤5×10^5,Q≤10^5で長い区間queryが重なると二次時間になる。</p>
+<p>棄却する候補: segment treeに区間内の最長1-runだけを保存する。</p>
+<p>左右境界を跨ぐrun長を復元できず、flip後の値も0-run情報なしには更新できない。</p>
+<p>左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。</p>
+<p>prefix[b]はA全体がbならA.len+B.prefix[b]、否则A.prefix[b]で、suffixも対称に求まる。</p>
+<p>flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。</p>
+<p>各文字をlen=1で、対応bitのprefix=suffix=best=1、反対bitを0としてleaf化する。上記mergeでlazy segment treeを構築する。type 1では[L,R]へflip tagをapplyし、既存tagとxor合成する。type 2ではrange productを取得しbest[1]を出力する。identityはlen=0としてmerge境界を扱う。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="run情報monoid">run情報monoid</h3>
+<p>発動条件: 区間内の同値連続長をmerge可能にしたいとき。</p>
+<p>length・prefix・suffix・bestを持って境界跨ぎ候補を加える。</p>
+<h3 id="lazy-segment-tree">lazy segment tree</h3>
+<p>発動条件: range updateとrange aggregate queryを同時に処理するとき。</p>
+<p>flip mappingをnodeへ遅延適用する。</p>
+<h3 id="対称情報のswap作用">対称情報のswap作用</h3>
+<p>発動条件: binary値の反転で0の統計と1の統計が交換されるとき。</p>
+<p>両bitの同型aggregateを保持してmappingをswapだけにする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>query対象は1-runだけだが、更新作用が0↔1なので、更新後も同じmonoid形式を保つ最小の補助情報として0-run三種が必要になる。</p>
+<p>別の問題へ持ち帰る視点: lazy treeのnode設計ではquery情報だけでなく、全update作用を受けてもO(1)で写せる閉包まで情報を拡張する。</p>
+<h2 id="正当性">正当性</h2>
+<p>左右node A,Bのbest[b]はmax(A.best[b],B.best[b],A.suffix[b]+B.prefix[b])である。 prefix[b]はA全体がbならA.len+B.prefix[b]、否则A.prefix[b]で、suffixも対称に求まる。 flip mappingはprefix[0]↔prefix[1]、suffix[0]↔suffix[1]、best[0]↔best[1]をswapしlenを保つ。 range反転とrange最長1-runの両方を対数時間で処理でき、merge・mapping・compositionが閉じる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>半開区間への変換で入力[L,R]の右端を落とさず、leaf・identityのlenを正しく設定する。</li>
+<li>lazy tag compositionはlogical xorで、push時に子へswapを一度ずつ伝える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>左suffixと右prefixが繋がって最大になる例をmergeし、その区間をflipした後に0/1の全三統計がswapするか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5 \times 10^5; 1 \leq Q \leq 10^5; S is a string of length N consisting of 0 and 1.; c \in \lbrace 1, 2 \rbrace; 1 \leq L \leq R \leq N; N, Q, c, L, and R are all integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=001110、[2,5]をflip。</p>
+<ol>
+<li>対象0111が1000になる。</li>
+<li>全列は010000で最長1-runは位置2の1。</li>
+</ol>
+<p>期待される結果: 答え1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ区間をもう一度flipすると何が起きるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>元の001110に戻り最長1-runは3。lazy tagは加算でなくxorで合成する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc322/editorial/7303">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-editorial-7303-78eb3ac0025e62afd734563853884e0cc2d27e7d0f8706015f4fb8f1cc14a71d</li>
+<li><a href="https://atcoder.jp/contests/abc322/tasks/abc322_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc322-f-problem-00617dfda1bb35d2bd1170644c1a944cd547c3359c166bec98e45285c40a7563</li>
+</ul></main>
+</body></html>

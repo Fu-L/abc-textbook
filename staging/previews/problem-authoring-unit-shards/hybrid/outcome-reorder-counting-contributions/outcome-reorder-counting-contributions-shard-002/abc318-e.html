@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC318-E — Sandwiches</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC318-E — Sandwiches</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>条件 i&lt;j&lt;k と A_i=A_k≠A_j は中央 j を固定すると、左右で同じ値 x を一つずつ選ぶ積 left[x]right[x] の和から x=A_j だけ除く形になる。</p>
+<p>j を一つ右へ動かすと left/right で変わる値は A_j 一種類だけなので、全 x の積和 total=Σleft[x]right[x] も差分更新できる。</p>
+<p>採用する候補: 中央位置を左から一度走査し、値別左右頻度と内積totalを一点差分で維持する。</p>
+<p>各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。</p>
+<p>棄却する候補: 両端 i,k を同値ごとに列挙し、その間の A_j≠A_i の個数を数える。</p>
+<p>同じ値が N 回現れる場合に端点対が Θ(N²) となり、間の個数を O(1) で取っても間に合わない。</p>
+<p>total は左右頻度ベクトルの内積であり、一要素を right から減らす/left へ増やす前にその値の旧寄与を引き、更新後寄与を足せばよい。</p>
+<p>中央値と同じ x の組は A_i=A_j=A_k となり条件外なので、各 j で left[A_j]right[A_j] を明示的に差し引く。</p>
+<p>初期 right を全頻度、left=0,total=0 とする。j を左から処理する際、まず A_j を right から一つ外し total を差分更新する。答えへ total−left[A_j]right[A_j] を加え、次の中央に備えて A_j を left へ一つ加えて total を再度差分更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="三つ組の中央固定">三つ組の中央固定</h3>
+<p>発動条件: i&lt;j&lt;k の両側要素に対称な条件があり、中央要素が除外条件を持つとき。</p>
+<p>左右の頻度・集約量を持ち、j ごとの組数を積で表す。</p>
+<h3 id="頻度ベクトル内積の差分更新">頻度ベクトル内積の差分更新</h3>
+<p>発動条件: 入力indexを一方向に走査すると左右multisetが一点ずつ変わり、Σf_xg_xが毎回必要なとき。</p>
+<p>変化する x の旧寄与だけ引き、新寄与だけ足す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>一見「同値の両端」を選ぶ問題でも、異値条件を持つ中央へ課金すると頻度内積が一走査で更新できる。</p>
+<p>別の問題へ持ち帰る視点: 順序付き三つ組は、どの index を固定すると残り二つが独立な左右選択になるか試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>total は左右頻度ベクトルの内積であり、一要素を right から減らす/left へ増やす前にその値の旧寄与を引き、更新後寄与を足せばよい。 中央値と同じ x の組は A_i=A_j=A_k となり条件外なので、各 j で left[A_j]right[A_j] を明示的に差し引く。 各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>中央 j を right から除いてから寄与を数え、left へ入れるのは数えた後にする。答えは Θ(N³) なので 64 bit を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>更新順を「rightから除く→数える→leftへ入れる」と言語化する。全要素同値の例で除外項により0になることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、左右頻度内積を一要素差分更新。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 3\times 10^5; 1\leq A_i \leq N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,1,1)。</p>
+<ol>
+<li>中央2の位置2では左1一個×右1二個で2。</li>
+<li>中央1の位置3は同値tripleを除外する。</li>
+</ol>
+<p>期待される結果: 条件triple2個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>totalだけで中央寄与を得てよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>中央値と同じ端値pairはA_i=A_j=A_kとなり条件外なのでleft[A_j]right[A_j]を引く。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc318/tasks/abc318_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4</li>
+<li><a href="https://atcoder.jp/contests/abc318/editorial/7068">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC357-F — Two Sequence Queries</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC357-F — Two Sequence Queries</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></p>
+<ul>
+<li>更新作用の合成順と要約への適用を定義し、遅延評価で保てる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>過去の版の保存・rollback・構造共有。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間へ A にx、Bにyを加えると積和は sumAB+y·sumA+x·sumB+len·xy へ変わる。sumABだけでは更新できず、一次の和二つも必要である。</p>
+<p>操作 (x,y) は成分ごとの加算で合成が単なる加算となり、node情報 (len,sumA,sumB,sumAB) への作用も O(1) で閉じる。</p>
+<p>採用する候補: 四集約をnodeに、(addA,addB)をlazy tagに持つ遅延segment treeで範囲加算・積和queryを処理する。</p>
+<p>mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。</p>
+<p>棄却する候補: A,Bそれぞれのrange add用構造を持ち、type3で各要素積を取り直す。</p>
+<p>個別値を得られても区間長分のpoint queryが必要で、一回O(N log N)になり得る。</p>
+<p>sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。</p>
+<p>二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。</p>
+<p>leaf iを (1,A_i,B_i,A_iB_i) とする。opは各成分和。mapping(x,y,node)で sumAB+=y sumA+x sumB+len xy、sumA+=len x、sumB+=len y。lazy tagは加算合成する。type1/2をrange apply、type3でrange productのsumABを出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="積のrange-updateに必要なmoment拡張">積のrange updateに必要なmoment拡張</h3>
+<p>発動条件: 複数配列の積和をqueryし、各配列へ独立な加算が来るとき。</p>
+<p>0次len、一次sumA/sumB、二次sumABまで持って二項展開を閉じる。</p>
+<h3 id="遅延segment-treeの作用設計">遅延segment treeの作用設計</h3>
+<p>発動条件: 区間情報monoidへ更新monoidが準同型として作用するとき。</p>
+<p>mapping・composition・identityを数式から定義する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>欲しい二次量だけでなく、更新式に現れる低次momentを一緒に持つとlazy作用が閉じる。</p>
+<p>別の問題へ持ち帰る視点: range updateで統計量が閉じないとき、展開式に出る補助統計量を状態へ追加する。</p>
+<h2 id="正当性">正当性</h2>
+<p>sumABのcross term更新には更新前sumA,sumBを使うので、式を一括で評価してからsumA,sumBを更新する。 二lazy操作 (x1,y1),(x2,y2) の合成は (x1+x2,y1+y2) で、xy項はmapping時に現在nodeへ自動的に現れる。 mapping・composition・mergeがすべて定数時間で、各query O(log N)になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>sumAB更新より先にsumA/sumBを書換えない。全入力・tag・積をmod正規化し、len xyの乗算幅を確保する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>mapping式を更新前変数で展開し、操作を二回適用した結果とtag合成結果が一致するか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+Q log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times 10^5; 0\leq A_i,B_i\leq 10^9; 1\leq l\leq r\leq N; 1\leq x\leq 10^9; All input values are integers.; There is at least one query of the third type.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2),B=(3,4)、全域でAに2、Bに1を加える。</p>
+<ol>
+<li>旧sumA=3,sumB=7,sumAB=11,len=2。</li>
+<li>新積和11+1·3+2·7+2·2·1=32。</li>
+</ol>
+<p>期待される結果: 直接(3·4)+(4·5)=32と一致。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>sumAを先に7へ変更して式に入れてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>旧sumAを使う必要がある。7を入れると36となりcross termを余計に数える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc357/editorial/10186">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc357-editorial-10186-0ffc8702f9b8507bafcdee69c180255e62398d8223724386832f88075516947d</li>
+<li><a href="https://atcoder.jp/contests/abc357/tasks/abc357_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc357-f-problem-a79b7aaa8ea4d464d60eeb53b25ebc4cbaa9cada5f4c8200d478058990ceb2c5</li>
+</ul></main>
+</body></html>

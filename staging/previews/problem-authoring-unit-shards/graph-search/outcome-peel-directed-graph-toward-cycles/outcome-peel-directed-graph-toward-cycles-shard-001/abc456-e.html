@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC456-E — Endless Holidays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC456-E — Endless Holidays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/directed-core-peeling.md">有向cycle検出・sink/source peeling</a></p>
+<ul>
+<li>三色DFSまたはKahn型peelingの不変条件を説明し、有向cycleの存在を判定して必要ならcycleへ残るcoreを抽出できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>有向cycle検出・sink/source peelingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>曜日はW日で周期的なので、都市x・曜日wを状態にすれば翌日の可能な滞在先が固定有向辺で表せる。無限に休日移動を続けられることは有限状態pathがcycleへ入ることと同値である。 頂点 (x,w) からは、同都市または道路隣接都市 y が曜日w+1にもopenな場合だけ遷移できる。 開始状態も任意なのでgraph内に一つでもcycleがあれば条件を満たし、特定sourceからのreachabilityは不要である。</p>
+<p>採用する候補: N×W のtime-expanded graphを構築し、open条件を満たす stay/road遷移を翌曜日layerへ張って、有向cycleをDFS色またはtopological deletionで検出する。</p>
+<p>同じ (都市,曜日) に再訪すれば以後そのcycleを繰り返せ、無限pathが存在すれば有限頂点性により必ず状態を再訪してcycleを含む。</p>
+<p>棄却する候補: 日数上限を仮定して可能都市集合を日ごとにsimulationし、空になるか観察する。</p>
+<p>cycleに入るまでの長さを任意に打ち切れず、曜日情報なしの都市集合だけでは状態再訪を正しく判定できない。</p>
+<p>頂点 (x,w) からは、同都市または道路隣接都市 y が曜日w+1にもopenな場合だけ遷移できる。</p>
+<p>開始状態も任意なのでgraph内に一つでもcycleがあれば条件を満たし、特定sourceからのreachabilityは不要である。</p>
+<p>各open状態を頂点化し、wからw mod W+1へstay辺と各道路両方向辺を条件付きで追加する。全頂点に三色DFSを行いback edgeを見つけるか、indegree削除後に残る頂点があるかでYes/Noを返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="時間展開graph">時間展開graph</h3>
+<p>発動条件: 環境条件が短い周期で変わる無限時系列の移動を扱うとき。</p>
+<p>場所×周期phaseを有限状態にして一日遷移を辺にする。</p>
+<h3 id="無限pathのcycle判定">無限pathのcycle判定</h3>
+<p>発動条件: 有限有向graphで任意開始から永遠に遷移可能かを問うとき。</p>
+<p>有向cycleの存在へ同値変形する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>周期的な時間依存graphはphaseを状態へ組み込むと静的graphになり、無限性はcycleへ置き換わる。</p>
+<p>別の問題へ持ち帰る視点: 開始点自由の無限walkではcycleへのreachabilityではなくcycle存在だけを調べればよい。</p>
+<h2 id="正当性">正当性</h2>
+<p>都市と曜日が同じなら次日の合法滞在移動が同じなので有限状態に閉じる。無限合法walkなら状態再訪でcycleを含み、cycleがあれば反復して無限移動可能。open条件付きedgeを正確に構築しcycle存在を調べれば必要十分。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>曜日Wから1へのwrapを正しく張り、出発日・到着日のopen条件を問題定義通り両方確認する。再帰DFSならNW深さを避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一日の遷移辺のopen条件を書き、無限pathなら有限状態の重複からcycle、cycleなら反復可能という双方向を証明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>都市N道路M、周期W。状態NW、遷移 O(W(N+M))、cycle DFS/peelingも同時間。</p>
+<h3 id="空間">空間</h3>
+<p>周期graphとvisited O(W(N+M))。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 10^5; 1 \leq N \leq 10^5; N-1 \leq M \leq 10^5; 1 \leq U_i \lt V_i \leq N; Any pair of cities can be reached from each other by traversing some roads.; 2 \leq W \leq 10; T,N,M,U_i,V_i,W are integers.; S_i is a string of length W consisting of o, x.; The sum of N over all test cases is at most 10^5.; The sum of M over all test cases is at most 10^5.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>周期2、一都市、両曜日open。</p>
+<ol>
+<li>状態(1,1)→(1,2)にstay。</li>
+<li>翌日(1,2)→(1,1)。</li>
+<li>二状態cycleを永久反復。</li>
+</ol>
+<p>期待される結果: Yes</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>都市だけの自己loopがあるから曜日を省いてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。翌曜日がclosedならそのstayは合法でなく、周期状態を持つ必要がある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc456/tasks/abc456_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc456-e-problem-c3e51b63fd40c2ce2328caafad47b2b781ce1afa77274de1f82ff6145927c238</li>
+<li><a href="https://atcoder.jp/contests/abc456/editorial/19849">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc456-editorial-19849-c986ee8612d12ce480a296e55c2761fbd42c85ed54d8d94616a63d4505cc0d52</li>
+</ul></main>
+</body></html>

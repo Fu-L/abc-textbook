@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC242-F — Black and White Rooks</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC242-F — Black and White Rooks</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>一つの行に白黒両方があれば、その行で色が切り替わる隣接二 rook の間に別 rook はなく互いに攻撃する。よって白が使う行・列と黒が使う行・列はそれぞれ互いに素であることが必要十分になる。</p>
+<p>具体的な行列集合は対称なので、各色が使う行数・列数だけを固定し、選ぶ集合数を二項係数で掛ければ指数的な subset 選択を避けられる。</p>
+<p>採用する候補: 使用行列数 (i,j,k,l) を列挙し、選んだ n×m 全行全列を使って x rook を置く個数 f(n,m,x) を包除原理で前計算して組み合わせる。</p>
+<p>色間の非攻撃条件を support 集合の disjointness、同色配置を全 support 使用の cell subset 数へ分離できる。</p>
+<p>棄却する候補: 白黒それぞれが使う行集合・列集合を bitmask で全列挙する。</p>
+<p>N,M は50で、行または列 subset だけでも指数個になる。</p>
+<p>f(n,m,x)=Σ_{a=0}^nΣ_{b=0}^m(-1)^{a+b}C(n,a)C(m,b)C((n-a)(m-b),x) と、空の行・列を包除すれば求められる。</p>
+<p>x=B,W について全 n≤N,m≤M の f を計算する。黒の使用行 i・列 k、白の使用行 j・列 l を正の範囲で選び、C(N,i)C(N-i,j)C(M,k)C(M-k,l)f(i,k,B)f(j,l,W) を全て加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="support-集合のサイズ固定">support 集合のサイズ固定</h3>
+<p>発動条件: ラベル付き行列の具体的な support 選択は多いが、配置数が support の大きさだけに依存するとき。</p>
+<p>サイズを列挙し、具体的集合の選び方を binomial coefficient として後掛けする。</p>
+<h3 id="空行空列の包除">空行・空列の包除</h3>
+<p>発動条件: 選んだ長方形の全行・全列を少なくとも一度使う cell subset を数えるとき。</p>
+<p>空にする行列集合を選び、残る cell から選ぶ個数を符号付きで加える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>rook の間に駒があれば遮られる規則でも、同じ行に二色が共存すれば色境界の隣接 rook が必ず攻撃するため、support disjoint が必要になる。</p>
+<p>別の問題へ持ち帰る視点: 遮蔽物付き攻撃条件では、同一直線上の並びで異種が隣接する境界が生じるかを見る。</p>
+<h2 id="正当性">正当性</h2>
+<p>一行に両色があれば色の異なる隣接rookが攻撃し合うので、使用行集合も列集合も両色で互いに素が必要十分。使用行列数を固定し空行・空列を包除で除いたfを使うと、各配置の実際の使用集合が一意になる。黒用集合と残りからの白用集合の二項係数を掛けることで全配置を一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>B&gt;n·m などの二項係数は0として扱う。両色は1個以上なので使用行列数も正で、白用集合は黒用を除いた残りから選ぶ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ行に B-W-B と並ぶ例でも中央の色境界に攻撃 pair が残ることを確認し、support disjoint の必要性を説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²M²)。各色の全行列数の包除と使用行列数の全組を列挙する。</p>
+<h3 id="空間">空間</h3>
+<p>O(NM+NM+B+W)の係数表、階乗表はO(NM)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 50; 1 \leq B,W \leq 2500; B+W \leq N \times M; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>2×2盤、黒白各1個。</p>
+<ol>
+<li>黒の位置は4択。</li>
+<li>白は黒と異なる行・列の対角位置だけ。</li>
+</ol>
+<p>期待される結果: 4配置。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じ行に黒白を置き、その間を同色rookで遮れば合法か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>行のrookを位置順に並べれば色が切り替わる隣接pairが必ずあり、その間に遮蔽物はない。</p>
+<p>確認結果: 同じ使用行を共有できない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc242/editorial/3522">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-editorial-3522-d39e3de67b27391779fc77a8c4b78a0c312a6680143b1c75af6a07908174f39f</li>
+<li><a href="https://atcoder.jp/contests/abc242/tasks/abc242_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-f-problem-a91e15c3ea5df8a298ef6f8f613cebf8ab72483d0ca9df9344328e0bb0171108</li>
+</ul></main>
+</body></html>

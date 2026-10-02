@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC412-F — Socks 4</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC412-F — Socks 4</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>状態から先の期待費用・期待回数を定義し、一歩分の費用と未来の期待値を分け、自己ループを移項した方程式を解ける。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>初めに外へ出ている色 C の一足を総数へ戻して数えると、各色総数 A_i とタンス内総数 S=ΣA_i-1 は、どの色を保持していても一定になる。 二色を外に持ったときは総数の多い色を保持するのが最適で、同数なら固定順でtie-breakできる。Aを昇順に並べれば状態遷移は現在色より大きい添字へのみ変化する。 j&lt;iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j&gt;iならjを保持して既計算dp_jへ移る。 X_i=Σ_{j&lt;i}A_j/S、Y_i=Σ_{j&gt;i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。</p>
+<p>採用する候補: 色iを保持中の残りdraw期待値 dp_i を、A_i昇順でiの降順に解く期待値DP</p>
+<p>dp_i=1+Σ_{j&lt;i}(A_j/S)dp_i+Σ_{j&gt;i}(A_j/S)dp_j を移項し、prefix A和とsuffix A_jdp_j和を差分管理すればsort後O(N)で求まる。</p>
+<p>棄却する候補: 現在の保持色から全draw色への Bellman 方程式を密行列として解く</p>
+<p>N状態の一般連立方程式にすると三次時間・二次memoryとなり、最適保持規則による上三角な依存を使っていない。</p>
+<p>j&lt;iを引いた場合は多い色iを保持して同じdp_iへ戻り、j=iなら即終了、j&gt;iならjを保持して既計算dp_jへ移る。</p>
+<p>X_i=Σ_{j&lt;i}A_j/S、Y_i=Σ_{j&gt;i}A_jdp_j/S とすれば dp_i=(1+Y_i)/(1-X_i)。iを一つ下げる更新は累積和の一項追加・削除だけである。</p>
+<p>元のA_Cを1増やし、(A_i,固定tie順,元id)をsortしてCの新indexを記録する。S=ΣA-1、prefix sumを作り、i=N..1で dp_i=(1+suffixWeighted/S)/(1-prefix[i-1]/S) を計算後 suffixWeighted+=A_i dp_i とする。初期色のdpを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="期待値dpの自己loop消去">期待値DPの自己loop消去</h3>
+<p>発動条件: 一step後に同じ状態へ戻る確率を含む期待時間を求めるとき。</p>
+<p>dp=1+qdp+r を (1-q)dp=1+r と移項する。</p>
+<h3 id="状態順序を作る貪欲方策">状態順序を作る貪欲方策</h3>
+<p>発動条件: 二候補から将来期待時間を小さくする一方を保持し、状態遷移を単調化できるとき。</p>
+<p>総数順に色を並べ、多い色だけへ状態が上がるようにする。</p>
+<h3 id="prefixsuffix集計">prefix/suffix集計</h3>
+<p>発動条件: 各iで左側の係数和と右側の重み付きDP和が必要なとき。</p>
+<p>prefix Aと降順更新のsuffixWeightedで二重和を消す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>保持中の一足を総数へ含めると、タンス内総数と色の比較尺度が状態によらず固定され、期待値式が三角化する。</p>
+<p>別の問題へ持ち帰る視点: 状態により母集団が一個だけ欠ける抽選では、その要素を含む固定総数へ正規化して分母と順位を共通化する。</p>
+<h2 id="正当性">正当性</h2>
+<p>外の一足を戻した総数 a_i とタンス総数 S=Σa−1は保持色に依らない。二色なら総数の大きい色を保持する方が成功確率と将来選択で劣らない。sort後、保持色iより小さい色のdrawは自己ループ、大きい色jは状態jへ、同色a_i−1枚は終了。E_i=1+(prefixLess/S)E_i+Σ_{j&gt;i}(a_j/S)E_jを移項した式を逆順に計算する。同数色の固定tie順による片方向遷移も実際の最適方策を表す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>増やした後の色Cをsort後も追跡し、同数色のtie-breakを一貫させる。Sと1-X_iの逆元が取れること、A_i-1枚の同色drawは終了項であることを確認する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=1、初期色が最小／最大、同数色、二色だけの例を有限Markov方程式またはsimulationと比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>色数 N。sort O(N log N)、suffix和による期待値DP O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>色の対応、prefix、DPで O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3 \times 10^5; 1 \leq C \leq N; 1 \leq A_i \leq 3000; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>タンス枚数A=(1,2)、外の色C=1。</p>
+<ol>
+<li>戻した総数は(2,2)、S=3。</li>
+<li>同じ総数なのでどちらを保持しても次drawの同色成功確率1/3。</li>
+<li>失敗後も成功確率1/3で E=1+(2/3)E。</li>
+</ol>
+<p>期待される結果: 期待回数3</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>外の一足を加えず(1,2)を総数とすると何を誤るか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>保持色1の同色成功枚数を0と見なしてしまう。元Aはタンス内だけの数で、状態間の総数不変条件には外の一足も必要。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc412/editorial/13390">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc412-editorial-13390-b263d8539d08b58d21d500d328245a667f0c65f8ff96b3109417e134c1f30b55</li>
+<li><a href="https://atcoder.jp/contests/abc412/tasks/abc412_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc412-f-problem-352d09bec1db82606463a985d7fc1f10a75f6f5ef3246f6d36c1e8401ccd6787</li>
+</ul></main>
+</body></html>

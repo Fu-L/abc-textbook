@@ -1,0 +1,77 @@
+{
+  "shardId": "outcome-count-through-cyclic-exponents-shard-001",
+  "primaryOutcomeId": "outcome-count-through-cyclic-exponents",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc212-g",
+    "abc335-g"
+  ],
+  "homeUnitId": "unit-cyclic-group-exponent-counting",
+  "prerequisiteOutcomeIds": [
+    "outcome-find-period-by-multiplicative-order"
+  ],
+  "dependencyShardIds": [
+    "outcome-find-period-by-multiplicative-order-shard-001"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+    "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "e5be4b758b25aefcc5205da15e8c02e2096dd0f19db122944e70ceb3bccfd190",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc212-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc335-g",
+      "path": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc335-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

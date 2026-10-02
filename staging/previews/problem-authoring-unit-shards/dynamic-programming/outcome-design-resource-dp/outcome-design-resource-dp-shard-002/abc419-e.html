@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC419-E — Subarray Sum Divisibility</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC419-E — Subarray Sum Divisibility</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>全length-L window sumがmod Mで等しい条件は、隣り合うwindow差A_i-A_{i+L}≡0と同値である。さらに最初のwindow sum≡0なら全windowが0になる。 よって同じindex mod Lの列A_i,A_{i+L},…は最終的に共通residueを持つ必要があり、residueを決めれば各要素の最小incrementは独立に決まる。 同じclassの各値をkへ合わせるには余りを一周以上増やす利点がなく、incrementは一意に(k-A_p+M) mod Mの最小非負値でよい。 class iの代表residue kは最初のwindowにちょうど一回現れるため、全classのk和≡0が最初のwindow divisibilityそのものになる。</p>
+<p>採用する候補: 各residue class iと目標値kのcost f[i][k]を前計算し、最初のL要素のresidue和を0にするmod M knapsack DP</p>
+<p>fはΣ((k-A_p) mod M)。L個のclassについて選んだkの和mod Mを状態にすればO(NM+LM^2)で最小総incrementを得られる。</p>
+<p>棄却する候補: 各A_iへのincrement 0..M-1を全列挙し、全window条件を検査する</p>
+<p>M^N候補があり、window差からindex mod Lごとに同じresidueになる強制構造を使っていない。</p>
+<p>同じclassの各値をkへ合わせるには余りを一周以上増やす利点がなく、incrementは一意に(k-A_p+M) mod Mの最小非負値でよい。</p>
+<p>class iの代表residue kは最初のwindowにちょうど一回現れるため、全classのk和≡0が最初のwindow divisibilityそのものになる。</p>
+<p>i=1..L,k=0..M-1についてf[i][k]=Σ_{p=i,i+L,…}((k-A_p+M)%M)を計算する。dp[0]=0から各class iを処理し、next[(r+k)%M]=min(next,dp[r]+f[i][k])と更新する。L class後のdp[0]を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="sliding-window差分">sliding-window差分</h3>
+<p>発動条件: 同じ長さの隣接window制約を要素間関係へ変えるとき。</p>
+<p>window sum差からA_i≡A_{i+L}を導く。</p>
+<h3 id="剰余class分解">剰余class分解</h3>
+<p>発動条件: indexがL離れた要素に同じmod条件が連鎖するとき。</p>
+<p>index mod Lごとに目標residueと合わせるcostを独立前計算する。</p>
+<h3 id="mod-knapsack-dp">mod knapsack DP</h3>
+<p>発動条件: 複数groupからresidueを一つずつ選び、総和mod Mを指定したいとき。</p>
+<p>classごとのcostを用いて累積residue0の最小値を求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>全windowを直接制約にせず、隣接差でL本のresidue chainと代表和一条件だけに分解する。</p>
+<p>別の問題へ持ち帰る視点: 重なる固定長window制約は、隣接windowの差を取って離れた要素の周期関係を抽出する。</p>
+<h2 id="正当性">正当性</h2>
+<p>隣接窓差は最終値A_i−A_{i+L}なので、全窓を0modMにするなら各index classのresidueが同じでなければならない。逆にこの一致と最初の窓residue0で全窓0が保証される。classの共通residue k固定時、各要素をそこへ増やす最小非負量は(k−A_i)modMで独立。classを一回ずつ処理するDPは全residue選択を網羅し、最初の窓は各class一要素ずつなので最終residue0が必要十分。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>incrementは負方向にできないのでmod差の最小非負代表を使う。cost最大はN(M-1)でint範囲内でもINF加算を安全にし、L=Nのclass長1も扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>L=1、L=N、既に全window divisible、同classでwrapが必要な例をincrement全探索と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 要素、法 M、窓長 L。class費用化 O(NM)、residue合成 O(LM²)、全体 O(NM+LM²)。</p>
+<h3 id="空間">空間</h3>
+<p>class費用O(LM)、rollingDP O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 500; 1 \leq L \leq N; 0 \leq A_i &lt; M; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3,L=2,M=3,A=(0,1,2)。</p>
+<ol>
+<li>class1は0,2で、residue0費用1、1費用3、2費用2。</li>
+<li>class2は1で、residue0費用2、1費用0、2費用1。</li>
+<li>和0mod3候補は(0,0):3,(1,2):4,(2,1):2。</li>
+</ol>
+<p>期待される結果: 2（最終列2,1,2）</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同classを同じ整数値まで増やす必要があるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>ない。窓和の条件はmodMだけなので同residueで十分。M倍の余分な増加を避ける。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc419/tasks/abc419_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc419-e-problem-9745e23ca858252ce68f4b06c24710e6580f6033bbb7ecf3ee09ca6b8e9fa693</li>
+<li><a href="https://atcoder.jp/contests/abc419/editorial/13669">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc419-editorial-13669-ea28eb62bdc6407b05afcca3ca925a26b0d33500cf664daecef4d5e1abdacf53</li>
+</ul></main>
+</body></html>

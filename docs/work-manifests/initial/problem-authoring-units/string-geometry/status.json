@@ -1,0 +1,232 @@
+{
+  "domain": "string-geometry",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shards": [
+    {
+      "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 6,
+      "subjectDigest": "d4255c95cd23ff46f1d1f7e7bd78d11552504dbdbabc1a33b3c749ca9d7a3004",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-finite-string-automaton-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 4,
+      "subjectDigest": "ab763d734fd34a57dcee772194114eb23a0bddfb1c6358b7a33c6723028081aa",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-multi-pattern-automaton-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 2,
+      "subjectDigest": "ed82eab51a63724bbba7caa8953be9957d4c26596a92ef8216dd9c321866e7f8",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-prefix-match-state-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 3,
+      "subjectDigest": "04c46394b3f512660fcc245b80c45e8e09142a26fce7422d39e3ff53ad8cadd4",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-suffix-automaton-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "edbaf2fbfdfcfcd0c58865f750b4fb0e282f405f69606894077d48a5d3db7396",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-build-suffix-lcp-index-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 6,
+      "subjectDigest": "b96b9acb2e03b2615b1b0beea84028b2a886c83a7a099fb0dc3c3773d956718a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-characterize-palindrome-intervals-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 2,
+      "subjectDigest": "5149992617fe69321489785cc9de10f721006efa1d8a4c61a84464dfdcc7e9e6",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-detect-crossing-by-cyclic-order-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "7a1903d0f89c60e8d106af988f0aac69bc1acbeea536e5466c8e076fb86b0e9d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-determinize-automaton-by-subsets-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "95ac9da95b36a84b54b2df24e255923860a876dd7e98c77f6a2e840942b183ff",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-evolve-run-length-encoded-state-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "9ccedb2f58491464d360e5df6f2f272b979cec95196ac7526e73d72340d42023",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 4,
+      "subjectDigest": "7a8e7ce43541a24f790675785666c21b6b12aa82d53a6f5737b5f6ffc503bdc2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 5,
+      "subjectDigest": "f23d757ceb81a73c7b68eeb0a3ba4380f7e561db3cecef4717f270a4d52c0e2d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "de66ce1295a5983b0f8300ca16cc4ea8e3c3d42e2327bc71d05e9017fbbfd52b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 4,
+      "subjectDigest": "1ca6d915450b8fc3112b5deb840ef2ab2f16b87e01216987bd4a9f6506847888",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-by-line-envelope-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 4,
+      "subjectDigest": "58a74794b88b38f5b6a789a158d54706938d8bec8907261b6402839610b2eee0",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-monge-transitions-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "7e93beb1086fe71238cba30d1d3cabfba1c220c198f99cf218ee97bf73a643cb",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-ratio-by-parametric-search-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 3,
+      "subjectDigest": "1b6188c08f4d01e28267e9bb3a31258401ceda58d62ee8fceb910e98a8578bcc",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "9f9ddac7c47addfd1bf8b7111887d36232d2b43d6c1533233f6acfd6cd66e7bc",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-univariate-convex-function-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 2,
+      "subjectDigest": "6df4d692fdf21170c56e6d1a9f8f62bf3f5980538d8f47aa09ff4ce025df2bee",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-query-recursively-defined-string-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 4,
+      "subjectDigest": "c0dd6b621429af3f41dc5dd561e407619c20fb1061c9472cc583ea71e959558c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 8,
+      "subjectDigest": "dd1ee2f0eeddbed79bf2bc734e93d75848287537484a4b92010f1fec5882a909",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
+      "domain": "string-geometry",
+      "problemCount": 7,
+      "subjectDigest": "7b187c2ec0bf628668a16f33a586e86412565ceabd9f2cebbc416432153ca0b3",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-represent-convex-intersection-by-halfplanes-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "8e476c6678be8fb62be000fd87281d9fb27730960141969a520f77d34b860261",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 6,
+      "subjectDigest": "95e402531d4bc96fdcd574ce7699a6e452d302559d57de33a34bc3f97b0d283a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-isotonic-regression-by-pav-shard-001",
+      "domain": "string-geometry",
+      "problemCount": 1,
+      "subjectDigest": "d662073b66430cdfb681ec72f36de3cb83fad37665f229e0ea255b27f24a7d53",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    }
+  ],
+  "scope": "Independent shard evidence only; no global join or human acceptance."
+}

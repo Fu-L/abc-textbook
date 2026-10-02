@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC288-F — Integer Division</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC288-F — Integer Division</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-prefix-partition.md">prefix分割DP</a></p>
+<ul>
+<li>列の最後のブロックを固定し、処理済みprefixの答えから次の切れ目へ遷移する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>prefix分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最後のsplit位置をjとすると、prefix X[1,j]の全分割積へ最後の整数X[j+1,i]を掛けるので、dp_i=Σ_{j=0}^{i-1}dp_j·X[j+1,i]となる。 substring整数は末尾digit d_iを付けるとX[j+1,i]=10X[j+1,i-1]+d_iになり、二次和を前段DPとprefix sumへまとめられる。 10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。 新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。 dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。</p>
+<p>採用する候補: dp_iの最後のsplitによる和を式変形し、dp prefix sumを持って一次漸化式で更新する。</p>
+<p>全split候補の寄与を10dp_{i-1}+d_iΣdp_jへ集約し、N≤2×10^5を線形走査できる。</p>
+<p>棄却する候補: 各末尾iで最後のsplit jを全列挙し、substring値を計算して加算する。</p>
+<p>状態ごとにO(i)候補があり、合計O(N^2)になる。</p>
+<p>棄却する候補: 2^{N-1}通りのsplit subsetを生成して積を求める。</p>
+<p>split位置ごとの二択を直接列挙すると指数時間になる。</p>
+<p>10dp_{i-1}は、以前の全最後blockを1桁左shiftした寄与の総和に一致する。</p>
+<p>新digit d_iは最後のsplit jにかかわらずd_i·dp_jとして加わるため、Σ_{j=0}^{i-1}dp_jだけ保持すればよい。</p>
+<p>dp_0=1は先頭から1blockを作るj=0の空prefixの積を表すが、i=1は一般式の10dp_0を含めず別初期化する。</p>
+<p>mod 998244353でdp_0=1、dp_1=d_1、prefix=dp_0+dp_1とする。i=2..Nについてdp_i=10dp_{i-1}+d_i·prefix(dp_0..dp_{i-1})を計算し、prefixへdp_iを加える。最後のdp_Nを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最後の区切り位置dp">最後の区切り位置DP</h3>
+<p>発動条件: 列を連続blockへ分割した全結果を数え上げるとき。</p>
+<p>最後のblock開始位置で場合分けしてprefix解と結合する。</p>
+<h3 id="式変形による遷移集約">式変形による遷移集約</h3>
+<p>発動条件: 全過去状態との遷移weightが桁追加などの共通漸化式を持つとき。</p>
+<p>前段の答えとdp累積和へ二次和を圧縮する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>最後の数を1桁伸ばす操作と直前で新しくsplitする操作を、10倍項とdigit×全prefix解の項として一度に数えられる。</p>
+<p>別の問題へ持ち帰る視点: 分割DPでは「最後のblockを延長」と「新blockを開始」の寄与が少数のaggregateで表せないか式を展開する。</p>
+<h2 id="正当性">正当性</h2>
+<p>最後blockへ次digitを連結すると各分割積の末尾因子は十倍されdp旧値の10倍を作る。次digitの加算寄与は全旧切れ目prefix積和に比例するので d_iΣdp_j。これに新block開始も含まれ、最後blockの切れ目分類で全分割を一度ずつ数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>i=1へ一般漸化式を適用すると不要な10dp_0が入るため、base caseを分ける。</li>
+<li>各乗算・加算をmodで正規化し、digitは文字から整数へ変換する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>2桁abで分割なしの10a+bと分割ありのabが漸化式のどの項から出るか展開し、dp_0とdp_1の初期化を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>桁数N。prefix和更新で O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>直前dpと累積和 O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; X has N digits in decimal representation, none of which is 0.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=123。</p>
+<ol>
+<li>分割積は123、1×23=23、12×3=36、1×2×3=6。</li>
+<li>dp1=1、dp2=10+2×2=14。</li>
+<li>dp3=140+3×(1+1+14)=188。</li>
+</ol>
+<p>期待される結果: 188</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>abc224-fの式値総和168と同じ計算か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>違う。本問はblockの積を足し、224-fはblockの和を足す。123で188と168に分かれる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc288/editorial/5667">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc288-editorial-5667-d41bd1feaccc5841e9212144b8ff4f65dd05dd41017569ad5aef4434fc2a0a8f</li>
+<li><a href="https://atcoder.jp/contests/abc288/tasks/abc288_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc288-f-problem-2a611b7afef5d226a91904818b9c889ce3c20ae510e938e77bae7976ec80bd70</li>
+</ul></main>
+</body></html>

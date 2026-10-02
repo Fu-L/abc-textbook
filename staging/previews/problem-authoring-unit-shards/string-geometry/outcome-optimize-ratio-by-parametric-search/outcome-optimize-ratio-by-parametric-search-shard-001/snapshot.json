@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-ratio-by-parametric-search-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "1b6188c08f4d01e28267e9bb3a31258401ceda58d62ee8fceb910e98a8578bcc",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "feb8bdfe6b7030e14627fbe85ec02a474ad5f85220de9007ac498a1005055d00",
+  "reviewDigest": "b5bb3fb5e8cf9d4d35163b4376e8237cbc51d3d7f86b078b5b747db457508664",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc236-e.html",
+      "digest": "d2d7f8709dd82800ca90e4d06f893ca955d5cb49871e377fabccf054dde8a4bb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc294-f.html",
+      "digest": "3a60f1826b0e1362531920d93bf2462cf5046ab7695fccd0c6207674e0256d1f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc324-f.html",
+      "digest": "528a6b697759140d023055b97878de7bb0bef83f17c552ecfd689b81aa25a928"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/index.html",
+      "digest": "83a61bf07b4772b645ae509e76eea5d05cf73a84f0635722bda18a724157cacb"
+    }
+  ],
+  "snapshotDigest": "fbc243e8fec443373cfed2cbefce13fa070ac12313491beb167a118e768a8d49"
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC357-E — Reachability in Functional Graph</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC357-E — Reachability in Functional Graph</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/functional-graph-decomposition.md">関数グラフのcycle・tree分解</a></p>
+<ul>
+<li>後続が一意なグラフをcycleと流入木へ分け、各頂点が属する構造を特定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>関数グラフのcycle・tree分解の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>outdegree 1 の functional graph の各弱連結成分は、唯一の有向cycleと、そこへ流れ込むreverse treesからなる。 cycle上の頂点からはcycle長 c 個すべてへ到達し、tree頂点uからはcycle c 個に加えてcycleまでのpath上の depth(u) 個へ到達する。 Kahn法でindegree0を順に除いた後に残る頂点はcycle頂点だけで、各cycleを一周して同じ長さを全頂点へ設定できる。 cycleからreverse graphを外向きにたどると、子uのreachable数は親a_uの値+1となり、共有suffixを一度だけ再利用できる。</p>
+<p>採用する候補: indegree削除またはSCCでcycleを特定し、cycle長を基底値としてreverse edge方向へ到達数+1を伝播する。</p>
+<p>各頂点・辺を定数回だけ処理し、全uのreachable countを O(N) で得て合計できる。</p>
+<p>棄却する候補: 各始点uからa_iを辿り、最初の重複まで訪問数を数える。</p>
+<p>長いtailを多数の始点が共有する場合、同じsuffixを繰り返し歩いて O(N²) になる。</p>
+<p>Kahn法でindegree0を順に除いた後に残る頂点はcycle頂点だけで、各cycleを一周して同じ長さを全頂点へ設定できる。</p>
+<p>cycleからreverse graphを外向きにたどると、子uのreachable数は親a_uの値+1となり、共有suffixを一度だけ再利用できる。</p>
+<p>全indegreeとreverse adjacencyを作り、queueでindegree0頂点を削除し順序を保存する。残存未訪問頂点ごとにcycleを列挙して長さ c をansCountへ代入する。削除順を逆にたどり count[u]=count[a_u]+1 とし、全 count を64 bitで合計する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="functional-graph-のcycle-peeling">functional graph のcycle peeling</h3>
+<p>発動条件: 各頂点の遷移先が一意で、cycleと流入木を分離したいとき。</p>
+<p>indegree0から除去し、残存部分をcycle、除去逆順をtree DP順とする。</p>
+<h3 id="共有suffixのdp">共有suffixのDP</h3>
+<p>発動条件: 各始点の一意な遷移列が途中から合流し、到達数を全点で求めるとき。</p>
+<p>次頂点の答え+1を逆topological順に伝える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>到達可能数はcomponent全体サイズではなく「自分からcycleまでのdepth＋cycle長」で、reverse subtreeの兄弟へは到達しない。</p>
+<p>別の問題へ持ち帰る視点: functional graphではundirected componentとdirected reachable setを混同せず、tailとcycleへ分ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>cycle点の到達集合はcycle全体。木頂点uは自身と後継の到達集合で、自身は後継から戻れないためcount[u]=count[A_u]+1。削除逆順なら後継が先に計算され、全到達pairを始点ごとの和でちょうど一度数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>self-loopもcycle長1として扱う。答えは最大N²なので64 bitを使い、peel順を逆にしないまま更新しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>一成分をcycleと逆向き木に描き、どの頂点へは到達しないかも確認する。peeling後の残存条件と逆順DPをセットで覚える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点に対して O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>出辺、入次数、削除順とcount O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq a_i \leq N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,3,2,3)。</p>
+<ol>
+<li>cycle2,3のcountは2。</li>
+<li>木頂点1,4はそれぞれ3。</li>
+<li>和3+2+2+3。</li>
+</ol>
+<p>期待される結果: 10</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>tree頂点のcountへcycle長を毎段加えてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。後継countに既にcycle全体が含まれるので自身の1だけを加える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc357/tasks/abc357_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc357-e-problem-64307c171532025fae3638a6c13355395f10cf6cbbc3eb9d72269d67bba48256</li>
+<li><a href="https://atcoder.jp/contests/abc357/editorial/10185">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc357-editorial-10185-02035c2aaf509823d56034c354d137d0ffb8eb747241aa8cb9ca245e69b7a846</li>
+</ul></main>
+</body></html>

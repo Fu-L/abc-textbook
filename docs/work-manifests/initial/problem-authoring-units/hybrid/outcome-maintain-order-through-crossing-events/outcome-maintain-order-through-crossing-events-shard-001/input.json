@@ -1,0 +1,78 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
+  "packets": [
+    {
+      "problemId": "abc344-g",
+      "learningOutcomeIds": [
+        "outcome-maintain-order-through-crossing-events"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep"
+      ],
+      "excludedTopics": [
+        "kinetic sorting・交差event順序更新の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-kinetic-order-maintenance",
+        "tag-event-sweep"
+      ],
+      "constraints": [
+        "Time limit: 10 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 5000; 1 \\le Q \\le 10^7; |X_i|, |Y_i| \\le 10^8; The pairs (X_i,Y_i) are distinct.; 0 \\le G_0 < (2^{31}-1); 0 \\le R_a \\le 10^8; 0 \\le R_b \\le 10^{16}"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "現在score順で隣接するXの異なる二点は、等値になるrational slopeを越えた時だけswapする。最小の次crossingをpriority queueで処理し、swap後に新しく隣接したpairのeventだけを追加すればsorted orderを連続的に保てる。 全pairの順序反転は高々O(N^2)回で、各queryは現在のsorted score列をbinary searchできる。",
+          "sourceRevisionIds": [
+            "source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd",
+            "source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd",
+          "path": "src/content/sources/abc316-abc367/source-abc344-editorial-9491-1b4a4b6aad92d2f681c081c3b4ff810904462a03e22b918e8b6d8d2eadcc55fd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc344_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3",
+          "path": "src/content/sources/abc316-abc367/source-abc344-g-problem-d809ded0a0e2df95e9eb3d8af3f604d216fa6b1928af47694c116afc97a46ef3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc344_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

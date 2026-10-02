@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC275-F — Erase Subarrays</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC275-F — Erase Subarrays</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最終的に各 a_i を残すか消すかを b_i∈{1,0} で表すと、目標和は Σa_i b_i=x になる。 1 回の操作で消せるのは元の添字上で連続する 0 の塊であり、必要操作数は 0-run の個数、すなわち 1→0 の境界数になる。 b_0=1 と仮定すれば、先頭から削除する場合も通常の 1→0 遷移として数えられ、端の特別扱いが消える。 a_i は正なので、残した和が M を超えた状態は将来 1,…,M に戻らず、保持しなくてよい。</p>
+<p>採用する候補: prefix、残した要素の和、直前を残したかの DP で、0-run を開始する時だけ費用 1 を加える。</p>
+<p>和の knapsack 状態に直前 bit を足すだけで、区間削除回数を局所遷移として数えられる。</p>
+<p>棄却する候補: 通常の部分和 DP で消した要素数を最小化する。</p>
+<p>同じ個数を消しても連続なら 1 操作、分散すれば複数操作なので、削除個数は目的関数を表さない。</p>
+<p>b_0=1 と仮定すれば、先頭から削除する場合も通常の 1→0 遷移として数えられ、端の特別扱いが消える。</p>
+<p>a_i は正なので、残した和が M を超えた状態は将来 1,…,M に戻らず、保持しなくてよい。</p>
+<p>dp[sum][last] を最小操作数として dp[0][1]=0 から始める。a_i を残すなら sum+a_i,last=1 へ同費用、消すなら sum,last=0 へ last=1 のときだけ +1 して更新し、各 x の min(dp[x][0],dp[x][1]) を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="run-数を数える-01-dp">run 数を数える 0/1 DP</h3>
+<p>発動条件: 選択結果の連続 block 数が費用になり、左から 1 要素ずつ決められるとき。</p>
+<p>直前の選択状態を持ち、block を開始する境界でだけ費用を増やす。</p>
+<h3 id="目的値で切る-knapsack">目的値で切る knapsack</h3>
+<p>発動条件: 重みが正で、必要な部分和が上限 M までに限られるとき。</p>
+<p>sum≤M の状態だけを保持して全 x の最小費用を同時に求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>区間を何度消すかという操作列を、最終的な keep/delete 列の 0-run 数へ変換すると、操作順序が消えて局所 DP になる。</p>
+<p>別の問題へ持ち帰る視点: 区間操作の最小回数では、最終状態を二値列にして変化点や連結成分数として費用を書けないか調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>削除操作数は消す位置の連続run数。直前が保持なら削除開始で1、削除なら継続で0を加えるとrun数を正確に数える。和と直前bitは未来の費用に十分なので同状態最小だけ残せる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>到達不能を十分大きい INF で初期化し、rolling array を使う場合は各 i で次配列を初期化する。</li>
+<li>最後が削除中でもその 0-run は開始時に既に数えているため、末尾で追加費用は不要である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>keep/delete 列 1001011000 の 0-run と操作数を対応させ、先頭・末尾の 0-run が遷移のどこで数えられるか追跡する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>列長N、出力和上限M。二bit knapsack O(NM)。</p>
+<h3 id="空間">空間</h3>
+<p>rolling sum×last O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,M \leq 3000; 1 \leq a_i \leq 3000; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,1)、目標和2。</p>
+<ol>
+<li>中央2だけ残すと左右を別runで消し2操作。</li>
+<li>両端1を残して中央だけ消すと1操作。</li>
+<li>小さい方。</li>
+</ol>
+<p>期待される結果: 1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>末尾削除runを最後にもう1足すか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>足さない。run開始時に既に費用1を加えており二重計上になる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc275/editorial/5140">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de</li>
+<li><a href="https://atcoder.jp/contests/abc275/tasks/abc275_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834</li>
+</ul></main>
+</body></html>

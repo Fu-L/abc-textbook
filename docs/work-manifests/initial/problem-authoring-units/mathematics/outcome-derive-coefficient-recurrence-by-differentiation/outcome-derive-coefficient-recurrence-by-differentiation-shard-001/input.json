@@ -1,0 +1,81 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-derive-coefficient-recurrence-by-differentiation-shard-001",
+  "packets": [
+    {
+      "problemId": "abc230-h",
+      "learningOutcomeIds": [
+        "outcome-derive-coefficient-recurrence-by-differentiation",
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-generating-functions",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "母関数方程式・高度な係数抽出の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-generating-function-coefficients",
+        "tag-relaxed-convolution",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq W \\leq 2.5 \\times 10^5; 1 \\leq K \\leq W; 1 \\leq w_i \\leq W (1 \\leq i \\leq K); i \\neq j \\to w_i \\neq w_j (1 \\leq i,j \\leq K); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "袋は外袋1個と非空の非順序多重集合に一意分解される。multisetの母関数はexp(ΣH(x^k)/k)で、空集合を引くことで非空条件を保つ。対数微分で得る約数和j_nとFの畳み込みは同じ母関数の係数式である。f_nを確定してからその倍数へn f_nを送り、過去から未来への寄与をCDQで一度ずつ送れば自己参照式を次数順に解ける。",
+          "sourceRevisionIds": [
+            "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+            "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1",
+          "path": "src/content/sources/abc212-abc263/source-abc230-editorial-3003-70d256e89da0d0eb0e51c7c7184fa0de26dc52504b5604f21a76fd095c71a1b1.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc230_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f",
+          "path": "src/content/sources/abc212-abc263/source-abc230-h-problem-4918ec95f5dbeb2947257115e5feb3e54e034bd147dc6c9ff608eb26a24d5f8f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc230_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

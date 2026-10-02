@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC301-EX — Difference of Distance</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC301-EX — Difference of Distance</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/lowlink-critical-structure.md">lowlinkで橋・関節点を特定する</a></p>
+<ul>
+<li>DFS木の到達時刻とlowlink値を計算し、橋と関節点の判定条件を説明できる。</li>
+<li>同重みeventの順序を正しく定め、Kruskal順にDSU成分とmetadataを併合してminimax連結閾値でquery・pairing・集計を処理できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>次数条件に基づく葉の反復削除と、答えを保つgraph core・kernelへの縮約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>bottleneck距離D(S,T)は重み≤wのsubgraphでの連結閾値であり、一辺重みを1増やして答えが変わるのはその辺重みがDと等しい場合だけである。 w&lt;Dなら更新後も≤D、w&gt;Dなら最適pathは対象辺を使わない。w=Dだけ「D以下pathからその辺を除けるか」というbridge問題になる。</p>
+<p>採用する候補: 重み別DSU縮約＋lowlink bridge判定</p>
+<p>軽い辺成分を縮約した同重みgraphで対象辺がS-Tを分離するbridgeか判定すれば、その辺が全最適bottleneck pathに必須か分かる。</p>
+<p>棄却する候補: 各queryで辺重み更新後にminimax shortest path</p>
+<p>Q回graph探索で過大。</p>
+<p>w&lt;Dなら更新後も≤D、w&gt;Dなら最適pathは対象辺を使わない。w=Dだけ「D以下pathからその辺を除けるか」というbridge問題になる。</p>
+<p>辺を重み順に処理し、w未満辺をDSUで縮約する。同重み辺で作るcomponent graphへlowlinkとDFS順を構築し、queryのS,T連結閾値と対象edgeのbridge分離sideから距離増加有無を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="minimax-pathと閾値連結">minimax pathと閾値連結</h3>
+<p>発動条件: path costが最大辺重み。</p>
+<p>重み以下edgeのDSU連結で距離を捉える。</p>
+<h3 id="縮約graphのbridge">縮約graphのbridge</h3>
+<p>発動条件: 全最適pathに特定edgeが必須か判定する。</p>
+<p>軽辺成分を縮約し同重み辺のlowlinkを求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>一増加という局所変更は、対象重みとbottleneck閾値が一致する層だけ見ればよく、その層では必須性がbridgeへ一致する。</p>
+<p>別の問題へ持ち帰る視点: minimax感度解析はweight layerを縮約してbridgeを調べる。</p>
+<h2 id="正当性">正当性</h2>
+<p>対象辺重みwがbottleneck Dより小さいなら1増えても≤D、大きいなら最適path不使用。w=DのときだけD以下graphでその辺を避けるS–T pathが争点になる。w未満成分の縮約後、同重み辺のbridgeがS,Tを反対側へ分けるときだけ代替不能。同重みをunion前に検査すれば必要十分の判定を得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同重み辺はunion前にまとめてgraphを作り、多重辺をbridgeと誤判定しない。query端点を縮約代表へ写す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小graphで更新前後minimax Dijkstraと比較し、同重みparallel経路、対象辺がbridgeでもS-Tを分けない例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M 辺、Q 質問。重みsort、同重みlowlink、接続閾値の復元木/LCA照会を使う実装は O((N+M+Q)log(N+M))。</p>
+<h3 id="空間">空間</h3>
+<p>全重み群graph・DSU・復元木と照会表で O((N+M)log N+Q)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 2\times 10^5; N-1\leq M \leq 2\times 10^5; 1 \leq U_i,V_i \leq N; U_i \neq V_i; 1 \leq W_i \leq M; The given graph is connected.; 1\leq Q \leq 2\times 10^5; 1 \leq A_j \leq M; 1 \leq S_j,T_j \leq N; S_j\neq T_j; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>辺1–2重み4、2–3重み4、1–3重み7。S=1,T=3、辺1–2を1増加。</p>
+<ol>
+<li>旧bottleneckは4。</li>
+<li>重み4群は道で辺1–2はS–Tを分けるbridge。</li>
+<li>増加後は道bottleneck5、直辺7。</li>
+</ol>
+<p>期待される結果: 新距離5（1増加）</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同重み4の辺1–3もあれば辺1–2増加で距離は変わるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>変わらない。重み4群がcycleとなり対象辺を避けるpathがある。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc301/editorial/6344">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-editorial-6344-dc0137a9d497b87c806f280bfaa16810971f41dec665b5150a4a92beaa240e2c</li>
+<li><a href="https://atcoder.jp/contests/abc301/tasks/abc301_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc301-ex-problem-9af37d3cfd4c8a86125b566c017bbdc9dbc36b618b097122b0d5477141ecd9c3</li>
+</ul></main>
+</body></html>

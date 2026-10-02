@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC242-E — (∀x∀)</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC242-E — (∀x∀)</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>鏡映対称な文字列を自由な前半で一意に表し、辞書順上限以下の個数を前半prefixの基数値と、等号境界の完成文字列一候補との比較で求められる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>長さ N の回文は先頭 h=ceil(N/2) 文字を決めると、残りを鏡映して一意に決まる。したがって26^N候補ではなく、自由な prefix を辞書順に数えればよい。</p>
+<p>prefix が S の先頭 h 文字より小さければ、最初の相違は前半にあるので完成した回文も必ず S より小さい。prefix が等しい一候補だけは、鏡映した後半と S を実際に比較する必要がある。</p>
+<p>採用する候補: S の前半を A=0,…,Z=25 の26進数として数え、同じ前半から作った境界回文が S 以下なら1を加える。</p>
+<p>前半が小さい全候補を桁 DP なしで一括計数し、判断が残る一候補だけを文字列比較できる。</p>
+<p>棄却する候補: 全回文を生成して S と辞書順比較する。</p>
+<p>自由な前半だけでも26^{ceil(N/2)}通りあり列挙できない。</p>
+<p>S 前半の26進 value は、それより辞書順で小さい長さ h の prefix の個数そのものである。</p>
+<p>h 文字を左から読み ans=26·ans+(S_i-‘A’) と更新する。S の前半を左右へ鏡映して palindrome P を作り、P≤S なら ans に1を足して法998244353で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="対称列の自由半分への圧縮">対称列の自由半分への圧縮</h3>
+<p>発動条件: 回文など、片側を決めると残りが一意に決まる構造を数えるとき。</p>
+<p>独立な ceil(N/2) 要素だけを列挙・数値化し、鏡映で全体を復元する。</p>
+<h3 id="辞書順の境界候補分離">辞書順の境界候補分離</h3>
+<p>発動条件: prefix が境界より小さい候補は一括判定でき、等しい prefix だけ後半比較が残るとき。</p>
+<p>strictly smaller prefix の個数と equal-prefix candidate の indicator を足す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>前半比較だけで決まらないのは S と前半が完全一致する回文一つだけであり、複雑な桁 DP は不要である。</p>
+<p>別の問題へ持ち帰る視点: 辞書順制約では最初の相違位置を考え、未確定な境界 case が何個残るかを切り出す。</p>
+<h2 id="正当性">正当性</h2>
+<p>S 前半の26進 value は、それより辞書順で小さい長さ h の prefix の個数そのものである。 前半が小さい全候補を桁 DP なしで一括計数し、判断が残る一候補だけを文字列比較できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>奇数長では中央文字を一度だけ使って鏡映する。26進 value は法上で更新しつつ、境界回文 P の比較は元の文字列で行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>偶数長で境界回文が S を超える例を作り、前半が一致しても自動で数えてはいけない理由を後半の最初の相違で確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各文字列O(N)、総文字数に線形。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、鏡映列。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le T \le 250000; N is an integer between 1 and 10^6 (inclusive).; In a single input, the sum of N over the test cases is at most 10^6.; S is a string of length N consisting of uppercase English letters.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=ABA。</p>
+<ol>
+<li>前半ABの26進値は1なので小さいprefix AAが一つ。</li>
+<li>同prefixの鏡映ABAはS以下なので一つ追加。</li>
+</ol>
+<p>期待される結果: 回文AAA,ABAの2個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>S=ABBなら答えは増えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>鏡映ABAは依然ABB以下なので答え2。prefixだけの数値に鏡映判定を加える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc242/tasks/abc242_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-e-problem-105c649ecb269302c3783a0fc0425f5042be2f65892d32c9e1a658283a51fa21</li>
+<li><a href="https://atcoder.jp/contests/abc242/editorial/3516">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-editorial-3516-341f0c2b714e9d00396dc06071f467ad103a6c56d7f034cb2d80284e09c1d2f7</li>
+</ul></main>
+</body></html>

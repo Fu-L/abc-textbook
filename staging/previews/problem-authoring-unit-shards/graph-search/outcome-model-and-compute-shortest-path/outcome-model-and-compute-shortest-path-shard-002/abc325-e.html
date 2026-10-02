@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC325-E — Our clients, please wait a moment</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC325-E — Our clients, please wait a moment</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/weighted-shortest-path.md">最短路モデル</a></p>
+<ul>
+<li>非負重みの距離確定を証明し、一般非負重みでは優先度付きキュー、0・1重みではdeque、単位重みではFIFOを選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>carからtrainへは高々1回だけ切り替え、逆は不可なので、routeは「city 1からswitch city iまでcarのみ」＋「iからcity Nまでtrainのみ」に分かれる。 固定iでの両区間は独立なsingle-mode shortest pathなので、car距離X_iとtrain距離Y_iの和を全iで最小化すればよい。 Dは対称なのでi→Nのtrain shortest distanceはN→iと同じweight graphで求められる。 carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。 complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。</p>
+<p>採用する候補: city 1からcar weightのDijkstra、city Nからtrain weightのDijkstraを各1回行い、min_i(X_i+Y_i)を取る。</p>
+<p>全switch位置を2本のsingle-source距離arrayで同時評価し、dense graphでもN≤1000の二乗Dijkstraで処理できる。</p>
+<p>棄却する候補: 各switch city iごとに前半・後半のshortest pathを別々に解く。</p>
+<p>同じmodeの距離計算をN回繰り返し、不要な三次規模になる。</p>
+<p>棄却する候補: city 1からi、iからNを直接1 edgeで移動するcostだけ比較する。</p>
+<p>Dは三角不等式を保証されず、中間cityを経由した方が短い場合がある。</p>
+<p>carのみでNまで行くcaseはswitch i=N、trainのみはi=1に含まれ、特別caseを別計算する必要がない。</p>
+<p>complete graphなのでheap版より、未確定最小頂点をarray走査するDijkstraを使えば各modeをO(N^2)で素直に実装できる。</p>
+<p>car graphのedge(i,j)=A·D_{i,j}でsource 1からdense DijkstraしXを得る。train graphのedge(i,j)=B·D_{i,j}+Cでsource Nから同様にYを得る。全i=1..NのX_i+Y_iの最小値を64bit整数で出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="一方向mode-switchの分割">一方向mode switchの分割</h3>
+<p>発動条件: mode AからBへ一度だけ切替可能で逆は禁止されるshortest route。</p>
+<p>switch頂点前後のsingle-mode距離を足す。</p>
+<h3 id="dense-graph-dijkstra">dense graph Dijkstra</h3>
+<p>発動条件: Nが約1000で全頂点対edge weightが入力matrixからO(1)取得できるとき。</p>
+<p>priority queueなしの最小未確定頂点走査でO(N^2)にする。</p>
+<h3 id="reverse-source-shortest-path">reverse-source shortest path</h3>
+<p>発動条件: 各頂点から共通sinkへの距離が必要でedge weightが対称またはreverse graphを作れるとき。</p>
+<p>sinkをsourceにした1回の探索で全Y_iを得る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>乗換cityを直接列挙してrouteを解く代わりに、全候補へ共有されるcar prefix距離とtrain suffix距離を別々に一括計算できる。</p>
+<p>別の問題へ持ち帰る視点: 経路が1つの境界点で2種類へ分かれる問題は、両側の全点距離arrayを前計算してmin-plusで結合する。</p>
+<h2 id="正当性">正当性</h2>
+<p>合法routeはcar区間とtrain区間を一つのswitch都市で分割できる。固定switchで両区間は独立だから二つの最短距離和が最適。train距離は対称性で終点から求められ、全switchの最小が全合法routeを覆う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>edge costとpath totalは32bitを超えるため64bit整数と十分大きいINFを使う。</li>
+<li>trainは移動1回ごとに+Cなので、D_{i,j}B+Cをedge単位で加える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Dがmetricでない3-city例を作り、直接edgeより中継が短くなることと、i=1,Nがsingle-mode routeを含むことを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>都市N、dense complete graph。二回dense Dijkstra O(N²)、switch列挙 O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>入力距離行列 O(N²)、二距離配列 O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 1000; 1 \leq A, B, C \leq 10^6; D_{i,j} \leq 10^6; D_{i,i} = 0; D_{i,j} = D_{j,i} &gt; 0 (i \neq j); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、D12=4、A=2,B=1,C=1。</p>
+<ol>
+<li>car費用8、train費用5。</li>
+<li>都市1でswitchなら5、都市2でswitchなら8。</li>
+<li>小さい方。</li>
+</ol>
+<p>期待される結果: 5</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>道路が有向なら終点から同じ向きのDijkstraでよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。i→Nを求めるにはtrain graphの逆辺でNから探索する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc325/tasks/abc325_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc325-e-problem-f837bba1c1ab4c1edc465e11e65ca1b5003adc5e01a14a6dcff9c5b69df9b038</li>
+<li><a href="https://atcoder.jp/contests/abc325/editorial/7478">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc325-editorial-7478-aa9a97d79b110d7443c3f3f4e3cdfbeb63f731737d117e4a029b7709167ce355</li>
+</ul></main>
+</body></html>

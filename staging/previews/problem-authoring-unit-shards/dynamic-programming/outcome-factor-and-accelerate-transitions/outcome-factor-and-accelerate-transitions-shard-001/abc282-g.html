@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC282-G — Similar Permutation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC282-G — Similar Permutation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>素朴な遷移元の列挙をprefix・suffix・区間の和や極値へ書き換え、依存順と問い合わせ範囲を保って高速化できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>permutationを左から作ると、次の大小方向は現在値より大きい未使用値を選ぶか小さい未使用値を選ぶかだけで決まる。</p>
+<p>具体的な未使用集合ではなく、現在A_iより大きい残数kと現在B_iより大きい残数lを持てば、次のrank選択後の状態範囲が連続区間になる。</p>
+<p>採用する候補: 長さi、similarity j、A/Bそれぞれのgreater-remaining数k,lの挿入DPを行い、遷移元の4 rectangle和を2D累積和で求める。</p>
+<p>next rankの全組を個別に試さず、同方向/逆方向の条件を長方形領域へまとめられる。</p>
+<p>棄却する候補: 二つのpermutationを全列挙して隣接増減方向を比較する。</p>
+<p>候補が(N!)²でN≤100でも不可能である。</p>
+<p>次Aが増加なら新kは0…k-1、減少ならk…remaining-1のどれかに一対一対応し、B側も同様である。</p>
+<p>similarityが増えるのはA,Bがともに増加またはともに減少する2 rectangle、増えないのは方向が異なる2 rectangleである。</p>
+<p>固定(i,j)のk,l平面に2D prefix sumを作れば、各次状態へのrectangle総和を定数個のcorner差で取れる。</p>
+<p>i=1では各初期値pairに対応してdp[1][0][k][l]=1とする。各i,j layerの2D累積和から同方向rectangleをj+1、逆方向rectangleをjへ遷移させる。i=Nでk=l=0かつj=Kの値をP moduloで出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="rank-based-permutation-dp">rank-based permutation DP</h3>
+<p>発動条件: permutationを順に構成し、比較が現在値に対する未使用値のrankだけで決まるとき。</p>
+<p>greater remaining数を状態にし、次rankを区間として表す。</p>
+<h3 id="dp遷移の2d-rectangle-sum">DP遷移の2D rectangle sum</h3>
+<p>発動条件: 遷移元/先が二つの独立rank条件の直積区間になるとき。</p>
+<p>各layerに二次元累積和を作りrectangle寄与をO(1)取得する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>二つの隣接差の積が正という条件は、増増・減減の二rectangleだけでsimilarityを1増やす。</p>
+<p>別の問題へ持ち帰る視点: 複数permutationの比較方向一致は、各rank軸のup/down半区間の直積として扱う。</p>
+<h2 id="正当性">正当性</h2>
+<p>相異なる残値から次の値を選ぶ時、現在値より小さい/大きいという条件は残値rankの連続区間になる。A,Bの両方のrankを状態にすれば、次の増減方向の組合せは四つの長方形領域へ分かれる。similarityを一つ増やすのは両方向が一致する二領域だけである。2D累積和による各長方形の和は、次の値の全選択を個別に足した値と等しい。相対rankを選ぶ列と元のpermutationが一対一なので、長さとsimilarity数のDPは各permutation pairを正しく数える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>iからi+1でremaining上限が1減るため、k,lのvalid rangeとrectangle端をlayerごとに合わせる。</li>
+<li>法Pは大きいprimeだが遷移は加減だけで、prefix差の負値をPで正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>remaining値を小さい順に並べ、現在値より上を選ぶと新greater数が0…k-1を各1回取ることを小Nで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N⁴)、length・similarity数・二残rankの状態を2D prefixで一括遷移。</p>
+<h3 id="空間">空間</h3>
+<p>O(N³)、length方向rolling。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 100; 0\leq K \leq N-1; 10^8 \leq P \leq 10^9; P is a prime number.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、A,Bは各々(1,2)または(2,1)。</p>
+<ol>
+<li>同じ向きの二組はsimilarity1。</li>
+<li>逆向きの二組はsimilarity0。</li>
+</ol>
+<p>期待される結果: K=0でもK=1でも2組。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>next rankを全pairへ個別に配ると何が増えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>各二次元状態からさらに二次元へ列挙して余分なN²因子が付く。同/逆方向を四rectangleへまとめprefix差で処理する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc282/editorial/5393">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc282-editorial-5393-c24383a9e3f327d508de882b4e496c8a01d6dc4abc2638636b91f999b91acfa3</li>
+<li><a href="https://atcoder.jp/contests/abc282/tasks/abc282_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc282-g-problem-ec3be7878e90f5627c96f1edd4f6084095dc51431de0e9c63d5a80381c5032b0</li>
+</ul></main>
+</body></html>

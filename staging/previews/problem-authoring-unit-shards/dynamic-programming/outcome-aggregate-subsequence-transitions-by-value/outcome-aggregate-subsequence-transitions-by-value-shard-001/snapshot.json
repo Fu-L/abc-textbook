@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c3c158ded12a33eba84a93d9e50fe0070063aed85b5d27962c39d0b19cdab3eb",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "32619ca465b20c85ff32a2e5f896f702df3305754e132213d9da64dcc1c95d9d",
+  "reviewDigest": "992e02440fa4a22b4cb9f4fdf6d2c6cf4e8e0bf2d09032e4d3bba21578445e11",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc240-ex.html",
+      "digest": "91c174b41aadc8521b1b9bfe7502189759cc5c918505eb5a125b8aecde8070bf"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc339-e.html",
+      "digest": "9d56cc496905140b9e064179ae4d41a46b4fa1938fc4badc52a19b4a5ec6fa81"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc354-f.html",
+      "digest": "970ce1dd7584d6d2db8b5325641637c8ae9df9993f91f52107294a9a90381091"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc360-g.html",
+      "digest": "60cb22d5de25885f53ab35f86910744e257b4492d14a7485fbc7724e96ddd181"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc410-g.html",
+      "digest": "ade69106a5e97954c86c6e81900380aee51480c70ca80e19e5c3465198293104"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/index.html",
+      "digest": "2abbac45cf0bb8914244dd644ef99dece051af6424f14fd645ebb4df28a12632"
+    }
+  ],
+  "snapshotDigest": "89392f8c29fd4133d7878252cc895f10e47a8dc88b545b5f4ed264f8beb1e428"
+}

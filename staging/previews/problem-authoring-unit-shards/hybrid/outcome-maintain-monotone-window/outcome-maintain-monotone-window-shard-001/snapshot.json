@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-monotone-window-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a8488a4b8d0ccf5fd67dd13c504c9c009bf6e9df174333c18ccab175c371e9c5",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "cdd3aaa7ca3631c3bc263cb7029388959f2f8c528645cc93ce554412b1ff3ba3",
+  "reviewDigest": "65a0ebdfa254b8c361bdbf6636873af53391243f203434abf502c2eb84122213",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc250-f.html",
+      "digest": "8bf80c8322df39d1a40526e3b42346a921d173e8c05bfe89e63886ea946e69f5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc258-e.html",
+      "digest": "b42a4373f07dfc48b0b26bef5d4e27be843fb7a60f543829049bb90a5944de1f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc260-e.html",
+      "digest": "425adb9383781f0977b276fbb8edafaa2dce7c9d219cf9b35c596560dd3283c3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc294-e.html",
+      "digest": "dbedd4cbbcbff8a0e146fda9b71d6068d6a7980b40a1341598899bec45812fd4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc337-f.html",
+      "digest": "61a2936bca31c123387d8c274b68ed8aee78c693e279b1ee83dfa57a713d4b2d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc370-f.html",
+      "digest": "87fae90a0c6148283bb69871989151e6f5eb676199b52c75d122b395f5f69957"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc444-e.html",
+      "digest": "4167b99505275340015f53b31ee869520b720cf4bff27dab3d8a0f1ccb5f714b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc452-f.html",
+      "digest": "391738da6bb1880b31ec452b8ddb94cf276f0b08d28d9d3ef5f9ddbcf98d2dd1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/index.html",
+      "digest": "671a508e75e2854c0ebc7798b0ceeb8ac02b8b45075fcb26813ca8df37fd24d1"
+    }
+  ],
+  "snapshotDigest": "82e221b1a833612e92b13575d4e9967a0a2b833b8d58bd70edc01e3cae3b2585"
+}

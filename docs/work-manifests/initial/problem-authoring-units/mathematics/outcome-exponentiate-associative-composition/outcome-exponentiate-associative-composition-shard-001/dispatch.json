@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-exponentiate-associative-composition-shard-001",
+  "primaryOutcomeId": "outcome-exponentiate-associative-composition",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc448-e"
+  ],
+  "homeUnitId": "unit-monoid-exponentiation",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001/abc448-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "1d2e281dae4f147cd7739fb44bebac455954bebddd1e9f20fdd92b637929917d",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc448-e",
+      "path": "src/content/docs/problems/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001/abc448-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

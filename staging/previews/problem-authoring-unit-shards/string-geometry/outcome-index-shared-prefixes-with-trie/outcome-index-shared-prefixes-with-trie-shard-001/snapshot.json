@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7a8e7ce43541a24f790675785666c21b6b12aa82d53a6f5737b5f6ffc503bdc2",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "26ff0b449a544071080065b339d4de44c0ab69b651ba9800aacc29bfe79ade13",
+  "reviewDigest": "8535ac56778f7476c3ee197460680ae04210302efb01c96d0599f7019c6dc06b",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc287-e.html",
+      "digest": "80a16418954542a7705c366db7a8b1a8001dea928f91e59ff47165828169f21d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc353-e.html",
+      "digest": "06a3c3b1373be4045403e43423f6c8289940096a84e68b8bedb005b2e5186348"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc377-g.html",
+      "digest": "bb7c21c6e8832c0e16be6be3ece3d6b0c9a581270cb047ac6c6d1c7b5a46749c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc437-e.html",
+      "digest": "d8203e8aa92d08319967d2d09ed9543b2353f6de71fd8a5027e9ffa95db4d425"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/index.html",
+      "digest": "375f6ca2bd75424d841e1ee85dc0c089a27a4e796acfece5f1baaf5bd2cefd73"
+    }
+  ],
+  "snapshotDigest": "84176876e1f8dffe1607625822c8a9519dbd9e38f50cf51a60b75d860491e8c5"
+}

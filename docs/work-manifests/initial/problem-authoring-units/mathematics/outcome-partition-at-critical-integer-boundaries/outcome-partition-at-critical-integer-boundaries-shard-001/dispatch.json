@@ -1,0 +1,55 @@
+{
+  "shardId": "outcome-partition-at-critical-integer-boundaries-shard-001",
+  "primaryOutcomeId": "outcome-partition-at-critical-integer-boundaries",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc318-f"
+  ],
+  "homeUnitId": "unit-integer-boundary-blocks",
+  "prerequisiteOutcomeIds": [],
+  "dependencyShardIds": [],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/abc318-f.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "41f7244a4da7d99fba559363e0b924939128e6f6dd3e3db8fa4d5e5f900ae8fe",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc318-f",
+      "path": "src/content/docs/problems/mathematics/outcome-partition-at-critical-integer-boundaries/outcome-partition-at-critical-integer-boundaries-shard-001/abc318-f.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

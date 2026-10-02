@@ -1,0 +1,152 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-solve-difference-constraints-shard-001",
+  "packets": [
+    {
+      "problemId": "abc216-g",
+      "learningOutcomeIds": [
+        "outcome-solve-difference-constraints"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-difference-constraints",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq \\min(2 \\times 10^5, \\frac{N(N+1)}{2} ); 1 \\leq L_i \\leq R_i \\leq N; 1 \\leq X_i \\leq R_i-L_i+1; (L_i,R_i) \\neq (L_j,R_j) if i \\neq j.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "0prefix Bの隣差0..1と区間上限をedge上限制約に変える。0から最短距離は全制約を満たすBの各点最大上界であり自身も三角不等式でfeasible。したがってB_N最大、1個数最小。隣差からbitを復元すると全区間条件を満たす。",
+          "sourceRevisionIds": [
+            "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+            "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db",
+          "path": "src/content/sources/abc212-abc263/source-abc216-editorial-2474-35eb7d20d651a85291f8335f4bd73bb4b03897d5acea3531a3818958a41280db.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc216_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e",
+          "path": "src/content/sources/abc212-abc263/source-abc216-g-problem-13b299a257f18f16182b1fb89e4953703d498edd2b25ab7f86504e773a0ff15e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc216_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc404-g",
+      "learningOutcomeIds": [
+        "outcome-solve-difference-constraints"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-prefix-aggregate",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-difference-constraints",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N,M \\le 4000; 1 \\le L_i \\le R_i \\le N; 1 \\le S_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。",
+          "sourceRevisionIds": [
+            "source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552",
+            "source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552",
+          "path": "src/content/sources/abc368-abc419/source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc404_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee",
+          "path": "src/content/sources/abc368-abc419/source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc404_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

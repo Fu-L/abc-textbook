@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "984d60dfea04586f86a02dd4d4bf672a243b62e8702852b8e05011e4fad6e265",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "b271c135067806a2431ce9edea7bafe0e143969bb0e67b2b716ad2e082bc5da7",
+  "reviewDigest": "ee4735b1dddaa23190cb747d7dd962673e8cfd5593b523a31fa05d93fb2a6d1d",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.html",
+      "digest": "77dc96d204233a8ed95ef302b5bde9942bd307433a99e9c9840fd87bfda76e88"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-f.html",
+      "digest": "4acb91409ee12bdd57bf2ae5c427320898260c5d31d153153de731bb9619af66"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc243-g.html",
+      "digest": "3f9cf8c488bbc36e5c9732fa0cb86ac31d4ffd32ceeb09fbc6b0bb9f70fd29b1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc338-g.html",
+      "digest": "3f741b33674ae54e33909892168eef29de5eafbb91a56e5b6b9677fc6c7dd9a4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/index.html",
+      "digest": "c4e062958f88b70290d0b64c3901f3a7ef72c71c271411249eae49e67d51d4eb"
+    }
+  ],
+  "snapshotDigest": "8bff87d1c89b04b06c1b7f19eb8815ed274bcab1e11350845f6984370aabba2f"
+}

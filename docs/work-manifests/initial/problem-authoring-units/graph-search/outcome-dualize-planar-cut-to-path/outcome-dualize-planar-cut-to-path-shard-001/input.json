@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-dualize-planar-cut-to-path-shard-001",
+  "packets": [
+    {
+      "problemId": "abc413-g",
+      "learningOutcomeIds": [
+        "outcome-dualize-planar-cut-to-path"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components",
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "平面graph双対・cut/path対応の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-planar-duality",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le H\\le2\\times10^5; 1\\le W\\le2\\times10^5; 0\\le K\\le2\\times10^5; 1\\le r_i\\le H\\ (1\\le i\\le K); 1\\le c_i\\le W\\ (1\\le i\\le K); (r_i,c_i)\\ne(1,1)\\ (1\\le i\\le K); (r_i,c_i)\\ne(H,W)\\ (1\\le i\\le K); (r_i,c_i)\\ne(r_j,c_j)\\ (1\\le i\\lt j\\le K); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各free隣接辺を容量1、blockedを含む辺を0とするとfree path不在は容量0 cut存在と同値。平面dualでそのcutは二分した外側face間の0辺pathに一致する。障害物近傍のprimal辺だけが容量0になるので対応dual辺を全てunionすれば二端子連結が遮断の必要十分条件。",
+          "sourceRevisionIds": [
+            "source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73",
+            "source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73",
+          "path": "src/content/sources/abc368-abc419/source-abc413-editorial-13403-a6cd05e7174483f4d0b5d99d10829df1975ff360e308407cc36d37e401633d73.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc413_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485",
+          "path": "src/content/sources/abc368-abc419/source-abc413-g-problem-a4cc07d09ba7337eb815934efae7939e57963df0d50fb0ec81dfee731455e485.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc413_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

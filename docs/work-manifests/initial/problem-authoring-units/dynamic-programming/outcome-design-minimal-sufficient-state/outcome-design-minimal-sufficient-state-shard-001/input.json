@@ -1,0 +1,567 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-001",
+  "packets": [
+    {
+      "problemId": "abc215-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-subset-state"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-subset-bitmask-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 1000; |S|=N; S consists of uppercase English letters from A through J."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "既使用文字集合と末尾block文字が将来合法性を決める。同じ末尾は継続可、未使用字は新block可、使用済み別字は再登場禁止。選ぶ/選ばない分岐で各位置部分列を一意に生成しsingletonで空から開始するため全合法非空部分列を数える。",
+          "sourceRevisionIds": [
+            "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+            "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+          "path": "src/content/sources/abc212-abc263/source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc215_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+          "path": "src/content/sources/abc212-abc263/source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc215_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc217-g",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5000; 2 \\leq M \\leq N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "i番の人と同じ余りの既存人数はfloor((i−1)/M)。それらは既に別groupを占めるので既存jgroupのうち許容合流先はj−floor((i−1)/M)。新singletonは旧j−1状態から一通り。無名groupを新規生成順で一意に扱うため重複なくpartitionを数える。",
+          "sourceRevisionIds": [
+            "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a",
+            "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a",
+          "path": "src/content/sources/abc212-abc263/source-abc217-editorial-2390-3e14cd67c50c643eb6ed83f86b0a18144437cde207cb3f0d90786c0a766be53a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc217_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555",
+          "path": "src/content/sources/abc212-abc263/source-abc217-g-problem-89671adfa61460fc1d2709554f7877054b80a8f9d7f0af49f3283bd82905f555.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc217_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc227-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq |S| \\leq 30; 0 \\leq K \\leq 10^9; S consists of K, E, Y."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同じ文字は左から順に対応させるのが最小swapの対応で、交差した同文字の対応を交換しても完成文字列は変わらず費用を減らせる。使用済みの各文字数が決まれば未使用の残列が一意に決まり、次に使う文字を先頭へ移す費用はその残列内順位。完成列prefixを文字数三つと累積費用へ圧縮しても将来遷移は同じだから合流できる。各完成文字列には文字種の選択列が一意に対応し、swap列の重複を数えない。",
+          "sourceRevisionIds": [
+            "source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346",
+            "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346",
+          "path": "src/content/sources/abc212-abc263/source-abc227-e-problem-b7746806d6e5e8256f10091efbe52d7fe25dc98cb8ba800e471036eab2cb6346.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc227_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455",
+          "path": "src/content/sources/abc212-abc263/source-abc227-editorial-2908-358e7d8a2b86537142f6687ab98ecfa660c27ed9ffe5d91d9fbcddbb60c60455.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc227_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc229-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq B_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二部グラフには二彩色があり、固定彩色の同色辺は必ず削除し異色辺は全て残してよい。よって同色辺の費用最小化と元問題は同値。中心色は全色反転対称性で0に固定できる。外周を切り、最初の色を固定すると放射辺と隣接辺の費用は直前色と今の色だけで決まる。最後に環を閉じる辺B_Nを先頭色と比較して加えることで全彩色を漏れなく最適化する。",
+          "sourceRevisionIds": [
+            "source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0",
+            "source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0",
+          "path": "src/content/sources/abc212-abc263/source-abc229-editorial-2964-a66e289920d7588fbb4b2e2cd89b55615cf46b882c4d66e37469774e168f85e0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc229_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4",
+          "path": "src/content/sources/abc212-abc263/source-abc229-f-problem-f2579985b675f085a56d0c290e1dc7beff1aa85aa5f2a862ccfd13f209542fb4.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc229_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc232-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq H, W \\leq 10^9; 1 \\leq K \\leq 10^6; 1 \\leq x_1, x_2 \\leq H; 1 \\leq y_1, y_2 \\leq W"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "終点相対の同一分類にある各マスは分類ごとの遷移先数が等しい。各分類への到達総数だけで次の到達総数を求められ、座標ごとDPの厳密な商となる。開始分類へ1を置きK回後の終点状態Aが目的数。",
+          "sourceRevisionIds": [
+            "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+            "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+          "path": "src/content/sources/abc212-abc263/source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc232_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d",
+          "path": "src/content/sources/abc212-abc263/source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc232_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc237-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-lis"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-lis-state"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 1000; 3 \\leq M \\leq 10; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "厳密増加部分列の各長さの最小末尾は、将来の伸長可否を完全に決めるpatience sortingの不変量。次値xは最初のtail≥xを置換する。三つのtailを全状態として数えれば、同じ情報のprefixを合流しても後続のLIS条件は変わらない。第四tailが必要になる遷移を禁止し、終了時に第三tailが有限な状態だけ合計すれば長さちょうど3を過不足なく数える。",
+          "sourceRevisionIds": [
+            "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+            "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc",
+          "path": "src/content/sources/abc212-abc263/source-abc237-editorial-3320-9a503b43d73bfdd4b1b155aa6841e8645cdf8efb74dcc3510bd1eacd2e89f2fc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc237_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88",
+          "path": "src/content/sources/abc212-abc263/source-abc237-f-problem-05f9e4e288335bd98171079bdbe7ba78cc1982d46880bc581a0e02f52f17fd88.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc237_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc244-e",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 2≤N≤2000; 1≤M≤2000; 1≤K≤2000; 1≤S,T,X≤N; X≠S; X≠T; 1≤U_i<V_i≤N; If i ≠ j, then (U_i, V_i) ≠ (U_j, V_j)."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "将来必要なのは現在頂点とX到着回数の偶奇だけ。Xへ着く場合にだけxor1する遷移は各walkの条件と一致する。各edgeごとに両方向を配るprefix帰納法で長さKの全walkを一度ずつ数え、終点偶数状態を読む。",
+          "sourceRevisionIds": [
+            "source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920",
+            "source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920",
+          "path": "src/content/sources/abc212-abc263/source-abc244-e-problem-c7b0059b4829f2485a38a0654d331cb7e65e73d2b8240fcae584a2fe22a06920.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc244_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2",
+          "path": "src/content/sources/abc212-abc263/source-abc244-editorial-3601-e4ea51c7997b77a0c14c3e3ddb86207455ef995f49f63e43e08ee2efe6c092a2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc244_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc247-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2\\times 10^5; 1 \\leq P_i,Q_i \\leq N; P and Q are permutations of (1, 2, \\dots, N).; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "P,Qがともにpermutationなので各数字の次数は2で、成分はcycleに限る。一数字を覆う条件は、その両側のカードの少なくとも一枚を選ぶことに等しい。したがって各cycleで隣接する二辺を同時に未選択にしない二値円環列を数えればよい。先頭辺の選否を固定したpath DPで末尾との条件まで検査するため漏れも重複もなく、別成分の選択は独立なので個数の積が答えになる。",
+          "sourceRevisionIds": [
+            "source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d",
+            "source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d",
+          "path": "src/content/sources/abc212-abc263/source-abc247-editorial-3719-54138435ddf75ce1e266312ac9adac85c77b1d83ba47f10c0d4b6ef028c5ee2d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc247_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e",
+          "path": "src/content/sources/abc212-abc263/source-abc247-f-problem-fce172e6e3b8c3b51cb8547dab42e6e9cede6b4a3842957bc2f78815827cb01e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc247_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

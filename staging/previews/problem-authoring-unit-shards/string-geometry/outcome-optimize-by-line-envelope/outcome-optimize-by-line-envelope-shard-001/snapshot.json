@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-by-line-envelope-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "58a74794b88b38f5b6a789a158d54706938d8bec8907261b6402839610b2eee0",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "fbdcf04a0ed6feaaae1fb6509fa877782636da3d928f4f040dfdf62e3f5c55eb",
+  "reviewDigest": "6df6e4c55dd60c6d482c9a4d852feb0455b443902b4c7c1c5ff6651ae6555f91",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc228-h.html",
+      "digest": "ac91241835c6097ac2d5e0d17e78f0757e62d1330b99d9830c238a302a9307db"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc289-g.html",
+      "digest": "9e2a32148fd3f8c150671a183420a90683eaeda7d8f87e9d93ccf84396e24841"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc372-g.html",
+      "digest": "01bce980e31940026aab2d004207f34a85e37f1b985fb3f1ba55046c7bbd9496"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/abc448-g.html",
+      "digest": "d654c40c8d3663122bbb69bac29a970a51818cb681850493010160eed5c004d0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-line-envelope/outcome-optimize-by-line-envelope-shard-001/index.html",
+      "digest": "23eddb699a412367e971b4d6fb9061c46b0cea8e10cfdbf426e307357c28336e"
+    }
+  ],
+  "snapshotDigest": "e82753f28ff9a038029a52a9f6e0bb8b00a729ca2cc383c17f3e3323b92b4113"
+}

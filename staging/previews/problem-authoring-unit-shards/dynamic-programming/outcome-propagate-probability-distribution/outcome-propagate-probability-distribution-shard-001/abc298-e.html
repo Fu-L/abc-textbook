@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC298-E — Unfair Sugoroku</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC298-E — Unfair Sugoroku</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>盤面位置は各手番で増えるだけなので、両者の位置(i,j)と次手番だけを持つ勝率DPをN側から逆順に解ける。 高橋手番では遷移先勝率の平均、青木手番でも高橋勝率の平均であり、終端N到達だけ0/1に固定すればよい。</p>
+<p>採用する候補: 手番付き二次元期待値DP</p>
+<p>各状態の遷移先は少なくとも一方の位置が大きく、終端勝敗から後退計算できる。</p>
+<p>棄却する候補: ゲーム木を全出目列挙</p>
+<p>終了までの分岐が指数的。</p>
+<p>高橋手番では遷移先勝率の平均、青木手番でも高橋勝率の平均であり、終端N到達だけ0/1に固定すればよい。</p>
+<p>dp[i][j][turn]をi,j降順に計算し、高橋手番はk=1..P、青木手番はk=1..Qの遷移平均を法逆元で取る。dp[A][B][0]を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="吸収確率dp">吸収確率DP</h3>
+<p>発動条件: 単調に終端へ進む確率ゲーム。</p>
+<p>終端勝敗を固定し遷移確率の加重平均を逆順計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>交互手番もturnを一状態追加するだけで、位置単調性が循環のない期待値方程式にする。</p>
+<p>別の問題へ持ち帰る視点: 単調確率過程は状態順序を見つけてDPする。</p>
+<h2 id="正当性">正当性</h2>
+<p>各手番で全dice遷移先の勝率を平均する。先にgoalした側の勝敗は確定し、非終端遷移は少なくとも一位置が増えるから降順の二位置で依存先を先に計算できる。手番を持つことで先手優位も正確に反映する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>min(i+k,N)でovershootをNへ止め、高橋が既にNなら1、青木がNなら0の基底優先度を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Nの連立/全確率展開と比較し、P,Q=1、開始点隣接、同一roundで両者が届き得る例を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>終点N、dice面数P,Q。二位置手番状態 O(N²(P+Q))。</p>
+<h3 id="空間">空間</h3>
+<p>位置pair×turn O(N²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 100; 1 \leq A, B &lt; N; 1 \leq P, Q \leq 10; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3,A=B=2,P=Q=1、高橋先手。</p>
+<ol>
+<li>高橋の唯一出目1で直ちに3到着。</li>
+<li>青木の手番は来ない。</li>
+<li>終端勝率1。</li>
+</ol>
+<p>期待される結果: 1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>両者同じ位置・同diceなら勝率1/2か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>一般に違う。先手が先にgoalする場合があり上例は1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc298/tasks/abc298_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc298-e-problem-5852dc6c338f2ccff6bd2385849a81c0ee563b813396f416b99683e1127bd9ff</li>
+<li><a href="https://atcoder.jp/contests/abc298/editorial/6216">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc298-editorial-6216-3e17008c42c2f5d640bcceb6616609643f0d97853747e55e48acc61dac404c8a</li>
+</ul></main>
+</body></html>

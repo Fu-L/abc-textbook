@@ -1,0 +1,582 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-prove-and-search-threshold-shard-001",
+  "packets": [
+    {
+      "problemId": "abc215-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-two-pointers-window"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-two-pointers-window"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 200000; 0 \\leq x_i,y_i \\leq 10^9; (x_i,y_i) \\neq (x_j,y_j) (i \\neq j); All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "min が K 以上という条件は二つの絶対差への AND に分解され、片方をソート順と尺取りで処理できる。 候補点の y 座標を全て検索する必要はなく、現在の y から最も離れ得る最小値と最大値だけで存在判定できる。 K が実現できればそれ以下も実現できる単調性があり、一回の判定はソート済み点列の一走査で済む。",
+          "sourceRevisionIds": [
+            "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+            "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256",
+          "path": "src/content/sources/abc212-abc263/source-abc215-editorial-2492-8f1c76515d6e5413c6eff27c70a7838983645ed3c9703cd2a31857ed9bf65256.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc215_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537",
+          "path": "src/content/sources/abc212-abc263/source-abc215-f-problem-3d3bb0596de094bb9dd0c51488ee4ac4d12638dafb79e095c451f0bf8b08b537.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc215_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc229-g",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-basic-convex-optimization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq |S| \\leq 2 \\times 10^5; Each character of S is Y or ..; 0 \\leq K \\leq 10^{12}; K is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "目標の連続座標を直接最適化せず、Y の順位 i を位置から引くことで「全要素を一値へ揃える」中央値問題に正規化する。 m 個を連続化できればそれ未満もでき、絶対値和は中央値で最小になるため各窓を定数個の区間和で評価できる。",
+          "sourceRevisionIds": [
+            "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+            "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f",
+          "path": "src/content/sources/abc212-abc263/source-abc229-editorial-2963-afb72ff0fd07e9b66f6fe951c466e017b8e32d71939a9ec4dd892bfe0ae2596f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc229_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708",
+          "path": "src/content/sources/abc212-abc263/source-abc229-g-problem-83a9221894dec91f4bf1f2918bfa0b9ca85696be322d5ff83af8e1dcb00a2708.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc229_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc246-g",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-rooted-tree-aggregation"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq u_i, v_i \\leq N; The given graph is a tree.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dp[v] を、v から開始する前に青木が追加で白くすべき黒頂点の最小数とする。子の必要数の合計から、直後の青木の 1 回分を引ける。 B_v=1 if v is black else 0 とすると dp[v]=max(Σdp[c]-1,0)+B_v である。root は値を持たず白として扱い、dp[1]>0 なら青木の通常の 1 回/turn だけでは防げず高橋が X 以上を保証する。 履歴全体を持たず、青木の削除余力を頂点ごとの最小必要個数へ集約して単調判定できる。",
+          "sourceRevisionIds": [
+            "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72",
+            "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72",
+          "path": "src/content/sources/abc212-abc263/source-abc246-editorial-3706-58e89afde03176a71e21a35f288b30c21510edef48cd51431090a860e25eba72.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc246_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362",
+          "path": "src/content/sources/abc212-abc263/source-abc246-g-problem-546e6e0480d942cf33a5e15ed7fdcbf6f3c8721c6409b7bc1dc3aa0f17817362.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc246_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc263-ex",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-cyclic-order-crossing",
+        "unit-event-sweep",
+        "unit-geometry-primitives",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-cyclic-order-crossing",
+        "tag-event-sweep",
+        "tag-fenwick-weighted-prefix",
+        "tag-geometry-orientation-transform"
+      ],
+      "constraints": [
+        "Time limit: 7 sec; Memory limit: 1024 MiB; Constraints: 2 \\le N \\le 5 \\times 10^4; 1 \\le K \\le \\frac{N(N-1)}{2}; -1000 \\le |A_i|,|B_i|,|C_i| \\le 1000(1 \\le i \\le N); No two of the lines are parallel.; A_i \\neq 0 or B_i \\neq 0(1 \\le i \\le N).; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "円周を一点で切って端点へ順位を付けると、二弦が交差する条件は L_i<L_j<R_i<R_j またはその対称形になる。 区間を R の昇順に処理し、既処理区間の開区間 (L,R) へ加算して現在の L を一点照会すれば、交互配置の各組を一度数えられる。 平面内の交点判定を円周上の一次元区間交差へ移せ、各半径の交点対数を直線対列挙なしで得られる。",
+          "sourceRevisionIds": [
+            "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+            "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e",
+          "path": "src/content/sources/abc212-abc263/source-abc263-ex-problem-543b610b58a83ab8fcc49166621729ab3c9bf7cfd405b3b5859683cf177be57e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc263_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228",
+          "path": "src/content/sources/abc212-abc263/source-abc263-editorial-4547-ab6351f9ba6f38bd467d4a0c42d90e514bf944d17b5b4e6d7e5997527f0df228.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc263_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc267-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-amortized-monotone-progress"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-amortized-monotone-progress"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; 0 \\le M \\le 2 \\times 10^5; 1 \\le A_i \\le 10^9; 1 \\le U_i,V_i \\le N; The given graph is simple.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "vを削除すると未削除隣接頂点uのcurrentCostからA_vを引けばよく、各辺は一度だけこの更新に使われる。 安全頂点を削除すると他頂点も安全側へしか動かず、queueが尽きるまでの貪欲処理が実現可能性の必要十分判定になる。",
+          "sourceRevisionIds": [
+            "source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a",
+            "source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a",
+          "path": "src/content/sources/abc264-abc315/source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc267_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153",
+          "path": "src/content/sources/abc264-abc315/source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc267_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc269-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-interactive-protocol"
+      ],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search",
+        "tag-interactive-protocol"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^3; N is an integer."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二次元の配置を直接特定せず、一方の座標範囲を全面にして行occupancyと列occupancyという二つの一次元問題へ分離する。 候補区間[L,R]の左半分[L,M]へ質問し、返値が区間長より1小さいかどうかだけでmissing coordinateの側を決められる。 各判定で候補区間を半減でき、合計2⌈log2 N⌉≤20回に収まる。",
+          "sourceRevisionIds": [
+            "source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096",
+            "source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096",
+          "path": "src/content/sources/abc264-abc315/source-abc269-e-problem-8e4896a525fecb86db0fcd4de17d466b9225f950f4f821e20877a5e10bb5f096.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc269_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51",
+          "path": "src/content/sources/abc264-abc315/source-abc269-editorial-4840-d8749b6eed0a078a255f371f2ff4ac02394f8bb7a44ec8628dc435c2448a0f51.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc269_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc270-e",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 0 \\leq A_i \\leq 10^{12}; 1 \\leq K \\leq 10^{12}; There are at least K apples in total. That is, \\sum_{i=1}^{N}A_i\\geq K.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。",
+          "sourceRevisionIds": [
+            "source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc",
+            "source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc",
+          "path": "src/content/sources/abc264-abc315/source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc270_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475",
+          "path": "src/content/sources/abc264-abc315/source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc270_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc292-f",
+      "learningOutcomeIds": [
+        "outcome-prove-and-search-threshold"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"
+      ],
+      "tagIds": [
+        "tag-monotone-threshold-search"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq A,B \\leq 1000; A and B are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一頂点を長方形の角へ平行移動してよい。そこから二辺の方向をθとθ+60°、0≤θ≤30°にすると、幅はl cosθ、高さはl sin(θ+60°)。前者はθについて減少、後者は増加するので、幅条件を満たす最小θで高さ条件を確認すれば必要十分。辺長を小さくしても収まるので二分探索できる。",
+          "sourceRevisionIds": [
+            "source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257",
+            "source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257",
+          "path": "src/content/sources/abc264-abc315/source-abc292-editorial-5884-ca8674d8c02ba4e9de86ab56ed2fc793bfb63f2e4110e636666fa34db9dee257.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc292_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08",
+          "path": "src/content/sources/abc264-abc315/source-abc292-f-problem-14684cc6ad83cda8b2e7dfa0094c5b55b180871141e9ef06070428a0f66e1d08.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc292_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

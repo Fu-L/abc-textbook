@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC424-G — Set list</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC424-G — Set list</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></p>
+<ul>
+<li>資源軸の上限と更新順を選び、選択の重複を避けられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>選択songを必要人数Bの降順に並べた時、割当可能性は全prefix kについてΣ_{first k}B≤R_k=Σ_i min(A_i,k)である。この条件は各idol capacityを持つbipartite degree sequenceの必要十分条件になる。 大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。</p>
+<p>採用する候補: B降順songを、選択数k・必要人数累積sのknapsack DPで選ぶ</p>
+<p>prefix feasibilityをsong追加時のs≤R_kとして逐次保証し、excitement最大化を有限状態で解ける。</p>
+<p>棄却する候補: 総必要dance回数ΣB≤ΣAだけを確認する</p>
+<p>一部songが多人数を要求すると同じidolを一曲に重複配置できず、prefix条件を満たさない場合がある。</p>
+<p>大きいBからk曲選んだprefixで必要な延べ人数sがR_k以下なら、全kでのGale型条件が保たれ、capacityの大きいidolから割り当てる帰納構成が可能である。</p>
+<p>songsをB降順sortしR_kを前計算する。dp[k][s]を処理済みsongsからk曲選び全prefix条件を満たす最大C和とし、skipまたはchooseで(k+1,s+B_j)へ遷移する際s+B_j≤R_{k+1}を課す。全dp最大を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="degree-sequence-feasibility">degree sequence feasibility</h3>
+<p>発動条件: 各itemがB_j個の異なるresourceを使い、resource iの総capacityがA_iである。</p>
+<p>需要降順prefixとΣmin(A_i,k)のmajorization条件で割当可否を特徴付ける。</p>
+<h3 id="制約付きknapsack-dp">制約付きknapsack DP</h3>
+<p>発動条件: songごとに選択/非選択し、選択数と需要和がprefix feasibilityを決める。</p>
+<p>(k,s)状態でexcitementを最大化し、R_kでinvalid stateを切る。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>誰が踊るかをDPに含めず、選択songのB列がcapacity列に割当可能かをprefix不等式へ完全に射影できる。</p>
+<p>別の問題へ持ち帰る視点: 複雑なassignmentはmajorization条件があればitem selection DPから分離できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>選曲をB降順にすると任意k曲の最大需要は先頭k曲の需要和である。idol iはk曲へ高々min(A_i,k)回参加できるためprefix条件は必要。bipartite b-matchingの容量cutを全song部分集合へ見ると、需要最大集合がprefixなのでこれらの条件だけで全cutを満たし十分。処理順もB降順に固定し、曲を追加する時だけ新prefixを検査すれば過去prefixは不変。DPは全可行選曲集合を一回ずつ検査しC和最大を保つ。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じj iterationでsongを二度選ばないようcopyまたはk,s降順更新し、-INF状態をskipする。B=0も扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N,M小でsong subsetとidol assignment max-flowを全比較しprefix条件を検証する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>idol N、song M、総参加枠 S=ΣA_i≤NM。容量表 O(NM)、dp遷移 O(M²S)（song×選曲数×総必要人数）、sort O(Mlog M)。</p>
+<h3 id="空間">空間</h3>
+<p>rollingで O(MS)、R表O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 100; 1\leq M\leq 100; 0\leq A_i\leq M; 0\leq B_i\leq N; 0\leq C_i\leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、A=(1,2)、song(B,C)=(2,5),(1,4),(1,3)。</p>
+<ol>
+<li>R1=2,R2=3,R3=3。</li>
+<li>最初二曲は需要3で可行、価値9。</li>
+<li>三曲全ては需要4&gt;R3で不可。</li>
+<li>需要2曲に二人、需要1曲に容量2のidolを割り当てる。</li>
+</ol>
+<p>期待される結果: 9</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>最終総需要≤ΣAだけを見てよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。A=(2,0)、需要B=2の一曲は総需要2≤総容量2でも、同じidolを同じ曲へ二回割り当てられず不可能。R1=1で除く。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc424/editorial/13936">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc424-editorial-13936-84a09f5da2aa7440936546e3b16a18fffb6a32bcec202e6fabc225a59900aaf4</li>
+<li><a href="https://atcoder.jp/contests/abc424/tasks/abc424_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc424-g-problem-387c737d0126b4c57dbaa6a2d61e9e94e7ef7709a220991e2e9275f5f56ffbe2</li>
+</ul></main>
+</body></html>

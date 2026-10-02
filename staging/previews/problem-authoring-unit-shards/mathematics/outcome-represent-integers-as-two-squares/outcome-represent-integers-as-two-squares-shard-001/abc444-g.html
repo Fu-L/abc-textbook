@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC444-G — Kyoen</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC444-G — Kyoen</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/gaussian-integers-two-squares.md">Gaussian整数・二平方和</a></p>
+<ul>
+<li>Z[i]での素因数分解と共役を用い、整数の二平方和表現をprime exponentごとに構成・数え上げる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/functional-graph-decomposition.md">関数グラフのcycle・tree分解</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/prime-divisor.md">素因数分解と約数構造</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>Gaussian整数・二平方和の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>円周条件はu=Cx−A,v=Cy−Bとしてu²+v²=N、(u,v)≡(−A,−B) mod Cへ変換する。Gaussian整数のnormに基づき素数を分類する。p≡3 (mod 4) の指数が奇数なら二平方和表現はない。偶数なら実因子p^(e/2)を固定する。p≡1 (mod 4) はGaussian素因数πと共役πへの指数分配、p=2は1+i、単元は±1,±iとして全表現を構成する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<p>Gaussian整数の素因数分解、mod Cの座標状態に対する周期集計と分布の乗法合成。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>p≡3 (mod 4) とp≡1 (mod 4) の合同類を区別する。座標の符号と順序を持つ解を数えるため、単元4通りを維持する。</p>
+<h2 id="正当性">正当性</h2>
+<p>円周条件はu=Cx−A,v=Cy−Bと置くとu²+v²=Nかつ(u,v)≡(−A,−B) mod Cになる。norm NのGaussian整数はprime分類で構成できる。p≡3 mod4の奇指数はnorm表現を持たず、偶指数は実因子を固定する。p≡1 mod4はπ,共役πへの指数分配が自由で、p=2と単元4通りも含めると全表現を尽くす。mod Cの乗法状態は有限なので巨大指数を先頭と周期の頻度で一括し、剰余積分布を合成して指定合同座標の全解を数える。逆変換x=(u+A)/C,y=(v+B)/Cは合同条件により整数で一意なので円周格子点数と一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<p>指数が巨大でも剰余状態の先頭と周期に分けて頻度を数える。normが同じでも指定座標合同条件が異なるので状態は実部・虚部の組で保持する。 最終照会の剰余は(−A mod C,−B mod C)。対称性を使って(A,B)を照会するなら、全単元込みの同時符号反転が個数を保つ理由を明示する。</p>
+<h2 id="復習の核">復習の核</h2>
+<p>N=3で0、N=5かつC=1で8を確認する。素数分類の合同式を逆に表記しない。</p>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(sC^4+sC² log Emax)を上界とする。sは素因数数、剰余分布mergeと各因子の周期集計。</p>
+<h3 id="空間">空間</h3>
+<p>O(C²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N \geq 1; 2 \leq P_i \leq 100; P_i are distinct primes.; 1 \leq E_i \leq 10^{18}; 1 \leq C \leq 50; 0 \leq A,B \lt C; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=5=5¹、C=1、A=B=0。</p>
+<ol>
+<li>整数解は(±1,±2),(±2,±1)。</li>
+<li>π=1+2iと共役の二択に単元±1,±iの4択を掛ける。</li>
+</ol>
+<p>期待される結果: 8点。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>N=3¹なら。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>3≡3 mod4で指数奇数なので二平方和にできない。modC条件以前に0。</p>
+<p>確認結果: 0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc444/editorial/15201">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc444-editorial-15201-d228d4461c46b04252b60ee63c43fb2dd9e131c229df9f41bbff0d67a09d9f88</li>
+<li><a href="https://atcoder.jp/contests/abc444/tasks/abc444_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc444-g-problem-54f848db5319c94c96ca2f9e9ea24336f3101577b8689d492467f1e10e9beb0f</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC313-EX — Group Photo</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC313-EX — Group Photo</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></p>
+<ul>
+<li>採用解法の未来を決める最小十分状態と、捨てられる履歴を説明できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>前列順列 a を固定すると、後列位置 i が越えるべき閾値は c_1=a_1、c_{N+1}=a_N、内部は min(a_{i−1},a_i) である。後列 B を並べられる条件は sorted B_i&gt;sorted C_i である。</p>
+<p>A を高さ昇順に挿入すると、既に隣接が確定した辺だけを結んだ path fragments の形が残り、閾値 C のうち現在高さ以下の個数は「挿入済み数＋連結成分数」だけで決まる。</p>
+<p>採用する候補: A を昇順に挿入し、確定隣接辺が作る連結成分数を状態とする O(N²) の挿入 DP を行う。</p>
+<p>具体的な fragment の長さや順序を係数へ集約でき、各高さ段で B との Hall 型 sorted 条件も成分数から判定できる。</p>
+<p>棄却する候補: 前列の N! 順列を列挙し、閾値列 C を sort して B と比較する。</p>
+<p>N=5000 で順列列挙は不可能で、条件が局所隣接 min だけに依存する構造を使えていない。</p>
+<p>新しい最大要素を挿入したとき、単独 fragment を作る・既存 fragment の端へ付く・二 fragment をつなぐ、の三類型で成分数の変化と配置数を数えられる。</p>
+<p>段 i、成分数 j なら現在までに確定する閾値数 k=i+j。新たに増える C の値が A_{i+1} 以下の区間に対し、対応する sorted B が十分大きいかだけ検査すればよい。</p>
+<p>A,B を昇順 sort する。dp[i][j] を小さい A を i 人挿入し path fragment が j 個ある部分構造数とし、新要素の置き方三種を組合せ係数付きで遷移する。k=i+j で現在確定した C の個数を追い、新しく確定する区間に B_t&gt;A_{i+1} が成り立たない遷移を捨てる。dp[N][1] に対応する完成数を答える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最大要素からの挿入-dp">最大要素からの挿入 DP</h3>
+<p>発動条件: 順列の隣接関係だけが評価に効き、値の大小がすべて異なるとき。</p>
+<p>値順に頂点を足し、確定隣接辺が作る path component 数を状態にする。</p>
+<h3 id="sorted-matching-condition">sorted matching condition</h3>
+<p>発動条件: 二集合を一対一に対応させ、各組で片方が閾値を超える必要があるとき。</p>
+<p>両者の昇順列を比較する条件へ Hall の条件を圧縮する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>隣接 min の multiset は、値を小さい順に見たときの挿入済み path fragments 数によって prefix 個数が決まる。</p>
+<p>別の問題へ持ち帰る視点: 順列の隣接 min/max を数える問題では、値 sweep 中の連結成分を状態にする挿入 DP を疑う。</p>
+<h2 id="正当性">正当性</h2>
+<p>前列を固定すると後列各位置に必要な高さの下限は、端のAと隣接Aのminである。後列を割り当てられる必要十分条件は、この下限列とBをそれぞれsortして対応する全組がstrictに大小条件を満たすことである。Aを小さい順に挿入すると配置済み要素はfragmentとなり、次要素の挿入は新fragment・片端へ付加・二fragment結合の三種類に一意に分類できる。処理済み人数iとfragment数jから確定済み下限数i+jが分かるので、上述のsorted条件をその時点で検査できる。fragment長や順序の選択数を係数で掛ければ前列を一回だけ数え、後列の存在だけを判定する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>端点 c_1,c_{N+1} も C に入るため閾値数が i+j になる理由を境界込みで確認する。遷移係数は fragment の左右端と隙間を区別して導く。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず固定順列から閾値 multiset C を導き、後列条件を sorted 比較へ落とす。その後、値を一つ挿入したとき C の確定数がどう変わるかを図示する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N²)、挿入済人数×fragment数、三類型の定数遷移。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、人数方向rollingとsorted A,B。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 5000; 1 \leq A_i,B_i \leq 10^9; A_i \neq A_j\ (1 \leq i &lt; j \leq N); B_i \neq B_j\ (1 \leq i &lt; j \leq N+1); A_i \neq B_j\ (1 \leq i \leq N, 1 \leq j \leq N+1); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、A=(1,3),B=(2,4,5)。</p>
+<ol>
+<li>前列(1,3)には後列(2,4,5)が適合。</li>
+<li>前列(3,1)には後列(4,2,5)が適合。</li>
+</ol>
+<p>期待される結果: 可能前列2通り。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>後列の配置数も積で数えてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>要求は適合する後列が存在する前列の数。後列を何通り構成できてもその前列は一回だけ数える。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc313/editorial/6903">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc313-editorial-6903-378c81df2d4aa702b7645ea4a24524162c3300cd4a1c707cb4bdccbcee20cee5</li>
+<li><a href="https://atcoder.jp/contests/abc313/tasks/abc313_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc313-ex-problem-e4be37fb90c83a87dc2d7d837cdb882fe383c7b4ce6200b33b8e8977fefdaa35</li>
+</ul></main>
+</body></html>

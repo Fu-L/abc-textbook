@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-static-sorted-range-index-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "a1cb22a74d58e5bb866e06e75d9b4e7021bf8debbd5cd9b5384ca22c6cf71a6b",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "89d4602ecca4453514047ade399b6e2076fb07f85efd0621e5f5a566e7318151",
+  "reviewDigest": "4db23ef5fc1056f9d7eb4e3be998762e233a627080b917d3db6850706cfe16ec",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.html",
+      "digest": "e333326c8feab3096fda1aa45e2cee1f2e7d99668ccd7229d1c6ad8012bea280"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/index.html",
+      "digest": "b7035f0fd43443e9b30f201c10960214d87bccf6bd2419cdc096a33fce6b4c98"
+    }
+  ],
+  "snapshotDigest": "45f70493a00caef1a7b00d10c6eae1139c01c6d58445c0f1ff225417c23d1f96"
+}

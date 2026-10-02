@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-linearize-static-range-information-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "3bebb32c4c99405cea3f8af08d3d5c794b9f13a8bc5073d2c8e59c67d611b8a0",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2dba1b01336f2ed74666e473e2b16300e86bb25f85e5ea5abcdf750e7a6c284d",
+  "reviewDigest": "61c80c4625c6a1ca73a7b99b3d2545d5aca4ca5df1e7f7ab41aeac896d888c32",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.html",
+      "digest": "f5480aef4d9a272809cb7d375ebd71ffd960aeb16fb49fcfc05c51ae2057bff6"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc268-e.html",
+      "digest": "0967b6cb06e2e4b1e9112d1060c2c9947cce6c732d05783e44f7774a48fb6a8f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc278-e.html",
+      "digest": "df5e280128bdef2563dd8935e29a014637ee9c1fb4c95240cf0a0b964be2d26c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc341-e.html",
+      "digest": "597018dd95e576fc2b35d3412a48da020863905f910844eea348dd189eee180d"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc410-f.html",
+      "digest": "25cdd7ff92a9f6cf1e2c61a4b7bd899895a3f0070e553832fa5cb6e207e45631"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc430-f.html",
+      "digest": "bdb921fcf53b6263c1131d4bef7e377fb0b63925f17e7a2edf90435d22c22111"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc441-e.html",
+      "digest": "b75abaaef05c56c82dd8dba8b1734fe852bd28d80c2418b8900f4487547efe35"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc454-f.html",
+      "digest": "0d04242abb84eea36f5816f15a540b380d5a6db69f62a2de9a693a0473582ab8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/index.html",
+      "digest": "595514247b47f9c8872162d47c4d1914609ec81da1bff052d1b97b497d158068"
+    }
+  ],
+  "snapshotDigest": "959b007fad98eaa36b2e1cfb5a22f93aec79c5e9d12de39bd1c751e500b74933"
+}

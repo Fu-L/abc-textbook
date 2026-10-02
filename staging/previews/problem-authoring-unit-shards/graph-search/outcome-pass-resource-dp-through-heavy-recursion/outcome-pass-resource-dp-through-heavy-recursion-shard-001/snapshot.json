@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "16e0cfa59df662a9e193d540b118223f9a16a63d5274d2649485e7c3bfa6708f",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "ab35da423a12c5436be296cf704635fd6c49de7034240152356e359d45cb7de4",
+  "reviewDigest": "1f8ec33f5402e60b46ee14163928ea49b346f55ab606e7ed1a11b0ac11d3978e",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.html",
+      "digest": "35fee529f69aea8fab06a41a2b620f3bbf82d1eb64e29eb5a7a4807528fa43f0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/index.html",
+      "digest": "db32f1659d6aff6e6df1701d369d1b2f8fdf64f519292468d31edd9cd8ac344f"
+    }
+  ],
+  "snapshotDigest": "7cbebc73754697a06d9e6e56b8ddf7c6358decf4df564c53b7a1dd2796179363"
+}

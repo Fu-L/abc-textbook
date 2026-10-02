@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-decompose-by-prime-or-divisor-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "64bc1455927fe39da0e592be01614c9311ea5031e891293a4460540612493aeb",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "9c0b8bf882ca7b0e639abb63c37ac50561afe059aa7dc2fcbd5926f4124d8b39",
+  "reviewDigest": "335bcb061677b65a35d5d428cc2ff45d9b49ed5bb273c4bdac2a518e3f2d9315",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc227-g.html",
+      "digest": "96c9fdd5faa6d6a2fbd16ceaf293221ca428e9d74fda90573821b1948c3d14f5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc259-e.html",
+      "digest": "c2333e8ede7828103746ffd6d161eda4f51a55ee79bb1ad8ca0cadc0100101ec"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc322-g.html",
+      "digest": "06ed911cab3ef5058c315bd8089445abbb41d8c7d82fd1242187314fa3ac49e4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc384-f.html",
+      "digest": "a9866ab025d91cec35256a3bf8745d7e1c1cfed762fe6b60f8c03ea8058deb80"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc393-e.html",
+      "digest": "3db9e4895f60017c20feeb1164d6c4f9097937fcd95accca8553a4460c891535"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc400-e.html",
+      "digest": "48c8ad6d06fc2da66abd4abdfe2301671965cf5393ffc7605397290eda14f891"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc412-e.html",
+      "digest": "d0bb61804a170ee17b83a8825de94d57ccc51fcb42bb32703edf776e9776ea9f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc420-g.html",
+      "digest": "9a388c258dd6d5fe64be15544158af4ad10609cb37e1bf6cb57ac2e60ed8a40a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/index.html",
+      "digest": "7a4d61ec9492b658cbe440251815637d4372423df1e414aca5fb5557006da491"
+    }
+  ],
+  "snapshotDigest": "839d81899c6e273ae764d5e750f49a79b48e19ae700a6acb966c93790c1a1c47"
+}

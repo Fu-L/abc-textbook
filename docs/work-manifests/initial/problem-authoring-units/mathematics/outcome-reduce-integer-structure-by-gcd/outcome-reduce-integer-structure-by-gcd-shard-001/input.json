@@ -1,0 +1,152 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
+  "packets": [
+    {
+      "problemId": "abc254-f",
+      "learningOutcomeIds": [
+        "outcome-reduce-integer-structure-by-gcd"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-monoid-aggregation"
+      ],
+      "excludedTopics": [
+        "Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"
+      ],
+      "tagIds": [
+        "tag-gcd-structure",
+        "tag-range-monoid-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,Q \\le 2 \\times 10^5; 1 \\le A_i,B_i \\le 10^9; 1 \\le h_1 \\le h_2 \\le N; 1 \\le w_1 \\le w_2 \\le N; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "長方形の値の公約数は同列同士の差から全dA、同行同士の差から全dBを割る。逆に基準値とその差分を割る数は、基準から差を加減して得る任意のA_i+B_jを割る。両方向の整除からgcdが一致し、二つの差分区間gcdと基準値だけで答えられる。",
+          "sourceRevisionIds": [
+            "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54",
+            "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54",
+          "path": "src/content/sources/abc212-abc263/source-abc254-editorial-4067-c931ee6e07f8d7b7e2f38c2ceb2193c131f8f11b66f6200318c5a3ce39a2cf54.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc254_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0",
+          "path": "src/content/sources/abc212-abc263/source-abc254-f-problem-fb9b12af78f2c27e67cf3fdf37ca5b98e81bbb6ccf253f0e8602d3235e2f53d0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc254_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc438-g",
+      "learningOutcomeIds": [
+        "outcome-reduce-integer-structure-by-gcd"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-event-sweep",
+        "unit-weighted-prefix-fenwick"
+      ],
+      "excludedTopics": [
+        "Bézout係数を求めて一次不定方程式の具体解・一般解を構成する手順は「gcdと整数解の成立条件」で扱う。gcdによる必要条件や剰余類への分解と、解を実際に構成する技能を区別する。"
+      ],
+      "tagIds": [
+        "tag-gcd-structure",
+        "tag-event-sweep",
+        "tag-fenwick-weighted-prefix"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N,M\\le 2\\times 10^5; 1\\le K\\le 10^{18}; 1\\le A_i,B_i\\le 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "i modNとi modMは同じg=gcd(N,M)classを持つので各classを独立に分ける。縮約長が互いに素ならBのNstep巡回は置換になり、A固定の出現列はその円環の連続区間。全周期と余りへ分け、区間のΣmin(x,b)=Σ_{b<x}b+x·#{b≥x}をcount/sum Fenwickで評価すれば各iの寄与を一度足せる。",
+          "sourceRevisionIds": [
+            "source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176",
+            "source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176",
+          "path": "src/content/sources/abc420-abc466/source-abc438-editorial-14946-dbd19ad9858e6d6249c2d0c86397539779fe662661dead81f99f18c6a8f94176.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc438_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c",
+          "path": "src/content/sources/abc420-abc466/source-abc438-g-problem-249f9c0c3a7d3782324a2337e5631cd5e7025d1cbd79f3db727ff09d5594012c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc438_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC381-F — 1122 Subsequence</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC381-F — 1122 Subsequence</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>値は1..20で、1122部分列では各採用値をちょうど二回ずつ使うため長さは最大40である。採用値集合 S が同じなら、最も早く作れる終了位置だけ残せば以後の拡張可能性を完全に表せる。 同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。 next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。</p>
+<p>採用する候補: dp[S] を各値を二回ずつ並べた部分列を作れる最小終了位置とし、S から最後の値 x を除いた状態の後に x の次出現を二回辿って更新する bit DP を行う。</p>
+<p>2^20 状態と各状態の set bit 遷移で O(20·2^20)、次出現表で各遷移 O(1) にできる。</p>
+<p>棄却する候補: 長さ40以下の全ての部分列 index を DFS して 1122 条件を確認する。</p>
+<p>N が2×10^5で短い長さでも部分列数は組合せ爆発し、値集合の小ささを使えていない。</p>
+<p>同じ集合 S を作る方法のうち終了位置が早いものは、遅いものが可能な全ての将来追加を同様に行えるため支配する。</p>
+<p>next(pos,x) を前計算すれば、x を二回追加した終了位置は next(next(dp[S],x),x) と書ける。</p>
+<p>各位置と値の次出現 index を後ろから前計算する。dp[0]=0、他をINFとし、mask と未使用値 x について二回 next を適用して dp[mask|1&lt;&lt;x] を chmin する。到達 mask の最大 popcount×2を返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最早終了位置を値にする-bit-dp">最早終了位置を値にする bit DP</h3>
+<p>発動条件: 種類数が小さい部分列選択で、同じ集合なら早い終了だけが優越するとき。</p>
+<p>mask ごとに最小 prefix 長を保持し next occurrence で遷移する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>部分列そのものを状態にせず、採用済み値集合と将来余地を最大化する最早位置だけへ圧縮する。</p>
+<p>別の問題へ持ち帰る視点: 各値をちょうど二回という規則が、遷移を next の二重適用へする。</p>
+<h2 id="正当性">正当性</h2>
+<p>maskで使った各値は隣接二出現のblockとして選ぶ。未使用値の最初二出現を現在終点後から選ぶと、同値二個を選ぶどの他の選択より終点が早く全将来に優越する。maskごと最短終点だけ残す帰納法で全feasible値集合を見つけ最大2popcountを得る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>値を0-origin bitへ直し、INF に next を適用しない。dp[empty] の位置0と配列 index の番兵規約を統一する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ mask の二つの終了位置を比較し、早い方だけで十分という支配性を次の二出現選択から説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>列長N、値種C=20。next表 O(NC)、subset DP O(C2^C)。</p>
+<h3 id="空間">空間</h3>
+<p>next表 O(NC)、最短終点DP O(2^C)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2 \times 10^5; 1\leq A_i \leq 20; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,1,2)。</p>
+<ol>
+<li>値1blockを選ぶと位置1,3で終点3。</li>
+<li>その後に値2二個は残らない。</li>
+<li>値2blockも位置2,4だけなので二blockは不可。</li>
+</ol>
+<p>期待される結果: 2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>この列の長さ4は各値二回だから1122型部分列になるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>ならない。順序は1212で同値pair blockの順序条件を満たさない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc381/editorial/11408">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-editorial-11408-e28925a36a1cc0462a58855ec2b49a1d989b5e9f61e0ee91cd9c99f91bda87aa</li>
+<li><a href="https://atcoder.jp/contests/abc381/tasks/abc381_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc381-f-problem-83a041909bdba22c82453addbdbc034a229cddb66e0846a3e5cfab78226b857d</li>
+</ul></main>
+</body></html>

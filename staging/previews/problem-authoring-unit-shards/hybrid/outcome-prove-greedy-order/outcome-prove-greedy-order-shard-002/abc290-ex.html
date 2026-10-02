@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC290-EX — Bow Meow Optimization</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC290-EX — Bow Meow Optimization</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/greedy-exchange.md">交換論から選択順を導く</a></p>
+<ul>
+<li>局所選択の交換または候補の支配関係を示し、安全な順序・候補・caseを確定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-resource.md">資源・容量DP</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>対称操作による状態の正規化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>中央から離れるほど同種族内の順位差が増えるため、不満係数の大きい動物ほど中央へ置く交換が解を悪化させない。</p>
+<p>採用する候補: 偶奇別に中央を処理して左右割当DP</p>
+<p>最適列を中央へ向け係数昇順となる左右二列へ正規化でき、係数順に各動物を左列Pか右列Qへ割り当てる状態DPで最小値を得られる。</p>
+<p>棄却する候補: 全動物の順列を列挙</p>
+<p>最大600匹の順列は扱えず、同種族内の交換可能性を利用していない。</p>
+<p>犬猫それぞれの中央個体を隣接させ最大係数を置く交換論により、奇数個を前処理で除けば両種族偶数の左右分割問題へ帰着する。</p>
+<p>偶数化後に全動物を係数順に走査し、dp[i][j][k]で左列Pへ入れた犬猫数を持って左右配置時の偏り費用を加え、指定個数状態の最小値を取る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="並べ替え不等式と交換論">並べ替え不等式と交換論</h3>
+<p>発動条件: 位置ごとの偏りが中央から単調に増える。</p>
+<p>大係数を小偏りへ寄せ、中央へ向かう係数順を正規化する。</p>
+<h3 id="個数制約付き割当dp">個数制約付き割当DP</h3>
+<p>発動条件: 係数順に要素を二群へ配り、各群の種別個数が指定される。</p>
+<p>dp[i][dogP][catP]で左右どちらへ置くかを選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>種族ごとの中央値の位置関係を先に固定すると、複雑な混合順列が「昇順列P＋反転列Q」という二群割当に縮む。</p>
+<p>別の問題へ持ち帰る視点: 順列最適化では交換で標準形を示してから、残る割当だけをDPする。</p>
+<h2 id="正当性">正当性</h2>
+<p>犬猫それぞれの中央個体を隣接させ最大係数を置く交換論により、奇数個を前処理で除けば両種族偶数の左右分割問題へ帰着する。 最適列を中央へ向け係数昇順となる左右二列へ正規化でき、係数順に各動物を左列Pか右列Qへ割り当てる状態DPで最小値を得られる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>N,Mの偶奇4ケースで中央除去と費用を正しく反映し、総費用は64ビットで持つ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小規模の全順列と比較し、各偶奇組合せ、同じ係数、中央の最大係数を除く前処理を検査する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N³)上界、左右配置DPの左右数×犬数×猫数状態、Nは全動物数。</p>
+<h3 id="空間">空間</h3>
+<p>O(N²)、走査位置をrollingする。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,M \leq 300; 1\leq A_i,B_i \leq 10^9; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=M=1、犬係数A=2、猫係数B=3。</p>
+<ol>
+<li>犬→猫なら犬は左右猫数0,1で費用2、猫は左右犬数1,0で費用3。</li>
+<li>逆順でも同じ絶対差になる。</li>
+</ol>
+<p>期待される結果: 最小不満度5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>奇数種数を偶数DPへ直接流してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>中央個体の前処理と係数交換による正規化が必要。左右対称の人数状態だけでは中央配置を表せない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc290/editorial/5769">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc290-editorial-5769-af1ef8e27fc3523ef9c273dc56ead5943390dfeba6f55f04302c6650407ccb2d</li>
+<li><a href="https://atcoder.jp/contests/abc290/tasks/abc290_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc290-ex-problem-a29b268f9fcb6fef3dc807abeffbc5b02d4686294356e60cfb3d6a59ecc855b3</li>
+</ul></main>
+</body></html>

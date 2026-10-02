@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC214-F — Substrings</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC214-F — Substrings</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-sequence.md">列・subsequence DP</a></p>
+<ul>
+<li>列の順序を保つ状態と、選ぶ・選ばない遷移を設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>列・subsequence DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>選んだ位置が隣り合わない部分列を数えるが、異なる位置集合から同じ文字列が得られる場合は一つとして数える必要がある。</p>
+<p>位置 i の文字を末尾に使う文字列は、それ以前に同じ文字が最後に現れた位置 k より前の末尾から作る重複分を除くことで一意に数えられる。</p>
+<p>棄却する候補: 各位置を選ぶか否かだけの DP で、隣接位置を同時に選ばない位置集合の個数を求める。</p>
+<p>同じ文字列を作る異なる位置集合を別々に数えるため、問題が要求する相異なる部分列数にならない。</p>
+<p>採用する候補: 各文字列を最後に採用した位置で分類する部分列 DP に、前の採用位置を一つ以上空ける遷移範囲を組み込む。</p>
+<p>同じ末尾文字による重複を最終出現位置で排除しながら、非隣接条件も和を取る添字範囲で表せる。</p>
+<p>通常の部分列 DP における最終出現による重複排除と、隣接位置を選べないことによる一つ手前までの遷移制限を同時に適用する。</p>
+<p>dp₀ を空文字列の一通り、隣接禁止用の番兵 dp₁ を 0 と置くと、同じ形の区間和で先頭付近も処理できる。</p>
+<p>末尾位置で分類した distinct-subsequence DP を作り、同じ文字の直前位置を左端、隣接を避けた位置を右端とする区間和を累積和で評価する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="最終出現による部分列の重複排除">最終出現による部分列の重複排除</h3>
+<p>発動条件: 異なる位置選択が同じ文字列を作り得るため、相異なる部分列だけを数えるとき。</p>
+<p>現在文字と同じ文字の直前出現位置を境界にし、それ以前から作られる重複した末尾追加を遷移から除く。</p>
+<h3 id="dp-遷移の累積和">DP 遷移の累積和</h3>
+<p>発動条件: 各状態が連続した添字範囲の DP 値の総和として表されるとき。</p>
+<p>最終出現位置から隣接禁止境界までの和を prefix sum の差で求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>重複排除が文字の最終出現を左境界にし、非隣接制約が現在位置の一つ前を右境界から外すため、二条件が一つの区間和へ統合される。</p>
+<p>別の問題へ持ち帰る視点: 部分列に局所的な位置制約を追加するときは、既存の重複排除 DP の遷移元範囲をどう狭めるかとして考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>各文字列をその末尾文字の最右の採用位置へ割り当てる。位置iに付加できるprefixは隣接を避けるためi−2以前で終わるものと空文字。直前の同文字位置kへ既に付加できたprefixを除けば重複は消える。よって新規分はprefix終了位置の連続区間の和となり、累積和で計算できる。任意の実現可能な文字列を末尾の同文字のより右の出現へ移しても隣接禁止を破らないので、この除去で実現可能な文字列を失わない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>dp の添字は実際の文字位置から一つずれるため、存在しない最終出現を 0 とする番兵を含めて遷移範囲を固定する。</li>
+<li>各区間和を法 10⁹＋7 で正規化し、最終的な合計から空文字列を含めない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>部分列の個数を問われたら、位置集合の個数か生成文字列の個数かを最初に区別し、同じ文字の例で重複を検査する。</li>
+<li>通常の最終出現 DP を基準にし、追加の位置制約が遷移元のどちらの境界を動かすかを式で比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)。アルファベット26種の最終出現と累積和を用いる。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 2 \times 10^5 (inclusive) consisting of lowercase English letters.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=aaa。</p>
+<ol>
+<li>一文字のaはどの位置を選んでも同一文字列。</li>
+<li>長さ二のaaは位置1,3で作れる。</li>
+<li>長さ三は隣接禁止に反する。</li>
+</ol>
+<p>期待される結果: 異なる非空文字列はa,aaの2個。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>S=abのときabも数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>数えない。二つの位置は隣接するため、合法なのはa,bの2個だけ。通常のdistinct-subsequence DPをそのまま使うとabを誤って追加する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc214/editorial/2440">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc214-editorial-2440-8404c7a84430603f504698d7a67b0eb89173b87ef656cf7e522e1d7ef121c7ac</li>
+<li><a href="https://atcoder.jp/contests/abc214/tasks/abc214_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc214-f-problem-203e028b0a1974274025dd558bce523e82e7a094cc1d77c32448a6e2abd00b75</li>
+</ul></main>
+</body></html>

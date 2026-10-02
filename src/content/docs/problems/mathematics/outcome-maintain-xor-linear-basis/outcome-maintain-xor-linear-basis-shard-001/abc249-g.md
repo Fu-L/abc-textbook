@@ -1,0 +1,117 @@
+---
+title: "ABC249-G — Xor Cards"
+draft: true
+authoringUnit: {"problemId":"abc249-g","docPath":"src/content/docs/problems/mathematics/outcome-maintain-xor-linear-basis/outcome-maintain-xor-linear-basis-shard-001/abc249-g.md","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-xor-linear-basis"],"sourceRevisionIds":["source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32","source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同一カードのA,Bを連結して消去すると実現可能な対のspanを保てる。A≤Kの候補はKと全bit一致するもの、または最初に異なるbitでA=0,K=1となるものに互いに素に分類できる。上位bitを固定した各分岐で自由な残余空間のBを高bit優先で最大化すれば、その分岐の最適値になる。全分岐の最大と非空選択可能性を確認する。","sourceRevisionIds":["source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32","source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"カード(A,B)=(1,2),(2,3)、K=2。","procedure":["非空選択の対は(1,2),(2,3),(3,1)。","A≤2の前二つのうちB最大は3。"],"executionTarget":null,"expectedResult":"3。","verificationStatus":"not_applicable","learningUnitIds":["unit-xor-linear-basis"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-maintain-xor-linear-basis"],"prerequisiteIds":[],"attainmentCondition":"一枚(A,B)=(1,0)、K=0では空集合の(0,0)を返してよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"−1。"},"answer":{"reasoningOrVerification":"非空選択が必要なので唯一のカードは不適。空集合をspan所属だけで許すと誤答になる。","procedure":["具体例の各状態・寄与を再計算する。","非空選択が必要なので唯一のカードは不適。空集合をspan所属だけで許すと誤答になる。"],"expectedResult":"−1。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [XOR線形基底](src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md)
+
+- 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+共通前提と本節で説明する内容。
+
+対象外:
+
+- XOR線形基底の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+カード集合の選択は(AのXOR,BのXOR)という対で表せ、各カードを60ビットのベクトルとして行基本変形しても実現可能な対の集合は変わらない。
+
+採用する候補: 連結した60ビット上のXOR基底と上限制約の桁探索
+
+最大1000枚を階数高々60の基底へ圧縮し、Aの上位ビット制約を守りながら、制約が緩んだ後はB側を最大XORにできる。
+
+棄却する候補: 全ての部分集合を列挙する
+
+選択肢が2^N個あり、N=1000では不可能である。
+
+AとBの基底を別々に作ると同じカードを選ぶ対応が失われるため、必ず(A,B)を連結した一つのベクトルとして消去する。
+
+Aの接頭辞がKより小さいと確定した時点で残りのAビットは自由になり、残ったB成分だけの線形空間で最大XORを取れる。
+
+(A_i,B_i)を連結したベクトルにガウス消去を行い、A側の上位ビットからK以下となる分岐を探索する。Kとの大小が確定した各候補で残余基底によるBの最大XORを求め、最大値を採用する。
+
+## 典型の発動条件
+
+### XOR線形基底
+
+発動条件: 部分集合XORの実現可能集合を小さい階数で表したい。
+
+カードの対をF2上の基底に圧縮し、行基本変形後の生成空間を探索する。
+
+### 二進接頭辞制約
+
+発動条件: XOR値にA≤Kという数値上限が付く。
+
+上位ビットからKと同じか小さいかを管理し、小さいと確定した枝で目的側Bを貪欲最大化する。
+
+## 問題固有の要素
+
+制約値Aと目的値Bを一体のベクトルにすることが、同一部分集合という相関を保ったまま線形代数を使う鍵である。
+
+別の問題へ持ち帰る視点: 線形空間上の辞書順制約は、接頭辞が境界未満になる最初の位置を列挙して自由な接尾辞最適化へ分ける。
+
+## 正当性
+
+同一カードのA,Bを連結して消去すると実現可能な対のspanを保てる。A≤Kの候補はKと全bit一致するもの、または最初に異なるbitでA=0,K=1となるものに互いに素に分類できる。上位bitを固定した各分岐で自由な残余空間のBを高bit優先で最大化すれば、その分岐の最適値になる。全分岐の最大と非空選択可能性を確認する。
+
+## 実装上の注意
+
+- A側30ビットとB側30ビットの並び、符号なし64ビットのシフト、空集合だけで得られる(0,0)と非空部分集合の区別を確認し、実現不能なら-1を返す。
+
+## 復習の核
+
+- N≤20の部分集合全探索と比較し、線形従属なカード、零ベクトル、K=0、A側の上位ビットで初めて境界未満になる各分岐を検査する。
+
+## 計算量と制約
+
+### 時間
+
+O(NB+B³)、B=60。連結ベクトルの消去後、Aの制約分岐ごとにBを最大化する。
+
+### 空間
+
+O(B²+N)、入力なしならO(B²)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 1000; 0 \leq K \lt 2^{30}; 0 \leq A_i, B_i \lt 2^{30} \, (1 \leq i \leq N); All values in input are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+カード(A,B)=(1,2),(2,3)、K=2。
+
+1. 非空選択の対は(1,2),(2,3),(3,1)。
+2. A≤2の前二つのうちB最大は3。
+
+期待される結果: 3。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+一枚(A,B)=(1,0)、K=0では空集合の(0,0)を返してよいか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+非空選択が必要なので唯一のカードは不適。空集合をspan所属だけで許すと誤答になる。
+
+確認結果: −1。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc249/editorial/3791) — source-abc249-editorial-3791-ee382c44f4b4af3bfe1362b47fd7d72e1fd71ef2abda63f6386ceb1b1caa7e32
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc249/tasks/abc249_g) — source-abc249-g-problem-778ba404c2c711fbb755b3caec725c2e66bb81c9bccee22d043387af045a4719

@@ -1,0 +1,79 @@
+{
+  "shardId": "outcome-solve-difference-constraints-shard-001",
+  "primaryOutcomeId": "outcome-solve-difference-constraints",
+  "domain": "graph-search",
+  "taskId": "T066",
+  "problemIds": [
+    "abc216-g",
+    "abc404-g"
+  ],
+  "homeUnitId": "unit-difference-constraints",
+  "prerequisiteOutcomeIds": [
+    "outcome-detect-improving-cycles",
+    "outcome-model-and-compute-shortest-path"
+  ],
+  "dependencyShardIds": [
+    "outcome-model-and-compute-shortest-path-shard-001",
+    "outcome-model-and-compute-shortest-path-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.md",
+    "src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "5c7946f8f9bc47fa18eb9b2fe5ff50428ce09d316e56baa171b96a9f9b9a709a",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc216-g",
+      "path": "src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc216-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc404-g",
+      "path": "src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

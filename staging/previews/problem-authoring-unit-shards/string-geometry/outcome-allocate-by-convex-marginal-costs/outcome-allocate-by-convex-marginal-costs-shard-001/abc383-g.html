@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC383-G — Bar Cover</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC383-G — Bar Cover</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/separable-convex-marginals.md">分離凸・凹の単調限界値選択</a></p>
+<ul>
+<li>分離凸費用または分離凹利益を単調な限界値列へ分解し、heap mergeか閾値別の個数・総和により必要な上位・下位K項を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>分離凸・凹の単調限界値選択の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>長さKのbarを置く開始位置iの利得は連続和B_iであり、bar同士が重ならない条件は選んだ開始位置の距離がK以上と言い換えられる。</p>
+<p>各個数についての最大値列は離散凹になる。この性質により、左右区間の解を通常のmax-plus convolutionより速くmergeできる。</p>
+<p>採用する候補: 境界から選べない長さを状態に持つ分割統治DPを、離散凹列の傾きmergeで結合する</p>
+<p>K≤5なので左右境界状態はO(K^2)に抑えられ、各nodeの個数方向を凹列の傾き列として線形mergeすることで全体O(NK^2 log N)になる。</p>
+<p>棄却する候補: dp[position][count]で次の選択位置を遷移する</p>
+<p>全countの答えを持つ二次元DPはΘ(N^2)状態になり、N=2×10^5では扱えない。</p>
+<p>dp[l][r][x][y]は左右端からx,y個の開始位置を禁止したとき、選択個数ごとの最大和を表す。</p>
+<p>中央を跨ぐ衝突は左側の右端禁止jと右側の左端禁止K-1-jを組にすれば排除できる。凹列のconvolutionは限界利得を降順mergeすればよい。</p>
+<p>Aの長さK window sum列Bを作る。区間を再帰分割し、各(x,y)境界状態についてj=0..K-1の左右DPを凹列としてmergeし最大を取る。rootの制約なし列から各bar本数の答えを得る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="分割統治dpと境界状態">分割統治DPと境界状態</h3>
+<p>発動条件: 局所制約が区間結合時に境界近傍だけで干渉するとき。</p>
+<p>左右端の禁止幅をK未満で持ち、中央衝突だけを調整する。</p>
+<h3 id="離散凹列のmax-plus-convolution">離散凹列のmax-plus convolution</h3>
+<p>発動条件: 選択個数ごとの最適値が限界利得非増加になるとき。</p>
+<p>二列の差分を降順mergeしてconvolutionを線形化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>Kが小さいのは遷移幅だけでなく、区間を結ぶ際に伝えるべき情報が両端各K通りしかないことを意味する。</p>
+<p>別の問題へ持ち帰る視点: 長距離の答え数が多くても、相互作用が境界幅に局在し価値列が凹なら分割統治と傾き表現を検討する。</p>
+<h2 id="正当性">正当性</h2>
+<p>bar選択は開始位置距離K以上の集合に等しい。左右分割時の跨ぎ衝突は右端禁止jと左端禁止K−1−jで全合法組を覆える。各状態の個数別最適値は凹列で、二列のmax-plus積は非増加限界利得のmergeで正しく得られる。境界split全てのmaxを取るため各個数の合法解を取りこぼさず、再帰から全体最適列になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>不可能な選択個数は負の無限大とし、短い区間ではx,yの禁止が重なる場合を正規化する。負のA_iでも0本の値を基準に壊さない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N≤12では開始位置subsetを全列挙し、負利得、K=1、区間長&lt;K、中央直前直後を選ぶcaseで全個数のDP列と凹性を照合する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(K³N log N)。各境界状態K²と中央split Kについて線形凹列mergeを行う。</p>
+<h3 id="空間">空間</h3>
+<p>O(K²N log N)の素朴再帰保持、解放でO(K²N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 1 \leq K \leq \min(5,N); -10^9 \leq A_i \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=4,K=2,A=(1,5,4,2)。</p>
+<ol>
+<li>window利得は6,9,6。一barなら中央9。</li>
+<li>二barは開始1,3だけで6+6=12。</li>
+</ol>
+<p>期待される結果: 0,1,2本の最適値0,9,12。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>Aが全負でも0本の値を負無限にしてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>0本は実現可能で値0。例えばK=1,A=(−1,−2)のexact本数列は0,−1,−3。</p>
+<p>確認結果: 0本は0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc383/editorial/11500">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc383-editorial-11500-ab0a48e7cda2a99f752f9faef52005366b6bdf6afeb68d0ce190a22a973b8251</li>
+<li><a href="https://atcoder.jp/contests/abc383/tasks/abc383_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc383-g-problem-72be83610d4356251b6c9b25d5441578f5fdd5ac5db4c535baf1c323433e9444</li>
+</ul></main>
+</body></html>

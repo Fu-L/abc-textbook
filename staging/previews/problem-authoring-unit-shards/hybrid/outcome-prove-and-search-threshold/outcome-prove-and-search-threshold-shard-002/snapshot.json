@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-prove-and-search-threshold-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "e4bce4fcf3f8d3b455758c6cfc4c1c3f93fc2465ebcab9183602d67fa8db06d2",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "986932c18f9be6c2449b05216052a8e21ca0f9e9d91733a548ac46fc4ac35d65",
+  "reviewDigest": "ba7d759da45ef78212145a17f75ea442f80ffa802bf4f0fecb8c198bddcff23c",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc293-ex.html",
+      "digest": "bba3378a7c70eea4f0c23fc8f1e3653b3b55fa0402d1cd8598d4db71be993891"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc300-f.html",
+      "digest": "272faab5101f53cf19766bd64c64292861b8516301ec3b318e0e45c4ce213d17"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc303-f.html",
+      "digest": "53639d4c03aeab6edda2daf6703725eb18c1f5d1a4e56949ff4ec464082027d8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc330-f.html",
+      "digest": "23f19d63ff51f2aecbfcb73ee4f3a34101c9f5a6d2d610686bf3db9f3dee0ff3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc373-e.html",
+      "digest": "c4397f4f689cb135a61ef4f3a15c4e30bb2a5646eaec2cb3e1c65e72e551e5fc"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc374-e.html",
+      "digest": "136561b4538b12d9fd1a5e26a33d2d905242fbf5597e6977b95afb81376612e3"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc381-e.html",
+      "digest": "35cc3ada68c7a1d116b2f2260034e5ba7a1498eafcf2634e6f1cc2b5098d79e0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/abc388-g.html",
+      "digest": "20c97ad3467e473b2a5c671bb0022f0650b8d060c2be1b47548737c733b87c82"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-002/index.html",
+      "digest": "40ce4c670dc329c30409c06f6a002a952943d83640cb52b4d45916b10050ad46"
+    }
+  ],
+  "snapshotDigest": "a3f975094804eee1d18b5f707d5d97f11bb4b4125aa83a542d10d3d964ee3480"
+}

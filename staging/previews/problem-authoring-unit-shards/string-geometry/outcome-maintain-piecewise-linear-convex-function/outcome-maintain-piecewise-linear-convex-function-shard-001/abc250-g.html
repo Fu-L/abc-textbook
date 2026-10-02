@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC250-G — Stonks</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC250-G — Stonks</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/geometry-optimization/slope-trick.md">slope trick</a></p>
+<ul>
+<li>区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/priority-queue-best-first.md">priority queue・best-first列挙</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>slope trickの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>日ごとの所持株数を持つDPは所持数に対して凹な折れ線になり、売買で増える傾きを価格の多重集合として管理できる。</p>
+<p>採用する候補: 傾きを最小ヒープで管理するslope trick</p>
+<p>各価格を傾きの変化点として挿入し、現在の最小買値より高く売れるときだけ差益を確定すれば、凹DP全体を線形個の要素で表せる。</p>
+<p>棄却する候補: 日数と所持株数を列挙するDP</p>
+<p>所持可能数が日数に比例するため二次状態となり、N=2×10^5では間に合わない。</p>
+<p>最小の未対応買値mが今日の価格Pより小さければP-mを利益へ加え、mを取り除いてPを2個挿入する更新がDPの傾き変化を正確に表す。</p>
+<p>利益が出ない日もPを1個挿入することで、将来の売却候補となる新しい傾きを残す。</p>
+<p>利益を0、最小ヒープを最初の価格一個で初期化する。二日目以降は挿入前の最小値mとP_iを比較し、m&lt;P_iならmを一つ取り出して利益へP_i-mを加え、P_iを二個挿入する。そうでなければP_iを一個挿入する。heapは取引候補の限界費用を表し、過去の売りを後から取り消してより高い価格へ付け替えられる。価格[1,2,100]では利益は1+98=99となる。全体O(N log N)。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="slope-trick">slope trick</h3>
+<p>発動条件: 整数状態上の凹・凸なDPが区分線形関数として表せる。</p>
+<p>所持株数方向の傾き変化点を価格の多重集合で保持し、日ごとの遷移を挿入・置換にする。</p>
+<h3 id="優先度付きキューによる売買対応">優先度付きキューによる売買対応</h3>
+<p>発動条件: 過去の候補のうち最も安いものを現在価格と対応させたい。</p>
+<p>最小買値を取り出して正の差益だけを確定し、売値を将来の境界として戻す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>ヒープの要素は実際の一対一売買履歴ではなく、所持数DPの傾きであり、売却時に同価格を二重挿入することが状態遷移を保存する。</p>
+<p>別の問題へ持ち帰る視点: 大きな離散状態を持つ最適化でも、値関数の凸凹性があれば傾きの変化点だけを管理できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>所持株数に対する最大利益DPは凹で、限界的に一株増やす費用の変化点を最小ヒープに保持できる。価格pが最小値mを上回ると、最安の限界買値をpで売ることでp−mだけ最終利益が改善する。mを取り除きpを二個挿入するのは、pでの新規購入候補と、過去の売却を後で取り消してより高く売る候補の両方を残す操作である。そうでなければ新規購入候補一個を追加する。これは毎日の購入・売却・待機DPを圧縮した更新であり、同一日に二回実売買するという意味ではない。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>利益は64ビット整数で持ち、同価格を多重集合として重複保持する。m&lt;P_iのときだけ差益を加え、P_iの挿入個数を間違えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Nが小さい所持株数DPと比較し、単調増加・単調減少・同価格の連続・同日にヒープへ二重挿入する更新を検証する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 2 \times 10^5; 1 \le P_i \le 10^9</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>価格[1,2,100]。</p>
+<ol>
+<li>初期heap=[1]、利益0。</li>
+<li>2の日に1をpopし利益1、heapへ2を二個入れる。</li>
+<li>100の日に2を一個popし利益98を追加する。これは前日の売却を100へ付け替えることに相当する。</li>
+</ol>
+<p>期待される結果: 利益99。実際には1で買い100で売れば達成できる。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>価格[3,2,1]で利益を得られるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>得られず0。各日で現在価格はheap最小値以下だから差益更新はなく、減少列で無理に取引しない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc250/editorial/3929">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc250-editorial-3929-7268adfb77e862152c0813b8f7f1c052ebbaa2479c7c002b297a92a61e43550b</li>
+<li><a href="https://atcoder.jp/contests/abc250/tasks/abc250_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc250-g-problem-04fa701869f3e1dcb4924c6b3fea60c63a251e0badcb3ce5bd629c2ac9384907</li>
+</ul></main>
+</body></html>

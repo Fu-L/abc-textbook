@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC321-E — Complete Binary Tree</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC321-E — Complete Binary Tree</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/implicit-binary-tree.md">対称性・深さ・label区間で巨大な完全二分木を数える</a></p>
+<ul>
+<li>同じ深さの対称性と2冪で距離splitを集約するか、heap番号の祖先case分解と子孫label区間を使い、巨大な完全二分木を展開せず数えられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>子を明示した一般木の木DP・rerooting、およびLCA・Euler順・HLD・virtual treeを実装するpath query。完全二分木でも個々の頂点を列挙する処理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>heap番号のtreeでは頂点vから下へd段の子孫labelが連続区間[v·2^d,(v+1)·2^d)になる。 Xから距離Kの頂点Yは、そのLCAがX自身か、Xの各ancestorのいずれかという高々tree高さ個のcaseへ一意に分かれる。 ancestor zをLCAとするcaseは、zから残りd段の全子孫からXへ向かうchild subtree分を引けば数えられる。 countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。 Xからu段上のancestor zについてd=K-uが0ならz自身1個、d&gt;0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。 u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。</p>
+<p>採用する候補: Xからrootまでancestorを算術で列挙し、各ancestorをpathの折返し点とするcaseを子孫label区間の長さでO(1)計数する。</p>
+<p>Nが10^18でもtree高さは約60で、頂点やedgeを生成せず各testを処理できる。</p>
+<p>棄却する候補: 頂点Xから通常のBFSをK layer行う。</p>
+<p>Nが最大10^18でtreeを明示できず、Kも非常に大きい。</p>
+<p>棄却する候補: 深さがdepth(X)±Kの全labelを数える。</p>
+<p>同じ深さ差でもLCA位置によりXからの距離が異なり、不要な別subtreeを含む。</p>
+<p>countDesc(v,d)はmax(0,min(N+1,(v+1)2^d)-v2^d)で、label上限Nとの区間intersectionだけになる。</p>
+<p>Xからu段上のancestor zについてd=K-uが0ならz自身1個、d&gt;0ならcountDesc(z,d)-countDesc(child,d-1)が寄与する。</p>
+<p>u=0、すなわちLCA=XのcaseはcountDesc(X,K)として最初に数える。</p>
+<p>overflowを避けるcountDesc(v,d)を用意し、まずanswer=countDesc(X,K)とする。child=X,z=floor(X/2),u=1からz=0またはu&gt;Kまで上る。d=K-uが0なら1を加え、正ならcountDesc(z,d)-countDesc(child,d-1)を加える。その後child=z,z=floor(z/2)へ更新し、各testのanswerを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="implicit-complete-binary-tree">implicit complete binary tree</h3>
+<p>発動条件: 親i/2・子2i,2i+1で巨大treeが番号だけ与えられるとき。</p>
+<p>子孫levelを連続label区間として数える。</p>
+<h3 id="ancestor位置での距離case分解">ancestor位置での距離case分解</h3>
+<p>発動条件: 固定始点から距離Kの頂点をrooted treeで数えるとき。</p>
+<p>pathが上へ何段進んでから別の枝へ下るかをancestorごとに分ける。</p>
+<h3 id="全体subtreeから進入branchを引く">全体subtreeから進入branchを引く</h3>
+<p>発動条件: LCAを特定ancestorに固定し、始点側branchを除外したいとき。</p>
+<p>ancestorのd段子孫数からpath childのd-1段子孫数を引く。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>heap labelでは同じ深さの子孫が区間になるため、通常ならsubtree size前計算が必要な距離計数を端点2つの算術へ変えられる。</p>
+<p>別の問題へ持ち帰る視点: implicit treeの番号規則から、depth固定のsubtreeがinterval・等差列などの数えやすい集合にならないか確認する。</p>
+<h2 id="正当性">正当性</h2>
+<p>距離Kの相手をLCAがXか各祖先かで一意分類する。祖先z側の残り深さ子孫からX方向の子孫だけ除けばLCAが正確にzの頂点を得る。heap子孫は連続区間なのでNで切って数え、互いに素な全場合を足す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>2^dやv·2^dが64bitを超える前に、dが十分大きい・v&gt;N&gt;&gt;dならcount 0と判定してshift overflowを避ける。</li>
+<li>KはN-1までで64bit値なのでint loop上限に変換せず、実際のancestorが尽きる約60回だけ回す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>Xの子孫case、親自身case、祖先の反対側subtree caseを小さいheap treeに色分けし、同じ頂点を重複せず全て数えるか確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>Nまでのheap木の高さ h=⌊log₂N⌋。祖先列挙と区間算術で各質問 O(h)。</p>
+<h3 id="空間">空間</h3>
+<p>木を生成せず O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T \leq 10^5; 1\leq N \leq 10^{18}; 1\leq X \leq N; 0\leq K \leq N-1; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=7,X=4,K=2。</p>
+<ol>
+<li>Xの2段下は存在しない。</li>
+<li>祖先2から残り1段の子孫{4,5}よりX側{4}を除いて5。</li>
+<li>祖先1で残り0なので1を足す。</li>
+</ol>
+<p>期待される結果: 2頂点 {1,5}</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>K=0なら祖先側も数えるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>数えない。相手はX自身一個だけで、祖先へ一辺以上移るケースは距離条件外。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc321/tasks/abc321_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc321-e-problem-0074e7d43934eb73ea96b27938b9a2a56d7c265abb3cdb40e35245fe5d9c3615</li>
+<li><a href="https://atcoder.jp/contests/abc321/editorial/7267">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc321-editorial-7267-650051c033b77bb70605dcb374d412fd3c16a53bb33e6b7fa2fa5f8a99beb305</li>
+</ul></main>
+</body></html>

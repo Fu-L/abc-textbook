@@ -1,0 +1,117 @@
+---
+title: "ABC267-E — Erasing Vertices 2"
+draft: true
+authoringUnit: {"problemId":"abc267-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc267-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress"],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search","tag-amortized-monotone-progress"],"sourceRevisionIds":["source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a","source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"vを削除すると未削除隣接頂点uのcurrentCostからA_vを引けばよく、各辺は一度だけこの更新に使われる。 安全頂点を削除すると他頂点も安全側へしか動かず、queueが尽きるまでの貪欲処理が実現可能性の必要十分判定になる。","sourceRevisionIds":["source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a","source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-prove-and-search-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3、頂点重み(2,3,4)。","procedure":["初cost=(3,6,3)。","閾値3で1,3を削除すると2のcostは0。"],"executionTarget":null,"expectedResult":"最大削除costの最小3。","verificationStatus":"not_applicable","learningUnitIds":["unit-monotone-search"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-prove-and-search-threshold"],"prerequisiteIds":["unit-amortized-monotone-progress"],"attainmentCondition":"閾値2で最初に削除できる頂点はあるか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"全初costが3以上で一つもなく不可。削除は隣接costを減らすだけなので任意のeligible順が安全。"},"answer":{"reasoningOrVerification":"全初costが3以上で一つもなく不可。削除は隣接costを減らすだけなので任意のeligible順が安全。","procedure":["具体例の各状態・寄与を再計算する。","全初costが3以上で一つもなく不可。削除は隣接costを減らすだけなので任意のeligible順が安全。"],"expectedResult":"全初costが3以上で一つもなく不可。削除は隣接costを減らすだけなので任意のeligible順が安全。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [単調境界を証明して探索する](src/content/docs/learn/modeling/monotone-search.md)
+
+- 判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
+
+対象外:
+
+- 連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。
+
+## 考察
+
+頂点vの現在costは未削除隣接頂点のA総和で、他頂点が削除されるたびに減ることはあっても増えない。
+
+最大costをX以下にできるかはXに対して単調であり、一度cost≤Xになった頂点は以後いつ削除しても安全である。
+
+棄却する候補: 全削除順N!通りを探索して各順序の最大costを比較する。
+
+順序数が階乗的で、局所的なcost減少の単調性を利用していない。
+
+採用する候補: 答え候補Xを二分探索し、currentCost≤Xの頂点をqueueで反復削除するpeelingにより全頂点を消せるか判定する。
+
+安全頂点を削除すると他頂点も安全側へしか動かず、queueが尽きるまでの貪欲処理が実現可能性の必要十分判定になる。
+
+vを削除すると未削除隣接頂点uのcurrentCostからA_vを引けばよく、各辺は一度だけこの更新に使われる。
+
+minimize maximum elimination costをparametric searchへ変え、monotone eligibilityを持つweighted degeneracy peelingでfeasibilityを判定する。
+
+## 典型の発動条件
+
+### 最大値最小化の答え二分探索
+
+発動条件: 全操作costを閾値X以下にできるかが単調に判定できるとき。
+
+Xで安全な削除順が存在するかをoracleにし、最小の可行Xを探索する。
+
+### 単調な頂点peeling
+
+発動条件: 頂点削除により残存頂点の制約値が減少し、許可状態から不許可へ戻らないとき。
+
+初期許可頂点をqueueへ入れ、削除差分で新たに許可された隣接頂点を追加する。
+
+## 問題固有の要素
+
+安全頂点をどの順でqueueから取っても、削除は残りcostを下げるだけなので全削除可能性は変わらない。
+
+別の問題へ持ち帰る視点: eligibilityが削除に対して単調なら、選択順の探索を任意順のclosure計算へ置き換える。
+
+## 正当性
+
+vを削除すると未削除隣接頂点uのcurrentCostからA_vを引けばよく、各辺は一度だけこの更新に使われる。 安全頂点を削除すると他頂点も安全側へしか動かず、queueが尽きるまでの貪欲処理が実現可能性の必要十分判定になる。
+
+## 実装上の注意
+
+- 各判定でcurrentCostを初期隣接A和へ戻し、removed/enqueued flagも初期化する。
+- 隣接和と答え上限は64 bit整数で保持し、削除済み頂点を重複処理しない。
+
+## 復習の核
+
+- 順序最適化のmax-min問題は、閾値を固定したとき許可操作が後から増えるだけかを確認する。
+- 頂点削除costが隣接重み和なら、削除時に各隣接頂点へ一回だけ重み差分を配る。
+
+## 計算量と制約
+
+### 時間
+
+O((N+M)log C)、C≤ΣAはcost閾値上限、各判定queue peeling O(N+M)。
+
+### 空間
+
+O(N+M)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; 0 \le M \le 2 \times 10^5; 1 \le A_i \le 10^9; 1 \le U_i,V_i \le N; The given graph is simple.; All values in input are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+道1-2-3、頂点重み(2,3,4)。
+
+1. 初cost=(3,6,3)。
+2. 閾値3で1,3を削除すると2のcostは0。
+
+期待される結果: 最大削除costの最小3。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+閾値2で最初に削除できる頂点はあるか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+全初costが3以上で一つもなく不可。削除は隣接costを減らすだけなので任意のeligible順が安全。
+
+## 出典
+
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc267/tasks/abc267_e) — source-abc267-e-problem-2dab07863f474ec1162748d6cadbcbea66a66c8b52362981bca715c3a0a9556a
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc267/editorial/4729) — source-abc267-editorial-4729-73c559264306d24b0e962aae7d50c12ac66a475829671c8c132e75d834abe153

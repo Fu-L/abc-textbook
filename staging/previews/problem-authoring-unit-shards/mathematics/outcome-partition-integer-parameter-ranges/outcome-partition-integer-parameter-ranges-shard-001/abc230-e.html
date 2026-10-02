@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC230-E — Fraction Floor Sum</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC230-E — Fraction Floor Sum</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>i が大きくなると floor(N/i) は単調に減り、同じ商を取る i が長い連続区間としてまとまる。</p>
+<p>商が k となる整数 i の個数は floor(N/k)−floor(N/(k＋1)) で求まり、小さい商は値ごとに一括加算できる。</p>
+<p>棄却する候補: i＝1 から N まで順に floor(N/i) を計算して足す。</p>
+<p>N が 10 の 12 乗まであるため、N 回の除算を実行できない。</p>
+<p>採用する候補: sqrt(N) 以下の商は出現回数でまとめ、それより大きい商は対応する小さい i を一つずつ処理する。</p>
+<p>商と添字の少なくとも一方が sqrt(N) 以下になる双曲線の性質により、両側を合わせても平方根程度の項だけで済む。</p>
+<p>全ての i を走査する代わりに、floor(N/i) の値が同じ区間を数えるという商側からの集約へ視点を移す。</p>
+<p>整数双曲線 xy≤N の格子点数え上げとして、小さい商の頻度集約と小さい除数の直接和を境界 floor(sqrt(N)) で分割する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="floor-商の平方根分割">floor 商の平方根分割</h3>
+<p>発動条件: floor(N/i) を i の広い範囲で集約して和や頻度を求めるとき。</p>
+<p>商 k の出現個数を除算二回の差で求め、大きい商側は小さい i だけ直接処理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>k₀＝floor(sqrt(N)) とすると、商が k₀＋1 以上の i は N/(k₀＋1) 以下に限られ、集約側との重複なしに直接列挙できる。</p>
+<p>別の問題へ持ち帰る視点: 商と除数の対称性を使う分割では、境界の等号を式で確認して二重計上を避ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>s=floor√Nとしてi≤sは直接足す。i&gt;sの商q≤sについてfloor(N/(q+1))&lt;i≤floor(N/q)をi&gt;sへ制限して個数を数える。この二領域は互いに素で全iを覆い、各商の寄与を一度だけ足す。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>平方根は浮動小数に頼らず整数として補正し、k₀²≤N＜(k₀＋1)² を満たすことを確認する。</li>
+<li>答えは 32 bit を超えるため 64 bit 整数を使い、二つの和の添字範囲を境界で重ねない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>floor(N/i) が並んだら、値の種類数と同値区間の端点 floor(N/k) を先に調べる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(√N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{12}; N is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=8。</p>
+<ol>
+<li>商は8,4,2,2,1,1,1,1。</li>
+<li>商2の区間[3,4]と商1の区間[5,8]を一括する。</li>
+</ol>
+<p>期待される結果: 20。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>N=9でi=3を両側へ入れるとどうなるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>寄与3を二重計上する。i&gt;sの制限を入れ、整数平方根の境界を正確にする。</p>
+<p>確認結果: 正しい和23。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc230/tasks/abc230_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc230-e-problem-3d6f2eb2af132c663a771b9bbc8c60031ad3f3e5de0dbe6cbab88f2cd9aa22a0</li>
+<li><a href="https://atcoder.jp/contests/abc230/editorial/3015">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc230-editorial-3015-e3a2cd6ba379bb9e86973db15ecf8c610c29213fe94c061e57e1d7b30cd5b019</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-augment-components-with-metadata-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "2dd613f76b7af5d31c033472645f23cf8298596e22c50de8d9f500f1fec19b0a",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "21f057df72492e0e1b9f8d91b2f9e48cca1776767afe0ddb5e471a7a0d27fa1f",
+  "reviewDigest": "790b3a2d36cf06a9b4bb6a528d21239936c42d93f8185a2c9dc9247b823b10bf",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc279-f.html",
+      "digest": "484f2d9fc4cb496bd57d7036138ee65b64758fecf52924a297127abe2355beee"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc372-e.html",
+      "digest": "31602baa97426c6fbe9ce660faffba1599764bd57f783425145f286cf47eb76b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc392-e.html",
+      "digest": "55ba787dbed84504a06ba43d24938204524ec34909fb84bf2b9074a235113da0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc401-e.html",
+      "digest": "ca3d06c47a3600050ac732f71bfc4686550d053d7e39bc207816b44e49a51ae0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc420-e.html",
+      "digest": "26aaf310a5de81caf1fc4fa4121f778ef1d0f7b3cafb71ccf7be57ebed07bca9"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/abc434-e.html",
+      "digest": "e9586901987afecde97b62bf8f17753700157d952612abe17c189f5e331bb545"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-augment-components-with-metadata/outcome-augment-components-with-metadata-shard-001/index.html",
+      "digest": "c549f8fbb8e67693ccab35a9045b2929f779a04e8df70f3bd8627558ec34cad0"
+    }
+  ],
+  "snapshotDigest": "e7d44f4cf4ab8b2efcc9b1d293d8ce2e4666b5e2616f962dca5434cee7482277"
+}

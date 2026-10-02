@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC345-G — Sugoroku 5</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC345-G — Sugoroku 5</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></p>
+<ul>
+<li>組合せの合成を生成関数の積・逆数・畳み込みに符号化できる。</li>
+<li>係数積和または反転列との相互相関を多項式積へ変換し、NTT・FFTで必要な係数範囲を計算できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/threshold-heavy-light.md">平方根・閾値による軽重分類</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>n回後にgoal未到達である確率a_nを使うと、ちょうどn回でgoalする確率はP_n=a_{n-1}-a_nである。一回の進行量母関数F(x)=K^{-1}(x+…+x^K)によりa_n=Σ_{s=0}^{N-1}[x^s]F(x)^nと書ける。</p>
+<p>採用する候補: Kの大小で係数公式と切詰め分割統治convolutionを使い分け、全a_nを列挙する</p>
+<p>大Kでは疎な(1-x^K)^n展開、小Kでは必要次数幅O(K·区間長)だけのNTTを使い、二乗DPを避けられる。</p>
+<p>棄却する候補: step数ごとに全square確率を配る通常DP</p>
+<p>N step×N square×K遷移はもちろん、sliding sumでKを消してもO(N^2)となる。</p>
+<p>F=x(1-x^K)/(K(1-x))より、a_n=K^{-n}[x^{N-1-n}](1-x^K)^n(1-x)^{-(n+1)}である。大KではjK次数だけを足す有限和としてa_nをO(N/K)で計算でき、小Kではdivide-and-conquer中の多項式を将来必要な上位O((r-l)K)項へ切れる。</p>
+<p>factorial・inverse factorialとKの逆冪を前計算する。大K側ではa_n=K^{-n}Σ_j(-1)^j C(n,j)C(N-1-jK,n)を有効jだけ加算する。小K側では区間[l,r)のa_n評価をFの冪とNTT convolutionで分割統治し、各nodeで必要degree windowだけ保持する。閾値を均衡させ、最後にa_{n-1}-a_nを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="確率分布の母関数">確率分布の母関数</h3>
+<p>発動条件: 独立dice和の分布とthreshold未満確率を全step数で求めたい。</p>
+<p>一回分Fのn乗係数として位置確率を表し、survival確率a_nへ合計する。</p>
+<h3 id="疎密による平方分割">疎密による平方分割</h3>
+<p>発動条件: Kが大きいと係数展開が疎で、小さいと低degree convolution幅が狭い。</p>
+<p>O(N^2/K)とO(NK log^2N)の二手法をK閾値で使い分ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>absorbing処理を直接母関数に入れず、無吸収のdice和がN未満であるsurvival確率を数えると、min(N,x+y)の挙動を単純な係数prefixへ変えられる。</p>
+<p>別の問題へ持ち帰る視点: 到達時刻分布はthreshold未到達確率の隣接差として求めると、吸収Markov過程を通常の和分布へ戻せる。</p>
+<h2 id="正当性">正当性</h2>
+<p>未到達確率a_nは進行量分布F^nのN未満係数和。F=x(1−x^K)/(K(1−x))を代入し包除で展開すると二項有限和になる。小Kの分割統治も同じFの冪を必要bandで計算するのでa_nが一致する。到達は単調で、時刻n−1未到達からn未到達を引いた差a_{n−1}−a_nが初回到達確率になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>a_0=1、n&gt;Nでは不要で、binomialの範囲外項を0にする。P_nのmod減算を正規化し、Kの逆元・逆冪をmod 998244353で扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>K=1ではP_N=1のみ、N=K、N小で全dice列挙し、ΣP_i=1とa_nの単調差を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N+min(N²/K,NK log²N))を目安とする。大Kは有限和、小Kは必要次数bandだけの分割統治NTT。</p>
+<h3 id="空間">空間</h3>
+<p>O(NK)の素朴band保持、不要band解放で抑える。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: 1 \leq K \leq N \leq 2 \times 10^5; N and K are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、K=2。</p>
+<ol>
+<li>一回でgoal不能。二回で未到達なのは(1,1)だけで確率1/4。</li>
+<li>三回では必ずgoalなので差分を取る。</li>
+</ol>
+<p>期待される結果: P_1=0,P_2=3/4,P_3=1/4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>K=1なら分布は。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>毎回1進むのでちょうどN回でのみgoal。a_nはn&lt;Nで1、n≥Nで0。</p>
+<p>確認結果: P_N=1、他0。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc345/editorial/9549">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3</li>
+<li><a href="https://atcoder.jp/contests/abc345/tasks/abc345_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb</li>
+</ul></main>
+</body></html>

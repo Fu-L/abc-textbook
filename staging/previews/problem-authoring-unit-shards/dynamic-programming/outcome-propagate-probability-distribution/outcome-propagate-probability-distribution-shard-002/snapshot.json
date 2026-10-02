@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-propagate-probability-distribution-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "cb2201b6b68ee5b130fd6187dec066308bcab4ec86d0d772c7afb098c0ebb11c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "17aae033baa7ad548968eb5f3b0a86a0085cce187e8e07b0a796913d965e58d5",
+  "reviewDigest": "2681a1c893eb424eba1a10d59114679dbb7f5c01d1e3244b4cfe3ce6af5785a5",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/abc360-e.html",
+      "digest": "b477f55497d806f93786b48f87085125ec200a431c7aec58d97106805057625f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-002/index.html",
+      "digest": "998dff9509c2d336d8a9d81124820b1607b5287a043fb92dc6c670ba1d915830"
+    }
+  ],
+  "snapshotDigest": "09b64ad271c877623585a645e9484f7eca86fe7f47598d912f4029683d806cfe"
+}

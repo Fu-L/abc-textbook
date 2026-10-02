@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC330-F — Minimize Bounding Square</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC330-F — Minimize Bounding Square</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/basic-convex-optimization.md">一次元凸・単峰最適化</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>side長dのsquareに全点を入れる条件は、x座標をある長さdのintervalへ、y座標も別の長さdのintervalへ移すことに分離できる。</p>
+<p>固定axis・interval [l,l+d]への最小移動costは、外側の座標だけをnearest endpointへclampしたΣdistanceである。</p>
+<p>axisごとの最小clamp costの和がK以下かはdを増やすほど成立しやすく、整数dについて単調判定になる。</p>
+<p>採用する候補: side長dをbinary searchし、各axisで長さd intervalへの最小L1 clamp costをsorted座標とprefix sumから求める。</p>
+<p>2次元の移動budgetを独立な1次元凸最適化へ分け、巨大座標を1ずつ動かさず最小整数sideを判定できる。</p>
+<p>棄却する候補: 各operationを1回ずつ使い、現在spanが大きいaxisの端点を内側へ動かす。</p>
+<p>Kが4×10^14で1-step simulationは不可能で、同じextreme集合をまとめて処理する必要がある。</p>
+<p>棄却する候補: x,yを同じ中心へ集めるcostだけを最小化する。</p>
+<p>最適squareはside d&gt;0のintervalを各axisで別位置に置け、1点へ集約する必要はない。</p>
+<p>sorted Vとprefix sumがあれば、l未満のcost=l·count−sum、l+d超のcost=sum−(l+d)·countとしてinterval costを対数時間評価できる。</p>
+<p>cost(l)はdiscrete convexで、lを右へ1動かす差分は左側点数−右側点数として単調増加するため、最小lをbinary searchできる。</p>
+<p>X,Yを別々にsortしてprefix sumを作る。axisCost(V,d)ではlを[min V,max V]でdiscrete convex searchし、Σ_{v&lt;l}(l-v)+Σ_{v&gt;l+d}(v-l-d)の最小を返す。predicate(d)=axisCost(X,d)+axisCost(Y,d)≤Kとし、d=0..max(initial x-span,y-span)をinteger binary searchして最小trueを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="answer-binary-search">answer binary search</h3>
+<p>発動条件: 整数bound dを緩めると必要costが単調減少する最小化問題。</p>
+<p>side長固定の可否を判定して最小dを探す。</p>
+<h3 id="intervalへのl1-clamp">intervalへのL1 clamp</h3>
+<p>発動条件: 1次元点群を長さ固定interval内へ移す最小総距離。</p>
+<p>外側だけを両endpointへ寄せる。</p>
+<h3 id="sorted-prefix-sumでの距離和">sorted prefix sumでの距離和</h3>
+<p>発動条件: threshold左・右の全点との距離和を繰り返し評価するとき。</p>
+<p>count×endpoint−sumで計算する。</p>
+<h3 id="discrete-convex-minimization">discrete convex minimization</h3>
+<p>発動条件: interval位置lのcost差分が単調なとき。</p>
+<p>差分の符号が変わる位置をbinary searchする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>squareのx/y interval位置は独立に選べ、操作costもManhattanのaxis和なので、共通なのはside長dとbudgetの加算だけになる。</p>
+<p>別の問題へ持ち帰る視点: axis-aligned bounding形状のL1移動最適化は、形状sizeを固定して各axisのclamp問題へ分離する。</p>
+<h2 id="正当性">正当性</h2>
+<p>sorted Vとprefix sumがあれば、l未満のcost=l·count−sum、l+d超のcost=sum−(l+d)·countとしてinterval costを対数時間評価できる。 cost(l)はdiscrete convexで、lを右へ1動かす差分は左側点数−右側点数として単調増加するため、最小lをbinary searchできる。 2次元の移動budgetを独立な1次元凸最適化へ分け、巨大座標を1ずつ動かさず最小整数sideを判定できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>costは最大4×10^14級なので64bit整数を使い、Kを超えた時点でcapしてoverflowを避けてもよい。</li>
+<li>interval endpoint l+dとupper_boundのinclusive条件を揃え、既にinterval内の点へcostを加えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>片axisだけspanが大きい例と、両axisへbudgetを分ける例で、predicateがaxis別最小costの和になることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N+log²C log N)、Cは座標幅。外側幅二分×内側convex位置二分×prefix評価。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N \le 2 \times 10^5; 0 \le K \le 4 \times 10^{14}; 0 \le X_i, Y_i \le 10^9</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>点(0,0),(4,2)、budgetK=2。</p>
+<ol>
+<li>幅2の正方形へxを各1移せばcost2、yはそのまま。</li>
+<li>幅1ならx距離合計3、y1でcost4。</li>
+</ol>
+<p>期待される結果: 最小幅2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>predicate一回をO(N)と書いてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>採用したprefix+convex探索ではaxis各O(log C log N)。二段探索とlower_boundの費用を明示する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc330/editorial/7753">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc330-editorial-7753-dbcbe9a7817397803a66a446c6015dcdc62e451709ee1cf5e569a8a02998f96e</li>
+<li><a href="https://atcoder.jp/contests/abc330/tasks/abc330_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc330-f-problem-8a90fa5e29d8244512c0ca99393824aab8100d938e9f9557e108155083428871</li>
+</ul></main>
+</body></html>

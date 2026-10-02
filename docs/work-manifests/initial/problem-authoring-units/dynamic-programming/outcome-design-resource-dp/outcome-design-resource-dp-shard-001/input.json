@@ -1,0 +1,580 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-resource-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc216-f",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 5000; 1 \\leq A_i,B_i \\leq 5000; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "A順で各非空subsetを最後の選択要素iで分類する。この時max AはA_iであり条件は旧B和≤A_i−B_i。旧prefixの和DPを先に集計し後でiを追加すれば各subsetを一度だけ数える。同Aも固定したsort順で最後が一意。",
+          "sourceRevisionIds": [
+            "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+            "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f",
+          "path": "src/content/sources/abc212-abc263/source-abc216-editorial-2560-a06bb87effd4e4ed9cc8ee0c190370cae8af098b0c6d9dfc5559cd63d5a0934f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc216_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0",
+          "path": "src/content/sources/abc212-abc263/source-abc216-f-problem-869388f0644dd957ae924a0dd867f5ed1f4ce38f389c65a44d06eee27222e7c0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc216_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc222-e",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering",
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 1000; 2 \\leq M \\leq 100; |K| \\leq 10^5; 1 \\leq A_i \\leq N; 1\\leq U_i,V_i\\leq N; The given graph is a tree.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "木pathは一意なので各辺の通過Cが確定する。赤寄与R、青寄与BについてR+B=S,R−B=KよりR=(S+K)/2。赤辺subsetをこの和で数えることは彩色と一対一。負・奇数・範囲外目標なら不可能。",
+          "sourceRevisionIds": [
+            "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+            "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75",
+          "path": "src/content/sources/abc212-abc263/source-abc222-e-problem-66346b14b7b00a2cf4c6f7a62e715f4396dfffe5f6510c009dabb84dd57c2a75.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc222_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c",
+          "path": "src/content/sources/abc212-abc263/source-abc222-editorial-2751-4c6263ecd939d2c7d814aacdf3a72b228b6a7db9ec6a206adaa6fc4962cd7f6c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc222_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc269-g",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 0 \\leq M \\leq 2 \\times 10^5; 0 \\leq A_i, B_i \\leq M; \\sum_{i=1}^N (A_i + B_i) = M; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "表面総和を基準に、カードiの反転を差δ_i=B_i−A_iと費用1の0/1選択にする。同じ差のc枚を大きさ1,2,4,…と残りへ分けると、0..cの全枚数をgroupのsubsetとして表せる。大きさsのgroupを差sδ・費用sのitemにすれば、元の選択と実現する和・費用の最小値が一致する。よって各groupを一回ずつ0/1最小化DPへ入れると、全カードの最少反転数が求まる。groupの絶対差総和はΣ|δ_i|≤Mである。閾値T以下のpower-of-two group数はΣ_j O(T/2^j)=O(T)、残りgroupも差種類ごとに一つでO(T)、T超のgroupはO(M/T)個なので、T=√Mで全group数O(√M)となる。",
+          "sourceRevisionIds": [
+            "source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84",
+            "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84",
+          "path": "src/content/sources/abc264-abc315/source-abc269-editorial-4841-ed4eb6b9855fed47f17aa20ed3e7bdd909ec1215e1c635d33bbf024aaf06cb84.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc269_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88",
+          "path": "src/content/sources/abc264-abc315/source-abc269-g-problem-a524766a4a3ef17cfa192e1df01517dc22fee40a0a8df100de4d6eacb36a8e88.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc269_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc275-f",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N,M \\leq 3000; 1 \\leq a_i \\leq 3000; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "削除操作数は消す位置の連続run数。直前が保持なら削除開始で1、削除なら継続で0を加えるとrun数を正確に数える。和と直前bitは未来の費用に十分なので同状態最小だけ残せる。",
+          "sourceRevisionIds": [
+            "source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de",
+            "source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de",
+          "path": "src/content/sources/abc264-abc315/source-abc275-editorial-5140-33e30d6f15367f3a5208b8ca2e5bcee240b76d6a3a84e356f18d66328559f2de.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc275_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834",
+          "path": "src/content/sources/abc264-abc315/source-abc275-f-problem-bdd85c388ee0c3ba859aafd6e162e1ecaa453bdd3e6a5714ac9e83a67fd86834.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc275_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc288-e",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 5000; 1 \\leq A_i \\leq 10^9; 1 \\leq C_i \\leq 10^9; 1 \\leq X_1 \\lt X_2 \\lt \\cdots \\lt X_M \\leq N; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "i番までにj個買うと次itemの取り得る付加費用範囲が選択数だけで決まる。その最小はsuffix minで得られ、採用公式構成で同時達成できる。欲しいitemは必ず購入、任意itemは両択として全subsetを列挙し、同(i,j)最小costが将来に優越する。",
+          "sourceRevisionIds": [
+            "source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427",
+            "source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427",
+          "path": "src/content/sources/abc264-abc315/source-abc288-e-problem-15cf566edfd9f31b80f5ca5d322329f4a4a29a6521bdd4cf87915262817ef427.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc288_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74",
+          "path": "src/content/sources/abc264-abc315/source-abc288-editorial-5659-5ba9ee2cd7f0cc7cd4a06ec5bdcc18492d47530691265e993c706e1a745a0a74.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc288_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc307-g",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 5000; \\lvert A_i \\rvert \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "均等化後の各値はqまたはq+1で高値がr個。辺iを跨ぐ移送量は元prefixと目標prefixの差で費用は絶対値。iまでの高値個数jだけで目標prefix iq+jが定まり、低/高の二遷移で全配置のL1費用を最小化する。",
+          "sourceRevisionIds": [
+            "source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f",
+            "source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f",
+          "path": "src/content/sources/abc264-abc315/source-abc307-g-problem-1a12f13209e3432c1289d0ccb8cb009ce4c0ffaeffa3f6e1b117a7eb37df511f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc307_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237",
+          "path": "src/content/sources/abc264-abc315/source-abc307-editorial-6660-a4e66cfdc5fb09ee57b8249e20af372e6a1ce6b3f60e1c1a3fc0c84b5e8de237.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc307_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc320-f",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N, H \\leq 300; 0 < X_1 < X_2 < \\ldots < X_N \\leq 10^5; 1 \\leq P_i \\leq 10^5; 1 \\leq F_i \\leq H; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "往路と復路の同じstationを一緒に処理し、往路給油後fuelと復路給油前fuelを状態とする。station間距離の消費は往路を順向き、復路を逆向きに加減するため、往復の時間差を状態の二fuelだけへ閉じ込められる。各stationの選択は不使用・往路給油・復路給油の三つで、同stationを二度買う遷移はない。給油min(H,f+F)の逆像は結果H未満なら一つ、Hなら区間H−F..Hなので、この全逆像を試せば全往復を覆う。折り返しで二fuelを接続した最小費用が実際の旅程と一対一になる。",
+          "sourceRevisionIds": [
+            "source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0",
+            "source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0",
+          "path": "src/content/sources/abc316-abc367/source-abc320-editorial-7167-8dd6ca4160c25c43cdf355c2143ba482043c92d64e858f47e3dbce2f421831c0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc320_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f",
+          "path": "src/content/sources/abc316-abc367/source-abc320-f-problem-d19cf850f87884c29f311fddf735094aaf3418d2435ad4e15a6a565a4d01bf4f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc320_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc321-f",
+      "learningOutcomeIds": [
+        "outcome-design-resource-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "使用済み要素集合そのものを状態とし、容量・個数の値軸を持たないDP。"
+      ],
+      "tagIds": [
+        "tag-knapsack-resource"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le Q \\le 5000; 1 \\le K \\le 5000; For each type-1 operation, 1 \\le x \\le 5000.; All the operations satisfy the condition in the problem statement."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一個の値x球は母関数因子1+t^x。追加の降順更新は旧係数だけ参照して一因子を掛ける。削除の昇順更新は old[s]=new[s]+new[s−x] を順に解いて一因子を割る。重複球も因子を別に持つため個体別部分集合数を保つ。",
+          "sourceRevisionIds": [
+            "source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c",
+            "source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c",
+          "path": "src/content/sources/abc316-abc367/source-abc321-editorial-7262-d2b9b8860ec2cfdca0a6b3fb6537c169e4fea09cadf1a78b75ec513a07f2835c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc321_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68",
+          "path": "src/content/sources/abc316-abc367/source-abc321-f-problem-db02ce3276d716fc8807c4554c30ea699cb92847de58b49207b5ed44b19feb68.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc321_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

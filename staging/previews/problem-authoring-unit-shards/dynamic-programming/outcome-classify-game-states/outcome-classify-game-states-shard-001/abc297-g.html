@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC297-G — Constrained Nim 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC297-G — Constrained Nim 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-game.md">ゲーム状態の勝敗とGrundy数</a></p>
+<ul>
+<li>後続状態から勝敗またはGrundy数を導き、ゲームの初期状態を分類できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>有限DAGの得点差minimax、循環ゲームの距離評価、独立な数ゲームの加算。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>山xのGrundy数を小さい範囲で実験すると、周期L+Rの中で長さLごとに0,1,…と増える形になる。</p>
+<p>採用する候補: 閉形式g(x)=floor((x mod(L+R))/L)を証明してxor</p>
+<p>一周期内のmexと遷移区間を確認し、遷移先Grundy集合が周期的に同じになるため全xへ拡張できる。</p>
+<p>棄却する候補: 各xまでGrundy DP</p>
+<p>A_iは10^9で全状態を計算できない。</p>
+<p>許される減少量[L,R]が長さR-L+1の連続区間なので、直前Grundy値集合が一周期ごとに同じmex構造を作る。</p>
+<p>各山でr=A_i mod(L+R)、g=floor(r/L)を計算してxorし、0ならSecond、非0ならFirstとする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="sprague-grundy-xor">Sprague-Grundy xor</h3>
+<p>発動条件: 独立な複数山の不偏ゲーム。</p>
+<p>各山のGrundy数をxorする。</p>
+<h3 id="grundy列の周期発見と証明">Grundy列の周期発見と証明</h3>
+<p>発動条件: 遷移が固定長区間で値域が巨大。</p>
+<p>小実験から周期候補を得てmex集合で示す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>連続区間だけ石を取れるゲームでは、L+R周期とL幅の段階値が現れる。</p>
+<p>別の問題へ持ち帰る視点: 区間遷移ゲームはmex列の周期性を実験・証明する。</p>
+<h2 id="正当性">正当性</h2>
+<p>g(x)=floor((x mod(L+R))/L)を候補とする。x&lt;Lなら合法手がなく候補は0である。x≥Lでは、減少量L..min(R,x)によって到達する剰余区間を、周期境界とLごとの値区間で分けると、候補自身は現れず、候補より小さい全値が少なくとも一回現れる。したがってそのmexは候補値に等しく、小さいxからの帰納法で式が成立する。各山の独立な手は一山だけを変えるので、合成Grundyはxorとなり、0か否かが後手/先手勝ちを決める。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>L+RとA_iは64ビットで計算し、R≥Lでも式の商範囲を決め打ちしない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小Aまで素朴mexと比較し、周期境界L+R-1/L+R、L=Rを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N)、各山をmod(L+R)してxor。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)補助。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 1\leq L \leq R \leq 10^9; 1\leq A_i \leq 10^9; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>L=2,R=3、山A=4一つ。</p>
+<ol>
+<li>g0=g1=0,g2=g3=1、4から1か2へ行くのでmex{0,1}=2。</li>
+<li>式floor((4 mod5)/2)=2。</li>
+</ol>
+<p>期待される結果: First。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>山5では同じGrundy2か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>5から2,3はどちらもg1なのでmex{1}=0。式も5 mod5=0でSecondとなる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc297/editorial/6172">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc297-editorial-6172-bc1a41b391eda2ee80b27fae0e97e1f35e7b36b6ad06304ce6c9713ad4a7fd02</li>
+<li><a href="https://atcoder.jp/contests/abc297/tasks/abc297_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc297-g-problem-5d7a9c2f2ffc60d29655b1e25594340a96613402eb03bbc0acfadfe94086087d</li>
+</ul></main>
+</body></html>

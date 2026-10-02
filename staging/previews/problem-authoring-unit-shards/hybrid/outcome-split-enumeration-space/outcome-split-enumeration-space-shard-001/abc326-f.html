@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC326-F — Robot Rotation</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC326-F — Robot Rotation</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/meet-in-the-middle.md">meet-in-the-middle・半分全列挙</a></p>
+<ul>
+<li>探索空間を独立に列挙できる二集合へ分け、両側の結果を照合・合成できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/constructive-witness.md">成立証明から構成解を復元する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>初期向きが+xで毎回90度回転するため、1,3,5,…回目は必ずy軸、2,4,6,…回目は必ずx軸の正負どちらかへ進む。</p>
+<p>各step直前の向きに関係なく次axisの正負はL/Rの選択で自由に選べるので、odd stepのsigned sum=Yとeven stepのsigned sum=Xを独立に解ける。</p>
+<p>各axisの項数は最大40で、符号2^40全列挙は大きいが半分ずつなら各2^20に収まる。</p>
+<p>採用する候補: odd/evenの2つのsigned-sum問題をmeet-in-the-middleで復元し、desired方向列をL/Rへ変換する。</p>
+<p>座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。</p>
+<p>棄却する候補: N回のL/R列2^N通りをsimulationする。</p>
+<p>N≤80で指数が大きすぎる。</p>
+<p>棄却する候補: 到達可能座標をsum幅のboolean DPで管理する。</p>
+<p>A_i総和が最大8×10^8で、座標幅に比例する配列を持てない。</p>
+<p>signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。</p>
+<p>odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。</p>
+<p>odd indexのA列をtarget Y、even index列をtarget Xとしてsolveする。solveは列を半分に分け、各halfの全maskで+/- sumを列挙し、一方をhash mapへ保存して補数pairを探し、各項のsignを返す。どちらか失敗ならNo。成功時、各iのtarget directionをoddなら±y、evenなら±xに設定し、初期direction +xから左回転で一致すればL、否则Rを出してdirectionを更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="meet-in-the-middle">meet-in-the-middle</h3>
+<p>発動条件: 40項程度のbinary選択で値域が大きく通常DPを使えないとき。</p>
+<p>前後半の候補sumを列挙して補数を辞書検索する。</p>
+<h3 id="直交axisの独立化">直交axisの独立化</h3>
+<p>発動条件: 90度turnを毎step行い、移動axisがparityで固定されるとき。</p>
+<p>odd stepをy、even stepをxのsigned sumへ分ける。</p>
+<h3 id="抽象解から操作列への復元">抽象解から操作列への復元</h3>
+<p>発動条件: DPで絶対方向を決めた後に相対turnを出力するとき。</p>
+<p>current directionとの差±1からL/Rを選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>rotation列は前stepの向きへ依存して見えるが、axisが交互なので各stepの正負方向は独立に選べ、依存は最後のL/R復号だけに残る。</p>
+<p>別の問題へ持ち帰る視点: 相対操作が絡む構成問題では、まず絶対状態列を独立に設計し、隣接差から操作へ戻せないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>signed sum B_iの前半全maskをsum→mask辞書へ入れ、後半sum tに対してtarget-tが辞書にあれば符号列を復元できる。 odd/evenで得た符号は実際の絶対方向を指定し、現在方向からその方向へ+90度ならL、−90度ならRと一意に変換できる。 座標依存を2本の1次元問題へ分離し、判定だけでなく各stepの符号maskも復元できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>入力の1-index odd/evenと0-index array parityを取り違えず、最初のstepはy方向である。</li>
+<li>sumは最大8×10^8程度で符号付き64bitを使い、hash mapには同じsumのmaskを1つ保持すればよい。</li>
+<li>方向を0:+x,1:+y,2:-x,3:-y等で持ち、mod 4の負値を正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>最初のL/Rが±yを選ぶことと、次の±x signが現在向きから必ずどちらか一回転で得られることを4方向tableで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>期待O(2^{ceil(N/4)}+N)、odd/evenそれぞれを半分に分けhash join。平衡mapなら追加log列挙数。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^{ceil(N/4)}+N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 80; 1 \leq A_i \leq 10^7; -10^9\leq X,Y \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2)、目標(X,Y)=(2,1)。</p>
+<ol>
+<li>oddは+1y、evenは+2xとする。</li>
+<li>初期+xからLで+y、次Rで+x。</li>
+</ol>
+<p>期待される結果: 回転列LRで到達(2,1)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>二軸のsignを選んだら元向きへの復元は曖昧か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>各stepは現向きから±90°だけで、必要絶対方向は前stepと直交するのでL/Rは一意。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc326/editorial/7476">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-editorial-7476-4d01976a865d3d9e446a33bade6b5ab30d1152561f955bffb10654bbdeeaa975</li>
+<li><a href="https://atcoder.jp/contests/abc326/tasks/abc326_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc326-f-problem-fee8d914a1899607dcd5cb88eb247c39542e80191159d1a5c500390bbeededb9</li>
+</ul></main>
+</body></html>

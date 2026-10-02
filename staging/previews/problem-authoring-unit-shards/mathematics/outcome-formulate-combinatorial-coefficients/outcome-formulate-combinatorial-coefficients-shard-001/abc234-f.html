@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC234-F — Reordering</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC234-F — Reordering</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>部分列を最後に自由に並べ替えるため、元の位置や選択順は消え、各文字を何個使うかだけが生成可能性を決める。</p>
+<p>使用個数 c_a,…,c_z を固定すると、得られる相異なる文字列数は総文字数の順列を同一文字の入替えで割った多項係数になる。</p>
+<p>棄却する候補: 元文字列の全ての部分列を列挙し、それぞれの全順列を集合へ入れて重複排除する。</p>
+<p>位置選択と並べ替えの両方が指数・階乗規模で、同じ文字列の重複も非常に多い。</p>
+<p>採用する候補: 文字種を一つずつ処理し、使用済み総長 j の文字列へ新文字を k 個挿入する位置 C(j＋k,k) を掛ける DP を行う。</p>
+<p>同じ新文字 k 個は区別せず、既存文字列との相対順を保った挿入位置だけで各完成文字列を一度数えられる。</p>
+<p>文字種ごとの頻度上限だけを残すことで、長さ最大 5000 の位置情報を「処理済み文字種と総使用数」の二状態へ圧縮する。</p>
+<p>部分列選択を文字頻度ベクトルへ商約し、各文字種の同一要素を既存列へ挿入する二項係数遷移で全長の multiset permutation 数を DP する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="頻度制約付き-multiset-permutation-dp">頻度制約付き multiset permutation DP</h3>
+<p>発動条件: 元集合から種類別上限以内を選び、選んだ同種要素を区別せず全順列を数えるとき。</p>
+<p>種類を順に追加し、新種類 k 個の配置場所を完成長に対する二項係数で選ぶ。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>新文字を k 個追加する際、既存文字の相対順を固定して新文字の位置だけ選ぶと C(j＋k,k) 通りになり、文字列を一意に分解できる。</p>
+<p>別の問題へ持ち帰る視点: 同一要素の追加では factorial 公式を直接全頻度へ適用せず、既存構造へ同一要素を挿入する組合せで逐次 DP にできる。</p>
+<h2 id="正当性">正当性</h2>
+<p>使う各文字数を固定すると元の位置は生成文字列に影響しない。同じ文字をk個追加する際、既存長jの列へ入れる位置集合はC(j+k,k)通りで、削除すれば元の列へ一意に戻る。文字種を順に処理するDPは各頻度ベクトルとその並べ方を一度ずつ生成する。最後に空列を除く。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>各文字の k は 0 からその頻度まで、既存長との合計が |S| 以下の範囲だけ遷移する。</li>
+<li>dp[0]＝1 は遷移用の空文字列として保持するが、最終答案では長さ 1 以上の係数だけを合計する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>選択後に自由な並べ替えがあるなら、元位置の情報が消えて種類別個数だけが残ることを最初に確認する。</li>
+<li>同じ文字 k 個の追加は区別せず、完成列のどの k 位置を新文字にするかという二項係数で数える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(|S|²)、文字種数26は定数。</p>
+<h3 id="空間">空間</h3>
+<p>O(|S|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length 1 and 5000 (inclusive) consisting of lowercase English letters.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=aab。</p>
+<ol>
+<li>長さ1はa,bの2種類。長さ2はaa,ab,baの3種類。</li>
+<li>長さ3はaab,aba,baaの3種類。</li>
+</ol>
+<p>期待される結果: 8種類。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同じaを別の元位置から選ぶ方法を掛けるべきか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>出来上がる文字列の種類を数えるため掛けない。S=aaならa,aaの2種類だけ。</p>
+<p>確認結果: S=aaの答え2。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc234/editorial/3223">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc234-editorial-3223-046d35954e659dc60bc7aa26e0efc75e4f6cca517bad349758550a7f621af1a2</li>
+<li><a href="https://atcoder.jp/contests/abc234/tasks/abc234_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc234-f-problem-63c82d89d32fbc1eedce8bd501c1d65d163257583e40c51ec7ca6ef5d4b88e95</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,80 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
+  "packets": [
+    {
+      "problemId": "abc459-g",
+      "learningOutcomeIds": [
+        "outcome-optimize-two-variable-convex-lattice-function",
+        "outcome-characterize-integer-solvability"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-bounded-enumeration"
+      ],
+      "excludedTopics": [
+        "一変数の傾き単調性やternary searchだけで解く凸最適化、および連続最小点から整数近傍への保証を持たない一般の格子探索。"
+      ],
+      "tagIds": [
+        "tag-bezout-diophantine",
+        "tag-two-variable-convex-lattice-optimization",
+        "tag-bounded-enumeration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2 \\times 10^5; 1 \\le A < B \\le 10^6; 0 \\le X, Y \\le 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二move型の符号合計は各座標の一次不定方程式へ移る。同型の符号合計p,qは同parityならmax(|p|,|q|)手で実現でき、必要な逆符号pairで不足を埋められる。extgcdの全解parameterと各型parityを固定すると目的は二つのmax絶対値の和で凸区分線形になる。公式の格子構造で折れ目交点周辺±2が整数最小候補を覆うため、全4parity候補の比較が全最適move数を得る。",
+          "sourceRevisionIds": [
+            "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+            "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
+          "path": "src/content/sources/abc420-abc466/source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc459_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc",
+          "path": "src/content/sources/abc420-abc466/source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc459_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

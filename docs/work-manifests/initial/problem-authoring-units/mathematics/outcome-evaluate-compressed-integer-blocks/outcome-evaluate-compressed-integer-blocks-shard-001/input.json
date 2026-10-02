@@ -1,0 +1,219 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-evaluate-compressed-integer-blocks-shard-001",
+  "packets": [
+    {
+      "problemId": "abc240-f",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-basic-convex-optimization"
+      ],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks",
+        "tag-basic-convex-optimization"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 2 \\times 10^5; 1 \\leq N \\leq 2 \\times 10^5; The sum of N in a single file is at most 2 \\times 10^5.; 1 \\leq M \\leq 10^9; |x_i| \\leq 4 \\, (1 \\leq i \\leq N); y_i \\gt 0 \\, (1 \\leq i \\leq N); \\sum_{k = 1}^N y_k = M; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "block内n項後の値はA_0+B_0n+xn(n+1)/2で、隣接差B_0+xnが一次式になる。x≥0なら最大は端点、x<0なら差が非負から負になる境界付近か端点に限られる。整数候補を範囲へ切って全て評価すればblock最大を取りこぼさない。block末尾のA,Bを次へ引き継ぐことで全体を覆う。",
+          "sourceRevisionIds": [
+            "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+            "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88",
+          "path": "src/content/sources/abc212-abc263/source-abc240-editorial-3422-da9c3a17066cdd84cfc5e3411c49dd6aadc54c78c261e1c84ddb28ec19a8fe88.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc240_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b",
+          "path": "src/content/sources/abc212-abc263/source-abc240-f-problem-b3212e7fd15de74ec261149e17a9350d880731402a4b747ff05d3ed92da9752b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc240_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc253-g",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq L \\leq R \\leq \\frac{N(N-1)}{2}; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "一完全行の交換(l,l+1)..(l,N)を実際に追うとsuffixの最後の値がlへ来て、それ以前が一つ右へずれる。k連続完全行では元suffix末尾k個が逆順で先頭へ並び、残りは元順のまま後ろへ来る。従ってsuffix全体と残りsuffixの二回の反転で同じ結果を得る。先頭末尾の不完全行と合成すれば指定交換区間そのものになる。",
+          "sourceRevisionIds": [
+            "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+            "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651",
+          "path": "src/content/sources/abc212-abc263/source-abc253-editorial-4026-6dddf3d68aae8c03de2977e126898a6e0bcfb1dfb17f2d04883dd840568e7651.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc253_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c",
+          "path": "src/content/sources/abc212-abc263/source-abc253-g-problem-1c8b3efdbf4b48372ac46aeaa71ef0cfbde0c000f3b9045a169f679bf0fa1b8c.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc253_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc429-g",
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-linear-recurrence"
+      ],
+      "excludedTopics": [
+        "素因数指数による整数条件の分解。"
+      ],
+      "tagIds": [
+        "tag-integer-boundary-blocks",
+        "tag-linear-recurrence-matrix"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 100; 1\\le N,M,R\\le 10^9; 0\\le A,B < M; 1\\le X < R; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "gcd縮約で到達剰余を一つの同合同類へ移し、完全周期では全縮約剰余を一度ずつ巡る。端数をindex差dの列に分けると剰余は±hの小歩幅で動き、wrapごとの区間は通常等差列になる。この分割は全kを一度覆うので、各列の冪和を足しても元の和を保つ。二分(power,sum)合成は乗算と加算だけで幾何和を計算し、合成数法でも成立する。",
+          "sourceRevisionIds": [
+            "source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215",
+            "source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215",
+          "path": "src/content/sources/abc420-abc466/source-abc429-editorial-14242-8c586c50b71364483aa2f1a0744f0edc53b0499f21359991f124117fb9446215.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc429_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a",
+          "path": "src/content/sources/abc420-abc466/source-abc429-g-problem-8e2a8092102af19fac9206f28a8823b9ba90edb38486977ad961bb232cda385a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc429_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

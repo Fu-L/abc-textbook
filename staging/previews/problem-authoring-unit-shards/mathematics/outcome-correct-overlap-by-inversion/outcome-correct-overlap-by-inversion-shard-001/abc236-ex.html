@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC236-EX — Distinct Multiples</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC236-EX — Distinct Multiples</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md">包除・Möbius反転で重複を補正する</a></p>
+<ul>
+<li>条件集合の重なり構造を特定し、包除またはMöbius反転の符号と範囲を正しく設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md">label付き連結成分分解・exponential formula</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>選択順を二項係数だけで式化する数え上げ。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各 i の候補値は D_i の倍数だが、M が 10 の 18 乗なので値を列挙して異なる代表を割り当てる DP は作れない。</p>
+<p>相異なる条件は、各対 (i,j) の等値事象 A_i＝A_j を全て避ける条件なので、等値辺集合への包除原理を適用できる。</p>
+<p>棄却する候補: 各 i へ D_i の倍数を順に割り当て、使用済み値集合を持つ探索を行う。</p>
+<p>一変数だけでも M/D_i 個の候補があり、巨大な値域と使用済み集合を扱えない。</p>
+<p>採用する候補: 全等値対への包除を、選択辺グラフの連結成分分割ごとにまとめ、各成分の共通倍数候補数と符号和を subset partition DP で合成する。</p>
+<p>同じ連結成分の A_i は全て等しくなり、候補数は D_i の lcm だけで決まるため、辺集合を頂点集合の分割へ圧縮できる。</p>
+<p>頂点集合 T が一等値成分になる値の候補数は g(T)=floor(M/lcm_{i∈T}D_i) である。</p>
+<p>|T| 頂点上の連結グラフを辺数符号付きで足した値は h(|T|)=(-1)^{|T|−1}(|T|−1)! となり、成分内部の全辺選択を一係数へ畳み込める。</p>
+<p>非衝突条件の edge inclusion-exclusion を set partition の重み積へ変換し、固定頂点を含む一成分 T’ を選ぶ再帰 dp[T]=Σg(T’)h(|T’|)dp[T\T’] で計算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="等値事象の包除と連結成分圧縮">等値事象の包除と連結成分圧縮</h3>
+<p>発動条件: 複数変数を相異ならせたいが各値域が巨大で、対ごとの等値制約だけは数えやすいとき。</p>
+<p>等値辺の連結成分ごとに変数を一値へ束ね、辺集合の符号和を成分サイズ係数へ置き換える。</p>
+<h3 id="部分集合の集合分割-dp">部分集合の集合分割 DP</h3>
+<p>発動条件: ラベル付き要素集合を成分へ分割し、各成分の重みの積を全分割について足すとき。</p>
+<p>最小 bit を含む成分だけを列挙して分割の順序重複を避ける。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>等値成分の共通値は全 D_i の公倍数でなければならず、最小公倍数が M を超えた時点で候補数は 0 になる。</p>
+<p>別の問題へ持ち帰る視点: 巨大上限下の共通倍数数え上げでは、lcm を上限で飽和させて値域列挙と整数 overflow を同時に避ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>等値事象への辺包除では辺集合の各連結成分Tが同じ値を持ち、その候補数はfloor(M/lcm D_i)。成分内部の符号和は(−1)^{|T|−1}(|T|−1)!となる。固定頂点を含む成分を一つ取り除く再帰は集合分割を重複なく列挙するため、衝突しない代表値の割当てだけ包除後に残る。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>mask の lcm は gcd で約分してから掛け、M を超える場合は番兵 M＋1 に飽和させる。</li>
+<li>成分候補 T’ は対象 mask の固定最下位 bit を必ず含め、h の交互符号を法 998244353 で正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>distinct 条件と巨大値域が組み合わさったら、衝突する対の等値事象を包除して成分単位にまとめる。</li>
+<li>辺集合包除が大きすぎる場合、選択辺の効果が連結成分だけで決まるなら分割重みへ圧縮する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(3^N+2^N log M)。subset LCMと固定bit付き成分再帰を計算する。</p>
+<h3 id="空間">空間</h3>
+<p>O(2^N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 16; 1 \leq M \leq 10^{18}; 1 \leq D_i \leq M , (1 \leq i \leq N); All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2、M=6、D=(2,3)。</p>
+<ol>
+<li>候補は{2,4,6}と{3,6}で全6組。</li>
+<li>共通値6の(6,6)だけ除く。</li>
+</ol>
+<p>期待される結果: 5組。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>二つのDがともに1なら何組か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>各候補M個で等値組M個を除く。重複Dでも個々の変数は区別する。</p>
+<p>確認結果: M(M−1)組。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc236/editorial/3289">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc236-editorial-3289-453fc6a1e1164ac3bd490c049e191d57eccc96468165dc2d354428f83588477c</li>
+<li><a href="https://atcoder.jp/contests/abc236/tasks/abc236_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc236-ex-problem-b886dc00dd4258aa9b3b3f9aaa78909f30fec53dba20aeb4393a4573e5becc53</li>
+</ul></main>
+</body></html>

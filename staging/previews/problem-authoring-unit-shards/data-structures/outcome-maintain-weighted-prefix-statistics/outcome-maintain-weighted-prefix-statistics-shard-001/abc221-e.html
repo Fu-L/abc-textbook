@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC221-E — LEQ</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC221-E — LEQ</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/weighted-prefix-fenwick.md">反転数・重み付き接頭辞統計をFenwick Treeで保つ</a></p>
+<ul>
+<li>処理済み値の頻度から反転数を数えるか、必要な添字付き接頭辞統計を導き、Fenwick Treeの線形結合で式を評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/coordinate-compression.md">疎なkeyの順序を保ってdense indexへ圧縮する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/prefix-aggregate.md">一次元・二次元累積和と差分で区間情報を線形化する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>一般のモノイドによるSegment Treeの区間要約。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>部分列の最初と最後の index を i&lt;j に固定すると、その間の j-i-1 要素はそれぞれ選ぶ・選ばないを自由に決められる。したがって端点が A_i≤A_j を満たす一組の寄与は 2^{j-i-1} である。</p>
+<p>端点対を直接列挙できないが、2^{j-i-1}=2^{j-1}·2^{-i} と分離できるため、右端 j を走査すると必要なのは A_i≤A_j である過去 i の重み 2^{-i} の prefix 和だけになる。</p>
+<p>採用する候補: A を座標圧縮し、Fenwick Tree に過去 index i の重み 2^{-i} を値 A_i の位置へ加え、各 j で A_j 以下の総和へ 2^{j-1} を掛ける。</p>
+<p>値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。</p>
+<p>棄却する候補: 全ての i&lt;j を調べ、A_i≤A_j なら 2^{j-i-1} を加える。</p>
+<p>端点対が二乗個あり、N=3×10^5 では列挙できない。</p>
+<p>部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。</p>
+<p>2 の冪と逆冪を法 998244353 で前計算する。j を左から走査し、Fenwick Tree の rank(A_j) 以下を query して 2^{j-1} 倍を答えへ加えた後、同じ rank に 2^{-j} を add する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="端点固定による部分列数え上げ">端点固定による部分列数え上げ</h3>
+<p>発動条件: 部分列の条件が最初と最後だけに依存し、中間要素の採否が自由なとき。</p>
+<p>端点対ごとの中間二択を 2 の冪で数え、端点寄与の総和へ変える。</p>
+<h3 id="座標圧縮付き-fenwick-tree">座標圧縮付き Fenwick Tree</h3>
+<p>発動条件: 左からの走査中に、値が現在値以下または以上の過去要素の重み和が必要なとき。</p>
+<p>値 rank 上の prefix sum と一点加算で不等号条件を処理する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>指数重み 2^{j-i-1} を右端だけの係数と左端だけの係数へ分離すると、単なる個数ではなく重み付き prefix query になる。</p>
+<p>別の問題へ持ち帰る視点: 二 index の差に指数が付く和では、a^{j-i}=a^j a^{-i} と分離してオンライン集計できないか試す。</p>
+<h2 id="正当性">正当性</h2>
+<p>部分列全体を DP 状態にせず、最初と最後だけを固定すると中間選択が独立な二択になり、その個数が端点間距離だけの冪になる。 値条件を Fenwick Tree の prefix query、index 間隔の重みを左右端へ分離し、全ての端点対の寄与をまとめられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>query を add より先に行って i&lt;j を保証し、A_i=A_j も条件に含むので同じ rank まで query する。2^{-i} は浮動小数でなく法上の逆元を使う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>三要素で端点 (1,3) を固定し、中間を入れる・入れない二通りを数えてから、一般の 2^{j-i-1} を再導出する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、値圧縮とFenwick。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3 \times 10^5; 1 \leq A_i \leq 10^9; All values in input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(1,2,3)。</p>
+<ol>
+<li>端点(1,2),(2,3)は中間0個で各1。</li>
+<li>(1,3)は中間1個の採否で2。</li>
+</ol>
+<p>期待される結果: 対象非空部分列のうち長さ2以上は4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値A=(2,2)をstrict prefixで処理してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>条件A_i≤A_jなので唯一の二要素列を落とす。同じrankまでqueryする。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc221/tasks/abc221_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-e-problem-31553d7a955139b88a89f7b7d5fad0702844b013338cca84806192fbbced4d37</li>
+<li><a href="https://atcoder.jp/contests/abc221/editorial/2718">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc221-editorial-2718-e8b624442e68a1112412ccfd31e488070b6bb0a6f415fd1a8ecbb260e8dad138</li>
+</ul></main>
+</body></html>

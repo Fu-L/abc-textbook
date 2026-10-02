@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-linearize-events-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b349fcbb0c092c13d9c9dc660dde382b3b219278c31189986d76ae990b9df29f",
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "riskReasons": [],
+  "status": "pending_policy_selected_human_review",
+  "humanApproval": false,
+  "authoringHolds": [],
+  "sourceVerifications": [],
+  "scope": "One shard owns whole Problem documents; local block keys are locators, not independent review entities.",
+  "reviewItems": [
+    {
+      "problemId": "abc231-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc231-f.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc266-ex",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc266-ex.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc274-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc274-f.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc283-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc283-f.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc309-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc309-f.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc311-g",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc311-g.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc320-e",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc320-e.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    },
+    {
+      "problemId": "abc327-f",
+      "path": "src/content/docs/problems/hybrid/outcome-linearize-events/outcome-linearize-events-shard-001/abc327-f.md",
+      "learningOutcomeIds": [
+        "outcome-linearize-events"
+      ],
+      "requiredInspection": [
+        "reasoning_reproducibility",
+        "correctness_and_assumptions",
+        "whole_algorithm_time_and_space",
+        "original_hand_worked_example",
+        "exercise_answer",
+        "source_binding"
+      ],
+      "authoringInspection": "codex_assisted_source_bound_authoring",
+      "decision": "pending"
+    }
+  ]
+}

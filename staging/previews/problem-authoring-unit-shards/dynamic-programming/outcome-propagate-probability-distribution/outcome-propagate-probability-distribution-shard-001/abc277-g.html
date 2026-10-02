@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC277-G — Random Walk to Millionaire</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC277-G — Random Walk to Millionaire</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>互いに排反な状態に確率を配り、遷移確率・吸収条件・総確率を保って分布や到達確率を計算できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>levelをそのままDP次元にするとtime iまで0頂点を何回踏んだかで0,…,iに広がり、vertex×time×levelは重い。</p>
+<p>level²は、それ以前に踏んだC=0の時刻からordered pair (x,y)を選ぶ個数と等しいため、二つのmarked時刻の有無だけで展開できる。</p>
+<p>採用する候補: random walkのprefixに対し、二つのordered markerが未選択/選択済みかを表す4状態をvertexごとに持ち、C=0到着時にmarkerを選ぶ遷移を加える。</p>
+<p>level値を列挙せず二次式を2個のmarkerへ展開し、各stepでgraph edgeを定数状態分だけ緩和できる。</p>
+<p>棄却する候補: dp[step][vertex][level]で確率を持ち、C=1到着時にlevel²を加える。</p>
+<p>levelがKまで増えるため、N,K≤3000では状態・遷移が一段多くなる。</p>
+<p>二つのmarkerはorderedで同じC=0到着時刻を選んでもよく、これがX²の対角pairも正しく含める。</p>
+<p>C=1の頂点へ到着した各prefixでは、両marker選択済み状態の重みがそのprefixの確率×現在level²に一致する。</p>
+<p>初期vertex1でmarker00の重み1から始める。各stepでcurrent vertexのdeg逆元を掛けて隣接vertexへ配り、到着先C=0なら各未選択markerについて現在時刻を選ぶ/選ばない遷移を行う。C=1到着後のstate11を答えへ加え、K回繰り返す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="多項式量のmarker展開">多項式量のmarker展開</h3>
+<p>発動条件: 履歴中のevent数のd次式を期待値として加算し、countをDP次元に持てないとき。</p>
+<p>count^dをordered d-tupleの選択数とみなし、各markerの選択済みbitだけを持つ。</p>
+<h3 id="random-walkの重みdp">random walkの重みDP</h3>
+<p>発動条件: 各vertexから隣接先を一様選択する有限step過程の期待値を求めるとき。</p>
+<p>path確率をdegの逆元でedgeへ配り、寄与状態を線形に加算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>報酬level²を『過去のlevel-up時刻のordered pair数』に変えると、levelの大きさが二つのboolean markerへ置き換わる。</p>
+<p>別の問題へ持ち帰る視点: 履歴countの低次多項式は、marked eventの組を数えることで定数個のflag DPへ落とせる。</p>
+<h2 id="正当性">正当性</h2>
+<p>長さtの歩行prefixを固定すると、levelはそのprefix内のC=0到着数Xである。X²は、その到着時刻から同じ時刻も許して二つを順序付きで選ぶ方法数である。二つのmarkerの未選択/選択済みを四状態で追跡し、C=0到着で各markerを選ぶかを分岐させると、両方選択済みの重みはprefix確率×X²になる。したがってC=1到着時にその重みを足すと、まさに期待収入を足している。全歩行prefixの確率を辺の1/degで更新するので、K歩までの和が期待総収入になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>遷移確率は出発vertexのdegreeの逆元であり、到着vertexのdegreeではない。</li>
+<li>C=0到着時に両markerを同時に現在stepへ置く遷移を含め、C=1到着時にはmarker更新せずstate11だけを報酬へ加える。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>0頂点を2回踏んだ後のlevel²=4を、(1,1),(1,2),(2,1),(2,2)の4 marker pairとして列挙する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(K(N+M))、四marker状態でK歩の全辺を緩和。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+M)、一歩ずつrolling。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 3000; N-1 \leq M \leq \min\lbrace N(N-1)/2, 3000\rbrace; 1 \leq K \leq 3000; 1 \leq u_i, v_i \leq N; u_i \neq v_i; i \neq j \implies \lbrace u_i, v_i\rbrace \neq \lbrace u_j, v_j \rbrace; The given graph is connected.; C_i \in \lbrace 0, 1\rbrace; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>二頂点の辺12、C=(1,0)、K=4。</p>
+<ol>
+<li>pathは1→2→1→2→1と確定。</li>
+<li>levelは1,1,2,2で、頂点1到着の収入は1²,2²。</li>
+</ol>
+<p>期待される結果: 期待収入5。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>二markerを同じlevel増加時刻へ割り当ててよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>X²はordered pairの和なので同時刻pairも必要。禁止するとX(X−1)だけを数えて二乗の対角項を落とす。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc277/editorial/5206">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-editorial-5206-14af14904ec3ad231acf4708459f0200d373946b9f51e04c31502e64f36edd55</li>
+<li><a href="https://atcoder.jp/contests/abc277/tasks/abc277_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-g-problem-2ed36a8919af830606b7492d0612289cead83ec578ec2c13b7213708d642c787</li>
+</ul></main>
+</body></html>

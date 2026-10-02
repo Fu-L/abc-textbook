@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC270-E — Apple Baskets on Circle</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC270-E — Apple Baskets on Circle</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></p>
+<ul>
+<li>判定の単調性を証明し、二分探索の成功側・失敗側を設定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>m周を終えた時点ではbasket iからmin(A_i,m)個食べており、総数F(m)=Σmin(A_i,m)はmについて単調非減少である。</p>
+<p>K個を超えない最大の完全周回数mまで一括処理すれば、残りK−F(m)個はbasket 1から一周未満の順次走査で食べられる。</p>
+<p>棄却する候補: 一回の行動ごとにbasketを巡回してK個食べるまでsimulationする。</p>
+<p>Kが10^12まであり、空basketを通る行動も含めて逐次処理できない。</p>
+<p>採用する候補: F(m)≤Kを満たす最大mをbinary searchし、各A_iからmまでをまとめて引いた後、端数だけ一周simulationする。</p>
+<p>一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。</p>
+<p>各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。</p>
+<p>最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。</p>
+<p>cyclic simulationをcomplete roundsのmonotone aggregateへ圧縮し、binary searchと一回のresidual scanで最終状態を再構成する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="答え上の二分探索">答え上の二分探索</h3>
+<p>発動条件: 同一操作をm回まとめた効果を計算でき、消費量がmに対して単調なとき。</p>
+<p>Σmin(A_i,m)≤Kとなる最大のfull-round countを探す。</p>
+<h3 id="bulk処理と端数simulation">bulk処理と端数simulation</h3>
+<p>発動条件: 周期的処理の大部分を一括適用した後、残りが一周期未満になるとき。</p>
+<p>m周分を全basketからまとめて減らし、残りだけindex順に1個ずつ減らす。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>full rounds後のbasket iはmax(A_i−m,0)であり、残りの食数はこの正値basketを先頭から一度ずつ訪ねればよい。</p>
+<p>別の問題へ持ち帰る視点: 巨大なcyclic processでは、全要素に同回数作用する完全周期と短いsuffixに分ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>F(m)の加算は10^17規模になり得るため64 bitを使い、Kを超えた時点で打ち切ってoverflowを避ける。</li>
+<li>binary searchはF(m)≤Kを満たす最大mという境界規約を固定し、端数が0なら余計にbasketを減らさない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>円環simulationでは、m周後の各要素と累積処理数を直接式にできるかを先に調べる。</li>
+<li>一括処理の境界は、残処理が一周期未満になる最大値として定義すると復元が単純になる。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log Amax)、完了周回数の判定O(N)、端数走査O(N)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i \leq 10^{12}; 1 \leq K \leq 10^{12}; There are at least K apples in total. That is, \sum_{i=1}^{N}A_i\geq K.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>A=(2,1,3)、K=4。</p>
+<ol>
+<li>一周m=1の消費3、m=2では5で予算超過。</li>
+<li>一周後(1,0,2)、残1を最初の箱から消費。</li>
+</ol>
+<p>期待される結果: 最終(0,0,2)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>端数を再び何周も回す必要はあるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>最大周回mを選んだ後の残りは次一周の非空箱数未満なので一走査で完了する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc270/tasks/abc270_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc</li>
+<li><a href="https://atcoder.jp/contests/abc270/editorial/4848">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475</li>
+</ul></main>
+</body></html>

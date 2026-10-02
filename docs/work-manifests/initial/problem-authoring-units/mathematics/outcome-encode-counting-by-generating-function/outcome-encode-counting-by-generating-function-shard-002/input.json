@@ -1,0 +1,541 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-encode-counting-by-generating-function-shard-002",
+  "packets": [
+    {
+      "problemId": "abc345-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-modular-arithmetic",
+        "unit-recursive-divide-and-conquer",
+        "unit-threshold-heavy-light"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic",
+        "tag-recursive-divide-and-conquer",
+        "tag-threshold-heavy-light"
+      ],
+      "constraints": [
+        "Time limit: 12 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 2 \\times 10^5; N and K are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "未到達確率a_nは進行量分布F^nのN未満係数和。F=x(1−x^K)/(K(1−x))を代入し包除で展開すると二項有限和になる。小Kの分割統治も同じFの冪を必要bandで計算するのでa_nが一致する。到達は単調で、時刻n−1未到達からn未到達を引いた差a_{n−1}−a_nが初回到達確率になる。",
+          "sourceRevisionIds": [
+            "source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3",
+            "source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3",
+          "path": "src/content/sources/abc316-abc367/source-abc345-editorial-9549-bbf9feee2dc8e8f9bcda8cc5b67eab93e4ae97e10063ff8e34b19b3a9890a8d3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc345_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb",
+          "path": "src/content/sources/abc316-abc367/source-abc345-g-problem-7d03c394d2605f58fdd910a1c46dfcc1e42ffb3b14cbd8503c3af52d9d4a26eb.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc345_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc352-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-contribution-reordering",
+        "unit-modular-arithmetic",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-combinatorial-coefficients",
+        "tag-contribution-reordering",
+        "tag-modular-arithmetic",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 3\\times 10^5; 2\\leq A_i \\leq 3000; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "i枚でpairがないことは全i枚の色が相異なること。色別1+A_jxの積の係数f_iは実物靴下の順不同選択数であり、全C(S,i)集合と比較すれば生存確率になる。T≥i+1とi枚後の生存は同じ事象なので、i=0..Nを足すtail-sumが取り出し枚数の期待値になる。",
+          "sourceRevisionIds": [
+            "source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786",
+            "source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786",
+          "path": "src/content/sources/abc316-abc367/source-abc352-editorial-9921-cd1539bcfa3bc4b97abe409358a9a00fefca49b80670243b72959acd693fe786.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc352_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa",
+          "path": "src/content/sources/abc316-abc367/source-abc352-g-problem-d90411b7e23ff5291b7a54c09dd39346be4e8a3d7e1c05f9a3f4669571b667fa.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc352_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc385-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-recursive-divide-and-conquer"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-recursive-divide-and-conquer"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; |K| \\leq N-1; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "降順挿入では新値は最小なので左端だけLを増やし、右端だけRを増やし、内部gapでは両方不変。既存i+1要素の内部gap数iより差のLaurent因子x^{−1}+i+xを得る。N−1回の挿入を掛け、x^{N−1}でshiftするとΠ(1+ix+x²)。従ってK+N−1次係数がexact差Kの順列を一度数える。",
+          "sourceRevisionIds": [
+            "source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a",
+            "source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a",
+          "path": "src/content/sources/abc368-abc419/source-abc385-editorial-11656-abbc96ead53c07d1d269bc2f578c53f96e5460874c25eaa08274554d877da35a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc385_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834",
+          "path": "src/content/sources/abc368-abc419/source-abc385-g-problem-e8e51b64f6070e9628eba3ed49737ae3a5b5b216afbfa3cb75da906281b76834.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc385_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc390-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-combinatorial-coefficients",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2 \\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "整数mの寄与はm以後の整数集合の総桁数だけ10冪でずれる。各後方整数を選ぶ/選ばないfactor1+10^{digits}xを掛けると後方個数rと桁shiftの重み和を得る。m自身のfactorを除き、後方順r!と前方順(N−1−r)!を掛けると全順列でのm寄与を一度数える。同桁mの係数は共通なのでcategory総和を掛ければよい。",
+          "sourceRevisionIds": [
+            "source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc",
+            "source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc",
+          "path": "src/content/sources/abc368-abc419/source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc390_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952",
+          "path": "src/content/sources/abc368-abc419/source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc390_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc422-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-modular-arithmetic"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-combinatorial-coefficients",
+        "tag-modular-arithmetic"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 1 \\leq A \\leq 3 \\times 10^5; 1 \\leq B \\leq 3 \\times 10^5; 1 \\leq C \\leq 3 \\times 10^5; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "各box数は独立で、multiple条件を満たす次数だけ置けば積のN次係数が総数Nの全tupleを一度表す。区別しないballは係数1、区別するballは1/n!で正規化した後N!を掛けて各tupleのlabel割当て多項係数を回復する。0個の定数項1が空boxも含める。",
+          "sourceRevisionIds": [
+            "source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a",
+            "source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a",
+          "path": "src/content/sources/abc420-abc466/source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc422_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9",
+          "path": "src/content/sources/abc420-abc466/source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc422_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc436-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-compute-convolution-or-correlation"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients",
+        "unit-dp-transition-optimization"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-convolution",
+        "tag-generating-functions",
+        "tag-dp-transition-acceleration"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le100; 1\\le A _ i\\le100\\ (1\\le i\\le N); 1\\le M\\le10 ^ {18}; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "X=dQ+Rは各成分で一意の桁分解で、A·X≤MはA·Q≤floor((M−A·R)/d)と同値。従って桁重み分布Sの頻度付き再帰は全Xを一度分類する。係数列へ転置した畳み込み・d個集約はこの再帰の線形和を保存し、最大添字が0に落ちると負上限のfは0、f(0)=1だから係数c_0が答えになる。",
+          "sourceRevisionIds": [
+            "source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3",
+            "source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3",
+          "path": "src/content/sources/abc420-abc466/source-abc436-editorial-14748-d9d1d8c863414f6d5468cf6b316754d131fd18addc8995826a59796ad00276b3.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc436_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278",
+          "path": "src/content/sources/abc420-abc466/source-abc436-g-problem-b283eaa6b2ba6c8af928d4ea6f1f3ad1b43b6d4dd7ca5183d4e02adfeec2f278.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc436_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc449-g",
+      "learningOutcomeIds": [
+        "outcome-encode-counting-by-generating-function",
+        "outcome-apply-formal-power-series-operations"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-combinatorial-coefficients"
+      ],
+      "excludedTopics": [
+        "係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"
+      ],
+      "tagIds": [
+        "tag-formal-power-series",
+        "tag-generating-functions"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq M \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "N個repunitの和は(10n−N)/9で、nはM桁以下10冪をN個足した値なので全単射。最小10冪項数は下M−1digitの和と上位係数で、項の分割は一回で項数を9増やす。従って最小項数t≤N、t≡N mod9、かつn≥Nが必要十分。digit係数母関数でt分布を数えprefix和とmod9抽出を行い、n<Nの不可能値を除くとdistinct和数になる。",
+          "sourceRevisionIds": [
+            "source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e",
+            "source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e",
+          "path": "src/content/sources/abc420-abc466/source-abc449-editorial-17258-762549cc000592d432feda1e20095c69814a9b7f5425c23b8254033b13b0085e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc449_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f",
+          "path": "src/content/sources/abc420-abc466/source-abc449-g-problem-3813696fa1319724d806eabf320c6b6304cde5c7e68a99659bde3068924ce95f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc449_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

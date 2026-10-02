@@ -1,0 +1,436 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-restrict-geometric-candidates-to-boundary-shard-001",
+  "packets": [
+    {
+      "problemId": "abc244-ex",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives",
+        "unit-segment-tree-canonical-decomposition"
+      ],
+      "excludedTopics": [
+        "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-boundary-hull",
+        "tag-segment-tree-canonical-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1≤Q≤2 \\times 10^5; |X_i|, |Y_i|, |A_i|, |B_i| ≤10^9; If i ≠ j, then (X_i, Y_i) ≠ (X_j, Y_j)."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "線形関数の最大は点集合の凸包頂点にある。時刻iで使用可能な点集合は葉prefix[1,i]で、segment treeのO(log Q)個の互いに素な区間へ分解できる。各区間の上下鎖では内積列が単峰となるためO(log Q)で最大を得る。全区間の最大を取ればprefix全体の最大に等しい。未来の点を構築には使っても、問い合わせ区間へ含めないことで時間制約を守る。",
+          "sourceRevisionIds": [
+            "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+            "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102",
+          "path": "src/content/sources/abc212-abc263/source-abc244-editorial-3602-eaa909af4b84f1fe36bda08c9bf6a281def38864da15ce544a494d48eab60102.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc244_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64",
+          "path": "src/content/sources/abc212-abc263/source-abc244-ex-problem-63892ec69190002f23b56f853073e779bd2a3b0b4035ce3c1932df8305512c64.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc244_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc257-ex",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives",
+        "unit-kinetic-order-maintenance"
+      ],
+      "excludedTopics": [
+        "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-boundary-hull",
+        "tag-kinetic-order-maintenance"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 1000; 1 \\leq K \\leq N; 1 \\leq C_i \\leq 10^5; 1 \\leq A_{i,j} \\leq 10^5; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "独立な出目の和の二乗期待値は平均和の二乗と分散和に分かれる。分母を払った各サイコロを点(x_i,y_i)へ写すと目的は選択和(X,Y)に対するX²+Yとなる。この凸関数の最大は選択和集合の凸包頂点で達成され、上側の各頂点はあるcに対するcX+Yの最大、つまりcx_i+y_iの上位K個で得られる。順位が変わるのは二直線の交点のみなので全交点順のsweepで候補を尽くせる。同傾きイベントをまとめ、直前・直後の上位K集合の評価を漏らさない。",
+          "sourceRevisionIds": [
+            "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+            "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a",
+          "path": "src/content/sources/abc212-abc263/source-abc257-editorial-4168-f4b0c81f2f0e7ca46ac56b229f127ec40515a09a6690d54425669db1055c8b4a.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc257_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f",
+          "path": "src/content/sources/abc212-abc263/source-abc257-ex-problem-89026fea7c003dede5775fd2a883a7341d60c0ac91d927e54c17c5e2fe06451f.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc257_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc275-g",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-boundary-hull"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 10^8\\leq A_i,B_i,C_i \\leq 10^9; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "総価値で重み・体積を割った比率は正規化点(A_i/C_i,B_i/C_i)の凸結合になる。逆に凸結合の係数は大きな個数で任意の精度まで近似できるので、極限問題の可達比率集合は凸包。両資源の容量が同じなら価値効率は1/max(x,y)、よってmax(x,y)を最小化する。支配された点は不要で下側Pareto凸包だけを見る。辺上ではmaxは二つの一次関数の最大だから、端点かx=yの交点で最小になる。これら全候補の最小値の逆数が求める極限。",
+          "sourceRevisionIds": [
+            "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731",
+            "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731",
+          "path": "src/content/sources/abc264-abc315/source-abc275-editorial-5111-51c9acaf8a6c44d57dd0445da6d60dda5cc93d44ef12a3eabc0b55b292e8d731.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc275_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b",
+          "path": "src/content/sources/abc264-abc315/source-abc275-g-problem-db4426d48142d9ee833f9447103bd7f71cfe0d09a8729b7542ca946e6029d37b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc275_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc286-ex",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-boundary-hull"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N \\leq 10^5; |x_i|,|y_i|,|s_x|,|s_y|,|t_x|,|t_y|\\leq 10^9; (x_1,y_1),(x_2,y_2),\\ldots, and (x_N,y_N) form a convex polygon in counterclockwise order.; No three points of C are colinear.; S and T are outside C and not on the circumference of C.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "線分STが凸障害物の内部を通らなければ三角不等式により直線が最短。内部を通る場合、最短経路の自由空間部分は直線で、境界への接続は接線となり、接点間は境界の二方向のいずれかをたどる。C∪{S,T}の凸包はこの接線と境界arcを同時に表すので、その周上のS−T二つのarc長の最小が最短である。境界への接触だけは内部交差と区別して直線を許す。",
+          "sourceRevisionIds": [
+            "source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e",
+            "source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e",
+          "path": "src/content/sources/abc264-abc315/source-abc286-editorial-5568-b6443e17b93b4acda941f3898e1facf7191809b5faa1df975f1edfa7c506b00e.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc286_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716",
+          "path": "src/content/sources/abc264-abc315/source-abc286-ex-problem-15c38577c720eb4723e02ad546c45234cfb17e37d1b62b397e322fb118847716.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc286_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc341-g",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-boundary-hull"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; 1\\leq A_i\\leq 10^6; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間平均はprefix二点の傾き。固定左点はsuffix集合の最左x点なので、最大傾き方向はupper hullの隣接辺になる。hullの内側の点を消してもその最大方向を変えず、右から追加するstackのpopは各点一度だけ。各左点追加直後の隣接傾きを取れば全左端の最大平均を得る。",
+          "sourceRevisionIds": [
+            "source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0",
+            "source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0",
+          "path": "src/content/sources/abc316-abc367/source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc341_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2",
+          "path": "src/content/sources/abc316-abc367/source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc341_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc356-g",
+      "learningOutcomeIds": [
+        "outcome-restrict-geometric-candidates-to-boundary"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-convex-boundary-hull"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \\le N \\le 2 \\times 10^5; 1 \\le A_i, B_i \\le 10^9; 1 \\le Q \\le 2 \\times 10^5; 1 \\le C_i, D_i \\le 10^9"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "時間比でstyleを混ぜる平均rateは凸結合そのものであり逆に全凸結合を実現できる。距離Dへ時間D/B、必要stamina D A/Bなので許容率A/B≤C/Dの中で最大Bが最短になる。支配された点を除いた下側hullだけで最大Bを達成でき、制約線との交点は二style混合で実現可能。chainの単調傾きからbinary searchでその辺を特定する。",
+          "sourceRevisionIds": [
+            "source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244",
+            "source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244",
+          "path": "src/content/sources/abc316-abc367/source-abc356-editorial-10127-9631dfbce040f74564c78e584baf44a5d137f433d5096315078ecbf2b3e04244.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc356_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601",
+          "path": "src/content/sources/abc316-abc367/source-abc356-g-problem-5064a3c530583bb2c3ad67ad3adaa9b4525eaf687a574a8925545b1991fd2601.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc356_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

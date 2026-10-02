@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-enumerate-subset-state-space-shard-002",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "5d5db7467cddd430e3a06200c2c2f80606ed3adc7288c02f7d4fe5b4ef32243c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "d4f249a55a5fa1c86aab4544bbeb5812379c07f203f7b4bb1b0f8a89dadb3320",
+  "reviewDigest": "a2792fba30aed67edc94504542b5bdcaef7ead8dea702b518d95a2a3e29d3c80",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc343-g.html",
+      "digest": "dd58e5b9f699a2f48bb4ba089ebad1e6d4c4f280f8097964c724b3646c333f84"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc352-f.html",
+      "digest": "a3267ed16ca10c366174bac8f09a83cb1abfeae34b4112bf57b1b2b1c6493874"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc381-f.html",
+      "digest": "35a89bb6c0336b0f90b8c012113ebd5caea2395524b91e32e0e0ff65e1bc200a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc396-g.html",
+      "digest": "939ebda072997d445424c914d6bfcd4aa142bf0f86399c4c82312f46b7b719c7"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc411-g.html",
+      "digest": "b1f2f43d6c1cad4b44511d166be40d22bb0c06c6f63a2625a17fee40cdb237fb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc425-f.html",
+      "digest": "9e2d34e890278ee5c2de8c86fec897a104a0d2f0f52c196601fcef42ddab9a3b"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc432-f.html",
+      "digest": "92e9d4c05ab812e9246d2c84ce948e84c5379870440f6eb34ff1a6b8ce85173c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/index.html",
+      "digest": "41ac184b9312e7ca39249a0007270556a312fec286fd8526bde708a7dd74cd3c"
+    }
+  ],
+  "snapshotDigest": "94b0142ce46189e0bd0d82b3df9ad9fba74b85694424232fb5dee6531e4fb48a"
+}

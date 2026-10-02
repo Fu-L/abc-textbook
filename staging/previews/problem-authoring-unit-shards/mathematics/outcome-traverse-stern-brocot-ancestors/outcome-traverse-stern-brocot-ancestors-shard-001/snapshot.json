@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-traverse-stern-brocot-ancestors-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "6f211adc901fcaad38ac6495dc8d81f6894866b8d30181d2bb311091dfe6bac2",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "79f196d3026d819ad6b1fb93d0401d1d160e5195fa428b91732e04f4ab13940c",
+  "reviewDigest": "ee911b73590d2e5e18b2b65957d3c42c2f342ece41d80765f557ece730244124",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-traverse-stern-brocot-ancestors/outcome-traverse-stern-brocot-ancestors-shard-001/abc273-ex.html",
+      "digest": "282750dee12ab5700f148f087d8552d7b4163aafd848ec28c0701bf0fbd2e41a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-traverse-stern-brocot-ancestors/outcome-traverse-stern-brocot-ancestors-shard-001/index.html",
+      "digest": "697703219efa6202cbd349d75b2f7b493f265ca985091addf3f59f2f5a9f36ae"
+    }
+  ],
+  "snapshotDigest": "20e9367baa0be2e21899574e59e56fc26746e0b99a3cf6eb52f0b3e743ecc512"
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC411-E — E [max]</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC411-E — E [max]</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/contribution-reordering.md">局所寄与へ分解して集計順を交換する</a></p>
+<ul>
+<li>数える対象を要素・組・値・区間のいずれかで一意に固定し、各対象が含まれる回数または指示変数の期待値を先に求めて総和できる。</li>
+<li>法 m 上の積で一因子を差し替えるとき、取り得る因子のうち非零剰余がすべて可逆かを確認し、剰余 0 の因子数と可逆な非零剰余因子の積を分離して、可逆な旧因子を逆元で除き新因子を掛けて更新後の積を復元できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>最大値が値 S_i に等しい確率を直接数えるより、P[max≤S_i] を使えば各 dice が S_i 以下を出す独立確率の積になる。</p>
+<p>全6N面の値を昇順 sweep すると、各 dice の「現在値以下の面数」B_j はその dice の面を通過したときだけ増え、更新総数は6N回である。</p>
+<p>採用する候補: 期待値を CDF の差分和から部分和変形し、threshold sweep で Π_j(B_j/6) を更新する</p>
+<p>E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。</p>
+<p>棄却する候補: N 個の dice の出目6^N通りを列挙して最大値を平均する</p>
+<p>独立性を積の CDF に変換せず、N=10^5 では候補数が指数的になる。</p>
+<p>threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。</p>
+<p>同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。</p>
+<p>(faceValue,dieId) の6N組を sortし、同値groupごとに各 cnt[die] を増やす。積 product と cnt=0 の dice 数 zeros を更新し、CDF=zeros&gt;0なら0、そうでなければ product·6^{-N} とする。隣のdistinct値との差×CDFを最大面値から引いて期待値を得る。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="cdf-による最大値の期待値">CDF による最大値の期待値</h3>
+<p>発動条件: 独立変数の最大値の期待値を求め、閾値以下確率が簡単なとき。</p>
+<p>P[max=value] をCDF差へ変え、summation by partsで隣接値gapとの積にする。</p>
+<h3 id="event-sweep">event sweep</h3>
+<p>発動条件: 閾値に応じて各対象の離散countが少数回だけ変化するとき。</p>
+<p>面値を昇順にまとめ、該当diceの≤threshold面数だけ更新する。</p>
+<h3 id="零を含む積の動的管理">零を含む積の動的管理</h3>
+<p>発動条件: 因子を割り算で更新したいが0因子があり得るとき。</p>
+<p>zero factor数と非零因子積を分け、zero数が0のときだけ積を利用する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>6N×N の閾値表を作らず、各面が一度だけ起こすcount更新から全diceのCDF積を保つ。</p>
+<p>別の問題へ持ち帰る視点: 独立確率の積をthreshold sweepする際は、各変数のCDFが変わるeventだけ処理し、0因子数を別管理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>threshold v で dice j が許す面数を B_j とすると P[max≤v]=Π_j B_j/6^N。各 B_j は0..6だけなので非零積は逆元で差し替えられる。 同じ値の全faceを一群として B_j を更新してからその threshold の CDF を評価する。途中で評価すると同値面を別の最大値として誤分割する。 E=S_max-Σ_i(S_{i+1}-S_i)P[max≤S_i] とし、zero count と非零 B_j の積を管理すれば、全 distinct threshold を O(N log N) で処理できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同値面を必ずbatch更新し、old count=0 のとき逆元0を取らない。6^{-N}を一度掛け、値差と期待値はmodへ写す。distinct値が一つだけの式も扱う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=1、全face同値、dice内重複、最小thresholdで一部diceがcount0のままの例を6^N全列挙と比較する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、6N面をsort、各面countの更新O(1)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、面event。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 10^5; 1\leq A_{i,j} \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>二diceとも面は1,1,1,2,2,2。</p>
+<ol>
+<li>max=1は両方1の確率1/4。</li>
+<li>max=2は3/4。</li>
+</ol>
+<p>期待される結果: 期待最大値7/4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>同値の三面を一面ずつCDFへ反映して積分してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>CDFはそのthreshold以下の全同値面を含む。同値group全更新後に評価する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc411/tasks/abc411_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc411-e-problem-98ce674015aab1611529fc1107e1c9bbe341e40cf8e2c43b601192197f7c29dd</li>
+<li><a href="https://atcoder.jp/contests/abc411/editorial/13361">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc411-editorial-13361-ed54805abf99dcee9f98de109c9c1471239666baf86409bc6803ad047a16aefd</li>
+</ul></main>
+</body></html>

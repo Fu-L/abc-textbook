@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-use-tree-diameter-extrema-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "36508d67f01576c2270902d37850587680d5fcdc717fedcbdfdc6049f964b125",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "b01a46c798a88d6cae3b298155afcb5d6e2c2d999b67886dad297f9c3691c205",
+  "reviewDigest": "43998450ef028b464c1be5066e4576c9397aeba5627c6bd20df501878b9368b6",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc221-f.html",
+      "digest": "b5abd4bdb057c859453cd5bd4dd30fe5af48a893867da16777a851d33967d5b1"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc222-f.html",
+      "digest": "6570c9599da38e371d67c21aa67be72dcd1b0b2fb0929a3fa1e6eca00afad8e8"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc267-f.html",
+      "digest": "0aeffe0f75cb3adc8cba3f5f7f69d8ae9d3361d700580ea40eec8b4c6c71bc3f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc361-e.html",
+      "digest": "7cb27ed2fd74ae8fec8150fce584a1d971deedf6f2189d0e6a33238c4f7599c5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc401-f.html",
+      "digest": "d65f0624148eaa0a578da6fc37485d8960d814d3f88ce2130d4cc79061ce3003"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc428-e.html",
+      "digest": "95d86fbaa71a4e80892afbf32c28a1cf99b2044d21393d4e133069814c4f4748"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/index.html",
+      "digest": "294f186943cf1fa3b631fa0f2ccbcb63fa98eeac0d21aa7ab6f6d792f0f3ecde"
+    }
+  ],
+  "snapshotDigest": "3b72a956a6617c371560a620b7562aaa564316c668f34dd8484726587f9c8f7f"
+}

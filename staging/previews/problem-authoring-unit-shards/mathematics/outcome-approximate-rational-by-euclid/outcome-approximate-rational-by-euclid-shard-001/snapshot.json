@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-approximate-rational-by-euclid-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "30bcde6fa6bde01049d363068adeba1d6a5413bd57024285ffb1392d31c54e11",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2f725f3d320e048b45424998fc53e3b23bab21c73cb0553b510333fcfcd90f5c",
+  "reviewDigest": "f1a9c9dc807acab97a94c52a8d1a2c9bf0334fcc23b1ac3a5b2933cedf313c22",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.html",
+      "digest": "47fa680607dea4b05318d4048f5084b9ff9644b0b7ea899f491fe7c9b29d4f70"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc408-g.html",
+      "digest": "cabb3e52741e7004ac2989780927e9ab5f08d06baf763bfdc7e9a10748ff2199"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/index.html",
+      "digest": "8a37e76766985d050a6dc7d7f27b1810cdcf59b273ab4173ebf39ba412ef23e9"
+    }
+  ],
+  "snapshotDigest": "31cd2205c672a6c9919ffe34f671c9b125ef367de2e7c21cc828b58afa09c061"
+}

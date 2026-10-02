@@ -1,0 +1,509 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-004",
+  "packets": [
+    {
+      "problemId": "abc391-g",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-automaton-dp"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-automaton-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 10; 1\\leq M\\leq 100; N and M are integers.; S is a lowercase English string of length N."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "LCS 行の隣接差は0/1で、先頭0から差分 mask で元行を一意復元できる。次の一文字で得る次行も標準 LCS 漸化式から一意である。よって row を状態とする決定的 automaton と同値。文字列 prefix は最後の文字と直前 prefix へ一意分解されるので、26文字遷移を加算すると全文字列を一度だけ数える。最終行末尾は差分の総和=popcountである。",
+          "sourceRevisionIds": [
+            "source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9",
+            "source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9",
+          "path": "src/content/sources/abc368-abc419/source-abc391-editorial-12087-f639720fd19ac6ed72e77e27e96e282e340d8462db32f56e2b1da5f323c1f6f9.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc391_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b",
+          "path": "src/content/sources/abc368-abc419/source-abc391-g-problem-3d8533bce00788b3eb9ac9d532744390dcdcc902cacd6d022dfc629af8376c8b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc391_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc403-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-constructive-witness",
+        "unit-prime-divisor"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-constructive-witness",
+        "tag-prime-divisor-decomposition"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N \\le 2000; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "任意の式の最外演算は加算、乗算、括弧付き式、または1のみの literal である。加算を含む式を乗算因子にするには括弧が必要なので expr と term を分ける。加算両項の値と1でない乗算因子は対象値より小さく、昇順 DP がそれらの最短表現を取得する。因子1を掛ける表現は短くならないため除外できる。全構文分類を遷移で覆い、長さ加算には演算子・括弧を含めるので文法に従う最短式を得る。",
+          "sourceRevisionIds": [
+            "source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93",
+            "source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93",
+          "path": "src/content/sources/abc368-abc419/source-abc403-editorial-12771-40816f386a2e96d37d3b6ae4f78aaed6c4433ef1367bad2c312f7db54d5bea93.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc403_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426",
+          "path": "src/content/sources/abc368-abc419/source-abc403-f-problem-4cf4b17433f9f9b863f1181b17134a8af10babfe57b14ebed9fb589ff7edc426.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc403_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc416-g",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-greedy-exchange"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-greedy-exchange-order"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 10^5; 1\\leq K \\leq 10^5; S_i is a string consisting of lowercase English letters with length at most 10.; N and K are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "XYとYXを比較する交換法で辞書順を悪化させず文字列を並べ替えられる。最小要素の無限反復より早く小さい文字を出す候補は存在せず、S_minをK回使ったprefixが実現可能。従って最適有限列はこの無限反復のprefixに限られる。同じ無限列のprefix同士では短い方が辞書順で小さい。phaseと使用個数のDPは、入力に存在する一致部分文字列を一つずつつなぐ全分割を網羅し、ちょうどK個で実現できる最短prefixを求める。",
+          "sourceRevisionIds": [
+            "source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c",
+            "source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c",
+          "path": "src/content/sources/abc368-abc419/source-abc416-editorial-13508-3cc358d000363441e0ec6cd32eabc27e757847b39f72389ef8f6cce98c7f016c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc416_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338",
+          "path": "src/content/sources/abc368-abc419/source-abc416-g-problem-9ebb537408e3fffb9e134910629c6205717daff6a09cae6b38632ffe13119338.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc416_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc422-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-contribution-reordering"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-contribution-reordering"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le5000; 1\\le M\\le5000; 1\\le W _ i\\le10 ^ 9\\ (1\\le i\\le N); 1\\le u _ i\\le v _ i\\le N\\ (1\\le i\\le M); The given graph is connected.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "長さlの道の燃料はΣ_{j=0}^{l−1}(l−j)W_{v_j}へ順序を入れ替えられる。残りn辺の状態から一歩進む重みnW_vはこの式の一項である。全初期残歩数0..N−1からcost0で始めると各長さのpathを同一DPで比較できる。正の体重増分により閉路を削除すれば後の体重も辺数も減って燃料は増えないため最適は単純path、長さ≤N−1。従ってlayer0の最小が全最適を網羅する。",
+          "sourceRevisionIds": [
+            "source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01",
+            "source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01",
+          "path": "src/content/sources/abc420-abc466/source-abc422-editorial-13819-43cd7ccc61b34cfce0f6748f44eb22d9a44bddf46c576379acd043608947ce01.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc422_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1",
+          "path": "src/content/sources/abc420-abc466/source-abc422-f-problem-25719361ea0a28492ed20a978afd491f51075fed0c262009e3945e8a26d1c0c1.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc422_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc440-g",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dsu-components"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-dsu-components"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: F,H,W are integers.; 1 \\leq F \\leq 10; 1 \\leq H,W \\leq 500; S_{k,i,j} is either a digit (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) or #. (1 \\leq k \\leq F, 1 \\leq i \\leq H, 1 \\leq j \\leq W); Q is an integer.; 1 \\leq Q \\leq 10^5; G_i, A_i, B_i are integers. (1 \\leq i \\leq Q); 1 \\leq G_i \\leq F (1 \\leq i \\leq Q); 1 \\leq A_i \\leq H (1 \\leq i \\leq Q); 1 \\leq B_i \\leq W (1 \\leq i \\leq Q); S_{G_i, A_i, B_i} is not #. (1 \\leq i \\leq Q)"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "同階成分内は自由に往復でき全重みを回収して任意出口へ行けるので一頂点縮約は等価。梯子なしは上向きDAGのpath。唯一の梯子は特定の上成分uと下成分vだけを結び、繰り返しても新成分を増やさないため、一度の下降へ整理できる。vからuへ戻るならu重みを再加算せず、別上成分wへ出るならuとwを別々に数える。開始下成分への再訪も同様にID一致で除く。公式の境界状態dvと二種dpはこの上昇・下降・再上昇の全形を網羅し、同じ成分以外には過去重みとの重複がない。候補除外は一致ID一つだけなので異ID上位二件が十分。",
+          "sourceRevisionIds": [
+            "source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92",
+            "source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92",
+          "path": "src/content/sources/abc420-abc466/source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc440_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2",
+          "path": "src/content/sources/abc420-abc466/source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc440_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc450-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-range-actions"
+      ],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-lazy-segment-action"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2\\times 10^5; 1 \\leq M \\leq 2\\times 10^5; 1 \\leq X_i < Y_i \\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "固定下向きchainにより到達集合はprefix1..rであり、Nが1から到達可能なら全頂点が強連結。辺をX昇順に処理すれば一度X>rとなった状態は以後到達を伸ばせず、先に選んだ到達不能辺が後から使えることもない。選ぶ辺(X,Y)はr<Xなら到達を変えず二択、X≤r<Yなら不採用はr・採用はY、r≥Yならどちらもrで二択。この完全な場合分けが区間倍・区間和からYへの加算となり、各subsetを一度だけ数える。削除subsetと残存subsetは補集合で一対一。",
+          "sourceRevisionIds": [
+            "source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa",
+            "source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa",
+          "path": "src/content/sources/abc420-abc466/source-abc450-editorial-17271-14f4cc413a1f20739b575ff4d2dd353fd67bcb2d2e31e1636bfd69e58b7c76fa.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc450_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa",
+          "path": "src/content/sources/abc420-abc466/source-abc450-f-problem-4bffc8e2482d19c23c3dca668eba04d09cbc5636627009a34727807427000eaa.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc450_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc462-f",
+      "learningOutcomeIds": [
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq T\\leq 10^5; S is a string of length between 3 and 3\\times 10^5, inclusive, consisting of uppercase English letters.; 1\\leq K \\leq 10; In each input, the total length of S over all test cases is at most 3\\times 10^5.; T and K are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "ABCは自分と重ならないため、末尾の新ABCを採ると直前三文字を一blockとして前prefixと分離できる。元prefixがその三文字間で失う既存ABCはX_i個、block作成はY_i変更なのでdp[i−3,j−1+X_i]+Y_i。末尾ABCを作らない最適では末尾字を元へ戻してもABC数は減らず変更数が減るから、skipはdp[i−1,j+Z_i]。この論法は「少なくともj増加」の状態で成立し、j=0の基底0を用いる。最終に過剰増加があっても変更字を一字ずつ元へ戻すと、一字でABC数は高々1だけ変わるので目標ちょうどKを必ず通り、費用は増えない。よって最小の少なくともK解とちょうどK解の費用は等しい。",
+          "sourceRevisionIds": [
+            "source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62",
+            "source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62",
+          "path": "src/content/sources/abc420-abc466/source-abc462-editorial-16164-52cbbb3827b91c096a486d13c992362aea139b8b1e716475326183aac32a6c62.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc462_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0",
+          "path": "src/content/sources/abc420-abc466/source-abc462-f-problem-31b1d1c4439105d0f203b91f1d5f4a8da45b6be631e272f544ac6728d4ec70a0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc462_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

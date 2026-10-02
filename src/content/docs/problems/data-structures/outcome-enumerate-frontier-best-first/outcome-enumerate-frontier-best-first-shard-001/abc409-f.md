@@ -1,0 +1,124 @@
+---
+title: "ABC409-F — Connecting Points"
+draft: true
+authoringUnit: {"problemId":"abc409-f","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc409-f.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration","unit-dsu-components"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8","source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"heap 上位が既に連結ならその pair は将来も連結のままなので、永久に捨ててよい。この単調性で stale entry の再構築が不要になる。 最初の有効 pair を union した後も heap key が k の entry をすべて処理する必要がある。途中で component が変化しても、距離 k の全辺を加えた連結成分が問題文の同時 merge と一致する。 頂点追加時に過去頂点との pair だけを追加し、type 2 では最初の非連結 pair の距離 k と同距離の全 pair を union する。各 pair は一度 push/pop される。","sourceRevisionIds":["source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8","source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"点(0,0),(1,0),(2,0)、初めは各別成分。","procedure":["最小距離1のpairは12,23。","同じqueryで両方unionする。"],"executionTarget":null,"expectedResult":"type2の出力1、全三点が同成分。","verificationStatus":"not_applicable","learningUnitIds":["unit-priority-queue-best-first"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"prerequisiteIds":["unit-bounded-enumeration","unit-dsu-components"],"attainmentCondition":"最初のpair12だけunionしてqueryを終えてよいか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"同距離23も同時merge対象なので不可。同じkeyの全entryを処理する。"},"answer":{"reasoningOrVerification":"同距離23も同時merge対象なので不可。同じkeyの全entryを処理する。","procedure":["具体例の各状態・寄与を再計算する。","同距離23も同時merge対象なので不可。同じkeyの全entryを処理する。"],"expectedResult":"同距離23も同時merge対象なので不可。同じkeyの全entryを処理する。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [priority queue・best-first列挙](src/content/docs/learn/query/priority-queue-best-first.md)
+
+- 現在のfrontierの極値をheapで確定し、新しく解禁された候補だけを追加して上位K個や最良状態を列挙する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
+
+対象外:
+
+- priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+component 間距離の最小値は、異なる component に属する頂点 pair の Manhattan 距離の最小値と同じなので、候補を全頂点 pair として持てる。
+
+type 2 で最小距離 k の全 pair を同時に union すれば、同じ k の辺による推移的な連結も一回の query 内で正しく反映される。
+
+採用する候補: 追加済み全頂点 pair を距離付き min-heap に入れ、DSU で既に同 component の stale pair を遅延削除する
+
+頂点追加時に過去頂点との pair だけを追加し、type 2 では最初の非連結 pair の距離 k と同距離の全 pair を union する。各 pair は一度 push/pop される。
+
+棄却する候補: type 2 ごとに現在の component pair ごとの距離を全頂点 pair から再計算する
+
+最大約3000頂点の二乗走査を最大1500 queryで繰り返し、component merge後も同じ距離を何度も評価する。
+
+heap 上位が既に連結ならその pair は将来も連結のままなので、永久に捨ててよい。この単調性で stale entry の再構築が不要になる。
+
+最初の有効 pair を union した後も heap key が k の entry をすべて処理する必要がある。途中で component が変化しても、距離 k の全辺を加えた連結成分が問題文の同時 merge と一致する。
+
+初期 N 頂点の全 unordered pair を heap に入れる。type 1 では新頂点と既存全頂点の pair を追加する。type 2 は連結済み pair を pop し、heap が空なら -1、そうでなければ最小 key k を固定して key=k の pair を全て pop・unionして k を出力する。type 3 は DSU.same を返す。
+
+## 典型の発動条件
+
+### priority queue の遅延削除
+
+発動条件: 候補の有効性が DSU の merge で失われるが、失効後に復活しないとき。
+
+heap top を使う直前に same を確認し、stale pair を捨てる。
+
+### DSU
+
+発動条件: 辺追加だけで component が併合され、connectivity query があるとき。
+
+最小距離 group の全 pair を union し、type 3 をほぼ定数時間で答える。
+
+### 全 pair の offline 候補化
+
+発動条件: 総頂点数が約3000で、各 pair の固定距離を一度だけ計算すればよいとき。
+
+初期および追加時に unordered pair を heap へ一度登録する。
+
+## 問題固有の要素
+
+component 距離を明示管理せず、頂点 pair の supersets を heap に保持して DSU で現在有効な最小だけを抽出する。
+
+別の問題へ持ち帰る視点: 集合間最小値が要素 pair の最小で、集合がmergeしかしないなら、全 pair候補＋単調なlazy invalidationを検討する。
+
+## 正当性
+
+heap 上位が既に連結ならその pair は将来も連結のままなので、永久に捨ててよい。この単調性で stale entry の再構築が不要になる。 最初の有効 pair を union した後も heap key が k の entry をすべて処理する必要がある。途中で component が変化しても、距離 k の全辺を加えた連結成分が問題文の同時 merge と一致する。 頂点追加時に過去頂点との pair だけを追加し、type 2 では最初の非連結 pair の距離 k と同距離の全 pair を union する。各 pair は一度 push/pop される。
+
+## 実装上の注意
+
+- type 2 の開始前に k 未満を含む連結済み top をすべて除く。同距離 k は有効・無効を問わず全て pop し、距離は 64 bit、総 pair 数分のmemoryを確保する。
+
+## 復習の核
+
+- 既に全連結、同じ最小距離がchain状に並ぶ、同距離pairの一部がstale、新頂点が最小距離を更新する例を愚直component距離計算と比較する。
+
+## 計算量と制約
+
+### 時間
+
+O(P² log P+Q α(P))、Pは全追加後の頂点数。各pairは一回push/popされる。
+
+### 空間
+
+O(P²+Q)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq 1500; 1\leq Q\leq 1500; 0\leq x_i,y_i\leq 10^9; For queries of type 1, 0\leq a,b\leq 10^9.; For queries of type 3, let n be the number of vertices in G just before processing that query, then 1\leq u\lt v\leq n.; All input values are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+点(0,0),(1,0),(2,0)、初めは各別成分。
+
+1. 最小距離1のpairは12,23。
+2. 同じqueryで両方unionする。
+
+期待される結果: type2の出力1、全三点が同成分。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+最初のpair12だけunionしてqueryを終えてよいか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+同距離23も同時merge対象なので不可。同じkeyの全entryを処理する。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc409/editorial/13228) — source-abc409-editorial-13228-cebc583d6c6842ea88624a86c2b7a418f774191123e7f161b74c2d6d494375e8
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc409/tasks/abc409_f) — source-abc409-f-problem-fec7ee4dd0681cfccdab7c82f1d78d79b19074fe7b587293188aa87e737a047e

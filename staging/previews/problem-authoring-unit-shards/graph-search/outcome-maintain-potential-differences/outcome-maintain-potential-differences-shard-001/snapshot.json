@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-maintain-potential-differences-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "546b0fb7795dc22d766a988b2b82535932c61f45d8be6c0b2830281fc5a14684",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "554a4d76a14c8c1688b900886f0d8bfebd608878e05f368ba0f01fc75cb953a4",
+  "reviewDigest": "524d1b76c5d474758a74dba88e270ab0c788b6a7f91f3c94b6431fecfcdd53cc",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.html",
+      "digest": "dd3a8ed1d7a9979f62fc0b019e6c3a7ed53c3b975ee0b33d5b5ca2207aa06571"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/index.html",
+      "digest": "f471e4b8c6cb0712d26c5ef92f5f4bde002bd1af045566becdd59acaf7ccc6ba"
+    }
+  ],
+  "snapshotDigest": "42708a4626b52db0f21dac0aa8a4542ce7ec5e2189899bff482004984c33d823"
+}

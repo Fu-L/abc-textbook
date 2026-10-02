@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC314-E — Roulettes</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC314-E — Roulettes</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-stochastic.md">確率過程・期待値DP</a></p>
+<ul>
+<li>意思決定時点で観測済みの情報を状態にし、行動の最適化と確率平均を正しい順序で組み合わせたBellman式を解ける。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>二人零和ゲームの勝敗・Grundy数。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>残り必要点が r の時点からの最小期待費用だけで将来が決まり、出目が正なら r の小さい状態から順に Bellman 値を確定できる。 0 点の出目は同じ状態への self-loop になる。そのまま式の右辺に未知 e_r が残るが、非0が出るまで同じルーレットを回す試行へまとめれば消せる。 P 個中 Z 個が0なら非0を得るまでの回数期待値は P/(P−Z) で、実効コストは C·P/(P−Z)、非0出目は一様である。 状態 i で特定 roulette j を選ぶ値は実効コスト＋非0出目先 e_{i+s} の平均であり、その最小が Bellman 最適性を満たす。</p>
+<p>採用する候補: 0 出目を除いた条件付きルーレットへ期待コストを補正し、残り点数の後ろ向き DP で各状態の最良ルーレットを選ぶ。</p>
+<p>全遷移がより目標に近い既計算状態へ進み、各状態・各ルーレットの期待値を直接比較できる。</p>
+<p>棄却する候補: 各履歴を状態として、ルーレット選択と出目を含む決定木を探索する。</p>
+<p>履歴は無限に伸び得るが、最適行動は累積点だけで決まる Markov 性を利用していない。</p>
+<p>P 個中 Z 個が0なら非0を得るまでの回数期待値は P/(P−Z) で、実効コストは C·P/(P−Z)、非0出目は一様である。</p>
+<p>状態 i で特定 roulette j を選ぶ値は実効コスト＋非0出目先 e_{i+s} の平均であり、その最小が Bellman 最適性を満たす。</p>
+<p>各 roulette から0を除き cost_i=C_i P_i/(P_i−Z_i) を作る。e[p]=0 (p≥M) とし p=M−1..0 の順に、全 roulette の cost_i+非0出目に対する e[min(M,p+s)] の平均を計算し最小を e[p] とする。e[0] を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="自己ループを含む期待値-dp">自己ループを含む期待値 DP</h3>
+<p>発動条件: 試行結果に状態不変があり、成功まで同じ選択を続けられるとき。</p>
+<p>幾何分布の期待回数で self-loop を消去し、進む遷移だけの実効操作へ置換する。</p>
+<h3 id="確率的最短路の-bellman-最適化">確率的最短路の Bellman 最適化</h3>
+<p>発動条件: 現在状態から行動を選び、その後の確率遷移に応じて追加費用が決まるとき。</p>
+<p>各行動の即時費用＋次状態価値の期待値を比較する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>0 が出た後に別 roulette へ変える必要はなく、同じ状態で改めて最適行動を選ぶ Bellman 方程式を解けば実効コスト式と一致する。</p>
+<p>別の問題へ持ち帰る視点: 期待値式の右辺に自分自身が現れたら、係数を移項するか成功までの geometric trial として解消する。</p>
+<h2 id="正当性">正当性</h2>
+<p>0出目は同状態を繰り返す。固定rouletteを選ぶBellman式の自己項を移項すると有効cost C_iP_i/(P_i−Z_i)と非零出目平均になる。全依存先が目標へ近いので後退DPしroulette最小を取ると最適策略が得られる。全零rouletteは進めず候補外。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>非0個数 P−Z は問題制約で正。平均の分母を元 P ではなく非0個数にし、実効 cost の補正と二重に確率を掛けない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず e_i の Bellman 方程式を書き、0出目の e_i 項を実際に左辺へ移す。行動が履歴でなく現在点だけに依存してよい理由も確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>目标M、roulette数N、全出目数L=ΣP_i。期待値DP O(ML)。</p>
+<h3 id="空間">空間</h3>
+<p>roulette入力O(L)、期待値O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 100; 1\leq M\leq 100; 1\leq C _ i\leq 10 ^ 4\ (1\leq i\leq N); 1\leq P _ i\leq 100\ (1\leq i\leq N); 0\leq S _ {i,j}\leq M\ (1\leq i\leq N,1\leq j\leq P _ i); \displaystyle\sum _ {j=1}^{P _ i}S _ {i,j}\gt0\ (1\leq i\leq N); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>目標1、一台cost2、出目(0,1)各1/2。</p>
+<ol>
+<li>E=2+(1/2)E+(1/2)×0。</li>
+<li>自己項を移しE/2=2。</li>
+<li>有効cost2×2/1。</li>
+</ol>
+<p>期待される結果: 4</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>0出目を捨てcost2のままにすると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>失敗時の再料金を消して期待値を過小評価する。costもP/(P−Z)倍する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc314/tasks/abc314_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-e-problem-9c1f2c4e116a29222661a3bac6c5d20fb485a8f1e886cc0600bd562106db0231</li>
+<li><a href="https://atcoder.jp/contests/abc314/editorial/6956">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc314-editorial-6956-1cac01b30607302e095c5960e9c250c8aa1588d44a99d3b56029134afc04c731</li>
+</ul></main>
+</body></html>

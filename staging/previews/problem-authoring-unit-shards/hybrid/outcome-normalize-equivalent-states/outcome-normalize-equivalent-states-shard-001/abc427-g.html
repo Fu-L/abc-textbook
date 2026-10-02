@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC427-G — Takahashi's Expectation 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC427-G — Takahashi's Expectation 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/normalization.md">同値な状態を正規化する</a></p>
+<ul>
+<li>対称操作で同値な状態の標準形と不変量を選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/monotone-search.md">単調境界を証明して探索する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>交換論による貪欲順の証明。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>プレゼント列は初期テンション T から最終値への関数を表す。隣接する悪い組 (p,q) は、長さを保ったまま等価な良い組 (q-A,max(q,p-B)) へ局所変換できる。</p>
+<p>採用する候補: 各ブロックを等価な良い列 P_i+A≤P_{i+1} に正規化し、二進カウンタのように同じ長さのブロックを線形マージする。</p>
+<p>良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。</p>
+<p>棄却する候補: 追加のたびに全プレゼント列を保持し、質問ごとに先頭からテンションをシミュレーションする。</p>
+<p>質問一回が現在の列長に比例し、多数のクエリに耐えない。</p>
+<p>良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。</p>
+<p>列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。</p>
+<p>良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。</p>
+<p>長さが互いに異なる 2 冪の良い列ブロックを保持する。追加を長さ 1 の良い列とし、同長ブロックがある間は順序を保って結合・正規化する。質問では古いブロックから順に、各良い列上の切替位置を二分探索してテンションを更新する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="関数としての列の正規形">関数としての列の正規形</h3>
+<p>発動条件: 列が状態への作用を表し、局所的な等価変換で照会しやすい形へ直せるとき。</p>
+<p>プレゼント列を全初期値 T に対して同じ結果を返す良い列へ正規化する。</p>
+<h3 id="二進カウンタ型ブロック分解">二進カウンタ型ブロック分解</h3>
+<p>発動条件: 末尾追加があり、同サイズの要約を線形時間でマージできるとき。</p>
+<p>2 冪長の良い列を高々一つずつ持ち、carry のようにマージして償却計算量を抑える。</p>
+<h3 id="単調境界の二分探索">単調境界の二分探索</h3>
+<p>発動条件: 正規化後の列で判定結果が一度だけ切り替わるとき。</p>
+<p>テンションが下がる区間と上がる区間の境界を探し、まとめて作用を計算する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>保存すべきものは値列そのものより、任意の T への作用を保つ照会容易な代表列である。</p>
+<p>別の問題へ持ち帰る視点: 合成可能な正規形と二進ブロックを組み合わせると、オンライン追加と全体作用の照会を両立できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>良い列ではテンションが下がる判定から上がる判定へ切り替わる位置が高々一度なので、その境界を二分探索して最終値を計算できる。 列の連結は関数合成 t_{P++Q}=t_Q∘t_P であり、部分列を等価列へ置換しても全体の作用は変わらない。 良い列どうしの正規化マージはソート列のマージと同様に O(|P|+|Q|) で行える。 良い列への問い合わせは二分探索で処理でき、追加は償却 O(log M)、全体問い合わせは O((log M)^2) になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>ブロックの連結順序を時系列どおりに保つ。局所変換の max(q,p-B) と q-A、良い条件 P_i+A≤P_{i+1} の不等号を取り違えない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>正規化マージがすべての初期 T で作用を保存すること、質問時にブロックを古い順へ関数合成していることを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>追加全体O(N log N)、Q質問O(Q log²N)、長さ2冪の各blockでO(log blocksize)探索。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)、block総長は追加数。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le2\times10 ^ 5; 1\le A\le10 ^ 9; 1\le B\le10 ^ 9; -10 ^ 9\le P _ i\le10 ^ 9\ (1\le i\le N); 1\le Q\le2\times10 ^ 5; T _ i=1 or T _ i=2\ (1\le i\le Q); There exists an integer i\ (1\le i\le Q) such that T _ i=2.; If T _ i=1, then -10 ^ 9\le X _ i\le10 ^ 9. (1\le i\le Q); If T _ i=2, then -10 ^ {12}\le X _ i\le10 ^ {12}. (1\le i\le Q); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>良い列block長が1,2,4の状態へ一要素追加。</p>
+<ol>
+<li>長さ1が二個なので2へmerge。</li>
+<li>次に2を4へ、4を8へmergeするbinary carry。</li>
+</ol>
+<p>期待される結果: 長さ8の一blockになる。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>一回の追加でO(N)mergeになれば全体O(N²)か。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>各要素が各2冪levelで高々一回mergeされるので総merge workはO(N log N)。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc427/editorial/14187">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc427-editorial-14187-6859ca900ec077c45ab4ddab0902e2fe562c9bad8c2277792e47014ba7e5d4fd</li>
+<li><a href="https://atcoder.jp/contests/abc427/tasks/abc427_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc427-g-problem-d5d44c48d7ef725e694608a0cce391a30f2bd165e4fa2794b3e40c274cb2d2d1</li>
+</ul></main>
+</body></html>

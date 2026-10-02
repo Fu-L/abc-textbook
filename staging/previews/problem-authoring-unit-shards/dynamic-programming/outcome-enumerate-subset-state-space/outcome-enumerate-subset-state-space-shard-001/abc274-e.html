@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC274-E — Booster</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC274-E — Booster</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-subset-state.md">部分集合・bitmask状態DP</a></p>
+<ul>
+<li>bitmaskの各bitが表す意味を定め、部分集合間の遷移を正しく設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>部分集合・bitmask状態DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>townsとchestsを合わせても17 pointsで、visited subsetから必須townsの達成状況と取得booster数の両方を復元できる。 visited chests数がkなら現在speedは2^kであり、次pointまでのtravel timeはEuclidean distance/2^kとなる。 同じmask,lastに達した経路は現在speedと残りpointsが一致するため、所要時間の最小値だけを保持すればよい。 全town bitsを含む任意mask,lastからoriginへ戻るtimeを加えれば、そのmaskに含まれないchestsを訪ねず終了する候補になる。</p>
+<p>棄却する候補: 訪問するchest subsetを固定し、その各caseで別々にtown/chest TSPを解く。</p>
+<p>可能ではあるがchest subset列挙とpath DPが重なり2^N3^Mの余分なfactorを持つ。</p>
+<p>採用する候補: 全pointsを同じbitmaskへ入れ、dp[mask][last]をそのvisited集合でlastへいるminimum timeとして遷移する。</p>
+<p>chestを訪問しない選択もmask列挙に自然に含まれ、booster countを追加stateなしで計算できる。</p>
+<p>同じmask,lastに達した経路は現在speedと残りpointsが一致するため、所要時間の最小値だけを保持すればよい。</p>
+<p>全town bitsを含む任意mask,lastからoriginへ戻るtimeを加えれば、そのmaskに含まれないchestsを訪ねず終了する候補になる。</p>
+<p>optional pickups that alter speedをsubset TSPへ統合し、visited-mask-derived resource levelでedge costsを評価する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="訪問集合bit-dp">訪問集合bit DP</h3>
+<p>発動条件: 対象点が20個未満で、経路の将来がvisited subsetとcurrent pointだけで決まるとき。</p>
+<p>未訪問point jを追加し、dp[mask∪{j}][j]へcurrent-to-j travel timeをrelaxする。</p>
+<h3 id="optional-verticesの同一state化">optional verticesの同一state化</h3>
+<p>発動条件: 必須訪問点と任意訪問点が同じ移動graph上にあり、任意点の効果をmaskから計算できるとき。</p>
+<p>town/chestを同じpoint listに置き、終端条件だけをall-town-bits includedとする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>booster countはpopcount(mask &amp; chestMask)なので、speedをDP dimensionとして重複保持しない。</p>
+<p>別の問題へ持ち帰る視点: resourceが特定visited itemsの個数だけで単調に変わるならsubset自体から導出する。</p>
+<h2 id="正当性">正当性</h2>
+<p>訪問maskからbooster数が分かり速度を2^countで復元できる。nextまでの所要時間は今の速度で決まるのでmask,lastが十分。全街を含むmaskから原点へ戻るcostを評価し、booster任意採否も全maskが覆う。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>originをmask外のstart/endとしてdp singletonをdistance from originで初期化し、N+M=0相当の空case規約も明確にする。</li>
+<li>distanceはhypotでdouble計算し、infinity初期値と2^kによる除算を一貫させる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>少数のoptional visitsは外側でsubset固定せず、必須pointsと同じvisited maskへ統合する。</li>
+<li>訪問で変化するspeed/resourceは、同じmaskなら一意かを確認してstate dimensionを削る。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>街N、boosterM、V=N+M。subset TSP O(V²2^V)。</p>
+<h3 id="空間">空間</h3>
+<p>mask×last O(V2^V)、距離表O(V²)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 12; 0 \leq M \leq 5; -10^9 \leq X_i,Y_i,P_i,Q_i \leq 10^9; (0,0), (X_i,Y_i), and (P_i,Q_i) are distinct.; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>街(4,0)、booster(1,0)。</p>
+<ol>
+<li>boosterなし往復8。</li>
+<li>先にboosterへ1、その後街まで3/2、原点へ4/2。</li>
+<li>合計1+1.5+2。</li>
+</ol>
+<p>期待される結果: 4.5</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>boosterへ向かう辺にも取得後速度を適用するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。到着してから速度が倍になる。辺costは旧maskで計算する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc274/tasks/abc274_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-e-problem-be297a46ec7a2045345d36a9d15ec7c9add4612d197ff976f4aac752017a43be</li>
+<li><a href="https://atcoder.jp/contests/abc274/editorial/5020">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc274-editorial-5020-27bf5ebee0c7846a38ea722d708f7869d9fd869ff41dad3fe6be350009735934</li>
+</ul></main>
+</body></html>

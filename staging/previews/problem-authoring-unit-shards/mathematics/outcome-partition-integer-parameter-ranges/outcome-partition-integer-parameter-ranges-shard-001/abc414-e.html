@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC414-E — Count A%B=C</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC414-E — Count A%B=C</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/number-theory/integer-boundary-blocks.md">整数境界と同値区間を正確に分ける</a></p>
+<ul>
+<li>floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>素因数指数による整数条件の分解。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>a mod b=c&gt;0かつa,b,cが相異なる条件は、1≤b&lt;a≤Nかつaがbの倍数でないことと同値である。このとき0&lt;c&lt;b&lt;aが自動的に成り立つ。</p>
+<p>b固定で有効なaはN-b個からbの倍数 floor(N/b)-1個を除いた N-b+1-floor(N/b) 個である。</p>
+<p>採用する候補: 全bの式を等差数列和 N(N+1)/2 と divisor summatory function Σ floor(N/b) の差にし、同じ商を区間ごとにまとめる</p>
+<p>q=floor(N/l)はr=floor(N/q)まで一定なので、lをr+1へ飛ばせば相異なる商区間はO(sqrt N)個である。</p>
+<p>棄却する候補: b=1..Nを全走査して有効a数を足す</p>
+<p>一項はO(1)でもN=10^12のloopは不可能で、floor quotientが長い区間で一定になる性質を使っていない。</p>
+<p>求める個数は Σ_b(N-b+1)-Σ_b floor(N/b)=N(N+1)/2-Σ_b floor(N/b) と簡潔に分離できる。</p>
+<p>floor(N/b)の値がqである最大右端はfloor(N/q)。区間[l,r]の寄与はq(r-l+1)なので、商ごとにまとめて漏れなく加算できる。</p>
+<p>S=0,l=1から、q=N/l、r=N/q、S+=q·(r-l+1)、l=r+1をNまで反復する。ans=N(N+1)/2-Sをmod 998244353で出力する。各項を適宜mod化し、O(sqrt N)区間を処理する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="商が一定な区間の列挙">商が一定な区間の列挙</h3>
+<p>発動条件: Σ floor(N/i)を巨大Nで求めるとき。</p>
+<p>現在商qから右端N/qを逆算して添字をまとめて進める。</p>
+<h3 id="条件の二変数化">条件の二変数化</h3>
+<p>発動条件: remainder cがa,bから一意に決まり、distinct条件も大小へ簡約できるとき。</p>
+<p>tupleを(a,b)へ射影し、c&gt;0を非倍数条件として数える。</p>
+<h3 id="等差数列和">等差数列和</h3>
+<p>発動条件: 各bに対する全候補a数が線形に変化するとき。</p>
+<p>Σ(N-b+1)をN(N+1)/2へ閉形式化する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>pairwise distinctは個別除外を数える必要がなく、正のremainderならc&lt;b&lt;aというstrict chainに自動変換される。</p>
+<p>別の問題へ持ち帰る視点: 剰余tupleでは商・余りの基本不等式からdistinct条件が冗長になる領域を先に切り分ける。</p>
+<h2 id="正当性">正当性</h2>
+<p>相異なる正a,b,cのa mod b=cはb&lt;aと非倍数条件に等しく、cは自動的に0&lt;c&lt;b&lt;aで一意。bごとの候補N−bから倍数floor(N/b)−1を除いた和はN(N+1)/2−Σfloor(N/b)。同商区間[l,N/q]の一括加算は全bを一度覆うので、その差がexact個数になる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>N(N+1)は64 bitを超えるので128 bitまたはmod上のinv2を使う。r=N/qを整数除算し、減算結果を法の非負範囲へ戻す。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>N=3..20を全(a,b,c)列挙し、b=1とb=Nの寄与0、完全平方数付近の商区間境界を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(√N)。floor(N/b)の同商区間をまとめる。</p>
+<h3 id="空間">空間</h3>
+<p>O(1)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^{12}; N is an integer.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=4。</p>
+<ol>
+<li>成立tupleは(3,2,1),(4,3,1)。</li>
+<li>式は4·5/2−(4+2+1+1)=2。</li>
+</ol>
+<p>期待される結果: 2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>b=aのcaseを残すと。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>余り0となり正のc条件に反する。b固定の候補数はN−bでa&gt;bだけ。</p>
+<p>確認結果: b=aは除く。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc414/tasks/abc414_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-e-problem-400f0f5a756e09ebb4432cb50e469a67995ec6b0e14ffa8478b397a8336277d7</li>
+<li><a href="https://atcoder.jp/contests/abc414/editorial/13450">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc414-editorial-13450-d136759d73f4ca99697d477bf5234f4941176a74dc16534f312ecb3b38ebb37a</li>
+</ul></main>
+</body></html>

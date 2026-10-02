@@ -1,0 +1,221 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-grid-table-dp-shard-001",
+  "packets": [
+    {
+      "problemId": "abc311-e",
+      "learningOutcomeIds": [
+        "outcome-design-grid-table-dp",
+        "outcome-design-minimal-sufficient-state"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"
+      ],
+      "tagIds": [
+        "tag-dp-state-equivalence",
+        "tag-grid-table-dp"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W \\leq 3000; 0 \\leq N \\leq \\min(H \\times W, 10^5); 1 \\leq a_i \\leq H; 1 \\leq b_i \\leq W; All (a_i, b_i) are pairwise different.; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "右下(i,j)の最大正方形は、穴なら0、空きなら上・左・左上最大長の最小+1。必要十分の領域包含でこの式が成立する。最大長kなら同じ右下の辺長1..kが全て存在し、各正方形は右下一意なのでkを足すと全個数。",
+          "sourceRevisionIds": [
+            "source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648",
+            "source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648",
+          "path": "src/content/sources/abc264-abc315/source-abc311-e-problem-e2dd52d35efd358a56006786026e087a80d57d7140105f6bf69af3bc50484648.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc311_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345",
+          "path": "src/content/sources/abc264-abc315/source-abc311-editorial-6819-e2eeec07acc12c8271d8945a98440cd4d9722e3a541be0e1dfd41afbf103f345.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc311_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc415-e",
+      "learningOutcomeIds": [
+        "outcome-design-grid-table-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"
+      ],
+      "tagIds": [
+        "tag-grid-table-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: H,W\\geq 1; H\\times W \\leq 2\\times 10^5; 1\\leq A_{i,j}\\leq 10^9; 1\\leq P_k\\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dpはそのマスへ入る前に必要な最小所持金。後続へ必要額はdown/rightの小さい方で、その額から現在純増Bを引く。所持金非負条件を加えてmax(0,need−B)。どの額もこの最小以上なら同じ将来pathが可能なので局所最小が十分。",
+          "sourceRevisionIds": [
+            "source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b",
+            "source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b",
+          "path": "src/content/sources/abc368-abc419/source-abc415-e-problem-ac9fbcfc3aebee7e6adfdf8886e99b63ddbf454c4b9282d59d31a939f224b19b.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc415_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc",
+          "path": "src/content/sources/abc368-abc419/source-abc415-editorial-13490-96982ae40cca5adfa7bb395c36335f4a42ef94bb25174d65daa86aec96c0dbcc.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc415_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc443-e",
+      "learningOutcomeIds": [
+        "outcome-design-grid-table-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "一次元の初歩的なDP、部分集合・資源DP、および区間の分割点を列挙する区間DP。"
+      ],
+      "tagIds": [
+        "tag-grid-table-dp"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: T,N,C are integers.; 1 \\le T \\le 50000; 2 \\le N \\le 3000; 1 \\le C \\le N; S_i is a string of length N consisting of . and #.; The C-th character of S_N is ..; For each input, the sum of N^2 does not exceed 9 \\times 10^6."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "壁を破壊する初回にはその列の全下方壁が既に壊れていなければならない。初めて壊せるのは元の最下壁だけである。その最下壁へ到達できたなら、同列を真上へ進み続けて全上方壁を順に壊す具体的なpathが存在するため、その列の上側は全て到達可能と確定してよい。最下壁より上へ別pathから入ったように見えても、下方壁を全て壊したpathは最下壁を通っているのでこの確定で網羅される。空きセルの三近傍伝播とこの列確定は全合法pathの必要十分な帰納更新。",
+          "sourceRevisionIds": [
+            "source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e",
+            "source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e",
+          "path": "src/content/sources/abc420-abc466/source-abc443-e-problem-b3960baa2caed86517a7483a19f035a7fa43860f29b9e6cf12ef1c1fb58bc67e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc443_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272",
+          "path": "src/content/sources/abc420-abc466/source-abc443-editorial-15178-902141be8f54ae13638e470cf9689e927602d2ef4019499fd15c4344db210272.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc443_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

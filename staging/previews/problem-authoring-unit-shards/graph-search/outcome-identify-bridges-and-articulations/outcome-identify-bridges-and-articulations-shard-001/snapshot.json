@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-identify-bridges-and-articulations-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d17b60717fd70e3b64c7ca085e693819979a9cdfdf057ca9de728aef8291cac3",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "8ae7778a9d13288784ff5c39c71037fe6defa0fb17f86946ff7e7adb2cc188dd",
+  "reviewDigest": "32a2eeac2f62a643e09526f6f560ff07766d3bfb1de7b9b95315ed459c9c089d",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc301-ex.html",
+      "digest": "63e290d42b56b2ee98b75d01485dde0711d4cac6806c45287bcfeb3213b0c30c"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc334-g.html",
+      "digest": "93ca95ebbc4e11faec13257d32ebc2489f73f6535c697e6af72b9dda6f0d11a4"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/abc375-g.html",
+      "digest": "9da355294f1aa6ce2cea1d73eaf9dde4e47d8f8dc8faaf0d096a3cd27c7a8881"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-identify-bridges-and-articulations/outcome-identify-bridges-and-articulations-shard-001/index.html",
+      "digest": "a7ba87e92e3a339a201aa7249d5ec42a2cf9cb1973a403b09e86ea53bae4dbf5"
+    }
+  ],
+  "snapshotDigest": "f6f8dcf4b202609dab4ca66e453627df78fdffb98b7129a49783214f19810d85"
+}

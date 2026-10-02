@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC435-E — Cover query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC435-E — Cover query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/ordered-interval-partition.md">端点更新型のrun分割管理</a></p>
+<ul>
+<li>互いに素な同値区間を左端順setで持ち、境界split・局所merge・range eraseでrun構造を動的管理する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/amortized-monotone-progress.md">単調進行による償却解析</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/ordered-set-multiset.md">ordered set・multisetの動的順序管理</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>端点更新型のrun分割管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>白マス集合は互いに素な極大区間の順序付き集合として持てる。黒くする [L,R] と交差する区間だけを削除し、左右にはみ出した部分を高々二つ戻せばよい。</p>
+<p>採用する候補: 白い極大区間を始点順の ordered set で管理し、[L,R] と交差する連続した区間だけ列挙・分割する。</p>
+<p>各クエリの境界処理は定数個、完全削除区間は全体で O(Q) 個なので O(Q log Q) に償却できる。</p>
+<p>棄却する候補: 長さ N の配列で各マスの色を持ち、クエリ区間を全走査する。</p>
+<p>N や区間長が大きく、同じ黒マスを何度も処理して O(NQ) になり得る。</p>
+<p>交差区間は順序付き集合中で連続し、最初は r≥L となる区間を lower_bound で見つければよい。</p>
+<p>一回の削除で区間数が増えるのは一つの区間が左右へ割れる場合だけで増分 1。したがって完全に消される区間の総数も初期数+全増分に抑えられる。</p>
+<p>set に [1,N] を入れ白マス総数 total=N とする。各 [L,R] で r≥L の最初の区間から l≤R の間だけ erase し、交差長を total から引く。l&lt;L なら [l,L-1]、R&lt;r なら [R+1,r] を insert し、total を出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="互いに素な区間の-ordered-set">互いに素な区間の ordered set</h3>
+<p>発動条件: 単調に削除される一次元集合へ範囲削除を行い、残存長を求めるとき。</p>
+<p>白い連続成分だけを保持し、交差成分の split/erase に限定する。</p>
+<h3 id="削除の償却解析">削除の償却解析</h3>
+<p>発動条件: 一回の更新で多数の区間を消すが、新しい区間の生成数が定数のとき。</p>
+<p>各消滅区間を過去の初期・生成イベントへ課金して総反復数を O(Q) にする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>単調な塗りつぶしでは既に消えた点を再訪せず、現在の連続成分単位で処理するのが本質である。</p>
+<p>別の問題へ持ち帰る視点: 範囲更新で大量 erase が起きても、split による要素増加が小さければ ordered set 走査を償却できる。</p>
+<h2 id="正当性">正当性</h2>
+<p>交差区間は順序付き集合中で連続し、最初は r≥L となる区間を lower_bound で見つければよい。 一回の削除で区間数が増えるのは一つの区間が左右へ割れる場合だけで増分 1。したがって完全に消される区間の総数も初期数+全増分に抑えられる。 各クエリの境界処理は定数個、完全削除区間は全体で O(Q) 個なので O(Q log Q) に償却できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>探索 key が始点基準なら L を含み得る直前区間も確認する。erase 中の iterator 更新、左右残片の空区間除外、total の差分を正確に行う。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>[L,R] と交差する最初の区間を取り逃さず、各交差長を一度だけ total から引いているかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>全Q質問で償却O(Q log Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(Q)、白極大区間。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 10^9; 1\leq Q\leq 2\times 10^5; 1\leq L_i\leq R_i\leq N; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=7、[3,5]、次に[2,6]を黒くする。</p>
+<ol>
+<li>初回の白区間は[1,2],[6,7]で4マス。</li>
+<li>次回は交差する2,6だけ追加で黒くなる。</li>
+</ol>
+<p>期待される結果: 白数は4,2。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>既に黒い[3,5]を再び黒くすると何を引くか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>交差する白区間がないので0を引く。区間長3を無条件に引いてはいけない。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc435/tasks/abc435_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc435-e-problem-5227c9034b5752c55f7b3016adf5e19e52c5bdec91124387880c04a2700827b5</li>
+<li><a href="https://atcoder.jp/contests/abc435/editorial/14733">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc435-editorial-14733-0e61d37e3106540e780b0121efa0e3e48e9aa8db6e9351b0421ca9ff3fd6bc2b</li>
+</ul></main>
+</body></html>

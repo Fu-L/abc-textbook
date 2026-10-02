@@ -1,0 +1,62 @@
+{
+  "shardId": "outcome-represent-integers-as-two-squares-shard-001",
+  "primaryOutcomeId": "outcome-represent-integers-as-two-squares",
+  "domain": "mathematics",
+  "taskId": "T069",
+  "problemIds": [
+    "abc444-g"
+  ],
+  "homeUnitId": "unit-gaussian-integers-two-squares",
+  "prerequisiteOutcomeIds": [
+    "outcome-decompose-by-prime-or-divisor"
+  ],
+  "dependencyShardIds": [
+    "outcome-decompose-by-prime-or-divisor-shard-001",
+    "outcome-decompose-by-prime-or-divisor-shard-002"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/abc444-g.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "third_party",
+    "riskReasons": [
+      "official_source_conflict"
+    ]
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "586069f05532769d416ae90a0e2998226753a5c3a9101dd2e48ef5da935c1a6a",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc444-g",
+      "path": "src/content/docs/problems/mathematics/outcome-represent-integers-as-two-squares/outcome-represent-integers-as-two-squares-shard-001/abc444-g.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

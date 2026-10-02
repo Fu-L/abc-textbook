@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC283-F — Permutation Distance</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC283-F — Permutation Distance</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></p>
+<ul>
+<li>値・時刻・座標順にeventを並べ、同値eventの処理順とactive集合の増分更新を設計できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/geometry-optimization/geometry-primitives.md">幾何の基本判定と座標変換</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-monoid-aggregation.md">区間monoid要約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>更新を単に逆順へ読む処理、答えの局所寄与だけを集計する順序交換、sort-uniqueしたkeyの添字化、および固定方向の単純scan。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>(i,P_i)を平面上のpointと見ると、D_iは他pointへのManhattan distance最小値で、絶対値はindex左右×value上下の4quadrantに分けられる。</p>
+<p>各quadrantでは式が±i±P_iと、条件付きの過去/未来pointのmaxまたはminへ分離する。</p>
+<p>採用する候補: indexを左右からsweepし、Pをkeyとするsegment treeでP_j±jのrange max/minをqueryして4quadrantの候補を更新する。</p>
+<p>全pair比較を、各pointあたり定数回のvalue range queryへ変えられる。</p>
+<p>棄却する候補: 各i,jのManhattan distanceを計算して最小を取る。</p>
+<p>N≤2×10^5に対してN² pairは多すぎる。</p>
+<p>j&lt;i,P_j&lt;P_iではdistance=P_i+i-(P_j+j)なので、P_j&lt;P_i上のP_j+j最大値だけが必要である。</p>
+<p>他の3caseもP_j-jのmax/minや反対向きsweepへ変わるだけで、座標反転・値反転を使えば同じhelperを再利用できる。</p>
+<p>左→右sweepでvalue range [1,P_i)と(P_i,N]から対応するP_j+j/P_j-j extremumをqueryしD_iを更新後、P_i位置へ値を登録する。右→左でも対称な2caseを処理し、4候補のminを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="manhattan-distanceのquadrant分解">Manhattan distanceのquadrant分解</h3>
+<p>発動条件: 点集合で|x-x’|+|y-y’|のnearest/farthestを条件付きに処理するとき。</p>
+<p>符号4通りへ絶対値を外し、linear formのextremum queryにする。</p>
+<h3 id="sweep-linevalue-segment-tree">sweep line＋value segment tree</h3>
+<p>発動条件: 片方の座標の大小を走査順で固定し、もう片方の範囲条件付きextremumが必要なとき。</p>
+<p>index順にpointを追加し、P区間のmax/minを取得する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>Pがpermutationなのでvalueをそのまま1…Nのsegment tree indexにでき、同値処理や座標圧縮が不要である。</p>
+<p>別の問題へ持ち帰る視点: 一方座標がpermutationなら、2D dominance queryの残り軸を直接dense indexとして使う。</p>
+<h2 id="正当性">正当性</h2>
+<p>j&lt;i,P_j&lt;P_iではdistance=P_i+i-(P_j+j)なので、P_j&lt;P_i上のP_j+j最大値だけが必要である。 他の3caseもP_j-jのmax/minや反対向きsweepへ変わるだけで、座標反転・値反転を使えば同じhelperを再利用できる。 全pair比較を、各pointあたり定数回のvalue range queryへ変えられる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>j≠iを保証するためqueryしてから現在pointをupdateし、空rangeはINF/−INFとして候補に使わない。</li>
+<li>4caseの符号を個別に書く場合はA_i=P_i+i,B_i=P_i-iのどちらをmax/minするか照合する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>1つのiについて他pointを4quadrantに分け、各distance式からqueryすべきlinear formとmax/minを手で導く。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(N log N)、四象限sweepと値域extremum。</p>
+<h3 id="空間">空間</h3>
+<p>O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2\times10^5; 1 \leq P _ i \leq N\ (1\leq i\leq N); i\neq j\implies P _ i\neq P _ j; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>P=(3,1,2)。</p>
+<ol>
+<li>位置1への距離は位置2がabs(3−1)+1=3、位置3がabs(3−2)+2=3。</li>
+<li>位置2,3の互いの距離は2。</li>
+</ol>
+<p>期待される結果: D=(3,2,2)。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>現在位置をquery前に登録すると何が起きるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>自分自身の距離0を拾い誤る。query後に登録してj≠iを保つ。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc283/editorial/5429">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc283-editorial-5429-265733246d92900746fb904ca503345a78237200e139aec78840cf3ccc46297a</li>
+<li><a href="https://atcoder.jp/contests/abc283/tasks/abc283_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc283-f-problem-ddedbccc58b75b633702cef20a7efe1e20c558840ee7a6a098a9930490417307</li>
+</ul></main>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC269-EX — Antichain</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC269-EX — Antichain</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/tree/heavy-path-tree-dp.md">heavy path上の多項式木DP</a></p>
+<ul>
+<li>heavy child上の漸化式をまとめ、light subtreeのsize総和を利用して木DPの多項式合成を高速化する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/generating-functions.md">組合せを生成関数へ符号化する</a></li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md">NTT・FFTで畳み込みと相互相関を求める</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/recursive-divide-and-conquer.md">再帰分割・分割統治</a></li>
+<li><a href="../../../../../../src/content/docs/learn/tree/rooted-tree-aggregation.md">根付き木DP・部分木集約</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>heavy path上の多項式木DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>subtree vのantichain generating functionをempty set込みでf_v(x)とすると、vを選ぶ場合はxだけ、選ばない場合は各childから独立に選べるため f_v=x+∏f_child となる。 このtree DPを素朴なpolynomial convolutionで行うと、細長い木やcentipede型で総次数処理が二乗に達する。 heavy path上でg_iをlight childrenのfの積と置くと f_i=x+g_i f_{i+1} となり、path先頭のfはprefix productsの和としてまとめて計算できる。 light edgeを子側へ渡るたびsubtree sizeは半分以下なので、light-rooted subproblemのサイズ総和には対数回分しか課金されない。</p>
+<p>棄却する候補: 各頂点で子のpolynomialを順に畳み込み、f_vを明示的に構築する。</p>
+<p>部分木サイズに比例する配列を多数の祖先で作り直し、最悪Θ(N^2)となる。</p>
+<p>採用する候補: 最大subtreeのchildをheavyとし、各heavy pathではlight-child積g_iを使う一次元漸化式をdivide-and-conquer polynomial productsで評価する。</p>
+<p>light edgeを跨ぐ部分木サイズ総和がO(N log N)で、NTTによる積とpath評価を全体O(N log^3 N)に抑えられる。</p>
+<p>heavy path上でg_iをlight childrenのfの積と置くと f_i=x+g_i f_{i+1} となり、path先頭のfはprefix productsの和としてまとめて計算できる。</p>
+<p>light edgeを子側へ渡るたびsubtree sizeは半分以下なので、light-rooted subproblemのサイズ総和には対数回分しか課金されない。</p>
+<p>antichainのtree generating-function DPをheavy pathsへ分解し、path recurrenceをNTT付きdivide and conquer、light subtreesをsize-aware mergingで合成する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="木dpの母関数化">木DPの母関数化</h3>
+<p>発動条件: subtreeごとの選び方が子間で独立に直積され、選択個数別の全答えが必要なとき。</p>
+<p>係数[x^K]をK頂点のantichain数とするpolynomialを持ち、子の独立選択を積で表す。</p>
+<h3 id="heavy-path分解によるdp高速化">heavy-path分解によるDP高速化</h3>
+<p>発動条件: tree DPの大きな状態を最大childへ再利用し、それ以外のsubtree処理だけを対数回に償却できるとき。</p>
+<p>heavy childのpath representationをmoveし、light childrenの結果だけをpolynomialとしてmergeする。</p>
+<h3 id="nttと分割統治積">NTTと分割統治積</h3>
+<p>発動条件: 多数のpolynomial積やprefix-product weighted sumを次数準線形で求める必要があるとき。</p>
+<p>heavy pathのg列とlight-child polynomialsをproduct treeで畳み込む。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>path X_1,…,X_mについて f_{X_1}=x+xg_1+xg_1g_2+⋯+g_1…g_m と展開できる。</p>
+<p>別の問題へ持ち帰る視点: 長いchain上のaffine recurrenceは、係数の区間積とweighted sumを組にしてdivide and conquerで合成する。</p>
+<h2 id="正当性">正当性</h2>
+<p>v選択時は子孫を選べず寄与x、非選択時は子のantichain独立選択で積なのでf_v=x+∏f_child。heavy子h以外の積g_vを作るとf_v=x+g_v f_hとなりaffine合成でpath全体をまとめられる。分割統治合成は元漸化式そのものなので答えは変わらず、empty定数1を含めた根係数が各サイズ数。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>fはempty setのconstant term 1を含め、出力時だけK=1,…,Nの係数を取り出す。</li>
+<li>polynomial degreeをsubtree sizeまでに切り、heavy childのvectorはcopyせずmoveして二乗memory trafficを避ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>tree polynomial DPが二乗になるときは、最大childに沿うchainだけを残してlight subproblemsへ計算量を課金する。</li>
+<li>chain recurrenceは各頂点を逐次展開せず、区間を表す積と和が結合的にmergeできるかを見る。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点。NTT convolutionと次数balanced積、heavy/light償却で O(N log³N)。</p>
+<h3 id="空間">空間</h3>
+<p>子多項式を併合後に解放しpath計算も逐次解放する場合 O(N log N) の安全な上界。全祖先の係数を保存すると最悪O(N²)になる。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq P_i \lt i; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>根1、子2,3。</p>
+<ol>
+<li>葉f2=f3=1+x。</li>
+<li>f1=x+(1+x)²=1+3x+x²。</li>
+<li>非空係数を読む。</li>
+</ol>
+<p>期待される結果: K1:3、K2:1、K3:0</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>path木で素朴多項式を全祖先へcopyすると。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>各配列次数が大きくなるため総copyが二乗。heavy path表現をmoveし一括合成する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc269/editorial/4838">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524</li>
+<li><a href="https://atcoder.jp/contests/abc269/tasks/abc269_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8</li>
+</ul></main>
+</body></html>

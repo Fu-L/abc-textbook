@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-detect-crossing-by-cyclic-order-shard-001",
+  "packets": [
+    {
+      "problemId": "abc338-e",
+      "learningOutcomeIds": [
+        "outcome-detect-crossing-by-cyclic-order"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-geometry-primitives"
+      ],
+      "excludedTopics": [
+        "円環順序・chord交差の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-cyclic-order-crossing"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\leq N \\leq 2\\times 10^5; 1\\leq A_i,B_i \\leq 2N; A_1,\\dots,A_N,B_1,\\dots,B_N are all distinct; All input values are integers"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "二chordが交差する必要十分は円周端点順が交互になること。開いた区間がnested/disjointなら右端は最新左端のchordを閉じるのでstackが一致する。右端でtop不一致なら先に開いたchordの内側で別chordが開いたまま外へ続く交互順を具体的に得る。従って一度でも不一致が交差、最後まで一致なら非交差。",
+          "sourceRevisionIds": [
+            "source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0",
+            "source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0",
+          "path": "src/content/sources/abc316-abc367/source-abc338-e-problem-9dd60d4e5c4ed7772cd791c12f8b48bef91c588ae829b02c763fbe3f7f9e8bc0.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc338_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102",
+          "path": "src/content/sources/abc316-abc367/source-abc338-editorial-9172-411422b4ddb0a7b0369c40a609943ac7f77967ee10923f39ad7fd7f30c5c8102.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc338_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

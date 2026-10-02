@@ -1,0 +1,156 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
+  "packets": [
+    {
+      "problemId": "abc420-f",
+      "learningOutcomeIds": [
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-monotone-stack-queue",
+        "unit-prefix-aggregate"
+      ],
+      "excludedTopics": [
+        "最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"
+      ],
+      "tagIds": [
+        "tag-cartesian-tree",
+        "tag-monotone-stack-queue",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N, M, and K are integers.; 1 \\le N,M \\le 5 \\times 10^5; 1 \\le N \\times M \\le 5 \\times 10^6; 1 \\le K \\le N \\times M; S_i is a string of length M consisting of . and #."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "a≤bとすればg(w)=w (1≤w≤a)、a (a<w≤b)、a+b-w (b<w≤a+b-1)。したがって各部分はαw+βで表せる。 q_w=floor(K/w)とwq_w=w floor(K/w)のprefixを用意すれば、threshold d=floor(K/h_i)でsplitしたΣg(w)min(h_i,q_w)を、各一次区間につき定数個のprefix差で求められる。 g(w)は三つの一次関数区間。min(h_i,floor(K/w))はw≤floor(K/h_i)でh_i、それ以降floor(K/w)なので、Σq_wとΣwq_wの前計算で各iを定数時間処理できる。",
+          "sourceRevisionIds": [
+            "source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7",
+            "source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7",
+          "path": "src/content/sources/abc420-abc466/source-abc420-editorial-13741-3707893785f657ea0534c3a14747e11b63e4f398d30f858a61cc0ee929c15fa7.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc420_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95",
+          "path": "src/content/sources/abc420-abc466/source-abc420-f-problem-e5255d1e68596a19e9632578192125b612d2b28436ace623ca5a7f368018ff95.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc420_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc435-f",
+      "learningOutcomeIds": [
+        "outcome-build-cartesian-tree-decomposition"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design",
+        "unit-monotone-stack-queue",
+        "unit-rooted-tree-aggregation"
+      ],
+      "excludedTopics": [
+        "最近傍の大小関係だけを答える単調stack、および木を構成せず冪等演算へ答えるRMQ。"
+      ],
+      "tagIds": [
+        "tag-cartesian-tree",
+        "tag-dp-state-equivalence",
+        "tag-monotone-stack-queue",
+        "tag-rooted-tree-aggregation"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N\\leq 2\\times 10^5; (P_1,P_2,\\ldots, P_N) is a permutation of (1,2,\\ldots,N).; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "[L_i,R_i] は左右で最初に現れる P_i より高い塔の内側であり、その左右部分の最大値位置 M_i^L,M_i^R が次に考えるべき代表である。 i から同じ側の任意 j へ有利に遷移できるなら、まずその側の最大塔 M を状態としても j へ到達可能で、dp[M]+|i-M| が候補を支配する。 各 i と左右部分の最大位置を結んだグラフは P の最大 Cartesian Tree になる。 一般の到達先は同じ側の最大塔を経由しても到達できるため、二候補へ縮約され、木構築・DP とも O(N) になる。",
+          "sourceRevisionIds": [
+            "source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217",
+            "source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217",
+          "path": "src/content/sources/abc420-abc466/source-abc435-editorial-14734-748bcd62111bf26fa2011c48bc5c9e5f3b2df660f399daac2f1a2621d929d217.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc435_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677",
+          "path": "src/content/sources/abc420-abc466/source-abc435-f-problem-006358a955d8f296aa608caa7b4b164b837f65d3a106a9e701e67194d3574677.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc435_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

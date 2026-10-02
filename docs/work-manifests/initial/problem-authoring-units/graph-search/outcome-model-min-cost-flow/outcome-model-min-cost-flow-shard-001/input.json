@@ -1,0 +1,442 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-model-min-cost-flow-shard-001",
+  "packets": [
+    {
+      "problemId": "abc214-h",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow",
+        "outcome-condense-and-order-directed-graph"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-min-cost-flow",
+        "tag-scc-condensation"
+      ],
+      "constraints": [
+        "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; 1 \\leq K \\leq 10; 1 \\leq A_i, B_i \\leq N; A_i \\neq B_i; A_i \\neq A_j or B_i \\neq B_j, if i \\neq j.; 1 \\leq X_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "SCC内は任意点へ戻れるので一度入れば全報酬を回収し縮約可能。DAGの一人経路が一単位flowに対応し頂点splitの報酬辺capacity1で全人を通して報酬を一度だけ得る。無報酬平行辺で再通過は可能。再重み付けは全source–sink flowへ同定数を加えるだけなので最適を変えない。",
+          "sourceRevisionIds": [
+            "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+            "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418",
+          "path": "src/content/sources/abc212-abc263/source-abc214-editorial-2441-461a7a0ecf3623a4c3930aa6115ae0e0085418e7a1a22e6b3d76980e46d99418.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc214_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e",
+          "path": "src/content/sources/abc212-abc263/source-abc214-h-problem-30de4d02cd6fe40dd4d97c88747f89d283e9e0de105422d6fb18d0bdd684c24e.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc214_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc224-h",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-min-cost-flow"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \\le L,R \\le 100; 1 \\le A_i,B_i \\le 10; 0 \\le C_{i,j} \\le 100"
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "元camera LPの各下限へ非負双対係数kを掛けると報酬ΣCkを得る下界。行和≤A、列和≤Bが二部flow容量になり、元/双対の整数性と強双対で最大flow報酬が元camera最小費用に等しい。任意送流量を許し負利益のaugmentationは採らない。",
+          "sourceRevisionIds": [
+            "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+            "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f",
+          "path": "src/content/sources/abc212-abc263/source-abc224-editorial-2812-a963e4de418ac85ab207eb1bf6e27d89df99910c5a60715e73a3e1328ee2127f.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc224_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59",
+          "path": "src/content/sources/abc212-abc263/source-abc224-h-problem-903a884b4f5f0da73fb92d1839d4c147b319f2e7dbd7febaaba82a38c349fa59.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc224_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc231-h",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-min-cost-flow"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H,W \\leq 10^3; 1 \\leq N \\leq 10^3; 1 \\leq A_i \\leq H; 1 \\leq B_i \\leq W; 1 \\leq C_i \\leq 10^9; All pairs (A_i,B_i) are distinct.; There is at least one white piece in every row and every column.; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "全頂点の最安辺費用sumを基準に、両端を一本で共有して覆う辺の差分はw−min_u−min_v。共有辺は重複端点をなくしても最安補完で悪化しないためmatchingへ正規化できる。任意濃度の最小差分matchingを足すと全辺cover最小を得る。shift後費用はkBIGを引いて比較する。",
+          "sourceRevisionIds": [
+            "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
+            "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948",
+          "path": "src/content/sources/abc212-abc263/source-abc231-editorial-3060-dbef394c0980a57c2674c27645e1d1d98f3c5367f8da315fbf04ba22bf450948.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc231_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf",
+          "path": "src/content/sources/abc212-abc263/source-abc231-h-problem-b7f4c99f6cc5b222f9af3d5af4695b2d525c0f188af41616f45bd49c5bf90baf.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc231_h",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc247-g",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-min-cost-flow"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3\\times 10^4; 1 \\leq A_i,B_i \\leq 150; 1 \\leq C_i \\leq 10^9; All values in input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "人を大学–分野辺とすると二側容量1が双方重複禁止を表す。flow量kの費用はkBIG−power総和なので同kで費用最小はpower最大。残余逆辺が以前のmatchingを組み替えられるため逐次augmentで各kの最適を得る。",
+          "sourceRevisionIds": [
+            "source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd",
+            "source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd",
+          "path": "src/content/sources/abc212-abc263/source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc247_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3",
+          "path": "src/content/sources/abc212-abc263/source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc247_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc407-g",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-min-cost-flow"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq H; 1\\leq W; HW\\leq2000; -10 ^ {12}\\leq A _ {i,j}\\leq10 ^ {12}\\ (1\\leq i\\leq H,1\\leq j\\leq W); All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "dominoは隣接二セルmatchingでvertex容量1が重なり禁止。残る値総和はtotal−matching edge和なので任意matching濃度で辺和を最小にすればよい。shift CはkCだけ費用へ加えるため各flow kから引いて比較すると元目的を厳密に復元する。",
+          "sourceRevisionIds": [
+            "source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c",
+            "source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c",
+          "path": "src/content/sources/abc368-abc419/source-abc407-editorial-13077-aa159cb15d934434d2eb3d4052fd10a9ca9a1133ac28ae724d49dbba8febe61c.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc407_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a",
+          "path": "src/content/sources/abc368-abc419/source-abc407-g-problem-10a1a22ae39383d2e2d15bccdb44c7a07f690a43c5906a252f6ec3e44d774d6a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc407_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    },
+    {
+      "problemId": "abc421-g",
+      "learningOutcomeIds": [
+        "outcome-model-min-cost-flow"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-max-flow-min-cut",
+        "unit-prefix-aggregate",
+        "unit-weighted-shortest-path"
+      ],
+      "excludedTopics": [
+        "最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-min-cost-flow",
+        "tag-prefix-difference"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\leq N \\leq 300; 1\\leq M \\leq 300; 1\\leq A_i \\leq 300; 1\\leq L_i\\leq R_i\\leq N; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "区間加算は差分box RからL−1へ一unitを動かす。内部負差分の不足を満たすflowがちょうど非減少化で、cost1のrange辺の流量和は操作回数。box Nの無限供給と正差分供給は末尾増加/余剰を許し、flow分解で操作multisetへ戻せる。",
+          "sourceRevisionIds": [
+            "source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd",
+            "source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd",
+          "path": "src/content/sources/abc420-abc466/source-abc421-editorial-13788-9378fdf51169821035f0f4852e984a6dfc0129a0dce8fb7debd76b012f3f72bd.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc421_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc",
+          "path": "src/content/sources/abc420-abc466/source-abc421-g-problem-34988055034f78b45b4b8a02d98691ec1afb35581e43a205d2468d6432d937bc.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc421_g",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

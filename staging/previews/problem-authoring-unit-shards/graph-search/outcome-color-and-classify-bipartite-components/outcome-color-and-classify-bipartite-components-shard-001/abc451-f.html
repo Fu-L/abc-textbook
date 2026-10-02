@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC451-F — Make Bipartite 3</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC451-F — Make Bipartite 3</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/bipartite-structure.md">二部彩色と成分構造を扱う</a></p>
+<ul>
+<li>各連結成分を二色に塗って矛盾を検出し、二つの部の大きさと色反転の自由度を成分ごとに集約できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/dsu-components.md">DSUによる連結成分管理・縮約</a></li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/small-to-large.md">small-to-large・DSU on Tree</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>重み付き最短路、一般の彩色問題、および容量付きmatching・min-cutの最適化。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>二部な連結成分の彩色は全頂点の白黒反転を除いて一意なので、黒頂点数の最小寄与はmin(c_0,c_1)である。全体の答えは成分寄与の和で、辺追加時に変わるのは端点を含む成分だけである。 端点が同じ成分なら、異色の場合は既存彩色を保てるが、同色の場合は奇閉路が生じて以後の辺追加でも二部性は戻らない。別成分なら同色のとき片側全体を反転してから併合すればよい。 頂点数が小さい成分を走査して大きい成分へ移すと、走査された頂点の所属成分サイズは少なくとも2倍になる。各頂点は高々log₂N回しか走査されず、全反転・移動を合計O(N log N)にできる。</p>
+<p>採用する候補: DSUと明示的な二色頂点集合を持ち、小さい成分だけを必要なら反転して併合する</p>
+<p>同一成分なら端点色だけで奇cycleを判定でき、別成分なら一方の彩色反転で必ず接続できる。小さい側だけを走査すれば各頂点の移動回数をO(log N)へ償却できる。</p>
+<p>棄却する候補: 各辺追加後にグラフ全体をBFSして二部彩色し直す</p>
+<p>一回O(N+Q)、全queryでは二次規模となり、過去に確定した成分彩色を再利用できていない。</p>
+<p>棄却する候補: 成分併合のたびに任意の側を全反転・全移動する</p>
+<p>同じ大成分を繰り返し走査する入力でΘ(N²)になり、端点を逆色にする局所条件は満たしても全体計算量を保証できない。</p>
+<p>端点が同じ成分なら、異色の場合は既存彩色を保てるが、同色の場合は奇閉路が生じて以後の辺追加でも二部性は戻らない。別成分なら同色のとき片側全体を反転してから併合すればよい。</p>
+<p>頂点数が小さい成分を走査して大きい成分へ移すと、走査された頂点の所属成分サイズは少なくとも2倍になる。各頂点は高々log₂N回しか走査されず、全反転・移動を合計O(N log N)にできる。</p>
+<p>各DSU成分に色0・1の頂点数とmember一覧を持ち、globalAns=Σmin(c_0,c_1)を管理する。別成分を結ぶときは両寄与を引き、小さい成分の端点色が大側端点と同じなら全memberの色を反転し、memberを大側へ移してDSUを併合し、新寄与を足す。同一成分の同色辺を見つけたら以後-1を出す。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="二部彩色の成分反転">二部彩色の成分反転</h3>
+<p>発動条件: 連結成分ごとの二色制約があり、成分間を新しい不同色辺で接続する。</p>
+<p>端点色が同じ場合だけ片方の成分を全反転し、色数を入れ替えて整合させる。</p>
+<h3 id="dsuとsmall-to-large-merge">DSUとsmall-to-large merge</h3>
+<p>発動条件: 連結成分をオンライン併合しつつ、成員ごとの状態更新が避けられない。</p>
+<p>DSUで同一成分を判定し、member一覧は小さい成分から大きい成分へだけ移す。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>求めるのは一つの固定彩色の黒数ではなく、各成分を独立に反転できる自由度を使ったΣmin(c_0,c_1)であり、merge前後の二成分だけ差分更新できる。</p>
+<p>別の問題へ持ち帰る視点: 制約充足解が成分ごとの対称操作を持つときは、その軌道内の最小コストを成分寄与にして、構造変更時の局所差分として管理する。</p>
+<h2 id="正当性">正当性</h2>
+<p>二部成分彩色は全反転以外一意で最小黒数min(c0,c1)。別成分は必要なら一方全反転して接続し、同成分同色辺だけが矛盾を作る。寄与の引き算併合足し算は全体最小黒数を保つ。小側移動はサイズ倍増で各頂点log N回。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>merge前に両成分のmin寄与を引き、反転時はsmall側全頂点の色と色数を一貫して入れ替える。DSUのleader選択とmember容器の所有者を同期し、非二部化後は状態更新を省略して-1を出し続ける。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>小グラフで全2^N彩色を試すoracleと比較し、孤立点、異色辺の成分内追加、三角形で初めて非二部化する瞬間、同サイズ成分の反転merge、色数が大きく偏る星・鎖を確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N頂点Q追加。small-to-large移動O(N log N)、DSU O(Qα(N))。</p>
+<h3 id="空間">空間</h3>
+<p>member、色、黒白countで O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \le N \le 2 \times 10^5; 1 \le Q \le 2 \times 10^5; 1 \le u_i \lt v_i \le N; (u_i, v_i) \ne (u_j, v_j) \ (i \ne j); All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=3、追加1–2,2–3,3–1。</p>
+<ol>
+<li>最初成分(1,1)で最小1。</li>
+<li>道は(2,1)で最小1。</li>
+<li>3–1は同色端点を結び奇cycle。</li>
+</ol>
+<p>期待される結果: 1,1,−1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>矛盾後に追加辺で二部性が回復するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>回復しない。既存奇cycleが残るため以後も−1。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc451/editorial/18091">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc451-editorial-18091-ee0e42ed4ad9b07800e171e23a7943b9727d1666e268304fbe47d241fe0b351a</li>
+<li><a href="https://atcoder.jp/contests/abc451/tasks/abc451_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc451-f-problem-1795336b8ffdf013868cbc1740d0a0261d6fb20324849793e539548d9821aeb5</li>
+</ul></main>
+</body></html>

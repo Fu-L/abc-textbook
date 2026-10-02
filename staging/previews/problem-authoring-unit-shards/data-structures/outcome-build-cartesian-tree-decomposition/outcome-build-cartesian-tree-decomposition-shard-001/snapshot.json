@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "10d0b49817077dbd7cf42f1eb454d05fc0f9ff9c565a244038c5b4f3c48257a9",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "0eb5082b54e3cfe637f480fb0c4882bd94a9d19195cd558eeea0fb8851a736ac",
+  "reviewDigest": "ed68b6ea47515693d6ce351aa82361b532f72d677d0d9aff45ec8d124a49d453",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc420-f.html",
+      "digest": "0f248612e5e2647849c59559fc04b61d41cee55bbe2dd884a59c5795ce9acb1f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/abc435-f.html",
+      "digest": "75ce3cab5139d0b4d1e873f505ea7a2ff0e719cab33bceb4ae256f9b2c97226a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-cartesian-tree-decomposition/outcome-build-cartesian-tree-decomposition-shard-001/index.html",
+      "digest": "8bbd387da8281b288f5781a8cd9cece4d83d7f6e2a36028950e9258f7b46eca2"
+    }
+  ],
+  "snapshotDigest": "ea381e62b39de94a850c89ecb5108c4d641f738445d5eaa155609f2bbace2d22"
+}

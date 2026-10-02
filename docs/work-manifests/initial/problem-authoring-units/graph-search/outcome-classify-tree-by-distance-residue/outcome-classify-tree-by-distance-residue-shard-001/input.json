@@ -1,0 +1,75 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-classify-tree-by-distance-residue-shard-001",
+  "packets": [
+    {
+      "problemId": "abc303-e",
+      "learningOutcomeIds": [
+        "outcome-classify-tree-by-distance-residue"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [],
+      "excludedTopics": [
+        "根付き木の子状態を合成する木DP、およびLCA・HLDによるパスの区間分解。"
+      ],
+      "tagIds": [
+        "tag-tree-distance-residue"
+      ],
+      "constraints": [
+        "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\\leq N\\leq 2\\times 10^5; 1\\leq u_i, v_i\\leq N; The given graph is an N-vertex tree obtained by the procedure in the problem statement.; All values in the input are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "構成木では葉隣接がstar中心で中心間距離は3の倍数、非中心は異なる剰余。中心からの距離0mod3だけを取れば全中心を復元し、その元次数がstar levelに一致する。",
+          "sourceRevisionIds": [
+            "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
+            "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd",
+          "path": "src/content/sources/abc264-abc315/source-abc303-e-problem-c838ea6c3e0b9635fa6650bb232baaa3892f42a8d277ba37d6132642ae4637bd.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc303_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2",
+          "path": "src/content/sources/abc264-abc315/source-abc303-editorial-6434-6a6ec6fcf19c8d60d88886da438753e6640976d44023868c0997e6da9de59ac2.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc303_e",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

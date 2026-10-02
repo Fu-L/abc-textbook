@@ -1,0 +1,520 @@
+{
+  "domain": "mathematics",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shards": [
+    {
+      "shardId": "outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "5d06e23407c3b8a4f5b3d6f7a8d746d8b93d67ba5eb066ab4ba7d672f9981338",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-apply-formal-power-series-operations-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "b554258c2e8ea6db13796166af4a9b18c4a7734a270d03e81ba6ace354a669b1",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-apply-subset-zeta-mobius-transform-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "d518aced27c2622c86cfb42a4bab8ee7a00c21d319cef4c0aa73f1761f8cb65f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-approximate-rational-by-euclid-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "30bcde6fa6bde01049d363068adeba1d6a5413bd57024285ffb1392d31c54e11",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "353bf94b06e3a97cfd3c465348a589daf0bcb3c87e3cbb61b100dd06911b6429",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-characterize-integer-solvability-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "827a8e16b0580e0d34176a23c33ca2e7e69bee6f29133ed8d1fbe4b7b0d0e892",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compose-series-and-project-powers-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "a6d63f0e318bfe975325e90e7a6bed3590ac985263ee8303f66dc776bc6f750d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-convolution-or-correlation-shard-001",
+      "domain": "mathematics",
+      "problemCount": 6,
+      "subjectDigest": "ba1e6e99cdfc569ba6a9ab98e9d12cc1fd206583fee2c89c82a989419bb822fe",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-in-finite-field-extension-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "fba3e537703abb8e5cb100ea63f510156b016e77ce16dbf871603916c4e2d8f0",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-online-relaxed-convolution-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "498466cf881ecd44a1b1b826db82a9bb2f6d321f639c219cd2f3fb124d138c2a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-compute-subset-convolution-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "b9066c75164d7106b01ec5e55803df52970a4325347c95fb6617a07535bc479e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-correct-overlap-by-inversion-shard-001",
+      "domain": "mathematics",
+      "problemCount": 8,
+      "subjectDigest": "202a5ccf90ee4c37996ca18c14a68197333bb70c48f7ba8538337c84c1b88b13",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-correct-overlap-by-inversion-shard-002",
+      "domain": "mathematics",
+      "problemCount": 7,
+      "subjectDigest": "344838323dea798599f8be366e7a717b4bf8ca93f5b38af606217f985d92a970",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "a0ad762c6587830bb526ae4f45c67f143dd4b8bdbcd3f9eb39b1135d90d6ef25",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-euler-circuits-by-best-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "131fbca46f96360fe5f53df0f2c617e2166b5e9af8029c645bef1463e1eea5ba",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-finite-field-subspaces-by-rank-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "ba29c1b2eb4295c9ab8e5bada64ce8b785f879d0e6e8a685324b04c4607337d7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-labeled-structures-by-components-shard-001",
+      "domain": "mathematics",
+      "problemCount": 5,
+      "subjectDigest": "ae6d8bbf522f49e053a52f16d76fefc75c3e6f3e23c9b0cedf73badd143b0b2e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-nonintersecting-paths-by-lgv-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "42aa640ebad0492aae67520c7f85bd2a4c7d21338f43a64fef637fedd070691f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-orbits-by-fixed-points-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "5842b835034942bcfc02451cbcaa41eaf6045dfcaadfda7c3333a75930260c19",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-count-through-cyclic-exponents-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "3a766413fd5e7a4bd9e06b90220379826ef78ae2665931f1cd32df0c395a0a5e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-decompose-by-prime-or-divisor-shard-001",
+      "domain": "mathematics",
+      "problemCount": 8,
+      "subjectDigest": "64bc1455927fe39da0e592be01614c9311ea5031e891293a4460540612493aeb",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-decompose-by-prime-or-divisor-shard-002",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "5d556e4a42d6649b78b5b82ce21662227bdaa11ab76182fbef571f997062e3fe",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-derive-coefficient-recurrence-by-differentiation-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "04a8d8ea1f7e51565a40805a538b4c4b1366d2e996360cc6e6c496397e973401",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-encode-counting-by-generating-function-shard-001",
+      "domain": "mathematics",
+      "problemCount": 8,
+      "subjectDigest": "0a0aebd4b34fb6f6c33e9b90e7b5f305591067fdc34c2d6917f0968c02730aa7",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-encode-counting-by-generating-function-shard-002",
+      "domain": "mathematics",
+      "problemCount": 7,
+      "subjectDigest": "fb855524089b6e37640ad8de5826ddc8ad7bba143ab5c7372ef42c15f1ca6c9f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-encode-labeled-trees-by-prufer-code-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "80342a653e772741b518a582d87e5880e980312d6481a565d5f73dbe31539ab0",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-evaluate-compressed-integer-blocks-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "47a7b410badcc1f2fb3cec431c4691d87be1b9f4f9120221f23530ecd37735b8",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-evaluate-polynomial-at-many-points-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "348b280d4486eb8f30c28db6bbaef462b35fc915ec96ea43e2840125306e82fe",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-expand-euler-product-sparsely-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "0ed300f40fb206ba2403bacc679aeb0fc269632d2a64e6b6630db8f490680bd9",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-exploit-modular-periodicity-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "77df78b47d9975185115bdb9e0fd3fb0bc050b0fd61dd250475d75356bd3ed0c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-exponentiate-associative-composition-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "93a2e215bc66728d9d3718962317909a2b87f40677a6ab6fc66f973d06e3facf",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-exponentiate-transition-over-semiring-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "a8d6ad96abe0835a3e2c32854d216ef984df8f998b7f71c28a9d6b696389c86f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-extract-rational-series-coefficient-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "b1b3c95f8fc17854da2865ffba55a5d44da14eaea79f725ad97603b681482600",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-factor-separable-linear-transform-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "fa8f9304beef9c5478ab991400ceec8dba6ced3626bad31d96eeac05e5e758b4",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-find-orbit-hit-by-bsgs-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "6951825d02907dcb0e181d664cc66c31512a7d3d7948658e0dc58f004b174206",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-find-period-by-multiplicative-order-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "883d2bb21c52adedc1520b3086d1ad2d5addfa303dc689cc5d5c14e053817d93",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-formulate-combinatorial-coefficients-shard-001",
+      "domain": "mathematics",
+      "problemCount": 8,
+      "subjectDigest": "08783aa27e4f3f7585195d86cd79f92c5b62ffb6f6a55856adfc89fc20292491",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
+      "domain": "mathematics",
+      "problemCount": 8,
+      "subjectDigest": "f0216cf20720e69aaec9e2882d53c2ac0280c6cb35d114ca2d21615dc214620e",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-formulate-combinatorial-coefficients-shard-003",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "adec59b7d641cbc7b0c9f8021493454557d002f27a1a247eeabdf44b00054eec",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-invert-divisor-lattice-by-mobius-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "aa1db0363e549515f4fdc0b76089dad546f8517b5ea1a2a923e29b5acb93d301",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-invert-generating-function-equation-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "a3ad2e70b7f8e53a90154c10fd859dca5504a90229e1ef51d8cfc7794ccd88b5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-maintain-xor-linear-basis-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "0f26fee45e216aad40f1596c8c25895dd1cec72a3bf8f1e866f6fcacf5a0a56f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-minimize-xor-coset-representative-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "3e1e01bafab5bdb16f608a5d787da3f123554c162efbb3fc28d805160e3c4788",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-poset-antichain-by-dilworth-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "4c305719370442a35fcb49db810767e914830a123ad9442ebb1200adfbc6b15a",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-optimize-weighted-matroid-basis-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "1c997a22d08d17486938845b98322a0538c2f975b1342ab557de94d02ba61baa",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-partition-at-critical-integer-boundaries-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "a38596b8f2b2d8ecc8fc657b877ef7989e4b454d44a6fe1403fc50acc874e9f5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-partition-integer-parameter-ranges-shard-001",
+      "domain": "mathematics",
+      "problemCount": 6,
+      "subjectDigest": "774b7e28fee8a6075774c9828fbcf0146cf35e12df8655b1d8caced363d463d2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "dbaba018b20baca32cab14aa129e5722d1c077db03c3e741e850d31d50c4555d",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-remove-boundaries-by-reflection-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "38e57191b4ca5bc8a6167031a50f631ede9731abdc115c58418d6168c4556e30",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-represent-integers-as-two-squares-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "2f0613ec237345fabc8d1b88def2ac054d86630186cda2e60847860260f1d84b",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-linear-system-and-rank-shard-001",
+      "domain": "mathematics",
+      "problemCount": 2,
+      "subjectDigest": "b8b6f07cf3e85b812a2f5418d25e52284bac2207f46c852418034d3343c69adb",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-solve-modular-constraints-shard-001",
+      "domain": "mathematics",
+      "problemCount": 4,
+      "subjectDigest": "9e6567e0c0d2f117883b8a5f4d5e56d6a2cab3ce45b6160b6d24165c67c4f19c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
+      "domain": "mathematics",
+      "problemCount": 3,
+      "subjectDigest": "18c2918ecff8fe056b00ca7a2a7627dc9d32e01cd0b9c1ed39fcfc75294f7d27",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-sum-multiplicative-function-by-min25-sieve-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "dc875ed17c2551b3abf62d346af7e68e6e2da3e07aef110b7bc4157c306de89c",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-test-linear-matroid-intersection-rank-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "4ebcbab4a45b15c4e3841d23272c3570f6f17a3476eab56693dc489f742a9e8f",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-translate-sequences-by-rsk-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "0a259bb40ea32929e99da62d32aacfb649f385361370ad9f95fbdc61aa6b94d5",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    },
+    {
+      "shardId": "outcome-traverse-stern-brocot-ancestors-shard-001",
+      "domain": "mathematics",
+      "problemCount": 1,
+      "subjectDigest": "6f211adc901fcaad38ac6495dc8d81f6894866b8d30181d2bb311091dfe6bac2",
+      "status": "automated_checks_passed",
+      "previewStatus": "on_hold",
+      "authoringHoldCount": 0
+    }
+  ],
+  "scope": "Independent shard evidence only; no global join or human acceptance."
+}

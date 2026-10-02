@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "7f03c52781361855a9edef14b60c233b33ad99f46f04f5ebbb39dd50a553cfb7",
+  "status": "on_hold",
+  "holdReasons": [
+    "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "32b66038ee1c6d03b4aa9061bebc78a0a437e661aa05950d8acb045da7d2a9e4",
+  "reviewDigest": "59f98435a3b1fb2dcfef638a1d77d97c740a457d29e0abaea8d26e5be14f3b5f",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc351-g.html",
+      "digest": "1f5451069f4b023ce2c3867994a1c380d7ffd0d0dd7ecfdaa547b8cb06ae9a17"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc460-g.html",
+      "digest": "01f15e23760af1c13805cd7c596237079417f595739e6fdb3047ff5c32ce50d5"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/index.html",
+      "digest": "8d14686aa21a505b122aeb98f417c305dfab7a78492a7ea6d45fd50749f5603e"
+    }
+  ],
+  "snapshotDigest": "993ee9b2c9c492500e304a2f133d3727b52609c04e82f6146e8e3eb8e5e29882"
+}

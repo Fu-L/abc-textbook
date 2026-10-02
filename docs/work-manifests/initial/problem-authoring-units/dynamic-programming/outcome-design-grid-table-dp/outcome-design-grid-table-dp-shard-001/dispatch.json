@@ -1,0 +1,98 @@
+{
+  "shardId": "outcome-design-grid-table-dp-shard-001",
+  "primaryOutcomeId": "outcome-design-grid-table-dp",
+  "domain": "dynamic-programming",
+  "taskId": "T067",
+  "problemIds": [
+    "abc311-e",
+    "abc415-e",
+    "abc443-e"
+  ],
+  "homeUnitId": "unit-dp-grid-table",
+  "prerequisiteOutcomeIds": [
+    "outcome-design-minimal-sufficient-state"
+  ],
+  "dependencyShardIds": [
+    "outcome-design-minimal-sufficient-state-shard-001",
+    "outcome-design-minimal-sufficient-state-shard-002",
+    "outcome-design-minimal-sufficient-state-shard-003",
+    "outcome-design-minimal-sufficient-state-shard-004"
+  ],
+  "documentPaths": [
+    "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md",
+    "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md",
+    "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc443-e.md"
+  ],
+  "workPath": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001",
+  "previewPath": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001",
+  "requiredChecks": [
+    "source",
+    "structure",
+    "example",
+    "answer",
+    "link",
+    "accessibility",
+    "review"
+  ],
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "manifestDigest": "016beb1f531582f52aeadd274b1b14d93e1885ad2f0a759f37a4e5b3558b0116",
+  "evidencePaths": {
+    "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/checks.json",
+    "review": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/review.json",
+    "preview": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/snapshot.json"
+  },
+  "ownedContentLocators": [
+    {
+      "ownerType": "problem",
+      "problemId": "abc311-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc415-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc415-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    },
+    {
+      "ownerType": "problem",
+      "problemId": "abc443-e",
+      "path": "src/content/docs/problems/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc443-e.md",
+      "localKeys": {
+        "claims": [
+          "correctness"
+        ],
+        "examples": [
+          "worked"
+        ],
+        "exercises": [
+          "transfer"
+        ]
+      }
+    }
+  ]
+}

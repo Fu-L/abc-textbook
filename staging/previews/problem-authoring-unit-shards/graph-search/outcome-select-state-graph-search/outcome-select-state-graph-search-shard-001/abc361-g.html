@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC361-G — Go Territory</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC361-G — Go Territory</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></p>
+<ul>
+<li>暗黙状態・重みなし辺・訪問条件を定義し、到達判定・最短手数・列挙の目的に応じてBFS・DFS・backtrackingを選べる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/modeling/event-sweep.md">event順にactive集合を更新する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>状態グラフのモデリングと探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>石のない格子点が領域内かは、四近傍で基準点(−1,−1)へ到達できるかで決まる。ただし無限平面全体を探索する必要はなく、状態が変わるのは石の周辺だけである。 複数の石成分が入れ子になると、行上の内外は単純な一回の反転では足りない。外→内でnesting depthを増やし、内→外で減らす境界eventとして合成する必要がある。 石が8近傍でつながる場合は周囲8マスだけを候補graphにし、最左下側の外点から四近傍探索すると境界付近の外側を識別できる。 別成分が近くて内外情報を上書きしないよう、Chebyshev距離2以下の石まで同じ処理成分へまとめてから境界eventを作る。</p>
+<p>採用する候補: 近接する石を成分化し、石周囲の空点で内外を判定してから、行ごとの境界eventをnesting depth付きで走査する。</p>
+<p>有限個の石周辺だけで境界の向きを取得し、長い内部区間は座標差でまとめて数えられる。</p>
+<p>棄却する候補: 座標上限を越える十分大きな長方形gridを確保し、全空点をflood fillする。</p>
+<p>二次元座標範囲の面積が巨大で、石が疎でも全cellを用意できない。</p>
+<p>石が8近傍でつながる場合は周囲8マスだけを候補graphにし、最左下側の外点から四近傍探索すると境界付近の外側を識別できる。</p>
+<p>別成分が近くて内外情報を上書きしないよう、Chebyshev距離2以下の石まで同じ処理成分へまとめてから境界eventを作る。</p>
+<p>石を近傍探索可能な集合に入れ、Chebyshev距離2以内を辺とする成分を列挙する。各成分で石の周囲空点を集め、外側基準から四近傍BFSして周辺点の内外を分類する。各行へ外→石列→内を+1、内→石列→外を−1のeventとして置き、x順にnesting depthを更新し、depth&gt;0の石でない格子点数を区間長で加える。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="障害物境界だけの疎なflood-fill">障害物境界だけの疎なflood fill</h3>
+<p>発動条件: 無限または巨大gridで障害物数だけが少ない到達不能領域を求めるとき。</p>
+<p>障害物周囲の候補点に探索を限定して境界の内外を判定する。</p>
+<h3 id="走査線と入れ子depth">走査線と入れ子depth</h3>
+<p>発動条件: 複数の閉境界が包含関係を持ち、単純parityでなく向き付き遷移を合成するとき。</p>
+<p>行ごとの境界eventを順に足し、正のdepth区間を内部として数える。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>面積を埋める代わりに境界周辺だけでtopologyを決め、内部の広さは行区間の長さとして算術的に加える。</p>
+<p>別の問題へ持ち帰る視点: 疎な障害物による巨大領域では、探索対象を面から境界へ落とせないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>石から離れた空格子では内外状態が変わらず、境界に必要な情報は石近傍だけ。距離2までの石成分をまとめると近接境界の内外判定を独立処理で壊さない。四近傍外側探索から作る符号eventを行順に足したnesting depthが正な区間だけを内部として数え、長い空区間は座標差で一括集計する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>8近傍連結だけでなく距離2の異成分を統合する条件を実装する。石自身を答えから除き、同じ行・座標のevent順と連続する石列を正規化する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>単一輪、接触する輪、輪の入れ子を別々に描き、周辺空点の内外と行eventの符号を追う。成分統合距離は公式条件どおりか小例で検査する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>石数N、近傍候補O(N)。hash近傍探索expected O(N)、行event sort O(N log N)、全体expected O(N log N)。balanced mapなら同漸近log。</p>
+<h3 id="空間">空間</h3>
+<p>石近傍graph、境界event O(N)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 0 \leq N \leq 2 \times 10^5; 0 \leq X_i, Y_i \leq 2 \times 10^5; The pairs (X_i, Y_i) are distinct.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>石(0,1),(1,0),(1,2),(2,1)の四個。</p>
+<ol>
+<li>中央空点(1,1)は四neighborが全て石。</li>
+<li>それ以外の周辺空点は外へ歩ける。</li>
+<li>囲まれた空点は中央だけ。</li>
+</ol>
+<p>期待される結果: 1</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>石が斜めに接するだけでは4近傍空点を遮れないか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>遮れる場合がある。上例は石同士が斜め接触し中央を閉じるので8近傍境界を扱う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc361/editorial/10355">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc361-editorial-10355-fa903d354a637287b02cc5a951981e5c8be5ba4737f17f92b245ca6fc792534b</li>
+<li><a href="https://atcoder.jp/contests/abc361/tasks/abc361_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc361-g-problem-e7ae4c77ce0cced0a222ce1ed6380ab09770e31ccbe61d31b1c9049c13c16d51</li>
+</ul></main>
+</body></html>

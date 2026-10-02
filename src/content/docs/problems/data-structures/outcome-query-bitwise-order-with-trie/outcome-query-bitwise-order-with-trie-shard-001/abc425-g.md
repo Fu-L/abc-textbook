@@ -1,0 +1,115 @@
+---
+title: "ABC425-G — Sum of Min of XOR"
+draft: true
+authoringUnit: {"problemId":"abc425-g","docPath":"src/content/docs/problems/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/abc425-g.md","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-recursive-divide-and-conquer"],"excludedTopics":["文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。"],"tagIds":["tag-binary-trie","tag-recursive-divide-and-conquer"],"sourceRevisionIds":["source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69","source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"問い合わせ側の最高 bit と一致する集合が非空なら反対側は候補にならず、一致側が空なら最高 bit の寄与 2^(k-1) が全 x に加わる。 M=2^k の全区間では片側しか A がない場合、下位 bit の問い合わせが二度現れ、固定寄与は 2^(2k-2) になる。 各 A_i は bit ごとの一つの部分問題だけへ入り、Trie を明示せず全体を O(N log max A) で処理できる。","sourceRevisionIds":["source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69","source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"A={1,3},M=4。","procedure":["x=0,1,2,3のmin XORは1,0,1,0。","下位までbit一致側を優先。"],"executionTarget":null,"expectedResult":"総和2。","verificationStatus":"not_applicable","learningUnitIds":["unit-binary-trie"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-query-bitwise-order-with-trie"],"prerequisiteIds":["unit-recursive-divide-and-conquer"],"attainmentCondition":"A={1}へ減らすと総和はいくつか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。"},"answer":{"reasoningOrVerification":"各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。","procedure":["具体例の各状態・寄与を再計算する。","各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。"],"expectedResult":"各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [bit列をTrieで索引化する](src/content/docs/learn/query/binary-trie.md)
+
+- 整数を上位bitからTrieへ格納し、部分木情報を保ちながらXOR・大小条件に最適な分岐を選べる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+- [再帰分割・分割統治](src/content/docs/learn/modeling/recursive-divide-and-conquer.md)
+
+対象外:
+
+- 文字列の共有接頭辞を索引化するTrie、および集合bitmaskの部分集合DP。
+
+## 考察
+
+各 x に対する min_i(x xor A_i) は最上位 bit が一致する A_i があれば必ずそちらで達成される。x の区間 [0,M) も最上位 bit で高々二つに分けられる。
+
+採用する候補: A と x の範囲を最高 bit で分割し、f(A,M,k)=Σ_{0≤x<M}min_i(x xor A_i) を再帰計算する。
+
+各 A_i は bit ごとの一つの部分問題だけへ入り、Trie を明示せず全体を O(N log max A) で処理できる。
+
+棄却する候補: 各 x=0,…,M-1 について全 A_i との xor を調べる。
+
+M と N の積に比例し、値域が大きい制約では間に合わない。
+
+問い合わせ側の最高 bit と一致する集合が非空なら反対側は候補にならず、一致側が空なら最高 bit の寄与 2^(k-1) が全 x に加わる。
+
+M=2^k の全区間では片側しか A がない場合、下位 bit の問い合わせが二度現れ、固定寄与は 2^(2k-2) になる。
+
+A の値を bit k-1 で B0,B1 に分ける。M が下半分以下、全区間、上下にまたがる場合を分岐し、各 x 側に対応する非空集合へ再帰する。一致側が空なら個数×2^(k-1) を加え、k=0 または M=0 で 0 を返す。
+
+## 典型の発動条件
+
+### bit ごとの分割統治
+
+発動条件: xor の最小化で、上位 bit の一致が下位 bit より常に優先されるとき。
+
+A と問い合わせ区間を同じ最高 bit で分け、選ばれる側を確定して一段下へ進む。
+
+### 暗黙 Trie 再帰
+
+発動条件: 値集合を二進 Trie として扱えるが、必要なのが部分集合と深さだけのとき。
+
+配列分割を再帰状態として持ち、Trie ノードを明示構築せず総和を集約する。
+
+## 問題固有の要素
+
+最小 xor の総和は各 x を独立処理せず、同じ上位 bit 接頭辞を持つ x の区間をまとめて処理できる。
+
+別の問題へ持ち帰る視点: 辞書順に優先される bit 評価では、候補集合と問い合わせ集合を同時に二分する再帰が有効である。
+
+## 正当性
+
+問い合わせ側の最高 bit と一致する集合が非空なら反対側は候補にならず、一致側が空なら最高 bit の寄与 2^(k-1) が全 x に加わる。 M=2^k の全区間では片側しか A がない場合、下位 bit の問い合わせが二度現れ、固定寄与は 2^(2k-2) になる。 各 A_i は bit ごとの一つの部分問題だけへ入り、Trie を明示せず全体を O(N log max A) で処理できる。
+
+## 実装上の注意
+
+- 2^(2k-2) や M·2^(k-1) は 32 bit を超えるため十分広い整数型を使う。M=2^k と空集合の各分岐を先に整理する。
+
+## 復習の核
+
+- M≤2^(k-1)、M=2^k、途中で上下にまたがる三場合について、再帰する集合・長さ・固定寄与を式と照合する。
+
+## 計算量と制約
+
+### 時間
+
+O(NB)、Bはmax(A_i,M)を覆うbit数。
+
+### 空間
+
+O(N+B)、bit分割用領域と再帰stack。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2.5 sec; Memory limit: 1024 MiB; Constraints: 1\le N\le 2\times 10^5; 1\le M\le 10^9; 0\le A_i \le 10^9; All input values are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+A={1,3},M=4。
+
+1. x=0,1,2,3のmin XORは1,0,1,0。
+2. 下位までbit一致側を優先。
+
+期待される結果: 総和2。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+A={1}へ減らすと総和はいくつか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+各x xor1は1,0,3,2で総和6。一致側が空の最高bit寄与を足す必要がある。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc425/editorial/14087) — source-abc425-editorial-14087-8cdd7294ddd4a59ef9ef2a1b40db4ca62e3e9167e956f318df271eee16191e69
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc425/tasks/abc425_g) — source-abc425-g-problem-625ba8459cf4ed915d88b837470014e58cc381321869d6c0da01c744941db707

@@ -1,0 +1,77 @@
+{
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "shardId": "outcome-design-interval-split-dp-shard-002",
+  "packets": [
+    {
+      "problemId": "abc400-f",
+      "learningOutcomeIds": [
+        "outcome-design-interval-split-dp"
+      ],
+      "baseline": {
+        "id": "prereq-abc-advanced-v1",
+        "version": "1.0.0"
+      },
+      "additionalPrerequisiteUnitIds": [
+        "unit-dp-state-design"
+      ],
+      "excludedTopics": [
+        "区間合成・領域分割DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"
+      ],
+      "tagIds": [
+        "tag-interval-partition-dp"
+      ],
+      "constraints": [
+        "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 400; 1 \\leq C_i \\leq N; 1 \\leq X_i \\leq 10^9; All input values are integers."
+      ],
+      "placementCandidate": {
+        "primaryProblemId": null,
+        "comparison": null,
+        "additionalElement": null
+      },
+      "technicalClaims": [
+        {
+          "text": "逆向きでは、色 c の塗り操作を、既に消えた0または c のみを含む区間の消去へ置換する。最終消去の両端の不要な0を縮めても費用は増えないため端は c とできる。その内部の異色部分は先に独立消去されており、ep が c を残し他を消す最小費用を表す。区間全体を最後に消す候補と二部分への分割を網羅すれば、任意の消去列を分解できる。円では最終消去区間の境界を cut とすれば線形区間解で表せ、全 cut 最小が円の最適値と一致する。",
+          "sourceRevisionIds": [
+            "source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58",
+            "source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "sourceRevisionId": "source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58",
+          "path": "src/content/sources/abc368-abc419/source-abc400-editorial-12625-0aebf97f723a76a0781e1ed9313a600be3b28cebc52c35a97eb9b75015211e58.json",
+          "sourceKind": "official_editorial",
+          "officialTaskId": "abc400_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        },
+        {
+          "sourceRevisionId": "source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a",
+          "path": "src/content/sources/abc368-abc419/source-abc400-f-problem-f05c34f1b8e095a282536aee51bb76a0783529f28ada451225a15a3fb7126e5a.json",
+          "sourceKind": "official_problem",
+          "officialTaskId": "abc400_f",
+          "checkedAt": "2026-07-24T23:59:30+09:00",
+          "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+          "allowedUses": [
+            "constraint_reference",
+            "technical_claim",
+            "example_verification",
+            "answer_verification"
+          ]
+        }
+      ],
+      "skill": {
+        "name": "abc-explanation-author",
+        "version": "1.1.1",
+        "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+      }
+    }
+  ]
+}

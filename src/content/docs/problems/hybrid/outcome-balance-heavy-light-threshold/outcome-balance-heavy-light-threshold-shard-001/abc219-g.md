@@ -1,0 +1,115 @@
+---
+title: "ABC219-G — Propagation"
+draft: true
+authoringUnit: {"problemId":"abc219-g","docPath":"src/content/docs/problems/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.md","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-threshold-heavy-light"],"sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。 軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。","sourceRevisionIds":["source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed","source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[{"key":"worked","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"kind":"illustrative","language":"日本語・数式","omissions":["実行プログラムは省略。小例の手計算を示す。"],"environment":"紙と筆記具、または数式を評価できる計算機","input":"道1-2-3、初期値(1,2,3)、query2,1。","procedure":["query2は値2を両隣へ配り(2,2,2)。","query1も値2を配るので全て2。"],"executionTarget":null,"expectedResult":"最終(2,2,2)。","verificationStatus":"not_applicable","learningUnitIds":["unit-threshold-heavy-light"]}],"exercises":[{"key":"transfer","learningOutcomeIds":["outcome-balance-heavy-light-threshold"],"prerequisiteIds":[],"attainmentCondition":"heavy看板に複数候補があれば値の最大を取るか。","assessment":{"method":"理由・境界・反例を言葉や式で説明する。","successCondition":"最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。"},"answer":{"reasoningOrVerification":"最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。","procedure":["具体例の各状態・寄与を再計算する。","最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。"],"expectedResult":"最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。","verificationStatus":"passed"}}],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+---
+
+## 学習の位置
+
+体系上の位置: [平方根・閾値による軽重分類](src/content/docs/learn/modeling/threshold-heavy-light.md)
+
+- 頻度・次数・更新回数を閾値でheavy/lightに分け、両側の計算量を均衡させる。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+
+共通前提: prereq-abc-advanced-v1 1.0.0。
+
+追加前提:
+
+共通前提と本節で説明する内容。
+
+対象外:
+
+- 平方根・閾値による軽重分類の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。
+
+## 考察
+
+一回の query は中心 x の現在値を全近傍へ上書きするため、次数の大きい頂点が何度も選ばれると隣接リスト走査の総量が大きくなる。一方、次数 B 以上の頂点数は次数和から高々 2M/B 個である。
+
+更新は加算ではなく代入なので、各頂点の正しい値は自分へ届いた更新のうち時刻が最大の一つだけで決まる。高次数頂点からの配布は、その頂点に値と時刻の看板を残して遅延できる。
+
+採用する候補: 次数 B 未満の query は全近傍へ即時反映し、次数 B 以上なら看板だけを更新する。頂点の値が必要な時に隣接する高次数頂点の看板から最新時刻を解決する。
+
+軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。
+
+棄却する候補: 全 query で x の隣接頂点を列挙して値を書き換える。
+
+星型などで中心が繰り返し指定されると、一回 Θ(N) の更新が Q 回発生する。
+
+頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。
+
+閾値 B を √M 程度に置き、各頂点について隣接 heavy 頂点を前計算する。query x の先頭で x を最新化し、x が light なら全近傍の値・時刻を更新、heavy なら x の看板へ値・時刻を保存する。全 query 後も各頂点を同じ方法で最新化して出力する。
+
+## 典型の発動条件
+
+### 次数平方分割
+
+発動条件: グラフ query の一回の費用が中心頂点の次数に比例し、辺数の総和だけが小さいとき。
+
+低次数は push、高次数は lazy にし、閾値 B と heavy 頂点数 M/B の釣り合いを取る。
+
+### timestamp による遅延代入
+
+発動条件: 複数の上書き更新が競合し、最も新しい更新だけを採用すればよいとき。
+
+値と query index を組で保存し、参照時に最大 timestamp の候補を選ぶ。
+
+## 問題固有の要素
+
+heavy 頂点の更新先を列挙しない代わりに、各受け手から「隣接 heavy の看板」を見に行く向きへ反転できる。
+
+別の問題へ持ち帰る視点: 高次数からの broadcast が重いとき、更新を発信者に置き、必要時に受信者が少数の重い発信者だけを pull できないか考える。
+
+## 正当性
+
+頂点 v を参照する直前に、v の明示値の時刻と v に隣接する全 heavy 頂点の看板時刻を比較すれば、未配布の代入を含む現在値を復元できる。 軽頂点の隣接走査を B 未満に抑え、遅延更新の確認先も高次数頂点数以下に抑えることで、疎グラフの次数和を利用できる。
+
+## 実装上の注意
+
+- query x 自身の現在値を必ず解決してから配布する。heavy の看板は x 自身ではなく近傍への更新を表し、最後の出力前にも全頂点を再解決する。
+
+## 復習の核
+
+- heavy 中心が看板を立てた直後に、その隣の light 頂点が発信者になる例を追い、「発信前の resolve」が必要な箇所を確認する。
+
+## 計算量と制約
+
+### 時間
+
+O(N+M+Q(B+M/B))、B≈√M、heavyは高々2M/B。
+
+### 空間
+
+O(N+M)。
+
+### 制約との対応
+
+公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min(2 \times 10^5, N(N-1)/2); 1 \leq Q \leq 2 \times 10^5; 1 \leq u_i, v_i \leq N; 1 \leq x_i \leq N; The given graph is simple. In other words, it has no self-loops and no multi-edges.; All values in input are integers.
+
+時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。
+
+## 具体例
+
+道1-2-3、初期値(1,2,3)、query2,1。
+
+1. query2は値2を両隣へ配り(2,2,2)。
+2. query1も値2を配るので全て2。
+
+期待される結果: 最終(2,2,2)。
+
+実行形式: 手計算による図示・追跡。プログラムの実行例ではない。
+
+## 確認問題
+
+heavy看板に複数候補があれば値の最大を取るか。
+
+### 確認する観点
+
+理由・境界・反例を言葉や式で説明する。
+
+### 解答と理由
+
+最後の代入を再現するので値でなく時刻の最大を取る。時刻1の値9より時刻2の値2が新しい。
+
+## 出典
+
+- [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc219/editorial/2653) — source-abc219-editorial-2653-598bf5f3b5ffde594aaa50f46b09222df85fe43d8d3dd777c8108114773be0ed
+- [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc219/tasks/abc219_g) — source-abc219-g-problem-fe6bb3c58f2b6043a90dc868b684e95b81fff924baa5dda91b1d5ed5dda7de34

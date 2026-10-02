@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "b0864a1771c519df4e5f6a1d5a7fc2d259eff1f926b66de243abe1b7d15552c8",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "2eb15a01dd614999874f61f65262f55c36099732c78a542f12516e8fdf8e133d",
+  "reviewDigest": "9f6005d4a343c96af34577db7228f046aef9321c45952550beb8e4118935b1bc",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.html",
+      "digest": "94f7af121321fc364bf305cf213a46c8a7389ee99b5eb5f7b5354c3769a2a0c0"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc464-g.html",
+      "digest": "0de22370981ea88fc984d2a97d99223089c7ee9707db38c0f5ac3624d406ae5f"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/index.html",
+      "digest": "4987d7b05c0a92ee42daa24a035032cc6cb60cc95e3780630ff3e8a6b8355291"
+    }
+  ],
+  "snapshotDigest": "2de297ad3b67837ad55082c5553a37e0dc1233f4e83c45930b582a9cc8ed7246"
+}

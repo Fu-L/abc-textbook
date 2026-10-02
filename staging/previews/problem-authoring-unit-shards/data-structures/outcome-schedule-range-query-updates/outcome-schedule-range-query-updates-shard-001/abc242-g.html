@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC242-G — Range Pairing Query</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC242-G — Range Pairing Query</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/mo-offline-range.md">Moの順序で区間問い合わせの差分を更新する</a></p>
+<ul>
+<li>区間問い合わせの順序と追加・削除操作を設計し、端点移動の総量を評価できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>オンラインのpriority queue・multiset、および単調stack・queue。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>区間内で色 c が cnt_c 人なら作れる pair は floor(cnt_c/2) で、答えは色ごとのこの値の和になる。query 間で端点を一つ動かすと変化するのは追加・削除した一色だけである。</p>
+<p>色を一個追加したとき旧個数が奇数なら pair が1増え、削除時は旧個数が偶数なら1減るため、区間状態を定数時間で更新できる。</p>
+<p>採用する候補: query を Mo’s algorithm の順に並べ、現在区間の色頻度と pair 総数を四種類の端点移動で保つ。</p>
+<p>各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。</p>
+<p>棄却する候補: 各 query で区間を走査して色頻度を作り直す。</p>
+<p>長い区間 query が多数あると総走査量が NQ になる。</p>
+<p>非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。</p>
+<p>query を左端 block と右端で Mo 順に sort する。現在 [L,R] を伸縮し、add(x) は count[A_x] が奇数なら ans++、remove(x) は削除前 count[A_x] が偶数なら ans— として頻度を更新し、元 query index へ ans を保存する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="mos-algorithm">Mo’s algorithm</h3>
+<p>発動条件: 静的配列の多数の offline range query で、要素一個の追加・削除から答えを更新できるとき。</p>
+<p>端点移動総数が小さくなる block 順へ query を並べ替える。</p>
+<h3 id="頻度関数の差分更新">頻度関数の差分更新</h3>
+<p>発動条件: 答えが Σg(cnt_c) の形で、cnt を±1した差が簡単なとき。</p>
+<p>対象色の g(new)-g(old) だけを総和へ反映する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>pair 数の増減条件が追加前は奇数、削除前は偶数と逆になる。</p>
+<p>別の問題へ持ち帰る視点: floor や parity を含む頻度集計では add/remove の差を別々に式で導き、対称だと決めつけない。</p>
+<h2 id="正当性">正当性</h2>
+<p>非線形な floor(cnt/2) でも、一個の増減差は cnt の偶奇だけで決まるため Mo の add/remove に必要な十分状態は頻度と総 pair 数だけである。 各 query を独立集計せず、近い区間間で O(1) update を共有でき、Q=10^6にも対応できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>remove 判定は count を減らす前の偶奇で行う。Q が10^6なので query object、sort comparator、入出力の定数倍を抑え、右端順を block ごとに反転する実装も検討する。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ色の個数を0→1→2→1→0と動かし、pair 数の差と add/remove の判定時点を表にして覚える。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(Q log Q+NB+NQ/B)、Bは左端block幅。B≈N/√Qで移動O(N√Q+Q)。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q)、頻度とquery。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: All values in input are integers.; 1 \le N \le 10^5; 1 \le Q \le 10^6; 1 \le A_i \le N; 1 \le l \le r \le N in each query.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>現在色頻度はc=3、他0。</p>
+<ol>
+<li>pair数floor(3/2)=1。</li>
+<li>一つ追加すると4で2、次に一つ削除で3に戻る。</li>
+</ol>
+<p>期待される結果: 答え1→2→1。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>削除後の奇偶を削除前式へ入れてよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>削除前4が偶数のときpairが減る。頻度を先に3へ変えて旧個数判定すると減分を落とす。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc242/editorial/3517">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-editorial-3517-8f6f37f325f43fbaf555b844c1ee19c06ff832fb51d07701a93709823ba4c8e8</li>
+<li><a href="https://atcoder.jp/contests/abc242/tasks/abc242_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc242-g-problem-89ae51a54b637dec16389b5cf4655ca2afd6fc5b686c76874fc04bec7d7003f5</li>
+</ul></main>
+</body></html>

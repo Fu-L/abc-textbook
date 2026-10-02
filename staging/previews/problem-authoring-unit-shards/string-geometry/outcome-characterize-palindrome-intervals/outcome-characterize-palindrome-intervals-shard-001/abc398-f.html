@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC398-F — ABCBA</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC398-F — ABCBA</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/string/palindrome-radius.md">回文半径と左右対称区間を特定する</a></p>
+<ul>
+<li>各中心の回文半径を求め、左右対称な区間の成立条件を判定できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>一般の部分文字列hash比較と、接尾辞・LCPの索引。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>Sをprefixに持つ長さ|S|+kのpalindromeでは、追加suffixはS先頭k文字のreverseに一意に決まる。</p>
+<p>この構成が可能な必要十分条件は、Sの残るsuffix S[k..]自体がpalindromeであることなので、k最小化は最長palindromic suffix探索になる。</p>
+<p>採用する候補: Manacher法で全中心のpalindrome半径を求め、末尾へ達する最長substringを選んで不足prefixを反転追加する</p>
+<p>全palindromic suffixをO(N)で判定でき、|S|=5×10^5でも最短追加長を線形時間で求められる。</p>
+<p>棄却する候補: k=0..Nを順に試し、各suffixを両端比較する</p>
+<p>同じ文字比較を繰り返して最悪O(N²)になる。</p>
+<p>最長palindromic suffixの開始位置kが分かれば、答えはS+reverse(S[0..k))である。</p>
+<p>偶数長・奇数長suffixの双方を扱うため、Manacherの二種類半径またはseparator変換を使う。</p>
+<p>S（またはseparator込み列）へManacher法を適用する。各centerの半径から右端がNに達するpalindromeの最小start kを求め、Sへprefix[0,k)のreverseを連結する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="palindrome-completion">palindrome completion</h3>
+<p>発動条件: 文字列をprefixに保ったまま末尾追加でpalindrome化するとき。</p>
+<p>最長palindromic suffixを残し、不足prefixをreverseする。</p>
+<h3 id="manacher-algorithm">Manacher algorithm</h3>
+<p>発動条件: 全centerの最長palindrome半径を線形時間で求めたいとき。</p>
+<p>末尾到達するodd/even palindromeを探索する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>完成文字列を探索せず、追加部分が既存prefixから強制されることを先に示すと、自由度は残すpalindromic suffixの長さだけになる。</p>
+<p>別の問題へ持ち帰る視点: 最小append/prepend palindrome問題は、反対側の最長palindromic borderへ帰着する。</p>
+<h2 id="正当性">正当性</h2>
+<p>S先頭k文字のmirrorは追加suffixとして一意に強制される。残るS[k..]が回文ならその両側をmirrorで挟んで全回文になり、逆にも全回文なら残りは回文である。従って追加最小は最長回文suffixの開始k最小。Manacherは偶奇全中心の最大半径を求めるので右端Nへ届く候補を尽くす。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>長さ1、全体が既にpalindrome、even suffixを扱う。prefixをreverseする範囲はpalindromic suffix開始位置より前だけ。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>短い全stringをk全探索と比較し、既回文、palindrome suffix長1、最長suffixが偶数/奇数のcaseを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O(|S|)。Manacherと追加prefix反転。</p>
+<h3 id="空間">空間</h3>
+<p>O(|S|)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: S is a string of length between 1 and 500000, inclusive, consisting of uppercase English letters.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>S=ABBC。</p>
+<ol>
+<li>最長回文suffixはCだけなのでk=3。</li>
+<li>prefix ABBのreverse BBAを追加する。</li>
+</ol>
+<p>期待される結果: ABBCBBA。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>S=ABBAでは何を追加するか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>全体が回文suffixでk=0。空prefix反転なので元のABBAのまま。</p>
+<p>確認結果: ABBA。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc398/editorial/12501">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc398-editorial-12501-01e1edb514d0ffe21194f92add6db7cc726417d4a9fa6e2b794adb918f94727f</li>
+<li><a href="https://atcoder.jp/contests/abc398/tasks/abc398_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc398-f-problem-c396893f0e5336d3421eef21e366c3e05c35d3dfc955c0f3248dc124818a60eb</li>
+</ul></main>
+</body></html>

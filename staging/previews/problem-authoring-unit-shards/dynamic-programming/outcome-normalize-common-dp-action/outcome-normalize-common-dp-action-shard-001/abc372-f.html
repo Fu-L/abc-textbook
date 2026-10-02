@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC372-F — Teleporting Takahashi 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC372-F — Teleporting Takahashi 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-transition-optimization.md">DP遷移を因数分解・集約して加速する</a></p>
+<ul>
+<li>全状態に共通する添字移動・倍率・affine作用を外出しし、旧値の保存と非可逆な作用を扱って例外だけを更新できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/dynamic-programming/dp-state-design.md">最小十分状態からDPを設計する</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>固定線形遷移の巨大回累乗。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>通常辺だけなら dp[i+1][v]=dp[i][v-1] という一マスの循環 shift である。追加辺は M≤50 本しかなく、shift 後の列と次の列が違う箇所もその端点付近に限られる。 cycle 辺による遷移は列全体の循環 shift と同一であり、値を移す代わりに添字の対応をずらせる。 追加辺 (X,Y) の寄与だけは shift に含まれないため、旧 dp[X] を新 dp[Y] へ加える差分として処理する。</p>
+<p>採用する候補: dp 配列の論理的な始点を毎手ずらし、追加辺から生じる O(M) 個の差分だけを実配列へ加える inline DP を行う。</p>
+<p>N 個の通常遷移をコピーせず配列 view の shift として共有でき、K 手を O(N+MK) で処理できる。</p>
+<p>棄却する候補: dp[手数][頂点] を通常通り作り、全 N+M 辺を毎手緩和する。</p>
+<p>N,K がともに2×10^5なので Θ(NK) の状態更新は不可能である。</p>
+<p>cycle 辺による遷移は列全体の循環 shift と同一であり、値を移す代わりに添字の対応をずらせる。</p>
+<p>追加辺 (X,Y) の寄与だけは shift に含まれないため、旧 dp[X] を新 dp[Y] へ加える差分として処理する。</p>
+<p>K+N 程度の配列または循環 index で各時刻の dp を同じ領域に対応づける。各手で論理 offset を一つ進め、M 本の追加辺について遷移元の旧値を退避して遷移先へ加算する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="inline-dp">inline DP</h3>
+<p>発動条件: 大部分の遷移が単なる shift で、各段で異なる箇所が少数のとき。</p>
+<p>配列をコピーせず添字対応をずらし、例外遷移だけ差分更新する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>遷移式を図として一段ずらすと、二つの DP 列の差が疎であることが見える。</p>
+<p>別の問題へ持ち帰る視点: ほぼ permutation の遷移では値の移動を省き、座標系そのものを動かす。</p>
+<h2 id="正当性">正当性</h2>
+<p>cycle通常遷移は全分布の一位置shiftなので配列viewのoffset変更だけで表せる。追加辺寄与はshift前のsource値から加える。全source値を退避してから加算すれば同手内の追加寄与の再利用を防ぎ、各層の通常DPと完全一致する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>追加辺の全寄与は同じ時刻の旧 dp から読む必要がある。通常の cycle 辺と重複する追加辺はないが、複数辺の加算順で新値を再利用しない。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>dp の二段を紙に一列ずつずらして重ね、どのセルだけが通常 shift と異なるかを発見する練習をする。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N cycle頂点、M追加辺、K手。offset shiftと追加辺処理で O(N+MK)。</p>
+<h3 id="空間">空間</h3>
+<p>循環配列O(N)（線形offset配列実装はO(N+K)）、追加辺O(M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 0 \leq M \leq 50; 1 \leq K \leq 2 \times 10^5; 1 \leq X_i, Y_i \leq N, X_i \neq Y_i; All of the N+M directed edges are distinct.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>cycle1→2→3→1、追加辺1→3、K=2、開始1。</p>
+<ol>
+<li>一手後は2,3へ各1。</li>
+<li>二手後は2→3と3→1、追加辺source1の旧値は0。</li>
+<li>分布(1,0,1)。</li>
+</ol>
+<p>期待される結果: 全walk数2</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>追加寄与を即時sourceとして同じ手に再利用してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>不可。一手で複数追加辺を渡るwalkを誤って作る。旧値を退避する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc372/editorial/10969">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc372-editorial-10969-ee25597f59d2400ce6fd5335a2a3770e021095d149183b0aae43dea85c7377e5</li>
+<li><a href="https://atcoder.jp/contests/abc372/tasks/abc372_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc372-f-problem-366da97398328238081e7fb0103fadbb1a66db6aa87bc7a830dce59f00c28490</li>
+</ul></main>
+</body></html>

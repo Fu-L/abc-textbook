@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC280-F — Pay or Receive</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC280-F — Pay or Receive</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/graph-potential-propagation.md">静的graph等式制約のpotential伝播</a></p>
+<ul>
+<li>辺等式をDFS/BFSでroot-relative potentialへ伝播し、cycle矛盾を検出して各連結成分の全解を自由offset一つで表現・復元できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/state-graph-search.md">状態グラフのモデリングと探索</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>roadを往復するとscore変化が符号反転するため、連結成分内でrootから各頂点へのpotentialが一意なら任意pathのscore差も一意になる。 同じ頂点へ異なるscoreで到達できるなら差を持つclosed walkがあり、正になる向きで何度も回ってscoreを無限に増やせる。 consistent componentでは任意のx→y walk scoreはpot[y]-pot[x]で、closed walk scoreは全て0になる。 不整合edgeが1本でもあるcomponentでは非零closed walkを両方向のうち有利な向きに反復でき、同componentの任意x,y queryがinfになる。</p>
+<p>採用する候補: 各componentをDFSし、edge A→Bでpot[B]=pot[A]+Cを割り当て、既割当てとの矛盾があればcomponentをunboundedと印付ける。</p>
+<p>連結性・有限時のscore差・非零cycleの有無を一度の前処理で得て、queryを定数時間で分類できる。</p>
+<p>棄却する候補: 各queryごとに最大score pathをBellman-Ford等で探索する。</p>
+<p>Q,N,M≤10^5で繰返し最短路は重く、undirected符号edgeのpotential構造を活かしていない。</p>
+<p>consistent componentでは任意のx→y walk scoreはpot[y]-pot[x]で、closed walk scoreは全て0になる。</p>
+<p>不整合edgeが1本でもあるcomponentでは非零closed walkを両方向のうち有利な向きに反復でき、同componentの任意x,y queryがinfになる。</p>
+<p>未訪問vertexごとにcomponent idとpot=0を置き、(u,v,+c)をDFS緩和する。pot[v]≠pot[u]+cを見つけたcomponentをbadにする。queryはcomponent不同ならnan、badならinf、それ以外はpot[y]-pot[x]。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="potential付きgraph">potential付きgraph</h3>
+<p>発動条件: edgeが頂点値の差を指定し、path和の一意性や矛盾を判定したいとき。</p>
+<p>rootからpotentialを割り当て、各edgeが差分式を満たすか検査する。</p>
+<h3 id="非零cycleによるunbounded判定">非零cycleによるunbounded判定</h3>
+<p>発動条件: cycleを繰り返せるwalk最適化で、cycle利得が0でないとき。</p>
+<p>符号反転可能なclosed walkを有利な向きに反復してinfとする。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>各roadの逆向きscoreが正確に−Cなので、cycle矛盾は単なる有限の別解ではなく、向きを選べる無限利得へ直結する。</p>
+<p>別の問題へ持ち帰る視点: 可逆edgeの加法scoreでは、path差の不整合がreversible profitable cycleになるかを見る。</p>
+<h2 id="正当性">正当性</h2>
+<p>矛盾がなければ全辺scoreがpotential差となり任意pathのscoreは終点差へtelescopingする。矛盾があれば非零closed walkがあり、逆向きで符号を選んで正scoreを無限反復できる。同成分からそこへ往復可能なのでinf。別成分はpathなし。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>A→Bで+C、B→Aで−Cを隣接listへ保存し、potentialの符号をquery式まで統一する。</li>
+<li>self-loop C&gt;0やparallel edgeの不一致もbad検出対象で、potentialと答えは64 bitにする。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>同じ2頂点を異なるCのparallel roadで結ぶ例から非零closed walkを作り、なぜcomponent全queryがinfになるか説明する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N 頂点、M road、Q質問。potentialDFS O(N+M)、各質問 O(1)。</p>
+<h3 id="空間">空間</h3>
+<p>符号付き隣接、component、potential O(N+M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N \leq 10^5; 0\leq M \leq 10^5; 1\leq Q \leq 10^5; 1\leq A_i,B_i,X_i,Y_i \leq N; 0\leq C_i \leq 10^9; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>road1→2 score3、2→3 score4、1→3 score8。</p>
+<ol>
+<li>最初の二辺でpot=(0,3,7)。</li>
+<li>直辺は期待7に対し8で矛盾。</li>
+<li>cycle1→3→2→1は8−4−3=1。</li>
+</ol>
+<p>期待される結果: 同成分質問はinf</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>cycleのscoreが負ならinfにならないか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>往復符号反転が可能なので逆に回れば正となりinf。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc280/editorial/5303">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-editorial-5303-aea62deae9b25f1c4e4b148b805c4bf36522b9a2edc9a3e1d8ad4c9488e912b0</li>
+<li><a href="https://atcoder.jp/contests/abc280/tasks/abc280_f">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc280-f-problem-47f71a8cdee8536d7a88cdb6ec9f45a36b4048b5445c952d60040e01ecc44ae9</li>
+</ul></main>
+</body></html>

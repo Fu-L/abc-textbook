@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC363-G — Dynamic Scheduling</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC363-G — Dynamic Scheduling</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/query/rollback.md">rollback・DFS入退場の状態復元</a></p>
+<ul>
+<li>更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/range-actions.md">区間更新を要約へ作用させる</a></li>
+<li><a href="../../../../../../src/content/docs/learn/query/segment-tree-canonical-decomposition.md">Segment Treeのcanonical区間分解</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>rollback・DFS入退場の状態復元の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>期限内に実行する仕事集合Xが実行可能である条件は、全nについてdeadline≤nの仕事数がn以下であることに等しい。f(n)=n−count(D_i≤n)を置けば全f(n)≥0で判定できる。</p>
+<p>一仕事を追加した最適集合は、追加可能なら採用し、不可能なら、それを採用可能にする選択済み仕事のうち報酬最小のものと交換して報酬が増える場合だけ更新すればよい。</p>
+<p>採用する候補: 仕事の有効期間を時刻segment treeへ載せ、DFS中にrollback可能な最適集合をHall条件のrange-min構造で更新する。</p>
+<p>任意変更を追加とundoへ変換し、各nodeで共通して有効な仕事だけを一方向に挿入できる。</p>
+<p>棄却する候補: 各query後にdeadline順の通常greedyを全N仕事へ実行し直す。</p>
+<p>単発問題には使えるが、一件変更のたびにほぼ同じ並べ替えと選択を繰り返す。</p>
+<p>仕事(D,P)をXへ入れるとf(D..N)へ−1、外すと+1であり、全体minimumが非負かをlazy segment treeで判定できる。</p>
+<p>各仕事versionが存在するquery時刻区間をsegment treeの標準分解nodeへ置き、node退出時に変更履歴stackを逆順undoすれば兄弟区間を汚さない。</p>
+<p>各仕事の初期値と更新後versionについて有効な時刻区間を求め、time segment treeへ登録する。DFSでnode内の仕事を順に追加し、Hall余裕fをrange add/minで管理する。invalidなら追加を可能にする選択済み仕事の最小報酬候補を補助set・segment treeで求め、利益が増す場合だけ交換する。葉で選択報酬和を出力し、退出時に全操作をrollbackする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="時間segment-treeとrollback">時間segment treeとrollback</h3>
+<p>発動条件: offlineな一点変更を、要素の追加だけ得意なdata structureで処理したいとき。</p>
+<p>各versionの生存区間をnodeへ分解し、DFSのstack順で追加・undoする。</p>
+<h3 id="hall条件のprefix-slack管理">Hall条件のprefix slack管理</h3>
+<p>発動条件: deadlineまでに一件ずつ割り当てるschedule集合の実行可能性を動的判定するとき。</p>
+<p>f(n)=n−期限n以下の選択数をsuffix加算・全体最小で保持する。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>費用流の負閉路更新は、このnested deadline構造では「新仕事を追加、または最小報酬仕事と一回交換」に具体化できる。</p>
+<p>別の問題へ持ち帰る視点: 一般最適化の残余操作も、近傍集合がnestedなら単純な交換oracleへ縮むことがある。</p>
+<h2 id="正当性">正当性</h2>
+<p>仕事(D,P)をXへ入れるとf(D..N)へ−1、外すと+1であり、全体minimumが非負かをlazy segment treeで判定できる。 各仕事versionが存在するquery時刻区間をsegment treeの標準分解nodeへ置き、node退出時に変更履歴stackを逆順undoすれば兄弟区間を汚さない。 任意変更を追加とundoへ変換し、各nodeで共通して有効な仕事だけを一方向に挿入できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>同じ仕事の旧versionと新versionの有効区間を半開区間で重複させない。追加失敗時に除ける最小報酬候補のdeadline範囲と、全補助構造のundo順を一致させる。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>まず静的なXのvalid条件と一仕事追加時の交換則を別々に証明する。その後、各mutationを履歴recordにまとめ、node退出で完全復元できるかassertする。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>O((N+Q)log Q log N)、各仕事versionをO(log Q)時刻nodeへ登録し、各追加・undoをO(log N)で処理。</p>
+<h3 id="空間">空間</h3>
+<p>O(N+Q log Q)、Hall木とversion登録・履歴。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 8 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 1 \leq Q \leq 10^5; 1 \leq D_i \leq N; 1 \leq P_i \leq 10^9; 1 \leq c \leq N; 1 \leq x \leq N; 1 \leq y \leq 10^9; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>仕事(deadline,reward)=(1,4),(1,7),(2,3)。</p>
+<ol>
+<li>最初二仕事は同時選択不可、期限1の余裕f(1)が負になる。</li>
+<li>reward4を7へ交換し期限2の仕事3を加える。</li>
+</ol>
+<p>期待される結果: 最適reward和10。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>報酬順だけで期限1の二仕事を採用してよいか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>期限1までに二仕事を完了できずHall条件違反。報酬11は達成不能なので実行可能集合内で交換する。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc363/editorial/10451">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc363-editorial-10451-6d090c51cdcb5cd135b6516c2a81751ba5d845e3e3c1302f5031dacd528bc3ce</li>
+<li><a href="https://atcoder.jp/contests/abc363/tasks/abc363_g">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc363-g-problem-4b21bdcb8e03600245118519ddd01979cb186e7c265ba480003997492e6ba9e3</li>
+</ul></main>
+</body></html>

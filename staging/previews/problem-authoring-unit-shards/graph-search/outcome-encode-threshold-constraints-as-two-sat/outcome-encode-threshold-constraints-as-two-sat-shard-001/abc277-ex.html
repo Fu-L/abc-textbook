@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC277-EX — Constrained Sums</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC277-EX — Constrained Sums</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/graph/two-sat.md">2-SAT・含意グラフ</a></p>
+<ul>
+<li>整数変数をthreshold命題列へ符号化し、単調性と二項制約をimplication graphへ張り、SCCから可否と充足割当を復元できる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<ul>
+<li><a href="../../../../../../src/content/docs/learn/graph/scc-condensation.md">SCC・縮約DAG・トポロジカル順序</a></li>
+</ul>
+<p>対象外:</p>
+<ul>
+<li>2-SAT・含意グラフの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各X_iは0,…,Mの小さな整数だが、Q個のsum区間制約がcycleを作るため、変数順に決める単純DPにはならない。 threshold命題P_{i,j}: j≤X_iを導入すると、整数値1個がjに関してtrueからfalseへ一度だけ切り替わるboolean列になる。 L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。 P_{i,0}=true、P_{i,M+1}=false、P_{i,j}⇒P_{i,j-1}を加えると、satisfying assignmentから最大true thresholdをX_iとして復元できる。</p>
+<p>採用する候補: 各threshold P_{i,j}を2-SAT変数にし、上下界のsum条件を全tに対する2-literal clauseへ変換してSCCで解く。</p>
+<p>M≤100によりNM変数を持て、二変数和の整数不等式をthreshold ORへ正確に線形化できる。</p>
+<p>棄却する候補: 各X_iのM+1候補を頂点にした一般CSPをbacktrackingする。</p>
+<p>constraint graphに木構造の保証がなく、候補割当ては指数的になる。</p>
+<p>L≤X_A+X_Bは全整数tについて P_{A,t}∨P_{B,L-t+1}、X_A+X_B≤Rは ¬P_{A,t}∨¬P_{B,R-t+1} と同値になる。</p>
+<p>P_{i,0}=true、P_{i,M+1}=false、P_{i,j}⇒P_{i,j-1}を加えると、satisfying assignmentから最大true thresholdをX_iとして復元できる。</p>
+<p>iごとにthreshold 0,…,M+1を用意し、端のunit clauseと単調clauseを張る。各queryと関連tについてlower/upperの2-SAT clauseを追加し、implication graphのSCCで矛盾を判定する。可解なら各iの最大true jを出力する。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="threshold-boolean化">threshold boolean化</h3>
+<p>発動条件: 小範囲整数変数への大小・和不等式をboolean制約へ落としたいとき。</p>
+<p>j≤Xという単調命題列を作り、値をtrue prefixの長さとして表す。</p>
+<h3 id="2-sat">2-SAT</h3>
+<p>発動条件: 各制約が二つのboolean literalのORへ表せ、全体の可解性と一解が必要なとき。</p>
+<p>clauseを2本のimplicationへし、literalと否定が同SCCか調べる。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>二変数和のlower/upper boundは、全cut位置tで『片方がcutを越える』というORの族に変換できる。</p>
+<p>別の問題へ持ち帰る視点: 整数和制約では閾値を一方へ配分するcutを全列挙し、forbiddenな同時閾値を二項clauseにできないか考える。</p>
+<h2 id="正当性">正当性</h2>
+<p>threshold列の単調性と端固定で各boolean割当は一整数に対応する。和下限・上限は全thresholdでのORclauseへ同値変換できるため2-SAT可解性と元整数制約可解性が一致。矛盾SCCがなければ最大true thresholdを復元する。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>threshold indexが0未満なら常true、M+1超なら常falseとしてclauseを簡約し、配列外参照を避ける。</li>
+<li>A_i=B_iのqueryでも同じ変数のliteralを正しく簡約し、復元後に全sum制約を再検査すると安全である。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>L=5のlower boundでt=X_A+1を選ぶ反証と、true thresholdがprefixになる単調clauseを小さなMで確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>N整数変数、上限M、Q和制約。threshold変数O(NM)、clause O((N+Q)M)、SCCで同時間。</p>
+<h3 id="空間">空間</h3>
+<p>implication graph O((N+Q)M)。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10000; 1 \leq M \leq 100; 1 \leq Q \leq 10000; 1 \leq A_i, B_i \leq N; 0 \leq L_i \leq R_i \leq 2 \times M; All values in the input are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>N=2,M=2、3≤X1+X2≤3。</p>
+<ol>
+<li>X1=1,X2=2なら各threshold列は単調。</li>
+<li>和3で上下clauseを満たす。</li>
+<li>例えばX1=X2=0は下限clauseに反する。</li>
+</ol>
+<p>期待される結果: 可解、例(1,2)</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>thresholdの単調clauseを省くと。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>true,false,trueのような整数に対応しない列が許され元制約と対応が失われる。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc277/editorial/5207">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-editorial-5207-6e0fa737968738d83a5f216d3ce3780e5818ae8d70b54fb98eef329608c7cc66</li>
+<li><a href="https://atcoder.jp/contests/abc277/tasks/abc277_h">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc277-ex-problem-6b66963c10929368400c3d4badf7542aecb515fea846906ca819168da6941245</li>
+</ul></main>
+</body></html>

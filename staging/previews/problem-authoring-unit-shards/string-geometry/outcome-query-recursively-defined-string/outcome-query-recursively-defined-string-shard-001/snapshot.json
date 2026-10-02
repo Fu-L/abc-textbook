@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "shardId": "outcome-query-recursively-defined-string-shard-001",
+  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "c0dd6b621429af3f41dc5dd561e407619c20fb1061c9472cc583ea71e959558c",
+  "status": "on_hold",
+  "holdReasons": [
+    "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
+  ],
+  "checksDigest": "152c0347fa2d2c5a43baffa22007af7e8afbfefd3a814735a7127f42b89e99c5",
+  "reviewDigest": "2604a64d706ec28a7aa177d1c81c8ffeb08277fd6b7c84ccfd453b1ff0858cc3",
+  "htmlFiles": [
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc346-f.html",
+      "digest": "2f2c2fe9c8e42f3af259f183747304f6dd1abc6bf029fef1290ce2d3c27beb2a"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc350-f.html",
+      "digest": "572a913e29ac6f35efcf20846b489dab8ed13f26cd6a316faf2e08798bf82c78"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc417-g.html",
+      "digest": "1decdeef8b715c681b54e9d01be3cd3a1cb032d0a7499aeb5c6d3521162da66e"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc450-e.html",
+      "digest": "d66d7d83369ced658b5f5b0c46212b577debb56e00bb8086a15ef41f635cc2cb"
+    },
+    {
+      "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/index.html",
+      "digest": "37ddfeb9c2b05972d8a176c887a11de2fa3d0266dab47df06f5bf5a8fabe2630"
+    }
+  ],
+  "snapshotDigest": "201354f19fabcedb024a521331fdba4735af5d2d24be14af455158d914c2386e"
+}

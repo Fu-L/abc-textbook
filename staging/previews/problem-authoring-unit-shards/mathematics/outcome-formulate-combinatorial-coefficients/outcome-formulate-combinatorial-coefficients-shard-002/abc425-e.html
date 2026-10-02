@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ABC425-E — Count Sequences 2</title><style>body{max-width:76ch;margin:2rem auto;padding:0 1rem;line-height:1.85;font-family:system-ui,sans-serif;overflow-wrap:anywhere}a{color:#145da0}a:focus-visible{outline:3px solid #145da0}pre{white-space:pre-wrap}h2{margin-top:2.5rem}li{margin:.45rem 0}</style></head><body><main><h1>ABC425-E — Count Sequences 2</h1><h2 id="学習の位置">学習の位置</h2>
+<p>体系上の位置: <a href="../../../../../../src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md">組合せ係数と対称性で数える</a></p>
+<ul>
+<li>選択・順列・分配の重複の有無を識別し、組合せ係数の式を立てられる。</li>
+</ul>
+<p>共通前提: prereq-abc-advanced-v1 1.0.0。</p>
+<p>追加前提:</p>
+<p>共通前提と本節で説明する内容。</p>
+<p>対象外:</p>
+<ul>
+<li>重なりを交互加減する包除・Möbius反転。</li>
+</ul>
+<h2 id="考察">考察</h2>
+<p>各値 i をちょうど C_i 回含む列は、総数 S=ΣC_i 個の位置へ同じ値を配置する多項係数で数えられる。法 M は素数とは限らないため、逆元を前提にしてはいけない。</p>
+<p>採用する候補: パスカルの漸化式で 0≤k≤n≤5000 の二項係数を法 M で前計算し、累積個数へ C_i 個を挿入する二項係数を順に掛ける。</p>
+<p>加減算と乗算だけなので合成数法でも成立し、ΣC_i≤5000 の制約に収まる。</p>
+<p>棄却する候補: 階乗と逆階乗から多項係数を直接計算する。</p>
+<p>M が素数とは限らず、階乗が M と互いに素でない場合に剰余逆元が存在しない。</p>
+<p>多項係数 S!/(C_1!…C_N!) は、前に置いた個数 s に新しい C_i 個の位置を選ぶ積 ∏ binom(s+C_i,C_i) に分解できる。</p>
+<p>パスカルの漸化式 binom(n,k)=binom(n-1,k-1)+binom(n-1,k) は任意の法で保たれる。</p>
+<p>最大 S まで二項係数表をパスカルの三角形で構築する。s=0 から各 C_i を走査し、答えへ binom(s+C_i,C_i) を掛けて s+=C_i とする。</p>
+<h2 id="典型の発動条件">典型の発動条件</h2>
+<h3 id="多項係数の逐次分解">多項係数の逐次分解</h3>
+<p>発動条件: 同種要素の個数が複数与えられ、異なる並べ方を数えるとき。</p>
+<p>既配置 s 個と新しい C_i 個を混ぜる位置の選び方へ分解し、二項係数の積にする。</p>
+<h3 id="パスカルの三角形">パスカルの三角形</h3>
+<p>発動条件: 法が合成数で、階乗の除算を安全に使えない一方、添字上限が小さいとき。</p>
+<p>加算だけで全二項係数を前計算し、各テストケースの積を O(N) で求める。</p>
+<h2 id="問題固有の要素">問題固有の要素</h2>
+<p>法 M の性質を問わない形へ式を変形することが核心であり、組合せ数そのものは除算なしの漸化式で計算できる。</p>
+<p>別の問題へ持ち帰る視点: 剰余下の割り算が危険なら、整数として同値な積分解や加法漸化式へ移す。</p>
+<h2 id="正当性">正当性</h2>
+<p>同値要素C_i個を既置s個へ追加する完成位置の選択はC(s+C_i,C_i)で、削除すれば元配置へ一意に戻る。全種類の積が多項係数を整数のまま分解する。Pascalの加算則は任意の法で成立するので、合成数Mで逆元がなくても正確にmod計算できる。</p>
+<h2 id="実装上の注意">実装上の注意</h2>
+<ul>
+<li>二項係数表は ΣC_i の最大値まで用意し、k=0 と k=n を 1 で初期化する。積と加算の各段階で M を取る。</li>
+</ul>
+<h2 id="復習の核">復習の核</h2>
+<ul>
+<li>階乗の除算を紛れ込ませていないか、積の各因子が『既存 s 個と新規 C_i 個の混ぜ方』を正しく表すかを確認する。</li>
+</ul>
+<h2 id="計算量と制約">計算量と制約</h2>
+<h3 id="時間">時間</h3>
+<p>各case O(S²+N)、S=ΣC_i≤5000。Pascal表をcaseの法Mで作る。</p>
+<h3 id="空間">空間</h3>
+<p>O(S²)。必要なrowだけ保持すればO(S)にできる。</p>
+<h3 id="制約との対応">制約との対応</h3>
+<p>公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq T\leq 10^5; 2\leq M\leq 10^9; 1\leq N; 1\leq C_i; \sum_{i=1}^N C_i\leq 5000; The sum of N over all test cases is at most 3\times 10^5.; All input values are integers.</p>
+<p>時間・空間の見積もりは、上記の採用手法全体（前処理と問い合わせを含む）についてのもの。入力規模を各パラメータへ代入して確認する。</p>
+<h2 id="具体例">具体例</h2>
+<p>C=(2,1)、M=4。</p>
+<ol>
+<li>二つの同値aとbの列はaab,aba,baa。</li>
+<li>C(2,2)C(3,1)=3。</li>
+</ol>
+<p>期待される結果: 3 mod4。</p>
+<p>実行形式: 手計算による図示・追跡。プログラムの実行例ではない。</p>
+<h2 id="確認問題">確認問題</h2>
+<p>階乗の逆元で3!/(2!1!) mod4を直接計算できるか。</p>
+<h3 id="確認する観点">確認する観点</h3>
+<p>理由・境界・反例を言葉や式で説明する。</p>
+<h3 id="解答と理由">解答と理由</h3>
+<p>2!は2でmod4の逆元を持たない。整数として答え3でもそのmod除算式は不成立。</p>
+<p>確認結果: Pascal加算を使う。</p>
+<h2 id="出典">出典</h2>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc425/tasks/abc425_e">公式問題（2026-07-24T23:59:30+09:00確認）</a> — source-abc425-e-problem-4eec5e025cece4165e13228782e7988bf88fbd0458c8206360239346b64b7ac5</li>
+<li><a href="https://atcoder.jp/contests/abc425/editorial/13919">個別公式解説（2026-07-24T23:59:30+09:00確認）</a> — source-abc425-editorial-13919-962140edb30e387f4fda6f723c717fe99d3199f26ad1ada60841811a4092ac9c</li>
+</ul></main>
+</body></html>
