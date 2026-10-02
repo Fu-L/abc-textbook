@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T059-review-5388358885",
+  "taskId": "T059",
+  "scopeDigest": "ced521933758d14434625401607e1a02a006b160c1f252bf2f52115869e626cd",
+  "digest": "b16edf071504a722f5b79dbaf70fb25a2be35e58fd960bf1d3ac9ad732c7020e",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-approximate-rational-by-euclid",
+    "outcome-build-prefix-match-state",
+    "outcome-characterize-bipartite-feasibility-by-hall",
+    "outcome-invert-divisor-lattice-by-mobius",
+    "outcome-normalize-string-to-primitive-period",
+    "outcome-optimize-by-line-envelope",
+    "outcome-optimize-poset-antichain-by-dilworth",
+    "outcome-reconstruct-tree-from-distance-matrix",
+    "outcome-solve-bipartite-matching",
+    "outcome-traverse-stern-brocot-ancestors"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-additive-tree-metric-reconstruction",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/tree/additive-tree-metric-reconstruction.md"],
+      "itemIds": ["unit:unit-additive-tree-metric-reconstruction"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-reconstruct-tree-from-distance-matrix"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-string-prefix-automata",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/string/string-prefix-automata.md"],
+      "itemIds": ["unit:unit-string-prefix-automata"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-z-algorithm",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/string/z-algorithm.md"],
+      "itemIds": ["unit:unit-z-algorithm"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-build-prefix-match-state"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-string-periodicity",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/string/string-periodicity.md"],
+      "itemIds": ["unit:unit-string-periodicity"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-normalize-string-to-primitive-period"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-divisor-mobius-inversion",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md"],
+      "itemIds": ["unit:unit-divisor-mobius-inversion"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-invert-divisor-lattice-by-mobius"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-line-envelope",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/geometry-optimization/line-envelope.md"],
+      "itemIds": ["unit:unit-line-envelope"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-optimize-by-line-envelope"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-bipartite-matching",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/bipartite-matching.md"],
+      "itemIds": ["unit:unit-bipartite-matching"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-characterize-bipartite-feasibility-by-hall",
+        "outcome-solve-bipartite-matching"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-poset-dilworth-antichain",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md"],
+      "itemIds": ["unit:unit-poset-dilworth-antichain"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-optimize-poset-antichain-by-dilworth"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-rational-approximation",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/rational-approximation.md"],
+      "itemIds": ["unit:unit-rational-approximation"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-approximate-rational-by-euclid"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5388358885-unit-stern-brocot-ancestry",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/stern-brocot-ancestry.md"],
+      "itemIds": ["unit:unit-stern-brocot-ancestry"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-traverse-stern-brocot-ancestors"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-02T04:46:51.063Z",
+  "updatedAt": "2026-10-02T04:46:51.063Z"
+}

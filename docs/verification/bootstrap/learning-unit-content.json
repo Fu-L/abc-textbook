@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "2611080d421f2130a407a717d0a4e5ddfb3b7b4e1c882b840a66b44cc0464024",
+  "subjectDigest": "e47aec3d382d90e5b9e638723d3a88bb4a7c4326cd76b933bd64f1f92147b8f5",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -34,7 +34,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-tree",
       "documentPath": "src/content/docs/learn/tree/additive-tree-metric-reconstruction.md",
-      "documentDigest": "91eaaaf83c6f94fc0793eb9c7349eaa7e32e0f256da9d940d947208c3c8cc0cf",
+      "documentDigest": "590f9b71b24f5f0d647ea11a397cca097281626c818b2fe429d0900508b0dcc4",
       "metadataDigest": "e809a35c01a56c0b025700f8023a149a46636178d60aa694537eaae81c2d6a29",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-additive-tree-metric-reconstruction/manifest.json",
       "manifestDigest": "09cd8e5a868cfade26e217052d006df41da8178067bf5e4daf8fba6a706f3265",
@@ -43,7 +43,7 @@
         "source-abc451-e-problem-486faf52b69d92d668c8a94037cf4238e216a473304d2419ed11e05cbaf873c7",
         "source-abc451-editorial-18053-511e274e4d8a71aa2362be37507a426841ec0b50030f23fe407b2e86badbfa53"
       ],
-      "conceptSummary": "木距離では三点から分岐点までの距離を、距離の和差の半分として求められる。与えられた距離表から分岐点と枝長を復元し、木に戻した距離が一致するかを確かめる。",
+      "conceptSummary": "まず、距離が与えられたN頂点が木の全頂点であり、追加頂点を許さず、各辺の重みが正であるモデルを固定する。D[i,j]を入力距離とし、D[i,i]=0、D[i,j",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -308,7 +308,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-graph",
       "documentPath": "src/content/docs/learn/graph/bipartite-matching.md",
-      "documentDigest": "38c4f73fd188e7b88c11f5adb547b99c45dcf517d3f747b0a45508ff2aa5db93",
+      "documentDigest": "352dad06d7a086a2030acd3a89df4fa887944138a02cb75e6c3892f18eefa790",
       "metadataDigest": "1ba9b42c1acb617edae8581515125c4dbbbb28a4b2a664902f1ec2f63f4491f9",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-bipartite-matching/manifest.json",
       "manifestDigest": "2ece17f0df3fc35787a560c3948146d971ca42cf6785c921af4e8fdd6ae1b9db",
@@ -324,7 +324,7 @@
         "source-abc274-editorial-5024-3468e986ad327531b55ba8d7500752e4a96643d6ee228ed003de46b8384d21ee",
         "source-abc274-g-problem-140e49ac25d320fa39a242cd8243b701987b85ba37609883b437ff644d6c6f83"
       ],
-      "conceptSummary": "未使用頂点から交互路を探し、未選択辺と選択辺を反転してmatchingを一つ増やす。増加路がなければ、より大きなmatchingとの差から増加路を作れないため最",
+      "conceptSummary": "二部グラフの左右の頂点集合をL,Rとする。matchingは端点を共有しない辺の集合であり、各頂点の相手をmateとして保存する。最初はすべて未使用とする。一対",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -1535,7 +1535,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
-      "documentDigest": "846dc572783f645a1cbeb0397c6a055cf6c728d209dcbdcae0dd8197b3f140d1",
+      "documentDigest": "7ed9a82cfff13ef9f5c25aacf4608745390367c6e883fc150eb51f68bd272757",
       "metadataDigest": "f471291f9b9b2f9339b23eff82024f2027e9e989f74bed7bf5aac0c695cd8f5e",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-divisor-mobius-inversion/manifest.json",
       "manifestDigest": "9f43f4a1dd644c614b494aad5ed0587b7b2b4e50cc4c83ce075f5da2c579112d",
@@ -1548,7 +1548,7 @@
         "source-abc304-editorial-6511-ddd57c50291556fbe38e4db2238919b9c70daa74e48096ec0d0655b1d6fa718e",
         "source-abc304-f-problem-b902c20c4f077e5c415a49f03de5f281397ae7faba2c8df6f44fecad1b786fe1"
       ],
-      "conceptSummary": "g(n)=Σ_{d|n}f(d)の重複は、約数の包含関係のMöbius関数μで反転できる。gcdがちょうどdという条件を、dの倍数を満たす条件から取り出すのが典",
+      "conceptSummary": "「ちょうどn」の値f(n)と、「nの約数すべて」を含む累積値g(n)=Σ_{d|n}f(d)を区別する。約数方向の和をzeta変換、その重複を取り除いてfへ戻す",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3462,7 +3462,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/line-envelope.md",
-      "documentDigest": "fd3f92a0acb3249d755f5f38b7f9cd60b675506fd5bc7664c4a4fec471c782e3",
+      "documentDigest": "476ebcecbc71cb8ee9805f86f65f4a9b3c3f33c14edef47f9b109d65d24cc2d8",
       "metadataDigest": "dc0f72f27bcf4980721a2e6b12e91a5832c8fb53e79473401cb8e95109d88af8",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-line-envelope/manifest.json",
       "manifestDigest": "5a980058a81b3e0268ec0f7bf36c7eec37e9c6eebe7887501955f2e9cd4a16d7",
@@ -3475,7 +3475,7 @@
         "source-abc372-editorial-10973-65365912d37b041843a3541d9f94ebcc20adf3f3b84671f32d4b4f9a7ea26184",
         "source-abc372-g-problem-68e8e9b0a9851ed0d38ff7ad6830f60fc20931fd6ca858be1c542cfeda092e25"
       ],
-      "conceptSummary": "dp[i]=min_j(a_j x_i+b_j)の形なら、過去の状態を直線として保存し評価点で下側包絡線を求める。遷移式を一次式へ分離してから構造を選ぶ。",
+      "conceptSummary": "dp[i]=h(i)+min_{j<i}(a_j x_i+b_j)の形なら、確定した過去の状態jを直線f_j(x)=a_j x+b_jとして保存し、点x_iでの",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -4632,7 +4632,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md",
-      "documentDigest": "38da87a8487ee845580473f86db941bf48eed5f2c39fa1a5f8103f96d008cd31",
+      "documentDigest": "c6adb8a9ee6d7db5c3a924f194471f00a15267523415e4cbe40f6158d16c51ca",
       "metadataDigest": "46b7fde0fdc4e6af5cdc5fdbcc9bb6297704c91c04cbe53602ecaf4bb895242f",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-poset-dilworth-antichain/manifest.json",
       "manifestDigest": "8806f97f483b4413e5d3575ecd6442361da113cf1ec0874684db48295de9b05a",
@@ -4645,7 +4645,7 @@
         "source-abc457-editorial-20073-c0e8ca7e10ab9fc73085b6a4b2baf263af7304fad4e6ee93c327a52fd1f6c4f6",
         "source-abc457-g-problem-a96a932e06773837ff5bd7ad67ac03548a86bff6ab7c1732612efa63200da320"
       ],
-      "conceptSummary": "比較可能関係を左右コピーの二部graphへ移すと、chain分割とmatchingが対応する。Dilworthの定理により最小chain数と最大antichai",
+      "conceptSummary": "半順序≤は反射律・反対称律・推移律を満たす比較関係である。異なる要素の厳密な比較をx<yと書く。chainは任意の二要素が比較可能な集合、antichain（反",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -4916,7 +4916,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-number-theory",
       "documentPath": "src/content/docs/learn/number-theory/rational-approximation.md",
-      "documentDigest": "274c6c383705dddd921fee84afff4575b9f4444d00a4a4755de3cb94d545a288",
+      "documentDigest": "4ffd4a7b75451d7730488dace91899d962835b8d24064ce86932719fef38a13a",
       "metadataDigest": "b16f8ba63e0564049d2c38007523f59baef06dff7efd2c3f8e59c4d9febda4cc",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-rational-approximation/manifest.json",
       "manifestDigest": "bf5b3a66b930b23278e9c6099386ca27a34e7243a600e27d3b74c13da1cbe8fb",
@@ -4929,7 +4929,7 @@
         "source-abc408-editorial-13160-f0bbad69a76239a83d4b9be0c4f4bf401ec4ac87d5f903c4c99db3dd24da480f",
         "source-abc408-g-problem-bd7d0b7e294a989742d677343685b1f01aa8f28ed58c1a9ec4133fae8d4a6c6c"
       ],
-      "conceptSummary": "分母や分子に制限のある近似では、Euclidから連分数を作り、収束分数と中間分数を候補にする。大きな整数範囲を、商ごとにまとめた分数の更新へ移す。",
+      "conceptSummary": "ここでは非負の有理数x=P/Qに対し、分母が1以上N以下の既約分数yで絶対誤差|x−y|を最小にする。P,Qを約分し、Q≤Nならx自身を返して終了する。有限小数",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5676,7 +5676,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-number-theory",
       "documentPath": "src/content/docs/learn/number-theory/stern-brocot-ancestry.md",
-      "documentDigest": "e64daa4b490c981b24eaac538dd392c02a4a9791c3380d32273f85734a832d25",
+      "documentDigest": "ddba87ae2b3c26b9c63e89cea6216cbaf69699c7c0f30ba70ebfea50869e4605",
       "metadataDigest": "50eff8dd934b732232798d103665663a7e51555d4b3a0aa7283099871526bf8a",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-stern-brocot-ancestry/manifest.json",
       "manifestDigest": "ffbb2b6c66712307c7f7fa308b6cc17220b173065955569cf7eb7544d90cfe12",
@@ -5685,7 +5685,7 @@
         "source-abc273-editorial-5032-bc0318e516e79abcb7e6f917516307bfad40b3d3d8298f2167fdcdf49ab74598",
         "source-abc273-ex-problem-93198a1b6850bd94a16aeea7cfeb76b7975a6238de7d77b71cb512114ab770ba"
       ],
-      "conceptSummary": "互いに素な正整数の分数を、左右境界のmediantで進むStern–Brocot木へ写す。左右へ進む回数をEuclidの商でまとめると、深い祖先列を一歩ずつ展開",
+      "conceptSummary": "正の既約分数P/Qを扱う。境界a/b=0/1、c/d=1/0から始め、現在の木の頂点をmediant(a+c)/(b+d)とする。根は1/1。目標がmedian",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5757,7 +5757,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-string",
       "documentPath": "src/content/docs/learn/string/string-periodicity.md",
-      "documentDigest": "0f6dce3d31464022ad9268912bc295b797e3fbdde28923fda14d5af1cab69f4f",
+      "documentDigest": "c519aa83debeb1a012349aabdd5fbd98b67fe6f9c996adf4ed505dc4800f47b1",
       "metadataDigest": "2a393d196694cdfb81e3fe553e3e958da670bc786f7c383cc5850df51a3eb9a6",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-string-periodicity/manifest.json",
       "manifestDigest": "062d1440f03ba2640ac9e06d01633a2d2823e5e41d4b389fab1978e09ea7e4bb",
@@ -5766,7 +5766,7 @@
         "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
         "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
       ],
-      "conceptSummary": "長さpが周期とは、i+p<NでS[i]=S[i+p]となることである。Z[p]≥N−pで確かめられる。繰り返しの最小単位へ正規化すると、異なる長さの文字列をpr",
+      "conceptSummary": "長さN>0の文字列Sについて、1≤p≤Nが周期とは、i+p<NでS[i]=S[i+p]となることである。p<NならZ[p]≥N−pと同値であり、p=Nは比較対象",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5782,7 +5782,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-string",
       "documentPath": "src/content/docs/learn/string/string-prefix-automata.md",
-      "documentDigest": "e4206af79ddc44444f9c0e7aafe76c8f2c34d7925f62d06eed7a68397be7e4c9",
+      "documentDigest": "a3fc6a66ca35265c43422604cc43ac760de402359351c9ed6fc6f76ca2c0af18",
       "metadataDigest": "85fe111dd4e80bbfc48705958d0e21a65b55511a5ddd901f16657dbefd211e90",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-string-prefix-automata/manifest.json",
       "manifestDigest": "24ce1c682f143f016a9153d6abb7c35fbd324f3bdc3edcb982bb67f026299566",
@@ -5795,7 +5795,7 @@
         "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
         "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
       ],
-      "conceptSummary": "一致中のpattern prefix長を状態にすれば、全文字履歴を覚えず次の一致を判定できる。不一致時には、既に読んだ列のsuffixでもある最長のpatter",
+      "conceptSummary": "文字列Sの各位置iについて、Sの先頭とS[i:]が何文字一致するかをZ[i]とする。各位置で先頭から比較し直すと、同じ文字を何度も調べてしまう。Z法では、先頭と",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -6511,7 +6511,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-string",
       "documentPath": "src/content/docs/learn/string/z-algorithm.md",
-      "documentDigest": "160112c2f05f5d5c2ae132cd6dbddc99590ba10efd99f934eda253eb142b3664",
+      "documentDigest": "6287de1fb2172650213fbca6a2aef6e34c1210bda18c0431f5845899e7c0431b",
       "metadataDigest": "d67eb54934be117e5cc42bcb8dc13bb5d43b5e2b084c4f42df0622b62621e87e",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-z-algorithm/manifest.json",
       "manifestDigest": "346de9839cdd243d53f25c423a77aebe21a9b5b2e771a0cee00f546149b60635",
@@ -6524,7 +6524,7 @@
         "source-abc312-editorial-6837-5ef0557ec95f9f3695549301448e94bb2e86a3fa08555a97e500efeb9601fcf6",
         "source-abc312-ex-problem-80b2b512b6e292ea11c777f5361a3e6cb93da64dd9ed4e5f47a50bc5164b478e"
       ],
-      "conceptSummary": "Z[i]は文字列全体のprefixと位置iからのsuffixの最長共通prefix長である。既知の一致区間[l,r)内ではZ[i−l]を再利用し、rを超える部分",
+      "conceptSummary": "長さNの文字列Sに対し、Z[i]をS[0:]とS[i:]の最長共通prefix長とする。ここではZ[0]=Nと定める。N=0なら空配列を返す。各iでZ[i]文字",
       "checks": [
         "accepted_metadata",
         "source_references",

@@ -103,6 +103,26 @@ Revisionは `learning-unit-content.json` に固定する。
 - 数ゲームの加算則を一般partizan gameへ拡張しない。
   [ABC229 H公式解説](https://atcoder.jp/contests/abc229/editorial/2977)と比較した。
 
+### モデル・更新・双対・停止条件の説明を補う
+
+[レビュー5388358885](https://github.com/Fu-L/abc-textbook/pull/64#pullrequestreview-5388358885)では、7件の指摘に共通して、習得対象の技能を本文から再構成するための操作と証明が不足していた。訂正前に[作業manifest](../../work-manifests/initial/us2/review-5388358885.json)で10単元の本文範囲を固定した。モデルの条件、状態と初期化、更新式、候補を捨てる根拠、停止と答えの復元を各所有単元で説明し、編集ガイドにも範囲照合と双対の復元を点検する基準を補った。
+
+- 木距離復元: 追加頂点を許さない正重み木で、根path上の最も近い祖先を親にする規則、根距離の厳密減少、全距離再検証を導出。[ABC451 E公式解説](https://atcoder.jp/contests/abc451/editorial/18053)と照合した。三点距離がすべて2の反例を、追加分岐点を許す別モデルとの違いとして本文へ記載した。
+- 接頭辞一致: 構造単元のKMP説明をZ法の導入へ差し替えた。下位のZ法でも初期化、区間長による切詰め、区間内の不一致再利用、右端を延ばす比較の償却、連結による照合を補った。[ABC257 G公式解説](https://atcoder.jp/contests/abc257/editorial/4185)と照合し、後続の文字列周期単元では、端の欠けを許す最小周期と整数回反復のprimitive
+  rootを区別して構成した。
+- 約数Möbius:
+  μの定義、素因数の部分集合による恒等式、約数方向・倍数方向の反転式を導出。評価順の昇順・降順を区別し、μの篩とexact
+  gcdへの接続を記述した。[ABC230 G公式解説の補足](https://atcoder.jp/contests/abc230/editorial/3020)と照合した。
+- 直線包絡: 最小値・傾き降順・query昇順を固定し、交点順による中央削除、将来も支配される先頭削除、同傾き、二分探索を導出。[ABC228 H公式解説](https://atcoder.jp/contests/abc228/editorial/2946)と照合した。任意挿入のLi
+  Chao Treeも、中央での交換と片側への再帰、query path上に候補が残る理由まで補った。
+- 二部matching: 増加路反転と最大性に加え、未使用左頂点からの交互路によるHall違反集合、Kőnig被覆と最大独立集合、DAGの頂点素なpath分割を導出。[ABC274 G公式解説](https://atcoder.jp/contests/abc274/editorial/5024)の被覆帰着と照合した。
+- 半順序:
+  chain分割とmatchingの両方向の対応からDilworth等式を説明。非負整数重みの比較不能な複製を容量で圧縮し、W−maxflowとcutからの最適反鎖復元を導出。[ABC354 G公式解説](https://atcoder.jp/contests/abc354/editorial/10029)と照合した。推移辺の欠落による誤答、同一入力の正規化、狭義・広義のLDS対応も補った。
+- 有理近似・祖先: 境界0/1・1/0、行列式1、左右それぞれの一括更新、完全一致の終了、分母制約による停止を説明。[ABC333 G公式解説](https://atcoder.jp/contests/abc333/editorial/7937)と照合し、隣接分数の間の分母下界から両端候補の最適性を導出した。[ABC408 G公式解説](https://atcoder.jp/contests/abc408/editorial/13160)の開区間では端点一致で止めない違いも記述した。祖先単元では残り座標によるfloor((p−1)/q)のrun長、1,1での終了、run途中のLCA、辞書順での祖先集合の和集合計数を説明し、[ABC273 Ex公式解説](https://atcoder.jp/contests/abc273/editorial/5032)の一括境界更新と照合した。
+
+一時Pythonスクリプトで、木復元2,486ケース、Z・周期・連結照合2,236ケース、両方向のMöbius反転320ケース、CHT・Li
+Chaoのquery134,940回、全小規模二部グラフ689件のmatching・Hall・被覆、重み付き反鎖6,306ケースの最適値・選択集合、有理近似37,504ケース、祖先経路1,600件、祖先集合の和集合500ケース、開区間の最小分母2,211ケースを独立した列挙と比較した。有理近似には完全一致、分母上限1、巨大な商、同誤差を含める。本文の証明を検算で置き換えず、自動検査と人の受入を区別する。
+
 ## 成果・所有権・訂正の確認
 
 全242成果の直接所有は変更しない。概念説明は各単元の習得対象へ、練習は既存の問題一覧へつながる。構造単元には子単元との使い分けを加え、OutcomeごとにUnitを複製していない。固定guide・assessment・自評価表やProblem固有の解説は追加していない。今回は実行可能Example・Exercise・Answerを追加していないので、その実行証跡は適用外。
