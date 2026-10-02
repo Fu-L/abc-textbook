@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T059-review-5390118875",
+  "taskId": "T059",
+  "scopeDigest": "0828a34ca5e37a0bb5b95f68ec4423ac5d8ced1ae42575c4c68e6fccaf1b99a0",
+  "digest": "31c34b179ccf497012a95fd434f284827391f8a18a4b05367280c6f513cdd4b5",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-bound-reachability-in-numerical-semigroup",
+    "outcome-build-balanced-separator-decomposition",
+    "outcome-characterize-integer-solvability",
+    "outcome-compute-all-pairs-distance",
+    "outcome-construct-degree-parity-subgraph",
+    "outcome-construct-optimal-spanning-tree",
+    "outcome-derive-mst-weight-from-threshold-components",
+    "outcome-detect-improving-cycles",
+    "outcome-find-rooted-cycle-by-shortest-path-branches",
+    "outcome-find-weighted-balanced-separator",
+    "outcome-kernelize-near-tree-graph",
+    "outcome-maintain-xor-linear-basis",
+    "outcome-map-graph-cycle-xor-to-span",
+    "outcome-minimize-xor-coset-representative",
+    "outcome-model-and-compute-shortest-path",
+    "outcome-optimize-monge-transitions",
+    "outcome-query-recursively-defined-string",
+    "outcome-relax-in-dependency-order",
+    "outcome-sum-affine-floors-by-euclid",
+    "outcome-sweep-connectivity-by-kruskal-threshold",
+    "outcome-use-cycle-space-basis"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-cycle-space-basis",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/cycle-space-basis.md"],
+      "itemIds": ["unit:unit-cycle-space-basis"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-map-graph-cycle-xor-to-span",
+        "outcome-use-cycle-space-basis"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-degree-parity-subgraph",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/degree-parity-subgraph.md"],
+      "itemIds": ["unit:unit-degree-parity-subgraph"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-construct-degree-parity-subgraph"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-euclidean-floor-sum",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/euclidean-floor-sum.md"],
+      "itemIds": ["unit:unit-euclidean-floor-sum"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-sum-affine-floors-by-euclid"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-gcd-diophantine",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/gcd-diophantine.md"],
+      "itemIds": ["unit:unit-gcd-diophantine"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-characterize-integer-solvability"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-kruskal-threshold-sweep",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/kruskal-threshold-sweep.md"],
+      "itemIds": ["unit:unit-kruskal-threshold-sweep"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-sweep-connectivity-by-kruskal-threshold"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-monge-optimization",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/geometry-optimization/monge-optimization.md"],
+      "itemIds": ["unit:unit-monge-optimization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-optimize-monge-transitions"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-near-tree-kernelization",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/near-tree-kernelization.md"],
+      "itemIds": ["unit:unit-near-tree-kernelization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-kernelize-near-tree-graph"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-numerical-semigroup-reachability",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/numerical-semigroup-reachability.md"],
+      "itemIds": ["unit:unit-numerical-semigroup-reachability"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-bound-reachability-in-numerical-semigroup"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-recursive-compressed-string",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/string/recursive-compressed-string.md"],
+      "itemIds": ["unit:unit-recursive-compressed-string"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-spanning-tree-optimization",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/spanning-tree-optimization.md"],
+      "itemIds": ["unit:unit-spanning-tree-optimization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-construct-optimal-spanning-tree",
+        "outcome-derive-mst-weight-from-threshold-components"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-tree-balanced-separators",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/tree/tree-balanced-separators.md"],
+      "itemIds": ["unit:unit-tree-balanced-separators"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-build-balanced-separator-decomposition",
+        "outcome-find-weighted-balanced-separator"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-weighted-shortest-path",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/graph/weighted-shortest-path.md"],
+      "itemIds": ["unit:unit-weighted-shortest-path"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-compute-all-pairs-distance",
+        "outcome-detect-improving-cycles",
+        "outcome-find-rooted-cycle-by-shortest-path-branches",
+        "outcome-model-and-compute-shortest-path",
+        "outcome-relax-in-dependency-order"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5390118875-unit-xor-linear-basis",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md"],
+      "itemIds": ["unit:unit-xor-linear-basis"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-maintain-xor-linear-basis",
+        "outcome-minimize-xor-coset-representative"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-02T09:23:43.563Z",
+  "updatedAt": "2026-10-02T09:23:43.563Z"
+}

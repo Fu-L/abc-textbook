@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "c7b7f2d0f3db871c650e54f7b3174dac8122a9847356862832e5b6ef0163f7be",
-  "contentSubjectDigest": "c45b8ee400e2740d725bf715f081497fd3e910d954f603c3e0f9af0e8c8a4ba3",
+  "subjectDigest": "130e796097e8baa9b6f0ca2207ebc364af7c66425cc1b19684f36b06ca59f140",
+  "contentSubjectDigest": "4275ef80d491275ff6429d35c346bed4adfd530101379aa41544c74cf2e60b54",
   "executor": "Codex",
   "executorId": "person-codex",
   "humanReview": false,
@@ -11,9 +11,9 @@
       "checkId": "check-verify-fast",
       "command": "npm run verify:fast",
       "exitCode": 0,
-      "completedAt": "2026-10-02T08:54:33.865Z",
+      "completedAt": "2026-10-02T11:26:07.850Z",
       "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "rawResultDigest": "77cddceef7b9cbe6374ce3bef28730add437d4b7d11f9bc905c86dd04f0fc926",
+      "rawResultDigest": "c22ef09380c87e94d63aa7905d55581b9de41525b3e145977d54be530bdc9b05",
       "summary": {
         "typeAndAstroErrors": 0,
         "typeAndAstroWarnings": 0,

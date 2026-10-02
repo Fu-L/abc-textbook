@@ -2,12 +2,12 @@
   "schemaVersion": "3.0.0",
   "id": "merge-review-bootstrap-us2-full-learning-units",
   "changeId": "change-issue-46-full-learning-units",
-  "logicalChangeSubjectDigest": "c7b7f2d0f3db871c650e54f7b3174dac8122a9847356862832e5b6ef0163f7be",
+  "logicalChangeSubjectDigest": "130e796097e8baa9b6f0ca2207ebc364af7c66425cc1b19684f36b06ca59f140",
   "subjectFiles": [
     {
       "path": "docs/operations/full-learning-units.md",
-      "sha256": "b4c1326b86852d1bec869eccd4fc94b794f1260bd3fdf3629c9a7ae0ad796d51",
-      "byteLength": 4507
+      "sha256": "f6f837c2d369c12ce79fc62ce5035e99671e21531af42f39886ed64fef97c3b9",
+      "byteLength": 5129
     },
     {
       "path": "docs/verification/bootstrap/canonical-taxonomy-materialization.json",
@@ -16,12 +16,12 @@
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
-      "sha256": "19c0c7f48595851a9b4604375cc46d5c06fd98015c9d90cebc98fc86735f6a20",
-      "byteLength": 36419
+      "sha256": "b509338762f9face55d0b9412b76b3f3be26d3990eaea53fd781a2e3d4e395b6",
+      "byteLength": 43126
     },
     {
       "path": "docs/verification/bootstrap/learning-unit-content.json",
-      "sha256": "4b3fbc54ee9aa02514156f6999a43ba7e7feb0c091e2bca31ae5a2a6a4e3e41d",
+      "sha256": "c8e0e16566219df188564e2c8439b4dc2977d930cc6e9ad9558cb8d1024abe86",
       "byteLength": 459712
     },
     {
@@ -1210,6 +1210,11 @@
       "byteLength": 11952
     },
     {
+      "path": "docs/work-manifests/initial/us2/review-5390118875.json",
+      "sha256": "7a6ba4d350c5bd5ce5b6adaafdc4e7f835dfe20f7d83c05c47ba385745424eb2",
+      "byteLength": 13161
+    },
+    {
       "path": "package.json",
       "sha256": "63d1e18f34432e129565e7f2fca9b42e5e48d650ac2c7d4fd4e62310b2eeb150",
       "byteLength": 5751
@@ -1411,8 +1416,8 @@
     },
     {
       "path": "src/content/docs/learn/combinatorics-algebra/xor-linear-basis.md",
-      "sha256": "cf0ea17d9b74efbc7f0f2633d2985d0ca2ecfe4c170e326c88e8b4734a1bc9ff",
-      "byteLength": 7713
+      "sha256": "f15e88d778ab7a84823b02125312eb2240910d42eb5fd4037feeb46bea064429",
+      "byteLength": 8550
     },
     {
       "path": "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
@@ -1611,8 +1616,8 @@
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/monge-optimization.md",
-      "sha256": "eda33cd95a065df12c3edbc4789333970fbaa3c5d8a3556a73ecc4a5ef7961d2",
-      "byteLength": 6252
+      "sha256": "2208cb36d5aeb84ac509215deb70aa4f84575e8f609d6da4a4f1c180fd1ee9cd",
+      "byteLength": 10713
     },
     {
       "path": "src/content/docs/learn/geometry-optimization/separable-convex-marginals.md",
@@ -1651,8 +1656,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/cycle-space-basis.md",
-      "sha256": "c3b80c500aaa1d30226cce75a29c13a1cff79c9f65b343e1f88500cb826adb28",
-      "byteLength": 7914
+      "sha256": "586a5c0d3784c6c7d070a97a688b365f6c2da8ab258b519fcdd8b8eaaf0b7269",
+      "byteLength": 9851
     },
     {
       "path": "src/content/docs/learn/graph/dag-topological-processing.md",
@@ -1661,8 +1666,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/degree-parity-subgraph.md",
-      "sha256": "feb78f663e29fe15bfe1013e4a8996b20c7064795cc707fdb767357357cf3e55",
-      "byteLength": 3359
+      "sha256": "81c3db270eda1409ccc68a702d1146cdd16e53d245d4bfb0719de653bcb11c02",
+      "byteLength": 4226
     },
     {
       "path": "src/content/docs/learn/graph/difference-constraints.md",
@@ -1751,8 +1756,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/kruskal-threshold-sweep.md",
-      "sha256": "a0cdee5dd7962a046c77819d4d424c25c47d09c42c2c944f885aad725cfdbb32",
-      "byteLength": 6851
+      "sha256": "6980b3369efaee82a6b7f11b025943c152b2062ba47a4462b07875953e0953a4",
+      "byteLength": 9389
     },
     {
       "path": "src/content/docs/learn/graph/lowlink-critical-structure.md",
@@ -1781,8 +1786,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/near-tree-kernelization.md",
-      "sha256": "d58cb583b3026258acd9cd26941d7a1e471141ccdf4053b13e72f046e8678a2d",
-      "byteLength": 5842
+      "sha256": "15f2329c0954a86d7cb352963151c1c8d70aeea2aa144906c9355cbfbd6bd5dd",
+      "byteLength": 6291
     },
     {
       "path": "src/content/docs/learn/graph/path-matching-contraction.md",
@@ -1816,8 +1821,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/spanning-tree-optimization.md",
-      "sha256": "03141166a43ac86272e0804e21b9f5b5eb93fd4e8117fbacb4810e69a17ba2db",
-      "byteLength": 9999
+      "sha256": "6aaa56e9941acb57b1824d22351007aa36bb41b54ca9e3f040ebe54b0f056ba3",
+      "byteLength": 10120
     },
     {
       "path": "src/content/docs/learn/graph/state-graph-search.md",
@@ -1841,8 +1846,8 @@
     },
     {
       "path": "src/content/docs/learn/graph/weighted-shortest-path.md",
-      "sha256": "6dd6e8585efbfde543ac8fd80e1593f9ca12d97e00df4ddf057aeb7ca0cba61f",
-      "byteLength": 29751
+      "sha256": "c59c7bc408f914672e37c48ee654cb58bc10420175f304b5f69e65174d37df3d",
+      "byteLength": 30479
     },
     {
       "path": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
@@ -2006,8 +2011,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/euclidean-floor-sum.md",
-      "sha256": "9e2c390275d9de05b33a3118d077c915b1f2fbfc1f51a47498b73868629e0c52",
-      "byteLength": 6635
+      "sha256": "9a67b223574dcffcc6627a3d6e883cd301c5262f18f37f5bb073b22b18133755",
+      "byteLength": 7365
     },
     {
       "path": "src/content/docs/learn/number-theory/finite-field-extension.md",
@@ -2026,8 +2031,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/gcd-diophantine.md",
-      "sha256": "d49dc8ca7c2f0108f3d58d7a7c6b54bc5e0b344f474d9a17cd99c023ef5b24b3",
-      "byteLength": 7150
+      "sha256": "7c8efd910353a68dbaaddba41ab64bb4e62b7fa13a42584f85c7e8bea8ae4564",
+      "byteLength": 8010
     },
     {
       "path": "src/content/docs/learn/number-theory/gcd-structure.md",
@@ -2076,8 +2081,8 @@
     },
     {
       "path": "src/content/docs/learn/number-theory/numerical-semigroup-reachability.md",
-      "sha256": "5a15970cbadc6195016bf252fe7d8d1a779d7c95ae67aadcf3ed0fa7a64d2e67",
-      "byteLength": 4483
+      "sha256": "07ffeb8696cf8e0d0f9da73090e1feb204b063fa86a436437ed46ee02451a637",
+      "byteLength": 4773
     },
     {
       "path": "src/content/docs/learn/number-theory/prime-divisor.md",
@@ -2271,8 +2276,8 @@
     },
     {
       "path": "src/content/docs/learn/string/recursive-compressed-string.md",
-      "sha256": "5bea07d4e6671a9d9ac66ee6efb4ba39e77f367e157cf8b8ad4a83b450ed4e30",
-      "byteLength": 6101
+      "sha256": "dd5236415bccdfa99be88c5bf52e51c933ed4b7f27f8665d525c3f53329ece45",
+      "byteLength": 6391
     },
     {
       "path": "src/content/docs/learn/string/run-length-dynamics.md",
@@ -2381,8 +2386,8 @@
     },
     {
       "path": "src/content/docs/learn/tree/tree-balanced-separators.md",
-      "sha256": "6113c46e7c041df7b01cb1cdc316f8408f07d14d62e8c8b6c55cb5fe941943da",
-      "byteLength": 7013
+      "sha256": "1d1dbe674c7acacdeb4abb2de67ae7ee2753fa23565614afd166c1e9f1b7b947",
+      "byteLength": 8855
     },
     {
       "path": "src/content/docs/learn/tree/tree-decomposition.md",
@@ -3603,17 +3608,17 @@
   "excludedArtifacts": [
     {
       "path": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "sha256": "0732b58c95b7b0bd9fb43f319fdb338ae1a0caff6153d84c9118485561a4c8b9",
+      "sha256": "d19e362c59945dbb810ece91bdca1f2e311140ca4fd7651a463ae34eb17059c7",
       "byteLength": 1360
     },
     {
       "path": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "sha256": "77cddceef7b9cbe6374ce3bef28730add437d4b7d11f9bc905c86dd04f0fc926",
-      "byteLength": 26414
+      "sha256": "c22ef09380c87e94d63aa7905d55581b9de41525b3e145977d54be530bdc9b05",
+      "byteLength": 26441
     },
     {
       "path": "docs/verification/bootstrap/us2.json",
-      "sha256": "6a7b018dfe104219bec4404e4470db2f95dcf69b3177a0106374a75ea63cac3e",
+      "sha256": "97aa4bf8a73c45dce7385a4e041fc9c465e1fdb4a59f8e211e9efe4f1f95f9da",
       "byteLength": 1988
     }
   ],
@@ -3865,7 +3870,7 @@
   ],
   "outcomeImpact": {
     "kind": "affects_learning_outcomes",
-    "rationale": "All 232 Units across nine chapters were re-inspected against all 242 accepted outcomes. PR #64 review 5389683770 corrections in 12 Units reconstruct multiset, exponent-state, and giant-integer fingerprints with distinct collision proofs, total error, and complexity; add rolling-hash initialization and LCP search; fix empty-state LIS counting; and derive bucket updates, finite subset intersections, gcd differences, multiplicative order, inclusion-exclusion, six DP optimization patterns, and terminal-calibrated expectation potentials. Accepted taxonomy, ownership, placements, and draft status are preserved."
+    "rationale": "All 232 Units across nine chapters were re-inspected against all 242 accepted outcomes. PR #64 review 5390118875 corrections in 13 Units separate global edge cycle space from component-local walk label spans, prove necessity and construction, preserve component-local path bounds and coset normalization, derive parity subgraphs and Kruskal minimax pairing, detail centroid decomposition and SMAWK, correct saturated reversal lengths and multigraph heap bounds, and make floor-sum and signed Diophantine parameter updates explicit. Independent exhaustive and direct-oracle checks accompany the prose. Accepted taxonomy, ownership, placements, and draft status are preserved."
   },
   "reviewMode": "self",
   "reviewerId": "person-maintainer",
@@ -3874,13 +3879,13 @@
       "checkId": "check-verify-fast",
       "executedByReviewerId": "person-codex",
       "command": "npm run verify:fast",
-      "subjectDigest": "c7b7f2d0f3db871c650e54f7b3174dac8122a9847356862832e5b6ef0163f7be",
+      "subjectDigest": "130e796097e8baa9b6f0ca2207ebc364af7c66425cc1b19684f36b06ca59f140",
       "resultPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
-      "resultDigest": "0732b58c95b7b0bd9fb43f319fdb338ae1a0caff6153d84c9118485561a4c8b9",
+      "resultDigest": "d19e362c59945dbb810ece91bdca1f2e311140ca4fd7651a463ae34eb17059c7",
       "rawResultPath": "docs/verification/bootstrap/full-learning-unit-verify-fast.json",
-      "rawResultDigest": "77cddceef7b9cbe6374ce3bef28730add437d4b7d11f9bc905c86dd04f0fc926",
+      "rawResultDigest": "c22ef09380c87e94d63aa7905d55581b9de41525b3e145977d54be530bdc9b05",
       "exitCode": 0,
-      "completedAt": "2026-10-02T08:54:33.865Z"
+      "completedAt": "2026-10-02T11:26:07.850Z"
     }
   ],
   "notApplicableChecks": [
@@ -3895,7 +3900,7 @@
   ],
   "humanContentReviewEvidenceId": "human-content-review-bootstrap-us2-full-learning-units-pending",
   "humanContentReviewEvidencePath": "docs/verification/bootstrap/us2.json",
-  "humanContentReviewEvidenceDigest": "6a7b018dfe104219bec4404e4470db2f95dcf69b3177a0106374a75ea63cac3e",
+  "humanContentReviewEvidenceDigest": "97aa4bf8a73c45dce7385a4e041fc9c465e1fdb4a59f8e211e9efe4f1f95f9da",
   "constitutionCheck": {
     "constitutionPath": ".specify/memory/constitution.md",
     "constitutionVersion": "3.0.0",
@@ -3923,6 +3928,6 @@
   },
   "unresolvedBlockingFindingCount": 0,
   "mergeApproved": false,
-  "reviewedAt": "2026-10-02T08:54:33.865Z",
-  "evidenceDigest": "724a50e9ad1d69222d3e46a42ea7ce965b1b05a1aaa9eea154df2d1e2cf8baef"
+  "reviewedAt": "2026-10-02T11:26:07.850Z",
+  "evidenceDigest": "e4a9dbc486ca5cfe883b84c52cff0867cd311d8c3320ea9ab75745f8eef644e3"
 }
