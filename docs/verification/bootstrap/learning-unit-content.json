@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "sourceBuild": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-  "subjectDigest": "1efb174395b03b4799bf78000d2fe37b8cefec0379884634e95005ed75238d5b",
+  "subjectDigest": "770264d43fd3bfa7abb4c9ddb783b070cfb16d7dc87a3b38237993e218827c1f",
   "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
   "units": [
     {
@@ -2540,7 +2540,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/fps-composition-power-projection.md",
-      "documentDigest": "c93a8f899d13604c3399e2372d51a3b2c6da95ce96509d7bcaca2176b0441cd6",
+      "documentDigest": "823f208f814fb91477fd228eca97a53249034aa6ae988b2aa10fc7df8a461f4d",
       "metadataDigest": "c9c51645f8b6c840239d023bc3269ca25fe191d35c1419c071bb420f32fdee6e",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-fps-composition-power-projection/manifest.json",
       "manifestDigest": "209b038929c3fa9931ec1b9ecbb61660b6d8326c96f544d547ec6597ed41ff18",
@@ -2551,7 +2551,7 @@
         "source-abc439-editorial-14995-0a2a7c616c5b380cf5458a7d308d228890333a82e09702d6969594b82d21f75c",
         "source-abc439-g-problem-0da2b7e4b8e02549256c2e22db02498f6e2ce0f1d44974bfbae9b0742dfeaf26"
       ],
-      "conceptSummary": "f(g(x))の合成と、g(x)^kの係数を線形汎関数で読むpower projectionは、係数写像の転置として関係する。求める精度とg(0)などの条件を固",
+      "conceptSummary": "精度をx^{N+1}未満とし、g(0)=0を仮定する。gを固定して `A_{j,k}=[x^j]g(x)^k`（0≤j,k≤N）と置く。fの係数ベクトルへAを掛",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -2826,7 +2826,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/generating-functions.md",
-      "documentDigest": "8c99d6931236f50682066caeb67883ad6eb6749da59cd7502596e758715c79a1",
+      "documentDigest": "00c61e9942c3cd1357732f297808c94cc94ad8b0a7716b64729430cd27ebc3f9",
       "metadataDigest": "07e27b2ea16b339e322929b1d1d2531ca571cda4b2bd81d7d172bddf4b6d2a97",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-generating-functions/manifest.json",
       "manifestDigest": "761107bcae5a5b41b1fc0feaa2964e752838691a056c8e45e9efd6eb52720f28",
@@ -2839,7 +2839,7 @@
         "source-abc231-editorial-3051-f01ce3737eb8308e2bca5621c3dafd2305bea4bc5c68a1be636ac7cc0f1ca678",
         "source-abc231-g-problem-69931605380a9f39f080222475ed80e894b343fb11dc7e342b4b9cd81494e59f"
       ],
-      "conceptSummary": "サイズnの個数を係数a_nとしてΣa_n x^nへ格納する。二つの独立な構造の結合は係数の畳み込み、選択肢の和は級数の和へ対応する。",
+      "conceptSummary": "先に「サイズ」と「同じ構造とみなす条件」を決める。サイズnの構造数がa_nなら、通常型生成関数を `A(x)=Σ_{n≥0} a_n x^n` と定義する。`[",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3075,7 +3075,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-tree",
       "documentPath": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
-      "documentDigest": "d44ea9868bffb33214f338b5909fd8544003ed9bdcda9e616aa49e187b5c3382",
+      "documentDigest": "97b1d183fc659b71b690821ab42db902af546c703a93620b6af17f96366ad51b",
       "metadataDigest": "d7d8e91fa5d3c19032e385c6fc08f2d83ef99ea281035b54db563d1eeabca226",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-heavy-light-recursive-dp/manifest.json",
       "manifestDigest": "c9580ed5fb95da4c51928b8742a5b207e404df6c6f80223f857904a3d7d38994",
@@ -3084,7 +3084,7 @@
         "source-abc311-editorial-6814-952ca8df25e1dc29d36a2d97bf5823cc8ec71cafd9a762902cea712a7640e19f",
         "source-abc311-ex-problem-e370488f1342f8751a5f37a9f0b8ab00784f5baee29786d775a1e52907cd7dc1"
       ],
-      "conceptSummary": "資源量の配列を木の再帰へ渡す際、重い子を優先して計算を共有し、軽い子だけに追加の分岐を負担させる。根拠は単にHLDという名前でなく、同じ資源DP入力が何回再計算",
+      "conceptSummary": "二状態の木上knapsackを標準形にする。頂点vは費用w_v、利益b_v、色c_v∈{0,1}を持つ。状態sでは、部分木内で最初に選ぶ頂点の色をsに制限する。",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3100,7 +3100,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-tree",
       "documentPath": "src/content/docs/learn/tree/heavy-path-tree-dp.md",
-      "documentDigest": "46ffb1d4d7f10b5055d8d8123715f1a9cfff98327bd17f73a5a979c2efc9e0b3",
+      "documentDigest": "91bbda8a6c01ee2784860e27f447e665a0879521308fc880c8a7d4177038c835",
       "metadataDigest": "08b400c945da2b979254801baa82feb2470abc1094a33f6e1e56f72efaa3aa68",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-heavy-path-tree-dp/manifest.json",
       "manifestDigest": "2a99307b0d977f1d3242075ee0ffd92270a6dd54e6c4b8065affc4b8287c7148",
@@ -3109,7 +3109,7 @@
         "source-abc269-editorial-4838-c30b479eb416f50d4f286ad6b698e2eb13b631f037caa01b68c45d7498952524",
         "source-abc269-ex-problem-f742e5223616f7665fcc961022130ba6863b060b10574df5001fb15403bb0ee8"
       ],
-      "conceptSummary": "木DPの重い子との合成をpath上の積、軽い子との合成を外側の要約として分ける。多項式の次数が部分木サイズに対応する場合、重軽分解と積のまとめ方で大きい畳み込み",
+      "conceptSummary": "根付き木のantichain、すなわち祖先・子孫を同時に選ばない頂点集合を、選んだ数ごとに数える。部分木vの生成多項式をF_v(x)とすると、vを選ぶ場合は{x",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3379,7 +3379,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/labeled-component-decomposition.md",
-      "documentDigest": "71101795fc8c986c552cfa361d27557e84e4de90564e30ad02ea05388b160ad0",
+      "documentDigest": "e53333f8863fa743536c75d25843121bf9eff5e6cd03ac5b138f4d79b644e20a",
       "metadataDigest": "9b382adcba623dc1c48656fe4500a7638aa3ea2aff6774fdc0f5c469d47f4704",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-labeled-component-decomposition/manifest.json",
       "manifestDigest": "3f71fa530791c6ca5600465cc770305b9c506617e1053bc493e0c40f22fed314",
@@ -3392,7 +3392,7 @@
         "source-abc253-editorial-4023-366204e887abfce0e08e2692d2e2861877d7e000474c649f5be1fddbb290bf8a",
         "source-abc253-ex-problem-403eda1a50e862876c0d2cf16a7969f8c8d764c1034b46e09454824b8ae3cabd"
       ],
-      "conceptSummary": "ラベル集合から一つの連結成分のラベルを選び、その成分と残りへ分解する。最小ラベルを含む成分を先に決めると、成分の並び替えによる重複を避けられる。",
+      "conceptSummary": "固定されたnラベル上の全構造の個数をa_n、連結な構造の個数をc_nとし、空構造は `a_0=1`、空の連結成分は存在しないとする。成分間の制約がなく、各構造が",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -3825,7 +3825,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-number-theory",
       "documentPath": "src/content/docs/learn/number-theory/min25-sieve.md",
-      "documentDigest": "833bb7e4890400d84ad534e3c74f89ea4eeb41fca80810405d3bef9a2caaad71",
+      "documentDigest": "e7f1bc5c7c680b356941370762e22aa6ca252a9c410d8056d20cf4a29ce980ac",
       "metadataDigest": "78d60d8de1828a0b9364307b1ed9ee44d98d02ac5bec8bd374b932d60c754317",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-min25-sieve/manifest.json",
       "manifestDigest": "fbbbe622d684a37e53581a08b99e43344e442df8ef683a35482893a2c6f2e2e7",
@@ -3834,7 +3834,7 @@
         "source-abc370-editorial-10869-b805b19b481f5f6449220fab8a2c5502e7d0135bdecba7ae5c67b32de475acd1",
         "source-abc370-g-problem-24d3314149c61d48b68d9a4609bdb987c7c7fd4e495ed430aa041d2f82f6562f"
       ],
-      "conceptSummary": "積性関数の総和を素数の寄与と最小素因数による分類へ分ける。N/iの相異なる値を索引にし、素数和の篩と素数冪の再帰を共有して1からNの直接列挙を避ける。",
+      "conceptSummary": "乗法的関数fは、互いに素なa,bについてf(ab)=f(a)f(b)を満たす。f(1)=1とし、素数冪f(p^e)を計算できる場合に `Σ_{m≤N}f(m)`",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5028,7 +5028,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/relaxed-convolution.md",
-      "documentDigest": "7335de4914a9cae6cd64866f2aa712dd464ddcaf2ff01672fbbc4903895036be",
+      "documentDigest": "717b7cf52b530aca5cc7370dfd76a51ec1a2c6e46c4353b7bfec21a048429f6c",
       "metadataDigest": "cc95ce0f874f6a31dc0de457c84089e830cc9965fe36dc67bdeeb3348e8d7986",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-relaxed-convolution/manifest.json",
       "manifestDigest": "26536ca42a80834c542ecb3426d22160af86cae33ef8cac70b553674998cb391",
@@ -5041,7 +5041,7 @@
         "source-abc281-editorial-5371-9181c75b8affe7e82abcf348c4ceb3daa99b80b33dfdc9aec716746006dc6ada",
         "source-abc281-ex-problem-238a900be791f6707698c0e4a18061f323afa9e96776892761c7304380778746"
       ],
-      "conceptSummary": "係数が順に決まり、次の係数が過去の畳み込み結果に依存する場合、全列を先に渡す一括NTTは使えない。確定済みblock同士の積をまとめ、必要な時点までに寄与を配る",
+      "conceptSummary": "時刻nにa_n,b_nが確定し、その直後に `c_n=Σ_{i+j=n}a_i b_j` を返す問題を考える。未来の係数を必要とする一括NTTは使えない。各積a",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5173,7 +5173,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/rsk-young-tableaux.md",
-      "documentDigest": "795a96577a28b964331efd57aedf5a9e340d3fd9daf5c9a38dac3480147d70f0",
+      "documentDigest": "a960402f0b43b6add2e14bf58c77e11f7d48a8d986cdb1a33a820b5d4b3ecfe1",
       "metadataDigest": "d74829dd4ec1494898993fe40b668c3fe13efcde2874a20d96ade3e8cd2908a7",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-rsk-young-tableaux/manifest.json",
       "manifestDigest": "04bd2b2c6db671882010193d8cba848dee40ad78d668d8a89455cb478f3a1d62",
@@ -5182,7 +5182,7 @@
         "source-abc378-editorial-11283-7858d0b5d92f979507e886a044d07ad747c4bfb2964eb529a160bec71d3074db",
         "source-abc378-g-problem-0e527fbbc43a6f3092556fb9d7fbef5243aa30226a3e4c71408157867c152ca0"
       ],
-      "conceptSummary": "列の要素を行へ挿入し、置き換えられた値を次の行へ送るRSK対応で、順列を同じ形のtableau対へ写す。第一行長とLIS長の一致により、部分列制約をYoung ",
+      "conceptSummary": "まず異なる値1,…,nからなる順列を扱う。Young図形λは、非増加の行長 `λ_1≥λ_2≥…>0` を左揃えに並べたn個のcellである。標準Young盤は",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5364,7 +5364,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/separable-linear-transform.md",
-      "documentDigest": "1dd3f0974da68b8c0540e7edd18cd15650044e71863f9278eb43938053e0f9ce",
+      "documentDigest": "89fd6feb0092adf235b6baad38ed3d1f936cbf08c7a75ef008f51473e6393f88",
       "metadataDigest": "7063e173ec3ed5f47ca042cabd57fda648eaaf71b39cb9d41ee73e1c20b40ae1",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-separable-linear-transform/manifest.json",
       "manifestDigest": "68c676da0ff168e5b5443e4125b66b468696493e69444f057523f11dc82c09e2",
@@ -5377,7 +5377,7 @@
         "source-abc265-editorial-4577-a0a5cd70b7240c0d5ac6da0e58b56efbdfc5e377bc7df7fe6419e06715bbce72",
         "source-abc265-ex-problem-055d926e1343bc0e9dd5f13eb2b0a7878d1c300f3d8cc91fac8b952717f48de5"
       ],
-      "conceptSummary": "多次元の線形変換が各軸の小さな変換のtensor積に分かれるなら、一軸ずつ作用させる。全体の密行列を作らず、座標ごとの局所合成で同じ結果を得る。",
+      "conceptSummary": "N=2^B個の係数をB bitのmaskで添字付けする。各bitへ同じ2×2行列 `H=((1,1),(1,-1))` を作用させると、全体の変換はそのB個のK",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5622,7 +5622,7 @@
       "taskId": "T155",
       "chapterId": "unit-chapter-tree",
       "documentPath": "src/content/docs/learn/tree/static-top-tree.md",
-      "documentDigest": "e3a9be1077bbb05521ef82cf34b1133162dafa10accd24a37d963b516022b82e",
+      "documentDigest": "fa301d15775b8c525c1b6e56be25f61e57d8489c2003cfec4431f7bee047fcc2",
       "metadataDigest": "a2bb13a7c3e636caa9e441a1b351f427f839348ddc558ac970ce4520e858f492",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-static-top-tree/manifest.json",
       "manifestDigest": "206fe09d3ad659098af153480ad139eee545e0c917dddb649e7c573f71ee87ae",
@@ -5633,7 +5633,7 @@
         "source-abc460-editorial-21012-6211d79b0247de51b5bce8908f4941d08e93e10351948ee7572b8ad47d17609a",
         "source-abc460-g-problem-8a4e2da0f88034c47040b8ff47d390445e433f0c72add4595cfba8620b77b27c"
       ],
-      "conceptSummary": "木の連結部分を境界頂点が少数のclusterとして表し、同じpathをつなぐcompressと枝をまとめるrakeで合成する。各clusterが外へ渡す情報を固",
+      "conceptSummary": "固定された根付き木で、`D_v=a_v+Π_{u:子}D_u` を保つ標準形を考える。空積は1とする。この形だけでも、子の集約とpath上の写像の合成を分ける手",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -5811,7 +5811,7 @@
       "taskId": "T158",
       "chapterId": "unit-chapter-combinatorics-algebra",
       "documentPath": "src/content/docs/learn/combinatorics-algebra/subset-convolution.md",
-      "documentDigest": "b761e0a284247941687b7ddf568bea1facc6d06e26ca106a003ccd3fc21c6f46",
+      "documentDigest": "67848e5c15c0ad23ab3ec30ad424ff9f526edd1c934ea5e994071833fa1d4797",
       "metadataDigest": "56adb5ab13d8075d26cd90eeaad9719ea7e9a7b9597fe432f5ce1ef10052843d",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-subset-convolution/manifest.json",
       "manifestDigest": "390631cdafa555695069b57f75f8e2c004b00fd1252d3276497c41d407282890",
@@ -5820,7 +5820,7 @@
         "source-abc294-editorial-5999-b882666d9441fb8009a2dee7f54d8c44d8f95e980d538ff9a700d23c9da2a6e0",
         "source-abc294-ex-problem-4feda50eb7e9fd0479a4ac69c9ef45ba9cc9d354325370e13bfff87fde54d521"
       ],
-      "conceptSummary": "h[S]=Σ_{T⊆S}f[T]g[S\\T]は、重ならない二集合の合成である。サイズ別のzeta変換を使い、変換後にサイズを畳み込み、Möbius反転で余計な重",
+      "conceptSummary": "N bitの集合に対して `h[S]=Σ_{T⊆S}f[T]g[S\\T]` を求める。素朴に全S,Tを列挙するとO(3^N)になる。通常のzeta変換はunio",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -6290,7 +6290,7 @@
       "taskId": "T055",
       "chapterId": "unit-chapter-geometry-optimization",
       "documentPath": "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
-      "documentDigest": "bb7843492d3a3e5fa29868e04c138a1ceac571775f3481c7ba749398da5559cb",
+      "documentDigest": "46be7b4a91c045393e139eae572fa8ddfdd541c55c3842dad33d25d293c7c00e",
       "metadataDigest": "52b58e97f9c6e57c9e1ba2c3e0900239f5f43793b6ab03de883a534e65e2773d",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-two-variable-convex-lattice-optimization/manifest.json",
       "manifestDigest": "0973855a9782b7546ad690436ee70c92a5a004a92ac2ba7091b668bc9c11e928",
@@ -6299,7 +6299,7 @@
         "source-abc459-editorial-20454-ecbf9c3449d7213519d035df601b8dabb67074d38f83e1d29ed6693f254b0d5d",
         "source-abc459-g-problem-7d797f0f192d6011a6ea95b5378e324bddf07dc615aaa01f92e8e5aefccec4dc"
       ],
-      "conceptSummary": "二変数整数の最適化では、連続凸性を確認した後、片方を固定した最適応答や格子境界を使って候補を減らす。実数の最適点に近い整数を選べばよい、という主張にも対象関数ご",
+      "conceptSummary": "具体的に、正整数A,Bと定数e_1,…,e_4に対する",
       "checks": [
         "accepted_metadata",
         "source_references",
@@ -6486,7 +6486,7 @@
       "taskId": "T056",
       "chapterId": "unit-chapter-modeling",
       "documentPath": "src/content/docs/learn/modeling/xor-threshold-matching.md",
-      "documentDigest": "581f006ee49465341f85952522336a04c594620813df55eee696ddc50cc7a7fb",
+      "documentDigest": "512c667bee74a8a10cb67e71c15b84b2e1b3c2e213337333244c8bd56b115451",
       "metadataDigest": "af1adfd77fd387df2e5e0fa6967b7b995da75488b815dee24789bc8669efbc9b",
       "manifestPath": "docs/work-manifests/initial/us2/full-learning-units/unit-xor-threshold-matching/manifest.json",
       "manifestDigest": "7c7ddf4d88ef3fc4e2f434353f64e01f0670a5191dbfb08b1aa4deae7bf28d59",
@@ -6495,7 +6495,7 @@
         "source-abc304-editorial-6509-25665901acc3aee34a2f625c898512795ee5ada3a6f576e8ca88f946ca941092",
         "source-abc304-g-problem-7222f03c3a6f796b532d44f31f39fb82660aa4eadbb9f8ec4112eecc795e3f5a"
       ],
-      "conceptSummary": "XOR値の閾値を上位bitから見ると、同じ側と反対側のどの組が許されるかを二分木の枝として表せる。閾値で許される組の構造を先に分解し、その上でmatchingの",
+      "conceptSummary": "閾値xを固定する。f_d(C)を、C内で下位d+1 bitのXORが `x mod 2^{d+1}` 以上となる、要素を重複使用しない最大pair数とする。g_",
       "checks": [
         "accepted_metadata",
         "source_references",
