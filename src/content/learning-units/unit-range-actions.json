@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-range-update-action"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/range-actions.md",
   "problemIds": [
     "abc237-g",

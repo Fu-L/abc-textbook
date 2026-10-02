@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-static-sorted-range-index"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/static-sorted-range-index.md",
   "problemIds": [
     "abc339-g"

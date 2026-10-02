@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-encode-threshold-constraints-as-two-sat"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/two-sat.md",
   "problemIds": [
     "abc277-ex"

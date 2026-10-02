@@ -52,7 +52,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-transform-to-geometry-optimization"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/index.md",
   "problemIds": [
     "abc216-e",

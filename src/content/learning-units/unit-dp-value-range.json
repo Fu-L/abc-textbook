@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-aggregate-subsequence-transitions-by-value"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-value-range.md",
   "problemIds": [
     "abc240-ex",

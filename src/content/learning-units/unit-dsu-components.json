@@ -30,7 +30,7 @@
     "outcome-augment-components-with-metadata",
     "outcome-maintain-connectivity-components"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/dsu-components.md",
   "problemIds": [
     "abc238-e",

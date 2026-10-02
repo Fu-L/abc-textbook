@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-randomized-algebraic-fingerprint",
+  "taskId": "T056",
+  "scopeDigest": "c22653ce1cdc1085e01a6f00118a31f7b505a563c4d01dbbe71c2c5f10b71765",
+  "digest": "f51179a465a44e13abbc640d3925290655ebb03abfbf61aa7f2e0a8e7734bcb1",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-randomized-algebraic-fingerprint",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md",
+        "src/content/learning-units/unit-randomized-algebraic-fingerprint.json"
+      ],
+      "itemIds": ["unit:unit-randomized-algebraic-fingerprint"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

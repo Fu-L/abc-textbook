@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compute-in-finite-field-extension"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/finite-field-extension.md",
   "problemIds": [
     "abc381-g"

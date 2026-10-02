@@ -38,7 +38,7 @@
     "outcome-count-finite-field-subspaces-by-rank",
     "outcome-formulate-combinatorial-coefficients"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
   "problemIds": [
     "abc226-f",

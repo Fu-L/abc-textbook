@@ -48,7 +48,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-model-string-state"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/index.md",
   "problemIds": [
     "abc213-f",

@@ -32,7 +32,7 @@
     "outcome-solve-difference-constraints"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/shortest-path-certificates.md",
   "problemIds": [
     "abc213-e",

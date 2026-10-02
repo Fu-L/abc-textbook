@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-solve-modular-constraints"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/modular-congruence.md",
   "problemIds": [
     "abc245-ex",

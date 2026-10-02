@@ -28,7 +28,7 @@
     "outcome-map-graph-cycle-xor-to-span",
     "outcome-use-cycle-space-basis"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/cycle-space-basis.md",
   "problemIds": [],
   "directProblemIds": [],

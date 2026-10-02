@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-prove-greedy-order"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/greedy-exchange.md",
   "problemIds": [
     "abc214-e",

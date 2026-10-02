@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-model-min-cost-flow"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/min-cost-flow.md",
   "problemIds": [
     "abc214-h",

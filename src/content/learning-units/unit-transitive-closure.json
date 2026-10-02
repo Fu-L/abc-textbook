@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compute-transitive-closure"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/transitive-closure.md",
   "problemIds": [
     "abc287-ex",

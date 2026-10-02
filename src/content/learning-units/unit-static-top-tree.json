@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compose-dynamic-tree-clusters"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/static-top-tree.md",
   "problemIds": [
     "abc351-g",

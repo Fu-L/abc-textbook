@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-euler-trail-circuit",
+  "taskId": "T155",
+  "scopeDigest": "e917bf17108a3e752518ab8478009b9ee1c5eabc323a6f43c8f1cbafc829bd64",
+  "digest": "8e3f2f27ccb9d0e0b30415a8483c7d6688cc2aa0ddc19e241bf885267557862d",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-check-euler-trail-existence",
+    "outcome-construct-euler-trail-or-circuit"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-euler-trail-circuit",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/graph/euler-trail-circuit.md",
+        "src/content/learning-units/unit-euler-trail-circuit.json"
+      ],
+      "itemIds": ["unit:unit-euler-trail-circuit"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-check-euler-trail-existence",
+        "outcome-construct-euler-trail-or-circuit"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

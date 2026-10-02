@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-integer-boundary-blocks",
+  "taskId": "T158",
+  "scopeDigest": "fd2c1ff25d55cfaecf306ba00b79fc0b60e4504d0f0afe2b8d75779860c31a72",
+  "digest": "1686d86a6fb1b898d8891d7bb79a7bb2097389f974fa1baa09e2c08c7cccb0d0",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-evaluate-compressed-integer-blocks",
+    "outcome-partition-at-critical-integer-boundaries",
+    "outcome-partition-integer-parameter-ranges",
+    "outcome-sum-piecewise-linear-integer-ranges"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-integer-boundary-blocks",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/number-theory/integer-boundary-blocks.md",
+        "src/content/learning-units/unit-integer-boundary-blocks.json"
+      ],
+      "itemIds": ["unit:unit-integer-boundary-blocks"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-evaluate-compressed-integer-blocks",
+        "outcome-partition-at-critical-integer-boundaries",
+        "outcome-partition-integer-parameter-ranges",
+        "outcome-sum-piecewise-linear-integer-ranges"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

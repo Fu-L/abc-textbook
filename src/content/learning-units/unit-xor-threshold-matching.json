@@ -25,7 +25,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-solve-xor-threshold-matching"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/xor-threshold-matching.md",
   "problemIds": [
     "abc304-g"

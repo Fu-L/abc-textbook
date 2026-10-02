@@ -30,7 +30,7 @@
     "outcome-enumerate-bounded-candidates-or-cases",
     "outcome-enumerate-subsets-by-mask"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/bounded-enumeration.md",
   "problemIds": [
     "abc219-e",

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-normalize-string-to-primitive-period"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/string-periodicity.md",
   "problemIds": [
     "abc312-ex"

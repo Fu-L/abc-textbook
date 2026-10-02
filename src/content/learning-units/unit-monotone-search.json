@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-prove-and-search-threshold"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/monotone-search.md",
   "problemIds": [
     "abc215-f",

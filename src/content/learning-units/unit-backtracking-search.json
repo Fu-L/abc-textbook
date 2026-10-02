@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-enumerate-by-reversible-backtracking"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/backtracking-search.md",
   "problemIds": [
     "abc284-e"

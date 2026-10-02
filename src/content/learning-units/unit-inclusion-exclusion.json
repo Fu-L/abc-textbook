@@ -32,7 +32,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-correct-overlap-by-inversion"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md",
   "problemIds": [
     "abc214-g",

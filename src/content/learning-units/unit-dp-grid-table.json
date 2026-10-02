@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-grid-table-dp"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-grid-table.md",
   "problemIds": [
     "abc311-e",

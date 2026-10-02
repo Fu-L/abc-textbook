@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-prefix-match-state"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/z-algorithm.md",
   "problemIds": [
     "abc257-g",

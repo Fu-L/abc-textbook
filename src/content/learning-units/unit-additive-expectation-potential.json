@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-decompose-expectation-by-additive-potential"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
   "problemIds": [
     "abc249-ex"

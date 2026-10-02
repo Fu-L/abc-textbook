@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-propagate-static-graph-potentials"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/graph-potential-propagation.md",
   "problemIds": [
     "abc280-f",

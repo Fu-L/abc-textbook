@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-reverse-update-time"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/reverse-offline.md",
   "problemIds": [
     "abc229-e",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-query-recursively-defined-string"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/recursive-compressed-string.md",
   "problemIds": [
     "abc346-f",

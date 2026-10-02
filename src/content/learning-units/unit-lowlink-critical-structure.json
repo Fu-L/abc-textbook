@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-identify-bridges-and-articulations"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/lowlink-critical-structure.md",
   "problemIds": [
     "abc301-ex",

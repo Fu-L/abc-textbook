@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-merge-small-into-large"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/small-to-large.md",
   "problemIds": [
     "abc324-g",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-run-dp-on-finite-automaton"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/automaton-dp.md",
   "problemIds": [],
   "directProblemIds": [],

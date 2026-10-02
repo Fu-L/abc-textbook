@@ -96,7 +96,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-transform-to-combinatorics-algebra"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/index.md",
   "problemIds": [
     "abc212-h",

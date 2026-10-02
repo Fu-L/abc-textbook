@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-exponentiate-transition-over-semiring"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/semiring-matrix-exponentiation.md",
   "problemIds": [
     "abc236-g",

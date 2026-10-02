@@ -32,7 +32,7 @@
     "outcome-construct-optimal-spanning-tree",
     "outcome-derive-mst-weight-from-threshold-components"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/spanning-tree-optimization.md",
   "problemIds": [
     "abc218-e",

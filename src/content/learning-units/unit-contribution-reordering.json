@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-reorder-counting-contributions"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/contribution-reordering.md",
   "problemIds": [
     "abc215-g",

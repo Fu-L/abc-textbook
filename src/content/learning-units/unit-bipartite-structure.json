@@ -30,7 +30,7 @@
     "outcome-account-for-color-swap-in-connected-bipartite-counting",
     "outcome-color-and-classify-bipartite-components"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/bipartite-structure.md",
   "problemIds": [
     "abc451-f"

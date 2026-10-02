@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-virtual-tree"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/virtual-tree.md",
   "problemIds": [
     "abc340-g"

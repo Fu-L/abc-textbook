@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compare-sequences-by-rolling-fingerprint"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/sequence-fingerprint.md",
   "problemIds": [
     "abc274-ex"

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-weighted-prefix-statistics"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
   "problemIds": [
     "abc221-e",

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-accelerate-tree-dp-by-heavy-path"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/heavy-path-tree-dp.md",
   "problemIds": [
     "abc269-ex"

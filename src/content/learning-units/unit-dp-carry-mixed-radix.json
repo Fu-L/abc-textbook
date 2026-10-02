@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-carry-or-mixed-radix-dp"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-carry-mixed-radix.md",
   "problemIds": [
     "abc231-e",

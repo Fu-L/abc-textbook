@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-pass-resource-dp-through-heavy-recursion"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
   "problemIds": [
     "abc311-ex"

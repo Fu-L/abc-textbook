@@ -38,7 +38,7 @@
     "outcome-slide-transition-recurrence",
     "outcome-subtract-exception-transitions"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-transition-optimization.md",
   "problemIds": [
     "abc212-e",

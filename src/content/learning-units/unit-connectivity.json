@@ -29,7 +29,7 @@
     "outcome-propagate-static-graph-potentials"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/connectivity.md",
   "problemIds": [
     "abc238-e",

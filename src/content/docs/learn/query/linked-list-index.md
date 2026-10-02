@@ -22,6 +22,19 @@ sidebar:
 
 - 要素IDから前後linkを引き、挿入・削除で変わる局所linkだけを更新して列順を復元できる。
 
+## 考え方
+
+各要素の前後の要素を索引として持ち、挿入・削除の際に隣接linkだけをつなぎ直す。値の並びを毎回移動せず、要素IDと掲載順を分ける。
+
+
+番兵head,tailを使い、空列ではnext[head]=tail,prev[tail]=headとする。uの直後へ新ID xを入れるならv=next[u]を保存し、next[u]=x,prev[x]=u,next[x]=v,prev[v]=xとする。xを消すならu=prev[x],v=next[x]としてnext[u]=v,prev[v]=uへ変更する。最後はnext[head]からtailまで辿って元の列順を出力する。IDからnodeを探す辞書の費用はlink更新のO(1)と別に数える。
+
+## 成立条件と計算量
+
+位置の要素IDが既知なら挿入・削除O(1)。k番目の要素の検索は単純なlinkだけではO(N)。head・tail、唯一の要素、削除済みID、重複値を扱い、値から一意のIDを推定しない。
+
+概念上の親: [データ構造と問い合わせ](/learn/query/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

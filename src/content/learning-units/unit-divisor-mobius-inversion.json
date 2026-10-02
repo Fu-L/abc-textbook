@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-invert-divisor-lattice-by-mobius"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
   "problemIds": [
     "abc230-g",

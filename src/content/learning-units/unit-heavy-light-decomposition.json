@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-apply-heavy-light-decomposition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/heavy-light-decomposition.md",
   "problemIds": [],
   "directProblemIds": [],

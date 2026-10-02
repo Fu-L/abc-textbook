@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-piecewise-linear-convex-function"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/slope-trick.md",
   "problemIds": [
     "abc217-h",

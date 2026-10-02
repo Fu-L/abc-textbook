@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-bound-reachability-in-numerical-semigroup"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/numerical-semigroup-reachability.md",
   "problemIds": [
     "abc388-f"

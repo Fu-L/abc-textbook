@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-two-variable-convex-lattice-function"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/two-variable-convex-lattice-optimization.md",
   "problemIds": [
     "abc459-g"

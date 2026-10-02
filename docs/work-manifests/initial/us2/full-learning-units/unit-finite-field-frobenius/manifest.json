@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-finite-field-frobenius",
+  "taskId": "T158",
+  "scopeDigest": "e702943a9a670f5d1c0c90a7b6cbe3d8b8d0ec0b89a84886193d66e16e7b02ab",
+  "digest": "9fb044b4d71e1890dee58c9d946fd19c7bd9f4cb7f00f15bf387f8d9c617fc46",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-accelerate-iteration-by-characteristic-p-frobenius"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-finite-field-frobenius",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/number-theory/finite-field-frobenius.md",
+        "src/content/learning-units/unit-finite-field-frobenius.json"
+      ],
+      "itemIds": ["unit:unit-finite-field-frobenius"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-accelerate-iteration-by-characteristic-p-frobenius"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

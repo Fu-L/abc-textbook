@@ -32,7 +32,7 @@
     "outcome-propagate-probability-distribution",
     "outcome-solve-stochastic-recurrence"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/dp-stochastic.md",
   "problemIds": [
     "abc226-h",

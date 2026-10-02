@@ -83,7 +83,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-state-transition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/index.md",
   "problemIds": [
     "abc212-e",

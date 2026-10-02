@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-heavy-light-recursive-dp",
+  "taskId": "T155",
+  "scopeDigest": "142f0456c83ca41fc37cde4afa429e9ccd8fc18c606b063acb7e4e25091545f4",
+  "digest": "c9580ed5fb95da4c51928b8742a5b207e404df6c6f80223f857904a3d7d38994",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-pass-resource-dp-through-heavy-recursion"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-heavy-light-recursive-dp",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/tree/heavy-light-recursive-dp.md",
+        "src/content/learning-units/unit-heavy-light-recursive-dp.json"
+      ],
+      "itemIds": ["unit:unit-heavy-light-recursive-dp"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-pass-resource-dp-through-heavy-recursion"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-reduce-integer-structure-by-gcd"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/gcd-structure.md",
   "problemIds": [
     "abc254-f",

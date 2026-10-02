@@ -26,7 +26,7 @@
     "outcome-split-enumeration-space"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/divide-enumeration.md",
   "problemIds": [
     "abc220-h",

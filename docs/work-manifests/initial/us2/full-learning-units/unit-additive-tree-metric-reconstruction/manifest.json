@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-additive-tree-metric-reconstruction",
+  "taskId": "T155",
+  "scopeDigest": "1a283d1aa680aba2f0756eb3e8c91fa4f5e220872a5000adc87cf1fef824027b",
+  "digest": "09cd8e5a868cfade26e217052d006df41da8178067bf5e4daf8fba6a706f3265",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-reconstruct-tree-from-distance-matrix"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-additive-tree-metric-reconstruction",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/tree/additive-tree-metric-reconstruction.md",
+        "src/content/learning-units/unit-additive-tree-metric-reconstruction.json"
+      ],
+      "itemIds": ["unit:unit-additive-tree-metric-reconstruction"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-reconstruct-tree-from-distance-matrix"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

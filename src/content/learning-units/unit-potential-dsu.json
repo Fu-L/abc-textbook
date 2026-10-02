@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-maintain-potential-differences"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/potential-dsu.md",
   "problemIds": [
     "abc328-f"

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-process-dag-in-topological-order"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/dag-topological-processing.md",
   "problemIds": [
     "abc277-f",

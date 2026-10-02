@@ -30,7 +30,7 @@
     "outcome-process-dag-in-topological-order"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/directed-condensation.md",
   "problemIds": [
     "abc245-f",

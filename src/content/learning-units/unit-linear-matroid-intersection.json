@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-test-linear-matroid-intersection-rank"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-matroid-intersection.md",
   "problemIds": [
     "abc399-g"

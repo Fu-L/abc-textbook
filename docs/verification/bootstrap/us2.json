@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "scope": "bootstrap-us2-full-learning-units",
+  "status": "awaiting_maintainer_review",
+  "reviewMode": "self",
+  "reviewerId": "person-maintainer",
+  "automatedExecutor": "Codex",
+  "logicalChangeSubjectDigest": "130e796097e8baa9b6f0ca2207ebc364af7c66425cc1b19684f36b06ca59f140",
+  "contentSubjectDigest": "4275ef80d491275ff6429d35c346bed4adfd530101379aa41544c74cf2e60b54",
+  "counts": { "chapters": 9, "units": 232, "ownedOutcomes": 242, "reachableProblems": 868 },
+  "workManifestPath": "docs/work-manifests/initial/us2/full-learning-units/acceptance-manifest.json",
+  "workManifestDigest": "b304398b633b4197309b714d68c0244060edee97c4a8ca9238df68fa6c9bc94a",
+  "perUnitWorkManifestIndex": "docs/work-manifests/initial/us2/full-learning-units/index.json",
+  "checkResultsPath": "docs/verification/bootstrap/full-learning-unit-check-results.json",
+  "technicalInspectionPath": "docs/verification/bootstrap/full-learning-unit-prose-review.md",
+  "automatedChecksPassed": true,
+  "humanReview": {
+    "status": "pending_re_review",
+    "approved": false,
+    "evidenceSchema": "HumanContentReviewEvidenceSchema",
+    "requiredBefore": "merge",
+    "basis": "Constitution 3.0.0 Authoring Workflow gate 4 requires explicit human outcome-coverage review before merge. Automated execution and Codex inspection are recorded separately and do not impersonate that reviewer.",
+    "prReviewUrl": "https://github.com/Fu-L/abc-textbook/pull/64#pullrequestreview-5390118875"
+  },
+  "sc010": {
+    "status": "not_required_by_owner",
+    "decision": "そもそもそんなものは不要です。",
+    "replacement": "T057 full-corpus automated navigation verification; no manual questionnaire or scoring artifacts."
+  },
+  "correctionImpact": {
+    "learningUnitsAndCanonicalPolicies": "verified",
+    "problemOwnedTargets": "pending_issues_47_48",
+    "publicDerivedIndexes": "pending_T160",
+    "overall": "pending"
+  },
+  "updatedAt": "2026-10-02T11:26:07.850Z"
+}

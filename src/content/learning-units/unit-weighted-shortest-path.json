@@ -36,7 +36,7 @@
     "outcome-model-and-compute-shortest-path",
     "outcome-relax-in-dependency-order"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/weighted-shortest-path.md",
   "problemIds": [
     "abc213-e",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-localize-change-impact-by-witness"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/change-impact-localization.md",
   "problemIds": [
     "abc218-f",

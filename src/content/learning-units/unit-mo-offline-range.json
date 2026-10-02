@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-schedule-range-query-updates"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/mo-offline-range.md",
   "problemIds": [
     "abc242-g",

@@ -22,7 +22,7 @@
     "outcome-peel-graph-core"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/graph-core-peeling.md",
   "problemIds": [
     "abc226-e",

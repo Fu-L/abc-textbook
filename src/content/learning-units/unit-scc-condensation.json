@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-condense-and-order-directed-graph"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/scc-condensation.md",
   "problemIds": [],
   "directProblemIds": [],

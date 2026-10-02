@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-by-line-envelope"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/line-envelope.md",
   "problemIds": [
     "abc228-h",

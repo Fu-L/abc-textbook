@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-reroot-tree-aggregation"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/rerooting.md",
   "problemIds": [
     "abc220-f",

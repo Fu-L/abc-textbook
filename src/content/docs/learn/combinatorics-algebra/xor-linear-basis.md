@@ -23,6 +23,34 @@ sidebar:
 - 整数をF2 vectorとして最高bit pivotで消去し、独立性判定・最大XOR・表現可能性をonlineに保つ。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 - XOR部分空間の基底をpivot bitごとにreduced formへ整え、高位bitから基底を加減してaffine cosetの最小整数代表を一意に得る。正規化写像の線形性を示し、二値のXOR最小化を各値の正規化へ分離できる。
 
+## 考え方
+
+整数をF₂ベクトルと見なし、最高bitごとにpivotを保存する。新しい値からpivotをXORして消し、最後に非零なら独立な基底を追加する。各消去がspanを保つため表現可能性を判定できる。
+
+basis[b]の最高bitをbとする。挿入xは高位bから、bit bが0なら通過、1でbasis[b]があればXORして消す。なければbasis[b]=xを置いて終了する。最後に0なら既存spanに属する。span内の最大値はres=0から高位順に `res XOR basis[b]>res` のときだけXORする。低位pivotは高位bitを変えないため、その桁の最良選択を固定できる。
+
+reduced formは、低位pivot bから順に、それより高い各basis[c]にbit bがあればbasis[b]をXORして消して作る。各pivot列は対応基底だけが1となる。coset x+Vの正規化norm(x)は、xのpivot bitが1のとき対応基底をXORして全pivotを0にする。非零v∈Vの最高bitはpivotなので、norm(x) XOR vはそこで0→1となり必ず増える。従ってnorm(x)はcosetの一意な最小整数である。
+
+一pivotの消去は `x→x XOR (x_b·basis[b])` というF₂線形写像であり、その合成normも線形。よってnorm(a XOR b)=norm(a) XOR norm(b)。同じ部分空間Vから自由にvを足せる比較なら `min_{v∈V}(a XOR b XOR v)=norm(a) XOR norm(b)` と各値を別々に正規化できる。二つの異なる部分空間や、選べるvを制限した問題にそのまま使うことはできない。
+
+### 同じ部分空間を使える比較を特定する
+
+無向walkへの応用では、連結成分Hごとのcycleラベルspan
+V_Hを用いる。同じHの頂点だけをnorm_H(p[v])へ写せば、二点間の最小walk XORはnorm_H(p[s]) XOR
+norm_H(p[t])。別成分のcycleを併せたspanで正規化すると、到達できないcycleの寄与まで消してしまう。成分ごとの写像とcomponent
+IDを一組で保持する。辺集合のcycle
+rankとラベルspanのrankも一般には異なる。詳しい対応は[cycle space](/learn/graph/cycle-space-basis/)で示す。
+
+## 成立条件と計算量
+
+B bit・N値のpivot挿入はO(NB)、基底空間O(B)。上記の全pivot列を消すreduced
+form構築は追加O(B²)、構築後の一正規化はO(B)。最小値だけなら高位順に値を小さくする消去で一query
+O(B)となり、reduced
+formの前処理は必須ではない。coset最小代表は高位pivotで値を小さくする向きへ消去し、reduced
+formで一意な代表を得る。最小代表への写像と、自由な二値のXOR比較を同じ操作と誤解しない。
+
+概念上の親: [線形方程式・基底・分離可能変換へ変換する](/learn/combinatorics-algebra/linear-algebra-xor/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

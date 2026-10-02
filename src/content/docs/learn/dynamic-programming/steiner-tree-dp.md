@@ -22,6 +22,21 @@ terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest
 
 - terminal subsetと終点を状態に、subset分割mergeとmulti-source shortest path relaxationを交互に行う。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+端子集合Sをつなぎ、根位置vで終わる最小費用dp[S][v]を持つ。同じvで集合を二分して合成し、その後最短路で根位置を動かす。
+
+
+非負辺重みの無向graphで端子t_0,…,t_{k−1}をつなぐ。dp[∅][v]=0、singletonはその端子だけ0、他∞から始める。非空maskを要素数昇順に処理し、全非空proper submask Aについて `base[v]=min(base[v],dp[A][v]+dp[mask\A][v])`。そのbaseを全vの初期距離として多始点Dijkstraし、結果をdp[mask][v]にする。singletonもこの最短路緩和を行う。
+
+任意の端子木を根vから見ると、最初の分岐または端子で端子集合を二つに分け、そこまでのpathを外へ付ける形に分解できる。逆に二木のunionと追加pathは端子をつなぎ、重複辺は非負なので除いて費用を下げられる。両方向から最適値が一致する。答えはmin_v dp[全mask][v]。merge元と最短路親を記録すれば辺集合を復元し、重複辺を一つへまとめられる。
+
+## 成立条件と計算量
+
+k端子・V頂点E辺なら典型的にO(3^k V+2^k(E+V) log V)。非負重みを仮定する最短路部分と集合合成を区別する。端子重複、単点集合の初期値、同じ集合の根移動を一巡で共有する。
+
+概念上の親: [動的計画法](/learn/dynamic-programming/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

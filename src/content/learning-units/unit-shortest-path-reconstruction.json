@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-build-shortest-path-certificate"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
   "problemIds": [
     "abc252-e"

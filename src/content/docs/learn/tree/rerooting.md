@@ -22,6 +22,21 @@ sidebar:
 
 - 子側と親側の寄与の差し替えを定義し、各頂点を根とした答えを求められる。
 
+## 考え方
+
+子から親へのmessageを計算した後、親側も含めた全隣接messageから各子へ送る値を作る。子自身の寄与を除いた合成をprefix/suffixで共有すれば全頂点を根とした答えを求められる。
+
+
+有向message m(u→v)を、辺uvを切ったu側の情報をvへ渡す値とする。頂点uで入るmessageを⊗で集約し、その結果に頂点処理と辺を渡る変換F_{u,v}を行うなら `m(u→v)=F_{u,v}(⊗_{w∈N(u),w≠v}m(w→u))`。根を一つ決め、postorderで子→親を作り、その後preorderで親→子を作る。
+
+隣接順に入る値a_0,…,a_{d−1}についてpref[0]=e,pref[j+1]=pref[j]⊗a_j、suff[d]=e,suff[j]=a_j⊗suff[j+1]とすれば、jだけを除く積はpref[j]⊗suff[j+1]。逆元のないminや非可換積にも使える。全入値の積へ答え用変換をかけると、その頂点を根にした答えになる。距離和の例ではmessage=(count,sumDist)、結合は成分和、u自身を一個加え、辺長wを渡るとsumDistへcount·wを足す。
+
+## 成立条件と計算量
+
+定数サイズの結合的合成ならO(N)。除外に逆元は不要で、prefix/suffixの積を使える。辺を渡る変換と頂点での合成を区別し、非可換なら隣接順も固定する。
+
+概念上の親: [木DP・集約・rerooting](/learn/tree/tree-aggregation/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

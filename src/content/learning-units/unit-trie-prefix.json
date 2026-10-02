@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-index-shared-prefixes-with-trie"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/string/trie-prefix.md",
   "problemIds": [
     "abc287-e",

@@ -33,7 +33,7 @@
     "outcome-solve-weighted-bipartite-matching"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/flow-matching.md",
   "problemIds": [
     "abc214-h",

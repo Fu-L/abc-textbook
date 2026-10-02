@@ -28,7 +28,7 @@
     "outcome-merge-small-into-large"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/decomposition-amortization.md",
   "problemIds": [
     "abc217-e",

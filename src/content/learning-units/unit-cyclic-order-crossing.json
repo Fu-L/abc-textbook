@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-detect-crossing-by-cyclic-order"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/cyclic-order-crossing.md",
   "problemIds": [
     "abc338-e"

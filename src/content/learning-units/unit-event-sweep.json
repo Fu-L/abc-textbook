@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-linearize-events"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/event-sweep.md",
   "problemIds": [
     "abc231-f",

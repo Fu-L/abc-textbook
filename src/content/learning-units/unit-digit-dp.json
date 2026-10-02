@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-count-prefix-constrained-objects"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/digit-dp.md",
   "problemIds": [
     "abc235-f",

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T156-unit-additive-expectation-potential",
+  "taskId": "T156",
+  "scopeDigest": "5498818a82d7792a1e27b071942a7cb5f6e75e7e1fd1f90e1164efc8ae2edb4a",
+  "digest": "5b0bffe6889334f2968ccd948f9c9175ee001623092514056fe0e3c7b72c1a7f",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-decompose-expectation-by-additive-potential"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T156-unit-additive-expectation-potential",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/dynamic-programming/additive-expectation-potential.md",
+        "src/content/learning-units/unit-additive-expectation-potential.json"
+      ],
+      "itemIds": ["unit:unit-additive-expectation-potential"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-decompose-expectation-by-additive-potential"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

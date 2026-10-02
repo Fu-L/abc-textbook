@@ -22,6 +22,21 @@ sidebar:
 
 - 更新前の差分をstackへ記録し、分割統治・時間Segment Tree・DFSの退場時に状態を正確に巻き戻す。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
+## 考え方
+
+更新で変わった値だけ履歴stackへ積み、checkpointまで逆順に戻す。時間区間を分割統治して入るとき追加し、出るとき戻せば、局所的な有効集合を保持できる。
+
+
+DSUの履歴には、付けられる根rvの旧parent、受ける根ruの旧sizeと、更新する成分数・集約値の旧値を保存する。checkpointは履歴の現在長さh。union by sizeでrvをruへ付けるたび一記録をpushし、rollback(h)は長さhになるまでpopして旧値を代入する。同根で何も変えないunionは記録しなくてよいが、一操作一記録で取消すAPIならno-op記録が必要。checkpoint規約と混ぜない。
+
+時間segment treeのDFSでは入場直前のhを保存し、そのnodeへ配置された全有効区間の更新を適用して子へ進み、退場時rollback(h)する。葉ではその時点を含む区間だけがroot pathへ配置されているためqueryの状態が正しく、退場後は兄弟の更新を引き継がない。
+
+## 成立条件と計算量
+
+rollback DSUでは経路圧縮を避けunion by sizeでfind O(log N)、一併合の取消O(1)。変更なしの併合もcheckpoint規約に合わせる。記録しない副作用があると元状態へ戻らない。
+
+概念上の親: [構造を共有して過去の版を保存・復元する](/learn/query/persistence-rollback/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

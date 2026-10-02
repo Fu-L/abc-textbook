@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-solve-weighted-bipartite-matching"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/weighted-bipartite-matching.md",
   "problemIds": [
     "abc373-g"

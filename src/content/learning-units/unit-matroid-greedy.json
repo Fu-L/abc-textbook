@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-weighted-matroid-basis"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/matroid-greedy.md",
   "problemIds": [
     "abc236-f"

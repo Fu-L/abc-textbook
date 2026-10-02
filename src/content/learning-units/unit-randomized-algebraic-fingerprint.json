@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compare-algebraic-objects-by-random-fingerprint"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md",
   "problemIds": [
     "abc238-g",

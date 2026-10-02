@@ -104,7 +104,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-model-and-exploit-graph"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/index.md",
   "problemIds": [
     "abc212-f",

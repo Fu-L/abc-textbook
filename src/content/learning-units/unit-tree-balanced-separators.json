@@ -30,7 +30,7 @@
     "outcome-build-balanced-separator-decomposition",
     "outcome-find-weighted-balanced-separator"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/tree-balanced-separators.md",
   "problemIds": [
     "abc291-ex",

@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-construct-degree-parity-subgraph"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/degree-parity-subgraph.md",
   "problemIds": [
     "abc345-f"

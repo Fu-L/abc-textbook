@@ -32,7 +32,7 @@
     "outcome-classify-tree-by-distance-residue",
     "outcome-use-tree-diameter-extrema"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/tree-metric.md",
   "problemIds": [
     "abc221-f",

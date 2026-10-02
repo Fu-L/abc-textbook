@@ -61,7 +61,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-model-and-exploit-tree"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/index.md",
   "problemIds": [
     "abc220-f",

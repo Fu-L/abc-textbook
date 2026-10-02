@@ -30,7 +30,7 @@
     "outcome-characterize-bipartite-feasibility-by-hall",
     "outcome-solve-bipartite-matching"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/bipartite-matching.md",
   "problemIds": [
     "abc215-h",

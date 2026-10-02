@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-restrict-geometric-candidates-to-boundary"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/convex-boundary-hull.md",
   "problemIds": [
     "abc244-ex",

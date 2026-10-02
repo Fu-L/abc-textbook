@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-split-enumeration-space"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/meet-in-the-middle.md",
   "problemIds": [
     "abc220-h",

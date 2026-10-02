@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-find-orbit-hit-by-bsgs"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/baby-step-giant-step.md",
   "problemIds": [
     "abc270-g"

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-answer-tree-ancestor-queries"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/tree-ancestor-lca.md",
   "problemIds": [
     "abc298-ex"

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-design-frontier-profile-dp"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/frontier-profile-dp.md",
   "problemIds": [
     "abc248-f",

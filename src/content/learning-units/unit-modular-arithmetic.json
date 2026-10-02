@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-compute-in-modular-arithmetic"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/number-theory/modular-arithmetic.md",
   "problemIds": [],
   "directProblemIds": [],

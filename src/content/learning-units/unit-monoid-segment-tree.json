@@ -36,7 +36,7 @@
     "outcome-maintain-sparse-domain-segment-tree"
   ],
   "ownedLearningOutcomeIds": [],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/monoid-segment-tree.md",
   "problemIds": [
     "abc223-f",

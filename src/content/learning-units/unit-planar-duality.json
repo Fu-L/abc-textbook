@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-dualize-planar-cut-to-path"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/planar-duality.md",
   "problemIds": [
     "abc413-g"

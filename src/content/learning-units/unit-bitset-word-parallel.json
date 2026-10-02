@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-accelerate-set-operations-with-bitsets"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/bitset-word-parallel.md",
   "problemIds": [
     "abc221-g",

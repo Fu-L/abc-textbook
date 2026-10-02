@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-combinatorial-coefficients",
+  "taskId": "T158",
+  "scopeDigest": "0d9cfaa8024240a7cc02fe098bff2d011a671b0c12661f20e1b74abd01632aba",
+  "digest": "c8667e121a9231386716cfb0c28eed0ede97dfd230bc2de58f8e7629de5cf0af",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-apply-stirling-transform",
+    "outcome-compute-binomial-by-lucas",
+    "outcome-count-finite-field-subspaces-by-rank",
+    "outcome-formulate-combinatorial-coefficients"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-combinatorial-coefficients",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/combinatorics-algebra/combinatorial-coefficients.md",
+        "src/content/learning-units/unit-combinatorial-coefficients.json"
+      ],
+      "itemIds": ["unit:unit-combinatorial-coefficients"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-apply-stirling-transform",
+        "outcome-compute-binomial-by-lucas",
+        "outcome-count-finite-field-subspaces-by-rank",
+        "outcome-formulate-combinatorial-coefficients"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-ratio-by-parametric-search"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/fractional-parametric-search.md",
   "problemIds": [
     "abc236-e",

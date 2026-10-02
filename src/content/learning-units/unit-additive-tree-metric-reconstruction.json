@@ -24,7 +24,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-reconstruct-tree-from-distance-matrix"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/tree/additive-tree-metric-reconstruction.md",
   "problemIds": [
     "abc451-e"

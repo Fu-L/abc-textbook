@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-divide-search-space-recursively"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/recursive-divide-and-conquer.md",
   "problemIds": [
     "abc282-ex",

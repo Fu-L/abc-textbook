@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-univariate-convex-function"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/basic-convex-optimization.md",
   "problemIds": [
     "abc224-g",

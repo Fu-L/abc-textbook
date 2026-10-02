@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T155-unit-directional-grid-effect-scan",
+  "taskId": "T155",
+  "scopeDigest": "fd1d3e8ba32a8ea24e7e4f58a44b5bbae3af0335148273335953b17a7db2296b",
+  "digest": "c7e3561222953558f762bcbc18481bf28e3f3bf3893d66b4baf9e517a7605272",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-precompute-directional-grid-effects"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T155-unit-directional-grid-effect-scan",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/graph/directional-grid-effect-scan.md",
+        "src/content/learning-units/unit-directional-grid-effect-scan.json"
+      ],
+      "itemIds": ["unit:unit-directional-grid-effect-scan"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-precompute-directional-grid-effects"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

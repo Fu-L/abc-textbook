@@ -22,6 +22,21 @@ sidebar:
 
 - 剰余を正規化して加減乗算し、二分累乗と可逆性を確認した逆元により法上の除算・確率を計算できる。
 
+## 考え方
+
+剰余は加減乗算と両立するが、aで割るにはgcd(a,m)=1が必要になる。二分累乗でa^kを求め、拡張Euclidまたは素数法のFermatで逆元を作る。
+
+
+二分累乗はres=1,power=a mod m,k=Kから、kが奇数ならres←res·power mod m、power←power² mod m、k←floor(k/2)を繰り返す。res·power^k≡a^Kの不変量で正しく、K=0は単位元1 mod m。逆元はgcd(a,m)=1のときだけ存在し、拡張Euclidのas+mt=1からs mod mで構成できる。素数pなら非零aに対しa^(p−2)も逆元である。
+
+法上の確率A/Bは整数のBが非零というだけでなく、B mod mが可逆かを確認してA·B^(−1)とする。例えばBがpの倍数なら素数法でも割れない。負の入力の剰余は[0,m)へ正規化し、法1は全値0として扱う。
+
+## 成立条件と計算量
+
+累乗とEuclidはO(log U)回の固定長算術。負の剰余を正規化し、乗算前のoverflowを扱う。確率をmodで表す場合も分母が可逆であることを検査する。合成数modへFermatを流用しない。
+
+概念上の親: [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
+
 ## 前提と範囲
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。

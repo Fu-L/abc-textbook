@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-by-lagrangian-relaxation"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/lagrangian-relaxation.md",
   "problemIds": [
     "abc305-ex",

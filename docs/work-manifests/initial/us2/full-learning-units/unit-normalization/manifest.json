@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-normalization",
+  "taskId": "T056",
+  "scopeDigest": "16b7843a0c2063a2d9361ba29f803a292be224542e1da7b9b29220ac1a6e3efd",
+  "digest": "2df8f5c0c61dfb0ec9cd8e7e65002c2e26e00d96464ee26b0d50d3a3eb9e1f09",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-count-symmetric-strings-under-lex-bound",
+    "outcome-normalize-equivalent-states"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-normalization",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/normalization.md",
+        "src/content/learning-units/unit-normalization.json"
+      ],
+      "itemIds": ["unit:unit-normalization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-count-symmetric-strings-under-lex-bound",
+        "outcome-normalize-equivalent-states"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

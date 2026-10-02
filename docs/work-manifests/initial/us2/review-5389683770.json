@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T059-review-5389683770",
+  "taskId": "T059",
+  "scopeDigest": "f204faeca6e35cfbd3e32c15fe5e4168290969fec59c90aed99c8e3fbcae2122",
+  "digest": "27c7a38a08b200e02a90a38d9751b59abffe329e2bad74af18500c822bb60c40",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": [
+    "outcome-aggregate-value-prefix-by-buckets",
+    "outcome-close-eventual-dp-tail",
+    "outcome-compare-algebraic-objects-by-random-fingerprint",
+    "outcome-compare-sequences-by-rolling-fingerprint",
+    "outcome-compress-dp-sufficient-aggregates",
+    "outcome-correct-overlap-by-inversion",
+    "outcome-decompose-expectation-by-additive-potential",
+    "outcome-design-and-bound-randomized-algorithm",
+    "outcome-design-lis-frontier",
+    "outcome-enumerate-bounded-candidates-or-cases",
+    "outcome-enumerate-subsets-by-mask",
+    "outcome-factor-and-accelerate-transitions",
+    "outcome-find-period-by-multiplicative-order",
+    "outcome-normalize-common-dp-action",
+    "outcome-reduce-integer-structure-by-gcd",
+    "outcome-slide-transition-recurrence",
+    "outcome-subtract-exception-transitions"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": { "requiredMode": "self", "riskReasons": [] },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-additive-expectation-potential",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/dynamic-programming/additive-expectation-potential.md"],
+      "itemIds": ["unit:unit-additive-expectation-potential"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-decompose-expectation-by-additive-potential"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-bounded-enumeration",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/modeling/bounded-enumeration.md"],
+      "itemIds": ["unit:unit-bounded-enumeration"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-enumerate-bounded-candidates-or-cases",
+        "outcome-enumerate-subsets-by-mask"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-dp-lis",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/dynamic-programming/dp-lis.md"],
+      "itemIds": ["unit:unit-dp-lis"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-design-lis-frontier"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-dp-transition-optimization",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/dynamic-programming/dp-transition-optimization.md"],
+      "itemIds": ["unit:unit-dp-transition-optimization"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [
+        "outcome-close-eventual-dp-tail",
+        "outcome-compress-dp-sufficient-aggregates",
+        "outcome-factor-and-accelerate-transitions",
+        "outcome-normalize-common-dp-action",
+        "outcome-slide-transition-recurrence",
+        "outcome-subtract-exception-transitions"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-gcd-structure",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/gcd-structure.md"],
+      "itemIds": ["unit:unit-gcd-structure"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-reduce-integer-structure-by-gcd"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-inclusion-exclusion",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md"],
+      "itemIds": ["unit:unit-inclusion-exclusion"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-multiplicative-order-periods",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/number-theory/multiplicative-order-periods.md"],
+      "itemIds": ["unit:unit-multiplicative-order-periods"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-find-period-by-multiplicative-order"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-randomized-algebraic-fingerprint",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/modeling/randomized-algebraic-fingerprint.md"],
+      "itemIds": ["unit:unit-randomized-algebraic-fingerprint"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-compare-algebraic-objects-by-random-fingerprint"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-randomized-algorithms",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/modeling/randomized-algorithms.md"],
+      "itemIds": ["unit:unit-randomized-algorithms"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-design-and-bound-randomized-algorithm"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-sequence-fingerprint",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/query/sequence-fingerprint.md"],
+      "itemIds": ["unit:unit-sequence-fingerprint"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-compare-sequences-by-rolling-fingerprint"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-string-hash",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/query/string-hash.md"],
+      "itemIds": ["unit:unit-string-hash"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": [],
+      "outcomeImpact": {
+        "kind": "none",
+        "rationale": "This review unit does not alter an observable learning outcome."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    },
+    {
+      "reviewUnitId": "RU-T059-review-5389683770-unit-value-bucket-aggregation",
+      "changeKind": "mixed",
+      "paths": ["src/content/docs/learn/query/value-bucket-aggregation.md"],
+      "itemIds": ["unit:unit-value-bucket-aggregation"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-aggregate-value-prefix-by-buckets"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-learning-unit-content", "check-verify-fast"],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-02T08:36:22.845Z",
+  "updatedAt": "2026-10-02T08:36:22.845Z"
+}

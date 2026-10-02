@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T056-unit-parallel-binary-search",
+  "taskId": "T056",
+  "scopeDigest": "b7309b335dc7f472615a44a5151e6cebb2bb83e451d6ec96f441efa5d41a0248",
+  "digest": "91f3127d1f5a30bd5fe69d0c3b5aaeb9a5214f53ea839b6b18baa217c0142cbe",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-share-threshold-checks-by-parallel-binary-search"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T056-unit-parallel-binary-search",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/modeling/parallel-binary-search.md",
+        "src/content/learning-units/unit-parallel-binary-search.json"
+      ],
+      "itemIds": ["unit:unit-parallel-binary-search"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-share-threshold-checks-by-parallel-binary-search"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

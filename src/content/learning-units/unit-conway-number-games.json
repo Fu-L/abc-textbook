@@ -26,7 +26,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-add-conway-number-games"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/dynamic-programming/conway-number-games.md",
   "problemIds": [
     "abc229-h"

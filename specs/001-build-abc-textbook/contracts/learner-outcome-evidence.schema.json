@@ -93,7 +93,7 @@
           }
         },
         "rubrics": {
-          "minItems": 2,
+          "minItems": 1,
           "type": "array",
           "items": {
             "$ref": "#/$defs/__schema9"
@@ -109,7 +109,6 @@
         "releaseDigest",
         "fixedAt",
         "sc009Items",
-        "sc010Items",
         "rubrics",
         "passingRatio"
       ],
@@ -266,12 +265,24 @@
       "additionalProperties": false
     },
     "__schema11": {
-      "minItems": 2,
+      "minItems": 1,
       "maxItems": 2,
       "type": "array",
       "items": {
         "$ref": "#/$defs/__schema12"
-      }
+      },
+      "contains": {
+        "properties": {
+          "criterionId": {
+            "const": "SC-009"
+          }
+        },
+        "required": [
+          "criterionId"
+        ]
+      },
+      "minContains": 1,
+      "maxContains": 1
     },
     "__schema12": {
       "type": "object",

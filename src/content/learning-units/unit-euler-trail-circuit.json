@@ -30,7 +30,7 @@
     "outcome-check-euler-trail-existence",
     "outcome-construct-euler-trail-or-circuit"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/euler-trail-circuit.md",
   "problemIds": [
     "abc286-g"

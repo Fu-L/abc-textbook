@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T156-unit-cyclic-minimax-game",
+  "taskId": "T156",
+  "scopeDigest": "32b52fb1dd5a33e24fe7302ae79dec7dbb24bc48e9401b3456a255772153a365",
+  "digest": "d8b30a563c09b54cb21fcc79d0083cc569c0a1f98554bab3099c24b0874fa07a",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-solve-cyclic-minimax-game"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T156-unit-cyclic-minimax-game",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/dynamic-programming/cyclic-minimax-game.md",
+        "src/content/learning-units/unit-cyclic-minimax-game.json"
+      ],
+      "itemIds": ["unit:unit-cyclic-minimax-game"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-solve-cyclic-minimax-game"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

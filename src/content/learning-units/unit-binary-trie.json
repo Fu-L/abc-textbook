@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-query-bitwise-order-with-trie"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/query/binary-trie.md",
   "problemIds": [
     "abc425-g"

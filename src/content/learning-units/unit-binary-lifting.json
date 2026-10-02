@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-jump-deterministic-transition"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/graph/binary-lifting.md",
   "problemIds": [
     "abc212-f",

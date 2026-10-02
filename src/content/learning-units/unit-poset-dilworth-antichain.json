@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-optimize-poset-antichain-by-dilworth"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/poset-dilworth-antichain.md",
   "problemIds": [
     "abc237-ex",

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T158-unit-cyclic-group-exponent-counting",
+  "taskId": "T158",
+  "scopeDigest": "fa99127371e2407d367dd515ae91d5583dff745ee34f676f29171e7ef41ea68a",
+  "digest": "e7121343b154595b11cf8e13582fc53ae86afcb91c37ca3c7b280ad903d8cd14",
+  "changeKind": "content",
+  "requiredRequirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+  "learningOutcomeIds": ["outcome-count-through-cyclic-exponents"],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T158-unit-cyclic-group-exponent-counting",
+      "changeKind": "content",
+      "paths": [
+        "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+        "src/content/learning-units/unit-cyclic-group-exponent-counting.json"
+      ],
+      "itemIds": ["unit:unit-cyclic-group-exponent-counting"],
+      "requirementIds": ["FR-007", "FR-008", "FR-009", "FR-010", "FR-013", "SC-004"],
+      "learningOutcomeIds": ["outcome-count-through-cyclic-exponents"],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": [
+        "check-canonical-materialization",
+        "check-learning-path",
+        "check-learning-unit-content"
+      ],
+      "evidenceRoles": ["full_learning_unit_review"],
+      "maintenanceBenefit": null,
+      "owner": "person-maintainer",
+      "status": "planned"
+    }
+  ],
+  "maintenanceBenefit": null,
+  "state": "planned",
+  "createdAt": "2026-10-01T16:26:04.144Z",
+  "updatedAt": "2026-10-01T16:26:04.144Z"
+}

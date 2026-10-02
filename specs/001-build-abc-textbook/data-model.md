@@ -470,7 +470,7 @@ Work Manifest、subject digest、HumanContentReviewEvidence、適用check集合�
 
 ### LearnerOutcomeEvidence
 
-SC-009/SC-010の運用者self-studyを一つのschemaで扱う。protocolはrelease digest、対象item、選定理由、提示順、期待要素、rubric、blocking項目、集計式を回答前に固定する。resultはraw回答、項目別採点、根拠、分子分母、aggregateを同じprotocol digestへ結び付ける。
+SC-009の運用者self-studyを扱う。SC-010はIssue #46実装中の運用者指示で廃止し、protocol項目とresultは旧記録の読み込みに限り任意で受け入れる。protocolはrelease digest、対象item、選定理由、提示順、期待要素、rubric、blocking項目、集計式を回答前に固定する。resultはraw回答、項目別採点、根拠、分子分母、aggregateを同じprotocol digestへ結び付ける。
 
 ### UserTimingEvidence
 

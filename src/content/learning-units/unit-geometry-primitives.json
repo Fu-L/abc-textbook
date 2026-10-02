@@ -30,7 +30,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-reduce-geometry-to-algebraic-predicates"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/geometry-optimization/geometry-primitives.md",
   "problemIds": [
     "abc220-g",

@@ -80,7 +80,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-identify-reusable-abstraction"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/index.md",
   "problemIds": [
     "abc214-e",

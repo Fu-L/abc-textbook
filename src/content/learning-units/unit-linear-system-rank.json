@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-solve-linear-system-and-rank"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/combinatorics-algebra/linear-system-rank.md",
   "problemIds": [
     "abc276-ex",

@@ -28,7 +28,7 @@
   "ownedLearningOutcomeIds": [
     "outcome-bound-monotone-total-work"
   ],
-  "contentPhase": "canonical_skeleton",
+  "contentPhase": "full_authoring",
   "docPath": "src/content/docs/learn/modeling/amortized-monotone-progress.md",
   "problemIds": [
     "abc217-e",
